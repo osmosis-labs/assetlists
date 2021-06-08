@@ -29,7 +29,10 @@ An assetlist json contains the following structure:
             "base": "usteak",
             "display": "steak",
             "symbol": "STK",
-            "ibc": {},
+            "ibc": {
+                "source-channel": "channel-35",
+                "osmo-channel": "channel-1"
+            },
             "logoURIs": {
                 "png": "https://github.com/linkto/image.png",
                 "svg": "https://stake.com/linkto/steak.svg"
@@ -52,7 +55,10 @@ An assetlist json contains the following structure:
             "base": "ibc/6ED71011FFBD0D137AFDB6AC574E9E100F61BA3DD44A8C05ECCE7E59D40A7B3E",
             "display": "foocoin",
             "symbol": "FOO",
-            "ibc": {},
+            "ibc": {
+                "source-channel": "channel-35",
+                "osmo-channel": "channel-1"
+            },
             "logoURIs": {
                 "png": "ipfs://QmXfzKRvjZz3u5JRgC4v5mGVbm9ahrUiB4DgzHBsnWbTMM",
                 "svg": ""

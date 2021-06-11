@@ -31,7 +31,7 @@ An assetlist json contains the following structure:
             "symbol": "STK",
             "ibc": {
                 "source-channel": "channel-35",
-                "osmo-channel": "channel-1"
+                "dest-channel": "channel-1"
             },
             "logoURIs": {
                 "png": "https://github.com/linkto/image.png",
@@ -57,7 +57,7 @@ An assetlist json contains the following structure:
             "symbol": "FOO",
             "ibc": {
                 "source-channel": "channel-35",
-                "osmo-channel": "channel-1"
+                "dest-channel": "channel-1"
             },
             "logoURIs": {
                 "png": "ipfs://QmXfzKRvjZz3u5JRgC4v5mGVbm9ahrUiB4DgzHBsnWbTMM",

@@ -33,7 +33,7 @@ An assetlist json contains the following structure:
                 "source_channel": "channel-35",
                 "dest_channel": "channel-1"
             },
-            "logoURIs": {
+            "logo_URIs": {
                 "png": "https://github.com/linkto/image.png",
                 "svg": "https://stake.com/linkto/steak.svg"
             }
@@ -59,7 +59,7 @@ An assetlist json contains the following structure:
                 "source_channel": "channel-35",
                 "dest_channel": "channel-1"
             },
-            "logoURIs": {
+            "logo_URIs": {
                 "png": "ipfs://QmXfzKRvjZz3u5JRgC4v5mGVbm9ahrUiB4DgzHBsnWbTMM",
                 "svg": ""
             }

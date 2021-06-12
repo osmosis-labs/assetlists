@@ -10,7 +10,7 @@ An assetlist json contains the following structure:
 
 ```
 {
-    "chain-id": "steak-chain-1",
+    "chain_id": "steak-chain-1",
     "assets": [
         {
             "description": "The native token of Steak Chain",
@@ -30,8 +30,8 @@ An assetlist json contains the following structure:
             "display": "steak",
             "symbol": "STK",
             "ibc": {
-                "source-channel": "channel-35",
-                "dest-channel": "channel-1"
+                "source_channel": "channel-35",
+                "dest_channel": "channel-1"
             },
             "logoURIs": {
                 "png": "https://github.com/linkto/image.png",
@@ -56,8 +56,8 @@ An assetlist json contains the following structure:
             "display": "foocoin",
             "symbol": "FOO",
             "ibc": {
-                "source-channel": "channel-35",
-                "dest-channel": "channel-1"
+                "source_channel": "channel-35",
+                "dest_channel": "channel-1"
             },
             "logoURIs": {
                 "png": "ipfs://QmXfzKRvjZz3u5JRgC4v5mGVbm9ahrUiB4DgzHBsnWbTMM",

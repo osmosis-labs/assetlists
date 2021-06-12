@@ -1,131 +1,123 @@
 {
-    "chain-id": "osmo-testnet-2",
-    "assets": [
-      {
-        "description": "The native token of Osmosis",
-        "denom_units": [
-          {
-            "denom": "uosmo",
-            "exponent": 0,
-            "aliases": []
-          },
-          {
-            "denom": "osmo",
-            "exponent": 6,
-            "aliases": []
-          }
-        ],
-        "base": "uosmo",
-        "display": "osmo",
-        "symbol": "OSMO",
-        "ibc": {
-          "source-channel": "",
-          "dest-channel": "",
-          "ibc-denom": ""
+  "chain-id": "osmo-testnet-2",
+  "assets": [
+    {
+      "description": "The native token of Osmosis",
+      "denom_units": [
+        {
+          "denom": "uosmo",
+          "exponent": 0,
+          "aliases": []
         },
-        "logoURIs": {
-          "png": "images/osmo.png",
-          "svg": "images/osmo.svg"
+        {
+          "denom": "osmo",
+          "exponent": 6,
+          "aliases": []
         }
+      ],
+      "base": "uosmo",
+      "display": "osmo",
+      "symbol": "OSMO",
+      "ibc": {
+        "source-channel": "",
+        "dest-channel": ""
       },
-      {
-        "description": "Cosmos Hub ATOM testnet token",
-        "denom_units": [
-          {
-            "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
-            "exponent": 0,
-            "aliases": [
-              "uatom"
-            ]
-          },
-          {
-            "denom": "atom",
-            "exponent": 6,
-            "aliases": []
-          }
-        ],
-        "base": "uatom",
-        "display": "atom",
-        "symbol": "ATOM",
-        "ibc": {
-          "source-channel": "channel-1",
-          "dest-channel": "channel-0"
-        },
-        "logoURIs": {
-          "png": "images/atom.png",
-          "svg": "images/atom.svg"
-        }
-      },
-      {
-        "description": "IRISnet IRIS testnet token",
-        "denom_units": [
-          {
-            "denom": "ibc/6ED71011FFBD0D137AFDB6AC574E9E100F61BA3DD44A8C05ECCE7E59D40A7B3E",
-            "exponent": 0,
-            "aliases": [
-              "uiris"
-            ]
-          },
-          {
-            "denom": "iris",
-            "exponent": 6,
-            "aliases": []
-          }
-        ],
-        "base": "uiris",
-        "display": "iris",
-        "symbol": "IRIS",
-        "ibc": {
-          "source-channel": "channel-1",
-          "dest-channel": "channel-1"
-        },
-        "logoURIs": {
-          "png": "images/iris.png",
-          "svg": "images/iris.svg"
-        }
-      },
-      {
-        "description": "Test token for osmo-testnet-2",
-        "denom_units": [
-          {
-            "denom": "poopcoin",
-            "exponent": 0,
-            "aliases": []
-          }
-        ],
-        "base": "poopcoin",
-        "display": "poop",
-        "symbol": "POOP",
-        "ibc": {
-          "source-channel": "",
-          "dest-channel": ""
-        },
-        "logoURIs": {
-          "png": "",
-          "svg": ""
-        }
-      },
-      {
-        "description": "Secondary test token for osmo-testnet-2",
-        "denom_units": [
-          {
-            "denom": "ion",
-            "exponent": 0,
-            "aliases": []
-          }
-        ],
-        "base": "ion",
-        "display": "ion",
-        "symbol": "ION",
-        "ibc": {
-          "source-channel": "",
-          "dest-channel": "",
-          "ibc-denom": ""
-        },
-        "logoURIs": {
-          "png": "",
-          "svg": ""
-        }
+      "logoURIs": {
+        "png": "images/osmo.png",
+        "svg": "images/osmo.svg"
       }
-    ]
-  }
+    },
+    {
+      "description": "Cosmos Hub ATOM testnet token",
+      "denom_units": [
+        {
+          "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
+          "exponent": 0,
+          "aliases": [
+            "uatom"
+          ]
+        },
+        {
+          "denom": "atom",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
+      "display": "atom",
+      "symbol": "ATOM",
+      "ibc": {
+        "source-channel": "channel-1",
+        "dest-channel": "channel-0"
+      },
+      "logoURIs": {
+        "png": "images/atom.png",
+        "svg": "images/atom.svg"
+      }
+    },
+    {
+      "description": "IRISnet IRIS testnet token",
+      "denom_units": [
+        {
+          "denom": "ibc/6ED71011FFBD0D137AFDB6AC574E9E100F61BA3DD44A8C05ECCE7E59D40A7B3E",
+          "exponent": 0,
+          "aliases": [
+            "uiris"
+          ]
+        },
+        {
+          "denom": "iris",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "ibc/6ED71011FFBD0D137AFDB6AC574E9E100F61BA3DD44A8C05ECCE7E59D40A7B3E",
+      "display": "iris",
+      "symbol": "IRIS",
+      "ibc": {
+        "source-channel": "channel-1",
+        "dest-channel": "channel-1"
+      },
+      "logoURIs": {
+        "png": "images/iris.png",
+        "svg": "images/iris.svg"
+      }
+    },
+    {
+      "description": "Test token for osmo-testnet-2",
+      "denom_units": [
+        {
+          "denom": "poopcoin",
+          "exponent": 0,
+          "aliases": []
+        }
+      ],
+      "base": "poopcoin",
+      "display": "poopcoin",
+      "symbol": "POOP",
+      "ibc": {},
+      "logoURIs": {
+        "png": "",
+        "svg": ""
+      }
+    },
+    {
+      "description": "Secondary test token for osmo-testnet-2",
+      "denom_units": [
+        {
+          "denom": "ion",
+          "exponent": 0,
+          "aliases": []
+        }
+      ],
+      "base": "ion",
+      "display": "ion",
+      "symbol": "ION",
+      "ibc": {},
+      "logoURIs": {
+        "png": "",
+        "svg": ""
+      }
+    }
+  ]
+}

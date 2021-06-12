@@ -44,11 +44,11 @@ An assetlist json contains the following structure:
                 {
                     "denom": "ibc/6ED71011FFBD0D137AFDB6AC574E9E100F61BA3DD44A8C05ECCE7E59D40A7B3E",
                     "exponent": 0,
-                    "aliases": ["afoocoin"]
+                    "aliases": ["ufoocoin"]
                 },
                 {
                     "denom": "foocoin",
-                    "exponent": 18,
+                    "exponent": 6,
                     "aliases": []
                 }
             ],

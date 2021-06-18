@@ -29,7 +29,6 @@ An assetlist json contains the following structure:
             "base": "usteak",
             "display": "steak",
             "symbol": "STK",
-            "ibc": {},
             "logo_URIs": {
                 "png": "https://github.com/linkto/image.png",
                 "svg": "https://stake.com/linkto/steak.svg"

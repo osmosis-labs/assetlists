@@ -55,7 +55,7 @@ An example assetlist json contains the following structure:
             "symbol": "FOO",
             "ibc": {
                 "source_channel": "channel-35",
-                "dest_channel": "channel-1"
+                "dst_channel": "channel-1"
             },
             "logo_URIs": {
                 "png": "ipfs://QmXfzKRvjZz3u5JRgC4v5mGVbm9ahrUiB4DgzHBsnWbTMM",

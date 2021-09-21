@@ -291,6 +291,60 @@
         "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/tick.png",
         "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/tick.svg"
       }
+    },
+    {
+      "description": "e-Money NGM staking token",
+      "denom_units": [
+        {
+          "denom": "ibc/1DC495FCEFDA068A3820F903EDBD78B942FBD204D7E93D3BA2B432E9669D1A59",
+          "exponent": 0,
+          "aliases": [
+            "ungm"
+          ]
+        },
+        {
+          "denom": "ngm",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/1DC495FCEFDA068A3820F903EDBD78B942FBD204D7E93D3BA2B432E9669D1A59",
+      "name": "e-Money",
+      "display": "ngm",
+      "symbol": "NGM",
+      "ibc": {
+        "source_channel": "channel-37",
+        "dst_channel": "channel-0"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ngm.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ngm.svg"
+      },
+      "coingecko_id": "e-money"
+    },
+    {
+      "description": "e-Money EUR stablecoin",
+      "denom_units": [
+        {
+          "denom": "ibc/5973C068568365FFF40DEDCF1A1CB7582B6116B731CD31A12231AE25E20B871F",
+          "exponent": 0
+        },
+        {
+          "denom": "eeur",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/5973C068568365FFF40DEDCF1A1CB7582B6116B731CD31A12231AE25E20B871F",
+      "name": "e-Money",
+      "display": "eeur",
+      "symbol": "EEUR",
+      "ibc": {
+        "source_channel": "channel-37",
+        "dst_channel": "channel-0"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ngm.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ngm.svg"
+      }
     }
   ]
 }

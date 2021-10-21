@@ -473,6 +473,65 @@
         "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/like.svg"
       },
       "coingecko_id": "likecoin"
+    },
+    {
+      "description": "The native staking token of Terra.",
+      "denom_units": [
+        {
+          "denom": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
+          "exponent": 0,
+          "aliases": [
+            "uluna"
+          ]
+        },
+        {
+          "denom": "luna",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
+      "name": "Luna",
+      "display": "luna",
+      "symbol": "LUNA",
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-72",
+        "source_denom": "uluna"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/luna.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/luna.svg"
+      },
+      "coingecko_id": "terra-luna"
+    },
+    {
+      "description": "The USD stablecoin of Terra.",
+      "denom_units": [
+        {
+          "denom": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC",
+          "exponent": 0,
+          "aliases": [
+            "uust"
+          ]
+        },
+        {
+          "denom": "ust",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC",
+      "name": "TerraUSD",
+      "display": "ust",
+      "symbol": "UST",
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-72",
+        "source_denom": "uust"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ust.png"
+      },
+      "coingecko_id": "terra-usd"
     }
   ]
 }

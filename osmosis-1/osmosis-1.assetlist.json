@@ -1,546 +1,566 @@
 {
-    "chain_id": "osmosis-1",
-    "assets": [{
-            "description": "The native token of Osmosis",
-            "denom_units": [{
-                    "denom": "uosmo",
-                    "exponent": 0,
-                    "aliases": []
-                },
-                {
-                    "denom": "osmo",
-                    "exponent": 6,
-                    "aliases": []
-                }
-            ],
-            "base": "uosmo",
-            "name": "Osmosis",
-            "display": "osmo",
-            "symbol": "OSMO",
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/osmo.png",
-                "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/osmo.svg"
-            }
+  "chain_id": "osmosis-1",
+  "assets": [
+    {
+      "description": "The native token of Osmosis",
+      "denom_units": [
+        {
+          "denom": "uosmo",
+          "exponent": 0,
+          "aliases": []
         },
         {
-            "denom_units": [{
-                    "denom": "uion",
-                    "exponent": 0
-                },
-                {
-                    "denom": "ion",
-                    "exponent": 6
-                }
-            ],
-            "base": "uion",
-            "name": "Ion",
-            "display": "ion",
-            "symbol": "ION",
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ion.png",
-                "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ion.svg"
-            }
-        },
-        {
-            "description": "The native staking and governance token of the Cosmos Hub.",
-            "denom_units": [{
-                    "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
-                    "exponent": 0
-                },
-                {
-                    "denom": "atom",
-                    "exponent": 6
-                }
-            ],
-            "base": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
-            "name": "Cosmos",
-            "display": "atom",
-            "symbol": "ATOM",
-            "ibc": {
-                "source_channel": "channel-141",
-                "dst_channel": "channel-0",
-                "source_denom": "uatom"
-            },
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/atom.png",
-                "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/atom.svg"
-            },
-            "coingecko_id": "cosmos"
-        },
-        {
-            "description": "Akash Token (AKT) is the Akash Network's native utility token, used as the primary means to govern, secure the blockchain, incentivize participants, and provide a default mechanism to store and exchange value.",
-            "denom_units": [{
-                    "denom": "ibc/1480B8FD20AD5FCAE81EA87584D269547DD4D436843C1D20F15E00EB64743EF4",
-                    "exponent": 0,
-                    "aliases": [
-                        "uakt"
-                    ]
-                },
-                {
-                    "denom": "akt",
-                    "exponent": 6
-                }
-            ],
-            "base": "ibc/1480B8FD20AD5FCAE81EA87584D269547DD4D436843C1D20F15E00EB64743EF4",
-            "name": "Akash Network",
-            "display": "akt",
-            "symbol": "AKT",
-            "ibc": {
-                "source_channel": "channel-9",
-                "dst_channel": "channel-1",
-                "source_denom": "uakt"
-            },
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/akt.png",
-                "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/akt.svg"
-            },
-            "coingecko_id": "akash-network"
-        },
-        {
-            "description": "The XPRT token is primarily a governance token for the Persistence chain.",
-            "denom_units": [{
-                    "denom": "ibc/A0CC0CF735BFB30E730C70019D4218A1244FF383503FF7579C9201AB93CA9293",
-                    "exponent": 0
-                },
-                {
-                    "denom": "xprt",
-                    "exponent": 6
-                }
-            ],
-            "base": "ibc/A0CC0CF735BFB30E730C70019D4218A1244FF383503FF7579C9201AB93CA9293",
-            "name": "Persistence",
-            "display": "xprt",
-            "symbol": "XPRT",
-            "ibc": {
-                "source_channel": "channel-6",
-                "dst_channel": "channel-4",
-                "source_denom": "uxprt"
-            },
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/xprt.png"
-            },
-            "coingecko_id": "persistence"
-        },
-        {
-            "description": "The IRIS token is the native governance token for the IrisNet chain.",
-            "denom_units": [{
-                    "denom": "ibc/7C4D60AA95E5A7558B0A364860979CA34B7FF8AAF255B87AF9E879374470CEC0",
-                    "exponent": 0,
-                    "aliases": [
-                        "uiris"
-                    ]
-                },
-                {
-                    "denom": "iris",
-                    "exponent": 6
-                }
-            ],
-            "base": "ibc/7C4D60AA95E5A7558B0A364860979CA34B7FF8AAF255B87AF9E879374470CEC0",
-            "name": "IRISnet",
-            "display": "iris",
-            "symbol": "IRIS",
-            "ibc": {
-                "source_channel": "channel-3",
-                "dst_channel": "channel-6",
-                "source_denom": "uiris"
-            },
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/iris.png"
-            },
-            "coingecko_id": "iris-network"
-        },
-        {
-            "description": "DVPN is the native token of the Sentinel Hub.",
-            "denom_units": [{
-                    "denom": "ibc/9712DBB13B9631EDFA9BF61B55F1B2D290B2ADB67E3A4EB3A875F3B6081B3B84",
-                    "exponent": 0,
-                    "aliases": [
-                        "udvpn"
-                    ]
-                },
-                {
-                    "denom": "dvpn",
-                    "exponent": 6
-                }
-            ],
-            "base": "ibc/9712DBB13B9631EDFA9BF61B55F1B2D290B2ADB67E3A4EB3A875F3B6081B3B84",
-            "name": "Sentinel",
-            "display": "dvpn",
-            "symbol": "DVPN",
-            "ibc": {
-                "source_channel": "channel-0",
-                "dst_channel": "channel-2",
-                "source_denom": "udvpn"
-            },
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/dvpn.png"
-            },
-            "coingecko_id": "sentinel"
-        },
-        {
-            "description": "CRO coin is the token for the Crypto.com platform.",
-            "denom_units": [{
-                    "denom": "ibc/E6931F78057F7CC5DA0FD6CEF82FF39373A6E0452BF1FD76910B93292CF356C1",
-                    "exponent": 0,
-                    "aliases": [
-                        "basecro"
-                    ]
-                },
-                {
-                    "denom": "cro",
-                    "exponent": 8
-                }
-            ],
-            "base": "ibc/E6931F78057F7CC5DA0FD6CEF82FF39373A6E0452BF1FD76910B93292CF356C1",
-            "name": "Crypto.com Coin",
-            "display": "cro",
-            "symbol": "CRO",
-            "ibc": {
-                "source_channel": "channel-10",
-                "dst_channel": "channel-5",
-                "source_denom": "basecro"
-            },
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/cro.png"
-            },
-            "coingecko_id": "crypto-com-chain"
-        },
-        {
-            "description": "REGEN coin is the token for the Regen Network Platform",
-            "denom_units": [{
-                    "denom": "ibc/1DCC8A6CB5689018431323953344A9F6CC4D0BFB261E88C9F7777372C10CD076",
-                    "exponent": 0,
-                    "aliases": [
-                        "uregen"
-                    ]
-                },
-                {
-                    "denom": "regen",
-                    "exponent": 6
-                }
-            ],
-            "base": "ibc/1DCC8A6CB5689018431323953344A9F6CC4D0BFB261E88C9F7777372C10CD076",
-            "name": "Regen Network",
-            "display": "regen",
-            "symbol": "REGEN",
-            "ibc": {
-                "source_channel": "channel-1",
-                "dst_channel": "channel-8",
-                "source_denom": "uregen"
-            },
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/regen.png"
-            }
-        },
-        {
-            "description": "IOV coin is the token for the Starname (IOV) Asset Name Service",
-            "denom_units": [{
-                    "denom": "ibc/52B1AA623B34EB78FD767CEA69E8D7FA6C9CFE1FBF49C5406268FD325E2CC2AC",
-                    "exponent": 0,
-                    "aliases": [
-                        "uiov"
-                    ]
-                },
-                {
-                    "denom": "iov",
-                    "exponent": 6
-                }
-            ],
-            "base": "ibc/52B1AA623B34EB78FD767CEA69E8D7FA6C9CFE1FBF49C5406268FD325E2CC2AC",
-            "name": "Starname",
-            "display": "iov",
-            "symbol": "IOV",
-            "ibc": {
-                "source_channel": "channel-2",
-                "dst_channel": "channel-15",
-                "source_denom": "uiov"
-            },
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/iov.png",
-                "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/iov.svg"
-            },
-            "coingecko_id": "starname"
-        },
-        {
-            "description": "TICK coin is the token for the Microtick Price Discovery & Oracle App",
-            "denom_units": [{
-                    "denom": "ibc/655BCEF3CDEBE32863FF281DBBE3B06160339E9897DC9C9C9821932A5F8BA6F8",
-                    "exponent": 0,
-                    "aliases": [
-                        "utick"
-                    ]
-                },
-                {
-                    "denom": "tick",
-                    "exponent": 6
-                }
-            ],
-            "base": "ibc/655BCEF3CDEBE32863FF281DBBE3B06160339E9897DC9C9C9821932A5F8BA6F8",
-            "display": "tick",
-            "name": "Microtick",
-            "symbol": "TICK",
-            "ibc": {
-                "source_channel": "channel-16",
-                "dst_channel": "channel-39",
-                "source_denom": "utick"
-            },
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/tick.png",
-                "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/tick.svg"
-            }
-        },
-        {
-            "description": "e-Money NGM staking token. In addition to earning staking rewards the token is bought back and burned based on e-Money stablecoin inflation.",
-            "denom_units": [{
-                    "denom": "ibc/1DC495FCEFDA068A3820F903EDBD78B942FBD204D7E93D3BA2B432E9669D1A59",
-                    "exponent": 0,
-                    "aliases": [
-                        "ungm"
-                    ]
-                },
-                {
-                    "denom": "ngm",
-                    "exponent": 6
-                }
-            ],
-            "base": "ibc/1DC495FCEFDA068A3820F903EDBD78B942FBD204D7E93D3BA2B432E9669D1A59",
-            "name": "e-Money",
-            "display": "ngm",
-            "symbol": "NGM",
-            "ibc": {
-                "source_channel": "channel-0",
-                "dst_channel": "channel-37",
-                "source_denom": "ungm"
-            },
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ngm.png",
-                "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ngm.svg"
-            },
-            "coingecko_id": "e-money"
-        },
-        {
-            "description": "e-Money EUR stablecoin. Audited and backed by fiat EUR deposits and government bonds.",
-            "denom_units": [{
-                    "denom": "ibc/5973C068568365FFF40DEDCF1A1CB7582B6116B731CD31A12231AE25E20B871F",
-                    "exponent": 0
-                },
-                {
-                    "denom": "eeur",
-                    "exponent": 6
-                }
-            ],
-            "base": "ibc/5973C068568365FFF40DEDCF1A1CB7582B6116B731CD31A12231AE25E20B871F",
-            "name": "e-Money EUR",
-            "display": "eeur",
-            "symbol": "EEUR",
-            "ibc": {
-                "source_channel": "channel-0",
-                "dst_channel": "channel-37",
-                "source_denom": "eeur"
-            },
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ngm.png",
-                "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ngm.svg"
-            }
-        },
-        {
-            "description": "The BCNA coin is the transactional token within the BitCanna network, serving the legal cannabis industry through its payment network, supply chain and trust network.",
-            "denom_units": [{
-                    "denom": "ibc/D805F1DA50D31B96E4282C1D4181EDDFB1A44A598BFF5666F4B43E4B8BEA95A5",
-                    "exponent": 0,
-                    "aliases": [
-                        "ubcna"
-                    ]
-                },
-                {
-                    "denom": "bcna",
-                    "exponent": 6
-                }
-            ],
-            "base": "ibc/D805F1DA50D31B96E4282C1D4181EDDFB1A44A598BFF5666F4B43E4B8BEA95A5",
-            "display": "bcna",
-            "name": "BitCanna",
-            "symbol": "BCNA",
-            "ibc": {
-                "source_channel": "channel-1",
-                "dst_channel": "channel-51",
-                "source_denom": "ubcna"
-            },
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/bcna.png",
-                "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/bcna.svg"
-            },
-            "coingecko_id": "bitcanna"
-        },
-        {
-            "description": "The native token of JUNO Chain",
-            "denom_units": [{
-                    "denom": "ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED",
-                    "exponent": 0,
-                    "aliases": [
-                        "ujuno"
-                    ]
-                },
-                {
-                    "denom": "juno",
-                    "exponent": 6
-                }
-            ],
-            "base": "ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED",
-            "name": "Juno",
-            "display": "juno",
-            "symbol": "JUNO",
-            "ibc": {
-                "source_channel": "channel-0",
-                "dst_channel": "channel-42",
-                "source_denom": "ujuno"
-            },
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/juno.png",
-                "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/juno.svg"
-            }
-        },
-        {
-            "description": "The native token of IXO Chain",
-            "denom_units": [{
-                    "denom": "ibc/F3FF7A84A73B62921538642F9797C423D2B4C4ACB3C7FCFFCE7F12AA69909C4B",
-                    "exponent": 0,
-                    "aliases": [
-                        "uixo"
-                    ]
-                },
-                {
-                    "denom": "ixo",
-                    "exponent": 6
-                }
-            ],
-            "base": "ibc/F3FF7A84A73B62921538642F9797C423D2B4C4ACB3C7FCFFCE7F12AA69909C4B",
-            "name": "IXO",
-            "display": "ixo",
-            "symbol": "IXO",
-            "ibc": {
-                "source_channel": "channel-4",
-                "dst_channel": "channel-38",
-                "source_denom": "uixo"
-            },
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ixo.png"
-            }
-        },
-        {
-            "description": "LIKE is the native staking and governance token of LikeCoin chain, a Decentralized Publishing Infrastructure to empower content ownership, authenticity, and provenance.",
-            "denom_units": [{
-                    "denom": "ibc/9989AD6CCA39D1131523DB0617B50F6442081162294B4795E26746292467B525",
-                    "exponent": 0,
-                    "aliases": [
-                        "nanolike"
-                    ]
-                },
-                {
-                    "denom": "like",
-                    "exponent": 9
-                }
-            ],
-            "base": "ibc/9989AD6CCA39D1131523DB0617B50F6442081162294B4795E26746292467B525",
-            "name": "LikeCoin",
-            "display": "like",
-            "symbol": "LIKE",
-            "ibc": {
-                "source_channel": "channel-3",
-                "dst_channel": "channel-53",
-                "source_denom": "nanolike"
-            },
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/like.png",
-                "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/like.svg"
-            },
-            "coingecko_id": "likecoin"
-        },
-        {
-            "description": "The native staking token of Terra.",
-            "denom_units": [{
-                    "denom": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
-                    "exponent": 0,
-                    "aliases": [
-                        "uluna"
-                    ]
-                },
-                {
-                    "denom": "luna",
-                    "exponent": 6
-                }
-            ],
-            "base": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
-            "name": "Luna",
-            "display": "luna",
-            "symbol": "LUNA",
-            "ibc": {
-                "source_channel": "channel-1",
-                "dst_channel": "channel-72",
-                "source_denom": "uluna"
-            },
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/luna.png",
-                "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/luna.svg"
-            },
-            "coingecko_id": "terra-luna"
-        },
-        {
-            "description": "The USD stablecoin of Terra.",
-            "denom_units": [{
-                    "denom": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC",
-                    "exponent": 0,
-                    "aliases": [
-                        "uust"
-                    ]
-                },
-                {
-                    "denom": "ust",
-                    "exponent": 6
-                }
-            ],
-            "base": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC",
-            "name": "TerraUSD",
-            "display": "ust",
-            "symbol": "UST",
-            "ibc": {
-                "source_channel": "channel-1",
-                "dst_channel": "channel-72",
-                "source_denom": "uust"
-            },
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ust.png"
-            },
-            "coingecko_id": "terra-usd"
-        },
-        {
-            "description": "BitSong Native Token",
-            "denom_units": [{
-                    "denom": "ibc/4E5444C35610CC76FC94E7F7886B93121175C28262DDFDDE6F84E82BF2425452",
-                    "exponent": 0,
-                    "aliases": [
-                        "ubtsg"
-                    ]
-                },
-                {
-                    "denom": "btsg",
-                    "exponent": 6
-                }
-            ],
-            "base": "ibc/4E5444C35610CC76FC94E7F7886B93121175C28262DDFDDE6F84E82BF2425452",
-            "name": "BitSong",
-            "display": "btsg",
-            "symbol": "BTSG",
-            "ibc": {
-                "source_channel": "channel-0",
-                "dst_channel": "channel-73",
-                "source_denom": "ubtsg"
-            },
-            "logo_URIs": {
-                "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/bitsong.png",
-                "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/bitsong.svg"
-            },
-            "coingecko_id": "bitsong"
+          "denom": "osmo",
+          "exponent": 6,
+          "aliases": []
         }
-    ]
+      ],
+      "base": "uosmo",
+      "name": "Osmosis",
+      "display": "osmo",
+      "symbol": "OSMO",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/osmo.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/osmo.svg"
+      }
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "uion",
+          "exponent": 0
+        },
+        {
+          "denom": "ion",
+          "exponent": 6
+        }
+      ],
+      "base": "uion",
+      "name": "Ion",
+      "display": "ion",
+      "symbol": "ION",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ion.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ion.svg"
+      }
+    },
+    {
+      "description": "The native staking and governance token of the Cosmos Hub.",
+      "denom_units": [
+        {
+          "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
+          "exponent": 0
+        },
+        {
+          "denom": "atom",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
+      "name": "Cosmos",
+      "display": "atom",
+      "symbol": "ATOM",
+      "ibc": {
+        "source_channel": "channel-141",
+        "dst_channel": "channel-0",
+        "source_denom": "uatom"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/atom.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/atom.svg"
+      },
+      "coingecko_id": "cosmos"
+    },
+    {
+      "description": "Akash Token (AKT) is the Akash Network's native utility token, used as the primary means to govern, secure the blockchain, incentivize participants, and provide a default mechanism to store and exchange value.",
+      "denom_units": [
+        {
+          "denom": "ibc/1480B8FD20AD5FCAE81EA87584D269547DD4D436843C1D20F15E00EB64743EF4",
+          "exponent": 0,
+          "aliases": [
+            "uakt"
+          ]
+        },
+        {
+          "denom": "akt",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/1480B8FD20AD5FCAE81EA87584D269547DD4D436843C1D20F15E00EB64743EF4",
+      "name": "Akash Network",
+      "display": "akt",
+      "symbol": "AKT",
+      "ibc": {
+        "source_channel": "channel-9",
+        "dst_channel": "channel-1",
+        "source_denom": "uakt"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/akt.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/akt.svg"
+      },
+      "coingecko_id": "akash-network"
+    },
+    {
+      "description": "The XPRT token is primarily a governance token for the Persistence chain.",
+      "denom_units": [
+        {
+          "denom": "ibc/A0CC0CF735BFB30E730C70019D4218A1244FF383503FF7579C9201AB93CA9293",
+          "exponent": 0
+        },
+        {
+          "denom": "xprt",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/A0CC0CF735BFB30E730C70019D4218A1244FF383503FF7579C9201AB93CA9293",
+      "name": "Persistence",
+      "display": "xprt",
+      "symbol": "XPRT",
+      "ibc": {
+        "source_channel": "channel-6",
+        "dst_channel": "channel-4",
+        "source_denom": "uxprt"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/xprt.png"
+      },
+      "coingecko_id": "persistence"
+    },
+    {
+      "description": "The IRIS token is the native governance token for the IrisNet chain.",
+      "denom_units": [
+        {
+          "denom": "ibc/7C4D60AA95E5A7558B0A364860979CA34B7FF8AAF255B87AF9E879374470CEC0",
+          "exponent": 0,
+          "aliases": [
+            "uiris"
+          ]
+        },
+        {
+          "denom": "iris",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/7C4D60AA95E5A7558B0A364860979CA34B7FF8AAF255B87AF9E879374470CEC0",
+      "name": "IRISnet",
+      "display": "iris",
+      "symbol": "IRIS",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-6",
+        "source_denom": "uiris"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/iris.png"
+      },
+      "coingecko_id": "iris-network"
+    },
+    {
+      "description": "DVPN is the native token of the Sentinel Hub.",
+      "denom_units": [
+        {
+          "denom": "ibc/9712DBB13B9631EDFA9BF61B55F1B2D290B2ADB67E3A4EB3A875F3B6081B3B84",
+          "exponent": 0,
+          "aliases": [
+            "udvpn"
+          ]
+        },
+        {
+          "denom": "dvpn",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/9712DBB13B9631EDFA9BF61B55F1B2D290B2ADB67E3A4EB3A875F3B6081B3B84",
+      "name": "Sentinel",
+      "display": "dvpn",
+      "symbol": "DVPN",
+      "ibc": {
+        "source_channel": "channel-0",
+        "dst_channel": "channel-2",
+        "source_denom": "udvpn"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/dvpn.png"
+      },
+      "coingecko_id": "sentinel"
+    },
+    {
+      "description": "CRO coin is the token for the Crypto.com platform.",
+      "denom_units": [
+        {
+          "denom": "ibc/E6931F78057F7CC5DA0FD6CEF82FF39373A6E0452BF1FD76910B93292CF356C1",
+          "exponent": 0,
+          "aliases": [
+            "basecro"
+          ]
+        },
+        {
+          "denom": "cro",
+          "exponent": 8
+        }
+      ],
+      "base": "ibc/E6931F78057F7CC5DA0FD6CEF82FF39373A6E0452BF1FD76910B93292CF356C1",
+      "name": "Crypto.com Coin",
+      "display": "cro",
+      "symbol": "CRO",
+      "ibc": {
+        "source_channel": "channel-10",
+        "dst_channel": "channel-5",
+        "source_denom": "basecro"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/cro.png"
+      },
+      "coingecko_id": "crypto-com-chain"
+    },
+    {
+      "description": "REGEN coin is the token for the Regen Network Platform",
+      "denom_units": [
+        {
+          "denom": "ibc/1DCC8A6CB5689018431323953344A9F6CC4D0BFB261E88C9F7777372C10CD076",
+          "exponent": 0,
+          "aliases": [
+            "uregen"
+          ]
+        },
+        {
+          "denom": "regen",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/1DCC8A6CB5689018431323953344A9F6CC4D0BFB261E88C9F7777372C10CD076",
+      "name": "Regen Network",
+      "display": "regen",
+      "symbol": "REGEN",
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-8",
+        "source_denom": "uregen"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/regen.png"
+      }
+    },
+    {
+      "description": "IOV coin is the token for the Starname (IOV) Asset Name Service",
+      "denom_units": [
+        {
+          "denom": "ibc/52B1AA623B34EB78FD767CEA69E8D7FA6C9CFE1FBF49C5406268FD325E2CC2AC",
+          "exponent": 0,
+          "aliases": [
+            "uiov"
+          ]
+        },
+        {
+          "denom": "iov",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/52B1AA623B34EB78FD767CEA69E8D7FA6C9CFE1FBF49C5406268FD325E2CC2AC",
+      "name": "Starname",
+      "display": "iov",
+      "symbol": "IOV",
+      "ibc": {
+        "source_channel": "channel-2",
+        "dst_channel": "channel-15",
+        "source_denom": "uiov"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/iov.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/iov.svg"
+      },
+      "coingecko_id": "starname"
+    },
+    {
+      "description": "TICK coin is the token for the Microtick Price Discovery & Oracle App",
+      "denom_units": [
+        {
+          "denom": "ibc/655BCEF3CDEBE32863FF281DBBE3B06160339E9897DC9C9C9821932A5F8BA6F8",
+          "exponent": 0,
+          "aliases": [
+            "utick"
+          ]
+        },
+        {
+          "denom": "tick",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/655BCEF3CDEBE32863FF281DBBE3B06160339E9897DC9C9C9821932A5F8BA6F8",
+      "display": "tick",
+      "name": "Microtick",
+      "symbol": "TICK",
+      "ibc": {
+        "source_channel": "channel-16",
+        "dst_channel": "channel-39",
+        "source_denom": "utick"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/tick.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/tick.svg"
+      }
+    },
+    {
+      "description": "e-Money NGM staking token. In addition to earning staking rewards the token is bought back and burned based on e-Money stablecoin inflation.",
+      "denom_units": [
+        {
+          "denom": "ibc/1DC495FCEFDA068A3820F903EDBD78B942FBD204D7E93D3BA2B432E9669D1A59",
+          "exponent": 0,
+          "aliases": [
+            "ungm"
+          ]
+        },
+        {
+          "denom": "ngm",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/1DC495FCEFDA068A3820F903EDBD78B942FBD204D7E93D3BA2B432E9669D1A59",
+      "name": "e-Money",
+      "display": "ngm",
+      "symbol": "NGM",
+      "ibc": {
+        "source_channel": "channel-0",
+        "dst_channel": "channel-37",
+        "source_denom": "ungm"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ngm.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ngm.svg"
+      },
+      "coingecko_id": "e-money"
+    },
+    {
+      "description": "e-Money EUR stablecoin. Audited and backed by fiat EUR deposits and government bonds.",
+      "denom_units": [
+        {
+          "denom": "ibc/5973C068568365FFF40DEDCF1A1CB7582B6116B731CD31A12231AE25E20B871F",
+          "exponent": 0
+        },
+        {
+          "denom": "eeur",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/5973C068568365FFF40DEDCF1A1CB7582B6116B731CD31A12231AE25E20B871F",
+      "name": "e-Money EUR",
+      "display": "eeur",
+      "symbol": "EEUR",
+      "ibc": {
+        "source_channel": "channel-0",
+        "dst_channel": "channel-37",
+        "source_denom": "eeur"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ngm.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ngm.svg"
+      }
+    },
+    {
+      "description": "The BCNA coin is the transactional token within the BitCanna network, serving the legal cannabis industry through its payment network, supply chain and trust network.",
+      "denom_units": [
+        {
+          "denom": "ibc/D805F1DA50D31B96E4282C1D4181EDDFB1A44A598BFF5666F4B43E4B8BEA95A5",
+          "exponent": 0,
+          "aliases": [
+            "ubcna"
+          ]
+        },
+        {
+          "denom": "bcna",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/D805F1DA50D31B96E4282C1D4181EDDFB1A44A598BFF5666F4B43E4B8BEA95A5",
+      "display": "bcna",
+      "name": "BitCanna",
+      "symbol": "BCNA",
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-51",
+        "source_denom": "ubcna"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/bcna.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/bcna.svg"
+      },
+      "coingecko_id": "bitcanna"
+    },
+    {
+      "description": "The native token of JUNO Chain",
+      "denom_units": [
+        {
+          "denom": "ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED",
+          "exponent": 0,
+          "aliases": [
+            "ujuno"
+          ]
+        },
+        {
+          "denom": "juno",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED",
+      "name": "Juno",
+      "display": "juno",
+      "symbol": "JUNO",
+      "ibc": {
+        "source_channel": "channel-0",
+        "dst_channel": "channel-42",
+        "source_denom": "ujuno"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/juno.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/juno.svg"
+      }
+    },
+    {
+      "description": "The native token of IXO Chain",
+      "denom_units": [
+        {
+          "denom": "ibc/F3FF7A84A73B62921538642F9797C423D2B4C4ACB3C7FCFFCE7F12AA69909C4B",
+          "exponent": 0,
+          "aliases": [
+            "uixo"
+          ]
+        },
+        {
+          "denom": "ixo",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/F3FF7A84A73B62921538642F9797C423D2B4C4ACB3C7FCFFCE7F12AA69909C4B",
+      "name": "IXO",
+      "display": "ixo",
+      "symbol": "IXO",
+      "ibc": {
+        "source_channel": "channel-4",
+        "dst_channel": "channel-38",
+        "source_denom": "uixo"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ixo.png"
+      }
+    },
+    {
+      "description": "LIKE is the native staking and governance token of LikeCoin chain, a Decentralized Publishing Infrastructure to empower content ownership, authenticity, and provenance.",
+      "denom_units": [
+        {
+          "denom": "ibc/9989AD6CCA39D1131523DB0617B50F6442081162294B4795E26746292467B525",
+          "exponent": 0,
+          "aliases": [
+            "nanolike"
+          ]
+        },
+        {
+          "denom": "like",
+          "exponent": 9
+        }
+      ],
+      "base": "ibc/9989AD6CCA39D1131523DB0617B50F6442081162294B4795E26746292467B525",
+      "name": "LikeCoin",
+      "display": "like",
+      "symbol": "LIKE",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-53",
+        "source_denom": "nanolike"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/like.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/like.svg"
+      },
+      "coingecko_id": "likecoin"
+    },
+    {
+      "description": "The native staking token of Terra.",
+      "denom_units": [
+        {
+          "denom": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
+          "exponent": 0,
+          "aliases": [
+            "uluna"
+          ]
+        },
+        {
+          "denom": "luna",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
+      "name": "Luna",
+      "display": "luna",
+      "symbol": "LUNA",
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-72",
+        "source_denom": "uluna"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/luna.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/luna.svg"
+      },
+      "coingecko_id": "terra-luna"
+    },
+    {
+      "description": "The USD stablecoin of Terra.",
+      "denom_units": [
+        {
+          "denom": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC",
+          "exponent": 0,
+          "aliases": [
+            "uust"
+          ]
+        },
+        {
+          "denom": "ust",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC",
+      "name": "TerraUSD",
+      "display": "ust",
+      "symbol": "UST",
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-72",
+        "source_denom": "uust"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ust.png"
+      },
+      "coingecko_id": "terra-usd"
+    },
+    {
+      "description": "BitSong Native Token",
+      "denom_units": [
+        {
+          "denom": "ibc/4E5444C35610CC76FC94E7F7886B93121175C28262DDFDDE6F84E82BF2425452",
+          "exponent": 0,
+          "aliases": [
+            "ubtsg"
+          ]
+        },
+        {
+          "denom": "btsg",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/4E5444C35610CC76FC94E7F7886B93121175C28262DDFDDE6F84E82BF2425452",
+      "name": "BitSong",
+      "display": "btsg",
+      "symbol": "BTSG",
+      "ibc": {
+        "source_channel": "channel-0",
+        "dst_channel": "channel-73",
+        "source_denom": "ubtsg"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/bitsong.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/bitsong.svg"
+      }
+    }
+  ]
 }

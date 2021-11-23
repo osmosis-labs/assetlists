@@ -536,7 +536,7 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/ust.png"
       },
-      "coingecko_id": "terra-usd"
+      "coingecko_id": "terrausd"
     },
     {
       "description": "BitSong Native Token",
@@ -567,6 +567,95 @@
         "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/btsg.svg"
       },
       "coingecko_id": "bitsong"
+    },
+    {
+      "description": "The native token of Ki Chain",
+      "denom_units": [
+        {
+          "denom": "ibc/B547DC9B897E7C3AA5B824696110B8E3D2C31E3ED3F02FF363DCBAD82457E07E",
+          "exponent": 0,
+          "aliases": [
+            "uxki"
+          ]
+        },
+        {
+          "denom": "xki",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/B547DC9B897E7C3AA5B824696110B8E3D2C31E3ED3F02FF363DCBAD82457E07E",
+      "name": "Ki",
+      "display": "xki",
+      "symbol": "XKI",
+      "ibc": {
+        "source_channel": "channel-0",
+        "dst_channel": "channel-77",
+        "source_denom": "uxki"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/xki.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/xki.svg"
+      },
+      "coingecko_id": "ki"
+    },
+    {
+      "description": "The native token of Secret Network",
+      "denom_units": [
+        {
+          "denom": "ibc/0954E1C28EB7AF5B72D24F3BC2B47BBB2FDF91BDDFD57B74B99E133AED40972A",
+          "exponent": 0,
+          "aliases": [
+            "uscrt"
+          ]
+        },
+        {
+          "denom": "scrt",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/0954E1C28EB7AF5B72D24F3BC2B47BBB2FDF91BDDFD57B74B99E133AED40972A",
+      "name": "Secret Network",
+      "display": "scrt",
+      "symbol": "SCRT",
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-88",
+        "source_denom": "uscrt"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/scrt.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/scrt.svg"
+      },
+      "coingecko_id": "secret"
+    },
+    {
+      "description": "Panacea is a public blockchain launched by MediBloc, which is the key infrastructure for reinventing the patient-centered healthcare data ecosystem",
+      "denom_units": [
+        {
+          "denom": "ibc/3BCCC93AD5DF58D11A6F8A05FA8BC801CBA0BA61A981F57E91B8B598BF8061CB",
+          "exponent": 0,
+          "aliases": [
+            "umed"
+          ]
+        },
+        {
+          "denom": "med",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/3BCCC93AD5DF58D11A6F8A05FA8BC801CBA0BA61A981F57E91B8B598BF8061CB",
+      "name": "Panacea",
+      "display": "med",
+      "symbol": "MED",
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-82",
+        "source_denom": "umed"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/med.png"
+      },
+      "coingecko_id": "medibloc"
     }
   ]
 }

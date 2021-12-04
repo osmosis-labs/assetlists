@@ -689,6 +689,33 @@
       }
     },
     {
+      "description": "Native Token of Comdex Protocol",
+      "denom_units": [
+        {
+          "denom": "ibc/EA3E1640F9B1532AB129A571203A0B9F789A7F14BB66E350DCBFA18E1A1931F0",
+          "exponent": 0,
+          "aliases": [
+            "ucmdx"
+          ]
+        },
+        {
+          "denom": "cmdx",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/EA3E1640F9B1532AB129A571203A0B9F789A7F14BB66E350DCBFA18E1A1931F0",
+      "name": "Comdex",
+      "display": "cmdx",
+      "symbol": "CMDX",
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-87",
+        "source_denom": "ucmdx"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/cmdx.png"
+      },
+      {
       "description": "Native token for the cheqd network",
       "denom_units": [
         {
@@ -699,13 +726,13 @@
           ]
         },
         {
-          "denom": "cheq",
+          "denom": "CHEQ",
           "exponent": 9
         }
       ],
       "base": "ibc/7A08C6F11EF0F59EB841B9F788A87EC9F2361C7D9703157EC13D940DC53031FA",
-      "name": "Cheqd"
-      "display": "cheq",
+      "name": "cheqd",
+      "display": "CHEQ",
       "symbol": "CHEQ",
       "ibc": {
         "source_channel": "channel-0",

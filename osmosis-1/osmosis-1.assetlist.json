@@ -950,7 +950,8 @@
       },
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/dig.png"
-      }
+      },
+      "coingecko_id": "dig-chain"
     },
     {
       "description": "Rowan Token (ROWAN) is the Sifchain Network's native utility token, used as the primary means to govern, provide liquidity, secure the blockchain, incentivize participants, and provide a default mechanism to store and exchange value.",
@@ -1063,9 +1064,67 @@
         "source_denom": "udarc"
       },
       "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/darc.png",
         "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/darc.svg"
       },
       "coingecko_id": "konstellation"
+    },
+    {
+      "description": "The native staking and governance token of the Umee Network.",
+      "denom_units": [
+        {
+          "denom": "ibc/67795E528DF67C5606FC20F824EA39A6EF55BA133F4DC79C90A8C47A0901E17C",
+          "exponent": 0,
+          "aliases": [
+            "uumee"
+          ]
+        },
+        {
+          "denom": "umee",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/67795E528DF67C5606FC20F824EA39A6EF55BA133F4DC79C90A8C47A0901E17C",
+      "name": "Umee",
+      "display": "umee",
+      "symbol": "UMEE",
+      "ibc": {
+        "source_channel": "channel-0",
+        "dst_channel": "channel-184",
+        "source_denom": "uumee"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/umee.png"
+      }
+    },
+    {
+      "description": "The native token of Gravity Bridge",
+      "denom_units": [
+        {
+          "denom": "ibc/E97634A40119F1898989C2A23224ED83FDD0A57EA46B3A094E287288D1672B44",
+          "exponent": 0,
+          "aliases": [
+            "ugraviton"
+          ]
+        },
+        {
+          "denom": "graviton",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/E97634A40119F1898989C2A23224ED83FDD0A57EA46B3A094E287288D1672B44",
+      "name": "Graviton",
+      "display": "graviton",
+      "symbol": "GRAV",
+      "ibc": {
+        "source_channel": "channel-10",
+        "dst_channel": "channel-144",
+        "source_denom": "ugraviton"
+      },
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/grav.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/grav.svg"
+      }
     },
     {
       "description": "The native token of Fetch.ai Chain",

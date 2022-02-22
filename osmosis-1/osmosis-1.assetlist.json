@@ -136,6 +136,32 @@
       "coingecko_id": "persistence"
     },
     {
+      "description": "The PSTAKE token is primarily a governance token for the Liquid Staking Protocol.",
+      "denom_units": [
+        {
+          "denom": "ibc/8061A06D3BD4D52C4A28FFECF7150D370393AF0BA661C3776C54FF32836C3961",
+          "exponent": 0
+        },
+        {
+          "denom": "pstake",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/8061A06D3BD4D52C4A28FFECF7150D370393AF0BA661C3776C54FF32836C3961",
+      "name": "PSTAKE",
+      "display": "pstake",
+      "symbol": "PSTAKE",
+      "ibc": {
+        "source_channel": "channel-6",
+        "dst_channel": "channel-4",
+        "source_denom": "ibc/A6E3AF63B3C906416A9AF7A556C59EA4BD50E617EFFE6299B99700CCB780E444"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/pstake.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/pstake.svg"
+      }
+    },
+    {
       "description": "The IRIS token is the native governance token for the IrisNet chain.",
       "denom_units": [
         {

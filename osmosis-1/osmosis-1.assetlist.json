@@ -1333,7 +1333,7 @@
         "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/evmos.svg"
       },
       "coingecko_id": "evmos"
-    },    
+    },
     {
       "description": "The native token of Carbon",
       "denom_units": [
@@ -1363,7 +1363,7 @@
         "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/swth.svg"
       },
       "coingecko_id": "switcheo"
-    },    
+    },
     {
       "description": "The native token of Cerberus",
       "denom_units": [
@@ -1392,6 +1392,126 @@
         "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/crbrus.png"
       },
       "coingecko_id": "cerberus-2"
+    },
+    {
+      "description": "Gravity Bridge ETH",
+      "denom_units": [
+        {
+          "denom": "ibc/65381C5F3FD21442283D56925E62EA524DED8B6927F0FF94E21E0020954C40B5",
+          "exponent": 0,
+          "aliases": [
+            "wei"
+          ]
+        },
+        {
+          "denom": "eth",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/65381C5F3FD21442283D56925E62EA524DED8B6927F0FF94E21E0020954C40B5",
+      "name": "Wrapped Ethereum",
+      "display": "Wrapped ETH",
+      "symbol": "WETH",
+      "ibc": {
+        "source_channel": "channel-10",
+        "dst_channel": "channel-144",
+        "source_denom": "gravity0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/eth.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/eth.svg"
+      },
+      "coingecko_id": "ethereum"
+    },
+    {
+      "description": "Gravity Bridge USDC",
+      "denom_units": [
+        {
+          "denom": "ibc/9F9B07EF9AD291167CF5700628145DE1DEB777C2CFC7907553B24446515F6D0E",
+          "exponent": 0,
+          "aliases": [
+            "uusdc"
+          ]
+        },
+        {
+          "denom": "usdc",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/9F9B07EF9AD291167CF5700628145DE1DEB777C2CFC7907553B24446515F6D0E",
+      "name": "USD Coin",
+      "display": "USDC",
+      "symbol": "USDC",
+      "ibc": {
+        "source_channel": "channel-10",
+        "dst_channel": "channel-144",
+        "source_denom": "gravity0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/usdc.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/usdc.svg"
+      },
+      "coingecko_id": "usd-coin"
+    },
+    {
+      "description": "Gravity Bridge Dai",
+      "denom_units": [
+        {
+          "denom": "ibc/F292A17CF920E3462C816CBE6B042E779F676CAB59096904C4C1C966413E3DF5",
+          "exponent": 0,
+          "aliases": [
+            "daiwei"
+          ]
+        },
+        {
+          "denom": "dai",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/F292A17CF920E3462C816CBE6B042E779F676CAB59096904C4C1C966413E3DF5",
+      "name": "Dai Stablecoin",
+      "display": "DAI",
+      "symbol": "DAI",
+      "ibc": {
+        "source_channel": "channel-10",
+        "dst_channel": "channel-144",
+        "source_denom": "gravity0x6B175474E89094C44Da98b954EedeAC495271d0F"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/dai.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/dai.svg"
+      },
+      "coingecko_id": "dai"
+    },
+    {
+      "description": "Gravity Bridge USDT",
+      "denom_units": [
+        {
+          "denom": "ibc/71B441E27F1BBB44DD0891BCD370C2794D404D60A4FFE5AECCD9B1E28BC89805",
+          "exponent": 0,
+          "aliases": [
+            "uusdt"
+          ]
+        },
+        {
+          "denom": "usdt",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/71B441E27F1BBB44DD0891BCD370C2794D404D60A4FFE5AECCD9B1E28BC89805",
+      "name": "Tether USD",
+      "display": "USDT",
+      "symbol": "USDT",
+      "ibc": {
+        "source_channel": "channel-10",
+        "dst_channel": "channel-144",
+        "source_denom": "gravity0xdAC17F958D2ee523a2206206994597C13D831ec7"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/usdt.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/usdt.svg"
+      },
+      "coingecko_id": "tether"
     }
   ]
 }

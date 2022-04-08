@@ -309,6 +309,36 @@
       "coingecko_id": "starname"
     },
     {
+      "description": "TICK coin is the token for the Microtick Price Discovery & Oracle App",
+      "denom_units": [
+        {
+          "denom": "ibc/655BCEF3CDEBE32863FF281DBBE3B06160339E9897DC9C9C9821932A5F8BA6F8",
+          "exponent": 0,
+          "aliases": [
+            "utick"
+          ]
+        },
+        {
+          "denom": "tick",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/655BCEF3CDEBE32863FF281DBBE3B06160339E9897DC9C9C9821932A5F8BA6F8",
+      "display": "tick",
+      "name": "Microtick",
+      "symbol": "TICK",
+      "ibc": {
+        "source_channel": "channel-16",
+        "dst_channel": "channel-39",
+        "source_denom": "utick"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/tick.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/tick.svg"
+      },
+      "coingecko_id": "microtick"
+    },
+    {
       "description": "e-Money NGM staking token. In addition to earning staking rewards the token is bought back and burned based on e-Money stablecoin inflation.",
       "denom_units": [
         {
@@ -1187,6 +1217,35 @@
       "coingecko_id": "marble"
     },
     {
+      "description": "Hope Galaxy is an NFT collection based on its own native Token $HOPE, a cw20 token on Juno chain.",
+      "type_asset": "cw20",
+      "address": "juno1re3x67ppxap48ygndmrc7har2cnc7tcxtm9nplcas4v0gc3wnmvs3s807z",
+      "denom_units": [
+        {
+          "denom": "ibc/C2A2E9CA95DDD4828B75124B5E27B8401C7D8493BC48353D418CBFC04565899B",
+          "exponent": 0
+        },
+        {
+          "denom": "hope",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/C2A2E9CA95DDD4828B75124B5E27B8401C7D8493BC48353D418CBFC04565899B",
+      "name": "Hope Galaxy",
+      "display": "hope",
+      "symbol": "HOPE",
+      "ibc": {
+        "source_channel": "channel-47",
+        "dst_channel": "channel-169",
+        "source_denom": "hope"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/hope.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/hope.svg"
+      },
+      "coingecko_id": "hope-galaxy"
+    },
+    {
       "description": "DEC is the native token of Decentr.",
       "denom_units": [
         {
@@ -1245,6 +1304,35 @@
         "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/swth.svg"
       },
       "coingecko_id": "switcheo"
+    },
+    {
+      "description": "The native token of Cerberus",
+      "denom_units": [
+        {
+          "denom": "ibc/41999DF04D9441DAC0DF5D8291DF4333FBCBA810FFD63FDCE34FDF41EF37B6F7",
+          "exponent": 0,
+          "aliases": [
+            "ucrbrus"
+          ]
+        },
+        {
+          "denom": "crbrus",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/41999DF04D9441DAC0DF5D8291DF4333FBCBA810FFD63FDCE34FDF41EF37B6F7",
+      "name": "Cerberus",
+      "display": "crbrus",
+      "symbol": "CRBRUS",
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-212",
+        "source_denom": "ucrbrus"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/crbrus.png"
+      },
+      "coingecko_id": "cerberus-2"
     }
   ]
 }

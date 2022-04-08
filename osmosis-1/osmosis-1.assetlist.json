@@ -136,6 +136,33 @@
       "coingecko_id": "persistence"
     },
     {
+      "description": "The PSTAKE token is primarily a governance token for the Liquid Staking Protocol.",
+      "denom_units": [
+        {
+          "denom": "ibc/8061A06D3BD4D52C4A28FFECF7150D370393AF0BA661C3776C54FF32836C3961",
+          "exponent": 0
+        },
+        {
+          "denom": "pstake",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/8061A06D3BD4D52C4A28FFECF7150D370393AF0BA661C3776C54FF32836C3961",
+      "name": "PSTAKE",
+      "display": "pstake",
+      "symbol": "PSTAKE",
+      "ibc": {
+        "source_channel": "channel-6",
+        "dst_channel": "channel-4",
+        "source_denom": "ibc/A6E3AF63B3C906416A9AF7A556C59EA4BD50E617EFFE6299B99700CCB780E444"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/pstake.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/pstake.svg"
+      },
+      "coingecko_id": "pstake-finance"
+    },
+    {
       "description": "The IRIS token is the native governance token for the IrisNet chain.",
       "denom_units": [
         {
@@ -209,7 +236,7 @@
         }
       ],
       "base": "ibc/E6931F78057F7CC5DA0FD6CEF82FF39373A6E0452BF1FD76910B93292CF356C1",
-      "name": "Crypto.com Coin",
+      "name": "Cronos",
       "display": "cro",
       "symbol": "CRO",
       "ibc": {
@@ -280,35 +307,6 @@
         "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/iov.svg"
       },
       "coingecko_id": "starname"
-    },
-    {
-      "description": "TICK coin is the token for the Microtick Price Discovery & Oracle App",
-      "denom_units": [
-        {
-          "denom": "ibc/655BCEF3CDEBE32863FF281DBBE3B06160339E9897DC9C9C9821932A5F8BA6F8",
-          "exponent": 0,
-          "aliases": [
-            "utick"
-          ]
-        },
-        {
-          "denom": "tick",
-          "exponent": 6
-        }
-      ],
-      "base": "ibc/655BCEF3CDEBE32863FF281DBBE3B06160339E9897DC9C9C9821932A5F8BA6F8",
-      "display": "tick",
-      "name": "Microtick",
-      "symbol": "TICK",
-      "ibc": {
-        "source_channel": "channel-16",
-        "dst_channel": "channel-39",
-        "source_denom": "utick"
-      },
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/tick.png",
-        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/tick.svg"
-      }
     },
     {
       "description": "e-Money NGM staking token. In addition to earning staking rewards the token is bought back and burned based on e-Money stablecoin inflation.",
@@ -715,7 +713,8 @@
       },
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/boot.png"
-      }
+      },
+      "coingecko_id": "bostrom"
     },
     {
       "description": "Native Token of Comdex Protocol",
@@ -890,7 +889,8 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/vdl.png",
         "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/vdl.svg"
-      }
+      },
+      "coingecko_id": "vidulum"
     },
     {
       "description": "The native token of Desmos",
@@ -919,7 +919,8 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/dsm.png",
         "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/dsm.svg"
-      }
+      },
+      "coingecko_id": "desmos"
     },
     {
       "description": "The native token of Dig Chain.",
@@ -978,6 +979,303 @@
         "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/inj.svg"
       },
       "coingecko_id": "injective-protocol"
+      },
+      "coingecko_id": "dig-chain"
+    },
+    {
+      "description": "Rowan Token (ROWAN) is the Sifchain Network's native utility token, used as the primary means to govern, provide liquidity, secure the blockchain, incentivize participants, and provide a default mechanism to store and exchange value.",
+      "denom_units": [
+        {
+          "denom": "ibc/8318FD63C42203D16DDCAF49FE10E8590669B3219A3E87676AC9DA50722687FB",
+          "exponent": 0
+        },
+        {
+          "denom": "rowan",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/8318FD63C42203D16DDCAF49FE10E8590669B3219A3E87676AC9DA50722687FB",
+      "name": "Sifchain Rowan",
+      "display": "rowan",
+      "symbol": "ROWAN",
+      "ibc": {
+        "source_channel": "channel-17",
+        "dst_channel": "channel-47",
+        "source_denom": "rowan"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/rowan.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/rowan.svg"
+      },
+      "coingecko_id": "sifchain"
+    },
+    {
+      "description": "The native token of Sommelier Chain.",
+      "denom_units": [
+        {
+          "denom": "ibc/9BBA9A1C257E971E38C1422780CE6F0B0686F0A3085E2D61118D904BFE0F5F5E",
+          "exponent": 0,
+          "aliases": [
+            "usomm"
+          ]
+        },
+        {
+          "denom": "somm",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/9BBA9A1C257E971E38C1422780CE6F0B0686F0A3085E2D61118D904BFE0F5F5E",
+      "name": "Sommelier Chain",
+      "display": "somm",
+      "symbol": "SOMM",
+      "ibc": {
+        "source_channel": "channel-0",
+        "dst_channel": "channel-165",
+        "source_denom": "usomm"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/somm.png"
+      },
+      "coingecko_id": "sommelier"
+    },
+    {
+      "description": "The native token of BandChain",
+      "denom_units": [
+        {
+          "denom": "ibc/F867AE2112EFE646EC71A25CD2DFABB8927126AC1E19F1BBF0FF693A4ECA05DE",
+          "exponent": 0,
+          "aliases": [
+            "uband"
+          ]
+        },
+        {
+          "denom": "band",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/F867AE2112EFE646EC71A25CD2DFABB8927126AC1E19F1BBF0FF693A4ECA05DE",
+      "name": "Band Protocol",
+      "display": "band",
+      "symbol": "BAND",
+      "ibc": {
+        "source_channel": "channel-83",
+        "dst_channel": "channel-148",
+        "source_denom": "uband"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/band.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/band.svg"
+      },
+      "coingecko_id": "band-protocol"
+    },
+    {
+      "description": "The native staking and governance token of the Konstellation Network.",
+      "denom_units": [
+        {
+          "denom": "ibc/346786EA82F41FE55FAD14BF69AD8BA9B36985406E43F3CB23E6C45A285A9593",
+          "exponent": 0,
+          "aliases": [
+            "udarc"
+          ]
+        },
+        {
+          "denom": "darc",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/346786EA82F41FE55FAD14BF69AD8BA9B36985406E43F3CB23E6C45A285A9593",
+      "name": "Konstellation",
+      "display": "darc",
+      "symbol": "DARC",
+      "ibc": {
+        "source_channel": "channel-0",
+        "dst_channel": "channel-171",
+        "source_denom": "udarc"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/darc.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/darc.svg"
+      },
+      "coingecko_id": "darcmatter-coin"
+    },
+    {
+      "description": "The native staking and governance token of the Umee Network.",
+      "denom_units": [
+        {
+          "denom": "ibc/67795E528DF67C5606FC20F824EA39A6EF55BA133F4DC79C90A8C47A0901E17C",
+          "exponent": 0,
+          "aliases": [
+            "uumee"
+          ]
+        },
+        {
+          "denom": "umee",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/67795E528DF67C5606FC20F824EA39A6EF55BA133F4DC79C90A8C47A0901E17C",
+      "name": "Umee",
+      "display": "umee",
+      "symbol": "UMEE",
+      "ibc": {
+        "source_channel": "channel-0",
+        "dst_channel": "channel-184",
+        "source_denom": "uumee"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/umee.png"
+      },
+      "coingecko_id": "umee"
+    },
+    {
+      "description": "The native token of Gravity Bridge",
+      "denom_units": [
+        {
+          "denom": "ibc/E97634A40119F1898989C2A23224ED83FDD0A57EA46B3A094E287288D1672B44",
+          "exponent": 0,
+          "aliases": [
+            "ugraviton"
+          ]
+        },
+        {
+          "denom": "graviton",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/E97634A40119F1898989C2A23224ED83FDD0A57EA46B3A094E287288D1672B44",
+      "name": "Graviton",
+      "display": "graviton",
+      "symbol": "GRAV",
+      "ibc": {
+        "source_channel": "channel-10",
+        "dst_channel": "channel-144",
+        "source_denom": "ugraviton"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/grav.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/grav.svg"
+      },
+      "coingecko_id": "graviton"
+    },
+    {
+      "description": "The native token cw20 for Neta on Juno Chain",
+      "type_asset": "cw20",
+      "address": "juno168ctmpyppk90d34p3jjy658zf5a5l3w8wk35wht6ccqj4mr0yv8s4j5awr",
+      "denom_units": [
+        {
+          "denom": "ibc/297C64CC42B5A8D8F82FE2EBE208A6FE8F94B86037FA28C4529A23701C228F7A",
+          "exponent": 0,
+          "aliases": [
+            "uneta"
+          ]
+        },
+        {
+          "denom": "neta",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/297C64CC42B5A8D8F82FE2EBE208A6FE8F94B86037FA28C4529A23701C228F7A",
+      "name": "Neta",
+      "display": "neta",
+      "symbol": "NETA",
+      "ibc": {
+        "source_channel": "channel-47",
+        "dst_channel": "channel-169",
+        "source_denom": "uneta"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/neta.png"
+      },
+      "coingecko_id": "neta"
+    },
+    {
+      "description": "The native token cw20 for Marble DAO on Juno Chain",
+      "type_asset": "cw20",
+      "address": "juno1g2g7ucurum66d42g8k5twk34yegdq8c82858gz0tq2fc75zy7khssgnhjl",
+      "denom_units": [
+        {
+          "denom": "ibc/F6B691D5F7126579DDC87357B09D653B47FDCE0A3383FF33C8D8B544FE29A8A6",
+          "exponent": 0
+        },
+        {
+          "denom": "marble",
+          "exponent": 3
+        }
+      ],
+      "base": "ibc/F6B691D5F7126579DDC87357B09D653B47FDCE0A3383FF33C8D8B544FE29A8A6",
+      "name": "Marble",
+      "display": "marble",
+      "symbol": "MARBLE",
+      "ibc": {
+        "source_channel": "channel-47",
+        "dst_channel": "channel-169",
+        "source_denom": "marble"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/marble.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/marble.svg"
+      },
+      "coingecko_id": "marble"
+    },
+    {
+      "description": "DEC is the native token of Decentr.",
+      "denom_units": [
+        {
+          "denom": "ibc/9BCB27203424535B6230D594553F1659C77EC173E36D9CF4759E7186EE747E84",
+          "exponent": 0,
+          "aliases": [
+            "udec"
+          ]
+        },
+        {
+          "denom": "dec",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/9BCB27203424535B6230D594553F1659C77EC173E36D9CF4759E7186EE747E84",
+      "name": "Decentr",
+      "display": "dec",
+      "symbol": "DEC",
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-181",
+        "source_denom": "udec"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/dec.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/dec.svg"
+      },
+      "coingecko_id": "decentr"
+    },
+    {
+      "description": "The native token of Carbon",
+      "denom_units": [
+        {
+          "denom": "ibc/8FEFAE6AECF6E2A255585617F781F35A8D5709A545A804482A261C0C9548A9D3",
+          "exponent": 0,
+          "aliases": [
+            "swth"
+          ]
+        },
+        {
+          "denom": "dswth",
+          "exponent": 8
+        }
+      ],
+      "base": "ibc/8FEFAE6AECF6E2A255585617F781F35A8D5709A545A804482A261C0C9548A9D3",
+      "name": "Carbon",
+      "display": "dswth",
+      "symbol": "SWTH",
+      "ibc": {
+        "source_channel": "channel-0",
+        "dst_channel": "channel-188",
+        "source_denom": "swth"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/swth.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/swth.svg"
+      },
+      "coingecko_id": "switcheo"
     }
   ]
 }

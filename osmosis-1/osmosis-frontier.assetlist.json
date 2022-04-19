@@ -1391,6 +1391,37 @@
         "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/rac.png",
         "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/rac.svg"
       }
+    },
+    {
+      "description": "Tether's USD stablecoin on Axelar",
+      "type_asset": "erc20",
+      "denom_units": [
+        {
+          "denom": "ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4",
+          "exponent": 0,
+          "aliases": [
+            "uusdt"
+          ]
+        },
+        {
+          "denom": "axusdt",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4",
+      "name": "Tether USD",
+      "display": "axusdt",
+      "symbol": "axUSDT",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-208",
+        "source_denom": "uusdt"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/usdt.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/usdt.svg"
+      },
+      "coingecko_id": "tether"
     }
   ]
 }

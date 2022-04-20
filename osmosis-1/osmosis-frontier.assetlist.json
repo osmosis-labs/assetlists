@@ -1422,6 +1422,68 @@
         "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/axusdt.svg"
       },
       "coingecko_id": "tether"
+    },
+    {
+      "description": "Circle's stablecoin on Axelar",
+      "type_asset": "erc20",
+      "denom_units": [
+        {
+          "denom": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858",
+          "exponent": 0,
+          "aliases": [
+            "uusd"
+          ]
+        },
+        {
+          "denom": "axusdc",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858",
+      "name": "USD Coin",
+      "display": "axusdc",
+      "symbol": "axUSDC",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-208",
+        "source_denom": "uusd"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/axusdc.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/axusdc.svg"
+      },
+      "coingecko_id": "usd-coin"
+    },
+    {
+      "description": "Frax's fractional-algorithmic stablecoin on Axelar",
+      "type_asset": "erc20",
+      "denom_units": [
+        {
+          "denom": "ibc/0E43EDE2E2A3AFA36D0CD38BDDC0B49FECA64FA426A82E102F304E430ECF46EE",
+          "exponent": 0,
+          "aliases": [
+            "frax-wei"
+          ]
+        },
+        {
+          "denom": "axfrax",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/0E43EDE2E2A3AFA36D0CD38BDDC0B49FECA64FA426A82E102F304E430ECF46EE",
+      "name": "Frax",
+      "display": "axfrax",
+      "symbol": "axFRAX",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-208",
+        "source_denom": "frax-wei"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/axfrax.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/axfrax.svg"
+      },
+      "coingecko_id": "frax"
     }
   ]
 }

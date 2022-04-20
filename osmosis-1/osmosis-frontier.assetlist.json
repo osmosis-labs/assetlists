@@ -1486,6 +1486,37 @@
       "coingecko_id": "frax"
     },
     {
+      "description": "Dai stablecoin on Axelar",
+      "type_asset": "erc20",
+      "denom_units": [
+        {
+          "denom": "ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7",
+          "exponent": 0,
+          "aliases": [
+            "dai-wei"
+          ]
+        },
+        {
+          "denom": "axdai",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7",
+      "name": "Dai Stablecoin",
+      "display": "axdai",
+      "symbol": "axDAI",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-208",
+        "source_denom": "dai-wei"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/axdai.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/axdai.svg"
+      },
+      "coingecko_id": "dai"
+    },
+    {
       "description": "Gravity Bridge ETH",
       "type_asset": "erc20",
       "denom_units": [

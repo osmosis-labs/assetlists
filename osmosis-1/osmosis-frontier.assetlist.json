@@ -1024,7 +1024,7 @@
         }
       ],
       "base": "ibc/9BBA9A1C257E971E38C1422780CE6F0B0686F0A3085E2D61118D904BFE0F5F5E",
-      "name": "Sommelier Chain",
+      "name": "Sommelier",
       "display": "somm",
       "symbol": "SOMM",
       "ibc": {
@@ -1033,7 +1033,8 @@
         "source_denom": "usomm"
       },
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/somm.png"
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/somm.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/somm.svg"
       },
       "coingecko_id": "sommelier"
     },
@@ -1155,6 +1156,36 @@
         "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/grav.svg"
       },
       "coingecko_id": "graviton"
+    },
+    {
+      "description": "The native token of Fetch.ai Chain",
+      "denom_units": [
+        {
+          "denom": "ibc/5D1F516200EE8C6B2354102143B78A2DEDA25EDE771AC0F8DC3C1837C8FD4447",
+          "exponent": 0,
+          "aliases": [
+            "afet"
+          ]
+        },
+        {
+          "denom": "fet",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/5D1F516200EE8C6B2354102143B78A2DEDA25EDE771AC0F8DC3C1837C8FD4447",
+      "name": "Fetch.ai",
+      "display": "fet",
+      "symbol": "FET",
+      "ibc": {
+        "source_channel": "channel-10",
+        "dst_channel": "channel-229",
+        "source_denom": "afet"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/fet.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/fet.svg"
+      },
+      "coingecko_id": "fetch-ai"
     },
     {
       "description": "The native token cw20 for Neta on Juno Chain",
@@ -1335,36 +1366,6 @@
       "coingecko_id": "cerberus-2"
     },
     {
-      "description": "The INJ token is the native governance token for the Injective chain.",
-      "denom_units": [
-        {
-          "denom": "ibc/64BA6E31FE887D66C6F8F31C7B1A80C7CA179239677B4088BB55F5EA07DBE273",
-          "exponent": 0,
-          "aliases": [
-            "uinj"
-          ]
-        },
-        {
-          "denom": "inj",
-          "exponent": 6
-        }
-      ],
-      "base": "ibc/64BA6E31FE887D66C6F8F31C7B1A80C7CA179239677B4088BB55F5EA07DBE273",
-      "name": "Injective",
-      "display": "inj",
-      "symbol": "INJ",
-      "ibc": {
-        "source_channel": "channel-8",
-        "dst_channel": "channel-122",
-        "source_denom": "uinj"
-      },
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/inj.png",
-        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/inj.svg"
-      },
-      "coingecko_id": "injective-protocol"
-    },
-    {
       "description": "Racoon aims to simplify accessibility to AI, NFTs and Gambling on the Cosmos Ecosystem",
       "type_asset": "cw20",
       "address": "juno1r4pzw8f9z0sypct5l9j906d47z998ulwvhvqe5xdwgy8wf84583sxwh0pa",
@@ -1391,6 +1392,252 @@
         "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/rac.png",
         "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/rac.svg"
       }
+    },
+    {
+      "description": "Tether's USD stablecoin on Axelar",
+      "type_asset": "erc20",
+      "denom_units": [
+        {
+          "denom": "ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4",
+          "exponent": 0,
+          "aliases": [
+            "uusdt"
+          ]
+        },
+        {
+          "denom": "axlusdt",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4",
+      "name": "Tether USD",
+      "display": "axlusdt",
+      "symbol": "axlUSDT",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-208",
+        "source_denom": "uusdt"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/axlusdt.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/axlusdt.svg"
+      },
+      "coingecko_id": "tether"
+    },
+    {
+      "description": "Circle's stablecoin on Axelar",
+      "type_asset": "erc20",
+      "denom_units": [
+        {
+          "denom": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858",
+          "exponent": 0,
+          "aliases": [
+            "uusdc"
+          ]
+        },
+        {
+          "denom": "axlusdc",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858",
+      "name": "USD Coin",
+      "display": "axlusdc",
+      "symbol": "axlUSDC",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-208",
+        "source_denom": "uusdc"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/axlusdc.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/axlusdc.svg"
+      },
+      "coingecko_id": "usd-coin"
+    },
+    {
+      "description": "Frax's fractional-algorithmic stablecoin on Axelar",
+      "type_asset": "erc20",
+      "denom_units": [
+        {
+          "denom": "ibc/0E43EDE2E2A3AFA36D0CD38BDDC0B49FECA64FA426A82E102F304E430ECF46EE",
+          "exponent": 0,
+          "aliases": [
+            "frax-wei"
+          ]
+        },
+        {
+          "denom": "axlfrax",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/0E43EDE2E2A3AFA36D0CD38BDDC0B49FECA64FA426A82E102F304E430ECF46EE",
+      "name": "Frax",
+      "display": "axlfrax",
+      "symbol": "axlFRAX",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-208",
+        "source_denom": "frax-wei"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/axlfrax.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/axlfrax.svg"
+      },
+      "coingecko_id": "frax"
+    },
+    {
+      "description": "Dai stablecoin on Axelar",
+      "type_asset": "erc20",
+      "denom_units": [
+        {
+          "denom": "ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7",
+          "exponent": 0,
+          "aliases": [
+            "dai-wei"
+          ]
+        },
+        {
+          "denom": "axldai",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7",
+      "name": "Dai Stablecoin",
+      "display": "axldai",
+      "symbol": "axlDAI",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-208",
+        "source_denom": "dai-wei"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/axldai.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/axldai.svg"
+      },
+      "coingecko_id": "dai"
+    },
+    {
+      "description": "Gravity Bridge ETH",
+      "type_asset": "erc20",
+      "denom_units": [
+        {
+          "denom": "ibc/65381C5F3FD21442283D56925E62EA524DED8B6927F0FF94E21E0020954C40B5",
+          "exponent": 0,
+          "aliases": [
+            "gravity0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+          ]
+        },
+        {
+          "denom": "gweth",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/65381C5F3FD21442283D56925E62EA524DED8B6927F0FF94E21E0020954C40B5",
+      "name": "Wrapped Ethereum",
+      "display": "gweth",
+      "symbol": "gWETH",
+      "ibc": {
+        "source_channel": "channel-10",
+        "dst_channel": "channel-144",
+        "source_denom": "gravity0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/gweth.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/gweth.svg"
+      },
+      "coingecko_id": "ethereum"
+    },
+    {
+      "description": "Gravity Bridge USDC",
+      "type_asset": "erc20",
+      "denom_units": [
+        {
+          "denom": "ibc/9F9B07EF9AD291167CF5700628145DE1DEB777C2CFC7907553B24446515F6D0E",
+          "exponent": 0,
+          "aliases": [
+            "gravity0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+          ]
+        },
+        {
+          "denom": "gusdc",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/9F9B07EF9AD291167CF5700628145DE1DEB777C2CFC7907553B24446515F6D0E",
+      "name": "USD Coin",
+      "display": "gusdc",
+      "symbol": "gUSDC",
+      "ibc": {
+        "source_channel": "channel-10",
+        "dst_channel": "channel-144",
+        "source_denom": "gravity0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/gusdc.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/gusdc.svg"
+      },
+      "coingecko_id": "usd-coin"
+    },
+    {
+      "description": "Gravity Bridge Dai",
+      "type_asset": "erc20",
+      "denom_units": [
+        {
+          "denom": "ibc/F292A17CF920E3462C816CBE6B042E779F676CAB59096904C4C1C966413E3DF5",
+          "exponent": 0,
+          "aliases": [
+            "gravity0x6B175474E89094C44Da98b954EedeAC495271d0F"
+          ]
+        },
+        {
+          "denom": "gdai",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/F292A17CF920E3462C816CBE6B042E779F676CAB59096904C4C1C966413E3DF5",
+      "name": "Dai Stablecoin",
+      "display": "gdai",
+      "symbol": "gDAI",
+      "ibc": {
+        "source_channel": "channel-10",
+        "dst_channel": "channel-144",
+        "source_denom": "gravity0x6B175474E89094C44Da98b954EedeAC495271d0F"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/gdai.png",
+        "svg": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/gdai.svg"
+      },
+      "coingecko_id": "dai"
+    },
+    {
+      "description": "The native token of AssetMantle",
+      "denom_units": [
+        {
+          "denom": "ibc/CBA34207E969623D95D057D9B11B0C8B32B89A71F170577D982FDDE623813FFC",
+          "exponent": 0,
+          "aliases": [
+            "umntl"
+          ]
+        },
+        {
+          "denom": "mntl",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/CBA34207E969623D95D057D9B11B0C8B32B89A71F170577D982FDDE623813FFC",
+      "name": "AssetMantle",
+      "display": "mntl",
+      "symbol": "MNTL",
+      "ibc": {
+        "source_channel": "channel-0",
+        "dst_channel": "channel-232",
+        "source_denom": "umntl"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/mntl.png"
+      },
+      "coingecko_id": "assetmantle"
     },
     {
       "description": "Hash is the staking token of the Provenance Blockchain",

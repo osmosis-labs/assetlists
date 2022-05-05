@@ -1198,6 +1198,7 @@
           "denom": "ibc/297C64CC42B5A8D8F82FE2EBE208A6FE8F94B86037FA28C4529A23701C228F7A",
           "exponent": 0,
           "aliases": [
+	    "cw20:juno168ctmpyppk90d34p3jjy658zf5a5l3w8wk35wht6ccqj4mr0yv8s4j5awr",
             "uneta"
           ]
         },
@@ -1213,7 +1214,7 @@
       "ibc": {
         "source_channel": "channel-47",
         "dst_channel": "channel-169",
-        "source_denom": "uneta"
+        "source_denom": "cw20:juno168ctmpyppk90d34p3jjy658zf5a5l3w8wk35wht6ccqj4mr0yv8s4j5awr"
       },
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/neta.png"
@@ -1227,7 +1228,10 @@
       "denom_units": [
         {
           "denom": "ibc/F6B691D5F7126579DDC87357B09D653B47FDCE0A3383FF33C8D8B544FE29A8A6",
-          "exponent": 0
+          "exponent": 0,
+	  "aliases": [
+	    "cw20:juno1g2g7ucurum66d42g8k5twk34yegdq8c82858gz0tq2fc75zy7khssgnhjl"
+	  ]
         },
         {
           "denom": "marble",
@@ -1241,7 +1245,7 @@
       "ibc": {
         "source_channel": "channel-47",
         "dst_channel": "channel-169",
-        "source_denom": "marble"
+        "source_denom": "cw20:juno1g2g7ucurum66d42g8k5twk34yegdq8c82858gz0tq2fc75zy7khssgnhjl"
       },
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/marble.png",
@@ -1256,7 +1260,10 @@
       "denom_units": [
         {
           "denom": "ibc/C2A2E9CA95DDD4828B75124B5E27B8401C7D8493BC48353D418CBFC04565899B",
-          "exponent": 0
+          "exponent": 0,
+	  "aliases": [
+	    "cw20:juno1re3x67ppxap48ygndmrc7har2cnc7tcxtm9nplcas4v0gc3wnmvs3s807z"
+	  ]
         },
         {
           "denom": "hope",
@@ -1270,7 +1277,7 @@
       "ibc": {
         "source_channel": "channel-47",
         "dst_channel": "channel-169",
-        "source_denom": "hope"
+        "source_denom": "cw20:juno1re3x67ppxap48ygndmrc7har2cnc7tcxtm9nplcas4v0gc3wnmvs3s807z"
       },
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/hope.png",
@@ -1374,7 +1381,10 @@
       "denom_units": [
         {
           "denom": "ibc/6BDB4C8CCD45033F9604E4B93ED395008A753E01EECD6992E7D1EA23D9D3B788",
-          "exponent": 0
+          "exponent": 0,
+	  "aliases": [
+	    "cw20:juno1r4pzw8f9z0sypct5l9j906d47z998ulwvhvqe5xdwgy8wf84583sxwh0pa"
+	  ]
         },
         {
           "denom": "rac",
@@ -1388,7 +1398,7 @@
       "ibc": {
         "source_channel": "channel-47",
         "dst_channel": "channel-169",
-        "source_denom": "rac"
+        "source_denom": "cw20:juno1r4pzw8f9z0sypct5l9j906d47z998ulwvhvqe5xdwgy8wf84583sxwh0pa"
       },
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/rac.png",
@@ -1639,7 +1649,7 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/images/mntl.png"
       },
-      "coingecko_id": "assetmantle"
+      "coingecko_id": "mantle"
     },
     {
       "description": "Hash is the staking token of the Provenance Blockchain",
@@ -1699,6 +1709,34 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/galaxy/images/galaxy.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/galaxy/images/galaxy.svg"
       }
-    }
+    },
+    {
+      "description": "The BLOCK token of Marble DEX on Juno Chain",
+      "type_asset": "cw20",
+      "address": "juno1y9rf7ql6ffwkv02hsgd4yruz23pn4w97p75e2slsnkm0mnamhzysvqnxaq",
+      "denom_units": [
+        {
+          "denom": "ibc/DB9755CB6FE55192948AE074D18FA815E1429D3D374D5BDA8D89623C6CF235C3",
+          "exponent": 0
+        },
+        {
+          "denom": "block",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/DB9755CB6FE55192948AE074D18FA815E1429D3D374D5BDA8D89623C6CF235C3",
+      "name": "Block",
+      "display": "block",
+      "symbol": "BLOCK",
+      "ibc": {
+        "source_channel": "channel-47",
+        "dst_channel": "channel-169",
+        "source_denom": "block"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/block.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/block.svg"
+      }
+	  }
   ]
 }

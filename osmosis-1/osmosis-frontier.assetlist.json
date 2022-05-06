@@ -1682,6 +1682,35 @@
       "coingecko_id": "provenance-blockchain"
     },
     {
+      "description": "GLX is the staking token of the Galaxy Chain",
+      "denom_units": [
+        {
+          "denom": "ibc/F49DE040EBA5AB2FAD5F660C2A1DDF98A68470FAE82229818BE775EBF3EE79F2",
+          "exponent": 0,
+          "aliases": [
+            "uglx"
+          ]
+        },
+        {
+          "denom": "glx",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/F49DE040EBA5AB2FAD5F660C2A1DDF98A68470FAE82229818BE775EBF3EE79F2",
+      "name": "Glx",
+      "display": "glx",
+      "symbol": "GLX",
+      "ibc": {
+        "source_channel": "channel-0",
+        "dst_channel": "channel-236",
+        "source_denom": "uglx"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/galaxy/images/galaxy.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/galaxy/images/galaxy.svg"
+      }
+    },
+    {
       "description": "The BLOCK token of Marble DEX on Juno Chain",
       "type_asset": "cw20",
       "address": "juno1y9rf7ql6ffwkv02hsgd4yruz23pn4w97p75e2slsnkm0mnamhzysvqnxaq",

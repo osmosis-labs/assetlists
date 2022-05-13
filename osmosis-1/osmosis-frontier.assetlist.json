@@ -1587,7 +1587,37 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/axlweth.svg"
       },
       "coingecko_id": "weth"
-    },  
+    },
+	{
+      "description": "Wrapped Bitcoin on Axelar",
+      "type_asset": "erc20",
+      "denom_units": [
+        {
+          "denom": "ibc/d1542aa8762db13087d8364f3ea6509fd6f009a34f00426af9e4f9fa85cbbf1f",
+          "exponent": 0,
+          "aliases": [
+            "wbtc-satoshi"
+          ]
+        },
+        {
+          "denom": "axlwbtc",
+          "exponent": 8
+        }
+      ],
+      "base": "ibc/d1542aa8762db13087d8364f3ea6509fd6f009a34f00426af9e4f9fa85cbbf1f",
+      "name": "Wrapped Bitcoin",
+      "display": "axlwbtc",
+      "symbol": "axlWBTC",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-208",
+        "source_denom": "wbtc-satoshi"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/axlwbtc.png"
+      },
+      "coingecko_id": "wrapped-bitcoin"
+    },
     {
       "description": "Gravity Bridge ETH",
       "type_asset": "erc20",

@@ -1885,6 +1885,36 @@
 				"png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/meme/images/meme.png",
 				"svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/meme/images/meme.svg"
 			}
-		}
+		},
+    {
+      "description": "Profit sharing token for Another.Software validator. Hold and receive dividends from Another.Software validator commissions!",
+      "type_asset": "cw20",
+      "address": "juno17wzaxtfdw5em7lc94yed4ylgjme63eh73lm3lutp2rhcxttyvpwsypjm4w",
+      "denom_units": [
+        {
+          "denom": "ibc/AA1C80225BCA7B32ED1FC6ABF8B8E899BEB48ECDB4B417FD69873C6D715F97E7",
+          "exponent": 0,
+					"aliases": [
+            "cw20:juno17wzaxtfdw5em7lc94yed4ylgjme63eh73lm3lutp2rhcxttyvpwsypjm4w"
+          ]
+        },
+        {
+          "denom": "asvt",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/AA1C80225BCA7B32ED1FC6ABF8B8E899BEB48ECDB4B417FD69873C6D715F97E7",
+      "name": "Another.Software Validator Token",
+      "display": "asvt",
+      "symbol": "ASVT",
+      "ibc": {
+        "source_channel": "channel-47",
+        "dst_channel": "channel-169",
+        "source_denom": "cw20:juno17wzaxtfdw5em7lc94yed4ylgjme63eh73lm3lutp2rhcxttyvpwsypjm4w"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/asvt.png"
+      }
+    }
   ]
 }

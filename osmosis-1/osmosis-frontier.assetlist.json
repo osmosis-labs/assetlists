@@ -1843,34 +1843,61 @@
       "coingecko_id": "evmos"
     },
     {
-			"description": "DAO dedicated to building tools on the Juno Network",
-			"type_asset": "cw20",
-			"address": "juno1n7n7d5088qlzlj37e9mgmkhx6dfgtvt02hqxq66lcap4dxnzdhwqfmgng3",
-			"denom_units": [
-				{
-					"denom": "ibc/0CB9DB3441D0D50F35699DEE22B9C965487E83FB2D9F483D1CC5CA34E856C484",
-					"exponent": 0,
-					"aliases": [
-						"cw20:juno1n7n7d5088qlzlj37e9mgmkhx6dfgtvt02hqxq66lcap4dxnzdhwqfmgng3"
-					]
-				},
-				{
-					"denom": "joe",
-					"exponent": 6
-				}
-			],
-			"base": "ibc/0CB9DB3441D0D50F35699DEE22B9C965487E83FB2D9F483D1CC5CA34E856C484",
-			"name": "JoeDAO",
-			"display": "joe",
-			"symbol": "JOE",
-			"ibc": {
-				"source_channel": "channel-47",
-				"dst_channel": "channel-169",
-				"source_denom": "cw20:juno1n7n7d5088qlzlj37e9mgmkhx6dfgtvt02hqxq66lcap4dxnzdhwqfmgng3"
-			},
-			"logo_URIs": {
-				"png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/joe.png"
-			}
-		}
+      "description": "DAO dedicated to building tools on the Juno Network",
+      "type_asset": "cw20",
+      "address": "juno1n7n7d5088qlzlj37e9mgmkhx6dfgtvt02hqxq66lcap4dxnzdhwqfmgng3",
+      "denom_units": [
+        {
+          "denom": "ibc/0CB9DB3441D0D50F35699DEE22B9C965487E83FB2D9F483D1CC5CA34E856C484",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno1n7n7d5088qlzlj37e9mgmkhx6dfgtvt02hqxq66lcap4dxnzdhwqfmgng3"
+          ]
+        },
+        {
+          "denom": "joe",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/0CB9DB3441D0D50F35699DEE22B9C965487E83FB2D9F483D1CC5CA34E856C484",
+      "name": "JoeDAO",
+      "display": "joe",
+      "symbol": "JOE",
+      "ibc": {
+        "source_channel": "channel-47",
+        "dst_channel": "channel-169",
+        "source_denom": "cw20:juno1n7n7d5088qlzlj37e9mgmkhx6dfgtvt02hqxq66lcap4dxnzdhwqfmgng3"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/joe.png"
+      }
+    },
+    {
+      "description": "The native staking and governance token of Kava",
+      "denom_units": [
+        {
+          "denom": "ibc/57AA1A70A4BC9769C525EBF6386F7A21536E04A79D62E1981EFCEF9428EBB205",
+          "exponent": 0,
+          "aliases": ["ukava"]
+        },
+        {
+          "denom": "kava",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/57AA1A70A4BC9769C525EBF6386F7A21536E04A79D62E1981EFCEF9428EBB205",
+      "name": "Kava",
+      "display": "kava",
+      "symbol": "KAVA",
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-143",
+        "source_denom": "ukava"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/kava.png"
+      },
+      "coingecko_id": "kava"
+    }
   ]
 }

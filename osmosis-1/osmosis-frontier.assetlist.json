@@ -1898,6 +1898,33 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/kava.png"
       },
       "coingecko_id": "kava"
+    },
+    {
+      "description": "L1 coin is the GenesisL1 blockchain utility, governance and EVM token",
+      "denom_units": [
+        {
+          "denom": "ibc/F16FDC11A7662B86BC0B9CE61871CBACF7C20606F95E86260FD38915184B75B4",
+          "exponent": 0,
+          "aliases": ["el1"]
+        },
+        {
+          "denom": "l1",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/F16FDC11A7662B86BC0B9CE61871CBACF7C20606F95E86260FD38915184B75B4",
+      "name": "GenesisL1",
+      "display": "l1",
+      "symbol": "L1",
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-253",
+        "source_denom": "el1"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/genesisl1/images/l1.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/genesisl1/images/l1.svg"
+      }
     }
   ]
 }

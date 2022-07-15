@@ -1408,6 +1408,62 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/tgrade/images/tgrade-symbol-gradient.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/tgrade/images/tgrade-symbol-gradient.svg"
       }
+    },
+    {
+      "description": "The native staking and governance token of the Kujira chain.",
+      "denom_units": [
+        {
+          "denom": "ibc/BB6BCDB515050BAE97516111873CCD7BCF1FD0CCB723CC12F3C4F704D6C646CE",
+          "exponent": 0,
+          "aliases": [
+            "ukuji"
+          ]
+        },
+        {
+          "denom": "kuji",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/BB6BCDB515050BAE97516111873CCD7BCF1FD0CCB723CC12F3C4F704D6C646CE",
+      "name": "Kuji",
+      "display": "kuji",
+      "symbol": "KUJI",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-259",
+        "source_denom": "ukuji"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/kuji.png"
+      }
+    },
+    {
+      "description": "Maker on Axelar",
+      "type_asset": "erc20",
+      "denom_units": [
+        {
+          "denom": "ibc/D27DDDF34BB47E5D5A570742CC667DE53277867116CCCA341F27785E899A70F3",
+          "exponent": 0,
+          "aliases": ["mkr-wei"]
+        },
+        {
+          "denom": "axlmkr",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/D27DDDF34BB47E5D5A570742CC667DE53277867116CCCA341F27785E899A70F3",
+      "name": "Maker",
+      "display": "axlmkr",
+      "symbol": "MKR.axl",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-208",
+        "source_denom": "mkr-wei"
+      },
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/mkr.svg"
+      },
+      "coingecko_id": "maker"
     }
   ]
 }

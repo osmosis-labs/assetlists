@@ -2102,7 +2102,36 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/odin/images/odin.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/odin/images/odin.svg"
       },
-	"coingecko_id": "odin-protocol"
+      "coingecko_id": "odin-protocol"
+    },
+    {
+      "description": "Geo token for ODIN Protocol",
+      "denom_units": [
+        {
+          "denom": "ibc/9B6FBABA36BB4A3BF127AE5E96B572A5197FD9F3111D895D8919B07BC290764A",
+          "exponent": 0,
+          "aliases": [
+            "mGeo"
+          ]
+        },
+        {
+          "denom": "geo",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/9B6FBABA36BB4A3BF127AE5E96B572A5197FD9F3111D895D8919B07BC290764A",
+      "name": "GEO",
+      "display": "geo",
+      "symbol": "GEO",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-258",
+        "source_denom": "mGeo"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/odin/images/geo.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/odin/images/geo.svg"
+      }
     },   
     {
       "description": "The native token of Shentu",
@@ -2662,19 +2691,47 @@
       }
     },
     {
+      "description": "CRE is the native token of the Crescent Network.",
+      "denom_units": [
+        {
+          "denom": "ibc/5A7C219BA5F7582B99629BA3B2A01A61BFDA0F6FD1FE95B5366F7334C4BC0580",
+          "exponent": 0,
+          "aliases": ["ucre"]
+        },
+        {
+          "denom": "cre",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/5A7C219BA5F7582B99629BA3B2A01A61BFDA0F6FD1FE95B5366F7334C4BC0580",
+      "name": "Crescent",
+      "display": "cre",
+      "symbol": "CRE",
+      "ibc": {
+        "source_channel": "channel-9",
+        "dst_channel": "channel-297",
+        "source_denom": "ucre"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/crescent/images/cre.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/crescent/images/cre.svg"
+      },
+      "coingecko_id": "crescent-network"
+    },
+    {
       "description": "The native token of the Cudos blockchain",
       "denom_units": [
         {
-          "denom": "ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED",
+          "denom": "ibc/E09ED39F390EC51FA9F3F69BEA08B5BBE6A48B3057B2B1C3467FAAE9E58B021B",
           "exponent": 0,
           "aliases": ["acudos"]
         },
         {
-          "denom": "juno",
-          "exponent": 6
+          "denom": "cudos",
+          "exponent": 18
         }
       ],
-      "base": "ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED",
+      "base": "ibc/E09ED39F390EC51FA9F3F69BEA08B5BBE6A48B3057B2B1C3467FAAE9E58B021B",
       "name": "Cudos",
       "display": "cudos",
       "symbol": "CUDOS",

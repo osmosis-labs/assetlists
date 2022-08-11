@@ -489,22 +489,48 @@
       "coingecko_id": "likecoin"
     },
     {
-      "description": "The native staking token of Terra Classic.",
+      "description": "The native staking token of Terra 2.0",
       "denom_units": [
         {
-          "denom": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
+          "denom": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9",
           "exponent": 0,
           "aliases": ["uluna"]
         },
         {
           "denom": "luna",
-          "exponent": 6,
-          "aliases": ["lunc"]
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9",
+      "name": "Luna",
+      "display": "luna",
+      "symbol": "LUNA",
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-251",
+        "source_denom": "uluna"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/luna.png"
+      },
+      "coingecko_id": "terra-luna-2"
+    },
+    {
+      "description": "The native staking token of Terra Classic.",
+      "denom_units": [
+        {
+          "denom": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
+          "exponent": 0,
+          "aliases": ["ulunc"]
+        },
+        {
+          "denom": "lunc",
+          "exponent": 6
         }
       ],
       "base": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
       "name": "Luna Classic",
-      "display": "luna",
+      "display": "lunc",
       "symbol": "LUNC",
       "ibc": {
         "source_channel": "channel-1",

@@ -494,17 +494,16 @@
         {
           "denom": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
           "exponent": 0,
-          "aliases": ["uluna"]
+          "aliases": ["ulunc"]
         },
         {
-          "denom": "luna",
-          "exponent": 6,
-          "aliases": ["lunc"]
+          "denom": "lunc",
+          "exponent": 6
         }
       ],
       "base": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
       "name": "Luna Classic",
-      "display": "luna",
+      "display": "lunc",
       "symbol": "LUNC",
       "ibc": {
         "source_channel": "channel-1",
@@ -572,6 +571,33 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/krt.png"
       },
       "coingecko_id": "terra-krw"
+    },
+    {
+      "description": "The native staking token of Terra 2.0",
+      "denom_units": [
+        {
+          "denom": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9",
+          "exponent": 0,
+          "aliases": ["uluna"]
+        },
+        {
+          "denom": "luna",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9",
+      "name": "Luna",
+      "display": "luna",
+      "symbol": "LUNA",
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-251",
+        "source_denom": "uluna"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/luna.png"
+      },
+      "coingecko_id": "terra-luna-2"
     },
     {
       "description": "BitSong Native Token",
@@ -695,7 +721,7 @@
       ],
       "base": "ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4",
       "name": "Bostrom",
-      "display": "boot",
+      "display": "ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4",
       "symbol": "BOOT",
       "ibc": {
         "source_channel": "channel-2",
@@ -1378,7 +1404,7 @@
       ],
       "base": "ibc/52E12CF5CA2BB903D84F5298B4BFD725D66CAB95E09AA4FC75B2904CA5485FEB",
       "name": "DHK",
-      "display": "dhk",
+      "display": "ibc/52E12CF5CA2BB903D84F5298B4BFD725D66CAB95E09AA4FC75B2904CA5485FEB",
       "symbol": "DHK",
       "ibc": {
         "source_channel": "channel-47",
@@ -2101,6 +2127,36 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/odin/images/odin.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/odin/images/odin.svg"
+      },
+      "coingecko_id": "odin-protocol"
+    },
+    {
+      "description": "Geo token for ODIN Protocol",
+      "denom_units": [
+        {
+          "denom": "ibc/9B6FBABA36BB4A3BF127AE5E96B572A5197FD9F3111D895D8919B07BC290764A",
+          "exponent": 0,
+          "aliases": [
+            "mGeo"
+          ]
+        },
+        {
+          "denom": "geo",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/9B6FBABA36BB4A3BF127AE5E96B572A5197FD9F3111D895D8919B07BC290764A",
+      "name": "GEO",
+      "display": "geo",
+      "symbol": "GEO",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-258",
+        "source_denom": "mGeo"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/odin/images/geo.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/odin/images/geo.svg"
       }
     },   
     {
@@ -2388,6 +2444,7 @@
       },
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/mkr.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/axlmkr.png",
       },
       "coingecko_id": "maker"
     },
@@ -2687,6 +2744,90 @@
         },
         "coingecko_id": "wmatic"
       }
+    },
+    {
+      "description": "CRE is the native token of the Crescent Network.",
+      "denom_units": [
+        {
+          "denom": "ibc/5A7C219BA5F7582B99629BA3B2A01A61BFDA0F6FD1FE95B5366F7334C4BC0580",
+          "exponent": 0,
+          "aliases": ["ucre"]
+        },
+        {
+          "denom": "cre",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/5A7C219BA5F7582B99629BA3B2A01A61BFDA0F6FD1FE95B5366F7334C4BC0580",
+      "name": "Crescent",
+      "display": "cre",
+      "symbol": "CRE",
+      "ibc": {
+        "source_channel": "channel-9",
+        "dst_channel": "channel-297",
+        "source_denom": "ucre"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/crescent/images/cre.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/crescent/images/cre.svg"
+      },
+      "coingecko_id": "crescent-network"
+    },
+    {
+      "description": "The native token of Lumen Network",
+      "denom_units": [
+        {
+          "denom": "ibc/FFA652599C77E853F017193E36B5AB2D4D9AFC4B54721A74904F80C9236BF3B7",
+          "exponent": 0,
+          "aliases": ["ulumen"]
+        },
+        {
+          "denom": "lumen",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/FFA652599C77E853F017193E36B5AB2D4D9AFC4B54721A74904F80C9236BF3B7",
+      "name": "LumenX",
+      "display": "lumen",
+      "symbol": "LUMEN",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-286",
+        "source_denom": "ulumen"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lumenx/images/lumen.png"
+      }
+    },
+    {
+      "description": "The native token of Oraichain",
+      "denom_units": [
+        {
+          "denom": "ibc/161D7D62BAB3B9C39003334F1671208F43C06B643CC9EDBBE82B64793C857F1D",
+          "exponent": 0,
+          "aliases": [
+            "orai"
+          ]
+        },
+        {
+          "denom": "ORAI",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/161D7D62BAB3B9C39003334F1671208F43C06B643CC9EDBBE82B64793C857F1D",
+      "name": "Oraichain",
+      "display": "ORAI",
+      "symbol": "ORAI",
+      "ibc": {
+        "source_channel": "channel-13",
+        "dst_channel": "channel-216",
+        "source_denom": "orai"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-white.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-white.svg"
+      },
+      "coingecko_id": "oraichain-token"
     }
   ]
 }

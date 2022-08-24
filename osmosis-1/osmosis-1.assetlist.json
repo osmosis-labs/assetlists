@@ -459,91 +459,6 @@
       "coingecko_id": "likecoin"
     },
     {
-      "description": "The native staking token of Terra Classic.",
-      "denom_units": [
-        {
-          "denom": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
-          "exponent": 0,
-          "aliases": ["uluna"]
-        },
-        {
-          "denom": "luna",
-          "exponent": 6,
-          "aliases": ["lunc"]
-        }
-      ],
-      "base": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
-      "name": "Luna Classic",
-      "display": "luna",
-      "symbol": "LUNC",
-      "ibc": {
-        "source_channel": "channel-1",
-        "dst_channel": "channel-72",
-        "source_denom": "uluna"
-      },
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/luna.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/luna.svg"
-      },
-      "coingecko_id": "terra-luna"
-    },
-    {
-      "description": "The USD stablecoin of Terra Classic.",
-      "denom_units": [
-        {
-          "denom": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC",
-          "exponent": 0,
-          "aliases": ["uust"]
-        },
-        {
-          "denom": "ust",
-          "exponent": 6,
-          "aliases": ["ustc"]
-        }
-      ],
-      "base": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC",
-      "name": "TerraClassicUSD",
-      "display": "ust",
-      "symbol": "USTC",
-      "ibc": {
-        "source_channel": "channel-1",
-        "dst_channel": "channel-72",
-        "source_denom": "uust"
-      },
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/ust.png"
-      },
-      "coingecko_id": "terrausd"
-    },
-    {
-      "description": "The KRW stablecoin of Terra Classic.",
-      "denom_units": [
-        {
-          "denom": "ibc/204A582244FC241613DBB50B04D1D454116C58C4AF7866C186AA0D6EEAD42780",
-          "exponent": 0,
-          "aliases": ["ukrw"]
-        },
-        {
-          "denom": "krt",
-          "exponent": 6,
-          "aliases": ["krtc"]
-        }
-      ],
-      "base": "ibc/204A582244FC241613DBB50B04D1D454116C58C4AF7866C186AA0D6EEAD42780",
-      "name": "TerraClassicKRW",
-      "display": "krt",
-      "symbol": "KRTC",
-      "ibc": {
-        "source_channel": "channel-1",
-        "dst_channel": "channel-72",
-        "source_denom": "ukrw"
-      },
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/krt.png"
-      },
-      "coingecko_id": "terra-krw"
-    },
-    {
       "description": "BitSong Native Token",
       "denom_units": [
         {
@@ -665,7 +580,7 @@
       ],
       "base": "ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4",
       "name": "Bostrom",
-      "display": "boot",
+      "display": "ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4",
       "symbol": "BOOT",
       "ibc": {
         "source_channel": "channel-2",
@@ -1199,7 +1114,7 @@
       "base": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858",
       "name": "USD Coin",
       "display": "axlusdc",
-      "symbol": "axlUSDC",
+      "symbol": "USDC",
       "ibc": {
         "source_channel": "channel-3",
         "dst_channel": "channel-208",
@@ -1228,7 +1143,7 @@
       "base": "ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5",
       "name": "Wrapped Ether",
       "display": "axlweth",
-      "symbol": "axlWETH",
+      "symbol": "WETH",
       "ibc": {
         "source_channel": "channel-3",
         "dst_channel": "channel-208",
@@ -1256,7 +1171,7 @@
       "base": "ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7",
       "name": "Dai Stablecoin",
       "display": "axldai",
-      "symbol": "axlDAI",
+      "symbol": "DAI",
       "ibc": {
         "source_channel": "channel-3",
         "dst_channel": "channel-208",
@@ -1351,34 +1266,6 @@
       "coingecko_id": "assetmantle"
     },
     {
-      "description": "Wrapped Ether on Axelar",
-      "type_asset": "erc20",
-      "denom_units": [
-        {
-          "denom": "ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5",
-          "exponent": 0,
-          "aliases": ["weth-wei"]
-        },
-        {
-          "denom": "axlweth",
-          "exponent": 18
-        }
-      ],
-      "base": "ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5",
-      "name": "Wrapped Ether",
-      "display": "axlweth",
-      "symbol": "axlWETH",
-      "ibc": {
-        "source_channel": "channel-3",
-        "dst_channel": "channel-208",
-        "source_denom": "weth-wei"
-      },
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/axlweth.png"
-      },
-      "coingecko_id": "weth"
-    },
-    {
       "description": "Wrapped Bitcoin on Axelar",
       "type_asset": "erc20",
       "denom_units": [
@@ -1395,7 +1282,7 @@
       "base": "ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F",
       "name": "Wrapped Bitcoin",
       "display": "axlwbtc",
-      "symbol": "axlWBTC",
+      "symbol": "WBTC",
       "ibc": {
         "source_channel": "channel-3",
         "dst_channel": "channel-208",
@@ -1460,6 +1347,156 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/evmos/images/evmos.svg"
       },
       "coingecko_id": "evmos"
+    },
+    {
+      "description": "The INJ token is the native governance token for the Injective chain.",
+      "denom_units": [
+        {
+          "denom": "ibc/64BA6E31FE887D66C6F8F31C7B1A80C7CA179239677B4088BB55F5EA07DBE273",
+          "exponent": 0,
+          "aliases": [
+            "inj"
+          ]
+        },
+        {
+          "denom": "uinj",
+          "exponent": 12
+        },
+        {
+          "denom": "INJ",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/64BA6E31FE887D66C6F8F31C7B1A80C7CA179239677B4088BB55F5EA07DBE273",
+      "name": "Injective",
+      "display": "INJ",
+      "symbol": "INJ",
+      "ibc": {
+        "source_channel": "channel-8",
+        "dst_channel": "channel-122",
+        "source_denom": "inj"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/inj.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/inj.svg"
+      },
+      "coingecko_id": "injective-protocol"
+    },
+    {
+      "description": "The native token of Tgrade",
+      "denom_units": [
+        {
+          "denom": "ibc/1E09CB0F506ACF12FDE4683FB6B34DA62FB4BE122641E0D93AAF98A87675676C",
+          "exponent": 0,
+          "aliases": ["utgd"]
+        },
+        {
+          "denom": "tgd",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/1E09CB0F506ACF12FDE4683FB6B34DA62FB4BE122641E0D93AAF98A87675676C",
+      "name": "Tgrade",
+      "display": "tgd",
+      "symbol": "TGD",
+      "ibc": {
+        "source_channel": "channel-0",
+        "dst_channel": "channel-263",
+        "source_denom": "utgd"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/tgrade/images/tgrade-symbol-gradient.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/tgrade/images/tgrade-symbol-gradient.svg"
+      }
+    },
+    {
+      "description": "The native staking and governance token of the Kujira chain.",
+      "denom_units": [
+        {
+          "denom": "ibc/BB6BCDB515050BAE97516111873CCD7BCF1FD0CCB723CC12F3C4F704D6C646CE",
+          "exponent": 0,
+          "aliases": [
+            "ukuji"
+          ]
+        },
+        {
+          "denom": "kuji",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/BB6BCDB515050BAE97516111873CCD7BCF1FD0CCB723CC12F3C4F704D6C646CE",
+      "name": "Kuji",
+      "display": "kuji",
+      "symbol": "KUJI",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-259",
+        "source_denom": "ukuji"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/kuji.png"
+      },
+      "coingecko_id": "kujira"
+    },
+    {
+      "description": "Maker on Axelar",
+      "type_asset": "erc20",
+      "denom_units": [
+        {
+          "denom": "ibc/D27DDDF34BB47E5D5A570742CC667DE53277867116CCCA341F27785E899A70F3",
+          "exponent": 0,
+          "aliases": ["mkr-wei"]
+        },
+        {
+          "denom": "axlmkr",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/D27DDDF34BB47E5D5A570742CC667DE53277867116CCCA341F27785E899A70F3",
+      "name": "Maker",
+      "display": "axlmkr",
+      "symbol": "MKR.axl",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-208",
+        "source_denom": "mkr-wei"
+      },
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/mkr.svg"
+      },
+      "coingecko_id": "maker"
+    },
+    {
+      "description": "Wrapped Polkadot on Axelar",
+      "type_asset": "erc20",
+      "denom_units": [
+        {
+          "denom": "ibc/3FF92D26B407FD61AE95D975712A7C319CDE28DE4D80BDC9978D935932B991D7",
+          "exponent": 0,
+          "aliases": [
+            "dot-planck",
+            "0xffffffff1fcacbd218edc0eba20fc2308c778080"
+          ]
+        },
+        {
+          "denom": "axldot",
+          "exponent": 10
+        }
+      ],
+      "base": "ibc/3FF92D26B407FD61AE95D975712A7C319CDE28DE4D80BDC9978D935932B991D7",
+      "name": "DOT",
+      "display": "axldot",
+      "symbol": "DOT.axl",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-208",
+        "source_denom": "dot-planck"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polkadot/images/dot.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polkadot/images/dot.svg"
+      },
+      "coingecko_id": "polkadot"
     }
   ]
 }

@@ -2799,6 +2799,66 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-white.svg"
       },
       "coingecko_id": "oraichain-token"
+    },
+    {
+      "description": "Staking derivative seJUNO for staked JUNO",
+      "type_asset": "cw20",
+      "address": "juno1dd0k0um5rqncfueza62w9sentdfh3ec4nw4aq4lk5hkjl63vljqscth9gv",
+      "denom_units": [
+        {
+          "denom": "ibc/c6b6bfcb6ee49a7cab1a7e7b021de35b99d525ac660844952f0f6c78dcb2a57b",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno1dd0k0um5rqncfueza62w9sentdfh3ec4nw4aq4lk5hkjl63vljqscth9gv"
+          ]
+        },
+        {
+          "denom": "sejuno",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/c6b6bfcb6ee49a7cab1a7e7b021de35b99d525ac660844952f0f6c78dcb2a57b",
+      "name": "StakeEasy seJUNO",
+      "display": "sejuno",
+      "symbol": "SEJUNO",
+      "ibc": {
+        "source_channel": "channel-47",
+        "dst_channel": "channel-169",
+        "source_denom": "cw20:juno1dd0k0um5rqncfueza62w9sentdfh3ec4nw4aq4lk5hkjl63vljqscth9gv"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/sejuno.png"
+      }
+    },
+    {
+      "description": "Staking derivative bJUNO for staked JUNO",
+      "type_asset": "cw20",
+      "address": "juno1wwnhkagvcd3tjz6f8vsdsw5plqnw8qy2aj3rrhqr2axvktzv9q2qz8jxn3",
+      "denom_units": [
+        {
+          "denom": "ibc/c2df5c3949ca835b221c575625991f09bab4e48fb9c11a4ee357194f736111e3",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno1wwnhkagvcd3tjz6f8vsdsw5plqnw8qy2aj3rrhqr2axvktzv9q2qz8jxn3"
+          ]
+        },
+        {
+          "denom": "bjuno",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/c2df5c3949ca835b221c575625991f09bab4e48fb9c11a4ee357194f736111e3",
+      "name": "StakeEasy bJUNO",
+      "display": "bjuno",
+      "symbol": "BJUNO",
+      "ibc": {
+        "source_channel": "channel-47",
+        "dst_channel": "channel-169",
+        "source_denom": "cw20:juno1wwnhkagvcd3tjz6f8vsdsw5plqnw8qy2aj3rrhqr2axvktzv9q2qz8jxn3"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/bjuno.png"
+      }
     }
   ]
 }

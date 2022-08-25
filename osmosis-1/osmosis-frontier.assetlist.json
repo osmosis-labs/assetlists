@@ -2245,7 +2245,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/hard.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/hard.svg"
       },
-      "coingecko_id": "hard-protocol"
+      "coingecko_id": "kava-lend"
     },
     {
       "description": "Governance token of Kava Swap Protocol",
@@ -2276,6 +2276,35 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/swp.svg"
       },
       "coingecko_id": "kava-swap"
+    },
+    {
+      "description": "The native stablecoin of Kava",
+      "denom_units": [
+        {
+          "denom": "ibc/C78F65E1648A3DFE0BAEB6C4CDA69CC2A75437F1793C0E6386DFDA26393790AE",
+          "exponent": 0,
+          "aliases": [
+            "usdx"
+          ]
+        },
+        {
+          "denom": "USDX",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/C78F65E1648A3DFE0BAEB6C4CDA69CC2A75437F1793C0E6386DFDA26393790AE",
+      "name": "USDX",
+      "display": "USDX",
+      "symbol": "USDX",
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-143",
+        "source_denom": "usdx"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/usdx.png"
+      },
+      "coingecko_id": "usdx"
     },
     {
       "description": "Gravity Bridge USDT",

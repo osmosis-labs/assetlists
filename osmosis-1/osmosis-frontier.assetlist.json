@@ -2828,6 +2828,34 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-white.svg"
       },
       "coingecko_id": "oraichain-token"
+    },
+    {
+      "description": "BLD is the token used to secure the Agoric chain through staking and to backstop Inter Protocol.",
+      "denom_units": [
+        {
+          "denom": "ibc/2DA9C149E9AD2BD27FEFA635458FB37093C256C1A940392634A16BEA45262604",
+          "exponent": 0,
+          "aliases": [
+            "ubld"
+          ]
+        },
+        {
+          "denom": "bld",
+          "exponent": 6
+        }
+      ],
+      "base": "ubld",
+      "name": "Agoric Staking Token",
+      "display": "bld",
+      "symbol": "BLD",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/agoric/images/bld.png"
+      },
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-320",
+        "source_denom": "ubld"
+      }
     }
   ]
 }

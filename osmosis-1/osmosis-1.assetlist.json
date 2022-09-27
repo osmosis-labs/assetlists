@@ -1352,9 +1352,7 @@
         {
           "denom": "ibc/64BA6E31FE887D66C6F8F31C7B1A80C7CA179239677B4088BB55F5EA07DBE273",
           "exponent": 0,
-          "aliases": [
-            "inj"
-          ]
+          "aliases": ["inj"]
         },
         {
           "denom": "uinj",
@@ -1413,9 +1411,7 @@
         {
           "denom": "ibc/BB6BCDB515050BAE97516111873CCD7BCF1FD0CCB723CC12F3C4F704D6C646CE",
           "exponent": 0,
-          "aliases": [
-            "ukuji"
-          ]
+          "aliases": ["ukuji"]
         },
         {
           "denom": "kuji",
@@ -1501,9 +1497,7 @@
         {
           "denom": "ibc/2DA9C149E9AD2BD27FEFA635458FB37093C256C1A940392634A16BEA45262604",
           "exponent": 0,
-          "aliases": [
-            "ubld"
-          ]
+          "aliases": ["ubld"]
         },
         {
           "denom": "bld",
@@ -1522,6 +1516,33 @@
         "dst_channel": "channel-320",
         "source_denom": "ubld"
       }
+    },
+    {
+      "description": "The native token of Lambda",
+      "denom_units": [
+        {
+          "denom": "ibc/0EA19B60FF5346E5A5C6830893DE11489308876444FC3352328F49CC03908274",
+          "exponent": 0,
+          "aliases": ["ulamb"]
+        },
+        {
+          "denom": "lamb",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/0EA19B60FF5346E5A5C6830893DE11489308876444FC3352328F49CC03908274",
+      "name": "Lambda",
+      "display": "lamb",
+      "symbol": "LAMB",
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-350",
+        "source_denom": "ulamb"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lambda/images/lambda.png"
+      },
+      "coingecko_id": "lambda"
     }
   ]
 }

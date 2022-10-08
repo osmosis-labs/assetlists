@@ -3108,6 +3108,33 @@
       "coingecko_id": "axelar"
     },
     {
+      "description": "Staking derivative stJUNO for staked JUNO by Stride",
+      "denom_units": [
+        {
+          "denom": "ibc/84502A75BCA4A5F68D464C00B3F610CE2585847D59B52E5FFB7C3C9D2DDCD3FE",
+          "exponent": 0,
+          "aliases": ["stujuno"]
+        },
+        {
+          "denom": "stjuno",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/84502A75BCA4A5F68D464C00B3F610CE2585847D59B52E5FFB7C3C9D2DDCD3FE",
+      "name": "Stride Juno",
+      "display": "stjuno",
+      "symbol": "stJUNO",
+      "ibc": {
+        "source_channel": "channel-5",
+        "dst_channel": "channel-326",
+        "source_denom": "stujuno"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stjuno.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stjuno.svg"
+      }
+    },
+    {
       "description": "The native token of Lambda",
       "denom_units": [
         {

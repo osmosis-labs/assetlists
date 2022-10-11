@@ -3047,6 +3047,62 @@
       "coingecko_id": "stride-staked-atom"
     },
     {
+      "description": "Staking derivative stSTARS for staked STARS by Stride",
+      "denom_units": [
+        {
+          "denom": "ibc/5DD1F95ED336014D00CE2520977EC71566D282F9749170ADC83A392E0EA7426A",
+          "exponent": 0,
+          "aliases": ["stustars"]
+        },
+        {
+          "denom": "ststars",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/5DD1F95ED336014D00CE2520977EC71566D282F9749170ADC83A392E0EA7426A",
+      "name": "Stride Staked Stars",
+      "display": "ststars",
+      "symbol": "stSTARS",
+      "ibc": {
+        "source_channel": "channel-5",
+        "dst_channel": "channel-326",
+        "source_denom": "stustars"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/ststars.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/ststars.svg"
+      }
+    },
+    {
+      "description": "Solarbank DAO Governance Token for speeding up the shift to renewable and green energy",
+      "type_asset": "cw20",
+      "address": "juno159q8t5g02744lxq8lfmcn6f78qqulq9wn3y9w7lxjgkz4e0a6kvsfvapse",
+      "denom_units": [
+        {
+          "denom": "ibc/C2DF5C3949CA835B221C575625991F09BAB4E48FB9C11A4EE357194F736111E3",
+          "exponent": 0,
+          "aliases": ["cw20:juno159q8t5g02744lxq8lfmcn6f78qqulq9wn3y9w7lxjgkz4e0a6kvsfvapse"]
+        },
+        {
+          "denom": "solar",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/C3FC4DED273E7D1DD2E7BAA3317EC9A53CD3252B577AA33DC00D9DF2BDF3ED5C",
+      "name": "Solarbank DAO",
+      "display": "solar",
+      "symbol": "SOLAR",
+      "ibc": {
+        "source_channel": "channel-47",
+        "dst_channel": "channel-169",
+        "source_denom": "cw20:juno159q8t5g02744lxq8lfmcn6f78qqulq9wn3y9w7lxjgkz4e0a6kvsfvapse"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/solar.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/solar.svg"
+      }
+    },
+	  {
       "description": "StakeEasy governance token",
       "type_asset": "cw20",
       "address": "juno19rqljkh95gh40s7qdx40ksx3zq5tm4qsmsrdz9smw668x9zdr3lqtg33mf",
@@ -3074,33 +3130,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/seasy.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/seasy.svg"
       }
-    },
-    {
-      "description": "Staking derivative stSTARS for staked STARS by Stride",
-      "denom_units": [
-        {
-          "denom": "ibc/5DD1F95ED336014D00CE2520977EC71566D282F9749170ADC83A392E0EA7426A",
-          "exponent": 0,
-          "aliases": ["stustars"]
-        },
-        {
-          "denom": "ststars",
-          "exponent": 6
-        }
-      ],
-      "base": "ibc/5DD1F95ED336014D00CE2520977EC71566D282F9749170ADC83A392E0EA7426A",
-      "name": "Stride Staked Stars",
-      "display": "ststars",
-      "symbol": "stSTARS",
-      "ibc": {
-        "source_channel": "channel-5",
-        "dst_channel": "channel-326",
-        "source_denom": "stustars"
-      },
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/ststars.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/ststars.svg"
-      }    
     },
     {
       "description": "The native staking and governance token of the Axelar chain",
@@ -3131,6 +3160,63 @@
         "source_denom": "uaxl"
       },
       "coingecko_id": "axelar"
+    },
+    {
+      "description": "REBUS coin is the token for the Rebuschain Platform",
+      "denom_units": [
+        {
+          "denom": "ibc/A1AC7F9EE2F643A68E3A35BCEB22040120BEA4059773BB56985C76BDFEBC71D9",
+          "exponent": 0,
+          "aliases": ["arebus"]
+        },
+        {
+          "denom": "rebus",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/A1AC7F9EE2F643A68E3A35BCEB22040120BEA4059773BB56985C76BDFEBC71D9",
+      "name": "Rebuschain",
+      "display": "rebus",
+      "symbol": "REBUS",
+      "ibc": {
+        "source_channel": "channel-0",
+        "dst_channel": "channel-355",
+        "source_denom": "arebus"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/rebus/images/rebus.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/rebus/images/rebus.svg"
+      },
+      "coingecko_id": "rebus"
+    },
+    {
+      "description": "The native staking and governance token of the Teritori chain",
+      "denom_units": [
+        {
+          "denom": "ibc/EB7FB9C8B425F289B63703413327C2051030E848CE4EAAEA2E51199D6D39D3EC",
+          "exponent": 0,
+          "aliases": [
+            "utori"
+          ]
+        },
+        {
+          "denom": "tori",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/EB7FB9C8B425F289B63703413327C2051030E848CE4EAAEA2E51199D6D39D3EC",
+      "name": "teritori",
+      "display": "tori",
+      "symbol": "TORI",
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/teritori/images/tori.svg"
+      },
+      "ibc": {
+        "source_channel": "channel-0",
+        "dst_channel": "channel-362",
+        "source_denom": "utori"
+      },
+      "coingecko_id": ""
     },
     {
       "description": "Staking derivative stJUNO for staked JUNO by Stride",

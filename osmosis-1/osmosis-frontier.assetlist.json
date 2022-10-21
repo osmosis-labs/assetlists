@@ -2225,6 +2225,33 @@
       "coingecko_id": "kujira"
     },
     {
+      "description": "The native over-collateralized stablecoin from the Kujira chain.",
+      "denom_units": [
+        {
+          "denom": "ibc/44492EAB24B72E3FB59B9FA619A22337FB74F95D8808FE6BC78CC0E6C18DC2EC",
+          "exponent": 0,
+          "aliases": ["uusk"]
+        },
+        {
+          "denom": "usk",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/44492EAB24B72E3FB59B9FA619A22337FB74F95D8808FE6BC78CC0E6C18DC2EC",
+      "name": "USK",
+      "display": "USK",
+      "symbol": "USK",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-259",
+        "source_denom": "factory:kujira1qk00h5atutpsv900x202pxx42npjr9thg58dnqpa72f2p7m2luase444a7:uusk"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/usk.png"
+      },
+      "coingecko_id": "usk"
+    },
+    {
       "description": "Governance token of Kava Lend Protocol",
       "denom_units": [
         {
@@ -3054,7 +3081,7 @@
       "address": "juno159q8t5g02744lxq8lfmcn6f78qqulq9wn3y9w7lxjgkz4e0a6kvsfvapse",
       "denom_units": [
         {
-          "denom": "ibc/C2DF5C3949CA835B221C575625991F09BAB4E48FB9C11A4EE357194F736111E3",
+          "denom": "ibc/C3FC4DED273E7D1DD2E7BAA3317EC9A53CD3252B577AA33DC00D9DF2BDF3ED5C",
           "exponent": 0,
           "aliases": [
             "cw20:juno159q8t5g02744lxq8lfmcn6f78qqulq9wn3y9w7lxjgkz4e0a6kvsfvapse"
@@ -3184,7 +3211,8 @@
       "display": "tori",
       "symbol": "TORI",
       "logo_URIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/teritori/images/tori.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/teritori/images/utori.png",
+	"svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/teritori/images/tori.svg"
       },
       "ibc": {
         "source_channel": "channel-0",
@@ -3246,6 +3274,34 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lambda/images/lambda.png"
       },
       "coingecko_id": "lambda"
+    },
+	  {
+      "description": "MUSE Governance Token",
+      "type_asset": "cw20",
+      "address": "juno1p8x807f6h222ur0vssqy3qk6mcpa40gw2pchquz5atl935t7kvyq894ne3",
+      "denom_units": [
+        {
+          "denom": "ibc/6B982170CE024689E8DD0E7555B129B488005130D4EDA426733D552D10B36D8F",
+          "exponent": 0,
+          "aliases": ["cw20:juno1p8x807f6h222ur0vssqy3qk6mcpa40gw2pchquz5atl935t7kvyq894ne3"]
+        },
+        {
+          "denom": "muse",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/6B982170CE024689E8DD0E7555B129B488005130D4EDA426733D552D10B36D8F",
+      "name": "MUSE",
+      "display": "muse",
+      "symbol": "MUSE",
+      "ibc": {
+        "source_channel": "channel-47",
+        "dst_channel": "channel-169",
+        "source_denom": "cw20:juno1p8x807f6h222ur0vssqy3qk6mcpa40gw2pchquz5atl935t7kvyq894ne3"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/muse.png"
+      }
     }
   ]
 }

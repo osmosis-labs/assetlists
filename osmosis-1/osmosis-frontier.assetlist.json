@@ -2849,7 +2849,7 @@
       "coingecko_id": "oraichain-token"
     },
     {
-      "description": "BLD is the token used to secure the Agoric chain through staking and to backstop Inter Protocol.",
+      "description": "BLD is the token used to secure the Agoric chain through staking and to govern Inter Protocol.",
       "denom_units": [
         {
           "denom": "ibc/2DA9C149E9AD2BD27FEFA635458FB37093C256C1A940392634A16BEA45262604",
@@ -2874,6 +2874,32 @@
         "source_denom": "ubld"
       }
     },
+    {
+      "description": "IST is a decentralized and fully collateralized stable token built for the Cosmos ecosystem.",
+      "denom_units": [
+        {
+          "denom": "ibc/5973C068568365FFF40DEDCF1A1CB7582B6116B731CD31A12231AE25E20B871F",
+          "exponent": 0,
+          "aliases": ["uist"]
+        },
+        {
+          "denom": "ist",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/5973C068568365FFF40DEDCF1A1CB7582B6116B731CD31A12231AE25E20B871F",
+      "name": "Inter Protocol",
+      "display": "ist",
+      "symbol": "IST",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/agoric/images/ist.png"
+      },
+      "ibc": {
+        "source_channel": "channel-1",
+        "dst_channel": "channel-320",
+        "source_denom": "uist"
+      }
+    }, 
     {
       "description": "The native token of the Cudos blockchain",
       "denom_units": [

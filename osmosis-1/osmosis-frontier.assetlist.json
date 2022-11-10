@@ -240,6 +240,35 @@
       "coingecko_id": "crypto-com-chain"
     },
     {
+      "description": "Wrapped BNB on Axelar",
+      "type_asset": "erc20",
+      "denom_units": [
+        {
+          "denom": "ibc/F4A070A6D78496D53127EA85C094A9EC87DFC1F36071B8CCDDBD020F933D213D",
+          "exponent": 0,
+          "aliases": ["wbnb-wei"]
+        },
+        {
+          "denom": "axlwbnb",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/F4A070A6D78496D53127EA85C094A9EC87DFC1F36071B8CCDDBD020F933D213D",
+      "name": "Wrapped BNB",
+      "display": "axlwbnb",
+      "symbol": "WBNB.axl",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-208",
+        "source_denom": "wbnb-wei"
+      },
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchainoonbeam/images/wbnb.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchainoonbeam/images/wbnb.png"
+      },
+      "coingecko_id": "wbnb"
+    },
+    {
       "description": "REGEN coin is the token for the Regen Network Platform",
       "denom_units": [
         {

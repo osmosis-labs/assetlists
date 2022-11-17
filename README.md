@@ -61,7 +61,9 @@ An example assetlist json contains the following structure:
             "logo_URIs": {
                 "png": "ipfs://QmXfzKRvjZz3u5JRgC4v5mGVbm9ahrUiB4DgzHBsnWbTMM",
                 "svg": ""
-            }
+            },
+            "coingecko_id": "foocoin-token",
+            "verified": false
         }
     ]
 }

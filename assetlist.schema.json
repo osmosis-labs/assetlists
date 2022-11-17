@@ -102,6 +102,10 @@
                 "coingecko_id": {
                     "type": "string",
                     "description": "[OPTIONAL] The coingecko id to fetch asset data from coingecko v3 api. See https://api.coingecko.com/api/v3/coins/list"
+                },
+                "verified": {
+                    "type": "boolean",
+                    "description": "Whether the token is to be listed on the Main Osmosis site as a verified asset vs only listed on Frontier"
                 }
             },
             "if": {

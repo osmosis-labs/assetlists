@@ -63,7 +63,10 @@ An example assetlist json contains the following structure:
                 "svg": ""
             },
             "coingecko_id": "foocoin-token",
-            "verified": false
+            "verified": false,
+            "pools": {
+              "OSMO": 992
+            }
         }
     ]
 }

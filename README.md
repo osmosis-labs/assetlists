@@ -34,7 +34,10 @@ An example assetlist json contains the following structure:
             "logo_URIs": {
                 "png": "https://github.com/linkto/image.png",
                 "svg": "https://stake.com/linkto/steak.svg"
-            }
+            },
+            "keywords": [
+                "osmosis-main"
+            ]
         },
         {
             "description": "Foocoin is the native token of the Foochain",
@@ -61,7 +64,11 @@ An example assetlist json contains the following structure:
             "logo_URIs": {
                 "png": "ipfs://QmXfzKRvjZz3u5JRgC4v5mGVbm9ahrUiB4DgzHBsnWbTMM",
                 "svg": ""
-            }
+            },
+            "coingecko_id": "foocoin-token",
+            "keywords": [
+                "osmosis-frontier"
+            ]
         }
     ]
 }

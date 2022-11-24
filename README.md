@@ -34,6 +34,12 @@ An example assetlist json contains the following structure:
             "logo_URIs": {
                 "png": "https://github.com/linkto/image.png",
                 "svg": "https://stake.com/linkto/steak.svg"
+            },
+            "keywords": [
+                "osmosis-main"
+            ],
+            "pools": {
+              "OSMO": 991
             }
         },
         {
@@ -63,7 +69,9 @@ An example assetlist json contains the following structure:
                 "svg": ""
             },
             "coingecko_id": "foocoin-token",
-            "verified": false,
+            "keywords": [
+                "osmosis-frontier"
+            ],
             "pools": {
               "OSMO": 992
             }

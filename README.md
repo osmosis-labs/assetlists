@@ -37,7 +37,10 @@ An example assetlist json contains the following structure:
             },
             "keywords": [
                 "osmosis-main"
-            ]
+            ],
+            "pools": {
+              "OSMO": 991
+            }
         },
         {
             "description": "Foocoin is the native token of the Foochain",
@@ -68,7 +71,10 @@ An example assetlist json contains the following structure:
             "coingecko_id": "foocoin-token",
             "keywords": [
                 "osmosis-frontier"
-            ]
+            ],
+            "pools": {
+              "OSMO": 992
+            }
         }
     ]
 }

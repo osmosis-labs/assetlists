@@ -108,6 +108,18 @@
                   "maxContains": 20,
                   "items": {
                       "type": "string"
+                  },
+                  "if": {
+                    "contains": {
+                      "type": "string",
+                      "pattern": "^osmosis-main$"
+                    }
+                  },
+                  "then": {
+                    "contains": {
+                      "type": "string",
+                      "pattern": "^osmosis-frontier$"
+                    }
                   }
               },
               "pools": {
@@ -155,6 +167,25 @@
                 "required": [
                     "address"
                 ]
+            },
+            "if": {
+              "properties": {
+                "keywords": {
+                  "type": "array",
+                  "contains": {
+                    "type": "string",
+                    "pattern": "^osmosis-frontier$"
+                  }
+                }
+              },
+              "required": [
+                "keywords"
+              ]
+            },
+            "then": {
+              "required": [
+                "pools" 
+              ]
             }
         },
         "denom_unit": {

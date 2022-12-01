@@ -31,9 +31,21 @@ An example assetlist json contains the following structure:
             "base": "usteak",
             "display": "steak",
             "symbol": "STK",
+            "ibc": {
+                "source_channel": "channel-35",
+                "dst_channel": "channel-1",
+                "source_denom": "ustk"
+            },
             "logo_URIs": {
-                "png": "https://github.com/linkto/image.png",
-                "svg": "https://stake.com/linkto/steak.svg"
+                "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fubar/images/stk.png",
+                "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fubar/images/stk.svg"
+            },
+            "keywords": [
+                "osmosis-main",
+                "osmosis-frontier"
+            ],
+            "pools": {
+              "OSMO": 991
             }
         },
         {
@@ -59,8 +71,15 @@ An example assetlist json contains the following structure:
                 "source_denom": "ufoocoin"
             },
             "logo_URIs": {
-                "png": "ipfs://QmXfzKRvjZz3u5JRgC4v5mGVbm9ahrUiB4DgzHBsnWbTMM",
+                "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fubar/images/foo.png",
                 "svg": ""
+            },
+            "coingecko_id": "foocoin-token",
+            "keywords": [
+                "osmosis-frontier"
+            ],
+            "pools": {
+              "OSMO": 992
             }
         }
     ]

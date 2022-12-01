@@ -30,79 +30,125 @@
                 "symbol"
             ],
             "properties": {
-                "description": {
-                    "type": "string",
-                    "description": "[OPTIONAL] A short description of the asset"
-                },
-                "denom_units": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/$defs/denom_unit"
+              "description": {
+                  "type": "string",
+                  "description": "[OPTIONAL] A short description of the asset"
+              },
+              "denom_units": {
+                  "type": "array",
+                  "items": {
+                      "$ref": "#/$defs/denom_unit"
+                  }
+              },
+              "type_asset": {
+                  "type": "string",
+                  "enum": ["sdk.coin", "cw20", "snip20", "erc20"],
+                  "default": "sdk.coin",
+                  "description": "[OPTIONAL] The potential options for type of asset. By default, assumes sdk.coin"
+              },
+              "address": {
+                  "type": "string",
+                  "description": "[OPTIONAL] The address of the asset. Only required for type_asset : cw20, snip20"
+              },
+              "base": {
+                  "type": "string",
+                  "description": "The base unit of the asset. Must be in denom_units."
+              },
+              "name": {
+                  "type": "string",
+                  "description": "The project name of the asset. For example Bitcoin."
+              },
+              "display": {
+                  "type": "string",
+                  "description": "The human friendly unit of the asset. Must be in denom_units."
+              },
+              "symbol": {
+                  "type": "string",
+                  "description": "The symbol of an asset. For example BTC."
+              },
+              "ibc": {
+                  "type": "object",
+                  "description": "[OPTIONAL] IBC Channel between src and dst between chain",
+                  "properties": {
+                      "source_channel": {
+                          "type": "string"
+                      },
+                      "dst_channel": {
+                          "type": "string"
+                      },
+                      "source_denom": {
+                          "type": "string"
+                      }
+                  },
+                  "required": [
+                      "source_channel",
+                      "dst_channel",
+                      "source_denom"
+                  ]
+              },
+              "logo_URIs": {
+                  "type": "object",
+                  "properties": {
+                      "png": {
+                          "type": "string",
+                          "format": "uri-reference"
+                      },
+                      "svg": {
+                          "type": "string",
+                          "format": "uri-reference"
+                      }
+                  }
+              },
+              "coingecko_id": {
+                  "type": "string",
+                  "description": "[OPTIONAL] The coingecko id to fetch asset data from coingecko v3 api. See https://api.coingecko.com/api/v3/coins/list"
+              },
+              "keywords": {
+                  "type": "array",
+                  "maxContains": 20,
+                  "items": {
+                      "type": "string"
+                  },
+                  "if": {
+                    "contains": {
+                      "type": "string",
+                      "pattern": "^osmosis-main$"
                     }
-                },
-                "type_asset": {
-                    "type": "string",
-                    "enum": ["sdk.coin", "cw20", "snip20", "erc20"],
-                    "default": "sdk.coin",
-                    "description": "[OPTIONAL] The potential options for type of asset. By default, assumes sdk.coin"
-                },
-                "address": {
-                    "type": "string",
-                    "description": "[OPTIONAL] The address of the asset. Only required for type_asset : cw20, snip20"
-                },
-                "base": {
-                    "type": "string",
-                    "description": "The base unit of the asset. Must be in denom_units."
-                },
-                "name": {
-                    "type": "string",
-                    "description": "The project name of the asset. For example Bitcoin."
-                },
-                "display": {
-                    "type": "string",
-                    "description": "The human friendly unit of the asset. Must be in denom_units."
-                },
-                "symbol": {
-                    "type": "string",
-                    "description": "The symbol of an asset. For example BTC."
-                },
-                "ibc": {
-                    "type": "object",
-                    "description": "[OPTIONAL] IBC Channel between src and dst between chain",
-                    "properties": {
-                        "source_channel": {
-                            "type": "string"
-                        },
-                        "dst_channel": {
-                            "type": "string"
-                        },
-                        "source_denom": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "source_channel",
-                        "dst_channel",
-                        "source_denom"
-                    ]
-                },
-                "logo_URIs": {
-                    "type": "object",
-                    "properties": {
-                        "png": {
-                            "type": "string",
-                            "format": "uri-reference"
-                        },
-                        "svg": {
-                            "type": "string",
-                            "format": "uri-reference"
-                        }
+                  },
+                  "then": {
+                    "contains": {
+                      "type": "string",
+                      "pattern": "^osmosis-frontier$"
                     }
+                  }
+              },
+              "pools": {
+                "type": "object",
+                "description": "[OPTIONAL] A list of primary Osmosis liquidity pools paired with various popular tokens.",
+                "properties": {
+                  "OSMO": {
+                    "type": "number",
+                    "description": "The primary Osmosis liquidity pool containing this token paired with the OSMO token."
+                  },
+                  "ATOM": {
+                    "type": "number"
+                  },
+                  "USDC.axl": {
+                    "type": "number"
+                  },
+                  "SCRT": {
+                    "type": "number"
+                  },
+                  "JUNO": {
+                    "type": "number"
+                  },
+                  "STARS": {
+                    "type": "number"
+                  }
                 },
-                "coingecko_id": {
-                    "type": "string",
-                    "description": "[OPTIONAL] The coingecko id to fetch asset data from coingecko v3 api. See https://api.coingecko.com/api/v3/coins/list"
-                }
+                "additionalProperties": false,
+                "minProperties": 1
+              }
             },
             "if": {
                 "properties": {
@@ -121,6 +167,25 @@
                 "required": [
                     "address"
                 ]
+            },
+            "if": {
+              "properties": {
+                "keywords": {
+                  "type": "array",
+                  "contains": {
+                    "type": "string",
+                    "pattern": "^osmosis-frontier$"
+                  }
+                }
+              },
+              "required": [
+                "keywords"
+              ]
+            },
+            "then": {
+              "required": [
+                "pools" 
+              ]
             }
         },
         "denom_unit": {

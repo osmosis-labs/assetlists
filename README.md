@@ -42,7 +42,8 @@ An example assetlist json contains the following structure:
             },
             "keywords": [
                 "osmosis-main",
-                "osmosis-frontier"
+                "osmosis-frontier",
+                "osmosis-info"
             ],
             "pools": {
               "OSMO": 991

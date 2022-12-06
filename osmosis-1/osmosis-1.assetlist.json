@@ -5079,6 +5079,37 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/fanfury.png"
       },
       "coingecko_id": "fanfury"
+    },
+    {
+      "description": "Wrapped Matic on Axelar",
+      "type_asset": "erc20",
+      "denom_units": [
+        {
+          "denom": "ibc/AB589511ED0DD5FA56171A39978AFBF1371DB986EC1C3526CE138A16377E39BB",
+          "exponent": 0,
+          "aliases": [
+            "wmatic-wei"
+          ]
+        },
+        {
+          "denom": "axlwmatic",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/AB589511ED0DD5FA56171A39978AFBF1371DB986EC1C3526CE138A16377E39BB",
+      "name": "Wrapped Matic",
+      "display": "axlwmatic",
+      "symbol": "WMATIC",
+      "ibc": {
+        "source_channel": "channel-3",
+        "dst_channel": "channel-208",
+        "source_denom": "wmatic-wei"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polygon/images/wmatic.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polygon/images/wmatic.svg"
+      },
+      "coingecko_id": "wmatic"
     }
   ]
 }

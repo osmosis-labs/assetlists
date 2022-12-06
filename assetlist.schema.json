@@ -120,6 +120,18 @@
                       "type": "string",
                       "pattern": "^osmosis-frontier$"
                     }
+                  },
+                  "if": {
+                    "contains": {
+                      "type": "string",
+                      "pattern": "^osmosis-info$"
+                    }
+                  },
+                  "then": {
+                    "contains": {
+                      "type": "string",
+                      "pattern": "^osmosis-frontier$"
+                    }
                   }
               },
               "pools": {

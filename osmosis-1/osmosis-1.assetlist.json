@@ -2010,6 +2010,40 @@
       }
     },
     {
+      "description": "The native EVM, governance and staking token of the Acrechain",
+      "denom_units": [
+        {
+          "denom": "ibc/BB936517F7E5D77A63E0ADB05217A6608B0C4CF8FBA7EA2F4BAE4107A7238F06",
+          "exponent": 0,
+          "aliases": ["aacre"]
+        },
+        {
+          "denom": "acre",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/BB936517F7E5D77A63E0ADB05217A6608B0C4CF8FBA7EA2F4BAE4107A7238F06",
+      "name": "Acre",
+      "display": "acre",
+      "symbol": "ACRE",
+      "ibc": {
+        "source_channel": "channel-0",
+        "dst_channel": "channel-490",
+        "source_denom": "aacre"
+      },
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/acrechain/images/acre.svg",
+	      "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/acrechain/images/acre.png"
+      },
+      "coingecko_id": "arable-protocol",
+      "keywords": [
+        "osmosis-frontier"
+      ],
+      "pools": {
+        "OSMO": 858
+      }
+    },
+    {
       "description": "Maker on Axelar",
       "type_asset": "erc20",
       "denom_units": [

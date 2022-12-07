@@ -6,6 +6,12 @@ Asset lists are a similar mechanism to allow frontends and other UIs to fetch me
 
 This standard is a work in progress. You'll notice that the format of `assets` in the assetlist.json structure is a strict superset json representation of the [`banktypes.DenomMetadata`](https://docs.cosmos.network/master/architecture/adr-024-coin-metadata.html) from the Cosmos SDK. This is purposefully done so that this standard may eventually be migrated into a Cosmos SDK module in the future, so it can be easily maintained on chain instead of on Github.
 
+Some keywords here are reserved: 
+- `osmosis-frontier` keyword requires that a pool ID be defined. It is used to keep track of which tokens appear on Osmosis Frontier.
+- `osmosis-main` keyword requires that 'osmosis-frontier' be defined, and also requires either: Osmosis governance to approve that the token be shown on app.osmosis.zone (Main site), or that the token is incentivized by Osmosis--which is also approved by Osmosis governance. It is used to keep track of which tokens appear on Osmosis Main.
+- `osmosis-info` keyword requires that a pool ID be defined and >=$10,000 USD-worth of liquidity of the token on Osmosis. It is used to filter which assets will appear on the Osmosis Info site and queryable by the API.
+
+
 The assetlist JSON Schema can be found [here](/assetlist.schema.json)
 
 An example assetlist json contains the following structure:

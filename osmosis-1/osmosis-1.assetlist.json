@@ -1,5 +1,5 @@
 {
-  "chain_id": "osmosis-1",
+  "chain_name": "osmosis",
   "assets": [
     {
       "description": "The native token of Osmosis",
@@ -99,7 +99,20 @@
       ],
       "pools": {
         "OSMO": 1
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "cosmoshub",
+            "base_denom": "uatom",
+            "channel_id": "channel-141"
+          },
+          "chain": {
+            "channel_id": "channel-0"
+          }
+        }
+      ]
     },
     {
       "description": "Akash Token (AKT) is the Akash Network's native utility token, used as the primary means to govern, secure the blockchain, incentivize participants, and provide a default mechanism to store and exchange value.",
@@ -137,7 +150,20 @@
       ],
       "pools": {
         "OSMO": 3
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "akash",
+            "base_denom": "uakt",
+            "channel_id": "channel-9"
+          },
+          "chain": {
+            "channel_id": "channel-1"
+          }
+        }
+      ]
     },
     {
       "description": "The XPRT token is primarily a governance token for the Persistence chain.",
@@ -174,7 +200,20 @@
       ],
       "pools": {
         "OSMO": 15
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "persistence",
+            "base_denom": "uxprt",
+            "channel_id": "channel-6"
+          },
+          "chain": {
+            "channel_id": "channel-4"
+          }
+        }
+      ]
     },
     {
       "description": "The PSTAKE token is primarily a governance token for the Liquid Staking Protocol.",
@@ -209,7 +248,48 @@
       ],
       "pools": {
         "OSMO": 648
-      }
+      },
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "persistence",
+            "base_denom": "XPRT"
+          },
+          "provider": "Persistence"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006"
+          },
+          "provider": "Gravity Bridge"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gravitybridge",
+            "base_denom": "gravity0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006",
+            "channel_id": "channel-24"
+          },
+          "chain": {
+            "channel_id": "channel-38",
+            "path": "transfer/channel-38/gravity0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006"
+          }
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "persistence",
+            "base_denom": "ibc/A6E3AF63B3C906416A9AF7A556C59EA4BD50E617EFFE6299B99700CCB780E444",
+            "channel_id": "channel-6"
+          },
+          "chain": {
+            "channel_id": "channel-4"
+          }
+        }
+      ]
     },
     {
       "description": "PSTAKE Liquid-Staked ATOM",
@@ -241,6 +321,17 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/stkatom.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/stkatom.svg"
+      },
+      "traces": {
+        "type": "ibc",
+        "counterparty": {
+          "chain_name": "persistence",
+          "base_denom": "stk/uatom",
+          "channel_id": "channel-6"
+        },
+        "chain": {
+          "channel_id": "channel-4"
+        }
       }
     },
     {
@@ -278,7 +369,20 @@
       ],
       "pools": {
         "OSMO": 7
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "irisnet",
+            "base_denom": "uiris",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-6"
+          }
+        }
+      ]
     },
     {
       "description": "DVPN is the native token of the Sentinel Hub.",
@@ -315,7 +419,20 @@
       ],
       "pools": {
         "OSMO": 5
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "sentinel",
+            "base_denom": "udvpn",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-2"
+          }
+        }
+      ]
     },
     {
       "description": "CRO coin is the token for the Crypto.com platform.",
@@ -352,7 +469,20 @@
       ],
       "pools": {
         "OSMO": 9
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "cryptoorgchain",
+            "base_denom": "basecro",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-5"
+          }
+        }
+      ]
     },
     {
       "description": "Wrapped BNB on Axelar",
@@ -391,7 +521,20 @@
       ],
       "pools": {
         "OSMO": 840
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "wbnb-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "REGEN coin is the token for the Regen Network Platform",
@@ -428,7 +571,20 @@
       ],
       "pools": {
         "OSMO": 42
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "regen",
+            "base_denom": "uregen",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-8"
+          }
+        }
+      ]
     },
     {
       "description": "IOV coin is the token for the Starname (IOV) Asset Name Service",
@@ -466,7 +622,20 @@
       ],
       "pools": {
         "OSMO": 197
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "starname",
+            "base_denom": "uiov",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-15"
+          }
+        }
+      ]
     },
     {
       "description": "e-Money NGM staking token. In addition to earning staking rewards the token is bought back and burned based on e-Money stablecoin inflation.",
@@ -504,7 +673,20 @@
       ],
       "pools": {
         "OSMO": 463
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "emoney",
+            "base_denom": "ungm",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-37"
+          }
+        }
+      ]
     },
     {
       "description": "e-Money EUR stablecoin. Audited and backed by fiat EUR deposits and government bonds.",
@@ -539,7 +721,20 @@
       ],
       "pools": {
         "OSMO": 481
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "emoney",
+            "base_denom": "eeur",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-37"
+          }
+        }
+      ]
     },
     {
       "description": "The BCNA coin is the transactional token within the BitCanna network, serving the legal cannabis industry through its payment network, supply chain and trust network.",
@@ -577,7 +772,20 @@
       ],
       "pools": {
         "OSMO": 571
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitcanna",
+            "base_denom": "ubcna",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-51"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of JUNO Chain",
@@ -615,7 +823,20 @@
       ],
       "pools": {
         "OSMO": 497
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "ujuno",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-42"
+          }
+        }
+      ]
     },
     {
       "description": "LIKE is the native staking and governance token of LikeCoin chain, a Decentralized Publishing Infrastructure to empower content ownership, authenticity, and provenance.",
@@ -653,7 +874,20 @@
       ],
       "pools": {
         "OSMO": 553
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "likecoin",
+            "base_denom": "nanolike",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-53"
+          }
+        }
+      ]
     },
     {
       "description": "BitSong Native Token",
@@ -691,7 +925,20 @@
       ],
       "pools": {
         "OSMO": 573
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitsong",
+            "base_denom": "ubtsg",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-73"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of Ki Chain",
@@ -729,7 +976,20 @@
       ],
       "pools": {
         "OSMO": 577
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "kichain",
+            "base_denom": "uxki",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-77"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of Secret Network",
@@ -767,7 +1027,20 @@
       ],
       "pools": {
         "OSMO": 584
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "uscrt",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-88"
+          }
+        }
+      ]
     },
     {
       "description": "Panacea is a public blockchain launched by MediBloc, which is the key infrastructure for reinventing the patient-centered healthcare data ecosystem",
@@ -804,7 +1077,20 @@
       ],
       "pools": {
         "OSMO": 586
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "panacea",
+            "base_denom": "umed",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-82"
+          }
+        }
+      ]
     },
     {
       "description": "Native Token of Comdex Protocol",
@@ -841,7 +1127,20 @@
       ],
       "pools": {
         "OSMO": 601
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "comdex",
+            "base_denom": "ucmdx",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-87"
+          }
+        }
+      ]
     },
     {
       "description": "Native token for the cheqd network",
@@ -879,7 +1178,20 @@
       ],
       "pools": {
         "OSMO": 602
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "cheqd",
+            "base_denom": "ncheq",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-108"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of Stargaze",
@@ -916,7 +1228,20 @@
       ],
       "pools": {
         "OSMO": 604
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stargaze",
+            "base_denom": "ustars",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-75"
+          }
+        }
+      ]
     },
     {
       "description": "Native token of the Lum Network",
@@ -953,7 +1278,20 @@
       ],
       "pools": {
         "OSMO": 608
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "lumnetwork",
+            "base_denom": "ulum",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-115"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of Chihuahua Chain",
@@ -991,7 +1329,20 @@
       ],
       "pools": {
         "OSMO": 605
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "chihuahua",
+            "base_denom": "uhuahua",
+            "channel_id": "channel-7"
+          },
+          "chain": {
+            "channel_id": "channel-113"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of Vidulum",
@@ -1029,7 +1380,20 @@
       ],
       "pools": {
         "OSMO": 613
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "vidulum",
+            "base_denom": "uvdl",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-124"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of Desmos",
@@ -1067,7 +1431,20 @@
       ],
       "pools": {
         "OSMO": 619
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "desmos",
+            "base_denom": "udsm",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-135"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of Dig Chain.",
@@ -1104,7 +1481,20 @@
       ],
       "pools": {
         "OSMO": 621
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "dig",
+            "base_denom": "udig",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-128"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of Sommelier Chain.",
@@ -1142,7 +1532,20 @@
       ],
       "pools": {
         "OSMO": 627
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "sommelier",
+            "base_denom": "usomm",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-165"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of BandChain",
@@ -1180,7 +1583,20 @@
       ],
       "pools": {
         "OSMO": 626
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bandchain",
+            "base_denom": "uband",
+            "channel_id": "channel-83"
+          },
+          "chain": {
+            "channel_id": "channel-148"
+          }
+        }
+      ]
     },
     {
       "description": "The native staking and governance token of the Konstellation Network.",
@@ -1218,7 +1634,20 @@
       ],
       "pools": {
         "OSMO": 637
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "konstellation",
+            "base_denom": "udarc",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-171"
+          }
+        }
+      ]
     },
     {
       "description": "The native staking and governance token of the Umee Network.",
@@ -1255,7 +1684,20 @@
       ],
       "pools": {
         "OSMO": 641
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "umee",
+            "base_denom": "uumee",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-184"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of Gravity Bridge",
@@ -1293,7 +1735,20 @@
       ],
       "pools": {
         "OSMO": 625
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gravitybridge",
+            "base_denom": "ugraviton",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-144"
+          }
+        }
+      ]
     },
     {
       "description": "DEC is the native token of Decentr.",
@@ -1331,7 +1786,20 @@
       ],
       "pools": {
         "OSMO": 644
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "decentr",
+            "base_denom": "udec",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-181"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of Carbon",
@@ -1369,7 +1837,20 @@
       ],
       "pools": {
         "OSMO": 651
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "carbon",
+            "base_denom": "swth",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-188"
+          }
+        }
+      ]
     },
     {
       "description": "Circle's stablecoin on Axelar",
@@ -1407,7 +1888,20 @@
       ],
       "pools": {
         "OSMO": 678
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "uusdc",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "Wrapped Ether on Axelar",
@@ -1445,7 +1939,20 @@
       ],
       "pools": {
         "OSMO": 704
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "weth-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "Dai stablecoin on Axelar",
@@ -1483,7 +1990,20 @@
       ],
       "pools": {
         "OSMO": 674
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "dai-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of Fetch.ai Chain",
@@ -1521,7 +2041,20 @@
       ],
       "pools": {
         "OSMO": 681
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "fetchhub",
+            "base_denom": "afet",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-229"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of AssetMantle",
@@ -1558,7 +2091,20 @@
       ],
       "pools": {
         "OSMO": 690
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "assetmantle",
+            "base_denom": "umntl",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-232"
+          }
+        }
+      ]
     },
     {
       "description": "Wrapped Bitcoin on Axelar",
@@ -1596,7 +2142,20 @@
       ],
       "pools": {
         "OSMO": 712
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "wbtc-satoshi",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "The native staking and governance token of Kava",
@@ -1633,7 +2192,20 @@
       ],
       "pools": {
         "OSMO": 730
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "kava",
+            "base_denom": "ukava",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-143"
+          }
+        }
+      ]
     },
     {
       "description": "The native EVM, governance and staking token of the Evmos Hub",
@@ -1671,7 +2243,20 @@
       ],
       "pools": {
         "OSMO": 722
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "evmos",
+            "base_denom": "aevmos",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-204"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of Tgrade",
@@ -1708,7 +2293,20 @@
       ],
       "pools": {
         "OSMO": 769
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "tgrade",
+            "base_denom": "utgd",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-263"
+          }
+        }
+      ]
     },
     {
       "description": "The native staking and governance token of the Kujira chain.",
@@ -1745,7 +2343,20 @@
       ],
       "pools": {
         "OSMO": 744
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "kujira",
+            "base_denom": "ukuji",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-259"
+          }
+        }
+      ]
     },
     {
       "description": "Chainlink on Axelar",
@@ -1783,7 +2394,20 @@
       ],
       "pools": {
         "OSMO": 731
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "link-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "Wrapped Polkadot on Axelar",
@@ -1822,7 +2446,20 @@
       ],
       "pools": {
         "OSMO": 773
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "dot-planck",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "BLD is the token used to secure the Agoric chain through staking and to backstop Inter Protocol.",
@@ -1858,7 +2495,20 @@
       ],
       "pools": {
         "OSMO": 795
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "agoric",
+            "base_denom": "ubld",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-320"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of Stride",
@@ -1897,7 +2547,20 @@
       ],
       "pools": {
         "OSMO": 806
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "ustrd",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326"
+          }
+        }
+      ]
     },
     {
       "description": "Staking derivative stATOM for staked ATOM by Stride",
@@ -1935,7 +2598,20 @@
       ],
       "pools": {
         "ATOM": 803
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stuatom",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326"
+          }
+        }
+      ]
     },
     {
       "description": "The native staking and governance token of the Axelar chain",
@@ -1973,7 +2649,20 @@
       ],
       "pools": {
         "OSMO": 812
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "uaxl",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "The INJ token is the native governance token for the Injective chain.",
@@ -2007,7 +2696,20 @@
       ],
       "pools": {
         "OSMO": 725
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "injective",
+            "base_denom": "inj",
+            "channel_id": "channel-8"
+          },
+          "chain": {
+            "channel_id": "channel-122"
+          }
+        }
+      ]
     },
     {
       "description": "The native EVM, governance and staking token of the Acrechain",
@@ -2015,7 +2717,9 @@
         {
           "denom": "ibc/BB936517F7E5D77A63E0ADB05217A6608B0C4CF8FBA7EA2F4BAE4107A7238F06",
           "exponent": 0,
-          "aliases": ["aacre"]
+          "aliases": [
+            "aacre"
+          ]
         },
         {
           "denom": "acre",
@@ -2033,7 +2737,7 @@
       },
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/acrechain/images/acre.svg",
-	      "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/acrechain/images/acre.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/acrechain/images/acre.png"
       },
       "coingecko_id": "arable-protocol",
       "keywords": [
@@ -2041,7 +2745,20 @@
       ],
       "pools": {
         "OSMO": 858
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "acrechain",
+            "base_denom": "aacre",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-490"
+          }
+        }
+      ]
     },
     {
       "description": "Maker on Axelar",
@@ -2078,7 +2795,20 @@
       ],
       "pools": {
         "OSMO": 733
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "mkr-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of IXO Chain",
@@ -2114,7 +2844,20 @@
       ],
       "pools": {
         "OSMO": 557
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "impacthub",
+            "base_denom": "uixo",
+            "channel_id": "channel-4"
+          },
+          "chain": {
+            "channel_id": "channel-38"
+          }
+        }
+      ]
     },
     {
       "description": "The staking token of Bostrom",
@@ -2145,7 +2888,20 @@
       ],
       "pools": {
         "OSMO": 597
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bostrom",
+            "base_denom": "boot",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-95"
+          }
+        }
+      ]
     },
     {
       "description": "The native token cw20 for Neta on Juno Chain",
@@ -2184,7 +2940,22 @@
       ],
       "pools": {
         "OSMO": 631
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno168ctmpyppk90d34p3jjy658zf5a5l3w8wk35wht6ccqj4mr0yv8s4j5awr",
+            "channel_id": "channel-47",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn"
+          },
+          "chain": {
+            "channel_id": "channel-169",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "TICK coin is the token for the Microtick Price Discovery & Oracle App",
@@ -2221,7 +2992,20 @@
       ],
       "pools": {
         "ATOM": 547
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "microtick",
+            "base_denom": "utick",
+            "channel_id": "channel-16"
+          },
+          "chain": {
+            "channel_id": "channel-39"
+          }
+        }
+      ]
     },
     {
       "description": "The native staking token of Terra Classic.",
@@ -2258,7 +3042,20 @@
       ],
       "pools": {
         "OSMO": 800
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "terra",
+            "base_denom": "uluna",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-72"
+          }
+        }
+      ]
     },
     {
       "description": "The USD stablecoin of Terra Classic.",
@@ -2297,7 +3094,20 @@
       ],
       "pools": {
         "OSMO": 560
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "terra",
+            "base_denom": "uust",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-72"
+          }
+        }
+      ]
     },
     {
       "description": "Rowan Token (ROWAN) is the Sifchain Network's native utility token, used as the primary means to govern, provide liquidity, secure the blockchain, incentivize participants, and provide a default mechanism to store and exchange value.",
@@ -2331,7 +3141,20 @@
       ],
       "pools": {
         "OSMO": 629
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "sifchain",
+            "base_denom": "rowan",
+            "channel_id": "channel-17"
+          },
+          "chain": {
+            "channel_id": "channel-47"
+          }
+        }
+      ]
     },
     {
       "description": "Gravity Bridge ETH",
@@ -2368,7 +3191,20 @@
       ],
       "pools": {
         "OSMO": 634
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gravitybridge",
+            "base_denom": "gravity0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-144"
+          }
+        }
+      ]
     },
     {
       "description": "Gravity Bridge USDC",
@@ -2405,7 +3241,20 @@
       ],
       "pools": {
         "OSMO": 633
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gravitybridge",
+            "base_denom": "gravity0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-144"
+          }
+        }
+      ]
     },
     {
       "description": "L1 coin is the GenesisL1 blockchain utility, governance and EVM token",
@@ -2441,7 +3290,20 @@
       ],
       "pools": {
         "OSMO": 732
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "genesisl1",
+            "base_denom": "el1",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-253"
+          }
+        }
+      ]
     },
     {
       "description": "Staking and goverance token for ODIN Protocol",
@@ -2478,7 +3340,20 @@
       ],
       "pools": {
         "OSMO": 777
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "odin",
+            "base_denom": "loki",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-258"
+          }
+        }
+      ]
     },
     {
       "description": "Gravity Bridge USDT",
@@ -2516,7 +3391,20 @@
       ],
       "pools": {
         "OSMO": 818
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gravitybridge",
+            "base_denom": "gravity0xdAC17F958D2ee523a2206206994597C13D831ec7",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-144"
+          }
+        }
+      ]
     },
     {
       "description": "ELEVENPARIS loyalty token on KiChain",
@@ -2555,7 +3443,22 @@
       ],
       "pools": {
         "OSMO": 774
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "kichain",
+            "base_denom": "cw20:ki1dt3lk455ed360pna38fkhqn0p8y44qndsr77qu73ghyaz2zv4whq83mwdy",
+            "channel_id": "channel-18",
+            "port": "wasm.ki1hzz0s0ucrhdp6tue2lxk3c03nj6f60qy463we7lgx0wudd72ctmsd9kgha"
+          },
+          "chain": {
+            "channel_id": "channel-261",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "DeFi gaming platform built on Juno",
@@ -2592,7 +3495,22 @@
       ],
       "pools": {
         "OSMO": 778
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1j0a9ymgngasfn3l5me8qpd53l5zlm9wurfdk7r65s5mg6tkxal3qpgf5se",
+            "channel_id": "channel-47",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn"
+          },
+          "chain": {
+            "channel_id": "channel-169",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "IST is a decentralized and fully collateralized stable token built for the Cosmos ecosystem.",
@@ -2628,7 +3546,20 @@
       ],
       "pools": {
         "OSMO": 837
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "agoric",
+            "base_denom": "uist",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-320"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of the Cudos blockchain",
@@ -2665,7 +3596,20 @@
       ],
       "pools": {
         "OSMO": 796
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "cudos",
+            "base_denom": "acudos",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-298"
+          }
+        }
+      ]
     },
     {
       "description": "Staking derivative seJUNO for staked JUNO",
@@ -2704,7 +3648,22 @@
       ],
       "pools": {
         "OSMO": 793
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1dd0k0um5rqncfueza62w9sentdfh3ec4nw4aq4lk5hkjl63vljqscth9gv",
+            "channel_id": "channel-47",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn"
+          },
+          "chain": {
+            "channel_id": "channel-169",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "REBUS coin is the token for the Rebuschain Platform",
@@ -2741,7 +3700,20 @@
       ],
       "pools": {
         "OSMO": 813
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "rebus",
+            "base_denom": "arebus",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-355"
+          }
+        }
+      ]
     },
     {
       "description": "The native staking and governance token of the Teritori chain",
@@ -2778,7 +3750,20 @@
       ],
       "pools": {
         "OSMO": 816
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "teritori",
+            "base_denom": "utori",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-362"
+          }
+        }
+      ]
     },
     {
       "description": "Staking derivative stJUNO for staked JUNO by Stride",
@@ -2814,7 +3799,20 @@
       ],
       "pools": {
         "JUNO": 817
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stujuno",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of Lambda",
@@ -2850,7 +3848,20 @@
       ],
       "pools": {
         "OSMO": 826
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "lambda",
+            "base_denom": "ulamb",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-378"
+          }
+        }
+      ]
     },
     {
       "description": "Jackal Native Token",
@@ -2887,7 +3898,20 @@
       ],
       "pools": {
         "OSMO": 832
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "jackal",
+            "base_denom": "ujkl",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-412"
+          }
+        }
+      ]
     },
     {
       "description": "Staking derivative stOSMO for staked OSMO by Stride",
@@ -2924,7 +3948,20 @@
       ],
       "pools": {
         "OSMO": 833
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stuosmo",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326"
+          }
+        }
+      ]
     },
     {
       "description": "The KRW stablecoin of Terra Classic.",
@@ -2956,7 +3993,20 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/krt.png"
       },
-      "coingecko_id": "terra-krw"
+      "coingecko_id": "terra-krw",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "terra",
+            "base_denom": "ukrw",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-72"
+          }
+        }
+      ]
     },
     {
       "description": "The native token cw20 for Marble DAO on Juno Chain",
@@ -2994,7 +4044,22 @@
       ],
       "pools": {
         "OSMO": 649
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1g2g7ucurum66d42g8k5twk34yegdq8c82858gz0tq2fc75zy7khssgnhjl",
+            "channel_id": "channel-47",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn"
+          },
+          "chain": {
+            "channel_id": "channel-169",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "The native staking token of Terra 2.0",
@@ -3029,7 +4094,20 @@
       ],
       "pools": {
         "OSMO": 726
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "terra2",
+            "base_denom": "uluna",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-251"
+          }
+        }
+      ]
     },
     {
       "description": "Hope Galaxy is an NFT collection based on its own native Token $HOPE, a cw20 token on Juno chain.",
@@ -3067,7 +4145,22 @@
       ],
       "pools": {
         "OSMO": 653
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1re3x67ppxap48ygndmrc7har2cnc7tcxtm9nplcas4v0gc3wnmvs3s807z",
+            "channel_id": "channel-47",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn"
+          },
+          "chain": {
+            "channel_id": "channel-169",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of Cerberus",
@@ -3102,7 +4195,20 @@
       ],
       "pools": {
         "OSMO": 662
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "cerberus",
+            "base_denom": "ucrbrus",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-212"
+          }
+        }
+      ]
     },
     {
       "description": "Racoon aims to simplify accessibility to AI, NFTs and Gambling on the Cosmos Ecosystem",
@@ -3140,7 +4246,22 @@
       ],
       "pools": {
         "OSMO": 669
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1r4pzw8f9z0sypct5l9j906d47z998ulwvhvqe5xdwgy8wf84583sxwh0pa",
+            "channel_id": "channel-47",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn"
+          },
+          "chain": {
+            "channel_id": "channel-169",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "The DAO token to build consensus among Hong Kong People",
@@ -3173,7 +4294,22 @@
       ],
       "pools": {
         "OSMO": 695
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1tdjwrqmnztn2j3sj2ln9xnyps5hs48q3ddwjrz7jpv6mskappjys5czd49",
+            "channel_id": "channel-47",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn"
+          },
+          "chain": {
+            "channel_id": "channel-169",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "Tether's USD stablecoin on Axelar",
@@ -3203,7 +4339,20 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/uusdt L@3x.png"
       },
-      "coingecko_id": "tether"
+      "coingecko_id": "tether",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "uusdt",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "Frax's fractional-algorithmic stablecoin on Axelar",
@@ -3233,7 +4382,20 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/frax-wei L@3x.png"
       },
-      "coingecko_id": "frax"
+      "coingecko_id": "frax",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "frax-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "Gravity Bridge WBTC",
@@ -3262,7 +4424,20 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gravitybridge/images/gwbtc.png"
       },
-      "coingecko_id": "wrapped-bitcoin"
+      "coingecko_id": "wrapped-bitcoin",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gravitybridge",
+            "base_denom": "gravity0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-144"
+          }
+        }
+      ]
     },
     {
       "description": "Gravity Bridge Dai",
@@ -3292,7 +4467,20 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gravitybridge/images/gdai.png"
       },
-      "coingecko_id": "dai"
+      "coingecko_id": "dai",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gravitybridge",
+            "base_denom": "gravity0x6B175474E89094C44Da98b954EedeAC495271d0F",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-144"
+          }
+        }
+      ]
     },
     {
       "description": "Hash is the staking token of the Provenance Blockchain",
@@ -3328,7 +4516,20 @@
       ],
       "pools": {
         "OSMO": 693
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "provenance",
+            "base_denom": "nhash",
+            "channel_id": "channel-7"
+          },
+          "chain": {
+            "channel_id": "channel-222"
+          }
+        }
+      ]
     },
     {
       "description": "GLX is the staking token of the Galaxy Chain",
@@ -3363,7 +4564,20 @@
       ],
       "pools": {
         "OSMO": 697
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "galaxy",
+            "base_denom": "uglx",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-236"
+          }
+        }
+      ]
     },
     {
       "description": "The BLOCK token of Marble DEX on Juno Chain",
@@ -3400,7 +4614,22 @@
       ],
       "pools": {
         "OSMO": 691
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1y9rf7ql6ffwkv02hsgd4yruz23pn4w97p75e2slsnkm0mnamhzysvqnxaq",
+            "channel_id": "channel-47",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn"
+          },
+          "chain": {
+            "channel_id": "channel-169",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "Token governance for Junoswap",
@@ -3437,7 +4666,22 @@
       ],
       "pools": {
         "OSMO": 700
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno15u3dt79t6sxxa3x3kpkhzsy56edaa5a66wvt3kxmukqjz2sx0hes5sn38g",
+            "channel_id": "channel-47",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn"
+          },
+          "chain": {
+            "channel_id": "channel-169",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "MEME Token (MEME) is the native staking token of the MEME Chain",
@@ -3472,7 +4716,20 @@
       ],
       "pools": {
         "OSMO": 701
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "meme",
+            "base_denom": "umeme",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-238"
+          }
+        }
+      ]
     },
     {
       "description": "Profit sharing token for Another.Software validator. Hold and receive dividends from Another.Software validator commissions!",
@@ -3502,7 +4759,22 @@
       },
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/asvt.png"
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno17wzaxtfdw5em7lc94yed4ylgjme63eh73lm3lutp2rhcxttyvpwsypjm4w",
+            "channel_id": "channel-47",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn"
+          },
+          "chain": {
+            "channel_id": "channel-169",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "The native EVM, governance, bridge, and staking token of Echelon",
@@ -3538,7 +4810,20 @@
       ],
       "pools": {
         "OSMO": 848
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "echelon",
+            "base_denom": "aechelon",
+            "channel_id": "channel-11"
+          },
+          "chain": {
+            "channel_id": "channel-403"
+          }
+        }
+      ]
     },
     {
       "description": "DAO dedicated to building tools on the Juno Network",
@@ -3574,7 +4859,22 @@
       ],
       "pools": {
         "OSMO": 718
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1n7n7d5088qlzlj37e9mgmkhx6dfgtvt02hqxq66lcap4dxnzdhwqfmgng3",
+            "channel_id": "channel-47",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn"
+          },
+          "chain": {
+            "channel_id": "channel-169",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "Atolo the native token of Rizon Chain",
@@ -3604,7 +4904,20 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/rizon/images/atolo.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/rizon/images/atolo.svg"
       },
-      "coingecko_id": "rizon"
+      "coingecko_id": "rizon",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "rizon",
+            "base_denom": "uatolo",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-221"
+          }
+        }
+      ]
     },
     {
       "description": "Geo token for ODIN Protocol",
@@ -3640,7 +4953,20 @@
       ],
       "pools": {
         "OSMO": 787
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "odin",
+            "base_denom": "mGeo",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-258"
+          }
+        }
+      ]
     },
     {
       "description": "O9W token for ODIN Protocol",
@@ -3675,7 +5001,20 @@
       ],
       "pools": {
         "OSMO": 805
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "odin",
+            "base_denom": "mO9W",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-258"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of Shentu",
@@ -3704,7 +5043,20 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/shentu/images/ctk.png"
       },
-      "coingecko_id": "certik"
+      "coingecko_id": "certik",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "shentu",
+            "base_denom": "uctk",
+            "channel_id": "channel-8"
+          },
+          "chain": {
+            "channel_id": "channel-146"
+          }
+        }
+      ]
     },
     {
       "description": "The native over-collateralized stablecoin from the Kujira chain.",
@@ -3739,7 +5091,20 @@
       ],
       "pools": {
         "OSMO": 819
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "kujira",
+            "base_denom": "factory:kujira1qk00h5atutpsv900x202pxx42npjr9thg58dnqpa72f2p7m2luase444a7:uusk",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-259"
+          }
+        }
+      ]
     },
     {
       "description": "Governance token of Kava Lend Protocol",
@@ -3769,7 +5134,20 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/hard.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/hard.svg"
       },
-      "coingecko_id": "kava-lend"
+      "coingecko_id": "kava-lend",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "kava",
+            "base_denom": "hard",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-143"
+          }
+        }
+      ]
     },
     {
       "description": "Governance token of Kava Swap Protocol",
@@ -3799,7 +5177,20 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/swp.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/swp.svg"
       },
-      "coingecko_id": "kava-swap"
+      "coingecko_id": "kava-swap",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "kava",
+            "base_denom": "swp",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-143"
+          }
+        }
+      ]
     },
     {
       "description": "The native stablecoin of Kava",
@@ -3828,7 +5219,20 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/usdx.png"
       },
-      "coingecko_id": "usdx"
+      "coingecko_id": "usdx",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "kava",
+            "base_denom": "usdx",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-143"
+          }
+        }
+      ]
     },
     {
       "description": "Aave on Axelar",
@@ -3858,7 +5262,20 @@
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/aave-wei L@3x.png"
       },
-      "coingecko_id": "aave"
+      "coingecko_id": "aave",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "aave-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "ApeCoin on Axelar",
@@ -3888,7 +5305,20 @@
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/ape-wei L@3x.png"
       },
-      "coingecko_id": "apecoin"
+      "coingecko_id": "apecoin",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "ape-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "Axie Infinity Shard on Axelar",
@@ -3918,7 +5348,20 @@
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/axs-wei L@3x.png"
       },
-      "coingecko_id": "axie-infinity"
+      "coingecko_id": "axie-infinity",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "axs-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "Rai Reflex Index on Axelar",
@@ -3948,7 +5391,20 @@
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/rai-wei L@3x.png"
       },
-      "coingecko_id": "rai"
+      "coingecko_id": "rai",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "rai-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "Shiba Inu on Axelar",
@@ -3978,7 +5434,20 @@
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/shib-wei L@3x.png"
       },
-      "coingecko_id": "shiba-inu"
+      "coingecko_id": "shiba-inu",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "shib-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "Uniswap on Axelar",
@@ -4008,7 +5477,20 @@
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/uni-wei L@3x.png"
       },
-      "coingecko_id": "uniswap"
+      "coingecko_id": "uniswap",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "uni-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "Chain on Axelar",
@@ -4038,7 +5520,20 @@
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/xcn-wei L@3x.png"
       },
-      "coingecko_id": "chain-2"
+      "coingecko_id": "chain-2",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "xcn-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "Wrapped GLMR on Axelar",
@@ -4069,7 +5564,20 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/wdev-wei.png"
       },
-      "coingecko_id": "wrapped-moonbeam"
+      "coingecko_id": "wrapped-moonbeam",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "wglmr-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "Gelotto Year 1 Grand Prize Token",
@@ -4105,7 +5613,22 @@
       ],
       "pools": {
         "OSMO": 790
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1gz8cf86zr4vw9cjcyyv432vgdaecvr9n254d3uwwkx9rermekddsxzageh",
+            "channel_id": "channel-47",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn"
+          },
+          "chain": {
+            "channel_id": "channel-169",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "CRE is the native token of the Crescent Network.",
@@ -4141,6 +5664,17 @@
       ],
       "pools": {
         "OSMO": 786
+      },
+      "traces": {
+        "type": "ibc",
+        "counterparty": {
+          "chain_name": "crescent",
+          "base_denom": "ucre",
+          "channel_id": "channel-9"
+        },
+        "chain": {
+          "channel_id": "channel-297"
+        }
       }
     },
     {
@@ -4175,7 +5709,20 @@
       ],
       "pools": {
         "OSMO": 788
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "lumenx",
+            "base_denom": "ulumen",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-286"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of Oraichain",
@@ -4205,7 +5752,20 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-white.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-white.svg"
       },
-      "coingecko_id": "oraichain-token"
+      "coingecko_id": "oraichain-token",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "oraichain",
+            "base_denom": "orai",
+            "channel_id": "channel-13"
+          },
+          "chain": {
+            "channel_id": "channel-216"
+          }
+        }
+      ]
     },
     {
       "description": "Staking derivative bJUNO for staked JUNO",
@@ -4237,7 +5797,22 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/bjuno.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/bjuno.svg"
       },
-      "coingecko_id": "stakeeasy-bjuno"
+      "coingecko_id": "stakeeasy-bjuno",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1wwnhkagvcd3tjz6f8vsdsw5plqnw8qy2aj3rrhqr2axvktzv9q2qz8jxn3",
+            "channel_id": "channel-47",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn"
+          },
+          "chain": {
+            "channel_id": "channel-169",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "Staking derivative stSTARS for staked STARS by Stride",
@@ -4272,7 +5847,20 @@
       ],
       "pools": {
         "STARS": 810
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stustars",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326"
+          }
+        }
+      ]
     },
     {
       "description": "Solarbank DAO Governance Token for speeding up the shift to renewable and green energy",
@@ -4303,7 +5891,22 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/solar.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/solar.svg"
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno159q8t5g02744lxq8lfmcn6f78qqulq9wn3y9w7lxjgkz4e0a6kvsfvapse",
+            "channel_id": "channel-47",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn"
+          },
+          "chain": {
+            "channel_id": "channel-169",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "StakeEasy governance token",
@@ -4341,7 +5944,22 @@
       ],
       "pools": {
         "OSMO": 808
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno19rqljkh95gh40s7qdx40ksx3zq5tm4qsmsrdz9smw668x9zdr3lqtg33mf",
+            "channel_id": "channel-47",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn"
+          },
+          "chain": {
+            "channel_id": "channel-169",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "MUSE Governance Token",
@@ -4371,7 +5989,22 @@
       },
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/muse.png"
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1p8x807f6h222ur0vssqy3qk6mcpa40gw2pchquz5atl935t7kvyq894ne3",
+            "channel_id": "channel-47",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn"
+          },
+          "chain": {
+            "channel_id": "channel-169",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "The native staking and governance coin of the Unification Blockchain.",
@@ -4406,7 +6039,20 @@
       ],
       "pools": {
         "OSMO": 830
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "unification",
+            "base_denom": "nund",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-382"
+          }
+        }
+      ]
     },
     {
       "description": "The native token cw20 for SIENNA on Secret Network",
@@ -4444,7 +6090,22 @@
       ],
       "pools": {
         "OSMO": 853
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret1rgm2m5t530tdzyd99775n6vzumxa5luxcllml4",
+            "channel_id": "channel-44",
+            "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4"
+          },
+          "chain": {
+            "channel_id": "channel-476",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "The native token cw20 for Shade on Secret Network",
@@ -4482,7 +6143,22 @@
       ],
       "pools": {
         "OSMO": 846
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret1qfql357amn448duf5gvp9gr48sxx9tsnhupu3d",
+            "channel_id": "channel-44",
+            "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4"
+          },
+          "chain": {
+            "channel_id": "channel-476",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "The native token cw20 for SCRT Staking Derivatives on Secret Network",
@@ -4520,7 +6196,22 @@
       ],
       "pools": {
         "SCRT": 854
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret1k6u0cy4feepm6pehnz804zmwakuwdapm69tuc4",
+            "channel_id": "channel-44",
+            "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4"
+          },
+          "chain": {
+            "channel_id": "channel-476",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "The native token cw20 for Button on Secret Network",
@@ -4552,7 +6243,22 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/butt.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/butt.svg"
       },
-      "coingecko_id": "buttcoin-2"
+      "coingecko_id": "buttcoin-2",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret1yxcexylwyxlq58umhgsjgstgcg2a0ytfy4d9lt",
+            "channel_id": "channel-44",
+            "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4"
+          },
+          "chain": {
+            "channel_id": "channel-476",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "The native token cw20 for Alter on Secret Network",
@@ -4590,7 +6296,22 @@
       ],
       "pools": {
         "OSMO": 845
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret12rcvz0umvk875kd6a803txhtlu7y0pnd73kcej",
+            "channel_id": "channel-44",
+            "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4"
+          },
+          "chain": {
+            "channel_id": "channel-476",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "Adam Clay a BitSong Music FanToken",
@@ -4618,7 +6339,20 @@
         "source_channel": "channel-0",
         "dst_channel": "channel-73",
         "source_denom": "ft2D8E7041556CE93E1EFD66C07C45D551A6AAAE09"
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitsong",
+            "base_denom": "ft2D8E7041556CE93E1EFD66C07C45D551A6AAAE09",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-73"
+          }
+        }
+      ]
     },
     {
       "description": "Nicola Fasano a BitSong Music FanToken",
@@ -4646,7 +6380,20 @@
         "source_channel": "channel-0",
         "dst_channel": "channel-73",
         "source_denom": "ft25B30C386CDDEBD1413D5AE1180956AE9EB3B9F7"
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitsong",
+            "base_denom": "ft25B30C386CDDEBD1413D5AE1180956AE9EB3B9F7",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-73"
+          }
+        }
+      ]
     },
     {
       "description": "Delta 9 a BitSong Music FanToken",
@@ -4674,7 +6421,20 @@
         "source_channel": "channel-0",
         "dst_channel": "channel-73",
         "source_denom": "ft575B10B0CEE2C164D9ED6A96313496F164A9607C"
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitsong",
+            "base_denom": "ft575B10B0CEE2C164D9ED6A96313496F164A9607C",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-73"
+          }
+        }
+      ]
     },
     {
       "description": "FONTI a BitSong Music FanToken",
@@ -4702,7 +6462,20 @@
         "source_channel": "channel-0",
         "dst_channel": "channel-73",
         "source_denom": "ft56664FC98A2CF5F4FBAC3566D1A11D891AD88305"
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitsong",
+            "base_denom": "ft56664FC98A2CF5F4FBAC3566D1A11D891AD88305",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-73"
+          }
+        }
+      ]
     },
     {
       "description": "BlackJack a BitSong Music FanToken",
@@ -4730,7 +6503,20 @@
         "source_channel": "channel-0",
         "dst_channel": "channel-73",
         "source_denom": "ft52EEB0EE509AC546ED92EAC8591F731F213DDD16"
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitsong",
+            "base_denom": "ft52EEB0EE509AC546ED92EAC8591F731F213DDD16",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-73"
+          }
+        }
+      ]
     },
     {
       "description": "Rawanne a BitSong Music FanToken",
@@ -4758,7 +6544,20 @@
         "source_channel": "channel-0",
         "dst_channel": "channel-73",
         "source_denom": "ftE4903ECC861CA45F2C2BC7EAB8255D2E6E87A33A"
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitsong",
+            "base_denom": "ftE4903ECC861CA45F2C2BC7EAB8255D2E6E87A33A",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-73"
+          }
+        }
+      ]
     },
     {
       "description": "Enmoda a BitSong Music FanToken",
@@ -4786,7 +6585,20 @@
         "source_channel": "channel-0",
         "dst_channel": "channel-73",
         "source_denom": "ft85AE1716C5E39EA6D64BBD7898C3899A7B500626"
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitsong",
+            "base_denom": "ft85AE1716C5E39EA6D64BBD7898C3899A7B500626",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-73"
+          }
+        }
+      ]
     },
     {
       "description": "404Deep Records a BitSong Music FanToken",
@@ -4814,7 +6626,20 @@
         "source_channel": "channel-0",
         "dst_channel": "channel-73",
         "source_denom": "ft99091610CCC66F4277C66D14AF2BC4C5EE52E27A"
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitsong",
+            "base_denom": "ft99091610CCC66F4277C66D14AF2BC4C5EE52E27A",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-73"
+          }
+        }
+      ]
     },
     {
       "description": "N43 a BitSong Music FanToken",
@@ -4842,7 +6667,20 @@
         "source_channel": "channel-0",
         "dst_channel": "channel-73",
         "source_denom": "ft387C1C279D962ED80C09C1D592A92C4275FD7C5D"
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitsong",
+            "base_denom": "ft387C1C279D962ED80C09C1D592A92C4275FD7C5D",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-73"
+          }
+        }
+      ]
     },
     {
       "description": "Puro Lobo a BitSong Music FanToken",
@@ -4870,7 +6708,20 @@
         "source_channel": "channel-0",
         "dst_channel": "channel-73",
         "source_denom": "ft24C9FA4F10B0F235F4A815B15FC774E046A2B2EB"
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitsong",
+            "base_denom": "ft24C9FA4F10B0F235F4A815B15FC774E046A2B2EB",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-73"
+          }
+        }
+      ]
     },
     {
       "description": "Vibranium a BitSong Music FanToken",
@@ -4898,7 +6749,20 @@
         "source_channel": "channel-0",
         "dst_channel": "channel-73",
         "source_denom": "ft7020C2A8E984EEBCBB383E91CD6FBB067BB2272B"
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitsong",
+            "base_denom": "ft7020C2A8E984EEBCBB383E91CD6FBB067BB2272B",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-73"
+          }
+        }
+      ]
     },
     {
       "description": "Karina a BitSong Music FanToken",
@@ -4926,7 +6790,20 @@
         "source_channel": "channel-0",
         "dst_channel": "channel-73",
         "source_denom": "ft2DD67F5D99E9A141142B48474FA7B6B3FF00A3FE"
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitsong",
+            "base_denom": "ft2DD67F5D99E9A141142B48474FA7B6B3FF00A3FE",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-73"
+          }
+        }
+      ]
     },
     {
       "description": "Luca Testa a BitSong Music FanToken",
@@ -4954,7 +6831,20 @@
         "source_channel": "channel-0",
         "dst_channel": "channel-73",
         "source_denom": "ft4B030260D99E3ABE2B604EA2B33BAF3C085CDA12"
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitsong",
+            "base_denom": "ft4B030260D99E3ABE2B604EA2B33BAF3C085CDA12",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-73"
+          }
+        }
+      ]
     },
     {
       "description": "Carolina Marquez a BitSong Music FanToken",
@@ -4982,7 +6872,20 @@
         "source_channel": "channel-0",
         "dst_channel": "channel-73",
         "source_denom": "ftD4B6290EDEE1EC7B97AB5A1DC6C177EFD08ADCC3"
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitsong",
+            "base_denom": "ftD4B6290EDEE1EC7B97AB5A1DC6C177EFD08ADCC3",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-73"
+          }
+        }
+      ]
     },
     {
       "description": "Wrapped Matic on Axelar",
@@ -5012,7 +6915,20 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/wmatic-wei L@3x.png"
       },
-      "coingecko_id": "wmatic"
+      "coingecko_id": "wmatic",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "wmatic-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of BeeZee",
@@ -5049,7 +6965,20 @@
       ],
       "pools": {
         "OSMO": 856
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "beezee",
+            "base_denom": "ubze",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-340"
+          }
+        }
+      ]
     },
     {
       "description": "The stable token of Harbor protocol on Comdex network",
@@ -5057,7 +6986,9 @@
         {
           "denom": "ibc/23CA6C8D1AB2145DD13EB1E089A2E3F960DC298B468CCE034E19E5A78B61136E",
           "exponent": 0,
-          "aliases": ["ucmst"]
+          "aliases": [
+            "ucmst"
+          ]
         },
         {
           "denom": "cmst",
@@ -5082,7 +7013,20 @@
       ],
       "pools": {
         "OSMO": 857
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "comdex",
+            "base_denom": "ucmst",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-87"
+          }
+        }
+      ]
     },
     {
       "description": "The native EVM, governance and staking token of the Imversed",
@@ -5117,7 +7061,20 @@
       ],
       "pools": {
         "USDC.axl": 866
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "imversed",
+            "base_denom": "aimv",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-517"
+          }
+        }
+      ]
     },
     {
       "description": "The native token cw20 for Fanfury on Juno Chain",
@@ -5141,14 +7098,29 @@
       "display": "fury",
       "symbol": "FURY",
       "ibc": {
-        "source_channel": "channel-0",
-        "dst_channel": "channel-73",
+        "source_channel": "channel-47",
+        "dst_channel": "channel-169",
         "source_denom": "cw20:juno1cltgm8v842gu54srmejewghnd6uqa26lzkpa635wzra9m9xuudkqa2gtcz"
       },
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/fanfury.png"
       },
-      "coingecko_id": "fanfury"
+      "coingecko_id": "fanfury",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1cltgm8v842gu54srmejewghnd6uqa26lzkpa635wzra9m9xuudkqa2gtcz",
+            "channel_id": "channel-47",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn"
+          },
+          "chain": {
+            "channel_id": "channel-169",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "Wrapped Matic on Axelar",
@@ -5179,7 +7151,20 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polygon/images/wmatic.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polygon/images/wmatic.svg"
       },
-      "coingecko_id": "wmatic"
+      "coingecko_id": "wmatic",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "wmatic-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     },
     {
       "description": "The native Token of Medas Digital.",
@@ -5214,7 +7199,20 @@
       ],
       "pools": {
         "OSMO": 859
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "medasdigital",
+            "base_denom": "umedas",
+            "channel_id": "channel-519"
+          },
+          "chain": {
+            "channel_id": "channel-0"
+          }
+        }
+      ]
     },
     {
       "description": "The native token cw20 for PHMN on Juno Chain",
@@ -5252,7 +7250,22 @@
       ],
       "pools": {
         "ATOM": 867
-      }
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1rws84uz7969aaa7pej303udhlkt3j9ca0l3egpcae98jwak9quzq8szn2l",
+            "channel_id": "channel-47",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn"
+          },
+          "chain": {
+            "channel_id": "channel-169",
+            "port": "transfer"
+          }
+        }
+      ]
     },
     {
       "description": "Binance USD on Axelar.",
@@ -5282,7 +7295,20 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/busd.png"
       },
-      "coingecko_id": "binance-usd"
+      "coingecko_id": "binance-usd",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "busd-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208"
+          }
+        }
+      ]
     }
   ]
 }

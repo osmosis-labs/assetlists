@@ -3065,7 +3065,8 @@
           "denom": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC",
           "exponent": 0,
           "aliases": [
-            "uust"
+            "uusd",
+            "microusd"
           ]
         },
         {
@@ -3083,7 +3084,7 @@
       "ibc": {
         "source_channel": "channel-1",
         "dst_channel": "channel-72",
-        "source_denom": "uust"
+        "source_denom": "uusd"
       },
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/ust.png"
@@ -3101,7 +3102,7 @@
           "type": "ibc",
           "counterparty": {
             "chain_name": "terra",
-            "base_denom": "uust",
+            "base_denom": "uusd",
             "channel_id": "channel-1"
           },
           "chain": {
@@ -7183,7 +7184,7 @@
       "description": "The native Token of Medas Digital.",
       "denom_units": [
         {
-          "denom": "ibc/01e94a5ff29b8ddefc86f412cc3927f7330e9b523cc63a6194b1108f5276025c",
+          "denom": "ibc/01E94A5FF29B8DDEFC86F412CC3927F7330E9B523CC63A6194B1108F5276025C",
           "exponent": 0,
           "aliases": [
             "umedas"
@@ -7194,13 +7195,13 @@
           "exponent": 6
         }
       ],
-      "base": "ibc/01e94a5ff29b8ddefc86f412cc3927f7330e9b523cc63a6194b1108f5276025c",
+      "base": "ibc/01E94A5FF29B8DDEFC86F412CC3927F7330E9B523CC63A6194B1108F5276025C",
       "name": "MedasDigital",
       "display": "medas",
       "symbol": "MEDAS",
       "ibc": {
-        "source_channel": "channel-519",
-        "dst_channel": "channel-0",
+        "source_channel": "channel-0",
+        "dst_channel": "channel-519",
         "source_denom": "umedas"
       },
       "logo_URIs": {
@@ -7219,10 +7220,10 @@
           "counterparty": {
             "chain_name": "medasdigital",
             "base_denom": "umedas",
-            "channel_id": "channel-519"
+            "channel_id": "channel-0"
           },
           "chain": {
-            "channel_id": "channel-0"
+            "channel_id": "channel-519"
           }
         }
       ]

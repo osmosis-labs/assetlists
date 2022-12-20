@@ -5,7 +5,7 @@ import hashlib
 import re
 
 rootdir = getcwd()
-file = "osmosis-1.assetlist.json"
+file = "osmosis-1/osmosis-1.assetlist.json"
 
 mismatches = []
 

@@ -9,7 +9,7 @@ This standard is a work in progress. You'll notice that the format of `assets` i
 Some keywords here are reserved: 
 - `osmosis-frontier` keyword requires that a pool ID be defined. It is used to keep track of which tokens appear on Osmosis Frontier.
 - `osmosis-main` keyword requires that 'osmosis-frontier' be defined, and also requires either: Osmosis governance to approve that the token be shown on app.osmosis.zone (Main site), or that the token is incentivized by Osmosis--which is also approved by Osmosis governance. It is used to keep track of which tokens appear on Osmosis Main.
-- `osmosis-info` keyword requires that a pool ID be defined and >=$10,000 USD-worth of liquidity of the token on Osmosis. It is used to filter which assets will appear on the Osmosis Info site and queryable by the API.
+- `osmosis-info` keyword requires that a pool ID be defined and that >=$1,000 USD-worth of liquidity of the token be on Osmosis. It is used to filter which assets will appear on the Osmosis Info site and queryable by the API.
 
 
 The assetlist JSON Schema can be found [here](/assetlist.schema.json)

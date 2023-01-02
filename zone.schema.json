@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "title": "Osmosis Zone List",
+  "description": "Osmosis Zone List is a basic list of assets, in order as shown on the Osmosis Zone.",
+  "type": "object",
+  "required": [
+    "chain_name",
+    "assets"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "pattern": "^\\.\\./zone\\.schema\\.json$"
+    },
+    "chain_name": {
+      "type": "string"
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/asset"
+      }
+    }
+  },
+  "additionalPropserties": false,
+  "$defs": {
+    "asset": {
+      "type": "object",
+      "required": [
+        "chain_name",
+        "base_denom"
+      ],
+      "properties": {
+        "chain_name": {
+          "type": "string",
+          "description": "Chain name as used in the Cosmos Chain Registry"
+        },
+        "base_denom": {
+          "type": "string",
+          "description": "Base denomination as used for the asset in the Cosmos Chain Registry"
+        },
+        "pools": {
+          "type": "object",
+          "description": "[OPTIONAL] A list of primary Osmosis liquidity pools paired with various popular tokens.",
+          "properties": {
+            "OSMO": {
+              "type": "number",
+              "description": "The ID number of the primary Osmosis liquidity pool containing this token paired with the OSMO token."
+            },
+            "ATOM": {
+              "type": "number"
+            },
+            "USDC.axl": {
+              "type": "number"
+            },
+            "SCRT": {
+              "type": "number"
+            },
+            "JUNO": {
+              "type": "number"
+            },
+            "STARS": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false,
+          "minProperties": 1
+        },
+        "osmosis_main": {
+          "type": "boolean",
+          "description": "Whether the asset appears on Osmosis Main. The asset should have been approved by Osmosis governance."
+        },
+        "osmosis_frontier": {
+          "type": "boolean",
+          "description": "Whether the asset appears on Osmosis Frontier. The asset should have at least 1 pool defined."
+        },
+        "osmosis_info": {
+          "type": "boolean",
+          "description": "Whether the asset appears on the Osmosis Info site. The asset should have at least $1000 USD worth of liquidity on Osmosis and be listed on Frontier."
+        },
+        "override_properties": {
+          "type": "object",
+          "description": "Properties that should not follow the Chain Registry, and behave or appear differently on Osmosis Zone.",
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "description": "The symbol of an asset. For example BTC."
+            },
+            "logo_URIs": {
+              "type": "object",
+              "properties": {
+                "png": {
+                  "type": "string",
+                  "format": "uri-reference",
+                  "pattern": "^https://raw\\.githubusercontent\\.com/cosmos/chain-registry/master/(|/testnets/|/_non-cosmos/)[a-z0-9]+/images/.+\\.png$"
+                },
+                "svg": {
+                  "type": "string",
+                  "format": "uri-reference",
+                  "pattern": "^https://raw\\.githubusercontent\\.com/cosmos/chain-registry/master/(|/testnets/|/_non-cosmos/)[a-z0-9]+/images/.+\\.svg$"
+                }
+              }
+            },
+            "coingecko_id": {
+              "type": "string",
+              "description": "[OPTIONAL] The coingecko id to fetch asset data from coingecko v3 api. See https://api.coingecko.com/api/v3/coins/list"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false,
+      "if": {
+        "required": [
+          "osmosis_main"
+        ],
+        "properties": {
+          "osmosis_main": {
+            "enum": [
+              true
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "osmosis_frontier"
+        ],
+        "properties": {
+          "osmosis_frontier": {
+            "enum": [
+              true
+            ]
+          }
+        }
+      },
+      "if": {
+        "required": [
+          "osmosis_info"
+        ],
+        "properties": {
+          "osmosis_info": {
+            "enum": [
+              true
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "pools"
+        ]
+      },
+      "if": {
+        "required": [
+          "osmosis_frontier"
+        ],
+        "properties": {
+          "osmosis_frontier": {
+            "enum": [
+              true
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "pools"
+        ]
+      }
+    }
+  }
+}

@@ -6734,6 +6734,52 @@
           }
         }
       ]
+    },
+    {
+      "description": "The native token cw20 for Amber on Secret Network",
+      "type_asset": "snip20",
+      "address": "secret1s09x2xvfd2lp2skgzm29w2xtena7s8fq98v852",
+      "denom_units": [
+        {
+          "denom": "ibc/18A1B70E3205A48DE8590C0D11030E7146CDBF1048789261D53FFFD7527F8B55",
+          "exponent": 0,
+          "aliases": [
+            "cw20:secret1s09x2xvfd2lp2skgzm29w2xtena7s8fq98v852"
+          ]
+        },
+        {
+          "denom": "amber",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/18A1B70E3205A48DE8590C0D11030E7146CDBF1048789261D53FFFD7527F8B55",
+      "name": "Amber",
+      "display": "amber",
+      "symbol": "AMBER",
+      "ibc": {
+        "source_channel": "channel-44",
+        "dst_channel": "channel-476",
+        "source_denom": "cw20:secret1s09x2xvfd2lp2skgzm29w2xtena7s8fq98v852"
+      },
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/amber.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/amber.svg"
+      },
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret1s09x2xvfd2lp2skgzm29w2xtena7s8fq98v852",
+            "channel_id": "channel-44",
+            "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4"
+          },
+          "chain": {
+            "channel_id": "channel-476",
+            "port": "transfer"
+          }
+        }
+      ]
     }
   ]
 }

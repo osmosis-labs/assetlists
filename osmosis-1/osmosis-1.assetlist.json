@@ -6285,6 +6285,53 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/stkatom.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/stkatom.svg"
       }
+    },
+    {
+      "description": "The native token of Onomy Protocol",
+      "denom_units": [
+        {
+          "denom": "ibc/B9606D347599F0F2FDF82BA3EE339000673B7D274EA50F59494DC51EFCD42163",
+          "exponent": 0,
+          "aliases": [
+            "anom"
+          ]
+        },
+        {
+          "denom": "nom",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/B9606D347599F0F2FDF82BA3EE339000673B7D274EA50F59494DC51EFCD42163",
+      "name": "Nom",
+      "display": "nom",
+      "symbol": "NOM",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "onomy",
+            "base_denom": "anom",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-525",
+            "path": "transfer/channel-525/anom"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/onomy/images/nom.png"
+      },
+      "keywords": [
+        "dex",
+        "stablecoin",
+        "bridge",
+        "staking",
+        "osmosis-frontier",
+        "osmosis-info",
+        "OSMO:882",
+        "ATOM:885"
+      ]
     }
   ]
 }

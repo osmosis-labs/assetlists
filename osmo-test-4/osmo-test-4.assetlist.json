@@ -1,0 +1,291 @@
+{
+  "chain_name": "osmosistestnet",
+  "assets": [
+    {
+      "description": "The native token of Osmosis",
+      "denom_units": [
+        {
+          "denom": "uosmo",
+          "exponent": 0,
+          "aliases": []
+        },
+        {
+          "denom": "osmo",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "uosmo",
+      "name": "Osmosis",
+      "display": "osmo",
+      "symbol": "OSMO",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
+      },
+      "coingecko_id": "osmosis",
+      "keywords": [
+        "dex",
+        "staking"
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "uion",
+          "exponent": 0
+        },
+        {
+          "denom": "ion",
+          "exponent": 6
+        }
+      ],
+      "base": "uion",
+      "name": "Ion",
+      "display": "ion",
+      "symbol": "ION",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
+      },
+      "coingecko_id": "ion",
+      "keywords": [
+        "memecoin"
+      ]
+    },
+    {
+      "description": "Circle's stablecoin on Axelar",
+      "denom_units": [
+        {
+          "denom": "ibc/FF3065989E34457F342D4EFB8692406D49D4E2B5C70F725F127862E22CE6BDCD",
+          "exponent": 0,
+          "aliases": [
+            "uausdc"
+          ]
+        },
+        {
+          "denom": "ausdc",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/FF3065989E34457F342D4EFB8692406D49D4E2B5C70F725F127862E22CE6BDCD",
+      "name": "USD Coin",
+      "display": "ausdc",
+      "symbol": "aUSDC",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereumtestnet",
+            "base_denom": "0x254d06f33bDc5b8ee05b2ea472107E300226659A"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelartestnet",
+            "base_denom": "uausdc",
+            "channel_id": "channel-135"
+          },
+          "chain": {
+            "channel_id": "channel-1946",
+            "path": "transfer/channel-1946/uausdc"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.svg"
+      },
+      "coingecko_id": "usd-coin"
+    },
+    {
+      "description": "Wrapped Ether on Axelar",
+      "denom_units": [
+        {
+          "denom": "ibc/0BE7C3DAC50BB1C34565C76F01944DCC79B50CF359B63149B9E04E2A6736A6E6",
+          "exponent": 0,
+          "aliases": [
+            "weth-wei"
+          ]
+        },
+        {
+          "denom": "weth",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/0BE7C3DAC50BB1C34565C76F01944DCC79B50CF359B63149B9E04E2A6736A6E6",
+      "name": "Wrapped Ether",
+      "display": "weth",
+      "symbol": "WETH",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereumtestnet",
+            "base_denom": "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelartestnet",
+            "base_denom": "weth-wei",
+            "channel_id": "channel-135"
+          },
+          "chain": {
+            "channel_id": "channel-1946",
+            "path": "transfer/channel-1946/weth-wei"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/weth.png"
+      },
+      "coingecko_id": "weth"
+    },
+    {
+      "description": "Wrapped BNB on Axelar",
+      "denom_units": [
+        {
+          "denom": "ibc/D38FD4C586C397DDAAB715C654DAEE3C3C40462CD410254AC7576208E947605B",
+          "exponent": 0,
+          "aliases": [
+            "wbnb-wei"
+          ]
+        },
+        {
+          "denom": "wbnb",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/D38FD4C586C397DDAAB715C654DAEE3C3C40462CD410254AC7576208E947605B",
+      "name": "Wrapped BNB",
+      "display": "wbnb",
+      "symbol": "WBNB",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "binancesmartchaintestnet",
+            "base_denom": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelartestnet",
+            "base_denom": "wbnb-wei",
+            "channel_id": "channel-135"
+          },
+          "chain": {
+            "channel_id": "channel-1946",
+            "path": "transfer/channel-1946/wbnb-wei"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/wbnb.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/wbnb.svg"
+      },
+      "coingecko_id": "wbnb"
+    },
+    {
+      "description": "Wrapped Matic on Axelar",
+      "denom_units": [
+        {
+          "denom": "ibc/16F3EB18413FD15154B02F9929473A3C0A23902BF8044157E9E5E0FBEB24FCEE",
+          "exponent": 0,
+          "aliases": [
+            "wmatic-wei"
+          ]
+        },
+        {
+          "denom": "wmatic",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/16F3EB18413FD15154B02F9929473A3C0A23902BF8044157E9E5E0FBEB24FCEE",
+      "name": "Wrapped Matic",
+      "display": "wmatic",
+      "symbol": "WMATIC",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "polygontestnet",
+            "base_denom": "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelartestnet",
+            "base_denom": "wmatic-wei",
+            "channel_id": "channel-135"
+          },
+          "chain": {
+            "channel_id": "channel-1946",
+            "path": "transfer/channel-1946/wmatic-wei"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polygon/images/wmatic.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polygon/images/wmatic.svg"
+      },
+      "coingecko_id": "matic-network"
+    },
+    {
+      "description": "Wrapped Moonbeam on Axelar",
+      "denom_units": [
+        {
+          "denom": "ibc/3A8B6E50B8050FC8CD704CD48C7922EA221B5FDA672517E243DDFF603FF896ED",
+          "exponent": 0,
+          "aliases": [
+            "wglmr-wei"
+          ]
+        },
+        {
+          "denom": "wglmr",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/3A8B6E50B8050FC8CD704CD48C7922EA221B5FDA672517E243DDFF603FF896ED",
+      "name": "Wrapped Moonbeam",
+      "display": "wglmr",
+      "symbol": "WGLMR",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "moonbeamtestnet",
+            "base_denom": "0x1436aE0dF0A8663F18c0Ec51d7e2E46591730715"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelartestnet",
+            "base_denom": "wglmr-wei",
+            "channel_id": "channel-135"
+          },
+          "chain": {
+            "channel_id": "channel-1946",
+            "path": "transfer/channel-1946/wglmr-wei"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/moonbeam/images/glmr.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/moonbeam/images/glmr.svg"
+      },
+      "coingecko_id": "wrapped-moonbeam"
+    }
+  ]
+}

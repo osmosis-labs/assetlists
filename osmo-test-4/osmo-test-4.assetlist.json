@@ -286,6 +286,43 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/moonbeam/images/glmr.svg"
       },
       "coingecko_id": "wrapped-moonbeam"
+    },
+    {
+      "description": "The native token of Mars Protocol",
+      "denom_units": [
+        {
+          "denom": "ibc/ACA4C8A815A053CC027DB90D15915ADA31939FA331CE745862CDD00A2904FA17",
+          "exponent": 0,
+          "aliases": [
+            "umars"
+          ]
+        },
+        {
+          "denom": "mars",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/ACA4C8A815A053CC027DB90D15915ADA31939FA331CE745862CDD00A2904FA17",
+      "name": "Mars",
+      "display": "mars",
+      "symbol": "MARS",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "marstestnet",
+            "base_denom": "umars",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-2083",
+            "path": "transfer/channel-2083/umars"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/marstestnet/images/mars.svg"
+      }
     }
   ]
 }

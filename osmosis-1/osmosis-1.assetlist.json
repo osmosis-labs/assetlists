@@ -218,6 +218,58 @@
       ]
     },
     {
+      "description": "Tether's USD stablecoin on Axelar",
+      "denom_units": [
+        {
+          "denom": "ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4",
+          "exponent": 0,
+          "aliases": [
+            "uusdt"
+          ]
+        },
+        {
+          "denom": "usdt",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4",
+      "name": "Tether USD",
+      "display": "usdt",
+      "symbol": "USDT",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "uusdt",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208",
+            "path": "transfer/channel-208/uusdt"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdt.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdt.svg"
+      },
+      "coingecko_id": "tether",
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "USDC.axl:877"
+      ]
+    },
+    {
       "description": "Dai stablecoin on Axelar",
       "denom_units": [
         {
@@ -517,6 +569,61 @@
       ]
     },
     {
+      "description": "The native staking token of Terra Classic.",
+      "denom_units": [
+        {
+          "denom": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
+          "exponent": 0,
+          "aliases": [
+            "microluna",
+            "uluna"
+          ]
+        },
+        {
+          "denom": "mluna",
+          "exponent": 3,
+          "aliases": [
+            "milliluna"
+          ]
+        },
+        {
+          "denom": "luna",
+          "exponent": 6,
+          "aliases": [
+            "lunc"
+          ]
+        }
+      ],
+      "base": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
+      "name": "Luna Classic",
+      "display": "luna",
+      "symbol": "LUNC",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "terra",
+            "base_denom": "uluna",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-72",
+            "path": "transfer/channel-72/uluna"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/luna.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/luna.svg"
+      },
+      "coingecko_id": "terra-luna",
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "OSMO:800"
+      ]
+    },
+    {
       "description": "The native token of JUNO Chain",
       "denom_units": [
         {
@@ -746,61 +853,6 @@
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:584"
-      ]
-    },
-    {
-      "description": "The native staking token of Terra Classic.",
-      "denom_units": [
-        {
-          "denom": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
-          "exponent": 0,
-          "aliases": [
-            "microluna",
-            "uluna"
-          ]
-        },
-        {
-          "denom": "mluna",
-          "exponent": 3,
-          "aliases": [
-            "milliluna"
-          ]
-        },
-        {
-          "denom": "luna",
-          "exponent": 6,
-          "aliases": [
-            "lunc"
-          ]
-        }
-      ],
-      "base": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
-      "name": "Luna Classic",
-      "display": "luna",
-      "symbol": "LUNC",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "terra",
-            "base_denom": "uluna",
-            "channel_id": "channel-1"
-          },
-          "chain": {
-            "channel_id": "channel-72",
-            "path": "transfer/channel-72/uluna"
-          }
-        }
-      ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/luna.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/luna.svg"
-      },
-      "coingecko_id": "terra-luna",
-      "keywords": [
-        "osmosis-frontier",
-        "osmosis-info",
-        "OSMO:800"
       ]
     },
     {
@@ -2816,58 +2868,6 @@
       "keywords": [
         "osmosis-frontier",
         "OSMO:669"
-      ]
-    },
-    {
-      "description": "Tether's USD stablecoin on Axelar",
-      "denom_units": [
-        {
-          "denom": "ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4",
-          "exponent": 0,
-          "aliases": [
-            "uusdt"
-          ]
-        },
-        {
-          "denom": "usdt",
-          "exponent": 6
-        }
-      ],
-      "base": "ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4",
-      "name": "Tether USD",
-      "display": "usdt",
-      "symbol": "USDT",
-      "traces": [
-        {
-          "type": "bridge",
-          "counterparty": {
-            "chain_name": "ethereum",
-            "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7"
-          },
-          "provider": "Axelar"
-        },
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "axelar",
-            "base_denom": "uusdt",
-            "channel_id": "channel-3"
-          },
-          "chain": {
-            "channel_id": "channel-208",
-            "path": "transfer/channel-208/uusdt"
-          }
-        }
-      ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdt.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdt.svg"
-      },
-      "coingecko_id": "tether",
-      "keywords": [
-        "osmosis-frontier",
-        "osmosis-info",
-        "USDC.axl:877"
       ]
     },
     {
@@ -5083,6 +5083,14 @@
       "symbol": "stATOM",
       "traces": [
         {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "cosmoshub",
+            "base_denom": "uatom"
+          },
+          "provider": "Stride"
+        },
+        {
           "type": "ibc",
           "counterparty": {
             "chain_name": "stride",
@@ -5126,6 +5134,14 @@
       "display": "ststars",
       "symbol": "stSTARS",
       "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "stargaze",
+            "base_denom": "ustars"
+          },
+          "provider": "Stride"
+        },
         {
           "type": "ibc",
           "counterparty": {
@@ -5390,6 +5406,14 @@
       "symbol": "stJUNO",
       "traces": [
         {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "ujuno"
+          },
+          "provider": "Stride"
+        },
+        {
           "type": "ibc",
           "counterparty": {
             "chain_name": "stride",
@@ -5431,6 +5455,14 @@
       "display": "stosmo",
       "symbol": "stOSMO",
       "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "osmosis",
+            "base_denom": "uosmo"
+          },
+          "provider": "Stride"
+        },
         {
           "type": "ibc",
           "counterparty": {
@@ -6063,6 +6095,7 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/comdex/images/cmst.png"
       },
+      "coingecko_id": "composite",
       "keywords": [
         "osmosis-frontier",
         "OSMO:857"
@@ -6368,12 +6401,58 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dyson/images/dys.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dyson/images/dys.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dyson/images/dys.svg"
       },
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:883"
+      ]
+    },
+    {
+      "description": "The native token cw20 for Hopers on Juno Chain",
+      "denom_units": [
+        {
+          "denom": "ibc/D3ADAF73F84CDF205BCB72C142FDAEEA2C612AB853CEE6D6C06F184FA38B1099",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno1u45shlp0q4gcckvsj06ss4xuvsu0z24a0d0vr9ce6r24pht4e5xq7q995n"
+          ]
+        },
+        {
+          "denom": "hopers",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "cw20",
+      "address": "juno1u45shlp0q4gcckvsj06ss4xuvsu0z24a0d0vr9ce6r24pht4e5xq7q995n",
+      "base": "ibc/D3ADAF73F84CDF205BCB72C142FDAEEA2C612AB853CEE6D6C06F184FA38B1099",
+      "name": "HOPERS",
+      "display": "HOPERS",
+      "symbol": "hopers",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1u45shlp0q4gcckvsj06ss4xuvsu0z24a0d0vr9ce6r24pht4e5xq7q995n",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
+            "channel_id": "channel-47"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-169",
+            "path": "transfer/channel-169/cw20:juno1u45shlp0q4gcckvsj06ss4xuvsu0z24a0d0vr9ce6r24pht4e5xq7q995n"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/hopers.png"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "OSMO:894"
       ]
     }
   ]

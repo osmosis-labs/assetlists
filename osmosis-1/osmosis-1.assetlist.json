@@ -6454,6 +6454,49 @@
         "osmosis-frontier",
         "OSMO:894"
       ]
+    },
+    {
+      "description": "The native staking and governance token of the Planq Network",
+      "denom_units": [
+        {
+          "denom": "ibc/B1E0166EA0D759FDF4B207D1F5F12210D8BFE36F2345CEFC76948CE2B36DFBAF",
+          "exponent": 0,
+          "aliases": [
+            "aplanq"
+          ]
+        },
+        {
+          "denom": "planq",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/B1E0166EA0D759FDF4B207D1F5F12210D8BFE36F2345CEFC76948CE2B36DFBAF",
+      "name": "Planq",
+      "display": "planq",
+      "symbol": "PLQ",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "planq",
+            "base_denom": "aplanq",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-492",
+            "path": "transfer/channel-492/aplanq"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/planq/images/planq.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/planq/images/planq.svg"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "OSMO:898"
+      ]
     }
   ]
 }

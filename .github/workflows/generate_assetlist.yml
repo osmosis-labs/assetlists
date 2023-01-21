@@ -1,0 +1,56 @@
+on:
+  workflow_dispatch:
+    branches:
+      - main
+name: Generate Assetlist
+jobs:
+  generate_assetlist:
+    name: Generate Assetlist
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        shell: bash
+    
+    steps:
+    
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+          
+      - name: Git Sumbodule Update
+        run: |
+          git pull --recurse-submodules
+          
+      - name: Install Node
+        run: |
+          nvm install v19.4.0
+          
+      - name: Run code to Generate Assetlist
+        run: |
+          node generate_assetlist.mjs
+      
+      - name: Add Commit Push
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
+          add_timestamp: false
+          commit_prefix: "[AUTO]"
+          commit_message: "assetlist.json Update"
+          force: false
+          target_branch: update/assetlist
+      
+      - name: Create A PR
+        uses: devops-infra/action-pull-request@v0.4.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_branch: update/assetlist
+          target_branch: main
+          title: assetlist.json Update
+          body: "**Automated pull request**"
+          old_string: "**THIS IS AN AUTOMATED UPDATE OF ASSETLIST.JSON**"
+          new_string: "** Automatic pull request**"
+          get_diff: true
+          ignore_users: "dependabot"

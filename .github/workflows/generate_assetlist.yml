@@ -24,13 +24,11 @@ jobs:
         run: |
           git pull --recurse-submodules
           
-      - name: Install Node
-        run: |
-          nvm install v19.4.0
-          
       - name: Run code to Generate Assetlist
-        run: |
-          node generate_assetlist.mjs
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: node generate_assetlist.mjs
       
       - name: Add Commit Push
         uses: devops-infra/action-commit-push@master

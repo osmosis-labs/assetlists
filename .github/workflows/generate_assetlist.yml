@@ -21,11 +21,14 @@ jobs:
         run: |
           git pull --recurse-submodules
           
-      - name: Run code to Generate Assetlist
+      - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: node generate_assetlist.mjs
+          
+      - name: Run code to Generate Assetlist
+        working-directory: ./.github/workflows/utility
+        run: node generate_assetlist.mjs
       
       - name: Add Commit Push
         uses: devops-infra/action-commit-push@master

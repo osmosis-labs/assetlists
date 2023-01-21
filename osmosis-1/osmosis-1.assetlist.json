@@ -131,7 +131,7 @@
       "base": "ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5",
       "name": "Wrapped Ether",
       "display": "weth",
-      "symbol": "WETH",
+      "symbol": "wETH",
       "traces": [
         {
           "type": "bridge",
@@ -155,7 +155,7 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/weth.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eth-white.png"
       },
       "coingecko_id": "weth",
       "keywords": [
@@ -480,7 +480,7 @@
       "base": "ibc/F4A070A6D78496D53127EA85C094A9EC87DFC1F36071B8CCDDBD020F933D213D",
       "name": "Wrapped BNB",
       "display": "wbnb",
-      "symbol": "WBNB",
+      "symbol": "wBNB",
       "traces": [
         {
           "type": "bridge",
@@ -533,7 +533,7 @@
       "base": "ibc/AB589511ED0DD5FA56171A39978AFBF1371DB986EC1C3526CE138A16377E39BB",
       "name": "Wrapped Matic",
       "display": "wmatic",
-      "symbol": "WMATIC",
+      "symbol": "wMATIC",
       "traces": [
         {
           "type": "bridge",
@@ -557,8 +557,7 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polygon/images/wmatic.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polygon/images/wmatic.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polygon/images/matic-purple.png"
       },
       "coingecko_id": "matic-network",
       "keywords": [
@@ -567,6 +566,51 @@
         "osmosis-info",
         "OSMO:789"
       ]
+    },
+    {
+      "description": "Wrapped AVAX on Axelar.",
+      "denom_units": [
+        {
+          "denom": "ibc/6F62F01D913E3FFE472A38C78235B8F021B511BC6596ADFF02615C8F83D3B373",
+          "exponent": 0,
+          "aliases": [
+            "wavax-wei"
+          ]
+        },
+        {
+          "denom": "avax",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/6F62F01D913E3FFE472A38C78235B8F021B511BC6596ADFF02615C8F83D3B373",
+      "name": "Wrapped AVAX",
+      "display": "avax",
+      "symbol": "wAVAX",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "avalanche",
+            "base_denom": "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "wavax-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208",
+            "path": "transfer/channel-208/wavax-wei"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/avalanche/images/avax.png"
+      }
     },
     {
       "description": "The native staking token of Terra Classic.",
@@ -4510,7 +4554,7 @@
       "base": "ibc/1E26DB0E5122AED464D98462BD384FCCB595732A66B3970AE6CE0B58BAE0FC49",
       "name": "Wrapped Moonbeam",
       "display": "wglmr",
-      "symbol": "WGLMR",
+      "symbol": "wGLMR",
       "traces": [
         {
           "type": "bridge",
@@ -6456,7 +6500,50 @@
       ]
     },
     {
-      "description": "The native staking and governance token of the Planq Network",
+      "description": "Overcollateralized stable coin for Arable derivatives v1",
+      "denom_units": [
+        {
+          "denom": "ibc/5D270A584B1078FBE07D14570ED5E88EC1FEDA8518B76C322606291E6FD8286F",
+          "exponent": 0,
+          "aliases": [
+            "erc20/0x2Cbea61fdfDFA520Ee99700F104D5b75ADf50B0c"
+          ]
+        },
+        {
+          "denom": "arusd",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/5D270A584B1078FBE07D14570ED5E88EC1FEDA8518B76C322606291E6FD8286F",
+      "name": "Arable USD",
+      "display": "arusd",
+      "symbol": "arUSD",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "acrechain",
+            "base_denom": "erc20/0x2Cbea61fdfDFA520Ee99700F104D5b75ADf50B0c",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-490",
+            "path": "transfer/channel-490/erc20/0x2Cbea61fdfDFA520Ee99700F104D5b75ADf50B0c"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/acrechain/images/arusd.png"
+      },
+      "coingecko_id": "arable-usd",
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "OSMO:895"
+      ]
+    },
+    {
+      "description": "The native EVM, governance and staking token of the Planq Network",
       "denom_units": [
         {
           "denom": "ibc/B1E0166EA0D759FDF4B207D1F5F12210D8BFE36F2345CEFC76948CE2B36DFBAF",

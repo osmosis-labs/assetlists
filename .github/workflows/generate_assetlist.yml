@@ -22,7 +22,7 @@ jobs:
           git pull --recurse-submodules
           
       - name: Run code to Generate Assetlist
-      - uses: actions/setup-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 16
       - run: node generate_assetlist.mjs

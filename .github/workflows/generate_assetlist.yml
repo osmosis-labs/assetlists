@@ -19,7 +19,8 @@ jobs:
           
       - name: Git Sumbodule Update
         run: |
-          git pull --recurse-submodules
+          cd chain-registry/
+          git pull
           
       - name: Setup Node
         uses: actions/setup-node@v3

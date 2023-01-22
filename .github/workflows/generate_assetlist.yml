@@ -20,7 +20,7 @@ jobs:
       - name: Git Sumbodule Update
         run: |
           git submodule update --init --recursive
-          git pull --recurse-submodules
+          git submodule update --recursive --remote
           
       - name: Setup Node
         uses: actions/setup-node@v3

@@ -6584,6 +6584,48 @@
         "osmosis-info",
         "OSMO:898"
       ]
+    },
+    {
+      "description": "Canto is a Layer-1 blockchain built to deliver on the promise of DeFi",
+      "denom_units": [
+        {
+          "denom": "ibc/47CAF2DB8C016FAC960F33BC492FD8E454593B65CC59D70FA9D9F30424F9C32F",
+          "exponent": 0,
+          "aliases": [
+            "acanto"
+          ]
+        },
+        {
+          "denom": "canto",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/47CAF2DB8C016FAC960F33BC492FD8E454593B65CC59D70FA9D9F30424F9C32F",
+      "name": "Canto",
+      "display": "canto",
+      "symbol": "CANTO",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "canto",
+            "base_denom": "acanto",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-550",
+            "path": "transfer/channel-550/acanto"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/canto/images/canto.png"
+      },
+      "coingecko_id": "canto",
+      "keywords": [
+        "osmosis-frontier",
+        "OSMO:901"
+      ]
     }
   ]
 }

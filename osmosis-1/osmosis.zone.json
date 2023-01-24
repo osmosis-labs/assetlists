@@ -156,9 +156,12 @@
     {
       "chain_name": "axelar",
       "base_denom": "wavax-wei",
+      "pools": {
+        "OSMO": 899
+      },
       "osmosis_main": false,
-      "osmosis_frontier": false,
-      "osmosis_info": false,
+      "osmosis_frontier": true,
+      "osmosis_info": true,
       "override_properties": {
         "symbol": "wAVAX",
         "logo_URIs": {
@@ -1409,6 +1412,19 @@
       "osmosis_main": false,
       "osmosis_frontier": true,
       "osmosis_info": false
+    },
+    {
+      "chain_name": "axelartestnet",
+      "base_denom": "wftm-wei",
+      "pools": {
+        "OSMO": 900
+      },
+      "osmosis_main": false,
+      "osmosis_frontier": true,
+      "osmosis_info": true,
+      "override_properties": {
+        "symbol": "wFTM"
+      }
     }
   ]
 }

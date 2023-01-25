@@ -367,6 +367,51 @@
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/marstestnet/images/mars.svg"
       }
+    },
+    {
+      "description": "Wrapped FTM on Axelar.",
+      "denom_units": [
+        {
+          "denom": "ibc/F9E624EB89ABEE4CB1EC04D7941F613BD8383EE7DE323589A82066D0345EF6EB",
+          "exponent": 0,
+          "aliases": [
+            "wftm-wei"
+          ]
+        },
+        {
+          "denom": "ftm",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/F9E624EB89ABEE4CB1EC04D7941F613BD8383EE7DE323589A82066D0345EF6EB",
+      "name": "Wrapped FTM",
+      "display": "ftm",
+      "symbol": "wFTM",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "fantomtestnet",
+            "base_denom": "0x812666209b90344Ec8e528375298ab9045c2Bd08"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelartestnet",
+            "base_denom": "wftm-wei",
+            "channel_id": "channel-135"
+          },
+          "chain": {
+            "channel_id": "channel-1946",
+            "path": "transfer/channel-1946/wftm-wei"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/fantom/images/ftm.png"
+      }
     }
   ]
 }

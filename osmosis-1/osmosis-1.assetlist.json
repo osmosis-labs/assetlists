@@ -6681,6 +6681,48 @@
         "osmosis-frontier",
         "OSMO:901"
       ]
+    },
+    {
+      "description": "Quicksilver Liquid Staked STARS",
+      "denom_units": [
+        {
+          "denom": "ibc/46C83BB054E12E189882B5284542DB605D94C99827E367C9192CF0579CD5BC83",
+          "exponent": 0,
+          "aliases": [
+            "uqstars"
+          ]
+        },
+        {
+          "denom": "qstars",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/46C83BB054E12E189882B5284542DB605D94C99827E367C9192CF0579CD5BC83",
+      "name": "Quicksilver Liquid Staked STARS",
+      "display": "qstars",
+      "symbol": "qSTARS",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "quicksilver",
+            "base_denom": "uqstars",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-522",
+            "path": "transfer/channel-522/uqstars"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qstars.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qstars.svg"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info"
+      ]
     }
   ]
 }

@@ -6733,6 +6733,54 @@
         "osmosis-frontier",
         "STARS:903"
       ]
+    },
+    {
+      "description": "WYND DAO Governance Token",
+      "denom_units": [
+        {
+          "denom": "ibc/2FBAC4BF296D7844796844B35978E5899984BA5A6314B2DD8F83C215550010B3",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno1mkw83sv6c7sjdvsaplrzc8yaes9l42p4mhy0ssuxjnyzl87c9eps7ce3m9"
+          ]
+        },
+        {
+          "denom": "wynd",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "cw20",
+      "address": "juno1mkw83sv6c7sjdvsaplrzc8yaes9l42p4mhy0ssuxjnyzl87c9eps7ce3m9",
+      "base": "ibc/2FBAC4BF296D7844796844B35978E5899984BA5A6314B2DD8F83C215550010B3",
+      "name": "Wynd DAO Governance Token",
+      "display": "wynd",
+      "symbol": "WYND",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1mkw83sv6c7sjdvsaplrzc8yaes9l42p4mhy0ssuxjnyzl87c9eps7ce3m9",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
+            "channel_id": "channel-47"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-169",
+            "path": "transfer/channel-169/cw20:juno1mkw83sv6c7sjdvsaplrzc8yaes9l42p4mhy0ssuxjnyzl87c9eps7ce3m9"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/wynd.svg"
+      },
+      "coingecko_id": "wynd",
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "OSMO:902"
+      ]
     }
+
   ]
 }

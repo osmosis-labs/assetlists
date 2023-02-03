@@ -6780,6 +6780,49 @@
         "osmosis-frontier",
         "OSMO:902"
       ]
+    },
+    {
+      "description": "Mars protocol token",
+      "denom_units": [
+        {
+          "denom": "ibc/573FCD90FACEE750F55A8864EF7D38265F07E5A9273FA0E8DAFD39951332B580",
+          "exponent": 0,
+          "aliases": [
+            "umars"
+          ]
+        },
+        {
+          "denom": "mars",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/573FCD90FACEE750F55A8864EF7D38265F07E5A9273FA0E8DAFD39951332B580",
+      "name": "Mars",
+      "display": "mars",
+      "symbol": "MARS",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "mars",
+            "base_denom": "umars",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-557",
+            "path": "transfer/channel-557/umars"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.svg"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "OSMO:907"
+      ]
     }
   ]
 }

@@ -131,7 +131,7 @@
       "base": "ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5",
       "name": "Wrapped Ether",
       "display": "weth",
-      "symbol": "wETH",
+      "symbol": "ETH",
       "traces": [
         {
           "type": "bridge",
@@ -480,7 +480,7 @@
       "base": "ibc/F4A070A6D78496D53127EA85C094A9EC87DFC1F36071B8CCDDBD020F933D213D",
       "name": "Wrapped BNB",
       "display": "wbnb",
-      "symbol": "wBNB",
+      "symbol": "BNB",
       "traces": [
         {
           "type": "bridge",
@@ -533,7 +533,7 @@
       "base": "ibc/AB589511ED0DD5FA56171A39978AFBF1371DB986EC1C3526CE138A16377E39BB",
       "name": "Wrapped Matic",
       "display": "wmatic",
-      "symbol": "wMATIC",
+      "symbol": "MATIC",
       "traces": [
         {
           "type": "bridge",
@@ -585,7 +585,7 @@
       "base": "ibc/6F62F01D913E3FFE472A38C78235B8F021B511BC6596ADFF02615C8F83D3B373",
       "name": "Wrapped AVAX",
       "display": "avax",
-      "symbol": "wAVAX",
+      "symbol": "AVAX",
       "traces": [
         {
           "type": "bridge",
@@ -612,6 +612,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/avalanche/images/avax.png"
       },
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:899"
@@ -1562,6 +1563,7 @@
       },
       "coingecko_id": "ixo",
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:557"
@@ -2379,7 +2381,7 @@
       ]
     },
     {
-      "description": "The native token of Carbon",
+      "description": "The native governance token of Carbon",
       "denom_units": [
         {
           "denom": "ibc/8FEFAE6AECF6E2A255585617F781F35A8D5709A545A804482A261C0C9548A9D3",
@@ -3506,6 +3508,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/meme/images/meme.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/meme/images/meme.svg"
       },
+      "coingecko_id": "meme-network",
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
@@ -4559,7 +4562,7 @@
       "base": "ibc/1E26DB0E5122AED464D98462BD384FCCB595732A66B3970AE6CE0B58BAE0FC49",
       "name": "Wrapped Moonbeam",
       "display": "wglmr",
-      "symbol": "wGLMR",
+      "symbol": "GLMR",
       "traces": [
         {
           "type": "bridge",
@@ -4804,7 +4807,12 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-white.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-white.svg"
       },
-      "coingecko_id": "oraichain-token"
+      "coingecko_id": "oraichain-token",
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "OSMO:799"
+      ]
     },
     {
       "description": "The native token of the Cudos blockchain",
@@ -5385,6 +5393,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/rebus/images/rebus.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/rebus/images/rebus.svg"
       },
+      "coingecko_id": "rebus",
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
@@ -6142,7 +6151,8 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/comdex/images/cmst.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/comdex/images/cmst.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/comdex/images/cmst.svg"
       },
       "coingecko_id": "composite",
       "keywords": [
@@ -6415,6 +6425,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/stkatom.svg"
       },
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
         "ATOM:886"
@@ -6610,7 +6621,7 @@
       "base": "ibc/5E2DFDF1734137302129EA1C1BA21A580F96F778D4F021815EA4F6DB378DA1A4",
       "name": "Wrapped FTM",
       "display": "ftm",
-      "symbol": "wFTM",
+      "symbol": "FTM",
       "traces": [
         {
           "type": "bridge",
@@ -6777,9 +6788,103 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/wynd.svg"
       },
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
+        "osmosis-info",
         "OSMO:902"
       ]
+    },
+    {
+      "description": "Circle's stablecoin from Polygon on Axelar",
+      "denom_units": [
+        {
+          "denom": "ibc/231FD77ECCB2DB916D314019DA30FE013202833386B1908A191D16989AD80B5A",
+          "exponent": 0,
+          "aliases": [
+            "polygon-uusdc"
+          ]
+        },
+        {
+          "denom": "polygon-usdc",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/231FD77ECCB2DB916D314019DA30FE013202833386B1908A191D16989AD80B5A",
+      "name": "USD Coin from Polygon",
+      "display": "polygon-usdc",
+      "symbol": "polygon.USDC",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "polygon",
+            "base_denom": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "polygon-uusdc",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208",
+            "path": "transfer/channel-208/polygon-uusdc"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.svg"
+      }
+    },
+    {
+      "description": "Circle's stablecoin from Avalanche on Axelar",
+      "denom_units": [
+        {
+          "denom": "ibc/F17C9CA112815613C5B6771047A093054F837C3020CBA59DFFD9D780A8B2984C",
+          "exponent": 0,
+          "aliases": [
+            "avalanche-uusdc"
+          ]
+        },
+        {
+          "denom": "avalanche-usdc",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/F17C9CA112815613C5B6771047A093054F837C3020CBA59DFFD9D780A8B2984C",
+      "name": "USD Coin from Avalanche",
+      "display": "avalanche-usdc",
+      "symbol": "avalanche.USDC",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "avalanche",
+            "base_denom": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "avalanche-uusdc",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208",
+            "path": "transfer/channel-208/avalanche-uusdc"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.svg"
+      }
     },
     {
       "description": "Mars protocol token",
@@ -6818,11 +6923,241 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.svg"
       },
+      "coingecko_id": "mars-protocol",
       "keywords": [
         "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:907"
+      ]
+    },
+    {
+      "description": "Ciento Exchange Token",
+      "denom_units": [
+        {
+          "denom": "ibc/D38BB3DD46864694F009AF01DA5A815B3A875F8CC52FF5679BFFCC35DC7451D5",
+          "exponent": 0,
+          "aliases": [
+            "erc20/0xAE6D3334989a22A65228732446731438672418F2"
+          ]
+        },
+        {
+          "denom": "cnto",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/D38BB3DD46864694F009AF01DA5A815B3A875F8CC52FF5679BFFCC35DC7451D5",
+      "name": "Ciento Token",
+      "display": "cnto",
+      "symbol": "CNTO",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "acrechain",
+            "base_denom": "erc20/0xAE6D3334989a22A65228732446731438672418F2",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-490",
+            "path": "transfer/channel-490/erc20/0xAE6D3334989a22A65228732446731438672418F2"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/acrechain/images/cnto.png"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "USDC.axl:909"
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/C491E7582E94AE921F6A029790083CDE1106C28F3F6C4AD7F1340544C13EC372",
+          "exponent": 0,
+          "aliases": [
+            "stuluna"
+          ]
+        },
+        {
+          "denom": "stluna",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/C491E7582E94AE921F6A029790083CDE1106C28F3F6C4AD7F1340544C13EC372",
+      "name": "stLUNA",
+      "display": "stluna",
+      "symbol": "stLUNA",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "terra2",
+            "base_denom": "uluna"
+          },
+          "provider": "Stride"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stuluna",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326",
+            "path": "transfer/channel-326/stuluna"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stluna.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stluna.svg"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "LUNA:913"
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/C5579A9595790017C600DD726276D978B9BF314CF82406CE342720A9C7911A01",
+          "exponent": 0,
+          "aliases": [
+            "staevmos"
+          ]
+        },
+        {
+          "denom": "stevmos",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/C5579A9595790017C600DD726276D978B9BF314CF82406CE342720A9C7911A01",
+      "name": "stEVMOS",
+      "display": "stevmos",
+      "symbol": "stEVMOS",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "evmos",
+            "base_denom": "uaevmos"
+          },
+          "provider": "Stride"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "staevmos",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326",
+            "path": "transfer/channel-326/staevmos"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stevmos.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stevmos.svg"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "EVMOS:922"
+      ]
+    },
+    {
+      "description": "Astroport is a neutral marketplace where anyone, from anywhere in the galaxy, can dock to trade their wares.",
+      "denom_units": [
+        {
+          "denom": "ibc/8410580A4F5421DFDBD888212624591E92A9E3B5C87D3C58913CE16ABD98B9B4",
+          "exponent": 0,
+          "aliases": [
+            "cw20:terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26"
+          ]
+        },
+        {
+          "denom": "astro",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "cw20",
+      "address": "terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26",
+      "base": "ibc/8410580A4F5421DFDBD888212624591E92A9E3B5C87D3C58913CE16ABD98B9B4",
+      "name": "Astroport",
+      "display": "astro",
+      "symbol": "ASTRO",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "terra2",
+            "base_denom": "cw20:terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26",
+            "port": "wasm.terra1d90p5lacfxnqgjxjupu234lxnxyeu8fdeef4d0e0nqy3p30r7gss4myn9x",
+            "channel_id": "channel-85"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-559",
+            "path": "transfer/channel-559/cw20:terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/astro.png"
+      },
+      "coingecko_id": "astroport-fi"
+    },
+    {
+      "description": "nRide Token",
+      "denom_units": [
+        {
+          "denom": "ibc/E750D31033DC1CF4A044C3AA0A8117401316DC918FBEBC4E3D34F91B09D5F54C",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno1qmlchtmjpvu0cr7u0tad2pq8838h6farrrjzp39eqa9xswg7teussrswlq"
+          ]
+        },
+        {
+          "denom": "nride",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "cw20",
+      "address": "juno1qmlchtmjpvu0cr7u0tad2pq8838h6farrrjzp39eqa9xswg7teussrswlq",
+      "base": "ibc/E750D31033DC1CF4A044C3AA0A8117401316DC918FBEBC4E3D34F91B09D5F54C",
+      "name": "nRide Token",
+      "display": "nride",
+      "symbol": "NRIDE",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1qmlchtmjpvu0cr7u0tad2pq8838h6farrrjzp39eqa9xswg7teussrswlq",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
+            "channel_id": "channel-47"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-169",
+            "path": "transfer/channel-169/cw20:juno1qmlchtmjpvu0cr7u0tad2pq8838h6farrrjzp39eqa9xswg7teussrswlq"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/nride.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/nride.svg"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "OSMO:924"
       ]
     }
   ]

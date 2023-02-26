@@ -1,0 +1,27 @@
+on: [workflow_dispatch]
+name: Validate Zone Data
+jobs:
+  generate_assetlist:
+    name: Validate Zone Data
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        shell: bash
+    
+    steps:
+    
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+          
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19
+          
+      - name: Run code to Validate Zone Data
+        working-directory: ./.github/workflows/utility
+        run: node validate_zone_data.mjs

@@ -7183,6 +7183,56 @@
         "osmosis-info",
         "OSMO:935"
       ]
+    },
+    {
+      "description": "Quicksilver Liquid Staked ATOM",
+      "denom_units": [
+        {
+          "denom": "ibc/FA602364BEC305A696CBDF987058E99D8B479F0318E47314C49173E8838C5BAC",
+          "exponent": 0,
+          "aliases": [
+            "uqatom"
+          ]
+        },
+        {
+          "denom": "qatom",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/FA602364BEC305A696CBDF987058E99D8B479F0318E47314C49173E8838C5BAC",
+      "name": "Quicksilver Liquid Staked ATOM",
+      "display": "qatom",
+      "symbol": "qatom",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "cosmoshub",
+            "base_denom": "uatom"
+          },
+          "provider": "Quicksilver"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "quicksilver",
+            "base_denom": "uqatom",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-522",
+            "path": "transfer/channel-522/uqatom"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qatom.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qatom.svg"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info"
+      ]
     }
   ]
 }

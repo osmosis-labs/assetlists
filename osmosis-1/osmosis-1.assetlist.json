@@ -260,9 +260,11 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdt.svg"
       },
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
-        "USDC.axl:877"
+        "USDC.axl:877",
+        "OSMO:831"
       ]
     },
     {
@@ -3494,8 +3496,7 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/meme/images/meme.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/meme/images/meme.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/meme/images/meme.png"
       },
       "coingecko_id": "meme-network",
       "keywords": [
@@ -5241,7 +5242,12 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/solar.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/solar.svg"
-      }
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "OSMO:941"
+      ]
     },
     {
       "description": "StakeEasy governance token",
@@ -6135,7 +6141,9 @@
       },
       "coingecko_id": "composite",
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
+        "osmosis-info",
         "OSMO:857"
       ]
     },
@@ -6403,6 +6411,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/stkatom.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/stkatom.svg"
       },
+      "coingecko_id": "stkatom",
       "keywords": [
         "osmosis-main",
         "osmosis-frontier",
@@ -6818,7 +6827,11 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.svg"
-      }
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "USDC.axl:938"
+      ]
     },
     {
       "description": "Circle's stablecoin from Avalanche on Axelar",
@@ -6864,7 +6877,11 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.svg"
-      }
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "USDC.axl:938"
+      ]
     },
     {
       "description": "Mars protocol token",
@@ -7182,6 +7199,57 @@
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:935"
+      ]
+    },
+    {
+      "description": "Quicksilver Liquid Staked ATOM",
+      "denom_units": [
+        {
+          "denom": "ibc/FA602364BEC305A696CBDF987058E99D8B479F0318E47314C49173E8838C5BAC",
+          "exponent": 0,
+          "aliases": [
+            "uqatom"
+          ]
+        },
+        {
+          "denom": "qatom",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "ibc/FA602364BEC305A696CBDF987058E99D8B479F0318E47314C49173E8838C5BAC",
+      "name": "Quicksilver Liquid Staked ATOM",
+      "display": "qatom",
+      "symbol": "qATOM",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "cosmoshub",
+            "base_denom": "uatom"
+          },
+          "provider": "Quicksilver"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "quicksilver",
+            "base_denom": "uqatom",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-522",
+            "path": "transfer/channel-522/uqatom"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qatom.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qatom.svg"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "ATOM:944"
       ]
     }
   ]

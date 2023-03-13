@@ -7254,6 +7254,49 @@
       ]
     },
     {
+      "description": "Quicksilver Liquid Staked REGEN",
+      "denom_units": [
+        {
+          "denom": "ibc/79A676508A2ECA1021EDDC7BB9CF70CEEC9514C478DA526A5A8B3E78506C2206",
+          "exponent": 0,
+          "aliases": [
+            "uqregen"
+          ]
+        },
+        {
+          "denom": "qregen",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/79A676508A2ECA1021EDDC7BB9CF70CEEC9514C478DA526A5A8B3E78506C2206",
+      "name": "Quicksilver Liquid Staked REGEN",
+      "display": "qregen",
+      "symbol": "qREGEN",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "quicksilver",
+            "base_denom": "uqregen",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-522",
+            "path": "transfer/channel-522/uqregen"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qregen.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qregen.svg"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "REGEN:948"
+      ]
+    },
+    {
       "description": "Governance Token of Harbor protocol on Comdex network",
       "denom_units": [
         {

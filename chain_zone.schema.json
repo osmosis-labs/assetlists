@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "title": "Osmosis Zone List",
+  "description": "Chain Zone List is a list of chains integrated with Osmosis, in alphabetical order.",
+  "type": "object",
+  "required": [
+    "chain_name",
+    "override_properties"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "pattern": "^\\.\\./chain_zone\\.schema\\.json$"
+    },
+    "chain_name": {
+      "type": "string"
+    },
+    "override_properties": {
+      "type": "object",
+      "description": "Properties that are not default from the Chain Registry.",
+      "required": [
+        "rpc",
+        "rest",
+        "wss"
+      ],
+      "properties": {
+        "rpc": {
+          "type": "string",
+          "description": "The rpc node to use for connecting with the chain.",
+          "pattern": "^https://.$"
+        },
+        "rest": {
+          "type": "string",
+          "description": "The rest node to use for connecting with the chain",
+          "pattern": "^https://.$"
+        },
+        "wss": {
+          "type": "string",
+          "description": "The wss node to use for connecting with the chain",
+          "pattern": "^wss://.$"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+  }
+}

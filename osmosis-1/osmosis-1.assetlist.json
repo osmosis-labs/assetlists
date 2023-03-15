@@ -1104,6 +1104,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/8061A06D3BD4D52C4A28FFECF7150D370393AF0BA661C3776C54FF32836C3961",
       "name": "pSTAKE Finance",
       "display": "pstake",
@@ -1155,6 +1156,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/pstake.svg"
       },
       "keywords": [
+        "canon",
         "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
@@ -2390,6 +2392,7 @@
           ]
         }
       ],
+      "type_asset": "sdk.coin",
       "base": "ibc/8FEFAE6AECF6E2A255585617F781F35A8D5709A545A804482A261C0C9548A9D3",
       "name": "Carbon",
       "display": "dswth",
@@ -7293,6 +7296,57 @@
       "keywords": [
         "osmosis-frontier",
         "OSMO:947"
+      ]
+    },
+    {
+      "description": "Quicksilver Liquid Staked REGEN",
+      "denom_units": [
+        {
+          "denom": "ibc/79A676508A2ECA1021EDDC7BB9CF70CEEC9514C478DA526A5A8B3E78506C2206",
+          "exponent": 0,
+          "aliases": [
+            "uqregen"
+          ]
+        },
+        {
+          "denom": "qregen",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "ibc/79A676508A2ECA1021EDDC7BB9CF70CEEC9514C478DA526A5A8B3E78506C2206",
+      "name": "Quicksilver Liquid Staked Regen",
+      "display": "qregen",
+      "symbol": "qREGEN",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "regen",
+            "base_denom": "uregen"
+          },
+          "provider": "Quicksilver"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "quicksilver",
+            "base_denom": "uqregen",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-522",
+            "path": "transfer/channel-522/uqregen"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qregen.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qregen.svg"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "REGEN:948"
       ]
     }
   ]

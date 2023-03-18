@@ -41,3 +41,53 @@ func TestGetSymbolByDenom(t *testing.T) {
 		}
 	}
 }
+
+func TestGetExponentBySymbol(t *testing.T) {
+	type testcase struct {
+		Symbol           string
+		ExpectedExponent int64
+	}
+	testcases := []testcase{
+		{"OSMO", 6},
+		{"ATOM", 6},
+		{"CANTO", 18},
+		{"LUNC", 6},
+		{"GRAV", 6},
+	}
+	for _, tc := range testcases {
+		exponent, err := GetExponentBySymbol(tc.Symbol)
+		if err != nil {
+			panic(err)
+		}
+		if exponent != tc.ExpectedExponent {
+			t.Errorf("Expected %d, got %d", tc.ExpectedExponent, exponent)
+		}
+	}
+}
+
+func TestGetDenomExponentBySymbol(t *testing.T) {
+	type testcase struct {
+		Symbol           string
+		ExpectedDenom    string
+		ExpectedExponent int64
+	}
+	testcases := []testcase{
+		{"OSMO", "uosmo", 6},
+		{"ATOM", "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2", 6},
+		{"CANTO", "ibc/47CAF2DB8C016FAC960F33BC492FD8E454593B65CC59D70FA9D9F30424F9C32F", 18},
+		{"LUNC", "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0", 6},
+		{"GRAV", "ibc/E97634A40119F1898989C2A23224ED83FDD0A57EA46B3A094E287288D1672B44", 6},
+	}
+	for _, tc := range testcases {
+		exponent, denom, err := GetDenomExponentBySymbol(tc.Symbol)
+		if err != nil {
+			panic(err)
+		}
+		if denom != tc.ExpectedDenom {
+			t.Errorf("Expected %s, got %s", tc.ExpectedDenom, denom)
+		}
+		if exponent != tc.ExpectedExponent {
+			t.Errorf("Expected %d, got %d", tc.ExpectedExponent, exponent)
+		}
+	}
+}

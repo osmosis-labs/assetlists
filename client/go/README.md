@@ -1,6 +1,7 @@
 # Client library for Assetlist Type
 
 This package provides a go type for the assetlist schemas.
+Release first tag : v0.1-beta
 
 ## How to update
 

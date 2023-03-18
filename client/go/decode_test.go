@@ -4,17 +4,16 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"path/filepath"
 	"testing"
 
-	"github.com/cavaliergopher/grab/v3"
 	"github.com/stretchr/testify/require"
 )
 
 func TestType(t *testing.T) {
-	resp, err := grab.Get(".", "https://raw.githubusercontent.com/osmosis-labs/assetlists/main/osmosis-1/osmosis-1.assetlist.json")
-	require.NoError(t, err)
+	relativePathAssetlist := filepath.Join("..", "..", "osmosis-1", "osmosis-1.assetlist.json")
 
-	content, err := ioutil.ReadFile(resp.Filename) // the file is inside the local directory
+	content, err := ioutil.ReadFile(relativePathAssetlist) // the file is inside the local directory
 	if err != nil {
 		fmt.Println("Err")
 	}

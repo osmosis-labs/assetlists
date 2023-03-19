@@ -1,6 +1,25 @@
 package assetlist
 
-import "testing"
+import (
+	"path/filepath"
+	"testing"
+
+	"github.com/stretchr/testify/require"
+)
+
+func TestTypeReadAssetListUnmarshalTestnet(t *testing.T) {
+	relativePathAssetlist := filepath.Join("..", "..", "osmo-test-4", "osmo-test-4.assetlist.json")
+
+	assetList = ReadAssetListUnmarshal(relativePathAssetlist)
+	require.Equal(t, "osmosistestnet", assetList.ChainName)
+}
+
+func TestReadAssetListUnmarshalMain(t *testing.T) {
+	relativePathAssetlist := filepath.Join("..", "..", "osmosis-1", "osmosis-1.assetlist.json")
+
+	assetList = ReadAssetListUnmarshal(relativePathAssetlist)
+	require.Equal(t, "osmosis", assetList.ChainName)
+}
 
 func TestGetDenomBySymbol(t *testing.T) {
 	type testcase struct {
@@ -88,6 +107,26 @@ func TestGetDenomExponentBySymbol(t *testing.T) {
 		}
 		if exponent != tc.ExpectedExponent {
 			t.Errorf("Expected %d, got %d", tc.ExpectedExponent, exponent)
+		}
+	}
+}
+
+func TestGetNameBySymbol(t *testing.T) {
+	type testcase struct {
+		Symbol       string
+		ExpectedName string
+	}
+	testcases := []testcase{
+		{"OSMO", "Osmosis"},
+		{"JUNO", "Juno"},
+	}
+	for _, tc := range testcases {
+		name, err := GetNameBySymbol(tc.Symbol)
+		if err != nil {
+			panic(err)
+		}
+		if name != tc.ExpectedName {
+			t.Errorf("Expected %s, got %s", tc.ExpectedName, name)
 		}
 	}
 }

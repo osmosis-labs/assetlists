@@ -4,51 +4,50 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"path/filepath"
 	"strings"
 )
 
-var osmosisAssetList Root
+var assetList Root
 
-func init() {
+func ReadAssetListUnmarshal(relativePathAssetlist string) Root {
 	// Read the content of the JSON file using ioutil.ReadFile().
-	relativePathAssetlist := filepath.Join("..", "..", "osmosis-1", "osmosis-1.assetlist.json")
 	file, err := ioutil.ReadFile(relativePathAssetlist)
 	if err != nil {
 		panic(err)
 	}
 
 	// Decode the JSON content using json.Unmarshal() and store it in a variable of type AssetList.
-	err = json.Unmarshal(file, &osmosisAssetList)
+	err = json.Unmarshal(file, &assetList)
 	if err != nil {
 		panic(err)
 	}
+	return assetList
 }
 
 func GetDenomBySymbol(symbol string) (string, error) {
 	symbol = strings.ToUpper(symbol)
-	for _, asset := range osmosisAssetList.Assets {
+	for _, asset := range assetList.Assets {
 		if strings.ToUpper(asset.Symbol) == symbol {
 			return asset.Base, nil
 		}
 	}
-	return "", fmt.Errorf("No asset found for symbol %s", symbol)
+	return "", fmt.Errorf("No denom found for symbol %s", symbol)
 }
 
 func GetSymbolByDenom(denom string) (string, error) {
 	denom = strings.ToLower(denom)
-	for _, asset := range osmosisAssetList.Assets {
+	for _, asset := range assetList.Assets {
 		if strings.ToLower(asset.Base) == denom {
 			return asset.Symbol, nil
 		}
 	}
-	return "", fmt.Errorf("No asset found for denom %s", denom)
+	return "", fmt.Errorf("No symbol found for denom %s", denom)
 }
 
 func GetExponentBySymbol(symbol string) (int64, error) {
 	symbol = strings.ToUpper(symbol)
 
-	for _, asset := range osmosisAssetList.Assets {
+	for _, asset := range assetList.Assets {
 		// If the symbol of the asset matches the given symbol, look for the corresponding exponent.
 		if strings.ToUpper(asset.Symbol) == symbol {
 			display := strings.ToLower(asset.Display)
@@ -75,7 +74,7 @@ func GetExponentBySymbol(symbol string) (int64, error) {
 func GetDenomExponentBySymbol(symbol string) (int64, string, error) {
 	symbol = strings.ToUpper(symbol)
 
-	for _, asset := range osmosisAssetList.Assets {
+	for _, asset := range assetList.Assets {
 		// If the symbol of the asset matches the given symbol, look for the corresponding exponent.
 		if strings.ToUpper(asset.Symbol) == symbol {
 			denom := asset.Base
@@ -98,4 +97,14 @@ func GetDenomExponentBySymbol(symbol string) (int64, string, error) {
 	}
 
 	return -1, "", fmt.Errorf("No exponent and denom found for symbol %s", symbol)
+}
+
+func GetNameBySymbol(symbol string) (string, error) {
+	symbol = strings.ToUpper(symbol)
+	for _, asset := range assetList.Assets {
+		if strings.ToUpper(asset.Symbol) == symbol {
+			return asset.Name, nil
+		}
+	}
+	return "", fmt.Errorf("No name found for symbol %s", symbol)
 }

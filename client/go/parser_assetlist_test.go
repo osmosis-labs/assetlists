@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestTypeReadAssetListUnmarshalTestnet(t *testing.T) {
+func TestReadAssetListUnmarshalTestnet(t *testing.T) {
 	relativePathAssetlist := filepath.Join("..", "..", "osmo-test-4", "osmo-test-4.assetlist.json")
 
 	assetList = ReadAssetListUnmarshal(relativePathAssetlist)

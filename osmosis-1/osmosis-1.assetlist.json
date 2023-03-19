@@ -7394,6 +7394,47 @@
         "osmosis-info",
         "OSMO:949"
       ]
+      },
+    {
+      "description": "The native token of Arkhadian",
+      "denom_units": [
+        {
+          "denom": "ibc/0F91EE8B98AAE3CF393D94CD7F89A10F8D7758C5EC707E721899DFE65C164C28",
+          "exponent": 0,
+          "aliases": [
+            "uarkh"
+          ]
+        },
+        {
+          "denom": "arkh",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/0F91EE8B98AAE3CF393D94CD7F89A10F8D7758C5EC707E721899DFE65C164C28",
+      "name": "Arkh",
+      "display": "arkh",
+      "symbol": "ARKH",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "arkh",
+            "base_denom": "uarkh",
+            "channel_id": "channel-12"
+          },
+          "chain": {
+            "channel_id": "channel-648",
+            "path": "transfer/channel-648/arkh"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/arkh/images/arkh.png"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+      ]
     }
   ]
 }

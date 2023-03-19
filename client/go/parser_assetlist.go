@@ -7,8 +7,6 @@ import (
 	"strings"
 )
 
-var assetList Root
-
 func ReadAssetListUnmarshal(relativePathAssetlist string) Root {
 	// Read the content of the JSON file using ioutil.ReadFile().
 	file, err := ioutil.ReadFile(relativePathAssetlist)
@@ -17,6 +15,7 @@ func ReadAssetListUnmarshal(relativePathAssetlist string) Root {
 	}
 
 	// Decode the JSON content using json.Unmarshal() and store it in a variable of type AssetList.
+	var assetList Root
 	err = json.Unmarshal(file, &assetList)
 	if err != nil {
 		panic(err)
@@ -24,7 +23,7 @@ func ReadAssetListUnmarshal(relativePathAssetlist string) Root {
 	return assetList
 }
 
-func GetDenomBySymbol(symbol string) (string, error) {
+func (assetList *Root) GetDenomBySymbol(symbol string) (string, error) {
 	symbol = strings.ToUpper(symbol)
 	for _, asset := range assetList.Assets {
 		if strings.ToUpper(asset.Symbol) == symbol {
@@ -34,7 +33,7 @@ func GetDenomBySymbol(symbol string) (string, error) {
 	return "", fmt.Errorf("No denom found for symbol %s", symbol)
 }
 
-func GetSymbolByDenom(denom string) (string, error) {
+func (assetList *Root) GetSymbolByDenom(denom string) (string, error) {
 	denom = strings.ToLower(denom)
 	for _, asset := range assetList.Assets {
 		if strings.ToLower(asset.Base) == denom {
@@ -44,7 +43,7 @@ func GetSymbolByDenom(denom string) (string, error) {
 	return "", fmt.Errorf("No symbol found for denom %s", denom)
 }
 
-func GetExponentBySymbol(symbol string) (int64, error) {
+func (assetList *Root) GetExponentBySymbol(symbol string) (int64, error) {
 	symbol = strings.ToUpper(symbol)
 
 	for _, asset := range assetList.Assets {
@@ -71,7 +70,7 @@ func GetExponentBySymbol(symbol string) (int64, error) {
 	return -1, fmt.Errorf("No exponent found for symbol %s", symbol)
 }
 
-func GetDenomExponentBySymbol(symbol string) (int64, string, error) {
+func (assetList *Root) GetDenomExponentBySymbol(symbol string) (int64, string, error) {
 	symbol = strings.ToUpper(symbol)
 
 	for _, asset := range assetList.Assets {
@@ -99,7 +98,7 @@ func GetDenomExponentBySymbol(symbol string) (int64, string, error) {
 	return -1, "", fmt.Errorf("No exponent and denom found for symbol %s", symbol)
 }
 
-func GetNameBySymbol(symbol string) (string, error) {
+func (assetList *Root) GetNameBySymbol(symbol string) (string, error) {
 	symbol = strings.ToUpper(symbol)
 	for _, asset := range assetList.Assets {
 		if strings.ToUpper(asset.Symbol) == symbol {

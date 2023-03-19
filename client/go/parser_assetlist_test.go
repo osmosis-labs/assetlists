@@ -7,11 +7,13 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+var assetList Root
+
 func TestReadAssetListUnmarshalTestnet(t *testing.T) {
 	relativePathAssetlist := filepath.Join("..", "..", "osmo-test-4", "osmo-test-4.assetlist.json")
-
-	assetList = ReadAssetListUnmarshal(relativePathAssetlist)
-	require.Equal(t, "osmosistestnet", assetList.ChainName)
+	var assetListTestnet Root
+	assetListTestnet = ReadAssetListUnmarshal(relativePathAssetlist)
+	require.Equal(t, "osmosistestnet", assetListTestnet.ChainName)
 }
 
 func TestReadAssetListUnmarshalMain(t *testing.T) {
@@ -31,7 +33,7 @@ func TestGetDenomBySymbol(t *testing.T) {
 		{"ATOM", "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"},
 	}
 	for _, tc := range testcases {
-		denom, err := GetDenomBySymbol(tc.Symbol)
+		denom, err := assetList.GetDenomBySymbol(tc.Symbol)
 		if err != nil {
 			panic(err)
 		}
@@ -51,7 +53,7 @@ func TestGetSymbolByDenom(t *testing.T) {
 		{"ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2", "ATOM"},
 	}
 	for _, tc := range testcases {
-		denom, err := GetSymbolByDenom(tc.Denom)
+		denom, err := assetList.GetSymbolByDenom(tc.Denom)
 		if err != nil {
 			panic(err)
 		}
@@ -74,7 +76,7 @@ func TestGetExponentBySymbol(t *testing.T) {
 		{"GRAV", 6},
 	}
 	for _, tc := range testcases {
-		exponent, err := GetExponentBySymbol(tc.Symbol)
+		exponent, err := assetList.GetExponentBySymbol(tc.Symbol)
 		if err != nil {
 			panic(err)
 		}
@@ -98,7 +100,7 @@ func TestGetDenomExponentBySymbol(t *testing.T) {
 		{"GRAV", "ibc/E97634A40119F1898989C2A23224ED83FDD0A57EA46B3A094E287288D1672B44", 6},
 	}
 	for _, tc := range testcases {
-		exponent, denom, err := GetDenomExponentBySymbol(tc.Symbol)
+		exponent, denom, err := assetList.GetDenomExponentBySymbol(tc.Symbol)
 		if err != nil {
 			panic(err)
 		}
@@ -121,7 +123,7 @@ func TestGetNameBySymbol(t *testing.T) {
 		{"JUNO", "Juno"},
 	}
 	for _, tc := range testcases {
-		name, err := GetNameBySymbol(tc.Symbol)
+		name, err := assetList.GetNameBySymbol(tc.Symbol)
 		if err != nil {
 			panic(err)
 		}

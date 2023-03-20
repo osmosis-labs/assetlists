@@ -7394,6 +7394,50 @@
         "osmosis-info",
         "OSMO:949"
       ]
+    },{
+      "description": "QCK - native token of Quicksilver",
+      "denom_units": [
+        {
+          "denom": "ibc/635CB83EF1DFE598B10A3E90485306FD0D47D34217A4BE5FD9977FA010A5367D",
+          "exponent": 0,
+          "aliases": [
+            "uqck"
+          ]
+        },
+        {
+          "denom": "qck",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/635CB83EF1DFE598B10A3E90485306FD0D47D34217A4BE5FD9977FA010A5367D",
+      "name": "QCK",
+      "display": "qck",
+      "symbol": "QCK",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "quicksilver",
+            "base_denom": "uqck",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-522",
+            "path": "transfer/channel-522/uqck"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qck.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qck.svg"
+      },
+      "coingecko_id": "quicksilver",
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier",
+        "osmosis-info",
+        "OSMO:952"
+      ]
     }
   ]
 }

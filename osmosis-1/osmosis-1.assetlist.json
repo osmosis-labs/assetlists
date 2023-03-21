@@ -6554,7 +6554,8 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/acrechain/images/arusd.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/acrechain/images/arusd.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/acrechain/images/arusd.svg"
       },
       "coingecko_id": "arable-usd",
       "keywords": [
@@ -6979,7 +6980,8 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/acrechain/images/cnto.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/acrechain/images/cnto.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/acrechain/images/cnto.svg"
       },
       "keywords": [
         "osmosis-frontier",
@@ -7451,6 +7453,48 @@
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:952"
+      ]
+    },
+    {
+      "description": "The native token of Arkhadian",
+      "denom_units": [
+        {
+          "denom": "ibc/0F91EE8B98AAE3CF393D94CD7F89A10F8D7758C5EC707E721899DFE65C164C28",
+          "exponent": 0,
+          "aliases": [
+            "arkh"
+          ]
+        },
+        {
+          "denom": "ARKH",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/0F91EE8B98AAE3CF393D94CD7F89A10F8D7758C5EC707E721899DFE65C164C28",
+      "name": "Arkh",
+      "display": "ARKH",
+      "symbol": "ARKH",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "arkh",
+            "base_denom": "arkh",
+            "channel_id": "channel-12"
+          },
+          "chain": {
+            "channel_id": "channel-648",
+            "path": "transfer/channel-648/arkh"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/arkh/images/arkh.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/arkh/images/arkh.svg"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "OSMO:954"
       ]
     }
   ]

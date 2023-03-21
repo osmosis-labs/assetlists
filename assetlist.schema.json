@@ -49,7 +49,7 @@
         },
         "type_asset": {
           "type": "string",
-          "enum": ["sdk.coin", "cw20", "snip20", "erc20"],
+          "enum": ["sdk.coin", "cw20", "snip20", "erc20", "ics20"],
           "default": "sdk.coin",
           "description": "[OPTIONAL] The potential options for type of asset. By default, assumes sdk.coin"
         },
@@ -88,7 +88,8 @@
                 "$ref": "#/$defs/non_ibc_transition"
               }
             ]
-          }
+          },
+          "minContains": 1
         },
         "ibc": {
           "type": "object",
@@ -127,16 +128,47 @@
           },
           "additionalProperties": false
         },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "png": {
+                "type": "string",
+                "format": "uri-reference",
+                "pattern": "^https://raw\\.githubusercontent\\.com/cosmos/chain-registry/master/(|testnets/|_non-cosmos/)[a-z0-9]+/images/.+\\.png$"
+              },
+              "svg": {
+                "type": "string",
+                "format": "uri-reference",
+                "pattern": "^https://raw\\.githubusercontent\\.com/cosmos/chain-registry/master/(|testnets/|_non-cosmos/)[a-z0-9]+/images/.+\\.svg$"
+              },
+              "theme": {
+                "type": "object",
+                "properties": {
+                  "primary_color_hex": {
+                   "type": "string",
+                   "pattern": "^#[0-9a-fA-F]{6}$"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
         "coingecko_id": {
           "type": "string",
           "description": "[OPTIONAL] The coingecko id to fetch asset data from coingecko v3 api. See https://api.coingecko.com/api/v3/coins/list"
         },
         "keywords": {
           "type": "array",
-          "maxContains": 20,
           "items": {
             "type": "string"
-          }
+          },
+          "minContains": 1,
+          "maxContains": 20
         }
       },
       "additionalProperties": false,
@@ -177,7 +209,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "minContains": 1
         }
       },
       "additionalProperties": false
@@ -242,7 +275,8 @@
         "chain": {
           "type": "object",
           "required": [
-            "channel_id"
+            "channel_id",
+            "path"
           ],
           "properties": {
             "channel_id": {
@@ -307,7 +341,8 @@
           "type": "object",
           "required": [
             "port",
-            "channel_id"
+            "channel_id",
+            "path"
           ],
           "properties": {
             "port": {

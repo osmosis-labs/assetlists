@@ -7496,6 +7496,57 @@
         "osmosis-frontier",
         "OSMO:954"
       ]
+    },
+    {
+      "description": "Quicksilver Liquid Staked OSMO",
+      "denom_units": [
+        {
+          "denom": "ibc/42D24879D4569CE6477B7E88206ADBFE47C222C6CAD51A54083E4A72594269FC",
+          "exponent": 0,
+          "aliases": [
+            "uqosmo"
+          ]
+        },
+        {
+          "denom": "qosmo",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "ibc/42D24879D4569CE6477B7E88206ADBFE47C222C6CAD51A54083E4A72594269FC",
+      "name": "Quicksilver Liquid Staked OSMO",
+      "display": "qosmo",
+      "symbol": "qOSMO",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "osmosis",
+            "base_denom": "uosmo"
+          },
+          "provider": "Quicksilver"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "quicksilver",
+            "base_denom": "uqosmo",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-522",
+            "path": "transfer/channel-522/uqosmo"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qosmo.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qosmo.svg"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info"
+      ]
     }
   ]
 }

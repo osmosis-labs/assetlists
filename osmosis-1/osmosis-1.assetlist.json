@@ -7564,6 +7564,49 @@
         "osmosis-info",
         "OSMO:956"
       ]
+    },
+    {
+      "description": "1 FRNZ is exclusively redeemable for 1 physical friendship bracelet with <3 from Noble",
+      "denom_units": [
+        {
+          "denom": "ibc/7FA7EC64490E3BDE5A1A28CBE73CC0AD22522794957BC891C46321E3A6074DB9",
+          "exponent": 0,
+          "aliases": [
+            "ufrienzies"
+          ]
+        },
+        {
+          "denom": "frienzies",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "ibc/7FA7EC64490E3BDE5A1A28CBE73CC0AD22522794957BC891C46321E3A6074DB9",
+      "name": "Noble FRENZ",
+      "display": "frenz",
+      "symbol": "FRNZ",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "noble",
+            "base_denom": "ufrienzies",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-750",
+            "path": "transfer/channel-750/ufrienzies"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/frenz.png"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "OSMO:958"
+      ]
     }
   ]
 }

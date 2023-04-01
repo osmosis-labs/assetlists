@@ -36,6 +36,7 @@ const ibcFolderName = "_IBC";
 const mainnetChainName = "osmosis";
 const testnetChainName = "osmosistestnet";
 let localChainName = "";
+let localChainAssetBases = [];
 const mainnetChainId = "osmosis-1";
 const testnetChainId = "osmo-test-4";
 let localChainId = "";
@@ -124,6 +125,16 @@ function reorderProperties(object, referenceObject) {
   return newObject;
 }
 
+function getLocalChainAssetBases() {
+  try {
+    const chainRegistryChainAssetlist = JSON.parse(fs.readFileSync(path.join(chainRegistryRoot, chainRegistrySubdirectory, localChainName, assetlistFileName)));
+    chainRegistryChainAssetlist.assets.forEach((asset) => {
+      localChainAssetBases.push(asset.base);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
   
@@ -226,6 +237,13 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
         }
         return;
       });
+      
+      //--Use local version of asset with same IBC Hash--
+      localChainAssetBases.forEach((asset) => {
+        if(asset == generatedAsset.base) {
+          generatedAsset = copyRegisteredAsset(localChainName, generatedAsset.base);
+        }
+      });
 
     }
   
@@ -301,11 +319,13 @@ function selectDomain(domain) {
     assetlistsSubdirectory = assetlistsMainnetsSubdirectory;
     localChainName = mainnetChainName;
     localChainId = mainnetChainId;
+    getLocalChainAssetBases();
   } else if(domain == "testnets") {
     chainRegistrySubdirectory = chainRegistryTestnetsSubdirectory;
     assetlistsSubdirectory = assetlistsTestnetsSubdirectory;
     localChainName = testnetChainName;
     localChainId = testnetChainId;
+    getLocalChainAssetBases();
   } else {
     console.log("Invalid Domain (Mainnets, Testnets, Devnets, etc.)");
   }

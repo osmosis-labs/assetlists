@@ -11,8 +11,7 @@ import * as path from 'path';
 
 export let chainNameToDirectoryMap = new Map();
 
-//export const chainRegistryRoot = "../../../chain-registry";
-export const chainRegistryRoot = "/mnt/e/Documents/GitHub/chain-registry";
+export const chainRegistryRoot = "../../../chain-registry";
 
 const networkTypeToDirectoryNameMap = new Map();
 networkTypeToDirectoryNameMap.set("mainnet", "");

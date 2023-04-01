@@ -238,7 +238,7 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
         return;
       });
       
-      //--Use local version if IBC Hash for asset exists in Chain Assetlist--
+      //--Use local version of asset with same IBC Hash--
       localChainAssetBases.forEach((asset) => {
         if(asset == generatedAsset.base) {
           generatedAsset = copyRegisteredAsset(localChainName, generatedAsset.base);

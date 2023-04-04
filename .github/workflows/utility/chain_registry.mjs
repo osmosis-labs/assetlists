@@ -55,7 +55,7 @@ const fileNames = {
 };
 
 let paths = {};
-let chains = {};
+let chains = [];
 export const chain__FileName = "chain.json";
 export const assetlist__FileName = "assetlist.json";
 
@@ -110,20 +110,14 @@ export function setDifferenceArray(a, b) {
 // -- CHAIN REGISTRY MODULES --
 
 
-// - network_type:: -
-
-
-
-
-
 export function populateChainDirectories() {
   for (let [networkType, networkTypeDirectoryName] of networkTypeToDirectoryNameMap) {
     for (let [domain, domainDirectoryName] of domainToDirectoryNameMap) {
-      let chainNames = setDifferenceArray(
+      chains = setDifferenceArray(
         getDirectoryContents(path.join(chainRegistryRoot, networkTypeDirectoryName, domainDirectoryName)),
         nonChainDirectories
       );
-      chainNames.forEach((chainName) => {
+      chains.forEach((chainName) => {
         chainNameToDirectoryMap.set(
           chainName,
           path.join(chainRegistryRoot, networkTypeDirectoryName, domainDirectoryName, chainName)
@@ -225,6 +219,28 @@ export function getAssetPointers() {
     assetPointers = assetPointers.concat(getAssetPointersByChain(chainName));
   });
   return assetPointers;
+}
+
+export function getChains() {
+  chains = Array.from(chainNameToDirectoryMap.keys());
+  return chains;
+}
+
+export function filterChainsByFileProperty(chains, file, property, value) {
+  let filtered = [];
+  chains.forEach((chain) => {
+    let propertyValue = getFileProperty(chain, file, property);
+    if(value == "*") {
+      if(propertyValue && propertyValue != "") {
+        filtered.push(pointer);
+      }
+    } else {
+      if(propertyValue == value) {
+        filtered.push(pointer);
+      }
+    }
+  });
+  return filtered;
 }
 
 export function filterAssetPointersByFileProperty(pointers, file, property, value) {

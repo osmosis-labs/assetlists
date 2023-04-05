@@ -7103,10 +7103,10 @@
       ]
     },
     {
-      "description": "Astroport is a neutral marketplace where anyone, from anywhere in the galaxy, can dock to trade their wares.",
+      "description": "ASTRO on Osmosis",
       "denom_units": [
         {
-          "denom": "ibc/E5916C205E90C7C3481AFD8663A13C1D6C63145FB6C38DA9FC151FEE706F32EF",
+          "denom": "ibc/8410580A4F5421DFDBD888212624591E92A9E3B5C87D3C58913CE16ABD98B9B4",
           "exponent": 0,
           "aliases": [
             "cw20:terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26"
@@ -7117,9 +7117,8 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
-      "address": "terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26",
-      "base": "ibc/E5916C205E90C7C3481AFD8663A13C1D6C63145FB6C38DA9FC151FEE706F32EF",
+      "type_asset": "ics20",
+      "base": "ibc/8410580A4F5421DFDBD888212624591E92A9E3B5C87D3C58913CE16ABD98B9B4",
       "name": "Astroport",
       "display": "astro",
       "symbol": "ASTRO",
@@ -7129,13 +7128,13 @@
           "counterparty": {
             "chain_name": "terra2",
             "base_denom": "cw20:terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26",
-            "port": "wasm.terra1e0mrzy8077druuu42vs0hu7ugguade0cj65dgtauyaw4gsl4kv0qtdf2au",
-            "channel_id": "channel-26"
+            "port": "wasm.terra1d90p5lacfxnqgjxjupu234lxnxyeu8fdeef4d0e0nqy3p30r7gss4myn9x",
+            "channel_id": "channel-85"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-341",
-            "path": "transfer/channel-341/cw20:terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26"
+            "channel_id": "channel-559",
+            "path": "transfer/channel-559/cw20:terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26"
           }
         }
       ],
@@ -7564,6 +7563,136 @@
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:956"
+      ]
+    },
+    {
+      "description": "Frienzies are an IBC token redeemable exclusively for a physical asset issued by the Noble entity.",
+      "denom_units": [
+        {
+          "denom": "ibc/7FA7EC64490E3BDE5A1A28CBE73CC0AD22522794957BC891C46321E3A6074DB9",
+          "exponent": 0,
+          "aliases": [
+            "microfrienzies",
+            "ufrienzies"
+          ]
+        },
+        {
+          "denom": "frienzies",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/7FA7EC64490E3BDE5A1A28CBE73CC0AD22522794957BC891C46321E3A6074DB9",
+      "name": "Frienzies",
+      "display": "frienzies",
+      "symbol": "FRNZ",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "noble",
+            "base_denom": "ufrienzies",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-750",
+            "path": "transfer/channel-750/ufrienzies"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/frnz.png"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "ATOM:958"
+      ]
+    },
+    {
+      "description": "The native token of Migaloo Chain",
+      "denom_units": [
+        {
+          "denom": "ibc/EDD6F0D66BCD49C1084FB2C35353B4ACD7B9191117CE63671B61320548F7C89D",
+          "exponent": 0,
+          "aliases": [
+            "uwhale"
+          ]
+        },
+        {
+          "denom": "whale",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/EDD6F0D66BCD49C1084FB2C35353B4ACD7B9191117CE63671B61320548F7C89D",
+      "name": "Whale",
+      "display": "whale",
+      "symbol": "WHALE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "migaloo",
+            "base_denom": "uwhale",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-642",
+            "path": "transfer/channel-642/uwhale"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/white-whale.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/white-whale.svg"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "OSMO:960"
+      ]
+    },
+    {
+      "description": "Evmos Guardians governance token.",
+      "denom_units": [
+        {
+          "denom": "ibc/BAC9C6998F1F5C316D3353622EAEDAF8BD00FAABEB374FECDF8C9BC475172CFA",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno1xekkh27punj0uxruv3gvuydyt856fax0nu750xns99t2qcxp7xmsqwhfma"
+          ]
+        },
+        {
+          "denom": "grdn",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "cw20",
+      "address": "juno1xekkh27punj0uxruv3gvuydyt856fax0nu750xns99t2qcxp7xmsqwhfma",
+      "base": "ibc/BAC9C6998F1F5C316D3353622EAEDAF8BD00FAABEB374FECDF8C9BC475172CFA",
+      "name": "Guardian",
+      "display": "grdn",
+      "symbol": "GRDN",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1xekkh27punj0uxruv3gvuydyt856fax0nu750xns99t2qcxp7xmsqwhfma",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
+            "channel_id": "channel-47"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-169",
+            "path": "transfer/channel-169/cw20:juno1xekkh27punj0uxruv3gvuydyt856fax0nu750xns99t2qcxp7xmsqwhfma"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/guardian.png"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "OSMO:959"
       ]
     }
   ]

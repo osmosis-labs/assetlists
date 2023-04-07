@@ -414,6 +414,45 @@
       }
     },
     {
+      "description": "The native token of JUNO Chain",
+      "denom_units": [
+        {
+          "denom": "ibc/7E3DB8DA12B7A7E2056E2449434A6F745E3C29B50217538BE31A50375EF088C6",
+          "exponent": 0,
+          "aliases": [
+            "ujunox"
+          ]
+        },
+        {
+          "denom": "junox",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/7E3DB8DA12B7A7E2056E2449434A6F745E3C29B50217538BE31A50375EF088C6",
+      "name": "Juno Testnet",
+      "display": "junox",
+      "symbol": "JUNOX",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "junotestnet",
+            "base_denom": "ujunox",
+            "channel_id": "channel-140"
+          },
+          "chain": {
+            "channel_id": "channel-3316",
+            "path": "transfer/channel-3316/ujunox"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.svg"
+      },
+      "coingecko_id": "juno-network"
+    },
+    {
       "description": "The native token of Nolus chain",
       "denom_units": [
         {

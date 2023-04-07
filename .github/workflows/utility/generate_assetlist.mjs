@@ -144,6 +144,8 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
 
     if(zoneAsset.chain_name != localChainName) {
 
+
+      //--Set Up Trace for IBC Transfer--
       let type = "ibc";
       let counterparty = {
         chain_name: zoneAsset.chain_name,
@@ -154,38 +156,62 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
         chain_name: localChainName,
         port: "transfer"
       };
-      let chain_1 = chain;
-      let chain_2 = counterparty;
-      
       
       //--Identify CW20 Transfer--
       if(counterparty.base_denom.slice(0,5) === "cw20:") {
         counterparty.port = "wasm.";
         type = "ibc-cw20";
       }
-      
+
       //--Identify Chain_1 and Chain_2--
+      let chain_1 = chain;
+      let chain_2 = counterparty;
+      let chainOrder = 0;
       if(counterparty.chain_name < chain.chain_name) {
         chain_1 = counterparty;
         chain_2 = chain;
+        chainOrder = 1;
       }
       
       //--Find IBC File Name--
-      let ibcFileName = chain_1 .chain_name + "-" + chain_2.chain_name + ".json";
+      let ibcFileName = chain_1.chain_name + "-" + chain_2.chain_name + ".json";
       
       //--Find IBC Connection--
       const ibcConnections = getIbcConnections(ibcFileName);
       
       //--Find IBC Channel and Port Info--
-      ibcConnections.channels.forEach(function(channel) {
-        if(channel.chain_1.port_id.slice(0,5) === chain_1.port.slice(0,5) && channel.chain_2.port_id.slice(0,5) === chain_2.port.slice(0,5)) {
-          chain_1.channel_id = channel.chain_1.channel_id;
-          chain_2.channel_id = channel.chain_2.channel_id;
-          chain_1.port = channel.chain_1.port_id;
-          chain_2.port = channel.chain_2.port_id;
-          return;
-        }
-      });
+      if(zoneAsset.path) {
+        //--With Path--
+        let parts = zoneAsset.path.split("/");
+        chain.port = parts[0];
+        chain.channel_id = parts[1];
+        ibcConnections.channels.forEach(function(channel) {
+          if(!chainOrder) {
+            if(channel.chain_1.port_id === chain_1.port && channel.chain_1.channel_id === chain_1.channel_id) {
+              chain_2.channel_id = channel.chain_2.channel_id;
+              chain_2.port = channel.chain_2.port_id;
+              return;
+            }
+          } else {
+            if(channel.chain_2.port_id === chain_2.port && channel.chain_2.channel_id === chain_2.channel_id) {
+              chain_1.channel_id = channel.chain_1.channel_id;
+              chain_1.port = channel.chain_1.port_id;
+              return;
+            }
+          }
+        });
+      } else {
+        //--without Path--
+        ibcConnections.channels.forEach(function(channel) {
+          if(channel.chain_1.port_id.slice(0,5) === chain_1.port.slice(0,5) && channel.chain_2.port_id.slice(0,5) === chain_2.port.slice(0,5)) {
+            chain_1.channel_id = channel.chain_1.channel_id;
+            chain_2.channel_id = channel.chain_2.channel_id;
+            chain_1.port = channel.chain_1.port_id;
+            chain_2.port = channel.chain_2.port_id;
+            return;
+          }
+        });
+      }
       
       //--Create Trace--
       let trace = {

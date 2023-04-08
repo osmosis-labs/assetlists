@@ -6388,6 +6388,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/onomy/images/nom.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/onomy/images/nom.svg"
       },
+      "coingecko_id": "onomy-protocol",
       "keywords": [
         "dex",
         "stablecoin",
@@ -7647,6 +7648,7 @@
       },
       "keywords": [
         "osmosis-frontier",
+        "osmosis-info",
         "OSMO:960"
       ]
     },
@@ -7694,6 +7696,53 @@
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:959"
+      ]
+    },
+    {
+      "description": "Mini Punks Token",
+      "denom_units": [
+        {
+          "denom": "ibc/DC0D3303BBE739E073224D0314385B88B247F56D71D726A91414CCA244FFFE7E",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno166heaxlyntd33a5euh4rrz26svhean4klzw594esmd02l4atan6sazy2my"
+          ]
+        },
+        {
+          "denom": "mnpu",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "cw20",
+      "address": "juno166heaxlyntd33a5euh4rrz26svhean4klzw594esmd02l4atan6sazy2my",
+      "base": "ibc/DC0D3303BBE739E073224D0314385B88B247F56D71D726A91414CCA244FFFE7E",
+      "name": "Mini Punks",
+      "display": "mnpu",
+      "symbol": "MNPU",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno166heaxlyntd33a5euh4rrz26svhean4klzw594esmd02l4atan6sazy2my",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
+            "channel_id": "channel-47"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-169",
+            "path": "transfer/channel-169/cw20:juno166heaxlyntd33a5euh4rrz26svhean4klzw594esmd02l4atan6sazy2my"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/mnpu.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/mnpu.svg"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "OSMO:961"
       ]
     }
   ]

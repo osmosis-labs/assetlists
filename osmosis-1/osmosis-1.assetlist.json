@@ -5876,9 +5876,9 @@
       "type_asset": "snip20",
       "address": "secret1qfql357amn448duf5gvp9gr48sxx9tsnhupu3d",
       "base": "ibc/71055835C7639739EAE03AACD1324FE162DBA41D09F197CB72D966D014225B1C",
-      "name": "Shade",
+      "name": "Shade (old)",
       "display": "shd",
-      "symbol": "SHD",
+      "symbol": "SHD(old)",
       "traces": [
         {
           "type": "ibc-cw20",
@@ -5896,10 +5896,8 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/shd.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/shd.svg"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/shdold.svg"
       },
-      "coingecko_id": "shade-protocol",
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
@@ -7647,6 +7645,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/white-whale.svg"
       },
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:960"
@@ -7836,6 +7835,51 @@
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:964"
+      ]
+    },
+    {
+      "description": "Nature Carbon Ton (NCT) is a carbon token standard backed 1:1 by carbon credits issued by Verra, a global leader in the voluntary carbon market. NCT credits on Regen Network have been tokenized by Toucan.earth.",
+      "denom_units": [
+        {
+          "denom": "ibc/A76EB6ECF4E3E2D4A23C526FD1B48FDD42F171B206C9D2758EF778A7826ADD68",
+          "exponent": 0,
+          "aliases": [
+            "eco.uC.NCT"
+          ]
+        },
+        {
+          "denom": "NCT",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/A76EB6ECF4E3E2D4A23C526FD1B48FDD42F171B206C9D2758EF778A7826ADD68",
+      "name": "Nature Carbon Ton",
+      "display": "NCT",
+      "symbol": "NCT",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "regen",
+            "base_denom": "eco.uC.NCT",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-8",
+            "path": "transfer/channel-8/eco.uC.NCT"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/regen/images/nct.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/regen/images/nct.svg"
+      },
+      "coingecko_id": "toucan-protocol-nature-carbon-tonne",
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier",
+        "osmosis-info",
+        "REGEN:972"
       ]
     }
   ]

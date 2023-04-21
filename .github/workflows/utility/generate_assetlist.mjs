@@ -21,6 +21,8 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
+import { returnAssets } from './getPools.mjs';
+
 
 const chainRegistryRoot = "../../../chain-registry";
 const chainRegistryMainnetsSubdirectory = "";
@@ -137,6 +139,8 @@ function getLocalChainAssetBases() {
 }
 
 const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
+  
+  let assets = await returnAssets(localChainName);
   
   await asyncForEach(zoneAssetlist.assets, async (zoneAsset) => {
 
@@ -300,18 +304,25 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
     if(zoneAsset.osmosis_info) {
       keywords.push("osmosis-info");
     }
-    if(keywords.length > 0) {
-      generatedAsset.keywords = keywords;
-    }
     if(zoneAsset.pools) {
       Object.keys(zoneAsset.pools).forEach((key) => {
         keywords.push(key + ":" + zoneAsset.pools[key]);
       });
     }
+    if (assets.get(generatedAsset.base)) {
+      if(assets.get(generatedAsset.base).osmosis_price) {
+        keywords.push(assets.get(generatedAsset.base).osmosis_price);
+      }
+      if(assets.get(generatedAsset.base).osmosis_info) {
+        keywords.push("osmosis-info_2");
+      }
+    }
+    if(keywords.length > 0) {
+      generatedAsset.keywords = keywords;
+    }
     
     //--Re-order Properties--
     generatedAsset = reorderProperties(generatedAsset, assetlistSchema);
-    //console.log(generatedAsset);
     
     //--Append Asset to Assetlist--
     generatedAssetlist.push(generatedAsset);

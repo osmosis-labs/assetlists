@@ -32,12 +32,14 @@ export const nonChainDirectories = [
   ".git",
   ".github",
   "_IBC",
+  "_memo_keys",
   "_non-cosmos",
   "testnets",
   ".gitignore",
   "assetlist.schema.json",
   "chain.schema.json",
   "ibc_data.schema.json",
+  "memo_keys.schema.json",
   "README.md"
 ]
 

@@ -1,0 +1,288 @@
+{
+  "zone": "osmosistestnet",
+  "chains": [
+    {
+      "chain_name": "osmosistestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Osmosis Testnet",
+      "chain_id": "osmo-test-4",
+      "bech32_prefix": "osmo",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "osmo",
+        "bech32PrefixAccPub": "osmopub",
+        "bech32PrefixValAddr": "osmovaloper",
+        "bech32PrefixValPub": "osmovaloperpub",
+        "bech32PrefixConsAddr": "osmovalcons",
+        "bech32PrefixConsPub": "osmovalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uosmo",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uosmo"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.testnet.osmosis.zone/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.testnet.osmosis.zone/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://testnet.mintscan.io/osmosis-testnet/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm",
+        "wasmd_0.24+",
+        "osmosis-txfees"
+      ]
+    },
+    {
+      "chain_name": "axelartestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Axelar Testnet",
+      "chain_id": "axelar-testnet-lisbon-3",
+      "bech32_prefix": "axelar",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "axelar",
+        "bech32PrefixAccPub": "axelarpub",
+        "bech32PrefixValAddr": "axelarvaloper",
+        "bech32PrefixValPub": "axelarvaloperpub",
+        "bech32PrefixConsAddr": "axelarvalcons",
+        "bech32PrefixConsPub": "axelarvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uaxl"
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uaxl"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://axelartest-rpc.quickapi.com/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://axelartest-lcd.quickapi.com/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://testnet.axelarscan.io/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "axelar-evm-bridge"
+      ]
+    },
+    {
+      "chain_name": "junotestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Juno Testnet",
+      "chain_id": "uni-6",
+      "bech32_prefix": "juno",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "juno",
+        "bech32PrefixAccPub": "junopub",
+        "bech32PrefixValAddr": "junovaloper",
+        "bech32PrefixValPub": "junovaloperpub",
+        "bech32PrefixConsAddr": "junovalcons",
+        "bech32PrefixConsPub": "junovalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ujunox",
+            "low_gas_price": 0.03,
+            "average_gas_price": 0.04,
+            "high_gas_price": 0.05
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ujunox"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.uni.junonetwork.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.uni.junonetwork.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://testnet.mintscan.io/juno-testnet/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
+    },
+    {
+      "chain_name": "marstestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Mars Hub Testnet",
+      "chain_id": "ares-1",
+      "bech32_prefix": "mars",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "mars",
+        "bech32PrefixAccPub": "marspub",
+        "bech32PrefixValAddr": "marsvaloper",
+        "bech32PrefixValPub": "marsvaloperpub",
+        "bech32PrefixConsAddr": "marsvalcons",
+        "bech32PrefixConsPub": "marsvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "umars",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0,
+            "high_gas_price": 0.025
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "umars"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://testnet-rpc.marsprotocol.io/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://testnet-rest.marsprotocol.io/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://testnet-explorer.marsprotocol.io/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "nolustestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Nolus Testnet",
+      "chain_id": "nolus-rila",
+      "bech32_prefix": "nolus",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "nolus",
+        "bech32PrefixAccPub": "noluspub",
+        "bech32PrefixValAddr": "nolusvaloper",
+        "bech32PrefixValPub": "nolusvaloperpub",
+        "bech32PrefixConsAddr": "nolusvalcons",
+        "bech32PrefixConsPub": "nolusvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "unls",
+            "low_gas_price": 0,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.05
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "unls"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://net-rila.nolus.io:26657"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://net-rila.nolus.io:1317"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer-rila.nolus.io/nolus-rila/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    }
+  ]
+}

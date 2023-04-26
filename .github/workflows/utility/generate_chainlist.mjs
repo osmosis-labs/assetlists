@@ -128,6 +128,7 @@ function generateChains(zone_chains) {
 
 function generateChainlist(chainName) {
   
+  chains = [];
   let zoneChainlist = getZoneChainlist(chainName);
   
   generateChains(zoneChainlist.chains);
@@ -144,8 +145,8 @@ function generateChainlist(chainName) {
 function main() {
 
   generateChainlist("osmosis");
-  //generateChainlist("osmosistestnet");
-  //generateChainlist("osmosistestnet5");
+  generateChainlist("osmosistestnet");
+  generateChainlist("osmosistestnet5");
   
 }
 

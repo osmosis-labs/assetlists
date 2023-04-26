@@ -1,0 +1,61 @@
+{
+  "$schema": "../zone_chains.schema.json",
+  "chains": [
+    {
+      "chain_name": "osmosistestnet",
+      "rpc": "https://rpc.testnet.osmosis.zone/",
+      "rest": "https://lcd.testnet.osmosis.zone/",
+      "explorer_tx_url": "https://testnet.mintscan.io/osmosis-testnet/txs/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm",
+        "wasmd_0.24+",
+        "osmosis-txfees"
+      ]
+    },
+    {
+      "chain_name": "axelartestnet",
+      "rpc": "https://axelartest-rpc.quickapi.com/",
+      "rest": "https://axelartest-lcd.quickapi.com/",
+      "explorer_tx_url": "https://testnet.axelarscan.io/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go",
+        "axelar-evm-bridge"
+      ]
+    },
+    {
+      "chain_name": "junotestnet",
+      "rpc": "https://rpc.uni.junonetwork.io",
+      "rest": "https://api.uni.junonetwork.io",
+      "explorer_tx_url": "https://testnet.mintscan.io/juno-testnet/txs/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
+    },
+    {
+      "chain_name": "marstestnet",
+      "rpc": "https://testnet-rpc.marsprotocol.io/",
+      "rest": "https://testnet-rest.marsprotocol.io/",
+      "explorer_tx_url": "https://testnet-explorer.marsprotocol.io/transactions/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "nolustestnet",
+      "rpc": "https://net-rila.nolus.io:26657",
+      "rest": "https://net-rila.nolus.io:1317",
+      "explorer_tx_url": "https://explorer-rila.nolus.io/nolus-rila/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    }
+  ]
+}

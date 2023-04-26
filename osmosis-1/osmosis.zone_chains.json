@@ -3,19 +3,20 @@
   "chains": [
     {
       "chain_name": "cosmoshub",
-      "override_properties": {
-        "rpc": "https://rpc-cosmoshub.keplr.app",
-        "rest": "https://lcd-cosmoshub.keplr.app",
-        "wss": "wss://lcd-cosmoshub.keplr.app"
-      }
+      "rpc": "https://rpc-cosmoshub.keplr.app",
+      "rest": "https://lcd-cosmoshub.keplr.app",
+      "explorer_tx_url": "https://www.mintscan.io/osmosis/txs/${txHash}",
+      "keplr_features": []
     },
     {
       "chain_name": "osmosis",
-      "override_properties": {
-        "rpc": "https://rpc-osmosis.keplr.app",
-        "rest": "https://lcd-osmosis.keplr.app",
-        "wss": "wss://lcd-osmosis.keplr.app"
-      }
+      "rpc": "https://rpc-osmosis.keplr.app",
+      "rest": "https://lcd-osmosis.keplr.app",
+      "explorer_tx_url": "https://www.mintscan.io/cosmos/txs/${txHash}",
+      "keplr_features": [
+        "cosmwasm",
+        "osmosis-txfees"
+      ]
     }
   ]
 }

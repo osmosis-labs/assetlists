@@ -1,0 +1,117 @@
+{
+  "zone": "osmosis",
+  "chains": [
+    {
+      "chain_name": "cosmoshub",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Cosmos Hub",
+      "chain_id": "cosmoshub-4",
+      "bech32_prefix": "cosmos",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "cosmos",
+        "bech32PrefixAccPub": "cosmospub",
+        "bech32PrefixValAddr": "cosmosvaloper",
+        "bech32PrefixValPub": "cosmosvaloperpub",
+        "bech32PrefixConsAddr": "cosmosvalcons",
+        "bech32PrefixConsPub": "cosmosvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uatom",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.03
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uatom"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-cosmoshub.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-cosmoshub.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/osmosis/txs/${txHash}"
+        }
+      ],
+      "features": []
+    },
+    {
+      "chain_name": "osmosis",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Osmosis",
+      "chain_id": "osmosis-1",
+      "bech32_prefix": "osmo",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "osmo",
+        "bech32PrefixAccPub": "osmopub",
+        "bech32PrefixValAddr": "osmovaloper",
+        "bech32PrefixValPub": "osmovaloperpub",
+        "bech32PrefixConsAddr": "osmovalcons",
+        "bech32PrefixConsPub": "osmovalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uosmo",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uosmo"
+          }
+        ],
+        "lock_duration": {
+          "time": "1209600s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-osmosis.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-osmosis.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/cosmos/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "cosmwasm",
+        "osmosis-txfees"
+      ]
+    }
+  ]
+}

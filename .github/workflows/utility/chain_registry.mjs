@@ -43,6 +43,33 @@ export const nonChainDirectories = [
   "README.md"
 ]
 
+export const assetSchema = {
+  description: "string",
+  denom_units: [],
+  type_asset: "string",
+  address: "string",
+  base: "string",
+  name: "string",
+  display: "string",
+  symbol: "string",
+  traces: [],
+  logo_URIs: {
+    png: "string",
+    svg: "string"
+  },
+  coingecko_id: "string",
+  keywords: []
+}
+
+export const bech32ConfigSuffixMap = new Map([
+  ["bech32PrefixAccAddr", ""],
+  ["bech32PrefixAccPub", "pub"],
+  ["bech32PrefixValAddr", "valoper"],
+  ["bech32PrefixValPub", "valoperpub"],
+  ["bech32PrefixConsAddr", "valcons"],
+  ["bech32PrefixConsPub", "valconspub"]
+]);
+
 
 const networkTypeToDirectoryMap = new Map();
 networkTypeToDirectoryMap.set("mainnet", "");

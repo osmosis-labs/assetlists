@@ -214,7 +214,7 @@
           },
           "chain": {
             "channel_id": "channel-4",
-            "path": "transfer/channel-1/uakt"
+            "path": "transfer/channel-4/uakt"
           }
         }
       ],
@@ -225,6 +225,48 @@
       "coingecko_id": "akash-network",
       "keywords": [
         "osmosis-price:uosmo:3",
+        "osmosis-info_2"
+      ]
+    },
+    {
+      "description": "Circle's stablecoin on Noble",
+      "denom_units": [
+        {
+          "denom": "ibc/B3504E092456BA618CC28AC671A71FB08C6CA0FD0BE7C8A5B5A3E2DD933CC9E4",
+          "exponent": 0,
+          "aliases": [
+            "usdc"
+          ]
+        },
+        {
+          "denom": "usdc",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/B3504E092456BA618CC28AC671A71FB08C6CA0FD0BE7C8A5B5A3E2DD933CC9E4",
+      "name": "Noble Testnet",
+      "display": "usdc",
+      "symbol": "USDC",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "grand-1",
+            "base_denom": "usdc",
+            "channel_id": "channel-6"
+          },
+          "chain": {
+            "channel_id": "channel-6",
+            "path": "transfer/channel-6/uusdc"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "",
+        "svg": ""
+      },
+      "coingecko_id": "noble-network",
+      "keywords": [
         "osmosis-info_2"
       ]
     }

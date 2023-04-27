@@ -25,35 +25,54 @@
       "type": "object",
       "required": [
         "chain_name",
-        "override_properties"
+        "rpc",
+        "rest",
+        "explorer_tx_url",
+        "keplr_features"
       ],
       "properties": {
         "chain_name": {
           "type": "string"
         },
-        "override_properties": {
+        "rpc": {
+          "type": "string",
+          "description": "The rpc node to use for connecting with the chain."
+        },
+        "rest": {
+          "type": "string",
+          "description": "The rest node to use for connecting with the chain"
+        },
+        "explorer_tx_url": {
+          "type": "string",
+          "description": "The chain's block explorer Transaction URL",
+          "pattern": "^https:\/\/.*{txHash}.*"
+        },
+        "keplr_features": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ibc-transfer",
+              "ibc-go",
+              "cosmwasm",
+              "wasmd_0.24+",
+              "eth-address-gen",
+              "eth-key-sign",
+              "secretwasm",
+              "osmosis-txfees",
+              "terra-classic-fee",
+              "axelar-evm-bridge"
+            ]
+          }
+        },
+        "outage": {
           "type": "object",
-          "description": "Properties that are not default from the Chain Registry.",
-          "required": [
-            "rpc",
-            "rest",
-            "wss"
-          ],
           "properties": {
-            "rpc": {
-              "type": "string",
-              "description": "The rpc node to use for connecting with the chain.",
-              "pattern": "^https://"
+            "block_height": {
+              "type": "number"
             },
-            "rest": {
-              "type": "string",
-              "description": "The rest node to use for connecting with the chain",
-              "pattern": "^https://"
-            },
-            "wss": {
-              "type": "string",
-              "description": "The wss node to use for connecting with the chain",
-              "pattern": "^wss://"
+            "message": {
+              "type": "string"
             }
           },
           "additionalProperties": false

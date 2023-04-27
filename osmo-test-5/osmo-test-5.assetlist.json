@@ -80,7 +80,7 @@
         {
           "type": "ibc",
           "counterparty": {
-            "chain_name": "junotestnet",
+            "chain_name": "uni-6",
             "base_denom": "ujunox",
             "channel_id": "channel-190"
           },
@@ -116,14 +116,14 @@
         }
       ],
       "base": "ibc/0973EE75F04F14E896733FD6B6F00342E7CD7867785EE8596D3E74767BC19FC9",
-      "name": "Mars",
+      "name": "Mars Testnet",
       "display": "mars",
       "symbol": "MARS",
       "traces": [
         {
           "type": "ibc",
           "counterparty": {
-            "chain_name": "marstestnet",
+            "chain_name": "ares-1",
             "base_denom": "umars",
             "channel_id": "channel-12"
           },
@@ -139,6 +139,49 @@
       "keywords": [
         "OSMO:768",
         "osmosis-price:uosmo:768",
+        "osmosis-info_2"
+      ]
+    },
+    {
+      "description": "The native staking and governance token of the Cosmos Hub.",
+      "denom_units": [
+        {
+          "denom": "ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477",
+          "exponent": 0,
+          "aliases": [
+            "uatom"
+          ]
+        },
+        {
+          "denom": "atom",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477",
+      "name": "Cosmos Hub Atom Testnet",
+      "display": "atom",
+      "symbol": "ATOM",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "thetha-testnet-001",
+            "base_denom": "uatom",
+            "channel_id": "channel-2500"
+          },
+          "chain": {
+            "channel_id": "channel-12",
+            "path": "transfer/channel-12/uatom"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.svg"
+      },
+      "coingecko_id": "cosmos",
+      "keywords": [
+        "osmosis-price:uosmo:1",
         "osmosis-info_2"
       ]
     }

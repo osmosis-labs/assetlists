@@ -3331,7 +3331,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dai.grv.svg"
       },
       "keywords": [
-        "osmosis-price:ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7:713"
+        "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:702"
       ]
     },
     {
@@ -8713,9 +8713,300 @@
       },
       "keywords": [
         "osmosis-frontier",
-        "osmosis-info",
         "OSMO:995",
         "osmosis-price:ibc/FFA652599C77E853F017193E36B5AB2D4D9AFC4B54721A74904F80C9236BF3B7:995",
+        "osmosis-info_2"
+      ]
+    },
+    {
+      "description": "The native token cw20 for Silk on Secret Network",
+      "denom_units": [
+        {
+          "denom": "ibc/8A025A1E70101E39DE0C0F153E582A30806D3DA16795F6D868A3AA247D2DEDF7",
+          "exponent": 0,
+          "aliases": [
+            "cw20:secret1fl449muk5yq8dlad7a22nje4p5d2pnsgymhjfd"
+          ]
+        },
+        {
+          "denom": "silk",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "snip25",
+      "address": "secret1fl449muk5yq8dlad7a22nje4p5d2pnsgymhjfd",
+      "base": "ibc/8A025A1E70101E39DE0C0F153E582A30806D3DA16795F6D868A3AA247D2DEDF7",
+      "name": "Silk",
+      "display": "silk",
+      "symbol": "SILK",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret1fl449muk5yq8dlad7a22nje4p5d2pnsgymhjfd",
+            "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4",
+            "channel_id": "channel-44"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-476",
+            "path": "transfer/channel-476/cw20:secret1fl449muk5yq8dlad7a22nje4p5d2pnsgymhjfd"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/silk.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/silk.svg"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "OSMO:1005",
+        "osmosis-price:uosmo:1005",
+        "osmosis-info_2"
+      ]
+    },
+    {
+      "description": "Mille: the 1000th token on osmosis",
+      "denom_units": [
+        {
+          "denom": "ibc/912275A63A565BFD80734AEDFFB540132C51E446EAC41483B26EDE8A557C71CF",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno1llg7q2d5dqlrqzh5dxv8c7kzzjszld34s5vktqmlmaaxqjssz43sxyhq0d"
+          ]
+        },
+        {
+          "denom": "mile",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "cw20",
+      "address": "juno1llg7q2d5dqlrqzh5dxv8c7kzzjszld34s5vktqmlmaaxqjssz43sxyhq0d",
+      "base": "ibc/912275A63A565BFD80734AEDFFB540132C51E446EAC41483B26EDE8A557C71CF",
+      "name": "Mille",
+      "display": "mile",
+      "symbol": "MILE",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1llg7q2d5dqlrqzh5dxv8c7kzzjszld34s5vktqmlmaaxqjssz43sxyhq0d",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
+            "channel_id": "channel-47"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-169",
+            "path": "transfer/channel-169/cw20:juno1llg7q2d5dqlrqzh5dxv8c7kzzjszld34s5vktqmlmaaxqjssz43sxyhq0d"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/mille.png"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "OSMO:1000",
+        "osmosis-price:uosmo:1000"
+      ]
+    },
+    {
+      "description": "Social Impact DAO dedicated to combatting food insecurity and malnutrition",
+      "denom_units": [
+        {
+          "denom": "ibc/980A2748F37C938AD129B92A51E2ABA8CFFC6862ADD61EC1B291125535DBE30B",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno13ca2g36ng6etcfhr9qxx352uw2n5e92np54thfkm3w3nzlhsgvwsjaqlyq"
+          ]
+        },
+        {
+          "denom": "manna",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "cw20",
+      "address": "juno13ca2g36ng6etcfhr9qxx352uw2n5e92np54thfkm3w3nzlhsgvwsjaqlyq",
+      "base": "ibc/980A2748F37C938AD129B92A51E2ABA8CFFC6862ADD61EC1B291125535DBE30B",
+      "name": "Manna",
+      "display": "manna",
+      "symbol": "MANNA",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno13ca2g36ng6etcfhr9qxx352uw2n5e92np54thfkm3w3nzlhsgvwsjaqlyq",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
+            "channel_id": "channel-47"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-169",
+            "path": "transfer/channel-169/cw20:juno13ca2g36ng6etcfhr9qxx352uw2n5e92np54thfkm3w3nzlhsgvwsjaqlyq"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/manna.png"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "OSMO:997",
+        "osmosis-price:uosmo:997"
+      ]
+    },
+    {
+      "description": "Wrapped FIL on Axelar",
+      "denom_units": [
+        {
+          "denom": "ibc/18FB5C09D9D2371F659D4846A956FA56225E377EE3C3652A2BF3542BF809159D",
+          "exponent": 0,
+          "aliases": [
+            "wfil-wei"
+          ]
+        },
+        {
+          "denom": "fil",
+          "exponent": 18
+        }
+      ],
+      "base": "ibc/18FB5C09D9D2371F659D4846A956FA56225E377EE3C3652A2BF3542BF809159D",
+      "name": "Wrapped FIL from Filecoin",
+      "display": "fil",
+      "symbol": "axlFIL",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "filecoin",
+            "base_denom": "0x60E1773636CF5E4A227d9AC24F20fEca034ee25A"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "wfil-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208",
+            "path": "transfer/channel-208/wfil-wei"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/filecoin/images/wfil.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/filecoin/images/wfil.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier",
+        "osmosis-info",
+        "OSMO:1006",
+        "osmosis-price:uosmo:1006",
+        "osmosis-info_2"
+      ]
+    },
+    {
+      "description": "Void",
+      "denom_units": [
+        {
+          "denom": "ibc/593F820ECE676A3E0890C734EC4F3A8DE16EC10A54EEDFA8BDFEB40EEA903960",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno1lpvx3mv2a6ddzfjc7zzz2v2cm5gqgqf0hx67hc5p5qwn7hz4cdjsnznhu8"
+          ]
+        },
+        {
+          "denom": "void",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "cw20",
+      "address": "juno1lpvx3mv2a6ddzfjc7zzz2v2cm5gqgqf0hx67hc5p5qwn7hz4cdjsnznhu8",
+      "base": "ibc/593F820ECE676A3E0890C734EC4F3A8DE16EC10A54EEDFA8BDFEB40EEA903960",
+      "name": "Void",
+      "display": "void",
+      "symbol": "VOID",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1lpvx3mv2a6ddzfjc7zzz2v2cm5gqgqf0hx67hc5p5qwn7hz4cdjsnznhu8",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
+            "channel_id": "channel-47"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-169",
+            "path": "transfer/channel-169/cw20:juno1lpvx3mv2a6ddzfjc7zzz2v2cm5gqgqf0hx67hc5p5qwn7hz4cdjsnznhu8"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/void.png"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "OSMO:1003",
+        "osmosis-price:uosmo:1003",
+        "osmosis-info_2"
+      ]
+    },
+    {
+      "description": "The native token cw20 for Shade on Secret Network",
+      "denom_units": [
+        {
+          "denom": "ibc/0B3D528E74E3DEAADF8A68F393887AC7E06028904D02173561B0D27F6E751D0A",
+          "exponent": 0,
+          "aliases": [
+            "cw20:secret153wu605vvp934xhd4k9dtd640zsep5jkesstdm"
+          ]
+        },
+        {
+          "denom": "shd",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "snip25",
+      "address": "secret153wu605vvp934xhd4k9dtd640zsep5jkesstdm",
+      "base": "ibc/0B3D528E74E3DEAADF8A68F393887AC7E06028904D02173561B0D27F6E751D0A",
+      "name": "Shade",
+      "display": "shd",
+      "symbol": "SHD",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret153wu605vvp934xhd4k9dtd640zsep5jkesstdm",
+            "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4",
+            "channel_id": "channel-44"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-476",
+            "path": "transfer/channel-476/cw20:secret153wu605vvp934xhd4k9dtd640zsep5jkesstdm"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/shd.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/shd.svg"
+      },
+      "coingecko_id": "shade-protocol",
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "OSMO:1004",
+        "osmosis-price:uosmo:1004",
         "osmosis-info_2"
       ]
     }

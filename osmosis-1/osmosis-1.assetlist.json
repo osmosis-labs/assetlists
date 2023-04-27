@@ -3659,7 +3659,8 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/meme/images/meme.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/meme/images/meme.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/meme/images/meme.svg"
       },
       "coingecko_id": "meme-network",
       "keywords": [
@@ -4916,7 +4917,7 @@
       ]
     },
     {
-      "description": "The native token of Lumen Network",
+      "description": "The native token of LumenX Network",
       "denom_units": [
         {
           "denom": "ibc/FFA652599C77E853F017193E36B5AB2D4D9AFC4B54721A74904F80C9236BF3B7",
@@ -5427,6 +5428,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/ststars.svg"
       },
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
         "STARS:810",
@@ -5715,6 +5717,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stjuno.svg"
       },
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
         "JUNO:817",
@@ -5990,6 +5993,7 @@
       },
       "coingecko_id": "jackal-protocol",
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:832",
@@ -6975,7 +6979,8 @@
       "keywords": [
         "osmosis-frontier",
         "OSMO:901",
-        "osmosis-price:uosmo:901"
+        "osmosis-price:uosmo:901",
+        "osmosis-info_2"
       ]
     },
     {
@@ -7323,6 +7328,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stluna.svg"
       },
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
         "LUNA:913",
         "osmosis-price:ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9:913"
@@ -7373,6 +7379,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stevmos.svg"
       },
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
         "EVMOS:922",
@@ -7952,7 +7959,7 @@
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:959",
-        "osmosis-price:uosmo:959",
+        "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:966",
         "osmosis-info_2"
       ]
     },
@@ -8428,8 +8435,7 @@
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:979",
-        "osmosis-price:uosmo:979",
-        "osmosis-info_2"
+        "osmosis-price:uosmo:979"
       ]
     },
     {
@@ -8663,6 +8669,54 @@
         "osmosis-frontier",
         "OSMO:993",
         "osmosis-price:uosmo:993"
+      ]
+    },
+    {
+      "description": "Light: LumenX community DAO treasury token",
+      "denom_units": [
+        {
+          "denom": "ibc/3DC08BDF2689978DBCEE28C7ADC2932AA658B2F64B372760FBC5A0058669AD29",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno1dpany8c0lj526lsa02sldv7shzvnw5dt5ues72rk35hd69rrydxqeraz8l"
+          ]
+        },
+        {
+          "denom": "light",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "cw20",
+      "address": "juno1dpany8c0lj526lsa02sldv7shzvnw5dt5ues72rk35hd69rrydxqeraz8l",
+      "base": "ibc/3DC08BDF2689978DBCEE28C7ADC2932AA658B2F64B372760FBC5A0058669AD29",
+      "name": "LIGHT",
+      "display": "light",
+      "symbol": "LIGHT",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1dpany8c0lj526lsa02sldv7shzvnw5dt5ues72rk35hd69rrydxqeraz8l",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
+            "channel_id": "channel-47"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-169",
+            "path": "transfer/channel-169/cw20:juno1dpany8c0lj526lsa02sldv7shzvnw5dt5ues72rk35hd69rrydxqeraz8l"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/light.png"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "OSMO:995",
+        "osmosis-price:ibc/FFA652599C77E853F017193E36B5AB2D4D9AFC4B54721A74904F80C9236BF3B7:995",
+        "osmosis-info_2"
       ]
     }
   ]

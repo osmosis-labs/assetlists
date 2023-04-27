@@ -1,0 +1,104 @@
+{
+  "chain_name": "osmo-test-5",
+  "assets": [
+    {
+      "description": "The native token of Osmosis",
+      "denom_units": [
+        {
+          "denom": "uosmo",
+          "exponent": 0,
+          "aliases": []
+        },
+        {
+          "denom": "osmo",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "uosmo",
+      "name": "Osmosis",
+      "display": "osmo",
+      "symbol": "OSMO",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
+      },
+      "coingecko_id": "osmosis",
+      "keywords": [
+        "dex",
+        "staking",
+        "osmosis-price:ibc/FF3065989E34457F342D4EFB8692406D49D4E2B5C70F725F127862E22CE6BDCD:766",
+        "osmosis-info_2"
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "uion",
+          "exponent": 0
+        },
+        {
+          "denom": "ion",
+          "exponent": 6
+        }
+      ],
+      "base": "uion",
+      "name": "Ion",
+      "display": "ion",
+      "symbol": "ION",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
+      },
+      "coingecko_id": "ion",
+      "keywords": [
+        "memecoin",
+        "osmosis-price:uosmo:2",
+        "osmosis-info_2"
+      ]
+    },
+    {
+      "description": "The native token of JUNO Chain",
+      "denom_units": [
+        {
+          "denom": "ibc/7E3DB8DA12B7A7E2056E2449434A6F745E3C29B50217538BE31A50375EF088C6",
+          "exponent": 0,
+          "aliases": [
+            "ujunox"
+          ]
+        },
+        {
+          "denom": "junox",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/7E3DB8DA12B7A7E2056E2449434A6F745E3C29B50217538BE31A50375EF088C6",
+      "name": "Juno Testnet",
+      "display": "junox",
+      "symbol": "JUNOX",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "junotestnet",
+            "base_denom": "ujunox",
+            "channel_id": "channel-140"
+          },
+          "chain": {
+            "channel_id": "channel-3316",
+            "path": "transfer/channel-3316/ujunox"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.svg"
+      },
+      "coingecko_id": "juno-network",
+      "keywords": [
+        "osmosis-price:uosmo:789",
+        "osmosis-info_2"
+      ]
+    }
+  ]
+}

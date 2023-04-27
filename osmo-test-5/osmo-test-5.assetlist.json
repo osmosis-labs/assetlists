@@ -184,6 +184,49 @@
         "osmosis-price:uosmo:1",
         "osmosis-info_2"
       ]
+    },
+    {
+      "description": "Akash Token (AKT) is the Akash Network's native utility token, used as the primary means to govern, secure the blockchain, incentivize participants, and provide a default mechanism to store and exchange value.",
+      "denom_units": [
+        {
+          "denom": "ibc/4DAE26570FD24ABA40E2BE4137E39D946C78B00B248D3F78B0919567C4371156",
+          "exponent": 0,
+          "aliases": [
+            "uakt"
+          ]
+        },
+        {
+          "denom": "akt",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/4DAE26570FD24ABA40E2BE4137E39D946C78B00B248D3F78B0919567C4371156",
+      "name": "Akash Testnet",
+      "display": "akt",
+      "symbol": "AKT",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "sandbox",
+            "base_denom": "uakt",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-4",
+            "path": "transfer/channel-1/uakt"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.svg"
+      },
+      "coingecko_id": "akash-network",
+      "keywords": [
+        "osmosis-price:uosmo:3",
+        "osmosis-info_2"
+      ]
     }
   ]
 }

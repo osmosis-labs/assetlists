@@ -23,7 +23,9 @@ async function queryPools(domain) {
     baseUrl = 'https://lcd.osmosis.zone/osmosis/gamm/v1beta1/pools';
   } else if (domain == "osmosistestnet") {
     baseUrl = 'https://lcd.testnet.osmosis.zone/osmosis/gamm/v1beta1/pools';
-  } else {
+  } else if (domain == "osmosistestnet5") {
+    baseUrl = 'https://lcd.osmotest5.osmosis.zone/osmosis/gamm/v1beta1/pools';
+  }else {
     return;
   }
   console.log(domain);
@@ -128,7 +130,11 @@ function getAssets(domain){
   } else if (domain == "osmosistestnet") {
     usd = "ibc/FF3065989E34457F342D4EFB8692406D49D4E2B5C70F725F127862E22CE6BDCD", // aUSDC
     osmo = "uosmo",
-    atom = "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2" // ATOM
+    atom = "ibc/" // ATOM
+  } else if (domain == "osmosistestnet5") {
+    usd = "ibc/3D3E77333E4AAE1BCE0F03BEDA9A538166D113AF1B60EB1C35365D03506F07F4", // aUSDC
+    osmo = "uosmo",
+    atom = "ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477" // ATOM
   } else {
     console.log("Unrecognized Domain");
   }

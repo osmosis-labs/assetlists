@@ -244,9 +244,9 @@
         }
       ],
       "base": "ibc/B3504E092456BA618CC28AC671A71FB08C6CA0FD0BE7C8A5B5A3E2DD933CC9E4",
-      "name": "Noble Testnet",
+      "name": "USD Coin",
       "display": "usdc",
-      "symbol": "USDC",
+      "symbol": "nUSDC",
       "traces": [
         {
           "type": "ibc",
@@ -266,6 +266,56 @@
         "svg": ""
       },
       "coingecko_id": "noble-network",
+      "keywords": [
+        "osmosis-info_2"
+      ]
+    },
+    {
+      "description": "Circle's stablecoin on Axelar",
+      "denom_units": [
+        {
+          "denom": "ibc/6F34E1BD664C36CE49ACC28E60D62559A5F96C4F9A6CCE4FC5A67B2852E24CFE",
+          "exponent": 0,
+          "aliases": [
+            "uausdc"
+          ]
+        },
+        {
+          "denom": "ausdc",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/6F34E1BD664C36CE49ACC28E60D62559A5F96C4F9A6CCE4FC5A67B2852E24CFE",
+      "name": "USD Coin",
+      "display": "ausdc",
+      "symbol": "aUSDC",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereumtestnet",
+            "base_denom": "0x254d06f33bDc5b8ee05b2ea472107E300226659A"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar-testnet-lisbon-3",
+            "base_denom": "uausdc",
+            "channel_id": "channel-227"
+          },
+          "chain": {
+            "channel_id": "channel-3",
+            "path": "transfer/channel-3/uausdc"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.svg"
+      },
+      "coingecko_id": "usd-coin",
       "keywords": [
         "osmosis-info_2"
       ]

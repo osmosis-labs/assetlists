@@ -21,75 +21,41 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
+import * as chain_reg from './chain_registry.mjs';
 import { returnAssets } from './getPools.mjs';
 
 
-const chainRegistryRoot = "../../../chain-registry";
-const chainRegistryMainnetsSubdirectory = "";
-const chainRegistryTestnetsSubdirectory = "/testnets";
-let chainRegistrySubdirectory = "";
+const chainNameToChainIdMap = new Map([
+  ["osmosis", "osmosis-1"],
+  ["osmosistestnet", "osmo-test-4"],
+  ["osmosistestnet5", "osmo-test-5"]
+]);
+
 const assetlistsRoot = "../../..";
-const assetlistsMainnetsSubdirectory = "/osmosis-1";
-const assetlistsTestnetsSubdirectory = "/osmo-test-4";
-let assetlistsSubdirectory = "";
 const assetlistFileName = "assetlist.json";
-const zoneAssetlistFileName = "osmosis.zone.json"
-const ibcFolderName = "_IBC";
-const mainnetChainName = "osmosis";
-const testnetChainName = "osmosistestnet";
-let localChainName = "";
-let localChainAssetBases = [];
-const mainnetChainId = "osmosis-1";
-const testnetChainId = "osmo-test-4";
-let localChainId = "";
-const assetlistSchema = {
-  description: "string",
-  denom_units: [],
-  type_asset: "string",
-  address: "string",
-  base: "string",
-  name: "string",
-  display: "string",
-  symbol: "string",
-  traces: [],
-  logo_URIs: {
-    png: "string",
-    svg: "string"
-  },
-  coingecko_id: "string",
-  keywords: []
-}
+const zoneAssetlistFileName = "osmosis.zone.json";
+const zoneChainlistFileName = "osmosis.zone_chains.json";
 
-function getZoneAssetlist() {
+
+function getZoneAssetlist(chainName) {
   try {
-    return JSON.parse(fs.readFileSync(path.join(assetlistsRoot, assetlistsSubdirectory, zoneAssetlistFileName)));
+    return JSON.parse(fs.readFileSync(path.join(
+      assetlistsRoot,
+      chainNameToChainIdMap.get(chainName),
+      zoneAssetlistFileName
+    )));
   } catch (err) {
     console.log(err);
   }
 }
 
-function copyRegisteredAsset(chain_name, base_denom) {
+function writeToFile(assetlist, chainName) {
   try {
-    const chainRegistryChainAssetlist = JSON.parse(fs.readFileSync(path.join(chainRegistryRoot, chainRegistrySubdirectory, chain_name, assetlistFileName)));
-    return chainRegistryChainAssetlist.assets.find((registeredAsset) => {
-      return registeredAsset.base === base_denom;
-    });
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-function getIbcConnections(ibcFileName) {
-  try {
-    return JSON.parse(fs.readFileSync(path.join(chainRegistryRoot, chainRegistrySubdirectory, ibcFolderName, ibcFileName)));
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-function writeToFile(assetlist) {
-  try {
-    fs.writeFile(path.join(assetlistsRoot, assetlistsSubdirectory, localChainId +'.assetlist.json'), JSON.stringify(assetlist,null,2), (err) => {
+    fs.writeFile(path.join(
+      assetlistsRoot,
+      chainNameToChainIdMap.get(chainName),
+      chainNameToChainIdMap.get(chainName) +'.assetlist.json'
+    ), JSON.stringify(assetlist,null,2), (err) => {
       if (err) throw err;
     });
   } catch (err) {
@@ -112,52 +78,45 @@ async function asyncForEach(array, callback) {
   }
 }
 
-function reorderProperties(object, referenceObject) {
-  let newObject = object;
-  if (typeof(object) === "object") {
-    if(object.constructor !== Array) {
-      newObject = {};
-      Object.keys(referenceObject).forEach((key) => {
-        if(object[key] && referenceObject[key]){
-          newObject[key] = reorderProperties(object[key], referenceObject[key]);
+const generateAssets = async (chainName, assets, zone_assets) => {
+  
+  let pool_assets = await returnAssets(chainName);
+  
+  await asyncForEach(zone_assets, async (zone_asset) => {
+
+    let generatedAsset = {};
+    
+    Object.keys(chain_reg.assetSchema).forEach((assetProperty) => {
+      let assetPropertyValue = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, assetProperty);
+      if (assetProperty == "traces") {
+        generatedAsset[assetProperty] = {};
+      }
+      if (assetPropertyValue) {
+        if (assetProperty == "logo_URIs") {
+          generatedAsset[assetProperty] = {};
+          if (assetPropertyValue.png) {
+            generatedAsset[assetProperty].png = assetPropertyValue.png;
+          }
+          if (assetPropertyValue.svg) {
+            generatedAsset[assetProperty].svg = assetPropertyValue.svg;
+          }
+        } else {
+          generatedAsset[assetProperty] = assetPropertyValue;
         }
-      });
-    }
-  }
-  return newObject;
-}
-
-function getLocalChainAssetBases() {
-  try {
-    const chainRegistryChainAssetlist = JSON.parse(fs.readFileSync(path.join(chainRegistryRoot, chainRegistrySubdirectory, localChainName, assetlistFileName)));
-    chainRegistryChainAssetlist.assets.forEach((asset) => {
-      localChainAssetBases.push(asset.base);
+      }
     });
-  } catch (err) {
-    console.log(err);
-  }
-}
 
-const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
-  
-  let assets = await returnAssets(localChainName);
-  
-  await asyncForEach(zoneAssetlist.assets, async (zoneAsset) => {
-
-    let generatedAsset = copyRegisteredAsset(zoneAsset.chain_name, zoneAsset.base_denom);
-
-    if(zoneAsset.chain_name != localChainName) {
-
+    if(zone_asset.chain_name != chainName) {
 
       //--Set Up Trace for IBC Transfer--
       let type = "ibc";
       let counterparty = {
-        chain_name: zoneAsset.chain_name,
-        base_denom: zoneAsset.base_denom,
+        chain_name: zone_asset.chain_name,
+        base_denom: zone_asset.base_denom,
         port: "transfer"
       };
       let chain = {
-        chain_name: localChainName,
+        chain_name: chainName,
         port: "transfer"
       };
       
@@ -177,19 +136,17 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
         chainOrder = 1;
       }
       
-      //--Find IBC File Name--
-      let ibcFileName = chain_1.chain_name + "-" + chain_2.chain_name + ".json";
-      
       //--Find IBC Connection--
-      const ibcConnections = getIbcConnections(ibcFileName);
+      let channels = chain_reg.getIBCFileProperty(chain_1.chain_name, chain_2.chain_name, "channels");
       
       //--Find IBC Channel and Port Info--
-      if(zoneAsset.path) {
+      if(zone_asset.path) {
+      
         //--With Path--
-        let parts = zoneAsset.path.split("/");
+        let parts = zone_asset.path.split("/");
         chain.port = parts[0];
         chain.channel_id = parts[1];
-        ibcConnections.channels.forEach(function(channel) {
+        channels.forEach(function(channel) {
           if(!chainOrder) {
             if(channel.chain_1.port_id === chain_1.port && channel.chain_1.channel_id === chain_1.channel_id) {
               chain_2.channel_id = channel.chain_2.channel_id;
@@ -205,8 +162,9 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
           }
         });
       } else {
+      
         //--without Path--
-        ibcConnections.channels.forEach(function(channel) {
+        channels.forEach(function(channel) {
           if(channel.chain_1.port_id.slice(0,5) === chain_1.port.slice(0,5) && channel.chain_2.port_id.slice(0,5) === chain_2.port.slice(0,5)) {
             chain_1.channel_id = channel.chain_1.channel_id;
             chain_2.channel_id = channel.chain_2.channel_id;
@@ -225,19 +183,20 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
       };
       
       //--Add Trace Path--
-      trace.chain.path = chain.port + "/" + trace.chain.channel_id + "/" + zoneAsset.base_denom;
+      trace.chain.path = chain.port + "/" + trace.chain.channel_id + "/" + zone_asset.base_denom;
       let traces = [];
-      if(generatedAsset.traces) {
+      if(Object.keys(generatedAsset.traces).length > 0) {
+      //if(generatedAsset.traces) {
         traces = generatedAsset.traces;
         if(traces[traces.length - 1].type === "ibc" || traces[traces.length - 1].type === "ibc-cw20") {
           if(traces[traces.length - 1].chain.path) {
             trace.chain.path = chain.port + "/" + trace.chain.channel_id + "/" + traces[traces.length - 1].chain.path;
           } else {
-            console.log(generatedAsset.base + "Missing Path");
+            console.log(zone_asset.base_denom + "Missing Path");
           }
         }
-      } else if (zoneAsset.base_denom.slice(0,7) === "factory") {
-        let baseReplacement = zoneAsset.base_denom.replace(/\//g,":");
+      } else if (zone_asset.base_denom.slice(0,7) === "factory") {
+        let baseReplacement = zone_asset.base_denom.replace(/\//g,":");
         trace.chain.path = chain.port + "/" + trace.chain.channel_id + "/" + baseReplacement;
       }
       
@@ -257,36 +216,30 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
       
       //--Replace Base with IBC Hash--
       generatedAsset.base = await ibcHash;
+      //generatedAsset.denom_units = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, "denom_units");
       generatedAsset.denom_units.forEach(async function(unit) {
-        if(unit.denom === zoneAsset.base_denom) {
+        if(unit.denom === zone_asset.base_denom) {
           if(!unit.aliases) {
             unit.aliases = [];
           }
-          unit.aliases.push(zoneAsset.base_denom);
+          unit.aliases.push(zone_asset.base_denom);
           unit.denom = await ibcHash;
         }
         return;
-      });
-      
-      //--Use local version of asset with same IBC Hash--
-      localChainAssetBases.forEach((asset) => {
-        if(asset == generatedAsset.base) {
-          generatedAsset = copyRegisteredAsset(localChainName, generatedAsset.base);
-        }
       });
 
     }
   
     //--Overrides Properties when Specified--
-    if(zoneAsset.override_properties) {
-      if(zoneAsset.override_properties.symbol) {
-        generatedAsset.symbol = zoneAsset.override_properties.symbol;
+    if(zone_asset.override_properties) {
+      if(zone_asset.override_properties.symbol) {
+        generatedAsset.symbol = zone_asset.override_properties.symbol;
       }
-      if(zoneAsset.override_properties.logo_URIs) {
-        generatedAsset.logo_URIs = zoneAsset.override_properties.logo_URIs;
+      if(zone_asset.override_properties.logo_URIs) {
+        generatedAsset.logo_URIs = zone_asset.override_properties.logo_URIs;
       }
-      if(zoneAsset.override_properties.coingecko_id) {
-        generatedAsset.coingecko_id = zoneAsset.override_properties.coingecko_id;
+      if(zone_asset.override_properties.coingecko_id) {
+        generatedAsset.coingecko_id = zone_asset.override_properties.coingecko_id;
       }
     }
     
@@ -295,85 +248,63 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
     if(generatedAsset.keywords) {
       keywords = generatedAsset.keywords;
     }
-    if(zoneAsset.osmosis_main) {
+    if(zone_asset.osmosis_main) {
       keywords.push("osmosis-main");
     }
-    if(zoneAsset.osmosis_frontier) {
+    if(zone_asset.osmosis_frontier) {
       keywords.push("osmosis-frontier");
     }
-    if(zoneAsset.osmosis_info) {
+    if(zone_asset.osmosis_info) {
       keywords.push("osmosis-info");
     }
-    if(zoneAsset.pools) {
-      Object.keys(zoneAsset.pools).forEach((key) => {
-        keywords.push(key + ":" + zoneAsset.pools[key]);
+    if(zone_asset.pools) {
+      Object.keys(zone_asset.pools).forEach((key) => {
+        keywords.push(key + ":" + zone_asset.pools[key]);
       });
     }
-    if (assets.get(generatedAsset.base)) {
-      if(assets.get(generatedAsset.base).osmosis_price) {
-        keywords.push(assets.get(generatedAsset.base).osmosis_price);
+    
+    if (pool_assets.get(generatedAsset.base)) {
+      if(pool_assets.get(generatedAsset.base).osmosis_price) {
+        keywords.push(pool_assets.get(generatedAsset.base).osmosis_price);
       }
-      if(assets.get(generatedAsset.base).osmosis_info) {
+      if(pool_assets.get(generatedAsset.base).osmosis_info) {
         keywords.push("osmosis-info_2");
       }
     }
+    
     if(keywords.length > 0) {
       generatedAsset.keywords = keywords;
     }
     
-    //--Re-order Properties--
-    generatedAsset = reorderProperties(generatedAsset, assetlistSchema);
-    
     //--Append Asset to Assetlist--
-    generatedAssetlist.push(generatedAsset);
+    assets.push(generatedAsset);
     
-    //console.log(generatedAssetlist);
+    //console.log(assets);
   
   });
 
 }
 
-
-async function generateAssetlist() {
+async function generateAssetlist(chainName) {
   
-  let zoneAssetlist = getZoneAssetlist();
-  
-  let generatedAssetlist = [];  
-  await generateAssets(generatedAssetlist, zoneAssetlist);
-  let chainAssetlist = {
-    chain_name: localChainName,
-    assets: await generatedAssetlist
+  let zoneAssetlist = getZoneAssetlist(chainName);
+  let assets = [];  
+  await generateAssets(chainName, assets, zoneAssetlist.assets);
+  let assetlist = {
+    zone: chainName,
+    assets: assets
   }
-  //console.log(chainAssetlist);
+  //console.log(assetlist);
   
-  writeToFile(chainAssetlist);
+  writeToFile(assetlist, chainName);
 
-}
-
-function selectDomain(domain) {
-  if(domain == "mainnets") {
-    chainRegistrySubdirectory = chainRegistryMainnetsSubdirectory;
-    assetlistsSubdirectory = assetlistsMainnetsSubdirectory;
-    localChainName = mainnetChainName;
-    localChainId = mainnetChainId;
-    getLocalChainAssetBases();
-  } else if(domain == "testnets") {
-    chainRegistrySubdirectory = chainRegistryTestnetsSubdirectory;
-    assetlistsSubdirectory = assetlistsTestnetsSubdirectory;
-    localChainName = testnetChainName;
-    localChainId = testnetChainId;
-    getLocalChainAssetBases();
-  } else {
-    console.log("Invalid Domain (Mainnets, Testnets, Devnets, etc.)");
-  }
 }
 
 async function main() {
-
-  selectDomain("mainnets");
-  await generateAssetlist();
-  selectDomain("testnets");
-  generateAssetlist();
+  
+  await generateAssetlist("osmosis");
+  await generateAssetlist("osmosistestnet");
+  await generateAssetlist("osmosistestnet5");
   
 }
 

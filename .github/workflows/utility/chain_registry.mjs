@@ -181,6 +181,24 @@ export function setFileProperty(chainName, file, property, value) {
   }
 }
 
+export function getIBCFileProperty(chainName1, chainName2, property) {
+  const chain1Directory = chainNameToDirectoryMap.get(chainName1);
+  const chain2Directory = chainNameToDirectoryMap.get(chainName2);
+  if(chain1Directory && chain2Directory) {
+    if(path.join(chain1Directory, "..") == path.join(chain2Directory, "..")) {
+      const ibcDirectory = path.join(chain1Directory, "..", "_IBC");
+      let list = [chainName1, chainName2];
+      list = list.sort();
+      const fileName = list[0] + '-' + list[1] + '.json';
+      const filePath = path.join(ibcDirectory, fileName);
+      const FILE_EXISTS = fs.existsSync(filePath);
+      if(FILE_EXISTS) {
+        return readJsonFile(filePath)[property];
+      }
+    }
+  }
+}
+
 export function getAssetProperty(chainName, baseDenom, property) {
   const assets = getFileProperty(chainName, "assetlist", "assets");
   if(assets) {

@@ -17,18 +17,16 @@ import * as path from 'path';
 import * as chain_reg from './chain_registry.mjs';
 
 
-const assetlistsRoot = "../../..";
 const chainNameToChainIdMap = new Map([
   ["osmosis", "osmosis-1"],
   ["osmosistestnet", "osmo-test-4"],
   ["osmosistestnet5", "osmo-test-5"]
 ]);
-let chains = [];
 
+const assetlistsRoot = "../../..";
 const assetlistFileName = "assetlist.json";
 const zoneAssetlistFileName = "osmosis.zone.json";
 const zoneChainlistFileName = "osmosis.zone_chains.json";
-
 
 function getZoneChainlist(chainName) {
   try {
@@ -56,7 +54,7 @@ function writeToFile(assetlist, chainName) {
   }
 }
 
-function generateChains(zone_chains) {
+function generateChains(chains, zone_chains) {
   
   zone_chains.forEach((zone_chain) => {
   
@@ -128,10 +126,9 @@ function generateChains(zone_chains) {
 
 function generateChainlist(chainName) {
   
-  chains = [];
   let zoneChainlist = getZoneChainlist(chainName);
-  
-  generateChains(zoneChainlist.chains);
+  let chains = [];
+  generateChains(chains, zoneChainlist.chains);
   let chainlist = {
     zone: chainName,
     chains: chains

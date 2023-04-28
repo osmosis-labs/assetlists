@@ -89,7 +89,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     Object.keys(chain_reg.assetSchema).forEach((assetProperty) => {
       let assetPropertyValue = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, assetProperty);
       if (assetProperty == "traces") {
-        generatedAsset[assetProperty] = {};
+        generatedAsset[assetProperty] = [];
       }
       if (assetPropertyValue) {
         if (assetProperty == "logo_URIs") {
@@ -185,7 +185,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
       //--Add Trace Path--
       trace.chain.path = chain.port + "/" + trace.chain.channel_id + "/" + zone_asset.base_denom;
       let traces = [];
-      if(Object.keys(generatedAsset.traces).length > 0) {
+      if(generatedAsset.traces.length > 0) {
       //if(generatedAsset.traces) {
         traces = generatedAsset.traces;
         if(traces[traces.length - 1].type === "ibc" || traces[traces.length - 1].type === "ibc-cw20") {

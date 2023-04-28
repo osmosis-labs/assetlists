@@ -291,7 +291,7 @@ async function generateAssetlist(chainName) {
   let assets = [];  
   await generateAssets(chainName, assets, zoneAssetlist.assets);
   let assetlist = {
-    zone: chainName,
+    chain_name: chainName,
     assets: assets
   }
   //console.log(assetlist);

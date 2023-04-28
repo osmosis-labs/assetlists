@@ -33,7 +33,7 @@ const chainNameToChainIdMap = new Map([
 
 const assetlistsRoot = "../../..";
 const assetlistFileName = "assetlist.json";
-const zoneAssetlistFileName = "osmosis.zone.json";
+const zoneAssetlistFileName = "osmosis.zone_assets.json";
 const zoneChainlistFileName = "osmosis.zone_chains.json";
 
 

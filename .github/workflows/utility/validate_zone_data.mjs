@@ -12,20 +12,25 @@ import * as path from 'path';
 import * as chain_reg from './chain_registry.mjs';
 
 const root = "../../..";
-const networkTypeToDirectoryMap = new Map();
-networkTypeToDirectoryMap.set("mainnet","osmosis-1");
-networkTypeToDirectoryMap.set("testnet","osmo-test-4");
-const zoneFileName = "osmosis.zone.json";
-const networkTypeToZoneFileMap = new Map();
-Array.from(networkTypeToDirectoryMap.keys()).forEach((networkType) => {
-  networkTypeToZoneFileMap.set(networkType, path.join(root, networkTypeToDirectoryMap.get(networkType), zoneFileName));
+
+const chainNameToChainIdMap = new Map([
+  ["osmosis", "osmosis-1"],
+  ["osmosistestnet", "osmo-test-4"],
+  ["osmosistestnet5", "osmo-test-5"]
+]);
+
+const zoneAssetsFileName = "osmosis.zone_assets.json";
+const zoneChainsFileName = "osmosis.zone_chains.json";
+const chainNameToZoneFileMap = new Map();
+Array.from(chainNameToChainIdMap.keys()).forEach((chainName) => {
+  chainNameToZoneFileMap.set(chainName, path.join(root, chainNameToChainIdMap.get(chainName), zoneAssetsFileName));
 });
 
 function main() {
   
   const chainRegAssetPointers = chain_reg.getAssetPointers();
-  Array.from(networkTypeToZoneFileMap.keys()).forEach((networkType) => {
-    let zoneJson = chain_reg.readJsonFile(networkTypeToZoneFileMap.get(networkType));
+  Array.from(chainNameToZoneFileMap.keys()).forEach((chainName) => {
+    let zoneJson = chain_reg.readJsonFile(chainNameToZoneFileMap.get(chainName));
     zoneJson.assets.forEach((zoneAsset) => {
       let ASSET_EXISTS = false;
       chainRegAssetPointers.forEach((chainRegAsset) => {

@@ -48,6 +48,7 @@ async function queryPools(domain) {
   }
   response = await fetch(url,options);
   result = await response.json();
+  if (!result.pools) { return; }
   getPools(result.pools);
   
   
@@ -363,6 +364,7 @@ function getLargestRoute(routes, i){
 export async function returnAssets(chain){
   getAssets(chain);
   await queryPools(chain);
+  if (pools.size == 0) { return; }
   getRoutes();
   console.log(ticks);
   return assets;

@@ -81,6 +81,7 @@ async function asyncForEach(array, callback) {
 const generateAssets = async (chainName, assets, zone_assets) => {
   
   let pool_assets = await returnAssets(chainName);
+  if (!pool_assets) { return; }
   
   await asyncForEach(zone_assets, async (zone_asset) => {
 
@@ -290,21 +291,22 @@ async function generateAssetlist(chainName) {
   let zoneAssetlist = getZoneAssetlist(chainName);
   let assets = [];  
   await generateAssets(chainName, assets, zoneAssetlist.assets);
+  if (!assets) { return; }
   let assetlist = {
     chain_name: chainName,
     assets: assets
   }
-  //console.log(assetlist);
+  console.log(assetlist);
   
-  writeToFile(assetlist, chainName);
+  //writeToFile(assetlist, chainName);
 
 }
 
 async function main() {
   
-  await generateAssetlist("osmosis");
+  //await generateAssetlist("osmosis");
   await generateAssetlist("osmosistestnet");
-  await generateAssetlist("osmosistestnet5");
+  //await generateAssetlist("osmosistestnet5");
   
 }
 

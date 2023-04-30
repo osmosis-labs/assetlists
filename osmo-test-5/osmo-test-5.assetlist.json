@@ -15,6 +15,7 @@
           "aliases": []
         }
       ],
+      "type_asset": "ics20",
       "base": "uosmo",
       "name": "Osmosis",
       "display": "osmo",
@@ -41,6 +42,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "uion",
       "name": "Ion",
       "display": "ion",
@@ -70,6 +72,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477",
       "name": "Cosmos",
       "display": "atom",
@@ -108,11 +111,20 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/6F34E1BD664C36CE49ACC28E60D62559A5F96C4F9A6CCE4FC5A67B2852E24CFE",
       "name": "USD Coin",
       "display": "ausdc",
       "symbol": "aUSDC",
       "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Circle"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -155,6 +167,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/8E2FEFCBD754FA3C97411F0126B9EC76191BAA1B3959CB73CECF396A4037BBF0",
       "name": "Juno Testnet",
       "display": "junox",
@@ -194,6 +207,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/0973EE75F04F14E896733FD6B6F00342E7CD7867785EE8596D3E74767BC19FC9",
       "name": "Mars",
       "display": "mars",

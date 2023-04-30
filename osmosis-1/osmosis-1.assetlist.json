@@ -13,6 +13,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "uosmo",
       "name": "Osmosis",
       "display": "osmo",
@@ -46,6 +47,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "uion",
       "name": "Ion",
       "display": "ion",
@@ -81,11 +83,20 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858",
       "name": "USD Coin",
       "display": "usdc",
       "symbol": "USDC",
       "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Circle"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -134,11 +145,20 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5",
       "name": "Wrapped Ether",
       "display": "weth",
       "symbol": "ETH",
       "traces": [
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "wei"
+          },
+          "provider": "Ethereum"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -187,11 +207,20 @@
           "exponent": 8
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F",
       "name": "Wrapped Bitcoin",
       "display": "wbtc",
       "symbol": "WBTC",
       "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "bitcoin",
+            "base_denom": "sat"
+          },
+          "provider": "BitGo, Kyber, and Ren"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -240,11 +269,20 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4",
       "name": "Tether USD",
       "display": "usdt",
       "symbol": "USDT",
       "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Tether"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -295,11 +333,20 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7",
       "name": "Dai Stablecoin",
       "display": "dai",
       "symbol": "DAI",
       "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "MakerDAO"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -349,6 +396,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/6329DD8CF31A334DD5BE3F68C846C9FE313281362B37686A62343BAC1EB1546D",
       "name": "Binance USD",
       "display": "busd",
@@ -401,6 +449,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
       "name": "Cosmos Hub Atom",
       "display": "atom",
@@ -448,6 +497,7 @@
           "exponent": 8
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/E6931F78057F7CC5DA0FD6CEF82FF39373A6E0452BF1FD76910B93292CF356C1",
       "name": "Cronos",
       "display": "cro",
@@ -495,11 +545,23 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/F4A070A6D78496D53127EA85C094A9EC87DFC1F36071B8CCDDBD020F933D213D",
       "name": "Wrapped BNB",
       "display": "wbnb",
       "symbol": "BNB",
       "traces": [
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "binancesmartchain",
+            "base_denom": "wei"
+          },
+          "chain": {
+            "contract": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"
+          },
+          "provider": "Binance"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -549,11 +611,20 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/AB589511ED0DD5FA56171A39978AFBF1371DB986EC1C3526CE138A16377E39BB",
       "name": "Wrapped Matic",
       "display": "wmatic",
       "symbol": "MATIC",
       "traces": [
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "polygon",
+            "base_denom": "wei"
+          },
+          "provider": "Polygon"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -602,11 +673,20 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/6F62F01D913E3FFE472A38C78235B8F021B511BC6596ADFF02615C8F83D3B373",
       "name": "Wrapped AVAX",
       "display": "avax",
       "symbol": "AVAX",
       "traces": [
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "avalanche",
+            "base_denom": "wei"
+          },
+          "provider": "Avalanche"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -666,6 +746,7 @@
           ]
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
       "name": "Luna Classic",
       "display": "luna",
@@ -712,6 +793,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED",
       "name": "Juno",
       "display": "juno",
@@ -759,11 +841,20 @@
           "exponent": 10
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/3FF92D26B407FD61AE95D975712A7C319CDE28DE4D80BDC9978D935932B991D7",
       "name": "Wrapped Polkadot",
       "display": "dot",
       "symbol": "DOT",
       "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "polkadot",
+            "base_denom": "Planck"
+          },
+          "provider": "Polkadot Parachain"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -813,6 +904,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/6AE98883D4D5D5FF9E50D7130F1305DA2FFA0C652D1DD9C123657C6B4EB2DF8A",
       "name": "Evmos",
       "display": "evmos",
@@ -860,6 +952,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/57AA1A70A4BC9769C525EBF6386F7A21536E04A79D62E1981EFCEF9428EBB205",
       "name": "Kava",
       "display": "kava",
@@ -907,6 +1000,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/0954E1C28EB7AF5B72D24F3BC2B47BBB2FDF91BDDFD57B74B99E133AED40972A",
       "name": "Secret Network",
       "display": "scrt",
@@ -965,6 +1059,7 @@
           ]
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC",
       "name": "TerraClassicUSD",
       "display": "ust",
@@ -1011,6 +1106,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/987C17B11ABC2B20019178ACE62929FE9840202CE79498E29FE8E5CB02B7C0A4",
       "name": "Stargaze",
       "display": "stars",
@@ -1058,6 +1154,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/B9E0A1A524E98BB407D3CED8720EFEFD186002F90C1B1B7964811DD0CCC12228",
       "name": "Chihuahua",
       "display": "huahua",
@@ -1105,6 +1202,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/A0CC0CF735BFB30E730C70019D4218A1244FF383503FF7579C9201AB93CA9293",
       "name": "Persistence",
       "display": "xprt",
@@ -1160,14 +1258,6 @@
       "display": "pstake",
       "symbol": "PSTAKE",
       "traces": [
-        {
-          "type": "liquid-stake",
-          "counterparty": {
-            "chain_name": "persistence",
-            "base_denom": "XPRT"
-          },
-          "provider": "Persistence"
-        },
         {
           "type": "bridge",
           "counterparty": {
@@ -1230,6 +1320,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/1480B8FD20AD5FCAE81EA87584D269547DD4D436843C1D20F15E00EB64743EF4",
       "name": "Akash Network",
       "display": "akt",
@@ -1277,6 +1368,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/1DCC8A6CB5689018431323953344A9F6CC4D0BFB261E88C9F7777372C10CD076",
       "name": "Regen Network",
       "display": "regen",
@@ -1324,6 +1416,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/9712DBB13B9631EDFA9BF61B55F1B2D290B2ADB67E3A4EB3A875F3B6081B3B84",
       "name": "Sentinel",
       "display": "dvpn",
@@ -1371,6 +1464,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/7C4D60AA95E5A7558B0A364860979CA34B7FF8AAF255B87AF9E879374470CEC0",
       "name": "IRISnet",
       "display": "iris",
@@ -1418,6 +1512,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/52B1AA623B34EB78FD767CEA69E8D7FA6C9CFE1FBF49C5406268FD325E2CC2AC",
       "name": "Starname",
       "display": "iov",
@@ -1465,6 +1560,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/1DC495FCEFDA068A3820F903EDBD78B942FBD204D7E93D3BA2B432E9669D1A59",
       "name": "e-Money",
       "display": "ngm",
@@ -1512,6 +1608,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/5973C068568365FFF40DEDCF1A1CB7582B6116B731CD31A12231AE25E20B871F",
       "name": "e-Money EUR",
       "display": "eur",
@@ -1558,6 +1655,7 @@
           "exponent": 9
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/9989AD6CCA39D1131523DB0617B50F6442081162294B4795E26746292467B525",
       "name": "LikeCoin",
       "display": "like",
@@ -1605,6 +1703,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/F3FF7A84A73B62921538642F9797C423D2B4C4ACB3C7FCFFCE7F12AA69909C4B",
       "name": "IXO",
       "display": "ixo",
@@ -1652,6 +1751,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/D805F1DA50D31B96E4282C1D4181EDDFB1A44A598BFF5666F4B43E4B8BEA95A5",
       "name": "BitCanna",
       "display": "bcna",
@@ -1699,7 +1799,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "sdk.coin",
+      "type_asset": "ics20",
       "base": "ibc/4E5444C35610CC76FC94E7F7886B93121175C28262DDFDDE6F84E82BF2425452",
       "name": "BitSong",
       "display": "btsg",
@@ -1747,6 +1847,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/B547DC9B897E7C3AA5B824696110B8E3D2C31E3ED3F02FF363DCBAD82457E07E",
       "name": "Ki",
       "display": "xki",
@@ -1794,6 +1895,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/3BCCC93AD5DF58D11A6F8A05FA8BC801CBA0BA61A981F57E91B8B598BF8061CB",
       "name": "MediBloc",
       "display": "med",
@@ -1837,6 +1939,7 @@
           ]
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4",
       "name": "Bostrom",
       "display": "boot",
@@ -1882,6 +1985,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/EA3E1640F9B1532AB129A571203A0B9F789A7F14BB66E350DCBFA18E1A1931F0",
       "name": "Comdex",
       "display": "cmdx",
@@ -1929,6 +2033,7 @@
           "exponent": 9
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/7A08C6F11EF0F59EB841B9F788A87EC9F2361C7D9703157EC13D940DC53031FA",
       "name": "cheqd",
       "display": "cheq",
@@ -1976,6 +2081,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/8A34AF0C1943FD0DFCDE9ADBF0B2C9959C45E87E6088EA2FC6ADACD59261B8A2",
       "name": "Lum",
       "display": "lum",
@@ -2023,6 +2129,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/E7B35499CFBEB0FF5778127ABA4FB2C4B79A6B8D3D831D4379C4048C238796BD",
       "name": "Vidulum",
       "display": "vdl",
@@ -2070,6 +2177,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/EA4C0A9F72E2CEDF10D0E7A9A6A22954DB3444910DB5BE980DF59B05A46DAD1C",
       "name": "Desmos",
       "display": "dsm",
@@ -2117,6 +2225,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/307E5C96C8F60D1CBEE269A9A86C0834E1DB06F2B3788AE4F716EDB97A48B97D",
       "name": "Dig Chain",
       "display": "dig",
@@ -2171,6 +2280,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/9BBA9A1C257E971E38C1422780CE6F0B0686F0A3085E2D61118D904BFE0F5F5E",
       "name": "Somm",
       "display": "somm",
@@ -2218,6 +2328,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/F867AE2112EFE646EC71A25CD2DFABB8927126AC1E19F1BBF0FF693A4ECA05DE",
       "name": "Band Protocol",
       "display": "band",
@@ -2265,6 +2376,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/346786EA82F41FE55FAD14BF69AD8BA9B36985406E43F3CB23E6C45A285A9593",
       "name": "DARC",
       "display": "darc",
@@ -2311,6 +2423,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/67795E528DF67C5606FC20F824EA39A6EF55BA133F4DC79C90A8C47A0901E17C",
       "name": "Umee",
       "display": "umee",
@@ -2358,6 +2471,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/E97634A40119F1898989C2A23224ED83FDD0A57EA46B3A094E287288D1672B44",
       "name": "Graviton",
       "display": "graviton",
@@ -2405,6 +2519,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/9BCB27203424535B6230D594553F1659C77EC173E36D9CF4759E7186EE747E84",
       "name": "Decentr",
       "display": "dec",
@@ -2441,7 +2556,7 @@
       "description": "The native token cw20 for Marble DAO on Juno Chain",
       "denom_units": [
         {
-          "denom": "ibc/F6B691D5F7126579DDC87357B09D653B47FDCE0A3383FF33C8D8B544FE29A8A6",
+          "denom": "ibc/FD91F45B7CD255C889CCB46D31C4880C1070512565C50514AA3EB3CB726741F4",
           "exponent": 0,
           "aliases": [
             "cw20:juno1g2g7ucurum66d42g8k5twk34yegdq8c82858gz0tq2fc75zy7khssgnhjl"
@@ -2452,9 +2567,9 @@
           "exponent": 3
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1g2g7ucurum66d42g8k5twk34yegdq8c82858gz0tq2fc75zy7khssgnhjl",
-      "base": "ibc/F6B691D5F7126579DDC87357B09D653B47FDCE0A3383FF33C8D8B544FE29A8A6",
+      "base": "ibc/FD91F45B7CD255C889CCB46D31C4880C1070512565C50514AA3EB3CB726741F4",
       "name": "Marble",
       "display": "marble",
       "symbol": "MARBLE",
@@ -2464,13 +2579,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno1g2g7ucurum66d42g8k5twk34yegdq8c82858gz0tq2fc75zy7khssgnhjl",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno1g2g7ucurum66d42g8k5twk34yegdq8c82858gz0tq2fc75zy7khssgnhjl"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno1g2g7ucurum66d42g8k5twk34yegdq8c82858gz0tq2fc75zy7khssgnhjl"
           }
         }
       ],
@@ -2482,9 +2597,7 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "OSMO:649",
-        "osmosis-price:uosmo:649",
-        "osmosis-info_2"
+        "OSMO:649"
       ]
     },
     {
@@ -2505,7 +2618,7 @@
           ]
         }
       ],
-      "type_asset": "sdk.coin",
+      "type_asset": "ics20",
       "base": "ibc/8FEFAE6AECF6E2A255585617F781F35A8D5709A545A804482A261C0C9548A9D3",
       "name": "Carbon",
       "display": "dswth",
@@ -2553,6 +2666,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/41999DF04D9441DAC0DF5D8291DF4333FBCBA810FFD63FDCE34FDF41EF37B6F7",
       "name": "Cerberus",
       "display": "crbrus",
@@ -2599,6 +2713,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/5D1F516200EE8C6B2354102143B78A2DEDA25EDE771AC0F8DC3C1837C8FD4447",
       "name": "fetch-ai",
       "display": "fet",
@@ -2646,6 +2761,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/CBA34207E969623D95D057D9B11B0C8B32B89A71F170577D982FDDE623813FFC",
       "name": "AssetMantle",
       "display": "mntl",
@@ -2682,7 +2798,7 @@
       "description": "The native token cw20 for Neta on Juno Chain",
       "denom_units": [
         {
-          "denom": "ibc/297C64CC42B5A8D8F82FE2EBE208A6FE8F94B86037FA28C4529A23701C228F7A",
+          "denom": "ibc/41F21D47117EAADE50568A70CD1E6FB567469E6838157CEF73172CDF126582DA",
           "exponent": 0,
           "aliases": [
             "cw20:juno168ctmpyppk90d34p3jjy658zf5a5l3w8wk35wht6ccqj4mr0yv8s4j5awr"
@@ -2693,9 +2809,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno168ctmpyppk90d34p3jjy658zf5a5l3w8wk35wht6ccqj4mr0yv8s4j5awr",
-      "base": "ibc/297C64CC42B5A8D8F82FE2EBE208A6FE8F94B86037FA28C4529A23701C228F7A",
+      "base": "ibc/41F21D47117EAADE50568A70CD1E6FB567469E6838157CEF73172CDF126582DA",
       "name": "Neta",
       "display": "neta",
       "symbol": "NETA",
@@ -2705,13 +2821,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno168ctmpyppk90d34p3jjy658zf5a5l3w8wk35wht6ccqj4mr0yv8s4j5awr",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno168ctmpyppk90d34p3jjy658zf5a5l3w8wk35wht6ccqj4mr0yv8s4j5awr"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno168ctmpyppk90d34p3jjy658zf5a5l3w8wk35wht6ccqj4mr0yv8s4j5awr"
           }
         }
       ],
@@ -2723,9 +2839,7 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "OSMO:631",
-        "osmosis-price:uosmo:631",
-        "osmosis-info_2"
+        "OSMO:631"
       ]
     },
     {
@@ -2743,6 +2857,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/64BA6E31FE887D66C6F8F31C7B1A80C7CA179239677B4088BB55F5EA07DBE273",
       "name": "Injective",
       "display": "INJ",
@@ -2800,6 +2915,7 @@
           ]
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/204A582244FC241613DBB50B04D1D454116C58C4AF7866C186AA0D6EEAD42780",
       "name": "TerraClassicKRW",
       "display": "krt",
@@ -2842,6 +2958,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/655BCEF3CDEBE32863FF281DBBE3B06160339E9897DC9C9C9821932A5F8BA6F8",
       "name": "Microtick",
       "display": "tick",
@@ -2887,6 +3004,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/8318FD63C42203D16DDCAF49FE10E8590669B3219A3E87676AC9DA50722687FB",
       "name": "Sifchain Rowan",
       "display": "ROWAN",
@@ -2933,6 +3051,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/7ED954CFFFC06EE8419387F3FC688837FF64EF264DE14219935F724EEEDBF8D3",
       "name": "Shentu",
       "display": "ctk",
@@ -2961,7 +3080,7 @@
       "description": "Hope Galaxy is an NFT collection based on its own native Token $HOPE, a cw20 token on Juno chain.",
       "denom_units": [
         {
-          "denom": "ibc/C2A2E9CA95DDD4828B75124B5E27B8401C7D8493BC48353D418CBFC04565899B",
+          "denom": "ibc/B85A1103C55F85DF059ACD4E7CE64DF8D29755AE6AD828F3E6FE33AD7EF43D09",
           "exponent": 0,
           "aliases": [
             "cw20:juno1re3x67ppxap48ygndmrc7har2cnc7tcxtm9nplcas4v0gc3wnmvs3s807z"
@@ -2972,9 +3091,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1re3x67ppxap48ygndmrc7har2cnc7tcxtm9nplcas4v0gc3wnmvs3s807z",
-      "base": "ibc/C2A2E9CA95DDD4828B75124B5E27B8401C7D8493BC48353D418CBFC04565899B",
+      "base": "ibc/B85A1103C55F85DF059ACD4E7CE64DF8D29755AE6AD828F3E6FE33AD7EF43D09",
       "name": "Hope Galaxy",
       "display": "hope",
       "symbol": "HOPE",
@@ -2984,13 +3103,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno1re3x67ppxap48ygndmrc7har2cnc7tcxtm9nplcas4v0gc3wnmvs3s807z",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno1re3x67ppxap48ygndmrc7har2cnc7tcxtm9nplcas4v0gc3wnmvs3s807z"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno1re3x67ppxap48ygndmrc7har2cnc7tcxtm9nplcas4v0gc3wnmvs3s807z"
           }
         }
       ],
@@ -3001,15 +3120,14 @@
       "coingecko_id": "hope-galaxy",
       "keywords": [
         "osmosis-frontier",
-        "OSMO:653",
-        "osmosis-price:uosmo:653"
+        "OSMO:653"
       ]
     },
     {
       "description": "Racoon aims to simplify accessibility to AI, NFTs and Gambling on the Cosmos Ecosystem",
       "denom_units": [
         {
-          "denom": "ibc/6BDB4C8CCD45033F9604E4B93ED395008A753E01EECD6992E7D1EA23D9D3B788",
+          "denom": "ibc/449540BEDD6EC04AED561CBC1CEC0BB300F4B0086F3F3B89A6BC54125206D8CB",
           "exponent": 0,
           "aliases": [
             "cw20:juno1r4pzw8f9z0sypct5l9j906d47z998ulwvhvqe5xdwgy8wf84583sxwh0pa"
@@ -3020,9 +3138,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1r4pzw8f9z0sypct5l9j906d47z998ulwvhvqe5xdwgy8wf84583sxwh0pa",
-      "base": "ibc/6BDB4C8CCD45033F9604E4B93ED395008A753E01EECD6992E7D1EA23D9D3B788",
+      "base": "ibc/449540BEDD6EC04AED561CBC1CEC0BB300F4B0086F3F3B89A6BC54125206D8CB",
       "name": "Racoon",
       "display": "rac",
       "symbol": "RAC",
@@ -3032,13 +3150,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno1r4pzw8f9z0sypct5l9j906d47z998ulwvhvqe5xdwgy8wf84583sxwh0pa",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno1r4pzw8f9z0sypct5l9j906d47z998ulwvhvqe5xdwgy8wf84583sxwh0pa"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno1r4pzw8f9z0sypct5l9j906d47z998ulwvhvqe5xdwgy8wf84583sxwh0pa"
           }
         }
       ],
@@ -3049,8 +3167,7 @@
       "coingecko_id": "racoon",
       "keywords": [
         "osmosis-frontier",
-        "OSMO:669",
-        "osmosis-price:uosmo:669"
+        "OSMO:669"
       ]
     },
     {
@@ -3068,11 +3185,20 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/0E43EDE2E2A3AFA36D0CD38BDDC0B49FECA64FA426A82E102F304E430ECF46EE",
       "name": "Frax",
       "display": "frax",
       "symbol": "FRAX",
       "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Frax Protocol"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -3118,6 +3244,7 @@
           "exponent": 8
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/C9B0D48FD2C5B91135F118FF2484551888966590D7BDC20F6A87308DBA670796",
       "name": "Wrapped Bitcoin",
       "display": "gwbtc",
@@ -3174,6 +3301,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/65381C5F3FD21442283D56925E62EA524DED8B6927F0FF94E21E0020954C40B5",
       "name": "Wrapped Ethereum",
       "display": "gweth",
@@ -3234,6 +3362,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/9F9B07EF9AD291167CF5700628145DE1DEB777C2CFC7907553B24446515F6D0E",
       "name": "USD Coin",
       "display": "gusdc",
@@ -3295,6 +3424,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/F292A17CF920E3462C816CBE6B042E779F676CAB59096904C4C1C966413E3DF5",
       "name": "Dai Stablecoin",
       "display": "gdai",
@@ -3351,6 +3481,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/71B441E27F1BBB44DD0891BCD370C2794D404D60A4FFE5AECCD9B1E28BC89805",
       "name": "Tether USD",
       "display": "gusdt",
@@ -3401,7 +3532,7 @@
       "description": "The native token of Marble DEX on Juno Chain",
       "denom_units": [
         {
-          "denom": "ibc/DB9755CB6FE55192948AE074D18FA815E1429D3D374D5BDA8D89623C6CF235C3",
+          "denom": "ibc/18682DDBA27CD4BC62A36BBB6E1F17D2CA57194D836B10CF2AFEAE8FCD7620B3",
           "exponent": 0,
           "aliases": [
             "cw20:juno1y9rf7ql6ffwkv02hsgd4yruz23pn4w97p75e2slsnkm0mnamhzysvqnxaq"
@@ -3412,9 +3543,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1y9rf7ql6ffwkv02hsgd4yruz23pn4w97p75e2slsnkm0mnamhzysvqnxaq",
-      "base": "ibc/DB9755CB6FE55192948AE074D18FA815E1429D3D374D5BDA8D89623C6CF235C3",
+      "base": "ibc/18682DDBA27CD4BC62A36BBB6E1F17D2CA57194D836B10CF2AFEAE8FCD7620B3",
       "name": "Block",
       "display": "block",
       "symbol": "BLOCK",
@@ -3424,13 +3555,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno1y9rf7ql6ffwkv02hsgd4yruz23pn4w97p75e2slsnkm0mnamhzysvqnxaq",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno1y9rf7ql6ffwkv02hsgd4yruz23pn4w97p75e2slsnkm0mnamhzysvqnxaq"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno1y9rf7ql6ffwkv02hsgd4yruz23pn4w97p75e2slsnkm0mnamhzysvqnxaq"
           }
         }
       ],
@@ -3440,8 +3571,7 @@
       },
       "keywords": [
         "osmosis-frontier",
-        "OSMO:691",
-        "osmosis-price:uosmo:691"
+        "OSMO:691"
       ]
     },
     {
@@ -3459,6 +3589,7 @@
           "exponent": 9
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/CE5BFF1D9BADA03BB5CCA5F56939392A761B53A10FBD03B37506669C3218D3B2",
       "name": "Hash",
       "display": "hash",
@@ -3505,6 +3636,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/F49DE040EBA5AB2FAD5F660C2A1DDF98A68470FAE82229818BE775EBF3EE79F2",
       "name": "Galaxy",
       "display": "glx",
@@ -3537,7 +3669,7 @@
       "description": "The DAO token to build consensus among Hong Kong People",
       "denom_units": [
         {
-          "denom": "ibc/52E12CF5CA2BB903D84F5298B4BFD725D66CAB95E09AA4FC75B2904CA5485FEB",
+          "denom": "ibc/750C1DE65E61B686B5BFEDD3693084E5C1B3F8E295474FC51A4FDDF19040D8C7",
           "exponent": 0,
           "aliases": [
             "dhk",
@@ -3545,9 +3677,9 @@
           ]
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1tdjwrqmnztn2j3sj2ln9xnyps5hs48q3ddwjrz7jpv6mskappjys5czd49",
-      "base": "ibc/52E12CF5CA2BB903D84F5298B4BFD725D66CAB95E09AA4FC75B2904CA5485FEB",
+      "base": "ibc/750C1DE65E61B686B5BFEDD3693084E5C1B3F8E295474FC51A4FDDF19040D8C7",
       "name": "DHK",
       "display": "dhk",
       "symbol": "DHK",
@@ -3557,13 +3689,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno1tdjwrqmnztn2j3sj2ln9xnyps5hs48q3ddwjrz7jpv6mskappjys5czd49",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno1tdjwrqmnztn2j3sj2ln9xnyps5hs48q3ddwjrz7jpv6mskappjys5czd49"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno1tdjwrqmnztn2j3sj2ln9xnyps5hs48q3ddwjrz7jpv6mskappjys5czd49"
           }
         }
       ],
@@ -3574,16 +3706,14 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "OSMO:695",
-        "osmosis-price:uosmo:695",
-        "osmosis-info_2"
+        "OSMO:695"
       ]
     },
     {
       "description": "Token governance for Junoswap",
       "denom_units": [
         {
-          "denom": "ibc/00B6E60AD3D65CBEF5579AC8AF609527C0B57535B6E32D96C80A735344FD9DCC",
+          "denom": "ibc/D07F289EF64A55B0EC269E0D3BB6E2CAC8770D076ED5D53A518C9293E18B6009",
           "exponent": 0,
           "aliases": [
             "cw20:juno15u3dt79t6sxxa3x3kpkhzsy56edaa5a66wvt3kxmukqjz2sx0hes5sn38g"
@@ -3594,9 +3724,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno15u3dt79t6sxxa3x3kpkhzsy56edaa5a66wvt3kxmukqjz2sx0hes5sn38g",
-      "base": "ibc/00B6E60AD3D65CBEF5579AC8AF609527C0B57535B6E32D96C80A735344FD9DCC",
+      "base": "ibc/D07F289EF64A55B0EC269E0D3BB6E2CAC8770D076ED5D53A518C9293E18B6009",
       "name": "JunoSwap",
       "display": "raw",
       "symbol": "RAW",
@@ -3606,13 +3736,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno15u3dt79t6sxxa3x3kpkhzsy56edaa5a66wvt3kxmukqjz2sx0hes5sn38g",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno15u3dt79t6sxxa3x3kpkhzsy56edaa5a66wvt3kxmukqjz2sx0hes5sn38g"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno15u3dt79t6sxxa3x3kpkhzsy56edaa5a66wvt3kxmukqjz2sx0hes5sn38g"
           }
         }
       ],
@@ -3623,8 +3753,7 @@
       "coingecko_id": "junoswap-raw-dao",
       "keywords": [
         "osmosis-frontier",
-        "OSMO:700",
-        "osmosis-price:uosmo:700"
+        "OSMO:700"
       ]
     },
     {
@@ -3642,6 +3771,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/67C89B8B0A70C08F093C909A4DD996DD10E0494C87E28FD9A551697BF173D4CA",
       "name": "MEME",
       "display": "meme",
@@ -3677,7 +3807,7 @@
       "description": "Profit sharing token for Another.Software validator. Hold and receive dividends from Another.Software validator commissions!",
       "denom_units": [
         {
-          "denom": "ibc/AA1C80225BCA7B32ED1FC6ABF8B8E899BEB48ECDB4B417FD69873C6D715F97E7",
+          "denom": "ibc/5147533C7BA60E90FE3A4C567C089582DFAC1E9AA4C497AC8BB2B6D36217106C",
           "exponent": 0,
           "aliases": [
             "cw20:juno17wzaxtfdw5em7lc94yed4ylgjme63eh73lm3lutp2rhcxttyvpwsypjm4w"
@@ -3688,9 +3818,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno17wzaxtfdw5em7lc94yed4ylgjme63eh73lm3lutp2rhcxttyvpwsypjm4w",
-      "base": "ibc/AA1C80225BCA7B32ED1FC6ABF8B8E899BEB48ECDB4B417FD69873C6D715F97E7",
+      "base": "ibc/5147533C7BA60E90FE3A4C567C089582DFAC1E9AA4C497AC8BB2B6D36217106C",
       "name": "Another.Software Validator Token",
       "display": "asvt",
       "symbol": "ASVT",
@@ -3700,28 +3830,25 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno17wzaxtfdw5em7lc94yed4ylgjme63eh73lm3lutp2rhcxttyvpwsypjm4w",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno17wzaxtfdw5em7lc94yed4ylgjme63eh73lm3lutp2rhcxttyvpwsypjm4w"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno17wzaxtfdw5em7lc94yed4ylgjme63eh73lm3lutp2rhcxttyvpwsypjm4w"
           }
         }
       ],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/asvt.png"
-      },
-      "keywords": [
-        "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:771"
-      ]
+      }
     },
     {
       "description": "DAO dedicated to building tools on the Juno Network",
       "denom_units": [
         {
-          "denom": "ibc/0CB9DB3441D0D50F35699DEE22B9C965487E83FB2D9F483D1CC5CA34E856C484",
+          "denom": "ibc/A4BF27C0470C17D4DFC368AE2FEF851B00EA3A1B64DE7A2CC5D2DB270DC8427F",
           "exponent": 0,
           "aliases": [
             "cw20:juno1n7n7d5088qlzlj37e9mgmkhx6dfgtvt02hqxq66lcap4dxnzdhwqfmgng3"
@@ -3732,9 +3859,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1n7n7d5088qlzlj37e9mgmkhx6dfgtvt02hqxq66lcap4dxnzdhwqfmgng3",
-      "base": "ibc/0CB9DB3441D0D50F35699DEE22B9C965487E83FB2D9F483D1CC5CA34E856C484",
+      "base": "ibc/A4BF27C0470C17D4DFC368AE2FEF851B00EA3A1B64DE7A2CC5D2DB270DC8427F",
       "name": "JoeDAO",
       "display": "joe",
       "symbol": "JOE",
@@ -3744,13 +3871,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno1n7n7d5088qlzlj37e9mgmkhx6dfgtvt02hqxq66lcap4dxnzdhwqfmgng3",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno1n7n7d5088qlzlj37e9mgmkhx6dfgtvt02hqxq66lcap4dxnzdhwqfmgng3"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno1n7n7d5088qlzlj37e9mgmkhx6dfgtvt02hqxq66lcap4dxnzdhwqfmgng3"
           }
         }
       ],
@@ -3760,9 +3887,7 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "OSMO:718",
-        "osmosis-price:uosmo:718",
-        "osmosis-info_2"
+        "OSMO:718"
       ]
     },
     {
@@ -3780,6 +3905,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9",
       "name": "Luna",
       "display": "luna",
@@ -3826,6 +3952,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/2716E3F2E146664BEFA9217F1A03BFCEDBCD5178B3C71CACB1A0D7584451D219",
       "name": "Rizon Chain",
       "display": "atolo",
@@ -3868,6 +3995,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/D6C28E07F7343360AC41E15DDD44D79701DDCA2E0C2C41279739C8D4AE5264BC",
       "name": "Hard",
       "display": "HARD",
@@ -3907,6 +4035,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/70CF1A54E23EA4E480DEDA9E12082D3FD5684C3483CBDCE190C5C807227688C5",
       "name": "Swap",
       "display": "SWP",
@@ -3946,6 +4075,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/D3327A763C23F01EC43D1F0DB3CEFEC390C362569B6FD191F40A5192F8960049",
       "name": "Chainlink",
       "display": "link",
@@ -4000,6 +4130,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/F16FDC11A7662B86BC0B9CE61871CBACF7C20606F95E86260FD38915184B75B4",
       "name": "GenesisL1",
       "display": "l1",
@@ -4045,6 +4176,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/384E5DD50BDE042E1AAF51F312B55F08F95BC985C503880189258B4D9374CBBE",
       "name": "Aave",
       "display": "aave",
@@ -4090,6 +4222,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/F83CC6471DA4D4B508F437244F10B9E4C68975344E551A2DEB6B8617AB08F0D4",
       "name": "ApeCoin",
       "display": "ape",
@@ -4135,6 +4268,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/6C0CB8653012DC2BC1820FD0B6B3AFF8A07D18630BDAEE066FEFB2D92F477C24",
       "name": "Axie Infinity Shard",
       "display": "axs",
@@ -4180,6 +4314,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/D27DDDF34BB47E5D5A570742CC667DE53277867116CCCA341F27785E899A70F3",
       "name": "Maker",
       "display": "mkr",
@@ -4232,11 +4367,20 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/BD796662F8825327D41C96355DF62045A5BA225BAE31C0A86289B9D88ED3F44E",
       "name": "Rai Reflex Index",
       "display": "rai",
       "symbol": "RAI",
       "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "RAI Finance"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -4277,6 +4421,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/19305E20681911F14D1FB275E538CDE524C3BF88CF9AE5D5F78F4D4DA05E85B2",
       "name": "Shiba Inu",
       "display": "shib",
@@ -4328,6 +4473,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/AE2719773D6FCDD05AC17B1ED63F672F5F9D84144A61965F348C86C2A83AD161",
       "name": "Uniswap",
       "display": "uni",
@@ -4373,6 +4519,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/B901BEC1B71D0573E6EE874FEC39E2DF4C2BDB1DB74CB3DA0A9CACC4A435B0EC",
       "name": "Chain",
       "display": "xcn",
@@ -4418,6 +4565,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/BB6BCDB515050BAE97516111873CCD7BCF1FD0CCB723CC12F3C4F704D6C646CE",
       "name": "Kuji",
       "display": "kuji",
@@ -4465,6 +4613,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/1E09CB0F506ACF12FDE4683FB6B34DA62FB4BE122641E0D93AAF98A87675676C",
       "name": "Tgrade",
       "display": "tgd",
@@ -4512,6 +4661,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/47EE224A9B33CF0ABEAC82106E52F0F6E8D8CEC5BA80B9D9A6F55172CBB0177D",
       "name": "Echelon",
       "display": "echelon",
@@ -4556,6 +4706,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/C360EF34A86D334F625E4CBB7DA3223AEA97174B61F35BB3758081A8160F7D9B",
       "name": "ODIN",
       "display": "odin",
@@ -4602,6 +4753,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/9B6FBABA36BB4A3BF127AE5E96B572A5197FD9F3111D895D8919B07BC290764A",
       "name": "GEO",
       "display": "geo",
@@ -4647,6 +4799,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/0CD46223FEABD2AEAAAF1F057D01E63BCA79B7D4BD6B68F1EB973A987344695D",
       "name": "O9W",
       "display": "O9W",
@@ -4679,7 +4832,7 @@
       "description": "ELEVENPARIS loyalty token on KiChain",
       "denom_units": [
         {
-          "denom": "ibc/AD185F62399F770CCCE8A36A180A77879FF6C26A0398BD3D2A74E087B0BFA121",
+          "denom": "ibc/4ECD7DAC7A22CF4F69206EBD8A42A121F93F87905174CE519077DDBB3594C993",
           "exponent": 0,
           "aliases": [
             "cw20:ki1dt3lk455ed360pna38fkhqn0p8y44qndsr77qu73ghyaz2zv4whq83mwdy"
@@ -4690,9 +4843,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "ki1dt3lk455ed360pna38fkhqn0p8y44qndsr77qu73ghyaz2zv4whq83mwdy",
-      "base": "ibc/AD185F62399F770CCCE8A36A180A77879FF6C26A0398BD3D2A74E087B0BFA121",
+      "base": "ibc/4ECD7DAC7A22CF4F69206EBD8A42A121F93F87905174CE519077DDBB3594C993",
       "name": "LVN",
       "display": "lvn",
       "symbol": "LVN",
@@ -4702,13 +4855,13 @@
           "counterparty": {
             "chain_name": "kichain",
             "base_denom": "cw20:ki1dt3lk455ed360pna38fkhqn0p8y44qndsr77qu73ghyaz2zv4whq83mwdy",
-            "port": "wasm.ki1hzz0s0ucrhdp6tue2lxk3c03nj6f60qy463we7lgx0wudd72ctmsd9kgha",
-            "channel_id": "channel-18"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-261",
-            "path": "transfer/channel-261/cw20:ki1dt3lk455ed360pna38fkhqn0p8y44qndsr77qu73ghyaz2zv4whq83mwdy"
+            "channel_id": "channel-77",
+            "path": "transfer/channel-77/cw20:ki1dt3lk455ed360pna38fkhqn0p8y44qndsr77qu73ghyaz2zv4whq83mwdy"
           }
         }
       ],
@@ -4719,9 +4872,7 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "OSMO:774",
-        "osmosis-price:ibc/B547DC9B897E7C3AA5B824696110B8E3D2C31E3ED3F02FF363DCBAD82457E07E:772",
-        "osmosis-info_2"
+        "OSMO:774"
       ]
     },
     {
@@ -4739,11 +4890,20 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/1E26DB0E5122AED464D98462BD384FCCB595732A66B3970AE6CE0B58BAE0FC49",
       "name": "Wrapped Moonbeam",
       "display": "wglmr",
       "symbol": "GLMR",
       "traces": [
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "moonbeam",
+            "base_denom": "Wei"
+          },
+          "provider": "Moonbeam"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -4777,7 +4937,7 @@
       "description": "DeFi gaming platform built on Juno",
       "denom_units": [
         {
-          "denom": "ibc/52C57FCA7D6854AA178E7A183DDBE4EF322B904B1D719FC485F6FFBC1F72A19E",
+          "denom": "ibc/4A784B547DD7416960435E43B0CC1B7EEBB90501D859A213C4E16D8EA8A832D7",
           "exponent": 0,
           "aliases": [
             "cw20:juno1j0a9ymgngasfn3l5me8qpd53l5zlm9wurfdk7r65s5mg6tkxal3qpgf5se"
@@ -4788,9 +4948,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1j0a9ymgngasfn3l5me8qpd53l5zlm9wurfdk7r65s5mg6tkxal3qpgf5se",
-      "base": "ibc/52C57FCA7D6854AA178E7A183DDBE4EF322B904B1D719FC485F6FFBC1F72A19E",
+      "base": "ibc/4A784B547DD7416960435E43B0CC1B7EEBB90501D859A213C4E16D8EA8A832D7",
       "name": "Gelotto",
       "display": "glto",
       "symbol": "GLTO",
@@ -4800,13 +4960,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno1j0a9ymgngasfn3l5me8qpd53l5zlm9wurfdk7r65s5mg6tkxal3qpgf5se",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno1j0a9ymgngasfn3l5me8qpd53l5zlm9wurfdk7r65s5mg6tkxal3qpgf5se"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno1j0a9ymgngasfn3l5me8qpd53l5zlm9wurfdk7r65s5mg6tkxal3qpgf5se"
           }
         }
       ],
@@ -4817,16 +4977,14 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "OSMO:778",
-        "osmosis-price:uosmo:778",
-        "osmosis-info_2"
+        "OSMO:778"
       ]
     },
     {
       "description": "Gelotto Year 1 Grand Prize Token",
       "denom_units": [
         {
-          "denom": "ibc/7C781B4C2082CD62129A972D47486D78EC17155C299270E3C89348EA026BEAF8",
+          "denom": "ibc/2869C010AC313FBBBE1FA3DF3CD6F31C5497D7778FC2652D7818484A2900500A",
           "exponent": 0,
           "aliases": [
             "cw20:juno1gz8cf86zr4vw9cjcyyv432vgdaecvr9n254d3uwwkx9rermekddsxzageh"
@@ -4837,9 +4995,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1gz8cf86zr4vw9cjcyyv432vgdaecvr9n254d3uwwkx9rermekddsxzageh",
-      "base": "ibc/7C781B4C2082CD62129A972D47486D78EC17155C299270E3C89348EA026BEAF8",
+      "base": "ibc/2869C010AC313FBBBE1FA3DF3CD6F31C5497D7778FC2652D7818484A2900500A",
       "name": "GKey",
       "display": "gkey",
       "symbol": "GKEY",
@@ -4849,13 +5007,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno1gz8cf86zr4vw9cjcyyv432vgdaecvr9n254d3uwwkx9rermekddsxzageh",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno1gz8cf86zr4vw9cjcyyv432vgdaecvr9n254d3uwwkx9rermekddsxzageh"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno1gz8cf86zr4vw9cjcyyv432vgdaecvr9n254d3uwwkx9rermekddsxzageh"
           }
         }
       ],
@@ -4866,9 +5024,7 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "OSMO:790",
-        "osmosis-price:uosmo:790",
-        "osmosis-info_2"
+        "OSMO:790"
       ]
     },
     {
@@ -4886,6 +5042,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/5A7C219BA5F7582B99629BA3B2A01A61BFDA0F6FD1FE95B5366F7334C4BC0580",
       "name": "Crescent",
       "display": "cre",
@@ -4932,6 +5089,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/FFA652599C77E853F017193E36B5AB2D4D9AFC4B54721A74904F80C9236BF3B7",
       "name": "LUMEN",
       "display": "lumen",
@@ -4977,6 +5135,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/161D7D62BAB3B9C39003334F1671208F43C06B643CC9EDBBE82B64793C857F1D",
       "name": "Oraichain",
       "display": "ORAI",
@@ -5024,6 +5183,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/E09ED39F390EC51FA9F3F69BEA08B5BBE6A48B3057B2B1C3467FAAE9E58B021B",
       "name": "Cudos",
       "display": "cudos",
@@ -5070,6 +5230,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/C78F65E1648A3DFE0BAEB6C4CDA69CC2A75437F1793C0E6386DFDA26393790AE",
       "name": "USDX",
       "display": "USDX",
@@ -5112,6 +5273,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/2DA9C149E9AD2BD27FEFA635458FB37093C256C1A940392634A16BEA45262604",
       "name": "Agoric",
       "display": "bld",
@@ -5159,6 +5321,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/92BE0717F4678905E53F4E45B2DED18BC0CB97BF1F8B6A25AFEDF3D5A879B4D5",
       "name": "Inter Stable Token",
       "display": "ist",
@@ -5194,7 +5357,7 @@
       "description": "Staking derivative seJUNO for staked JUNO",
       "denom_units": [
         {
-          "denom": "ibc/C6B6BFCB6EE49A7CAB1A7E7B021DE35B99D525AC660844952F0F6C78DCB2A57B",
+          "denom": "ibc/23223AC4E0D6D7BB253C23B9FA07A978ADA5B0BA97DCBEAF176CA73B01382384",
           "exponent": 0,
           "aliases": [
             "cw20:juno1dd0k0um5rqncfueza62w9sentdfh3ec4nw4aq4lk5hkjl63vljqscth9gv"
@@ -5205,9 +5368,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1dd0k0um5rqncfueza62w9sentdfh3ec4nw4aq4lk5hkjl63vljqscth9gv",
-      "base": "ibc/C6B6BFCB6EE49A7CAB1A7E7B021DE35B99D525AC660844952F0F6C78DCB2A57B",
+      "base": "ibc/23223AC4E0D6D7BB253C23B9FA07A978ADA5B0BA97DCBEAF176CA73B01382384",
       "name": "StakeEasy seJUNO",
       "display": "sejuno",
       "symbol": "SEJUNO",
@@ -5217,13 +5380,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno1dd0k0um5rqncfueza62w9sentdfh3ec4nw4aq4lk5hkjl63vljqscth9gv",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno1dd0k0um5rqncfueza62w9sentdfh3ec4nw4aq4lk5hkjl63vljqscth9gv"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno1dd0k0um5rqncfueza62w9sentdfh3ec4nw4aq4lk5hkjl63vljqscth9gv"
           }
         }
       ],
@@ -5235,16 +5398,14 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "OSMO:793",
-        "osmosis-price:ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED:807",
-        "osmosis-info_2"
+        "OSMO:793"
       ]
     },
     {
       "description": "Staking derivative bJUNO for staked JUNO",
       "denom_units": [
         {
-          "denom": "ibc/C2DF5C3949CA835B221C575625991F09BAB4E48FB9C11A4EE357194F736111E3",
+          "denom": "ibc/354C75CF3B3D108EE52C3FF0C37A78B0B498A1A2F446563E03C9FF2B9452D705",
           "exponent": 0,
           "aliases": [
             "cw20:juno1wwnhkagvcd3tjz6f8vsdsw5plqnw8qy2aj3rrhqr2axvktzv9q2qz8jxn3"
@@ -5255,9 +5416,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1wwnhkagvcd3tjz6f8vsdsw5plqnw8qy2aj3rrhqr2axvktzv9q2qz8jxn3",
-      "base": "ibc/C2DF5C3949CA835B221C575625991F09BAB4E48FB9C11A4EE357194F736111E3",
+      "base": "ibc/354C75CF3B3D108EE52C3FF0C37A78B0B498A1A2F446563E03C9FF2B9452D705",
       "name": "StakeEasy bJUNO",
       "display": "bjuno",
       "symbol": "BJUNO",
@@ -5267,13 +5428,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno1wwnhkagvcd3tjz6f8vsdsw5plqnw8qy2aj3rrhqr2axvktzv9q2qz8jxn3",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno1wwnhkagvcd3tjz6f8vsdsw5plqnw8qy2aj3rrhqr2axvktzv9q2qz8jxn3"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno1wwnhkagvcd3tjz6f8vsdsw5plqnw8qy2aj3rrhqr2axvktzv9q2qz8jxn3"
           }
         }
       ],
@@ -5298,6 +5459,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/A8CA5EE328FA10C9519DF6057DA1F69682D28F7D0F5CCC7ECB72E3DCA2D157A4",
       "name": "Stride",
       "display": "strd",
@@ -5331,6 +5493,7 @@
       ]
     },
     {
+      "description": "The native staking and governance token of the Cosmos Hub.",
       "denom_units": [
         {
           "denom": "ibc/C140AFD542AE77BD7DCC83F13FDD8C5E5BB8C4929785E6EC2F4C636F98F17901",
@@ -5344,6 +5507,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/C140AFD542AE77BD7DCC83F13FDD8C5E5BB8C4929785E6EC2F4C636F98F17901",
       "name": "stATOM",
       "display": "statom",
@@ -5385,6 +5549,7 @@
       ]
     },
     {
+      "description": "The native token of Stargaze",
       "denom_units": [
         {
           "denom": "ibc/5DD1F95ED336014D00CE2520977EC71566D282F9749170ADC83A392E0EA7426A",
@@ -5398,6 +5563,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/5DD1F95ED336014D00CE2520977EC71566D282F9749170ADC83A392E0EA7426A",
       "name": "stSTARS",
       "display": "ststars",
@@ -5441,7 +5607,7 @@
       "description": "Solarbank DAO Governance Token for speeding up the shift to renewable and green energy",
       "denom_units": [
         {
-          "denom": "ibc/C3FC4DED273E7D1DD2E7BAA3317EC9A53CD3252B577AA33DC00D9DF2BDF3ED5C",
+          "denom": "ibc/1257300A1149AC679FB9501ED317517AF4C4C6E75EB3948F435EA0F14062C8CC",
           "exponent": 0,
           "aliases": [
             "cw20:juno159q8t5g02744lxq8lfmcn6f78qqulq9wn3y9w7lxjgkz4e0a6kvsfvapse"
@@ -5452,9 +5618,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno159q8t5g02744lxq8lfmcn6f78qqulq9wn3y9w7lxjgkz4e0a6kvsfvapse",
-      "base": "ibc/C3FC4DED273E7D1DD2E7BAA3317EC9A53CD3252B577AA33DC00D9DF2BDF3ED5C",
+      "base": "ibc/1257300A1149AC679FB9501ED317517AF4C4C6E75EB3948F435EA0F14062C8CC",
       "name": "Solarbank DAO",
       "display": "solar",
       "symbol": "SOLAR",
@@ -5464,13 +5630,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno159q8t5g02744lxq8lfmcn6f78qqulq9wn3y9w7lxjgkz4e0a6kvsfvapse",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno159q8t5g02744lxq8lfmcn6f78qqulq9wn3y9w7lxjgkz4e0a6kvsfvapse"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno159q8t5g02744lxq8lfmcn6f78qqulq9wn3y9w7lxjgkz4e0a6kvsfvapse"
           }
         }
       ],
@@ -5481,16 +5647,14 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "OSMO:941",
-        "osmosis-price:uosmo:941",
-        "osmosis-info_2"
+        "OSMO:941"
       ]
     },
     {
       "description": "StakeEasy governance token",
       "denom_units": [
         {
-          "denom": "ibc/18A676A074F73B9B42DA4F9DFC8E5AEF334C9A6636DDEC8D34682F52F1DECDF6",
+          "denom": "ibc/96B64F0D3E5B6632589A45ACB7DCD9877B8FB8CECFCF3F6B8712BED317100AD1",
           "exponent": 0,
           "aliases": [
             "cw20:juno19rqljkh95gh40s7qdx40ksx3zq5tm4qsmsrdz9smw668x9zdr3lqtg33mf"
@@ -5501,9 +5665,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno19rqljkh95gh40s7qdx40ksx3zq5tm4qsmsrdz9smw668x9zdr3lqtg33mf",
-      "base": "ibc/18A676A074F73B9B42DA4F9DFC8E5AEF334C9A6636DDEC8D34682F52F1DECDF6",
+      "base": "ibc/96B64F0D3E5B6632589A45ACB7DCD9877B8FB8CECFCF3F6B8712BED317100AD1",
       "name": "StakeEasy SEASY",
       "display": "seasy",
       "symbol": "SEASY",
@@ -5513,13 +5677,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno19rqljkh95gh40s7qdx40ksx3zq5tm4qsmsrdz9smw668x9zdr3lqtg33mf",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno19rqljkh95gh40s7qdx40ksx3zq5tm4qsmsrdz9smw668x9zdr3lqtg33mf"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno19rqljkh95gh40s7qdx40ksx3zq5tm4qsmsrdz9smw668x9zdr3lqtg33mf"
           }
         }
       ],
@@ -5530,8 +5694,7 @@
       "coingecko_id": "seasy",
       "keywords": [
         "osmosis-frontier",
-        "OSMO:808",
-        "osmosis-price:uosmo:808"
+        "OSMO:808"
       ]
     },
     {
@@ -5549,6 +5712,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/903A61A498756EA560B85A85132D3AEE21B5DEDD41213725D22ABF276EA6945E",
       "name": "Axelar",
       "display": "axl",
@@ -5596,6 +5760,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/A1AC7F9EE2F643A68E3A35BCEB22040120BEA4059773BB56985C76BDFEBC71D9",
       "name": "Rebus",
       "display": "rebus",
@@ -5642,6 +5807,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/EB7FB9C8B425F289B63703413327C2051030E848CE4EAAEA2E51199D6D39D3EC",
       "name": "Teritori",
       "display": "tori",
@@ -5674,6 +5840,7 @@
       ]
     },
     {
+      "description": "The native token of JUNO Chain",
       "denom_units": [
         {
           "denom": "ibc/84502A75BCA4A5F68D464C00B3F610CE2585847D59B52E5FFB7C3C9D2DDCD3FE",
@@ -5687,6 +5854,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/84502A75BCA4A5F68D464C00B3F610CE2585847D59B52E5FFB7C3C9D2DDCD3FE",
       "name": "stJUNO",
       "display": "stjuno",
@@ -5727,6 +5895,7 @@
       ]
     },
     {
+      "description": "The native token of Osmosis",
       "denom_units": [
         {
           "denom": "ibc/D176154B0C63D1F9C6DCFB4F70349EBF2E2B5A87A05902F57A6AE92B863E9AEC",
@@ -5740,6 +5909,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/D176154B0C63D1F9C6DCFB4F70349EBF2E2B5A87A05902F57A6AE92B863E9AEC",
       "name": "stOSMO",
       "display": "stosmo",
@@ -5783,7 +5953,7 @@
       "description": "The native token cw20 for MuseDAO on Juno Chain",
       "denom_units": [
         {
-          "denom": "ibc/6B982170CE024689E8DD0E7555B129B488005130D4EDA426733D552D10B36D8F",
+          "denom": "ibc/0E4DBAB2A953E983A1322577A7757B8FD30D4F6F9122B2E2448FDB247DFBD21F",
           "exponent": 0,
           "aliases": [
             "cw20:juno1p8x807f6h222ur0vssqy3qk6mcpa40gw2pchquz5atl935t7kvyq894ne3"
@@ -5794,9 +5964,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1p8x807f6h222ur0vssqy3qk6mcpa40gw2pchquz5atl935t7kvyq894ne3",
-      "base": "ibc/6B982170CE024689E8DD0E7555B129B488005130D4EDA426733D552D10B36D8F",
+      "base": "ibc/0E4DBAB2A953E983A1322577A7757B8FD30D4F6F9122B2E2448FDB247DFBD21F",
       "name": "MuseDAO",
       "display": "muse",
       "symbol": "MUSE",
@@ -5806,13 +5976,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno1p8x807f6h222ur0vssqy3qk6mcpa40gw2pchquz5atl935t7kvyq894ne3",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno1p8x807f6h222ur0vssqy3qk6mcpa40gw2pchquz5atl935t7kvyq894ne3"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno1p8x807f6h222ur0vssqy3qk6mcpa40gw2pchquz5atl935t7kvyq894ne3"
           }
         }
       ],
@@ -5835,6 +6005,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/80825E8F04B12D914ABEADB1F4D39C04755B12C8402F6876EE3168450C0A90BB",
       "name": "Lambda",
       "display": "lamb",
@@ -5881,6 +6052,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/44492EAB24B72E3FB59B9FA619A22337FB74F95D8808FE6BC78CC0E6C18DC2EC",
       "name": "USK",
       "display": "USK",
@@ -5925,6 +6097,7 @@
           "exponent": 9
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/608EF5C0CE64FEA097500DB39657BDD36CA708CC5DCC2E250A024B6981DD36BC",
       "name": "Unification Network",
       "display": "FUND",
@@ -5970,6 +6143,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/8E697BDABE97ACE8773C6DF7402B2D1D5104DD1EEABE12608E3469B7F64C15BA",
       "name": "Jackal",
       "display": "jkl",
@@ -6006,7 +6180,7 @@
       "description": "The native token cw20 for Alter on Secret Network",
       "denom_units": [
         {
-          "denom": "ibc/A6383B6CF5EA23E067666C06BC34E2A96869927BD9744DC0C1643E589C710AA3",
+          "denom": "ibc/4EF01BEF4AF708BD04A80370D0DCEAAB84DD5E3578AB358FA5658B8A1DF001CC",
           "exponent": 0,
           "aliases": [
             "cw20:secret12rcvz0umvk875kd6a803txhtlu7y0pnd73kcej"
@@ -6017,7 +6191,8 @@
           "exponent": 6
         }
       ],
-      "base": "ibc/A6383B6CF5EA23E067666C06BC34E2A96869927BD9744DC0C1643E589C710AA3",
+      "type_asset": "ics20",
+      "base": "ibc/4EF01BEF4AF708BD04A80370D0DCEAAB84DD5E3578AB358FA5658B8A1DF001CC",
       "name": "Alter",
       "display": "alter",
       "symbol": "ALTER",
@@ -6027,13 +6202,13 @@
           "counterparty": {
             "chain_name": "secretnetwork",
             "base_denom": "cw20:secret12rcvz0umvk875kd6a803txhtlu7y0pnd73kcej",
-            "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4",
-            "channel_id": "channel-44"
+            "port": "transfer",
+            "channel_id": "channel-1"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-476",
-            "path": "transfer/channel-476/cw20:secret12rcvz0umvk875kd6a803txhtlu7y0pnd73kcej"
+            "channel_id": "channel-88",
+            "path": "transfer/channel-88/cw20:secret12rcvz0umvk875kd6a803txhtlu7y0pnd73kcej"
           }
         }
       ],
@@ -6045,16 +6220,14 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "OSMO:845",
-        "osmosis-price:uosmo:845",
-        "osmosis-info_2"
+        "OSMO:845"
       ]
     },
     {
       "description": "The native token cw20 for Button on Secret Network",
       "denom_units": [
         {
-          "denom": "ibc/1FBA9E763B8679BEF7BAAAF2D16BCA78C3B297D226C3F31312C769D7B8F992D8",
+          "denom": "ibc/498962FFC2E6AB140346FE00D7E0DFDDCD2F8CFC961F9E7D47D0AFA8D17CF3A6",
           "exponent": 0,
           "aliases": [
             "cw20:secret1yxcexylwyxlq58umhgsjgstgcg2a0ytfy4d9lt"
@@ -6065,9 +6238,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "snip20",
+      "type_asset": "ics20",
       "address": "secret1yxcexylwyxlq58umhgsjgstgcg2a0ytfy4d9lt",
-      "base": "ibc/1FBA9E763B8679BEF7BAAAF2D16BCA78C3B297D226C3F31312C769D7B8F992D8",
+      "base": "ibc/498962FFC2E6AB140346FE00D7E0DFDDCD2F8CFC961F9E7D47D0AFA8D17CF3A6",
       "name": "Button",
       "display": "butt",
       "symbol": "BUTT",
@@ -6077,13 +6250,13 @@
           "counterparty": {
             "chain_name": "secretnetwork",
             "base_denom": "cw20:secret1yxcexylwyxlq58umhgsjgstgcg2a0ytfy4d9lt",
-            "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4",
-            "channel_id": "channel-44"
+            "port": "transfer",
+            "channel_id": "channel-1"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-476",
-            "path": "transfer/channel-476/cw20:secret1yxcexylwyxlq58umhgsjgstgcg2a0ytfy4d9lt"
+            "channel_id": "channel-88",
+            "path": "transfer/channel-88/cw20:secret1yxcexylwyxlq58umhgsjgstgcg2a0ytfy4d9lt"
           }
         }
       ],
@@ -6091,16 +6264,13 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/butt.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/butt.svg"
       },
-      "coingecko_id": "buttcoin-2",
-      "keywords": [
-        "osmosis-price:uosmo:985"
-      ]
+      "coingecko_id": "buttcoin-2"
     },
     {
       "description": "The native token cw20 for Shade on Secret Network",
       "denom_units": [
         {
-          "denom": "ibc/71055835C7639739EAE03AACD1324FE162DBA41D09F197CB72D966D014225B1C",
+          "denom": "ibc/FDBA3732918159C746C95154BDB1367A24DD7A8BD88A39DC443104981302D666",
           "exponent": 0,
           "aliases": [
             "cw20:secret1qfql357amn448duf5gvp9gr48sxx9tsnhupu3d"
@@ -6111,9 +6281,9 @@
           "exponent": 8
         }
       ],
-      "type_asset": "snip20",
+      "type_asset": "ics20",
       "address": "secret1qfql357amn448duf5gvp9gr48sxx9tsnhupu3d",
-      "base": "ibc/71055835C7639739EAE03AACD1324FE162DBA41D09F197CB72D966D014225B1C",
+      "base": "ibc/FDBA3732918159C746C95154BDB1367A24DD7A8BD88A39DC443104981302D666",
       "name": "Shade (old)",
       "display": "shd",
       "symbol": "SHD(old)",
@@ -6123,13 +6293,13 @@
           "counterparty": {
             "chain_name": "secretnetwork",
             "base_denom": "cw20:secret1qfql357amn448duf5gvp9gr48sxx9tsnhupu3d",
-            "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4",
-            "channel_id": "channel-44"
+            "port": "transfer",
+            "channel_id": "channel-1"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-476",
-            "path": "transfer/channel-476/cw20:secret1qfql357amn448duf5gvp9gr48sxx9tsnhupu3d"
+            "channel_id": "channel-88",
+            "path": "transfer/channel-88/cw20:secret1qfql357amn448duf5gvp9gr48sxx9tsnhupu3d"
           }
         }
       ],
@@ -6139,15 +6309,14 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "OSMO:846",
-        "osmosis-price:uosmo:846"
+        "OSMO:846"
       ]
     },
     {
       "description": "The native token cw20 for SIENNA on Secret Network",
       "denom_units": [
         {
-          "denom": "ibc/9A8A93D04917A149C8AC7C16D3DA8F470D59E8D867499C4DA97450E1D7363213",
+          "denom": "ibc/AD9E794272640D387E6C3F7FC61580EF4F8CB4A5CDBEE6CEC7C2B8B90590E07D",
           "exponent": 0,
           "aliases": [
             "cw20:secret1rgm2m5t530tdzyd99775n6vzumxa5luxcllml4"
@@ -6158,9 +6327,9 @@
           "exponent": 18
         }
       ],
-      "type_asset": "snip20",
+      "type_asset": "ics20",
       "address": "secret1rgm2m5t530tdzyd99775n6vzumxa5luxcllml4",
-      "base": "ibc/9A8A93D04917A149C8AC7C16D3DA8F470D59E8D867499C4DA97450E1D7363213",
+      "base": "ibc/AD9E794272640D387E6C3F7FC61580EF4F8CB4A5CDBEE6CEC7C2B8B90590E07D",
       "name": "SIENNA",
       "display": "sienna",
       "symbol": "SIENNA",
@@ -6170,13 +6339,13 @@
           "counterparty": {
             "chain_name": "secretnetwork",
             "base_denom": "cw20:secret1rgm2m5t530tdzyd99775n6vzumxa5luxcllml4",
-            "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4",
-            "channel_id": "channel-44"
+            "port": "transfer",
+            "channel_id": "channel-1"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-476",
-            "path": "transfer/channel-476/cw20:secret1rgm2m5t530tdzyd99775n6vzumxa5luxcllml4"
+            "channel_id": "channel-88",
+            "path": "transfer/channel-88/cw20:secret1rgm2m5t530tdzyd99775n6vzumxa5luxcllml4"
           }
         }
       ],
@@ -6187,15 +6356,14 @@
       "coingecko_id": "sienna",
       "keywords": [
         "osmosis-frontier",
-        "OSMO:853",
-        "osmosis-price:uosmo:853"
+        "OSMO:853"
       ]
     },
     {
       "description": "The native token cw20 for SCRT Staking Derivatives on Secret Network",
       "denom_units": [
         {
-          "denom": "ibc/D0E5BF2940FB58D9B283A339032DE88111407AAD7D94A7F1F3EB78874F8616D4",
+          "denom": "ibc/8217C0F5620D3474ADAD3B9A1990A6FD37B496DCD73C31E61FBF543DE533E092",
           "exponent": 0,
           "aliases": [
             "cw20:secret1k6u0cy4feepm6pehnz804zmwakuwdapm69tuc4"
@@ -6206,9 +6374,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "snip20",
+      "type_asset": "ics20",
       "address": "secret1k6u0cy4feepm6pehnz804zmwakuwdapm69tuc4",
-      "base": "ibc/D0E5BF2940FB58D9B283A339032DE88111407AAD7D94A7F1F3EB78874F8616D4",
+      "base": "ibc/8217C0F5620D3474ADAD3B9A1990A6FD37B496DCD73C31E61FBF543DE533E092",
       "name": "SCRT Staking Derivatives",
       "display": "stkd-scrt",
       "symbol": "stkd-SCRT",
@@ -6218,13 +6386,13 @@
           "counterparty": {
             "chain_name": "secretnetwork",
             "base_denom": "cw20:secret1k6u0cy4feepm6pehnz804zmwakuwdapm69tuc4",
-            "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4",
-            "channel_id": "channel-44"
+            "port": "transfer",
+            "channel_id": "channel-1"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-476",
-            "path": "transfer/channel-476/cw20:secret1k6u0cy4feepm6pehnz804zmwakuwdapm69tuc4"
+            "channel_id": "channel-88",
+            "path": "transfer/channel-88/cw20:secret1k6u0cy4feepm6pehnz804zmwakuwdapm69tuc4"
           }
         }
       ],
@@ -6235,8 +6403,7 @@
       "coingecko_id": "stkd-scrt",
       "keywords": [
         "osmosis-frontier",
-        "SCRT:854",
-        "osmosis-price:ibc/0954E1C28EB7AF5B72D24F3BC2B47BBB2FDF91BDDFD57B74B99E133AED40972A:854"
+        "SCRT:854"
       ]
     },
     {
@@ -6254,6 +6421,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/C822645522FC3EECF817609AA38C24B64D04F5C267A23BCCF8F2E3BC5755FA88",
       "name": "BeeZee",
       "display": "bze",
@@ -6289,7 +6457,7 @@
       "description": "The native token cw20 for Fanfury on Juno Chain",
       "denom_units": [
         {
-          "denom": "ibc/7CE5F388D661D82A0774E47B5129DA51CC7129BD1A70B5FA6BCEBB5B0A2FAEAF",
+          "denom": "ibc/CA39C427CDE0C403F55E4E4C7ED897191077D529F5C475891C3BB26BDE0AB962",
           "exponent": 0,
           "aliases": [
             "cw20:juno1cltgm8v842gu54srmejewghnd6uqa26lzkpa635wzra9m9xuudkqa2gtcz"
@@ -6300,9 +6468,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1cltgm8v842gu54srmejewghnd6uqa26lzkpa635wzra9m9xuudkqa2gtcz",
-      "base": "ibc/7CE5F388D661D82A0774E47B5129DA51CC7129BD1A70B5FA6BCEBB5B0A2FAEAF",
+      "base": "ibc/CA39C427CDE0C403F55E4E4C7ED897191077D529F5C475891C3BB26BDE0AB962",
       "name": "Fanfury",
       "display": "fury",
       "symbol": "FURY",
@@ -6312,13 +6480,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno1cltgm8v842gu54srmejewghnd6uqa26lzkpa635wzra9m9xuudkqa2gtcz",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno1cltgm8v842gu54srmejewghnd6uqa26lzkpa635wzra9m9xuudkqa2gtcz"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno1cltgm8v842gu54srmejewghnd6uqa26lzkpa635wzra9m9xuudkqa2gtcz"
           }
         }
       ],
@@ -6342,6 +6510,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/BB936517F7E5D77A63E0ADB05217A6608B0C4CF8FBA7EA2F4BAE4107A7238F06",
       "name": "Acre",
       "display": "acre",
@@ -6387,6 +6556,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/23CA6C8D1AB2145DD13EB1E089A2E3F960DC298B468CCE034E19E5A78B61136E",
       "name": "CMST",
       "display": "cmst",
@@ -6434,6 +6604,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/92B223EBFA74DB99BEA92B23DEAA6050734FEEAABB84689CB8E1AE8F9C9F9AF4",
       "name": "IMV",
       "display": "imv",
@@ -6478,6 +6649,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/01E94A5FF29B8DDEFC86F412CC3927F7330E9B523CC63A6194B1108F5276025C",
       "name": "Medas Digital",
       "display": "medas",
@@ -6512,7 +6684,7 @@
       "description": "The native token cw20 for PHMN on Juno Chain",
       "denom_units": [
         {
-          "denom": "ibc/D3B574938631B0A1BA704879020C696E514CFADAA7643CDE4BD5EB010BDE327B",
+          "denom": "ibc/1961D159959B5481DC2FD97821BFB22D3B78EBC26D7EEB432F561C7886D19BB3",
           "exponent": 0,
           "aliases": [
             "cw20:juno1rws84uz7969aaa7pej303udhlkt3j9ca0l3egpcae98jwak9quzq8szn2l"
@@ -6523,9 +6695,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1rws84uz7969aaa7pej303udhlkt3j9ca0l3egpcae98jwak9quzq8szn2l",
-      "base": "ibc/D3B574938631B0A1BA704879020C696E514CFADAA7643CDE4BD5EB010BDE327B",
+      "base": "ibc/1961D159959B5481DC2FD97821BFB22D3B78EBC26D7EEB432F561C7886D19BB3",
       "name": "POSTHUMAN",
       "display": "phmn",
       "symbol": "PHMN",
@@ -6535,13 +6707,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno1rws84uz7969aaa7pej303udhlkt3j9ca0l3egpcae98jwak9quzq8szn2l",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno1rws84uz7969aaa7pej303udhlkt3j9ca0l3egpcae98jwak9quzq8szn2l"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno1rws84uz7969aaa7pej303udhlkt3j9ca0l3egpcae98jwak9quzq8szn2l"
           }
         }
       ],
@@ -6553,16 +6725,14 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "ATOM:867",
-        "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:867",
-        "osmosis-info_2"
+        "ATOM:867"
       ]
     },
     {
       "description": "The native token cw20 for Amber on Secret Network",
       "denom_units": [
         {
-          "denom": "ibc/18A1B70E3205A48DE8590C0D11030E7146CDBF1048789261D53FFFD7527F8B55",
+          "denom": "ibc/6749D6C59A1D7C8E017D88C60D0A9EA5AE48F75CA7171875B77F2B5208AB6968",
           "exponent": 0,
           "aliases": [
             "cw20:secret1s09x2xvfd2lp2skgzm29w2xtena7s8fq98v852"
@@ -6573,9 +6743,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "snip20",
+      "type_asset": "ics20",
       "address": "secret1s09x2xvfd2lp2skgzm29w2xtena7s8fq98v852",
-      "base": "ibc/18A1B70E3205A48DE8590C0D11030E7146CDBF1048789261D53FFFD7527F8B55",
+      "base": "ibc/6749D6C59A1D7C8E017D88C60D0A9EA5AE48F75CA7171875B77F2B5208AB6968",
       "name": "Amber",
       "display": "amber",
       "symbol": "AMBER",
@@ -6585,23 +6755,20 @@
           "counterparty": {
             "chain_name": "secretnetwork",
             "base_denom": "cw20:secret1s09x2xvfd2lp2skgzm29w2xtena7s8fq98v852",
-            "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4",
-            "channel_id": "channel-44"
+            "port": "transfer",
+            "channel_id": "channel-1"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-476",
-            "path": "transfer/channel-476/cw20:secret1s09x2xvfd2lp2skgzm29w2xtena7s8fq98v852"
+            "channel_id": "channel-88",
+            "path": "transfer/channel-88/cw20:secret1s09x2xvfd2lp2skgzm29w2xtena7s8fq98v852"
           }
         }
       ],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/amber.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/amber.svg"
-      },
-      "keywords": [
-        "osmosis-price:uosmo:984"
-      ]
+      }
     },
     {
       "description": "The native token of Onomy Protocol",
@@ -6618,6 +6785,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/B9606D347599F0F2FDF82BA3EE339000673B7D274EA50F59494DC51EFCD42163",
       "name": "Nom",
       "display": "nom",
@@ -6671,6 +6839,7 @@
           ]
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/CAA179E40F0266B0B29FB5EAA288FB9212E628822265D4141EBD1C47C3CBFCBC",
       "name": "PSTAKE staked ATOM",
       "display": "stkatom",
@@ -6714,6 +6883,7 @@
           ]
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/E27CD305D33F150369AB526AEB6646A76EC3FFB1A6CA58A663B5DE657A89D55D",
       "name": "Dys",
       "display": "dys",
@@ -6748,7 +6918,7 @@
       "description": "The native token cw20 for Hopers on Juno Chain",
       "denom_units": [
         {
-          "denom": "ibc/D3ADAF73F84CDF205BCB72C142FDAEEA2C612AB853CEE6D6C06F184FA38B1099",
+          "denom": "ibc/64C3E5463E019D86B50025F87A19D966BC51723F6BCC4135F13354EF9C4B89DB",
           "exponent": 0,
           "aliases": [
             "cw20:juno1u45shlp0q4gcckvsj06ss4xuvsu0z24a0d0vr9ce6r24pht4e5xq7q995n"
@@ -6759,9 +6929,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1u45shlp0q4gcckvsj06ss4xuvsu0z24a0d0vr9ce6r24pht4e5xq7q995n",
-      "base": "ibc/D3ADAF73F84CDF205BCB72C142FDAEEA2C612AB853CEE6D6C06F184FA38B1099",
+      "base": "ibc/64C3E5463E019D86B50025F87A19D966BC51723F6BCC4135F13354EF9C4B89DB",
       "name": "Hopers",
       "display": "hopers",
       "symbol": "HOPERS",
@@ -6771,13 +6941,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno1u45shlp0q4gcckvsj06ss4xuvsu0z24a0d0vr9ce6r24pht4e5xq7q995n",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno1u45shlp0q4gcckvsj06ss4xuvsu0z24a0d0vr9ce6r24pht4e5xq7q995n"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno1u45shlp0q4gcckvsj06ss4xuvsu0z24a0d0vr9ce6r24pht4e5xq7q995n"
           }
         }
       ],
@@ -6789,9 +6959,7 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "OSMO:894",
-        "osmosis-price:uosmo:894",
-        "osmosis-info_2"
+        "OSMO:894"
       ]
     },
     {
@@ -6809,6 +6977,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/5D270A584B1078FBE07D14570ED5E88EC1FEDA8518B76C322606291E6FD8286F",
       "name": "Arable USD",
       "display": "arusd",
@@ -6855,6 +7024,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/B1E0166EA0D759FDF4B207D1F5F12210D8BFE36F2345CEFC76948CE2B36DFBAF",
       "name": "Planq",
       "display": "planq",
@@ -6901,11 +7071,23 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/5E2DFDF1734137302129EA1C1BA21A580F96F778D4F021815EA4F6DB378DA1A4",
       "name": "Wrapped FTM",
       "display": "ftm",
       "symbol": "FTM",
       "traces": [
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "fantom",
+            "base_denom": "wei"
+          },
+          "chain": {
+            "contract": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83"
+          },
+          "provider": "Fantom"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -6953,6 +7135,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/47CAF2DB8C016FAC960F33BC492FD8E454593B65CC59D70FA9D9F30424F9C32F",
       "name": "Canto",
       "display": "canto",
@@ -6998,6 +7181,7 @@
           "aliases": []
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/46C83BB054E12E189882B5284542DB605D94C99827E367C9192CF0579CD5BC83",
       "name": "Quicksilver Liquid Staked STARS",
       "display": "qstars",
@@ -7040,7 +7224,7 @@
       "description": "WYND DAO Governance Token",
       "denom_units": [
         {
-          "denom": "ibc/2FBAC4BF296D7844796844B35978E5899984BA5A6314B2DD8F83C215550010B3",
+          "denom": "ibc/1A4E22BCBFFEA91F854E2116BC7CBE669E79CB9C9E14CFD42E74946270B1DBD2",
           "exponent": 0,
           "aliases": [
             "cw20:juno1mkw83sv6c7sjdvsaplrzc8yaes9l42p4mhy0ssuxjnyzl87c9eps7ce3m9"
@@ -7051,9 +7235,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1mkw83sv6c7sjdvsaplrzc8yaes9l42p4mhy0ssuxjnyzl87c9eps7ce3m9",
-      "base": "ibc/2FBAC4BF296D7844796844B35978E5899984BA5A6314B2DD8F83C215550010B3",
+      "base": "ibc/1A4E22BCBFFEA91F854E2116BC7CBE669E79CB9C9E14CFD42E74946270B1DBD2",
       "name": "Wynd DAO Governance Token",
       "display": "wynd",
       "symbol": "WYND",
@@ -7063,13 +7247,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno1mkw83sv6c7sjdvsaplrzc8yaes9l42p4mhy0ssuxjnyzl87c9eps7ce3m9",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno1mkw83sv6c7sjdvsaplrzc8yaes9l42p4mhy0ssuxjnyzl87c9eps7ce3m9"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno1mkw83sv6c7sjdvsaplrzc8yaes9l42p4mhy0ssuxjnyzl87c9eps7ce3m9"
           }
         }
       ],
@@ -7081,9 +7265,7 @@
         "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
-        "OSMO:902",
-        "osmosis-price:uosmo:902",
-        "osmosis-info_2"
+        "OSMO:902"
       ]
     },
     {
@@ -7101,11 +7283,20 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/231FD77ECCB2DB916D314019DA30FE013202833386B1908A191D16989AD80B5A",
       "name": "USD Coin from Polygon",
       "display": "polygon-usdc",
       "symbol": "polygon.USDC",
       "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Circle"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -7153,11 +7344,20 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/F17C9CA112815613C5B6771047A093054F837C3020CBA59DFFD9D780A8B2984C",
       "name": "USD Coin from Avalanche",
       "display": "avalanche-usdc",
       "symbol": "avalanche.USDC",
       "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Circle"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -7205,6 +7405,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/573FCD90FACEE750F55A8864EF7D38265F07E5A9273FA0E8DAFD39951332B580",
       "name": "Mars",
       "display": "mars",
@@ -7252,6 +7453,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/D38BB3DD46864694F009AF01DA5A815B3A875F8CC52FF5679BFFCC35DC7451D5",
       "name": "Ciento Token",
       "display": "cnto",
@@ -7283,6 +7485,7 @@
       ]
     },
     {
+      "description": "The native staking token of Terra.",
       "denom_units": [
         {
           "denom": "ibc/C491E7582E94AE921F6A029790083CDE1106C28F3F6C4AD7F1340544C13EC372",
@@ -7296,6 +7499,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/C491E7582E94AE921F6A029790083CDE1106C28F3F6C4AD7F1340544C13EC372",
       "name": "stLUNA",
       "display": "stluna",
@@ -7347,6 +7551,7 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/C5579A9595790017C600DD726276D978B9BF314CF82406CE342720A9C7911A01",
       "name": "stEVMOS",
       "display": "stevmos",
@@ -7390,7 +7595,7 @@
       "description": "nRide Token",
       "denom_units": [
         {
-          "denom": "ibc/E750D31033DC1CF4A044C3AA0A8117401316DC918FBEBC4E3D34F91B09D5F54C",
+          "denom": "ibc/ADD649B3C3E9DBEEE94D7EF7AF90AE8675C59B2C111506B7B63455D682FE44D5",
           "exponent": 0,
           "aliases": [
             "cw20:juno1qmlchtmjpvu0cr7u0tad2pq8838h6farrrjzp39eqa9xswg7teussrswlq"
@@ -7401,9 +7606,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1qmlchtmjpvu0cr7u0tad2pq8838h6farrrjzp39eqa9xswg7teussrswlq",
-      "base": "ibc/E750D31033DC1CF4A044C3AA0A8117401316DC918FBEBC4E3D34F91B09D5F54C",
+      "base": "ibc/ADD649B3C3E9DBEEE94D7EF7AF90AE8675C59B2C111506B7B63455D682FE44D5",
       "name": "nRide Token",
       "display": "nride",
       "symbol": "NRIDE",
@@ -7413,13 +7618,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno1qmlchtmjpvu0cr7u0tad2pq8838h6farrrjzp39eqa9xswg7teussrswlq",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno1qmlchtmjpvu0cr7u0tad2pq8838h6farrrjzp39eqa9xswg7teussrswlq"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno1qmlchtmjpvu0cr7u0tad2pq8838h6farrrjzp39eqa9xswg7teussrswlq"
           }
         }
       ],
@@ -7430,9 +7635,7 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "OSMO:924",
-        "osmosis-price:uosmo:924",
-        "osmosis-info_2"
+        "OSMO:924"
       ]
     },
     {
@@ -7450,6 +7653,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/8BE73A810E22F80E5E850531A688600D63AE7392E7C2770AE758CAA4FD921B7F",
       "name": "8ball",
       "display": "ebl",
@@ -7496,6 +7700,7 @@
           "aliases": []
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/FA602364BEC305A696CBDF987058E99D8B479F0318E47314C49173E8838C5BAC",
       "name": "Quicksilver Liquid Staked ATOM",
       "display": "qatom",
@@ -7549,6 +7754,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/AD4DEA52408EA07C0C9E19444EC8DA84A274A70AD2687A710EFDDEB28BB2986A",
       "name": "Harbor",
       "display": "harbor",
@@ -7593,6 +7799,7 @@
           "aliases": []
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/79A676508A2ECA1021EDDC7BB9CF70CEEC9514C478DA526A5A8B3E78506C2206",
       "name": "Quicksilver Liquid Staked Regen",
       "display": "qregen",
@@ -7635,7 +7842,7 @@
       "description": "Inspired by Bonk. A community project to celebrate the settlers of JunoNetwork.",
       "denom_units": [
         {
-          "denom": "ibc/4F24D904BAB5FFBD3524F2DE3EC3C7A9E687A2408D9A985E57B356D9FA9201C6",
+          "denom": "ibc/0B4E07F839582ECA7B1DC21B09234D257E2848183AC432133704D5405DDFAEEC",
           "exponent": 0,
           "aliases": [
             "cw20:juno1u8cr3hcjvfkzxcaacv9q75uw9hwjmn8pucc93pmy6yvkzz79kh3qncca8x"
@@ -7646,9 +7853,9 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1u8cr3hcjvfkzxcaacv9q75uw9hwjmn8pucc93pmy6yvkzz79kh3qncca8x",
-      "base": "ibc/4F24D904BAB5FFBD3524F2DE3EC3C7A9E687A2408D9A985E57B356D9FA9201C6",
+      "base": "ibc/0B4E07F839582ECA7B1DC21B09234D257E2848183AC432133704D5405DDFAEEC",
       "name": "Juno Fox",
       "display": "fox",
       "symbol": "FOX",
@@ -7658,13 +7865,13 @@
           "counterparty": {
             "chain_name": "juno",
             "base_denom": "cw20:juno1u8cr3hcjvfkzxcaacv9q75uw9hwjmn8pucc93pmy6yvkzz79kh3qncca8x",
-            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-            "channel_id": "channel-47"
+            "port": "transfer",
+            "channel_id": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-169",
-            "path": "transfer/channel-169/cw20:juno1u8cr3hcjvfkzxcaacv9q75uw9hwjmn8pucc93pmy6yvkzz79kh3qncca8x"
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/cw20:juno1u8cr3hcjvfkzxcaacv9q75uw9hwjmn8pucc93pmy6yvkzz79kh3qncca8x"
           }
         }
       ],
@@ -7674,9 +7881,7 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "OSMO:949",
-        "osmosis-price:uosmo:949",
-        "osmosis-info_2"
+        "OSMO:949"
       ]
     },
     {
@@ -7695,6 +7900,7 @@
           "aliases": []
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/635CB83EF1DFE598B10A3E90485306FD0D47D34217A4BE5FD9977FA010A5367D",
       "name": "Quicksilver",
       "display": "qck",
@@ -7741,6 +7947,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/0F91EE8B98AAE3CF393D94CD7F89A10F8D7758C5EC707E721899DFE65C164C28",
       "name": "Arkh",
       "display": "ARKH",
@@ -7786,6 +7993,7 @@
           "aliases": []
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/42D24879D4569CE6477B7E88206ADBFE47C222C6CAD51A54083E4A72594269FC",
       "name": "Quicksilver Liquid Staked OSMO",
       "display": "qosmo",
@@ -7840,6 +8048,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/7FA7EC64490E3BDE5A1A28CBE73CC0AD22522794957BC891C46321E3A6074DB9",
       "name": "Frienzies",
       "display": "frienzies",
@@ -7883,6 +8092,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/EDD6F0D66BCD49C1084FB2C35353B4ACD7B9191117CE63671B61320548F7C89D",
       "name": "Whale",
       "display": "whale",
@@ -7930,7 +8140,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1xekkh27punj0uxruv3gvuydyt856fax0nu750xns99t2qcxp7xmsqwhfma",
       "base": "ibc/BAC9C6998F1F5C316D3353622EAEDAF8BD00FAABEB374FECDF8C9BC475172CFA",
       "name": "Guardian",
@@ -7959,7 +8169,7 @@
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:959",
-        "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:966",
+        "osmosis-price:uosmo:959",
         "osmosis-info_2"
       ]
     },
@@ -7978,7 +8188,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno166heaxlyntd33a5euh4rrz26svhean4klzw594esmd02l4atan6sazy2my",
       "base": "ibc/DC0D3303BBE739E073224D0314385B88B247F56D71D726A91414CCA244FFFE7E",
       "name": "Mini Punks",
@@ -8027,7 +8237,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1x5qt47rw84c4k6xvvywtrd40p8gxjt8wnmlahlqg07qevah3f8lqwxfs7z",
       "base": "ibc/447A0DCE83691056289503DDAB8EB08E52E167A73629F2ACC59F056B92F51CE8",
       "name": "ShibaCosmos",
@@ -8074,7 +8284,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1qqwf3lkfjhp77yja7gmg3y95pda0e5xctqrdhf3wvwdd79flagvqfgrgxp",
       "base": "ibc/71066B030D8FC6479E638580E1BA9C44925E8C1F6E45036669D22017CFDC8C5E",
       "name": "Sikoba Token",
@@ -8123,6 +8333,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/A76EB6ECF4E3E2D4A23C526FD1B48FDD42F171B206C9D2758EF778A7826ADD68",
       "name": "Nature Carbon Ton",
       "display": "nct",
@@ -8170,7 +8381,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1ngww7zxak55fql42wmyqrr4rhzpne24hhs4p3w4cwhcdgqgr3hxsmzl9zg",
       "base": "ibc/0E4FA664327BD40B32803EE84A77F145834C0281B7F82B65521333B3669FA0BA",
       "name": "Celestims",
@@ -8216,7 +8427,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1ytymtllllsp3hfmndvcp802p2xmy5s8m59ufel8xv9ahyxyfs4hs4kd4je",
       "base": "ibc/8AEEA9B9304392070F72611076C0E328CE3F2DECA1E18557E36F9DB4F09C0156",
       "name": "Osmosis Doge",
@@ -8264,7 +8475,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1jrr0tuuzxrrwcg6hgeqhw5wqpck2y55734e7zcrp745aardlp0qqg8jz06",
       "base": "ibc/1EB03F13F29FEA73444586FC4E88A8C14ACE9291501E9658E3BEF951EA4AC85D",
       "name": "Apemos",
@@ -8310,7 +8521,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1jwdy7v4egw36pd84aeks3ww6n8k7zhsumd4ac8q5lts83ppxueus4626e8",
       "base": "ibc/3DB1721541C94AD19D7735FECED74C227E13F925BDB814392980B40A19C1ED54",
       "name": "Invaders",
@@ -8358,7 +8569,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1k2ruzzvvwwtwny6gq6kcwyfhkzahaunp685wmz4hafplduekj98q9hgs6d",
       "base": "ibc/04BE4E9C825ED781F9684A1226114BB49607500CAD855F1E3FEEC18532297250",
       "name": "Doge Apr",
@@ -8406,7 +8617,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1zqrj3ta4u7ylv0wqzd8t8q3jrr9rdmn43zuzp9zemeunecnhy8fss778g7",
       "base": "ibc/00BC6883C29D45EAA021A55CFDD5884CA8EFF9D39F698A9FEF79E13819FF94F8",
       "name": "Osmo Pepe",
@@ -8453,7 +8664,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1f5datjdse3mdgrapwuzs3prl7pvxxht48ns6calnn0t77v2s9l8s0qu488",
       "base": "ibc/F4A07138CAEF0BFB4889E03C44C57956A48631061F1C8AB80421C1F229C1B835",
       "name": "Catmos",
@@ -8499,7 +8710,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1j4ux0f6gt7e82z7jdpm25v4g2gts880ap64rdwa49989wzhd0dfqed6vqm",
       "base": "ibc/56B988C4D934FB7503F5EA9B440C75D489C8AD5D193715B477BEC4F84B8BBA2A",
       "name": "Summit",
@@ -8546,7 +8757,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1j4ux0f6gt7e82z7jdpm25v4g2gts880ap64rdwa49989wzhd0dfqed6vqm",
       "base": "ibc/56B988C4D934FB7503F5EA9B440C75D489C8AD5D193715B477BEC4F84B8BBA2A",
       "name": "Summit",
@@ -8593,6 +8804,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/CEE970BB3D26F4B907097B6B660489F13F3B0DA765B83CC7D9A0BC0CE220FA6F",
       "name": "Flix",
       "display": "flix",
@@ -8640,7 +8852,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1dyyf7pxeassxvftf570krv7fdf5r8e4r04mp99h0mllsqzp3rs4q7y8yqg",
       "base": "ibc/7A496DB7C2277D4B74EC4428DDB5AC8A62816FBD0DEBE1CFE094935D746BE19C",
       "name": "Spacer",
@@ -8686,7 +8898,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1dpany8c0lj526lsa02sldv7shzvnw5dt5ues72rk35hd69rrydxqeraz8l",
       "base": "ibc/3DC08BDF2689978DBCEE28C7ADC2932AA658B2F64B372760FBC5A0058669AD29",
       "name": "LIGHT",
@@ -8733,7 +8945,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "snip25",
+      "type_asset": "ics20",
       "address": "secret1fl449muk5yq8dlad7a22nje4p5d2pnsgymhjfd",
       "base": "ibc/8A025A1E70101E39DE0C0F153E582A30806D3DA16795F6D868A3AA247D2DEDF7",
       "name": "Silk",
@@ -8782,7 +8994,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1llg7q2d5dqlrqzh5dxv8c7kzzjszld34s5vktqmlmaaxqjssz43sxyhq0d",
       "base": "ibc/912275A63A565BFD80734AEDFFB540132C51E446EAC41483B26EDE8A557C71CF",
       "name": "Mille",
@@ -8828,7 +9040,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno13ca2g36ng6etcfhr9qxx352uw2n5e92np54thfkm3w3nzlhsgvwsjaqlyq",
       "base": "ibc/980A2748F37C938AD129B92A51E2ABA8CFFC6862ADD61EC1B291125535DBE30B",
       "name": "Manna",
@@ -8874,11 +9086,20 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/18FB5C09D9D2371F659D4846A956FA56225E377EE3C3652A2BF3542BF809159D",
       "name": "Wrapped FIL from Filecoin",
       "display": "fil",
       "symbol": "axlFIL",
       "traces": [
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "filecoin",
+            "base_denom": "attoFIL"
+          },
+          "provider": "Filecoin"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -8928,7 +9149,7 @@
           "exponent": 6
         }
       ],
-      "type_asset": "cw20",
+      "type_asset": "ics20",
       "address": "juno1lpvx3mv2a6ddzfjc7zzz2v2cm5gqgqf0hx67hc5p5qwn7hz4cdjsnznhu8",
       "base": "ibc/593F820ECE676A3E0890C734EC4F3A8DE16EC10A54EEDFA8BDFEB40EEA903960",
       "name": "Void",
@@ -8975,7 +9196,7 @@
           "exponent": 8
         }
       ],
-      "type_asset": "snip25",
+      "type_asset": "ics20",
       "address": "secret153wu605vvp934xhd4k9dtd640zsep5jkesstdm",
       "base": "ibc/0B3D528E74E3DEAADF8A68F393887AC7E06028904D02173561B0D27F6E751D0A",
       "name": "Shade",

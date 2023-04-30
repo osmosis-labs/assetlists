@@ -373,6 +373,7 @@ export async function returnAssets(chain){
 async function main() {
   let domain = "osmosis";
   //let domain = "osmosistestnet";
+  //let domain = "osmosistestnet5";
   returnAssets(domain);
 }
 

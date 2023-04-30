@@ -228,6 +228,41 @@ export function setAssetProperty(chainName, baseDenom, property, value) {
   }
 }
 
+export function getAssetPropertyWithTrace(chainName, baseDenom, property) {
+  let value = getAssetProperty(chainName, baseDenom, property);
+  if (!value) {
+    if (property != "traces") {
+      let traces = getAssetProperty(chainName, baseDenom, "traces");
+      if (traces) {
+        let originAsset = {
+          chainName: traces[traces.length - 1].counterparty.chain_name,
+          baseDenom: traces[traces.length - 1].counterparty.base_denom
+        }
+        return getAssetPropertyWithTrace(originAsset.chainName, originAsset.baseDenom, property);
+      }
+    }
+  }
+  return value;
+}
+
+export function getAssetTraces(chainName, baseDenom) {
+  let traces = getAssetProperty(chainName, baseDenom, "traces");
+  let fullTrace;
+  if (traces) {
+    fullTrace = [];
+    fullTrace.push(traces[traces.length - 1]);
+    let originAsset = {
+      chainName: traces[traces.length - 1].counterparty.chain_name,
+      baseDenom: traces[traces.length - 1].counterparty.base_denom
+    }
+    let previousTraces = getAssetTraces(originAsset.chainName, originAsset.baseDenom);
+    if (previousTraces) {
+      fullTrace = previousTraces.concat(fullTrace);
+    }
+  }
+  return fullTrace;
+}
+
 export function getAssetPointersByChain(chainName) {
   let assetPointers = [];
   const assets = getFileProperty(chainName, "assetlist", "assets");

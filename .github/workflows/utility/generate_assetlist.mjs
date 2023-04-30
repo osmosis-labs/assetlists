@@ -139,7 +139,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
         port: "trans"
       };
       if (type === "ibc-cw20") {
-        port: "wasm."
+        counterparty.port = "wasm."
       }
       
       let chain = {

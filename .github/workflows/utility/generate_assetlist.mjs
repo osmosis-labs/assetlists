@@ -88,39 +88,39 @@ const generateAssets = async (chainName, assets, zone_assets) => {
 
     let generatedAsset = {};
     Object.keys(chain_reg.assetSchema).forEach((assetProperty) => {
-      if (assetProperty == "type_asset") {
-        generatedAsset.type_asset = "ics20";
-      } else {
-        let assetPropertyValue;
-        if (assetProperty == "description" ||
-          assetProperty == "name" ||
-          assetProperty == "symbol" ||
-          assetProperty == "logo_URIs" ||
-          assetProperty == "images"
-        ) {
-          assetPropertyValue = chain_reg.getAssetPropertyWithTrace(zone_asset.chain_name, zone_asset.base_denom, assetProperty);
-        } else if (assetProperty == "traces") {
-          assetPropertyValue = chain_reg.getAssetTraces(zone_asset.chain_name, zone_asset.base_denom);
-        } else {
-          assetPropertyValue = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, assetProperty);
+      let assetPropertyValue;
+      if (assetProperty == "description" ||
+        assetProperty == "name" ||
+        assetProperty == "symbol" ||
+        assetProperty == "logo_URIs" ||
+        assetProperty == "images"
+      ) {
+        assetPropertyValue = chain_reg.getAssetPropertyWithTrace(zone_asset.chain_name, zone_asset.base_denom, assetProperty);
+      } else if (assetProperty == "traces") {
+        assetPropertyValue = chain_reg.getAssetTraces(zone_asset.chain_name, zone_asset.base_denom);
+      } else if (assetProperty == "type_asset") {
+        if(zone_asset.chain_name != chainName) {
+          assetPropertyValue = "ics20";
         }
-        if (assetPropertyValue) {
-          if (assetProperty == "logo_URIs") {
-            generatedAsset[assetProperty] = {};
-            if (assetPropertyValue.png) {
-              generatedAsset[assetProperty].png = assetPropertyValue.png;
-            }
-            if (assetPropertyValue.svg) {
-              generatedAsset[assetProperty].svg = assetPropertyValue.svg;
-            }
-          } else {
-            generatedAsset[assetProperty] = assetPropertyValue;
+      } else {
+        assetPropertyValue = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, assetProperty);
+      }
+      if (assetPropertyValue) {
+        if (assetProperty == "logo_URIs") {
+          generatedAsset[assetProperty] = {};
+          if (assetPropertyValue.png) {
+            generatedAsset[assetProperty].png = assetPropertyValue.png;
+          }
+          if (assetPropertyValue.svg) {
+            generatedAsset[assetProperty].svg = assetPropertyValue.svg;
           }
         } else {
-          if (assetProperty == "traces") {
-            generatedAsset.traces = [];
-          }        
+          generatedAsset[assetProperty] = assetPropertyValue;
         }
+      } else {
+        if (assetProperty == "traces") {
+          generatedAsset.traces = [];
+        }        
       }
     });
 

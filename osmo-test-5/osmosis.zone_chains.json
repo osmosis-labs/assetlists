@@ -5,7 +5,7 @@
       "chain_name": "osmosistestnet5",
       "rpc": "https://rpc.osmotest5.osmosis.zone/",
       "rest": "https://lcd.osmotest5.osmosis.zone/",
-      "explorer_tx_url": "https://explorer.osmotest5.osmosis.zone/osmo-test-5/tx/${txHash}",
+      "explorer_tx_url": "https://testnet.mintscan.io/osmosis-testnet/txs/${txHash}",
       "keplr_features": [
         "ibc-go",
         "ibc-transfer",
@@ -54,6 +54,26 @@
         "ibc-transfer",
         "ibc-go",
         "axelar-evm-bridge"
+      ]
+    },
+    {
+      "chain_name": "nobletestnet",
+      "rpc": "https://rpc.testnet.noble.strange.love:443",
+      "rest": "https://api.testnet.noble.strange.love:443",
+      "explorer_tx_url": "https://testnet.mintscan.io/noble-testnet/txs/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "akashtestnet",
+      "rpc": "http://rpc.sandbox.ny.aksh.pw:26657",
+      "rest": "http://api.sandbox.ny.aksh.pw:1317",
+      "explorer_tx_url": "https://testnet.ping.pub/akash/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
       ]
     },
     {

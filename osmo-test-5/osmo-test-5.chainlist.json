@@ -270,6 +270,59 @@
         "ibc-go",
         "axelar-evm-bridge"
       ]
+    },
+    {
+      "chain_name": "kyvetestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Kaon",
+      "chain_id": "kaon-1",
+      "bech32_prefix": "kyve",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "kyve",
+        "bech32PrefixAccPub": "kyvepub",
+        "bech32PrefixValAddr": "kyvevaloper",
+        "bech32PrefixValPub": "kyvevaloperpub",
+        "bech32PrefixConsAddr": "kyvevalcons",
+        "bech32PrefixConsPub": "kyvevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "tkyve",
+            "fixed_min_gas_price": 0.02
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "tkyve"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-eu-1.kaon.kyve.network"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-eu-1.kaon.kyve.network"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://testnet.mintscan.io/kyve-testnet/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
     }
   ]
 }

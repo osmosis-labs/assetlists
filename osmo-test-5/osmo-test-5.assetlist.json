@@ -227,6 +227,43 @@
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/marstestnet/images/mars.svg"
       }
+    },
+    {
+      "description": "The native utility token of the KYVE network.",
+      "denom_units": [
+        {
+          "denom": "ibc/AB8AF05799E299FB5C5C80781DA35887F53E029745D20E5641233DB4E6B28515",
+          "exponent": 0,
+          "aliases": [
+            "tkyve"
+          ]
+        },
+        {
+          "denom": "kyve",
+          "exponent": 6
+        }
+      ],
+      "base": "ibc/AB8AF05799E299FB5C5C80781DA35887F53E029745D20E5641233DB4E6B28515",
+      "name": "KYVE Testnet",
+      "display": "kyve",
+      "symbol": "KYVE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "kyvetestnet",
+            "base_denom": "tkyve",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-10",
+            "path": "transfer/channel-10/tkyve"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/kyvetestnet/images/kyve.svg"
+      }
     }
   ]
 }

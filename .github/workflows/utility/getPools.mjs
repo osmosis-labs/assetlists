@@ -133,7 +133,7 @@ function getAssets(domain){
     osmo = "uosmo",
     atom = "ibc/" // ATOM
   } else if (domain == "osmosistestnet5") {
-    usd = "ibc/3D3E77333E4AAE1BCE0F03BEDA9A538166D113AF1B60EB1C35365D03506F07F4", // aUSDC
+    usd = "ibc/6F34E1BD664C36CE49ACC28E60D62559A5F96C4F9A6CCE4FC5A67B2852E24CFE", // aUSDC
     osmo = "uosmo",
     atom = "ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477" // ATOM
   } else {

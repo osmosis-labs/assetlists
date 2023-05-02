@@ -4830,6 +4830,65 @@
         "ibc-go",
         "axelar-evm-bridge"
       ]
+    },
+    {
+      "chain_name": "bluzelle",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Bluzelle",
+      "chain_id": "bluzelle-9",
+      "bech32_prefix": "bluzelle",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "bluzelle",
+        "bech32PrefixAccPub": "bluzellepub",
+        "bech32PrefixValAddr": "bluzellevaloper",
+        "bech32PrefixValPub": "bluzellevaloperpub",
+        "bech32PrefixConsAddr": "bluzellevalcons",
+        "bech32PrefixConsPub": "bluzellevalconspub"
+      },
+      "slip44": 483,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ubnt",
+            "fixed_min_gas_price": 0.002,
+            "low_gas_price": 0.002,
+            "average_gas_price": 0.002,
+            "high_gas_price": 0.025
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ubnt"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://a.client.sentry.net.bluzelle.com:26657"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://a.client.sentry.net.bluzelle.com:1317"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://bd.explorer.net.bluzelle.com/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
     }
   ]
 }

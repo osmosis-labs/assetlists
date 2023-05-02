@@ -38,12 +38,12 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://rpc.testnet.osmosis.zone/"
+            "address": "https://rpc.osmotest5.osmosis.zone/"
           }
         ],
         "rest": [
           {
-            "address": "https://lcd.testnet.osmosis.zone/"
+            "address": "https://lcd.osmotest5.osmosis.zone/"
           }
         ]
       },
@@ -272,6 +272,110 @@
       ]
     },
     {
+      "chain_name": "nobltestnet",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Noble",
+      "chain_id": "grand-1",
+      "bech32_prefix": "noble",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "noble",
+        "bech32PrefixAccPub": "noblepub",
+        "bech32PrefixValAddr": "noblevaloper",
+        "bech32PrefixValPub": "noblevaloperpub",
+        "bech32PrefixConsAddr": "noblevalcons",
+        "bech32PrefixConsPub": "noblevalconspub"
+      },
+      "slip44": 118,
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ustake"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.testnet.noble.strange.love:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.testnet.noble.strange.love:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://testnet.mintscan.io/noble-testnet/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "akashtestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Sandbox",
+      "chain_id": "sandbox",
+      "bech32_prefix": "akash",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "akash",
+        "bech32PrefixAccPub": "akashpub",
+        "bech32PrefixValAddr": "akashvaloper",
+        "bech32PrefixValPub": "akashvaloperpub",
+        "bech32PrefixConsAddr": "akashvalcons",
+        "bech32PrefixConsPub": "akashvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uakt",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.015,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uakt"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "http://rpc.sandbox.ny.aksh.pw:26657"
+          }
+        ],
+        "rest": [
+          {
+            "address": "http://api.sandbox.ny.aksh.pw:1317"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.testnet-02.aksh.pw/akash/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
       "chain_name": "kyvetestnet",
       "status": "live",
       "network_type": "testnet",
@@ -292,6 +396,13 @@
           {
             "denom": "tkyve",
             "fixed_min_gas_price": 0.02
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "tkyve"
           }
         ]
       },

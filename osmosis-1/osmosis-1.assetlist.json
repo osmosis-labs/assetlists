@@ -9020,8 +9020,7 @@
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:1005",
-        "osmosis-price:uosmo:1005",
-        "osmosis-info_2"
+        "osmosis-price:uosmo:1005"
       ]
     },
     {
@@ -9223,7 +9222,8 @@
       "keywords": [
         "osmosis-frontier",
         "OSMO:1003",
-        "osmosis-price:uosmo:1003"
+        "osmosis-price:uosmo:1003",
+        "osmosis-info_2"
       ]
     },
     {
@@ -9325,6 +9325,61 @@
         "osmosis-info",
         "USDC.axl:1007",
         "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:1007",
+        "osmosis-info_2"
+      ]
+    },
+    {
+      "description": "Arbitrum on Axelar",
+      "denom_units": [
+        {
+          "denom": "ibc/10E5E5B06D78FFBB61FD9F89209DEE5FD4446ED0550CBB8E3747DA79E10D9DC6",
+          "exponent": 0,
+          "aliases": [
+            "arb-wei"
+          ]
+        },
+        {
+          "denom": "arb",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/10E5E5B06D78FFBB61FD9F89209DEE5FD4446ED0550CBB8E3747DA79E10D9DC6",
+      "name": "Arbitrum",
+      "display": "arb",
+      "symbol": "ARB",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "arbitrum",
+            "base_denom": "0x912CE59144191C1204E64559FE8253a0e49E6548"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "arb-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208",
+            "path": "transfer/channel-208/arb-wei"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/arbitrum/images/arb.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/arbitrum/images/arb.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier",
+        "osmosis-info",
+        "OSMO:1011",
+        "osmosis-price:uosmo:1011",
         "osmosis-info_2"
       ]
     }

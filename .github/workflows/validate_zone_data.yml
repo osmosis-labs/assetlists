@@ -21,6 +21,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: true
           
+      - name: Git Sumbodule Update
+        run: |
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
+          
       - name: Setup Node
         uses: actions/setup-node@v3
         with:

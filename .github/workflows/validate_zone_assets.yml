@@ -1,0 +1,26 @@
+on:
+  pull_request:
+    branches:
+      - main
+name: Pull request workflow
+jobs:
+  validate_assetlists:
+    name: Validate zone
+    runs-on: ubuntu-latest
+    steps:
+    
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+      - name: Git Sumbodule Update
+        run: |
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
+          
+      - name: Install JSON-Schema-Validator
+        run: npm install -g jsonschema
+
+      - name: Validate Zone Assets schema
+        run: find . -name '*zone_assets.json' -exec jsonschema -i {} -s ./zone_assets.schema.json \;

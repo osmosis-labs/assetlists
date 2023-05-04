@@ -8,8 +8,9 @@ jobs:
     name: Validate zone chains
     runs-on: ubuntu-latest
     steps:
+    
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: true
@@ -17,9 +18,9 @@ jobs:
         run: |
           git submodule update --init --recursive
           git submodule update --recursive --remote
+          
+      - name: Install JSON-Schema-Validator
+        run: npm install -g jsonschema
+
       - name: Validate Zone Chains schema
-        uses: snapcart/json-schema-validator@v1.0.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          json_schema: ./zone_chains.schema.json
-          json_path_pattern: .*zone_chains.json$
+        run: find . -name '*zone_chains.json' -exec jsonschema -i {} -s ./zone_chains.schema.json \;

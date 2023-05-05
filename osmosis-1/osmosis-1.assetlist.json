@@ -6618,7 +6618,7 @@
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:857",
-        "osmosis-price:ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7:908",
+        "osmosis-price:ibc/92BE0717F4678905E53F4E45B2DED18BC0CB97BF1F8B6A25AFEDF3D5A879B4D5:908",
         "osmosis-info_2"
       ]
     },
@@ -6856,7 +6856,7 @@
         "osmosis-info",
         "OSMO:882",
         "ATOM:885",
-        "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:885"
+        "osmosis-price:uosmo:882"
       ]
     },
     {
@@ -8502,8 +8502,7 @@
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:975",
-        "osmosis-price:uosmo:975",
-        "osmosis-info_2"
+        "osmosis-price:uosmo:975"
       ]
     },
     {
@@ -9020,7 +9019,8 @@
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:1005",
-        "osmosis-price:uosmo:1005"
+        "osmosis-price:uosmo:1005",
+        "osmosis-info_2"
       ]
     },
     {
@@ -9222,8 +9222,7 @@
       "keywords": [
         "osmosis-frontier",
         "OSMO:1003",
-        "osmosis-price:uosmo:1003",
-        "osmosis-info_2"
+        "osmosis-price:uosmo:1003"
       ]
     },
     {
@@ -9381,6 +9380,99 @@
         "OSMO:1011",
         "osmosis-price:uosmo:1011",
         "osmosis-info_2"
+      ]
+    },
+    {
+      "description": "Silica",
+      "denom_units": [
+        {
+          "denom": "ibc/5164ECF584AD7DC27DA9E6A89E75DAB0F7C4FCB0A624B69215B8BC6A2C40CD07",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno10vgf2u03ufcf25tspgn05l7j3tfg0j63ljgpffy98t697m5r5hmqaw95ux"
+          ]
+        },
+        {
+          "denom": "silica",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "juno10vgf2u03ufcf25tspgn05l7j3tfg0j63ljgpffy98t697m5r5hmqaw95ux",
+      "base": "ibc/5164ECF584AD7DC27DA9E6A89E75DAB0F7C4FCB0A624B69215B8BC6A2C40CD07",
+      "name": "Silica",
+      "display": "silica",
+      "symbol": "SLCA",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno10vgf2u03ufcf25tspgn05l7j3tfg0j63ljgpffy98t697m5r5hmqaw95ux",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
+            "channel_id": "channel-47"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-169",
+            "path": "transfer/channel-169/cw20:juno10vgf2u03ufcf25tspgn05l7j3tfg0j63ljgpffy98t697m5r5hmqaw95ux"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/silica.png"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "OSMO:983",
+        "osmosis-price:uosmo:983",
+        "osmosis-info_2"
+      ]
+    },
+    {
+      "description": "Pepec",
+      "denom_units": [
+        {
+          "denom": "ibc/C00B17F74C94449A62935B4C886E6F0F643249A270DEF269D53CE6741ECCDB93",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno1epxnvge53c4hkcmqzlxryw5fp7eae2utyk6ehjcfpwajwp48km3sgxsh9k"
+          ]
+        },
+        {
+          "denom": "pepec",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "juno1epxnvge53c4hkcmqzlxryw5fp7eae2utyk6ehjcfpwajwp48km3sgxsh9k",
+      "base": "ibc/C00B17F74C94449A62935B4C886E6F0F643249A270DEF269D53CE6741ECCDB93",
+      "name": "Pepec",
+      "display": "pepec",
+      "symbol": "PEPEC",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1epxnvge53c4hkcmqzlxryw5fp7eae2utyk6ehjcfpwajwp48km3sgxsh9k",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
+            "channel_id": "channel-47"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-169",
+            "path": "transfer/channel-169/cw20:juno1epxnvge53c4hkcmqzlxryw5fp7eae2utyk6ehjcfpwajwp48km3sgxsh9k"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/pepec.png"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "OSMO:1016",
+        "osmosis-price:uosmo:1016"
       ]
     }
   ]

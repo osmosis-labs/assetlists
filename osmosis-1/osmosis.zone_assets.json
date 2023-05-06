@@ -1759,8 +1759,8 @@
         "OSMO": 979
       },
       "osmosis_main": false,
-      "osmosis_frontier": true,
-      "osmosis_info": true
+      "osmosis_frontier": false,
+      "osmosis_info": false
     },
     {
       "chain_name": "juno",
@@ -1940,6 +1940,17 @@
       "override_propertes": {
         "symbol": "PEPEC" 
       }
+    },
+    {
+      "chain_name": "axelar",
+      "base_denom": "pepe-wei",
+      "path": "transfer/channel-208/pepe-wei",
+      "pools": {
+        "OSMO": 1018
+      },
+      "osmosis_main": true,
+      "osmosis_frontier": true,
+      "osmosis_info": true
     }
   ]
 }

@@ -19,4 +19,4 @@ jobs:
         run: npm install -g jsonschema
 
       - name: Validate Zone Assets schema
-        run: jsonschema -i '*/zone_assets.json' ./zone_assets.schema.json \;
+        run: find . -name 'zone_assets.json' -exec jsonschema -i {} ./zone_assets.schema.json \;

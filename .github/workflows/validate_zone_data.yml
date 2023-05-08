@@ -3,9 +3,9 @@ on:
   pull_request:
     branches:
       - main
-name: Validate Zone Data
+name: Pull request workflow
 jobs:
-  generate_assetlist:
+  validate_zone_data:
     name: Validate Zone Data
     runs-on: ubuntu-latest
     

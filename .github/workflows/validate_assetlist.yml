@@ -15,4 +15,9 @@ jobs:
         run: npm install -g jsonschema
 
       - name: Validate Zone Assets schema
-        run: cd ./ && find ./osmo-test-4 -type f -name 'osmo-test-4.assetlist.json' -exec jsonschema -i {} ./assetlist.schema.json \;
+        run: |
+          for file in $(find . -name '*.assetlist.json'); do
+            if ! jsonschema -i "$file" ./assetlist.schema.json; then
+              exit 1
+            fi
+          done

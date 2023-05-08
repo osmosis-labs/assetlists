@@ -14,10 +14,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: true
-      - name: Git Sumbodule Update
-        run: |
-          git submodule update --init --recursive
-          git submodule update --recursive --remote
           
       - name: Install JSON-Schema-Validator
         run: npm install -g jsonschema

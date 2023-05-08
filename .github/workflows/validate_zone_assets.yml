@@ -20,5 +20,8 @@ jobs:
 
       - name: Validate Zone Assets schema
         run: |
-          set -e
-          find . -name 'osmosis.zone_assets.json' -exec jsonschema -i {} ./zone_assets.schema.json \;
+          for file in $(find . -name 'osmosis.zone_assets.json'); do
+            if ! jsonschema -i "$file" ./zone_assets.schema.json; then
+              exit 1
+            fi
+          done

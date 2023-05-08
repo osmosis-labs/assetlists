@@ -19,4 +19,6 @@ jobs:
         run: npm install -g jsonschema
 
       - name: Validate Zone Assets schema
-        run: find . -name 'osmosis.zone_assets.json' -exec jsonschema -i {} ./zone_assets.schema.json \; || exit 1
+        run: |
+          set -e
+          find . -name 'osmosis.zone_assets.json' -exec jsonschema -i {} ./zone_assets.schema.json \;

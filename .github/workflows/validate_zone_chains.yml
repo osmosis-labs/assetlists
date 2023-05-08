@@ -14,13 +14,9 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: true
-      - name: Git Sumbodule Update
-        run: |
-          git submodule update --init --recursive
-          git submodule update --recursive --remote
           
       - name: Install JSON-Schema-Validator
         run: npm install -g jsonschema
 
       - name: Validate Zone Chains schema
-        run: find . -name '*zone_chains.json' -exec jsonschema -i {} -s ./zone_chains.schema.json \;
+        run: find . -name '*zone_chains.json' -exec jsonschema -i {} ./zone_chains.schema.json \;

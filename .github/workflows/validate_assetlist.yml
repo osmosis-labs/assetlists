@@ -13,9 +13,6 @@ jobs:
           
       - name: Install JSON-Schema-Validator
         run: npm install -g jsonschema
-      - run: pwd
+
       - name: Validate Zone Assets schema
-        run: |
-          for file in $(find . -name 'assetlist.json'); do
-            jsonschema -i $file ./assetlist.schema.json;
-          done
+        run: find . -type f -name '*.assetlist.json' -exec jsonschema -i {} ./assetlist.schema.json \;

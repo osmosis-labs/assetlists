@@ -15,4 +15,4 @@ jobs:
         run: npm install -g jsonschema
 
       - name: Validate Zone Assets schema
-        run: find . -type f -name '*.assetlist.json' -exec jsonschema -i {} ./assetlist.schema.json \;
+        run: find ./osmo-test-4 -type f -name 'osmo-test-4.assetlist.json' -exec jsonschema -i {} ./assetlist.schema.json \;

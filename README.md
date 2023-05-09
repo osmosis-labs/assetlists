@@ -10,6 +10,8 @@ The `.assetlist.json` files herein are generated, which will be triggered by add
 
 ## How to Add Assets
 
+Please see the asset [listing requirements](https://raw.githubusercontent.com/osmosis/assetlists/main/listing.md) to display assets on Osmosis Zone web app. 
+
 To add an asset, add a new asset object to the very bottom of the _osmosis.zone.schema_ file, containing the asset's base denom and chain name.
 - `base_denom` is the indivisible, minimial (exponent 0) denomination unit for the asset, which is also the value defined as `base` for the asset in the Chain Registry.
 - `chain_name` must be the exact value defined as `chain_name` for the chain in the Chain Registry--it is also the name of the chain's directory in the Chain Registry. 

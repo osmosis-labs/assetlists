@@ -4844,8 +4844,7 @@
       "keywords": [
         "osmosis-frontier",
         "OSMO:805",
-        "osmosis-price:uosmo:805",
-        "osmosis-info_2"
+        "osmosis-price:uosmo:805"
       ]
     },
     {
@@ -6623,7 +6622,7 @@
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:857",
-        "osmosis-price:ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7:908",
+        "osmosis-price:ibc/92BE0717F4678905E53F4E45B2DED18BC0CB97BF1F8B6A25AFEDF3D5A879B4D5:908",
         "osmosis-info_2"
       ]
     },
@@ -8879,7 +8878,7 @@
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:992",
-        "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:1019",
+        "osmosis-price:uosmo:992",
         "osmosis-info_2"
       ]
     },
@@ -8972,7 +8971,7 @@
       "keywords": [
         "osmosis-frontier",
         "OSMO:1009",
-        "osmosis-price:ibc/FFA652599C77E853F017193E36B5AB2D4D9AFC4B54721A74904F80C9236BF3B7:995"
+        "osmosis-price:uosmo:1009"
       ]
     },
     {
@@ -9271,8 +9270,7 @@
         "osmosis-frontier",
         "osmosis-info",
         "OSMO:1004",
-        "osmosis-price:uosmo:1004",
-        "osmosis-info_2"
+        "osmosis-price:uosmo:1004"
       ]
     },
     {
@@ -9556,6 +9554,274 @@
         "osmosis-info",
         "OSMO:1022",
         "osmosis-price:uosmo:1022"
+      ]
+    },
+    {
+      "description": "Coinbase Wrapped Staked ETH (“cbETH”) is a utility token and liquid representation of ETH staked through Coinbase. cbETH gives customers the option to sell, transfer, or otherwise use their staked ETH in dapps while it remains locked by the Ethereum protocol.",
+      "denom_units": [
+        {
+          "denom": "ibc/4D7A6F2A7744B1534C984A21F9EDFFF8809FC71A9E9243FFB702073E7FCA513A",
+          "exponent": 0,
+          "aliases": [
+            "0xbe9895146f7af43049ca1c1ae358b0541ea49704",
+            "cbeth-wei"
+          ]
+        },
+        {
+          "denom": "cbeth",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/4D7A6F2A7744B1534C984A21F9EDFFF8809FC71A9E9243FFB702073E7FCA513A",
+      "name": "Coinbase Wrapped Staked ETH",
+      "display": "cbeth",
+      "symbol": "cbETH",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "wei"
+          },
+          "provider": "Coinbase"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xbe9895146f7af43049ca1c1ae358b0541ea49704"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "cbeth-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208",
+            "path": "transfer/channel-208/cbeth-wei"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/cbeth.png"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier",
+        "osmosis-info",
+        "ETH.axl:1027",
+        "osmosis-price:ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5:1027",
+        "osmosis-info_2"
+      ]
+    },
+    {
+      "description": "Rocket Pool is a decentralised Ethereum Proof of Stake pool.",
+      "denom_units": [
+        {
+          "denom": "ibc/E610B83FD5544E00A8A1967A2EB3BEF25F1A8CFE8650FE247A8BD4ECA9DC9222",
+          "exponent": 0,
+          "aliases": [
+            "0xae78736cd615f374d3085123a210448e74fc6393",
+            "reth-wei"
+          ]
+        },
+        {
+          "denom": "reth",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/E610B83FD5544E00A8A1967A2EB3BEF25F1A8CFE8650FE247A8BD4ECA9DC9222",
+      "name": "Rocket Pool Ether",
+      "display": "reth",
+      "symbol": "rETH",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "wei"
+          },
+          "provider": "Rocket Pool"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xae78736cd615f374d3085123a210448e74fc6393"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "reth-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208",
+            "path": "transfer/channel-208/reth-wei"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/reth.png"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier",
+        "osmosis-info",
+        "ETH.axl:1026",
+        "osmosis-price:ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5:1026",
+        "osmosis-info_2"
+      ]
+    },
+    {
+      "description": "sfrxETH is the version of frxETH which accrues staking yield. All profit generated from Frax Ether validators is distributed to sfrxETH holders. By exchanging frxETH for sfrxETH, one become's eligible for staking yield, which is redeemed upon converting sfrxETH back to frxETH.",
+      "denom_units": [
+        {
+          "denom": "ibc/81F578C39006EB4B27FFFA9460954527910D73390991B379C03B18934D272F46",
+          "exponent": 0,
+          "aliases": [
+            "0xac3e018457b222d93114458476f3e3416abbe38f",
+            "sfrxeth-wei"
+          ]
+        },
+        {
+          "denom": "sfrxeth",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/81F578C39006EB4B27FFFA9460954527910D73390991B379C03B18934D272F46",
+      "name": "Staked Frax Ether",
+      "display": "sfrxeth",
+      "symbol": "sfrxETH",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "wei"
+          },
+          "provider": "Frax"
+        },
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0x5e8422345238f34275888049021821e8e08caa1f"
+          },
+          "provider": "Frax"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xac3e018457b222d93114458476f3e3416abbe38f"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "sfrxeth-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208",
+            "path": "transfer/channel-208/sfrxeth-wei"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/sfrxeth.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier",
+        "osmosis-info",
+        "ETH.axl:1025",
+        "osmosis-price:ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5:1025",
+        "osmosis-info_2"
+      ]
+    },
+    {
+      "description": "wstETH is a wrapped version of stETH. As some DeFi protocols require a constant balance mechanism for tokens, wstETH keeps your balance of stETH fixed and uses an underlying share system to reflect your earned staking rewards.",
+      "denom_units": [
+        {
+          "denom": "ibc/B2BD584CD2A0A9CE53D4449667E26160C7D44A9C41AF50F602C201E5B3CCA46C",
+          "exponent": 0,
+          "aliases": [
+            "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+            "wsteth-wei"
+          ]
+        },
+        {
+          "denom": "wsteth",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/B2BD584CD2A0A9CE53D4449667E26160C7D44A9C41AF50F602C201E5B3CCA46C",
+      "name": "Wrapped Lido Staked Ether",
+      "display": "wsteth",
+      "symbol": "wstETH",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "wei"
+          },
+          "provider": "Lido"
+        },
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84"
+          },
+          "provider": "Lido"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "wsteth-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208",
+            "path": "transfer/channel-208/wsteth-wei"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wsteth.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier",
+        "osmosis-info",
+        "ETH.axl:1024",
+        "osmosis-price:ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5:1024",
+        "osmosis-info_2"
       ]
     }
   ]

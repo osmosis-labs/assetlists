@@ -32,16 +32,50 @@ function main() {
   Array.from(chainNameToZoneFileMap.keys()).forEach((chainName) => {
     let zoneJson = chain_reg.readJsonFile(chainNameToZoneFileMap.get(chainName));
     zoneJson.assets.forEach((zoneAsset) => {
+
       let ASSET_EXISTS = false;
-      chainRegAssetPointers.forEach((chainRegAsset) => {
+      ASSET_EXISTS = chainRegAssetPointers.some((chainRegAsset) => {
         if(chainRegAsset.chain_name == zoneAsset.chain_name && chainRegAsset.base_denom == zoneAsset.base_denom) {
-          ASSET_EXISTS = true;
+          return true;
         }
       });
       //console.log(zoneAsset);
       if(!ASSET_EXISTS) {
         throw new Error(`Asset ${zoneAsset.base_denom} does not exist in the chain registry.`);
       }
+
+      //see if ibc channel is registered
+      if (zoneAsset.chain_name != chainName) {
+        if (!zoneAsset.path) {
+          throw new Error(`Path missing for ${zoneAsset.base_denom}. Please enter a Path.`);
+        }
+          
+        let chain1 = false;
+        if (chain_reg.getIBCFileProperty(chainName, zoneAsset.chain_name, "chain_1").chain_name == chainName) {
+          chain1 = true;
+        }
+        let ibcChannels = chain_reg.getIBCFileProperty(chainName, zoneAsset.chain_name, "channels");
+        let thisChannel = "";
+        let thisPort = "";
+
+        let VALID_PATH = false;
+        VALID_PATH = ibcChannels.some((channel) => {
+          if (chain1) {
+            thisChannel = channel.chain_1.channel_id;
+            thisPort = channel.chain_1.port_id;
+          } else {
+            thisChannel = channel.chain_2.channel_id;
+            thisPort = channel.chain_2.port_id;
+          }
+          if (zoneAsset.path.startsWith(thisPort + '/' + thisChannel)) {
+            return true;
+          }
+        });
+        if(!VALID_PATH) {
+          throw new Error(`IBC Channel for Path: ${zoneAsset.path} does not exist in the chain registry.`);
+        }
+      }
+
     }); 
   });
   

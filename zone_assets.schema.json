@@ -43,48 +43,6 @@
           "type": "string",
           "description": "The entire IBC path, with the port and channel data for each hop"
         },
-        "pools": {
-          "type": "object",
-          "description": "[OPTIONAL] A list of primary Osmosis liquidity pools paired with various popular tokens.",
-          "properties": {
-            "OSMO": {
-              "type": "number",
-              "description": "The ID number of the primary Osmosis liquidity pool containing this token paired with the OSMO token."
-            },
-            "ATOM": {
-              "type": "number"
-            },
-            "USDC.axl": {
-              "type": "number"
-            },
-            "SCRT": {
-              "type": "number"
-            },
-            "JUNO": {
-              "type": "number"
-            },
-            "STARS": {
-              "type": "number"
-            },
-            "LUNA": {
-              "type": "number"
-            },
-            "EVMOS": {
-              "type": "number"
-            },
-            "REGEN": {
-              "type": "number"
-            },
-            "USDT.axl": {
-              "type": "number"
-            },
-            "ETH.axl": {
-              "type": "number"
-            }
-          },
-          "additionalProperties": false,
-          "minProperties": 1
-        },
         "osmosis_main": {
           "type": "boolean",
           "description": "Whether the asset appears on Osmosis Main. The asset should have been approved by Osmosis governance."
@@ -148,40 +106,6 @@
             ]
           }
         }
-      },
-      "if": {
-        "required": [
-          "osmosis_info"
-        ],
-        "properties": {
-          "osmosis_info": {
-            "enum": [
-              true
-            ]
-          }
-        }
-      },
-      "then": {
-        "required": [
-          "pools"
-        ]
-      },
-      "if": {
-        "required": [
-          "osmosis_frontier"
-        ],
-        "properties": {
-          "osmosis_frontier": {
-            "enum": [
-              true
-            ]
-          }
-        }
-      },
-      "then": {
-        "required": [
-          "pools"
-        ]
       }
     }
   }

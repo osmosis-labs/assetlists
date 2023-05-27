@@ -1,0 +1,24 @@
+name: Delete Branch on Merge
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  delete-branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if PR is merged
+        run: echo "PR state: ${{ github.event.pull_request.merged }}"
+
+      - name: Delete branch
+        if: >
+          github.event.pull_request.merged == true &&
+          github.event.pull_request.head.ref == 'update/assetlist'
+        run: |
+          git config --global user.name "Generic User"
+          git config --global user.email "generic-user@example.com"
+          git fetch --prune
+          git branch -d 'update/assetlist'

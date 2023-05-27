@@ -285,21 +285,12 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     if(zone_asset.osmosis_frontier) {
       keywords.push("osmosis-frontier");
     }
-    if(zone_asset.osmosis_info) {
-      keywords.push("osmosis-info");
-    }
-    if(zone_asset.pools) {
-      Object.keys(zone_asset.pools).forEach((key) => {
-        keywords.push(key + ":" + zone_asset.pools[key]);
-      });
-    }
-    
     if (pool_assets.get(generatedAsset.base)) {
+      if(pool_assets.get(generatedAsset.base).osmosis_info) {
+        keywords.push("osmosis-info");
+      }
       if(pool_assets.get(generatedAsset.base).osmosis_price) {
         keywords.push(pool_assets.get(generatedAsset.base).osmosis_price);
-      }
-      if(pool_assets.get(generatedAsset.base).osmosis_info) {
-        keywords.push("osmosis-info_2");
       }
     }
     

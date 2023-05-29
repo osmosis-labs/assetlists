@@ -21,17 +21,38 @@ const chainNameToChainIdMap = new Map([
 
 const zoneAssetsFileName = "osmosis.zone_assets.json";
 const zoneChainsFileName = "osmosis.zone_chains.json";
-const chainNameToZoneFileMap = new Map();
+const chainNameToZoneAssetsFileMap = new Map();
+const chainNameToZoneChainsFileMap = new Map();
 Array.from(chainNameToChainIdMap.keys()).forEach((chainName) => {
-  chainNameToZoneFileMap.set(chainName, path.join(root, chainNameToChainIdMap.get(chainName), zoneAssetsFileName));
+  chainNameToZoneAssetsFileMap.set(chainName, path.join(root, chainNameToChainIdMap.get(chainName), zoneAssetsFileName));
+  chainNameToZoneChainsFileMap.set(chainName, path.join(root, chainNameToChainIdMap.get(chainName), zoneChainsFileName));
 });
 
 function main() {
   
   const chainRegAssetPointers = chain_reg.getAssetPointers();
-  Array.from(chainNameToZoneFileMap.keys()).forEach((chainName) => {
-    let zoneJson = chain_reg.readJsonFile(chainNameToZoneFileMap.get(chainName));
-    zoneJson.assets.forEach((zoneAsset) => {
+  Array.from(chainNameToChainIdMap.keys()).forEach((chainName) => {
+    let zoneAssetsJson = chain_reg.readJsonFile(chainNameToZoneAssetsFileMap.get(chainName));
+    let zoneChainsJson = chain_reg.readJsonFile(chainNameToZoneChainsFileMap.get(chainName));
+
+    let zoneChains = [];
+
+    //see if zone_chain is valid
+    zoneChainsJson.chains.forEach((zoneChain) => {
+
+      let CHAIN_EXISTS = false;
+      let chain_name = chain_reg.getFileProperty(zoneChain.chain_name, "chain", "chain_name");
+      if (chain_name == zoneChain.chain_name) {
+        zoneChains.push(chain_name);
+        CHAIN_EXISTS = true;
+      }
+      if (!CHAIN_EXISTS) {
+        throw new Error(`Chain ${zoneChain.chain_name} does not exist in the chain registry.`);
+      }
+
+    });
+
+    zoneAssetsJson.assets.forEach((zoneAsset) => {
 
       let ASSET_EXISTS = false;
       ASSET_EXISTS = chainRegAssetPointers.some((chainRegAsset) => {
@@ -44,7 +65,14 @@ function main() {
         throw new Error(`Asset ${zoneAsset.base_denom} does not exist in the chain registry.`);
       }
 
+      //see if chain_name is in zone chains
+      if (!zoneChains.includes(zoneAsset.chain_name)) {
+        console.log(zoneChains);
+        throw new Error(`Asset: ${zoneAsset.base_denom}'s Chain: ${zoneAsset.chain_name} does not exist in zone_chains.json.`);
+      }
+
       //see if ibc channel is registered
+      let VALID_PATH = false;
       if (zoneAsset.chain_name != chainName) {
         if (!zoneAsset.path) {
           throw new Error(`Path missing for ${zoneAsset.base_denom}. Please enter a Path.`);
@@ -58,7 +86,6 @@ function main() {
         let thisChannel = "";
         let thisPort = "";
 
-        let VALID_PATH = false;
         VALID_PATH = ibcChannels.some((channel) => {
           if (chain1) {
             thisChannel = channel.chain_1.channel_id;
@@ -71,7 +98,7 @@ function main() {
             return true;
           }
         });
-        if(!VALID_PATH) {
+        if (!VALID_PATH) {
           throw new Error(`IBC Channel for Path: ${zoneAsset.path} does not exist in the chain registry.`);
         }
       }

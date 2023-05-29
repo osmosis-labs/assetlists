@@ -1,0 +1,54 @@
+name: Add Asset
+on:
+  workflow_dispatch:
+    inputs:
+      chain_name:
+        description: 'chain_name (Chain Registry directory)'
+        required: true
+        default: 'cosmoshub'
+      base_denom:
+        description: 'base_denom (Asset base)'
+        required: true
+        default: 'uatom'
+      path:
+        description: 'path (IBC transfer path--required for all IBC transferred assets)'
+        required: false
+        default: 'transfer/channel-141/uatom'
+      osmosis_main:
+        description: 'osmosis_main (whether to appear as verified asset--default to FALSE)'
+        required: false
+        default: false
+      override_symbol:
+        description: 'Override Symbol (if different than registered)'
+        required: false
+      override_logo:
+        description: 'Override Logo URL (if different than registered)'
+        required: false
+      override_cgid:
+        description: 'Override CoinGecko ID (if different than registered)'
+        required: false
+      osmosis_pool:
+        description: 'Liquidity added. Pool ID of any on-chain liquidity pool containing the asset'
+        required: false
+      request_staging_frontend:
+        description: 'Liquidity not yet added. Request a Staging Frontend to add liquidity'
+        required: false
+        default: false
+
+jobs:
+  my-action-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Display Parameters
+        run: |
+          echo "chain_name: ${{ github.event.inputs.chain_name }}"
+          echo "base_denom: ${{ github.event.inputs.base_denom }}"
+          echo "path: ${{ github.event.inputs.path }}"
+          echo "osmosis_main: ${{ github.event.inputs.osmosis_main }}" 
+          echo "override_symbol: ${{ github.event.inputs.override_symbol }}"
+          echo "override_logo: ${{ github.event.inputs.override_logo }}"
+          echo "override_cgid: ${{ github.event.inputs.override_cgid }}"
+          echo "osmosis_pool: ${{ github.event.inputs.osmosis_pool }}"
+          echo "request_staging_frontend: ${{ github.event.inputs.request_staging_frontend }}"
+          

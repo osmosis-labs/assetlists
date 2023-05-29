@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Check if PR is merged
-        run: echo "PR state: ${{ github.event.pull_request.merged }}"
+        run: echo "PR state ${{ github.event.pull_request.merged }}"
 
       - name: Delete branch
         if: >

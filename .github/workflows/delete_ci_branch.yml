@@ -20,4 +20,5 @@ jobs:
           github.event.pull_request.head.ref == 'update/chainlist')
         run: |
           git fetch --prune
-          git branch -d 'update/assetlist'
+          git branch -d update/assetlist
+          git branch -d update/chainlist

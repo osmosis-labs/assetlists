@@ -48,16 +48,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Display Parameters
+      
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+          
+      - name: Git Sumbodule Update
         run: |
-          echo "Osmosis Zone: ${{ github.event.inputs.chain_name }}"
-          echo "chain_name: ${{ github.event.inputs.chain_name }}"
-          echo "base_denom: ${{ github.event.inputs.base_denom }}"
-          echo "path: ${{ github.event.inputs.path }}"
-          echo "osmosis_main: ${{ github.event.inputs.osmosis_main }}" 
-          echo "override_symbol: ${{ github.event.inputs.override_symbol }}"
-          echo "override_logo: ${{ github.event.inputs.override_logo }}"
-          echo "override_cgid: ${{ github.event.inputs.override_cgid }}"
-          echo "osmosis_pool: ${{ github.event.inputs.osmosis_pool }}"
-          echo "request_staging_frontend: ${{ github.event.inputs.request_staging_frontend }}"
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
+      
+      - name: Set environment variables
+        run: |
+          echo "osmosis_zone=${{ github.event.inputs.osmosis_zone }}" >> $GITHUB_ENV
+          echo "chain_name=${{ github.event.inputs.chain_name }}" >> $GITHUB_ENV
+          echo "base_denom=${{ github.event.inputs.base_denom }}" >> $GITHUB_ENV
+          echo "path=${{ github.event.inputs.path }}" >> $GITHUB_ENV
+          echo "osmosis_main=${{ github.event.inputs.osmosis_main }}" >> $GITHUB_ENV
+          echo "override_symbol=${{ github.event.inputs.override_symbol }}" >> $GITHUB_ENV
+          echo "override_logo=${{ github.event.inputs.override_logo }}" >> $GITHUB_ENV
+          echo "override_cgid=${{ github.event.inputs.override_cgid }}" >> $GITHUB_ENV
+          echo "osmosis_pool=${{ github.event.inputs.osmosis_pool }}" >> $GITHUB_ENV
+          echo "request_staging_frontend=${{ github.event.inputs.request_staging_frontend }}" >> $GITHUB_ENV
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19.6.0
+
+      - name: Run validation script
+        run: node validate_add_asset.mjs
           

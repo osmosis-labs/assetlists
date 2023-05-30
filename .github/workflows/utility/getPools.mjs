@@ -14,20 +14,46 @@ const num_largest_pools = 5;
 
 let ticks = 0;
 
+function get_base_url(domain) {
+  let baseUrl;
+  if (domain == "osmosis") {
+    return 'https://lcd.osmosis.zone/osmosis/gamm/v1beta1/pools';
+  } else if (domain == "osmosistestnet") {
+    return 'https://lcd.testnet.osmosis.zone/osmosis/gamm/v1beta1/pools';
+  } else if (domain == "osmosistestnet5") {
+    return 'https://lcd.osmotest5.osmosis.zone/osmosis/gamm/v1beta1/pools';
+  }else {
+    return;
+  }
+}
+
+export async function queryPool(domain, pool_id) {
+
+  //--QUERY API--
+
+  let baseUrl = get_base_url(domain);
+  let url = baseUrl;
+  let param = `/${pool_id}`
+  if(param) {
+    url = baseUrl + param;
+  }
+
+  const options = {
+    method: 'GET',
+    accept: 'application/json'
+  }
+  let response = await fetch(url,options);
+  let result = await response.json();
+  if (!result.pool) { return; } else {
+    return result.pool;
+  }
+}
+
 async function queryPools(domain) {
 
   //--QUERY API--
 
-  let baseUrl;
-  if (domain == "osmosis") {
-    baseUrl = 'https://lcd.osmosis.zone/osmosis/gamm/v1beta1/pools';
-  } else if (domain == "osmosistestnet") {
-    baseUrl = 'https://lcd.testnet.osmosis.zone/osmosis/gamm/v1beta1/pools';
-  } else if (domain == "osmosistestnet5") {
-    baseUrl = 'https://lcd.osmotest5.osmosis.zone/osmosis/gamm/v1beta1/pools';
-  }else {
-    return;
-  }
+  let baseUrl = get_base_url(domain);
   console.log(domain);
   console.log(baseUrl);
   const options = {

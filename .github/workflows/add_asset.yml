@@ -2,6 +2,14 @@ name: Add Asset
 on:
   workflow_dispatch:
     inputs:
+      osmosis_zone:
+        description: 'Osmosis Zone'
+        required: true
+        default: 'osmosis (osmosis-1)'
+        options: 
+          - 'osmosis (osmosis-1)'
+          - 'osmosistestnet5 (osmo-test-5)'
+          - 'osmosistestnet (osmo-test-4)'
       chain_name:
         description: 'chain_name (Chain Registry directory)'
         required: true
@@ -42,6 +50,7 @@ jobs:
     steps:
       - name: Display Parameters
         run: |
+          echo "Osmosis Zone: ${{ github.event.inputs.chain_name }}"
           echo "chain_name: ${{ github.event.inputs.chain_name }}"
           echo "base_denom: ${{ github.event.inputs.base_denom }}"
           echo "path: ${{ github.event.inputs.path }}"

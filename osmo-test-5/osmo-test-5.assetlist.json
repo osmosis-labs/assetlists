@@ -382,6 +382,49 @@
       "keywords": [
         "osmosis-price:uosmo:4"
       ]
+    },
+    {
+      "description": "QCK - native token of Quicksilver",
+      "denom_units": [
+        {
+          "denom": "ibc/F37CF69589DE12342758382F8770C0852CD8D2E4519F55166EBDAF472AD667C9",
+          "exponent": 0,
+          "aliases": [
+            "uqck"
+          ]
+        },
+        {
+          "denom": "qck",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/F37CF69589DE12342758382F8770C0852CD8D2E4519F55166EBDAF472AD667C9",
+      "name": "Quicksilver",
+      "display": "qck",
+      "symbol": "QCK",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "quicksilvertestnet",
+            "base_denom": "uqck"
+          },
+          "chain": {
+            "channel_id": "channel-13",
+            "path": "transfer/channel-13/uqck"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qck.png"
+      },
+      "coingecko_id": "quicksilver",
+      "keywords": [
+        "osmosis-info",
+        "osmosis-price:uosmo:34"
+      ]
     }
   ]
 }

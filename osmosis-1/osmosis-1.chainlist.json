@@ -1110,6 +1110,62 @@
       },
       "explorers": [
         {
+          "tx_page": "https://www.mintscan.io/bitcanna/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "bitsong",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "BitSong",
+      "chain_id": "bitsong-2b",
+      "bech32_prefix": "bitsong",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "bitsong",
+        "bech32PrefixAccPub": "bitsongpub",
+        "bech32PrefixValAddr": "bitsongvaloper",
+        "bech32PrefixValPub": "bitsongvaloperpub",
+        "bech32PrefixConsAddr": "bitsongvalcons",
+        "bech32PrefixConsPub": "bitsongvalconspub"
+      },
+      "slip44": 639,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ubtsg",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 3,
+            "average_gas_price": 10,
+            "high_gas_price": 20
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ubtsg"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.explorebitsong.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.explorebitsong.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
           "tx_page": "https://explorebitsong.com/transactions/${txHash}"
         }
       ],
@@ -1337,7 +1393,7 @@
       "chain_name": "cheqd",
       "status": "live",
       "network_type": "mainnet",
-      "pretty_name": "cheqd",
+      "pretty_name": "Cheqd",
       "chain_id": "cheqd-mainnet-1",
       "bech32_prefix": "cheqd",
       "bech32_config": {

@@ -10,7 +10,7 @@
 
 import * as path from 'path';
 import * as chain_reg from './chain_registry.mjs';
-import queryPool from './getPools/mjs';
+import { queryPool } from './getPools.mjs';
 
 const root = "../../..";
 
@@ -29,7 +29,7 @@ Array.from(chainNameToChainIdMap.keys()).forEach((chainName) => {
   chainNameToZoneChainsFileMap.set(chainName, path.join(root, chainNameToChainIdMap.get(chainName), zoneChainsFileName));
 });
 
-function validate_manual_code() {
+function validate_zone_files() {
   
   const chainRegAssetPointers = chain_reg.getAssetPointers();
   Array.from(chainNameToChainIdMap.keys()).forEach((chainName) => {
@@ -109,17 +109,22 @@ function validate_manual_code() {
   
 }
 
-function validate_add_asset() {
+export async function validate_add_asset() {
 
   const osmosis_zone = process.env.osmosis_zone;
+  //const osmosis_zone = "osmosis (osmosis-1)";
   const chain_name = process.env.chain_name;
+  //const chain_name = "cosmoshub";
   const base_denom = process.env.base_denom;
+  //const base_denom = "uatom";
   const path = process.env.path;
+  //const path = "transfer/channel-0/uatom";
   const osmosis_main = process.env.osmosis_main;
   const override_symbol = process.env.override_symbol;
   const override_logo = process.env.override_logo;
   const override_cgid = process.env.override_cgid;
   const osmosis_pool = process.env.osmosis_pool;
+  //const osmosis_pool = 1;
   const request_staging_frontend = process.env.request_staging_frontend;
 
   //get osmosis chain name
@@ -137,7 +142,7 @@ function validate_add_asset() {
   }
 
   //validate base_denom
-  if (!chain_reg.get_asset_property(chain_name, base_denom, "base_denom")){
+  if (!chain_reg.getAssetProperty(chain_name, base_denom, "base")){
     throw new Error(`Asset ${base_denom} does not exist in the Chain Registry. Register the asset first.`);
   }
 
@@ -161,7 +166,7 @@ function validate_add_asset() {
       thisChannel = channel.chain_2.channel_id;
       thisPort = channel.chain_2.port_id;
     }
-    if (zoneAsset.path.startsWith(thisPort + '/' + thisChannel)) {
+    if (path.startsWith(thisPort + '/' + thisChannel)) {
       return true;
     }
   });
@@ -170,11 +175,18 @@ function validate_add_asset() {
   }
 
   //validate pool
-  let pool = queryPool(osmosis_zone_chain_name, osmosis_pool);
+  let pool = await queryPool(osmosis_zone_chain_name, osmosis_pool);
+  let ibcDenom = await chain_reg.calculateIbcHash(path);
+  console.log(ibcDenom);
   console.log(pool);
+  console.log(pool.pool_assets[0].token);
+  console.log(pool.pool_assets?.some(obj => obj.token.denom === ibcDenom));
+  if (!(pool.pool_assets?.find(obj => obj.token.denom === ibcDenom) || pool.pool_liquidity?.find(obj => obj.denom === ibcDenom))) {
+    throw new Error(`Pool: ${osmosis_pool} does not contain Base Denom: ${base_denom}.`);
+  }
   
 }
 
-//validate_manual_code();
+//validate_zone_files();
 
 //validate_add_asset();

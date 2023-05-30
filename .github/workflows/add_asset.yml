@@ -79,5 +79,5 @@ jobs:
           node-version: 19.6.0
 
       - name: Run validation script
-        run: node --experimental-modules -e "import { validate_add_asset() } from './validate_zone_data.mjs'; validate_add_asset();"
+        run: node --experimental-modules -e "import { validate_add_asset } from './validate_zone_data.mjs'; validate_add_asset();"
           

@@ -136,6 +136,17 @@ export function setDifferenceArray(a, b) {
   return c;
 }
 
+
+export async function calculateIbcHash(ibcHashInput) {
+  const textAsBuffer = new TextEncoder().encode(ibcHashInput);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', textAsBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer))
+  const digest = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  const ibcHashOutput = "ibc/" + digest.toUpperCase();
+  return ibcHashOutput;
+}
+
+
 // -- CHAIN REGISTRY MODULES --
 
 

@@ -29,7 +29,7 @@ Array.from(chainNameToChainIdMap.keys()).forEach((chainName) => {
   chainNameToZoneChainsFileMap.set(chainName, path.join(root, chainNameToChainIdMap.get(chainName), zoneChainsFileName));
 });
 
-function validate_zone_files() {
+export function validate_zone_files() {
   
   const chainRegAssetPointers = chain_reg.getAssetPointers();
   Array.from(chainNameToChainIdMap.keys()).forEach((chainName) => {

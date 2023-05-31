@@ -111,6 +111,7 @@ function validate_zone_files() {
 
 export async function validate_add_asset() {
 
+  
   const osmosis_zone = process.env.osmosis_zone;
   //const osmosis_zone = "osmosis (osmosis-1)";
   const chain_name = process.env.chain_name;
@@ -120,12 +121,12 @@ export async function validate_add_asset() {
   const path = process.env.path;
   //const path = "transfer/channel-0/uatom";
   const osmosis_main = process.env.osmosis_main;
-  const override_symbol = process.env.override_symbol;
-  const override_logo = process.env.override_logo;
-  const override_cgid = process.env.override_cgid;
   const osmosis_pool = process.env.osmosis_pool;
   //const osmosis_pool = 1;
   const request_staging_frontend = process.env.request_staging_frontend;
+
+
+  // -- VALIDATE CHAIN NAME ---
 
   //get osmosis chain name
   let osmosis_zone_chain_name = "";
@@ -134,19 +135,22 @@ export async function validate_add_asset() {
       osmosis_zone_chain_name = zone_chain_name;
     }
   });
-
-  //validate chain_name
+  //check chain_name
   let zoneChainsJson = chain_reg.readJsonFile(chainNameToZoneChainsFileMap.get(osmosis_zone_chain_name));
   if (!zoneChainsJson.chains.find(obj => obj.chain_name === chain_name)) {
     throw new Error(`Chain ${chain_name} does not exist in zone_chains.json. Register the chain first.`);
   }
 
-  //validate base_denom
+
+  // --- VALIDATE BASE DENOM ---
+
   if (!chain_reg.getAssetProperty(chain_name, base_denom, "base")){
     throw new Error(`Asset ${base_denom} does not exist in the Chain Registry. Register the asset first.`);
   }
 
-  //validate path
+
+  // --- VALIDATE PATH ---
+
   let VALID_PATH = false;
   if (!path) {
     throw new Error(`Path missing. Please enter a Path.`);
@@ -174,19 +178,41 @@ export async function validate_add_asset() {
     throw new Error(`IBC Channel for Path: ${path} does not exist in the chain registry.`);
   }
 
-  //validate pool
-  let pool = await queryPool(osmosis_zone_chain_name, osmosis_pool);
-  let ibcDenom = await chain_reg.calculateIbcHash(path);
-  console.log(ibcDenom);
-  console.log(pool);
-  console.log(pool.pool_assets[0].token);
-  console.log(pool.pool_assets?.some(obj => obj.token.denom === ibcDenom));
-  if (!(pool.pool_assets?.find(obj => obj.token.denom === ibcDenom) || pool.pool_liquidity?.find(obj => obj.denom === ibcDenom))) {
-    throw new Error(`Pool: ${osmosis_pool} does not contain Base Denom: ${base_denom}.`);
+
+  // --- VALIDATE POOL ---
+
+  if (pool) {
+    let pool = await queryPool(osmosis_zone_chain_name, osmosis_pool);
+    let ibcDenom = await chain_reg.calculateIbcHash(path);
+    console.log(ibcDenom);
+    console.log(pool);
+    console.log(pool.pool_assets[0].token);
+    console.log(pool.pool_assets?.some(obj => obj.token.denom === ibcDenom));
+    if (!(pool.pool_assets?.find(obj => obj.token.denom === ibcDenom) || pool.pool_liquidity?.find(obj => obj.denom === ibcDenom))) {
+      throw new Error(`Pool: ${osmosis_pool} does not contain Base Denom: ${base_denom}.`);
+    }
   }
   
+
+  // --- CREATE ASSET OBJECT ---
+
+  let asset = {
+    chain_name: chain_name,
+    base_denom: base_denom,
+    path: path
+  }
+  if (osmosis_main) { asset.osmosis_main = true; }
+  asset.osmosis_frontier = true;
+
+
+  // --- ADD ASSET TO ZONE ASSETS ---
+  let zoneAssetsJson = chain_reg.readJsonFile(chainNameToZoneAssetsFileMap.get(osmosis_zone_chain_name));
+  zoneAssetsJson.assets.push(asset);
+  chain_reg.writeJsonFile(chainNameToZoneAssetsFileMap.get(osmosis_zone_chain_name),zoneAssetsJson);
+
+
 }
 
-//validate_zone_files();
 
+//validate_zone_files();
 //validate_add_asset();

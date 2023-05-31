@@ -16,9 +16,9 @@ jobs:
       - name: Delete branch
         if: >
           github.event.pull_request.merged == true &&
-          github.event.pull_request.head.ref == 'update/assetlist'
+          (github.event.pull_request.head.ref == 'update/assetlist' ||
+          github.event.pull_request.head.ref == 'update/chainlist')
         run: |
-          git config --global user.name "Generic User"
-          git config --global user.email "generic-user@example.com"
           git fetch --prune
-          git branch -d 'update/assetlist'
+          git branch -d update/assetlist
+          git branch -d update/chainlist

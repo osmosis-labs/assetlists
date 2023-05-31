@@ -147,6 +147,10 @@ export async function validate_add_asset() {
   if (!chain_reg.getAssetProperty(chain_name, base_denom, "base")){
     throw new Error(`Asset ${base_denom} does not exist in the Chain Registry. Register the asset first.`);
   }
+  let zoneAssetsJson = chain_reg.readJsonFile(chainNameToZoneAssetsFileMap.get(osmosis_zone_chain_name));
+  if (zoneChainsJson.chains.find(obj => obj.base_denom === base_denom && obj.chain_name === chain_name)) {
+    throw new Error(`Asset ${base_denom} already exists in zone_assets.json.`);
+  }
 
 
   // --- VALIDATE PATH ---
@@ -206,7 +210,6 @@ export async function validate_add_asset() {
 
 
   // --- ADD ASSET TO ZONE ASSETS ---
-  let zoneAssetsJson = chain_reg.readJsonFile(chainNameToZoneAssetsFileMap.get(osmosis_zone_chain_name));
   zoneAssetsJson.assets.push(asset);
   chain_reg.writeJsonFile(chainNameToZoneAssetsFileMap.get(osmosis_zone_chain_name),zoneAssetsJson);
 

@@ -185,7 +185,7 @@ export async function validate_add_asset() {
 
   // --- VALIDATE POOL ---
 
-  if (pool) {
+  if (osmosis_pool) {
     let pool = await queryPool(osmosis_zone_chain_name, osmosis_pool);
     let ibcDenom = await chain_reg.calculateIbcHash(path);
     console.log(ibcDenom);

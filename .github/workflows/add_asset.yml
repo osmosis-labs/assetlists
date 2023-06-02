@@ -38,8 +38,13 @@ on:
 
 
 jobs:
-  my-action-job:
+  add_asset:
+    name: Add Asset
     runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        shell: bash
 
     steps:
       
@@ -54,6 +59,11 @@ jobs:
           git submodule update --init --recursive
           git submodule update --recursive --remote
       
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19.6.0
+      
       - name: Set environment variables
         run: |
           echo "osmosis_zone=${{ github.event.inputs.osmosis_zone }}" >> $GITHUB_ENV
@@ -64,12 +74,8 @@ jobs:
           echo "osmosis_pool=${{ github.event.inputs.osmosis_pool }}" >> $GITHUB_ENV
           echo "request_staging_frontend=${{ github.event.inputs.request_staging_frontend }}" >> $GITHUB_ENV
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 19.6.0
-
       - name: Run validation script
+        working-directory: ./.github/workflows/utility
         run: node validate_add_asset.mjs
           
       - name: Add Commit Push
@@ -89,15 +95,15 @@ jobs:
           source_branch: update/add_asset
           target_branch: main
           title: Add Zone Asset
-          body: "**Automated pull request**
-          osmosis_zone = ${{ github.event.inputs.osmosis_zone }}
-          chain_name = ${{ github.event.inputs.chain_name }}
-          base_denom = ${{ github.event.inputs.base_denom }}
-          path = ${{ github.event.inputs.path }}
-          osmosis_main = ${{ github.event.inputs.osmosis_main }}
-          osmosis_pool = ${{ github.event.inputs.osmosis_pool }}
-          request_staging_frontend = ${{ github.event.inputs.request_staging_frontend }}
-          "
+          body: |
+            **Automated pull request**
+            osmosis_zone = ${{ github.event.inputs.osmosis_zone }}
+            chain_name = ${{ github.event.inputs.chain_name }}
+            base_denom = ${{ github.event.inputs.base_denom }}
+            path = ${{ github.event.inputs.path }}
+            osmosis_main = ${{ github.event.inputs.osmosis_main }}
+            osmosis_pool = ${{ github.event.inputs.osmosis_pool }}
+            request_staging_frontend = ${{ github.event.inputs.request_staging_frontend }}
           old_string: "**THIS IS AN AUTOMATED ADDITON OF ASSET**"
           new_string: "** ADD ASSET - ${{ github.event.inputs.chain_name }}::${{ github.event.inputs.base_denom }}**"
           get_diff: true

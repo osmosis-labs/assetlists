@@ -205,7 +205,7 @@ export async function validate_add_asset() {
     base_denom: base_denom,
     path: path
   }
-  if (osmosis_main) { asset.osmosis_main = true; }
+  if (osmosis_main) { asset.osmosis_main = true; } else { asset.osmosis_main = false; }
   asset.osmosis_frontier = true;
 
 

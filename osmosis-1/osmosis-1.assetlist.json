@@ -115,6 +115,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.svg"
       },
+      "coingecko_id": "axlusdc",
       "keywords": [
         "osmosis-main",
         "osmosis-frontier",
@@ -9499,6 +9500,144 @@
         "osmosis-frontier",
         "osmosis-info",
         "osmosis-price:ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5:1024"
+      ]
+    },
+    {
+      "description": "The native token of Gitopia",
+      "denom_units": [
+        {
+          "denom": "ibc/B1C1806A540B3E165A2D42222C59946FB85BA325596FC85662D7047649F419F3",
+          "exponent": 0,
+          "aliases": [
+            "ulore"
+          ]
+        },
+        {
+          "denom": "LORE",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/B1C1806A540B3E165A2D42222C59946FB85BA325596FC85662D7047649F419F3",
+      "name": "LORE",
+      "display": "LORE",
+      "symbol": "LORE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gitopia",
+            "base_denom": "ulore",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-781",
+            "path": "transfer/channel-781/ulore"
+          }
+        }
+      ],
+      "coingecko_id": "gitopia",
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "osmosis-price:uosmo:1036"
+      ]
+    },
+    {
+      "description": "Lion DAO is a community DAO that lives on the Terra blockchain with the mission to reactivate the LUNAtic community and showcase Terra protocols & tooling",
+      "denom_units": [
+        {
+          "denom": "ibc/98BCD43F190C6960D0005BC46BB765C827403A361C9C03C2FF694150A30284B0",
+          "exponent": 0,
+          "aliases": [
+            "cw20:terra1lxx40s29qvkrcj8fsa3yzyehy7w50umdvvnls2r830rys6lu2zns63eelv"
+          ]
+        },
+        {
+          "denom": "roar",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "terra1lxx40s29qvkrcj8fsa3yzyehy7w50umdvvnls2r830rys6lu2zns63eelv",
+      "base": "ibc/98BCD43F190C6960D0005BC46BB765C827403A361C9C03C2FF694150A30284B0",
+      "name": "Lion DAO",
+      "display": "roar",
+      "symbol": "ROAR",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "terra2",
+            "base_denom": "cw20:terra1lxx40s29qvkrcj8fsa3yzyehy7w50umdvvnls2r830rys6lu2zns63eelv",
+            "port": "wasm.terra1e0mrzy8077druuu42vs0hu7ugguade0cj65dgtauyaw4gsl4kv0qtdf2au",
+            "channel_id": "channel-26"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-341",
+            "path": "transfer/channel-341/cw20:terra1lxx40s29qvkrcj8fsa3yzyehy7w50umdvvnls2r830rys6lu2zns63eelv"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/roar.png"
+      },
+      "keywords": [
+        "osmosis-frontier"
+      ]
+    },
+    {
+      "description": "The native token of Umee",
+      "denom_units": [
+        {
+          "denom": "ibc/02F196DA6FD0917DD5FEA249EE61880F4D941EE9059E7964C5C9B50AF103800F",
+          "exponent": 0,
+          "aliases": [
+            "stuumee"
+          ]
+        },
+        {
+          "denom": "stumee",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/02F196DA6FD0917DD5FEA249EE61880F4D941EE9059E7964C5C9B50AF103800F",
+      "name": "stUMEE",
+      "display": "stumee",
+      "symbol": "stUMEE",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "umee",
+            "base_denom": "uumee"
+          },
+          "provider": "Stride"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stuumee",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326",
+            "path": "transfer/channel-326/stuumee"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stumee.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stumee.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier",
+        "osmosis-info",
+        "osmosis-price:ibc/67795E528DF67C5606FC20F824EA39A6EF55BA133F4DC79C90A8C47A0901E17C:1035"
       ]
     }
   ]

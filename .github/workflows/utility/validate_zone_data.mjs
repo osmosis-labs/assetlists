@@ -53,8 +53,6 @@ export function validate_zone_files() {
 
       let CHAIN_STAKING = false;
       let staking_tokens = chain_reg.getFileProperty(zoneChain.chain_name, "chain", "staking")?.staking_tokens[0]?.denom;
-      console.log(chain_name);
-      console.log(staking_tokens);
       if (staking_tokens) {
         CHAIN_STAKING = true;
       }

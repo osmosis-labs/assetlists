@@ -48,7 +48,18 @@ export function validate_zone_files() {
         CHAIN_EXISTS = true;
       }
       if (!CHAIN_EXISTS) {
-        throw new Error(`Chain ${zoneChain.chain_name} does not exist in the chain registry.`);
+        throw new Error(`Chain ${zoneChain.chain_name} does not exist in the Chain Registry.`);
+      }
+
+      let CHAIN_STAKING = false;
+      let staking_tokens = chain_reg.getFileProperty(zoneChain.chain_name, "chain", "staking")?.staking_tokens[0]?.denom;
+      console.log(chain_name);
+      console.log(staking_tokens);
+      if (staking_tokens) {
+        CHAIN_STAKING = true;
+      }
+      if (!CHAIN_STAKING) {
+        throw new Error(`Chain ${zoneChain.chain_name} does not have staking defined in the Chain Registry.`);
       }
 
     });
@@ -215,7 +226,6 @@ export async function validate_add_asset() {
 
 
 }
-
 
 //validate_zone_files();
 //validate_add_asset();

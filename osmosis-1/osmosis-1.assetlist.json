@@ -2829,7 +2829,7 @@
       },
       "coingecko_id": "terrakrw",
       "keywords": [
-        "osmosis-price:ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC:581"
+        "osmosis-price:ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC:582"
       ]
     },
     {
@@ -6407,7 +6407,7 @@
         "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
-        "osmosis-price:ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7:908"
+        "osmosis-price:ibc/92BE0717F4678905E53F4E45B2DED18BC0CB97BF1F8B6A25AFEDF3D5A879B4D5:908"
       ]
     },
     {
@@ -6495,7 +6495,7 @@
       "keywords": [
         "medas",
         "osmosis-frontier",
-        "osmosis-price:ibc/9712DBB13B9631EDFA9BF61B55F1B2D290B2ADB67E3A4EB3A875F3B6081B3B84:910"
+        "osmosis-price:uosmo:859"
       ]
     },
     {
@@ -8180,7 +8180,7 @@
       },
       "keywords": [
         "osmosis-frontier",
-        "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:980"
+        "osmosis-price:uosmo:974"
       ]
     },
     {
@@ -8586,7 +8586,7 @@
         "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
-        "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:1019"
+        "osmosis-price:uosmo:992"
       ]
     },
     {
@@ -9114,7 +9114,7 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "osmosis-price:uosmo:983"
+        "osmosis-price:ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F:1023"
       ]
     },
     {
@@ -9238,7 +9238,8 @@
       "keywords": [
         "osmosis-main",
         "osmosis-frontier",
-        "osmosis-price:uosmo:1022"
+        "osmosis-info",
+        "osmosis-price:ibc/D3B574938631B0A1BA704879020C696E514CFADAA7643CDE4BD5EB010BDE327B:1042"
       ]
     },
     {
@@ -9587,7 +9588,8 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/roar.png"
       },
       "keywords": [
-        "osmosis-frontier"
+        "osmosis-frontier",
+        "osmosis-price:uosmo:1043"
       ]
     },
     {
@@ -9667,11 +9669,56 @@
       "keywords": [
         "osmosis-main",
         "osmosis-frontier",
+        "osmosis-info",
         "osmosis-price:uosmo:1039"
       ]
     },
     {
-      "description": "Lion Cub DAO is a useless meme community DAO on Terra2 blockchain",
+      "description": "The native token of Nolus chain",
+      "denom_units": [
+        {
+          "denom": "ibc/D9AFCECDD361D38302AA66EB3BAC23B95234832C51D12489DC451FA2B7C72782",
+          "exponent": 0,
+          "aliases": [
+            "unls"
+          ]
+        },
+        {
+          "denom": "nls",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/D9AFCECDD361D38302AA66EB3BAC23B95234832C51D12489DC451FA2B7C72782",
+      "name": "Nolus",
+      "display": "nls",
+      "symbol": "NLS",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "nolus",
+            "base_denom": "unls",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-783",
+            "path": "transfer/channel-783/unls"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nolus/images/nolus.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nolus/images/nolus.svg"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:1041"
+      ]
+    },
+    {
+      "description": "Lion Cub DAO is a useless meme community DAO on Terra",
       "denom_units": [
         {
           "denom": "ibc/6F18EFEBF1688AA77F7EAC17065609494DC1BA12AFC78E9AEC832AF70A11BEF3",
@@ -9715,7 +9762,7 @@
       ]
     },
     {
-      "description": "BLUE CUB DAO is a community DAO on Terra2 Blockchain",
+      "description": "BLUE CUB DAO is a community DAO on Terra",
       "denom_units": [
         {
           "denom": "ibc/DA961FE314B009C38595FFE3AF41225D8894D663B8C3F6650DCB5B6F8435592E",

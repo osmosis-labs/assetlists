@@ -326,7 +326,7 @@ async function generateAssetlist(chainName) {
 async function main() {
   
   await generateAssetlist("osmosis");
-  await generateAssetlist("osmosistestnet");
+  //await generateAssetlist("osmosistestnet");
   await generateAssetlist("osmosistestnet5");
   
 }

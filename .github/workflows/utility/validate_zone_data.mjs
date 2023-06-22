@@ -16,7 +16,7 @@ const root = "../../..";
 
 const chainNameToChainIdMap = new Map([
   ["osmosis", "osmosis-1"],
-  ["osmosistestnet", "osmo-test-4"],
+  //["osmosistestnet", "osmo-test-4"],
   ["osmosistestnet5", "osmo-test-5"]
 ]);
 

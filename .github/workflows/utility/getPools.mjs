@@ -21,7 +21,6 @@ function get_base_url(domain) {
   } else if (domain == "osmosistestnet") {
     return 'https://lcd.testnet4.osmosis.zone/osmosis/gamm/v1beta1/pools';
   } else if (domain == "osmosistestnet5") {
-    //return 'https://lcd.osmotest5.osmosis.zone/osmosis/gamm/v1beta1/pools';
     return 'https://lcd.testnet.osmosis.zone/osmosis/gamm/v1beta1/pools';
   }else {
     return;

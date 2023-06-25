@@ -84,6 +84,13 @@
           }
         ]
       },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uatom"
+          }
+        ]
+      },
       "apis": {
         "rpc": [
           {
@@ -464,7 +471,10 @@
       "fees": {
         "fee_tokens": [
           {
-            "denom": "uqck"
+            "denom": "uqck",
+            "low_gas_price": 0.0001,
+            "average_gas_price": 0.0001,
+            "high_gas_price": 0.00025
           }
         ]
       },
@@ -490,6 +500,62 @@
       "explorers": [
         {
           "tx_page": "https://testnet.quicksilver.explorers.guru/transaction/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "chain4energytestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Chain4Energy Testnet",
+      "chain_id": "babajaga-1",
+      "bech32_prefix": "c4e",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "c4e",
+        "bech32PrefixAccPub": "c4epub",
+        "bech32PrefixValAddr": "c4evaloper",
+        "bech32PrefixValPub": "c4evaloperpub",
+        "bech32PrefixConsAddr": "c4evalcons",
+        "bech32PrefixConsPub": "c4evalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uc4e",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.02,
+            "average_gas_price": 0.03,
+            "high_gas_price": 0.06
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uc4e"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-testnet.c4e.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-testnet.c4e.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer-testnet.c4e.io/transactions/${txHash}"
         }
       ],
       "features": [

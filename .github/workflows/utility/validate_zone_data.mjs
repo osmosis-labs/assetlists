@@ -16,7 +16,7 @@ const root = "../../..";
 
 const chainNameToChainIdMap = new Map([
   ["osmosis", "osmosis-1"],
-  ["osmosistestnet", "osmo-test-4"],
+  //["osmosistestnet", "osmo-test-4"],
   ["osmosistestnet5", "osmo-test-5"]
 ]);
 
@@ -48,7 +48,16 @@ export function validate_zone_files() {
         CHAIN_EXISTS = true;
       }
       if (!CHAIN_EXISTS) {
-        throw new Error(`Chain ${zoneChain.chain_name} does not exist in the chain registry.`);
+        throw new Error(`Chain ${zoneChain.chain_name} does not exist in the Chain Registry.`);
+      }
+
+      let CHAIN_STAKING = false;
+      let staking_tokens = chain_reg.getFileProperty(zoneChain.chain_name, "chain", "staking")?.staking_tokens[0]?.denom;
+      if (staking_tokens) {
+        CHAIN_STAKING = true;
+      }
+      if (!CHAIN_STAKING) {
+        throw new Error(`Chain ${zoneChain.chain_name} does not have staking defined in the Chain Registry.`);
       }
 
     });
@@ -205,7 +214,7 @@ export async function validate_add_asset() {
     base_denom: base_denom,
     path: path
   }
-  if (osmosis_main) { asset.osmosis_main = true; }
+  if (osmosis_main) { asset.osmosis_main = true; } else { asset.osmosis_main = false; }
   asset.osmosis_frontier = true;
 
 
@@ -215,7 +224,6 @@ export async function validate_add_asset() {
 
 
 }
-
 
 //validate_zone_files();
 //validate_add_asset();

@@ -252,7 +252,7 @@
       "description": "USD Coin",
       "denom_units": [
         {
-          "denom": "ibc/B3504E092456BA618CC28AC671A71FB08C6CA0FD0BE7C8A5B5A3E2DD933CC9E4",
+          "denom": "ibc/40F1B2458AEDA66431F9D44F48413240B8D28C072463E2BF53655728683583E3",
           "exponent": 0,
           "aliases": [
             "microusdc",
@@ -265,7 +265,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/B3504E092456BA618CC28AC671A71FB08C6CA0FD0BE7C8A5B5A3E2DD933CC9E4",
+      "base": "ibc/40F1B2458AEDA66431F9D44F48413240B8D28C072463E2BF53655728683583E3",
       "name": "USD Coin",
       "display": "usdc",
       "symbol": "USDC",
@@ -283,11 +283,11 @@
           "counterparty": {
             "chain_name": "nobletestnet",
             "base_denom": "uusdc",
-            "channel_id": "channel-6"
+            "channel_id": "channel-10"
           },
           "chain": {
-            "channel_id": "channel-6",
-            "path": "transfer/channel-6/uusdc"
+            "channel_id": "channel-123",
+            "path": "transfer/channel-123/uusdc"
           }
         }
       ],
@@ -296,7 +296,7 @@
       },
       "keywords": [
         "osmosis-info",
-        "osmosis-price:ibc/6F34E1BD664C36CE49ACC28E60D62559A5F96C4F9A6CCE4FC5A67B2852E24CFE:7"
+        "osmosis-price:ibc/6F34E1BD664C36CE49ACC28E60D62559A5F96C4F9A6CCE4FC5A67B2852E24CFE:46"
       ]
     },
     {
@@ -425,6 +425,48 @@
       "keywords": [
         "osmosis-info",
         "osmosis-price:uosmo:34"
+      ]
+    },
+    {
+      "description": "The native token of Chain4Energy",
+      "denom_units": [
+        {
+          "denom": "ibc/E3D323CB6F427C49E56F913C853A416F6B71BAA9B0164625AD0203266F92B3ED",
+          "exponent": 0,
+          "aliases": [
+            "uc4e"
+          ]
+        },
+        {
+          "denom": "c4e",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/E3D323CB6F427C49E56F913C853A416F6B71BAA9B0164625AD0203266F92B3ED",
+      "name": "Chain4Energy",
+      "display": "c4e",
+      "symbol": "C4E",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "chain4energytestnet",
+            "base_denom": "uc4e",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-111",
+            "path": "transfer/channel-111/uc4e"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/chain4energytestnet/images/c4e.png"
+      },
+      "keywords": [
+        "osmosis-info",
+        "osmosis-price:ibc/6F34E1BD664C36CE49ACC28E60D62559A5F96C4F9A6CCE4FC5A67B2852E24CFE:40"
       ]
     }
   ]

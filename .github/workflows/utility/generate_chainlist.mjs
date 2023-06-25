@@ -142,7 +142,7 @@ function generateChainlist(chainName) {
 function main() {
 
   generateChainlist("osmosis");
-  generateChainlist("osmosistestnet");
+  //generateChainlist("osmosistestnet");
   generateChainlist("osmosistestnet5");
   
 }

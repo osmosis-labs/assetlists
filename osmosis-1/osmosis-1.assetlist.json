@@ -115,6 +115,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.svg"
       },
+      "coingecko_id": "axlusdc",
       "keywords": [
         "osmosis-main",
         "osmosis-frontier",
@@ -1888,7 +1889,7 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:596"
+        "osmosis-price:ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5:912"
       ]
     },
     {
@@ -6494,7 +6495,7 @@
       "keywords": [
         "medas",
         "osmosis-frontier",
-        "osmosis-price:ibc/9712DBB13B9631EDFA9BF61B55F1B2D290B2ADB67E3A4EB3A875F3B6081B3B84:910"
+        "osmosis-price:uosmo:859"
       ]
     },
     {
@@ -7996,7 +7997,6 @@
       },
       "keywords": [
         "osmosis-frontier",
-        "osmosis-info",
         "osmosis-price:uosmo:961"
       ]
     },
@@ -8180,7 +8180,7 @@
       },
       "keywords": [
         "osmosis-frontier",
-        "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:980"
+        "osmosis-price:uosmo:974"
       ]
     },
     {
@@ -9114,7 +9114,7 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "osmosis-price:uosmo:983"
+        "osmosis-price:ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F:1023"
       ]
     },
     {
@@ -9159,7 +9159,6 @@
       },
       "keywords": [
         "osmosis-frontier",
-        "osmosis-info",
         "osmosis-price:uosmo:1016"
       ]
     },
@@ -9227,8 +9226,9 @@
           "exponent": 6
         }
       ],
+      "address": "osmo14klwqgkmackvx2tqa0trtg69dmy0nrg4ntq4gjgw2za4734r5seqjqm4gm",
       "base": "factory/osmo14klwqgkmackvx2tqa0trtg69dmy0nrg4ntq4gjgw2za4734r5seqjqm4gm/uibcx",
-      "name": "IBCX",
+      "name": "IBCX Core <Product of ION DAO>",
       "display": "ibcx",
       "symbol": "IBCX",
       "traces": [],
@@ -9238,7 +9238,8 @@
       "keywords": [
         "osmosis-main",
         "osmosis-frontier",
-        "osmosis-price:uosmo:1022"
+        "osmosis-info",
+        "osmosis-price:ibc/D3B574938631B0A1BA704879020C696E514CFADAA7643CDE4BD5EB010BDE327B:1042"
       ]
     },
     {
@@ -9499,6 +9500,352 @@
         "osmosis-frontier",
         "osmosis-info",
         "osmosis-price:ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5:1024"
+      ]
+    },
+    {
+      "description": "The native token of Gitopia",
+      "denom_units": [
+        {
+          "denom": "ibc/B1C1806A540B3E165A2D42222C59946FB85BA325596FC85662D7047649F419F3",
+          "exponent": 0,
+          "aliases": [
+            "ulore"
+          ]
+        },
+        {
+          "denom": "LORE",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/B1C1806A540B3E165A2D42222C59946FB85BA325596FC85662D7047649F419F3",
+      "name": "LORE",
+      "display": "LORE",
+      "symbol": "LORE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gitopia",
+            "base_denom": "ulore",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-781",
+            "path": "transfer/channel-781/ulore"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gitopia/images/lore.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gitopia/images/lore.svg"
+      },
+      "coingecko_id": "gitopia",
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "osmosis-price:uosmo:1036"
+      ]
+    },
+    {
+      "description": "Lion DAO is a community DAO that lives on the Terra blockchain with the mission to reactivate the LUNAtic community and showcase Terra protocols & tooling",
+      "denom_units": [
+        {
+          "denom": "ibc/98BCD43F190C6960D0005BC46BB765C827403A361C9C03C2FF694150A30284B0",
+          "exponent": 0,
+          "aliases": [
+            "cw20:terra1lxx40s29qvkrcj8fsa3yzyehy7w50umdvvnls2r830rys6lu2zns63eelv"
+          ]
+        },
+        {
+          "denom": "roar",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "terra1lxx40s29qvkrcj8fsa3yzyehy7w50umdvvnls2r830rys6lu2zns63eelv",
+      "base": "ibc/98BCD43F190C6960D0005BC46BB765C827403A361C9C03C2FF694150A30284B0",
+      "name": "Lion DAO",
+      "display": "roar",
+      "symbol": "ROAR",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "terra2",
+            "base_denom": "cw20:terra1lxx40s29qvkrcj8fsa3yzyehy7w50umdvvnls2r830rys6lu2zns63eelv",
+            "port": "wasm.terra1e0mrzy8077druuu42vs0hu7ugguade0cj65dgtauyaw4gsl4kv0qtdf2au",
+            "channel_id": "channel-26"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-341",
+            "path": "transfer/channel-341/cw20:terra1lxx40s29qvkrcj8fsa3yzyehy7w50umdvvnls2r830rys6lu2zns63eelv"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/roar.png"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-price:uosmo:1043"
+      ]
+    },
+    {
+      "description": "The native token of Umee",
+      "denom_units": [
+        {
+          "denom": "ibc/02F196DA6FD0917DD5FEA249EE61880F4D941EE9059E7964C5C9B50AF103800F",
+          "exponent": 0,
+          "aliases": [
+            "stuumee"
+          ]
+        },
+        {
+          "denom": "stumee",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/02F196DA6FD0917DD5FEA249EE61880F4D941EE9059E7964C5C9B50AF103800F",
+      "name": "stUMEE",
+      "display": "stumee",
+      "symbol": "stUMEE",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "umee",
+            "base_denom": "uumee"
+          },
+          "provider": "Stride"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stuumee",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326",
+            "path": "transfer/channel-326/stuumee"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stumee.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stumee.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier",
+        "osmosis-info",
+        "osmosis-price:ibc/67795E528DF67C5606FC20F824EA39A6EF55BA133F4DC79C90A8C47A0901E17C:1035"
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "factory/osmo1xqw2sl9zk8a6pch0csaw78n4swg5ws8t62wc5qta4gnjxfqg6v2qcs243k/stuibcx",
+          "exponent": 0
+        },
+        {
+          "denom": "stibcx",
+          "exponent": 6
+        }
+      ],
+      "address": "osmo1xqw2sl9zk8a6pch0csaw78n4swg5ws8t62wc5qta4gnjxfqg6v2qcs243k",
+      "base": "factory/osmo1xqw2sl9zk8a6pch0csaw78n4swg5ws8t62wc5qta4gnjxfqg6v2qcs243k/stuibcx",
+      "name": "stIBCX Core <Product of ION DAO>",
+      "display": "stibcx",
+      "symbol": "stIBCX",
+      "traces": [],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/stibcx.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/stibcx.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier",
+        "osmosis-info",
+        "osmosis-price:uosmo:1039"
+      ]
+    },
+    {
+      "description": "The native token of Nolus chain",
+      "denom_units": [
+        {
+          "denom": "ibc/D9AFCECDD361D38302AA66EB3BAC23B95234832C51D12489DC451FA2B7C72782",
+          "exponent": 0,
+          "aliases": [
+            "unls"
+          ]
+        },
+        {
+          "denom": "nls",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/D9AFCECDD361D38302AA66EB3BAC23B95234832C51D12489DC451FA2B7C72782",
+      "name": "Nolus",
+      "display": "nls",
+      "symbol": "NLS",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "nolus",
+            "base_denom": "unls",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-783",
+            "path": "transfer/channel-783/unls"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nolus/images/nolus.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nolus/images/nolus.svg"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:1041"
+      ]
+    },
+    {
+      "description": "Lion Cub DAO is a useless meme community DAO on Terra",
+      "denom_units": [
+        {
+          "denom": "ibc/6F18EFEBF1688AA77F7EAC17065609494DC1BA12AFC78E9AEC832AF70A11BEF3",
+          "exponent": 0,
+          "aliases": [
+            "cw20:terra1lalvk0r6nhruel7fvzdppk3tup3mh5j4d4eadrqzfhle4zrf52as58hh9t"
+          ]
+        },
+        {
+          "denom": "cub",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "terra1lalvk0r6nhruel7fvzdppk3tup3mh5j4d4eadrqzfhle4zrf52as58hh9t",
+      "base": "ibc/6F18EFEBF1688AA77F7EAC17065609494DC1BA12AFC78E9AEC832AF70A11BEF3",
+      "name": "Lion Cub DAO",
+      "display": "cub",
+      "symbol": "CUB",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "terra2",
+            "base_denom": "cw20:terra1lalvk0r6nhruel7fvzdppk3tup3mh5j4d4eadrqzfhle4zrf52as58hh9t",
+            "port": "wasm.terra1e0mrzy8077druuu42vs0hu7ugguade0cj65dgtauyaw4gsl4kv0qtdf2au",
+            "channel_id": "channel-26"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-341",
+            "path": "transfer/channel-341/cw20:terra1lalvk0r6nhruel7fvzdppk3tup3mh5j4d4eadrqzfhle4zrf52as58hh9t"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/cub.png"
+      },
+      "keywords": [
+        "osmosis-frontier"
+      ]
+    },
+    {
+      "description": "BLUE CUB DAO is a community DAO on Terra",
+      "denom_units": [
+        {
+          "denom": "ibc/DA961FE314B009C38595FFE3AF41225D8894D663B8C3F6650DCB5B6F8435592E",
+          "exponent": 0,
+          "aliases": [
+            "cw20:terra1gwrz9xzhqsygyr5asrgyq3pu0ewpn00mv2zenu86yvx2nlwpe8lqppv584"
+          ]
+        },
+        {
+          "denom": "blue",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "terra1gwrz9xzhqsygyr5asrgyq3pu0ewpn00mv2zenu86yvx2nlwpe8lqppv584",
+      "base": "ibc/DA961FE314B009C38595FFE3AF41225D8894D663B8C3F6650DCB5B6F8435592E",
+      "name": "BLUE CUB DAO",
+      "display": "blue",
+      "symbol": "BLUE",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "terra2",
+            "base_denom": "cw20:terra1gwrz9xzhqsygyr5asrgyq3pu0ewpn00mv2zenu86yvx2nlwpe8lqppv584",
+            "port": "wasm.terra1e0mrzy8077druuu42vs0hu7ugguade0cj65dgtauyaw4gsl4kv0qtdf2au",
+            "channel_id": "channel-26"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-341",
+            "path": "transfer/channel-341/cw20:terra1gwrz9xzhqsygyr5asrgyq3pu0ewpn00mv2zenu86yvx2nlwpe8lqppv584"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/blue.png"
+      },
+      "keywords": [
+        "osmosis-frontier"
+      ]
+    },
+    {
+      "description": "The native token of Neutron chain.",
+      "denom_units": [
+        {
+          "denom": "ibc/126DA09104B71B164883842B769C0E9EC1486C0887D27A9999E395C2C8FB5682",
+          "exponent": 0,
+          "aliases": [
+            "untrn"
+          ]
+        },
+        {
+          "denom": "ntrn",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/126DA09104B71B164883842B769C0E9EC1486C0887D27A9999E395C2C8FB5682",
+      "name": "Neutron",
+      "display": "ntrn",
+      "symbol": "NTRN",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "neutron",
+            "base_denom": "untrn",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-874",
+            "path": "transfer/channel-874/untrn"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/ntrn.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/ntrn.svg"
+      },
+      "coingecko_id": "neutron",
+      "keywords": [
+        "osmosis-frontier"
       ]
     }
   ]

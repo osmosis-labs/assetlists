@@ -84,7 +84,7 @@ jobs:
           github_token: "${{ secrets.GITHUB_TOKEN }}"
           add_timestamp: false
           commit_prefix: "[AUTO]"
-          commit_message: "Add Zone Asset"
+          commit_message: "Add Zone Asset ${{ github.event.inputs.base_denom }}"
           force: false
           target_branch: update/add_asset
       
@@ -94,7 +94,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           source_branch: update/add_asset
           target_branch: main
-          title: Add Zone Asset
+          title: Add Zone Asset 
           body: |
             **Automated pull request**
             osmosis_zone = ${{ github.event.inputs.osmosis_zone }}

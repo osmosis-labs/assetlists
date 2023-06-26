@@ -5153,6 +5153,61 @@
         "ibc-transfer",
         "ibc-go"
       ]
+    },
+     {
+      "chain_name": "composable",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Centauri",
+      "chain_id": "centauri-1",
+      "bech32_prefix": "centauri",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "centauri",
+        "bech32PrefixAccPub": "centauripub",
+        "bech32PrefixValAddr": "centaurivaloper",
+        "bech32PrefixValPub": "centaurivaloperpub",
+        "bech32PrefixConsAddr": "centaurivalcons",
+        "bech32PrefixConsPub": "centaurivalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ppica",
+            "low_gas_price": 0,
+            "average_gas_price": 0,
+            "high_gas_price": 0
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ppica"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-composable-ia.cosmosia.notional.ventures"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-composable-ia.cosmosia.notional.ventures"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/centauri/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
     }
   ]
 }

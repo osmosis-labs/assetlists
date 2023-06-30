@@ -9998,6 +9998,50 @@
       "keywords": [
         "osmosis-frontier"
       ]
+    },
+    {
+      "description": "The native token of Quasar chain.",
+      "denom_units": [
+        {
+          "denom": "ibc/1B708808D372E959CD4839C594960309283424C775F4A038AAEBE7F83A988477",
+          "exponent": 0,
+          "aliases": [
+            "uqsr"
+          ]
+        },
+        {
+          "denom": "qsr",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/1B708808D372E959CD4839C594960309283424C775F4A038AAEBE7F83A988477",
+      "name": "Quasar",
+      "display": "qsr",
+      "symbol": "QSR",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "quasar",
+            "base_denom": "uqsr",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-688",
+            "path": "transfer/channel-688/uqsr"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://github.com/cosmos/chain-registry/blob/master/quasar/images/quasar.png",
+        "svg": "https://github.com/cosmos/chain-registry/blob/master/quasar/images/quasar.svg"
+      },
+      "coingecko_id": "",
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier"
+      ]
     }
   ]
 }

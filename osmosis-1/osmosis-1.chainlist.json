@@ -5209,6 +5209,76 @@
         "ibc-transfer",
         "ibc-go"
       ]
+    },
+    {
+      "chain_name": "quasar",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Quasar",
+      "chain_id": "quasar-1",
+      "bech32_prefix": "quasar",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "quasar",
+        "bech32PrefixAccPub": "quasarpub",
+        "bech32PrefixValAddr": "quasarvaloper",
+        "bech32PrefixValPub": "quasarvaloperpub",
+        "bech32PrefixConsAddr": "quasarvalcons",
+        "bech32PrefixConsPub": "quasarvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ibc/0471F1C4E7AFD3F07702BEF6DC365268D64570F7C1FDC98EA6098DD6DE59817B",
+            "fixed_min_gas_price": 0.01,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.03
+          },
+          {
+            "denom": "ibc/FA0006F056DB6719B8C16C551FC392B62F5729978FC0B125AC9A432DBB2AA1A5",
+            "fixed_min_gas_price": 0.01,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.03
+          },
+          {
+            "denom": "ibc/FA7775734CC73176B7425910DE001A1D2AD9B6D9E93129A5D0750EAD13E4E63A",
+            "fixed_min_gas_price": 0.01,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.03
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uqsr"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://quasar-rpc.polkachu.com/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://quasar-api.polkachu.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/quasar/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
     }
   ]
 }

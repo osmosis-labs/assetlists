@@ -132,9 +132,9 @@
         "fee_tokens": [
           {
             "denom": "ujunox",
-            "low_gas_price": 0.0025,
-            "average_gas_price": 0.0025,
-            "high_gas_price": 0.0024
+            "low_gas_price": 0.003,
+            "average_gas_price": 0.0045,
+            "high_gas_price": 0.006
           }
         ]
       },
@@ -556,6 +556,62 @@
       "explorers": [
         {
           "tx_page": "https://explorer-testnet.c4e.io/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "composabletestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Composable Testnet",
+      "chain_id": "banksy-testnet-3",
+      "bech32_prefix": "centauri",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "centauri",
+        "bech32PrefixAccPub": "centauripub",
+        "bech32PrefixValAddr": "centaurivaloper",
+        "bech32PrefixValPub": "centaurivaloperpub",
+        "bech32PrefixConsAddr": "centaurivalcons",
+        "bech32PrefixConsPub": "centaurivalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ppica",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0,
+            "high_gas_price": 0
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ppica"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-banksy.notional.ventures"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-banksy.notional.ventures"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.nodexcapital.com/composable-3/tx/${txHash}"
         }
       ],
       "features": [

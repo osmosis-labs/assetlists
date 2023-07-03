@@ -6042,7 +6042,6 @@
       "coingecko_id": "alter",
       "keywords": [
         "osmosis-frontier",
-        "osmosis-info",
         "osmosis-price:uosmo:845"
       ]
     },
@@ -7949,7 +7948,7 @@
       },
       "keywords": [
         "osmosis-frontier",
-        "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:966"
+        "osmosis-price:uosmo:959"
       ]
     },
     {
@@ -8871,6 +8870,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-frontier",
+        "osmosis-info",
         "osmosis-price:uosmo:1006"
       ]
     },
@@ -9712,6 +9712,7 @@
       },
       "coingecko_id": "nolus",
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
         "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:1041"
@@ -9892,6 +9893,7 @@
       },
       "keywords": [
         "osmosis-frontier",
+        "osmosis-info",
         "osmosis-price:uosmo:1028"
       ]
     },
@@ -9934,7 +9936,9 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/composable.svg"
       },
       "keywords": [
-        "osmosis-frontier"
+        "osmosis-frontier",
+        "osmosis-info",
+        "osmosis-price:uosmo:1057"
       ]
     },
     {
@@ -9996,6 +10000,51 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/kusama/images/ksm.svg"
       },
       "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "osmosis-price:uosmo:1058"
+      ]
+    },
+    {
+      "description": "The native currency of the Realio Network.",
+      "denom_units": [
+        {
+          "denom": "ibc/1CDF9C7D073DD59ED06F15DB08CC0901F2A24759BE70463570E8896F9A444ADF",
+          "exponent": 0,
+          "aliases": [
+            "ario"
+          ]
+        },
+        {
+          "denom": "rio",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/1CDF9C7D073DD59ED06F15DB08CC0901F2A24759BE70463570E8896F9A444ADF",
+      "name": "Realio Network",
+      "display": "rio",
+      "symbol": "RIO",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "realio",
+            "base_denom": "ario",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-1424",
+            "path": "transfer/channel-1424/ario"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/realio/images/rio.png"
+      },
+      "coingecko_id": "realio-network",
+      "keywords": [
+        "osmosis-main",
         "osmosis-frontier"
       ]
     }

@@ -5202,7 +5202,66 @@
       },
       "explorers": [
         {
-          "tx_page": "https://ping.pub/centauri/tx/${txHash}"
+          "tx_page": "https://ping.pub/Centauri/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "realio",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Realio Network",
+      "chain_id": "realionetwork_3301-1",
+      "bech32_prefix": "realio",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "realio",
+        "bech32PrefixAccPub": "realiopub",
+        "bech32PrefixValAddr": "realiovaloper",
+        "bech32PrefixValPub": "realiovaloperpub",
+        "bech32PrefixConsAddr": "realiovalcons",
+        "bech32PrefixConsPub": "realiovalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ario",
+            "fixed_min_gas_price": 1000000000,
+            "low_gas_price": 4000000000,
+            "average_gas_price": 5000000000,
+            "high_gas_price": 8000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ario"
+          },
+          {
+            "denom": "arst"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://realio-rpc.genznodes.dev"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://realio-api.genznodes.dev"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.genznodes.dev/realio/tx/${txHash}"
         }
       ],
       "features": [

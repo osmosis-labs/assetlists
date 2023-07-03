@@ -5950,7 +5950,6 @@
       "coingecko_id": "unification",
       "keywords": [
         "osmosis-frontier",
-        "osmosis-info",
         "osmosis-price:uosmo:830"
       ]
     },
@@ -6407,7 +6406,7 @@
         "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
-        "osmosis-price:ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7:908"
+        "osmosis-price:ibc/92BE0717F4678905E53F4E45B2DED18BC0CB97BF1F8B6A25AFEDF3D5A879B4D5:908"
       ]
     },
     {
@@ -6725,7 +6724,7 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
-        "osmosis-price:uosmo:905"
+        "osmosis-price:ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F:950"
       ]
     },
     {
@@ -7950,7 +7949,6 @@
       },
       "keywords": [
         "osmosis-frontier",
-        "osmosis-info",
         "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:966"
       ]
     },
@@ -8586,7 +8584,7 @@
         "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
-        "osmosis-price:uosmo:992"
+        "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:1019"
       ]
     },
     {
@@ -8722,6 +8720,7 @@
       },
       "keywords": [
         "osmosis-frontier",
+        "osmosis-info",
         "osmosis-price:uosmo:1005"
       ]
     },
@@ -8872,7 +8871,6 @@
       "keywords": [
         "osmosis-main",
         "osmosis-frontier",
-        "osmosis-info",
         "osmosis-price:uosmo:1006"
       ]
     },
@@ -8965,6 +8963,7 @@
       "coingecko_id": "shade-protocol",
       "keywords": [
         "osmosis-frontier",
+        "osmosis-info",
         "osmosis-price:uosmo:1004"
       ]
     },
@@ -9711,6 +9710,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nolus/images/nolus.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nolus/images/nolus.svg"
       },
+      "coingecko_id": "nolus",
       "keywords": [
         "osmosis-frontier",
         "osmosis-info",
@@ -9844,6 +9844,157 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/ntrn.svg"
       },
       "coingecko_id": "neutron",
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-info",
+        "osmosis-price:uosmo:1046"
+      ]
+    },
+    {
+      "description": "An innovative DAO dedicated to housing the most vulnerable",
+      "denom_units": [
+        {
+          "denom": "ibc/2F5C084037D951B24D100F15CC013A131DF786DCE1B1DBDC48F018A9B9A138DE",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno1ju8k8sqwsqu5k6umrypmtyqu2wqcpnrkf4w4mntvl0javt4nma7s8lzgss"
+          ]
+        },
+        {
+          "denom": "casa",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "juno1ju8k8sqwsqu5k6umrypmtyqu2wqcpnrkf4w4mntvl0javt4nma7s8lzgss",
+      "base": "ibc/2F5C084037D951B24D100F15CC013A131DF786DCE1B1DBDC48F018A9B9A138DE",
+      "name": "Casa",
+      "display": "casa",
+      "symbol": "CASA",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1ju8k8sqwsqu5k6umrypmtyqu2wqcpnrkf4w4mntvl0javt4nma7s8lzgss",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
+            "channel_id": "channel-47"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-169",
+            "path": "transfer/channel-169/cw20:juno1ju8k8sqwsqu5k6umrypmtyqu2wqcpnrkf4w4mntvl0javt4nma7s8lzgss"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/casa.png"
+      },
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-price:uosmo:1028"
+      ]
+    },
+    {
+      "description": "The native staking and governance token of Centauri.",
+      "denom_units": [
+        {
+          "denom": "ibc/56D7C03B8F6A07AD322EEE1BEF3AE996E09D1C1E34C27CF37E0D4A0AC5972516",
+          "exponent": 0,
+          "aliases": [
+            "ppica"
+          ]
+        },
+        {
+          "denom": "pica",
+          "exponent": 12
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/56D7C03B8F6A07AD322EEE1BEF3AE996E09D1C1E34C27CF37E0D4A0AC5972516",
+      "name": "Pica",
+      "display": "pica",
+      "symbol": "PICA",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "composable",
+            "base_denom": "ppica",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-1279",
+            "path": "transfer/channel-1279/ppica"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/composable.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/composable.svg"
+      },
+      "keywords": [
+        "osmosis-frontier"
+      ]
+    },
+    {
+      "description": "The native staking and governance token of Kusama Relay Chain.",
+      "denom_units": [
+        {
+          "denom": "ibc/6727B2F071643B3841BD535ECDD4ED9CAE52ABDD0DCD07C3630811A7A37B215C",
+          "exponent": 0,
+          "aliases": [
+            "4",
+            "ibc/EE9046745AEC0E8302CB7ED9D5AD67F528FB3B7AE044B247FB0FB293DBDA35E9"
+          ]
+        },
+        {
+          "denom": "ksm",
+          "exponent": 12
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/6727B2F071643B3841BD535ECDD4ED9CAE52ABDD0DCD07C3630811A7A37B215C",
+      "name": "KSM",
+      "display": "ksm",
+      "symbol": "KSM",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "kusama",
+            "base_denom": "Planck"
+          },
+          "provider": "Kusama Parachain"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "picasso",
+            "base_denom": "4",
+            "channel_id": "channel-17"
+          },
+          "chain": {
+            "channel_id": "channel-2",
+            "path": "transfer/channel-2/4"
+          }
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "composable",
+            "base_denom": "ibc/EE9046745AEC0E8302CB7ED9D5AD67F528FB3B7AE044B247FB0FB293DBDA35E9",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-1279",
+            "path": "transfer/channel-1279/transfer/channel-2/4"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/kusama/images/ksm.svg"
+      },
       "keywords": [
         "osmosis-frontier"
       ]

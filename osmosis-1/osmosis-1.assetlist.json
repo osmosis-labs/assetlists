@@ -6405,7 +6405,7 @@
         "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
-        "osmosis-price:ibc/92BE0717F4678905E53F4E45B2DED18BC0CB97BF1F8B6A25AFEDF3D5A879B4D5:908"
+        "osmosis-price:ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7:908"
       ]
     },
     {
@@ -8719,7 +8719,6 @@
       },
       "keywords": [
         "osmosis-frontier",
-        "osmosis-info",
         "osmosis-price:uosmo:1005"
       ]
     },
@@ -8870,7 +8869,6 @@
       "keywords": [
         "osmosis-main",
         "osmosis-frontier",
-        "osmosis-info",
         "osmosis-price:uosmo:1006"
       ]
     },
@@ -10043,6 +10041,50 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/realio/images/rio.png"
       },
       "coingecko_id": "realio-network",
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier"
+      ]
+    },
+    {
+      "description": "The native token of Quasar",
+      "denom_units": [
+        {
+          "denom": "ibc/1B708808D372E959CD4839C594960309283424C775F4A038AAEBE7F83A988477",
+          "exponent": 0,
+          "aliases": [
+            "uqsr"
+          ]
+        },
+        {
+          "denom": "qsr",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/1B708808D372E959CD4839C594960309283424C775F4A038AAEBE7F83A988477",
+      "name": "Quasar",
+      "display": "qsr",
+      "symbol": "QSR",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "quasar",
+            "base_denom": "uqsr",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-688",
+            "path": "transfer/channel-688/uqsr"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quasar/images/quasar.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quasar/images/quasar.svg"
+      },
       "keywords": [
         "osmosis-main",
         "osmosis-frontier"

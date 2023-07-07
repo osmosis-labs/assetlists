@@ -8,7 +8,7 @@
  - Explicitly voted in by Osmosis Governance (just a signalling proposal--no parameter changes),
  - Implicitly, by Osmosis Governance approving allocation of Osmosis' Liquidity Mining incentives to a pool containing the asset,
  - Token is of a project built on Osmosis chain,
- - Token is of a project bunded by Osmosis Grants Program,
+ - Token is of a project funded by Osmosis Grants Program,
  - Top 100 Market Capitalization on CoinGecko or CoinMarketCap.
 ### Downgrade from Osmosis Main site:
  - Explicitly voted out by Osmosis Governance,

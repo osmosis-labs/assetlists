@@ -5335,8 +5335,123 @@
         }
       ],
       "features": [
-        "ibc-go",
-        "ibc-transfer"
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "archway",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Archway",
+      "chain_id": "archway-1",
+      "bech32_prefix": "archway",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "archway",
+        "bech32PrefixAccPub": "archwaypub",
+        "bech32PrefixValAddr": "archwayvaloper",
+        "bech32PrefixValPub": "archwayvaloperpub",
+        "bech32PrefixConsAddr": "archwayvalcons",
+        "bech32PrefixConsPub": "archwayvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "aarch",
+            "fixed_min_gas_price": 900000000000,
+            "low_gas_price": 1000000000000,
+            "average_gas_price": 1500000000000,
+            "high_gas_price": 2000000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "aarch"
+          }
+        ],
+        "lock_duration": {
+          "time": "1209600s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.mainnet.archway.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.mainnet.archway.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/archway/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "empowerchain",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "EmpowerChain",
+      "chain_id": "empowerchain-1",
+      "bech32_prefix": "empower",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "empower",
+        "bech32PrefixAccPub": "empowerpub",
+        "bech32PrefixValAddr": "empowervaloper",
+        "bech32PrefixValPub": "empowervaloperpub",
+        "bech32PrefixConsAddr": "empowervalcons",
+        "bech32PrefixConsPub": "empowervalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "umpwr",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.03
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "umpwr"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://empower-rpc.polkachu.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://empower-api.polkachu.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/empower/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
       ]
     }
   ]

@@ -5453,6 +5453,64 @@
         "ibc-transfer",
         "ibc-go"
       ]
+    },
+    {
+      "chain_name": "fxcore",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "f(x)Core",
+      "chain_id": "fxcore",
+      "bech32_prefix": "fx",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "fx",
+        "bech32PrefixAccPub": "fxpub",
+        "bech32PrefixValAddr": "fxvaloper",
+        "bech32PrefixValPub": "fxvaloperpub",
+        "bech32PrefixConsAddr": "fxvalcons",
+        "bech32PrefixConsPub": "fxvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "FX",
+            "fixed_min_gas_price": 4200000000000,
+            "low_gas_price": 400000000000,
+            "average_gas_price": 4200000000000,
+            "high_gas_price": 500000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "FX"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://fx-json.functionx.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://fx-rest.functionx.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://starscan.io/fxcore/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
     }
   ]
 }

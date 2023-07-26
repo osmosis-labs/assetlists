@@ -4552,7 +4552,6 @@
       "coingecko_id": "echelon",
       "keywords": [
         "osmosis-frontier",
-        "osmosis-info",
         "osmosis-price:uosmo:848"
       ]
     },
@@ -6634,6 +6633,7 @@
         "stablecoin",
         "bridge",
         "staking",
+        "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
         "osmosis-price:uosmo:882"
@@ -9583,6 +9583,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/roar.png"
       },
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
         "osmosis-price:uosmo:1043"
@@ -10174,9 +10175,54 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/empowerchain/images/mpwr.svg"
       },
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
         "osmosis-price:uosmo:1065"
+      ]
+    },
+    {
+      "description": "A revolutionary DAO created to bring clean drinking water to men, women, and children worldwide. We hope you join us on our journey!",
+      "denom_units": [
+        {
+          "denom": "ibc/AABCB14ACAFD53A5C455BAC01EA0CA5AE18714895846681A52BFF1E3B960B44E",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno1m4h8q4p305wgy7vkux0w6e5ylhqll3s6pmadhxkhqtuwd5wlxhxs8xklsw"
+          ]
+        },
+        {
+          "denom": "watr",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "juno1m4h8q4p305wgy7vkux0w6e5ylhqll3s6pmadhxkhqtuwd5wlxhxs8xklsw",
+      "base": "ibc/AABCB14ACAFD53A5C455BAC01EA0CA5AE18714895846681A52BFF1E3B960B44E",
+      "name": "WATR",
+      "display": "watr",
+      "symbol": "WATR",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1m4h8q4p305wgy7vkux0w6e5ylhqll3s6pmadhxkhqtuwd5wlxhxs8xklsw",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
+            "channel_id": "channel-47"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-169",
+            "path": "transfer/channel-169/cw20:juno1m4h8q4p305wgy7vkux0w6e5ylhqll3s6pmadhxkhqtuwd5wlxhxs8xklsw"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/watr.png"
+      },
+      "keywords": [
+        "osmosis-frontier"
       ]
     }
   ]

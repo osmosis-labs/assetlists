@@ -18,9 +18,9 @@ function get_base_url(domain) {
   let baseUrl;
   if (domain == "osmosis") {
     return 'https://lcd.osmosis.zone/osmosis/gamm/v1beta1/pools';
-  } else if (domain == "osmosistestnet") {
+  } else if (domain == "osmosistestnet4") {
     return 'https://lcd.testnet4.osmosis.zone/osmosis/gamm/v1beta1/pools';
-  } else if (domain == "osmosistestnet5") {
+  } else if (domain == "osmosistestnet") {
     return 'https://lcd.testnet.osmosis.zone/osmosis/gamm/v1beta1/pools';
   }else {
     return;
@@ -154,11 +154,11 @@ function getAssets(domain){
     usd = "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858", // USDC
     osmo = "uosmo",
     atom = "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2" // ATOM
-  } else if (domain == "osmosistestnet") {
+  } else if (domain == "osmosistestnet4") {
     usd = "ibc/FF3065989E34457F342D4EFB8692406D49D4E2B5C70F725F127862E22CE6BDCD", // aUSDC
     osmo = "uosmo",
     atom = "ibc/" // ATOM
-  } else if (domain == "osmosistestnet5") {
+  } else if (domain == "osmosistestnet") {
     usd = "ibc/6F34E1BD664C36CE49ACC28E60D62559A5F96C4F9A6CCE4FC5A67B2852E24CFE", // aUSDC
     osmo = "uosmo",
     atom = "ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477" // ATOM
@@ -398,8 +398,8 @@ export async function returnAssets(chain){
 
 async function main() {
   let domain = "osmosis";
+  //let domain = "osmosistestnet4";
   //let domain = "osmosistestnet";
-  //let domain = "osmosistestnet5";
   returnAssets(domain);
 }
 

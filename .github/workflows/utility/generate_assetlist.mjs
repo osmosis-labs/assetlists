@@ -27,8 +27,8 @@ import { returnAssets } from './getPools.mjs';
 
 const chainNameToChainIdMap = new Map([
   ["osmosis", "osmosis-1"],
-  ["osmosistestnet", "osmo-test-4"],
-  ["osmosistestnet5", "osmo-test-5"]
+  ["osmosistestnet4", "osmo-test-4"],
+  ["osmosistestnet", "osmo-test-5"]
 ]);
 
 const assetlistsRoot = "../../..";
@@ -326,8 +326,8 @@ async function generateAssetlist(chainName) {
 async function main() {
   
   await generateAssetlist("osmosis");
-  //await generateAssetlist("osmosistestnet");
-  await generateAssetlist("osmosistestnet5");
+  //await generateAssetlist("osmosistestnet4");
+  await generateAssetlist("osmosistestnet");
   
 }
 

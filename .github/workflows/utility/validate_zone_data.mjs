@@ -17,7 +17,7 @@ const root = "../../..";
 const chainNameToChainIdMap = new Map([
   ["osmosis", "osmosis-1"],
   //["osmosistestnet", "osmo-test-4"],
-  ["osmosistestnet5", "osmo-test-5"]
+  ["osmosistestnet", "osmo-test-5"]
 ]);
 
 const zoneAssetsFileName = "osmosis.zone_assets.json";

@@ -54,7 +54,10 @@
       "osmosis_main": true,
       "osmosis_frontier": true,
       "override_properties": {
-        "symbol": "USDT"
+        "symbol": "USDT.axl",
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.axl.svg"
+        }
       }
     },
     {
@@ -1551,7 +1554,13 @@
       "base_denom": "ibc/F3EC9F834E57DF704FA3AEAF14E8391C2E58397FE56960AD70E67562990D8265",
       "path": "transfer/channel-1279/transfer/channel-2/130",
       "osmosis_main": false,
-      "osmosis_frontier": true
+      "osmosis_frontier": true,
+      "override_properties": {
+        "symbol": "USDT.comp",
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.comp.svg"
+        }
+      }
     },
     {
       "chain_name": "realio",
@@ -1594,6 +1603,13 @@
       "path": "transfer/channel-767/ukyve",
       "osmosis_main": false,
       "osmosis_frontier": true
-    }
+    },
+    {
+      "chain_name": "kava",
+      "base_denom": "uusdt",
+      "path": "transfer/channel-143/uusdt",
+      "osmosis_main": true,
+      "osmosis_frontier": true
+    },
   ]
 }

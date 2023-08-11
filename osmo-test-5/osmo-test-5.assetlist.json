@@ -460,6 +460,45 @@
         "osmosis-info",
         "osmosis-price:ibc/6F34E1BD664C36CE49ACC28E60D62559A5F96C4F9A6CCE4FC5A67B2852E24CFE:40"
       ]
+    },
+    {
+      "description": "The native token of Persistence testnet.",
+      "denom_units": [
+        {
+          "denom": "ibc/754C8533F8A418B03AD5F2C6AA19D4703CF78BBAB9E2E4DDD6212AAC2E502CA6",
+          "exponent": 0,
+          "aliases": [
+            "uxprt"
+          ]
+        },
+        {
+          "denom": "xprt",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/754C8533F8A418B03AD5F2C6AA19D4703CF78BBAB9E2E4DDD6212AAC2E502CA6",
+      "name": "Persistence",
+      "display": "xprt",
+      "symbol": "XPRT",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "persistencetestnet2",
+            "base_denom": "uxprt",
+            "channel_id": "channel-7"
+          },
+          "chain": {
+            "channel_id": "channel-1037",
+            "path": "transfer/channel-1037/uxprt"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.svg"
+      }
     }
   ]
 }

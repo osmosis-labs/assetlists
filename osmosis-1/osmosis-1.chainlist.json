@@ -1038,10 +1038,10 @@
         "fee_tokens": [
           {
             "denom": "uixo",
-            "fixed_min_gas_price": 0.015,
-            "low_gas_price": 0.015,
-            "average_gas_price": 0.025,
-            "high_gas_price": 0.04
+            "fixed_min_gas_price": 0.025,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.4,
+            "high_gas_price": 0.1
           }
         ]
       },
@@ -1428,8 +1428,8 @@
           {
             "denom": "ncheq",
             "fixed_min_gas_price": 25,
-            "low_gas_price": 25,
-            "average_gas_price": 50,
+            "low_gas_price": 50,
+            "average_gas_price": 75,
             "high_gas_price": 100
           }
         ]
@@ -1537,9 +1537,9 @@
           {
             "denom": "uhuahua",
             "fixed_min_gas_price": 0,
-            "low_gas_price": 1,
-            "average_gas_price": 5,
-            "high_gas_price": 10
+            "low_gas_price": 500,
+            "average_gas_price": 1250,
+            "high_gas_price": 2000
           }
         ]
       },
@@ -2246,7 +2246,7 @@
         "fee_tokens": [
           {
             "denom": "swth",
-            "fixed_min_gas_price": 0,
+            "fixed_min_gas_price": 100000000,
             "low_gas_price": 1,
             "average_gas_price": 1,
             "high_gas_price": 1,
@@ -4791,12 +4791,12 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://whitewhale-rpc.lavenderfive.com"
+            "address": "https://migaloo-rpc.lavenderfive.com"
           }
         ],
         "rest": [
           {
-            "address": "https://whitewhale-api.lavenderfive.com"
+            "address": "https://migaloo-api.lavenderfive.com"
           }
         ]
       },
@@ -5158,7 +5158,7 @@
       "chain_name": "composable",
       "status": "live",
       "network_type": "mainnet",
-      "pretty_name": "Centauri",
+      "pretty_name": "Composable",
       "chain_id": "centauri-1",
       "bech32_prefix": "centauri",
       "bech32_config": {
@@ -5447,6 +5447,118 @@
       "explorers": [
         {
           "tx_page": "https://ping.pub/empower/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "kyve",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "KYVE",
+      "chain_id": "kyve-1",
+      "bech32_prefix": "kyve",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "kyve",
+        "bech32PrefixAccPub": "kyvepub",
+        "bech32PrefixValAddr": "kyvevaloper",
+        "bech32PrefixValPub": "kyvevaloperpub",
+        "bech32PrefixConsAddr": "kyvevalcons",
+        "bech32PrefixConsPub": "kyvevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ukyve",
+            "fixed_min_gas_price": 0.02,
+            "low_gas_price": 0.02,
+            "average_gas_price": 0.03,
+            "high_gas_price": 0.06
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ukyve"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-eu-1.kyve.network"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-eu-1.kyve.network"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://mintscan.io/kyve/transactions/{txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "sei",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Sei",
+      "chain_id": "pacific-1",
+      "bech32_prefix": "sei",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "sei",
+        "bech32PrefixAccPub": "seipub",
+        "bech32PrefixValAddr": "seivaloper",
+        "bech32PrefixValPub": "seivaloperpub",
+        "bech32PrefixConsAddr": "seivalcons",
+        "bech32PrefixConsPub": "seivalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "usei",
+            "fixed_min_gas_price": 0.1,
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.1,
+            "high_gas_price": 0.25
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "usei"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.wallet.pacific-1.sei.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.wallet.pacific-1.sei.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/sei/txs/{txHash}"
         }
       ],
       "features": [

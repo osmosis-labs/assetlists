@@ -10543,6 +10543,60 @@
         "osmosis-main",
         "osmosis-frontier"
       ]
+    },
+    {
+      "description": "Quicksilver Liquid Staked SOMM",
+      "denom_units": [
+        {
+          "denom": "ibc/EAF76AD1EEF7B16D167D87711FB26ABE881AC7D9F7E6D0CF313D5FA530417208",
+          "exponent": 0,
+          "aliases": [
+            "uqsomm"
+          ]
+        },
+        {
+          "denom": "qsomm",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/EAF76AD1EEF7B16D167D87711FB26ABE881AC7D9F7E6D0CF313D5FA530417208",
+      "name": "Quicksilver Liquid Staked SOMM",
+      "display": "qsomm",
+      "symbol": "qSOMM",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "sommelier",
+            "base_denom": "usomm"
+          },
+          "provider": "Quicksilver"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "quicksilver",
+            "base_denom": "uqsomm",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-522",
+            "path": "transfer/channel-522/uqosmo"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qsomm.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qsomm.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier",
+        "osmosis-info",
+        "osmosis-price:uosmo:1087"
+      ]
     }
   ]
 }

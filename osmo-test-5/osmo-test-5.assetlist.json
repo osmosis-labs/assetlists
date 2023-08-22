@@ -503,6 +503,44 @@
       "keywords": [
         "osmosis-price:uosmo:85"
       ]
-    }
+    },
+    {
+        "description": "The native token of NEXX GEN AI",
+        "denom_units": [
+          {
+            "denom": "ibc/63E267AE9838B950435FD6A29025AFDFF406EB60E05F106FB76730AC3CFBB1C7",
+            "exponent": 0,
+            "aliases": [
+              "unexx"
+            ]
+          },
+          {
+            "denom": "nexx",
+            "exponent": 6
+          }
+        ],
+        "type_asset": "ics20",
+        "base": "ibc/63E267AE9838B950435FD6A29025AFDFF406EB60E05F106FB76730AC3CFBB1C7",
+        "name": "NEXX GEN AI",
+        "display": "NEXX",
+        "symbol": "NEXX",
+        "traces": [
+          {
+            "type": "ibc",
+            "counterparty": {
+              "chain_name": "juno",
+              "base_denom": "factory/juno1qly4zcmzr2gyxtze5yt9chv2srczwwunppxjfh/NEXX",
+              "channel_id": "channel-303"
+            },
+            "chain": {
+              "channel_id": "channel-1357",
+              "path": "transfer/channel-1357/factory/juno1qly4zcmzr2gyxtze5yt9chv2srczwwunppxjfh/NEXX"
+            }
+          }
+        ],
+        "logo_URIs": {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/nexx.png"
+        }
+      }
   ]
 }

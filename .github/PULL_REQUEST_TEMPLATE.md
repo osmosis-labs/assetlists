@@ -35,15 +35,6 @@ If adding a new asset, please ensure the following:
    - The IBC channel referenced in `path` must be registered to the Chain Registry.
    - `osmosis_main` defaults to `false` (or else cite the listing rule that justifies enlisting to the Main app)
 
-### Validation Testing
-
-If adding or updating a chain or asset, the changes must be validated from the updated build of the Osmosis Frontend. Please specify who shall validate:
-- [ ] Osmosis assetlists repo maintainers are to validate--testers will need a small amount of tokens to validate. In which case:
-  - [ ] Validaters can buy a small amount of this asset from Pool ID: {PROVIDE POOL ID}.
-
-OTHERWISE
-- [ ] Submitting team are to validate--a preview link is requested in the comments of this PR. The submitting team will provide evidence of success of the Deposit and Withdraw functions from the Preview Frontend. (screenshot + tx url)
-
 ### On-chain liquidity
 
 If adding a new asset, please provide the plan for on-chain liquidity of the asset: (choose one)
@@ -51,9 +42,15 @@ If adding a new asset, please provide the plan for on-chain liquidity of the ass
 
 OR
 - [ ] A preview link is requested for the submitting team to be able to create a pool using the Osmosis Frontend.
+<!-- Did you know, the Create Pool modal will reveal all tokens held by the wallet, even if they're not listed on Osmosis -->
 
 OR
 - [ ] The token is, or will be, going through a StreamSwap stream; thus, the token should be listed without requiring on-chain liquidity. A Pool ID will be provided in this PR following the stream's completion once the team has had a chance to create a pool using the earned funds.
 
+### Validation Testing
+
+If adding or updating a chain or asset, the changes must be validated from the updated build of the Osmosis Frontend. Testers will need a small amount of tokens to validate. 
+  - [ ] Validaters can buy a small amount of this asset from Pool ID: {PROVIDE POOL ID}.
+  - [ ] Preview build has been validated.
 
 <!-- Add any special context, if necessary -->

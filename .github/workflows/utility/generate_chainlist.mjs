@@ -19,8 +19,8 @@ import * as chain_reg from './chain_registry.mjs';
 
 const chainNameToChainIdMap = new Map([
   ["osmosis", "osmosis-1"],
-  ["osmosistestnet", "osmo-test-4"],
-  ["osmosistestnet5", "osmo-test-5"]
+  ["osmosistestnet4", "osmo-test-4"],
+  ["osmosistestnet", "osmo-test-5"]
 ]);
 
 const assetlistsRoot = "../../..";
@@ -142,8 +142,8 @@ function generateChainlist(chainName) {
 function main() {
 
   generateChainlist("osmosis");
-  //generateChainlist("osmosistestnet");
-  generateChainlist("osmosistestnet5");
+  //generateChainlist("osmosistestnet4");
+  generateChainlist("osmosistestnet");
   
 }
 

@@ -16,7 +16,7 @@
    - Deceptive, (cannot imitate other assets or copyrighted material via name, symbol, or logo),
    - Shows signs of being a scam, or the team showing nefarious behaviour, (e.g., evidence of rug-pull or pump-n-dump), or
    - Lack an associated identity (may be pseudonymous)
-     - Asset listing PRs from new GitHub accounts will not be accepted; the PR must have contribution from a GitHub account with a significant (and public) contribution history.
+     - Asset listing PRs from brand new GitHub accounts will be rejected; the PR must have contribution from a GitHub account with a significant (and public) contribution history.
 
 ### Upgrade Asset to Verified Status (permissioned):
 Verified status is granted if the token or project meets any of the following criteria:
@@ -35,7 +35,8 @@ Verified status is granted if the token or project meets any of the following cr
  - Legitimacy
    - Brand presence: A well-designed project website or well-curated content on content platforms; e.g., a blog, Medium, YouTube, X, etc.
    - Community presence: Active community channels/following on X, Discord, Telegram, Reddit, etc.
-   - Developer presence: GitHub organization with active development (merely forking a chain or minting a token and registering it is insufficient to be considered 'active development') on open-source repository(s).
+   - Developer presence: GitHub organization with active development on open-source repository(s).
+     - Note: (merely forking a chain or registering a token does not qualify as 'active development')
 
 ### Downgrade Asset from Verified status:
  - Explicitly voted out by Osmosis Governance

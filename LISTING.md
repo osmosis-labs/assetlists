@@ -28,7 +28,7 @@ Verified status is granted if the token or project meets any of the following cr
  - Collaboration
    - Token is of a project built on Osmosis chain
    - Token is of a project funded by Osmosis Grants Program
-   - Token launches via StreamSwap stream on Osmosis
+   - Token is launched via StreamSwap stream on Osmosis
    - Project team is an Osmocon sponsor (Silver+)
  - Significance
    - Has a dedicated CoinGecko or CoinMarketCap page with a Market Capitalization rank

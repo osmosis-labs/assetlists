@@ -671,6 +671,62 @@
         "ibc-transfer",
         "ibc-go"
       ]
+    },
+    {
+      "chain_name": "xiontestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Xion Testnet",
+      "chain_id": "xion-testnet-1",
+      "bech32_prefix": "xion",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "xion",
+        "bech32PrefixAccPub": "xionpub",
+        "bech32PrefixValAddr": "xionvaloper",
+        "bech32PrefixValPub": "xionvaloperpub",
+        "bech32PrefixConsAddr": "xionvalcons",
+        "bech32PrefixConsPub": "xionvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uxion",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uxion"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.xion-testnet-1.burnt.com:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.xion-testnet-1.burnt.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://pingpub.xion-testnet-1.burnt.com/xion-testnet-1/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
     }
   ]
 }

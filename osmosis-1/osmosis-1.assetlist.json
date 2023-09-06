@@ -10643,6 +10643,46 @@
         "osmosis-info",
         "osmosis-price:ibc/9BBA9A1C257E971E38C1422780CE6F0B0686F0A3085E2D61118D904BFE0F5F5E:1120"
       ]
+    },
+    {
+        "description": "$DGL is a utility token for the Licorice ecosystem and a native token on Juno chain.",
+        "denom_units": [
+          {
+            "denom": "ibc/D69F6D787EC649F4E998161A9F0646F4C2DCC64748A2AB982F14CAFBA7CC0EC9",
+            "exponent": 0,
+            "aliases": [
+              "factory/juno1u805lv20qc6jy7c3ttre7nct6uyl20pfky5r7e/DGL"
+            ]
+          },
+          {
+            "denom": "dgl",
+            "exponent": 6
+          }
+        ],
+        "type_asset": "ics20",
+        "address": "juno1u805lv20qc6jy7c3ttre7nct6uyl20pfky5r7e",
+        "base": "ibc/D69F6D787EC649F4E998161A9F0646F4C2DCC64748A2AB982F14CAFBA7CC0EC9",
+        "name": "DGL Licorice",
+        "display": "dgl",
+        "symbol": "DGL",
+        "traces": [
+          {
+            "type": "ibc",
+            "counterparty": {
+              "chain_name": "juno",
+              "base_denom": "factory/juno1u805lv20qc6jy7c3ttre7nct6uyl20pfky5r7e/DGL",
+              "channel_id": "channel-0"
+            },
+            "chain": {
+              "port": "transfer",
+              "channel_id": "channel-42",
+              "path": "transfer/channel-42/factory/juno1u805lv20qc6jy7c3ttre7nct6uyl20pfky5r7e/DGL"
+              }
+          }
+        ],
+        "logo_URIs": {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/dgl.png"
+        }
     }
   ]
 }

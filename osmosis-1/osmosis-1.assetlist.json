@@ -58,7 +58,7 @@
         "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
-        "osmosis-price:uosmo:1013"
+        "osmosis-price:uosmo:2"
       ]
     },
     {
@@ -384,6 +384,14 @@
       "display": "busd",
       "symbol": "BUSD",
       "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Binance"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -1434,7 +1442,7 @@
         "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
-        "osmosis-price:uosmo:7"
+        "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:8"
       ]
     },
     {
@@ -1755,7 +1763,7 @@
         "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
-        "osmosis-price:uosmo:573"
+        "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:574"
       ]
     },
     {
@@ -2960,6 +2968,7 @@
       },
       "coingecko_id": "certik",
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
         "osmosis-price:uosmo:1020"
@@ -3630,7 +3639,7 @@
       "coingecko_id": "junoswap-raw-dao",
       "keywords": [
         "osmosis-frontier",
-        "osmosis-price:uosmo:700"
+        "osmosis-price:ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7:699"
       ]
     },
     {
@@ -4640,7 +4649,6 @@
       },
       "keywords": [
         "osmosis-frontier",
-        "osmosis-info",
         "osmosis-price:uosmo:787"
       ]
     },
@@ -4927,7 +4935,6 @@
       "coingecko_id": "crescent-network",
       "keywords": [
         "osmosis-frontier",
-        "osmosis-info",
         "osmosis-price:uosmo:786"
       ]
     },
@@ -5628,7 +5635,7 @@
       ]
     },
     {
-      "description": "Tori token (TORI) is the Teritoti Network’s native utility token, used as the primary means to govern, secure the blockchain, incentivize ecosystem contributors and use the various Teritori dApp features.",
+      "description": "The native token of Teritori",
       "denom_units": [
         {
           "denom": "ibc/EB7FB9C8B425F289B63703413327C2051030E848CE4EAAEA2E51199D6D39D3EC",
@@ -6492,7 +6499,8 @@
       "keywords": [
         "medas",
         "osmosis-frontier",
-        "osmosis-price:uosmo:859"
+        "osmosis-info",
+        "osmosis-price:ibc/9712DBB13B9631EDFA9BF61B55F1B2D290B2ADB67E3A4EB3A875F3B6081B3B84:910"
       ]
     },
     {
@@ -6771,7 +6779,6 @@
       "coingecko_id": "hopers-io ",
       "keywords": [
         "osmosis-frontier",
-        "osmosis-info",
         "osmosis-price:uosmo:894"
       ]
     },
@@ -7569,7 +7576,7 @@
       },
       "keywords": [
         "osmosis-frontier",
-        "osmosis-price:uosmo:967"
+        "osmosis-price:uosmo:951"
       ]
     },
     {
@@ -7947,7 +7954,7 @@
       },
       "keywords": [
         "osmosis-frontier",
-        "osmosis-price:uosmo:959"
+        "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:966"
       ]
     },
     {
@@ -8176,7 +8183,7 @@
       },
       "keywords": [
         "osmosis-frontier",
-        "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:980"
+        "osmosis-price:uosmo:974"
       ]
     },
     {
@@ -8959,7 +8966,6 @@
       "coingecko_id": "shade-protocol",
       "keywords": [
         "osmosis-frontier",
-        "osmosis-info",
         "osmosis-price:uosmo:1004"
       ]
     },
@@ -9889,7 +9895,6 @@
       },
       "keywords": [
         "osmosis-frontier",
-        "osmosis-info",
         "osmosis-price:uosmo:1028"
       ]
     },
@@ -10005,6 +10010,7 @@
       },
       "keywords": [
         "osmosis-frontier",
+        "osmosis-info",
         "osmosis-price:uosmo:1058"
       ]
     },
@@ -10080,69 +10086,8 @@
       },
       "keywords": [
         "osmosis-frontier",
+        "osmosis-info",
         "osmosis-price:uosmo:1069"
-      ]
-    },
-    {
-      "description": "The native staking and governance token of Statemine parachain.",
-      "denom_units": [
-        {
-          "denom": "ibc/FDFCC2BD1D609151C3593EC84FD9EA43057FF45F264BC89B18E7085F3F29A248",
-          "exponent": 0,
-          "aliases": [
-            "130",
-            "ibc/F3EC9F834E57DF704FA3AEAF14E8391C2E58397FE56960AD70E67562990D8265"
-          ]
-        },
-        {
-          "denom": "usdt",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/FDFCC2BD1D609151C3593EC84FD9EA43057FF45F264BC89B18E7085F3F29A248",
-      "name": "USDT",
-      "display": "usdt",
-      "symbol": "USDT.comp",
-      "traces": [
-        {
-          "type": "bridge",
-          "counterparty": {
-            "chain_name": "statemine",
-            "base_denom": "130"
-          },
-          "provider": "Kusama Parachain"
-        },
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "picasso",
-            "base_denom": "130",
-            "channel_id": "channel-17"
-          },
-          "chain": {
-            "channel_id": "channel-2",
-            "path": "transfer/channel-2/130"
-          }
-        },
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "composable",
-            "base_denom": "ibc/F3EC9F834E57DF704FA3AEAF14E8391C2E58397FE56960AD70E67562990D8265",
-            "channel_id": "channel-3"
-          },
-          "chain": {
-            "channel_id": "channel-1279",
-            "path": "transfer/channel-1279/transfer/channel-2/130"
-          }
-        }
-      ],
-      "logo_URIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.comp.svg"
-      },
-      "keywords": [
-        "osmosis-frontier"
       ]
     },
     {
@@ -10184,7 +10129,8 @@
       },
       "coingecko_id": "realio-network",
       "keywords": [
-        "osmosis-price:uosmo:1074"
+        "osmosis-info",
+        "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:1084"
       ]
     },
     {
@@ -10410,6 +10356,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kyve/images/kyve-token.svg"
       },
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
         "osmosis-price:uosmo:1075"
@@ -10538,10 +10485,11 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sei/images/sei.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sei/images/sei.svg"
       },
-      "coingecko_id": "sei",
+      "coingecko_id": "sei-network",
       "keywords": [
         "osmosis-main",
-        "osmosis-frontier"
+        "osmosis-frontier",
+        "osmosis-price:uosmo:1086"
       ]
     },
     {
@@ -10583,7 +10531,7 @@
           },
           "chain": {
             "channel_id": "channel-522",
-            "path": "transfer/channel-522/uqosmo"
+            "path": "transfer/channel-522/uqsomm"
           }
         }
       ],
@@ -10595,7 +10543,372 @@
         "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
-        "osmosis-price:uosmo:1087"
+        "osmosis-price:ibc/9BBA9A1C257E971E38C1422780CE6F0B0686F0A3085E2D61118D904BFE0F5F5E:1087"
+      ]
+    },
+    {
+      "description": "The native staking and governance token of the Passage chain.",
+      "denom_units": [
+        {
+          "denom": "ibc/208B2F137CDE510B44C41947C045CFDC27F996A9D990EA64460BDD5B3DBEB2ED",
+          "exponent": 0,
+          "aliases": [
+            "upasg"
+          ]
+        },
+        {
+          "denom": "pasg",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/208B2F137CDE510B44C41947C045CFDC27F996A9D990EA64460BDD5B3DBEB2ED",
+      "name": "Passage",
+      "display": "pasg",
+      "symbol": "PASG",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "passage",
+            "base_denom": "upasg",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-2494",
+            "path": "transfer/channel-2494/upasg"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/passage/images/pasg.png"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier",
+        "osmosis-info",
+        "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:1137"
+      ]
+    },
+    {
+      "description": "Somm Token (SOMM) is the native staking token of the Sommelier Chain",
+      "denom_units": [
+        {
+          "denom": "ibc/5A0060579D24FBE5268BEA74C3281E7FE533D361C41A99307B4998FEC611E46B",
+          "exponent": 0,
+          "aliases": [
+            "stusomm"
+          ]
+        },
+        {
+          "denom": "stsomm",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/5A0060579D24FBE5268BEA74C3281E7FE533D361C41A99307B4998FEC611E46B",
+      "name": "stSOMM",
+      "display": "stsomm",
+      "symbol": "stSOMM",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "sommelier",
+            "base_denom": "usomm"
+          },
+          "provider": "Stride"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stusomm",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326",
+            "path": "transfer/channel-326/stusomm"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stsomm.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stsomm.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier",
+        "osmosis-info",
+        "osmosis-price:ibc/9BBA9A1C257E971E38C1422780CE6F0B0686F0A3085E2D61118D904BFE0F5F5E:1120"
+      ]
+    },
+    {
+      "description": "Wrapped SOL (Wormhole), SOL, factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8sYgCzLRJC3J7qPn2bNbx6PiGcarhyx8rBhVaNnfvHCA",
+      "denom_units": [
+        {
+          "denom": "ibc/C058818AD1980A9C77F26D1BEF9E3ADF674C9659EB88563FD46950A9BC4164A6",
+          "exponent": 0,
+          "aliases": [
+            "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8sYgCzLRJC3J7qPn2bNbx6PiGcarhyx8rBhVaNnfvHCA"
+          ]
+        },
+        {
+          "denom": "wormhole/8sYgCzLRJC3J7qPn2bNbx6PiGcarhyx8rBhVaNnfvHCA/8",
+          "exponent": 8,
+          "aliases": []
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "wormhole1wn625s4jcmvk0szpl85rj5azkfc6suyvf75q6vrddscjdphtve8sca0pvl",
+      "base": "ibc/C058818AD1980A9C77F26D1BEF9E3ADF674C9659EB88563FD46950A9BC4164A6",
+      "name": "Wrapped SOL (Wormhole)",
+      "display": "wormhole/8sYgCzLRJC3J7qPn2bNbx6PiGcarhyx8rBhVaNnfvHCA/8",
+      "symbol": "SOL",
+      "traces": [
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "solana",
+            "base_denom": "Lamport"
+          },
+          "provider": "Solana"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "solana",
+            "base_denom": "So11111111111111111111111111111111111111112"
+          },
+          "provider": "Wormhole"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gateway",
+            "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8sYgCzLRJC3J7qPn2bNbx6PiGcarhyx8rBhVaNnfvHCA",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-2186",
+            "path": "transfer/channel-2186/factory:wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx:8sYgCzLRJC3J7qPn2bNbx6PiGcarhyx8rBhVaNnfvHCA"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/sol.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier"
+      ]
+    },
+    {
+      "description": "Bonk (Wormhole), Bonk, factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/95mnwzvJZJ3fKz77xfGN2nR5to9pZmH8YNvaxgLgw5AR",
+      "denom_units": [
+        {
+          "denom": "ibc/620CD4A652485ECC8BEE7716D5D64BEA1B165612FCCD9706D63A4248CB685E7C",
+          "exponent": 0,
+          "aliases": [
+            "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/95mnwzvJZJ3fKz77xfGN2nR5to9pZmH8YNvaxgLgw5AR"
+          ]
+        },
+        {
+          "denom": "wormhole/95mnwzvJZJ3fKz77xfGN2nR5to9pZmH8YNvaxgLgw5AR/5",
+          "exponent": 5,
+          "aliases": []
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "wormhole10qt8wg0n7z740ssvf3urmvgtjhxpyp74hxqvqt7z226gykuus7eq9mpu8u",
+      "base": "ibc/620CD4A652485ECC8BEE7716D5D64BEA1B165612FCCD9706D63A4248CB685E7C",
+      "name": "Bonk (Wormhole)",
+      "display": "wormhole/95mnwzvJZJ3fKz77xfGN2nR5to9pZmH8YNvaxgLgw5AR/5",
+      "symbol": "Bonk",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "solana",
+            "base_denom": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"
+          },
+          "provider": "Wormhole"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gateway",
+            "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/95mnwzvJZJ3fKz77xfGN2nR5to9pZmH8YNvaxgLgw5AR",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-2186",
+            "path": "transfer/channel-2186/factory:wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx:95mnwzvJZJ3fKz77xfGN2nR5to9pZmH8YNvaxgLgw5AR"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/bonk.png"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier"
+      ]
+    },
+    {
+      "description": "Tether USD (Wormhole), USDT, factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8iuAc6DSeLvi2JDUtwJxLytsZT8R19itXebZsNReLLNi",
+      "denom_units": [
+        {
+          "denom": "ibc/4EDA0CAEE870C8FCA5DDCD390F11B89BA850654D81FEAEF9DBBA17D722239D70",
+          "exponent": 0,
+          "aliases": [
+            "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8iuAc6DSeLvi2JDUtwJxLytsZT8R19itXebZsNReLLNi"
+          ]
+        },
+        {
+          "denom": "wormhole/8iuAc6DSeLvi2JDUtwJxLytsZT8R19itXebZsNReLLNi/6",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "wormhole1w27ekqvvtzfanfxnkw4jx2f8gdfeqwd3drkee3e64xat6phwjg0savgmhw",
+      "base": "ibc/4EDA0CAEE870C8FCA5DDCD390F11B89BA850654D81FEAEF9DBBA17D722239D70",
+      "name": "Tether USD (Wormhole)",
+      "display": "wormhole/8iuAc6DSeLvi2JDUtwJxLytsZT8R19itXebZsNReLLNi/6",
+      "symbol": "USDT.wh",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+          },
+          "provider": "Wormhole"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gateway",
+            "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8iuAc6DSeLvi2JDUtwJxLytsZT8R19itXebZsNReLLNi",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-2186",
+            "path": "transfer/channel-2186/factory:wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx:8iuAc6DSeLvi2JDUtwJxLytsZT8R19itXebZsNReLLNi"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.hole.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier"
+      ]
+    },
+    {
+      "description": "Sui (Wormhole), SUI, factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh",
+      "denom_units": [
+        {
+          "denom": "ibc/034873957DC93F6650D50760F2C289C5AA0AFEB307D8A8AE7E167F40023341D5",
+          "exponent": 0,
+          "aliases": [
+            "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh"
+          ]
+        },
+        {
+          "denom": "wormhole/46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh/8",
+          "exponent": 8,
+          "aliases": []
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "wormhole19hlynxzedrlqv99v6qscww7d3crhl86qtd0vprpltg5g9xx6jk9q6ya33y",
+      "base": "ibc/034873957DC93F6650D50760F2C289C5AA0AFEB307D8A8AE7E167F40023341D5",
+      "name": "Sui (Wormhole)",
+      "display": "wormhole/46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh/8",
+      "symbol": "SUI",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "sui",
+            "base_denom": "0x2::sui::SUI"
+          },
+          "provider": "Wormhole"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gateway",
+            "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-2186",
+            "path": "transfer/channel-2186/factory:wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx:46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/sui/images/sui.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier"
+      ]
+    },
+    {
+      "description": "Aptos Coin (Wormhole), APT, factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5wS2fGojbL9RhGEAeQBdkHPUAciYDxjDTMYvdf9aDn2r",
+      "denom_units": [
+        {
+          "denom": "ibc/F5493DA7706B00E955ADBC6DDDA24789D4644A81C5E96277A54A0B9C5FD63543",
+          "exponent": 0,
+          "aliases": [
+            "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5wS2fGojbL9RhGEAeQBdkHPUAciYDxjDTMYvdf9aDn2r"
+          ]
+        },
+        {
+          "denom": "wormhole/5wS2fGojbL9RhGEAeQBdkHPUAciYDxjDTMYvdf9aDn2r/8",
+          "exponent": 8,
+          "aliases": []
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "wormhole1f9sxjn0qu8xylcpzlvnhrefnatndqxnrajfrnr5h97hegnmsdqhsh6juc0",
+      "base": "ibc/F5493DA7706B00E955ADBC6DDDA24789D4644A81C5E96277A54A0B9C5FD63543",
+      "name": "Aptos Coin (Wormhole)",
+      "display": "wormhole/5wS2fGojbL9RhGEAeQBdkHPUAciYDxjDTMYvdf9aDn2r/8",
+      "symbol": "APT",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "aptos",
+            "base_denom": "0x1::aptos_coin::AptosCoin"
+          },
+          "provider": "Wormhole"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gateway",
+            "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5wS2fGojbL9RhGEAeQBdkHPUAciYDxjDTMYvdf9aDn2r",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-2186",
+            "path": "transfer/channel-2186/factory:wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx:5wS2fGojbL9RhGEAeQBdkHPUAciYDxjDTMYvdf9aDn2r"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/aptos/images/aptos.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier"
       ]
     }
   ]

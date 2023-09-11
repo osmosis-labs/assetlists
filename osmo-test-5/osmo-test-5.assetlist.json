@@ -165,7 +165,7 @@
       "description": "The native token of JUNO Chain",
       "denom_units": [
         {
-          "denom": "ibc/8E2FEFCBD754FA3C97411F0126B9EC76191BAA1B3959CB73CECF396A4037BBF0",
+          "denom": "ibc/749F60D2792A9E5552EF43C0EDC808B93A16F4B118418F22CF28481B44E81BC9",
           "exponent": 0,
           "aliases": [
             "ujunox"
@@ -177,7 +177,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/8E2FEFCBD754FA3C97411F0126B9EC76191BAA1B3959CB73CECF396A4037BBF0",
+      "base": "ibc/749F60D2792A9E5552EF43C0EDC808B93A16F4B118418F22CF28481B44E81BC9",
       "name": "Juno Testnet",
       "display": "junox",
       "symbol": "JUNOX",
@@ -186,11 +186,12 @@
           "type": "ibc",
           "counterparty": {
             "chain_name": "junotestnet",
-            "base_denom": "ujunox"
+            "base_denom": "ujunox",
+            "channel_id": "channel-622"
           },
           "chain": {
-            "channel_id": "channel-1",
-            "path": "transfer/channel-1/ujunox"
+            "channel_id": "channel-1419",
+            "path": "transfer/channel-1419/ujunox"
           }
         }
       ],
@@ -198,11 +199,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.svg"
       },
-      "coingecko_id": "juno-network",
-      "keywords": [
-        "osmosis-info",
-        "osmosis-price:uosmo:3"
-      ]
+      "coingecko_id": "juno-network"
     },
     {
       "description": "The native token of Mars Protocol",

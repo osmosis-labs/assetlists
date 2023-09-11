@@ -469,7 +469,7 @@
       ]
     },
     {
-      "description": "CRO coin is the token for the Crypto.com platform.",
+      "description": "CRO is the native token of the Crypto.org Chain, referred to as Native CRO.",
       "denom_units": [
         {
           "denom": "ibc/E6931F78057F7CC5DA0FD6CEF82FF39373A6E0452BF1FD76910B93292CF356C1",
@@ -4560,7 +4560,6 @@
       "coingecko_id": "echelon",
       "keywords": [
         "osmosis-frontier",
-        "osmosis-info",
         "osmosis-price:uosmo:848"
       ]
     },
@@ -6411,7 +6410,7 @@
         "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
-        "osmosis-price:ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7:908"
+        "osmosis-price:ibc/92BE0717F4678905E53F4E45B2DED18BC0CB97BF1F8B6A25AFEDF3D5A879B4D5:908"
       ]
     },
     {
@@ -7576,7 +7575,7 @@
       },
       "keywords": [
         "osmosis-frontier",
-        "osmosis-price:uosmo:951"
+        "osmosis-price:uosmo:967"
       ]
     },
     {
@@ -10909,6 +10908,50 @@
       "keywords": [
         "osmosis-main",
         "osmosis-frontier"
+      ]
+    },
+    {
+      "description": "MantaDAO Governance Token",
+      "denom_units": [
+        {
+          "denom": "ibc/51D893F870B7675E507E91DA8DB0B22EA66333207E4F5C0708757F08EE059B0B",
+          "exponent": 0,
+          "aliases": [
+            "factory/kujira1643jxg8wasy5cfcn7xm8rd742yeazcksqlg4d7/umnta"
+          ]
+        },
+        {
+          "denom": "mnta",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/51D893F870B7675E507E91DA8DB0B22EA66333207E4F5C0708757F08EE059B0B",
+      "name": "MNTA",
+      "display": "MNTA",
+      "symbol": "MNTA",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "kujira",
+            "base_denom": "factory/kujira1643jxg8wasy5cfcn7xm8rd742yeazcksqlg4d7/umnta",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-259",
+            "path": "transfer/channel-259/factory:kujira1643jxg8wasy5cfcn7xm8rd742yeazcksqlg4d7:umnta"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/mnta.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/mnta.svg"
+      },
+      "coingecko_id": "mantadao",
+      "keywords": [
+        "osmosis-frontier",
+        "osmosis-price:uosmo:1139"
       ]
     }
   ]

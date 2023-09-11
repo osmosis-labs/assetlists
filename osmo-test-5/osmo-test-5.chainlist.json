@@ -1,8 +1,8 @@
 {
-  "zone": "osmosistestnet5",
+  "zone": "osmosistestnet",
   "chains": [
     {
-      "chain_name": "osmosistestnet5",
+      "chain_name": "osmosistestnet",
       "status": "live",
       "network_type": "testnet",
       "pretty_name": "Osmosis Testnet",
@@ -612,6 +612,115 @@
       "explorers": [
         {
           "tx_page": "https://explorer.nodexcapital.com/composable-3/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "persistencetestnet2",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Persistence Testnet",
+      "chain_id": "test-core-2",
+      "bech32_prefix": "persistence",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "persistence",
+        "bech32PrefixAccPub": "persistencepub",
+        "bech32PrefixValAddr": "persistencevaloper",
+        "bech32PrefixValPub": "persistencevaloperpub",
+        "bech32PrefixConsAddr": "persistencevalcons",
+        "bech32PrefixConsPub": "persistencevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uxprt",
+            "fixed_min_gas_price": 0
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uxprt"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.testnet2.persistence.one"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.testnet2.persistence.one"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://testnet.mintscan.io/persistence-testnet/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "xiontestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Xion Testnet",
+      "chain_id": "xion-testnet-1",
+      "bech32_prefix": "xion",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "xion",
+        "bech32PrefixAccPub": "xionpub",
+        "bech32PrefixValAddr": "xionvaloper",
+        "bech32PrefixValPub": "xionvaloperpub",
+        "bech32PrefixConsAddr": "xionvalcons",
+        "bech32PrefixConsPub": "xionvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uxion",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uxion"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.xion-testnet-1.burnt.com:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.xion-testnet-1.burnt.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://pingpub.xion-testnet-1.burnt.com/xion-testnet-1/tx/${txHash}"
         }
       ],
       "features": [

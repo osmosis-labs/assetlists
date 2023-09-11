@@ -54,7 +54,10 @@
       "osmosis_main": true,
       "osmosis_frontier": true,
       "override_properties": {
-        "symbol": "USDT"
+        "symbol": "USDT.axl",
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.axl.svg"
+        }
       }
     },
     {
@@ -461,7 +464,7 @@
       "chain_name": "shentu",
       "base_denom": "uctk",
       "path": "transfer/channel-146/uctk",
-      "osmosis_main": false,
+      "osmosis_main": true,
       "osmosis_frontier": true
     },
     {
@@ -1540,6 +1543,13 @@
       "osmosis_frontier": true
     },
     {
+      "chain_name": "composable",
+      "base_denom": "ibc/3CC19CEC7E5A3E90E78A5A9ECC5A0E2F8F826A375CF1E096F4515CF09DA3E366",
+      "path": "transfer/channel-1279/transfer/channel-2/transfer/channel-15/79228162514264337593543950342",
+      "osmosis_main": false,
+      "osmosis_frontier": true
+    },
+    {
       "chain_name": "realio",
       "base_denom": "ario",
       "path": "transfer/channel-1424/ario",
@@ -1575,10 +1585,106 @@
       "osmosis_frontier": true
     },
     {
+      "chain_name": "kyve",
+      "base_denom": "ukyve",
+      "path": "transfer/channel-767/ukyve",
+      "osmosis_main": true,
+      "osmosis_frontier": true
+    },
+    {
+      "chain_name": "kava",
+      "base_denom": "erc20/tether/usdt",
+      "path": "transfer/channel-143/erc20/tether/usdt",
+      "osmosis_main": true,
+      "osmosis_frontier": true
+    },
+    {
+      "chain_name": "osmosis",
+      "base_denom": "factory/osmo1dv8wz09tckslr2wy5z86r46dxvegylhpt97r9yd6qc3kyc6tv42qa89dr9/ampOSMO",
+      "osmosis_main": true,
+      "osmosis_frontier": true
+    },
+    {
+      "chain_name": "sei",
+      "base_denom": "usei",
+      "path": "transfer/channel-782/usei",
+      "osmosis_main": true,
+      "osmosis_frontier": true
+    },
+    {
+      "chain_name": "quicksilver",
+      "base_denom": "uqsomm",
+      "path": "transfer/channel-522/uqsomm",
+      "osmosis_main": true,
+      "osmosis_frontier": true
+    },
+    {
+      "chain_name": "passage",
+      "base_denom": "upasg",
+      "path": "transfer/channel-2494/upasg",
+      "osmosis_main": true,
+      "osmosis_frontier": true
+    },
+    {
+      "chain_name": "stride",
+      "base_denom": "stusomm",
+      "path": "transfer/channel-326/stusomm",
+      "osmosis_main": true,
+      "osmosis_frontier": true
+    },
+    {
+      "chain_name": "gateway",
+      "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8sYgCzLRJC3J7qPn2bNbx6PiGcarhyx8rBhVaNnfvHCA",
+      "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8sYgCzLRJC3J7qPn2bNbx6PiGcarhyx8rBhVaNnfvHCA",
+      "osmosis_main": true,
+      "osmosis_frontier": true
+    },
+    {
+      "chain_name": "gateway",
+      "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/95mnwzvJZJ3fKz77xfGN2nR5to9pZmH8YNvaxgLgw5AR",
+      "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/95mnwzvJZJ3fKz77xfGN2nR5to9pZmH8YNvaxgLgw5AR",
+      "osmosis_main": true,
+      "osmosis_frontier": true
+    },
+    {
+      "chain_name": "gateway",
+      "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8iuAc6DSeLvi2JDUtwJxLytsZT8R19itXebZsNReLLNi",
+      "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8iuAc6DSeLvi2JDUtwJxLytsZT8R19itXebZsNReLLNi",
+      "osmosis_main": true,
+      "osmosis_frontier": true,
+      "override_properties": {
+        "symbol": "USDT.wh",
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.hole.svg"
+        }
+      }
+    },
+    {
+      "chain_name": "gateway",
+      "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh",
+      "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh",
+      "osmosis_main": true,
+      "osmosis_frontier": true
+    },
+    {
+      "chain_name": "gateway",
+      "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5wS2fGojbL9RhGEAeQBdkHPUAciYDxjDTMYvdf9aDn2r",
+      "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5wS2fGojbL9RhGEAeQBdkHPUAciYDxjDTMYvdf9aDn2r",
+      "osmosis_main": true,
+      "osmosis_frontier": true
+    },
+    {
+      "chain_name": "kujira",
+      "base_denom": "factory/kujira1643jxg8wasy5cfcn7xm8rd742yeazcksqlg4d7/umnta",
+      "path": "transfer/channel-259/factory:kujira1643jxg8wasy5cfcn7xm8rd742yeazcksqlg4d7:umnta",
+      "osmosis_main": false,
+      "osmosis_frontier": true
+    },
+    {
       "chain_name": "xpla",
       "base_denom": "axpla",
-      "path": "transfer/channel-1634/axpla",      
-      "osmosis_main": false,
+      "path": "transfer/channel-1634/axpla",
+      "osmosis_main": true,
       "osmosis_frontier": true
     }
   ]

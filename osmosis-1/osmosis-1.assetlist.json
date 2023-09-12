@@ -10953,6 +10953,58 @@
         "osmosis-frontier",
         "osmosis-price:uosmo:1139"
       ]
+    },
+    {
+      "description": "Canonical form of USDC for the Cosmos ecosystem, natively issued by Circle on the Noble blockchain",
+      "denom_units": [
+        {
+          "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4",
+          "exponent": 0,
+          "aliases": [
+            "uusdc"
+          ]
+        },
+        {
+          "denom": "usdc",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4",
+      "name": "USD Coin",
+      "display": "usdc",
+      "symbol": "nUSDC",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Circle"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "noble",
+            "base_denom": "uusdc",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-750",
+            "path": "transfer/channel-750/uusdc"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "",
+        "svg": ""
+      },
+      "coingecko_id": "usd-coin",
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier"
+      ]
     }
   ]
 }

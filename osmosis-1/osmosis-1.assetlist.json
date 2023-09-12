@@ -7575,7 +7575,7 @@
       },
       "keywords": [
         "osmosis-frontier",
-        "osmosis-price:uosmo:967"
+        "osmosis-price:uosmo:951"
       ]
     },
     {
@@ -10952,6 +10952,194 @@
       "keywords": [
         "osmosis-frontier",
         "osmosis-price:uosmo:1139"
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/DB421D24F8571EDBA4816557B8D459B444ADD795E499289841228AD3EFB2B791",
+          "exponent": 0,
+          "aliases": [
+            "factory/juno1u805lv20qc6jy7c3ttre7nct6uyl20pfky5r7e/DGL"
+          ]
+        },
+        {
+          "denom": "dgl",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "juno1u805lv20qc6jy7c3ttre7nct6uyl20pfky5r7e",
+      "base": "ibc/DB421D24F8571EDBA4816557B8D459B444ADD795E499289841228AD3EFB2B791",
+      "name": "Licorice",
+      "display": "dgl",
+      "symbol": "DGL",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "factory/juno1u805lv20qc6jy7c3ttre7nct6uyl20pfky5r7e/DGL",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/factory:juno1u805lv20qc6jy7c3ttre7nct6uyl20pfky5r7e:DGL"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/dgl.png"
+      },
+      "keywords": [
+        "osmosis-frontier"
+      ]
+    },
+    {
+      "description": "USD Coin (Wormhole), USDC, factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/GGh9Ufn1SeDGrhzEkMyRKt5568VbbxZK2yvWNsd6PbXt",
+      "denom_units": [
+        {
+          "denom": "ibc/9FB3464A62D6E1D712E3036E11757FF88626F41CCA87F061AB0EF469CF4D19FC",
+          "exponent": 0,
+          "aliases": [
+            "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/GGh9Ufn1SeDGrhzEkMyRKt5568VbbxZK2yvWNsd6PbXt"
+          ]
+        },
+        {
+          "denom": "wormhole/GGh9Ufn1SeDGrhzEkMyRKt5568VbbxZK2yvWNsd6PbXt/6",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "wormhole1utjx3594tlvfw4375esgu72wa4sdgf0q7x4ye27husf5kvuzp5rsr72gdq",
+      "base": "ibc/9FB3464A62D6E1D712E3036E11757FF88626F41CCA87F061AB0EF469CF4D19FC",
+      "name": "USD Coin (Wormhole)",
+      "display": "wormhole/GGh9Ufn1SeDGrhzEkMyRKt5568VbbxZK2yvWNsd6PbXt/6",
+      "symbol": "USDC.wh",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+          },
+          "provider": "Wormhole"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gateway",
+            "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/GGh9Ufn1SeDGrhzEkMyRKt5568VbbxZK2yvWNsd6PbXt",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-2186",
+            "path": "transfer/channel-2186/factory:wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx:GGh9Ufn1SeDGrhzEkMyRKt5568VbbxZK2yvWNsd6PbXt"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdc.hole.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier"
+      ]
+    },
+    {
+      "description": "Wrapped Ether (Wormhole), WETH, factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5BWqpR48Lubd55szM5i62zK7TFkddckhbT48yy6mNbDp",
+      "denom_units": [
+        {
+          "denom": "ibc/580F8A1EF2A4281116B8F331973CC87E579811593859AC11B4E46BF6EA73EBFE",
+          "exponent": 0,
+          "aliases": [
+            "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5BWqpR48Lubd55szM5i62zK7TFkddckhbT48yy6mNbDp"
+          ]
+        },
+        {
+          "denom": "wormhole/5BWqpR48Lubd55szM5i62zK7TFkddckhbT48yy6mNbDp/8",
+          "exponent": 8,
+          "aliases": []
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "wormhole18csycs4vm6varkp00apuqlsm7v4twg8jsljk8wfdd7cghr7g4rtslwqndm",
+      "base": "ibc/580F8A1EF2A4281116B8F331973CC87E579811593859AC11B4E46BF6EA73EBFE",
+      "name": "Wrapped Ether (Wormhole)",
+      "display": "wormhole/5BWqpR48Lubd55szM5i62zK7TFkddckhbT48yy6mNbDp/8",
+      "symbol": "wETH.wh",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+          },
+          "provider": "Wormhole"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gateway",
+            "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5BWqpR48Lubd55szM5i62zK7TFkddckhbT48yy6mNbDp",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-2186",
+            "path": "transfer/channel-2186/factory:wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx:5BWqpR48Lubd55szM5i62zK7TFkddckhbT48yy6mNbDp"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/weth.hole.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier"
+      ]
+    },
+    {
+      "description": "USD Coin",
+      "denom_units": [
+        {
+          "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4",
+          "exponent": 0,
+          "aliases": [
+            "microusdc",
+            "uusdc"
+          ]
+        },
+        {
+          "denom": "usdc",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4",
+      "name": "USD Coin",
+      "display": "usdc",
+      "symbol": "noble.USDC",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "noble",
+            "base_denom": "uusdc",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-750",
+            "path": "transfer/channel-750/uusdc"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/noble.usdc.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier"
       ]
     }
   ]

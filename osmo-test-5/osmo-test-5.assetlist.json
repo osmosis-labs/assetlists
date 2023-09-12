@@ -63,7 +63,7 @@
       "description": "The native staking and governance token of the Theta testnet version of the Cosmos Hub.",
       "denom_units": [
         {
-          "denom": "ibc/E18A3A309CAA2DC7F6C030718F93660ADFE6047021559841CF72A5F04FC19030",
+          "denom": "ibc/B28CFD38D84A480EF2A03AC575DCB05004D934A603A5A642888847BCDA6340C0",
           "exponent": 0,
           "aliases": [
             "uatom"
@@ -75,7 +75,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/E18A3A309CAA2DC7F6C030718F93660ADFE6047021559841CF72A5F04FC19030",
+      "base": "ibc/B28CFD38D84A480EF2A03AC575DCB05004D934A603A5A642888847BCDA6340C0",
       "name": "Cosmos",
       "display": "atom",
       "symbol": "ATOM",
@@ -85,18 +85,22 @@
           "counterparty": {
             "chain_name": "cosmoshubtestnet",
             "base_denom": "uatom",
-            "channel_id": "channel-2971"
+            "channel_id": "channel-3108"
           },
           "chain": {
-            "channel_id": "channel-1099",
-            "path": "transfer/channel-1099/uatom"
+            "channel_id": "channel-1497",
+            "path": "transfer/channel-1497/uatom"
           }
         }
       ],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.svg"
-      }
+      },
+      "keywords": [
+        "osmosis-info",
+        "osmosis-price:uosmo:151"
+      ]
     },
     {
       "description": "Circle's stablecoin on Axelar",
@@ -161,7 +165,7 @@
       "description": "The native token of JUNO Chain",
       "denom_units": [
         {
-          "denom": "ibc/8E2FEFCBD754FA3C97411F0126B9EC76191BAA1B3959CB73CECF396A4037BBF0",
+          "denom": "ibc/749F60D2792A9E5552EF43C0EDC808B93A16F4B118418F22CF28481B44E81BC9",
           "exponent": 0,
           "aliases": [
             "ujunox"
@@ -173,7 +177,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/8E2FEFCBD754FA3C97411F0126B9EC76191BAA1B3959CB73CECF396A4037BBF0",
+      "base": "ibc/749F60D2792A9E5552EF43C0EDC808B93A16F4B118418F22CF28481B44E81BC9",
       "name": "Juno Testnet",
       "display": "junox",
       "symbol": "JUNOX",
@@ -183,11 +187,11 @@
           "counterparty": {
             "chain_name": "junotestnet",
             "base_denom": "ujunox",
-            "channel_id": "channel-190"
+            "channel_id": "channel-622"
           },
           "chain": {
-            "channel_id": "channel-1",
-            "path": "transfer/channel-1/ujunox"
+            "channel_id": "channel-1419",
+            "path": "transfer/channel-1419/ujunox"
           }
         }
       ],
@@ -195,11 +199,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.svg"
       },
-      "coingecko_id": "juno-network",
-      "keywords": [
-        "osmosis-info",
-        "osmosis-price:uosmo:3"
-      ]
+      "coingecko_id": "juno-network"
     },
     {
       "description": "The native token of Mars Protocol",
@@ -501,7 +501,60 @@
       },
       "coingecko_id": "persistence",
       "keywords": [
+        "osmosis-info",
         "osmosis-price:uosmo:85"
+      ]
+    },
+    {
+      "description": "The native staking token of the Xion network.",
+      "denom_units": [
+        {
+          "denom": "ibc/13F66070C572362C27DCE01404E18888E7C53CF65202C03237DB3F4FB7169722",
+          "exponent": 0,
+          "aliases": [
+            "microxion",
+            "uxion"
+          ]
+        },
+        {
+          "denom": "mxion",
+          "exponent": 3,
+          "aliases": [
+            "millixion"
+          ]
+        },
+        {
+          "denom": "XION",
+          "exponent": 6,
+          "aliases": [
+            "xion"
+          ]
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/13F66070C572362C27DCE01404E18888E7C53CF65202C03237DB3F4FB7169722",
+      "name": "xion",
+      "display": "XION",
+      "symbol": "XION",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "xiontestnet",
+            "base_denom": "uxion",
+            "channel_id": "channel-8"
+          },
+          "chain": {
+            "channel_id": "channel-1299",
+            "path": "transfer/channel-1299/uxion"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xion/images/burnt-round.png"
+      },
+      "keywords": [
+        "osmosis-price:uosmo:144"
       ]
     }
   ]

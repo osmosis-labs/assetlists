@@ -5807,6 +5807,65 @@
         "ibc-transfer",
         "cosmwasm"
       ]
+    },
+    {
+      "chain_name": "XPLA",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "xpla",
+      "chain_id": "dimension_37-1",
+      "bech32_prefix": "xpla",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "xpla",
+        "bech32PrefixAccPub": "xplapub",
+        "bech32PrefixValAddr": "xplavaloper",
+        "bech32PrefixValPub": "xplavaloperpub",
+        "bech32PrefixConsAddr": "xplavalcons",
+        "bech32PrefixConsPub": "xplavalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "axpla",
+            "fixed_min_gas_price": 850000000000,
+            "low_gas_price": 850000000000,
+            "average_gas_price": 1147500000000,
+            "high_gas_price": 1487500000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "axpla"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://dimension-rpc.xpla.dev"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://dimension-lcd.xpla.dev"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.xpla.dev/mainnet/tx/{txHash}"
+        }
+      ],
+      "features": [
+        "eth-address-gen",
+        "eth-key-sign",
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm"
+      ]
     }
   ]
 }

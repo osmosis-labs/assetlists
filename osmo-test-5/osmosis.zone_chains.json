@@ -116,15 +116,25 @@
         "ibc-go"
       ]
      },
-     {
-       "chain_name": "persistencetestnet2",
-       "rpc": "https://rpc.testnet2.persistence.one",
-       "rest": "https://rest.testnet2.persistence.one",
-       "explorer_tx_url": "https://testnet.mintscan.io/persistence-testnet/txs/${txHash}",
-       "keplr_features": [
-         "ibc-transfer",
-         "ibc-go"
-       ]
-      }
+    {
+      "chain_name": "persistencetestnet2",
+      "rpc": "https://rpc.testnet2.persistence.one",
+      "rest": "https://rest.testnet2.persistence.one",
+      "explorer_tx_url": "https://testnet.mintscan.io/persistence-testnet/txs/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "xiontestnet",
+      "rpc": "https://rpc.xion-testnet-1.burnt.com:443",
+      "rest": "https://api.xion-testnet-1.burnt.com",
+      "explorer_tx_url": "https://pingpub.xion-testnet-1.burnt.com/xion-testnet-1/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    }
   ]
 }

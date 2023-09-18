@@ -819,7 +819,7 @@
       "base": "ibc/3FF92D26B407FD61AE95D975712A7C319CDE28DE4D80BDC9978D935932B991D7",
       "name": "Wrapped Polkadot",
       "display": "dot",
-      "symbol": "DOT",
+      "symbol": "DOT.axl",
       "traces": [
         {
           "type": "bridge",
@@ -851,8 +851,7 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polkadot/images/dot.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polkadot/images/dot.svg"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dot.axl.svg"
       },
       "keywords": [
         "osmosis-main",
@@ -6410,7 +6409,7 @@
         "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
-        "osmosis-price:ibc/92BE0717F4678905E53F4E45B2DED18BC0CB97BF1F8B6A25AFEDF3D5A879B4D5:908"
+        "osmosis-price:ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7:908"
       ]
     },
     {
@@ -7108,6 +7107,14 @@
           "provider": "Circle"
         },
         {
+          "type": "additional-mintage",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+          },
+          "provider": "Circle"
+        },
+        {
           "type": "bridge",
           "counterparty": {
             "chain_name": "polygon",
@@ -7163,6 +7170,14 @@
           "counterparty": {
             "chain_name": "forex",
             "base_denom": "USD"
+          },
+          "provider": "Circle"
+        },
+        {
+          "type": "additional-mintage",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
           },
           "provider": "Circle"
         },
@@ -10008,6 +10023,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/kusama/images/ksm.svg"
       },
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
         "osmosis-price:uosmo:1058"
@@ -10084,6 +10100,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polkadot/images/dot.svg"
       },
       "keywords": [
+        "osmosis-main",
         "osmosis-frontier",
         "osmosis-info",
         "osmosis-price:uosmo:1069"
@@ -10646,7 +10663,7 @@
       "description": "Wrapped SOL (Wormhole), SOL, factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8sYgCzLRJC3J7qPn2bNbx6PiGcarhyx8rBhVaNnfvHCA",
       "denom_units": [
         {
-          "denom": "ibc/C058818AD1980A9C77F26D1BEF9E3ADF674C9659EB88563FD46950A9BC4164A6",
+          "denom": "ibc/1E43D59E565D41FB4E54CA639B838FFD5BCFC20003D330A56CB1396231AA1CBA",
           "exponent": 0,
           "aliases": [
             "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8sYgCzLRJC3J7qPn2bNbx6PiGcarhyx8rBhVaNnfvHCA"
@@ -10660,7 +10677,7 @@
       ],
       "type_asset": "ics20",
       "address": "wormhole1wn625s4jcmvk0szpl85rj5azkfc6suyvf75q6vrddscjdphtve8sca0pvl",
-      "base": "ibc/C058818AD1980A9C77F26D1BEF9E3ADF674C9659EB88563FD46950A9BC4164A6",
+      "base": "ibc/1E43D59E565D41FB4E54CA639B838FFD5BCFC20003D330A56CB1396231AA1CBA",
       "name": "Wrapped SOL (Wormhole)",
       "display": "wormhole/8sYgCzLRJC3J7qPn2bNbx6PiGcarhyx8rBhVaNnfvHCA/8",
       "symbol": "SOL",
@@ -10690,7 +10707,7 @@
           },
           "chain": {
             "channel_id": "channel-2186",
-            "path": "transfer/channel-2186/factory:wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx:8sYgCzLRJC3J7qPn2bNbx6PiGcarhyx8rBhVaNnfvHCA"
+            "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8sYgCzLRJC3J7qPn2bNbx6PiGcarhyx8rBhVaNnfvHCA"
           }
         }
       ],
@@ -10706,7 +10723,7 @@
       "description": "Bonk (Wormhole), Bonk, factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/95mnwzvJZJ3fKz77xfGN2nR5to9pZmH8YNvaxgLgw5AR",
       "denom_units": [
         {
-          "denom": "ibc/620CD4A652485ECC8BEE7716D5D64BEA1B165612FCCD9706D63A4248CB685E7C",
+          "denom": "ibc/CA3733CB0071F480FAE8EF0D9C3D47A49C6589144620A642BBE0D59A293D110E",
           "exponent": 0,
           "aliases": [
             "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/95mnwzvJZJ3fKz77xfGN2nR5to9pZmH8YNvaxgLgw5AR"
@@ -10720,7 +10737,7 @@
       ],
       "type_asset": "ics20",
       "address": "wormhole10qt8wg0n7z740ssvf3urmvgtjhxpyp74hxqvqt7z226gykuus7eq9mpu8u",
-      "base": "ibc/620CD4A652485ECC8BEE7716D5D64BEA1B165612FCCD9706D63A4248CB685E7C",
+      "base": "ibc/CA3733CB0071F480FAE8EF0D9C3D47A49C6589144620A642BBE0D59A293D110E",
       "name": "Bonk (Wormhole)",
       "display": "wormhole/95mnwzvJZJ3fKz77xfGN2nR5to9pZmH8YNvaxgLgw5AR/5",
       "symbol": "Bonk",
@@ -10742,7 +10759,7 @@
           },
           "chain": {
             "channel_id": "channel-2186",
-            "path": "transfer/channel-2186/factory:wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx:95mnwzvJZJ3fKz77xfGN2nR5to9pZmH8YNvaxgLgw5AR"
+            "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/95mnwzvJZJ3fKz77xfGN2nR5to9pZmH8YNvaxgLgw5AR"
           }
         }
       ],
@@ -10758,7 +10775,7 @@
       "description": "Tether USD (Wormhole), USDT, factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8iuAc6DSeLvi2JDUtwJxLytsZT8R19itXebZsNReLLNi",
       "denom_units": [
         {
-          "denom": "ibc/4EDA0CAEE870C8FCA5DDCD390F11B89BA850654D81FEAEF9DBBA17D722239D70",
+          "denom": "ibc/2108F2D81CBE328F371AD0CEF56691B18A86E08C3651504E42487D9EE92DDE9C",
           "exponent": 0,
           "aliases": [
             "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8iuAc6DSeLvi2JDUtwJxLytsZT8R19itXebZsNReLLNi"
@@ -10772,7 +10789,7 @@
       ],
       "type_asset": "ics20",
       "address": "wormhole1w27ekqvvtzfanfxnkw4jx2f8gdfeqwd3drkee3e64xat6phwjg0savgmhw",
-      "base": "ibc/4EDA0CAEE870C8FCA5DDCD390F11B89BA850654D81FEAEF9DBBA17D722239D70",
+      "base": "ibc/2108F2D81CBE328F371AD0CEF56691B18A86E08C3651504E42487D9EE92DDE9C",
       "name": "Tether USD (Wormhole)",
       "display": "wormhole/8iuAc6DSeLvi2JDUtwJxLytsZT8R19itXebZsNReLLNi/6",
       "symbol": "USDT.wh",
@@ -10794,7 +10811,7 @@
           },
           "chain": {
             "channel_id": "channel-2186",
-            "path": "transfer/channel-2186/factory:wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx:8iuAc6DSeLvi2JDUtwJxLytsZT8R19itXebZsNReLLNi"
+            "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8iuAc6DSeLvi2JDUtwJxLytsZT8R19itXebZsNReLLNi"
           }
         }
       ],
@@ -10810,7 +10827,7 @@
       "description": "Sui (Wormhole), SUI, factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh",
       "denom_units": [
         {
-          "denom": "ibc/034873957DC93F6650D50760F2C289C5AA0AFEB307D8A8AE7E167F40023341D5",
+          "denom": "ibc/B1C287C2701774522570010EEBCD864BCB7AB714711B3AA218699FDD75E832F5",
           "exponent": 0,
           "aliases": [
             "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh"
@@ -10824,7 +10841,7 @@
       ],
       "type_asset": "ics20",
       "address": "wormhole19hlynxzedrlqv99v6qscww7d3crhl86qtd0vprpltg5g9xx6jk9q6ya33y",
-      "base": "ibc/034873957DC93F6650D50760F2C289C5AA0AFEB307D8A8AE7E167F40023341D5",
+      "base": "ibc/B1C287C2701774522570010EEBCD864BCB7AB714711B3AA218699FDD75E832F5",
       "name": "Sui (Wormhole)",
       "display": "wormhole/46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh/8",
       "symbol": "SUI",
@@ -10846,7 +10863,7 @@
           },
           "chain": {
             "channel_id": "channel-2186",
-            "path": "transfer/channel-2186/factory:wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx:46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh"
+            "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh"
           }
         }
       ],
@@ -10862,7 +10879,7 @@
       "description": "Aptos Coin (Wormhole), APT, factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5wS2fGojbL9RhGEAeQBdkHPUAciYDxjDTMYvdf9aDn2r",
       "denom_units": [
         {
-          "denom": "ibc/F5493DA7706B00E955ADBC6DDDA24789D4644A81C5E96277A54A0B9C5FD63543",
+          "denom": "ibc/A4D176906C1646949574B48C1928D475F2DF56DE0AC04E1C99B08F90BC21ABDE",
           "exponent": 0,
           "aliases": [
             "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5wS2fGojbL9RhGEAeQBdkHPUAciYDxjDTMYvdf9aDn2r"
@@ -10876,7 +10893,7 @@
       ],
       "type_asset": "ics20",
       "address": "wormhole1f9sxjn0qu8xylcpzlvnhrefnatndqxnrajfrnr5h97hegnmsdqhsh6juc0",
-      "base": "ibc/F5493DA7706B00E955ADBC6DDDA24789D4644A81C5E96277A54A0B9C5FD63543",
+      "base": "ibc/A4D176906C1646949574B48C1928D475F2DF56DE0AC04E1C99B08F90BC21ABDE",
       "name": "Aptos Coin (Wormhole)",
       "display": "wormhole/5wS2fGojbL9RhGEAeQBdkHPUAciYDxjDTMYvdf9aDn2r/8",
       "symbol": "APT",
@@ -10898,7 +10915,7 @@
           },
           "chain": {
             "channel_id": "channel-2186",
-            "path": "transfer/channel-2186/factory:wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx:5wS2fGojbL9RhGEAeQBdkHPUAciYDxjDTMYvdf9aDn2r"
+            "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5wS2fGojbL9RhGEAeQBdkHPUAciYDxjDTMYvdf9aDn2r"
           }
         }
       ],
@@ -10951,13 +10968,14 @@
       "coingecko_id": "mantadao",
       "keywords": [
         "osmosis-frontier",
+        "osmosis-info",
         "osmosis-price:uosmo:1139"
       ]
     },
     {
       "denom_units": [
         {
-          "denom": "ibc/DB421D24F8571EDBA4816557B8D459B444ADD795E499289841228AD3EFB2B791",
+          "denom": "ibc/D69F6D787EC649F4E998161A9F0646F4C2DCC64748A2AB982F14CAFBA7CC0EC9",
           "exponent": 0,
           "aliases": [
             "factory/juno1u805lv20qc6jy7c3ttre7nct6uyl20pfky5r7e/DGL"
@@ -10970,7 +10988,7 @@
       ],
       "type_asset": "ics20",
       "address": "juno1u805lv20qc6jy7c3ttre7nct6uyl20pfky5r7e",
-      "base": "ibc/DB421D24F8571EDBA4816557B8D459B444ADD795E499289841228AD3EFB2B791",
+      "base": "ibc/D69F6D787EC649F4E998161A9F0646F4C2DCC64748A2AB982F14CAFBA7CC0EC9",
       "name": "Licorice",
       "display": "dgl",
       "symbol": "DGL",
@@ -10984,7 +11002,7 @@
           },
           "chain": {
             "channel_id": "channel-42",
-            "path": "transfer/channel-42/factory:juno1u805lv20qc6jy7c3ttre7nct6uyl20pfky5r7e:DGL"
+            "path": "transfer/channel-42/factory/juno1u805lv20qc6jy7c3ttre7nct6uyl20pfky5r7e/DGL"
           }
         }
       ],
@@ -10992,14 +11010,15 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/dgl.png"
       },
       "keywords": [
-        "osmosis-frontier"
+        "osmosis-frontier",
+        "osmosis-price:uosmo:1143"
       ]
     },
     {
       "description": "USD Coin (Wormhole), USDC, factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/GGh9Ufn1SeDGrhzEkMyRKt5568VbbxZK2yvWNsd6PbXt",
       "denom_units": [
         {
-          "denom": "ibc/9FB3464A62D6E1D712E3036E11757FF88626F41CCA87F061AB0EF469CF4D19FC",
+          "denom": "ibc/6B99DB46AA9FF47162148C1726866919E44A6A5E0274B90912FD17E19A337695",
           "exponent": 0,
           "aliases": [
             "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/GGh9Ufn1SeDGrhzEkMyRKt5568VbbxZK2yvWNsd6PbXt"
@@ -11013,7 +11032,7 @@
       ],
       "type_asset": "ics20",
       "address": "wormhole1utjx3594tlvfw4375esgu72wa4sdgf0q7x4ye27husf5kvuzp5rsr72gdq",
-      "base": "ibc/9FB3464A62D6E1D712E3036E11757FF88626F41CCA87F061AB0EF469CF4D19FC",
+      "base": "ibc/6B99DB46AA9FF47162148C1726866919E44A6A5E0274B90912FD17E19A337695",
       "name": "USD Coin (Wormhole)",
       "display": "wormhole/GGh9Ufn1SeDGrhzEkMyRKt5568VbbxZK2yvWNsd6PbXt/6",
       "symbol": "USDC.wh",
@@ -11035,7 +11054,7 @@
           },
           "chain": {
             "channel_id": "channel-2186",
-            "path": "transfer/channel-2186/factory:wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx:GGh9Ufn1SeDGrhzEkMyRKt5568VbbxZK2yvWNsd6PbXt"
+            "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/GGh9Ufn1SeDGrhzEkMyRKt5568VbbxZK2yvWNsd6PbXt"
           }
         }
       ],
@@ -11051,7 +11070,7 @@
       "description": "Wrapped Ether (Wormhole), WETH, factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5BWqpR48Lubd55szM5i62zK7TFkddckhbT48yy6mNbDp",
       "denom_units": [
         {
-          "denom": "ibc/580F8A1EF2A4281116B8F331973CC87E579811593859AC11B4E46BF6EA73EBFE",
+          "denom": "ibc/62F82550D0B96522361C89B0DA1119DE262FBDFB25E5502BC5101B5C0D0DBAAC",
           "exponent": 0,
           "aliases": [
             "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5BWqpR48Lubd55szM5i62zK7TFkddckhbT48yy6mNbDp"
@@ -11065,7 +11084,7 @@
       ],
       "type_asset": "ics20",
       "address": "wormhole18csycs4vm6varkp00apuqlsm7v4twg8jsljk8wfdd7cghr7g4rtslwqndm",
-      "base": "ibc/580F8A1EF2A4281116B8F331973CC87E579811593859AC11B4E46BF6EA73EBFE",
+      "base": "ibc/62F82550D0B96522361C89B0DA1119DE262FBDFB25E5502BC5101B5C0D0DBAAC",
       "name": "Wrapped Ether (Wormhole)",
       "display": "wormhole/5BWqpR48Lubd55szM5i62zK7TFkddckhbT48yy6mNbDp/8",
       "symbol": "wETH.wh",
@@ -11087,7 +11106,7 @@
           },
           "chain": {
             "channel_id": "channel-2186",
-            "path": "transfer/channel-2186/factory:wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx:5BWqpR48Lubd55szM5i62zK7TFkddckhbT48yy6mNbDp"
+            "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5BWqpR48Lubd55szM5i62zK7TFkddckhbT48yy6mNbDp"
           }
         }
       ],
@@ -11122,6 +11141,22 @@
       "symbol": "noble.USDC",
       "traces": [
         {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Circle"
+        },
+        {
+          "type": "additional-mintage",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+          },
+          "provider": "Circle"
+        },
+        {
           "type": "ibc",
           "counterparty": {
             "chain_name": "noble",
@@ -11140,6 +11175,111 @@
       "keywords": [
         "osmosis-main",
         "osmosis-frontier"
+      ]
+    },
+    {
+      "description": "Maximize ETH yield through leveraged staking across Aave, Compound and Morpho and liquidity provision of ETH liquid staking tokens on Uniswap V3.",
+      "denom_units": [
+        {
+          "denom": "ibc/FBB3FEF80ED2344D821D4F95C31DBFD33E4E31D5324CAD94EF756E67B749F668",
+          "exponent": 0,
+          "aliases": [
+            "0xb5b29320d2Dde5BA5BAFA1EbcD270052070483ec",
+            "yieldeth-wei"
+          ]
+        },
+        {
+          "denom": "YieldETH",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/FBB3FEF80ED2344D821D4F95C31DBFD33E4E31D5324CAD94EF756E67B749F668",
+      "name": "Real Yield Eth",
+      "display": "YieldETH",
+      "symbol": "YieldETH",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "wei"
+          },
+          "provider": "Seven Seas & DeFine Logic Labs"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xb5b29320d2Dde5BA5BAFA1EbcD270052070483ec"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "yieldeth-wei",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208",
+            "path": "transfer/channel-208/yieldeth-wei"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/yieldeth.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/yieldeth.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier"
+      ]
+    },
+    {
+      "description": "The native staking token of XPLA.",
+      "denom_units": [
+        {
+          "denom": "ibc/95C9B5870F95E21A242E6AF9ADCB1F212EE4A8855087226C36FBE43FC41A77B8",
+          "exponent": 0,
+          "aliases": [
+            "axpla"
+          ]
+        },
+        {
+          "denom": "xpla",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/95C9B5870F95E21A242E6AF9ADCB1F212EE4A8855087226C36FBE43FC41A77B8",
+      "name": "Xpla",
+      "display": "xpla",
+      "symbol": "XPLA",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "xpla",
+            "base_denom": "axpla",
+            "channel_id": "channel-9"
+          },
+          "chain": {
+            "channel_id": "channel-1634",
+            "path": "transfer/channel-1634/axpla"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xpla/images/xpla.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xpla/images/xpla.svg"
+      },
+      "coingecko_id": "xpla",
+      "keywords": [
+        "osmosis-main",
+        "osmosis-frontier",
+        "osmosis-price:uosmo:1173"
       ]
     }
   ]

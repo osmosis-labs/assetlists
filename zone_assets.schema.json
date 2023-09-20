@@ -43,13 +43,9 @@
           "type": "string",
           "description": "The entire IBC path, with the port and channel data for each hop"
         },
-        "osmosis_main": {
+        "osmosis_verified": {
           "type": "boolean",
-          "description": "Whether the asset appears on Osmosis Main. The asset should have been approved by Osmosis governance."
-        },
-        "osmosis_frontier": {
-          "type": "boolean",
-          "description": "Whether the asset appears on Osmosis Frontier. The asset should have at least 1 pool defined."
+          "description": "Whether the asset have verified status Osmosis Zone app."
         },
         "override_properties": {
           "type": "object",
@@ -82,31 +78,7 @@
           "additionalProperties": true
         }
       },
-      "additionalProperties": false,
-      "if": {
-        "required": [
-          "osmosis_main"
-        ],
-        "properties": {
-          "osmosis_main": {
-            "enum": [
-              true
-            ]
-          }
-        }
-      },
-      "then": {
-        "required": [
-          "osmosis_frontier"
-        ],
-        "properties": {
-          "osmosis_frontier": {
-            "enum": [
-              true
-            ]
-          }
-        }
-      }
+      "additionalProperties": false
     }
   }
 }

@@ -32,6 +32,8 @@ Verified status is granted if the token or project meets any of the following cr
    - Project team is an Osmocon sponsor (Silver+)
  - Significance
    - Has a dedicated CoinGecko or CoinMarketCap page with a top 1000 Market Capitalization rank
+   - Is available for trade on any of the following 'major' centralized exchanges:
+     - Binance, Coinbase, Kraken, Bybit, KuCoin, OKX, Bitstamp, Bitfinex, Gate.io, Huobi Global 
  - Legitimacy
    - Brand presence: A well-designed project website or well-curated content on content platforms; e.g., a blog, Medium, YouTube, X, etc., and
    - Community presence: Active community channels/following on X, Discord, Telegram, Reddit, etc., and

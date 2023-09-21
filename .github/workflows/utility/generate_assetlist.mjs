@@ -279,7 +279,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     if(generatedAsset.keywords) {
       keywords = generatedAsset.keywords;
     }
-    if(zone_asset.osmosis_main) {
+    if(zone_asset.osmosis_verified) {
       keywords.push("osmosis-main");
     }
     if(zone_asset.osmosis_frontier) {

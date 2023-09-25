@@ -565,7 +565,10 @@
           {
             "denom": "uxprt"
           }
-        ]
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
       },
       "apis": {
         "rpc": [
@@ -1532,6 +1535,7 @@
         "bech32PrefixConsAddr": "chihuahuavalcons",
         "bech32PrefixConsPub": "chihuahuavalconspub"
       },
+      "slip44": 118,
       "fees": {
         "fee_tokens": [
           {
@@ -2180,14 +2184,14 @@
       "network_type": "mainnet",
       "pretty_name": "Shentu",
       "chain_id": "shentu-2.2",
-      "bech32_prefix": "certik",
+      "bech32_prefix": "shentu",
       "bech32_config": {
-        "bech32PrefixAccAddr": "certik",
-        "bech32PrefixAccPub": "certikpub",
-        "bech32PrefixValAddr": "certikvaloper",
-        "bech32PrefixValPub": "certikvaloperpub",
-        "bech32PrefixConsAddr": "certikvalcons",
-        "bech32PrefixConsPub": "certikvalconspub"
+        "bech32PrefixAccAddr": "shentu",
+        "bech32PrefixAccPub": "shentupub",
+        "bech32PrefixValAddr": "shentuvaloper",
+        "bech32PrefixValPub": "shentuvaloperpub",
+        "bech32PrefixConsAddr": "shentuvalcons",
+        "bech32PrefixConsPub": "shentuvalconspub"
       },
       "slip44": 118,
       "fees": {
@@ -2946,7 +2950,7 @@
       "chain_name": "terra2",
       "status": "live",
       "network_type": "mainnet",
-      "pretty_name": "Terra 2.0",
+      "pretty_name": "Terra",
       "chain_id": "phoenix-1",
       "bech32_prefix": "terra",
       "bech32_config": {
@@ -4060,7 +4064,10 @@
           {
             "denom": "nund"
           }
-        ]
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
       },
       "apis": {
         "rpc": [
@@ -4869,7 +4876,7 @@
         ],
         "rest": [
           {
-            "address": "https://noble-api.polkachu.com"
+            "address": "https://api.mainnet.noble.strange.love"
           }
         ]
       },
@@ -5809,10 +5816,10 @@
       ]
     },
     {
-      "chain_name": "XPLA",
+      "chain_name": "xpla",
       "status": "live",
       "network_type": "mainnet",
-      "pretty_name": "xpla",
+      "pretty_name": "XPLA",
       "chain_id": "dimension_37-1",
       "bech32_prefix": "xpla",
       "bech32_config": {
@@ -5856,7 +5863,7 @@
       },
       "explorers": [
         {
-          "tx_page": "https://explorer.xpla.dev/mainnet/tx/{txHash}"
+          "tx_page": "https://explorer.xpla.io/mainnet/tx/${txHash}"
         }
       ],
       "features": [

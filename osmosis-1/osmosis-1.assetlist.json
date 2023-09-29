@@ -2961,7 +2961,7 @@
       ]
     },
     {
-      "description": "Racoon aims to simplify accessibility to AI, NFTs and Gambling on the Cosmos Ecosystem",
+      "description": "Racoon Legacy",
       "denom_units": [
         {
           "denom": "ibc/6BDB4C8CCD45033F9604E4B93ED395008A753E01EECD6992E7D1EA23D9D3B788",
@@ -2978,9 +2978,9 @@
       "type_asset": "ics20",
       "address": "juno1r4pzw8f9z0sypct5l9j906d47z998ulwvhvqe5xdwgy8wf84583sxwh0pa",
       "base": "ibc/6BDB4C8CCD45033F9604E4B93ED395008A753E01EECD6992E7D1EA23D9D3B788",
-      "name": "Racoon",
-      "display": "rac",
-      "symbol": "RAC",
+      "name": "Racoon.legacy",
+      "display": "rac.legacy",
+      "symbol": "RACx",
       "traces": [
         {
           "type": "ibc-cw20",
@@ -3001,7 +3001,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/rac.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/rac.svg"
       },
-      "coingecko_id": "racoon",
       "keywords": [
         "osmosis-price:uosmo:669"
       ]
@@ -11083,6 +11082,48 @@
         "osmosis-info",
         "osmosis-price:uosmo:1121"
       ]
+    },
+    {
+      "description": "Racoon",
+      "denom_units": [
+        {
+          "denom": "ibc/DDF1CD4CDC14AE2D6A3060193624605FF12DEE71CF1F8C19EEF35E9447653493",
+          "exponent": 0,
+          "aliases": [
+            "urac",
+            "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/urac"
+          ]
+        },
+        {
+          "denom": "rac",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/DDF1CD4CDC14AE2D6A3060193624605FF12DEE71CF1F8C19EEF35E9447653493",
+      "name": "Racoon",
+      "display": "rac",
+      "symbol": "RAC",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "migaloo",
+            "base_denom": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/urac",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-642",
+            "path": "transfer/channel-642/factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/urac"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rac.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rac.svg"
+      },
+      "coingecko_id": "racoon",
+      "keywords": []
     }
   ]
 }

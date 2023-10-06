@@ -5703,62 +5703,6 @@
       ]
     },
     {
-      "chain_name": "doravota",
-      "status": "live",
-      "network_type": "mainnet",
-      "pretty_name": "Dora Vota",
-      "chain_id": "vota-ash",
-      "bech32_prefix": "dora",
-      "bech32_config": {
-        "bech32PrefixAccAddr": "dora",
-        "bech32PrefixAccPub": "dorapub",
-        "bech32PrefixValAddr": "doravaloper",
-        "bech32PrefixValPub": "doravaloperpub",
-        "bech32PrefixConsAddr": "doravalcons",
-        "bech32PrefixConsPub": "doravalconspub"
-      },
-      "slip44": 118,
-      "fees": {
-        "fee_tokens": [
-          {
-            "denom": "peaka",
-            "fixed_min_gas_price": 100000000000,
-            "low_gas_price": 100000000000,
-            "average_gas_price": 100000000000,
-            "high_gas_price": 100000000000
-          }
-        ]
-      },
-      "staking": {
-        "staking_tokens": [
-          {
-            "denom": "peaka"
-          }
-        ]
-      },
-      "apis": {
-        "rpc": [
-          {
-            "address": "https://vota-rpc.dorafactory.org"
-          }
-        ],
-        "rest": [
-          {
-            "address": "https://vota-rest.dorafactory.org"
-          }
-        ]
-      },
-      "explorers": [
-        {
-          "tx_page": "https://vota-explorer.dorafactory.org/dora/tx/${txHash}"
-        }
-      ],
-      "features": [
-        "ibc-transfer",
-        "ibc-go"
-      ]
-    },
-    {
       "chain_name": "passage",
       "status": "live",
       "network_type": "mainnet",
@@ -5928,6 +5872,62 @@
         "ibc-transfer",
         "ibc-go",
         "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "doravota",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Dora Vota",
+      "chain_id": "vota-ash",
+      "bech32_prefix": "dora",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "dora",
+        "bech32PrefixAccPub": "dorapub",
+        "bech32PrefixValAddr": "doravaloper",
+        "bech32PrefixValPub": "doravaloperpub",
+        "bech32PrefixConsAddr": "doravalcons",
+        "bech32PrefixConsPub": "doravalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "peaka",
+            "fixed_min_gas_price": 100000000000,
+            "low_gas_price": 100000000000,
+            "average_gas_price": 100000000000,
+            "high_gas_price": 100000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "peaka"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://vota-rpc.dorafactory.org"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://vota-rest.dorafactory.org"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://vota-explorer.dorafactory.org/dora/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
       ]
     }
   ]

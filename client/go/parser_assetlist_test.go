@@ -10,7 +10,7 @@ import (
 var assetList Root
 
 func TestReadAssetListUnmarshalTestnet(t *testing.T) {
-	relativePathAssetlist := filepath.Join("..", "..", "osmo-test-4", "osmo-test-4.assetlist.json")
+	relativePathAssetlist := filepath.Join("..", "..", "osmo-test-5", "osmo-test-5.assetlist.json")
 	var assetListTestnet Root
 	assetListTestnet = ReadAssetListUnmarshal(relativePathAssetlist)
 	require.Equal(t, "osmosistestnet", assetListTestnet.ChainName)

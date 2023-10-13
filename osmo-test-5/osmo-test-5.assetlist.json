@@ -1,5 +1,5 @@
 {
-  "chain_name": "osmosistestnet5",
+  "chain_name": "osmosistestnet",
   "assets": [
     {
       "description": "The native token of Osmosis",
@@ -63,7 +63,7 @@
       "description": "The native staking and governance token of the Theta testnet version of the Cosmos Hub.",
       "denom_units": [
         {
-          "denom": "ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477",
+          "denom": "ibc/B28CFD38D84A480EF2A03AC575DCB05004D934A603A5A642888847BCDA6340C0",
           "exponent": 0,
           "aliases": [
             "uatom"
@@ -75,7 +75,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477",
+      "base": "ibc/B28CFD38D84A480EF2A03AC575DCB05004D934A603A5A642888847BCDA6340C0",
       "name": "Cosmos",
       "display": "atom",
       "symbol": "ATOM",
@@ -85,11 +85,11 @@
           "counterparty": {
             "chain_name": "cosmoshubtestnet",
             "base_denom": "uatom",
-            "channel_id": "channel-2500"
+            "channel_id": "channel-3108"
           },
           "chain": {
-            "channel_id": "channel-12",
-            "path": "transfer/channel-12/uatom"
+            "channel_id": "channel-1497",
+            "path": "transfer/channel-1497/uatom"
           }
         }
       ],
@@ -99,7 +99,7 @@
       },
       "keywords": [
         "osmosis-info",
-        "osmosis-price:uosmo:12"
+        "osmosis-price:uosmo:151"
       ]
     },
     {
@@ -165,7 +165,7 @@
       "description": "The native token of JUNO Chain",
       "denom_units": [
         {
-          "denom": "ibc/8E2FEFCBD754FA3C97411F0126B9EC76191BAA1B3959CB73CECF396A4037BBF0",
+          "denom": "ibc/749F60D2792A9E5552EF43C0EDC808B93A16F4B118418F22CF28481B44E81BC9",
           "exponent": 0,
           "aliases": [
             "ujunox"
@@ -177,7 +177,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/8E2FEFCBD754FA3C97411F0126B9EC76191BAA1B3959CB73CECF396A4037BBF0",
+      "base": "ibc/749F60D2792A9E5552EF43C0EDC808B93A16F4B118418F22CF28481B44E81BC9",
       "name": "Juno Testnet",
       "display": "junox",
       "symbol": "JUNOX",
@@ -187,11 +187,11 @@
           "counterparty": {
             "chain_name": "junotestnet",
             "base_denom": "ujunox",
-            "channel_id": "channel-190"
+            "channel_id": "channel-622"
           },
           "chain": {
-            "channel_id": "channel-1",
-            "path": "transfer/channel-1/ujunox"
+            "channel_id": "channel-1419",
+            "path": "transfer/channel-1419/ujunox"
           }
         }
       ],
@@ -199,11 +199,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.svg"
       },
-      "coingecko_id": "juno-network",
-      "keywords": [
-        "osmosis-info",
-        "osmosis-price:uosmo:3"
-      ]
+      "coingecko_id": "juno-network"
     },
     {
       "description": "The native token of Mars Protocol",
@@ -279,6 +275,22 @@
           "provider": "Circle"
         },
         {
+          "type": "additional-mintage",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+          },
+          "provider": "Circle"
+        },
+        {
+          "type": "test-mintage",
+          "counterparty": {
+            "chain_name": "noble",
+            "base_denom": "uusdc"
+          },
+          "provider": "Circle"
+        },
+        {
           "type": "ibc",
           "counterparty": {
             "chain_name": "nobletestnet",
@@ -303,7 +315,7 @@
       "description": "Akash Token (AKT) is the Akash Network's native utility token, used as the primary means to govern, secure the blockchain, incentivize participants, and provide a default mechanism to store and exchange value.",
       "denom_units": [
         {
-          "denom": "ibc/33C17B7D6A37726CA8DD4A4036198916F79A3A4D661B054AA2E8C92809907C58",
+          "denom": "ibc/8B4CE466BD253F9A6F96EA6996B97CD3A4DEC59537DC71B158F8D9141F13B721",
           "exponent": 0,
           "aliases": [
             "uakt"
@@ -315,7 +327,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/33C17B7D6A37726CA8DD4A4036198916F79A3A4D661B054AA2E8C92809907C58",
+      "base": "ibc/8B4CE466BD253F9A6F96EA6996B97CD3A4DEC59537DC71B158F8D9141F13B721",
       "name": "Akash Network",
       "display": "akt",
       "symbol": "AKT",
@@ -325,11 +337,11 @@
           "counterparty": {
             "chain_name": "akashtestnet",
             "base_denom": "uakt",
-            "channel_id": "channel-0"
+            "channel_id": "channel-1"
           },
           "chain": {
-            "channel_id": "channel-899",
-            "path": "transfer/channel-899/uakt"
+            "channel_id": "channel-1208",
+            "path": "transfer/channel-1208/uakt"
           }
         }
       ],
@@ -466,43 +478,100 @@
       ]
     },
     {
-      "description": "The native staking and governance token of the Composable testnet.",
+      "description": "The XPRT token is primarily a governance token for the Persistence chain.",
       "denom_units": [
         {
-          "denom": "ibc/27689601842A99059DFD79EB0A34A089FC2F7337491B5555C176400A8FA7F2A4",
+          "denom": "ibc/754C8533F8A418B03AD5F2C6AA19D4703CF78BBAB9E2E4DDD6212AAC2E502CA6",
           "exponent": 0,
           "aliases": [
-            "ppica"
+            "uxprt"
           ]
         },
         {
-          "denom": "pica",
-          "exponent": 12
+          "denom": "xprt",
+          "exponent": 6
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/27689601842A99059DFD79EB0A34A089FC2F7337491B5555C176400A8FA7F2A4",
-      "name": "Pica",
-      "display": "pica",
-      "symbol": "PICA",
+      "base": "ibc/754C8533F8A418B03AD5F2C6AA19D4703CF78BBAB9E2E4DDD6212AAC2E502CA6",
+      "name": "Persistence",
+      "display": "xprt",
+      "symbol": "XPRT",
       "traces": [
         {
           "type": "ibc",
           "counterparty": {
-            "chain_name": "composabletestnet",
-            "base_denom": "ppica",
-            "channel_id": "channel-11"
+            "chain_name": "persistencetestnet2",
+            "base_denom": "uxprt",
+            "channel_id": "channel-7"
           },
           "chain": {
-            "channel_id": "channel-329",
-            "path": "transfer/channel-329/ppica"
+            "channel_id": "channel-1037",
+            "path": "transfer/channel-1037/uxprt"
           }
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/composable.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/composable.svg"
-      }
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.svg"
+      },
+      "coingecko_id": "persistence",
+      "keywords": [
+        "osmosis-info",
+        "osmosis-price:uosmo:85"
+      ]
+    },
+    {
+      "description": "The native staking token of the Xion network.",
+      "denom_units": [
+        {
+          "denom": "ibc/13F66070C572362C27DCE01404E18888E7C53CF65202C03237DB3F4FB7169722",
+          "exponent": 0,
+          "aliases": [
+            "microxion",
+            "uxion"
+          ]
+        },
+        {
+          "denom": "mxion",
+          "exponent": 3,
+          "aliases": [
+            "millixion"
+          ]
+        },
+        {
+          "denom": "XION",
+          "exponent": 6,
+          "aliases": [
+            "xion"
+          ]
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/13F66070C572362C27DCE01404E18888E7C53CF65202C03237DB3F4FB7169722",
+      "name": "xion",
+      "display": "XION",
+      "symbol": "XION",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "xiontestnet",
+            "base_denom": "uxion",
+            "channel_id": "channel-8"
+          },
+          "chain": {
+            "channel_id": "channel-1299",
+            "path": "transfer/channel-1299/uxion"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xion/images/burnt-round.png"
+      },
+      "keywords": [
+        "osmosis-price:uosmo:144"
+      ]
     }
   ]
 }

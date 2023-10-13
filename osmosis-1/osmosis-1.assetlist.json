@@ -11084,5 +11084,98 @@
         "osmosis-price:uosmo:1121"
       ]
     }
+  ,
+  {
+    "description": "The native token of ohhNFT.",
+    "denom_units": [
+      {
+        "denom": "ibc/CFF40564FDA3E958D9904B8B479124987901168494655D9CC6B7C0EC0416020B",
+        "exponent": 0,
+        "aliases": [
+          "dust"
+        ]
+      },
+      {
+        "denom": "strdst",
+        "exponent": 6
+      }
+    ],
+    "type_asset": "ics20",
+    "base": "ibc/CFF40564FDA3E958D9904B8B479124987901168494655D9CC6B7C0EC0416020B",
+    "name": "Stardust STRDST",
+    "display": "strdst",
+    "symbol": "strdst",
+    "traces": [
+      {
+        "type": "ibc",
+        "counterparty": {
+          "chain_name": "stargaze",
+          "base_denom": "factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/dust",
+          "channel_id": "channel-0"
+        },
+        "chain": {
+          "channel_id": "channel-75",
+          "path": "transfer/channel-75/factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/dust"
+        }
+      }
+    ],
+    "logo_URIs": {
+      "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/dust.png",
+      "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/dust.svg"
+    },
+    "coingecko_id": "",
+    "keywords": [
+      "osmosis-main",
+      "osmosis-frontier",
+      "osmosis-info",
+      "osmosis-price:uosmo:604"
+    ]
+  },
+  {
+    "description": "ohhNFT LP Token.",
+    "denom_units": [
+      {
+        "denom": "ibc/71DAA4CAFA4FE2F9803ABA0696BA5FC0EFC14305A2EA8B4E01880DB851B1EC02",
+        "exponent": 0,
+        "aliases": [
+          "uBRNCH"
+        ]
+      },
+      {
+        "denom": "brnch",
+        "exponent": 6
+      }
+    ],
+    "type_asset": "ics20",
+    "base": "ibc/71DAA4CAFA4FE2F9803ABA0696BA5FC0EFC14305A2EA8B4E01880DB851B1EC02",
+    "name": "Branch",
+    "display": "BRNCH",
+    "symbol": "BRNCH",
+    "traces": [
+      {
+        "type": "ibc",
+        "counterparty": {
+          "chain_name": "stargaze",
+          "base_denom": "factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/uBRNCH",
+          "channel_id": "channel-0"
+        },
+        "chain": {
+          "channel_id": "channel-75",
+          "path": "transfer/channel-75/factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/uBRNCH"
+        }
+      }
+    ],
+    "logo_URIs": {
+      "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/brnch.png",
+      "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/brnch.svg"
+    },
+    "coingecko_id": "",
+    "keywords": [
+      "osmosis-main",
+      "osmosis-frontier",
+      "osmosis-info",
+      "osmosis-price:uosmo:604"
+    ]
+  }
   ]
 }

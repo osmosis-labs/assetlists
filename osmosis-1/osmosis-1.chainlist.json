@@ -5873,6 +5873,61 @@
         "ibc-go",
         "cosmwasm"
       ]
+    },
+    {
+      "chain_name": "sge",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "SGE",
+      "chain_id": "sgenet-1",
+      "bech32_prefix": "sge",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "sge",
+        "bech32PrefixAccPub": "sgepub",
+        "bech32PrefixValAddr": "sgevaloper",
+        "bech32PrefixValPub": "sgevaloperpub",
+        "bech32PrefixConsAddr": "sgevalcons",
+        "bech32PrefixConsPub": "sgevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "usge",
+            "fixed_min_gas_price": 0.001,
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.25,
+            "high_gas_price": 0.5
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "usge"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://sge-priv.kingnodes.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://sge-priv.kingnodes.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://blockexplorer.sgenetwork.io/sge/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
     }
   ]
 }

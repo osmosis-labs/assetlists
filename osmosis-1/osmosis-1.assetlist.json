@@ -11083,6 +11083,50 @@
         "osmosis-info",
         "osmosis-price:uosmo:1121"
       ]
+    },
+    {
+      "description": "The native token of SGE network",
+      "denom_units": [
+        {
+          "denom": "ibc/A1830DECC0B742F0B2044FF74BE727B5CF92C9A28A9235C3BACE4D24A23504FA",
+          "exponent": 0,
+          "aliases": [
+            "usge"
+          ]
+        },
+        {
+          "denom": "SGE",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/A1830DECC0B742F0B2044FF74BE727B5CF92C9A28A9235C3BACE4D24A23504FA",
+      "name": "SGE",
+      "display": "sge",
+      "symbol": "SGE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "SGE",
+            "base_denom": "usge",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-5485",
+            "path": "transfer/channel-5485/usge"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sge/images/sge.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sge/images/sge.svg"
+      },
+      "coingecko_id": "sge",
+      "keywords": [
+        "osmosis-main",
+        "osmosis-info"
+      ]
     }
   ]
 }

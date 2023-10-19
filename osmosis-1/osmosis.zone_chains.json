@@ -786,7 +786,7 @@
     {
       "chain_name": "noble",
       "rpc": "https://rpc.mainnet.noble.strange.love",
-      "rest": "https://noble-api.polkachu.com",
+      "rest": "https://api.mainnet.noble.strange.love",
       "explorer_tx_url": "https://www.mintscan.io/noble/txs/${txHash}",
       "keplr_features": [
         "ibc-transfer",
@@ -881,7 +881,9 @@
       "explorer_tx_url": "https://explorer.genznodes.dev/realio/tx/${txHash}",
       "keplr_features": [
         "ibc-transfer",
-        "ibc-go"
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
       ]
     },
     {
@@ -910,8 +912,8 @@
       "rest": "https://empower-api.polkachu.com",
       "explorer_tx_url": "https://ping.pub/empower/tx/${txHash}",
       "keplr_features": [
-          "ibc-transfer",
-          "ibc-go"
+        "ibc-transfer",
+        "ibc-go"
       ]
     },
     {
@@ -920,8 +922,8 @@
       "rest": "https://api-eu-1.kyve.network",
       "explorer_tx_url": "https://mintscan.io/kyve/transactions/${txHash}",
       "keplr_features": [
-          "ibc-transfer",
-          "ibc-go"
+        "ibc-transfer",
+        "ibc-go"
       ]
     },
     {
@@ -930,8 +932,8 @@
       "rest": "https://rest.wallet.pacific-1.sei.io",
       "explorer_tx_url": "https://www.mintscan.io/sei/transactions/${txHash}",
       "keplr_features": [
-          "ibc-transfer",
-          "ibc-go"
+        "ibc-transfer",
+        "ibc-go"
       ]
     },
     {
@@ -940,8 +942,8 @@
       "rest": "https://api.passage.vitwit.com",
       "explorer_tx_url": "https://www.mintscan.io/passage/transactions/${txHash}",
       "keplr_features": [
-          "ibc-transfer",
-          "ibc-go"
+        "ibc-transfer",
+        "ibc-go"
       ]
     },
     {
@@ -953,6 +955,28 @@
         "ibc-go",
         "ibc-transfer",
         "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "xpla",
+      "rpc": "https://dimension-rpc.xpla.dev",
+      "rest": "https://dimension-lcd.xpla.dev",
+      "explorer_tx_url": "https://explorer.xpla.io/mainnet/tx/${txHash}",
+      "keplr_features": [
+        "eth-address-gen",
+        "eth-key-sign",
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "sge",
+      "rpc": "https://sge-priv.kingnodes.com",
+      "rest": "https://sge-priv.kingnodes.com",
+      "explorer_tx_url": "https://blockexplorer.sgenetwork.io/sge/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer"
       ]
     },
     {

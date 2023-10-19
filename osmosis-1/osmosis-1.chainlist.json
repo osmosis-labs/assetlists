@@ -565,7 +565,10 @@
           {
             "denom": "uxprt"
           }
-        ]
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
       },
       "apis": {
         "rpc": [
@@ -1532,6 +1535,7 @@
         "bech32PrefixConsAddr": "chihuahuavalcons",
         "bech32PrefixConsPub": "chihuahuavalconspub"
       },
+      "slip44": 118,
       "fees": {
         "fee_tokens": [
           {
@@ -2180,14 +2184,14 @@
       "network_type": "mainnet",
       "pretty_name": "Shentu",
       "chain_id": "shentu-2.2",
-      "bech32_prefix": "certik",
+      "bech32_prefix": "shentu",
       "bech32_config": {
-        "bech32PrefixAccAddr": "certik",
-        "bech32PrefixAccPub": "certikpub",
-        "bech32PrefixValAddr": "certikvaloper",
-        "bech32PrefixValPub": "certikvaloperpub",
-        "bech32PrefixConsAddr": "certikvalcons",
-        "bech32PrefixConsPub": "certikvalconspub"
+        "bech32PrefixAccAddr": "shentu",
+        "bech32PrefixAccPub": "shentupub",
+        "bech32PrefixValAddr": "shentuvaloper",
+        "bech32PrefixValPub": "shentuvaloperpub",
+        "bech32PrefixConsAddr": "shentuvalcons",
+        "bech32PrefixConsPub": "shentuvalconspub"
       },
       "slip44": 118,
       "fees": {
@@ -2946,7 +2950,7 @@
       "chain_name": "terra2",
       "status": "live",
       "network_type": "mainnet",
-      "pretty_name": "Terra 2.0",
+      "pretty_name": "Terra",
       "chain_id": "phoenix-1",
       "bech32_prefix": "terra",
       "bech32_config": {
@@ -4060,7 +4064,10 @@
           {
             "denom": "nund"
           }
-        ]
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
       },
       "apis": {
         "rpc": [
@@ -4869,7 +4876,7 @@
         ],
         "rest": [
           {
-            "address": "https://noble-api.polkachu.com"
+            "address": "https://api.mainnet.noble.strange.love"
           }
         ]
       },
@@ -5806,6 +5813,120 @@
         "ibc-go",
         "ibc-transfer",
         "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "xpla",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "XPLA",
+      "chain_id": "dimension_37-1",
+      "bech32_prefix": "xpla",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "xpla",
+        "bech32PrefixAccPub": "xplapub",
+        "bech32PrefixValAddr": "xplavaloper",
+        "bech32PrefixValPub": "xplavaloperpub",
+        "bech32PrefixConsAddr": "xplavalcons",
+        "bech32PrefixConsPub": "xplavalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "axpla",
+            "fixed_min_gas_price": 850000000000,
+            "low_gas_price": 850000000000,
+            "average_gas_price": 1147500000000,
+            "high_gas_price": 1487500000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "axpla"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://dimension-rpc.xpla.dev"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://dimension-lcd.xpla.dev"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.xpla.io/mainnet/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "eth-address-gen",
+        "eth-key-sign",
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "sge",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "SGE",
+      "chain_id": "sgenet-1",
+      "bech32_prefix": "sge",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "sge",
+        "bech32PrefixAccPub": "sgepub",
+        "bech32PrefixValAddr": "sgevaloper",
+        "bech32PrefixValPub": "sgevaloperpub",
+        "bech32PrefixConsAddr": "sgevalcons",
+        "bech32PrefixConsPub": "sgevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "usge",
+            "fixed_min_gas_price": 0.001,
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.25,
+            "high_gas_price": 0.5
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "usge"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://sge-priv.kingnodes.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://sge-priv.kingnodes.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://blockexplorer.sgenetwork.io/sge/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
       ]
     },
     {

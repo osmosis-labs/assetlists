@@ -212,7 +212,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
         }
       }
       if (!chain.path) {
-        if (zone_asset.base_denom.slice(0,7) === "factory") {
+        if (zone_asset.base_denom.slice(0,7) === "factory" && zone_asset.chain_name === "kujira") {
           let baseReplacement = zone_asset.base_denom.replace(/\//g,":");
           chain.path = chain.port + "/" + chain.channel_id + "/" + baseReplacement;
         } else {
@@ -279,7 +279,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     if(generatedAsset.keywords) {
       keywords = generatedAsset.keywords;
     }
-    if(zone_asset.osmosis_main) {
+    if(zone_asset.osmosis_verified) {
       keywords.push("osmosis-main");
     }
     if(zone_asset.osmosis_frontier) {

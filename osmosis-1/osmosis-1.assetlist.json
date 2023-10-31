@@ -11404,6 +11404,47 @@
         "osmosis-info",
         "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:1238"
       ]
+    },
+    {
+      "description": "BITS - Native token of Bitswift Cash",
+      "denom_units": [
+        {
+          "denom": "ibc/E4767181FEC2D11BEBC10C590CC766F5BEAEB44AB0AA17D94E5A4839B3556158",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno14fz92ehqt37e096xr95kmy8nc0kz803uezxtg4fwx7agjjma86sqm8mg3h"
+          ]
+        },
+        {
+          "denom": "bits",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "juno14fz92ehqt37e096xr95kmy8nc0kz803uezxtg4fwx7agjjma86sqm8mg3h",
+      "base": "ibc/E4767181FEC2D11BEBC10C590CC766F5BEAEB44AB0AA17D94E5A4839B3556158",
+      "name": "BITS",
+      "display": "bits",
+      "symbol": "BITS",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno14fz92ehqt37e096xr95kmy8nc0kz803uezxtg4fwx7agjjma86sqm8mg3h",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
+            "channel_id": "channel-47"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-169",
+            "path": "transfer/channel-169/cw20:juno14fz92ehqt37e096xr95kmy8nc0kz803uezxtg4fwx7agjjma86sqm8mg3h"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/bits.png"
+      }
     }
-  ]
+  ],
 }

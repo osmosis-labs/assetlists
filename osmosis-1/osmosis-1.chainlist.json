@@ -924,6 +924,7 @@
         "bech32PrefixConsAddr": "microvalcons",
         "bech32PrefixConsPub": "microvalconspub"
       },
+      "slip44": 118,
       "fees": {
         "fee_tokens": [
           {
@@ -1860,6 +1861,7 @@
         "bech32PrefixConsAddr": "sifvalcons",
         "bech32PrefixConsPub": "sifvalconspub"
       },
+      "slip44": 118,
       "fees": {
         "fee_tokens": [
           {
@@ -1964,6 +1966,7 @@
         "bech32PrefixConsAddr": "darcvalcons",
         "bech32PrefixConsPub": "darcvalconspub"
       },
+      "slip44": 118,
       "fees": {
         "fee_tokens": [
           {
@@ -2605,6 +2608,7 @@
         "bech32PrefixConsAddr": "cerberusvalcons",
         "bech32PrefixConsPub": "cerberusvalconspub"
       },
+      "slip44": 118,
       "fees": {
         "fee_tokens": [
           {
@@ -2712,6 +2716,7 @@
         "bech32PrefixConsAddr": "mantlevalcons",
         "bech32PrefixConsPub": "mantlevalconspub"
       },
+      "slip44": 118,
       "fees": {
         "fee_tokens": [
           {
@@ -4361,6 +4366,7 @@
         "bech32PrefixConsAddr": "medasvalcons",
         "bech32PrefixConsPub": "medasvalconspub"
       },
+      "slip44": 118,
       "fees": {
         "fee_tokens": [
           {
@@ -5925,7 +5931,10 @@
         "fee_tokens": [
           {
             "denom": "usge",
-            "fixed_min_gas_price": 0.001
+            "fixed_min_gas_price": 0.001,
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.25,
+            "high_gas_price": 0.5
           }
         ]
       },
@@ -6067,6 +6076,184 @@
       "features": [
         "ibc-transfer",
         "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "coreum",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Coreum",
+      "chain_id": "coreum-mainnet-1",
+      "bech32_prefix": "core",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "core",
+        "bech32PrefixAccPub": "corepub",
+        "bech32PrefixValAddr": "corevaloper",
+        "bech32PrefixValPub": "corevaloperpub",
+        "bech32PrefixConsAddr": "corevalcons",
+        "bech32PrefixConsPub": "corevalconspub"
+      },
+      "slip44": 990,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ucore",
+            "fixed_min_gas_price": 0.03125,
+            "low_gas_price": 0.0625,
+            "average_gas_price": 0.0625,
+            "high_gas_price": 62.5
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ucore"
+          }
+        ],
+        "lock_duration": {
+          "time": "168h"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://full-node.mainnet-1.coreum.dev:26657"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://full-node.mainnet-1.coreum.dev:1317"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/coreum/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "celestia",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Celestia",
+      "chain_id": "celestia",
+      "bech32_prefix": "celestia",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "celestia",
+        "bech32PrefixAccPub": "celestiapub",
+        "bech32PrefixValAddr": "celestiavaloper",
+        "bech32PrefixValPub": "celestiavaloperpub",
+        "bech32PrefixConsAddr": "celestiavalcons",
+        "bech32PrefixConsPub": "celestiavalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "utia",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.2,
+            "high_gas_price": 0.4
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "utia"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-celestia.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-celestia.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/celestia/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "dydx",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "dYdX Protocol",
+      "chain_id": "dydx-mainnet-1",
+      "bech32_prefix": "dydx",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "dydx",
+        "bech32PrefixAccPub": "dydxpub",
+        "bech32PrefixValAddr": "dydxvaloper",
+        "bech32PrefixValPub": "dydxvaloperpub",
+        "bech32PrefixConsAddr": "dydxvalcons",
+        "bech32PrefixConsPub": "dydxvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "adydx",
+            "fixed_min_gas_price": 12500000000,
+            "low_gas_price": 12500000000,
+            "average_gas_price": 12500000000,
+            "high_gas_price": 20000000000
+          },
+          {
+            "denom": "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5",
+            "fixed_min_gas_price": 0.025,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.03
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "adydx"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://dydx-rpc.lavenderfive.com:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://dydx-api.lavenderfive.com:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/dydx/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
       ]
     },
     {

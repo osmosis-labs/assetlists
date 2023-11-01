@@ -608,9 +608,6 @@
         "bech32PrefixConsPub": "iaavalconspub"
       },
       "slip44": 118,
-      "alternative_slip44s": [
-        566
-      ],
       "fees": {
         "fee_tokens": [
           {
@@ -653,7 +650,7 @@
       "chain_name": "cryptoorgchain",
       "status": "live",
       "network_type": "mainnet",
-      "pretty_name": "Crypto.org Chain",
+      "pretty_name": "Cronos POS Chain",
       "chain_id": "crypto-org-chain-mainnet-1",
       "bech32_prefix": "cro",
       "bech32_config": {
@@ -2384,6 +2381,28 @@
             }
           },
           {
+            "denom": "ibc/35E771B8682D828173F4B795F6C307780F96DC64D6F914FAE4CC9B4666F66364",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 300000000,
+            "average_gas_price": 300000000,
+            "high_gas_price": 300000000,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "ibc/4E06CF24FEBFB3F5AF645377DCC0B70AA6183BAF6B918B8B6243FCDEB7D38118",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.0006,
+            "average_gas_price": 0.0006,
+            "high_gas_price": 0.0006,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
             "denom": "ibc/662914D0C1CEBCB070C68F061D035E8B10A07C79AB286E7342C85F3BE74612C5",
             "fixed_min_gas_price": 0,
             "low_gas_price": 0.00015,
@@ -2466,6 +2485,17 @@
             "low_gas_price": 100000000,
             "average_gas_price": 100000000,
             "high_gas_price": 100000000,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "zil.1.18.1a4a06",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 6000,
+            "average_gas_price": 6000,
+            "high_gas_price": 6000,
             "gas_costs": {
               "cosmos_send": 100000000,
               "ibc_transfer": 100000000
@@ -4335,10 +4365,9 @@
         "fee_tokens": [
           {
             "denom": "umedas",
-            "fixed_min_gas_price": 0,
-            "low_gas_price": 0,
-            "average_gas_price": 0.0001,
-            "high_gas_price": 0.00025
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.25,
+            "high_gas_price": 0.4
           }
         ]
       },
@@ -4910,10 +4939,10 @@
         "fee_tokens": [
           {
             "denom": "uwhale",
-            "fixed_min_gas_price": 0.25,
-            "low_gas_price": 0.25,
-            "average_gas_price": 0.5,
-            "high_gas_price": 0.75
+            "fixed_min_gas_price": 1,
+            "low_gas_price": 1,
+            "average_gas_price": 2,
+            "high_gas_price": 3
           }
         ]
       },
@@ -5255,9 +5284,9 @@
         "fee_tokens": [
           {
             "denom": "untrn",
-            "low_gas_price": 0.01,
-            "average_gas_price": 0.025,
-            "high_gas_price": 0.05
+            "low_gas_price": 0.5,
+            "average_gas_price": 0.5,
+            "high_gas_price": 0.5
           }
         ]
       },
@@ -5402,7 +5431,9 @@
       ],
       "features": [
         "ibc-transfer",
-        "ibc-go"
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
       ]
     },
     {
@@ -5894,10 +5925,7 @@
         "fee_tokens": [
           {
             "denom": "usge",
-            "fixed_min_gas_price": 0.001,
-            "low_gas_price": 0.1,
-            "average_gas_price": 0.25,
-            "high_gas_price": 0.5
+            "fixed_min_gas_price": 0.001
           }
         ]
       },
@@ -5927,6 +5955,118 @@
       ],
       "features": [
         "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "stafihub",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "StaFi Hub",
+      "chain_id": "stafihub-1",
+      "bech32_prefix": "stafi",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "stafi",
+        "bech32PrefixAccPub": "stafipub",
+        "bech32PrefixValAddr": "stafivaloper",
+        "bech32PrefixValPub": "stafivaloperpub",
+        "bech32PrefixConsAddr": "stafivalcons",
+        "bech32PrefixConsPub": "stafivalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ufis",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ufis"
+          }
+        ],
+        "lock_duration": {
+          "time": "1209600s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://public-rpc1.stafihub.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://public-rest-rpc1.stafihub.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/stafi/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "doravota",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Dora Vota",
+      "chain_id": "vota-ash",
+      "bech32_prefix": "dora",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "dora",
+        "bech32PrefixAccPub": "dorapub",
+        "bech32PrefixValAddr": "doravaloper",
+        "bech32PrefixValPub": "doravaloperpub",
+        "bech32PrefixConsAddr": "doravalcons",
+        "bech32PrefixConsPub": "doravalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "peaka",
+            "fixed_min_gas_price": 100000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "peaka"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://vota-rpc.dorafactory.org"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://vota-rest.dorafactory.org"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://vota-explorer.dorafactory.org/dora/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
       ]
     },
     {

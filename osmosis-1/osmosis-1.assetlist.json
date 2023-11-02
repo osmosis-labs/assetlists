@@ -2083,7 +2083,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:618"
+        "osmosis-price:uosmo:619"
       ]
     },
     {
@@ -4568,6 +4568,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/odin/images/geo.svg"
       },
       "keywords": [
+        "osmosis-info",
         "osmosis-price:uosmo:787"
       ]
     },
@@ -7367,6 +7368,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/8ball/images/8ball.svg"
       },
       "keywords": [
+        "osmosis-info",
         "osmosis-price:uosmo:935"
       ]
     },
@@ -7462,7 +7464,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/comdex/images/harbor.svg"
       },
       "keywords": [
-        "osmosis-price:uosmo:951"
+        "osmosis-price:uosmo:967"
       ]
     },
     {
@@ -11359,6 +11361,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/dust.svg"
       },
       "keywords": [
+        "osmosis-main",
         "osmosis-info",
         "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1234"
       ]
@@ -11403,6 +11406,184 @@
       "keywords": [
         "osmosis-info",
         "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:1238"
+      ]
+    },
+    {
+      "description": "The native token of Coreum",
+      "denom_units": [
+        {
+          "denom": "ibc/F3166F4D31D6BA1EC6C9F5536F5DDDD4CC93DBA430F7419E7CDC41C497944A65",
+          "exponent": 0,
+          "aliases": [
+            "ucore"
+          ]
+        },
+        {
+          "denom": "core",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/F3166F4D31D6BA1EC6C9F5536F5DDDD4CC93DBA430F7419E7CDC41C497944A65",
+      "name": "Coreum",
+      "display": "core",
+      "symbol": "COREUM",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "coreum",
+            "base_denom": "ucore",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-2188",
+            "path": "transfer/channel-2188/ucore"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/coreum.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/coreum.svg"
+      },
+      "coingecko_id": "coreum",
+      "keywords": [
+        "dex",
+        "staking",
+        "wasm",
+        "assets",
+        "nft",
+        "osmosis-info",
+        "osmosis-price:uosmo:1244"
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/D79E7D83AB399BFFF93433E54FAA480C191248FC556924A2A8351AE2638B3877",
+          "exponent": 0,
+          "aliases": [
+            "utia"
+          ]
+        },
+        {
+          "denom": "tia",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/D79E7D83AB399BFFF93433E54FAA480C191248FC556924A2A8351AE2638B3877",
+      "name": "Celestia",
+      "display": "tia",
+      "symbol": "TIA",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "celestia",
+            "base_denom": "utia",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-6994",
+            "path": "transfer/channel-6994/utia"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/celestia/images/celestia.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/celestia/images/celestia.svg"
+      },
+      "coingecko_id": "celestia",
+      "keywords": [
+        "osmosis-main",
+        "osmosis-info",
+        "osmosis-price:uosmo:1249"
+      ]
+    },
+    {
+      "description": "The native staking token of dYdX Protocol.",
+      "denom_units": [
+        {
+          "denom": "ibc/831F0B1BBB1D08A2B75311892876D71565478C532967545476DF4C2D7492E48C",
+          "exponent": 0,
+          "aliases": [
+            "adydx"
+          ]
+        },
+        {
+          "denom": "dydx",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/831F0B1BBB1D08A2B75311892876D71565478C532967545476DF4C2D7492E48C",
+      "name": "dYdX",
+      "display": "dydx",
+      "symbol": "DYDX",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "dydx",
+            "base_denom": "adydx",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-6787",
+            "path": "transfer/channel-6787/adydx"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx-circle.svg"
+      },
+      "coingecko_id": "dydx",
+      "keywords": [
+        "osmosis-main"
+      ]
+    },
+    {
+      "description": "The native staking token of the Function X",
+      "denom_units": [
+        {
+          "denom": "ibc/2B30802A0B03F91E4E16D6175C9B70F2911377C1CAE9E50FF011C821465463F9",
+          "exponent": 0,
+          "aliases": [
+            "FX"
+          ]
+        },
+        {
+          "denom": "WFX",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/2B30802A0B03F91E4E16D6175C9B70F2911377C1CAE9E50FF011C821465463F9",
+      "name": "Function X",
+      "display": "WFX",
+      "symbol": "FX",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "fxcore",
+            "base_denom": "FX",
+            "channel_id": "channel-19"
+          },
+          "chain": {
+            "channel_id": "channel-2716",
+            "path": "transfer/channel-2716/FX"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/fx.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/fx.svg"
+      },
+      "coingecko_id": "fx-coin",
+      "keywords": [
+        "osmosis-price:uosmo:1241"
       ]
     }
   ]

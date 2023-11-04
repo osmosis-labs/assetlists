@@ -3572,7 +3572,7 @@
       },
       "coingecko_id": "junoswap-raw-dao",
       "keywords": [
-        "osmosis-price:ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7:699"
+        "osmosis-price:uosmo:700"
       ]
     },
     {
@@ -4486,7 +4486,7 @@
       ]
     },
     {
-      "description": "Staking and goverance token for ODIN Protocol",
+      "description": "Staking and governance token for ODIN Protocol",
       "denom_units": [
         {
           "denom": "ibc/C360EF34A86D334F625E4CBB7DA3223AEA97174B61F35BB3758081A8160F7D9B",
@@ -6437,7 +6437,7 @@
       "coingecko_id": "posthuman",
       "keywords": [
         "osmosis-info",
-        "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:867"
+        "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:1255"
       ]
     },
     {
@@ -9052,7 +9052,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/D3B574938631B0A1BA704879020C696E514CFADAA7643CDE4BD5EB010BDE327B:1042"
+        "osmosis-price:ibc/D3B574938631B0A1BA704879020C696E514CFADAA7643CDE4BD5EB010BDE327B:1254"
       ]
     },
     {
@@ -11584,6 +11584,56 @@
       "coingecko_id": "fx-coin",
       "keywords": [
         "osmosis-price:uosmo:1241"
+      ]
+    },
+    {
+      "description": "Bitcoin. On Cosmos.",
+      "denom_units": [
+        {
+          "denom": "ibc/75345531D87BD90BF108BE7240BD721CB2CB0A1F16D4EBA71B09EC3C43E15C8F",
+          "exponent": 0,
+          "aliases": [
+            "usat"
+          ]
+        },
+        {
+          "denom": "nbtc",
+          "exponent": 14
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/75345531D87BD90BF108BE7240BD721CB2CB0A1F16D4EBA71B09EC3C43E15C8F",
+      "name": "Nomic Bitcoin",
+      "display": "nbtc",
+      "symbol": "nBTC",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "bitcoin",
+            "base_denom": "sat"
+          },
+          "provider": "Nomic"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "nomic",
+            "base_denom": "usat",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-6897",
+            "path": "transfer/channel-6897/usat"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nbtc.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nbtc.svg"
+      },
+      "keywords": [
+        "osmosis-main"
       ]
     },
     {

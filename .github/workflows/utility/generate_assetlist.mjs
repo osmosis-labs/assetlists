@@ -293,6 +293,9 @@ const generateAssets = async (chainName, assets, zone_assets) => {
         keywords.push(pool_assets.get(generatedAsset.base).osmosis_price);
       }
     }
+    if(zone_asset.peg_mechanism) {
+      keywords.push("peg:" + zone_asset.peg_mechanism);
+    }
     
     if(keywords.length > 0) {
       generatedAsset.keywords = keywords;

@@ -153,19 +153,17 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.svg"
-      },
-      "coingecko_id": "usd-coin"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
+      }
     },
     {
       "description": "Wrapped Ether on Axelar",
       "denom_units": [
         {
-          "denom": "ibc/843722794BD664C6AA62ED2E1531EB4E9D3DCC88954574D5014745B288206032",
+          "denom": "ibc/1F42AC9631DBE03009219ECCFE151786F53A038DE9F7A07C709158514F1D5942",
           "exponent": 0,
           "aliases": [
-            "weth-wei"
+            "eth-wei"
           ]
         },
         {
@@ -174,10 +172,10 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/843722794BD664C6AA62ED2E1531EB4E9D3DCC88954574D5014745B288206032",
+      "base": "ibc/1F42AC9631DBE03009219ECCFE151786F53A038DE9F7A07C709158514F1D5942",
       "name": "Wrapped Ether",
       "display": "weth",
-      "symbol": "WETH",
+      "symbol": "axlWETH",
       "traces": [
         {
           "type": "wrapped",
@@ -199,19 +197,18 @@
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelartestnet",
-            "base_denom": "weth-wei",
+            "base_denom": "eth-wei",
             "channel_id": "channel-339"
           },
           "chain": {
             "channel_id": "channel-4170",
-            "path": "transfer/channel-4170/weth-wei"
+            "path": "transfer/channel-4170/eth-wei"
           }
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/weth.png"
-      },
-      "coingecko_id": "weth"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/weth.svg"
+      }
     },
     {
       "description": "The native token of JUNO Chain",
@@ -355,6 +352,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
       },
       "keywords": [
+        "osmosis-info",
         "osmosis-price:ibc/1587E7B54FC9EFDA2350DC690EC2F9B9ECEB6FC31CF11884F9C0C5207ABE3921:313"
       ]
     },

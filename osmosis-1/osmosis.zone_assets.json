@@ -37,6 +37,10 @@
         "logo_URIs": {
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eth-white.png"
         }
+      },
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "wei"
       }
     },
     {
@@ -46,6 +50,10 @@
       "osmosis_verified": true,
       "override_properties": {
         "symbol": "WBTC"
+      },
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
       }
     },
     {
@@ -69,6 +77,10 @@
       "osmosis_verified": true,
       "override_properties": {
         "symbol": "DAI"
+      },
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x6b175474e89094c44da98b954eedeac495271d0f"
       }
     },
     {
@@ -78,6 +90,10 @@
       "osmosis_verified": true,
       "override_properties": {
         "symbol": "BUSD"
+      },
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x4fabb145d64652a948d72533023f6e7a623c7c53"
       }
     },
     {
@@ -103,6 +119,10 @@
       "override_properties": {
         "symbol": "BNB",
         "name": "Binance Coin"
+      },
+      "canonical": {
+        "chain_name": "binancesmartchain",
+        "base_denom": "wei"
       }
     },
     {
@@ -116,6 +136,10 @@
         "logo_URIs": {
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polygon/images/matic-purple.png"
         }
+      },
+      "canonical": {
+        "chain_name": "polygon",
+        "base_denom": "wei"
       }
     },
     {
@@ -129,6 +153,10 @@
         "logo_URIs": {
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/avalanche/images/avax.png"
         }
+      },
+      "canonical": {
+        "chain_name": "avalanche",
+        "base_denom": "wei"
       }
     },
     {
@@ -203,7 +231,11 @@
       "chain_name": "persistence",
       "base_denom": "ibc/A6E3AF63B3C906416A9AF7A556C59EA4BD50E617EFFE6299B99700CCB780E444",
       "path": "transfer/channel-4/transfer/channel-38/gravity0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006"
+      }
     },
     {
       "chain_name": "akash",
@@ -323,7 +355,8 @@
       "chain_name": "dig",
       "base_denom": "udig",
       "path": "transfer/channel-128/udig",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "osmosis_unstable": true
     },
     {
       "chain_name": "sommelier",
@@ -377,7 +410,8 @@
       "chain_name": "cerberus",
       "base_denom": "ucrbrus",
       "path": "transfer/channel-212/ucrbrus",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "osmosis_unstable": true
     },
     {
       "chain_name": "fetchhub",
@@ -414,13 +448,15 @@
       "chain_name": "microtick",
       "base_denom": "utick",
       "path": "transfer/channel-39/utick",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "osmosis_unstable": true
     },
     {
       "chain_name": "sifchain",
       "base_denom": "rowan",
       "path": "transfer/channel-47/rowan",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "osmosis_unstable": true
     },
     {
       "chain_name": "shentu",
@@ -448,6 +484,10 @@
       "osmosis_verified": true,
       "override_properties": {
         "symbol": "FRAX"
+      },
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x853d955acef822db058eb8505911ed77f175b99e"
       }
     },
     {
@@ -592,6 +632,10 @@
       "osmosis_verified": true,
       "override_properties": {
         "symbol": "LINK"
+      },
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x514910771af9ca656af840dff83e8264ecf986ca"
       }
     },
     {
@@ -607,6 +651,10 @@
       "osmosis_verified": false,
       "override_properties": {
         "symbol": "AAVE"
+      },
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0xb5b29320d2Dde5BA5BAFA1EbcD270052070483ec"
       }
     },
     {
@@ -616,6 +664,10 @@
       "osmosis_verified": false,
       "override_properties": {
         "symbol": "APE"
+      },
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x4d224452801aced8b2f0aebe155379bb5d594381"
       }
     },
     {
@@ -625,6 +677,10 @@
       "osmosis_verified": false,
       "override_properties": {
         "symbol": "AXS"
+      },
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0xbb0e17ef65f82ab018d8edd776e8dd940327b28b"
       }
     },
     {
@@ -634,6 +690,10 @@
       "osmosis_verified": true,
       "override_properties": {
         "symbol": "MKR"
+      },
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2"
       }
     },
     {
@@ -643,6 +703,10 @@
       "osmosis_verified": false,
       "override_properties": {
         "symbol": "RAI"
+      },
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x03ab458634910aad20ef5f1c8ee96f1d6ac54919"
       }
     },
     {
@@ -652,6 +716,10 @@
       "osmosis_verified": false,
       "override_properties": {
         "symbol": "SHIB"
+      },
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce"
       }
     },
     {
@@ -661,6 +729,10 @@
       "osmosis_verified": false,
       "override_properties": {
         "symbol": "UNI"
+      },
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984"
       }
     },
     {
@@ -670,6 +742,10 @@
       "osmosis_verified": false,
       "override_properties": {
         "symbol": "XCN"
+      },
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0xa2cd3d43c775978a96bdbf12d733d5a1ed94fb18"
       }
     },
     {
@@ -722,6 +798,10 @@
       "override_properties": {
         "symbol": "GLMR",
         "name": "Moonbeam"
+      },
+      "canonical": {
+        "chain_name": "moonbeam",
+        "base_denom": "Wei"
       }
     },
     {
@@ -746,7 +826,8 @@
       "chain_name": "lumenx",
       "base_denom": "ulumen",
       "path": "transfer/channel-286/ulumen",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "osmosis_unstable": true
     },
     {
       "chain_name": "oraichain",
@@ -1002,6 +1083,10 @@
       "override_properties": {
         "symbol": "FTM",
         "name": "Fantom"
+      },
+      "canonical": {
+        "chain_name": "fantom",
+        "base_denom": "wei"
       }
     },
     {
@@ -1033,6 +1118,10 @@
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/polygon.usdc.svg"
         }
+      },
+      "canonical": {
+        "chain_name": "polygon",
+        "base_denom": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
       }
     },
     {
@@ -1046,6 +1135,10 @@
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/avalanche.usdc.svg"
         }
+      },
+      "canonical": {
+        "chain_name": "avalanche",
+        "base_denom": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E"
       }
     },
     {
@@ -1118,7 +1211,8 @@
       "chain_name": "arkh",
       "base_denom": "arkh",
       "path": "transfer/channel-648/arkh",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "osmosis_unstable": true
     },
     {
       "chain_name": "quicksilver",
@@ -1254,6 +1348,10 @@
       "override_properties": {
         "symbol": "FIL",
         "name": "Filecoin"
+      },
+      "canonical": {
+        "chain_name": "filecoin",
+        "base_denom": "attoFIL"
       }
     },
     {
@@ -1278,7 +1376,11 @@
       "chain_name": "axelar",
       "base_denom": "arb-wei",
       "path": "transfer/channel-208/arb-wei",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "canonical": {
+        "chain_name": "arbitrum",
+        "base_denom": "0x912CE59144191C1204E64559FE8253a0e49E6548"
+      }
     },
     {
       "chain_name": "juno",
@@ -1299,7 +1401,11 @@
       "chain_name": "axelar",
       "base_denom": "pepe-wei",
       "path": "transfer/channel-208/pepe-wei",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x6982508145454Ce325dDbE47a25d4ec3d2311933"
+      }
     },
     {
       "chain_name": "osmosis",
@@ -1310,19 +1416,31 @@
       "chain_name": "axelar",
       "base_denom": "cbeth-wei",
       "path": "transfer/channel-208/cbeth-wei",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0xbe9895146f7af43049ca1c1ae358b0541ea49704"
+      }
     },
     {
       "chain_name": "axelar",
       "base_denom": "reth-wei",
       "path": "transfer/channel-208/reth-wei",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0xae78736cd615f374d3085123a210448e74fc6393"
+      }
     },
     {
       "chain_name": "axelar",
       "base_denom": "sfrxeth-wei",
       "path": "transfer/channel-208/sfrxeth-wei",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0xac3e018457b222d93114458476f3e3416abbe38f"
+      }
     },
     {
       "chain_name": "axelar",
@@ -1396,13 +1514,21 @@
       "chain_name": "composable",
       "base_denom": "ibc/EE9046745AEC0E8302CB7ED9D5AD67F528FB3B7AE044B247FB0FB293DBDA35E9",
       "path": "transfer/channel-1279/transfer/channel-2/4",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "canonical": {
+        "chain_name": "kusama",
+        "base_denom": "Planck"
+      }
     },
     {
       "chain_name": "composable",
       "base_denom": "ibc/3CC19CEC7E5A3E90E78A5A9ECC5A0E2F8F826A375CF1E096F4515CF09DA3E366",
       "path": "transfer/channel-1279/transfer/channel-2/transfer/channel-15/79228162514264337593543950342",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "canonical": {
+        "chain_name": "polkadot",
+        "base_denom": "Planck"
+      }
     },
     {
       "chain_name": "quasar",
@@ -1474,13 +1600,21 @@
       "chain_name": "gateway",
       "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8sYgCzLRJC3J7qPn2bNbx6PiGcarhyx8rBhVaNnfvHCA",
       "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8sYgCzLRJC3J7qPn2bNbx6PiGcarhyx8rBhVaNnfvHCA",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "canonical": {
+        "chain_name": "solana",
+        "base_denom": "Lamport"
+      }
     },
     {
       "chain_name": "gateway",
       "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/95mnwzvJZJ3fKz77xfGN2nR5to9pZmH8YNvaxgLgw5AR",
       "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/95mnwzvJZJ3fKz77xfGN2nR5to9pZmH8YNvaxgLgw5AR",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "canonical": {
+        "chain_name": "solana",
+        "base_denom": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"
+      }
     },
     {
       "chain_name": "gateway",
@@ -1498,7 +1632,11 @@
       "chain_name": "gateway",
       "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh",
       "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "canonical": {
+        "chain_name": "sui",
+        "base_denom": "0x2::sui::SUI"
+      }
     },
     {
       "chain_name": "gateway",
@@ -1509,6 +1647,10 @@
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/aptos/images/apt-dm.svg"
         }
+      },
+      "canonical": {
+        "chain_name": "aptos",
+        "base_denom": "0x1::aptos_coin::AptosCoin"
       }
     },
     {
@@ -1563,7 +1705,11 @@
       "chain_name": "axelar",
       "base_denom": "yieldeth-wei",
       "path": "transfer/channel-208/yieldeth-wei",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0xb5b29320d2Dde5BA5BAFA1EbcD270052070483ec"
+      }
     },
     {
       "chain_name": "xpla",
@@ -1691,7 +1837,11 @@
       "chain_name": "neutron",
       "base_denom": "factory/neutron1ug740qrkquxzrk2hh29qrlx3sktkfml3je7juusc2te7xmvsscns0n2wry/wstETH",
       "path": "transfer/channel-874/factory/neutron1ug740qrkquxzrk2hh29qrlx3sktkfml3je7juusc2te7xmvsscns0n2wry/wstETH",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0"
+      }
     },
     {
       "chain_name": "osmosis",

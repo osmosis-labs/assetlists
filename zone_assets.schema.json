@@ -30,6 +30,7 @@
         "chain_name",
         "base_denom"
       ],
+      "additionalProperties": false,
       "properties": {
         "chain_name": {
           "type": "string",
@@ -47,6 +48,28 @@
           "type": "boolean",
           "description": "Whether the asset have verified status Osmosis Zone app."
         },
+        "osmosis_unstable": {
+          "type": "boolean",
+          "description": "Whether the asset can reliably be transferred to or from Osmosis."
+        },
+        "canonical": {
+          "type": "object",
+          "required": [
+            "chain_name",
+            "base_denom"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "chain_name": {
+              "type": "string",
+              "description": "Chain name as used in the Cosmos Chain Registry"
+            },
+            "base_denom": {
+              "type": "string",
+              "description": "Base denomination as used for the asset in the Cosmos Chain Registry"
+            }
+          }
+        },
         "peg_mechanism": {
           "type": "string",
           "description": "The peg mechanism for synthetically created assets--most important for stablecoins.",
@@ -59,6 +82,7 @@
         "override_properties": {
           "type": "object",
           "description": "Properties that should not follow the Chain Registry, and behave or appear differently on Osmosis Zone.",
+          "additionalProperties": true,
           "properties": {
             "symbol": {
               "type": "string",
@@ -83,11 +107,9 @@
               "type": "string",
               "description": "[OPTIONAL] The coingecko id to fetch asset data from coingecko v3 api. See https://api.coingecko.com/api/v3/coins/list"
             }
-          },
-          "additionalProperties": true
+          }
         }
-      },
-      "additionalProperties": false
+      }
     }
   }
 }

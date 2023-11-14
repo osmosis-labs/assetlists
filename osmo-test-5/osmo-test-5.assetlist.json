@@ -63,7 +63,7 @@
       "description": "The native staking and governance token of the Theta testnet version of the Cosmos Hub.",
       "denom_units": [
         {
-          "denom": "ibc/B28CFD38D84A480EF2A03AC575DCB05004D934A603A5A642888847BCDA6340C0",
+          "denom": "ibc/9FF2B7A5F55038A7EE61F4FD6749D9A648B48E89830F2682B67B5DC158E2753C",
           "exponent": 0,
           "aliases": [
             "uatom"
@@ -75,7 +75,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/B28CFD38D84A480EF2A03AC575DCB05004D934A603A5A642888847BCDA6340C0",
+      "base": "ibc/9FF2B7A5F55038A7EE61F4FD6749D9A648B48E89830F2682B67B5DC158E2753C",
       "name": "Cosmos",
       "display": "atom",
       "symbol": "ATOM",
@@ -85,11 +85,11 @@
           "counterparty": {
             "chain_name": "cosmoshubtestnet",
             "base_denom": "uatom",
-            "channel_id": "channel-3108"
+            "channel_id": "channel-3306"
           },
           "chain": {
-            "channel_id": "channel-1497",
-            "path": "transfer/channel-1497/uatom"
+            "channel_id": "channel-4156",
+            "path": "transfer/channel-4156/uatom"
           }
         }
       ],
@@ -99,14 +99,14 @@
       },
       "keywords": [
         "osmosis-info",
-        "osmosis-price:uosmo:151"
+        "osmosis-price:uosmo:308"
       ]
     },
     {
       "description": "Circle's stablecoin on Axelar",
       "denom_units": [
         {
-          "denom": "ibc/6F34E1BD664C36CE49ACC28E60D62559A5F96C4F9A6CCE4FC5A67B2852E24CFE",
+          "denom": "ibc/2164BDB48DE5501430E71286448D87C6D2240EC0E078CF113CAB85E21A352BB0",
           "exponent": 0,
           "aliases": [
             "uausdc"
@@ -118,7 +118,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/6F34E1BD664C36CE49ACC28E60D62559A5F96C4F9A6CCE4FC5A67B2852E24CFE",
+      "base": "ibc/2164BDB48DE5501430E71286448D87C6D2240EC0E078CF113CAB85E21A352BB0",
       "name": "USD Coin",
       "display": "ausdc",
       "symbol": "aUSDC",
@@ -144,28 +144,77 @@
           "counterparty": {
             "chain_name": "axelartestnet",
             "base_denom": "uausdc",
-            "channel_id": "channel-227"
+            "channel_id": "channel-339"
           },
           "chain": {
-            "channel_id": "channel-3",
-            "path": "transfer/channel-3/uausdc"
+            "channel_id": "channel-4170",
+            "path": "transfer/channel-4170/uausdc"
           }
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.svg"
-      },
-      "coingecko_id": "usd-coin",
-      "keywords": [
-        "osmosis-info"
-      ]
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
+      }
+    },
+    {
+      "description": "Wrapped Ether on Axelar",
+      "denom_units": [
+        {
+          "denom": "ibc/1F42AC9631DBE03009219ECCFE151786F53A038DE9F7A07C709158514F1D5942",
+          "exponent": 0,
+          "aliases": [
+            "eth-wei"
+          ]
+        },
+        {
+          "denom": "weth",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/1F42AC9631DBE03009219ECCFE151786F53A038DE9F7A07C709158514F1D5942",
+      "name": "Wrapped Ether",
+      "display": "weth",
+      "symbol": "ETH",
+      "traces": [
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "ethereumtestnet",
+            "base_denom": "wei"
+          },
+          "provider": "Ethereum"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereumtestnet",
+            "base_denom": "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelartestnet",
+            "base_denom": "eth-wei",
+            "channel_id": "channel-339"
+          },
+          "chain": {
+            "channel_id": "channel-4170",
+            "path": "transfer/channel-4170/eth-wei"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/weth.svg"
+      }
     },
     {
       "description": "The native token of JUNO Chain",
       "denom_units": [
         {
-          "denom": "ibc/749F60D2792A9E5552EF43C0EDC808B93A16F4B118418F22CF28481B44E81BC9",
+          "denom": "ibc/315940955C3051051C55B195EE30F7265D5BE3D3A7CC48D74E5D9871DCED8B26",
           "exponent": 0,
           "aliases": [
             "ujunox"
@@ -177,7 +226,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/749F60D2792A9E5552EF43C0EDC808B93A16F4B118418F22CF28481B44E81BC9",
+      "base": "ibc/315940955C3051051C55B195EE30F7265D5BE3D3A7CC48D74E5D9871DCED8B26",
       "name": "Juno Testnet",
       "display": "junox",
       "symbol": "JUNOX",
@@ -187,11 +236,11 @@
           "counterparty": {
             "chain_name": "junotestnet",
             "base_denom": "ujunox",
-            "channel_id": "channel-622"
+            "channel_id": "channel-811"
           },
           "chain": {
-            "channel_id": "channel-1419",
-            "path": "transfer/channel-1419/ujunox"
+            "channel_id": "channel-4167",
+            "path": "transfer/channel-4167/ujunox"
           }
         }
       ],
@@ -205,7 +254,7 @@
       "description": "The native token of Mars Protocol",
       "denom_units": [
         {
-          "denom": "ibc/2E7368A14AC9AB7870F32CFEA687551C5064FA861868EDF7437BC877358A81F9",
+          "denom": "ibc/18401C07347459EE2413C0AFDE3ACDB66AC9FD363B3E56A6FC1DFF1B69341FC3",
           "exponent": 0,
           "aliases": [
             "umars"
@@ -217,7 +266,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/2E7368A14AC9AB7870F32CFEA687551C5064FA861868EDF7437BC877358A81F9",
+      "base": "ibc/18401C07347459EE2413C0AFDE3ACDB66AC9FD363B3E56A6FC1DFF1B69341FC3",
       "name": "Mars",
       "display": "mars",
       "symbol": "MARS",
@@ -227,28 +276,24 @@
           "counterparty": {
             "chain_name": "marstestnet",
             "base_denom": "umars",
-            "channel_id": "channel-14"
+            "channel_id": "channel-27"
           },
           "chain": {
-            "channel_id": "channel-24",
-            "path": "transfer/channel-24/umars"
+            "channel_id": "channel-4168",
+            "path": "transfer/channel-4168/umars"
           }
         }
       ],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.svg"
-      },
-      "keywords": [
-        "osmosis-info",
-        "osmosis-price:uosmo:10"
-      ]
+      }
     },
     {
       "description": "USD Coin",
       "denom_units": [
         {
-          "denom": "ibc/40F1B2458AEDA66431F9D44F48413240B8D28C072463E2BF53655728683583E3",
+          "denom": "ibc/DE6792CF9E521F6AD6E9A4BDF6225C9571A3B74ACC0A529F92BC5122A39D2E58",
           "exponent": 0,
           "aliases": [
             "microusdc",
@@ -261,7 +306,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/40F1B2458AEDA66431F9D44F48413240B8D28C072463E2BF53655728683583E3",
+      "base": "ibc/DE6792CF9E521F6AD6E9A4BDF6225C9571A3B74ACC0A529F92BC5122A39D2E58",
       "name": "USD Coin",
       "display": "usdc",
       "symbol": "USDC",
@@ -295,11 +340,11 @@
           "counterparty": {
             "chain_name": "nobletestnet",
             "base_denom": "uusdc",
-            "channel_id": "channel-10"
+            "channel_id": "channel-22"
           },
           "chain": {
-            "channel_id": "channel-123",
-            "path": "transfer/channel-123/uusdc"
+            "channel_id": "channel-4280",
+            "path": "transfer/channel-4280/uusdc"
           }
         }
       ],
@@ -308,14 +353,14 @@
       },
       "keywords": [
         "osmosis-info",
-        "osmosis-price:ibc/6F34E1BD664C36CE49ACC28E60D62559A5F96C4F9A6CCE4FC5A67B2852E24CFE:46"
+        "osmosis-price:ibc/1587E7B54FC9EFDA2350DC690EC2F9B9ECEB6FC31CF11884F9C0C5207ABE3921:313"
       ]
     },
     {
       "description": "Akash Token (AKT) is the Akash Network's native utility token, used as the primary means to govern, secure the blockchain, incentivize participants, and provide a default mechanism to store and exchange value.",
       "denom_units": [
         {
-          "denom": "ibc/8B4CE466BD253F9A6F96EA6996B97CD3A4DEC59537DC71B158F8D9141F13B721",
+          "denom": "ibc/AD59D59CFB0E628E73C798415F823AB5B6257C2FE4BF67DBB5D6A677B2686E82",
           "exponent": 0,
           "aliases": [
             "uakt"
@@ -327,7 +372,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/8B4CE466BD253F9A6F96EA6996B97CD3A4DEC59537DC71B158F8D9141F13B721",
+      "base": "ibc/AD59D59CFB0E628E73C798415F823AB5B6257C2FE4BF67DBB5D6A677B2686E82",
       "name": "Akash Network",
       "display": "akt",
       "symbol": "AKT",
@@ -337,11 +382,11 @@
           "counterparty": {
             "chain_name": "akashtestnet",
             "base_denom": "uakt",
-            "channel_id": "channel-1"
+            "channel_id": "channel-6"
           },
           "chain": {
-            "channel_id": "channel-1208",
-            "path": "transfer/channel-1208/uakt"
+            "channel_id": "channel-4171",
+            "path": "transfer/channel-4171/uakt"
           }
         }
       ],

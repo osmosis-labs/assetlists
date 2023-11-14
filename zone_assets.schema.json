@@ -47,6 +47,15 @@
           "type": "boolean",
           "description": "Whether the asset have verified status Osmosis Zone app."
         },
+        "peg_mechanism": {
+          "type": "string",
+          "description": "The peg mechanism for synthetically created assets--most important for stablecoins.",
+          "enum": [
+            "collateralized",
+            "algorithmic",
+            "hybrid"
+          ]
+        },
         "override_properties": {
           "type": "object",
           "description": "Properties that should not follow the Chain Registry, and behave or appear differently on Osmosis Zone.",

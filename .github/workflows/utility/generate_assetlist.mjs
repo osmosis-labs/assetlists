@@ -296,6 +296,12 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     if(zone_asset.peg_mechanism) {
       keywords.push("peg:" + zone_asset.peg_mechanism);
     }
+    if(zone_asset.osmosis_unstable) {
+      keywords.push("osmosis-unstable");
+    }
+    if(zone_asset.osmosis_unlisted) {
+      keywords.push("osmosis-unlisted");
+    }
     
     if(keywords.length > 0) {
       generatedAsset.keywords = keywords;

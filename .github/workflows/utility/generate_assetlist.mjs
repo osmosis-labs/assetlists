@@ -87,6 +87,13 @@ const generateAssets = async (chainName, assets, zone_assets) => {
   await asyncForEach(zone_assets, async (zone_asset) => {
 
     let generatedAsset = {};
+    
+    let reference_asset = {};
+    if(zone_asset.canonical){
+      reference_asset = zone_asset.canonical;
+    } else {
+      reference_asset = zone_asset;
+    }
     Object.keys(chain_reg.assetSchema).forEach((assetProperty) => {
       let assetPropertyValue;
       if (assetProperty == "description" ||
@@ -95,7 +102,9 @@ const generateAssets = async (chainName, assets, zone_assets) => {
         assetProperty == "logo_URIs" ||
         assetProperty == "images"
       ) {
-        assetPropertyValue = chain_reg.getAssetPropertyWithTrace(zone_asset.chain_name, zone_asset.base_denom, assetProperty);
+        assetPropertyValue = chain_reg.getAssetPropertyWithTrace(reference_asset.chain_name, reference_asset.base_denom, assetProperty);
+      } else if (assetProperty == "coingecko_id" && zone_asset.canonical) {
+        assetPropertyValue = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, assetProperty);
       } else if (assetProperty == "traces") {
         assetPropertyValue = chain_reg.getAssetTraces(zone_asset.chain_name, zone_asset.base_denom);
       } else if (assetProperty == "type_asset") {
@@ -265,6 +274,9 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     if(zone_asset.override_properties) {
       if(zone_asset.override_properties.symbol) {
         generatedAsset.symbol = zone_asset.override_properties.symbol;
+      }
+      if(zone_asset.override_properties.name) {
+        generatedAsset.name = zone_asset.override_properties.name;
       }
       if(zone_asset.override_properties.logo_URIs) {
         generatedAsset.logo_URIs = zone_asset.override_properties.logo_URIs;

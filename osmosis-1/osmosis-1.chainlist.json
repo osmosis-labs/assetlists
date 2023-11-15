@@ -84,7 +84,7 @@
         "fee_tokens": [
           {
             "denom": "uatom",
-            "fixed_min_gas_price": 0,
+            "fixed_min_gas_price": 0.0025,
             "low_gas_price": 0.01,
             "average_gas_price": 0.025,
             "high_gas_price": 0.03
@@ -300,7 +300,7 @@
       },
       "explorers": [
         {
-          "tx_page": "https://finder.station.money/columbus-5/tx/${txHash}"
+          "tx_page": "https://finder.terra.money/columbus-5/tx/${txHash}"
         }
       ],
       "features": [
@@ -990,10 +990,10 @@
         "fee_tokens": [
           {
             "denom": "nanolike",
-            "fixed_min_gas_price": 0,
-            "low_gas_price": 1,
-            "average_gas_price": 10,
-            "high_gas_price": 1000
+            "fixed_min_gas_price": 1000,
+            "low_gas_price": 1000,
+            "average_gas_price": 10000,
+            "high_gas_price": 1000000
           }
         ]
       },
@@ -3048,7 +3048,7 @@
       },
       "explorers": [
         {
-          "tx_page": "https://finder.station.money/phoenix-1/tx/${txHash}"
+          "tx_page": "https://finder.terra.money/phoenix-1/tx/${txHash}"
         }
       ],
       "features": [
@@ -5996,12 +5996,12 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://sge-priv.kingnodes.com"
+            "address": "https://sge-priv-rpc.kingnodes.com"
           }
         ],
         "rest": [
           {
-            "address": "https://sge-priv.kingnodes.com"
+            "address": "https://sge-priv-rest.kingnodes.com"
           }
         ]
       },
@@ -6118,7 +6118,7 @@
       },
       "explorers": [
         {
-          "tx_page": "https://vota-explorer.dorafactory.org/dora/tx/${txHash}"
+          "tx_page": "https://vota-explorer.dorafactory.org/doravota/tx/${txHash}"
         }
       ],
       "features": [
@@ -6421,6 +6421,119 @@
       "features": [
         "ibc-go",
         "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "nois",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Nois",
+      "chain_id": "nois-1",
+      "bech32_prefix": "nois",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "nois",
+        "bech32PrefixAccPub": "noispub",
+        "bech32PrefixValAddr": "noisvaloper",
+        "bech32PrefixValPub": "noisvaloperpub",
+        "bech32PrefixConsAddr": "noisvalcons",
+        "bech32PrefixConsPub": "noisvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "unois",
+            "fixed_min_gas_price": 0.05,
+            "low_gas_price": 0.05,
+            "average_gas_price": 0.05,
+            "high_gas_price": 0.1
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "unois"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://nois-rpc.lavenderfive.com:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://nois-api.lavenderfive.com:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://app.ezstaking.io/nois/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "qwoyn",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Qwoyn",
+      "chain_id": "qwoyn-1",
+      "bech32_prefix": "qwoyn",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "qwoyn",
+        "bech32PrefixAccPub": "qwoynpub",
+        "bech32PrefixValAddr": "qwoynvaloper",
+        "bech32PrefixValPub": "qwoynvaloperpub",
+        "bech32PrefixConsAddr": "qwoynvalcons",
+        "bech32PrefixConsPub": "qwoynvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uqwoyn",
+            "fixed_min_gas_price": 0.025
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uqwoyn"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.qwoyn.studio:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.qwoyn.studio:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.theamsolutions.info/qwoyn-main/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm"
       ]
     }
   ]

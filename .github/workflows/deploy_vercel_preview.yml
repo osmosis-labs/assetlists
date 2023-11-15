@@ -8,4 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Vercel Deployment via Webhook
-        run: curl -X POST ${{ secrets.VERCEL_WEBHOOK_DEPLOY_PREVIEW_URL }}
+        run: curl -X POST ${{ secrets.VERCEL_WEBHOOK_DEPLOY_STAGE }}

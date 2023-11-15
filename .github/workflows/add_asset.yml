@@ -3,67 +3,65 @@ on:
   workflow_dispatch:
     inputs:
       osmosis_zone:
-        description: 'Osmosis Zone'
+        description: "Osmosis Zone"
         required: true
-        default: 'osmosis (osmosis-1)'
-        options: 
-          - 'osmosis (osmosis-1)'
-          - 'osmosistestnet (osmo-test-5)'
-          - 'osmosistestnet4 (osmo-test-4)'
+        default: "osmosis (osmosis-1)"
+        options:
+          - "osmosis (osmosis-1)"
+          - "osmosistestnet (osmo-test-5)"
+          - "osmosistestnet4 (osmo-test-4)"
       chain_name:
-        description: 'chain_name (Chain Registry directory)'
+        description: "chain_name (Chain Registry directory)"
         required: true
-        default: 'cosmoshub'
+        default: "cosmoshub"
       base_denom:
-        description: 'base_denom (Asset base)'
+        description: "base_denom (Asset base)"
         required: true
-        default: 'uatom'
+        default: "uatom"
       path:
-        description: 'path (IBC transfer path--required for all IBC transferred assets)'
+        description: "path (IBC transfer path--required for all IBC transferred assets)"
         required: false
-        default: 'transfer/channel-141/uatom'
+        default: "transfer/channel-141/uatom"
       osmosis_main:
-        description: 'osmosis_main (whether to appear as verified asset--default to FALSE)'
+        description: "osmosis_main (whether to appear as verified asset--default to FALSE)"
         required: false
         type: boolean
         default: false
       osmosis_pool:
-        description: 'Pool ID of any on-chain liquidity pool containing the asset if liquidity has been added. '
+        description: "Pool ID of any on-chain liquidity pool containing the asset if liquidity has been added. "
         required: false
       request_staging_frontend:
-        description: 'If liquidity not yet been added, you can request a Staging Frontend to add liquidity'
+        description: "If liquidity not yet been added, you can request a Staging Frontend to add liquidity"
         required: false
         type: boolean
         default: false
-
 
 jobs:
   add_asset:
     name: Add Asset
     runs-on: ubuntu-latest
-    
+
     defaults:
       run:
         shell: bash
 
     steps:
-      
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: true
-          
+
       - name: Git Sumbodule Update
         run: |
           git submodule update --init --recursive
           git submodule update --recursive --remote
-      
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 19.6.0
-      
+
       - name: Set environment variables
         run: |
           echo "osmosis_zone=${{ github.event.inputs.osmosis_zone }}" >> $GITHUB_ENV
@@ -77,7 +75,7 @@ jobs:
       - name: Run validation script
         working-directory: ./.github/workflows/utility
         run: node validate_add_asset.mjs
-          
+
       - name: Add Commit Push
         uses: devops-infra/action-commit-push@master
         with:
@@ -87,14 +85,14 @@ jobs:
           commit_message: "Add Zone Asset ${{ github.event.inputs.base_denom }}"
           force: false
           target_branch: update/add_asset
-      
+
       - name: Create A PR
         uses: devops-infra/action-pull-request@v0.4.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           source_branch: update/add_asset
           target_branch: main
-          title: Add Zone Asset 
+          title: Add Zone Asset
           body: |
             **Automated pull request**
             osmosis_zone = ${{ github.event.inputs.osmosis_zone }}

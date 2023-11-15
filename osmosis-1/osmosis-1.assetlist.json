@@ -1200,6 +1200,14 @@
       "symbol": "PSTAKE",
       "traces": [
         {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "persistence",
+            "base_denom": "uxprt"
+          },
+          "provider": "Persistence"
+        },
+        {
           "type": "bridge",
           "counterparty": {
             "chain_name": "ethereum",
@@ -2134,7 +2142,8 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:621"
+        "osmosis-price:uosmo:621",
+        "osmosis-unstable"
       ]
     },
     {
@@ -2551,7 +2560,8 @@
       "coingecko_id": "cerberus-2",
       "keywords": [
         "osmosis-info",
-        "osmosis-price:uosmo:662"
+        "osmosis-price:uosmo:662",
+        "osmosis-unstable"
       ]
     },
     {
@@ -2832,7 +2842,8 @@
       },
       "keywords": [
         "osmosis-info",
-        "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:547"
+        "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:547",
+        "osmosis-unstable"
       ]
     },
     {
@@ -2876,7 +2887,8 @@
       "coingecko_id": "sifchain",
       "keywords": [
         "osmosis-info",
-        "osmosis-price:uosmo:629"
+        "osmosis-price:uosmo:629",
+        "osmosis-unstable"
       ]
     },
     {
@@ -4914,7 +4926,8 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lumenx/images/lumen.svg"
       },
       "keywords": [
-        "osmosis-price:uosmo:788"
+        "osmosis-price:uosmo:788",
+        "osmosis-unstable"
       ]
     },
     {
@@ -7674,7 +7687,8 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/arkh/images/arkh.svg"
       },
       "keywords": [
-        "osmosis-price:uosmo:954"
+        "osmosis-price:uosmo:954",
+        "osmosis-unstable"
       ]
     },
     {
@@ -8638,7 +8652,7 @@
       "base": "ibc/18FB5C09D9D2371F659D4846A956FA56225E377EE3C3652A2BF3542BF809159D",
       "name": "Wrapped FIL from Filecoin",
       "display": "fil",
-      "symbol": "axlFIL",
+      "symbol": "FIL",
       "traces": [
         {
           "type": "wrapped",
@@ -9242,7 +9256,7 @@
       "base": "ibc/B2BD584CD2A0A9CE53D4449667E26160C7D44A9C41AF50F602C201E5B3CCA46C",
       "name": "Wrapped Lido Staked Ether",
       "display": "wsteth",
-      "symbol": "wstETH",
+      "symbol": "wstETH.axl",
       "traces": [
         {
           "type": "liquid-stake",
@@ -11734,6 +11748,206 @@
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/nstk.svg"
       }
+    },
+    {
+      "description": "ohhNFT LP token.",
+      "denom_units": [
+        {
+          "denom": "ibc/71DAA4CAFA4FE2F9803ABA0696BA5FC0EFC14305A2EA8B4E01880DB851B1EC02",
+          "exponent": 0,
+          "aliases": [
+            "factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/uBRNCH"
+          ]
+        },
+        {
+          "denom": "BRNCH",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/71DAA4CAFA4FE2F9803ABA0696BA5FC0EFC14305A2EA8B4E01880DB851B1EC02",
+      "name": "Branch",
+      "display": "BRNCH",
+      "symbol": "BRNCH",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stargaze",
+            "base_denom": "factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/uBRNCH",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-75",
+            "path": "transfer/channel-75/factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/uBRNCH"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/brnch.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/brnch.svg"
+      },
+      "keywords": [
+        "osmosis-info",
+        "osmosis-price:ibc/CFF40564FDA3E958D9904B8B479124987901168494655D9CC6B7C0EC0416020B:1288"
+      ]
+    },
+    {
+      "description": "wstETH on Neutron",
+      "denom_units": [
+        {
+          "denom": "ibc/2F21E6D4271DE3F561F20A02CD541DAF7405B1E9CB3B9B07E3C2AC7D8A4338A5",
+          "exponent": 0,
+          "aliases": [
+            "factory/neutron1ug740qrkquxzrk2hh29qrlx3sktkfml3je7juusc2te7xmvsscns0n2wry/wstETH"
+          ]
+        },
+        {
+          "denom": "wstETH",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/2F21E6D4271DE3F561F20A02CD541DAF7405B1E9CB3B9B07E3C2AC7D8A4338A5",
+      "name": "wstETH",
+      "display": "wstETH",
+      "symbol": "wstETH",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "wei"
+          },
+          "provider": "Lido"
+        },
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84"
+          },
+          "provider": "Lido"
+        },
+        {
+          "type": "additional-mintage",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0"
+          },
+          "provider": "Lido"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "neutron",
+            "base_denom": "factory/neutron1ug740qrkquxzrk2hh29qrlx3sktkfml3je7juusc2te7xmvsscns0n2wry/wstETH",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-874",
+            "path": "transfer/channel-874/factory/neutron1ug740qrkquxzrk2hh29qrlx3sktkfml3je7juusc2te7xmvsscns0n2wry/wstETH"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wsteth.svg"
+      },
+      "keywords": [
+        "osmosis-main"
+      ]
+    },
+    {
+      "description": "Margined Power Token sqATOM",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1g8qypve6l95xmhgc0fddaecerffymsl7kn9muw/sqatom",
+          "exponent": 0
+        },
+        {
+          "denom": "sqatom",
+          "exponent": 6
+        }
+      ],
+      "base": "factory/osmo1g8qypve6l95xmhgc0fddaecerffymsl7kn9muw/sqatom",
+      "name": "ATOM Squared",
+      "display": "sqatom",
+      "symbol": "sqATOM",
+      "traces": [],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sqatom.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "Margined Power Token sqBTC",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1g8qypve6l95xmhgc0fddaecerffymsl7kn9muw/sqbtc",
+          "exponent": 0
+        },
+        {
+          "denom": "sqbtc",
+          "exponent": 6
+        }
+      ],
+      "base": "factory/osmo1g8qypve6l95xmhgc0fddaecerffymsl7kn9muw/sqbtc",
+      "name": "BTC Squared",
+      "display": "sqbtc",
+      "symbol": "sqBTC",
+      "traces": [],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sqbtc.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "QWOYN is the native governance token for Qwoyn Network",
+      "denom_units": [
+        {
+          "denom": "ibc/09FAF1E04435E14C68DE7AB0D03C521C92975C792DB12B2EA390BAA2E06B3F3D",
+          "exponent": 0,
+          "aliases": [
+            "uqwoyn"
+          ]
+        },
+        {
+          "denom": "qwoyn",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/09FAF1E04435E14C68DE7AB0D03C521C92975C792DB12B2EA390BAA2E06B3F3D",
+      "name": "Qwoyn Blockchain",
+      "display": "qwoyn",
+      "symbol": "QWOYN",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "qwoyn",
+            "base_denom": "uqwoyn",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-880",
+            "path": "transfer/channel-880/uqwoyn"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qwoyn/images/qwoyn.png"
+      },
+      "keywords": [
+        "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:1291",
+        "osmosis-unlisted"
+      ]
     }
   ]
 }

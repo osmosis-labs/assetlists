@@ -53,7 +53,7 @@
       },
       "explorers": [
         {
-          "tx_page": "https://www.mintscan.io/cosmos/txs/${txHash}"
+          "tx_page": "https://www.mintscan.io/osmosis/txs/${txHash}"
         }
       ],
       "features": [
@@ -113,7 +113,7 @@
       },
       "explorers": [
         {
-          "tx_page": "https://www.mintscan.io/osmosis/txs/${txHash}"
+          "tx_page": "https://www.mintscan.io/cosmos/txs/${txHash}"
         }
       ],
       "features": [
@@ -2570,7 +2570,7 @@
         "fee_tokens": [
           {
             "denom": "inj",
-            "fixed_min_gas_price": 500000000,
+            "fixed_min_gas_price": 160000000,
             "low_gas_price": 500000000,
             "average_gas_price": 700000000,
             "high_gas_price": 900000000
@@ -6502,7 +6502,10 @@
         "fee_tokens": [
           {
             "denom": "uqwoyn",
-            "fixed_min_gas_price": 0.025
+            "fixed_min_gas_price": 0.03,
+            "low_gas_price": 0.03,
+            "average_gas_price": 0.05,
+            "high_gas_price": 0.075
           }
         ]
       },

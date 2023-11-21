@@ -10,7 +10,10 @@
     {
       "chain_name": "osmosis",
       "base_denom": "uion",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "override_properties": {
+        "name": "ION Dao"
+      }
     },
     {
       "chain_name": "axelar",
@@ -361,7 +364,10 @@
       "chain_name": "sommelier",
       "base_denom": "usomm",
       "path": "transfer/channel-165/usomm",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "override_properties": {
+        "name": "Sommelier"
+      }
     },
     {
       "chain_name": "bandchain",
@@ -455,7 +461,10 @@
       "base_denom": "rowan",
       "path": "transfer/channel-47/rowan",
       "osmosis_verified": false,
-      "osmosis_unstable": true
+      "osmosis_unstable": true,
+      "override_properties": {
+        "name": "Sifchain"
+      }
     },
     {
       "chain_name": "shentu",
@@ -495,6 +504,7 @@
       "path": "transfer/channel-144/gravity0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
       "osmosis_verified": false,
       "override_properties": {
+        "name": "Wrapped Bitcoin (Gravity Bridge)",
         "symbol": "WBTC.grv",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.grv.svg"
@@ -507,6 +517,7 @@
       "path": "transfer/channel-144/gravity0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
       "osmosis_verified": true,
       "override_properties": {
+        "name": "Ether (Gravity Bridge)",
         "symbol": "WETH.grv",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/weth.grv.svg"
@@ -520,6 +531,7 @@
       "peg_mechanism": "collateralized",
       "osmosis_verified": true,
       "override_properties": {
+        "name": "USD Coin (Gravity Bridge)",
         "symbol": "USDC.grv",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdc.grv.svg"
@@ -533,6 +545,7 @@
       "peg_mechanism": "collateralized",
       "osmosis_verified": false,
       "override_properties": {
+        "name": "DAI Stablecoin (Gravity Bridge)",
         "symbol": "DAI.grv",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dai.grv.svg"
@@ -546,6 +559,7 @@
       "peg_mechanism": "collateralized",
       "osmosis_verified": true,
       "override_properties": {
+        "name": "Tether USD (Gravity Bridge)",
         "symbol": "USDT.grv",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.grv.svg"
@@ -616,13 +630,19 @@
       "chain_name": "kava",
       "base_denom": "hard",
       "path": "transfer/channel-143/hard",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "override_properties": {
+        "name": "Kava Hard"
+      }
     },
     {
       "chain_name": "kava",
       "base_denom": "swp",
       "path": "transfer/channel-143/swp",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "override_properties": {
+        "name": "Kava Swap"
+      }
     },
     {
       "chain_name": "axelar",
@@ -751,7 +771,10 @@
       "chain_name": "kujira",
       "base_denom": "ukuji",
       "path": "transfer/channel-259/ukuji",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "override_properties": {
+        "name": "Kujira"
+      }
     },
     {
       "chain_name": "tgrade",
@@ -844,7 +867,10 @@
       "chain_name": "kava",
       "base_denom": "usdx",
       "path": "transfer/channel-143/usdx",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "override_properties": {
+        "name": "Kava USDX"
+      }
     },
     {
       "chain_name": "agoric",
@@ -879,13 +905,19 @@
       "chain_name": "stride",
       "base_denom": "stuatom",
       "path": "transfer/channel-326/stuatom",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "override_properties": {
+        "name": "Stride Staked ATOM"
+      }
     },
     {
       "chain_name": "stride",
       "base_denom": "stustars",
       "path": "transfer/channel-326/stustars",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "override_properties": {
+        "name": "Stride Staked STARS"
+      }
     },
     {
       "chain_name": "juno",
@@ -921,13 +953,19 @@
       "chain_name": "stride",
       "base_denom": "stujuno",
       "path": "transfer/channel-326/stujuno",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "override_properties": {
+        "name": "Stride Staked JUNO"
+      }
     },
     {
       "chain_name": "stride",
       "base_denom": "stuosmo",
       "path": "transfer/channel-326/stuosmo",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "override_properties": {
+        "name": "Stride Staked OSMO"
+      }
     },
     {
       "chain_name": "juno",
@@ -1113,6 +1151,7 @@
       "peg_mechanism": "collateralized",
       "osmosis_verified": true,
       "override_properties": {
+        "name": "USD Coin (Polygon)",
         "symbol": "polygon.USDC",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/polygon.usdc.svg"
@@ -1130,6 +1169,7 @@
       "peg_mechanism": "collateralized",
       "osmosis_verified": true,
       "override_properties": {
+        "name": "USD Coin (Avalanche)",
         "symbol": "avalanche.USDC",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/avalanche.usdc.svg"
@@ -1156,13 +1196,19 @@
       "chain_name": "stride",
       "base_denom": "stuluna",
       "path": "transfer/channel-326/stuluna",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "override_properties": {
+        "name": "Stride Staked LUNA"
+      }
     },
     {
       "chain_name": "stride",
       "base_denom": "staevmos",
       "path": "transfer/channel-326/staevmos",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "override_properties": {
+        "name": "Stride Staked EVMOS"
+      }
     },
     {
       "chain_name": "juno",
@@ -1403,13 +1449,17 @@
       "osmosis_verified": true,
       "canonical": {
         "chain_name": "ethereum",
+        "name": "Pepe",
         "base_denom": "0x6982508145454Ce325dDbE47a25d4ec3d2311933"
       }
     },
     {
       "chain_name": "osmosis",
       "base_denom": "factory/osmo14klwqgkmackvx2tqa0trtg69dmy0nrg4ntq4gjgw2za4734r5seqjqm4gm/uibcx",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "override_properties": {
+        "name": "IBC Index"
+      }
     },
     {
       "chain_name": "axelar",
@@ -1469,12 +1519,18 @@
       "chain_name": "stride",
       "base_denom": "stuumee",
       "path": "transfer/channel-326/stuumee",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "override_properties": {
+        "name": "Stride Staked UMEE"
+      }
     },
     {
       "chain_name": "osmosis",
       "base_denom": "factory/osmo1xqw2sl9zk8a6pch0csaw78n4swg5ws8t62wc5qta4gnjxfqg6v2qcs243k/stuibcx",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "override_properties": {
+        "name": "Staked IBCX"
+      }
     },
     {
       "chain_name": "nolus",
@@ -1600,7 +1656,10 @@
       "chain_name": "stride",
       "base_denom": "stusomm",
       "path": "transfer/channel-326/stusomm",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "override_properties": {
+        "name": "Stride Staked SOMM"
+      }
     },
     {
       "chain_name": "gateway",
@@ -1663,7 +1722,10 @@
       "chain_name": "kujira",
       "base_denom": "factory/kujira1643jxg8wasy5cfcn7xm8rd742yeazcksqlg4d7/umnta",
       "path": "transfer/channel-259/factory:kujira1643jxg8wasy5cfcn7xm8rd742yeazcksqlg4d7:umnta",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "override_properties": {
+        "name": "MantaDAO"
+      }
     },
     {
       "chain_name": "juno",
@@ -1748,12 +1810,18 @@
     {
       "chain_name": "osmosis",
       "base_denom": "factory/osmo1s794h9rxggytja3a4pmwul53u98k06zy2qtrdvjnfuxruh7s8yjs6cyxgd/ucdt",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "override_properties": {
+        "name": "CDT Stablecoin"
+      }
     },
     {
       "chain_name": "osmosis",
       "base_denom": "factory/osmo1s794h9rxggytja3a4pmwul53u98k06zy2qtrdvjnfuxruh7s8yjs6cyxgd/umbrn",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "override_properties": {
+        "name": "Membrane"
+      }
     },
     {
       "chain_name": "sge",
@@ -1835,7 +1903,10 @@
       "chain_name": "kujira",
       "base_denom": "factory/kujira1aaudpfr9y23lt9d45hrmskphpdfaq9ajxd3ukh/unstk",
       "path": "transfer/channel-259/factory/kujira1aaudpfr9y23lt9d45hrmskphpdfaq9ajxd3ukh/unstk",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "override_properties": {
+        "name": "Unstake Fi"
+      }
     },
     {
       "chain_name": "stargaze",

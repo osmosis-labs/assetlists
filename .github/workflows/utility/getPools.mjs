@@ -17,7 +17,7 @@ let ticks = 0;
 function get_base_url(domain) {
   let baseUrl;
   if (domain == "osmosis") {
-    return 'https://lcd.osmosis.zone/osmosis/gamm/v1beta1/pools';
+    return 'https://lcd.osmosis.zone/osmosis/poolmanager/v1beta1/all-pools';
   } else if (domain == "osmosistestnet4") {
     return 'https://lcd.testnet4.osmosis.zone/osmosis/gamm/v1beta1/pools';
   } else if (domain == "osmosistestnet") {
@@ -100,17 +100,20 @@ function getPools(all_pools) {
   
 }
 
+const classic_pool = "/osmosis.gamm.v1beta1.Pool";
+const stableswap_pool = "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool";
+const concentrated_pool = "/osmosis.concentratedliquidity.v1beta1.Pool";
+const half_weight = 0.5;
+
 function Pool(pool) {
   
   let pool_obj = {};
-  pool_obj.id = pool.id;
+  pool_obj.id = pool.id ? pool.id : pool.pool_id;
   pool_obj.pool_assets = new Map();
   pool_obj.pool_assets.clear();
   let total_weight = 0;
-  if (pool.pool_assets) {
-    pool.pool_assets.forEach((pool_asset) => {
-      total_weight = total_weight + parseInt(pool_asset.weight);
-    });
+  if (pool['@type'] == classic_pool) {
+    total_weight = pool.total_weight;
     pool.pool_assets.forEach((pool_asset) => {
       let asset = {}
       asset.amount = parseInt(pool_asset.token.amount);
@@ -121,19 +124,39 @@ function Pool(pool) {
         assets.set(pool_asset.token.denom, Asset(pool_asset.token.denom));
       }
     });
-  } else if (pool.pool_liquidity) {
-    let i = 0;
+  } else if (pool['@type'] == stableswap_pool) {
     pool.pool_liquidity.forEach((pool_asset) => {
       let asset = {}
       asset.amount = parseInt(pool_asset.amount);
       asset.weight = 1 / pool.pool_liquidity.length;
       asset.size = asset.amount / asset.weight;
       pool_obj.pool_assets.set(pool_asset.denom,asset);
-      i = i + 1;
       if (!assets.get(pool_asset.denom)) {
         assets.set(pool_asset.denom, Asset(pool_asset.denom));
       }
     });
+  } else if (pool['@type'] == concentrated_pool) {
+    let current_tick_liquidity = pool.current_tick_liquidity;
+    let current_sqrt_price = pool.current_sqrt_price;
+    let token0 = {}
+    token0.amount = current_tick_liquidity/current_sqrt_price;
+    token0.weight = half_weight;
+    token0.size = token0.amount / token0.weight;
+    pool_obj.pool_assets.set(pool.token0,token0);
+    if (!assets.get(pool.token0)) {
+      assets.set(pool.token0, Asset(pool.token0));
+    }
+    let token1 = {}
+    token1.amount = current_tick_liquidity * current_sqrt_price;
+    token1.weight = half_weight;
+    token1.size = token1.amount / token1.weight;
+    pool_obj.pool_assets.set(pool.token1,token1);
+    if (!assets.get(pool.token1)) {
+      assets.set(pool.token1, Asset(pool.token1));
+    }
+  } else {
+    console.log("Pool type does not exist!");
+    console.log(pool_obj.id);
   }
   return pool_obj;
 }
@@ -403,4 +426,4 @@ async function main() {
   returnAssets(domain);
 }
 
-//main();
+main(); //TURN THIS BACK OFF

@@ -426,4 +426,4 @@ async function main() {
   returnAssets(domain);
 }
 
-main(); //TURN THIS BACK OFF
+//main(); //TURN THIS BACK OFF

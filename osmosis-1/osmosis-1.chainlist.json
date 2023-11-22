@@ -6538,6 +6538,63 @@
         "ibc-transfer",
         "cosmwasm"
       ]
+    },
+    {
+      "chain_name": "source",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Source",
+      "chain_id": "source-1",
+      "bech32_prefix": "source",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "source",
+        "bech32PrefixAccPub": "sourcepub",
+        "bech32PrefixValAddr": "sourcevaloper",
+        "bech32PrefixValPub": "sourcevaloperpub",
+        "bech32PrefixConsAddr": "sourcevalcons",
+        "bech32PrefixConsPub": "sourcevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "usource",
+            "fixed_min_gas_price": 0.05,
+            "low_gas_price": 0.05,
+            "average_gas_price": 0.75,
+            "high_gas_price": 1.0
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "usource"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.source.tcnetwork.io/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.source.tcnetwork.io/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.tcnetwork.io/source/transaction/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm"
+      ]
     }
   ]
 }

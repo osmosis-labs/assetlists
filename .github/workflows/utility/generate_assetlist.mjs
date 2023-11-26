@@ -114,6 +114,16 @@ const generateAssets = async (chainName, assets, zone_assets) => {
       } else {
         assetPropertyValue = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, assetProperty);
       }
+
+      // Use Chain's Name instead of Asset Name when it's the staking token
+      if (assetProperty == "name") {
+        let staking_denom = chain_reg.getFileProperty(reference_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom;
+        if(reference_asset.base_denom == staking_denom) {
+           let chainPretty = chain_reg.getFileProperty(reference_asset.chain_name, "chain", "pretty_name");
+           assetPropertyValue = chainPretty ? chainPretty : defaultValue;
+        }
+      }
+
       if (assetPropertyValue) {
         if (assetProperty == "logo_URIs") {
           generatedAsset[assetProperty] = {};

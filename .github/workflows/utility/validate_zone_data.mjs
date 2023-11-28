@@ -136,8 +136,6 @@ export function validate_zone_files() {
 
     }); 
   });
-
-  console.log(chains_wo_fees);
   
 }
 

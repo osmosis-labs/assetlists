@@ -52,12 +52,33 @@ export function validate_zone_files() {
       }
 
       let CHAIN_STAKING = false;
-      let staking_tokens = chain_reg.getFileProperty(zoneChain.chain_name, "chain", "staking")?.staking_tokens[0]?.denom;
-      if (staking_tokens) {
+      let staking_token = chain_reg.getFileProperty(zoneChain.chain_name, "chain", "staking")?.staking_tokens[0]?.denom;
+      if (staking_token) {
         CHAIN_STAKING = true;
       }
       if (!CHAIN_STAKING) {
         throw new Error(`Chain ${zoneChain.chain_name} does not have staking defined in the Chain Registry.`);
+      }
+
+      let CHAIN_FEES = false;
+      let fee_token = chain_reg.getFileProperty(zoneChain.chain_name, "chain", "fees")?.fee_tokens[0];
+      if(
+        fee_token?.low_gas_price !== undefined &&
+        fee_token?.average_gas_price !== undefined &&
+        fee_token?.high_gas_price !== undefined &&
+        fee_token?.low_gas_price <= fee_token?.average_gas_price &&
+        fee_token?.average_gas_price <= fee_token?.high_gas_price )
+      {
+        if(fee_token?.fixed_min_gas_price) {
+          if(fee_token?.fixed_min_gas_price <= fee_token?.low_gas_price) {
+            CHAIN_FEES = true;
+          }
+        } else {
+          CHAIN_FEES = true;
+        }
+      }
+      if (!CHAIN_FEES) {
+        throw new Error(`Chain ${zoneChain.chain_name} does not have fees properly defined in the Chain Registry.`);
       }
 
     });
@@ -115,6 +136,8 @@ export function validate_zone_files() {
 
     }); 
   });
+
+  console.log(chains_wo_fees);
   
 }
 

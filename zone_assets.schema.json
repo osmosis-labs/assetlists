@@ -83,29 +83,6 @@
             "hybrid"
           ]
         },
-        "additional_transfer": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": [
-              "type"
-            ],
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "The name of the provider of the method or interface used to transfer the asset to/from the chain.",
-              },
-              "type": {
-                "type": "string",
-                "enum": [
-                  "external_interface",
-                  "integrated_bridge",
-                  "fiat_onramp"
-                ]
-              }
-            }
-          }
-        },
         "override_properties": {
           "type": "object",
           "description": "Properties that should not follow the Chain Registry, and behave or appear differently on Osmosis Zone.",

@@ -198,7 +198,15 @@
       "chain_name": "evmos",
       "base_denom": "aevmos",
       "path": "transfer/channel-204/aevmos",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "additional_transfer": [
+        {
+          "name": "Evmos App",
+          "type": "external_interface",
+          "deposit_url": "https://app.evmos.org/assets",
+          "withdraw_url": "https://app.evmos.org/assets"
+        }
+      ]
     },
     {
       "chain_name": "kava",
@@ -826,7 +834,7 @@
         {
           "name": "Kujira Blue",
           "type": "external_interface",
-          "deposit_url": "https://blue.kujira.app/ibc?destination=osmosis-1&denom=ukuji",
+          "deposit_url": "https://blue.kujira.app/ibc?destination=osmosis-1&denom=ukuji"
         }
       ]
     },
@@ -1027,7 +1035,7 @@
         {
           "name": "Kujira Blue",
           "type": "external_interface",
-          "deposit_url": "https://blue.kujira.app/ibc?destination=osmosis-1&source=kaiyo-1&denom=factory%2Fkujira1qk00h5atutpsv900x202pxx42npjr9thg58dnqpa72f2p7m2luase444a7%2Fuusk",
+          "deposit_url": "https://blue.kujira.app/ibc?destination=osmosis-1&source=kaiyo-1&denom=factory%2Fkujira1qk00h5atutpsv900x202pxx42npjr9thg58dnqpa72f2p7m2luase444a7%2Fuusk"
         }
       ]
     },
@@ -1849,7 +1857,7 @@
         {
           "name": "Kujira Blue",
           "type": "external_interface",
-          "deposit_url": "https://blue.kujira.app/ibc?destination=osmosis-1&source=kaiyo-1&denom=factory%2Fkujira1643jxg8wasy5cfcn7xm8rd742yeazcksqlg4d7%2Fumnta",
+          "deposit_url": "https://blue.kujira.app/ibc?destination=osmosis-1&source=kaiyo-1&denom=factory%2Fkujira1643jxg8wasy5cfcn7xm8rd742yeazcksqlg4d7%2Fumnta"
         }
       ]
     },
@@ -1941,7 +1949,14 @@
       "chain_name": "evmos",
       "base_denom": "erc20/0x655ecB57432CC1370f65e5dc2309588b71b473A9",
       "path": "transfer/channel-204/erc20/0x655ecB57432CC1370f65e5dc2309588b71b473A9",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "additional_transfer": [
+        {
+          "name": "Evmos App",
+          "type": "external_interface",
+          "deposit_url": "https://app.evmos.org/assets"
+        }
+      ]
     },
     {
       "chain_name": "realio",

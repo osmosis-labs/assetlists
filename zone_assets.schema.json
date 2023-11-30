@@ -94,21 +94,8 @@
               "name": {
                 "type": "string",
                 "description": "The name of the provider of the method or interface used to transfer the asset to/from the chain.",
-              },
-              "type": {
-                "type": "string",
-                "enum": [
-                  "external_interface",
-                  "integrated_bridge",
-                  "fiat_onramp"
-                ]
               }
-            },
-            "oneOf": [
-              { "$ref": "#/$defs/external_interface" },
-              { "$ref": "#/$defs/integrated_bridge" },
-              { "$ref": "#/$defs/fiat_onramp" }
-            ]
+            }
           }
         },
         "override_properties": {

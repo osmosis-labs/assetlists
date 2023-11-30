@@ -94,6 +94,14 @@
               "name": {
                 "type": "string",
                 "description": "The name of the provider of the method or interface used to transfer the asset to/from the chain.",
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "external_interface",
+                  "integrated_bridge",
+                  "fiat_onramp"
+                ]
               }
             }
           }

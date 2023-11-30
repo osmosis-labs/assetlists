@@ -24,7 +24,6 @@ Verified status is granted if the token or project meets any of the following cr
    - Permissioned contract(s), or
    - Osmosis' Liquidity Mining incentive allocation to any pool containing the asset
      - (Note: This includes the External Incentive Matching program)
-     Note: Although the Osmosis Zone app has historically complied with signalling proposals to qualify an asset as 'Verified'(, or, what used to be a promotion from the Frontier app to the Main app), there is no obligation for interfaces to reflect governance outcomes. Decisions solely affecting the Osmosis Zone app(, and have no effect on-chain,) are not appropriate for Osmosis Governance. Do not create a signalling proposal to try to qualify an asset.)
  - Collaboration, via any of the following:
    - Token is of a project built on Osmosis chain, or
    - Token is of a project funded by Osmosis Grants Program, or

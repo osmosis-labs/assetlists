@@ -422,7 +422,15 @@
       "chain_name": "carbon",
       "base_denom": "swth",
       "path": "transfer/channel-188/swth",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "additional_transfer": [
+        {
+          "name": "Carbon Demex",
+          "type": "external_interface",
+          "deposit_url": "https://app.dem.exchange/account/balance/withdraw/swth",
+          "withdraw_url": "https://app.dem.exchange/account/balance/deposit/swth"
+        }
+      ]
     },
     {
       "chain_name": "cerberus",
@@ -848,7 +856,15 @@
       "chain_name": "echelon",
       "base_denom": "aechelon",
       "path": "transfer/channel-403/aechelon",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "additional_transfer": [
+        {
+          "name": "Echelon Network",
+          "type": "external_interface",
+          "deposit_url": "https://app.ech.network/ibc",
+          "withdraw_url": "https://app.ech.network/ibc"
+        }
+      ]
     },
     {
       "chain_name": "odin",
@@ -2016,7 +2032,14 @@
       "chain_name": "xpla",
       "base_denom": "axpla",
       "path": "transfer/channel-1634/axpla",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "additional_transfer": [
+        {
+          "name": "XPLA",
+          "type": "external_interface",
+          "deposit_url": "https://ibc.xpla.io/"
+        }
+      ]
     },
     {
       "chain_name": "sei",
@@ -2041,7 +2064,14 @@
       "chain_name": "realio",
       "base_denom": "ario",
       "path": "transfer/channel-1424/ario",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "additional_transfer": [
+        {
+          "name": "Realio Network",
+          "type": "external_interface",
+          "deposit_url": "https://app.realio.network/"
+        }
+      ]
     },
     {
       "chain_name": "osmosis",
@@ -2110,7 +2140,14 @@
       "chain_name": "fxcore",
       "base_denom": "FX",
       "path": "transfer/channel-2716/FX",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "additional_transfer": [
+        {
+          "name": "Starscan",
+          "type": "external_interface",
+          "deposit_url": "https://starscan.io/fxbridge?from=fxcore&to=osmosis&token=FX"
+        }
+      ]
     },
     {
       "chain_name": "nomic",

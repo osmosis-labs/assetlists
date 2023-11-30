@@ -94,7 +94,12 @@
                   "fiat_onramp"
                 ]
               }
-            }
+            },
+            "oneOf": [
+              { "$ref": "#/$defs/external_interface" },
+              { "$ref": "#/$defs/integrated_bridge" },
+              { "$ref": "#/$defs/fiat_onramp" }
+            ]
           }
         },
         "peg_mechanism": {

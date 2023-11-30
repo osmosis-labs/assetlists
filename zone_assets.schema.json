@@ -83,6 +83,89 @@
             "hybrid"
           ]
         },
+        "additional_transfer": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the provider of the method or interface used to transfer the asset to/from the chain.",
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "external_interface",
+                  "integrated_bridge",
+                  "fiat_onramp"
+                ]
+              },
+              "$defs": {
+                "external_interface": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "const": "external_interface"
+                    },
+                    "deposit_url": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "The URL of the interface used for depositing the asset to this chain.",
+                    },
+                    "withdraw_url": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "The URL of the interface used for withdrawing the asset to this chain.",
+                    }
+                  }
+                },
+                "integrated_bridge": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "const": "integrated_bridge"
+                    },
+                    "provider_chain_key": {
+                      "type": "string"
+                    },
+                    "provider_asset_key": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "provider_chain_key",
+                    "provider_asset_key"
+                  ]
+                },
+                "fiat_onramp": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "const": "fiat_onramp"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "provider_asset_key": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "provider_asset_key"
+                  ]
+                }
+              }
+            },
+            "oneOf": [
+              { "$ref": "#/$defs/external_interface" },
+              { "$ref": "#/$defs/integrated_bridge" },
+              { "$ref": "#/$defs/fiat_onramp" }
+            ]
+          }
+        },
         "override_properties": {
           "type": "object",
           "description": "Properties that should not follow the Chain Registry, and behave or appear differently on Osmosis Zone.",
@@ -110,6 +193,10 @@
             "coingecko_id": {
               "type": "string",
               "description": "[OPTIONAL] The coingecko id to fetch asset data from coingecko v3 api. See https://api.coingecko.com/api/v3/coins/list"
+            },
+            "name": {
+              "type": "string",
+              "description": "How the asset should be described. E.g., $USTC is named: 'Terra USD'."
             }
           }
         }

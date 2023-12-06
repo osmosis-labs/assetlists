@@ -749,7 +749,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC:562"
+        "osmosis-price:uosmo:800"
       ]
     },
     {
@@ -1180,7 +1180,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:15"
+        "osmosis-price:uosmo:1101"
       ]
     },
     {
@@ -2340,7 +2340,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB:1205"
+        "osmosis-price:uosmo:1110"
       ]
     },
     {
@@ -5630,8 +5630,8 @@
       },
       "coingecko_id": "teritori",
       "keywords": [
-        "osmosis-info",
         "osmosis-main",
+        "osmosis-info",
         "osmosis-price:uosmo:816"
       ]
     },
@@ -5736,7 +5736,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:1252"
+        "osmosis-price:uosmo:833"
       ]
     },
     {
@@ -6356,7 +6356,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1258",
+        "osmosis-price:uosmo:857",
         "peg:collateralized"
       ]
     },
@@ -7622,7 +7622,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/fox.png"
       },
       "keywords": [
-        "osmosis-info",
         "osmosis-price:uosmo:949"
       ]
     },
@@ -7852,7 +7851,9 @@
       },
       "coingecko_id": "white-whale",
       "keywords": [
-        "osmosis-main"
+        "osmosis-main",
+        "osmosis-info",
+        "osmosis-price:uosmo:1318"
       ]
     },
     {
@@ -10009,7 +10010,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7:1298"
+        "osmosis-price:uosmo:1061"
       ]
     },
     {
@@ -10272,6 +10273,7 @@
       "coingecko_id": "sei-network",
       "keywords": [
         "osmosis-main",
+        "osmosis-info",
         "osmosis-price:uosmo:1114"
       ]
     },
@@ -10596,7 +10598,6 @@
       },
       "keywords": [
         "osmosis-main",
-        "osmosis-info",
         "osmosis-price:ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB:1131"
       ]
     },
@@ -10650,7 +10651,7 @@
       "coingecko_id": "sui",
       "keywords": [
         "osmosis-main",
-        "osmosis-price:ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB:1128"
+        "osmosis-price:ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB:1127"
       ]
     },
     {
@@ -11660,6 +11661,7 @@
       "coingecko_id": "fx-coin",
       "keywords": [
         "osmosis-main",
+        "osmosis-info",
         "osmosis-price:uosmo:1241"
       ]
     },
@@ -11712,7 +11714,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1253"
+        "osmosis-price:ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F:1284"
       ]
     },
     {
@@ -12030,7 +12032,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qwoyn/images/qwoyn.png"
       },
       "keywords": [
-        "osmosis-info",
         "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:1295"
       ]
     },
@@ -12301,7 +12302,54 @@
       "coingecko_id": "pyth-network",
       "keywords": [
         "osmosis-main",
+        "osmosis-info",
         "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1315"
+      ]
+    },
+    {
+      "description": "PSTAKE Liquid-Staked OSMO",
+      "denom_units": [
+        {
+          "denom": "ibc/ECBE78BF7677320A93E7BA1761D144BCBF0CBC247C290C049655E106FE5DC68E",
+          "exponent": 0,
+          "aliases": [
+            "stk/uosmo"
+          ]
+        },
+        {
+          "denom": "stkosmo",
+          "exponent": 6,
+          "aliases": [
+            "stk/osmo"
+          ]
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/ECBE78BF7677320A93E7BA1761D144BCBF0CBC247C290C049655E106FE5DC68E",
+      "name": "PSTAKE staked OSMO",
+      "display": "stkosmo",
+      "symbol": "stkOSMO",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "persistence",
+            "base_denom": "stk/uosmo",
+            "channel_id": "channel-6"
+          },
+          "chain": {
+            "channel_id": "channel-4",
+            "path": "transfer/channel-4/stk/uosmo"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/stkosmo.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/stkosmo.svg"
+      },
+      "keywords": [
+        "osmosis-price:uosmo:1323",
+        "osmosis-unlisted"
       ]
     }
   ]

@@ -736,6 +736,62 @@
         "ibc-transfer",
         "ibc-go"
       ]
+    },
+    {
+      "chain_name": "sagatestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Saga Testnet",
+      "chain_id": "ssc-testnet-1",
+      "bech32_prefix": "saga",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "saga",
+        "bech32PrefixAccPub": "sagapub",
+        "bech32PrefixValAddr": "sagavaloper",
+        "bech32PrefixValPub": "sagavaloperpub",
+        "bech32PrefixConsAddr": "sagavalcons",
+        "bech32PrefixConsPub": "sagavalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "utsaga",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.0025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "utsaga"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://testnet-ssc.sagarpc.io/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://testnet-ssc-lcd.sagarpc.io/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/saga-testnet/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
     }
   ]
 }

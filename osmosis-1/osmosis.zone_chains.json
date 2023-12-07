@@ -5,7 +5,7 @@
       "chain_name": "osmosis",
       "rpc": "https://rpc-osmosis.keplr.app",
       "rest": "https://lcd-osmosis.keplr.app",
-      "explorer_tx_url": "https://www.mintscan.io/cosmos/txs/${txHash}",
+      "explorer_tx_url": "https://www.mintscan.io/osmosis/txs/${txHash}",
       "keplr_features": [
         "ibc-go",
         "ibc-transfer",
@@ -18,7 +18,7 @@
       "chain_name": "cosmoshub",
       "rpc": "https://rpc-cosmoshub.keplr.app",
       "rest": "https://lcd-cosmoshub.keplr.app",
-      "explorer_tx_url": "https://www.mintscan.io/osmosis/txs/${txHash}",
+      "explorer_tx_url": "https://www.mintscan.io/cosmos/txs/${txHash}",
       "keplr_features": [
         "ibc-go",
         "ibc-transfer"
@@ -108,7 +108,7 @@
       "chain_name": "starname",
       "rpc": "https://rpc-iov.keplr.app",
       "rest": "https://lcd-iov.keplr.app",
-      "explorer_tx_url": "https://www.mintscan.io/starname/txs/${txHash}",
+      "explorer_tx_url": "https://ping.pub/starname/tx/${txHash}",
       "keplr_features": [
         "ibc-transfer"
       ]
@@ -501,8 +501,8 @@
     },
     {
       "chain_name": "kujira",
-      "rpc": "https://rpc.kaiyo.kujira.setten.io",
-      "rest": "https://lcd.kaiyo.kujira.setten.io",
+      "rpc": "https://rpc-kujira-ia.cosmosia.notional.ventures",
+      "rest": "https://api-kujira-ia.cosmosia.notional.ventures",
       "explorer_tx_url": "https://finder.kujira.app/kaiyo-1/tx/${txHash}",
       "keplr_features": [
         "ibc-transfer",
@@ -786,7 +786,7 @@
     {
       "chain_name": "noble",
       "rpc": "https://rpc.mainnet.noble.strange.love",
-      "rest": "https://noble-api.polkachu.com",
+      "rest": "https://api.mainnet.noble.strange.love",
       "explorer_tx_url": "https://www.mintscan.io/noble/txs/${txHash}",
       "keplr_features": [
         "ibc-transfer",
@@ -881,7 +881,9 @@
       "explorer_tx_url": "https://explorer.genznodes.dev/realio/tx/${txHash}",
       "keplr_features": [
         "ibc-transfer",
-        "ibc-go"
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
       ]
     },
     {
@@ -910,8 +912,8 @@
       "rest": "https://empower-api.polkachu.com",
       "explorer_tx_url": "https://ping.pub/empower/tx/${txHash}",
       "keplr_features": [
-          "ibc-transfer",
-          "ibc-go"
+        "ibc-transfer",
+        "ibc-go"
       ]
     },
     {
@@ -920,8 +922,8 @@
       "rest": "https://api-eu-1.kyve.network",
       "explorer_tx_url": "https://mintscan.io/kyve/transactions/${txHash}",
       "keplr_features": [
-          "ibc-transfer",
-          "ibc-go"
+        "ibc-transfer",
+        "ibc-go"
       ]
     },
     {
@@ -930,8 +932,8 @@
       "rest": "https://rest.wallet.pacific-1.sei.io",
       "explorer_tx_url": "https://www.mintscan.io/sei/transactions/${txHash}",
       "keplr_features": [
-          "ibc-transfer",
-          "ibc-go"
+        "ibc-transfer",
+        "ibc-go"
       ]
     },
     {
@@ -940,8 +942,8 @@
       "rest": "https://api.passage.vitwit.com",
       "explorer_tx_url": "https://www.mintscan.io/passage/transactions/${txHash}",
       "keplr_features": [
-          "ibc-transfer",
-          "ibc-go"
+        "ibc-transfer",
+        "ibc-go"
       ]
     },
     {
@@ -949,6 +951,132 @@
       "rpc": "https://wormchain-rpc.quickapi.com",
       "rest": "https://wormchain-lcd.quickapi.com",
       "explorer_tx_url": "https://bigdipper.live/wormhole/transactions/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "xpla",
+      "rpc": "https://dimension-rpc.xpla.dev",
+      "rest": "https://dimension-lcd.xpla.dev",
+      "explorer_tx_url": "https://explorer.xpla.io/mainnet/tx/${txHash}",
+      "keplr_features": [
+        "eth-address-gen",
+        "eth-key-sign",
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "sge",
+      "rpc": "https://sge-priv-rpc.kingnodes.com",
+      "rest": "https://sge-priv-rest.kingnodes.com",
+      "explorer_tx_url": "https://blockexplorer.sgenetwork.io/sge/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "stafihub",
+      "rpc": "https://public-rpc1.stafihub.io",
+      "rest": "https://public-rest-rpc1.stafihub.io",
+      "explorer_tx_url": "https://www.mintscan.io/stafi/transactions/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "doravota",
+      "rpc": "https://vota-rpc.dorafactory.org",
+      "rest": "https://vota-rest.dorafactory.org",
+      "explorer_tx_url": "https://vota-explorer.dorafactory.org/doravota/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "coreum",
+      "rpc": "https://full-node.mainnet-1.coreum.dev:26657",
+      "rest": "https://full-node.mainnet-1.coreum.dev:1317",
+      "explorer_tx_url": "https://www.mintscan.io/coreum/tx/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "celestia",
+      "rpc": "https://rpc-celestia.keplr.app",
+      "rest": "https://lcd-celestia.keplr.app",
+      "explorer_tx_url": "https://www.mintscan.io/celestia/tx/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "dydx",
+      "rpc": "https://dydx-rpc.lavenderfive.com:443",
+      "rest": "https://dydx-api.lavenderfive.com:443",
+      "explorer_tx_url": "https://www.mintscan.io/dydx/txs/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "fxcore",
+      "rpc": "https://fx-json.functionx.io",
+      "rest": "https://fx-rest.functionx.io",
+      "explorer_tx_url": "https://starscan.io/fxcore/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "nomic",
+      "rpc": "https://stakenet-rpc.nomic.io:2096",
+      "rest": "https://app.nomic.io:8443",
+      "explorer_tx_url": "https://bigdipper.live/nomic/transactions/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "nois",
+      "rpc": "https://nois-rpc.lavenderfive.com:443",
+      "rest": "https://nois-api.lavenderfive.com:443",
+      "explorer_tx_url": "https://app.ezstaking.io/nois/txs/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "qwoyn",
+      "rpc": "https://rpc.qwoyn.studio:443",
+      "rest": "https://api.qwoyn.studio:443",
+      "explorer_tx_url": "https://explorer.theamsolutions.info/qwoyn-main/tx/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "source",
+      "rpc": "https://rpc.source.tcnetwork.io/",
+      "rest": "https://rest.source.tcnetwork.io/",
+      "explorer_tx_url": "https://explorer.tcnetwork.io/source/transaction/${txHash}",
       "keplr_features": [
         "ibc-go",
         "ibc-transfer",

@@ -38,6 +38,7 @@
           "time": "1209600s"
         }
       },
+      "description": "Osmosis (OSMO) is a decentralized exchange (DEX) for Cosmos, an ecosystem of sovereign, interoperable blockchains all connected trustlessly over IBC, the Inter-Blockchain Communication Protocol. Osmosis also offers non-IBC assets bridged from the Ethereum and Polkadot ecosystems. Osmosis' Supercharged Liquidity implements an efficient liquidity pool mechanism analogous to Uniswap's concentrated liquidity, attaining improved capital efficiency and allowing liquidity providers to compete for earned fees and incentives.\n\nAs an appchain DEX, Osmosis has greater control over the full blockchain stack than DEXs that must follow the code of a parent chain. This fine-grained control has enabled, for example, the development of Superfluid Staking, an improvement to Proof-of-Stake security. Superfluid staking allows the underlying OSMO in an LP position to add to chain security and earn staking rewards for doing so. The customizability of appchains also allows for the development of a transaction mempool shielded with threshold encryption, which will greatly reduce harmful MEV on Osmosis.\n\nOsmosis's vision is to build a cross-chain native DEX and trading suite that connects all chains over IBC, including Ethereum and Bitcoin. To build out the trading functionalities, Osmosis has invited external developers to create a bespoke DEX ecosystem that includes lending, credit, margin, fiat on-ramps, Defi strategy vaults, NFTs, stablecoins, and more – all the functionalities of a centralized exchange and more, plus the trust-minimization of decentralized finance.",
       "apis": {
         "rpc": [
           {
@@ -52,7 +53,7 @@
       },
       "explorers": [
         {
-          "tx_page": "https://www.mintscan.io/cosmos/txs/${txHash}"
+          "tx_page": "https://www.mintscan.io/osmosis/txs/${txHash}"
         }
       ],
       "features": [
@@ -83,7 +84,7 @@
         "fee_tokens": [
           {
             "denom": "uatom",
-            "fixed_min_gas_price": 0,
+            "fixed_min_gas_price": 0.005,
             "low_gas_price": 0.01,
             "average_gas_price": 0.025,
             "high_gas_price": 0.03
@@ -97,6 +98,7 @@
           }
         ]
       },
+      "description": "In a nutshell, Cosmos Hub bills itself as a project that solves some of the hardest problems facing the blockchain industry. It aims to offer an antidote to slow, expensive, unscalable and environmentally harmful proof-of-work protocols, like those used by Bitcoin, by offering an ecosystem of connected blockchains.\n\nThe project’s other goals include making blockchain technology less complex and difficult for developers thanks to a modular framework that demystifies decentralized apps. Last but not least, an Inter-blockchain Communication protocol makes it easier for blockchain networks to communicate with each other — preventing fragmentation in the industry.\n\nCosmos Hub's origins can be dated back to 2014, when Tendermint, a core contributor to the network, was founded. In 2016, a white paper for Cosmos was published — and a token sale was held the following year. ATOM tokens are earned through a hybrid proof-of-stake algorithm, and they help to keep the Cosmos Hub, the project’s flagship blockchain, secure. This cryptocurrency also has a role in the network’s governance.",
       "apis": {
         "rpc": [
           {
@@ -111,7 +113,7 @@
       },
       "explorers": [
         {
-          "tx_page": "https://www.mintscan.io/osmosis/txs/${txHash}"
+          "tx_page": "https://www.mintscan.io/cosmos/txs/${txHash}"
         }
       ],
       "features": [
@@ -343,6 +345,7 @@
           }
         ]
       },
+      "description": "Secret Network is the first blockchain with customizable privacy. You get to choose what you share, with whom, and how. This protects users, and empowers developers to build a better Web3.",
       "apis": {
         "rpc": [
           {
@@ -388,7 +391,10 @@
         "fee_tokens": [
           {
             "denom": "uakt",
-            "fixed_min_gas_price": 0
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.00025,
+            "average_gas_price": 0.0025,
+            "high_gas_price": 0.025
           }
         ]
       },
@@ -399,6 +405,7 @@
           }
         ]
       },
+      "description": "Akash is open-source Supercloud that lets users buy and sell computing resources securely and efficiently. Purpose-built for public utility.",
       "apis": {
         "rpc": [
           {
@@ -454,6 +461,7 @@
           }
         ]
       },
+      "description": "Regen Network, a platform to originate and invest in high-integrity carbon and biodiversity credits from ecological regeneration projects.",
       "apis": {
         "rpc": [
           {
@@ -508,6 +516,7 @@
           }
         ]
       },
+      "description": "The Sentinel ecosystem is a global network of autonomous dVPN applications that enable private and censorship resistant internet access.",
       "apis": {
         "rpc": [
           {
@@ -565,8 +574,12 @@
           {
             "denom": "uxprt"
           }
-        ]
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
       },
+      "description": "Persistence is an app chain for Liquid Staking powering an ecosystem of DeFi applications focused on unlocking the liquidity of staked assets.",
       "apis": {
         "rpc": [
           {
@@ -605,9 +618,6 @@
         "bech32PrefixConsPub": "iaavalconspub"
       },
       "slip44": 118,
-      "alternative_slip44s": [
-        566
-      ],
       "fees": {
         "fee_tokens": [
           {
@@ -650,7 +660,7 @@
       "chain_name": "cryptoorgchain",
       "status": "live",
       "network_type": "mainnet",
-      "pretty_name": "Crypto.org Chain",
+      "pretty_name": "Cronos POS Chain",
       "chain_id": "crypto-org-chain-mainnet-1",
       "bech32_prefix": "cro",
       "bech32_config": {
@@ -682,6 +692,7 @@
           }
         ]
       },
+      "description": "Cronos PoS Chain is a public, open-source and permissionless blockchain - a fully decentralized network with high speed and low fees, designed to be a public good that helps drive mass adoption of blockchain technology through use cases like Payments, DeFi and NFTs.",
       "apis": {
         "rpc": [
           {
@@ -739,6 +750,7 @@
           }
         ]
       },
+      "description": "Starname is the best way to claim your part of the blockchain. You can use it for decentralized identification, payments, ownership and applications. Starname can be integrated into digital wallets, dapps and exchanges.",
       "apis": {
         "rpc": [
           {
@@ -753,7 +765,7 @@
       },
       "explorers": [
         {
-          "tx_page": "https://www.mintscan.io/starname/txs/${txHash}"
+          "tx_page": "https://ping.pub/starname/tx/${txHash}"
         }
       ],
       "features": [
@@ -885,6 +897,7 @@
           }
         ]
       },
+      "description": "Juno is a completely community owned and operated smart contract platform.",
       "apis": {
         "rpc": [
           {
@@ -924,10 +937,14 @@
         "bech32PrefixConsAddr": "microvalcons",
         "bech32PrefixConsPub": "microvalconspub"
       },
+      "slip44": 118,
       "fees": {
         "fee_tokens": [
           {
-            "denom": "utick"
+            "denom": "utick",
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
           }
         ]
       },
@@ -979,10 +996,10 @@
         "fee_tokens": [
           {
             "denom": "nanolike",
-            "fixed_min_gas_price": 0,
-            "low_gas_price": 1,
-            "average_gas_price": 10,
-            "high_gas_price": 1000
+            "fixed_min_gas_price": 1000,
+            "low_gas_price": 1000,
+            "average_gas_price": 10000,
+            "high_gas_price": 1000000
           }
         ]
       },
@@ -1040,8 +1057,8 @@
             "denom": "uixo",
             "fixed_min_gas_price": 0.025,
             "low_gas_price": 0.025,
-            "average_gas_price": 0.4,
-            "high_gas_price": 0.1
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
           }
         ]
       },
@@ -1163,6 +1180,7 @@
           }
         ]
       },
+      "description": "Artists, Fans, Managers and Labels in One Single Holistic Ecosystem: $BTSG. Earn real-time royalties, discover exclusive content, mint and trade Fantokens, buy & sell NFTs.",
       "apis": {
         "rpc": [
           {
@@ -1496,6 +1514,7 @@
           }
         ]
       },
+      "description": "The premier community-focused blockchain for NFTs. Stargaze empowers creators, developers, collectors, and traders to participate on the platform. The Stargaze chain consists of various NFT-related apps such as a Launchpad, and a Marketplace with offers and auctions.",
       "apis": {
         "rpc": [
           {
@@ -1532,6 +1551,7 @@
         "bech32PrefixConsAddr": "chihuahuavalcons",
         "bech32PrefixConsPub": "chihuahuavalconspub"
       },
+      "slip44": 118,
       "fees": {
         "fee_tokens": [
           {
@@ -1648,7 +1668,10 @@
         "fee_tokens": [
           {
             "denom": "uvdl",
-            "fixed_min_gas_price": 0
+            "fixed_min_gas_price": 0.0002,
+            "low_gas_price": 0.002,
+            "average_gas_price": 0.005,
+            "high_gas_price": 0.007
           }
         ]
       },
@@ -1811,7 +1834,10 @@
       "fees": {
         "fee_tokens": [
           {
-            "denom": "usomm"
+            "denom": "usomm",
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
           }
         ]
       },
@@ -1822,6 +1848,7 @@
           }
         ]
       },
+      "description": "Automated vaults find best-in-class yields while mitigating risk.",
       "apis": {
         "rpc": [
           {
@@ -1859,6 +1886,7 @@
         "bech32PrefixConsAddr": "sifvalcons",
         "bech32PrefixConsPub": "sifvalconspub"
       },
+      "slip44": 118,
       "fees": {
         "fee_tokens": [
           {
@@ -1916,7 +1944,10 @@
       "fees": {
         "fee_tokens": [
           {
-            "denom": "uband"
+            "denom": "uband",
+            "low_gas_price": 0.0025,
+            "average_gas_price": 0.003,
+            "high_gas_price": 0.005
           }
         ]
       },
@@ -1927,6 +1958,7 @@
           }
         ]
       },
+      "description": "Band Protocol is a cross-chain data oracle platform that aggregates and connects real-world data and APIs to smart contracts.",
       "apis": {
         "rpc": [
           {
@@ -1963,11 +1995,15 @@
         "bech32PrefixConsAddr": "darcvalcons",
         "bech32PrefixConsPub": "darcvalconspub"
       },
+      "slip44": 118,
       "fees": {
         "fee_tokens": [
           {
             "denom": "udarc",
-            "fixed_min_gas_price": 0
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.0001,
+            "average_gas_price": 0.001,
+            "high_gas_price": 0.01
           }
         ]
       },
@@ -2100,6 +2136,7 @@
           }
         ]
       },
+      "description": "An open, decentralized bridge that unlocks the power of interoperability & liquidity between blockchain ecosystems.",
       "apis": {
         "rpc": [
           {
@@ -2142,7 +2179,10 @@
         "fee_tokens": [
           {
             "denom": "udec",
-            "fixed_min_gas_price": 0.025
+            "fixed_min_gas_price": 0.025,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.025
           }
         ]
       },
@@ -2180,14 +2220,14 @@
       "network_type": "mainnet",
       "pretty_name": "Shentu",
       "chain_id": "shentu-2.2",
-      "bech32_prefix": "certik",
+      "bech32_prefix": "shentu",
       "bech32_config": {
-        "bech32PrefixAccAddr": "certik",
-        "bech32PrefixAccPub": "certikpub",
-        "bech32PrefixValAddr": "certikvaloper",
-        "bech32PrefixValPub": "certikvaloperpub",
-        "bech32PrefixConsAddr": "certikvalcons",
-        "bech32PrefixConsPub": "certikvalconspub"
+        "bech32PrefixAccAddr": "shentu",
+        "bech32PrefixAccPub": "shentupub",
+        "bech32PrefixValAddr": "shentuvaloper",
+        "bech32PrefixValPub": "shentuvaloperpub",
+        "bech32PrefixConsAddr": "shentuvalcons",
+        "bech32PrefixConsPub": "shentuvalconspub"
       },
       "slip44": 118,
       "fees": {
@@ -2249,7 +2289,7 @@
         "fee_tokens": [
           {
             "denom": "swth",
-            "fixed_min_gas_price": 100000000,
+            "fixed_min_gas_price": 1,
             "low_gas_price": 1,
             "average_gas_price": 1,
             "high_gas_price": 1,
@@ -2380,6 +2420,28 @@
             }
           },
           {
+            "denom": "ibc/35E771B8682D828173F4B795F6C307780F96DC64D6F914FAE4CC9B4666F66364",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 300000000,
+            "average_gas_price": 300000000,
+            "high_gas_price": 300000000,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "ibc/4E06CF24FEBFB3F5AF645377DCC0B70AA6183BAF6B918B8B6243FCDEB7D38118",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.0006,
+            "average_gas_price": 0.0006,
+            "high_gas_price": 0.0006,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
             "denom": "ibc/662914D0C1CEBCB070C68F061D035E8B10A07C79AB286E7342C85F3BE74612C5",
             "fixed_min_gas_price": 0,
             "low_gas_price": 0.00015,
@@ -2466,6 +2528,17 @@
               "cosmos_send": 100000000,
               "ibc_transfer": 100000000
             }
+          },
+          {
+            "denom": "zil.1.18.1a4a06",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 6000,
+            "average_gas_price": 6000,
+            "high_gas_price": 6000,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
           }
         ]
       },
@@ -2518,7 +2591,7 @@
         "fee_tokens": [
           {
             "denom": "inj",
-            "fixed_min_gas_price": 500000000,
+            "fixed_min_gas_price": 160000000,
             "low_gas_price": 500000000,
             "average_gas_price": 700000000,
             "high_gas_price": 900000000
@@ -2532,6 +2605,7 @@
           }
         ]
       },
+      "description": "Injective’s mission is to create a truly free and inclusive financial system through decentralization.",
       "apis": {
         "rpc": [
           {
@@ -2571,11 +2645,15 @@
         "bech32PrefixConsAddr": "cerberusvalcons",
         "bech32PrefixConsPub": "cerberusvalconspub"
       },
+      "slip44": 118,
       "fees": {
         "fee_tokens": [
           {
             "denom": "ucrbrus",
-            "fixed_min_gas_price": 0
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
           }
         ]
       },
@@ -2678,6 +2756,7 @@
         "bech32PrefixConsAddr": "mantlevalcons",
         "bech32PrefixConsPub": "mantlevalconspub"
       },
+      "slip44": 118,
       "fees": {
         "fee_tokens": [
           {
@@ -2695,6 +2774,7 @@
           }
         ]
       },
+      "description": "AssetMantle’s suite of products is focused on the NFT ecosystem, helping you up your game with digital asset ownership.",
       "apis": {
         "rpc": [
           {
@@ -2918,6 +2998,7 @@
           }
         ]
       },
+      "description": "Developers use Evmos as the Ethereum Canary Chain to deploy applications of the future. Get all the functionalities of Ethereum with the power of IBC and Interchain composability.",
       "apis": {
         "rpc": [
           {
@@ -2946,7 +3027,7 @@
       "chain_name": "terra2",
       "status": "live",
       "network_type": "mainnet",
-      "pretty_name": "Terra 2.0",
+      "pretty_name": "Terra",
       "chain_id": "phoenix-1",
       "bech32_prefix": "terra",
       "bech32_config": {
@@ -2976,6 +3057,7 @@
           }
         ]
       },
+      "description": "Fueled by a passionate community and deep developer talent pool, the Terra blockchain is built to enable the next generation of Web3 products and services.",
       "apis": {
         "rpc": [
           {
@@ -3090,6 +3172,7 @@
           }
         ]
       },
+      "description": "Kava is a decentralized blockchain that combines the speed and interoperability of Cosmos with the developer power of Ethereum.",
       "apis": {
         "rpc": [
           {
@@ -3201,15 +3284,16 @@
           }
         ]
       },
+      "description": "A decentralized ecosystem for protocols, builders and web3 users seeking sustainable FinTech.",
       "apis": {
         "rpc": [
           {
-            "address": "https://rpc.kaiyo.kujira.setten.io"
+            "address": "https://rpc-kujira-ia.cosmosia.notional.ventures"
           }
         ],
         "rest": [
           {
-            "address": "https://lcd.kaiyo.kujira.setten.io"
+            "address": "https://api-kujira-ia.cosmosia.notional.ventures"
           }
         ]
       },
@@ -3659,6 +3743,7 @@
           }
         ]
       },
+      "description": "The Agoric platform makes it safe and seamless to build decentralized apps using your existing JavaScript knowledge.",
       "apis": {
         "rpc": [
           {
@@ -3841,6 +3926,7 @@
           }
         ]
       },
+      "description": "Stride is a blockchain that provides liquidity for staked tokens. Using Stride, you can earn both taking and DeFi yields across the Cosmos IBC ecosystem.",
       "apis": {
         "rpc": [
           {
@@ -3883,7 +3969,10 @@
         "fee_tokens": [
           {
             "denom": "arebus",
-            "fixed_min_gas_price": 0
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
           }
         ]
       },
@@ -4060,7 +4149,10 @@
           {
             "denom": "nund"
           }
-        ]
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
       },
       "apis": {
         "rpc": [
@@ -4160,7 +4252,10 @@
         "fee_tokens": [
           {
             "denom": "ubze",
-            "fixed_min_gas_price": 0
+            "fixed_min_gas_price": 0.01,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
           }
         ]
       },
@@ -4324,14 +4419,14 @@
         "bech32PrefixConsAddr": "medasvalcons",
         "bech32PrefixConsPub": "medasvalconspub"
       },
+      "slip44": 118,
       "fees": {
         "fee_tokens": [
           {
             "denom": "umedas",
-            "fixed_min_gas_price": 0,
-            "low_gas_price": 0,
-            "average_gas_price": 0.0001,
-            "high_gas_price": 0.00025
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.25,
+            "high_gas_price": 0.4
           }
         ]
       },
@@ -4569,6 +4664,7 @@
           }
         ]
       },
+      "description": "Lend, borrow and earn with an autonomous credit protocol in the Cosmos universe. Open to all, closed to none.",
       "apis": {
         "rpc": [
           {
@@ -4683,6 +4779,7 @@
           }
         ]
       },
+      "description": "Liquid Stake your Cosmos assets with your preferred validator and receive liquid staked assets (qASSETs) that you can use for swapping, pooling, lending, and more, all while your original stake earns staking APY from securing the network.",
       "apis": {
         "rpc": [
           {
@@ -4837,17 +4934,17 @@
         "fee_tokens": [
           {
             "denom": "uusdc",
-            "fixed_min_gas_price": 0,
-            "low_gas_price": 0.01,
-            "average_gas_price": 0.025,
-            "high_gas_price": 0.03
+            "fixed_min_gas_price": 0.1,
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.1,
+            "high_gas_price": 0.2
           },
           {
             "denom": "ibc/EF48E6B1A1A19F47ECAEA62F5670C37C0580E86A9E88498B7E393EB6F49F33C0",
-            "fixed_min_gas_price": 0,
-            "low_gas_price": 0,
-            "average_gas_price": 0.002,
-            "high_gas_price": 0.003
+            "fixed_min_gas_price": 0.01,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.01,
+            "high_gas_price": 0.02
           }
         ]
       },
@@ -4861,6 +4958,7 @@
           "time": "1814400s"
         }
       },
+      "description": "The most reliable, secure, and frictionless way to natively issue a digital asset in Cosmos.",
       "apis": {
         "rpc": [
           {
@@ -4869,7 +4967,7 @@
         ],
         "rest": [
           {
-            "address": "https://noble-api.polkachu.com"
+            "address": "https://api.mainnet.noble.strange.love"
           }
         ]
       },
@@ -4903,10 +5001,10 @@
         "fee_tokens": [
           {
             "denom": "uwhale",
-            "fixed_min_gas_price": 0.25,
-            "low_gas_price": 0.25,
-            "average_gas_price": 0.5,
-            "high_gas_price": 0.75
+            "fixed_min_gas_price": 1,
+            "low_gas_price": 1,
+            "average_gas_price": 2,
+            "high_gas_price": 3
           }
         ]
       },
@@ -4973,6 +5071,7 @@
           }
         ]
       },
+      "description": "Decentralized media and network layer for Creators & Sovereign Communities powered by NFTs and related distribution protocols.",
       "apis": {
         "rpc": [
           {
@@ -5029,6 +5128,7 @@
           }
         ]
       },
+      "description": "Axelar delivers secure cross-chain communication for Web3. Our infrastructure enables dApp users to interact with any asset or application, on any chain, with one click.",
       "apis": {
         "rpc": [
           {
@@ -5148,6 +5248,7 @@
           "time": "1814400s"
         }
       },
+      "description": "Gitopia is the next-generation Code Collaboration Platform fuelled by a decentralized network and interactive token economy. It is designed to optimize the open-source software development process through collaboration, transparency, and incentivization.",
       "apis": {
         "rpc": [
           {
@@ -5206,6 +5307,7 @@
           "time": "1814400s"
         }
       },
+      "description": "Elevate your game with up to 3x equity. Dive into a world of minimized risks and unlock the full potential of your assets.",
       "apis": {
         "rpc": [
           {
@@ -5248,9 +5350,21 @@
         "fee_tokens": [
           {
             "denom": "untrn",
-            "low_gas_price": 0.01,
-            "average_gas_price": 0.025,
-            "high_gas_price": 0.05
+            "low_gas_price": 0.5,
+            "average_gas_price": 0.5,
+            "high_gas_price": 0.5
+          },
+          {
+            "denom": "ibc/C4CFF46FD6DE35CA4CF4CE031E643C8FDC9BA4B99AE598E9B0ED98FE3A2319F9",
+            "low_gas_price": 0.022,
+            "average_gas_price": 0.022,
+            "high_gas_price": 0.022
+          },
+          {
+            "denom": "ibc/F082B65C88E4B6D5EF1DB243CDA1D331D002759E938A0F5CD3FFDC5D53B3E349",
+            "low_gas_price": 0.25,
+            "average_gas_price": 0.25,
+            "high_gas_price": 0.25
           }
         ]
       },
@@ -5261,6 +5375,7 @@
           }
         ]
       },
+      "description": "The most secure CosmWasm platform in Cosmos, Neutron lets smart-contracts leverage bleeding-edge Interchain technology with minimal overhead.",
       "apis": {
         "rpc": [
           {
@@ -5317,6 +5432,7 @@
           }
         ]
       },
+      "description": "Composable is the base layer connecting L1s and L2s. We are scaling IBC to other ecosystems, pushing the boundaries of trust-minimized interoperability. We abstract the cross-chain experience for users, delivering seamless chain-agnostic execution of user intentions.",
       "apis": {
         "rpc": [
           {
@@ -5395,7 +5511,9 @@
       ],
       "features": [
         "ibc-transfer",
-        "ibc-go"
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
       ]
     },
     {
@@ -5446,6 +5564,7 @@
           }
         ]
       },
+      "description": "Quasar is the first decentralized asset management (D.A.M.) platform enabled by IBC. A secure, permissionless, composable, and diversified interchain DeFi experience is finally here.",
       "apis": {
         "rpc": [
           {
@@ -5505,6 +5624,7 @@
           "time": "1209600s"
         }
       },
+      "description": "An incentivized L1 blockchain that allows developers to capture the value their dapps create, enabling sustainable economic models.",
       "apis": {
         "rpc": [
           {
@@ -5617,6 +5737,7 @@
           }
         ]
       },
+      "description": "Revolutionizing data reliability in the Web3 space, KYVE Network provides fast and easy tooling for data validation, immutability, and retrieval, ensuring trustless data for seamless scalability and eliminating data risks and roadblocks.",
       "apis": {
         "rpc": [
           {
@@ -5673,6 +5794,7 @@
           }
         ]
       },
+      "description": "Sei is the fastest Layer 1 blockchain, designed to scale with the industry.",
       "apis": {
         "rpc": [
           {
@@ -5800,6 +5922,705 @@
       "explorers": [
         {
           "tx_page": "https://bigdipper.live/wormhole/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "xpla",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "XPLA",
+      "chain_id": "dimension_37-1",
+      "bech32_prefix": "xpla",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "xpla",
+        "bech32PrefixAccPub": "xplapub",
+        "bech32PrefixValAddr": "xplavaloper",
+        "bech32PrefixValPub": "xplavaloperpub",
+        "bech32PrefixConsAddr": "xplavalcons",
+        "bech32PrefixConsPub": "xplavalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "axpla",
+            "fixed_min_gas_price": 850000000000,
+            "low_gas_price": 850000000000,
+            "average_gas_price": 1147500000000,
+            "high_gas_price": 1487500000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "axpla"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://dimension-rpc.xpla.dev"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://dimension-lcd.xpla.dev"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.xpla.io/mainnet/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "eth-address-gen",
+        "eth-key-sign",
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "sge",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "SGE",
+      "chain_id": "sgenet-1",
+      "bech32_prefix": "sge",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "sge",
+        "bech32PrefixAccPub": "sgepub",
+        "bech32PrefixValAddr": "sgevaloper",
+        "bech32PrefixValPub": "sgevaloperpub",
+        "bech32PrefixConsAddr": "sgevalcons",
+        "bech32PrefixConsPub": "sgevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "usge",
+            "fixed_min_gas_price": 0.001,
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.25,
+            "high_gas_price": 0.5
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "usge"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://sge-priv-rpc.kingnodes.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://sge-priv-rest.kingnodes.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://blockexplorer.sgenetwork.io/sge/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "stafihub",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "StaFi Hub",
+      "chain_id": "stafihub-1",
+      "bech32_prefix": "stafi",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "stafi",
+        "bech32PrefixAccPub": "stafipub",
+        "bech32PrefixValAddr": "stafivaloper",
+        "bech32PrefixValPub": "stafivaloperpub",
+        "bech32PrefixConsAddr": "stafivalcons",
+        "bech32PrefixConsPub": "stafivalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ufis",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ufis"
+          }
+        ],
+        "lock_duration": {
+          "time": "1209600s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://public-rpc1.stafihub.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://public-rest-rpc1.stafihub.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/stafi/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "doravota",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Dora Vota",
+      "chain_id": "vota-ash",
+      "bech32_prefix": "dora",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "dora",
+        "bech32PrefixAccPub": "dorapub",
+        "bech32PrefixValAddr": "doravaloper",
+        "bech32PrefixValPub": "doravaloperpub",
+        "bech32PrefixConsAddr": "doravalcons",
+        "bech32PrefixConsPub": "doravalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "peaka",
+            "fixed_min_gas_price": 100000000000,
+            "low_gas_price": 100000000000,
+            "average_gas_price": 100000000000,
+            "high_gas_price": 100000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "peaka"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://vota-rpc.dorafactory.org"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://vota-rest.dorafactory.org"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://vota-explorer.dorafactory.org/doravota/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "coreum",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Coreum",
+      "chain_id": "coreum-mainnet-1",
+      "bech32_prefix": "core",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "core",
+        "bech32PrefixAccPub": "corepub",
+        "bech32PrefixValAddr": "corevaloper",
+        "bech32PrefixValPub": "corevaloperpub",
+        "bech32PrefixConsAddr": "corevalcons",
+        "bech32PrefixConsPub": "corevalconspub"
+      },
+      "slip44": 990,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ucore",
+            "fixed_min_gas_price": 0.03125,
+            "low_gas_price": 0.0625,
+            "average_gas_price": 0.0625,
+            "high_gas_price": 62.5
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ucore"
+          }
+        ],
+        "lock_duration": {
+          "time": "168h"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://full-node.mainnet-1.coreum.dev:26657"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://full-node.mainnet-1.coreum.dev:1317"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/coreum/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "celestia",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Celestia",
+      "chain_id": "celestia",
+      "bech32_prefix": "celestia",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "celestia",
+        "bech32PrefixAccPub": "celestiapub",
+        "bech32PrefixValAddr": "celestiavaloper",
+        "bech32PrefixValPub": "celestiavaloperpub",
+        "bech32PrefixConsAddr": "celestiavalcons",
+        "bech32PrefixConsPub": "celestiavalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "utia",
+            "fixed_min_gas_price": 0.002,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.02,
+            "high_gas_price": 0.1
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "utia"
+          }
+        ]
+      },
+      "description": "Celestia is a modular data availability network that securely scales with the number of users, making it easy for anyone to launch their own blockchain.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-celestia.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-celestia.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/celestia/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "dydx",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "dYdX Protocol",
+      "chain_id": "dydx-mainnet-1",
+      "bech32_prefix": "dydx",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "dydx",
+        "bech32PrefixAccPub": "dydxpub",
+        "bech32PrefixValAddr": "dydxvaloper",
+        "bech32PrefixValPub": "dydxvaloperpub",
+        "bech32PrefixConsAddr": "dydxvalcons",
+        "bech32PrefixConsPub": "dydxvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "adydx",
+            "fixed_min_gas_price": 12500000000,
+            "low_gas_price": 12500000000,
+            "average_gas_price": 12500000000,
+            "high_gas_price": 20000000000
+          },
+          {
+            "denom": "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5",
+            "fixed_min_gas_price": 0.025,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.03
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "adydx"
+          }
+        ]
+      },
+      "description": "Our goal is to build open source code that can power a first class product and trading experience.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://dydx-rpc.lavenderfive.com:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://dydx-api.lavenderfive.com:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/dydx/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "fxcore",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "f(x)Core",
+      "chain_id": "fxcore",
+      "bech32_prefix": "fx",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "fx",
+        "bech32PrefixAccPub": "fxpub",
+        "bech32PrefixValAddr": "fxvaloper",
+        "bech32PrefixValPub": "fxvaloperpub",
+        "bech32PrefixConsAddr": "fxvalcons",
+        "bech32PrefixConsPub": "fxvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "FX",
+            "fixed_min_gas_price": 4000000000000,
+            "low_gas_price": 4000000000000,
+            "average_gas_price": 4200000000000,
+            "high_gas_price": 5000000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "FX"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://fx-json.functionx.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://fx-rest.functionx.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://starscan.io/fxcore/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "nomic",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Nomic",
+      "chain_id": "nomic-stakenet-3",
+      "bech32_prefix": "nomic",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "nomic",
+        "bech32PrefixAccPub": "nomic",
+        "bech32PrefixConsAddr": "nomic",
+        "bech32PrefixConsPub": "nomic",
+        "bech32PrefixValAddr": "nomic",
+        "bech32PrefixValPub": "nomic"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "unom",
+            "low_gas_price": 0,
+            "average_gas_price": 0,
+            "high_gas_price": 0
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "unom"
+          }
+        ],
+        "lock_duration": {
+          "time": "1209600s"
+        }
+      },
+      "description": "The superior way to use Bitcoin in Cosmos DeFi. Use IBC to securely and efficiently bridge your BTC to Osmosis and more.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://stakenet-rpc.nomic.io:2096"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://app.nomic.io:8443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://bigdipper.live/nomic/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "nois",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Nois",
+      "chain_id": "nois-1",
+      "bech32_prefix": "nois",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "nois",
+        "bech32PrefixAccPub": "noispub",
+        "bech32PrefixValAddr": "noisvaloper",
+        "bech32PrefixValPub": "noisvaloperpub",
+        "bech32PrefixConsAddr": "noisvalcons",
+        "bech32PrefixConsPub": "noisvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "unois",
+            "fixed_min_gas_price": 0.05,
+            "low_gas_price": 0.05,
+            "average_gas_price": 0.05,
+            "high_gas_price": 0.1
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "unois"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://nois-rpc.lavenderfive.com:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://nois-api.lavenderfive.com:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://app.ezstaking.io/nois/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "qwoyn",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Qwoyn",
+      "chain_id": "qwoyn-1",
+      "bech32_prefix": "qwoyn",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "qwoyn",
+        "bech32PrefixAccPub": "qwoynpub",
+        "bech32PrefixValAddr": "qwoynvaloper",
+        "bech32PrefixValPub": "qwoynvaloperpub",
+        "bech32PrefixConsAddr": "qwoynvalcons",
+        "bech32PrefixConsPub": "qwoynvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uqwoyn",
+            "fixed_min_gas_price": 0.03,
+            "low_gas_price": 0.03,
+            "average_gas_price": 0.05,
+            "high_gas_price": 0.075
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uqwoyn"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.qwoyn.studio:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.qwoyn.studio:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.theamsolutions.info/qwoyn-main/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "source",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Source",
+      "chain_id": "source-1",
+      "bech32_prefix": "source",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "source",
+        "bech32PrefixAccPub": "sourcepub",
+        "bech32PrefixValAddr": "sourcevaloper",
+        "bech32PrefixValPub": "sourcevaloperpub",
+        "bech32PrefixConsAddr": "sourcevalcons",
+        "bech32PrefixConsPub": "sourcevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "usource",
+            "fixed_min_gas_price": 0.05,
+            "low_gas_price": 0.05,
+            "average_gas_price": 0.075,
+            "high_gas_price": 0.1
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "usource"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.source.tcnetwork.io/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.source.tcnetwork.io/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.tcnetwork.io/source/transaction/${txHash}"
         }
       ],
       "features": [

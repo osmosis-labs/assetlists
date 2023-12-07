@@ -91,6 +91,10 @@ function generateChains(chains, zone_chains) {
     
     // -- Get Staking --
     chain.staking = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "staking");
+
+    
+    // -- Get Description --
+    chain.description = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "description");
     
     
     // -- Get APIs --

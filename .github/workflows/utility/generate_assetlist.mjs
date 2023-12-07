@@ -87,6 +87,13 @@ const generateAssets = async (chainName, assets, zone_assets) => {
   await asyncForEach(zone_assets, async (zone_asset) => {
 
     let generatedAsset = {};
+    
+    let reference_asset = {};
+    if(zone_asset.canonical){
+      reference_asset = zone_asset.canonical;
+    } else {
+      reference_asset = zone_asset;
+    }
     Object.keys(chain_reg.assetSchema).forEach((assetProperty) => {
       let assetPropertyValue;
       if (assetProperty == "description" ||
@@ -95,7 +102,9 @@ const generateAssets = async (chainName, assets, zone_assets) => {
         assetProperty == "logo_URIs" ||
         assetProperty == "images"
       ) {
-        assetPropertyValue = chain_reg.getAssetPropertyWithTrace(zone_asset.chain_name, zone_asset.base_denom, assetProperty);
+        assetPropertyValue = chain_reg.getAssetPropertyWithTrace(reference_asset.chain_name, reference_asset.base_denom, assetProperty);
+      } else if (assetProperty == "coingecko_id" && zone_asset.canonical) {
+        assetPropertyValue = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, assetProperty);
       } else if (assetProperty == "traces") {
         assetPropertyValue = chain_reg.getAssetTraces(zone_asset.chain_name, zone_asset.base_denom);
       } else if (assetProperty == "type_asset") {
@@ -105,6 +114,16 @@ const generateAssets = async (chainName, assets, zone_assets) => {
       } else {
         assetPropertyValue = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, assetProperty);
       }
+
+      // Use Chain's Name instead of Asset Name when it's the staking token
+      if (assetProperty == "name") {
+        let staking_denom = chain_reg.getFileProperty(reference_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom;
+        if(reference_asset.base_denom == staking_denom) {
+           let chainPretty = chain_reg.getFileProperty(reference_asset.chain_name, "chain", "pretty_name");
+           assetPropertyValue = chainPretty ? chainPretty : defaultValue;
+        }
+      }
+
       if (assetPropertyValue) {
         if (assetProperty == "logo_URIs") {
           generatedAsset[assetProperty] = {};
@@ -212,7 +231,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
         }
       }
       if (!chain.path) {
-        if (zone_asset.base_denom.slice(0,7) === "factory") {
+        if (zone_asset.base_denom.slice(0,7) === "factory" && zone_asset.chain_name === "kujira") {
           let baseReplacement = zone_asset.base_denom.replace(/\//g,":");
           chain.path = chain.port + "/" + chain.channel_id + "/" + baseReplacement;
         } else {
@@ -266,6 +285,9 @@ const generateAssets = async (chainName, assets, zone_assets) => {
       if(zone_asset.override_properties.symbol) {
         generatedAsset.symbol = zone_asset.override_properties.symbol;
       }
+      if(zone_asset.override_properties.name) {
+        generatedAsset.name = zone_asset.override_properties.name;
+      }
       if(zone_asset.override_properties.logo_URIs) {
         generatedAsset.logo_URIs = zone_asset.override_properties.logo_URIs;
       }
@@ -279,7 +301,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     if(generatedAsset.keywords) {
       keywords = generatedAsset.keywords;
     }
-    if(zone_asset.osmosis_main) {
+    if(zone_asset.osmosis_verified) {
       keywords.push("osmosis-main");
     }
     if(zone_asset.osmosis_frontier) {
@@ -292,6 +314,15 @@ const generateAssets = async (chainName, assets, zone_assets) => {
       if(pool_assets.get(generatedAsset.base).osmosis_price) {
         keywords.push(pool_assets.get(generatedAsset.base).osmosis_price);
       }
+    }
+    if(zone_asset.peg_mechanism) {
+      keywords.push("peg:" + zone_asset.peg_mechanism);
+    }
+    if(zone_asset.osmosis_unstable) {
+      keywords.push("osmosis-unstable");
+    }
+    if(zone_asset.osmosis_unlisted) {
+      keywords.push("osmosis-unlisted");
     }
     
     if(keywords.length > 0) {

@@ -614,6 +614,49 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xion/images/burnt-round.png"
       }
+    },
+    {
+      "description": "The native token of Saga Testnet",
+      "denom_units": [
+        {
+          "denom": "ibc/6477A305C6127DE72C5BC8AAE85F318DF571DC8D590228CB191C952C304125F3",
+          "exponent": 0,
+          "aliases": [
+            "utsaga"
+          ]
+        },
+        {
+          "denom": "tsaga",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/6477A305C6127DE72C5BC8AAE85F318DF571DC8D590228CB191C952C304125F3",
+      "name": "Saga Testnet",
+      "display": "tsaga",
+      "symbol": "TSAGA",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "sagatestnet",
+            "base_denom": "utsaga",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-4374",
+            "path": "transfer/channel-4374/utsaga"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.svg"
+      },
+      "keywords": [
+        "osmosis-price:uosmo:317"
+      ]
     }
   ]
 }

@@ -37,6 +37,6 @@ jobs:
           echo "Failed to fetch latest commit after $MAX_RETRIES attempts."
           exit 1
       - name: Deploy preview
-        run: curl -X POST ${{ secrets.VERCEL_WEBHOOK_DEPLOY_STAGE }}
+        run: curl -X POST ${{ secrets.VERCEL_WEBHOOK_DEPLOY_STAGE }}?buildCache=false
       - name: Deploy production
-        run: curl -X POST ${{ secrets.VERCEL_WEBHOOK_DEPLOY_PRODUCTION }}
+        run: curl -X POST ${{ secrets.VERCEL_WEBHOOK_DEPLOY_PRODUCTION }}?buildCache=false

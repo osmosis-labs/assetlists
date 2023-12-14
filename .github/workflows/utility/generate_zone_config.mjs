@@ -103,12 +103,13 @@ const generateAssets = async (chainName, assets, zone_assets) => {
 
     generatedAsset.verified = zone_asset.osmosis_verified;
 
-    if (pool_assets.get(generatedAsset.ibc_denom)) {
+    let denom = generatedAsset.ibc_denom ? generatedAsset.ibc_denom : zone_asset.base_denom;
+    if (pool_assets.get(denom)) {
     
-      generatedAsset.api_include = pool_assets.get(generatedAsset.ibc_denom).osmosis_info;
+      generatedAsset.api_include = pool_assets.get(denom).osmosis_info;
       
       let price = "";
-      price = pool_assets.get(generatedAsset.ibc_denom).osmosis_price;
+      price = pool_assets.get(denom).osmosis_price;
       if(price) {
         let price_parts = price.split(':');
         generatedAsset.price = {

@@ -2,25 +2,6 @@
 //   to generate the zone_config json using the zone json and chain registry data
 
 
-// -- THE PLAN --
-//
-// read zone list from osmosis.zone.json
-// add assets to zone array
-
-// for each asset in zone array, identify the chain and base (this is primary key)
-//   with chain, find matching chain folder in chain registry
-//   within the chain folder,
-//     pull asset details from the chain's assetlist,
-//   get ibc connection details,
-//     figure out which chain name comes first alphabetically
-//   generate asset object differently if ibc:
-//     with an extra trace for the ibc transfer, and
-//     the base becomes the ibc hash, and
-//     the first denom becomes the ibc hash, and the original base becomes an alias
-
-// write assetlist array to file osmosis-1.zone_config.json
-
-
 import * as fs from 'fs';
 import * as path from 'path';
 import * as chain_reg from './chain_registry.mjs';
@@ -138,14 +119,29 @@ const generateAssets = async (chainName, assets, zone_assets) => {
       
     }
     
+    let categories = [];
+    if(zone_asset.categories) {
+      categories = zone_asset.categories;
+    }
+    if(zone_asset.peg_mechanism) {
+      categories.push("stablecoin");
+    }
+    let traces = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, "traces");
+    traces?.forEach((trace) => {
+      if(trace.type == "liquid-stake") {
+        categories.push("liquid_staking");
+      }
+    });
+
+    generatedAsset.categories = categories.length > 0 ? categories : undefined;
     
     generatedAsset.peg_mechanism = zone_asset.peg_mechanism;
     
+    generatedAsset.additional_transfer = zone_asset.additional_transfer;
+
     generatedAsset.unstable = zone_asset.osmosis_unstable;
     
     generatedAsset.unlisted = zone_asset.osmosis_unlisted;
-    
-    generatedAsset.additional_transfer = zone_asset.additional_transfer;
     
     
     

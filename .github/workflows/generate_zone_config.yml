@@ -1,8 +1,8 @@
 on: [workflow_dispatch]
-name: Generate Assetlist
+name: Generate Zone Config
 jobs:
-  generate_assetlist:
-    name: Generate Assetlist
+  generate_zone_config:
+    name: Generate Zone Config
     runs-on: ubuntu-latest
     
     defaults:
@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: 19.6.0
           
-      - name: Run code to Generate Assetlist
+      - name: Run code to Generate Zone Config
         working-directory: ./.github/workflows/utility
         run: node generate_zone_config.mjs
       

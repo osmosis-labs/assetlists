@@ -144,6 +144,19 @@
               "description": "How the asset should be described. E.g., $USTC is named: 'Terra USD'."
             }
           }
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "l1",
+              "defi",
+              "store value",
+              "web3"
+            ]
+          },
+          "minItems": 1
         }
       }
     },

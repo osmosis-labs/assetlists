@@ -888,7 +888,10 @@
       "chain_name": "kichain",
       "base_denom": "cw20:ki1dt3lk455ed360pna38fkhqn0p8y44qndsr77qu73ghyaz2zv4whq83mwdy",
       "path": "transfer/channel-261/cw20:ki1dt3lk455ed360pna38fkhqn0p8y44qndsr77qu73ghyaz2zv4whq83mwdy",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "override_properties": {
+        "symbol": "kichain.LVN"
+      }
     },
     {
       "chain_name": "axelar",
@@ -2257,13 +2260,31 @@
       "chain_name": "persistence",
       "base_denom": "stk/uosmo",
       "path": "transfer/channel-4/stk/uosmo",
+      "osmosis_verified": true
+    },
+    {
+      "chain_name": "osmosis",
+      "base_denom": "factory/osmo1mlng7pz4pnyxtpq0akfwall37czyk9lukaucsrn30ameplhhshtqdvfm5c/ulvn",
+      "osmosis_verified": true,
       "osmosis_unlisted": true
+    },
+    {
+      "chain_name": "chihuahua",
+      "base_denom": "cw20:chihuahua1yl8z39ugle8s02fpwkhh293509q5xcpalmdzc4amvchz8nkexrmsy95gef",
+      "path": "transfer/channel-11348/cw20:chihuahua1yl8z39ugle8s02fpwkhh293509q5xcpalmdzc4amvchz8nkexrmsy95gef",
+      "osmosis_verified": false
+    },
+    {
+      "chain_name": "neutron",
+      "base_denom": "factory/neutron1p8d89wvxyjcnawmgw72klknr3lg9gwwl6ypxda/newt",
+      "path": "transfer/channel-874/factory/neutron1p8d89wvxyjcnawmgw72klknr3lg9gwwl6ypxda/newt",
+      "osmosis_verified": false
     },
     {
       "chain_name": "osmosis",
       "base_denom": "factory/osmo1f5vfcph2dvfeqcqkhetwv75fda69z7e5c2dldm3kvgj23crkv6wqcn47a0/umilkTIA",
       "osmosis_verified": true,
       "osmosis_unlisted": true
-   }
+    }
   ]
 }

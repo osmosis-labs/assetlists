@@ -14,13 +14,9 @@
 <!-- If NOT adding a new chain, please remove this 'Adding Chains' section. -->
 If adding a new chain, please ensure the following:
 - [ ] Chain is registered to the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry).
-
-  Note:
    - Chain's registration must have `staking` defined, with at least one `staking_token` denom specified.
    - Chain's registration must have `fees` defined; at least one fee token has low, average, and high gas prices defined.
 - [ ] Add chain to bottom of `zone_chains.json`
-
-  Note:
    - RPC and REST must not have any CORS blocking of the Osmosis domain.
    - RCP node must have WSS enabled.
 
@@ -30,27 +26,13 @@ If adding a new chain, please ensure the following:
 If adding a new asset, please ensure the following:
 - [ ] Asset is registered to the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry).
 - [ ] Add asset to bottom of `zone_assets.json`.
-
-  Note:
    - The IBC channel referenced in `path` must be registered to the Chain Registry.
-   - `osmosis_main` defaults to `false` (or else cite the listing rule that justifies enlisting to the Main app)
+   - `osmosis_unlisted` defaults to `true` (until the respesentation and transferring of the new asset has been validated)
 
 ### On-chain liquidity
 
-If adding a new asset, please provide the plan for on-chain liquidity of the asset: (choose one)
-- [ ] The submitting team will ensure a pool will be created soon. Please hold off until further communication, which will notify of the Pool ID. (Please set the PR's status to Draft until the pool has been created)
-
-OR
-- [ ] A preview link is requested for the submitting team to be able to create a pool using the Osmosis Frontend.
-<!-- Did you know, the Create Pool modal will reveal all tokens held by the wallet, even if they're not listed on Osmosis -->
-
-OR
-- [ ] The token is, or will be, going through a StreamSwap stream; thus, the token should be listed without requiring on-chain liquidity. A Pool ID will be provided in this PR following the stream's completion once the team has had a chance to create a pool using the earned funds.
-
-### Validation Testing
-
-If adding or updating a chain or asset, the changes must be validated from the updated build of the Osmosis Frontend. Testers will need a small amount of tokens to validate. 
-  - [ ] Validaters can buy a small amount of this asset from Pool ID: {PROVIDE POOL ID}.
-  - [ ] Preview build has been validated.
-
-<!-- Add any special context, if necessary -->
+For each new asset, please provide the plan for on-chain liquidity of the asset: (choose one)
+- [ ] Ready -- A liquidity pool has been created. The pool ID is: ______
+- [ ] Soon -- A pool will be created. (See: [Pool Setup Guilde](https://docs.osmosis.zone/overview/integrate/pool-setup).)
+  - [ ] (optional) A preview of the Osmosis Zone app with the new asset added is requested for creating the pool. (Supercharged Liquidity pools cannot be created via Osmosis Zone app)
+- [ ] StreamSwap -- The token is, or will be, going through a StreamSwap stream; thus, the token should be listed without requiring on-chain liquidity. A Pool ID will be provided in this PR following the stream's completion once the team has had a chance to create a pool using the earned funds.

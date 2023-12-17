@@ -294,6 +294,9 @@ const generateAssets = async (chainName, assets, zone_assets) => {
       if(zone_asset.override_properties.coingecko_id) {
         generatedAsset.coingecko_id = zone_asset.override_properties.coingecko_id;
       }
+      if(zone_asset.override_properties.traces) {
+        generatedAsset.traces = zone_asset.override_properties.traces;
+      }
     }
     
     //--Add Keywords--

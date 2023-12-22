@@ -6629,62 +6629,6 @@
         "ibc-transfer",
         "cosmwasm"
       ]
-    },
-    {
-      "chain_name": "pundix",
-      "status": "live",
-      "network_type": "mainnet",
-      "pretty_name": "pundix",
-      "chain_id": "PUNDIX",
-      "bech32_prefix": "px",
-      "bech32_config": {
-        "bech32PrefixAccAddr": "px",
-        "bech32PrefixAccPub": "pxpub",
-        "bech32PrefixValAddr": "pxvaloper",
-        "bech32PrefixValPub": "pxvaloperpub",
-        "bech32PrefixConsAddr": "pxvalcons",
-        "bech32PrefixConsPub": "pxvalconspub"
-      },
-      "slip44": 118,
-      "fees": {
-        "fee_tokens": [
-          {
-            "denom": "ibc/55367B7B6572631B78A93C66EF9FDFCE87CDE372CC4ED7848DA78C1EB1DCDD78",
-            "fixed_min_gas_price": 2000000000000,
-            "low_gas_price": 2000000000000,
-            "average_gas_price": 2500000000000,
-            "high_gas_price": 3000000000000
-          }
-        ]
-      },
-      "staking": {
-        "staking_tokens": [
-          {
-            "denom": "ibc/55367B7B6572631B78A93C66EF9FDFCE87CDE372CC4ED7848DA78C1EB1DCDD78"
-          }
-        ]
-      },
-      "apis": {
-        "rpc": [
-          {
-            "address": "https://px-json.pundix.com"
-          }
-        ],
-        "rest": [
-          {
-            "address": "https://px-rest.pundix.com"
-          }
-        ]
-      },
-      "explorers": [
-        {
-          "tx_page": "https://starscan.io/pundix/tx/${txHash}"
-        }
-      ],
-      "features": [
-        "ibc-transfer",
-        "ibc-go"
-      ]
     }
   ]
 }

@@ -56,7 +56,7 @@
         "memecoin",
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:1100"
+        "osmosis-price:uosmo:2"
       ]
     },
     {
@@ -749,7 +749,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:800"
+        "osmosis-price:ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB:1162"
       ]
     },
     {
@@ -1135,7 +1135,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:1111"
+        "osmosis-price:uosmo:605"
       ]
     },
     {
@@ -1301,7 +1301,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:1093"
+        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1301"
       ]
     },
     {
@@ -4661,6 +4661,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/odin/images/o9w.svg"
       },
       "keywords": [
+        "osmosis-info",
         "osmosis-price:uosmo:805"
       ]
     },
@@ -5358,7 +5359,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:1136"
+        "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:1283"
       ]
     },
     {
@@ -5739,7 +5740,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:833"
+        "osmosis-price:uosmo:1252"
       ]
     },
     {
@@ -6808,7 +6809,7 @@
       "coingecko_id": "planq",
       "keywords": [
         "osmosis-info",
-        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1218"
+        "osmosis-price:uosmo:898"
       ]
     },
     {
@@ -12495,11 +12496,183 @@
       "symbol": "milkTIA",
       "traces": [],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/milktia.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/milktia.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/milktia.svg"
       },
       "keywords": [
         "osmosis-main",
+        "osmosis-info",
         "osmosis-price:ibc/D79E7D83AB399BFFF93433E54FAA480C191248FC556924A2A8351AE2638B3877:1335"
+      ]
+    },
+    {
+      "description": "ASH",
+      "denom_units": [
+        {
+          "denom": "ibc/4976049456D261659D0EC499CC9C2391D3C7D1128A0B9FB0BBF2842D1B2BC7BC",
+          "exponent": 0,
+          "aliases": [
+            "factory/migaloo1erul6xyq0gk6ws98ncj7lnq9l4jn4gnnu9we73gdz78yyl2lr7qqrvcgup/ash"
+          ]
+        },
+        {
+          "denom": "ASH",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/4976049456D261659D0EC499CC9C2391D3C7D1128A0B9FB0BBF2842D1B2BC7BC",
+      "name": "ASH",
+      "display": "ASH",
+      "symbol": "ASH",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "migaloo",
+            "base_denom": "factory/migaloo1erul6xyq0gk6ws98ncj7lnq9l4jn4gnnu9we73gdz78yyl2lr7qqrvcgup/ash",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-642",
+            "path": "transfer/channel-642/factory/migaloo1erul6xyq0gk6ws98ncj7lnq9l4jn4gnnu9we73gdz78yyl2lr7qqrvcgup/ash"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/ash.svg"
+      },
+      "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "RAC",
+      "denom_units": [
+        {
+          "denom": "ibc/DDF1CD4CDC14AE2D6A3060193624605FF12DEE71CF1F8C19EEF35E9447653493",
+          "exponent": 0,
+          "aliases": [
+            "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/urac"
+          ]
+        },
+        {
+          "denom": "RAC",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/DDF1CD4CDC14AE2D6A3060193624605FF12DEE71CF1F8C19EEF35E9447653493",
+      "name": "RAC",
+      "display": "RAC",
+      "symbol": "RAC",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "migaloo",
+            "base_denom": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/urac",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-642",
+            "path": "transfer/channel-642/factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/urac"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rac.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rac.svg"
+      },
+      "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "GUPPY",
+      "denom_units": [
+        {
+          "denom": "ibc/42A9553A7770F3D7B62F3A82AF04E7719B4FD6EAF31BE5645092AAC4A6C2201D",
+          "exponent": 0,
+          "aliases": [
+            "factory/migaloo1etlu2h30tjvv8rfa4fwdc43c92f6ul5w9acxzk/uguppy"
+          ]
+        },
+        {
+          "denom": "GUPPY",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/42A9553A7770F3D7B62F3A82AF04E7719B4FD6EAF31BE5645092AAC4A6C2201D",
+      "name": "GUPPY",
+      "display": "GUPPY",
+      "symbol": "GUPPY",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "migaloo",
+            "base_denom": "factory/migaloo1etlu2h30tjvv8rfa4fwdc43c92f6ul5w9acxzk/uguppy",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-642",
+            "path": "transfer/channel-642/factory/migaloo1etlu2h30tjvv8rfa4fwdc43c92f6ul5w9acxzk/uguppy"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/guppy.png"
+      },
+      "keywords": [
+        "osmosis-info",
+        "osmosis-price:ibc/46AC07DBFF1352EC94AF5BD4D23740D92D9803A6B41F6E213E77F3A1143FB963:1342",
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "The native EVM, governance and staking token of the Haqq Network",
+      "denom_units": [
+        {
+          "denom": "ibc/69110FF673D70B39904FF056CFDFD58A90BEC3194303F45C32CB91B8B0A738EA",
+          "exponent": 0,
+          "aliases": [
+            "aISLM"
+          ]
+        },
+        {
+          "denom": "ISLM",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/69110FF673D70B39904FF056CFDFD58A90BEC3194303F45C32CB91B8B0A738EA",
+      "name": "Haqq Network",
+      "display": "ISLM",
+      "symbol": "ISLM",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "haqq",
+            "base_denom": "aISLM",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-1575",
+            "path": "transfer/channel-1575/aISLM"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/haqq/images/islm.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/haqq/images/islm.svg"
+      },
+      "coingecko_id": "islamic-coin",
+      "keywords": [
+        "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:1343",
+        "osmosis-unlisted"
       ]
     }
   ]

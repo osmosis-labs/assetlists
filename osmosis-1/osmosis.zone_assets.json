@@ -2320,6 +2320,27 @@
       "base_denom": "factory/inj14lf8xm6fcvlggpa7guxzjqwjmtr24gnvf56hvz/autism",
       "path": "transfer/channel-122/factory/inj14lf8xm6fcvlggpa7guxzjqwjmtr24gnvf56hvz/autism",
       "osmosis_verified": false
+    },
+    {
+      "chain_name": "gravitybridge",
+      "base_denom": "gravity0x60e683C6514Edd5F758A55b6f393BeBBAfaA8d5e",
+      "path": "transfer/channel-144/gravity0x60e683C6514Edd5F758A55b6f393BeBBAfaA8d5e",
+      "override_properties": {
+        "symbol": "PAGE"
+      },
+      "osmosis_verified": false,
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x60e683C6514Edd5F758A55b6f393BeBBAfaA8d5e"
+      },
+      "additional_transfer": [
+        {
+          "name": "Gravity Bridge",
+          "type": "external_interface",
+          "deposit_url": "https://bridge.blockscape.network/?from=gravitybridge&to=osmosis",
+          "withdraw_url": "https://bridge.blockscape.network/?from=osmosis&to=gravitybridge"
+        }
+      ]
     }
   ]
 }

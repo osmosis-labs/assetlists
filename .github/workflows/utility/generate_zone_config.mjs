@@ -15,7 +15,9 @@ const chainNameToChainIdMap = new Map([
 ]);
 
 const assetlistsRoot = "../../..";
+const generatedFolderName = "generated";
 const assetlistFileName = "assetlist.json";
+const zoneAssetConfigFileName = "zone_asset_config.json";
 const zoneAssetlistFileName = "osmosis.zone_assets.json";
 const zoneChainlistFileName = "osmosis.zone_chains.json";
 
@@ -37,7 +39,8 @@ function writeToFile(assetlist, chainName) {
     fs.writeFile(path.join(
       assetlistsRoot,
       chainNameToChainIdMap.get(chainName),
-      chainNameToChainIdMap.get(chainName) +'.zone_config.json'
+      generatedFolderName,
+      zoneAssetConfigFileName
     ), JSON.stringify(assetlist,null,2), (err) => {
       if (err) throw err;
     });
@@ -72,9 +75,9 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     let generatedAsset = {};
     
     
-    
-    generatedAsset.base_denom = zone_asset.base_denom;
     generatedAsset.chain_name = zone_asset.chain_name;
+    generatedAsset.base_denom = zone_asset.base_denom;
+    
 
     
     let reference_asset = {};
@@ -83,14 +86,30 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     } else {
       reference_asset = zone_asset;
     }
+    generatedAsset.symbol = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "symbol");
+
+
+    //Get Decimals
+    let denom_units = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, "denom_units");
+    let display = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, "display");
+    denom_units.forEach((unit) => {
+      if(unit.denom === display) {
+        generatedAsset.decimals = unit.exponent;
+      }
+    });
+
+
+    generatedAsset.images = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "images");
     generatedAsset.coingecko_id = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "coingecko_id");
-    
 
   
     //--Overrides Properties when Specified--
     if(zone_asset.override_properties) {
       if(zone_asset.override_properties.coingecko_id) {
         generatedAsset.coingecko_id = zone_asset.override_properties.coingecko_id;
+      }
+      if(zone_asset.override_properties.symbol) {
+        generatedAsset.symbol = zone_asset.override_properties.symbol;
       }
     }
     

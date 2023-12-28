@@ -56,6 +56,10 @@
           "type": "boolean",
           "description": "Whether the asset should be temporarily unlisted on the Osmosis Zone app."
         },
+        "osmosis_validated": {
+          "type": "boolean",
+          "description": "Whether the asset has been confrimed by a human to display and function correctly on Osmosis Zone."
+        },
         "canonical": {
           "type": "object",
           "required": [
@@ -74,7 +78,7 @@
             }
           }
         },
-        "additional_transfer": {
+        "transfer_methods": {
           "type": "array",
           "items": {
             "type": "object",
@@ -93,6 +97,10 @@
                   "integrated_bridge",
                   "fiat_onramp"
                 ]
+              },
+              "osmosis_validated": {
+                "type": "boolean",
+                "description": "Whether the transfer method has been tested by a human and confirm to be working correctly."
               }
             },
             "oneOf": [

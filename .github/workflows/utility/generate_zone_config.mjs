@@ -86,9 +86,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     } else {
       reference_asset = zone_asset;
     }
-    generatedAsset.coingecko_id = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "coingecko_id");
     generatedAsset.symbol = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "symbol");
-    generatedAsset.images = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "images");
 
 
     //Get Decimals
@@ -96,10 +94,13 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     let display = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, "display");
     denom_units.forEach((unit) => {
       if(unit.denom === display) {
-        generateAsset.decimals = unit.exponent;
+        generatedAsset.decimals = unit.exponent;
       }
     });
 
+
+    generatedAsset.images = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "images");
+    generatedAsset.coingecko_id = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "coingecko_id");
 
   
     //--Overrides Properties when Specified--

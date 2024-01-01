@@ -22,7 +22,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as chain_reg from './chain_registry.mjs';
-import { returnAssets } from './getPools.mjs';
 
 
 const chainNameToChainIdMap = new Map([
@@ -32,6 +31,7 @@ const chainNameToChainIdMap = new Map([
 ]);
 
 const assetlistsRoot = "../../..";
+const generatedFolderName = "generated";
 const assetlistFileName = "assetlist.json";
 const zoneAssetlistFileName = "osmosis.zone_assets.json";
 const zoneChainlistFileName = "osmosis.zone_chains.json";
@@ -54,7 +54,8 @@ function writeToFile(assetlist, chainName) {
     fs.writeFile(path.join(
       assetlistsRoot,
       chainNameToChainIdMap.get(chainName),
-      chainNameToChainIdMap.get(chainName) +'.assetlist.json'
+      generatedFolderName,
+      assetlistFileName
     ), JSON.stringify(assetlist,null,2), (err) => {
       if (err) throw err;
     });
@@ -79,10 +80,6 @@ async function asyncForEach(array, callback) {
 }
 
 const generateAssets = async (chainName, assets, zone_assets) => {
-  
-  let pool_assets;
-  pool_assets = await returnAssets(chainName);
-  if (!pool_assets) { return; }
   
   await asyncForEach(zone_assets, async (zone_asset) => {
 
@@ -291,47 +288,12 @@ const generateAssets = async (chainName, assets, zone_assets) => {
       if(zone_asset.override_properties.logo_URIs) {
         generatedAsset.logo_URIs = zone_asset.override_properties.logo_URIs;
       }
-      if(zone_asset.override_properties.coingecko_id) {
-        generatedAsset.coingecko_id = zone_asset.override_properties.coingecko_id;
-      }
       if(zone_asset.override_properties.traces) {
         generatedAsset.traces = zone_asset.override_properties.traces;
       }
     }
     
-    //--Add Keywords--
-    let keywords = [];
-    if(generatedAsset.keywords) {
-      keywords = generatedAsset.keywords;
-    }
-    if(zone_asset.osmosis_verified) {
-      keywords.push("osmosis-main");
-    }
-    if(zone_asset.osmosis_frontier) {
-      keywords.push("osmosis-frontier");
-    }
-    if (pool_assets.get(generatedAsset.base)) {
-      if(pool_assets.get(generatedAsset.base).osmosis_info) {
-        keywords.push("osmosis-info");
-      }
-      if(pool_assets.get(generatedAsset.base).osmosis_price) {
-        keywords.push(pool_assets.get(generatedAsset.base).osmosis_price);
-      }
-    }
-    if(zone_asset.peg_mechanism) {
-      keywords.push("peg:" + zone_asset.peg_mechanism);
-    }
-    if(zone_asset.osmosis_unstable) {
-      keywords.push("osmosis-unstable");
-    }
-    if(zone_asset.osmosis_unlisted) {
-      keywords.push("osmosis-unlisted");
-    }
-    
-    if(keywords.length > 0) {
-      generatedAsset.keywords = keywords;
-    }
-    
+
     //--Append Asset to Assetlist--
     assets.push(generatedAsset);
     

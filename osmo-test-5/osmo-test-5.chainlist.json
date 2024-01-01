@@ -80,7 +80,10 @@
         "fee_tokens": [
           {
             "denom": "uatom",
-            "fixed_min_gas_price": 0.0025
+            "fixed_min_gas_price": 0.005,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.03
           }
         ]
       },
@@ -639,7 +642,10 @@
         "fee_tokens": [
           {
             "denom": "uxprt",
-            "fixed_min_gas_price": 0
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.05,
+            "average_gas_price": 0.125,
+            "high_gas_price": 0.2
           }
         ]
       },
@@ -724,6 +730,118 @@
       "explorers": [
         {
           "tx_page": "https://pingpub.xion-testnet-1.burnt.com/xion-testnet-1/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "sagatestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Saga Testnet",
+      "chain_id": "ssc-testnet-1",
+      "bech32_prefix": "saga",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "saga",
+        "bech32PrefixAccPub": "sagapub",
+        "bech32PrefixValAddr": "sagavaloper",
+        "bech32PrefixValPub": "sagavaloperpub",
+        "bech32PrefixConsAddr": "sagavalcons",
+        "bech32PrefixConsPub": "sagavalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "utsaga",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.0025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "utsaga"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://testnet-ssc.sagarpc.io/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://testnet-ssc-lcd.sagarpc.io/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/saga-testnet/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "impacthubtestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "ixo",
+      "chain_id": "pandora-8",
+      "bech32_prefix": "ixo",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "ixo",
+        "bech32PrefixAccPub": "ixopub",
+        "bech32PrefixValAddr": "ixovaloper",
+        "bech32PrefixValPub": "ixovaloperpub",
+        "bech32PrefixConsAddr": "ixovalcons",
+        "bech32PrefixConsPub": "ixovalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uixo",
+            "fixed_min_gas_price": 0.015,
+            "low_gas_price": 0.015,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uixo"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.testnet.ixo.earth"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://testnet.ixo.earth/rest"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://blockscan-pandora.ixo.earth/transactions/${txHash}"
         }
       ],
       "features": [

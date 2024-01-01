@@ -38,7 +38,7 @@
           "time": "1209600s"
         }
       },
-      "description": "Swap, earn, and build on the leading decentralized Cosmos exchange.",
+      "description": "Osmosis (OSMO) is the premier DEX and cross-chain DeFi hub within the Cosmos ecosystem, a network of over 50 sovereign, interoperable blockchains seamlessly connected through the Inter-Blockchain Communication Protocol (IBC). Pioneering in its approach, Osmosis offers a dynamic trading and liquidity provision experience, integrating non-IBC assets from other ecosystems, including Ethereum, Solana, Avalanche, and Polkadot. Initially adopting Balancer-style pools, Osmosis now also features a concentrated liquidity model that is orders of magnitude more capital efficient, meaning that significantly less liquidity is required to handle the same amount of trading volume with minimal slippage.\n\nAs a true appchain, Osmosis has greater control over the full blockchain stack than traditional smart contract DEXs, which must follow the code of the parent chain that it is built on. This fine-grained control has enabled, for example, the development of Superfluid Staking, an extension of Proof of Stake that allows assets at the application layer to be staked to secure the chain. The customizability of appchains also allows implementing features like the Protocol Revenue module, which enables Osmosis to conduct on-chain arbitrage on behalf of OSMO stakers, balancing prices across pools while generating real yield revenue from this volume. Additionally, as a sovereign appchain, Osmosis governance can vote on upgrades to the protocol. One example of this was the introduction of a Taker Fee, which switched on the collection of exchange fees to generate diverse yield from Osmosis volume and distribute it to OSMO stakers.\n\nOsmosis is bringing the full centralized exchange experience to the decentralized world by building a cross-chain native DEX and trading suite that connects all chains over IBC, including Ethereum and Bitcoin. To reach this goal, Osmosis hosts an ever-expanding suite of DeFi applications aimed at providing a one-stop experience that includes lending, credit, margin, DeFi strategy vaults, power perps, fiat on-ramps, NFTs, stablecoins, and more — all of the functionalities that centralized exchange offer and more, in the trust-minimized environment of decentralized finance.",
       "apis": {
         "rpc": [
           {
@@ -53,7 +53,7 @@
       },
       "explorers": [
         {
-          "tx_page": "https://www.mintscan.io/cosmos/txs/${txHash}"
+          "tx_page": "https://www.mintscan.io/osmosis/txs/${txHash}"
         }
       ],
       "features": [
@@ -84,7 +84,7 @@
         "fee_tokens": [
           {
             "denom": "uatom",
-            "fixed_min_gas_price": 0,
+            "fixed_min_gas_price": 0.005,
             "low_gas_price": 0.01,
             "average_gas_price": 0.025,
             "high_gas_price": 0.03
@@ -98,7 +98,7 @@
           }
         ]
       },
-      "description": "Cosmos Hub is the gateway to a rapidly expanding ecosystem of independent interconnected blockchains built using developer-friendly application components and connected with ground-breaking IBC (Inter-Blockchain Communication) protocol.",
+      "description": "In a nutshell, Cosmos Hub bills itself as a project that solves some of the hardest problems facing the blockchain industry. It aims to offer an antidote to slow, expensive, unscalable and environmentally harmful proof-of-work protocols, like those used by Bitcoin, by offering an ecosystem of connected blockchains.\n\nThe project’s other goals include making blockchain technology less complex and difficult for developers thanks to a modular framework that demystifies decentralized apps. Last but not least, an Inter-blockchain Communication protocol makes it easier for blockchain networks to communicate with each other — preventing fragmentation in the industry.\n\nCosmos Hub's origins can be dated back to 2014, when Tendermint, a core contributor to the network, was founded. In 2016, a white paper for Cosmos was published — and a token sale was held the following year. ATOM tokens are earned through a hybrid proof-of-stake algorithm, and they help to keep the Cosmos Hub, the project’s flagship blockchain, secure. This cryptocurrency also has a role in the network’s governance.",
       "apis": {
         "rpc": [
           {
@@ -113,7 +113,7 @@
       },
       "explorers": [
         {
-          "tx_page": "https://www.mintscan.io/osmosis/txs/${txHash}"
+          "tx_page": "https://www.mintscan.io/cosmos/txs/${txHash}"
         }
       ],
       "features": [
@@ -391,7 +391,10 @@
         "fee_tokens": [
           {
             "denom": "uakt",
-            "fixed_min_gas_price": 0
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.00025,
+            "average_gas_price": 0.0025,
+            "high_gas_price": 0.025
           }
         ]
       },
@@ -762,7 +765,7 @@
       },
       "explorers": [
         {
-          "tx_page": "https://www.mintscan.io/starname/txs/${txHash}"
+          "tx_page": "https://ping.pub/starname/tx/${txHash}"
         }
       ],
       "features": [
@@ -938,7 +941,10 @@
       "fees": {
         "fee_tokens": [
           {
-            "denom": "utick"
+            "denom": "utick",
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
           }
         ]
       },
@@ -990,10 +996,10 @@
         "fee_tokens": [
           {
             "denom": "nanolike",
-            "fixed_min_gas_price": 0,
-            "low_gas_price": 1,
-            "average_gas_price": 10,
-            "high_gas_price": 1000
+            "fixed_min_gas_price": 1000,
+            "low_gas_price": 1000,
+            "average_gas_price": 10000,
+            "high_gas_price": 1000000
           }
         ]
       },
@@ -1051,8 +1057,8 @@
             "denom": "uixo",
             "fixed_min_gas_price": 0.025,
             "low_gas_price": 0.025,
-            "average_gas_price": 0.4,
-            "high_gas_price": 0.1
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
           }
         ]
       },
@@ -1583,7 +1589,8 @@
       ],
       "features": [
         "ibc-transfer",
-        "ibc-go"
+        "ibc-go",
+        "wasmd_0.24+"
       ]
     },
     {
@@ -1662,7 +1669,10 @@
         "fee_tokens": [
           {
             "denom": "uvdl",
-            "fixed_min_gas_price": 0
+            "fixed_min_gas_price": 0.0002,
+            "low_gas_price": 0.002,
+            "average_gas_price": 0.005,
+            "high_gas_price": 0.007
           }
         ]
       },
@@ -1825,7 +1835,10 @@
       "fees": {
         "fee_tokens": [
           {
-            "denom": "usomm"
+            "denom": "usomm",
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
           }
         ]
       },
@@ -1932,7 +1945,10 @@
       "fees": {
         "fee_tokens": [
           {
-            "denom": "uband"
+            "denom": "uband",
+            "low_gas_price": 0.0025,
+            "average_gas_price": 0.003,
+            "high_gas_price": 0.005
           }
         ]
       },
@@ -1985,7 +2001,10 @@
         "fee_tokens": [
           {
             "denom": "udarc",
-            "fixed_min_gas_price": 0
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.0001,
+            "average_gas_price": 0.001,
+            "high_gas_price": 0.01
           }
         ]
       },
@@ -2161,7 +2180,10 @@
         "fee_tokens": [
           {
             "denom": "udec",
-            "fixed_min_gas_price": 0.025
+            "fixed_min_gas_price": 0.025,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.025
           }
         ]
       },
@@ -2268,7 +2290,7 @@
         "fee_tokens": [
           {
             "denom": "swth",
-            "fixed_min_gas_price": 100000000,
+            "fixed_min_gas_price": 1,
             "low_gas_price": 1,
             "average_gas_price": 1,
             "high_gas_price": 1,
@@ -2570,7 +2592,7 @@
         "fee_tokens": [
           {
             "denom": "inj",
-            "fixed_min_gas_price": 500000000,
+            "fixed_min_gas_price": 160000000,
             "low_gas_price": 500000000,
             "average_gas_price": 700000000,
             "high_gas_price": 900000000
@@ -2629,7 +2651,10 @@
         "fee_tokens": [
           {
             "denom": "ucrbrus",
-            "fixed_min_gas_price": 0
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
           }
         ]
       },
@@ -3037,7 +3062,7 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://rpc.terrav2.ccvalidators.com/"
+            "address": "https://terra2-rpc.lavenderfive.com:443"
           }
         ],
         "rest": [
@@ -3246,10 +3271,115 @@
         "fee_tokens": [
           {
             "denom": "ukuji",
-            "fixed_min_gas_price": 0.00119,
-            "low_gas_price": 0.01,
-            "average_gas_price": 0.025,
-            "high_gas_price": 0.03
+            "fixed_min_gas_price": 0.0034,
+            "low_gas_price": 0.0034,
+            "average_gas_price": 0.0051,
+            "high_gas_price": 0.00681
+          },
+          {
+            "denom": "factory/kujira1qk00h5atutpsv900x202pxx42npjr9thg58dnqpa72f2p7m2luase444a7/uusk",
+            "fixed_min_gas_price": 0.01186,
+            "low_gas_price": 0.01186,
+            "average_gas_price": 0.01779,
+            "high_gas_price": 0.02372
+          },
+          {
+            "denom": "ibc/295548A78785A1007F232DE286149A6FF512F180AF5657780FC89C009E2C348F",
+            "fixed_min_gas_price": 0.0119,
+            "low_gas_price": 0.0119,
+            "average_gas_price": 0.01785,
+            "high_gas_price": 0.02379
+          },
+          {
+            "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
+            "fixed_min_gas_price": 0.00129,
+            "low_gas_price": 0.00129,
+            "average_gas_price": 0.00193,
+            "high_gas_price": 0.00258
+          },
+          {
+            "denom": "ibc/47BD209179859CDE4A2806763D7189B6E6FE13A17880FE2B42DE1E6C1E329E23",
+            "fixed_min_gas_price": 0.01795,
+            "low_gas_price": 0.01795,
+            "average_gas_price": 0.02692,
+            "high_gas_price": 0.0359
+          },
+          {
+            "denom": "ibc/3607EB5B5E64DD1C0E12E07F077FF470D5BC4706AFCBC98FE1BA960E5AE4CE07",
+            "fixed_min_gas_price": 0.65943,
+            "low_gas_price": 0.65943,
+            "average_gas_price": 0.98915,
+            "high_gas_price": 1.31887
+          },
+          {
+            "denom": "ibc/F3AA7EF362EC5E791FE78A0F4CCC69FEE1F9A7485EB1A8CAB3F6601C00522F10",
+            "fixed_min_gas_price": 160416396197,
+            "low_gas_price": 160416396197,
+            "average_gas_price": 240624594296,
+            "high_gas_price": 320832792394
+          },
+          {
+            "denom": "ibc/EFF323CC632EC4F747C61BCE238A758EFDB7699C3226565F7C20DA06509D59A5",
+            "fixed_min_gas_price": 0.02689,
+            "low_gas_price": 0.02689,
+            "average_gas_price": 0.04034,
+            "high_gas_price": 0.05379
+          },
+          {
+            "denom": "ibc/DA59C009A0B3B95E0549E6BF7B075C8239285989FF457A8EDDBB56F10B2A6986",
+            "fixed_min_gas_price": 0.01495,
+            "low_gas_price": 0.01495,
+            "average_gas_price": 0.02243,
+            "high_gas_price": 0.02991
+          },
+          {
+            "denom": "ibc/A358D7F19237777AF6D8AD0E0F53268F8B18AE8A53ED318095C14D6D7F3B2DB5",
+            "fixed_min_gas_price": 0.03139,
+            "low_gas_price": 0.03139,
+            "average_gas_price": 0.04709,
+            "high_gas_price": 0.06278
+          },
+          {
+            "denom": "ibc/4F393C3FCA4190C0A6756CE7F6D897D5D1BE57D6CCB80D0BC87393566A7B6602",
+            "fixed_min_gas_price": 0.90403,
+            "low_gas_price": 0.90403,
+            "average_gas_price": 1.35605,
+            "high_gas_price": 1.80806
+          },
+          {
+            "denom": "ibc/004EBF085BBED1029326D56BE8A2E67C08CECE670A94AC1947DF413EF5130EB2",
+            "fixed_min_gas_price": 559196837,
+            "low_gas_price": 559196837,
+            "average_gas_price": 838795256,
+            "high_gas_price": 1118393675
+          },
+          {
+            "denom": "ibc/1B38805B1C75352B28169284F96DF56BDEBD9E8FAC005BDCC8CF0378C82AA8E7",
+            "fixed_min_gas_price": 5772801,
+            "low_gas_price": 5772801,
+            "average_gas_price": 8659201,
+            "high_gas_price": 11545602
+          },
+          {
+            "denom": "factory/kujira1643jxg8wasy5cfcn7xm8rd742yeazcksqlg4d7/umnta",
+            "fixed_min_gas_price": 0.01807,
+            "low_gas_price": 0.01807,
+            "average_gas_price": 0.02711,
+            "high_gas_price": 0.03615
+          },
+          {
+            "denom": "ibc/FE98AAD68F02F03565E9FA39A5E627946699B2B07115889ED812D8BA639576A9",
+            "fixed_min_gas_price": 0.01194,
+            "low_gas_price": 0.01194,
+            "average_gas_price": 0.01792,
+            "high_gas_price": 0.02389
+          },
+          {
+            "denom": "ibc/E5CA126979E2FFB4C70C072F8094D07ECF27773B37623AD2BF7582AD0726F0F3",
+            "fixed_min_gas_price": 0.00019,
+            "low_gas_price": 0.00019,
+            "average_gas_price": 0.00029,
+            "high_gas_price": 0.00039
           }
         ]
       },
@@ -3264,12 +3394,12 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://rpc.kaiyo.kujira.setten.io"
+            "address": "https://rpc-kujira-ia.cosmosia.notional.ventures"
           }
         ],
         "rest": [
           {
-            "address": "https://lcd.kaiyo.kujira.setten.io"
+            "address": "https://api-kujira-ia.cosmosia.notional.ventures"
           }
         ]
       },
@@ -3945,7 +4075,10 @@
         "fee_tokens": [
           {
             "denom": "arebus",
-            "fixed_min_gas_price": 0
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
           }
         ]
       },
@@ -4225,7 +4358,10 @@
         "fee_tokens": [
           {
             "denom": "ubze",
-            "fixed_min_gas_price": 0
+            "fixed_min_gas_price": 0.01,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
           }
         ]
       },
@@ -4904,17 +5040,17 @@
         "fee_tokens": [
           {
             "denom": "uusdc",
-            "fixed_min_gas_price": 0,
-            "low_gas_price": 0.01,
-            "average_gas_price": 0.025,
-            "high_gas_price": 0.03
+            "fixed_min_gas_price": 0.1,
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.1,
+            "high_gas_price": 0.2
           },
           {
             "denom": "ibc/EF48E6B1A1A19F47ECAEA62F5670C37C0580E86A9E88498B7E393EB6F49F33C0",
-            "fixed_min_gas_price": 0,
-            "low_gas_price": 0,
-            "average_gas_price": 0.002,
-            "high_gas_price": 0.003
+            "fixed_min_gas_price": 0.01,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.01,
+            "high_gas_price": 0.02
           }
         ]
       },
@@ -5320,21 +5456,21 @@
         "fee_tokens": [
           {
             "denom": "untrn",
-            "low_gas_price": 0.5,
-            "average_gas_price": 0.5,
-            "high_gas_price": 0.5
+            "low_gas_price": 0.56,
+            "average_gas_price": 0.56,
+            "high_gas_price": 0.84
           },
           {
             "denom": "ibc/C4CFF46FD6DE35CA4CF4CE031E643C8FDC9BA4B99AE598E9B0ED98FE3A2319F9",
-            "low_gas_price": 0.022,
-            "average_gas_price": 0.022,
-            "high_gas_price": 0.022
+            "low_gas_price": 0.02,
+            "average_gas_price": 0.02,
+            "high_gas_price": 0.03
           },
           {
             "denom": "ibc/F082B65C88E4B6D5EF1DB243CDA1D331D002759E938A0F5CD3FFDC5D53B3E349",
-            "low_gas_price": 0.25,
-            "average_gas_price": 0.25,
-            "high_gas_price": 0.25
+            "low_gas_price": 0.2,
+            "average_gas_price": 0.2,
+            "high_gas_price": 0.3
           }
         ]
       },
@@ -5996,12 +6132,12 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://sge-priv.kingnodes.com"
+            "address": "https://sge-priv-rpc.kingnodes.com"
           }
         ],
         "rest": [
           {
-            "address": "https://sge-priv.kingnodes.com"
+            "address": "https://sge-priv-rest.kingnodes.com"
           }
         ]
       },
@@ -6093,7 +6229,10 @@
         "fee_tokens": [
           {
             "denom": "peaka",
-            "fixed_min_gas_price": 100000000000
+            "fixed_min_gas_price": 100000000000,
+            "low_gas_price": 100000000000,
+            "average_gas_price": 100000000000,
+            "high_gas_price": 100000000000
           }
         ]
       },
@@ -6118,7 +6257,7 @@
       },
       "explorers": [
         {
-          "tx_page": "https://vota-explorer.dorafactory.org/dora/tx/${txHash}"
+          "tx_page": "https://vota-explorer.dorafactory.org/doravota/tx/${txHash}"
         }
       ],
       "features": [
@@ -6205,10 +6344,10 @@
         "fee_tokens": [
           {
             "denom": "utia",
-            "fixed_min_gas_price": 0,
-            "low_gas_price": 0.1,
-            "average_gas_price": 0.2,
-            "high_gas_price": 0.4
+            "fixed_min_gas_price": 0.002,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.02,
+            "high_gas_price": 0.1
           }
         ]
       },
@@ -6421,6 +6560,237 @@
       "features": [
         "ibc-go",
         "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "nois",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Nois",
+      "chain_id": "nois-1",
+      "bech32_prefix": "nois",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "nois",
+        "bech32PrefixAccPub": "noispub",
+        "bech32PrefixValAddr": "noisvaloper",
+        "bech32PrefixValPub": "noisvaloperpub",
+        "bech32PrefixConsAddr": "noisvalcons",
+        "bech32PrefixConsPub": "noisvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "unois",
+            "fixed_min_gas_price": 0.05,
+            "low_gas_price": 0.05,
+            "average_gas_price": 0.05,
+            "high_gas_price": 0.1
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "unois"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://nois-rpc.lavenderfive.com:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://nois-api.lavenderfive.com:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://app.ezstaking.io/nois/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "qwoyn",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Qwoyn",
+      "chain_id": "qwoyn-1",
+      "bech32_prefix": "qwoyn",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "qwoyn",
+        "bech32PrefixAccPub": "qwoynpub",
+        "bech32PrefixValAddr": "qwoynvaloper",
+        "bech32PrefixValPub": "qwoynvaloperpub",
+        "bech32PrefixConsAddr": "qwoynvalcons",
+        "bech32PrefixConsPub": "qwoynvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uqwoyn",
+            "fixed_min_gas_price": 0.03,
+            "low_gas_price": 0.03,
+            "average_gas_price": 0.05,
+            "high_gas_price": 0.075
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uqwoyn"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.qwoyn.studio:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.qwoyn.studio:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.theamsolutions.info/qwoyn-main/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "source",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Source",
+      "chain_id": "source-1",
+      "bech32_prefix": "source",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "source",
+        "bech32PrefixAccPub": "sourcepub",
+        "bech32PrefixValAddr": "sourcevaloper",
+        "bech32PrefixValPub": "sourcevaloperpub",
+        "bech32PrefixConsAddr": "sourcevalcons",
+        "bech32PrefixConsPub": "sourcevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "usource",
+            "fixed_min_gas_price": 0.05,
+            "low_gas_price": 0.05,
+            "average_gas_price": 0.075,
+            "high_gas_price": 0.1
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "usource"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.source.tcnetwork.io/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.source.tcnetwork.io/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.tcnetwork.io/source/transaction/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "haqq",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Haqq Network",
+      "chain_id": "haqq_11235-1",
+      "bech32_prefix": "haqq",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "haqq",
+        "bech32PrefixAccPub": "haqqpub",
+        "bech32PrefixValAddr": "haqqvaloper",
+        "bech32PrefixValPub": "haqqvaloperpub",
+        "bech32PrefixConsAddr": "haqqvalcons",
+        "bech32PrefixConsPub": "haqqvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "aISLM",
+            "fixed_min_gas_price": 250000000,
+            "low_gas_price": 20000000000,
+            "average_gas_price": 25000000000,
+            "high_gas_price": 40000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "aISLM"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.tm.haqq.network/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.cosmos.haqq.network/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/haqq/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
       ]
     }
   ]

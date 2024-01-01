@@ -20,25 +20,29 @@
 
 ### Upgrade Asset to Verified Status (permissioned)
 Verified status is granted if the token or project meets any of the following criteria:
- - Governance Approval
-   - Signalling Proposal, or
+ - Governance Approval, via any of the following:
    - Permissioned contract(s), or
    - Osmosis' Liquidity Mining incentive allocation to any pool containing the asset
      - (Note: This includes the External Incentive Matching program)
- - Collaboration
+ - Collaboration, via any of the following:
    - Token is of a project built on Osmosis chain, or
    - Token is of a project funded by Osmosis Grants Program, or
    - Token is launched via StreamSwap stream on Osmosis, or
    - Project team is an Osmocon sponsor (Silver+)
- - Significance
+ - Significance, via any of the following:
    - Has a dedicated CoinGecko or CoinMarketCap page with a top 1000 Market Capitalization rank
    - Is available for trade on any of the following 'major' centralized exchanges:
      - Binance, Coinbase, Kraken, Bybit, KuCoin, OKX, Bitstamp, Bitfinex, Gate.io, Huobi Global 
- - Legitimacy
+ - Legitimacy, meeting ALL of the following:
    - Brand presence: A well-designed project website or well-curated content on content platforms; e.g., a blog, Medium, YouTube, X, etc., and
    - Community presence: Active community channels/following on X, Discord, Telegram, Reddit, etc., and
    - Developer presence: GitHub organization with active development on open-source repository(s).
-     - Note: (merely forking a chain or registering a token does not qualify as 'active development')
+     - (Note: Merely forking a chain or registering a token does not qualify as 'active development')
+    
+#### Notify about Verified Status Upgrade
+To notifiy the maintainers of the Osmosis Zone App about an unverified asset qualifying (or potentially qualifying) for Verified status, please submit to [this form](https://forms.clickup.com/37420681/f/13nzm9-24693/ZHODANFHHWP198YVAM).
+
+Note that although many qualifying requirements are objective and clear, some requirements, particularly those listed under 'Legitimacy', are more qualitative and can be challenging for the reviewing team to determine with confidence. Thus, it should be known that assets that only potentially qualify via the 'Legitimacy' requirements are not guaranteed to become Verified on the Osmosis app.
 
 ### Downgrade Asset from Verified status
  - Explicitly voted out by Osmosis Governance

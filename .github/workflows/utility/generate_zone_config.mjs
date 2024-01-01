@@ -19,7 +19,7 @@ const generatedFolderName = "generated";
 const assetlistFileName = "assetlist.json";
 const zoneAssetConfigFileName = "zone_asset_config.json";
 const zoneAssetlistFileName = "osmosis.zone_assets.json";
-const zoneChainlistFileName = "osmosis.zone_chains.json";
+//const zoneChainlistFileName = "osmosis.zone_chains.json";
 
 
 function getZoneAssetlist(chainName) {
@@ -28,6 +28,18 @@ function getZoneAssetlist(chainName) {
       assetlistsRoot,
       chainNameToChainIdMap.get(chainName),
       zoneAssetlistFileName
+    )));
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+function getZoneChainlist(chainName) {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(
+      assetlistsRoot,
+      chainNameToChainIdMap.get(chainName),
+      zoneChainlistFileName
     )));
   } catch (err) {
     console.log(err);
@@ -64,7 +76,7 @@ async function asyncForEach(array, callback) {
   }
 }
 
-const generateAssets = async (chainName, assets, zone_assets) => {
+const generateAssets = async (chainName, assets, zone_assets, zone_chains) => {
   
   let pool_assets;
   pool_assets = await returnAssets(chainName);
@@ -77,7 +89,14 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     
     generatedAsset.chain_name = zone_asset.chain_name;
     generatedAsset.base_denom = zone_asset.base_denom;
-    
+    generatedAsset.minimal_denom = zone_asset.base_denom;
+
+    //Replace Minimal Denom with IBC Hash Denom (iff appl.)
+    if(zone_asset.chain_name != chainName) {
+      let ibcHash = calculateIbcHash(zone_asset.path);
+      //--Replace Base with IBC Hash--
+      generatedAsset.minimal_denom = await ibcHash;
+    }
 
     
     let reference_asset = {};
@@ -113,16 +132,15 @@ const generateAssets = async (chainName, assets, zone_assets) => {
       }
     }
     
-    
-    if(zone_asset.chain_name != chainName) {
-      let ibcHash = calculateIbcHash(zone_asset.path);
-      //--Replace Base with IBC Hash--
-      generatedAsset.ibc_denom = await ibcHash;
-    }
 
+    //  OSMOSIS-VERIFIED
     generatedAsset.verified = zone_asset.osmosis_verified;
 
-    let denom = generatedAsset.ibc_denom ? generatedAsset.ibc_denom : zone_asset.base_denom;
+    //  OSMOSIS-VALIDATED
+    generatedAsset.validated = zone_asset.osmosis_validated;
+
+
+    let denom = generatedAsset.minimal_denom;
     if (pool_assets.get(denom)) {
     
       generatedAsset.api_include = pool_assets.get(denom).osmosis_info;
@@ -156,8 +174,107 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     generatedAsset.categories = categories.length > 0 ? categories : undefined;
     
     generatedAsset.peg_mechanism = zone_asset.peg_mechanism;
+
+    generatedAsset.transfer_methods = zone_asset.transfer_methods;
     
-    generatedAsset.additional_transfer = zone_asset.additional_transfer;
+
+    if(zone_asset.chain_name != chainName) {
+
+      //--Set Up Trace for IBC Transfer--
+      
+      let type = "ibc";
+      if (zone_asset.base_denom.slice(0,5) === "cw20:") {
+        type = "ibc-cw20";
+      }
+      
+      let counterparty = {
+        chain_name: zone_asset.chain_name,
+        chain_id: chain_reg.getFileProperty(zone_asset.chain_name, "chain", "chain_id"),
+        base_denom: zone_asset.base_denom,
+        port: "trans"
+      };
+      if (type === "ibc-cw20") {
+        counterparty.port = "wasm."
+      }
+
+      
+      let chain = {
+        port: "transfer"
+      };
+
+
+      //--Identify chain_1 and chain_2--
+      let chain_1 = chain;
+      let chain_2 = counterparty;
+      let chainOrder = 0;
+      if(zone_asset.chain_name < chainName) {
+        chain_1 = counterparty;
+        chain_2 = chain;
+        chainOrder = 1;
+      }
+      
+      
+      //--Find IBC Connection--
+      let channels = chain_reg.getIBCFileProperty(zone_asset.chain_name, chainName, "channels");
+      
+      
+      //--Find IBC Channel and Port Info--
+      
+      //--with Path--
+      if(zone_asset.path) {
+        let parts = zone_asset.path.split("/");
+        chain.port = parts[0];
+        chain.channel_id = parts[1];
+        channels.forEach((channel) => {
+          if(!chainOrder) {
+            if(channel.chain_1.port_id === chain.port && channel.chain_1.channel_id === chain.channel_id) {
+              counterparty.channel_id = channel.chain_2.channel_id;
+              counterparty.port = channel.chain_2.port_id;
+              return;
+            }
+          } else {
+            if(channel.chain_2.port_id === chain.port && channel.chain_2.channel_id === chain.channel_id) {
+              counterparty.channel_id = channel.chain_1.channel_id;
+              counterparty.port = channel.chain_1.port_id;
+              return;
+            }
+          }
+        });
+        
+      //--without Path--
+      } else {
+        channels.forEach((channel) => {
+          if(channel.chain_1.port_id.slice(0,5) === chain_1.port.slice(0,5) && channel.chain_2.port_id.slice(0,5) === chain_2.port.slice(0,5)) {
+            chain_1.channel_id = channel.chain_1.channel_id;
+            chain_2.channel_id = channel.chain_2.channel_id;
+            chain_1.port = channel.chain_1.port_id;
+            chain_2.port = channel.chain_2.port_id;
+            return;
+          }
+        });
+      }
+      
+      
+      //--Add Path--
+      chain.path = zone_asset.path;
+      
+      
+      //--Create Trace Object--
+      let trace = {
+        type: type,
+        counterparty: counterparty,
+        chain: chain
+      }
+
+      if (!generatedAsset.transfer_methods) {
+        trace.validated = true;
+        generatedAsset.transfer_methods = [];
+      }
+
+      generatedAsset.transfer_methods.push(trace);
+
+    }
+
 
     generatedAsset.unstable = zone_asset.osmosis_unstable;
     
@@ -177,6 +294,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
 async function generateAssetlist(chainName) {
   
   let zoneAssetlist = getZoneAssetlist(chainName);
+  //let zoneChainlist = getZoneChainlist(chainName);
   let assets = [];  
   await generateAssets(chainName, assets, zoneAssetlist.assets);
   if (!assets) { return; }

@@ -4,6 +4,7 @@
     {
       "chain_name": "osmosistestnet",
       "base_denom": "uosmo",
+      "minimal_denom": "uosmo",
       "symbol": "OSMO",
       "decimals": 6,
       "images": [
@@ -13,6 +14,7 @@
         }
       ],
       "coingecko_id": "osmosis",
+      "validated": true,
       "api_include": true,
       "price": {
         "pool": "5",
@@ -22,6 +24,7 @@
     {
       "chain_name": "osmosistestnet",
       "base_denom": "uion",
+      "minimal_denom": "uion",
       "symbol": "ION",
       "decimals": 6,
       "images": [
@@ -31,6 +34,7 @@
         }
       ],
       "coingecko_id": "ion",
+      "validated": true,
       "api_include": true,
       "price": {
         "pool": "1",
@@ -40,6 +44,7 @@
     {
       "chain_name": "cosmoshubtestnet",
       "base_denom": "uatom",
+      "minimal_denom": "ibc/9FF2B7A5F55038A7EE61F4FD6749D9A648B48E89830F2682B67B5DC158E2753C",
       "symbol": "ATOM",
       "decimals": 6,
       "images": [
@@ -48,16 +53,35 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.svg"
         }
       ],
-      "ibc_denom": "ibc/9FF2B7A5F55038A7EE61F4FD6749D9A648B48E89830F2682B67B5DC158E2753C",
+      "validated": true,
       "api_include": true,
       "price": {
         "pool": "308",
         "denom": "uosmo"
-      }
+      },
+      "transfer_methods": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "cosmoshubtestnet",
+            "chain_id": "theta-testnet-001",
+            "base_denom": "uatom",
+            "port": "transfer",
+            "channel_id": "channel-3306"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-4156",
+            "path": "transfer/channel-4156/uatom"
+          },
+          "validated": true
+        }
+      ]
     },
     {
       "chain_name": "axelartestnet",
       "base_denom": "uausdc",
+      "minimal_denom": "ibc/2164BDB48DE5501430E71286448D87C6D2240EC0E078CF113CAB85E21A352BB0",
       "symbol": "aUSDC",
       "decimals": 6,
       "images": [
@@ -69,11 +93,30 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
         }
       ],
-      "ibc_denom": "ibc/2164BDB48DE5501430E71286448D87C6D2240EC0E078CF113CAB85E21A352BB0"
+      "validated": true,
+      "transfer_methods": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelartestnet",
+            "chain_id": "axelar-testnet-lisbon-3",
+            "base_denom": "uausdc",
+            "port": "transfer",
+            "channel_id": "channel-339"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-4170",
+            "path": "transfer/channel-4170/uausdc"
+          },
+          "validated": true
+        }
+      ]
     },
     {
       "chain_name": "axelartestnet",
       "base_denom": "eth-wei",
+      "minimal_denom": "ibc/1F42AC9631DBE03009219ECCFE151786F53A038DE9F7A07C709158514F1D5942",
       "symbol": "ETH",
       "decimals": 18,
       "images": [
@@ -85,11 +128,30 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/weth.svg"
         }
       ],
-      "ibc_denom": "ibc/1F42AC9631DBE03009219ECCFE151786F53A038DE9F7A07C709158514F1D5942"
+      "validated": true,
+      "transfer_methods": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelartestnet",
+            "chain_id": "axelar-testnet-lisbon-3",
+            "base_denom": "eth-wei",
+            "port": "transfer",
+            "channel_id": "channel-339"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-4170",
+            "path": "transfer/channel-4170/eth-wei"
+          },
+          "validated": true
+        }
+      ]
     },
     {
       "chain_name": "junotestnet",
       "base_denom": "ujunox",
+      "minimal_denom": "ibc/315940955C3051051C55B195EE30F7265D5BE3D3A7CC48D74E5D9871DCED8B26",
       "symbol": "JUNOX",
       "decimals": 6,
       "images": [
@@ -99,11 +161,30 @@
         }
       ],
       "coingecko_id": "juno-network",
-      "ibc_denom": "ibc/315940955C3051051C55B195EE30F7265D5BE3D3A7CC48D74E5D9871DCED8B26"
+      "validated": true,
+      "transfer_methods": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "junotestnet",
+            "chain_id": "uni-6",
+            "base_denom": "ujunox",
+            "port": "transfer",
+            "channel_id": "channel-811"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-4167",
+            "path": "transfer/channel-4167/ujunox"
+          },
+          "validated": true
+        }
+      ]
     },
     {
       "chain_name": "marstestnet",
       "base_denom": "umars",
+      "minimal_denom": "ibc/18401C07347459EE2413C0AFDE3ACDB66AC9FD363B3E56A6FC1DFF1B69341FC3",
       "symbol": "MARS",
       "decimals": 6,
       "images": [
@@ -112,11 +193,30 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.svg"
         }
       ],
-      "ibc_denom": "ibc/18401C07347459EE2413C0AFDE3ACDB66AC9FD363B3E56A6FC1DFF1B69341FC3"
+      "validated": true,
+      "transfer_methods": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "marstestnet",
+            "chain_id": "ares-1",
+            "base_denom": "umars",
+            "port": "transfer",
+            "channel_id": "channel-27"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-4168",
+            "path": "transfer/channel-4168/umars"
+          },
+          "validated": true
+        }
+      ]
     },
     {
       "chain_name": "nobletestnet",
       "base_denom": "uusdc",
+      "minimal_denom": "ibc/DE6792CF9E521F6AD6E9A4BDF6225C9571A3B74ACC0A529F92BC5122A39D2E58",
       "symbol": "USDC",
       "decimals": 6,
       "images": [
@@ -124,16 +224,35 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
         }
       ],
-      "ibc_denom": "ibc/DE6792CF9E521F6AD6E9A4BDF6225C9571A3B74ACC0A529F92BC5122A39D2E58",
+      "validated": true,
       "api_include": true,
       "price": {
         "pool": "314",
         "denom": "uosmo"
-      }
+      },
+      "transfer_methods": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "nobletestnet",
+            "chain_id": "grand-1",
+            "base_denom": "uusdc",
+            "port": "transfer",
+            "channel_id": "channel-22"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-4280",
+            "path": "transfer/channel-4280/uusdc"
+          },
+          "validated": true
+        }
+      ]
     },
     {
       "chain_name": "akashtestnet",
       "base_denom": "uakt",
+      "minimal_denom": "ibc/AD59D59CFB0E628E73C798415F823AB5B6257C2FE4BF67DBB5D6A677B2686E82",
       "symbol": "AKT",
       "decimals": 6,
       "images": [
@@ -142,11 +261,30 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.svg"
         }
       ],
-      "ibc_denom": "ibc/AD59D59CFB0E628E73C798415F823AB5B6257C2FE4BF67DBB5D6A677B2686E82"
+      "validated": true,
+      "transfer_methods": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "akashtestnet",
+            "chain_id": "sandbox-01",
+            "base_denom": "uakt",
+            "port": "transfer",
+            "channel_id": "channel-6"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-4171",
+            "path": "transfer/channel-4171/uakt"
+          },
+          "validated": true
+        }
+      ]
     },
     {
       "chain_name": "kyvetestnet",
       "base_denom": "tkyve",
+      "minimal_denom": "ibc/AB8AF05799E299FB5C5C80781DA35887F53E029745D20E5641233DB4E6B28515",
       "symbol": "KYVE",
       "decimals": 6,
       "images": [
@@ -154,15 +292,34 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/kyvetestnet/images/kyve.svg"
         }
       ],
-      "ibc_denom": "ibc/AB8AF05799E299FB5C5C80781DA35887F53E029745D20E5641233DB4E6B28515",
+      "validated": true,
       "price": {
         "pool": "4",
         "denom": "uosmo"
-      }
+      },
+      "transfer_methods": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "kyvetestnet",
+            "chain_id": "kaon-1",
+            "base_denom": "tkyve",
+            "port": "transfer",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-10",
+            "path": "transfer/channel-10/tkyve"
+          },
+          "validated": true
+        }
+      ]
     },
     {
       "chain_name": "quicksilvertestnet",
       "base_denom": "uqck",
+      "minimal_denom": "ibc/F37CF69589DE12342758382F8770C0852CD8D2E4519F55166EBDAF472AD667C9",
       "symbol": "QCK",
       "decimals": 6,
       "images": [
@@ -171,16 +328,35 @@
         }
       ],
       "coingecko_id": "quicksilver",
-      "ibc_denom": "ibc/F37CF69589DE12342758382F8770C0852CD8D2E4519F55166EBDAF472AD667C9",
+      "validated": true,
       "api_include": true,
       "price": {
         "pool": "34",
         "denom": "uosmo"
-      }
+      },
+      "transfer_methods": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "quicksilvertestnet",
+            "chain_id": "rhye-1",
+            "base_denom": "uqck",
+            "port": "transfer",
+            "channel_id": "channel-20"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-13",
+            "path": "transfer/channel-13/uqck"
+          },
+          "validated": true
+        }
+      ]
     },
     {
       "chain_name": "chain4energytestnet",
       "base_denom": "uc4e",
+      "minimal_denom": "ibc/E3D323CB6F427C49E56F913C853A416F6B71BAA9B0164625AD0203266F92B3ED",
       "symbol": "C4E",
       "decimals": 6,
       "images": [
@@ -189,16 +365,35 @@
         }
       ],
       "coingecko_id": "",
-      "ibc_denom": "ibc/E3D323CB6F427C49E56F913C853A416F6B71BAA9B0164625AD0203266F92B3ED",
+      "validated": true,
       "api_include": true,
       "price": {
         "pool": "40",
         "denom": "ibc/6F34E1BD664C36CE49ACC28E60D62559A5F96C4F9A6CCE4FC5A67B2852E24CFE"
-      }
+      },
+      "transfer_methods": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "chain4energytestnet",
+            "chain_id": "babajaga-1",
+            "base_denom": "uc4e",
+            "port": "transfer",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-111",
+            "path": "transfer/channel-111/uc4e"
+          },
+          "validated": true
+        }
+      ]
     },
     {
       "chain_name": "persistencetestnet2",
       "base_denom": "uxprt",
+      "minimal_denom": "ibc/754C8533F8A418B03AD5F2C6AA19D4703CF78BBAB9E2E4DDD6212AAC2E502CA6",
       "symbol": "XPRT",
       "decimals": 6,
       "images": [
@@ -208,16 +403,35 @@
         }
       ],
       "coingecko_id": "persistence",
-      "ibc_denom": "ibc/754C8533F8A418B03AD5F2C6AA19D4703CF78BBAB9E2E4DDD6212AAC2E502CA6",
+      "validated": true,
       "api_include": true,
       "price": {
         "pool": "85",
         "denom": "uosmo"
-      }
+      },
+      "transfer_methods": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "persistencetestnet2",
+            "chain_id": "test-core-2",
+            "base_denom": "uxprt",
+            "port": "transfer",
+            "channel_id": "channel-7"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-1037",
+            "path": "transfer/channel-1037/uxprt"
+          },
+          "validated": true
+        }
+      ]
     },
     {
       "chain_name": "xiontestnet",
       "base_denom": "uxion",
+      "minimal_denom": "ibc/3642669AD14386D3E38F43F30CFCA859B3E8A05BF6BD6A23DEBD2115AD1325E9",
       "symbol": "XION",
       "decimals": 6,
       "images": [
@@ -225,16 +439,35 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xion/images/burnt-round.png"
         }
       ],
-      "ibc_denom": "ibc/3642669AD14386D3E38F43F30CFCA859B3E8A05BF6BD6A23DEBD2115AD1325E9",
+      "validated": true,
       "api_include": true,
       "price": {
         "pool": "333",
         "denom": "ibc/DE6792CF9E521F6AD6E9A4BDF6225C9571A3B74ACC0A529F92BC5122A39D2E58"
-      }
+      },
+      "transfer_methods": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "xiontestnet",
+            "chain_id": "xion-testnet-1",
+            "base_denom": "uxion",
+            "port": "transfer",
+            "channel_id": "channel-12"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-4410",
+            "path": "transfer/channel-4410/uxion"
+          },
+          "validated": true
+        }
+      ]
     },
     {
       "chain_name": "sagatestnet",
       "base_denom": "utsaga",
+      "minimal_denom": "ibc/6477A305C6127DE72C5BC8AAE85F318DF571DC8D590228CB191C952C304125F3",
       "symbol": "TSAGA",
       "decimals": 6,
       "images": [
@@ -243,15 +476,34 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.svg"
         }
       ],
-      "ibc_denom": "ibc/6477A305C6127DE72C5BC8AAE85F318DF571DC8D590228CB191C952C304125F3",
+      "validated": true,
       "price": {
         "pool": "317",
         "denom": "uosmo"
-      }
+      },
+      "transfer_methods": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "sagatestnet",
+            "chain_id": "ssc-testnet-1",
+            "base_denom": "utsaga",
+            "port": "transfer",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-4374",
+            "path": "transfer/channel-4374/utsaga"
+          },
+          "validated": true
+        }
+      ]
     },
     {
       "chain_name": "impacthubtestnet",
       "base_denom": "uixo",
+      "minimal_denom": "ibc/88C815D69587CF0F05E96E5E2731EA56194D73C9A02A500095294D3A5DE68F16",
       "symbol": "IXO",
       "decimals": 6,
       "images": [
@@ -264,11 +516,29 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/impacthub/images/ixo.svg"
         }
       ],
-      "ibc_denom": "ibc/88C815D69587CF0F05E96E5E2731EA56194D73C9A02A500095294D3A5DE68F16",
+      "validated": true,
       "price": {
         "pool": "254",
         "denom": "uosmo"
-      }
+      },
+      "transfer_methods": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "impacthubtestnet",
+            "chain_id": "pandora-8",
+            "base_denom": "uixo",
+            "port": "transfer",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-1637",
+            "path": "transfer/channel-1637/uixo"
+          },
+          "validated": true
+        }
+      ]
     }
   ]
 }

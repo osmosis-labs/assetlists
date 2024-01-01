@@ -19,7 +19,7 @@ const generatedFolderName = "generated";
 const assetlistFileName = "assetlist.json";
 const zoneAssetConfigFileName = "zone_asset_config.json";
 const zoneAssetlistFileName = "osmosis.zone_assets.json";
-//const zoneChainlistFileName = "osmosis.zone_chains.json";
+const zoneChainlistFileName = "osmosis.zone_chains.json";
 
 
 function getZoneAssetlist(chainName) {
@@ -76,7 +76,7 @@ async function asyncForEach(array, callback) {
   }
 }
 
-const generateAssets = async (chainName, assets, zone_assets, zone_chains) => {
+const generateAssets = async (chainName, assets, zone_assets) => {
   
   let pool_assets;
   pool_assets = await returnAssets(chainName);

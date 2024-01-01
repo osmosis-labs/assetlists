@@ -28,7 +28,7 @@
         "staking",
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:factory/osmo1mlng7pz4pnyxtpq0akfwall37czyk9lukaucsrn30ameplhhshtqdvfm5c/ulvn:1325"
+        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1221"
       ]
     },
     {
@@ -465,7 +465,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:1135"
+        "osmosis-price:uosmo:1265"
       ]
     },
     {
@@ -1301,7 +1301,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:1093"
+        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1301"
       ]
     },
     {
@@ -1750,7 +1750,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2:574"
+        "osmosis-price:uosmo:1109"
       ]
     },
     {
@@ -2107,7 +2107,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:619"
+        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1271"
       ]
     },
     {
@@ -3212,7 +3212,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5:1297"
+        "osmosis-price:uosmo:634"
       ]
     },
     {
@@ -7293,8 +7293,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stluna.svg"
       },
       "keywords": [
-        "osmosis-main",
-        "osmosis-price:ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9:913"
+        "osmosis-main"
       ]
     },
     {
@@ -9591,10 +9590,7 @@
       ],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/cub.png"
-      },
-      "keywords": [
-        "osmosis-price:ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9:1072"
-      ]
+      }
     },
     {
       "description": "BLUE CUB DAO is a community DAO on Terra",
@@ -9635,10 +9631,7 @@
       ],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/blue.png"
-      },
-      "keywords": [
-        "osmosis-price:ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9:1073"
-      ]
+      }
     },
     {
       "description": "The native token of Neutron chain.",
@@ -11945,7 +11938,6 @@
       "coingecko_id": "wrapped-steth",
       "keywords": [
         "osmosis-main",
-        "osmosis-info",
         "osmosis-price:ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5:1292"
       ]
     },
@@ -12665,8 +12657,7 @@
       },
       "coingecko_id": "islamic-coin",
       "keywords": [
-        "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:1343",
-        "osmosis-unlisted"
+        "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:1343"
       ]
     },
     {
@@ -12847,6 +12838,52 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/ninja.png"
       }
+    },
+    {
+      "description": "Kleomedes Token",
+      "denom_units": [
+        {
+          "denom": "ibc/5F5B7DA5ECC80F6C7A8702D525BB0B74279B1F7B8EFAE36E423D68788F7F39FF",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno10gthz5ufgrpuk5cscve2f0hjp56wgp90psqxcrqlg4m9mcu9dh8q4864xy"
+          ]
+        },
+        {
+          "denom": "kleo",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "juno10gthz5ufgrpuk5cscve2f0hjp56wgp90psqxcrqlg4m9mcu9dh8q4864xy",
+      "base": "ibc/5F5B7DA5ECC80F6C7A8702D525BB0B74279B1F7B8EFAE36E423D68788F7F39FF",
+      "name": "Kleomedes",
+      "display": "kleo",
+      "symbol": "KLEO",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno10gthz5ufgrpuk5cscve2f0hjp56wgp90psqxcrqlg4m9mcu9dh8q4864xy",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
+            "channel_id": "channel-47"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-169",
+            "path": "transfer/channel-169/cw20:juno10gthz5ufgrpuk5cscve2f0hjp56wgp90psqxcrqlg4m9mcu9dh8q4864xy"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/kleomedes.png"
+      },
+      "keywords": [
+        "osmosis-info",
+        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1353",
+        "osmosis-unlisted"
+      ]
     }
   ]
 }

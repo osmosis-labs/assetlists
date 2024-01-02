@@ -358,6 +358,29 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
 
 
 
+    //--Sorting--
+    //how to sort tokens if they don't have cgid
+    if(!generatedAsset.coingecko_id && !zone_asset.canonical){
+      traces?.forEach((trace) => {
+        if(trace.provider) {
+          let providers = zoneConfig?.provider_primary_token;
+          if(providers) {
+            providers.forEach((provider) => {
+              if(provider.provider == trace.provider) {
+                generatedAsset.sort_with = {
+                  chain_name: provider.token.chain_name,
+                  base_denom: provider.token.base_denom
+                }
+                return;
+              }
+            });
+          }
+        }
+      });
+    }
+
+
+
     //--Overrides Properties when Specified--
     if(zone_asset.override_properties) {
       if(zone_asset.override_properties.coingecko_id) {

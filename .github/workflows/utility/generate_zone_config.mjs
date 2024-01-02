@@ -17,9 +17,11 @@ const chainNameToChainIdMap = new Map([
 const assetlistsRoot = "../../..";
 const generatedFolderName = "generated";
 const assetlistFileName = "assetlist.json";
+const chainlistFileName = "chainlist.json";
 const zoneAssetConfigFileName = "zone_asset_config.json";
 const zoneAssetlistFileName = "osmosis.zone_assets.json";
 const zoneChainlistFileName = "osmosis.zone_chains.json";
+const zoneConfigFileName = "osmosis.zone_config.json";
 
 
 function getZoneAssetlist(chainName) {
@@ -40,6 +42,18 @@ function getZoneChainlist(chainName) {
       assetlistsRoot,
       chainNameToChainIdMap.get(chainName),
       zoneChainlistFileName
+    )));
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+function getZoneConfig(chainName) {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(
+      assetlistsRoot,
+      chainNameToChainIdMap.get(chainName),
+      zoneConfigFileName
     )));
   } catch (err) {
     console.log(err);
@@ -76,7 +90,7 @@ async function asyncForEach(array, callback) {
   }
 }
 
-const generateAssets = async (chainName, assets, zone_assets) => {
+const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
   
   let pool_assets;
   pool_assets = await returnAssets(chainName);
@@ -171,6 +185,9 @@ const generateAssets = async (chainName, assets, zone_assets) => {
 
     generatedAsset.transfer_methods = zone_asset.transfer_methods;
     
+
+    let bridge_provider = "";
+
 
     if(zone_asset.chain_name != chainName) {
 
@@ -267,24 +284,58 @@ const generateAssets = async (chainName, assets, zone_assets) => {
 
       generatedAsset.transfer_methods.push(trace);
 
+
+
+      //--Get Bridge Provider--
+      if(!zone_asset.canonical) {
+        traces?.forEach((trace) => {
+          if(trace.type == "bridge") {
+            bridge_provider = trace.provider;
+            let suffixes = zoneConfig?.interoperability?.suffixes;
+            if(suffixes) {
+              suffixes.forEach((suffix) => {
+                if(suffix.provider == bridge_provider) {
+                  generatedAsset.symbol = generatedAsset.symbol + suffix.suffix;
+                }
+              });
+            }
+            return;
+          }
+        });
+      }
+
+
+
     }
 
 
-    generatedAsset.unstable = zone_asset.osmosis_unstable;
-    
-    generatedAsset.unlisted = zone_asset.osmosis_unlisted;
     
 
-    //--Add Name--
+
+    //--Staking token?--
     let is_staking_token = false;
     if(zone_asset.base_denom == chain_reg.getFileProperty(reference_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom) {
       is_staking_token = true;
     }
 
+
+    //--Add Name--
+
     let name = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "name");
+
+    //use chain name if staking token
     if(is_staking_token) {
       name = chain_reg.getFileProperty(reference_asset.chain_name, "chain", "pretty_name");
     }
+
+    //append bridge provider if not already there
+    if(bridge_provider) {
+      if(!name.includes(bridge_provider)) {
+        name = name + " " + "(" + bridge_provider + ")"
+      }
+    }
+
+    //submit name
     generatedAsset.name = name;
 
 
@@ -307,6 +358,29 @@ const generateAssets = async (chainName, assets, zone_assets) => {
 
 
 
+    //--Sorting--
+    //how to sort tokens if they don't have cgid
+    if(!generatedAsset.coingecko_id && !zone_asset.canonical){
+      traces?.forEach((trace) => {
+        if(trace.provider) {
+          let providers = zoneConfig?.provider_primary_token;
+          if(providers) {
+            providers.forEach((provider) => {
+              if(provider.provider == trace.provider) {
+                generatedAsset.sort_with = {
+                  chain_name: provider.token.chain_name,
+                  base_denom: provider.token.base_denom
+                }
+                return;
+              }
+            });
+          }
+        }
+      });
+    }
+
+
+
     //--Overrides Properties when Specified--
     if(zone_asset.override_properties) {
       if(zone_asset.override_properties.coingecko_id) {
@@ -324,6 +398,10 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     }
 
 
+    generatedAsset.unstable = zone_asset.osmosis_unstable;
+    
+    generatedAsset.unlisted = zone_asset.osmosis_unlisted;
+
     
     //--Append Asset to Assetlist--
     assets.push(generatedAsset);
@@ -336,10 +414,12 @@ const generateAssets = async (chainName, assets, zone_assets) => {
 
 async function generateAssetlist(chainName) {
   
+  let zoneConfig = getZoneConfig(chainName)?.config;
+
   let zoneAssetlist = getZoneAssetlist(chainName);
   //let zoneChainlist = getZoneChainlist(chainName);
   let assets = [];  
-  await generateAssets(chainName, assets, zoneAssetlist.assets);
+  await generateAssets(chainName, assets, zoneAssetlist.assets, zoneConfig);
   if (!assets) { return; }
   let assetlist = {
     chain_name: chainName,

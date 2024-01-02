@@ -280,6 +280,8 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     
     generatedAsset.unlisted = zone_asset.osmosis_unlisted;
     
+    //--Add Description--
+    generatedAsset.description = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, "description");
     
     
     //--Append Asset to Assetlist--

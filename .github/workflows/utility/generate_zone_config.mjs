@@ -118,19 +118,13 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     });
 
 
+    generatedAsset.logo_URIs = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "logo_URIs");
     generatedAsset.images = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "images");
+    
+    
     generatedAsset.coingecko_id = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "coingecko_id");
 
   
-    //--Overrides Properties when Specified--
-    if(zone_asset.override_properties) {
-      if(zone_asset.override_properties.coingecko_id) {
-        generatedAsset.coingecko_id = zone_asset.override_properties.coingecko_id;
-      }
-      if(zone_asset.override_properties.symbol) {
-        generatedAsset.symbol = zone_asset.override_properties.symbol;
-      }
-    }
     
 
     //  OSMOSIS-VERIFIED
@@ -280,9 +274,56 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     
     generatedAsset.unlisted = zone_asset.osmosis_unlisted;
     
+
+    //--Add Name--
+    let is_staking_token = false;
+    if(zone_asset.base_denom == chain_reg.getFileProperty(zone_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom) {
+      is_staking_token = true;
+    }
+
+    let name = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, "name");
+    if(is_staking_token) {
+      name = chain_reg.getFileProperty(zone_asset.chain_name, "chain", "pretty_name");
+    }
+    generatedAsset.name = name;
+
+
+
     //--Add Description--
-    generatedAsset.description = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, "description");
-    
+    let asset_description = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, "description");
+    let description = asset_description ? asset_description : "";
+    //need to see if it's first staking token
+    if(is_staking_token) {
+      //it is a staking token, so we pull the chain_description
+      let chain_description = chain_reg.getFileProperty(zone_asset.chain_name, "chain", "description");
+      if(chain_description) {
+        if(description) {
+          description = description + "\n\n";
+        }
+        description = description + chain_description;
+      }
+    }
+    generatedAsset.description = description;
+
+
+
+    //--Overrides Properties when Specified--
+    if(zone_asset.override_properties) {
+      if(zone_asset.override_properties.coingecko_id) {
+        generatedAsset.coingecko_id = zone_asset.override_properties.coingecko_id;
+      }
+      if(zone_asset.override_properties.symbol) {
+        generatedAsset.symbol = zone_asset.override_properties.symbol;
+      }
+      if(zone_asset.override_properties.name) {
+        generatedAsset.name = zone_asset.override_properties.name;
+      }
+      if(zone_asset.override_properties.logo_URIs) {
+        generatedAsset.logo_URIs = zone_asset.override_properties.logo_URIs;
+      }
+    }
+
+
     
     //--Append Asset to Assetlist--
     assets.push(generatedAsset);

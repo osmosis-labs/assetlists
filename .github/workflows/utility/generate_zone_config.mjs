@@ -277,25 +277,25 @@ const generateAssets = async (chainName, assets, zone_assets) => {
 
     //--Add Name--
     let is_staking_token = false;
-    if(zone_asset.base_denom == chain_reg.getFileProperty(zone_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom) {
+    if(zone_asset.base_denom == chain_reg.getFileProperty(reference_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom) {
       is_staking_token = true;
     }
 
-    let name = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, "name");
+    let name = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "name");
     if(is_staking_token) {
-      name = chain_reg.getFileProperty(zone_asset.chain_name, "chain", "pretty_name");
+      name = chain_reg.getFileProperty(reference_asset.chain_name, "chain", "pretty_name");
     }
     generatedAsset.name = name;
 
 
 
     //--Add Description--
-    let asset_description = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, "description");
+    let asset_description = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "description");
     let description = asset_description ? asset_description : "";
     //need to see if it's first staking token
     if(is_staking_token) {
       //it is a staking token, so we pull the chain_description
-      let chain_description = chain_reg.getFileProperty(zone_asset.chain_name, "chain", "description");
+      let chain_description = chain_reg.getFileProperty(reference_asset.chain_name, "chain", "description");
       if(chain_description) {
         if(description) {
           description = description + "\n\n";

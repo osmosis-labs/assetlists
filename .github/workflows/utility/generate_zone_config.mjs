@@ -17,9 +17,11 @@ const chainNameToChainIdMap = new Map([
 const assetlistsRoot = "../../..";
 const generatedFolderName = "generated";
 const assetlistFileName = "assetlist.json";
+const chainlistFileName = "chainlist.json";
 const zoneAssetConfigFileName = "zone_asset_config.json";
 const zoneAssetlistFileName = "osmosis.zone_assets.json";
 const zoneChainlistFileName = "osmosis.zone_chains.json";
+const zoneConfigFileName = "osmosis.zone_config.json";
 
 
 function getZoneAssetlist(chainName) {
@@ -40,6 +42,18 @@ function getZoneChainlist(chainName) {
       assetlistsRoot,
       chainNameToChainIdMap.get(chainName),
       zoneChainlistFileName
+    )));
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+function getZoneConfig(chainName) {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(
+      assetlistsRoot,
+      chainNameToChainIdMap.get(chainName),
+      zoneConfigFileName
     )));
   } catch (err) {
     console.log(err);
@@ -76,7 +90,7 @@ async function asyncForEach(array, callback) {
   }
 }
 
-const generateAssets = async (chainName, assets, zone_assets) => {
+const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
   
   let pool_assets;
   pool_assets = await returnAssets(chainName);
@@ -277,6 +291,14 @@ const generateAssets = async (chainName, assets, zone_assets) => {
         traces?.forEach((trace) => {
           if(trace.type == "bridge") {
             bridge_provider = trace.provider;
+            let suffixes = zoneConfig?.interoperability?.suffixes;
+            if(suffixes) {
+              suffixes.forEach((suffix) => {
+                if(suffix.provider == bridge_provider) {
+                  generatedAsset.symbol = generatedAsset.symbol + suffix.suffix;
+                }
+              });
+            }
             return;
           }
         });
@@ -369,10 +391,12 @@ const generateAssets = async (chainName, assets, zone_assets) => {
 
 async function generateAssetlist(chainName) {
   
+  let zoneConfig = getZoneConfig(chainName)?.config;
+
   let zoneAssetlist = getZoneAssetlist(chainName);
   //let zoneChainlist = getZoneChainlist(chainName);
   let assets = [];  
-  await generateAssets(chainName, assets, zoneAssetlist.assets);
+  await generateAssets(chainName, assets, zoneAssetlist.assets, zoneConfig);
   if (!assets) { return; }
   let assetlist = {
     chain_name: chainName,

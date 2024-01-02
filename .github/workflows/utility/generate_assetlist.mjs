@@ -324,7 +324,9 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     if(zone_asset.osmosis_unstable) {
       keywords.push("osmosis-unstable");
     }
-    if(zone_asset.osmosis_unlisted) {
+    console.log(zone_asset.osmosis_validated);
+    if(zone_asset.osmosis_unlisted || !zone_asset.osmosis_validated) {
+      console.log("Hide!");
       keywords.push("osmosis-unlisted");
     }
     

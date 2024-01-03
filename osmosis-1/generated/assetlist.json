@@ -2563,7 +2563,8 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/microtick/images/tick.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/microtick/images/tick.svg"
-      }
+      },
+      "coingecko_id": "microtick"
     },
     {
       "description": "Rowan Token (ROWAN) is the Sifchain Network's native utility token, used as the primary means to govern, provide liquidity, secure the blockchain, incentivize participants, and provide a default mechanism to store and exchange value.",
@@ -2708,7 +2709,7 @@
       "base": "ibc/6BDB4C8CCD45033F9604E4B93ED395008A753E01EECD6992E7D1EA23D9D3B788",
       "name": "Racoon",
       "display": "rac",
-      "symbol": "RAC",
+      "symbol": "juno.RAC",
       "traces": [
         {
           "type": "ibc-cw20",
@@ -3723,53 +3724,6 @@
       "coingecko_id": "apecoin"
     },
     {
-      "description": "Axie Infinity is a Pokémon-inspired digital pet universe where anyone can earn tokens through skilled gameplay and contributions to the ecosystem. Players can battle, collect, raise, and build a land-based kingdom for their pets (known as Axies).",
-      "denom_units": [
-        {
-          "denom": "ibc/6C0CB8653012DC2BC1820FD0B6B3AFF8A07D18630BDAEE066FEFB2D92F477C24",
-          "exponent": 0,
-          "aliases": [
-            "axs-wei"
-          ]
-        },
-        {
-          "denom": "axs",
-          "exponent": 18
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/6C0CB8653012DC2BC1820FD0B6B3AFF8A07D18630BDAEE066FEFB2D92F477C24",
-      "name": "Axie Infinity Shard",
-      "display": "axs",
-      "symbol": "AXS",
-      "traces": [
-        {
-          "type": "bridge",
-          "counterparty": {
-            "chain_name": "ethereum",
-            "base_denom": "0xbb0e17ef65f82ab018d8edd776e8dd940327b28b"
-          },
-          "provider": "Axelar"
-        },
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "axelar",
-            "base_denom": "axs-wei",
-            "channel_id": "channel-3"
-          },
-          "chain": {
-            "channel_id": "channel-208",
-            "path": "transfer/channel-208/axs-wei"
-          }
-        }
-      ],
-      "logo_URIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/axs.svg"
-      },
-      "coingecko_id": "axie-infinity"
-    },
-    {
       "description": "Maker is a Decentralized Autonomous Organization that creates and insures the dai stablecoin on the Ethereum blockchain",
       "denom_units": [
         {
@@ -3917,100 +3871,6 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/shib.svg"
       },
       "coingecko_id": "shiba-inu"
-    },
-    {
-      "description": "UNI token served as governance token for Uniswap protocol with 1 billion UNI have been minted at genesis. 60% of the UNI genesis supply is allocated to Uniswap community members and remaining for team, investors and advisors.",
-      "denom_units": [
-        {
-          "denom": "ibc/AE2719773D6FCDD05AC17B1ED63F672F5F9D84144A61965F348C86C2A83AD161",
-          "exponent": 0,
-          "aliases": [
-            "uni-wei"
-          ]
-        },
-        {
-          "denom": "uni",
-          "exponent": 18
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/AE2719773D6FCDD05AC17B1ED63F672F5F9D84144A61965F348C86C2A83AD161",
-      "name": "Uniswap",
-      "display": "uni",
-      "symbol": "UNI",
-      "traces": [
-        {
-          "type": "bridge",
-          "counterparty": {
-            "chain_name": "ethereum",
-            "base_denom": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984"
-          },
-          "provider": "Axelar"
-        },
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "axelar",
-            "base_denom": "uni-wei",
-            "channel_id": "channel-3"
-          },
-          "chain": {
-            "channel_id": "channel-208",
-            "path": "transfer/channel-208/uni-wei"
-          }
-        }
-      ],
-      "logo_URIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/uni.svg"
-      },
-      "coingecko_id": "uniswap"
-    },
-    {
-      "description": "Chain is a cloud blockchain protocol that enables organizations to build better financial services from the ground up powered by Sequence and Chain Core.",
-      "denom_units": [
-        {
-          "denom": "ibc/B901BEC1B71D0573E6EE874FEC39E2DF4C2BDB1DB74CB3DA0A9CACC4A435B0EC",
-          "exponent": 0,
-          "aliases": [
-            "xcn-wei"
-          ]
-        },
-        {
-          "denom": "xcn",
-          "exponent": 18
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/B901BEC1B71D0573E6EE874FEC39E2DF4C2BDB1DB74CB3DA0A9CACC4A435B0EC",
-      "name": "Chain",
-      "display": "xcn",
-      "symbol": "XCN",
-      "traces": [
-        {
-          "type": "bridge",
-          "counterparty": {
-            "chain_name": "ethereum",
-            "base_denom": "0xa2cd3d43c775978a96bdbf12d733d5a1ed94fb18"
-          },
-          "provider": "Axelar"
-        },
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "axelar",
-            "base_denom": "xcn-wei",
-            "channel_id": "channel-3"
-          },
-          "chain": {
-            "channel_id": "channel-208",
-            "path": "transfer/channel-208/xcn-wei"
-          }
-        }
-      ],
-      "logo_URIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/xcn.svg"
-      },
-      "coingecko_id": "chain-2"
     },
     {
       "description": "The native staking and governance token of the Kujira chain.",
@@ -4707,7 +4567,8 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/agoric/images/ist.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/agoric/images/ist.svg"
-      }
+      },
+      "coingecko_id": "inter-stable-token"
     },
     {
       "description": "Staking derivative seJUNO for staked JUNO",
@@ -4928,7 +4789,8 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/ststars.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/ststars.svg"
-      }
+      },
+      "coingecko_id": "stride-staked-stars"
     },
     {
       "description": "Solarbank DAO Governance Token for speeding up the shift to renewable and green energy",
@@ -5179,7 +5041,8 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stjuno.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stjuno.svg"
-      }
+      },
+      "coingecko_id": "stride-staked-juno"
     },
     {
       "description": "The native token of Osmosis",
@@ -5226,7 +5089,8 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stosmo.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stosmo.svg"
-      }
+      },
+      "coingecko_id": "stride-staked-osmo"
     },
     {
       "description": "The native token cw20 for MuseDAO on Juno Chain",
@@ -6404,7 +6268,8 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/wynd.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/wynd.svg"
-      }
+      },
+      "coingecko_id": "wynd"
     },
     {
       "description": "USDC is a fully collateralized US Dollar stablecoin developed by CENTRE, the open source project with Circle being the first of several forthcoming issuers.",
@@ -6656,7 +6521,8 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stluna.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stluna.svg"
-      }
+      },
+      "coingecko_id": "stride-staked-luna"
     },
     {
       "denom_units": [
@@ -6702,7 +6568,8 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stevmos.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stevmos.svg"
-      }
+      },
+      "coingecko_id": "stride-staked-evmos"
     },
     {
       "description": "nRide Token",
@@ -6870,7 +6737,8 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/comdex/images/harbor.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/comdex/images/harbor.svg"
-      }
+      },
+      "coingecko_id": "harbor-2"
     },
     {
       "description": "Quicksilver Liquid Staked REGEN",
@@ -7823,7 +7691,8 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/silk.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/silk.svg"
-      }
+      },
+      "coingecko_id": "silk-bcec1136-561c-4706-a42c-8b67d0d7f7d2"
     },
     {
       "description": "Mille: the 1000th token on osmosis",
@@ -8612,7 +8481,8 @@
       ],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/roar.png"
-      }
+      },
+      "coingecko_id": "lion-dao"
     },
     {
       "description": "The native token of Umee",
@@ -8659,7 +8529,8 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stumee.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stumee.svg"
-      }
+      },
+      "coingecko_id": "stride-staked-umee"
     },
     {
       "denom_units": [
@@ -9517,7 +9388,8 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stsomm.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stsomm.svg"
-      }
+      },
+      "coingecko_id": "stride-staked-sommelier"
     },
     {
       "description": "Solana (SOL) is the native asset of the Solana blockchain.",
@@ -10071,7 +9943,8 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/yieldeth.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/yieldeth.svg"
-      }
+      },
+      "coingecko_id": "yieldeth-sommelier"
     },
     {
       "description": "The native staking token of XPLA.",
@@ -10791,7 +10664,8 @@
       ],
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/nstk.svg"
-      }
+      },
+      "coingecko_id": "unstake-fi"
     },
     {
       "description": "ohhNFT LP token.",
@@ -11265,7 +11139,8 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/stkosmo.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/stkosmo.svg"
-      }
+      },
+      "coingecko_id": "pstake-staked-osmo"
     },
     {
       "description": "Levana native token",
@@ -11287,7 +11162,8 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/levana.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/levana.svg"
-      }
+      },
+      "coingecko_id": "levana-protocol"
     },
     {
       "description": "Puppy",
@@ -11367,7 +11243,8 @@
       ],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/newt.png"
-      }
+      },
+      "coingecko_id": "newt"
     },
     {
       "description": "MilkyWay's liquid staked TIA",
@@ -11389,7 +11266,8 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/milktia.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/milktia.svg"
-      }
+      },
+      "coingecko_id": "milkyway-staked-tia"
     },
     {
       "description": "ASH",
@@ -11448,7 +11326,7 @@
       "base": "ibc/DDF1CD4CDC14AE2D6A3060193624605FF12DEE71CF1F8C19EEF35E9447653493",
       "name": "RAC",
       "display": "RAC",
-      "symbol": "migaloo.RAC",
+      "symbol": "RAC",
       "traces": [
         {
           "type": "ibc",
@@ -11582,7 +11460,8 @@
       ],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/autism.png"
-      }
+      },
+      "coingecko_id": "autism"
     },
     {
       "description": "The PAGE token is used for actions in the PageDAO NFT literary ecosystem and for DAO governance.",
@@ -11715,7 +11594,8 @@
       ],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/ninja.png"
-      }
+      },
+      "coingecko_id": "dog-wif-nuchucks"
     },
     {
       "description": "Kleomedes Token",
@@ -11757,6 +11637,83 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/kleomedes.png"
       }
+    },
+    {
+      "description": "NYX Token (NYX) is the Nym Network's native token.",
+      "denom_units": [
+        {
+          "denom": "ibc/1A611E8A3E4248106A1A5A80A64BFA812739435E8B9888EB3F652A21F029F317",
+          "exponent": 0,
+          "aliases": [
+            "unyx"
+          ]
+        },
+        {
+          "denom": "nyx",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/1A611E8A3E4248106A1A5A80A64BFA812739435E8B9888EB3F652A21F029F317",
+      "name": "Nym",
+      "display": "nyx",
+      "symbol": "NYX",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "nyx",
+            "base_denom": "unyx",
+            "channel_id": "channel-8"
+          },
+          "chain": {
+            "channel_id": "channel-15464",
+            "path": "transfer/channel-15464/unyx"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nyx/images/nyx.png"
+      }
+    },
+    {
+      "description": "NYM Token (NYM) is the Nym Network's native utility token, used as the primary means to incentivize mixnet node operators.",
+      "denom_units": [
+        {
+          "denom": "ibc/37CB3078432510EE57B9AFA8DBE028B33AE3280A144826FEAC5F2334CF2C5539",
+          "exponent": 0,
+          "aliases": [
+            "unym"
+          ]
+        },
+        {
+          "denom": "nym",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/37CB3078432510EE57B9AFA8DBE028B33AE3280A144826FEAC5F2334CF2C5539",
+      "name": "NYM",
+      "display": "nym",
+      "symbol": "NYM",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "nyx",
+            "base_denom": "unym",
+            "channel_id": "channel-8"
+          },
+          "chain": {
+            "channel_id": "channel-15464",
+            "path": "transfer/channel-15464/unym"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nyx/images/nym.png"
+      },
+      "coingecko_id": "nym"
     }
   ]
 }

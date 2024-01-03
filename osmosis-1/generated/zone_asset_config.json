@@ -47,7 +47,7 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "2",
+        "pool": "1100",
         "denom": "uosmo"
       },
       "name": "Ion DAO",
@@ -344,7 +344,7 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "1265",
+        "pool": "1135",
         "denom": "uosmo"
       },
       "transfer_methods": [
@@ -4755,7 +4755,7 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "1283",
+        "pool": "1136",
         "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
       },
       "categories": [
@@ -4802,7 +4802,7 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "810",
+        "pool": "1331",
         "denom": "ibc/987C17B11ABC2B20019178ACE62929FE9840202CE79498E29FE8E5CB02B7C0A4"
       },
       "categories": [
@@ -11124,6 +11124,7 @@
       ],
       "coingecko_id": "pyth-network",
       "verified": true,
+      "api_include": true,
       "price": {
         "pool": "1315",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
@@ -11221,8 +11222,8 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "1325",
-        "denom": "uosmo"
+        "pool": "1337",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "name": "Levana",
       "description": "Levana native token"
@@ -11715,6 +11716,82 @@
       ],
       "name": "Kleomedes",
       "description": "Kleomedes Token",
+      "unlisted": true
+    },
+    {
+      "chain_name": "nyx",
+      "base_denom": "unyx",
+      "minimal_denom": "ibc/1A611E8A3E4248106A1A5A80A64BFA812739435E8B9888EB3F652A21F029F317",
+      "symbol": "NYX",
+      "decimals": 6,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nyx/images/nyx.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nyx/images/nyx.png"
+        }
+      ],
+      "coingecko_id": "",
+      "verified": true,
+      "transfer_methods": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "nyx",
+            "chain_id": "nyx",
+            "base_denom": "unyx",
+            "port": "transfer",
+            "channel_id": "channel-8"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-15464",
+            "path": "transfer/channel-15464/unyx"
+          },
+          "validated": true
+        }
+      ],
+      "name": "Nym",
+      "description": "NYX Token (NYX) is the Nym Network's native token.",
+      "unlisted": true
+    },
+    {
+      "chain_name": "nyx",
+      "base_denom": "unym",
+      "minimal_denom": "ibc/37CB3078432510EE57B9AFA8DBE028B33AE3280A144826FEAC5F2334CF2C5539",
+      "symbol": "NYM",
+      "decimals": 6,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nyx/images/nym.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nyx/images/nym.png"
+        }
+      ],
+      "coingecko_id": "nym",
+      "verified": true,
+      "transfer_methods": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "nyx",
+            "chain_id": "nyx",
+            "base_denom": "unym",
+            "port": "transfer",
+            "channel_id": "channel-8"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-15464",
+            "path": "transfer/channel-15464/unym"
+          },
+          "validated": true
+        }
+      ],
+      "name": "NYM",
+      "description": "NYM Token (NYM) is the Nym Network's native utility token, used as the primary means to incentivize mixnet node operators.",
       "unlisted": true
     }
   ]

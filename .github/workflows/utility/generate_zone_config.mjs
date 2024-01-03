@@ -144,8 +144,6 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
     //  OSMOSIS-VERIFIED
     generatedAsset.verified = zone_asset.osmosis_verified;
 
-    //  OSMOSIS-VALIDATED
-    generatedAsset.validated = zone_asset.osmosis_validated;
 
 
     let denom = generatedAsset.minimal_denom;

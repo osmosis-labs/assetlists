@@ -28,7 +28,7 @@
         "staking",
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1221"
+        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1263"
       ]
     },
     {
@@ -177,7 +177,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:1281"
+        "osmosis-price:uosmo:1134"
       ]
     },
     {
@@ -465,7 +465,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:1265"
+        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1251"
       ]
     },
     {
@@ -12186,6 +12186,7 @@
       "coingecko_id": "pyth-network",
       "keywords": [
         "osmosis-main",
+        "osmosis-info",
         "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1315"
       ]
     },
@@ -12783,6 +12784,91 @@
       "keywords": [
         "osmosis-info",
         "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1353",
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "NYX Token (NYX) is the Nym Network's native token.",
+      "denom_units": [
+        {
+          "denom": "ibc/1A611E8A3E4248106A1A5A80A64BFA812739435E8B9888EB3F652A21F029F317",
+          "exponent": 0,
+          "aliases": [
+            "unyx"
+          ]
+        },
+        {
+          "denom": "nyx",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/1A611E8A3E4248106A1A5A80A64BFA812739435E8B9888EB3F652A21F029F317",
+      "name": "Nym",
+      "display": "nyx",
+      "symbol": "NYX",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "nyx",
+            "base_denom": "unyx",
+            "channel_id": "channel-8"
+          },
+          "chain": {
+            "channel_id": "channel-15464",
+            "path": "transfer/channel-15464/unyx"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nyx/images/nyx.png"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "NYM Token (NYM) is the Nym Network's native utility token, used as the primary means to incentivize mixnet node operators.",
+      "denom_units": [
+        {
+          "denom": "ibc/37CB3078432510EE57B9AFA8DBE028B33AE3280A144826FEAC5F2334CF2C5539",
+          "exponent": 0,
+          "aliases": [
+            "unym"
+          ]
+        },
+        {
+          "denom": "nym",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/37CB3078432510EE57B9AFA8DBE028B33AE3280A144826FEAC5F2334CF2C5539",
+      "name": "NYM",
+      "display": "nym",
+      "symbol": "NYM",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "nyx",
+            "base_denom": "unym",
+            "channel_id": "channel-8"
+          },
+          "chain": {
+            "channel_id": "channel-15464",
+            "path": "transfer/channel-15464/unym"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nyx/images/nym.png"
+      },
+      "coingecko_id": "nym",
+      "keywords": [
+        "osmosis-main",
         "osmosis-unlisted"
       ]
     }

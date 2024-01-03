@@ -331,8 +331,8 @@
         "fee_tokens": [
           {
             "denom": "uscrt",
-            "fixed_min_gas_price": 0.1,
-            "low_gas_price": 0.1,
+            "fixed_min_gas_price": 0.05,
+            "low_gas_price": 0.05,
             "average_gas_price": 0.1,
             "high_gas_price": 0.25
           }
@@ -3044,10 +3044,10 @@
         "fee_tokens": [
           {
             "denom": "uluna",
-            "fixed_min_gas_price": 0.0125,
-            "low_gas_price": 0.0125,
-            "average_gas_price": 0.015,
-            "high_gas_price": 0.04
+            "fixed_min_gas_price": 0.15,
+            "low_gas_price": 0.15,
+            "average_gas_price": 0.15,
+            "high_gas_price": 0.4
           }
         ]
       },
@@ -6791,6 +6791,128 @@
         "ibc-go",
         "eth-address-gen",
         "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "pundix",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Pundi X Chain",
+      "chain_id": "PUNDIX",
+      "bech32_prefix": "px",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "px",
+        "bech32PrefixAccPub": "pxpub",
+        "bech32PrefixValAddr": "pxvaloper",
+        "bech32PrefixValPub": "pxvaloperpub",
+        "bech32PrefixConsAddr": "pxvalcons",
+        "bech32PrefixConsPub": "pxvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ibc/55367B7B6572631B78A93C66EF9FDFCE87CDE372CC4ED7848DA78C1EB1DCDD78",
+            "fixed_min_gas_price": 2000000000000,
+            "low_gas_price": 2000000000000,
+            "average_gas_price": 2500000000000,
+            "high_gas_price": 3000000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ibc/55367B7B6572631B78A93C66EF9FDFCE87CDE372CC4ED7848DA78C1EB1DCDD78"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://px-json.pundix.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://px-rest.pundix.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://starscan.io/pundix/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "nyx",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Nym",
+      "chain_id": "nyx",
+      "bech32_prefix": "n",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "n",
+        "bech32PrefixAccPub": "npub",
+        "bech32PrefixValAddr": "nvaloper",
+        "bech32PrefixValPub": "nvaloperpub",
+        "bech32PrefixConsAddr": "nvalcons",
+        "bech32PrefixConsPub": "nvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "unym",
+            "fixed_min_gas_price": 0.025,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          },
+          {
+            "denom": "unyx",
+            "fixed_min_gas_price": 0.025,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "unyx"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://nym-rpc.polkachu.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://nym-api.polkachu.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/nyx/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
       ]
     }
   ]

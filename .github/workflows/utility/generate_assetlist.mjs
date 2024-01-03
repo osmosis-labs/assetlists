@@ -307,9 +307,6 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     if(zone_asset.osmosis_verified) {
       keywords.push("osmosis-main");
     }
-    if(zone_asset.osmosis_frontier) {
-      keywords.push("osmosis-frontier");
-    }
     if (pool_assets.get(generatedAsset.base)) {
       if(pool_assets.get(generatedAsset.base).osmosis_info) {
         keywords.push("osmosis-info");
@@ -324,9 +321,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     if(zone_asset.osmosis_unstable) {
       keywords.push("osmosis-unstable");
     }
-    console.log(zone_asset.osmosis_validated);
-    if(zone_asset.osmosis_unlisted || !zone_asset.osmosis_validated) {
-      console.log("Hide!");
+    if(zone_asset.osmosis_unlisted) {
       keywords.push("osmosis-unlisted");
     }
     

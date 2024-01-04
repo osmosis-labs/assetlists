@@ -185,14 +185,14 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
     //--Process Transfer Methods--
     generatedAsset.transfer_methods = zone_asset.transfer_methods;
 
-    generatedAsset.transfer_methods.forEach((transfer_method) => {
+    generatedAsset.transfer_methods?.forEach((transfer_method) => {
       //if integrated bridge, get counterparty data
       if(transfer_method.type == "integrated_bridge") {
         //get counterparty data
         transfer_method.counterparty.forEach((asset) => {
           //fill in counterparty data from config file
-          let evm_base = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "base")
-          let evm_symbol = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "symbol"),
+          let evm_base = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "base");
+          let evm_symbol = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "symbol");
           let evm_display = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "display");
           let evm_denom_units = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "denom_units");
           let evm_decimals;
@@ -325,7 +325,7 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
         traces?.forEach((trace) => {
           if(trace.type == "bridge") {
             bridge_provider = trace.provider;
-            let suffixes = zoneConfig?.providers;
+            let providers = zoneConfig?.providers;
             if(providers) {
               providers.forEach((provider) => {
                 if(provider.provider == bridge_provider && provider.suffix) {
@@ -400,7 +400,7 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
           let providers = zoneConfig?.providers;
           if(providers) {
             providers.forEach((provider) => {
-              if(provider.provider == trace.provider) {
+              if(provider.provider == trace.provider && provider.token) {
                 generatedAsset.sort_with = {
                   chain_name: provider.token.chain_name,
                   base_denom: provider.token.base_denom

@@ -72,7 +72,30 @@
       "canonical": {
         "chain_name": "ethereum",
         "base_denom": "wei"
-      }
+      },
+      "transfer_methods": [
+        {
+          "name": "Axelar Bridge",
+          "type": "integrated_bridge",
+          "counterparty": [
+            {
+              "chain_name": "ethereum",
+              "base_denom": "wei"
+            },
+            {
+              "chain_name": "ethereum",
+              "base_denom": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+            }
+          ],
+          "provider_asset_key": "eth"
+        },
+        {
+          "name": "Satellite",
+          "type": "external_interface",
+          "deposit_url": "https://satellite.money/?source=ethereum&destination=osmosis&asset_denom=weth-wei",
+          "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=weth-wei"
+        }
+      ]
     },
     {
       "chain_name": "axelar",

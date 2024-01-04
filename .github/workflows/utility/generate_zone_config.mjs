@@ -181,8 +181,44 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
     
     generatedAsset.peg_mechanism = zone_asset.peg_mechanism;
 
+
+    //--Process Transfer Methods--
     generatedAsset.transfer_methods = zone_asset.transfer_methods;
-    
+
+    generatedAsset.transfer_methods?.forEach((transfer_method) => {
+      //if integrated bridge, get counterparty data
+      if(transfer_method.type == "integrated_bridge") {
+        //get counterparty data
+        transfer_method.counterparty.forEach((asset) => {
+          //fill in counterparty data from config file
+          let evm_base = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "base");
+          let evm_symbol = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "symbol");
+          let evm_display = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "display");
+          let evm_denom_units = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "denom_units");
+          let evm_decimals;
+          evm_denom_units.forEach((unit) => {
+            if(unit.denom == display) {
+              evm_decimals = unit.exponent
+            }
+          });
+          let evm_chain;
+          zoneConfig?.evm_chains?.forEach((chain) => {
+            if(chain.chain_name == asset.chain_name) {
+              evm_chain = chain;
+            }
+          });
+          if(evm_base, evm_symbol, evm_decimals, evm_chain) {
+            asset.evm = {
+              base: evm_base,
+              symbol: evm_symbol,
+              decimals: evm_decimals,
+              chain: evm_chain
+            }
+          }
+        });
+      }
+    });
+
 
     let bridge_provider = "";
 
@@ -276,7 +312,7 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
       }
 
       if (!generatedAsset.transfer_methods) {
-        trace.validated = true;
+        //trace.validated = true;
         generatedAsset.transfer_methods = [];
       }
 
@@ -289,11 +325,11 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
         traces?.forEach((trace) => {
           if(trace.type == "bridge") {
             bridge_provider = trace.provider;
-            let suffixes = zoneConfig?.interoperability?.suffixes;
-            if(suffixes) {
-              suffixes.forEach((suffix) => {
-                if(suffix.provider == bridge_provider) {
-                  generatedAsset.symbol = generatedAsset.symbol + suffix.suffix;
+            let providers = zoneConfig?.providers;
+            if(providers) {
+              providers.forEach((provider) => {
+                if(provider.provider == bridge_provider && provider.suffix) {
+                  generatedAsset.symbol = generatedAsset.symbol + provider.suffix;
                 }
               });
             }
@@ -361,10 +397,10 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
     if(!generatedAsset.coingecko_id && !zone_asset.canonical){
       traces?.forEach((trace) => {
         if(trace.provider) {
-          let providers = zoneConfig?.provider_primary_token;
+          let providers = zoneConfig?.providers;
           if(providers) {
             providers.forEach((provider) => {
-              if(provider.provider == trace.provider) {
+              if(provider.provider == trace.provider && provider.token) {
                 generatedAsset.sort_with = {
                   chain_name: provider.token.chain_name,
                   base_denom: provider.token.base_denom

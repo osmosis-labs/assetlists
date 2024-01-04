@@ -2,43 +2,66 @@
   "$schema": "../zone.schema.json",
   "chain_name": "osmosis",
   "config": {
-    "interoperability": {
-      "suffixes": [
-        {
-          "provider": "Axelar",
-          "suffix": ".axl"
-        },
-        {
-          "provider": "Gravity Bridge",
-          "suffix": ".grv"
-        },
-        {
-          "provider": "Wormhole",
-          "suffix": ".wh"
-        },
-        {
-          "provider": "Composable",
-          "suffix": ".comp"
-        }
-      ]
-    },
-    "provider_primary_token": [
+    "providers": [
       {
         "provider": "Axelar",
+        "suffix": ".axl",
         "token": {
           "chain_name": "axelar",
           "base_denom": "uaxl"
+        },
+        "api_keys": {
+          "chain_keys": [
+            {
+              "chain_name": "ethereum",
+              "api_key": "ethereum"
+            },
+            {
+              "chain_name": "arbitrum",
+              "api_key": "arbitrum"
+            },
+            {
+              "chain_name": "avalanche",
+              "api_key": "avalanche"
+            },
+            {
+              "chain_name": "binancesmartchain",
+              "api_key": "binance"
+            },
+            {
+              "chain_name": "fantom",
+              "api_key": "fantom"
+            },
+            {
+              "chain_name": "filecoin",
+              "api_key": "filecoin"
+            },
+            {
+              "chain_name": "moonbeam",
+              "api_key": "moonbeam"
+            },
+            {
+              "chain_name": "polygon",
+              "api_key": "polygon"
+            }
+          ]
         }
       },
       {
         "provider": "Gravity Bridge",
+        "suffix": ".grv",
         "token": {
           "chain_name": "gravitybridge",
           "base_denom": "ugrav"
         }
       },
       {
+        "provider": "Wormhole",
+        "suffix": ".wh"
+      },
+      {
         "provider": "Composable",
+        "suffix": ".comp",
         "token": {
           "chain_name": "composable",
           "base_denom": "ppica"
@@ -63,6 +86,128 @@
         "token": {
           "chain_name": "persistence",
           "base_denom": "uxprt"
+        }
+      }
+    ],
+    "evm_chains": [
+      {
+        "chain_name": "ethereum",
+        "pretty_name_osmosis": "Ethereum",
+        "pretty_name_client": "Polygon Mainnet",
+        "chain_id": 1,
+        "logo_URL": "/networks/ethereum.svg",
+        "rpc_URLs": [
+          "https://ethereum.publicnode.com"
+        ],
+        "nativeCurrency": {
+          "name": "Ether",
+          "symbol": "ETH",
+          "decimals": 18
+        }
+      },
+      {
+        "chain_name": "arbitrum",
+        "pretty_name_osmosis": "Arbitrum",
+        "pretty_name_client": "Arbitrum One",
+        "chain_id": 42161,
+        "logo_URL": "/networks/arbitrum.svg",
+        "rpc_URLs": [
+          "https://arbitrum-one.publicnode.com"
+        ],
+        "nativeCurrency": {
+          "name": "Arbitrum",
+          "symbol": "ETH",
+          "decimals": 18
+        }
+      },
+      {
+        "chain_name": "avalanche",
+        "pretty_name_osmosis": "Avalanche",
+        "client_pretty_name": "Avalanche C-Chain",
+        "chain_id": 43114,
+        "logo_URL": "/networks/avalanche.svg",
+        "rpc_URLs": [
+          "https://api.avax.network/ext/bc/C/rpc"
+        ],
+        "nativeCurrency": {
+          "name": "Avalanche",
+          "symbol": "AVAX",
+          "decimals": 18
+        }
+      },
+      {
+        "chain_name": "binancesmartchain",
+        "pretty_nam_osmosise": "Binance Smart Chain",
+        "client_pretty_name": "Binance Smart Chain Mainnet",
+        "chain_id": 56,
+        "logo_URL": "/networks/binance.svg",
+        "rpc_URLs": [
+          "https://bsc-dataseed.binance.org/"
+        ],
+        "nativeCurrency": {
+          "name": "Binance Chain Native Token",
+          "symbol": "BNB",
+          "decimals": 18
+        }
+      },
+      {
+        "chain_name": "fantom",
+        "pretty_name_osmosis": "Fantom",
+        "pretty_name_client": "Fantom Opera",
+        "chain_id": 250,
+        "logo_URL": "/networks/fantom.svg",
+        "rpc_URLs": [
+          "https://fantom.publicnode.com"
+        ],
+        "nativeCurrency": {
+          "name": "Fantom",
+          "symbol": "FTM",
+          "decimals": 18
+        }
+      },
+      {
+        "chain_name": "filecoin",
+        "pretty_name_osmosis": "Filecoin",
+        "pretty_name_client": "Filecoin - Mainnet",
+        "chain_id": 461,
+        "logo_URL": "/networks/filecoin.svg",
+        "rpc_URLs": [
+          "https://rpc.ankr.com/filecoin"
+        ],
+        "nativeCurrency": {
+          "name": "Filecoin",
+          "symbol": "FIL",
+          "decimals": 18
+        }
+      },
+      {
+        "chain_name": "moonbeam",
+        "pretty_name_osmosis": "Moonbeam",
+        "pretty_name_client": "Moonbeam Mainnet",
+        "chain_id": 1284,
+        "logo_URL": "/networks/moonbeam.svg",
+        "rpc_URLs": [
+          "https://moonbeam.publicnode.com"
+        ],
+        "nativeCurrency": {
+          "name": "Moonbeam",
+          "symbol": "GLMR",
+          "decimals": 18
+        }
+      },
+      {
+        "chain_name": "polygon",
+        "pretty_name_osmosis": "Polygon",
+        "pretty_name_client": "Polygon Mainnet",
+        "chain_id": 137,
+        "logo_URL": "/networks/polygon.svg",
+        "rpc_URLs": [
+          "https://polygon-rpc.com/"
+        ],
+        "nativeCurrency": {
+          "name": "Matic",
+          "symbol": "MATIC",
+          "decimals": 18
         }
       }
     ]

@@ -18,6 +18,37 @@
       "path": "transfer/channel-208/uusdc",
       "peg_mechanism": "collateralized",
       "osmosis_verified": true,
+      "transfer_methods": [
+        {
+          "name": "Axelar Bridge",
+          "type": "integrated_bridge",
+          "counterparty": [
+            {
+              "chain_name": "ethereum",
+              "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+            },
+            {
+              "chain_name": "avalanche",
+              "base_denom": "0xfab550568C688d5d8a52c7d794cb93edc26ec0ec"
+            },
+            {
+              "chain_name": "moonbeam",
+              "base_denom": "0xca01a1d0993565291051daff390892518acfad3a"
+            },
+            {
+              "chain_name": "polygon",
+              "base_denom": "0x750e4c4984a9e0f12978ea6742bc1c5d248f40ed"
+            }
+          ],
+          "provider_asset_key": "uusdc"
+        },
+        {
+          "name": "Satellite",
+          "type": "external_interface",
+          "deposit_url": "https://satellite.money/?source=ethereum&destination=osmosis&asset_denom=uusdc",
+          "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=uusdc"
+        }
+      ],
       "override_properties": {
         "symbol": "USDC.axl",
         "logo_URIs": {

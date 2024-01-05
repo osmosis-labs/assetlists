@@ -182,6 +182,13 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
     generatedAsset.peg_mechanism = zone_asset.peg_mechanism;
 
 
+
+    //--Identify What the Token Represents--
+    let origin_asset;
+    //iterate each trace, starting from the bottom
+
+
+
     //--Process Transfer Methods--
     generatedAsset.transfer_methods = zone_asset.transfer_methods;
 
@@ -191,30 +198,16 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
         //get counterparty data
         transfer_method.counterparty.forEach((asset) => {
           //fill in counterparty data from config file
-          let evm_base = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "base");
-          let evm_symbol = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "symbol");
-          let evm_display = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "display");
-          let evm_denom_units = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "denom_units");
-          let evm_decimals;
-          evm_denom_units.forEach((unit) => {
+          asset.symbol = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "symbol");
+          let display = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "display");
+          let denom_units = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "denom_units");
+          let decimals;
+          denom_units.forEach((unit) => {
             if(unit.denom == display) {
-              evm_decimals = unit.exponent
+              asset.decimals = unit.exponent;
+              return;
             }
           });
-          let evm_chain;
-          zoneConfig?.evm_chains?.forEach((chain) => {
-            if(chain.chain_name == asset.chain_name) {
-              evm_chain = chain;
-            }
-          });
-          if(evm_base, evm_symbol, evm_decimals, evm_chain) {
-            asset.evm = {
-              base: evm_base,
-              symbol: evm_symbol,
-              decimals: evm_decimals,
-              chain: evm_chain
-            }
-          }
         });
       }
     });

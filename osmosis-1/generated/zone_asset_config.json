@@ -21,8 +21,8 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "1265",
-        "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
+        "pool": "1221",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "name": "Osmosis",
       "description": "The native token of Osmosis\n\nOsmosis (OSMO) is the premier DEX and cross-chain DeFi hub within the Cosmos ecosystem, a network of over 50 sovereign, interoperable blockchains seamlessly connected through the Inter-Blockchain Communication Protocol (IBC). Pioneering in its approach, Osmosis offers a dynamic trading and liquidity provision experience, integrating non-IBC assets from other ecosystems, including Ethereum, Solana, Avalanche, and Polkadot. Initially adopting Balancer-style pools, Osmosis now also features a concentrated liquidity model that is orders of magnitude more capital efficient, meaning that significantly less liquidity is required to handle the same amount of trading volume with minimal slippage.\n\nAs a true appchain, Osmosis has greater control over the full blockchain stack than traditional smart contract DEXs, which must follow the code of the parent chain that it is built on. This fine-grained control has enabled, for example, the development of Superfluid Staking, an extension of Proof of Stake that allows assets at the application layer to be staked to secure the chain. The customizability of appchains also allows implementing features like the Protocol Revenue module, which enables Osmosis to conduct on-chain arbitrage on behalf of OSMO stakers, balancing prices across pools while generating real yield revenue from this volume. Additionally, as a sovereign appchain, Osmosis governance can vote on upgrades to the protocol. One example of this was the introduction of a Taker Fee, which switched on the collection of exchange fees to generate diverse yield from Osmosis volume and distribute it to OSMO stakers.\n\nOsmosis is bringing the full centralized exchange experience to the decentralized world by building a cross-chain native DEX and trading suite that connects all chains over IBC, including Ethereum and Bitcoin. To reach this goal, Osmosis hosts an ever-expanding suite of DeFi applications aimed at providing a one-stop experience that includes lending, credit, margin, DeFi strategy vaults, power perps, fiat on-ramps, NFTs, stablecoins, and more — all of the functionalities that centralized exchange offer and more, in the trust-minimized environment of decentralized finance."
@@ -84,95 +84,26 @@
             {
               "chain_name": "ethereum",
               "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-              "evm": {
-                "base": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-                "symbol": "USDC",
-                "decimals": 6,
-                "chain": {
-                  "chain_name": "ethereum",
-                  "pretty_name_osmosis": "Ethereum",
-                  "pretty_name_client": "Ethereum Mainnet",
-                  "chain_id": 1,
-                  "logo_URL": "/networks/ethereum.svg",
-                  "rpc_URLs": [
-                    "https://ethereum.publicnode.com"
-                  ],
-                  "nativeCurrency": {
-                    "name": "Ether",
-                    "symbol": "ETH",
-                    "decimals": 18
-                  }
-                }
-              }
+              "symbol": "USDC",
+              "decimals": 6
             },
             {
               "chain_name": "avalanche",
               "base_denom": "0xfab550568C688d5d8a52c7d794cb93edc26ec0ec",
-              "evm": {
-                "base": "0xfab550568C688d5d8a52c7d794cb93edc26ec0ec",
-                "symbol": "axlUSDC",
-                "chain": {
-                  "chain_name": "avalanche",
-                  "pretty_name_osmosis": "Avalanche",
-                  "client_pretty_name": "Avalanche C-Chain",
-                  "chain_id": 43114,
-                  "logo_URL": "/networks/avalanche.svg",
-                  "rpc_URLs": [
-                    "https://api.avax.network/ext/bc/C/rpc"
-                  ],
-                  "nativeCurrency": {
-                    "name": "Avalanche",
-                    "symbol": "AVAX",
-                    "decimals": 18
-                  }
-                }
-              }
+              "symbol": "axlUSDC",
+              "decimals": 6
             },
             {
               "chain_name": "moonbeam",
               "base_denom": "0xca01a1d0993565291051daff390892518acfad3a",
-              "evm": {
-                "base": "0xca01a1d0993565291051daff390892518acfad3a",
-                "symbol": "axlUSDC",
-                "chain": {
-                  "chain_name": "moonbeam",
-                  "pretty_name_osmosis": "Moonbeam",
-                  "pretty_name_client": "Moonbeam Mainnet",
-                  "chain_id": 1284,
-                  "logo_URL": "/networks/moonbeam.svg",
-                  "rpc_URLs": [
-                    "https://moonbeam.publicnode.com"
-                  ],
-                  "nativeCurrency": {
-                    "name": "Moonbeam",
-                    "symbol": "GLMR",
-                    "decimals": 18
-                  }
-                }
-              }
+              "symbol": "axlUSDC",
+              "decimals": 6
             },
             {
               "chain_name": "polygon",
               "base_denom": "0x750e4c4984a9e0f12978ea6742bc1c5d248f40ed",
-              "evm": {
-                "base": "0x750e4c4984a9e0f12978ea6742bc1c5d248f40ed",
-                "symbol": "axlUSDC",
-                "chain": {
-                  "chain_name": "polygon",
-                  "pretty_name_osmosis": "Polygon",
-                  "pretty_name_client": "Polygon Mainnet",
-                  "chain_id": 137,
-                  "logo_URL": "/networks/polygon.svg",
-                  "rpc_URLs": [
-                    "https://polygon-rpc.com/"
-                  ],
-                  "nativeCurrency": {
-                    "name": "Matic",
-                    "symbol": "MATIC",
-                    "decimals": 18
-                  }
-                }
-              }
+              "symbol": "axlUSDC",
+              "decimals": 6
             }
           ],
           "provider_asset_key": "uusdc"
@@ -221,8 +152,8 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "1264",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "pool": "1134",
+        "denom": "uosmo"
       },
       "transfer_methods": [
         {
@@ -232,49 +163,14 @@
             {
               "chain_name": "ethereum",
               "base_denom": "wei",
-              "evm": {
-                "base": "wei",
-                "symbol": "ETH",
-                "chain": {
-                  "chain_name": "ethereum",
-                  "pretty_name_osmosis": "Ethereum",
-                  "pretty_name_client": "Ethereum Mainnet",
-                  "chain_id": 1,
-                  "logo_URL": "/networks/ethereum.svg",
-                  "rpc_URLs": [
-                    "https://ethereum.publicnode.com"
-                  ],
-                  "nativeCurrency": {
-                    "name": "Ether",
-                    "symbol": "ETH",
-                    "decimals": 18
-                  }
-                }
-              }
+              "symbol": "ETH",
+              "decimals": 18
             },
             {
               "chain_name": "ethereum",
               "base_denom": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
-              "evm": {
-                "base": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
-                "symbol": "WETH",
-                "decimals": 18,
-                "chain": {
-                  "chain_name": "ethereum",
-                  "pretty_name_osmosis": "Ethereum",
-                  "pretty_name_client": "Ethereum Mainnet",
-                  "chain_id": 1,
-                  "logo_URL": "/networks/ethereum.svg",
-                  "rpc_URLs": [
-                    "https://ethereum.publicnode.com"
-                  ],
-                  "nativeCurrency": {
-                    "name": "Ether",
-                    "symbol": "ETH",
-                    "decimals": 18
-                  }
-                }
-              }
+              "symbol": "WETH",
+              "decimals": 18
             }
           ],
           "provider_asset_key": "eth"
@@ -324,8 +220,8 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "1277",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "pool": "1090",
+        "denom": "uosmo"
       },
       "transfer_methods": [
         {
@@ -504,8 +400,8 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "1251",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "pool": "1135",
+        "denom": "uosmo"
       },
       "transfer_methods": [
         {
@@ -808,7 +704,7 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "773",
+        "pool": "1091",
         "denom": "uosmo"
       },
       "transfer_methods": [
@@ -1986,8 +1882,8 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "1271",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "pool": "619",
+        "denom": "uosmo"
       },
       "transfer_methods": [
         {
@@ -4826,7 +4722,7 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "1136",
+        "pool": "1283",
         "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
       },
       "categories": [
@@ -5180,7 +5076,7 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "833",
+        "pool": "1252",
         "denom": "uosmo"
       },
       "categories": [
@@ -6319,7 +6215,6 @@
       ],
       "coingecko_id": "canto",
       "verified": true,
-      "api_include": true,
       "price": {
         "pool": "901",
         "denom": "uosmo"
@@ -8929,8 +8824,8 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "1145",
-        "denom": "uosmo"
+        "pool": "1144",
+        "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
       },
       "transfer_methods": [
         {
@@ -10880,8 +10775,8 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "1326",
-        "denom": "ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4"
+        "pool": "1302",
+        "denom": "uosmo"
       },
       "transfer_methods": [
         {
@@ -11723,6 +11618,7 @@
       ],
       "coingecko_id": "nym",
       "verified": true,
+      "api_include": true,
       "price": {
         "pool": "1361",
         "denom": "uosmo"
@@ -11745,8 +11641,7 @@
         }
       ],
       "name": "NYM",
-      "description": "NYM Token (NYM) is the Nym Network's native utility token, used as the primary means to incentivize mixnet node operators.",
-      "unlisted": true
+      "description": "NYM Token (NYM) is the Nym Network's native utility token, used as the primary means to incentivize mixnet node operators."
     },
     {
       "chain_name": "chihuahua",
@@ -11787,6 +11682,41 @@
       "name": "Chihuahuawifhat",
       "description": "has a hat",
       "unlisted": true
+    },
+    {
+      "chain_name": "neutron",
+      "base_denom": "factory/neutron170v88vrtnedesyfytuku257cggxc79rd7lwt7q/ucircus",
+      "minimal_denom": "ibc/8C8F6349F656C943543C6B040377BE44123D01F712277815C3C13098BB98818C",
+      "symbol": "CIRCUS",
+      "decimals": 6,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/circus.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/circus.png"
+        }
+      ],
+      "verified": false,
+      "transfer_methods": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "neutron",
+            "chain_id": "neutron-1",
+            "base_denom": "factory/neutron170v88vrtnedesyfytuku257cggxc79rd7lwt7q/ucircus",
+            "port": "transfer",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-874",
+            "path": "transfer/channel-874/factory/neutron170v88vrtnedesyfytuku257cggxc79rd7lwt7q/ucircus"
+          }
+        }
+      ],
+      "name": "AtomEconomicZone69JaeKwonInu",
+      "description": "clownmaxxed store of value"
     }
   ]
 }

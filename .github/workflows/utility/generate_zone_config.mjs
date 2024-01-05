@@ -23,6 +23,13 @@ const zoneAssetlistFileName = "osmosis.zone_assets.json";
 const zoneChainlistFileName = "osmosis.zone_chains.json";
 const zoneConfigFileName = "osmosis.zone_config.json";
 
+const find_origin_trace_types = [
+  "ibc",
+  "ibc-cw20",
+  "bridge",
+  "wrapped",
+  "additional-mintage"
+];
 
 function getZoneAssetlist(chainName) {
   try {
@@ -170,7 +177,7 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
     if(zone_asset.peg_mechanism) {
       categories.push("stablecoin");
     }
-    let traces = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, "traces");
+    let traces = chain_reg.getAssetTraces(zone_asset.chain_name, zone_asset.base_denom);
     traces?.forEach((trace) => {
       if(trace.type == "liquid-stake") {
         categories.push("liquid_staking");
@@ -181,11 +188,8 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
     
     generatedAsset.peg_mechanism = zone_asset.peg_mechanism;
 
+    
 
-
-    //--Identify What the Token Represents--
-    let origin_asset;
-    //iterate each trace, starting from the bottom
 
 
 
@@ -216,7 +220,12 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
     let bridge_provider = "";
 
 
+
     if(zone_asset.chain_name != chainName) {
+
+      if(!traces) {
+        traces = [];
+      }
 
       //--Set Up Trace for IBC Transfer--
       
@@ -234,7 +243,6 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
       if (type === "ibc-cw20") {
         counterparty.port = "wasm."
       }
-
       
       let chain = {
         port: "transfer"
@@ -304,6 +312,8 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
         chain: chain
       }
 
+      traces.push(trace);
+
       if (!generatedAsset.transfer_methods) {
         //trace.validated = true;
         generatedAsset.transfer_methods = [];
@@ -332,9 +342,77 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
       }
 
 
-
     }
 
+
+    //--Identify What the Token Represents--
+    if(traces) {
+
+      let last_trace = "";
+      let bridge_uses = 0;
+      //iterate each trace, starting from the bottom
+      for (let i = traces.length - 1; i >= 0; i--) {
+        if(!find_origin_trace_types.includes(traces[i].type)) {
+          break;
+        } else if (traces[i].type == "bridge" && bridge_uses) {
+          break;
+        } else {
+          if(!generatedAsset.counterparty) {
+            generatedAsset.counterparty = [];
+          }
+          last_trace = traces[i];
+          let counterparty = {
+            chain_name: last_trace.counterparty.chain_name,
+            base_denom: last_trace.counterparty.base_denom
+          };
+          if(last_trace.type == "bridge") {
+            bridge_uses += 1;
+          }
+          let comsos_chain_id = chain_reg.getFileProperty(last_trace.counterparty.chain_name, "chain", "chain_id")
+          if(comsos_chain_id) {
+            counterparty.chain_type = "cosmos";
+            counterparty.chain_id = comsos_chain_id;
+          } else {
+            zoneConfig?.evm_chains?.forEach((evm_chain) => {
+              if(evm_chain.chain_name == last_trace.counterparty.chain_name) {
+                counterparty.chain_type = "evm";
+                counterparty.chain_id = evm_chain.chain_id;
+                return;
+              }
+            });
+            if(!last_trace.counterparty.chain_type) {
+              counterparty.chain_type = "non-cosmos"
+            }
+          }
+          counterparty.symbol = chain_reg.getAssetProperty(
+            last_trace.counterparty.chain_name,
+            last_trace.counterparty.base_denom,
+            "symbol"
+          );
+          let display = chain_reg.getAssetProperty(last_trace.counterparty.chain_name, last_trace.counterparty.base_denom, "display");
+          let denom_units = chain_reg.getAssetProperty(last_trace.counterparty.chain_name, last_trace.counterparty.base_denom, "denom_units");
+          denom_units.forEach((unit) => {
+            if(unit.denom == display) {
+              counterparty.decimals = unit.exponent;
+              return;
+            }
+          });
+          counterparty.logo_URIs = chain_reg.getAssetProperty(
+            last_trace.counterparty.chain_name,
+            last_trace.counterparty.base_denom,
+            "logo_URIs"
+          );
+          generatedAsset.counterparty.push(counterparty);
+        }
+      }
+      if(last_trace) {
+        generatedAsset.common_key = chain_reg.getAssetProperty(
+          last_trace.counterparty.chain_name,
+          last_trace.counterparty.base_denom,
+          "symbol"
+        );
+      }
+    }
 
     
 

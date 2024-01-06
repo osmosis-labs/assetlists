@@ -83,27 +83,19 @@
           "counterparty": [
             {
               "chain_name": "ethereum",
-              "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-              "symbol": "USDC",
-              "decimals": 6
+              "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
             },
             {
               "chain_name": "avalanche",
-              "base_denom": "0xfab550568C688d5d8a52c7d794cb93edc26ec0ec",
-              "symbol": "axlUSDC",
-              "decimals": 6
+              "base_denom": "0xfab550568C688d5d8a52c7d794cb93edc26ec0ec"
             },
             {
               "chain_name": "moonbeam",
-              "base_denom": "0xca01a1d0993565291051daff390892518acfad3a",
-              "symbol": "axlUSDC",
-              "decimals": 6
+              "base_denom": "0xca01a1d0993565291051daff390892518acfad3a"
             },
             {
               "chain_name": "polygon",
-              "base_denom": "0x750e4c4984a9e0f12978ea6742bc1c5d248f40ed",
-              "symbol": "axlUSDC",
-              "decimals": 6
+              "base_denom": "0x750e4c4984a9e0f12978ea6742bc1c5d248f40ed"
             }
           ],
           "provider_asset_key": "uusdc"
@@ -115,10 +107,10 @@
           "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=uusdc"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "uusdc",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -148,6 +140,7 @@
           "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "symbol": "USDC",
           "decimals": 6,
           "logo_URIs": {
@@ -188,15 +181,11 @@
           "counterparty": [
             {
               "chain_name": "ethereum",
-              "base_denom": "wei",
-              "symbol": "ETH",
-              "decimals": 18
+              "base_denom": "wei"
             },
             {
               "chain_name": "ethereum",
-              "base_denom": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
-              "symbol": "WETH",
-              "decimals": 18
+              "base_denom": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
             }
           ],
           "provider_asset_key": "eth"
@@ -208,10 +197,10 @@
           "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=weth-wei"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "weth-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -240,6 +229,7 @@
           "base_denom": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
           "symbol": "WETH",
           "decimals": 18,
           "logo_URIs": {
@@ -251,6 +241,7 @@
           "base_denom": "wei",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
           "symbol": "ETH",
           "decimals": 18,
           "logo_URIs": {
@@ -288,10 +279,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "wbtc-satoshi",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -320,6 +311,7 @@
           "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
           "symbol": "WBTC",
           "decimals": 8,
           "logo_URIs": {
@@ -359,10 +351,10 @@
       "peg_mechanism": "collateralized",
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "uusdt",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -392,6 +384,7 @@
           "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "symbol": "USDT",
           "decimals": 6,
           "logo_URIs": {
@@ -434,10 +427,10 @@
       "peg_mechanism": "collateralized",
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "dai-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -467,6 +460,7 @@
           "base_denom": "0x6b175474e89094c44da98b954eedeac495271d0f",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
           "symbol": "DAI",
           "decimals": 18,
           "logo_URIs": {
@@ -503,10 +497,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "busd-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -535,6 +529,7 @@
           "base_denom": "0x4fabb145d64652a948d72533023f6e7a623c7c53",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0x4fabb145d64652a948d72533023f6e7a623c7c53",
           "symbol": "BUSD",
           "decimals": 18,
           "logo_URIs": {
@@ -567,15 +562,15 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "1135",
-        "denom": "uosmo"
+        "pool": "1251",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "cosmoshub",
-            "chain_id": "cosmoshub-4",
             "base_denom": "uatom",
             "port": "transfer",
             "channel_id": "channel-141"
@@ -631,10 +626,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "cryptoorgchain",
-            "chain_id": "crypto-org-chain-mainnet-1",
             "base_denom": "basecro",
             "port": "transfer",
             "channel_id": "channel-10"
@@ -688,10 +683,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "wbnb-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -721,6 +716,7 @@
           "base_denom": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
           "chain_type": "non-cosmos",
           "chain_id": 56,
+          "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
           "symbol": "WBNB",
           "decimals": 18,
           "logo_URIs": {
@@ -733,6 +729,7 @@
           "base_denom": "wei",
           "chain_type": "non-cosmos",
           "chain_id": 56,
+          "address": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
           "symbol": "BNB",
           "decimals": 18,
           "logo_URIs": {
@@ -769,10 +766,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "wmatic-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -802,6 +799,7 @@
           "base_denom": "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270",
           "chain_type": "non-cosmos",
           "chain_id": 137,
+          "address": "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270",
           "symbol": "WMATIC",
           "decimals": 18,
           "logo_URIs": {
@@ -813,6 +811,7 @@
           "base_denom": "wei",
           "chain_type": "non-cosmos",
           "chain_id": 137,
+          "address": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
           "symbol": "MATIC",
           "decimals": 18,
           "logo_URIs": {
@@ -849,10 +848,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "wavax-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -881,6 +880,7 @@
           "base_denom": "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7",
           "chain_type": "non-cosmos",
           "chain_id": 43114,
+          "address": "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7",
           "symbol": "WAVAX",
           "decimals": 18,
           "logo_URIs": {
@@ -892,6 +892,7 @@
           "base_denom": "wei",
           "chain_type": "non-cosmos",
           "chain_id": 43114,
+          "address": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
           "symbol": "AVAX",
           "decimals": 18,
           "logo_URIs": {
@@ -935,10 +936,10 @@
           "withdraw_url": "https://bridge.terra.money"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "terra",
-            "chain_id": "columbus-5",
             "base_denom": "uluna",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -993,10 +994,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "ujuno",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -1049,10 +1050,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "dot-planck",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -1082,6 +1083,7 @@
           "base_denom": "0xffffffff1fcacbd218edc0eba20fc2308c778080",
           "chain_type": "non-cosmos",
           "chain_id": 1284,
+          "address": "0xffffffff1fcacbd218edc0eba20fc2308c778080",
           "symbol": "xcDOT",
           "decimals": 10,
           "logo_URIs": {
@@ -1129,10 +1131,10 @@
           "withdraw_url": "https://app.evmos.org/assets"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "evmos",
-            "chain_id": "evmos_9001-2",
             "base_denom": "aevmos",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -1187,10 +1189,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "kava",
-            "chain_id": "kava_2222-10",
             "base_denom": "ukava",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -1245,10 +1247,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "secretnetwork",
-            "chain_id": "secret-4",
             "base_denom": "uscrt",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -1307,10 +1309,10 @@
       "peg_mechanism": "algorithmic",
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "terra",
-            "chain_id": "columbus-5",
             "base_denom": "uusd",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -1365,10 +1367,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "stargaze",
-            "chain_id": "stargaze-1",
             "base_denom": "ustars",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -1423,10 +1425,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "chihuahua",
-            "chain_id": "chihuahua-1",
             "base_denom": "uhuahua",
             "port": "transfer",
             "channel_id": "channel-7"
@@ -1481,10 +1483,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "persistence",
-            "chain_id": "core-1",
             "base_denom": "uxprt",
             "port": "transfer",
             "channel_id": "channel-6"
@@ -1542,10 +1544,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "persistence",
-            "chain_id": "core-1",
             "base_denom": "ibc/A6E3AF63B3C906416A9AF7A556C59EA4BD50E617EFFE6299B99700CCB780E444",
             "port": "transfer",
             "channel_id": "channel-6"
@@ -1587,6 +1589,7 @@
           "base_denom": "0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006",
           "symbol": "PSTAKE",
           "decimals": 18,
           "logo_URIs": {
@@ -1624,10 +1627,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "akash",
-            "chain_id": "akashnet-2",
             "base_denom": "uakt",
             "port": "transfer",
             "channel_id": "channel-9"
@@ -1682,10 +1685,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "regen",
-            "chain_id": "regen-1",
             "base_denom": "uregen",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -1740,10 +1743,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "sentinel",
-            "chain_id": "sentinelhub-2",
             "base_denom": "udvpn",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -1798,10 +1801,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "irisnet",
-            "chain_id": "irishub-1",
             "base_denom": "uiris",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -1856,10 +1859,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "starname",
-            "chain_id": "iov-mainnet-ibc",
             "base_denom": "uiov",
             "port": "transfer",
             "channel_id": "channel-2"
@@ -1914,10 +1917,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "emoney",
-            "chain_id": "emoney-3",
             "base_denom": "ungm",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -1972,10 +1975,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "emoney",
-            "chain_id": "emoney-3",
             "base_denom": "eeur",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -2030,10 +2033,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "likecoin",
-            "chain_id": "likecoin-mainnet-2",
             "base_denom": "nanolike",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -2088,10 +2091,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "impacthub",
-            "chain_id": "ixo-5",
             "base_denom": "uixo",
             "port": "transfer",
             "channel_id": "channel-4"
@@ -2146,10 +2149,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "bitcanna",
-            "chain_id": "bitcanna-1",
             "base_denom": "ubcna",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -2204,10 +2207,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "bitsong",
-            "chain_id": "bitsong-2b",
             "base_denom": "ubtsg",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -2262,10 +2265,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "kichain",
-            "chain_id": "kichain-2",
             "base_denom": "uxki",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -2320,10 +2323,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "panacea",
-            "chain_id": "panacea-3",
             "base_denom": "umed",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -2378,10 +2381,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "bostrom",
-            "chain_id": "bostrom",
             "base_denom": "boot",
             "port": "transfer",
             "channel_id": "channel-2"
@@ -2436,10 +2439,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "comdex",
-            "chain_id": "comdex-1",
             "base_denom": "ucmdx",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -2494,10 +2497,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "cheqd",
-            "chain_id": "cheqd-mainnet-1",
             "base_denom": "ncheq",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -2552,10 +2555,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "lumnetwork",
-            "chain_id": "lum-network-1",
             "base_denom": "ulum",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -2610,10 +2613,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "vidulum",
-            "chain_id": "vidulum-1",
             "base_denom": "uvdl",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -2668,10 +2671,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "desmos",
-            "chain_id": "desmos-mainnet",
             "base_denom": "udsm",
             "port": "transfer",
             "channel_id": "channel-2"
@@ -2724,10 +2727,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "dig",
-            "chain_id": "dig-1",
             "base_denom": "udig",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -2782,10 +2785,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "sommelier",
-            "chain_id": "sommelier-3",
             "base_denom": "usomm",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -2840,10 +2843,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "bandchain",
-            "chain_id": "laozi-mainnet",
             "base_denom": "uband",
             "port": "transfer",
             "channel_id": "channel-83"
@@ -2898,10 +2901,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "konstellation",
-            "chain_id": "darchub",
             "base_denom": "udarc",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -2956,10 +2959,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "umee",
-            "chain_id": "umee-1",
             "base_denom": "uumee",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -3014,10 +3017,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "gravitybridge",
-            "chain_id": "gravity-bridge-3",
             "base_denom": "ugraviton",
             "port": "transfer",
             "channel_id": "channel-10"
@@ -3072,10 +3075,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "decentr",
-            "chain_id": "mainnet-3",
             "base_denom": "udec",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -3130,10 +3133,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1g2g7ucurum66d42g8k5twk34yegdq8c82858gz0tq2fc75zy7khssgnhjl",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -3194,10 +3197,10 @@
           "withdraw_url": "https://app.dem.exchange/account/balance/deposit/swth"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "carbon",
-            "chain_id": "carbon-1",
             "base_denom": "swth",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -3252,10 +3255,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "cerberus",
-            "chain_id": "cerberus-chain-1",
             "base_denom": "ucrbrus",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -3311,10 +3314,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "fetchhub",
-            "chain_id": "fetchhub-4",
             "base_denom": "afet",
             "port": "transfer",
             "channel_id": "channel-10"
@@ -3369,10 +3372,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "assetmantle",
-            "chain_id": "mantle-1",
             "base_denom": "umntl",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -3427,10 +3430,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno168ctmpyppk90d34p3jjy658zf5a5l3w8wk35wht6ccqj4mr0yv8s4j5awr",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -3491,10 +3494,10 @@
           "withdraw_url": "https://hub.injective.network/bridge/?destination=injective&origin=osmosis&token=inj"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "injective",
-            "chain_id": "injective-1",
             "base_denom": "inj",
             "port": "transfer",
             "channel_id": "channel-8"
@@ -3552,10 +3555,10 @@
       "peg_mechanism": "algorithmic",
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "terra",
-            "chain_id": "columbus-5",
             "base_denom": "ukrw",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -3610,10 +3613,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "microtick",
-            "chain_id": "microtick-1",
             "base_denom": "utick",
             "port": "transfer",
             "channel_id": "channel-16"
@@ -3669,10 +3672,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "sifchain",
-            "chain_id": "sifchain-1",
             "base_denom": "rowan",
             "port": "transfer",
             "channel_id": "channel-17"
@@ -3728,10 +3731,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "shentu",
-            "chain_id": "shentu-2.2",
             "base_denom": "uctk",
             "port": "transfer",
             "channel_id": "channel-8"
@@ -3785,10 +3788,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1re3x67ppxap48ygndmrc7har2cnc7tcxtm9nplcas4v0gc3wnmvs3s807z",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -3843,10 +3846,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1r4pzw8f9z0sypct5l9j906d47z998ulwvhvqe5xdwgy8wf84583sxwh0pa",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -3903,10 +3906,10 @@
       "peg_mechanism": "hybrid",
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "frax-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -3935,6 +3938,7 @@
           "base_denom": "0x853d955acef822db058eb8505911ed77f175b99e",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0x853d955acef822db058eb8505911ed77f175b99e",
           "symbol": "FRAX",
           "decimals": 18,
           "logo_URIs": {
@@ -3974,10 +3978,10 @@
           "withdraw_url": "https://bridge.blockscape.network/?from=osmosis&to=gravitybridge"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "gravitybridge",
-            "chain_id": "gravity-bridge-3",
             "base_denom": "gravity0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
             "port": "transfer",
             "channel_id": "channel-10"
@@ -4007,6 +4011,7 @@
           "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
           "symbol": "WBTC",
           "decimals": 8,
           "logo_URIs": {
@@ -4051,10 +4056,10 @@
           "withdraw_url": "https://bridge.blockscape.network/?from=osmosis&to=gravitybridge"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "gravitybridge",
-            "chain_id": "gravity-bridge-3",
             "base_denom": "gravity0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
             "port": "transfer",
             "channel_id": "channel-10"
@@ -4083,6 +4088,7 @@
           "base_denom": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
           "symbol": "WETH",
           "decimals": 18,
           "logo_URIs": {
@@ -4094,6 +4100,7 @@
           "base_denom": "wei",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
           "symbol": "ETH",
           "decimals": 18,
           "logo_URIs": {
@@ -4142,10 +4149,10 @@
           "withdraw_url": "https://bridge.blockscape.network/?from=osmosis&to=gravitybridge"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "gravitybridge",
-            "chain_id": "gravity-bridge-3",
             "base_denom": "gravity0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
             "port": "transfer",
             "channel_id": "channel-10"
@@ -4174,6 +4181,7 @@
           "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "symbol": "USDC",
           "decimals": 6,
           "logo_URIs": {
@@ -4220,10 +4228,10 @@
           "withdraw_url": "https://bridge.blockscape.network/?from=osmosis&to=gravitybridge"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "gravitybridge",
-            "chain_id": "gravity-bridge-3",
             "base_denom": "gravity0x6B175474E89094C44Da98b954EedeAC495271d0F",
             "port": "transfer",
             "channel_id": "channel-10"
@@ -4252,6 +4260,7 @@
           "base_denom": "0x6b175474e89094c44da98b954eedeac495271d0f",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
           "symbol": "DAI",
           "decimals": 18,
           "logo_URIs": {
@@ -4299,10 +4308,10 @@
           "withdraw_url": "https://bridge.blockscape.network/?from=osmosis&to=gravitybridge"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "gravitybridge",
-            "chain_id": "gravity-bridge-3",
             "base_denom": "gravity0xdAC17F958D2ee523a2206206994597C13D831ec7",
             "port": "transfer",
             "channel_id": "channel-10"
@@ -4331,6 +4340,7 @@
           "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "symbol": "USDT",
           "decimals": 6,
           "logo_URIs": {
@@ -4369,10 +4379,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1y9rf7ql6ffwkv02hsgd4yruz23pn4w97p75e2slsnkm0mnamhzysvqnxaq",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -4427,10 +4437,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "provenance",
-            "chain_id": "pio-mainnet-1",
             "base_denom": "nhash",
             "port": "transfer",
             "channel_id": "channel-7"
@@ -4483,10 +4493,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "galaxy",
-            "chain_id": "galaxy-1",
             "base_denom": "uglx",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -4539,10 +4549,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1tdjwrqmnztn2j3sj2ln9xnyps5hs48q3ddwjrz7jpv6mskappjys5czd49",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -4595,10 +4605,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno15u3dt79t6sxxa3x3kpkhzsy56edaa5a66wvt3kxmukqjz2sx0hes5sn38g",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -4653,10 +4663,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "meme",
-            "chain_id": "meme-1",
             "base_denom": "umeme",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -4707,10 +4717,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno17wzaxtfdw5em7lc94yed4ylgjme63eh73lm3lutp2rhcxttyvpwsypjm4w",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -4761,10 +4771,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1n7n7d5088qlzlj37e9mgmkhx6dfgtvt02hqxq66lcap4dxnzdhwqfmgng3",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -4818,10 +4828,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "terra2",
-            "chain_id": "phoenix-1",
             "base_denom": "uluna",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -4875,10 +4885,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "rizon",
-            "chain_id": "titan-1",
             "base_denom": "uatolo",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -4928,10 +4938,10 @@
       "verified": false,
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "kava",
-            "chain_id": "kava_2222-10",
             "base_denom": "hard",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -4981,10 +4991,10 @@
       "verified": false,
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "kava",
-            "chain_id": "kava_2222-10",
             "base_denom": "swp",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -5039,10 +5049,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "link-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -5072,6 +5082,7 @@
           "base_denom": "0x514910771af9ca656af840dff83e8264ecf986ca",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0x514910771af9ca656af840dff83e8264ecf986ca",
           "symbol": "LINK",
           "decimals": 18,
           "logo_URIs": {
@@ -5108,10 +5119,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "genesisl1",
-            "chain_id": "genesis_29-2",
             "base_denom": "el1",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -5159,10 +5170,10 @@
       "verified": false,
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "aave-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -5191,6 +5202,7 @@
           "base_denom": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9",
           "symbol": "AAVE",
           "decimals": 18,
           "logo_URIs": {
@@ -5221,10 +5233,10 @@
       "verified": false,
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "ape-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -5253,6 +5265,7 @@
           "base_denom": "0x4d224452801aced8b2f0aebe155379bb5d594381",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0x4d224452801aced8b2f0aebe155379bb5d594381",
           "symbol": "APE",
           "decimals": 18,
           "logo_URIs": {
@@ -5287,10 +5300,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "mkr-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -5319,6 +5332,7 @@
           "base_denom": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2",
           "symbol": "MKR",
           "decimals": 18,
           "logo_URIs": {
@@ -5348,10 +5362,10 @@
       "verified": false,
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "rai-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -5380,6 +5394,7 @@
           "base_denom": "0x03ab458634910aad20ef5f1c8ee96f1d6ac54919",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0x03ab458634910aad20ef5f1c8ee96f1d6ac54919",
           "symbol": "RAI",
           "decimals": 18,
           "logo_URIs": {
@@ -5414,10 +5429,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "shib-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -5446,6 +5461,7 @@
           "base_denom": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
           "symbol": "SHIB",
           "decimals": 18,
           "logo_URIs": {
@@ -5488,10 +5504,10 @@
           "deposit_url": "https://blue.kujira.app/ibc?destination=osmosis-1&denom=ukuji"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "kujira",
-            "chain_id": "kaiyo-1",
             "base_denom": "ukuji",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -5546,10 +5562,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "tgrade",
-            "chain_id": "tgrade-mainnet-1",
             "base_denom": "utgd",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -5607,10 +5623,10 @@
           "withdraw_url": "https://app.ech.network/ibc"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "echelon",
-            "chain_id": "echelon_3000-3",
             "base_denom": "aechelon",
             "port": "transfer",
             "channel_id": "channel-11"
@@ -5664,10 +5680,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "odin",
-            "chain_id": "odin-mainnet-freya",
             "base_denom": "loki",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -5721,10 +5737,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "odin",
-            "chain_id": "odin-mainnet-freya",
             "base_denom": "mGeo",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -5778,10 +5794,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "odin",
-            "chain_id": "odin-mainnet-freya",
             "base_denom": "mO9W",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -5834,10 +5850,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "kichain",
-            "chain_id": "kichain-2",
             "base_denom": "cw20:ki1dt3lk455ed360pna38fkhqn0p8y44qndsr77qu73ghyaz2zv4whq83mwdy",
             "port": "wasm.ki1hzz0s0ucrhdp6tue2lxk3c03nj6f60qy463we7lgx0wudd72ctmsd9kgha",
             "channel_id": "channel-18"
@@ -5888,10 +5904,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "wglmr-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -5921,6 +5937,7 @@
           "base_denom": "0xacc15dc74880c9944775448304b263d191c6077f",
           "chain_type": "non-cosmos",
           "chain_id": 1284,
+          "address": "0xacc15dc74880c9944775448304b263d191c6077f",
           "symbol": "WGLMR",
           "decimals": 18,
           "logo_URIs": {
@@ -5932,6 +5949,7 @@
           "base_denom": "Wei",
           "chain_type": "non-cosmos",
           "chain_id": 1284,
+          "address": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
           "symbol": "GLMR",
           "decimals": 18,
           "logo_URIs": {
@@ -5967,10 +5985,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1j0a9ymgngasfn3l5me8qpd53l5zlm9wurfdk7r65s5mg6tkxal3qpgf5se",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -6024,10 +6042,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1gz8cf86zr4vw9cjcyyv432vgdaecvr9n254d3uwwkx9rermekddsxzageh",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -6082,10 +6100,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "crescent",
-            "chain_id": "crescent-1",
             "base_denom": "ucre",
             "port": "transfer",
             "channel_id": "channel-9"
@@ -6138,10 +6156,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "lumenx",
-            "chain_id": "LumenX",
             "base_denom": "ulumen",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -6197,10 +6215,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "oraichain",
-            "chain_id": "Oraichain",
             "base_denom": "orai",
             "port": "transfer",
             "channel_id": "channel-13"
@@ -6255,10 +6273,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "cudos",
-            "chain_id": "cudos-1",
             "base_denom": "acudos",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -6312,10 +6330,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "kava",
-            "chain_id": "kava_2222-10",
             "base_denom": "usdx",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -6370,10 +6388,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "agoric",
-            "chain_id": "agoric-3",
             "base_denom": "ubld",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -6428,10 +6446,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "agoric",
-            "chain_id": "agoric-3",
             "base_denom": "uist",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -6486,10 +6504,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1dd0k0um5rqncfueza62w9sentdfh3ec4nw4aq4lk5hkjl63vljqscth9gv",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -6538,10 +6556,10 @@
       "coingecko_id": "stakeeasy-bjuno",
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1wwnhkagvcd3tjz6f8vsdsw5plqnw8qy2aj3rrhqr2axvktzv9q2qz8jxn3",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -6596,10 +6614,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "stride",
-            "chain_id": "stride-1",
             "base_denom": "ustrd",
             "port": "transfer",
             "channel_id": "channel-5"
@@ -6657,10 +6675,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "stride",
-            "chain_id": "stride-1",
             "base_denom": "stuatom",
             "port": "transfer",
             "channel_id": "channel-5"
@@ -6710,7 +6728,7 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "810",
+        "pool": "1331",
         "denom": "ibc/987C17B11ABC2B20019178ACE62929FE9840202CE79498E29FE8E5CB02B7C0A4"
       },
       "categories": [
@@ -6718,10 +6736,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "stride",
-            "chain_id": "stride-1",
             "base_denom": "stustars",
             "port": "transfer",
             "channel_id": "channel-5"
@@ -6775,10 +6793,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno159q8t5g02744lxq8lfmcn6f78qqulq9wn3y9w7lxjgkz4e0a6kvsfvapse",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -6831,10 +6849,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno19rqljkh95gh40s7qdx40ksx3zq5tm4qsmsrdz9smw668x9zdr3lqtg33mf",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -6889,10 +6907,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "uaxl",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -6947,10 +6965,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "rebus",
-            "chain_id": "reb_1111-1",
             "base_denom": "arebus",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -7009,10 +7027,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "teritori",
-            "chain_id": "teritori-1",
             "base_denom": "utori",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -7070,10 +7088,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "stride",
-            "chain_id": "stride-1",
             "base_denom": "stujuno",
             "port": "transfer",
             "channel_id": "channel-5"
@@ -7131,10 +7149,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "stride",
-            "chain_id": "stride-1",
             "base_denom": "stuosmo",
             "port": "transfer",
             "channel_id": "channel-5"
@@ -7181,10 +7199,10 @@
       "verified": false,
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1p8x807f6h222ur0vssqy3qk6mcpa40gw2pchquz5atl935t7kvyq894ne3",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -7238,10 +7256,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "lambda",
-            "chain_id": "lambda_92000-1",
             "base_denom": "ulamb",
             "port": "transfer",
             "channel_id": "channel-2"
@@ -7300,10 +7318,10 @@
           "deposit_url": "https://blue.kujira.app/ibc?destination=osmosis-1&source=kaiyo-1&denom=factory%2Fkujira1qk00h5atutpsv900x202pxx42npjr9thg58dnqpa72f2p7m2luase444a7%2Fuusk"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "kujira",
-            "chain_id": "kaiyo-1",
             "base_denom": "factory/kujira1qk00h5atutpsv900x202pxx42npjr9thg58dnqpa72f2p7m2luase444a7/uusk",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -7358,10 +7376,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "unification",
-            "chain_id": "FUND-MainNet-2",
             "base_denom": "nund",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -7416,10 +7434,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "jackal",
-            "chain_id": "jackal-1",
             "base_denom": "ujkl",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -7478,10 +7496,10 @@
           "deposit_url": "https://dash.scrt.network/ibc"
         },
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "secretnetwork",
-            "chain_id": "secret-4",
             "base_denom": "cw20:secret12rcvz0umvk875kd6a803txhtlu7y0pnd73kcej",
             "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4",
             "channel_id": "channel-44"
@@ -7540,10 +7558,10 @@
           "deposit_url": "https://dash.scrt.network/ibc"
         },
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "secretnetwork",
-            "chain_id": "secret-4",
             "base_denom": "cw20:secret1yxcexylwyxlq58umhgsjgstgcg2a0ytfy4d9lt",
             "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4",
             "channel_id": "channel-44"
@@ -7599,10 +7617,10 @@
           "deposit_url": "https://dash.scrt.network/ibc"
         },
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "secretnetwork",
-            "chain_id": "secret-4",
             "base_denom": "cw20:secret1qfql357amn448duf5gvp9gr48sxx9tsnhupu3d",
             "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4",
             "channel_id": "channel-44"
@@ -7660,10 +7678,10 @@
           "deposit_url": "https://dash.scrt.network/ibc"
         },
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "secretnetwork",
-            "chain_id": "secret-4",
             "base_denom": "cw20:secret1rgm2m5t530tdzyd99775n6vzumxa5luxcllml4",
             "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4",
             "channel_id": "channel-44"
@@ -7722,10 +7740,10 @@
           "deposit_url": "https://dash.scrt.network/ibc"
         },
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "secretnetwork",
-            "chain_id": "secret-4",
             "base_denom": "cw20:secret1k6u0cy4feepm6pehnz804zmwakuwdapm69tuc4",
             "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4",
             "channel_id": "channel-44"
@@ -7780,10 +7798,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "beezee",
-            "chain_id": "beezee-1",
             "base_denom": "ubze",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -7831,10 +7849,10 @@
       "verified": false,
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1cltgm8v842gu54srmejewghnd6uqa26lzkpa635wzra9m9xuudkqa2gtcz",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -7888,10 +7906,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "acrechain",
-            "chain_id": "acre_9052-1",
             "base_denom": "aacre",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -7950,10 +7968,10 @@
       "peg_mechanism": "collateralized",
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "comdex",
-            "chain_id": "comdex-1",
             "base_denom": "ucmst",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -8007,10 +8025,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "imversed",
-            "chain_id": "imversed_5555555-1",
             "base_denom": "aimv",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -8064,10 +8082,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "medasdigital",
-            "chain_id": "medasdigital-1",
             "base_denom": "umedas",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -8122,10 +8140,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1rws84uz7969aaa7pej303udhlkt3j9ca0l3egpcae98jwak9quzq8szn2l",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -8183,10 +8201,10 @@
           "deposit_url": "https://dash.scrt.network/ibc"
         },
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "secretnetwork",
-            "chain_id": "secret-4",
             "base_denom": "cw20:secret1s09x2xvfd2lp2skgzm29w2xtena7s8fq98v852",
             "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4",
             "channel_id": "channel-44"
@@ -8241,10 +8259,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "onomy",
-            "chain_id": "onomy-mainnet-1",
             "base_denom": "anom",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -8299,10 +8317,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "persistence",
-            "chain_id": "core-1",
             "base_denom": "stk/uatom",
             "port": "transfer",
             "channel_id": "channel-6"
@@ -8357,10 +8375,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "dyson",
-            "chain_id": "dyson-mainnet-01",
             "base_denom": "dys",
             "port": "transfer",
             "channel_id": "channel-2"
@@ -8414,10 +8432,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1u45shlp0q4gcckvsj06ss4xuvsu0z24a0d0vr9ce6r24pht4e5xq7q995n",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -8477,10 +8495,10 @@
           "withdraw_url": "https://app.arable.finance/#/ibc"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "acrechain",
-            "chain_id": "acre_9052-1",
             "base_denom": "erc20/0x2Cbea61fdfDFA520Ee99700F104D5b75ADf50B0c",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -8540,10 +8558,10 @@
           "deposit_url": "https://tfm.com/bridge?chainTo=osmosis-1&chainFrom=planq_7070-2&token0=aplanq&token1=ibc%2FB1E0166EA0D759FDF4B207D1F5F12210D8BFE36F2345CEFC76948CE2B36DFBAF"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "planq",
-            "chain_id": "planq_7070-2",
             "base_denom": "aplanq",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -8598,10 +8616,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "wftm-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -8630,6 +8648,7 @@
           "base_denom": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
           "chain_type": "non-cosmos",
           "chain_id": 250,
+          "address": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
           "symbol": "WFTM",
           "decimals": 18,
           "logo_URIs": {
@@ -8642,6 +8661,7 @@
           "base_denom": "wei",
           "chain_type": "non-cosmos",
           "chain_id": 250,
+          "address": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
           "symbol": "FTM",
           "decimals": 18,
           "logo_URIs": {
@@ -8678,10 +8698,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "canto",
-            "chain_id": "canto_7700-1",
             "base_denom": "acanto",
             "port": "transfer",
             "channel_id": "channel-5"
@@ -8738,10 +8758,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "quicksilver",
-            "chain_id": "quicksilver-2",
             "base_denom": "uqstars",
             "port": "transfer",
             "channel_id": "channel-2"
@@ -8800,10 +8820,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1mkw83sv6c7sjdvsaplrzc8yaes9l42p4mhy0ssuxjnyzl87c9eps7ce3m9",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -8860,10 +8880,10 @@
       "peg_mechanism": "collateralized",
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "polygon-uusdc",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -8893,6 +8913,7 @@
           "base_denom": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
           "chain_type": "non-cosmos",
           "chain_id": 137,
+          "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
           "symbol": "USDC",
           "decimals": 6,
           "logo_URIs": {
@@ -8904,6 +8925,7 @@
           "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "symbol": "USDC",
           "decimals": 6,
           "logo_URIs": {
@@ -8942,10 +8964,10 @@
       "peg_mechanism": "collateralized",
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "avalanche-uusdc",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -8975,6 +8997,7 @@
           "base_denom": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
           "chain_type": "non-cosmos",
           "chain_id": 43114,
+          "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
           "symbol": "USDC",
           "decimals": 6,
           "logo_URIs": {
@@ -8986,6 +9009,7 @@
           "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "symbol": "USDC",
           "decimals": 6,
           "logo_URIs": {
@@ -9022,10 +9046,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "mars",
-            "chain_id": "mars-1",
             "base_denom": "umars",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -9085,10 +9109,10 @@
           "withdraw_url": "https://app.arable.finance/#/ibc"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "acrechain",
-            "chain_id": "acre_9052-1",
             "base_denom": "erc20/0xAE6D3334989a22A65228732446731438672418F2",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -9136,19 +9160,15 @@
       ],
       "coingecko_id": "stride-staked-luna",
       "verified": true,
-      "price": {
-        "pool": "913",
-        "denom": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9"
-      },
       "categories": [
         "liquid_staking"
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "stride",
-            "chain_id": "stride-1",
             "base_denom": "stuluna",
             "port": "transfer",
             "channel_id": "channel-5"
@@ -9206,10 +9226,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "stride",
-            "chain_id": "stride-1",
             "base_denom": "staevmos",
             "port": "transfer",
             "channel_id": "channel-5"
@@ -9263,10 +9283,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1qmlchtmjpvu0cr7u0tad2pq8838h6farrrjzp39eqa9xswg7teussrswlq",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -9321,10 +9341,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "8ball",
-            "chain_id": "eightball-1",
             "base_denom": "uebl",
             "port": "transfer",
             "channel_id": "channel-16"
@@ -9381,10 +9401,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "quicksilver",
-            "chain_id": "quicksilver-2",
             "base_denom": "uqatom",
             "port": "transfer",
             "channel_id": "channel-2"
@@ -9442,10 +9462,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "comdex",
-            "chain_id": "comdex-1",
             "base_denom": "uharbor",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -9502,10 +9522,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "quicksilver",
-            "chain_id": "quicksilver-2",
             "base_denom": "uqregen",
             "port": "transfer",
             "channel_id": "channel-2"
@@ -9560,10 +9580,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1u8cr3hcjvfkzxcaacv9q75uw9hwjmn8pucc93pmy6yvkzz79kh3qncca8x",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -9615,10 +9635,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "quicksilver",
-            "chain_id": "quicksilver-2",
             "base_denom": "uqck",
             "port": "transfer",
             "channel_id": "channel-2"
@@ -9670,10 +9690,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "arkh",
-            "chain_id": "arkh",
             "base_denom": "arkh",
             "port": "transfer",
             "channel_id": "channel-12"
@@ -9731,10 +9751,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "quicksilver",
-            "chain_id": "quicksilver-2",
             "base_denom": "uqosmo",
             "port": "transfer",
             "channel_id": "channel-2"
@@ -9792,10 +9812,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "noble",
-            "chain_id": "noble-1",
             "base_denom": "ufrienzies",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -9850,10 +9870,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "migaloo",
-            "chain_id": "migaloo-1",
             "base_denom": "uwhale",
             "port": "transfer",
             "channel_id": "channel-5"
@@ -9904,10 +9924,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1xekkh27punj0uxruv3gvuydyt856fax0nu750xns99t2qcxp7xmsqwhfma",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -9959,10 +9979,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno166heaxlyntd33a5euh4rrz26svhean4klzw594esmd02l4atan6sazy2my",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -10013,10 +10033,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1x5qt47rw84c4k6xvvywtrd40p8gxjt8wnmlahlqg07qevah3f8lqwxfs7z",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -10069,10 +10089,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1qqwf3lkfjhp77yja7gmg3y95pda0e5xctqrdhf3wvwdd79flagvqfgrgxp",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -10127,10 +10147,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "regen",
-            "chain_id": "regen-1",
             "base_denom": "eco.uC.NCT",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -10181,10 +10201,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1ngww7zxak55fql42wmyqrr4rhzpne24hhs4p3w4cwhcdgqgr3hxsmzl9zg",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -10234,10 +10254,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1ytymtllllsp3hfmndvcp802p2xmy5s8m59ufel8xv9ahyxyfs4hs4kd4je",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -10287,10 +10307,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1jrr0tuuzxrrwcg6hgeqhw5wqpck2y55734e7zcrp745aardlp0qqg8jz06",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -10340,10 +10360,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1jwdy7v4egw36pd84aeks3ww6n8k7zhsumd4ac8q5lts83ppxueus4626e8",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -10393,10 +10413,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1k2ruzzvvwwtwny6gq6kcwyfhkzahaunp685wmz4hafplduekj98q9hgs6d",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -10446,10 +10466,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1f5datjdse3mdgrapwuzs3prl7pvxxht48ns6calnn0t77v2s9l8s0qu488",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -10499,10 +10519,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1j4ux0f6gt7e82z7jdpm25v4g2gts880ap64rdwa49989wzhd0dfqed6vqm",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -10556,10 +10576,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "omniflixhub",
-            "chain_id": "omniflixhub-1",
             "base_denom": "uflix",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -10610,10 +10630,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1dyyf7pxeassxvftf570krv7fdf5r8e4r04mp99h0mllsqzp3rs4q7y8yqg",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -10663,10 +10683,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1dpany8c0lj526lsa02sldv7shzvnw5dt5ues72rk35hd69rrydxqeraz8l",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -10725,10 +10745,10 @@
           "deposit_url": "https://dash.scrt.network/ibc"
         },
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "secretnetwork",
-            "chain_id": "secret-4",
             "base_denom": "cw20:secret1fl449muk5yq8dlad7a22nje4p5d2pnsgymhjfd",
             "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4",
             "channel_id": "channel-44"
@@ -10779,10 +10799,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1llg7q2d5dqlrqzh5dxv8c7kzzjszld34s5vktqmlmaaxqjssz43sxyhq0d",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -10832,10 +10852,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno13ca2g36ng6etcfhr9qxx352uw2n5e92np54thfkm3w3nzlhsgvwsjaqlyq",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -10888,10 +10908,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "wfil-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -10921,6 +10941,7 @@
           "base_denom": "0x60E1773636CF5E4A227d9AC24F20fEca034ee25A",
           "chain_type": "non-cosmos",
           "chain_id": 461,
+          "address": "0x60E1773636CF5E4A227d9AC24F20fEca034ee25A",
           "symbol": "WFIL",
           "decimals": 18,
           "logo_URIs": {
@@ -10933,6 +10954,7 @@
           "base_denom": "attoFIL",
           "chain_type": "non-cosmos",
           "chain_id": 461,
+          "address": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
           "symbol": "FIL",
           "decimals": 18,
           "logo_URIs": {
@@ -10966,10 +10988,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1lpvx3mv2a6ddzfjc7zzz2v2cm5gqgqf0hx67hc5p5qwn7hz4cdjsnznhu8",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -11023,10 +11045,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "secretnetwork",
-            "chain_id": "secret-4",
             "base_denom": "cw20:secret153wu605vvp934xhd4k9dtd640zsep5jkesstdm",
             "port": "wasm.secret1tqmms5awftpuhalcv5h5mg76fa0tkdz4jv9ex4",
             "channel_id": "channel-44"
@@ -11081,10 +11103,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "bluzelle",
-            "chain_id": "bluzelle-9",
             "base_denom": "ubnt",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -11139,10 +11161,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "arb-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -11172,6 +11194,7 @@
           "base_denom": "0x912CE59144191C1204E64559FE8253a0e49E6548",
           "chain_type": "non-cosmos",
           "chain_id": 42161,
+          "address": "0x912CE59144191C1204E64559FE8253a0e49E6548",
           "symbol": "ARB",
           "decimals": 18,
           "logo_URIs": {
@@ -11206,10 +11229,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno10vgf2u03ufcf25tspgn05l7j3tfg0j63ljgpffy98t697m5r5hmqaw95ux",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -11259,10 +11282,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1epxnvge53c4hkcmqzlxryw5fp7eae2utyk6ehjcfpwajwp48km3sgxsh9k",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -11315,10 +11338,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "pepe-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -11348,6 +11371,7 @@
           "base_denom": "0x6982508145454Ce325dDbE47a25d4ec3d2311933",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0x6982508145454Ce325dDbE47a25d4ec3d2311933",
           "symbol": "PEPE",
           "decimals": 18,
           "logo_URIs": {
@@ -11409,10 +11433,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "cbeth-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -11441,6 +11465,7 @@
           "base_denom": "0xbe9895146f7af43049ca1c1ae358b0541ea49704",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xbe9895146f7af43049ca1c1ae358b0541ea49704",
           "symbol": "cbETH",
           "decimals": 18,
           "logo_URIs": {
@@ -11477,10 +11502,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "reth-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -11509,6 +11534,7 @@
           "base_denom": "0xae78736cd615f374d3085123a210448e74fc6393",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xae78736cd615f374d3085123a210448e74fc6393",
           "symbol": "rETH",
           "decimals": 18,
           "logo_URIs": {
@@ -11545,10 +11571,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "sfrxeth-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -11577,6 +11603,7 @@
           "base_denom": "0xac3e018457b222d93114458476f3e3416abbe38f",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xac3e018457b222d93114458476f3e3416abbe38f",
           "symbol": "sfrxETH",
           "decimals": 18,
           "logo_URIs": {
@@ -11588,6 +11615,7 @@
           "base_denom": "0x5e8422345238f34275888049021821e8e08caa1f",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0x5e8422345238f34275888049021821e8e08caa1f",
           "symbol": "frxETH",
           "decimals": 18,
           "logo_URIs": {
@@ -11628,10 +11656,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "wsteth-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -11660,6 +11688,7 @@
           "base_denom": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
           "symbol": "wstETH",
           "decimals": 18,
           "logo_URIs": {
@@ -11671,6 +11700,7 @@
           "base_denom": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
           "symbol": "stETH",
           "decimals": 18,
           "logo_URIs": {
@@ -11714,10 +11744,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "gitopia",
-            "chain_id": "gitopia",
             "base_denom": "ulore",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -11775,10 +11805,10 @@
           "withdraw_url": "https://tfm.com/bridge?chainFrom=osmosis-1&chainTo=phoenix-1&token0=ibc%2F98BCD43F190C6960D0005BC46BB765C827403A361C9C03C2FF694150A30284B0&token1=terra1lxx40s29qvkrcj8fsa3yzyehy7w50umdvvnls2r830rys6lu2zns63eelv"
         },
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "terra2",
-            "chain_id": "phoenix-1",
             "base_denom": "cw20:terra1lxx40s29qvkrcj8fsa3yzyehy7w50umdvvnls2r830rys6lu2zns63eelv",
             "port": "wasm.terra1e0mrzy8077druuu42vs0hu7ugguade0cj65dgtauyaw4gsl4kv0qtdf2au",
             "channel_id": "channel-26"
@@ -11835,10 +11865,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "stride",
-            "chain_id": "stride-1",
             "base_denom": "stuumee",
             "port": "transfer",
             "channel_id": "channel-5"
@@ -11918,10 +11948,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "nolus",
-            "chain_id": "pirin-1",
             "base_denom": "unls",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -11966,10 +11996,6 @@
         }
       ],
       "verified": false,
-      "price": {
-        "pool": "1072",
-        "denom": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9"
-      },
       "transfer_methods": [
         {
           "name": "TFM IBC Transfer",
@@ -11978,10 +12004,10 @@
           "withdraw_url": "https://tfm.com/bridge?chainFrom=osmosis-1&chainTo=phoenix-1&token0=ibc%2F6F18EFEBF1688AA77F7EAC17065609494DC1BA12AFC78E9AEC832AF70A11BEF3&token1=terra1lalvk0r6nhruel7fvzdppk3tup3mh5j4d4eadrqzfhle4zrf52as58hh9t"
         },
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "terra2",
-            "chain_id": "phoenix-1",
             "base_denom": "cw20:terra1lalvk0r6nhruel7fvzdppk3tup3mh5j4d4eadrqzfhle4zrf52as58hh9t",
             "port": "wasm.terra1e0mrzy8077druuu42vs0hu7ugguade0cj65dgtauyaw4gsl4kv0qtdf2au",
             "channel_id": "channel-26"
@@ -12025,10 +12051,6 @@
         }
       ],
       "verified": false,
-      "price": {
-        "pool": "1073",
-        "denom": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9"
-      },
       "transfer_methods": [
         {
           "name": "TFM IBC Transfer",
@@ -12037,10 +12059,10 @@
           "withdraw_url": "https://tfm.com/bridge?chainFrom=osmosis-1&chainTo=phoenix-1&token0=ibc%2FDA961FE314B009C38595FFE3AF41225D8894D663B8C3F6650DCB5B6F8435592E&token1=terra1gwrz9xzhqsygyr5asrgyq3pu0ewpn00mv2zenu86yvx2nlwpe8lqppv584"
         },
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "terra2",
-            "chain_id": "phoenix-1",
             "base_denom": "cw20:terra1gwrz9xzhqsygyr5asrgyq3pu0ewpn00mv2zenu86yvx2nlwpe8lqppv584",
             "port": "wasm.terra1e0mrzy8077druuu42vs0hu7ugguade0cj65dgtauyaw4gsl4kv0qtdf2au",
             "channel_id": "channel-26"
@@ -12094,10 +12116,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "neutron",
-            "chain_id": "neutron-1",
             "base_denom": "untrn",
             "port": "transfer",
             "channel_id": "channel-10"
@@ -12148,10 +12170,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1ju8k8sqwsqu5k6umrypmtyqu2wqcpnrkf4w4mntvl0javt4nma7s8lzgss",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -12213,10 +12235,10 @@
           "withdraw_url": "https://app.trustless.zone/?from=OSMOSIS&to=PICASSO"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "composable",
-            "chain_id": "centauri-1",
             "base_denom": "ppica",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -12284,10 +12306,10 @@
           "withdraw_url": "https://app.trustless.zone/?from=OSMOSIS&to=PICASSO"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "composable",
-            "chain_id": "centauri-1",
             "base_denom": "ibc/EE9046745AEC0E8302CB7ED9D5AD67F528FB3B7AE044B247FB0FB293DBDA35E9",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -12354,8 +12376,8 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "1144",
-        "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
+        "pool": "1145",
+        "denom": "uosmo"
       },
       "transfer_methods": [
         {
@@ -12365,10 +12387,10 @@
           "withdraw_url": "https://app.trustless.zone/?from=OSMOSIS&to=PICASSO"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "composable",
-            "chain_id": "centauri-1",
             "base_denom": "ibc/3CC19CEC7E5A3E90E78A5A9ECC5A0E2F8F826A375CF1E096F4515CF09DA3E366",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -12450,10 +12472,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "quasar",
-            "chain_id": "quasar-1",
             "base_denom": "uqsr",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -12507,10 +12529,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "archway",
-            "chain_id": "archway-1",
             "base_denom": "aarch",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -12567,10 +12589,10 @@
           "deposit_url": "https://tfm.com/bridge?chainTo=osmosis-1&chainFrom=empowerchain-1&token0=umpwr&token1=ibc%2FDD3938D8131F41994C1F01F4EB5233DEE9A0A5B787545B9A07A321925655BF38"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "empowerchain",
-            "chain_id": "empowerchain-1",
             "base_denom": "umpwr",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -12620,10 +12642,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno1m4h8q4p305wgy7vkux0w6e5ylhqll3s6pmadhxkhqtuwd5wlxhxs8xklsw",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -12677,10 +12699,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "kyve",
-            "chain_id": "kyve-1",
             "base_denom": "ukyve",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -12737,10 +12759,10 @@
       "peg_mechanism": "collateralized",
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "kava",
-            "chain_id": "kava_2222-10",
             "base_denom": "erc20/tether/usdt",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -12769,6 +12791,7 @@
           "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "symbol": "USDT",
           "decimals": 6,
           "logo_URIs": {
@@ -12832,10 +12855,10 @@
           "withdraw_url": "https://tfm.com/bridge?chainFrom=osmosis-1&chainTo=pacific-1&token0=ibc%2F71F11BC0AF8E526B80E44172EBA9D3F0A8E03950BB882325435691EBC9450B1D&token1=usei"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "sei",
-            "chain_id": "pacific-1",
             "base_denom": "usei",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -12892,10 +12915,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "quicksilver",
-            "chain_id": "quicksilver-2",
             "base_denom": "uqsomm",
             "port": "transfer",
             "channel_id": "channel-2"
@@ -12952,10 +12975,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "passage",
-            "chain_id": "passage-2",
             "base_denom": "upasg",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -13012,10 +13035,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "stride",
-            "chain_id": "stride-1",
             "base_denom": "stusomm",
             "port": "transfer",
             "channel_id": "channel-5"
@@ -13074,10 +13097,10 @@
           "withdraw_url": "https://portalbridge.com/cosmos/"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "gateway",
-            "chain_id": "wormchain",
             "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8sYgCzLRJC3J7qPn2bNbx6PiGcarhyx8rBhVaNnfvHCA",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -13155,10 +13178,10 @@
           "withdraw_url": "https://portalbridge.com/cosmos/"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "gateway",
-            "chain_id": "wormchain",
             "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/95mnwzvJZJ3fKz77xfGN2nR5to9pZmH8YNvaxgLgw5AR",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -13216,7 +13239,6 @@
         }
       ],
       "verified": true,
-      "api_include": true,
       "price": {
         "pool": "1131",
         "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
@@ -13229,10 +13251,10 @@
           "withdraw_url": "https://portalbridge.com/cosmos/"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "gateway",
-            "chain_id": "wormchain",
             "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8iuAc6DSeLvi2JDUtwJxLytsZT8R19itXebZsNReLLNi",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -13261,6 +13283,7 @@
           "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "symbol": "USDT",
           "decimals": 6,
           "logo_URIs": {
@@ -13300,10 +13323,10 @@
           "withdraw_url": "https://portalbridge.com/cosmos/"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "gateway",
-            "chain_id": "wormchain",
             "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -13376,10 +13399,10 @@
           "withdraw_url": "https://portalbridge.com/cosmos/"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "gateway",
-            "chain_id": "wormchain",
             "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5wS2fGojbL9RhGEAeQBdkHPUAciYDxjDTMYvdf9aDn2r",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -13448,10 +13471,10 @@
           "deposit_url": "https://blue.kujira.app/ibc?destination=osmosis-1&source=kaiyo-1&denom=factory%2Fkujira1643jxg8wasy5cfcn7xm8rd742yeazcksqlg4d7%2Fumnta"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "kujira",
-            "chain_id": "kaiyo-1",
             "base_denom": "factory/kujira1643jxg8wasy5cfcn7xm8rd742yeazcksqlg4d7/umnta",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -13503,10 +13526,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "factory/juno1u805lv20qc6jy7c3ttre7nct6uyl20pfky5r7e/DGL",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -13562,10 +13585,10 @@
           "withdraw_url": "https://portalbridge.com/cosmos/"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "gateway",
-            "chain_id": "wormchain",
             "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/GGh9Ufn1SeDGrhzEkMyRKt5568VbbxZK2yvWNsd6PbXt",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -13594,6 +13617,7 @@
           "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "symbol": "USDC",
           "decimals": 6,
           "logo_URIs": {
@@ -13633,10 +13657,10 @@
           "withdraw_url": "https://portalbridge.com/cosmos/"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "gateway",
-            "chain_id": "wormchain",
             "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5BWqpR48Lubd55szM5i62zK7TFkddckhbT48yy6mNbDp",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -13666,6 +13690,7 @@
           "base_denom": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
           "symbol": "WETH",
           "decimals": 18,
           "logo_URIs": {
@@ -13677,6 +13702,7 @@
           "base_denom": "wei",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
           "symbol": "ETH",
           "decimals": 18,
           "logo_URIs": {
@@ -13712,10 +13738,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "noble",
-            "chain_id": "noble-1",
             "base_denom": "uusdc",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -13745,6 +13771,7 @@
           "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "symbol": "USDC",
           "decimals": 6,
           "logo_URIs": {
@@ -13784,10 +13811,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "axelar",
-            "chain_id": "axelar-dojo-1",
             "base_denom": "yieldeth-wei",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -13817,6 +13844,7 @@
           "base_denom": "0xb5b29320d2Dde5BA5BAFA1EbcD270052070483ec",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xb5b29320d2Dde5BA5BAFA1EbcD270052070483ec",
           "symbol": "YieldETH",
           "decimals": 18,
           "logo_URIs": {
@@ -13859,10 +13887,10 @@
           "deposit_url": "https://ibc.xpla.io/"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "xpla",
-            "chain_id": "dimension_37-1",
             "base_denom": "axpla",
             "port": "transfer",
             "channel_id": "channel-9"
@@ -13914,10 +13942,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "sei",
-            "chain_id": "pacific-1",
             "base_denom": "factory/sei1thgp6wamxwqt7rthfkeehktmq0ujh5kspluw6w/OIN",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -13975,10 +14003,10 @@
           "deposit_url": "https://app.evmos.org/assets"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "evmos",
-            "chain_id": "evmos_9001-2",
             "base_denom": "erc20/0x655ecB57432CC1370f65e5dc2309588b71b473A9",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -14038,10 +14066,10 @@
           "deposit_url": "https://app.realio.network/"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "realio",
-            "chain_id": "realionetwork_3301-1",
             "base_denom": "ario",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -14144,10 +14172,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "sge",
-            "chain_id": "sgenet-1",
             "base_denom": "usge",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -14200,10 +14228,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "stafihub",
-            "chain_id": "stafihub-1",
             "base_denom": "ufis",
             "port": "transfer",
             "channel_id": "channel-10"
@@ -14258,10 +14286,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "stafihub",
-            "chain_id": "stafihub-1",
             "base_denom": "uratom",
             "port": "transfer",
             "channel_id": "channel-10"
@@ -14315,10 +14343,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "stargaze",
-            "chain_id": "stargaze-1",
             "base_denom": "factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/dust",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -14373,10 +14401,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "doravota",
-            "chain_id": "vota-ash",
             "base_denom": "peaka",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -14430,10 +14458,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "coreum",
-            "chain_id": "coreum-mainnet-1",
             "base_denom": "ucore",
             "port": "transfer",
             "channel_id": "channel-2"
@@ -14488,10 +14516,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "celestia",
-            "chain_id": "celestia",
             "base_denom": "utia",
             "port": "transfer",
             "channel_id": "channel-2"
@@ -14551,10 +14579,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "dydx",
-            "chain_id": "dydx-mainnet-1",
             "base_denom": "adydx",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -14614,10 +14642,10 @@
           "deposit_url": "https://starscan.io/fxbridge?from=fxcore&to=osmosis&token=FX"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "fxcore",
-            "chain_id": "fxcore",
             "base_denom": "FX",
             "port": "transfer",
             "channel_id": "channel-19"
@@ -14671,10 +14699,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "nomic",
-            "chain_id": "nomic-stakenet-3",
             "base_denom": "usat",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -14738,10 +14766,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "nois",
-            "chain_id": "nois-1",
             "base_denom": "unois",
             "port": "transfer",
             "channel_id": "channel-37"
@@ -14812,10 +14840,10 @@
       "verified": false,
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "kujira",
-            "chain_id": "kaiyo-1",
             "base_denom": "factory/kujira1aaudpfr9y23lt9d45hrmskphpdfaq9ajxd3ukh/unstk",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -14869,10 +14897,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "stargaze",
-            "chain_id": "stargaze-1",
             "base_denom": "factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/uBRNCH",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -14928,10 +14956,10 @@
       ],
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "neutron",
-            "chain_id": "neutron-1",
             "base_denom": "factory/neutron1ug740qrkquxzrk2hh29qrlx3sktkfml3je7juusc2te7xmvsscns0n2wry/wstETH",
             "port": "transfer",
             "channel_id": "channel-10"
@@ -14960,6 +14988,7 @@
           "base_denom": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
           "symbol": "wstETH",
           "decimals": 18,
           "logo_URIs": {
@@ -14971,6 +15000,7 @@
           "base_denom": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
           "symbol": "stETH",
           "decimals": 18,
           "logo_URIs": {
@@ -15046,10 +15076,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "qwoyn",
-            "chain_id": "qwoyn-1",
             "base_denom": "uqwoyn",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -15102,10 +15132,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "bostrom",
-            "chain_id": "bostrom",
             "base_denom": "hydrogen",
             "port": "transfer",
             "channel_id": "channel-2"
@@ -15158,10 +15188,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "bostrom",
-            "chain_id": "bostrom",
             "base_denom": "tocyb",
             "port": "transfer",
             "channel_id": "channel-2"
@@ -15215,10 +15245,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "bostrom",
-            "chain_id": "bostrom",
             "base_denom": "millivolt",
             "port": "transfer",
             "channel_id": "channel-2"
@@ -15272,10 +15302,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "bostrom",
-            "chain_id": "bostrom",
             "base_denom": "milliampere",
             "port": "transfer",
             "channel_id": "channel-2"
@@ -15330,10 +15360,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "source",
-            "chain_id": "source-1",
             "base_denom": "usource",
             "port": "transfer",
             "channel_id": "channel-0"
@@ -15392,10 +15422,10 @@
           "withdraw_url": "https://portalbridge.com/cosmos/"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "gateway",
-            "chain_id": "wormchain",
             "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/B8ohBnfisop27exk2gtNABJyYjLwQA7ogrp5uNzvZCoy",
             "port": "transfer",
             "channel_id": "channel-3"
@@ -15459,10 +15489,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "persistence",
-            "chain_id": "core-1",
             "base_denom": "stk/uosmo",
             "port": "transfer",
             "channel_id": "channel-6"
@@ -15543,10 +15573,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "chihuahua",
-            "chain_id": "chihuahua-1",
             "base_denom": "cw20:chihuahua1yl8z39ugle8s02fpwkhh293509q5xcpalmdzc4amvchz8nkexrmsy95gef",
             "port": "wasm.chihuahua1jwkag4yvhyj9fuddtkygvavya8hmdjuzmgxwg9vp3lw9twv6lrcq9mgl52",
             "channel_id": "channel-73"
@@ -15598,10 +15628,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "neutron",
-            "chain_id": "neutron-1",
             "base_denom": "factory/neutron1p8d89wvxyjcnawmgw72klknr3lg9gwwl6ypxda/newt",
             "port": "transfer",
             "channel_id": "channel-10"
@@ -15681,10 +15711,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "migaloo",
-            "chain_id": "migaloo-1",
             "base_denom": "factory/migaloo1erul6xyq0gk6ws98ncj7lnq9l4jn4gnnu9we73gdz78yyl2lr7qqrvcgup/ash",
             "port": "transfer",
             "channel_id": "channel-5"
@@ -15737,10 +15767,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "migaloo",
-            "chain_id": "migaloo-1",
             "base_denom": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/urac",
             "port": "transfer",
             "channel_id": "channel-5"
@@ -15792,10 +15822,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "migaloo",
-            "chain_id": "migaloo-1",
             "base_denom": "factory/migaloo1etlu2h30tjvv8rfa4fwdc43c92f6ul5w9acxzk/uguppy",
             "port": "transfer",
             "channel_id": "channel-5"
@@ -15848,10 +15878,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "haqq",
-            "chain_id": "haqq_11235-1",
             "base_denom": "aISLM",
             "port": "transfer",
             "channel_id": "channel-2"
@@ -15899,10 +15929,10 @@
       "verified": false,
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "injective",
-            "chain_id": "injective-1",
             "base_denom": "factory/inj14lf8xm6fcvlggpa7guxzjqwjmtr24gnvf56hvz/autism",
             "port": "transfer",
             "channel_id": "channel-8"
@@ -15962,10 +15992,10 @@
           "withdraw_url": "https://bridge.blockscape.network/?from=osmosis&to=gravitybridge"
         },
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "gravitybridge",
-            "chain_id": "gravity-bridge-3",
             "base_denom": "gravity0x60e683C6514Edd5F758A55b6f393BeBBAfaA8d5e",
             "port": "transfer",
             "channel_id": "channel-10"
@@ -15995,6 +16025,7 @@
           "base_denom": "0x60e683C6514Edd5F758A55b6f393BeBBAfaA8d5e",
           "chain_type": "non-cosmos",
           "chain_id": 1,
+          "address": "0x60e683C6514Edd5F758A55b6f393BeBBAfaA8d5e",
           "symbol": "PAGE",
           "decimals": 8,
           "logo_URIs": {
@@ -16031,10 +16062,10 @@
       "verified": false,
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "pundix",
-            "chain_id": "PUNDIX",
             "base_denom": "bsc0x29a63F4B209C29B4DC47f06FFA896F32667DAD2C",
             "port": "transfer",
             "channel_id": "channel-1"
@@ -16064,6 +16095,7 @@
           "base_denom": "0x29a63F4B209C29B4DC47f06FFA896F32667DAD2C",
           "chain_type": "non-cosmos",
           "chain_id": 56,
+          "address": "0x29a63F4B209C29B4DC47f06FFA896F32667DAD2C",
           "symbol": "PURSE",
           "decimals": 18,
           "logo_URIs": {
@@ -16094,10 +16126,10 @@
       "verified": false,
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "injective",
-            "chain_id": "injective-1",
             "base_denom": "factory/inj1xtel2knkt8hmc9dnzpjz6kdmacgcfmlv5f308w/ninja",
             "port": "transfer",
             "channel_id": "channel-8"
@@ -16149,10 +16181,10 @@
       },
       "transfer_methods": [
         {
-          "type": "ibc-cw20",
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
           "counterparty": {
             "chain_name": "juno",
-            "chain_id": "juno-1",
             "base_denom": "cw20:juno10gthz5ufgrpuk5cscve2f0hjp56wgp90psqxcrqlg4m9mcu9dh8q4864xy",
             "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
             "channel_id": "channel-47"
@@ -16200,10 +16232,10 @@
       "verified": true,
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "nyx",
-            "chain_id": "nyx",
             "base_denom": "unyx",
             "port": "transfer",
             "channel_id": "channel-8"
@@ -16256,10 +16288,10 @@
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "nyx",
-            "chain_id": "nyx",
             "base_denom": "unym",
             "port": "transfer",
             "channel_id": "channel-8"
@@ -16303,16 +16335,17 @@
         }
       ],
       "verified": false,
+      "api_include": true,
       "price": {
         "pool": "1356",
         "denom": "ibc/B9E0A1A524E98BB407D3CED8720EFEFD186002F90C1B1B7964811DD0CCC12228"
       },
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "chihuahua",
-            "chain_id": "chihuahua-1",
             "base_denom": "factory/chihuahua1x4q2vkrz4dfgd9hcw0p5m2f2nuv2uqmt9xr8k2/achihuahuawifhat",
             "port": "transfer",
             "channel_id": "channel-7"
@@ -16359,10 +16392,10 @@
       "verified": false,
       "transfer_methods": [
         {
+          "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
             "chain_name": "neutron",
-            "chain_id": "neutron-1",
             "base_denom": "factory/neutron170v88vrtnedesyfytuku257cggxc79rd7lwt7q/ucircus",
             "port": "transfer",
             "channel_id": "channel-10"
@@ -16390,6 +16423,56 @@
       "common_key": "CIRCUS",
       "name": "AtomEconomicZone69JaeKwonInu",
       "description": "clownmaxxed store of value"
+    },
+    {
+      "chain_name": "juno",
+      "base_denom": "cw20:juno1zkwveux7y6fmsr88atf3cyffx96p0c96qr8tgcsj7vfnhx7sal3s3zu3ps",
+      "minimal_denom": "ibc/176DD560277BB0BD676260BE02EBAB697725CA85144D8A2BF286C6B5323DB5FE",
+      "symbol": "JAPE",
+      "decimals": 6,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/jape.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/jape.png"
+        }
+      ],
+      "verified": false,
+      "transfer_methods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1zkwveux7y6fmsr88atf3cyffx96p0c96qr8tgcsj7vfnhx7sal3s3zu3ps",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
+            "channel_id": "channel-47"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-169",
+            "path": "transfer/channel-169/cw20:juno1zkwveux7y6fmsr88atf3cyffx96p0c96qr8tgcsj7vfnhx7sal3s3zu3ps"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chain_name": "juno",
+          "base_denom": "cw20:juno1zkwveux7y6fmsr88atf3cyffx96p0c96qr8tgcsj7vfnhx7sal3s3zu3ps",
+          "chain_type": "cosmos",
+          "chain_id": "juno-1",
+          "symbol": "JAPE",
+          "decimals": 6,
+          "logo_URIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/jape.png"
+          }
+        }
+      ],
+      "common_key": "JAPE",
+      "name": "Junø Apes",
+      "description": "Governance and utility token for the Junø Apes NFT platform on Juno",
+      "unlisted": true
     }
   ]
 }

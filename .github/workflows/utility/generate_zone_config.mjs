@@ -30,6 +30,7 @@ const find_origin_trace_types = [
   "wrapped",
   "additional-mintage"
 ];
+const zero_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
 
 function getZoneAssetlist(chainName) {
   try {
@@ -154,7 +155,7 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
 
 
     let denom = generatedAsset.minimal_denom;
-    if (pool_assets.get(denom)) {
+    if (pool_assets?.get(denom)) {
     
       generatedAsset.api_include = pool_assets.get(denom).osmosis_info;
       
@@ -196,25 +197,6 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
     //--Process Transfer Methods--
     generatedAsset.transfer_methods = zone_asset.transfer_methods;
 
-    generatedAsset.transfer_methods?.forEach((transfer_method) => {
-      //if integrated bridge, get counterparty data
-      if(transfer_method.type == "integrated_bridge") {
-        //get counterparty data
-        transfer_method.counterparty.forEach((asset) => {
-          //fill in counterparty data from config file
-          asset.symbol = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "symbol");
-          let display = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "display");
-          let denom_units = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "denom_units");
-          let decimals;
-          denom_units.forEach((unit) => {
-            if(unit.denom == display) {
-              asset.decimals = unit.exponent;
-              return;
-            }
-          });
-        });
-      }
-    });
 
 
     let bridge_provider = "";
@@ -319,7 +301,23 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
         generatedAsset.transfer_methods = [];
       }
 
-      generatedAsset.transfer_methods.push(trace);
+      let ibc_transfer_method = {
+        name: "Osmosis IBC Transfer",
+        type: "ibc",
+        counterparty: {
+          chain_name: zone_asset.chain_name,
+          base_denom: zone_asset.base_denom,
+          port: trace.counterparty.port,
+          channel_id: trace.counterparty.channel_id
+        },
+        chain: {
+          port: trace.chain.port,
+          channel_id: trace.chain.channel_id,
+          path: zone_asset.path
+        }
+      }
+      generatedAsset.transfer_methods.push(ibc_transfer_method);
+      //generatedAsset.transfer_methods.push(trace);
 
 
 
@@ -377,6 +375,14 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
               if(evm_chain.chain_name == last_trace.counterparty.chain_name) {
                 counterparty.chain_type = "evm";
                 counterparty.chain_id = evm_chain.chain_id;
+                counterparty.address = chain_reg.getAssetProperty(
+                  last_trace.counterparty.chain_name,
+                  last_trace.counterparty.base_denom,
+                  "address"
+                );
+                if(!counterparty.address) {
+                  counterparty.address = zero_address;
+                }
                 return;
               }
             });

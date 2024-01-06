@@ -56,6 +56,10 @@
           "type": "boolean",
           "description": "Whether the asset should be temporarily unlisted on the Osmosis Zone app."
         },
+        "osmosis_validated": {
+          "type": "boolean",
+          "description": "Whether the asset has been confrimed by a human to display and function correctly on Osmosis Zone."
+        },
         "canonical": {
           "type": "object",
           "required": [
@@ -74,7 +78,7 @@
             }
           }
         },
-        "additional_transfer": {
+        "transfer_methods": {
           "type": "array",
           "items": {
             "type": "object",
@@ -93,6 +97,10 @@
                   "integrated_bridge",
                   "fiat_onramp"
                 ]
+              },
+              "osmosis_validated": {
+                "type": "boolean",
+                "description": "Whether the transfer method has been tested by a human and confirm to be working correctly."
               }
             },
             "oneOf": [
@@ -144,6 +152,19 @@
               "description": "How the asset should be described. E.g., $USTC is named: 'Terra USD'."
             }
           }
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "l1",
+              "defi",
+              "store value",
+              "web3"
+            ]
+          },
+          "minItems": 1
         }
       }
     },
@@ -152,6 +173,17 @@
       "properties": {
         "type": {
           "const": "external_interface"
+        },
+        "counterparty": {
+          "type": "object",
+          "properties": {
+            "chain_name": {
+              "type": "string"
+            },
+            "base_denom": {
+              "type": "string"
+            }
+          }
         },
         "deposit_url": {
           "type": "string",
@@ -171,17 +203,24 @@
         "type": {
           "const": "integrated_bridge"
         },
-        "provider_chain_key": {
-          "type": "string"
+        "counterparty": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "chain_name": {
+                "type": "string"
+              },
+              "base_denom": {
+                "type": "string"
+              }
+            }
+          }
         },
-        "provider_asset_key": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "provider_chain_key",
-        "provider_asset_key"
-      ]
+        "required": [
+          "provider_asset_key"
+        ]
+      }
     },
     "fiat_onramp": {
       "type": "object",

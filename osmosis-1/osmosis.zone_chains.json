@@ -502,8 +502,8 @@
     },
     {
       "chain_name": "kujira",
-      "rpc": "https://rpc-kujira-ia.cosmosia.notional.ventures",
-      "rest": "https://api-kujira-ia.cosmosia.notional.ventures",
+      "rpc": "https://kujira-rpc.polkachu.com",
+      "rest": "https://kujira-api.polkachu.com/",
       "explorer_tx_url": "https://finder.kujira.app/kaiyo-1/tx/${txHash}",
       "keplr_features": [
         "ibc-transfer",
@@ -1082,6 +1082,38 @@
         "ibc-go",
         "ibc-transfer",
         "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "haqq",
+      "rpc": "https://rpc.tm.haqq.network/",
+      "rest": "https://rest.cosmos.haqq.network/",
+      "explorer_tx_url": "https://ping.pub/haqq/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "pundix",
+      "rpc": "https://px-json.pundix.com",
+      "rest": "https://px-rest.pundix.com",
+      "explorer_tx_url": "https://starscan.io/pundix/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "nyx",
+      "rpc": "https://nym-rpc.polkachu.com",
+      "rest": "https://nym-api.polkachu.com",
+      "explorer_tx_url": "https://www.mintscan.io/nyx/transactions/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
       ]
     }
   ]

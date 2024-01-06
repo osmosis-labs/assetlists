@@ -18,6 +18,37 @@
       "path": "transfer/channel-208/uusdc",
       "peg_mechanism": "collateralized",
       "osmosis_verified": true,
+      "transfer_methods": [
+        {
+          "name": "Axelar Bridge",
+          "type": "integrated_bridge",
+          "counterparty": [
+            {
+              "chain_name": "ethereum",
+              "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+            },
+            {
+              "chain_name": "avalanche",
+              "base_denom": "0xfab550568C688d5d8a52c7d794cb93edc26ec0ec"
+            },
+            {
+              "chain_name": "moonbeam",
+              "base_denom": "0xca01a1d0993565291051daff390892518acfad3a"
+            },
+            {
+              "chain_name": "polygon",
+              "base_denom": "0x750e4c4984a9e0f12978ea6742bc1c5d248f40ed"
+            }
+          ],
+          "provider_asset_key": "uusdc"
+        },
+        {
+          "name": "Satellite",
+          "type": "external_interface",
+          "deposit_url": "https://satellite.money/?source=ethereum&destination=osmosis&asset_denom=uusdc",
+          "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=uusdc"
+        }
+      ],
       "override_properties": {
         "symbol": "USDC.axl",
         "logo_URIs": {
@@ -41,7 +72,30 @@
       "canonical": {
         "chain_name": "ethereum",
         "base_denom": "wei"
-      }
+      },
+      "transfer_methods": [
+        {
+          "name": "Axelar Bridge",
+          "type": "integrated_bridge",
+          "counterparty": [
+            {
+              "chain_name": "ethereum",
+              "base_denom": "wei"
+            },
+            {
+              "chain_name": "ethereum",
+              "base_denom": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+            }
+          ],
+          "provider_asset_key": "eth"
+        },
+        {
+          "name": "Satellite",
+          "type": "external_interface",
+          "deposit_url": "https://satellite.money/?source=ethereum&destination=osmosis&asset_denom=weth-wei",
+          "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=weth-wei"
+        }
+      ]
     },
     {
       "chain_name": "axelar",
@@ -167,7 +221,7 @@
       "override_properties": {
         "name": "Luna Classic"
       },
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Terra Bridge",
           "type": "external_interface",
@@ -199,7 +253,7 @@
       "base_denom": "aevmos",
       "path": "transfer/channel-204/aevmos",
       "osmosis_verified": true,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Evmos App",
           "type": "external_interface",
@@ -423,7 +477,7 @@
       "base_denom": "swth",
       "path": "transfer/channel-188/swth",
       "osmosis_verified": true,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Carbon Demex",
           "type": "external_interface",
@@ -462,7 +516,7 @@
       "base_denom": "inj",
       "path": "transfer/channel-122/inj",
       "osmosis_verified": true,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Injective Hub",
           "type": "external_interface",
@@ -511,6 +565,9 @@
       "chain_name": "juno",
       "base_denom": "cw20:juno1r4pzw8f9z0sypct5l9j906d47z998ulwvhvqe5xdwgy8wf84583sxwh0pa",
       "path": "transfer/channel-169/cw20:juno1r4pzw8f9z0sypct5l9j906d47z998ulwvhvqe5xdwgy8wf84583sxwh0pa",
+      "override_properties": {
+        "symbol": "juno.RAC"
+      },
       "osmosis_verified": false
     },
     {
@@ -539,7 +596,7 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.grv.svg"
         }
       },
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Gravity Bridge",
           "type": "external_interface",
@@ -560,7 +617,7 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/weth.grv.svg"
         }
       },
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Gravity Bridge",
           "type": "external_interface",
@@ -582,7 +639,7 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdc.grv.svg"
         }
       },
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Gravity Bridge",
           "type": "external_interface",
@@ -604,7 +661,7 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dai.grv.svg"
         }
       },
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Gravity Bridge",
           "type": "external_interface",
@@ -626,7 +683,7 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.grv.svg"
         }
       },
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Gravity Bridge",
           "type": "external_interface",
@@ -734,6 +791,7 @@
       "base_denom": "aave-wei",
       "path": "transfer/channel-208/aave-wei",
       "osmosis_verified": false,
+      "osmosis_unlisted": true,
       "override_properties": {
         "symbol": "AAVE"
       },
@@ -747,25 +805,13 @@
       "base_denom": "ape-wei",
       "path": "transfer/channel-208/ape-wei",
       "osmosis_verified": false,
+      "osmosis_unlisted": true,
       "override_properties": {
         "symbol": "APE"
       },
       "canonical": {
         "chain_name": "ethereum",
         "base_denom": "0x4d224452801aced8b2f0aebe155379bb5d594381"
-      }
-    },
-    {
-      "chain_name": "axelar",
-      "base_denom": "axs-wei",
-      "path": "transfer/channel-208/axs-wei",
-      "osmosis_verified": false,
-      "override_properties": {
-        "symbol": "AXS"
-      },
-      "canonical": {
-        "chain_name": "ethereum",
-        "base_denom": "0xbb0e17ef65f82ab018d8edd776e8dd940327b28b"
       }
     },
     {
@@ -786,6 +832,7 @@
       "base_denom": "rai-wei",
       "path": "transfer/channel-208/rai-wei",
       "osmosis_verified": false,
+      "osmosis_unlisted": true,
       "override_properties": {
         "symbol": "RAI"
       },
@@ -799,6 +846,7 @@
       "base_denom": "shib-wei",
       "path": "transfer/channel-208/shib-wei",
       "osmosis_verified": false,
+      "osmosis_unlisted": true,
       "override_properties": {
         "symbol": "SHIB"
       },
@@ -808,37 +856,11 @@
       }
     },
     {
-      "chain_name": "axelar",
-      "base_denom": "uni-wei",
-      "path": "transfer/channel-208/uni-wei",
-      "osmosis_verified": false,
-      "override_properties": {
-        "symbol": "UNI"
-      },
-      "canonical": {
-        "chain_name": "ethereum",
-        "base_denom": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984"
-      }
-    },
-    {
-      "chain_name": "axelar",
-      "base_denom": "xcn-wei",
-      "path": "transfer/channel-208/xcn-wei",
-      "osmosis_verified": false,
-      "override_properties": {
-        "symbol": "XCN"
-      },
-      "canonical": {
-        "chain_name": "ethereum",
-        "base_denom": "0xa2cd3d43c775978a96bdbf12d733d5a1ed94fb18"
-      }
-    },
-    {
       "chain_name": "kujira",
       "base_denom": "ukuji",
       "path": "transfer/channel-259/ukuji",
       "osmosis_verified": true,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Kujira Blue",
           "type": "external_interface",
@@ -857,7 +879,7 @@
       "base_denom": "aechelon",
       "path": "transfer/channel-403/aechelon",
       "osmosis_verified": false,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Echelon Network",
           "type": "external_interface",
@@ -936,7 +958,7 @@
       "chain_name": "oraichain",
       "base_denom": "orai",
       "path": "transfer/channel-216/orai",
-      "osmosis_verified": false
+      "osmosis_verified": true
     },
     {
       "chain_name": "cudos",
@@ -1050,7 +1072,7 @@
       "base_denom": "factory/kujira1qk00h5atutpsv900x202pxx42npjr9thg58dnqpa72f2p7m2luase444a7/uusk",
       "path": "transfer/channel-259/factory:kujira1qk00h5atutpsv900x202pxx42npjr9thg58dnqpa72f2p7m2luase444a7:uusk",
       "osmosis_verified": true,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Kujira Blue",
           "type": "external_interface",
@@ -1075,7 +1097,7 @@
       "base_denom": "cw20:secret12rcvz0umvk875kd6a803txhtlu7y0pnd73kcej",
       "path": "transfer/channel-476/cw20:secret12rcvz0umvk875kd6a803txhtlu7y0pnd73kcej",
       "osmosis_verified": false,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Secret Network IBC Transfer",
           "type": "external_interface",
@@ -1088,7 +1110,7 @@
       "base_denom": "cw20:secret1yxcexylwyxlq58umhgsjgstgcg2a0ytfy4d9lt",
       "path": "transfer/channel-476/cw20:secret1yxcexylwyxlq58umhgsjgstgcg2a0ytfy4d9lt",
       "osmosis_verified": false,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Secret Network IBC Transfer",
           "type": "external_interface",
@@ -1101,7 +1123,7 @@
       "base_denom": "cw20:secret1qfql357amn448duf5gvp9gr48sxx9tsnhupu3d",
       "path": "transfer/channel-476/cw20:secret1qfql357amn448duf5gvp9gr48sxx9tsnhupu3d",
       "osmosis_verified": false,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Secret Network IBC Transfer",
           "type": "external_interface",
@@ -1114,7 +1136,7 @@
       "base_denom": "cw20:secret1rgm2m5t530tdzyd99775n6vzumxa5luxcllml4",
       "path": "transfer/channel-476/cw20:secret1rgm2m5t530tdzyd99775n6vzumxa5luxcllml4",
       "osmosis_verified": false,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Secret Network IBC Transfer",
           "type": "external_interface",
@@ -1127,7 +1149,7 @@
       "base_denom": "cw20:secret1k6u0cy4feepm6pehnz804zmwakuwdapm69tuc4",
       "path": "transfer/channel-476/cw20:secret1k6u0cy4feepm6pehnz804zmwakuwdapm69tuc4",
       "osmosis_verified": false,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Secret Network IBC Transfer",
           "type": "external_interface",
@@ -1183,7 +1205,7 @@
       "base_denom": "cw20:secret1s09x2xvfd2lp2skgzm29w2xtena7s8fq98v852",
       "path": "transfer/channel-476/cw20:secret1s09x2xvfd2lp2skgzm29w2xtena7s8fq98v852",
       "osmosis_verified": false,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Secret Network IBC Transfer",
           "type": "external_interface",
@@ -1220,7 +1242,7 @@
       "base_denom": "erc20/0x2Cbea61fdfDFA520Ee99700F104D5b75ADf50B0c",
       "path": "transfer/channel-490/erc20/0x2Cbea61fdfDFA520Ee99700F104D5b75ADf50B0c",
       "osmosis_verified": false,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Arable Finance",
           "type": "external_interface",
@@ -1234,7 +1256,7 @@
       "base_denom": "aplanq",
       "path": "transfer/channel-492/aplanq",
       "osmosis_verified": false,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "TFM IBC Transfer",
           "type": "external_interface",
@@ -1321,7 +1343,7 @@
       "base_denom": "erc20/0xAE6D3334989a22A65228732446731438672418F2",
       "path": "transfer/channel-490/erc20/0xAE6D3334989a22A65228732446731438672418F2",
       "osmosis_verified": false,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Arable Finance",
           "type": "external_interface",
@@ -1504,7 +1526,7 @@
       "base_denom": "cw20:secret1fl449muk5yq8dlad7a22nje4p5d2pnsgymhjfd",
       "path": "transfer/channel-476/cw20:secret1fl449muk5yq8dlad7a22nje4p5d2pnsgymhjfd",
       "osmosis_verified": true,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Secret Network IBC Transfer",
           "type": "external_interface",
@@ -1649,7 +1671,7 @@
       "base_denom": "cw20:terra1lxx40s29qvkrcj8fsa3yzyehy7w50umdvvnls2r830rys6lu2zns63eelv",
       "path": "transfer/channel-341/cw20:terra1lxx40s29qvkrcj8fsa3yzyehy7w50umdvvnls2r830rys6lu2zns63eelv",
       "osmosis_verified": true,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "TFM IBC Transfer",
           "type": "external_interface",
@@ -1680,7 +1702,7 @@
       "base_denom": "cw20:terra1lalvk0r6nhruel7fvzdppk3tup3mh5j4d4eadrqzfhle4zrf52as58hh9t",
       "path": "transfer/channel-341/cw20:terra1lalvk0r6nhruel7fvzdppk3tup3mh5j4d4eadrqzfhle4zrf52as58hh9t",
       "osmosis_verified": false,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "TFM IBC Transfer",
           "type": "external_interface",
@@ -1694,7 +1716,7 @@
       "base_denom": "cw20:terra1gwrz9xzhqsygyr5asrgyq3pu0ewpn00mv2zenu86yvx2nlwpe8lqppv584",
       "path": "transfer/channel-341/cw20:terra1gwrz9xzhqsygyr5asrgyq3pu0ewpn00mv2zenu86yvx2nlwpe8lqppv584",
       "osmosis_verified": false,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "TFM IBC Transfer",
           "type": "external_interface",
@@ -1720,12 +1742,12 @@
       "base_denom": "ppica",
       "path": "transfer/channel-1279/ppica",
       "osmosis_verified": true,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Composable Trustless Zone",
           "type": "external_interface",
-          "deposit_url": "https://app.trustless.zone/multihop?from=PICASSO&to=OSMOSIS",
-          "withdraw_url": "https://app.trustless.zone/multihop?from=OSMOSIS&to=PICASSO"
+          "deposit_url": "https://app.trustless.zone/?from=PICASSO&to=OSMOSIS",
+          "withdraw_url": "https://app.trustless.zone/?from=OSMOSIS&to=PICASSO"
         }
       ]
     },
@@ -1738,12 +1760,12 @@
         "chain_name": "kusama",
         "base_denom": "Planck"
       },
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Composable Trustless Zone",
           "type": "external_interface",
-          "deposit_url": "https://app.trustless.zone/multihop?from=PICASSO&to=OSMOSIS",
-          "withdraw_url": "https://app.trustless.zone/multihop?from=OSMOSIS&to=PICASSO"
+          "deposit_url": "https://app.trustless.zone/?from=PICASSO&to=OSMOSIS",
+          "withdraw_url": "https://app.trustless.zone/?from=OSMOSIS&to=PICASSO"
         }
       ]
     },
@@ -1756,12 +1778,12 @@
         "chain_name": "polkadot",
         "base_denom": "Planck"
       },
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Composable Trustless Zone",
           "type": "external_interface",
-          "deposit_url": "https://app.trustless.zone/multihop?from=PICASSO&to=OSMOSIS",
-          "withdraw_url": "https://app.trustless.zone/multihop?from=OSMOSIS&to=PICASSO"
+          "deposit_url": "https://app.trustless.zone/?from=PICASSO&to=OSMOSIS",
+          "withdraw_url": "https://app.trustless.zone/?from=OSMOSIS&to=PICASSO"
         }
       ]
     },
@@ -1782,7 +1804,7 @@
       "base_denom": "umpwr",
       "path": "transfer/channel-1411/umpwr",
       "osmosis_verified": true,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "TFM IBC Transfer",
           "type": "external_interface",
@@ -1823,7 +1845,7 @@
       "base_denom": "usei",
       "path": "transfer/channel-782/usei",
       "osmosis_verified": true,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "TFM IBC Transfer",
           "type": "external_interface",
@@ -1858,7 +1880,7 @@
         "chain_name": "solana",
         "base_denom": "Lamport"
       },
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Wormhole Portal Bridge",
           "type": "external_interface",
@@ -1876,7 +1898,7 @@
         "chain_name": "solana",
         "base_denom": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"
       },
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Wormhole Portal Bridge",
           "type": "external_interface",
@@ -1896,7 +1918,7 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.hole.svg"
         }
       },
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Wormhole Portal Bridge",
           "type": "external_interface",
@@ -1914,7 +1936,7 @@
         "chain_name": "sui",
         "base_denom": "0x2::sui::SUI"
       },
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Wormhole Portal Bridge",
           "type": "external_interface",
@@ -1937,7 +1959,7 @@
         "chain_name": "aptos",
         "base_denom": "0x1::aptos_coin::AptosCoin"
       },
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Wormhole Portal Bridge",
           "type": "external_interface",
@@ -1951,7 +1973,7 @@
       "base_denom": "factory/kujira1643jxg8wasy5cfcn7xm8rd742yeazcksqlg4d7/umnta",
       "path": "transfer/channel-259/factory:kujira1643jxg8wasy5cfcn7xm8rd742yeazcksqlg4d7:umnta",
       "osmosis_verified": true,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Kujira Blue",
           "type": "external_interface",
@@ -1976,7 +1998,7 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdc.hole.svg"
         }
       },
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Wormhole Portal Bridge",
           "type": "external_interface",
@@ -1996,7 +2018,7 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/weth.hole.svg"
         }
       },
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Wormhole Portal Bridge",
           "type": "external_interface",
@@ -2036,7 +2058,7 @@
       "base_denom": "axpla",
       "path": "transfer/channel-1634/axpla",
       "osmosis_verified": true,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "XPLA",
           "type": "external_interface",
@@ -2055,7 +2077,7 @@
       "base_denom": "erc20/0x655ecB57432CC1370f65e5dc2309588b71b473A9",
       "path": "transfer/channel-204/erc20/0x655ecB57432CC1370f65e5dc2309588b71b473A9",
       "osmosis_verified": false,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Evmos App",
           "type": "external_interface",
@@ -2068,7 +2090,7 @@
       "base_denom": "ario",
       "path": "transfer/channel-1424/ario",
       "osmosis_verified": false,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Realio Network",
           "type": "external_interface",
@@ -2144,7 +2166,7 @@
       "base_denom": "FX",
       "path": "transfer/channel-2716/FX",
       "osmosis_verified": true,
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Starscan",
           "type": "external_interface",
@@ -2212,7 +2234,7 @@
       "chain_name": "bostrom",
       "base_denom": "hydrogen",
       "path": "transfer/channel-95/hydrogen",
-      "osmosis_verified": false
+      "osmosis_verified": true
     },
     {
       "chain_name": "bostrom",
@@ -2247,7 +2269,7 @@
         "chain_name": "solana",
         "base_denom": "HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3"
       },
-      "additional_transfer": [
+      "transfer_methods": [
         {
           "name": "Wormhole Portal Bridge",
           "type": "external_interface",
@@ -2265,13 +2287,126 @@
     {
       "chain_name": "osmosis",
       "base_denom": "factory/osmo1mlng7pz4pnyxtpq0akfwall37czyk9lukaucsrn30ameplhhshtqdvfm5c/ulvn",
-      "osmosis_verified": true,
-      "osmosis_unlisted": true
+      "osmosis_verified": true
     },
     {
       "chain_name": "chihuahua",
       "base_denom": "cw20:chihuahua1yl8z39ugle8s02fpwkhh293509q5xcpalmdzc4amvchz8nkexrmsy95gef",
       "path": "transfer/channel-11348/cw20:chihuahua1yl8z39ugle8s02fpwkhh293509q5xcpalmdzc4amvchz8nkexrmsy95gef",
+      "osmosis_verified": false
+    },
+    {
+      "chain_name": "neutron",
+      "base_denom": "factory/neutron1p8d89wvxyjcnawmgw72klknr3lg9gwwl6ypxda/newt",
+      "path": "transfer/channel-874/factory/neutron1p8d89wvxyjcnawmgw72klknr3lg9gwwl6ypxda/newt",
+      "osmosis_verified": false
+    },
+    {
+      "chain_name": "osmosis",
+      "base_denom": "factory/osmo1f5vfcph2dvfeqcqkhetwv75fda69z7e5c2dldm3kvgj23crkv6wqcn47a0/umilkTIA",
+      "osmosis_verified": true,
+      "override_properties": {
+        "traces": []
+      }
+    },
+    {
+      "chain_name": "migaloo",
+      "base_denom": "factory/migaloo1erul6xyq0gk6ws98ncj7lnq9l4jn4gnnu9we73gdz78yyl2lr7qqrvcgup/ash",
+      "path": "transfer/channel-642/factory/migaloo1erul6xyq0gk6ws98ncj7lnq9l4jn4gnnu9we73gdz78yyl2lr7qqrvcgup/ash",
+      "osmosis_verified": false
+    },
+    {
+      "chain_name": "migaloo",
+      "base_denom": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/urac",
+      "path": "transfer/channel-642/factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/urac",
+      "osmosis_verified": false
+    },
+    {
+      "chain_name": "migaloo",
+      "base_denom": "factory/migaloo1etlu2h30tjvv8rfa4fwdc43c92f6ul5w9acxzk/uguppy",
+      "path": "transfer/channel-642/factory/migaloo1etlu2h30tjvv8rfa4fwdc43c92f6ul5w9acxzk/uguppy",
+      "osmosis_verified": false
+    },
+    {
+      "chain_name": "haqq",
+      "base_denom": "aISLM",
+      "path": "transfer/channel-1575/aISLM",
+      "osmosis_verified": true
+    },
+    {
+      "chain_name": "injective",
+      "base_denom": "factory/inj14lf8xm6fcvlggpa7guxzjqwjmtr24gnvf56hvz/autism",
+      "path": "transfer/channel-122/factory/inj14lf8xm6fcvlggpa7guxzjqwjmtr24gnvf56hvz/autism",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true
+    },
+    {
+      "chain_name": "gravitybridge",
+      "base_denom": "gravity0x60e683C6514Edd5F758A55b6f393BeBBAfaA8d5e",
+      "path": "transfer/channel-144/gravity0x60e683C6514Edd5F758A55b6f393BeBBAfaA8d5e",
+      "override_properties": {
+        "symbol": "PAGE"
+      },
+      "osmosis_verified": false,
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x60e683C6514Edd5F758A55b6f393BeBBAfaA8d5e"
+      },
+      "transfer_methods": [
+        {
+          "name": "Gravity Bridge",
+          "type": "external_interface",
+          "deposit_url": "https://bridge.blockscape.network/?from=gravitybridge&to=osmosis",
+          "withdraw_url": "https://bridge.blockscape.network/?from=osmosis&to=gravitybridge"
+        }
+      ],
+      "osmosis_unlisted": true
+    },
+    {
+      "chain_name": "pundix",
+      "base_denom": "bsc0x29a63F4B209C29B4DC47f06FFA896F32667DAD2C",
+      "path": "transfer/channel-12618/bsc0x29a63F4B209C29B4DC47f06FFA896F32667DAD2C",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true
+    },
+    {
+      "chain_name": "injective",
+      "base_denom": "factory/inj1xtel2knkt8hmc9dnzpjz6kdmacgcfmlv5f308w/ninja",
+      "path": "transfer/channel-122/factory/inj1xtel2knkt8hmc9dnzpjz6kdmacgcfmlv5f308w/ninja",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true
+    },
+    {
+      "chain_name": "juno",
+      "base_denom": "cw20:juno10gthz5ufgrpuk5cscve2f0hjp56wgp90psqxcrqlg4m9mcu9dh8q4864xy",
+      "path": "transfer/channel-169/cw20:juno10gthz5ufgrpuk5cscve2f0hjp56wgp90psqxcrqlg4m9mcu9dh8q4864xy",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true
+    },
+    {
+      "chain_name": "nyx",
+      "base_denom": "unyx",
+      "path": "transfer/channel-15464/unyx",
+      "osmosis_verified": true,
+      "osmosis_unlisted": true
+    },
+    {
+      "chain_name": "nyx",
+      "base_denom": "unym",
+      "path": "transfer/channel-15464/unym",
+      "osmosis_verified": true
+    },
+    {
+      "chain_name": "chihuahua",
+      "base_denom": "factory/chihuahua1x4q2vkrz4dfgd9hcw0p5m2f2nuv2uqmt9xr8k2/achihuahuawifhat",
+      "path": "transfer/channel-113/factory/chihuahua1x4q2vkrz4dfgd9hcw0p5m2f2nuv2uqmt9xr8k2/achihuahuawifhat",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true
+    },
+    {
+      "chain_name": "neutron",
+      "base_denom": "factory/neutron170v88vrtnedesyfytuku257cggxc79rd7lwt7q/ucircus",
+      "path": "transfer/channel-874/factory/neutron170v88vrtnedesyfytuku257cggxc79rd7lwt7q/ucircus",
       "osmosis_verified": false
     },
     {

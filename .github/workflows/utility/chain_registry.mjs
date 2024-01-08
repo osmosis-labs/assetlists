@@ -226,6 +226,24 @@ export function getAssetProperty(chainName, baseDenom, property) {
   }
 }
 
+
+export function getAssetObject(chainName, baseDenom) {
+  const assets = getFileProperty(chainName, "assetlist", "assets");
+  if(assets) {
+    let selectedAsset;
+    assets.forEach((asset) => {
+      if(asset.base == baseDenom) {
+        selectedAsset = asset;
+        return;
+      }
+    });
+    if(selectedAsset) {
+      return selectedAsset;
+    }
+  }
+}
+
+
 export function setAssetProperty(chainName, baseDenom, property, value) {
   const assets = getFileProperty(chainName, "assetlist", "assets");
   if(assets) {
@@ -369,6 +387,8 @@ export function filterAssetPointersByAssetProperty(pointers, property, value) {
   });
   return filtered;
 }
+
+
 
 function main() {
   populateChainDirectories();

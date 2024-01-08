@@ -23,6 +23,7 @@ const zoneAssetlistFileName = "osmosis.zone_assets.json";
 const zoneChainlistFileName = "osmosis.zone_chains.json";
 const zoneConfigFileName = "osmosis.zone_config.json";
 
+//This defines with types of traces are considered essentially the same asset
 const find_origin_trace_types = [
   "ibc",
   "ibc-cw20",
@@ -30,6 +31,8 @@ const find_origin_trace_types = [
   "wrapped",
   "additional-mintage"
 ];
+
+//This address corresponds to the native assset on all evm chains (e.g., wei on ethereum)
 const zero_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
 
 function getZoneAssetlist(chainName) {

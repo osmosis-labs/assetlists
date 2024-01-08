@@ -562,8 +562,8 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "1251",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "pool": "1265",
+        "denom": "uosmo"
       },
       "transfer_methods": [
         {
@@ -1738,8 +1738,8 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "6",
-        "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
+        "pool": "5",
+        "denom": "uosmo"
       },
       "transfer_methods": [
         {
@@ -6497,7 +6497,6 @@
       ],
       "coingecko_id": "stakeeasy-juno-derivative",
       "verified": false,
-      "api_include": true,
       "price": {
         "pool": "807",
         "denom": "ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED"
@@ -6728,7 +6727,7 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "1331",
+        "pool": "810",
         "denom": "ibc/987C17B11ABC2B20019178ACE62929FE9840202CE79498E29FE8E5CB02B7C0A4"
       },
       "categories": [
@@ -9160,6 +9159,10 @@
       ],
       "coingecko_id": "stride-staked-luna",
       "verified": true,
+      "price": {
+        "pool": "913",
+        "denom": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9"
+      },
       "categories": [
         "liquid_staking"
       ],
@@ -11996,6 +11999,10 @@
         }
       ],
       "verified": false,
+      "price": {
+        "pool": "1072",
+        "denom": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9"
+      },
       "transfer_methods": [
         {
           "name": "TFM IBC Transfer",
@@ -12051,6 +12058,10 @@
         }
       ],
       "verified": false,
+      "price": {
+        "pool": "1073",
+        "denom": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9"
+      },
       "transfer_methods": [
         {
           "name": "TFM IBC Transfer",
@@ -12376,8 +12387,8 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "1145",
-        "denom": "uosmo"
+        "pool": "1144",
+        "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
       },
       "transfer_methods": [
         {
@@ -13239,6 +13250,7 @@
         }
       ],
       "verified": true,
+      "api_include": true,
       "price": {
         "pool": "1131",
         "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
@@ -14694,8 +14706,8 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "1253",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "pool": "1284",
+        "denom": "ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F"
       },
       "transfer_methods": [
         {
@@ -14740,7 +14752,8 @@
       ],
       "common_key": "BTC",
       "name": "Nomic Bitcoin",
-      "description": "Bitcoin. On Cosmos."
+      "description": "Bitcoin. On Cosmos.",
+      "unstable": true
     },
     {
       "chain_name": "nois",
@@ -16472,6 +16485,60 @@
       "common_key": "JAPE",
       "name": "Junø Apes",
       "description": "Governance and utility token for the Junø Apes NFT platform on Juno",
+      "unlisted": true
+    },
+    {
+      "chain_name": "chihuahua",
+      "base_denom": "factory/chihuahua13jawsn574rf3f0u5rhu7e8n6sayx5gkw3eddhp/uwoof",
+      "minimal_denom": "ibc/9B8EC667B6DF55387DC0F3ACC4F187DA6921B0806ED35DE6B04DE96F5AB81F53",
+      "symbol": "WOOF",
+      "decimals": 6,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/chihuahua/images/woof.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/chihuahua/images/woof.png"
+        }
+      ],
+      "verified": false,
+      "price": {
+        "pool": "1365",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+      },
+      "transfer_methods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "chihuahua",
+            "base_denom": "factory/chihuahua13jawsn574rf3f0u5rhu7e8n6sayx5gkw3eddhp/uwoof",
+            "port": "transfer",
+            "channel_id": "channel-7"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-113",
+            "path": "transfer/channel-113/factory/chihuahua13jawsn574rf3f0u5rhu7e8n6sayx5gkw3eddhp/uwoof"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chain_name": "chihuahua",
+          "base_denom": "factory/chihuahua13jawsn574rf3f0u5rhu7e8n6sayx5gkw3eddhp/uwoof",
+          "chain_type": "cosmos",
+          "chain_id": "chihuahua-1",
+          "symbol": "WOOF",
+          "decimals": 6,
+          "logo_URIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/chihuahua/images/woof.png"
+          }
+        }
+      ],
+      "common_key": "WOOF",
+      "name": "WOOF",
+      "description": "Woof",
       "unlisted": true
     }
   ]

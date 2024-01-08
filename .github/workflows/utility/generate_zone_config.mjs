@@ -23,6 +23,7 @@ const zoneAssetlistFileName = "osmosis.zone_assets.json";
 const zoneChainlistFileName = "osmosis.zone_chains.json";
 const zoneConfigFileName = "osmosis.zone_config.json";
 
+//This defines with types of traces are considered essentially the same asset
 const find_origin_trace_types = [
   "ibc",
   "ibc-cw20",
@@ -30,6 +31,8 @@ const find_origin_trace_types = [
   "wrapped",
   "additional-mintage"
 ];
+
+//This address corresponds to the native assset on all evm chains (e.g., wei on ethereum)
 const zero_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
 
 function getZoneAssetlist(chainName) {
@@ -106,59 +109,96 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
   
   await asyncForEach(zone_assets, async (zone_asset) => {
 
+
+    //--Create the Generated Asset Object--
+    //  this will go into zone_asset_config
     let generatedAsset = {};
     
+
     
+    //--Identity (Chain Registry Pointer)--
     generatedAsset.chain_name = zone_asset.chain_name;
     generatedAsset.base_denom = zone_asset.base_denom;
-    generatedAsset.minimal_denom = zone_asset.base_denom;
 
-    //Replace Minimal Denom with IBC Hash Denom (iff appl.)
+
+
+    //--Get Origin Asset Object from Chain Registry--
+    let origin_asset = chain_reg.getAssetObject(zone_asset.chain_name, zone_asset.base_denom);
+
+
+
+    //--Get Local Asset Object from Chain Registry--
+    //--Local Base Denom (Denomination of the Asset when on the local chain)
+    //---e.g., OSMO on Osmosis -> uosmo
+    //---e.g., ATOM os Osmosis -> ibc/...
+    let local_asset;
     if(zone_asset.chain_name != chainName) {
-      let ibcHash = calculateIbcHash(zone_asset.path);
-      //--Replace Base with IBC Hash--
-      generatedAsset.minimal_denom = await ibcHash;
+      let ibcHash = calculateIbcHash(zone_asset.path);    //Calc IBC Hash Denom
+      generatedAsset.local_base_denom = await ibcHash;    //Set IBC Hash Denom
+      local_asset = chain_reg.getAssetObject(chainName, ibcHash);
+    } else {
+      generatedAsset.local_base_denom = zone_asset.base_denom;
     }
+    let asset = local_asset ? local_asset : origin_asset;
+
 
     
-    let reference_asset = {};
-    if(zone_asset.canonical){
-      reference_asset = zone_asset.canonical;
-    } else {
-      reference_asset = zone_asset;
+    //--Get Canonical Asset from Chain Registry--
+    //  used to override certain properties if this local variant is
+    //  the canonical representation of a foreign asset
+    let canonical_origin_asset = origin_asset;
+    let canonical_origin_chain_name = zone_asset.chain_name;
+    if(zone_asset.canonical) {
+      canonical_origin_chain_name = zone_asset.canonical.chain_name;
+      canonical_origin_asset = chain_reg.getAssetObject(zone_asset.canonical.chain_name, zone_asset.canonical.base_denom);
     }
-    generatedAsset.symbol = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "symbol");
 
 
-    //Get Decimals
-    let denom_units = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, "denom_units");
-    let display = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, "display");
-    denom_units.forEach((unit) => {
-      if(unit.denom === display) {
+
+    //--Set Reference Asset--
+    //  used to refer to what the asset represents, and allows for
+    //  potential overrides defined in the local chain's assetlist
+    let reference_asset = asset;
+    if(!local_asset && canonical_origin_asset) {
+      reference_asset = canonical_origin_asset;
+    }
+
+
+
+    //--Get Symbol
+    generatedAsset.symbol = reference_asset.symbol;
+
+
+
+    //--Get Decimals--
+    asset.denom_units.forEach((unit) => {
+      if(unit.denom === asset.display) {
         generatedAsset.decimals = unit.exponent;
       }
     });
 
 
-    generatedAsset.logo_URIs = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "logo_URIs");
-    generatedAsset.images = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "images");
-    
-    
-    generatedAsset.coingecko_id = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "coingecko_id");
 
+    //--Get Logos--
+    generatedAsset.logo_URIs = reference_asset.logo_URIs;
+    generatedAsset.images = reference_asset.images;
+    
+
+
+    //--Get CGID--
+    generatedAsset.coingecko_id = canonical_origin_asset.coingecko_id;
   
     
 
-    //  OSMOSIS-VERIFIED
+    //--Get Verified Status--
     generatedAsset.verified = zone_asset.osmosis_verified;
 
 
 
-    let denom = generatedAsset.minimal_denom;
+    //--Get Best Pricing Reference Pool--
+    let denom = generatedAsset.local_base_denom;
     if (pool_assets?.get(denom)) {
-    
       generatedAsset.api_include = pool_assets.get(denom).osmosis_info;
-      
       let price = "";
       price = pool_assets.get(denom).osmosis_price;
       if(price) {
@@ -168,14 +208,16 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
           denom: price_parts[1]
         }
       }
-      
     }
     
+
+
+    //--Get Categories--
     let categories = [];
     if(zone_asset.categories) {
       categories = zone_asset.categories;
     }
-    if(zone_asset.peg_mechanism) {
+    if(zone_asset.peg_mechanism && !categories.includes("stablecoin")) {
       categories.push("stablecoin");
     }
     let traces = chain_reg.getAssetTraces(zone_asset.chain_name, zone_asset.base_denom);
@@ -184,12 +226,15 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
         categories.push("liquid_staking");
       }
     });
-
     generatedAsset.categories = categories.length > 0 ? categories : undefined;
     
+
+
+    //--Get Peg Mechanism--
     generatedAsset.peg_mechanism = zone_asset.peg_mechanism;
 
-    
+
+
 
 
 
@@ -424,40 +469,43 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
 
 
     //--Staking token?--
+    //  used to get name and description
     let is_staking_token = false;
-    if(zone_asset.base_denom == chain_reg.getFileProperty(reference_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom) {
+    if(zone_asset.base_denom == chain_reg.getFileProperty(canonical_origin_chain_name, "chain", "staking")?.staking_tokens[0]?.denom) {
       is_staking_token = true;
     }
 
 
+
     //--Add Name--
+    //  default to reference asset's name...
+    //  default to reference asset's name...
+    let name = reference_asset.name;
 
-    let name = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "name");
-
-    //use chain name if staking token
+    //  but use chain name instead if it's the staking token...
     if(is_staking_token) {
-      name = chain_reg.getFileProperty(reference_asset.chain_name, "chain", "pretty_name");
+      name = chain_reg.getFileProperty(canonical_origin_chain_name, "chain", "pretty_name");
     }
 
-    //append bridge provider if not already there
+    // and append bridge provider if it's not already there
     if(bridge_provider) {
       if(!name.includes(bridge_provider)) {
         name = name + " " + "(" + bridge_provider + ")"
       }
     }
 
-    //submit name
+    //  submit
     generatedAsset.name = name;
 
 
 
     //--Add Description--
-    let asset_description = chain_reg.getAssetProperty(reference_asset.chain_name, reference_asset.base_denom, "description");
+    let asset_description = reference_asset.description;
     let description = asset_description ? asset_description : "";
     //need to see if it's first staking token
     if(is_staking_token) {
       //it is a staking token, so we pull the chain_description
-      let chain_description = chain_reg.getFileProperty(reference_asset.chain_name, "chain", "description");
+      let chain_description = chain_reg.getFileProperty(canonical_origin_chain_name, "chain", "description");
       if(chain_description) {
         if(description) {
           description = description + "\n\n";
@@ -509,15 +557,16 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
     }
 
 
+
+    //--Add Flags--
     generatedAsset.unstable = zone_asset.osmosis_unstable;
-    
     generatedAsset.unlisted = zone_asset.osmosis_unlisted;
+
 
     
     //--Append Asset to Assetlist--
     assets.push(generatedAsset);
     
-    //console.log(assets);
   
   });
 
@@ -528,7 +577,6 @@ async function generateAssetlist(chainName) {
   let zoneConfig = getZoneConfig(chainName)?.config;
 
   let zoneAssetlist = getZoneAssetlist(chainName);
-  //let zoneChainlist = getZoneChainlist(chainName);
   let assets = [];  
   await generateAssets(chainName, assets, zoneAssetlist.assets, zoneConfig);
   if (!assets) { return; }
@@ -536,7 +584,6 @@ async function generateAssetlist(chainName) {
     chain_name: chainName,
     assets: assets
   }
-  //console.log(assetlist);
   
   writeToFile(assetlist, chainName);
 

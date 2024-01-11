@@ -101,11 +101,191 @@ async function asyncForEach(array, callback) {
   }
 }
 
-const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
+//create related assets map {asset} -> [{{asset},#distance}]
+let relatedAssets = new Map();
+//define related asset distances
+const traceDistance = 1;
+const providerTokenDistance = 10;
+
+
+function getMostRecentNonIBCTrace(asset) {
+  //console.log(asset);
+  let traces = chain_reg.getAssetTraces(asset.chain_name, asset.base_denom);
+  //console.log(traces);
   
+  if(!traces) {
+    return;
+  }
+
+  for (let i = traces.length - 1; i >= 0; i--) {
+    if(traces[i].type != "ibc") {
+      return traces[i];
+    }
+  }
+
+  return;
+}
+
+
+function addRelative(asset1, asset2, d) {
+  
+  //cancel if they are the same
+  if(asset1.chain_name == asset2.chain_name && asset1.base_denom == asset2.base_denom) {
+    return;
+  }
+
+  let assetKey1 = asset1.chain_name + "." + asset1.base_denom;
+  let assetKey2 = asset2.chain_name + "." + asset2.base_denom;
+
+  //add relative to asset1, or at least lower the distance
+  let included = 0;
+  let relatives = relatedAssets.get(assetKey1);
+  relatives.forEach((relative) => {
+    if(relative.asset.chain_name == asset2.chain_name && relative.asset.base_denom == asset2.base_denom) {
+      included = 1;
+      if(d < relative.d) {
+        relative.d = d;
+      } 
+      return;
+    }
+  });
+  if(!included) {
+    let newRelative = {
+      asset: {
+        chain_name: asset2.chain_name,
+        base_denom: asset2.base_denom
+      },
+      d: d
+    };
+    relatedAssets.get(assetKey1).push(newRelative);
+  }
+  
+
+  //add relative to asset2, or at least lower the distance
+  included = 0;
+  relatives = relatedAssets.get(assetKey2);
+  relatives.forEach((relative) => {
+    if(relative.asset.chain_name == asset1.chain_name && relative.asset.base_denom == asset1.base_denom) {
+      included = 1;
+      if(d < relative.d) {
+        relative.d = d;
+      } 
+      return;
+    }
+  });
+  if(!included) {
+    let newRelative = {
+      asset: {
+        chain_name: asset1.chain_name,
+        base_denom: asset1.base_denom
+      },
+      d: d
+    };
+    relatedAssets.get(assetKey2).push(newRelative);
+  }
+
+
+}
+
+
+function addRelativeDeep(asset1, asset2, d) {
+
+  //cancel if they are the same
+  if(asset1.chain_name == asset2.chain_name && asset1.base_denom == asset2.base_denom) {
+    return;
+  }
+
+  let assetKey1 = asset1.chain_name + "." + asset1.base_denom;
+  let assetKey2 = asset2.chain_name + "." + asset2.base_denom;
+
+  
+  //first investigate the assets if they haven't been added yet
+  if(!relatedAssets.has(assetKey1)) {
+    getRelatedAssets(asset1);
+  }
+  if(!relatedAssets.has(assetKey2)) {
+    getRelatedAssets(asset2);
+  }
+  
+  //nested for loop to make sure each relative gets added to each other relative
+  relatedAssets.get(assetKey1).forEach((rel1) => {
+    relatedAssets.get(assetKey2).forEach((rel2) => {
+      addRelative(rel1.asset, rel2.asset, rel1.d + rel2.d + d)
+    });
+    addRelative(rel1.asset, asset2, rel1.d + d)
+  });
+  relatedAssets.get(assetKey2).forEach((rel2) => {
+    addRelative(rel2.asset, asset1, rel2.d + d)
+  });
+    
+  addRelative(asset1, asset2, d);
+
+}
+
+
+function getRelatedAssets(asset) {
+
+  let assetKey = asset.chain_name + "." + asset.base_denom;
+
+  //skip if already in map
+  if(relatedAssets.has(assetKey)) {
+    return;
+  }
+
+  //add to map with zero relationships
+  relatedAssets.set(assetKey, []);
+  
+  //iterate back through traces to find the next valid trace
+  let trace = getMostRecentNonIBCTrace(asset);
+
+  //skip if no traces
+  if(!trace) {
+    return;
+  }
+
+  //identify trace asset
+  let traceAsset = {
+    chain_name: trace.counterparty.chain_name,
+    base_denom: trace.counterparty.base_denom
+  };
+
+  //add each asset and their relatives to eachother
+  addRelativeDeep(asset, traceAsset, traceDistance);
+
+}
+
+
+function getAllRelatedAssets(assets) {
+
+  //iterate assets
+  assets.forEach((asset) => {
+
+    //define asset object
+    let assetPointer = {
+      chain_name: asset.chain_name,
+      base_denom: asset.base_denom
+    }
+
+    //get related assets for the current asset
+    getRelatedAssets(assetPointer);
+
+  });
+
+  relatedAssets.forEach((value, key) => {
+    console.log(key);
+    console.log(value);
+  });
+
+}
+
+
+const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
+
+  //getRelatedAssets(zone_assets);
+
   let pool_assets;
-  pool_assets = await returnAssets(chainName);
-  if (!pool_assets) { return; }
+  //pool_assets = await returnAssets(chainName);
+  //if (!pool_assets) { return; }
   
   await asyncForEach(zone_assets, async (zone_asset) => {
 
@@ -580,6 +760,9 @@ async function generateAssetlist(chainName) {
   let assets = [];  
   await generateAssets(chainName, assets, zoneAssetlist.assets, zoneConfig);
   if (!assets) { return; }
+  
+  await getAllRelatedAssets(assets);
+
   let assetlist = {
     chain_name: chainName,
     assets: assets

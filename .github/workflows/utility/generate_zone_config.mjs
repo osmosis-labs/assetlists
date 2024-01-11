@@ -23,6 +23,8 @@ const zoneAssetlistFileName = "osmosis.zone_assets.json";
 const zoneChainlistFileName = "osmosis.zone_chains.json";
 const zoneConfigFileName = "osmosis.zone_config.json";
 
+let zoneConfig;
+
 //This defines with types of traces are considered essentially the same asset
 const find_origin_trace_types = [
   "ibc",
@@ -103,9 +105,6 @@ async function asyncForEach(array, callback) {
 
 //create related assets map {asset} -> [{{asset},#distance}]
 let relatedAssets = new Map();
-//define related asset distances
-const traceDistance = 1;
-const providerTokenDistance = 10;
 
 
 function getMostRecentNonIBCTrace(asset) {
@@ -223,7 +222,31 @@ function addRelativeDeep(asset1, asset2, d) {
 }
 
 
+//define related asset distances
+let distanceMap = new Map();
+
+// Add entries to the map
+distanceMap.set('chainStaking', 4);
+distanceMap.set('provider', 7);
+distanceMap.set('wrapped', 1);
+distanceMap.set('bridge', 2);
+distanceMap.set('liquid-stake', 5);
+distanceMap.set('additional-mintage', 1);
+
+// Function to get distance with a default value
+function getDistance(relationship) {
+  // Use the Map.get() method with a default value (e.g., 0)
+  return distanceMap.get(relationship) || 2;
+}
+
+
 function getRelatedAssets(asset) {
+
+  //define related asset distances
+  const traceDistance = 1;
+  const traceProviderDistance = 15;
+  const chainStakingDistance = 10;
+
 
   let assetKey = asset.chain_name + "." + asset.base_denom;
 
@@ -235,6 +258,17 @@ function getRelatedAssets(asset) {
   //add to map with zero relationships
   relatedAssets.set(assetKey, []);
   
+  //get origin chain staking asset
+  let chainStaking = chain_reg.getFileProperty(asset.chain_name, "chain", "staking");
+  if(chainStaking && chainStaking.staking_tokens?.[0]?.denom) {
+    let chainStakingAsset = {
+      chain_name: asset.chain_name,
+      base_denom: chainStaking.staking_tokens?.[0]?.denom
+    }
+    //add each asset and their relatives to eachother
+    addRelativeDeep(asset, chainStakingAsset, getDistance("chainStaking"));
+  }
+
   //iterate back through traces to find the next valid trace
   let trace = getMostRecentNonIBCTrace(asset);
 
@@ -250,12 +284,33 @@ function getRelatedAssets(asset) {
   };
 
   //add each asset and their relatives to eachother
-  addRelativeDeep(asset, traceAsset, traceDistance);
+  addRelativeDeep(asset, traceAsset, getDistance(trace.type));
+
+  //get relationships for provider token
+  let traceProviderAsset;
+  if(trace.provider && zoneConfig?.providers) {
+    zoneConfig.providers.forEach((provider) => {
+      if(provider.provider == trace.provider && provider.token) {
+
+        //identify trace provider asset
+        traceProviderAsset = {
+          chain_name: provider.token.chain_name,
+          base_denom: provider.token.base_denom
+        };
+
+        //add each asset and their relatives to eachother
+        addRelativeDeep(asset, traceProviderAsset, getDistance("provider"));
+        return;
+      }
+    });
+  }
 
 }
 
 
 function getAllRelatedAssets(assets) {
+
+  let filterTop_n_Relatives = 10;
 
   //iterate assets
   assets.forEach((asset) => {
@@ -271,9 +326,27 @@ function getAllRelatedAssets(assets) {
 
   });
 
+  //sort and filter the relatives
   relatedAssets.forEach((value, key) => {
-    console.log(key);
-    console.log(value);
+
+    //sort the relatives
+    let sortedRelatives = [...value].sort((a, b) => a.d - b.d);
+
+    //filter the relatives by whether they are among zone assets
+    let filteredRelativesAmongZoneAssets = sortedRelatives.filter(relative =>
+      assets.some(asset =>
+        asset.chain_name === relative.asset.chain_name && asset.base_denom === relative.asset.base_denom
+      )
+    );
+
+    //filter the relatives to top 10 or so
+    let filteredRelativesTopN = filteredRelativesAmongZoneAssets.slice(0, filterTop_n_Relatives);
+    relatedAssets.set(key, filteredRelativesTopN);
+
+    // Display
+    console.log("Relatives for", key);
+    console.log(filteredRelativesTopN);
+
   });
 
 }
@@ -754,11 +827,11 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
 
 async function generateAssetlist(chainName) {
   
-  let zoneConfig = getZoneConfig(chainName)?.config;
+  zoneConfig = getZoneConfig(chainName)?.config;
 
   let zoneAssetlist = getZoneAssetlist(chainName);
   let assets = [];  
-  await generateAssets(chainName, assets, zoneAssetlist.assets, zoneConfig);
+  await generateAssets(chainName, assets, zoneAssetlist.assets);
   if (!assets) { return; }
   
   await getAllRelatedAssets(assets);
@@ -776,7 +849,7 @@ async function main() {
   
   await generateAssetlist("osmosis");
   //await generateAssetlist("osmosistestnet4");
-  await generateAssetlist("osmosistestnet");
+  //await generateAssetlist("osmosistestnet");
   
 }
 

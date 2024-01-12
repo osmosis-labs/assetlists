@@ -108,9 +108,8 @@ let relatedAssets = new Map();
 
 
 function getMostRecentNonIBCTrace(asset) {
-  //console.log(asset);
+
   let traces = chain_reg.getAssetTraces(asset.chain_name, asset.base_denom);
-  //console.log(traces);
   
   if(!traces) {
     return;
@@ -227,10 +226,10 @@ let distanceMap = new Map();
 
 // Add entries to the map
 distanceMap.set('chainStaking', 4);
-distanceMap.set('provider', 7);
+distanceMap.set('provider', 11);
 distanceMap.set('wrapped', 1);
 distanceMap.set('bridge', 2);
-distanceMap.set('liquid-stake', 5);
+distanceMap.set('liquid-stake', 4);
 distanceMap.set('additional-mintage', 1);
 
 // Function to get distance with a default value
@@ -343,11 +342,37 @@ function getAllRelatedAssets(assets) {
     let filteredRelativesTopN = filteredRelativesAmongZoneAssets.slice(0, filterTop_n_Relatives);
     relatedAssets.set(key, filteredRelativesTopN);
 
+    // Display with distance
+    //console.log("Relatives for", key);
+    //console.log(filteredRelativesTopN);
+
+    //remove distance
+    let relativesArray = [];
+    filteredRelativesTopN.forEach((relative) => {
+      let relativePointer = {
+        chain_name: relative.asset.chain_name,
+        base_denom: relative.asset.base_denom
+      }
+      relativesArray.push(relativePointer);
+    });
+    relatedAssets.set(key, relativesArray);
+
     // Display
-    console.log("Relatives for", key);
-    console.log(filteredRelativesTopN);
+    //console.log("Relatives for", key);
+    //console.log(relativesArray);
 
   });
+
+  assets.forEach((asset) => {
+
+    //define asset object
+    let assetKey = asset.chain_name + "." + asset.base_denom;
+    
+    asset.related_assets = relatedAssets.get(assetKey);
+
+  });
+
+  return assets;
 
 }
 
@@ -834,7 +859,7 @@ async function generateAssetlist(chainName) {
   await generateAssets(chainName, assets, zoneAssetlist.assets);
   if (!assets) { return; }
   
-  await getAllRelatedAssets(assets);
+  assets = await getAllRelatedAssets(assets);
 
   let assetlist = {
     chain_name: chainName,

@@ -127,6 +127,10 @@ function getMostRecentNonIBCTrace(asset) {
 
 function addRelative(asset1, asset2, d) {
   
+  if(!asset1 || !asset2) {
+    return;
+  }
+
   //cancel if they are the same
   if(asset1.chain_name == asset2.chain_name && asset1.base_denom == asset2.base_denom) {
     return;
@@ -139,7 +143,7 @@ function addRelative(asset1, asset2, d) {
   let included = 0;
   let relatives = relatedAssets.get(assetKey1);
   relatives.forEach((relative) => {
-    if(relative.asset.chain_name == asset2.chain_name && relative.asset.base_denom == asset2.base_denom) {
+    if(relative.asset?.chain_name == asset2.chain_name && relative.asset?.base_denom == asset2.base_denom) {
       included = 1;
       if(d < relative.d) {
         relative.d = d;
@@ -163,7 +167,7 @@ function addRelative(asset1, asset2, d) {
   included = 0;
   relatives = relatedAssets.get(assetKey2);
   relatives.forEach((relative) => {
-    if(relative.asset.chain_name == asset1.chain_name && relative.asset.base_denom == asset1.base_denom) {
+    if(relative.asset?.chain_name == asset1.chain_name && relative.asset?.base_denom == asset1.base_denom) {
       included = 1;
       if(d < relative.d) {
         relative.d = d;
@@ -334,7 +338,7 @@ function getAllRelatedAssets(assets) {
     //filter the relatives by whether they are among zone assets
     let filteredRelativesAmongZoneAssets = sortedRelatives.filter(relative =>
       assets.some(asset =>
-        asset.chain_name === relative.asset.chain_name && asset.base_denom === relative.asset.base_denom
+        asset.chain_name === relative.asset?.chain_name && asset.base_denom === relative.asset?.base_denom
       )
     );
 
@@ -377,9 +381,7 @@ function getAllRelatedAssets(assets) {
 }
 
 
-const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
-
-  //getRelatedAssets(zone_assets);
+const generateAssets = async (chainName, assets, zone_assets) => {
 
   let pool_assets;
   pool_assets = await returnAssets(chainName);
@@ -874,7 +876,7 @@ async function main() {
   
   await generateAssetlist("osmosis");
   //await generateAssetlist("osmosistestnet4");
-  //await generateAssetlist("osmosistestnet");
+  await generateAssetlist("osmosistestnet");
   
 }
 

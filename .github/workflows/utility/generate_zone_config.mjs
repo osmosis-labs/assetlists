@@ -796,6 +796,9 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     generatedAsset.description = description;
 
 
+    //--Get Twitter URL--
+    generatedAsset.twitter_URL = zone_asset.twitter_URL;
+
 
     //--Sorting--
     //how to sort tokens if they don't have cgid

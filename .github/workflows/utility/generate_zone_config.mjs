@@ -382,8 +382,8 @@ const generateAssets = async (chainName, assets, zone_assets, zoneConfig) => {
   //getRelatedAssets(zone_assets);
 
   let pool_assets;
-  //pool_assets = await returnAssets(chainName);
-  //if (!pool_assets) { return; }
+  pool_assets = await returnAssets(chainName);
+  if (!pool_assets) { return; }
   
   await asyncForEach(zone_assets, async (zone_asset) => {
 

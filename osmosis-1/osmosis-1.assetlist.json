@@ -56,7 +56,7 @@
         "memecoin",
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:1100"
+        "osmosis-price:uosmo:2"
       ]
     },
     {
@@ -181,7 +181,7 @@
       ]
     },
     {
-      "description": "Wrapped Bitcoin (WBTC) is an ERC20 token backed 1:1 with Bitcoin. Completely transparent. 100% verifiable. Community led.",
+      "description": "Wrapped Bitcoin on Axelar",
       "denom_units": [
         {
           "denom": "ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F",
@@ -199,7 +199,7 @@
       "base": "ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F",
       "name": "Wrapped Bitcoin",
       "display": "wbtc",
-      "symbol": "WBTC",
+      "symbol": "WBTC.axl",
       "traces": [
         {
           "type": "bridge",
@@ -231,14 +231,13 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.svg"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.axl.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.axl.png"
       },
-      "coingecko_id": "wrapped-bitcoin",
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:1090"
+        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1277"
       ]
     },
     {
@@ -3272,7 +3271,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:633",
+        "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:872",
         "peg:collateralized"
       ]
     },
@@ -5088,7 +5087,6 @@
       },
       "coingecko_id": "stakeeasy-juno-derivative",
       "keywords": [
-        "osmosis-info",
         "osmosis-price:ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED:807"
       ]
     },
@@ -5614,7 +5612,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:1252"
+        "osmosis-price:uosmo:833"
       ]
     },
     {
@@ -9801,7 +9799,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB:1144"
+        "osmosis-price:uosmo:1145"
       ]
     },
     {
@@ -9895,7 +9893,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:1061"
+        "osmosis-price:ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7:1298"
       ]
     },
     {
@@ -10765,10 +10763,18 @@
       "symbol": "wETH.wh",
       "traces": [
         {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "wei"
+          },
+          "provider": "Ethereum"
+        },
+        {
           "type": "bridge",
           "counterparty": {
             "chain_name": "ethereum",
-            "base_denom": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+            "base_denom": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
           },
           "provider": "Wormhole"
         },
@@ -10790,6 +10796,7 @@
       },
       "keywords": [
         "osmosis-main",
+        "osmosis-info",
         "osmosis-price:ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5:1214"
       ]
     },
@@ -12921,8 +12928,8 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/chihuahua/images/baddog.png"
       },
       "keywords": [
-        "osmosis-price:ibc/B9E0A1A524E98BB407D3CED8720EFEFD186002F90C1B1B7964811DD0CCC12228:1356",
-        "osmosis-unlisted"
+        "osmosis-info",
+        "osmosis-price:ibc/B9E0A1A524E98BB407D3CED8720EFEFD186002F90C1B1B7964811DD0CCC12228:1356"
       ]
     },
     {
@@ -12963,6 +12970,181 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/circus.png"
       }
+    },
+    {
+      "description": "Governance and utility token for the Junø Apes NFT platform on Juno",
+      "denom_units": [
+        {
+          "denom": "ibc/176DD560277BB0BD676260BE02EBAB697725CA85144D8A2BF286C6B5323DB5FE",
+          "exponent": 0,
+          "aliases": [
+            "cw20:juno1zkwveux7y6fmsr88atf3cyffx96p0c96qr8tgcsj7vfnhx7sal3s3zu3ps"
+          ]
+        },
+        {
+          "denom": "jape",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "juno1zkwveux7y6fmsr88atf3cyffx96p0c96qr8tgcsj7vfnhx7sal3s3zu3ps",
+      "base": "ibc/176DD560277BB0BD676260BE02EBAB697725CA85144D8A2BF286C6B5323DB5FE",
+      "name": "Junø Apes",
+      "display": "jape",
+      "symbol": "JAPE",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1zkwveux7y6fmsr88atf3cyffx96p0c96qr8tgcsj7vfnhx7sal3s3zu3ps",
+            "port": "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
+            "channel_id": "channel-47"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-169",
+            "path": "transfer/channel-169/cw20:juno1zkwveux7y6fmsr88atf3cyffx96p0c96qr8tgcsj7vfnhx7sal3s3zu3ps"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/jape.png"
+      },
+      "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "Woof",
+      "denom_units": [
+        {
+          "denom": "ibc/9B8EC667B6DF55387DC0F3ACC4F187DA6921B0806ED35DE6B04DE96F5AB81F53",
+          "exponent": 0,
+          "aliases": [
+            "factory/chihuahua13jawsn574rf3f0u5rhu7e8n6sayx5gkw3eddhp/uwoof"
+          ]
+        },
+        {
+          "denom": "WOOF",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/9B8EC667B6DF55387DC0F3ACC4F187DA6921B0806ED35DE6B04DE96F5AB81F53",
+      "name": "WOOF",
+      "display": "WOOF",
+      "symbol": "WOOF",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "chihuahua",
+            "base_denom": "factory/chihuahua13jawsn574rf3f0u5rhu7e8n6sayx5gkw3eddhp/uwoof",
+            "channel_id": "channel-7"
+          },
+          "chain": {
+            "channel_id": "channel-113",
+            "path": "transfer/channel-113/factory/chihuahua13jawsn574rf3f0u5rhu7e8n6sayx5gkw3eddhp/uwoof"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/chihuahua/images/woof.png"
+      },
+      "keywords": [
+        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1365",
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "The native coin of Sneaky Productions.",
+      "denom_units": [
+        {
+          "denom": "ibc/94ED1F172BC633DFC56D7E26551D8B101ADCCC69052AC44FED89F97FF658138F",
+          "exponent": 0,
+          "aliases": [
+            "factory/stars1xx5976njvxpl9n4v8huvff6cudhx7yuu8e7rt4/usneaky"
+          ]
+        },
+        {
+          "denom": "sneaky",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/94ED1F172BC633DFC56D7E26551D8B101ADCCC69052AC44FED89F97FF658138F",
+      "name": "Sneaky Productions",
+      "display": "sneaky",
+      "symbol": "SNEAKY",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stargaze",
+            "base_denom": "factory/stars1xx5976njvxpl9n4v8huvff6cudhx7yuu8e7rt4/usneaky",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-75",
+            "path": "transfer/channel-75/factory/stars1xx5976njvxpl9n4v8huvff6cudhx7yuu8e7rt4/usneaky"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/sneaky.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/sneaky.svg"
+      },
+      "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "Wrapped Bitcoin (WBTC) is an ERC20 token backed 1:1 with Bitcoin. Completely transparent. 100% verifiable. Community led.",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc",
+          "exponent": 0,
+          "aliases": [
+            "wbtc-satoshi"
+          ]
+        },
+        {
+          "denom": "wbtc",
+          "exponent": 8
+        }
+      ],
+      "address": "osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743",
+      "base": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc",
+      "name": "Wrapped Bitcoin",
+      "display": "wbtc",
+      "symbol": "WBTC",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "bitcoin",
+            "base_denom": "sat"
+          },
+          "provider": "BitGo, Kyber, and Ren"
+        },
+        {
+          "type": "additional-mintage",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+          },
+          "provider": "BitGo, Kyber, and Ren"
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-unlisted"
+      ]
     }
   ]
 }

@@ -103,11 +103,11 @@
       "path": "transfer/channel-208/wbtc-satoshi",
       "osmosis_verified": true,
       "override_properties": {
-        "symbol": "WBTC"
-      },
-      "canonical": {
-        "chain_name": "ethereum",
-        "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+        "symbol": "WBTC.axl",
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.axl.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.axl.png"
+        }
       }
     },
     {
@@ -2374,6 +2374,14 @@
       "base_denom": "factory/inj1xtel2knkt8hmc9dnzpjz6kdmacgcfmlv5f308w/ninja",
       "path": "transfer/channel-122/factory/inj1xtel2knkt8hmc9dnzpjz6kdmacgcfmlv5f308w/ninja",
       "osmosis_verified": false,
+      "transfer_methods": [
+        {
+          "name": "TFM IBC Transfer",
+          "type": "external_interface",
+          "deposit_url": "https://tfm.com/bridge?chainFrom=injective-1&chainTo=osmosis-1&token0=factory%2Finj1xtel2knkt8hmc9dnzpjz6kdmacgcfmlv5f308w%2Fninja&token1=ibc%2F183C0BB962D2F57C957E0B134CFA0AC9D6F755C02DE9DC2A59089BA23009DEC3",
+          "withdraw_url": "https://tfm.com/bridge?chainFrom=osmosis-1&chainTo=injective-1&token0=ibc%2F183C0BB962D2F57C957E0B134CFA0AC9D6F755C02DE9DC2A59089BA23009DEC3&token1=factory%2Finj1xtel2knkt8hmc9dnzpjz6kdmacgcfmlv5f308w%2Fninja"
+        }
+      ],
       "osmosis_unlisted": true
     },
     {
@@ -2400,14 +2408,40 @@
       "chain_name": "chihuahua",
       "base_denom": "factory/chihuahua1x4q2vkrz4dfgd9hcw0p5m2f2nuv2uqmt9xr8k2/achihuahuawifhat",
       "path": "transfer/channel-113/factory/chihuahua1x4q2vkrz4dfgd9hcw0p5m2f2nuv2uqmt9xr8k2/achihuahuawifhat",
-      "osmosis_verified": false,
-      "osmosis_unlisted": true
+      "osmosis_verified": false
     },
     {
       "chain_name": "neutron",
       "base_denom": "factory/neutron170v88vrtnedesyfytuku257cggxc79rd7lwt7q/ucircus",
       "path": "transfer/channel-874/factory/neutron170v88vrtnedesyfytuku257cggxc79rd7lwt7q/ucircus",
       "osmosis_verified": false
+    },
+    {
+      "chain_name": "juno",
+      "base_denom": "cw20:juno1zkwveux7y6fmsr88atf3cyffx96p0c96qr8tgcsj7vfnhx7sal3s3zu3ps",
+      "path": "transfer/channel-169/cw20:juno1zkwveux7y6fmsr88atf3cyffx96p0c96qr8tgcsj7vfnhx7sal3s3zu3ps",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true
+    },
+    {
+      "chain_name": "chihuahua",
+      "base_denom": "factory/chihuahua13jawsn574rf3f0u5rhu7e8n6sayx5gkw3eddhp/uwoof",
+      "path": "transfer/channel-113/factory/chihuahua13jawsn574rf3f0u5rhu7e8n6sayx5gkw3eddhp/uwoof",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true
+    },
+    {
+      "chain_name": "stargaze",
+      "base_denom": "factory/stars1xx5976njvxpl9n4v8huvff6cudhx7yuu8e7rt4/usneaky",
+      "path": "transfer/channel-75/factory/stars1xx5976njvxpl9n4v8huvff6cudhx7yuu8e7rt4/usneaky",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true
+    },
+    {
+      "chain_name": "osmosis",
+      "base_denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc",
+      "osmosis_verified": true,
+      "osmosis_unlisted": true
     },
     {
       "chain_name": "neutron",

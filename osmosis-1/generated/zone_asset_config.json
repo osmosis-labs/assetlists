@@ -26,6 +26,7 @@
       },
       "name": "Osmosis",
       "description": "The native token of Osmosis\n\nOsmosis (OSMO) is the premier DEX and cross-chain DeFi hub within the Cosmos ecosystem, a network of over 50 sovereign, interoperable blockchains seamlessly connected through the Inter-Blockchain Communication Protocol (IBC). Pioneering in its approach, Osmosis offers a dynamic trading and liquidity provision experience, integrating non-IBC assets from other ecosystems, including Ethereum, Solana, Avalanche, and Polkadot. Initially adopting Balancer-style pools, Osmosis now also features a concentrated liquidity model that is orders of magnitude more capital efficient, meaning that significantly less liquidity is required to handle the same amount of trading volume with minimal slippage.\n\nAs a true appchain, Osmosis has greater control over the full blockchain stack than traditional smart contract DEXs, which must follow the code of the parent chain that it is built on. This fine-grained control has enabled, for example, the development of Superfluid Staking, an extension of Proof of Stake that allows assets at the application layer to be staked to secure the chain. The customizability of appchains also allows implementing features like the Protocol Revenue module, which enables Osmosis to conduct on-chain arbitrage on behalf of OSMO stakers, balancing prices across pools while generating real yield revenue from this volume. Additionally, as a sovereign appchain, Osmosis governance can vote on upgrades to the protocol. One example of this was the introduction of a Taker Fee, which switched on the collection of exchange fees to generate diverse yield from Osmosis volume and distribute it to OSMO stakers.\n\nOsmosis is bringing the full centralized exchange experience to the decentralized world by building a cross-chain native DEX and trading suite that connects all chains over IBC, including Ethereum and Bitcoin. To reach this goal, Osmosis hosts an ever-expanding suite of DeFi applications aimed at providing a one-stop experience that includes lending, credit, margin, DeFi strategy vaults, power perps, fiat on-ramps, NFTs, stablecoins, and more — all of the functionalities that centralized exchange offer and more, in the trust-minimized environment of decentralized finance.",
+      "twitter_URL": "https://twitter.com/osmosiszone",
       "related_assets": [
         {
           "chain_name": "osmosis",
@@ -94,6 +95,7 @@
       },
       "name": "Ion DAO",
       "description": "",
+      "twitter_URL": "https://twitter.com/_IONDAO",
       "related_assets": [
         {
           "chain_name": "osmosis",
@@ -426,19 +428,17 @@
       "chain_name": "axelar",
       "base_denom": "wbtc-satoshi",
       "local_base_denom": "ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F",
-      "symbol": "WBTC",
+      "symbol": "WBTC.axl",
       "decimals": 8,
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.svg"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.axl.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.axl.png"
       },
       "images": [
         {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.svg"
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/wbtc.png"
         }
       ],
-      "coingecko_id": "wrapped-bitcoin",
       "verified": true,
       "api_include": true,
       "price": {
@@ -489,9 +489,17 @@
         }
       ],
       "common_key": "WBTC",
-      "name": "Wrapped Bitcoin",
-      "description": "Wrapped Bitcoin (WBTC) is an ERC20 token backed 1:1 with Bitcoin. Completely transparent. 100% verifiable. Community led.",
+      "name": "Wrapped Bitcoin (Axelar)",
+      "description": "Wrapped Bitcoin on Axelar",
+      "sort_with": {
+        "chain_name": "axelar",
+        "base_denom": "uaxl"
+      },
       "related_assets": [
+        {
+          "chain_name": "osmosis",
+          "base_denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc"
+        },
         {
           "chain_name": "axelar",
           "base_denom": "uaxl"
@@ -503,6 +511,10 @@
         {
           "chain_name": "nomic",
           "base_denom": "usat"
+        },
+        {
+          "chain_name": "osmosis",
+          "base_denom": "uosmo"
         },
         {
           "chain_name": "axelar",
@@ -523,14 +535,6 @@
         {
           "chain_name": "axelar",
           "base_denom": "busd-wei"
-        },
-        {
-          "chain_name": "axelar",
-          "base_denom": "wbnb-wei"
-        },
-        {
-          "chain_name": "axelar",
-          "base_denom": "wmatic-wei"
         }
       ]
     },
@@ -670,8 +674,8 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "1260",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "pool": "1261",
+        "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
       },
       "categories": [
         "stablecoin"
@@ -935,6 +939,7 @@
       "common_key": "ATOM",
       "name": "Cosmos Hub",
       "description": "The native staking and governance token of the Cosmos Hub.\n\nIn a nutshell, Cosmos Hub bills itself as a project that solves some of the hardest problems facing the blockchain industry. It aims to offer an antidote to slow, expensive, unscalable and environmentally harmful proof-of-work protocols, like those used by Bitcoin, by offering an ecosystem of connected blockchains.\n\nThe project’s other goals include making blockchain technology less complex and difficult for developers thanks to a modular framework that demystifies decentralized apps. Last but not least, an Inter-blockchain Communication protocol makes it easier for blockchain networks to communicate with each other — preventing fragmentation in the industry.\n\nCosmos Hub's origins can be dated back to 2014, when Tendermint, a core contributor to the network, was founded. In 2016, a white paper for Cosmos was published — and a token sale was held the following year. ATOM tokens are earned through a hybrid proof-of-stake algorithm, and they help to keep the Cosmos Hub, the project’s flagship blockchain, secure. This cryptocurrency also has a role in the network’s governance.",
+      "twitter_URL": "https://twitter.com/cosmoshub",
       "related_assets": [
         {
           "chain_name": "stride",
@@ -1035,6 +1040,7 @@
       "common_key": "CRO",
       "name": "Cronos POS Chain",
       "description": "CRO is the native token of the Crypto.org Chain, referred to as Native CRO.\n\nCronos PoS Chain is a public, open-source and permissionless blockchain - a fully decentralized network with high speed and low fees, designed to be a public good that helps drive mass adoption of blockchain technology through use cases like Payments, DeFi and NFTs.",
+      "twitter_URL": "https://twitter.com/cronos_chain",
       "related_assets": []
     },
     {
@@ -1541,6 +1547,7 @@
       "common_key": "JUNO",
       "name": "Juno",
       "description": "The native token of JUNO Chain\n\nJuno is a completely community owned and operated smart contract platform.",
+      "twitter_URL": "https://twitter.com/JunoNetwork",
       "related_assets": [
         {
           "chain_name": "juno",
@@ -1762,6 +1769,7 @@
       "common_key": "EVMOS",
       "name": "Evmos",
       "description": "The native EVM, governance and staking token of the Evmos Hub\n\nDevelopers use Evmos as the Ethereum Canary Chain to deploy applications of the future. Get all the functionalities of Ethereum with the power of IBC and Interchain composability.",
+      "twitter_URL": "https://twitter.com/EvmosOrg",
       "related_assets": [
         {
           "chain_name": "evmos",
@@ -1862,6 +1870,7 @@
       "common_key": "KAVA",
       "name": "Kava",
       "description": "The native staking and governance token of Kava\n\nKava is a decentralized blockchain that combines the speed and interoperability of Cosmos with the developer power of Ethereum.",
+      "twitter_URL": "https://twitter.com/KAVA_CHAIN",
       "related_assets": [
         {
           "chain_name": "kava",
@@ -1962,6 +1971,7 @@
       "common_key": "SCRT",
       "name": "Secret Network",
       "description": "The native token of Secret Network\n\nSecret Network is the first blockchain with customizable privacy. You get to choose what you share, with whom, and how. This protects users, and empowers developers to build a better Web3.",
+      "twitter_URL": "https://twitter.com/SecretNetwork",
       "related_assets": [
         {
           "chain_name": "secretnetwork",
@@ -2126,6 +2136,7 @@
       "common_key": "STARS",
       "name": "Stargaze",
       "description": "The native token of Stargaze\n\nThe premier community-focused blockchain for NFTs. Stargaze empowers creators, developers, collectors, and traders to participate on the platform. The Stargaze chain consists of various NFT-related apps such as a Launchpad, and a Marketplace with offers and auctions.",
+      "twitter_URL": "https://twitter.com/StargazeZone",
       "related_assets": [
         {
           "chain_name": "stride",
@@ -2298,6 +2309,7 @@
       "common_key": "XPRT",
       "name": "Persistence",
       "description": "The XPRT token is primarily a governance token for the Persistence chain.\n\nPersistence is an app chain for Liquid Staking powering an ecosystem of DeFi applications focused on unlocking the liquidity of staked assets.",
+      "twitter_URL": "https://twitter.com/PersistenceOne",
       "related_assets": [
         {
           "chain_name": "persistence",
@@ -2526,6 +2538,7 @@
       "common_key": "AKT",
       "name": "Akash",
       "description": "Akash Token (AKT) is the Akash Network's native utility token, used as the primary means to govern, secure the blockchain, incentivize participants, and provide a default mechanism to store and exchange value.\n\nAkash is open-source Supercloud that lets users buy and sell computing resources securely and efficiently. Purpose-built for public utility.",
+      "twitter_URL": "https://twitter.com/akashnet_",
       "related_assets": []
     },
     {
@@ -2585,6 +2598,7 @@
       "common_key": "REGEN",
       "name": "Regen",
       "description": "REGEN coin is the token for the Regen Network Platform\n\nRegen Network, a platform to originate and invest in high-integrity carbon and biodiversity credits from ecological regeneration projects.",
+      "twitter_URL": "https://twitter.com/regen_network",
       "related_assets": [
         {
           "chain_name": "quicksilver",
@@ -2685,6 +2699,7 @@
       "common_key": "DVPN",
       "name": "Sentinel",
       "description": "DVPN is the native token of the Sentinel Hub.\n\nThe Sentinel ecosystem is a global network of autonomous dVPN applications that enable private and censorship resistant internet access.",
+      "twitter_URL": "https://twitter.com/SentinelVPN",
       "related_assets": []
     },
     {
@@ -2803,6 +2818,7 @@
       "common_key": "IOV",
       "name": "Starname",
       "description": "IOV coin is the token for the Starname (IOV) Asset Name Service\n\nStarname is the best way to claim your part of the blockchain. You can use it for decentralized identification, payments, ownership and applications. Starname can be integrated into digital wallets, dapps and exchanges.",
+      "twitter_URL": "https://twitter.com/starname_me",
       "related_assets": []
     },
     {
@@ -3167,6 +3183,7 @@
       "common_key": "BTSG",
       "name": "BitSong",
       "description": "BitSong Native Token\n\nArtists, Fans, Managers and Labels in One Single Holistic Ecosystem: $BTSG. Earn real-time royalties, discover exclusive content, mint and trade Fantokens, buy & sell NFTs.",
+      "twitter_URL": "https://twitter.com/BitSongOfficial",
       "related_assets": []
     },
     {
@@ -3786,6 +3803,7 @@
       "common_key": "SOMM",
       "name": "Sommelier",
       "description": "Somm Token (SOMM) is the native staking token of the Sommelier Chain\n\nAutomated vaults find best-in-class yields while mitigating risk.",
+      "twitter_URL": "https://twitter.com/sommfinance",
       "related_assets": [
         {
           "chain_name": "quicksilver",
@@ -3886,6 +3904,7 @@
       "common_key": "BAND",
       "name": "Band Protocol",
       "description": "The native token of BandChain\n\nBand Protocol is a cross-chain data oracle platform that aggregates and connects real-world data and APIs to smart contracts.",
+      "twitter_URL": "https://twitter.com/BandProtocol",
       "related_assets": []
     },
     {
@@ -4104,6 +4123,7 @@
       "common_key": "GRAV",
       "name": "Gravity Bridge",
       "description": "The native token of Gravity Bridge\n\nAn open, decentralized bridge that unlocks the power of interoperability & liquidity between blockchain ecosystems.",
+      "twitter_URL": "https://twitter.com/gravity_bridge",
       "related_assets": [
         {
           "chain_name": "gravitybridge",
@@ -4138,12 +4158,12 @@
           "base_denom": "uusdc"
         },
         {
-          "chain_name": "axelar",
-          "base_denom": "uusdc"
+          "chain_name": "osmosis",
+          "base_denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc"
         },
         {
           "chain_name": "axelar",
-          "base_denom": "weth-wei"
+          "base_denom": "uusdc"
         }
       ]
     },
@@ -4547,6 +4567,7 @@
       "common_key": "MNTL",
       "name": "AssetMantle",
       "description": "The native token of Asset Mantle\n\nAssetMantle’s suite of products is focused on the NFT ecosystem, helping you up your game with digital asset ownership.",
+      "twitter_URL": "https://twitter.com/AssetMantle",
       "related_assets": []
     },
     {
@@ -4712,6 +4733,7 @@
       "common_key": "INJ",
       "name": "Injective",
       "description": "The INJ token is the native governance token for the Injective chain.\n\nInjective’s mission is to create a truly free and inclusive financial system through decentralization.",
+      "twitter_URL": "https://twitter.com/Injective_",
       "related_assets": [
         {
           "chain_name": "injective",
@@ -5364,6 +5386,10 @@
       },
       "related_assets": [
         {
+          "chain_name": "osmosis",
+          "base_denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc"
+        },
+        {
           "chain_name": "gravitybridge",
           "base_denom": "ugraviton"
         },
@@ -5374,6 +5400,10 @@
         {
           "chain_name": "nomic",
           "base_denom": "usat"
+        },
+        {
+          "chain_name": "osmosis",
+          "base_denom": "uosmo"
         },
         {
           "chain_name": "axelar",
@@ -5394,14 +5424,6 @@
         {
           "chain_name": "gravitybridge",
           "base_denom": "gravity0xdAC17F958D2ee523a2206206994597C13D831ec7"
-        },
-        {
-          "chain_name": "gravitybridge",
-          "base_denom": "gravity0x60e683C6514Edd5F758A55b6f393BeBBAfaA8d5e"
-        },
-        {
-          "chain_name": "kava",
-          "base_denom": "erc20/tether/usdt"
         }
       ]
     },
@@ -5553,8 +5575,8 @@
       "verified": true,
       "api_include": true,
       "price": {
-        "pool": "633",
-        "denom": "uosmo"
+        "pool": "872",
+        "denom": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858"
       },
       "categories": [
         "stablecoin"
@@ -6618,6 +6640,7 @@
       "common_key": "LUNA",
       "name": "Luna",
       "description": "The native staking token of Terra.\n\nFueled by a passionate community and deep developer talent pool, the Terra blockchain is built to enable the next generation of Web3 products and services.",
+      "twitter_URL": "https://twitter.com/terra_money",
       "related_assets": [
         {
           "chain_name": "stride",
@@ -7674,6 +7697,7 @@
       "common_key": "KUJI",
       "name": "Kujira",
       "description": "The native staking and governance token of the Kujira chain.\n\nA decentralized ecosystem for protocols, builders and web3 users seeking sustainable FinTech.",
+      "twitter_URL": "https://twitter.com/TeamKujira",
       "related_assets": [
         {
           "chain_name": "kujira",
@@ -8782,6 +8806,7 @@
       "common_key": "BLD",
       "name": "Agoric",
       "description": "BLD is the token used to secure the Agoric chain through staking and to backstop Inter Protocol.\n\nThe Agoric platform makes it safe and seamless to build decentralized apps using your existing JavaScript knowledge.",
+      "twitter_URL": "https://twitter.com/agoric",
       "related_assets": [
         {
           "chain_name": "agoric",
@@ -9103,6 +9128,7 @@
       "common_key": "STRD",
       "name": "Stride",
       "description": "The native token of Stride\n\nStride is a blockchain that provides liquidity for staked tokens. Using Stride, you can earn both taking and DeFi yields across the Cosmos IBC ecosystem.",
+      "twitter_URL": "https://twitter.com/stride_zone",
       "related_assets": [
         {
           "chain_name": "stride",
@@ -9606,6 +9632,7 @@
       "common_key": "AXL",
       "name": "Axelar",
       "description": "The native token of Axelar\n\nAxelar delivers secure cross-chain communication for Web3. Our infrastructure enables dApp users to interact with any asset or application, on any chain, with one click.",
+      "twitter_URL": "https://twitter.com/axelarnetwork",
       "related_assets": [
         {
           "chain_name": "axelar",
@@ -12551,6 +12578,7 @@
       "common_key": "MARS",
       "name": "Mars Hub",
       "description": "Mars protocol token\n\nLend, borrow and earn with an autonomous credit protocol in the Cosmos universe. Open to all, closed to none.",
+      "twitter_URL": "https://twitter.com/mars_protocol",
       "related_assets": []
     },
     {
@@ -13417,6 +13445,7 @@
       "common_key": "QCK",
       "name": "Quicksilver",
       "description": "QCK - native token of Quicksilver\n\nLiquid Stake your Cosmos assets with your preferred validator and receive liquid staked assets (qASSETs) that you can use for swapping, pooling, lending, and more, all while your original stake earns staking APY from securing the network.",
+      "twitter_URL": "https://twitter.com/quicksilverzone",
       "related_assets": [
         {
           "chain_name": "quicksilver",
@@ -15004,6 +15033,7 @@
       "common_key": "FLIX",
       "name": "OmniFlix",
       "description": "The native staking token of OmniFlix Hub.\n\nDecentralized media and network layer for Creators & Sovereign Communities powered by NFTs and related distribution protocols.",
+      "twitter_URL": "https://twitter.com/OmniFlixNetwork",
       "related_assets": []
     },
     {
@@ -16872,6 +16902,7 @@
       "common_key": "LORE",
       "name": "Gitopia",
       "description": "The native token of Gitopia\n\nGitopia is the next-generation Code Collaboration Platform fuelled by a decentralized network and interactive token economy. It is designed to optimize the open-source software development process through collaboration, transparency, and incentivization.",
+      "twitter_URL": "https://twitter.com/gitopiaDAO",
       "related_assets": []
     },
     {
@@ -17203,6 +17234,7 @@
       "common_key": "NLS",
       "name": "Nolus",
       "description": "The native token of Nolus chain\n\nElevate your game with up to 3x equity. Dive into a world of minimized risks and unlock the full potential of your assets.",
+      "twitter_URL": "https://twitter.com/NolusProtocol",
       "related_assets": []
     },
     {
@@ -17464,6 +17496,7 @@
       "common_key": "NTRN",
       "name": "Neutron",
       "description": "The native token of Neutron chain.\n\nThe most secure CosmWasm platform in Cosmos, Neutron lets smart-contracts leverage bleeding-edge Interchain technology with minimal overhead.",
+      "twitter_URL": "https://twitter.com/Neutron_org",
       "related_assets": [
         {
           "chain_name": "neutron",
@@ -17476,6 +17509,10 @@
         {
           "chain_name": "neutron",
           "base_denom": "factory/neutron170v88vrtnedesyfytuku257cggxc79rd7lwt7q/ucircus"
+        },
+        {
+          "chain_name": "neutron",
+          "base_denom": "factory/neutron143wp6g8paqasnuuey6zyapucknwy9rhnld8hkr/bad"
         },
         {
           "chain_name": "axelar",
@@ -17500,10 +17537,6 @@
         {
           "chain_name": "axelar",
           "base_denom": "uusdc"
-        },
-        {
-          "chain_name": "axelar",
-          "base_denom": "wbtc-satoshi"
         }
       ]
     },
@@ -17676,6 +17709,7 @@
       "common_key": "PICA",
       "name": "Composable",
       "description": "The native staking and governance token of Composable.\n\nComposable is the base layer connecting L1s and L2s. We are scaling IBC to other ecosystems, pushing the boundaries of trust-minimized interoperability. We abstract the cross-chain experience for users, delivering seamless chain-agnostic execution of user intentions.",
+      "twitter_URL": "https://twitter.com/ComposableFin",
       "related_assets": [
         {
           "chain_name": "composable",
@@ -18029,6 +18063,7 @@
       "common_key": "QSR",
       "name": "Quasar",
       "description": "The native token of Quasar\n\nQuasar is the first decentralized asset management (D.A.M.) platform enabled by IBC. A secure, permissionless, composable, and diversified interchain DeFi experience is finally here.",
+      "twitter_URL": "https://twitter.com/QuasarFi",
       "related_assets": []
     },
     {
@@ -18088,6 +18123,7 @@
       "common_key": "ARCH",
       "name": "Archway",
       "description": "The native token of Archway network\n\nAn incentivized L1 blockchain that allows developers to capture the value their dapps create, enabling sustainable economic models.",
+      "twitter_URL": "https://twitter.com/archwayHQ",
       "related_assets": []
     },
     {
@@ -18302,6 +18338,7 @@
       "common_key": "KYVE",
       "name": "KYVE",
       "description": "The native utility token of the KYVE network.\n\nRevolutionizing data reliability in the Web3 space, KYVE Network provides fast and easy tooling for data validation, immutability, and retrieval, ensuring trustless data for seamless scalability and eliminating data risks and roadblocks.",
+      "twitter_URL": "https://twitter.com/KYVENetwork",
       "related_assets": []
     },
     {
@@ -18543,6 +18580,7 @@
       "common_key": "SEI",
       "name": "Sei",
       "description": "The native staking token of Sei.\n\nSei is the fastest Layer 1 blockchain, designed to scale with the industry.",
+      "twitter_URL": "https://twitter.com/SeiNetwork",
       "related_assets": [
         {
           "chain_name": "sei",
@@ -20994,6 +21032,7 @@
       "common_key": "TIA",
       "name": "Celestia",
       "description": "Celestia is a modular data availability network that securely scales with the number of users, making it easy for anyone to launch their own blockchain.",
+      "twitter_URL": "https://twitter.com/CelestiaOrg",
       "related_assets": [
         {
           "chain_name": "osmosis",
@@ -21099,6 +21138,7 @@
       "common_key": "DYDX",
       "name": "dYdX Protocol",
       "description": "The native staking token of dYdX Protocol.\n\nOur goal is to build open source code that can power a first class product and trading experience.",
+      "twitter_URL": "https://twitter.com/dYdX",
       "related_assets": []
     },
     {
@@ -21233,12 +21273,20 @@
       "description": "Bitcoin. On Cosmos.",
       "related_assets": [
         {
+          "chain_name": "osmosis",
+          "base_denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc"
+        },
+        {
           "chain_name": "axelar",
           "base_denom": "wbtc-satoshi"
         },
         {
           "chain_name": "gravitybridge",
           "base_denom": "gravity0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
+        },
+        {
+          "chain_name": "osmosis",
+          "base_denom": "uosmo"
         },
         {
           "chain_name": "axelar",
@@ -21249,28 +21297,20 @@
           "base_denom": "ugraviton"
         },
         {
-          "chain_name": "axelar",
-          "base_denom": "uusdc"
+          "chain_name": "osmosis",
+          "base_denom": "uion"
         },
         {
-          "chain_name": "axelar",
-          "base_denom": "weth-wei"
+          "chain_name": "stride",
+          "base_denom": "stuosmo"
         },
         {
-          "chain_name": "axelar",
-          "base_denom": "uusdt"
+          "chain_name": "quicksilver",
+          "base_denom": "uqosmo"
         },
         {
-          "chain_name": "axelar",
-          "base_denom": "dai-wei"
-        },
-        {
-          "chain_name": "axelar",
-          "base_denom": "busd-wei"
-        },
-        {
-          "chain_name": "axelar",
-          "base_denom": "wbnb-wei"
+          "chain_name": "osmosis",
+          "base_denom": "factory/osmo14klwqgkmackvx2tqa0trtg69dmy0nrg4ntq4gjgw2za4734r5seqjqm4gm/uibcx"
         }
       ]
     },
@@ -21664,6 +21704,10 @@
           "base_denom": "factory/neutron170v88vrtnedesyfytuku257cggxc79rd7lwt7q/ucircus"
         },
         {
+          "chain_name": "neutron",
+          "base_denom": "factory/neutron143wp6g8paqasnuuey6zyapucknwy9rhnld8hkr/bad"
+        },
+        {
           "chain_name": "axelar",
           "base_denom": "weth-wei"
         },
@@ -21678,10 +21722,6 @@
         {
           "chain_name": "axelar",
           "base_denom": "uusdc"
-        },
-        {
-          "chain_name": "axelar",
-          "base_denom": "wbtc-satoshi"
         }
       ]
     },
@@ -22644,6 +22684,10 @@
           "base_denom": "factory/neutron170v88vrtnedesyfytuku257cggxc79rd7lwt7q/ucircus"
         },
         {
+          "chain_name": "neutron",
+          "base_denom": "factory/neutron143wp6g8paqasnuuey6zyapucknwy9rhnld8hkr/bad"
+        },
+        {
           "chain_name": "axelar",
           "base_denom": "wsteth-wei"
         },
@@ -22666,10 +22710,6 @@
         {
           "chain_name": "axelar",
           "base_denom": "uusdc"
-        },
-        {
-          "chain_name": "axelar",
-          "base_denom": "wbtc-satoshi"
         }
       ]
     },
@@ -23180,12 +23220,12 @@
           "base_denom": "uusdc"
         },
         {
-          "chain_name": "axelar",
-          "base_denom": "uusdc"
+          "chain_name": "osmosis",
+          "base_denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc"
         },
         {
           "chain_name": "axelar",
-          "base_denom": "weth-wei"
+          "base_denom": "uusdc"
         }
       ]
     },
@@ -23671,6 +23711,10 @@
           "base_denom": "factory/neutron1p8d89wvxyjcnawmgw72klknr3lg9gwwl6ypxda/newt"
         },
         {
+          "chain_name": "neutron",
+          "base_denom": "factory/neutron143wp6g8paqasnuuey6zyapucknwy9rhnld8hkr/bad"
+        },
+        {
           "chain_name": "axelar",
           "base_denom": "wsteth-wei"
         },
@@ -23693,10 +23737,6 @@
         {
           "chain_name": "axelar",
           "base_denom": "uusdc"
-        },
-        {
-          "chain_name": "axelar",
-          "base_denom": "wbtc-satoshi"
         }
       ]
     },
@@ -23957,6 +23997,196 @@
         {
           "chain_name": "stride",
           "base_denom": "stuosmo"
+        }
+      ]
+    },
+    {
+      "chain_name": "osmosis",
+      "base_denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc",
+      "local_base_denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc",
+      "symbol": "WBTC",
+      "decimals": 8,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "ethereum",
+            "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.svg"
+        }
+      ],
+      "verified": true,
+      "counterparty": [
+        {
+          "chain_name": "ethereum",
+          "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+          "chain_type": "non-cosmos",
+          "chain_id": 1,
+          "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+          "symbol": "WBTC",
+          "decimals": 8,
+          "logo_URIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.svg"
+          }
+        },
+        {
+          "chain_name": "bitcoin",
+          "base_denom": "sat",
+          "chain_type": "non-cosmos",
+          "symbol": "BTC",
+          "decimals": 8,
+          "logo_URIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/bitcoin/images/btc.png"
+          }
+        }
+      ],
+      "common_key": "BTC",
+      "name": "Wrapped Bitcoin",
+      "description": "",
+      "unlisted": true,
+      "related_assets": [
+        {
+          "chain_name": "axelar",
+          "base_denom": "wbtc-satoshi"
+        },
+        {
+          "chain_name": "gravitybridge",
+          "base_denom": "gravity0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
+        },
+        {
+          "chain_name": "osmosis",
+          "base_denom": "uosmo"
+        },
+        {
+          "chain_name": "nomic",
+          "base_denom": "usat"
+        },
+        {
+          "chain_name": "axelar",
+          "base_denom": "uaxl"
+        },
+        {
+          "chain_name": "gravitybridge",
+          "base_denom": "ugraviton"
+        },
+        {
+          "chain_name": "osmosis",
+          "base_denom": "uion"
+        },
+        {
+          "chain_name": "stride",
+          "base_denom": "stuosmo"
+        },
+        {
+          "chain_name": "quicksilver",
+          "base_denom": "uqosmo"
+        },
+        {
+          "chain_name": "osmosis",
+          "base_denom": "factory/osmo14klwqgkmackvx2tqa0trtg69dmy0nrg4ntq4gjgw2za4734r5seqjqm4gm/uibcx"
+        }
+      ]
+    },
+    {
+      "chain_name": "neutron",
+      "base_denom": "factory/neutron143wp6g8paqasnuuey6zyapucknwy9rhnld8hkr/bad",
+      "local_base_denom": "ibc/442A08C33AE9875DF90792FFA73B5728E1CAECE87AB4F26AE9B422F1E682ED23",
+      "symbol": "BAD",
+      "decimals": 6,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/bad.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/bad.png"
+        }
+      ],
+      "verified": false,
+      "api_include": true,
+      "price": {
+        "pool": "1381",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+      },
+      "transfer_methods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "neutron",
+            "base_denom": "factory/neutron143wp6g8paqasnuuey6zyapucknwy9rhnld8hkr/bad",
+            "port": "transfer",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-874",
+            "path": "transfer/channel-874/factory/neutron143wp6g8paqasnuuey6zyapucknwy9rhnld8hkr/bad"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chain_name": "neutron",
+          "base_denom": "factory/neutron143wp6g8paqasnuuey6zyapucknwy9rhnld8hkr/bad",
+          "chain_type": "cosmos",
+          "chain_id": "neutron-1",
+          "symbol": "BAD",
+          "decimals": 6,
+          "logo_URIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/bad.png"
+          }
+        }
+      ],
+      "common_key": "BAD",
+      "name": "Badcoin",
+      "description": "Baddest coin on Cosmos",
+      "unlisted": true,
+      "related_assets": [
+        {
+          "chain_name": "neutron",
+          "base_denom": "untrn"
+        },
+        {
+          "chain_name": "neutron",
+          "base_denom": "factory/neutron1ug740qrkquxzrk2hh29qrlx3sktkfml3je7juusc2te7xmvsscns0n2wry/wstETH"
+        },
+        {
+          "chain_name": "neutron",
+          "base_denom": "factory/neutron1p8d89wvxyjcnawmgw72klknr3lg9gwwl6ypxda/newt"
+        },
+        {
+          "chain_name": "neutron",
+          "base_denom": "factory/neutron170v88vrtnedesyfytuku257cggxc79rd7lwt7q/ucircus"
+        },
+        {
+          "chain_name": "axelar",
+          "base_denom": "wsteth-wei"
+        },
+        {
+          "chain_name": "axelar",
+          "base_denom": "uaxl"
+        },
+        {
+          "chain_name": "axelar",
+          "base_denom": "weth-wei"
+        },
+        {
+          "chain_name": "gravitybridge",
+          "base_denom": "gravity0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+        },
+        {
+          "chain_name": "gateway",
+          "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5BWqpR48Lubd55szM5i62zK7TFkddckhbT48yy6mNbDp"
+        },
+        {
+          "chain_name": "axelar",
+          "base_denom": "uusdc"
         }
       ]
     }

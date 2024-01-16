@@ -40,7 +40,7 @@ Verified status is granted if the token or project meets any of the following cr
      - (Note: Merely forking a chain or registering a token does not qualify as 'active development')
     
 #### Notify about Verified Status Upgrade
-To notifiy the maintainers of the Osmosis Zone App about an unverified asset qualifying (or potentially qualifying) for Verified status, please submit to [this form](https://forms.clickup.com/37420681/f/13nzm9-24693/ZHODANFHHWP198YVAM).
+To notifiy the maintainers of the Osmosis Zone App about an unverified asset qualifying (or potentially qualifying) for Verified status, please submit to [this form](https://forms.clickup.com/37420681/f/13nzm9-26193/E9AX59RR07HUBRABBP).
 
 Note that although many qualifying requirements are objective and clear, some requirements, particularly those listed under 'Legitimacy', are more qualitative and can be challenging for the reviewing team to determine with confidence. Thus, it should be known that assets that only potentially qualify via the 'Legitimacy' requirements are not guaranteed to become Verified on the Osmosis app.
 

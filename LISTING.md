@@ -33,14 +33,14 @@ Verified status is granted if the token or project meets any of the following cr
    - Has a dedicated CoinGecko or CoinMarketCap page with a top 1000 Market Capitalization rank
    - Is available for trade on any of the following 'major' centralized exchanges:
      - Binance, Coinbase, Kraken, Bybit, KuCoin, OKX, Bitstamp, Bitfinex, Gate.io, Huobi Global 
- - Legitimacy, meeting ALL of the following:
+ - Project Legitimacy, meeting ALL of the following (only applies for the primary token of the project):
    - Brand presence: A well-designed project website or well-curated content on content platforms; e.g., a blog, Medium, YouTube, X, etc., and
    - Community presence: Active community channels/following on X, Discord, Telegram, Reddit, etc., and
    - Developer presence: GitHub organization with active development on open-source repository(s).
      - (Note: Merely forking a chain or registering a token does not qualify as 'active development')
     
 #### Notify about Verified Status Upgrade
-To notifiy the maintainers of the Osmosis Zone App about an unverified asset qualifying (or potentially qualifying) for Verified status, please submit to [this form](https://forms.clickup.com/37420681/f/13nzm9-24693/ZHODANFHHWP198YVAM).
+To notifiy the maintainers of the Osmosis Zone App about an unverified asset qualifying (or potentially qualifying) for Verified status, please submit to [this form](https://forms.clickup.com/37420681/f/13nzm9-26193/E9AX59RR07HUBRABBP).
 
 Note that although many qualifying requirements are objective and clear, some requirements, particularly those listed under 'Legitimacy', are more qualitative and can be challenging for the reviewing team to determine with confidence. Thus, it should be known that assets that only potentially qualify via the 'Legitimacy' requirements are not guaranteed to become Verified on the Osmosis app.
 

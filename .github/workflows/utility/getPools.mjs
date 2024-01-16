@@ -224,6 +224,7 @@ function getRoute(asset, route, hops, ignore_assets){
   if (!asset.largest_pools) {
     let sizes = [];
     asset_pools.forEach((pool) => {
+      if(isNaN(pool.pool_assets.get(asset.base).size)){ return }
       sizes.push(pool.pool_assets.get(asset.base).size);
     });
     sizes.sort(function(a, b){return b - a});

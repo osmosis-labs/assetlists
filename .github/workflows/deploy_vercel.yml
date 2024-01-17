@@ -38,5 +38,7 @@ jobs:
           exit 1
       - name: Deploy preview
         run: curl -X POST ${{ secrets.VERCEL_WEBHOOK_DEPLOY_STAGE }}
+      - name: Deploy testnet
+        run: curl -X POST ${{ secrets.VERCEL_WEBHOOK_DEPLOY_TESTNET }}
       - name: Deploy production
         run: curl -X POST ${{ secrets.VERCEL_WEBHOOK_DEPLOY_PRODUCTION }}

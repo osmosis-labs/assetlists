@@ -182,7 +182,7 @@ function getAssets(domain){
     osmo = "uosmo",
     atom = "ibc/" // ATOM
   } else if (domain == "osmosistestnet") {
-    usd = "ibc/6F34E1BD664C36CE49ACC28E60D62559A5F96C4F9A6CCE4FC5A67B2852E24CFE", // aUSDC
+    usd = "ibc/DE6792CF9E521F6AD6E9A4BDF6225C9571A3B74ACC0A529F92BC5122A39D2E58", // Noble USDC
     osmo = "uosmo",
     atom = "ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477" // ATOM
   } else {
@@ -224,6 +224,7 @@ function getRoute(asset, route, hops, ignore_assets){
   if (!asset.largest_pools) {
     let sizes = [];
     asset_pools.forEach((pool) => {
+      if(isNaN(pool.pool_assets.get(asset.base).size)){ return }
       sizes.push(pool.pool_assets.get(asset.base).size);
     });
     sizes.sort(function(a, b){return b - a});

@@ -239,6 +239,7 @@ function getRoute(asset, route, hops, ignore_assets){
     }
     asset.largest_pools = [];
     asset_pools.forEach((pool) => {
+      if(isNaN(pool.pool_assets.get(asset.base).size)){ return }
       if(pool.pool_assets.get(asset.base).size >= sizes[size_threshold - 1]) {
         asset.largest_pools.push(pool);
       }

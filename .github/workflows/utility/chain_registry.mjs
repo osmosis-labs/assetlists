@@ -274,6 +274,23 @@ export function getAssetPropertyWithTrace(chainName, baseDenom, property) {
   return value;
 }
 
+export function getAssetPropertyWithTraceIBC(chainName, baseDenom, property) {
+  let value = getAssetProperty(chainName, baseDenom, property);
+  if (!value) {
+    if (property != "traces") {
+      let traces = getAssetProperty(chainName, baseDenom, "traces");
+      if (traces && (traces[traces.length - 1].type == "ibc" || traces[traces.length - 1].type == "ibc-cw20")) {
+        let originAsset = {
+          chainName: traces[traces.length - 1].counterparty.chain_name,
+          baseDenom: traces[traces.length - 1].counterparty.base_denom
+        }
+        return getAssetPropertyWithTrace(originAsset.chainName, originAsset.baseDenom, property);
+      }
+    }
+  }
+  return value;
+}
+
 export function getAssetTraces(chainName, baseDenom) {
   let traces = getAssetProperty(chainName, baseDenom, "traces");
   let fullTrace;

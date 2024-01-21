@@ -1,0 +1,55 @@
+on: [workflow_dispatch]
+name: Generate Chainlist
+jobs:
+  generate_assetlist:
+    name: Generate Chainlist
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        shell: bash
+    
+    steps:
+    
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+          
+      - name: Git Sumbodule Update
+        run: |
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
+          
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19.6.0
+          
+      - name: Run code to Generate Chainlist
+        working-directory: ./.github/workflows/utility
+        run: node generate_chainlist.mjs
+      
+      - name: Add Commit Push
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
+          add_timestamp: false
+          commit_prefix: "[AUTO]"
+          commit_message: "chainlist.json Update"
+          force: false
+          target_branch: update/chainlist
+      
+      - name: Create A PR
+        uses: devops-infra/action-pull-request@v0.4.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_branch: update/chainlist
+          target_branch: main
+          title: chainlist.json Update
+          body: "**Automated pull request**"
+          old_string: "**THIS IS AN AUTOMATED UPDATE OF CHAINLIST.JSON**"
+          new_string: "** Automatic pull request**"
+          get_diff: true
+          ignore_users: "dependabot"

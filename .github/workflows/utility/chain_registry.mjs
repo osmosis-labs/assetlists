@@ -227,6 +227,23 @@ export function getAssetProperty(chainName, baseDenom, property) {
 }
 
 
+export function getAssetDecimals(chainName, baseDenom) {
+  let decimals;
+  let display = getAssetProperty(chainName, baseDenom, "display");
+  let denom_units = getAssetProperty(chainName, baseDenom, "denom_units");
+  denom_units?.forEach((denom_unit) => {
+    if(
+      denom_unit.denom == display ||
+      denom_unit.aliases?.includes(display)
+    ) {
+      decimals = denom_unit.exponent;
+      return;
+    }
+  });
+  return decimals;
+}
+
+
 export function getAssetObject(chainName, baseDenom) {
   const assets = getFileProperty(chainName, "assetlist", "assets");
   if(assets) {

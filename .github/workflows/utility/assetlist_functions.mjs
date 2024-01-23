@@ -67,6 +67,7 @@ function getFileLocation(chainName, fileName) {
 }
 
 
+
 export function readFromFile(chainName, fileName) {
   try {
     return JSON.parse(
@@ -78,6 +79,7 @@ export function readFromFile(chainName, fileName) {
     console.log(err);
   }
 }
+
 
 
 export function writeToFile(chainName, fileName, value) {

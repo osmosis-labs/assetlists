@@ -816,8 +816,8 @@ async function generateAssetlists() {
 }
 
 
-async function main() {
-  await generateAssetlists();
+function main() {
+  generateAssetlists();
 }
 
 

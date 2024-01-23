@@ -28,7 +28,7 @@
         "staking",
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1221"
+        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1263"
       ]
     },
     {
@@ -6232,7 +6232,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1258",
+        "osmosis-price:uosmo:857",
         "peg:collateralized"
       ]
     },
@@ -13288,7 +13288,47 @@
       },
       "keywords": [
         "osmosis-main",
+        "osmosis-info",
         "osmosis-price:ibc/D79E7D83AB399BFFF93433E54FAA480C191248FC556924A2A8351AE2638B3877:1378"
+      ]
+    },
+    {
+      "description": "The deflationary utility token of the Apollo DAO project",
+      "denom_units": [
+        {
+          "denom": "ibc/73BB20AF857D1FE6E061D01CA13870872AD0C979497CAF71BEA25B1CBF6879F1",
+          "exponent": 0,
+          "aliases": [
+            "apollo",
+            "factory/neutron154gg0wtm2v4h9ur8xg32ep64e8ef0g5twlsgvfeajqwghdryvyqsqhgk8e/APOLLO"
+          ]
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/73BB20AF857D1FE6E061D01CA13870872AD0C979497CAF71BEA25B1CBF6879F1",
+      "name": "Apollo DAO",
+      "display": "factory/neutron154gg0wtm2v4h9ur8xg32ep64e8ef0g5twlsgvfeajqwghdryvyqsqhgk8e/APOLLO",
+      "symbol": "APOLLO",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "neutron",
+            "base_denom": "factory/neutron154gg0wtm2v4h9ur8xg32ep64e8ef0g5twlsgvfeajqwghdryvyqsqhgk8e/APOLLO",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-874",
+            "path": "transfer/channel-874/factory/neutron154gg0wtm2v4h9ur8xg32ep64e8ef0g5twlsgvfeajqwghdryvyqsqhgk8e/APOLLO"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/apollo.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-unlisted"
       ]
     }
   ]

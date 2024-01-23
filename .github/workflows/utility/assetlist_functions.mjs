@@ -26,7 +26,14 @@ export const zoneAssetConfigFileName = "zone_asset_config.json";
 export const assetlistFileName = "assetlist.json";
 export const chainlistFileName = "chainlist.json";
 
-
+//- Chain Names --
+export const chainNames = [
+  "osmosis",
+  "osmosistestnet"
+];
+const chainNames_decommissioned = [
+  "osmosistestnet4"
+];
 
 
 
@@ -36,7 +43,7 @@ export const chainlistFileName = "chainlist.json";
 function getFileLocation(chainName, fileName) {
   
   const assetlistsRoot = "../../..";
-  const generatedFolderName = "generated";"
+  const generatedDirectoryName = "generated";
   const chainNameToChainIdMap = new Map([
     ["osmosis", "osmosis-1"],
     ["osmosistestnet4", "osmo-test-4"],
@@ -76,10 +83,12 @@ export function readFromFile(chainName, fileName) {
 export function writeToFile(chainName, fileName, value) {
   try {
     fs.writeFile(
-      getFileLocation(chainName, fileName)
-    ), JSON.stringify(value,null,2), (err) => {
-      if (err) throw err;
-    });
+      getFileLocation(chainName, fileName),
+      JSON.stringify(value,null,2),
+      (err) => {
+        if (err) throw err;
+      }
+    );
   } catch (err) {
     console.log(err);
   }

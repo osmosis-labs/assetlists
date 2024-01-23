@@ -19,60 +19,18 @@
 // write assetlist array to file osmosis-1.assetlist.json
 
 
-import * as fs from 'fs';
-import * as path from 'path';
+
+//-- Imports --
+
 import * as chain_reg from './chain_registry.mjs';
 import * as zone from './assetlist_functions.mjs';
 
 
-const chainNameToChainIdMap = new Map([
-  ["osmosis", "osmosis-1"],
-  ["osmosistestnet4", "osmo-test-4"],
-  ["osmosistestnet", "osmo-test-5"]
-]);
-
-const assetlistsRoot = "../../..";
-const generatedFolderName = "generated";
-const assetlistFileName = "assetlist.json";
-const zoneAssetlistFileName = "osmosis.zone_assets.json";
-const zoneChainlistFileName = "osmosis.zone_chains.json";
 
 
-function getZoneAssetlist(chainName) {
-  try {
-    return JSON.parse(fs.readFileSync(path.join(
-      assetlistsRoot,
-      chainNameToChainIdMap.get(chainName),
-      zoneAssetlistFileName
-    )));
-  } catch (err) {
-    console.log(err);
-  }
-}
 
-function writeToFile(assetlist, chainName) {
-  try {
-    fs.writeFile(path.join(
-      assetlistsRoot,
-      chainNameToChainIdMap.get(chainName),
-      generatedFolderName,
-      assetlistFileName
-    ), JSON.stringify(assetlist,null,2), (err) => {
-      if (err) throw err;
-    });
-  } catch (err) {
-    console.log(err);
-  }
-}
 
-async function calculateIbcHash(ibcHashInput) {
-  const textAsBuffer = new TextEncoder().encode(ibcHashInput);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', textAsBuffer);
-  const hashArray = Array.from(new Uint8Array(hashBuffer))
-  const digest = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-  const ibcHashOutput = "ibc/" + digest.toUpperCase();
-  return ibcHashOutput;
-}
+//-- Functions --
 
 async function asyncForEach(array, callback) {
   for (let index = 0; index < array.length; index++) {
@@ -258,7 +216,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
       
       
       //--Get IBC Hash--
-      let ibcHash = calculateIbcHash(traces[traces.length -1].chain.path);
+      let ibcHash = zone.calculateIbcHash(traces[traces.length -1].chain.path);
       
       
       //--Replace Base with IBC Hash--
@@ -305,8 +263,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
 }
 
 async function generateAssetlist(chainName) {
-  
-  let zoneAssetlist = getZoneAssetlist(chainName);
+  let zoneAssetlist = zone.readFromFile(chainName, zone.zoneAssetlistFileName);
   let assets = [];  
   await generateAssets(chainName, assets, zoneAssetlist.assets);
   if (!assets) { return; }
@@ -315,17 +272,20 @@ async function generateAssetlist(chainName) {
     assets: assets
   }
   //console.log(assetlist);
-  
-  writeToFile(assetlist, chainName);
-
+  zone.writeToFile(chainName, zone.assetlistFileName, assetlist);
 }
+
+
+async function generateAssetlists() {
+  for (const chainName of zone.chainNames) {
+    await generateAssetlist(chainName);
+  }
+}
+
 
 async function main() {
-  
-  await generateAssetlist("osmosis");
-  //await generateAssetlist("osmosistestnet4");
-  await generateAssetlist("osmosistestnet");
-  
+  await generateAssetlists();
 }
+
 
 main();

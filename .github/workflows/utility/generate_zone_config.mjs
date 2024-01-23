@@ -2,30 +2,21 @@
 //   to generate the zone_config json using the zone json and chain registry data
 
 
-import * as fs from 'fs';
-import * as path from 'path';
+//-- Imports --
+
 import * as chain_reg from './chain_registry.mjs';
 import * as zone from './assetlist_functions.mjs';
 import { returnAssets } from './getPools.mjs';
 
 
 
-const chainNameToChainIdMap = new Map([
-  ["osmosis", "osmosis-1"],
-  ["osmosistestnet4", "osmo-test-4"],
-  ["osmosistestnet", "osmo-test-5"]
-]);
 
-const assetlistsRoot = "../../..";
-const generatedFolderName = "generated";
-const assetlistFileName = "assetlist.json";
-const chainlistFileName = "chainlist.json";
-const zoneAssetConfigFileName = "zone_asset_config.json";
-const zoneAssetlistFileName = "osmosis.zone_assets.json";
-const zoneChainlistFileName = "osmosis.zone_chains.json";
-const zoneConfigFileName = "osmosis.zone_config.json";
+//-- Global Constants --
 
 let zoneConfig;
+
+//This address corresponds to the native assset on all evm chains (e.g., wei on ethereum)
+const zero_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
 
 //This defines with types of traces are considered essentially the same asset
 const find_origin_trace_types = [
@@ -36,68 +27,14 @@ const find_origin_trace_types = [
   "additional-mintage"
 ];
 
-//This address corresponds to the native assset on all evm chains (e.g., wei on ethereum)
-const zero_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
 
-function getZoneAssetlist(chainName) {
-  try {
-    return JSON.parse(fs.readFileSync(path.join(
-      assetlistsRoot,
-      chainNameToChainIdMap.get(chainName),
-      zoneAssetlistFileName
-    )));
-  } catch (err) {
-    console.log(err);
-  }
-}
 
-function getZoneChainlist(chainName) {
-  try {
-    return JSON.parse(fs.readFileSync(path.join(
-      assetlistsRoot,
-      chainNameToChainIdMap.get(chainName),
-      zoneChainlistFileName
-    )));
-  } catch (err) {
-    console.log(err);
-  }
-}
 
-function getZoneConfig(chainName) {
-  try {
-    return JSON.parse(fs.readFileSync(path.join(
-      assetlistsRoot,
-      chainNameToChainIdMap.get(chainName),
-      zoneConfigFileName
-    )));
-  } catch (err) {
-    console.log(err);
-  }
-}
 
-function writeToFile(assetlist, chainName) {
-  try {
-    fs.writeFile(path.join(
-      assetlistsRoot,
-      chainNameToChainIdMap.get(chainName),
-      generatedFolderName,
-      zoneAssetConfigFileName
-    ), JSON.stringify(assetlist,null,2), (err) => {
-      if (err) throw err;
-    });
-  } catch (err) {
-    console.log(err);
-  }
-}
 
-async function calculateIbcHash(ibcHashInput) {
-  const textAsBuffer = new TextEncoder().encode(ibcHashInput);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', textAsBuffer);
-  const hashArray = Array.from(new Uint8Array(hashBuffer))
-  const digest = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-  const ibcHashOutput = "ibc/" + digest.toUpperCase();
-  return ibcHashOutput;
-}
+
+//-- Functions --
+
 
 async function asyncForEach(array, callback) {
   for (let index = 0; index < array.length; index++) {
@@ -415,7 +352,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     //---e.g., ATOM os Osmosis -> ibc/...
     let local_asset;
     if(zone_asset.chain_name != chainName) {
-      let ibcHash = calculateIbcHash(zone_asset.path);    //Calc IBC Hash Denom
+      let ibcHash = zone.calculateIbcHash(zone_asset.path);    //Calc IBC Hash Denom
       generatedAsset.local_base_denom = await ibcHash;    //Set IBC Hash Denom
       local_asset = chain_reg.getAssetObject(chainName, ibcHash);
     } else {
@@ -858,31 +795,30 @@ const generateAssets = async (chainName, assets, zone_assets) => {
 }
 
 async function generateAssetlist(chainName) {
-  
-  zoneConfig = getZoneConfig(chainName)?.config;
-
-  let zoneAssetlist = getZoneAssetlist(chainName);
+  zoneConfig = zone.readFromFile(chainName, zone.zoneConfigFileName)?.config;
+  let zoneAssetlist = zone.readFromFile(chainName, zone.zoneAssetlistFileName);
   let assets = [];  
   await generateAssets(chainName, assets, zoneAssetlist.assets);
   if (!assets) { return; }
-  
   assets = await getAllRelatedAssets(assets);
-
   let assetlist = {
     chain_name: chainName,
     assets: assets
   }
-  
-  writeToFile(assetlist, chainName);
-
+  zone.writeToFile(chainName, zone.zoneAssetConfigFileName, assetlist);
 }
+
+
+async function generateAssetlists() {
+  for (const chainName of zone.chainNames) {
+    await generateAssetlist(chainName);
+  }
+}
+
 
 async function main() {
-  
-  await generateAssetlist("osmosis");
-  //await generateAssetlist("osmosistestnet4");
-  await generateAssetlist("osmosistestnet");
-  
+  await generateAssetlists();
 }
+
 
 main();

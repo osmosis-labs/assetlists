@@ -15,7 +15,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as chain_reg from './chain_registry.mjs';
-
+import * as assetlist_funcs from './assetlist_functions.mjs';
 
 const chainNameToChainIdMap = new Map([
   ["osmosis", "osmosis-1"],
@@ -242,7 +242,9 @@ function generateChains(chains, zone_chains) {
 
 function generateChainlist(chainName) {
   
-  let zoneChainlist = getZoneChainlist(chainName);
+  //let zoneChainlist = getZoneChainlist(chainName);
+  let zoneChainlist = assetlist_funcs.readFromFile(chainName, zoneChainlistFileName);
+
   let chains = [];
   generateChains(chains, zoneChainlist.chains);
   let chainlist = {

@@ -93,3 +93,20 @@ export function writeToFile(chainName, fileName, value) {
     console.log(err);
   }
 }
+
+
+
+export async function calculateIbcHash(ibcHashInput) {
+  const textAsBuffer = new TextEncoder().encode(ibcHashInput);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', textAsBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer))
+  const digest = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  const ibcHashOutput = "ibc/" + digest.toUpperCase();
+  return ibcHashOutput;
+}
+
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array);
+  }
+}

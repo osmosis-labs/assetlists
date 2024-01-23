@@ -12,64 +12,10 @@
 // write chainlist array to file osmosis-1.chainlist.json
 
 
-import * as fs from 'fs';
-import * as path from 'path';
+
 import * as chain_reg from './chain_registry.mjs';
+import * as zone from './assetlist_functions.mjs';
 
-
-const chainNameToChainIdMap = new Map([
-  ["osmosis", "osmosis-1"],
-  ["osmosistestnet4", "osmo-test-4"],
-  ["osmosistestnet", "osmo-test-5"]
-]);
-
-const assetlistsRoot = "../../..";
-const generatedFolderName = "generated";
-const assetlistFileName = "assetlist.json";
-const chainlistFileName = "chainlist.json";
-const zoneAssetConfigFileName = "zone_asset_config.json";
-const zoneAssetlistFileName = "osmosis.zone_assets.json";
-const zoneChainlistFileName = "osmosis.zone_chains.json";
-const zoneConfigFileName = "osmosis.zone_config.json";
-
-function getZoneAssetlist(chainName) {
-  try {
-    return JSON.parse(fs.readFileSync(path.join(
-      assetlistsRoot,
-      chainNameToChainIdMap.get(chainName),
-      zoneAssetlistFileName
-    )));
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-function getZoneChainlist(chainName) {
-  try {
-    return JSON.parse(fs.readFileSync(path.join(
-      assetlistsRoot,
-      chainNameToChainIdMap.get(chainName),
-      zoneChainlistFileName
-    )));
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-function writeToFile(list, localChainName, fileName) {
-  try {
-    fs.writeFile(path.join(
-      assetlistsRoot,
-      chainNameToChainIdMap.get(localChainName),
-      generatedFolderName,
-      chainlistFileName
-    ), JSON.stringify(list,null,2), (err) => {
-      if (err) throw err;
-    });
-  } catch (err) {
-    console.log(err);
-  }
-}
 
 function generateChains(chains, zone_chains) {
   
@@ -241,8 +187,7 @@ function generateChains(chains, zone_chains) {
 }
 
 function generateChainlist(chainName) {
-  
-  let zoneChainlist = getZoneChainlist(chainName);
+  let zoneChainlist = zone.readFromFile(chainName, zone.zoneChainlistFileName);
   let chains = [];
   generateChains(chains, zoneChainlist.chains);
   let chainlist = {
@@ -250,17 +195,17 @@ function generateChainlist(chainName) {
     chains: chains
   }
   //console.log(chainlist);
-  
-  writeToFile(chainlist, chainName, chainlistFileName);
+  zone.writeToFile(chainName, zone.chainlistFileName, chainlist);
+}
 
+function generateChainlists() {
+  zone.chainNames.forEach((chainName) => {
+    generateChainlist(chainName);
+  });
 }
 
 function main() {
-
-  generateChainlist("osmosis");
-  //generateChainlist("osmosistestnet4");
-  generateChainlist("osmosistestnet");
-  
+  generateChainlists();
 }
 
 main();

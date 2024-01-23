@@ -5,7 +5,9 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as chain_reg from './chain_registry.mjs';
+import * as zone from './assetlist_functions.mjs';
 import { returnAssets } from './getPools.mjs';
+
 
 
 const chainNameToChainIdMap = new Map([
@@ -444,7 +446,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     }
 
 
-
+    
     //--Get Symbol
     generatedAsset.symbol = reference_asset.symbol;
 

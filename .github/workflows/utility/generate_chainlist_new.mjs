@@ -99,20 +99,24 @@ async function generateChains(chains, zone_chains, local_chain_name) {
     // -- Get Staking --
     let chain_reg_staking = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "staking");
     base_denom = chain_reg_staking?.staking_tokens[0]?.denom;
+    local_base_denom = await getLocalBaseDenom(zone_chain.chain_name, base_denom, local_chain_name);
     symbol = chain_reg.getAssetProperty(zone_chain.chain_name, base_denom, "symbol");
     decimals = chain_reg.getAssetDecimals(zone_chain.chain_name, base_denom);
     coingecko_id = chain_reg.getAssetPropertyWithTraceIBC(zone_chain.chain_name, base_denom, "coingecko_id");
     logo_URIs = chain_reg.getAssetProperty(zone_chain.chain_name, base_denom, "logo_URIs");
     image_URL = logo_URIs?.png ? logo_URIs?.png : logo_URIs?.svg;
-    local_base_denom = await getLocalBaseDenom(zone_chain.chain_name, base_denom, local_chain_name);
     currency = {
       coinDenom: symbol,
+      chainSuggestionDenom: base_denom,
       coinMinimalDenom: local_base_denom,
       sourceDenom: base_denom,
       coinDecimals: decimals ? decimals : 0,
       coinGeckoId: coingecko_id,
       coinImageUrl: image_URL
     };
+    if (base_denom == local_base_denom) {
+      delete currency.sourceDenom;
+    }
     chain.stakeCurrency = currency;
     currency = {};
 
@@ -124,20 +128,24 @@ async function generateChains(chains, zone_chains, local_chain_name) {
     await asyncForEach(chain_reg_fees?.fee_tokens, async (fee) => {
     //for (const fee in chain_reg_fees?.fee_tokens) {
       base_denom = fee.denom;
+      local_base_denom = await getLocalBaseDenom(zone_chain.chain_name, base_denom, local_chain_name);
       symbol = chain_reg.getAssetProperty(zone_chain.chain_name, base_denom, "symbol");
       decimals = chain_reg.getAssetDecimals(zone_chain.chain_name, base_denom);
       coingecko_id = chain_reg.getAssetPropertyWithTraceIBC(zone_chain.chain_name, base_denom, "coingecko_id");
       logo_URIs = chain_reg.getAssetProperty(zone_chain.chain_name, base_denom, "logo_URIs");
       image_URL = logo_URIs?.png ? logo_URIs?.png : logo_URIs?.svg;
-      local_base_denom = await getLocalBaseDenom(zone_chain.chain_name, base_denom, local_chain_name);
       currency = {
         coinDenom: symbol,
+        chainSuggestionDenom: base_denom,
         coinMinimalDenom: local_base_denom,
         sourceDenom: base_denom,
         coinDecimals: decimals ? decimals : 0,
         coinGeckoId: coingecko_id,
         coinImageUrl: image_URL
       };
+      if (base_denom == local_base_denom) {
+        delete currency.sourceDenom;
+      }
       if(fee.low_gas_price && fee.average_gas_price && fee.high_gas_price) { 
         currency.gasPriceStep = {
           low: fee.low_gas_price,
@@ -158,20 +166,24 @@ async function generateChains(chains, zone_chains, local_chain_name) {
     await asyncForEach(chain_reg_assets, async (asset) => {
     //for (const asset in chain_reg_assets) {
       base_denom = asset.base;
+      local_base_denom = await getLocalBaseDenom(zone_chain.chain_name, base_denom, local_chain_name);
       symbol = asset.symbol;
       decimals = chain_reg.getAssetDecimals(zone_chain.chain_name, base_denom);
       coingecko_id = chain_reg.getAssetPropertyWithTraceIBC(zone_chain.chain_name, base_denom, "coingecko_id");;
       logo_URIs = asset.logo_URIs;
       image_URL = logo_URIs?.png ? logo_URIs?.png : logo_URIs?.svg;
-      local_base_denom = await getLocalBaseDenom(zone_chain.chain_name, base_denom, local_chain_name);
       currency = {
         coinDenom: symbol,
+        chainSuggestionDenom: base_denom,
         coinMinimalDenom: local_base_denom,
         sourceDenom: base_denom,
         coinDecimals: decimals ? decimals : 0,
         coinGeckoId: coingecko_id,
         coinImageUrl: image_URL
       };
+      if (base_denom == local_base_denom) {
+        delete currency.sourceDenom;
+      }
       currencies.push(currency);
       currency = {};
     });

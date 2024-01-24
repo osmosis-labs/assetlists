@@ -338,7 +338,8 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     //--Identity (Chain Registry Pointer)--
     generatedAsset.chain_name = zone_asset.chain_name;
     generatedAsset.base_denom = zone_asset.base_denom;
-
+    //--sourceDenom--
+    generatedAsset.sourceDenom = zone_asset.base_denom;
 
 
     //--Get Origin Asset Object from Chain Registry--
@@ -347,16 +348,16 @@ const generateAssets = async (chainName, assets, zone_assets) => {
 
 
     //--Get Local Asset Object from Chain Registry--
-    //--Local Base Denom (Denomination of the Asset when on the local chain)
+    //--coinMinimalDenom (Denomination of the Asset when on the local chain)
     //---e.g., OSMO on Osmosis -> uosmo
     //---e.g., ATOM os Osmosis -> ibc/...
     let local_asset;
     if(zone_asset.chain_name != chainName) {
       let ibcHash = zone.calculateIbcHash(zone_asset.path);    //Calc IBC Hash Denom
-      generatedAsset.local_base_denom = await ibcHash;    //Set IBC Hash Denom
+      generatedAsset.coinMinimalDenom = await ibcHash;    //Set IBC Hash Denom
       local_asset = chain_reg.getAssetObject(chainName, ibcHash);
     } else {
-      generatedAsset.local_base_denom = zone_asset.base_denom;
+      generatedAsset.coinMinimalDenom = zone_asset.base_denom;
     }
     let asset = local_asset ? local_asset : origin_asset;
 
@@ -415,7 +416,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
 
 
     //--Get Best Pricing Reference Pool--
-    let denom = generatedAsset.local_base_denom;
+    let denom = generatedAsset.coinMinimalDenom;
     if (pool_assets?.get(denom)) {
       generatedAsset.api_include = pool_assets.get(denom).osmosis_info;
       let price = "";

@@ -823,25 +823,33 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
       }
       if(zone_asset.override_properties.logo_URIs) {
         generated_zoneConfigAsset.logo_URIs = zone_asset.override_properties.logo_URIs;
-        let match = 0;
-        images.forEach((image) => {
-          if (
-            (
-              !generated_zoneConfigAsset.logo_URIs.png ||
-              generated_zoneConfigAsset.logo_URIs.png == image.png
-            ) &&
-            (
-              !generated_zoneConfigAsset.logo_URIs.svg ||
-              generated_zoneConfigAsset.logo_URIs.svg == image.svg
-            )
-          ) {
-            match = 1;
-          }
-        });
-        if (!match) {
-          images.push(zone_asset.override_properties.logo_URIs);
-        }
       }
+    }
+
+
+    //--Finalize Images--
+    let match = 0;
+    images.forEach((image) => {
+      if (
+        (
+          !generated_zoneConfigAsset.logo_URIs.png ||
+          generated_zoneConfigAsset.logo_URIs.png == image.png
+        ) &&
+        (
+          !generated_zoneConfigAsset.logo_URIs.svg ||
+          generated_zoneConfigAsset.logo_URIs.svg == image.svg
+        )
+      ) {
+        match = 1;
+        return;
+      }
+    });
+    if (!match) {
+      let new_image = {
+        png: generated_zoneConfigAsset.logo_URIs.png,
+        svg: generated_zoneConfigAsset.logo_URIs.svg
+      }
+      images.push(new_image);
     }
 
 

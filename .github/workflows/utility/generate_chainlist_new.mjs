@@ -228,8 +228,8 @@ async function generateChains(chains, zone_chains, local_chain_name) {
 }
 
 async function generateChainlist(chainName) {
-  zoneAssetlist = zone.readFromFile(chainName, zone.zoneAssetlistFileName);
-  let zoneChainlist = zone.readFromFile(chainName, zone.zoneChainlistFileName);
+  zoneAssetlist = zone.readFromFile(chainName, zone.noDir, zone.zoneAssetlistFileName);
+  let zoneChainlist = zone.readFromFile(chainName, zone.noDir, zone.zoneChainlistFileName);
   let chains = [];
   chains = await generateChains(chains, zoneChainlist.chains, chainName);
   let chainlist = {
@@ -237,7 +237,7 @@ async function generateChainlist(chainName) {
     chains: chains
   }
   //console.log(chainlist);
-  zone.writeToFile(chainName, zone.chainlistFileName, chainlist);
+  zone.writeToFile(chainName, zone.zoneConfigChainlist, zone.chainlistFileName, chainlist);
 }
 
 

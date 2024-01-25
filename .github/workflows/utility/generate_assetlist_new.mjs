@@ -918,8 +918,8 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
 }
 
 async function generateAssetlist(chainName) {
-  zoneConfig = zone.readFromFile(chainName, zone.zoneConfigFileName)?.config;
-  let zoneAssetlist = zone.readFromFile(chainName, zone.zoneAssetlistFileName)?.assets;
+  zoneConfig = zone.readFromFile(chainName, zone.noDir, zone.zoneConfigFileName)?.config;
+  let zoneAssetlist = zone.readFromFile(chainName, zone.noDir, zone.zoneAssetlistFileName)?.assets;
   let zone_config_assets = [];
   let chain_reg_assets = [];
   await generateAssets(chainName, zoneAssetlist, zone_config_assets, chain_reg_assets);
@@ -933,8 +933,8 @@ async function generateAssetlist(chainName) {
     chain_name: chainName,
     assets: chain_reg_assets
   }
-  zone.writeToFile(chainName, zone.zoneAssetConfigFileName, zone_config_assetlist);
-  zone.writeToFile(chainName, zone.assetlistFileName, chain_reg_assetlist);
+  zone.writeToFile(chainName, zone.chainRegAssetlist, zone.assetlistFileName, zone_config_assetlist);
+  zone.writeToFile(chainName, zone.zoneConfigAssetlist, zone.assetlistFileName, chain_reg_assetlist);
 }
 
 

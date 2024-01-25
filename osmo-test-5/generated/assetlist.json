@@ -15,15 +15,21 @@
           "aliases": []
         }
       ],
+      "type_asset": "sdk.coin",
       "base": "uosmo",
       "name": "Osmosis Testnet",
       "display": "osmo",
       "symbol": "OSMO",
-      "traces": [],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
       },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
+        }
+      ],
       "coingecko_id": "osmosis",
       "keywords": [
         "dex",
@@ -41,15 +47,21 @@
           "exponent": 6
         }
       ],
+      "type_asset": "sdk.coin",
       "base": "uion",
       "name": "Ion",
       "display": "ion",
       "symbol": "ION",
-      "traces": [],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
       },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
+        }
+      ],
       "coingecko_id": "ion",
       "keywords": [
         "memecoin"
@@ -92,7 +104,13 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.svg"
-      }
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.svg"
+        }
+      ]
     },
     {
       "description": "Circle's stablecoin on Axelar",
@@ -111,9 +129,9 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/2164BDB48DE5501430E71286448D87C6D2240EC0E078CF113CAB85E21A352BB0",
-      "name": "USD Coin",
+      "name": "USD Coin (Axelar)",
       "display": "ausdc",
-      "symbol": "aUSDC",
+      "symbol": "aUSDC.axl",
       "traces": [
         {
           "type": "synthetic",
@@ -146,7 +164,16 @@
       ],
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
-      }
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "ethereumtestnet",
+            "base_denom": "0x254d06f33bDc5b8ee05b2ea472107E300226659A"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
+        }
+      ]
     },
     {
       "description": "Wrapped Ether on Axelar",
@@ -165,7 +192,7 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/1F42AC9631DBE03009219ECCFE151786F53A038DE9F7A07C709158514F1D5942",
-      "name": "Wrapped Ether",
+      "name": "Wrapped Ether (Axelar)",
       "display": "weth",
       "symbol": "ETH",
       "traces": [
@@ -200,7 +227,16 @@
       ],
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/weth.svg"
-      }
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "ethereumtestnet",
+            "base_denom": "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/weth.svg"
+        }
+      ]
     },
     {
       "description": "The native token of JUNO Chain",
@@ -240,6 +276,12 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.svg"
       },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.svg"
+        }
+      ],
       "coingecko_id": "juno-network"
     },
     {
@@ -279,7 +321,13 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.svg"
-      }
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.svg"
+        }
+      ]
     },
     {
       "description": "USD Coin",
@@ -342,7 +390,13 @@
       ],
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
-      }
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
+        }
+      ],
+      "coingecko_id": "usd-coin"
     },
     {
       "description": "Akash Token (AKT) is the Akash Network's native utility token, used as the primary means to govern, secure the blockchain, incentivize participants, and provide a default mechanism to store and exchange value.",
@@ -381,7 +435,13 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.svg"
-      }
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.svg"
+        }
+      ]
     },
     {
       "description": "The native utility token of the Kaon testnet version of KYVE.",
@@ -419,7 +479,12 @@
       ],
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/kyvetestnet/images/kyve.svg"
-      }
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/kyvetestnet/images/kyve.svg"
+        }
+      ]
     },
     {
       "description": "QCK - native token of Quicksilver",
@@ -459,6 +524,11 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qck.png"
       },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qck.png"
+        }
+      ],
       "coingecko_id": "quicksilver"
     },
     {
@@ -497,7 +567,13 @@
       ],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/chain4energytestnet/images/c4e.png"
-      }
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/chain4energytestnet/images/c4e.png"
+        }
+      ],
+      "coingecko_id": ""
     },
     {
       "description": "The XPRT token is primarily a governance token for the Persistence chain.",
@@ -537,6 +613,12 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.svg"
       },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.svg"
+        }
+      ],
       "coingecko_id": "persistence"
     },
     {
@@ -586,7 +668,12 @@
       ],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xion/images/burnt-round.png"
-      }
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xion/images/burnt-round.png"
+        }
+      ]
     },
     {
       "description": "The native token of Saga Testnet",
@@ -626,7 +713,13 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.svg"
-      }
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.svg"
+        }
+      ]
     },
     {
       "description": "The native token of IXO Chain",
@@ -673,7 +766,17 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/impacthub/images/ixo.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/impacthub/images/ixo.svg"
-      }
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "impacthub",
+            "base_denom": "uixo"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/impacthub/images/ixo.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/impacthub/images/ixo.svg"
+        }
+      ]
     }
   ]
 }

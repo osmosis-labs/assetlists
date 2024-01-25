@@ -27,6 +27,8 @@ const find_origin_trace_types = [
   "additional-mintage"
 ];
 
+//create related assets map {asset} -> [{{asset},#distance}]
+let relatedAssets = new Map();
 
 
 
@@ -42,8 +44,6 @@ async function asyncForEach(array, callback) {
   }
 }
 
-//create related assets map {asset} -> [{{asset},#distance}]
-let relatedAssets = new Map();
 
 
 function getMostRecentNonIBCTrace(asset) {
@@ -320,7 +320,7 @@ function getAllRelatedAssets(assets) {
 }
 
 
-const generateAssets = async (chainName, assets, zone_assets) => {
+const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_reg_assets) => {
 
   let pool_assets;
   pool_assets = await returnAssets(chainName);
@@ -329,17 +329,19 @@ const generateAssets = async (chainName, assets, zone_assets) => {
   await asyncForEach(zone_assets, async (zone_asset) => {
 
 
-    //--Create the Generated Asset Object--
+    //--Create the Generated Asset Objects--
     //  this will go into zone_asset_config
-    let generatedAsset = {};
+    let generated_zoneConfigAsset = {};
+    //  this will go into [chain_reg] assetlist
+    let generated_chainRegAsset = {};
     
 
     
     //--Identity (Chain Registry Pointer)--
-    generatedAsset.chain_name = zone_asset.chain_name;
-    generatedAsset.base_denom = zone_asset.base_denom;
+    generated_zoneConfigAsset.chain_name = zone_asset.chain_name;
+    generated_zoneConfigAsset.base_denom = zone_asset.base_denom;
     //--sourceDenom--
-    generatedAsset.sourceDenom = zone_asset.base_denom;
+    generated_zoneConfigAsset.sourceDenom = zone_asset.base_denom;
 
 
     //--Get Origin Asset Object from Chain Registry--
@@ -354,10 +356,10 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     let local_asset;
     if(zone_asset.chain_name != chainName) {
       let ibcHash = zone.calculateIbcHash(zone_asset.path);    //Calc IBC Hash Denom
-      generatedAsset.coinMinimalDenom = await ibcHash;    //Set IBC Hash Denom
+      generated_zoneConfigAsset.coinMinimalDenom = await ibcHash;    //Set IBC Hash Denom
       local_asset = chain_reg.getAssetObject(chainName, ibcHash);
     } else {
-      generatedAsset.coinMinimalDenom = zone_asset.base_denom;
+      generated_zoneConfigAsset.coinMinimalDenom = zone_asset.base_denom;
     }
     let asset = local_asset ? local_asset : origin_asset;
 
@@ -386,44 +388,44 @@ const generateAssets = async (chainName, assets, zone_assets) => {
 
     
     //--Get Symbol
-    generatedAsset.symbol = reference_asset.symbol;
+    generated_zoneConfigAsset.symbol = reference_asset.symbol;
 
 
 
     //--Get Decimals--
     asset.denom_units.forEach((unit) => {
       if(unit.denom === asset.display) {
-        generatedAsset.decimals = unit.exponent;
+        generated_zoneConfigAsset.decimals = unit.exponent;
       }
     });
 
 
 
     //--Get Logos--
-    generatedAsset.logo_URIs = reference_asset.logo_URIs;
-    generatedAsset.images = reference_asset.images;
+    generated_zoneConfigAsset.logo_URIs = reference_asset.logo_URIs;
+    let images = reference_asset.images;
     
 
 
     //--Get CGID--
-    generatedAsset.coingecko_id = canonical_origin_asset.coingecko_id;
+    generated_zoneConfigAsset.coingecko_id = canonical_origin_asset.coingecko_id;
   
     
 
     //--Get Verified Status--
-    generatedAsset.verified = zone_asset.osmosis_verified;
+    generated_zoneConfigAsset.verified = zone_asset.osmosis_verified;
 
 
 
     //--Get Best Pricing Reference Pool--
-    let denom = generatedAsset.coinMinimalDenom;
+    let denom = generated_zoneConfigAsset.coinMinimalDenom;
     if (pool_assets?.get(denom)) {
-      generatedAsset.api_include = pool_assets.get(denom).osmosis_info;
+      generated_zoneConfigAsset.api_include = pool_assets.get(denom).osmosis_info;
       let price = "";
       price = pool_assets.get(denom).osmosis_price;
       if(price) {
         let price_parts = price.split(':');
-        generatedAsset.price = {
+        generated_zoneConfigAsset.price = {
           pool: price_parts[2],
           denom: price_parts[1]
         }
@@ -446,21 +448,18 @@ const generateAssets = async (chainName, assets, zone_assets) => {
         categories.push("liquid_staking");
       }
     });
-    generatedAsset.categories = categories.length > 0 ? categories : undefined;
+    generated_zoneConfigAsset.categories = categories.length > 0 ? categories : undefined;
     
 
 
     //--Get Peg Mechanism--
-    generatedAsset.peg_mechanism = zone_asset.peg_mechanism;
-
-
-
+    generated_zoneConfigAsset.peg_mechanism = zone_asset.peg_mechanism;
 
 
 
 
     //--Process Transfer Methods--
-    generatedAsset.transfer_methods = zone_asset.transfer_methods;
+    generated_zoneConfigAsset.transfer_methods = zone_asset.transfer_methods;
 
 
 
@@ -470,7 +469,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
 
     if(zone_asset.chain_name != chainName) {
 
-      if(!traces) {
+      if (!traces) {
         traces = [];
       }
 
@@ -483,7 +482,6 @@ const generateAssets = async (chainName, assets, zone_assets) => {
       
       let counterparty = {
         chain_name: zone_asset.chain_name,
-        chain_id: chain_reg.getFileProperty(zone_asset.chain_name, "chain", "chain_id"),
         base_denom: zone_asset.base_denom,
         port: "trans"
       };
@@ -548,8 +546,31 @@ const generateAssets = async (chainName, assets, zone_assets) => {
       }
       
       
+
       //--Add Path--
-      chain.path = zone_asset.path;
+      if(traces.length > 0) {
+        if(traces[traces.length - 1].type === "ibc" || traces[traces.length - 1].type === "ibc-cw20") {
+          if(traces[traces.length - 1].chain.path) {
+            chain.path = chain.port + "/" + chain.channel_id + "/" + traces[traces.length - 1].chain.path;
+          } else {
+            console.log(zone_asset.base_denom + "Missing Path");
+          }
+        }
+      }
+      if (!chain.path) {
+        if (zone_asset.base_denom.slice(0,7) === "factory" && zone_asset.chain_name === "kujira") {
+          let baseReplacement = zone_asset.base_denom.replace(/\//g,":");
+          chain.path = chain.port + "/" + chain.channel_id + "/" + baseReplacement;
+        } else {
+          chain.path = chain.port + "/" + chain.channel_id + "/" + zone_asset.base_denom;
+        }
+      }
+
+      //--Double Check Path--
+      if (chain.path != zone_asset.path) {
+        console.log("Warning! Provided trace path does not match generated path.");
+        console.log(zone_asset);
+      }
       
       
       //--Create Trace Object--
@@ -559,11 +580,10 @@ const generateAssets = async (chainName, assets, zone_assets) => {
         chain: chain
       }
 
-      traces.push(trace);
 
-      if (!generatedAsset.transfer_methods) {
+      if (!generated_zoneConfigAsset.transfer_methods) {
         //trace.validated = true;
-        generatedAsset.transfer_methods = [];
+        generated_zoneConfigAsset.transfer_methods = [];
       }
 
       let ibc_transfer_method = {
@@ -581,8 +601,18 @@ const generateAssets = async (chainName, assets, zone_assets) => {
           path: zone_asset.path
         }
       }
-      generatedAsset.transfer_methods.push(ibc_transfer_method);
-      //generatedAsset.transfer_methods.push(trace);
+      generated_zoneConfigAsset.transfer_methods.push(ibc_transfer_method);
+      //generated_zoneConfigAsset.transfer_methods.push(trace);
+
+
+
+      //--Cleanup Trace--
+      if(type === "ibc") {
+        delete trace.chain.port;
+        delete trace.counterparty.port;
+      }
+
+      traces.push(trace);
 
 
 
@@ -595,7 +625,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
             if(providers) {
               providers.forEach((provider) => {
                 if(provider.provider == bridge_provider && provider.suffix) {
-                  generatedAsset.symbol = generatedAsset.symbol + provider.suffix;
+                  generated_zoneConfigAsset.symbol = generated_zoneConfigAsset.symbol + provider.suffix;
                 }
               });
             }
@@ -620,8 +650,8 @@ const generateAssets = async (chainName, assets, zone_assets) => {
         } else if (traces[i].type == "bridge" && bridge_uses) {
           break;
         } else {
-          if(!generatedAsset.counterparty) {
-            generatedAsset.counterparty = [];
+          if(!generated_zoneConfigAsset.counterparty) {
+            generated_zoneConfigAsset.counterparty = [];
           }
           last_trace = traces[i];
           let counterparty = {
@@ -673,16 +703,31 @@ const generateAssets = async (chainName, assets, zone_assets) => {
             last_trace.counterparty.base_denom,
             "logo_URIs"
           );
-          generatedAsset.counterparty.push(counterparty);
+          generated_zoneConfigAsset.counterparty.push(counterparty);
         }
       }
       if(last_trace) {
-        generatedAsset.common_key = chain_reg.getAssetProperty(
+        generated_zoneConfigAsset.common_key = chain_reg.getAssetProperty(
           last_trace.counterparty.chain_name,
           last_trace.counterparty.base_denom,
           "symbol"
         );
       }
+    }
+
+
+    let denom_units = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, "denom_units");
+    if (zone_asset.chain_name != chainName) {
+      denom_units.forEach(async function(unit) {
+        if(unit.denom === zone_asset.base_denom) {
+          if(!unit.aliases) {
+            unit.aliases = [];
+          }
+          unit.aliases.push(unit.denom);
+          unit.denom = generated_zoneConfigAsset.coinMinimalDenom;
+          return;
+        }
+      });
     }
 
     
@@ -715,7 +760,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     }
 
     //  submit
-    generatedAsset.name = name;
+    generated_zoneConfigAsset.name = name;
 
 
 
@@ -733,23 +778,25 @@ const generateAssets = async (chainName, assets, zone_assets) => {
         description = description + chain_description;
       }
     }
-    generatedAsset.description = description;
+    generated_zoneConfigAsset.description = description;
+
 
 
     //--Get Twitter URL--
-    generatedAsset.twitter_URL = zone_asset.twitter_URL;
+    generated_zoneConfigAsset.twitter_URL = zone_asset.twitter_URL;
+
 
 
     //--Sorting--
     //how to sort tokens if they don't have cgid
-    if(!generatedAsset.coingecko_id && !zone_asset.canonical){
+    if(!generated_zoneConfigAsset.coingecko_id && !zone_asset.canonical){
       traces?.forEach((trace) => {
         if(trace.provider) {
           let providers = zoneConfig?.providers;
           if(providers) {
             providers.forEach((provider) => {
               if(provider.provider == trace.provider && provider.token) {
-                generatedAsset.sort_with = {
+                generated_zoneConfigAsset.sort_with = {
                   chain_name: provider.token.chain_name,
                   base_denom: provider.token.base_denom
                 }
@@ -766,29 +813,96 @@ const generateAssets = async (chainName, assets, zone_assets) => {
     //--Overrides Properties when Specified--
     if(zone_asset.override_properties) {
       if(zone_asset.override_properties.coingecko_id) {
-        generatedAsset.coingecko_id = zone_asset.override_properties.coingecko_id;
+        generated_zoneConfigAsset.coingecko_id = zone_asset.override_properties.coingecko_id;
       }
       if(zone_asset.override_properties.symbol) {
-        generatedAsset.symbol = zone_asset.override_properties.symbol;
+        generated_zoneConfigAsset.symbol = zone_asset.override_properties.symbol;
       }
       if(zone_asset.override_properties.name) {
-        generatedAsset.name = zone_asset.override_properties.name;
+        generated_zoneConfigAsset.name = zone_asset.override_properties.name;
       }
       if(zone_asset.override_properties.logo_URIs) {
-        generatedAsset.logo_URIs = zone_asset.override_properties.logo_URIs;
+        generated_zoneConfigAsset.logo_URIs = zone_asset.override_properties.logo_URIs;
+        let match = 0;
+        images.forEach((image) => {
+          if (
+            (
+              !generated_zoneConfigAsset.logo_URIs.png ||
+              generated_zoneConfigAsset.logo_URIs.png == image.png
+            ) &&
+            (
+              !generated_zoneConfigAsset.logo_URIs.svg ||
+              generated_zoneConfigAsset.logo_URIs.svg == image.svg
+            )
+          ) {
+            match = 1;
+          }
+        });
+        if (!match) {
+          images.push(zone_asset.override_properties.logo_URIs);
+        }
       }
     }
 
 
 
+
     //--Add Flags--
-    generatedAsset.unstable = zone_asset.osmosis_unstable;
-    generatedAsset.unlisted = zone_asset.osmosis_unlisted;
+    generated_zoneConfigAsset.unstable = zone_asset.osmosis_unstable;
+    generated_zoneConfigAsset.unlisted = zone_asset.osmosis_unlisted;
+
+    
+    
+    //--Get Keywords--
+    let keywords = asset.keywords ? asset.keywords : [];
+    //--Update Keywords--
+    if(zone_asset.osmosis_unstable) {
+      keywords.push("osmosis_unstable");
+    }
+    if(zone_asset.osmosis_unlisted) {
+      keywords.push("osmosis_unlisted");
+    }
+    if(zone_asset.verified) {
+      keywords.push("osmosis_verified");
+    }
+    if(!keywords.length) {
+      keywords = undefined;
+    }
+
+
+
+    //--Get type_asset--
+    let type_asset = "ics20";
+    if (zone_asset.chain_name == chainName) {
+      type_asset = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, "type_asset");
+      if (!type_asset) {
+        type_asset = "sdk.coin";
+      }
+    }
 
 
     
     //--Append Asset to Assetlist--
-    assets.push(generatedAsset);
+    zone_config_assets.push(generated_zoneConfigAsset);
+
+
+    //--Setup Chain_Reg Asset--
+    generated_chainRegAsset = {
+      description: asset_description,
+      denom_units: denom_units,
+      type_asset: type_asset,
+      base: generated_zoneConfigAsset.coinMinimalDenom,
+      name: generated_zoneConfigAsset.name,
+      display: asset.display,
+      symbol: generated_zoneConfigAsset.symbol,
+      traces: traces,
+      logo_URIs: generated_zoneConfigAsset.logo_URIs,
+      images: images,
+      coingecko_id: generated_zoneConfigAsset.coingecko_id,
+      keywords: keywords
+    }
+    //--Append to Chain_Reg Assetlist--
+    chain_reg_assets.push(generated_chainRegAsset);
     
   
   });
@@ -797,16 +911,22 @@ const generateAssets = async (chainName, assets, zone_assets) => {
 
 async function generateAssetlist(chainName) {
   zoneConfig = zone.readFromFile(chainName, zone.zoneConfigFileName)?.config;
-  let zoneAssetlist = zone.readFromFile(chainName, zone.zoneAssetlistFileName);
-  let assets = [];  
-  await generateAssets(chainName, assets, zoneAssetlist.assets);
-  if (!assets) { return; }
-  assets = await getAllRelatedAssets(assets);
-  let assetlist = {
+  let zoneAssetlist = zone.readFromFile(chainName, zone.zoneAssetlistFileName)?.assets;
+  let zone_config_assets = [];
+  let chain_reg_assets = [];
+  await generateAssets(chainName, zoneAssetlist, zone_config_assets, chain_reg_assets);
+  if (!zone_config_assets) { return; }
+  zone_config_assets = await getAllRelatedAssets(zone_config_assets);
+  let zone_config_assetlist = {
     chain_name: chainName,
-    assets: assets
+    assets: zone_config_assets
   }
-  zone.writeToFile(chainName, zone.zoneAssetConfigFileName, assetlist);
+  let chain_reg_assetlist = {
+    chain_name: chainName,
+    assets: chain_reg_assets
+  }
+  zone.writeToFile(chainName, zone.zoneAssetConfigFileName, zone_config_assetlist);
+  zone.writeToFile(chainName, zone.assetlistFileName, chain_reg_assetlist);
 }
 
 

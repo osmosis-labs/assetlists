@@ -64,25 +64,25 @@ async function generateChains(chains, zone_chains, local_chain_name) {
     let chain = {};
     chain.chain_name = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "chain_name");
     chain.status = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "status");
-    chain.network_type = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "network_type");
-    chain.pretty_name = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "pretty_name");
-    chain.chain_id = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "chain_id");
+    chain.networkType = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "network_type");
+    chain.prettyName = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "pretty_name");
+    chain.chainId = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "chain_id");
     
     
     // -- Get bech32_config --
-    chain.bech32_prefix = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "bech32_prefix");
+    chain.bech32Prefix = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "bech32_prefix");
     let bech32_config = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "bech32_config");
     if (!bech32_config) { bech32_config = {}; }
     chain_reg.bech32ConfigSuffixMap.forEach((value, key) => {
       if (bech32_config[key]) { return; }
-      bech32_config[key] = chain.bech32_prefix?.concat(value);
+      bech32_config[key] = chain.bech32Prefix?.concat(value);
     });
     chain.bech32Config = bech32_config;
 
 
     // -- Get SLIP44 --
     chain.slip44 = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "slip44");
-    chain.alternative_slip44s = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "alternative_slip44s");
+    chain.alternativeSlip44s = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "alternative_slip44s");
 
 
     // -- Define Curreny Object Skeleton --
@@ -207,7 +207,7 @@ async function generateChains(chains, zone_chains, local_chain_name) {
     // -- Get Explorer Tx URL --
     chain.explorers = [];
     chain.explorers[0] = {};
-    chain.explorers[0].tx_page = zone_chain.explorer_tx_url;
+    chain.explorers[0].txPage = zone_chain.explorer_tx_url;
     
     
     // -- Get Keplr Suggest Chain Features --

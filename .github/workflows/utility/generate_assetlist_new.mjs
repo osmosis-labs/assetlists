@@ -331,17 +331,17 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
 
     //--Create the Generated Asset Objects--
     //  this will go into zone_asset_config
-    let generated_zoneConfigAsset = {};
+    let generated_asset = {};
     //  this will go into [chain_reg] assetlist
     let generated_chainRegAsset = {};
     
 
     
     //--Identity (Chain Registry Pointer)--
-    generated_zoneConfigAsset.chain_name = zone_asset.chain_name;
-    generated_zoneConfigAsset.base_denom = zone_asset.base_denom;
+    generated_asset.chain_name = zone_asset.chain_name;
+    generated_asset.base_denom = zone_asset.base_denom;
     //--sourceDenom--
-    generated_zoneConfigAsset.sourceDenom = zone_asset.base_denom;
+    generated_asset.sourceDenom = zone_asset.base_denom;
 
 
     //--Get Origin Asset Object from Chain Registry--
@@ -356,10 +356,10 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
     let local_asset;
     if(zone_asset.chain_name != chainName) {
       let ibcHash = zone.calculateIbcHash(zone_asset.path);    //Calc IBC Hash Denom
-      generated_zoneConfigAsset.coinMinimalDenom = await ibcHash;    //Set IBC Hash Denom
+      generated_asset.coinMinimalDenom = await ibcHash;    //Set IBC Hash Denom
       local_asset = chain_reg.getAssetObject(chainName, ibcHash);
     } else {
-      generated_zoneConfigAsset.coinMinimalDenom = zone_asset.base_denom;
+      generated_asset.coinMinimalDenom = zone_asset.base_denom;
     }
     let asset = local_asset ? local_asset : origin_asset;
 
@@ -388,44 +388,44 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
 
     
     //--Get Symbol
-    generated_zoneConfigAsset.symbol = reference_asset.symbol;
+    generated_asset.symbol = reference_asset.symbol;
 
 
 
     //--Get Decimals--
     asset.denom_units.forEach((unit) => {
       if(unit.denom === asset.display) {
-        generated_zoneConfigAsset.decimals = unit.exponent;
+        generated_asset.decimals = unit.exponent;
       }
     });
 
 
 
     //--Get Logos--
-    generated_zoneConfigAsset.logo_URIs = reference_asset.logo_URIs;
+    generated_asset.logo_URIs = reference_asset.logo_URIs;
     let images = reference_asset.images;
     
 
 
     //--Get CGID--
-    generated_zoneConfigAsset.coingecko_id = canonical_origin_asset.coingecko_id;
+    generated_asset.coingecko_id = canonical_origin_asset.coingecko_id;
   
     
 
     //--Get Verified Status--
-    generated_zoneConfigAsset.verified = zone_asset.osmosis_verified;
+    generated_asset.verified = zone_asset.osmosis_verified;
 
 
 
     //--Get Best Pricing Reference Pool--
-    let denom = generated_zoneConfigAsset.coinMinimalDenom;
+    let denom = generated_asset.coinMinimalDenom;
     if (pool_assets?.get(denom)) {
-      generated_zoneConfigAsset.api_include = pool_assets.get(denom).osmosis_info;
+      generated_asset.api_include = pool_assets.get(denom).osmosis_info;
       let price = "";
       price = pool_assets.get(denom).osmosis_price;
       if(price) {
         let price_parts = price.split(':');
-        generated_zoneConfigAsset.price = {
+        generated_asset.price = {
           pool: price_parts[2],
           denom: price_parts[1]
         }
@@ -448,18 +448,18 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
         categories.push("liquid_staking");
       }
     });
-    generated_zoneConfigAsset.categories = categories.length > 0 ? categories : undefined;
+    generated_asset.categories = categories.length > 0 ? categories : undefined;
     
 
 
     //--Get Peg Mechanism--
-    generated_zoneConfigAsset.peg_mechanism = zone_asset.peg_mechanism;
+    generated_asset.peg_mechanism = zone_asset.peg_mechanism;
 
 
 
 
     //--Process Transfer Methods--
-    generated_zoneConfigAsset.transfer_methods = zone_asset.transfer_methods;
+    generated_asset.transfer_methods = zone_asset.transfer_methods;
 
 
 
@@ -581,9 +581,9 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
       }
 
 
-      if (!generated_zoneConfigAsset.transfer_methods) {
+      if (!generated_asset.transfer_methods) {
         //trace.validated = true;
-        generated_zoneConfigAsset.transfer_methods = [];
+        generated_asset.transfer_methods = [];
       }
 
       let ibc_transfer_method = {
@@ -601,8 +601,8 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
           path: zone_asset.path
         }
       }
-      generated_zoneConfigAsset.transfer_methods.push(ibc_transfer_method);
-      //generated_zoneConfigAsset.transfer_methods.push(trace);
+      generated_asset.transfer_methods.push(ibc_transfer_method);
+      //generated_asset.transfer_methods.push(trace);
 
 
 
@@ -625,7 +625,7 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
             if(providers) {
               providers.forEach((provider) => {
                 if(provider.provider == bridge_provider && provider.suffix) {
-                  generated_zoneConfigAsset.symbol = generated_zoneConfigAsset.symbol + provider.suffix;
+                  generated_asset.symbol = generated_asset.symbol + provider.suffix;
                 }
               });
             }
@@ -650,8 +650,8 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
         } else if (traces[i].type == "bridge" && bridge_uses) {
           break;
         } else {
-          if(!generated_zoneConfigAsset.counterparty) {
-            generated_zoneConfigAsset.counterparty = [];
+          if(!generated_asset.counterparty) {
+            generated_asset.counterparty = [];
           }
           last_trace = traces[i];
           let counterparty = {
@@ -703,11 +703,11 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
             last_trace.counterparty.base_denom,
             "logo_URIs"
           );
-          generated_zoneConfigAsset.counterparty.push(counterparty);
+          generated_asset.counterparty.push(counterparty);
         }
       }
       if(last_trace) {
-        generated_zoneConfigAsset.common_key = chain_reg.getAssetProperty(
+        generated_asset.common_key = chain_reg.getAssetProperty(
           last_trace.counterparty.chain_name,
           last_trace.counterparty.base_denom,
           "symbol"
@@ -724,7 +724,7 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
             unit.aliases = [];
           }
           unit.aliases.push(unit.denom);
-          unit.denom = generated_zoneConfigAsset.coinMinimalDenom;
+          unit.denom = generated_asset.coinMinimalDenom;
           return;
         }
       });
@@ -760,7 +760,7 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
     }
 
     //  submit
-    generated_zoneConfigAsset.name = name;
+    generated_asset.name = name;
 
 
 
@@ -778,25 +778,25 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
         description = description + chain_description;
       }
     }
-    generated_zoneConfigAsset.description = description;
+    generated_asset.description = description;
 
 
 
     //--Get Twitter URL--
-    generated_zoneConfigAsset.twitter_URL = zone_asset.twitter_URL;
+    generated_asset.twitter_URL = zone_asset.twitter_URL;
 
 
 
     //--Sorting--
     //how to sort tokens if they don't have cgid
-    if(!generated_zoneConfigAsset.coingecko_id && !zone_asset.canonical){
+    if(!generated_asset.coingecko_id && !zone_asset.canonical){
       traces?.forEach((trace) => {
         if(trace.provider) {
           let providers = zoneConfig?.providers;
           if(providers) {
             providers.forEach((provider) => {
               if(provider.provider == trace.provider && provider.token) {
-                generated_zoneConfigAsset.sort_with = {
+                generated_asset.sort_with = {
                   chain_name: provider.token.chain_name,
                   base_denom: provider.token.base_denom
                 }
@@ -813,16 +813,16 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
     //--Overrides Properties when Specified--
     if(zone_asset.override_properties) {
       if(zone_asset.override_properties.coingecko_id) {
-        generated_zoneConfigAsset.coingecko_id = zone_asset.override_properties.coingecko_id;
+        generated_asset.coingecko_id = zone_asset.override_properties.coingecko_id;
       }
       if(zone_asset.override_properties.symbol) {
-        generated_zoneConfigAsset.symbol = zone_asset.override_properties.symbol;
+        generated_asset.symbol = zone_asset.override_properties.symbol;
       }
       if(zone_asset.override_properties.name) {
-        generated_zoneConfigAsset.name = zone_asset.override_properties.name;
+        generated_asset.name = zone_asset.override_properties.name;
       }
       if(zone_asset.override_properties.logo_URIs) {
-        generated_zoneConfigAsset.logo_URIs = zone_asset.override_properties.logo_URIs;
+        generated_asset.logo_URIs = zone_asset.override_properties.logo_URIs;
       }
     }
 
@@ -832,12 +832,12 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
     images.forEach((image) => {
       if (
         (
-          !generated_zoneConfigAsset.logo_URIs.png ||
-          generated_zoneConfigAsset.logo_URIs.png == image.png
+          !generated_asset.logo_URIs.png ||
+          generated_asset.logo_URIs.png == image.png
         ) &&
         (
-          !generated_zoneConfigAsset.logo_URIs.svg ||
-          generated_zoneConfigAsset.logo_URIs.svg == image.svg
+          !generated_asset.logo_URIs.svg ||
+          generated_asset.logo_URIs.svg == image.svg
         )
       ) {
         match = 1;
@@ -846,8 +846,8 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
     });
     if (!match) {
       let new_image = {
-        png: generated_zoneConfigAsset.logo_URIs.png,
-        svg: generated_zoneConfigAsset.logo_URIs.svg
+        png: generated_asset.logo_URIs.png,
+        svg: generated_asset.logo_URIs.svg
       }
       images.push(new_image);
     }
@@ -856,8 +856,8 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
 
 
     //--Add Flags--
-    generated_zoneConfigAsset.unstable = zone_asset.osmosis_unstable;
-    generated_zoneConfigAsset.unlisted = zone_asset.osmosis_unlisted;
+    generated_asset.unstable = zone_asset.osmosis_unstable;
+    generated_asset.unlisted = zone_asset.osmosis_unlisted;
 
     
     
@@ -889,7 +889,32 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
     }
 
 
-    
+    //--Setup Zone_Config Asset--
+    let generated_zoneConfigAsset = {
+      chain_name:       generated_asset.chain_name,
+      base_denom:       generated_asset.base_denom,
+      sourceDenom:      generated_asset.sourceDenom,
+      coinMinimalDenom: generated_asset.coinMinimalDenom,
+      symbol:           generated_asset.symbol,
+      decimals:         generated_asset.decimals,
+      logoURIs:        generated_asset.logo_URIs,
+      coingeckoId:     generated_asset.coingecko_id,
+      verified:         generated_asset.verified,
+      apiInclude:      generated_asset.api_include,
+      price:            generated_asset.price,
+      categories:       generated_asset.categories,
+      pegMechanism:    generated_asset.peg_mechanism,
+      transferMethods: generated_asset.transfer_methods,
+      counterparty:     generated_asset.counterparty,
+      commonKey:       generated_asset.common_key,
+      name:             generated_asset.name,
+      description:      generated_asset.description,
+      unstable:         generated_asset.unstable,
+      sortWith:        generated_asset.sort_with,
+      twitterURL:      generated_asset.twitter_URL,
+      unlisted:         generated_asset.unlisted,
+      relatedAssets:   generated_asset.related_assets,
+    }
     //--Append Asset to Assetlist--
     zone_config_assets.push(generated_zoneConfigAsset);
 
@@ -899,14 +924,14 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
       description: asset_description,
       denom_units: denom_units,
       type_asset: type_asset,
-      base: generated_zoneConfigAsset.coinMinimalDenom,
-      name: generated_zoneConfigAsset.name,
+      base: generated_asset.coinMinimalDenom,
+      name: generated_asset.name,
       display: asset.display,
-      symbol: generated_zoneConfigAsset.symbol,
+      symbol: generated_asset.symbol,
       traces: traces,
-      logo_URIs: generated_zoneConfigAsset.logo_URIs,
+      logo_URIs: generated_asset.logo_URIs,
       images: images,
-      coingecko_id: generated_zoneConfigAsset.coingecko_id,
+      coingecko_id: generated_asset.coingecko_id,
       keywords: keywords
     }
     //--Append to Chain_Reg Assetlist--
@@ -933,8 +958,8 @@ async function generateAssetlist(chainName) {
     chain_name: chainName,
     assets: chain_reg_assets
   }
-  zone.writeToFile(chainName, zone.chainRegAssetlist, zone.assetlistFileName, zone_config_assetlist);
-  zone.writeToFile(chainName, zone.zoneConfigAssetlist, zone.assetlistFileName, chain_reg_assetlist);
+  zone.writeToFile(chainName, zone.zoneConfigAssetlist, zone.assetlistFileName, zone_config_assetlist);
+  zone.writeToFile(chainName, zone.chainRegAssetlist, zone.assetlistFileName, chain_reg_assetlist);
 }
 
 

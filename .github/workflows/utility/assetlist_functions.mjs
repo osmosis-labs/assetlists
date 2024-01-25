@@ -22,9 +22,15 @@ export const zoneAssetlistFileName = "osmosis.zone_assets.json";
 export const zoneChainlistFileName = "osmosis.zone_chains.json";
 
 //- Generated Files -
-export const zoneAssetConfigFileName = "zone_asset_config.json";
 export const assetlistFileName = "assetlist.json";
 export const chainlistFileName = "chainlist.json";
+
+//- Directory Names -
+export const noDir = "";
+const generatedDirectoryName = "generated";
+export const chainRegAssetlist = path.join(generatedDirectoryName, "chain_registry");
+export const zoneConfigAssetlist = path.join(generatedDirectoryName, "frontend");
+export const zoneConfigChainlist = path.join(generatedDirectoryName, "frontend");
 
 //- Chain Names --
 export const chainNames = [
@@ -40,39 +46,29 @@ const chainNames_decommissioned = [
 //-- Functions --
 
 
-function getFileLocation(chainName, fileName) {
+function getFileLocation(chainName, directoryName, fileName) {
   
   const assetlistsRoot = "../../..";
-  const generatedDirectoryName = "generated";
   const chainNameToChainIdMap = new Map([
     ["osmosis", "osmosis-1"],
     ["osmosistestnet4", "osmo-test-4"],
     ["osmosistestnet", "osmo-test-5"]
   ]);
-
-  let envDir = "";
-  if (                                   // is a generated file
-    fileName == zoneAssetConfigFileName  || 
-    fileName == assetlistFileName        ||
-    fileName == chainlistFileName
-  ) {
-    envDir = generatedDirectoryName;
-  }
   return path.join(
     assetlistsRoot,
     chainNameToChainIdMap.get(chainName),
-    envDir,
+    directoryName,
     fileName
   );
 }
 
 
 
-export function readFromFile(chainName, fileName) {
+export function readFromFile(chainName, directoryName, fileName) {
   try {
     return JSON.parse(
       fs.readFileSync(
-        getFileLocation(chainName, fileName)
+        getFileLocation(chainName, directoryName, fileName)
       )
     );
   } catch (err) {
@@ -82,10 +78,10 @@ export function readFromFile(chainName, fileName) {
 
 
 
-export function writeToFile(chainName, fileName, value) {
+export function writeToFile(chainName, directoryName, fileName, value) {
   try {
     fs.writeFile(
-      getFileLocation(chainName, fileName),
+      getFileLocation(chainName, directoryName, fileName),
       JSON.stringify(value,null,2),
       (err) => {
         if (err) throw err;

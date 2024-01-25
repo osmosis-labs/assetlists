@@ -1,8 +1,8 @@
 on: [workflow_dispatch]
-name: Generate Zone Config
+name: Generate Assetlist New
 jobs:
   generate_zone_config:
-    name: Generate Zone Config
+    name: Generate Assetlist New
     runs-on: ubuntu-latest
     
     defaults:
@@ -27,9 +27,9 @@ jobs:
         with:
           node-version: 19.6.0
           
-      - name: Run code to Generate Zone Config
+      - name: Run code to Generate Assetlist New
         working-directory: ./.github/workflows/utility
-        run: node generate_zone_config.mjs
+        run: node generate_assetlist_new.mjs
       
       - name: Add Commit Push
         uses: devops-infra/action-commit-push@master
@@ -37,7 +37,7 @@ jobs:
           github_token: "${{ secrets.GITHUB_TOKEN }}"
           add_timestamp: false
           commit_prefix: "[AUTO]"
-          commit_message: "zone_config.json Update"
+          commit_message: "New assetlist.json Update"
           force: false
           target_branch: update/zone_config
       
@@ -45,11 +45,11 @@ jobs:
         uses: devops-infra/action-pull-request@v0.4.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: update/zone_config
+          source_branch: update/assetlist_new
           target_branch: main
-          title: zone_config.json Update
+          title: New assetlist.json Update
           body: "**Automated pull request**"
-          old_string: "**THIS IS AN AUTOMATED UPDATE OF ZONE_CONFIG.JSON**"
+          old_string: "**THIS IS AN AUTOMATED UPDATE OF ASSETLIST.JSON**"
           new_string: "** Automatic pull request**"
           get_diff: true
           ignore_users: "dependabot"

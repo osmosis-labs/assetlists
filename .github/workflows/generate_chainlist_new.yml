@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: 19.6.0
           
-      - name: Run code to Generate Chainlist
+      - name: Run code to Generate Chainlist New
         working-directory: ./.github/workflows/utility
         run: node generate_chainlist_new.mjs
       
@@ -37,17 +37,17 @@ jobs:
           github_token: "${{ secrets.GITHUB_TOKEN }}"
           add_timestamp: false
           commit_prefix: "[AUTO]"
-          commit_message: "chainlist.json Update"
+          commit_message: "New chainlist.json Update"
           force: false
-          target_branch: update/chainlist
+          target_branch: update/chainlist_new
       
       - name: Create A PR
         uses: devops-infra/action-pull-request@v0.4.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: update/chainlist
+          source_branch: update/chainlist_new
           target_branch: main
-          title: chainlist.json Update
+          title: New chainlist.json Update
           body: "**Automated pull request**"
           old_string: "**THIS IS AN AUTOMATED UPDATE OF CHAINLIST.JSON**"
           new_string: "** Automatic pull request**"

@@ -311,7 +311,7 @@ function getAllRelatedAssets(assets) {
     //define asset object
     let assetKey = asset.chain_name + "." + asset.base_denom;
     
-    asset.related_assets = relatedAssets.get(assetKey);
+    asset.relatedAssets = relatedAssets.get(assetKey);
 
   });
 
@@ -467,6 +467,7 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
 
 
 
+    //--Get Traces--
     if(zone_asset.chain_name != chainName) {
 
       if (!traces) {
@@ -897,23 +898,23 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
       coinMinimalDenom: generated_asset.coinMinimalDenom,
       symbol:           generated_asset.symbol,
       decimals:         generated_asset.decimals,
-      logoURIs:        generated_asset.logo_URIs,
-      coingeckoId:     generated_asset.coingecko_id,
+      logoURIs:         generated_asset.logo_URIs,
+      coingeckoId:      generated_asset.coingecko_id,
       verified:         generated_asset.verified,
-      apiInclude:      generated_asset.api_include,
+      apiInclude:       generated_asset.api_include,
       price:            generated_asset.price,
       categories:       generated_asset.categories,
-      pegMechanism:    generated_asset.peg_mechanism,
-      transferMethods: generated_asset.transfer_methods,
+      pegMechanism:     generated_asset.peg_mechanism,
+      transferMethods:  generated_asset.transfer_methods,
       counterparty:     generated_asset.counterparty,
-      commonKey:       generated_asset.common_key,
+      commonKey:        generated_asset.common_key,
       name:             generated_asset.name,
       description:      generated_asset.description,
       unstable:         generated_asset.unstable,
-      sortWith:        generated_asset.sort_with,
-      twitterURL:      generated_asset.twitter_URL,
+      sortWith:         generated_asset.sort_with,
+      twitterURL:       generated_asset.twitter_URL,
       unlisted:         generated_asset.unlisted,
-      relatedAssets:   generated_asset.related_assets,
+      relatedAssets:    generated_asset.related_assets,
     }
     //--Append Asset to Assetlist--
     zone_config_assets.push(generated_zoneConfigAsset);

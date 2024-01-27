@@ -1,9 +1,8 @@
 {
-  "chain_name": "osmosistestnet",
+  "chainName": "osmosistestnet",
   "assets": [
     {
-      "chain_name": "osmosistestnet",
-      "base_denom": "uosmo",
+      "chainName": "osmosistestnet",
       "sourceDenom": "uosmo",
       "coinMinimalDenom": "uosmo",
       "symbol": "OSMO",
@@ -20,16 +19,10 @@
       },
       "name": "Osmosis Testnet",
       "description": "The native token of Osmosis",
-      "related_assets": [
-        {
-          "chain_name": "osmosistestnet",
-          "base_denom": "uion"
-        }
-      ]
+      "relatedAssets": []
     },
     {
-      "chain_name": "osmosistestnet",
-      "base_denom": "uion",
+      "chainName": "osmosistestnet",
       "sourceDenom": "uion",
       "coinMinimalDenom": "uion",
       "symbol": "ION",
@@ -46,16 +39,10 @@
       },
       "name": "Ion",
       "description": "",
-      "related_assets": [
-        {
-          "chain_name": "osmosistestnet",
-          "base_denom": "uosmo"
-        }
-      ]
+      "relatedAssets": []
     },
     {
-      "chain_name": "cosmoshubtestnet",
-      "base_denom": "uatom",
+      "chainName": "cosmoshubtestnet",
       "sourceDenom": "uatom",
       "coinMinimalDenom": "ibc/9FF2B7A5F55038A7EE61F4FD6749D9A648B48E89830F2682B67B5DC158E2753C",
       "symbol": "ATOM",
@@ -74,27 +61,27 @@
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
-            "chain_name": "cosmoshubtestnet",
-            "base_denom": "uatom",
+            "chainName": "cosmoshubtestnet",
+            "sourceDenom": "uatom",
             "port": "transfer",
-            "channel_id": "channel-3306"
+            "channelId": "channel-3306"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-4156",
+            "channelId": "channel-4156",
             "path": "transfer/channel-4156/uatom"
           }
         }
       ],
       "counterparty": [
         {
-          "chain_name": "cosmoshubtestnet",
-          "base_denom": "uatom",
-          "chain_type": "cosmos",
-          "chain_id": "theta-testnet-001",
+          "chainName": "cosmoshubtestnet",
+          "sourceDenom": "uatom",
+          "chainType": "cosmos",
+          "chainId": "theta-testnet-001",
           "symbol": "ATOM",
           "decimals": 6,
-          "logo_URIs": {
+          "logoURIs": {
             "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.svg"
           }
@@ -103,11 +90,10 @@
       "commonKey": "ATOM",
       "name": "Cosmos Hub Public Testnet",
       "description": "The native staking and governance token of the Theta testnet version of the Cosmos Hub.",
-      "related_assets": []
+      "relatedAssets": []
     },
     {
-      "chain_name": "axelartestnet",
-      "base_denom": "uausdc",
+      "chainName": "axelartestnet",
       "sourceDenom": "uausdc",
       "coinMinimalDenom": "ibc/2164BDB48DE5501430E71286448D87C6D2240EC0E078CF113CAB85E21A352BB0",
       "symbol": "aUSDC.axl",
@@ -121,37 +107,37 @@
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
-            "chain_name": "axelartestnet",
-            "base_denom": "uausdc",
+            "chainName": "axelartestnet",
+            "sourceDenom": "uausdc",
             "port": "transfer",
-            "channel_id": "channel-339"
+            "channelId": "channel-339"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-4170",
+            "channelId": "channel-4170",
             "path": "transfer/channel-4170/uausdc"
           }
         }
       ],
       "counterparty": [
         {
-          "chain_name": "axelartestnet",
-          "base_denom": "uausdc",
-          "chain_type": "cosmos",
-          "chain_id": "axelar-testnet-lisbon-3",
+          "chainName": "axelartestnet",
+          "sourceDenom": "uausdc",
+          "chainType": "cosmos",
+          "chainId": "axelar-testnet-lisbon-3",
           "symbol": "aUSDC",
           "decimals": 6,
-          "logo_URIs": {
+          "logoURIs": {
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
           }
         },
         {
-          "chain_name": "ethereumtestnet",
-          "base_denom": "0x254d06f33bDc5b8ee05b2ea472107E300226659A",
-          "chain_type": "non-cosmos",
+          "chainName": "ethereumtestnet",
+          "sourceDenom": "0x254d06f33bDc5b8ee05b2ea472107E300226659A",
+          "chainType": "non-cosmos",
           "symbol": "aUSDC",
           "decimals": 6,
-          "logo_URIs": {
+          "logoURIs": {
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
           }
         }
@@ -160,19 +146,13 @@
       "name": "USD Coin (Axelar)",
       "description": "Circle's stablecoin on Axelar",
       "sortWith": {
-        "chain_name": "axelar",
-        "base_denom": "uaxl"
+        "chainName": "axelar",
+        "sourceDenom": "uaxl"
       },
-      "related_assets": [
-        {
-          "chain_name": "axelartestnet",
-          "base_denom": "eth-wei"
-        }
-      ]
+      "relatedAssets": []
     },
     {
-      "chain_name": "axelartestnet",
-      "base_denom": "eth-wei",
+      "chainName": "axelartestnet",
       "sourceDenom": "eth-wei",
       "coinMinimalDenom": "ibc/1F42AC9631DBE03009219ECCFE151786F53A038DE9F7A07C709158514F1D5942",
       "symbol": "ETH",
@@ -186,47 +166,47 @@
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
-            "chain_name": "axelartestnet",
-            "base_denom": "eth-wei",
+            "chainName": "axelartestnet",
+            "sourceDenom": "eth-wei",
             "port": "transfer",
-            "channel_id": "channel-339"
+            "channelId": "channel-339"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-4170",
+            "channelId": "channel-4170",
             "path": "transfer/channel-4170/eth-wei"
           }
         }
       ],
       "counterparty": [
         {
-          "chain_name": "axelartestnet",
-          "base_denom": "eth-wei",
-          "chain_type": "cosmos",
-          "chain_id": "axelar-testnet-lisbon-3",
+          "chainName": "axelartestnet",
+          "sourceDenom": "eth-wei",
+          "chainType": "cosmos",
+          "chainId": "axelar-testnet-lisbon-3",
           "symbol": "axlWETH",
           "decimals": 18,
-          "logo_URIs": {
+          "logoURIs": {
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/weth.svg"
           }
         },
         {
-          "chain_name": "ethereumtestnet",
-          "base_denom": "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6",
-          "chain_type": "non-cosmos",
+          "chainName": "ethereumtestnet",
+          "sourceDenom": "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6",
+          "chainType": "non-cosmos",
           "symbol": "WETH",
           "decimals": 18,
-          "logo_URIs": {
+          "logoURIs": {
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/weth.svg"
           }
         },
         {
-          "chain_name": "ethereumtestnet",
-          "base_denom": "wei",
-          "chain_type": "non-cosmos",
+          "chainName": "ethereumtestnet",
+          "sourceDenom": "wei",
+          "chainType": "non-cosmos",
           "symbol": "ETH",
           "decimals": 18,
-          "logo_URIs": {
+          "logoURIs": {
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eth.svg"
           }
         }
@@ -235,19 +215,13 @@
       "name": "Wrapped Ether (Axelar)",
       "description": "Wrapped Ether on Axelar",
       "sortWith": {
-        "chain_name": "axelar",
-        "base_denom": "uaxl"
+        "chainName": "axelar",
+        "sourceDenom": "uaxl"
       },
-      "related_assets": [
-        {
-          "chain_name": "axelartestnet",
-          "base_denom": "uausdc"
-        }
-      ]
+      "relatedAssets": []
     },
     {
-      "chain_name": "junotestnet",
-      "base_denom": "ujunox",
+      "chainName": "junotestnet",
       "sourceDenom": "ujunox",
       "coinMinimalDenom": "ibc/315940955C3051051C55B195EE30F7265D5BE3D3A7CC48D74E5D9871DCED8B26",
       "symbol": "JUNOX",
@@ -263,27 +237,27 @@
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
-            "chain_name": "junotestnet",
-            "base_denom": "ujunox",
+            "chainName": "junotestnet",
+            "sourceDenom": "ujunox",
             "port": "transfer",
-            "channel_id": "channel-811"
+            "channelId": "channel-811"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-4167",
+            "channelId": "channel-4167",
             "path": "transfer/channel-4167/ujunox"
           }
         }
       ],
       "counterparty": [
         {
-          "chain_name": "junotestnet",
-          "base_denom": "ujunox",
-          "chain_type": "cosmos",
-          "chain_id": "uni-6",
+          "chainName": "junotestnet",
+          "sourceDenom": "ujunox",
+          "chainType": "cosmos",
+          "chainId": "uni-6",
           "symbol": "JUNOX",
           "decimals": 6,
-          "logo_URIs": {
+          "logoURIs": {
             "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png",
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.svg"
           }
@@ -292,11 +266,10 @@
       "commonKey": "JUNOX",
       "name": "Juno Testnet",
       "description": "The native token of JUNO Chain",
-      "related_assets": []
+      "relatedAssets": []
     },
     {
-      "chain_name": "marstestnet",
-      "base_denom": "umars",
+      "chainName": "marstestnet",
       "sourceDenom": "umars",
       "coinMinimalDenom": "ibc/18401C07347459EE2413C0AFDE3ACDB66AC9FD363B3E56A6FC1DFF1B69341FC3",
       "symbol": "MARS",
@@ -311,27 +284,27 @@
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
-            "chain_name": "marstestnet",
-            "base_denom": "umars",
+            "chainName": "marstestnet",
+            "sourceDenom": "umars",
             "port": "transfer",
-            "channel_id": "channel-27"
+            "channelId": "channel-27"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-4168",
+            "channelId": "channel-4168",
             "path": "transfer/channel-4168/umars"
           }
         }
       ],
       "counterparty": [
         {
-          "chain_name": "marstestnet",
-          "base_denom": "umars",
-          "chain_type": "cosmos",
-          "chain_id": "ares-1",
+          "chainName": "marstestnet",
+          "sourceDenom": "umars",
+          "chainType": "cosmos",
+          "chainId": "ares-1",
           "symbol": "MARS",
           "decimals": 6,
-          "logo_URIs": {
+          "logoURIs": {
             "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.png",
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.svg"
           }
@@ -340,11 +313,10 @@
       "commonKey": "MARS",
       "name": "Mars Hub Testnet",
       "description": "The native token of Mars Protocol",
-      "related_assets": []
+      "relatedAssets": []
     },
     {
-      "chain_name": "nobletestnet",
-      "base_denom": "uusdc",
+      "chainName": "nobletestnet",
       "sourceDenom": "uusdc",
       "coinMinimalDenom": "ibc/DE6792CF9E521F6AD6E9A4BDF6225C9571A3B74ACC0A529F92BC5122A39D2E58",
       "symbol": "USDC",
@@ -360,27 +332,27 @@
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
-            "chain_name": "nobletestnet",
-            "base_denom": "uusdc",
+            "chainName": "nobletestnet",
+            "sourceDenom": "uusdc",
             "port": "transfer",
-            "channel_id": "channel-22"
+            "channelId": "channel-22"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-4280",
+            "channelId": "channel-4280",
             "path": "transfer/channel-4280/uusdc"
           }
         }
       ],
       "counterparty": [
         {
-          "chain_name": "nobletestnet",
-          "base_denom": "uusdc",
-          "chain_type": "cosmos",
-          "chain_id": "grand-1",
+          "chainName": "nobletestnet",
+          "sourceDenom": "uusdc",
+          "chainType": "cosmos",
+          "chainId": "grand-1",
           "symbol": "USDC",
           "decimals": 6,
-          "logo_URIs": {
+          "logoURIs": {
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
           }
         }
@@ -388,11 +360,10 @@
       "commonKey": "USDC",
       "name": "USD Coin",
       "description": "USD Coin",
-      "related_assets": []
+      "relatedAssets": []
     },
     {
-      "chain_name": "akashtestnet",
-      "base_denom": "uakt",
+      "chainName": "akashtestnet",
       "sourceDenom": "uakt",
       "coinMinimalDenom": "ibc/AD59D59CFB0E628E73C798415F823AB5B6257C2FE4BF67DBB5D6A677B2686E82",
       "symbol": "AKT",
@@ -407,27 +378,27 @@
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
-            "chain_name": "akashtestnet",
-            "base_denom": "uakt",
+            "chainName": "akashtestnet",
+            "sourceDenom": "uakt",
             "port": "transfer",
-            "channel_id": "channel-6"
+            "channelId": "channel-6"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-4171",
+            "channelId": "channel-4171",
             "path": "transfer/channel-4171/uakt"
           }
         }
       ],
       "counterparty": [
         {
-          "chain_name": "akashtestnet",
-          "base_denom": "uakt",
-          "chain_type": "cosmos",
-          "chain_id": "sandbox-01",
+          "chainName": "akashtestnet",
+          "sourceDenom": "uakt",
+          "chainType": "cosmos",
+          "chainId": "sandbox-01",
           "symbol": "AKT",
           "decimals": 6,
-          "logo_URIs": {
+          "logoURIs": {
             "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.png",
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.svg"
           }
@@ -436,11 +407,10 @@
       "commonKey": "AKT",
       "name": "Sandbox",
       "description": "Akash Token (AKT) is the Akash Network's native utility token, used as the primary means to govern, secure the blockchain, incentivize participants, and provide a default mechanism to store and exchange value.",
-      "related_assets": []
+      "relatedAssets": []
     },
     {
-      "chain_name": "kyvetestnet",
-      "base_denom": "tkyve",
+      "chainName": "kyvetestnet",
       "sourceDenom": "tkyve",
       "coinMinimalDenom": "ibc/AB8AF05799E299FB5C5C80781DA35887F53E029745D20E5641233DB4E6B28515",
       "symbol": "KYVE",
@@ -458,27 +428,27 @@
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
-            "chain_name": "kyvetestnet",
-            "base_denom": "tkyve",
+            "chainName": "kyvetestnet",
+            "sourceDenom": "tkyve",
             "port": "transfer",
-            "channel_id": "channel-2"
+            "channelId": "channel-2"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-10",
+            "channelId": "channel-10",
             "path": "transfer/channel-10/tkyve"
           }
         }
       ],
       "counterparty": [
         {
-          "chain_name": "kyvetestnet",
-          "base_denom": "tkyve",
-          "chain_type": "cosmos",
-          "chain_id": "kaon-1",
+          "chainName": "kyvetestnet",
+          "sourceDenom": "tkyve",
+          "chainType": "cosmos",
+          "chainId": "kaon-1",
           "symbol": "KYVE",
           "decimals": 6,
-          "logo_URIs": {
+          "logoURIs": {
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/kyvetestnet/images/kyve.svg"
           }
         }
@@ -486,11 +456,10 @@
       "commonKey": "KYVE",
       "name": "KYVE Kaon",
       "description": "The native utility token of the Kaon testnet version of KYVE.",
-      "related_assets": []
+      "relatedAssets": []
     },
     {
-      "chain_name": "quicksilvertestnet",
-      "base_denom": "uqck",
+      "chainName": "quicksilvertestnet",
       "sourceDenom": "uqck",
       "coinMinimalDenom": "ibc/F37CF69589DE12342758382F8770C0852CD8D2E4519F55166EBDAF472AD667C9",
       "symbol": "QCK",
@@ -509,27 +478,27 @@
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
-            "chain_name": "quicksilvertestnet",
-            "base_denom": "uqck",
+            "chainName": "quicksilvertestnet",
+            "sourceDenom": "uqck",
             "port": "transfer",
-            "channel_id": "channel-20"
+            "channelId": "channel-20"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-13",
+            "channelId": "channel-13",
             "path": "transfer/channel-13/uqck"
           }
         }
       ],
       "counterparty": [
         {
-          "chain_name": "quicksilvertestnet",
-          "base_denom": "uqck",
-          "chain_type": "cosmos",
-          "chain_id": "rhye-2",
+          "chainName": "quicksilvertestnet",
+          "sourceDenom": "uqck",
+          "chainType": "cosmos",
+          "chainId": "rhye-2",
           "symbol": "QCK",
           "decimals": 6,
-          "logo_URIs": {
+          "logoURIs": {
             "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qck.png"
           }
         }
@@ -537,11 +506,10 @@
       "commonKey": "QCK",
       "name": "Quicksilver Testnet",
       "description": "QCK - native token of Quicksilver",
-      "related_assets": []
+      "relatedAssets": []
     },
     {
-      "chain_name": "chain4energytestnet",
-      "base_denom": "uc4e",
+      "chainName": "chain4energytestnet",
       "sourceDenom": "uc4e",
       "coinMinimalDenom": "ibc/E3D323CB6F427C49E56F913C853A416F6B71BAA9B0164625AD0203266F92B3ED",
       "symbol": "C4E",
@@ -560,27 +528,27 @@
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
-            "chain_name": "chain4energytestnet",
-            "base_denom": "uc4e",
+            "chainName": "chain4energytestnet",
+            "sourceDenom": "uc4e",
             "port": "transfer",
-            "channel_id": "channel-0"
+            "channelId": "channel-0"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-111",
+            "channelId": "channel-111",
             "path": "transfer/channel-111/uc4e"
           }
         }
       ],
       "counterparty": [
         {
-          "chain_name": "chain4energytestnet",
-          "base_denom": "uc4e",
-          "chain_type": "cosmos",
-          "chain_id": "babajaga-1",
+          "chainName": "chain4energytestnet",
+          "sourceDenom": "uc4e",
+          "chainType": "cosmos",
+          "chainId": "babajaga-1",
           "symbol": "C4E",
           "decimals": 6,
-          "logo_URIs": {
+          "logoURIs": {
             "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/chain4energytestnet/images/c4e.png"
           }
         }
@@ -588,11 +556,10 @@
       "commonKey": "C4E",
       "name": "Chain4Energy Testnet",
       "description": "The native token of Chain4Energy",
-      "related_assets": []
+      "relatedAssets": []
     },
     {
-      "chain_name": "persistencetestnet2",
-      "base_denom": "uxprt",
+      "chainName": "persistencetestnet2",
       "sourceDenom": "uxprt",
       "coinMinimalDenom": "ibc/754C8533F8A418B03AD5F2C6AA19D4703CF78BBAB9E2E4DDD6212AAC2E502CA6",
       "symbol": "XPRT",
@@ -612,27 +579,27 @@
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
-            "chain_name": "persistencetestnet2",
-            "base_denom": "uxprt",
+            "chainName": "persistencetestnet2",
+            "sourceDenom": "uxprt",
             "port": "transfer",
-            "channel_id": "channel-7"
+            "channelId": "channel-7"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-1037",
+            "channelId": "channel-1037",
             "path": "transfer/channel-1037/uxprt"
           }
         }
       ],
       "counterparty": [
         {
-          "chain_name": "persistencetestnet2",
-          "base_denom": "uxprt",
-          "chain_type": "cosmos",
-          "chain_id": "test-core-2",
+          "chainName": "persistencetestnet2",
+          "sourceDenom": "uxprt",
+          "chainType": "cosmos",
+          "chainId": "test-core-2",
           "symbol": "XPRT",
           "decimals": 6,
-          "logo_URIs": {
+          "logoURIs": {
             "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.png",
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.svg"
           }
@@ -641,11 +608,10 @@
       "commonKey": "XPRT",
       "name": "Persistence Testnet",
       "description": "The XPRT token is primarily a governance token for the Persistence chain.",
-      "related_assets": []
+      "relatedAssets": []
     },
     {
-      "chain_name": "xiontestnet",
-      "base_denom": "uxion",
+      "chainName": "xiontestnet",
       "sourceDenom": "uxion",
       "coinMinimalDenom": "ibc/3642669AD14386D3E38F43F30CFCA859B3E8A05BF6BD6A23DEBD2115AD1325E9",
       "symbol": "XION",
@@ -664,27 +630,27 @@
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
-            "chain_name": "xiontestnet",
-            "base_denom": "uxion",
+            "chainName": "xiontestnet",
+            "sourceDenom": "uxion",
             "port": "transfer",
-            "channel_id": "channel-12"
+            "channelId": "channel-12"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-4410",
+            "channelId": "channel-4410",
             "path": "transfer/channel-4410/uxion"
           }
         }
       ],
       "counterparty": [
         {
-          "chain_name": "xiontestnet",
-          "base_denom": "uxion",
-          "chain_type": "cosmos",
-          "chain_id": "xion-testnet-1",
+          "chainName": "xiontestnet",
+          "sourceDenom": "uxion",
+          "chainType": "cosmos",
+          "chainId": "xion-testnet-1",
           "symbol": "XION",
           "decimals": 6,
-          "logo_URIs": {
+          "logoURIs": {
             "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xion/images/burnt-round.png"
           }
         }
@@ -692,11 +658,10 @@
       "commonKey": "XION",
       "name": "Xion Testnet",
       "description": "The native staking token of the Xion network.",
-      "related_assets": []
+      "relatedAssets": []
     },
     {
-      "chain_name": "sagatestnet",
-      "base_denom": "utsaga",
+      "chainName": "sagatestnet",
       "sourceDenom": "utsaga",
       "coinMinimalDenom": "ibc/48384130079A5987378F5776775F8C29A02505273E777BBB99361F2BB5B577C9",
       "symbol": "TSAGA",
@@ -711,27 +676,27 @@
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
-            "chain_name": "sagatestnet",
-            "base_denom": "utsaga",
+            "chainName": "sagatestnet",
+            "sourceDenom": "utsaga",
             "port": "transfer",
-            "channel_id": "channel-20"
+            "channelId": "channel-20"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-4946",
+            "channelId": "channel-4946",
             "path": "transfer/channel-4946/utsaga"
           }
         }
       ],
       "counterparty": [
         {
-          "chain_name": "sagatestnet",
-          "base_denom": "utsaga",
-          "chain_type": "cosmos",
-          "chain_id": "ssc-testnet-1",
+          "chainName": "sagatestnet",
+          "sourceDenom": "utsaga",
+          "chainType": "cosmos",
+          "chainId": "ssc-testnet-1",
           "symbol": "TSAGA",
           "decimals": 6,
-          "logo_URIs": {
+          "logoURIs": {
             "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.png",
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.svg"
           }
@@ -740,11 +705,10 @@
       "commonKey": "TSAGA",
       "name": "Saga Testnet",
       "description": "The native token of Saga Testnet",
-      "related_assets": []
+      "relatedAssets": []
     },
     {
-      "chain_name": "impacthubtestnet",
-      "base_denom": "uixo",
+      "chainName": "impacthubtestnet",
       "sourceDenom": "uixo",
       "coinMinimalDenom": "ibc/88C815D69587CF0F05E96E5E2731EA56194D73C9A02A500095294D3A5DE68F16",
       "symbol": "IXO",
@@ -763,27 +727,27 @@
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
-            "chain_name": "impacthubtestnet",
-            "base_denom": "uixo",
+            "chainName": "impacthubtestnet",
+            "sourceDenom": "uixo",
             "port": "transfer",
-            "channel_id": "channel-10"
+            "channelId": "channel-10"
           },
           "chain": {
             "port": "transfer",
-            "channel_id": "channel-1637",
+            "channelId": "channel-1637",
             "path": "transfer/channel-1637/uixo"
           }
         }
       ],
       "counterparty": [
         {
-          "chain_name": "impacthubtestnet",
-          "base_denom": "uixo",
-          "chain_type": "cosmos",
-          "chain_id": "pandora-8",
+          "chainName": "impacthubtestnet",
+          "sourceDenom": "uixo",
+          "chainType": "cosmos",
+          "chainId": "pandora-8",
           "symbol": "IXO",
           "decimals": 6,
-          "logo_URIs": {
+          "logoURIs": {
             "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/impacthub/images/ixo.png",
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/impacthub/images/ixo.svg"
           }
@@ -792,7 +756,7 @@
       "commonKey": "IXO",
       "name": "ixo",
       "description": "The native token of IXO Chain",
-      "related_assets": []
+      "relatedAssets": []
     }
   ]
 }

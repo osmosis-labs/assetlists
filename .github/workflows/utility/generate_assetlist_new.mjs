@@ -311,7 +311,13 @@ function getAllRelatedAssets(assets) {
     //define asset object
     let assetKey = asset.chain_name + "." + asset.base_denom;
     
-    asset.related_assets = relatedAssets.get(assetKey);
+    asset.relatedAssets = relatedAssets.get(assetKey);
+    asset.relatedAssets?.forEach((relatedAsset) => {
+      relatedAsset.chainName    = relatedAsset.chain_name || undefined;
+      delete                      relatedAsset.chain_name;
+      relatedAsset.sourceDenom  = relatedAsset.base_denom || undefined;
+      delete                      relatedAsset.base_denom;
+    });
 
   });
 
@@ -460,6 +466,23 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
 
     //--Process Transfer Methods--
     generated_asset.transfer_methods = zone_asset.transfer_methods;
+    //-Replace snake_case with camelCase-
+    generated_asset.transfer_methods?.forEach((transfer_method) => {
+      transfer_method.providerAssetId   = transfer_method.provider_asset_id  || undefined;
+      delete                              transfer_method.provider_asset_id;
+      transfer_method.unwrappedAssetId  = transfer_method.unwrapped_asset_id || undefined;
+      delete                              transfer_method.unwrapped_asset_id;
+      transfer_method.depositUrl        = transfer_method.deposit_url        || undefined;
+      delete                              transfer_method.deposit_url;
+      transfer_method.withdrawUrl       = transfer_method.withdraw_url       || undefined;
+      delete                              transfer_method.withdraw_url;
+      transfer_method.counterparty?.forEach((counterparty) => {
+        counterparty.chainName    = counterparty.chain_name || undefined;
+        delete                      counterparty.chain_name;
+        counterparty.sourceDenom  = counterparty.base_denom || undefined;
+        delete                      counterparty.base_denom;
+      });
+    })
 
 
 
@@ -467,6 +490,7 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
 
 
 
+    //--Get Traces--
     if(zone_asset.chain_name != chainName) {
 
       if (!traces) {
@@ -581,24 +605,21 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
       }
 
 
-      if (!generated_asset.transfer_methods) {
-        //trace.validated = true;
-        generated_asset.transfer_methods = [];
-      }
+      generated_asset.transfer_methods = generated_asset.transfer_methods || [];
 
       let ibc_transfer_method = {
         name: "Osmosis IBC Transfer",
         type: "ibc",
         counterparty: {
-          chain_name: zone_asset.chain_name,
-          base_denom: zone_asset.base_denom,
+          chainName: zone_asset.chain_name,
+          sourceDenom: zone_asset.base_denom,
           port: trace.counterparty.port,
-          channel_id: trace.counterparty.channel_id
+          channelId: trace.counterparty.channel_id
         },
         chain: {
           port: trace.chain.port,
-          channel_id: trace.chain.channel_id,
-          path: zone_asset.path
+          channelId: trace.chain.channel_id,
+          path: trace.chain.path
         }
       }
       generated_asset.transfer_methods.push(ibc_transfer_method);
@@ -655,21 +676,21 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
           }
           last_trace = traces[i];
           let counterparty = {
-            chain_name: last_trace.counterparty.chain_name,
-            base_denom: last_trace.counterparty.base_denom
+            chainName: last_trace.counterparty.chain_name,
+            sourceDenom: last_trace.counterparty.base_denom
           };
           if(last_trace.type == "bridge") {
             bridge_uses += 1;
           }
           let comsos_chain_id = chain_reg.getFileProperty(last_trace.counterparty.chain_name, "chain", "chain_id")
           if(comsos_chain_id) {
-            counterparty.chain_type = "cosmos";
-            counterparty.chain_id = comsos_chain_id;
+            counterparty.chainType = "cosmos";
+            counterparty.chainId = comsos_chain_id;
           } else {
             zoneConfig?.evm_chains?.forEach((evm_chain) => {
               if(evm_chain.chain_name == last_trace.counterparty.chain_name) {
-                counterparty.chain_type = "evm";
-                counterparty.chain_id = evm_chain.chain_id;
+                counterparty.chainType = "evm";
+                counterparty.chainId = evm_chain.chain_id;
                 counterparty.address = chain_reg.getAssetProperty(
                   last_trace.counterparty.chain_name,
                   last_trace.counterparty.base_denom,
@@ -682,7 +703,7 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
               }
             });
             if(!last_trace.counterparty.chain_type) {
-              counterparty.chain_type = "non-cosmos"
+              counterparty.chainType = "non-cosmos"
             }
           }
           counterparty.symbol = chain_reg.getAssetProperty(
@@ -698,7 +719,7 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
               return;
             }
           });
-          counterparty.logo_URIs = chain_reg.getAssetProperty(
+          counterparty.logoURIs = chain_reg.getAssetProperty(
             last_trace.counterparty.chain_name,
             last_trace.counterparty.base_denom,
             "logo_URIs"
@@ -797,8 +818,8 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
             providers.forEach((provider) => {
               if(provider.provider == trace.provider && provider.token) {
                 generated_asset.sort_with = {
-                  chain_name: provider.token.chain_name,
-                  base_denom: provider.token.base_denom
+                  chainName: provider.token.chain_name,
+                  sourceDenom: provider.token.base_denom
                 }
                 return;
               }
@@ -891,29 +912,28 @@ const generateAssets = async (chainName, zone_assets, zone_config_assets, chain_
 
     //--Setup Zone_Config Asset--
     let generated_zoneConfigAsset = {
-      chain_name:       generated_asset.chain_name,
-      base_denom:       generated_asset.base_denom,
+      chainName:        generated_asset.chain_name,
       sourceDenom:      generated_asset.sourceDenom,
       coinMinimalDenom: generated_asset.coinMinimalDenom,
       symbol:           generated_asset.symbol,
       decimals:         generated_asset.decimals,
-      logoURIs:        generated_asset.logo_URIs,
-      coingeckoId:     generated_asset.coingecko_id,
+      logoURIs:         generated_asset.logo_URIs,
+      coingeckoId:      generated_asset.coingecko_id,
       verified:         generated_asset.verified,
-      apiInclude:      generated_asset.api_include,
+      apiInclude:       generated_asset.api_include,
       price:            generated_asset.price,
       categories:       generated_asset.categories,
-      pegMechanism:    generated_asset.peg_mechanism,
-      transferMethods: generated_asset.transfer_methods,
+      pegMechanism:     generated_asset.peg_mechanism,
+      transferMethods:  generated_asset.transfer_methods,
       counterparty:     generated_asset.counterparty,
-      commonKey:       generated_asset.common_key,
+      commonKey:        generated_asset.common_key,
       name:             generated_asset.name,
       description:      generated_asset.description,
       unstable:         generated_asset.unstable,
-      sortWith:        generated_asset.sort_with,
-      twitterURL:      generated_asset.twitter_URL,
+      sortWith:         generated_asset.sort_with,
+      twitterURL:       generated_asset.twitter_URL,
       unlisted:         generated_asset.unlisted,
-      relatedAssets:   generated_asset.related_assets,
+      relatedAssets:    generated_asset.related_assets,
     }
     //--Append Asset to Assetlist--
     zone_config_assets.push(generated_zoneConfigAsset);
@@ -951,7 +971,7 @@ async function generateAssetlist(chainName) {
   if (!zone_config_assets) { return; }
   zone_config_assets = await getAllRelatedAssets(zone_config_assets);
   let zone_config_assetlist = {
-    chain_name: chainName,
+    chainName: chainName,
     assets: zone_config_assets
   }
   let chain_reg_assetlist = {

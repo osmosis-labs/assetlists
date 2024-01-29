@@ -1881,7 +1881,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/75345531D87BD90BF108BE7240BD721CB2CB0A1F16D4EBA71B09EC3C43E15C8F:1306"
+        "osmosis-price:ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5:912"
       ]
     },
     {
@@ -2475,6 +2475,7 @@
       },
       "coingecko_id": "marble",
       "keywords": [
+        "osmosis-info",
         "osmosis-price:uosmo:649"
       ]
     },
@@ -3270,7 +3271,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858:872",
+        "osmosis-price:uosmo:633",
         "peg:collateralized"
       ]
     },
@@ -5087,7 +5088,7 @@
       },
       "coingecko_id": "stakeeasy-juno-derivative",
       "keywords": [
-        "osmosis-price:ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED:807"
+        "osmosis-price:uosmo:793"
       ]
     },
     {
@@ -6332,7 +6333,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:857",
+        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1258",
         "peg:collateralized"
       ]
     },
@@ -12380,7 +12381,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1337"
+        "osmosis-price:uosmo:1325"
       ]
     },
     {
@@ -12902,7 +12903,7 @@
       },
       "keywords": [
         "osmosis-info",
-        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1353"
+        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1421"
       ]
     },
     {
@@ -13030,7 +13031,7 @@
       },
       "keywords": [
         "osmosis-info",
-        "osmosis-price:ibc/B9E0A1A524E98BB407D3CED8720EFEFD186002F90C1B1B7964811DD0CCC12228:1356"
+        "osmosis-price:ibc/B9E0A1A524E98BB407D3CED8720EFEFD186002F90C1B1B7964811DD0CCC12228:1420"
       ]
     },
     {
@@ -13158,6 +13159,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/chihuahua/images/woof.png"
       },
       "keywords": [
+        "osmosis-info",
         "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1365"
       ]
     },
@@ -13248,7 +13250,7 @@
       },
       "keywords": [
         "osmosis-main",
-        "osmosis-unlisted"
+        "osmosis-price:ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F:1422"
       ]
     },
     {
@@ -13358,7 +13360,7 @@
       "symbol": "WOSMO",
       "traces": [],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/WOSMO.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wosmo.png"
       },
       "keywords": [
         "osmosis-info",
@@ -13431,7 +13433,60 @@
       },
       "keywords": [
         "osmosis-main",
+        "osmosis-info",
         "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1410"
+      ]
+    },
+    {
+      "description": "Stride's liquid staked DYDX",
+      "denom_units": [
+        {
+          "denom": "ibc/980E82A9F8E7CA8CD480F4577E73682A6D3855A267D1831485D7EBEF0E7A6C2C",
+          "exponent": 0,
+          "aliases": [
+            "stadydx"
+          ]
+        },
+        {
+          "denom": "stDYDX",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/980E82A9F8E7CA8CD480F4577E73682A6D3855A267D1831485D7EBEF0E7A6C2C",
+      "name": "Stride Staked DYDX",
+      "display": "stDYDX",
+      "symbol": "stDYDX",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "dydx",
+            "base_denom": "adydx"
+          },
+          "provider": "Stride"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stadydx",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326",
+            "path": "transfer/channel-326/stadydx"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdydx.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdydx.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-info",
+        "osmosis-price:ibc/831F0B1BBB1D08A2B75311892876D71565478C532967545476DF4C2D7492E48C:1423"
       ]
     }
   ]

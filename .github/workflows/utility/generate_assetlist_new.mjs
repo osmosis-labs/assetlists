@@ -6,7 +6,7 @@
 
 import * as chain_reg from './chain_registry.mjs';
 import * as zone from './assetlist_functions.mjs';
-import { returnAssets } from './getPools.mjs';
+import { getAssetsPricing } from './getPools.mjs';
 import { getAllRelatedAssets } from './getRelatedAssets.mjs';
 
 
@@ -45,7 +45,7 @@ async function asyncForEach(array, callback) {
 const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_assets, chain_reg_assets) => {
 
   let pool_assets;
-  pool_assets = await returnAssets(chainName);
+  pool_assets = await getAssetsPricing(chainName);
   if (!pool_assets) { return; }
   
   await asyncForEach(zone_assets, async (zone_asset) => {

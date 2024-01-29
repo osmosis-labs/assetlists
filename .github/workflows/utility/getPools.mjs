@@ -2,8 +2,20 @@
 // to identify the pools and liquidity of an asset. To price it and determine whether it goes on info site
 
 
+
+//-- Imports --
+
 import * as fs from 'fs';
 import fetch from 'node-fetch';
+import * as queryApi from './queryApi.mjs';
+import * as zone from './assetlist_functions.mjs';
+
+
+
+
+
+
+//-- Globals --
 
 let pools = new Map();
 export let assets = new Map();
@@ -13,6 +25,12 @@ const num_max_hops = 3;
 const num_largest_pools = 5;
 
 let ticks = 0;
+
+
+
+
+
+//-- Functions --
 
 function get_base_url(domain) {
   let baseUrl;
@@ -26,6 +44,7 @@ function get_base_url(domain) {
     return;
   }
 }
+
 
 export async function queryPool(domain, pool_id) {
 
@@ -49,45 +68,23 @@ export async function queryPool(domain, pool_id) {
   }
 }
 
-async function queryPools(domain) {
 
+async function queryPools(domain) {
+  
   //--QUERY API--
 
   let baseUrl = get_base_url(domain);
+  let params;
+  let fileName = "all-pools.json";
+
   console.log(domain);
-  console.log(baseUrl);
-  const options = {
-    method: 'GET',
-    accept: 'application/json'
-  }
+  //console.log(baseUrl);
 
-  let url = baseUrl;
-  let response;
-  let result;
-  let param = null;
-  let paginationKey = "";
-  const paginationLimit = 2000;
-  
-  param = `?pagination.limit=${paginationLimit}`
-  if(param) {
-    url = baseUrl + param;
-  }
-  response = await fetch(url,options);
-  result = await response.json();
-  if (!result.pools) { return; }
-  getPools(result.pools);
-  
-  
-  // -- For testing locally --
-  //fs.writeFile('pools.json', JSON.stringify(pools,null,2), (err) => {
-    //if (err) throw err;
-  //});
-  //getPools(JSON.parse(fs.readFileSync('pools.json')));
-  
+  queryApi.queryAPI(baseUrl, params, domain, fileName);
 
-  console.log("Pools: ");
-  console.log(pools.size);
-  //console.log(pools);
+  let storedResult = queryApi.readQueryResponse(domain, fileName);
+  if (!storedResult?.pools) { return; }
+  getPools(storedResult.pools);
 
 }
 
@@ -412,7 +409,7 @@ function getLargestRoute(routes, i){
 
 
 
-export async function returnAssets(chain){
+export async function getAssetsPricing(chain){
   getAssets(chain);
   await queryPools(chain);
   if (pools.size == 0) { return; }
@@ -425,7 +422,7 @@ async function main() {
   let domain = "osmosis";
   //let domain = "osmosistestnet4";
   //let domain = "osmosistestnet";
-  returnAssets(domain);
+  getAssetsPricing(domain);
 }
 
 //main(); //TURN THIS BACK OFF

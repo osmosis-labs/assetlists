@@ -87,6 +87,7 @@ export function writeToFile(chainName, directoryName, fileName, value) {
         if (err) throw err;
       }
     );
+    //console.log("Write successful!");
   } catch (err) {
     console.log(err);
   }

@@ -1,0 +1,46 @@
+on: [workflow_dispatch]
+name: Update Chain Registry
+jobs:
+  update_chain_registry:
+    name: Update Chain Registry
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        shell: bash
+    
+    steps:
+    
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+          
+      - name: Git Sumbodule Update
+        run: |
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
+      
+      - name: Add Commit Push
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
+          add_timestamp: false
+          commit_prefix: "[AUTO]"
+          commit_message: "Chain Registry Submodule Update"
+          force: false
+          target_branch: update/chain_reg
+      
+      - name: Create A PR
+        uses: devops-infra/action-pull-request@v0.4.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_branch: update/chain_reg
+          target_branch: main
+          title: chain_reg Update
+          body: "**Automated pull request**"
+          old_string: "**THIS IS AN AUTOMATED UPDATE OF CHAIN REGISTRY SUBMODULE**"
+          new_string: "** Automatic pull request**"
+          get_diff: true
+          ignore_users: "dependabot"

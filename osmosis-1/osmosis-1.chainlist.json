@@ -1,0 +1,6966 @@
+{
+  "zone": "osmosis",
+  "chains": [
+    {
+      "chain_name": "osmosis",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Osmosis",
+      "chain_id": "osmosis-1",
+      "bech32_prefix": "osmo",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "osmo",
+        "bech32PrefixAccPub": "osmopub",
+        "bech32PrefixValAddr": "osmovaloper",
+        "bech32PrefixValPub": "osmovaloperpub",
+        "bech32PrefixConsAddr": "osmovalcons",
+        "bech32PrefixConsPub": "osmovalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uosmo",
+            "fixed_min_gas_price": 0.0025,
+            "low_gas_price": 0.0025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uosmo"
+          }
+        ],
+        "lock_duration": {
+          "time": "1209600s"
+        }
+      },
+      "description": "Osmosis (OSMO) is the premier DEX and cross-chain DeFi hub within the Cosmos ecosystem, a network of over 50 sovereign, interoperable blockchains seamlessly connected through the Inter-Blockchain Communication Protocol (IBC). Pioneering in its approach, Osmosis offers a dynamic trading and liquidity provision experience, integrating non-IBC assets from other ecosystems, including Ethereum, Solana, Avalanche, and Polkadot. Initially adopting Balancer-style pools, Osmosis now also features a concentrated liquidity model that is orders of magnitude more capital efficient, meaning that significantly less liquidity is required to handle the same amount of trading volume with minimal slippage.\n\nAs a true appchain, Osmosis has greater control over the full blockchain stack than traditional smart contract DEXs, which must follow the code of the parent chain that it is built on. This fine-grained control has enabled, for example, the development of Superfluid Staking, an extension of Proof of Stake that allows assets at the application layer to be staked to secure the chain. The customizability of appchains also allows implementing features like the Protocol Revenue module, which enables Osmosis to conduct on-chain arbitrage on behalf of OSMO stakers, balancing prices across pools while generating real yield revenue from this volume. Additionally, as a sovereign appchain, Osmosis governance can vote on upgrades to the protocol. One example of this was the introduction of a Taker Fee, which switched on the collection of exchange fees to generate diverse yield from Osmosis volume and distribute it to OSMO stakers.\n\nOsmosis is bringing the full centralized exchange experience to the decentralized world by building a cross-chain native DEX and trading suite that connects all chains over IBC, including Ethereum and Bitcoin. To reach this goal, Osmosis hosts an ever-expanding suite of DeFi applications aimed at providing a one-stop experience that includes lending, credit, margin, DeFi strategy vaults, power perps, fiat on-ramps, NFTs, stablecoins, and more — all of the functionalities that centralized exchange offer and more, in the trust-minimized environment of decentralized finance.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-osmosis.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-osmosis.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/osmosis/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm",
+        "wasmd_0.24+",
+        "osmosis-txfees"
+      ]
+    },
+    {
+      "chain_name": "cosmoshub",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Cosmos Hub",
+      "chain_id": "cosmoshub-4",
+      "bech32_prefix": "cosmos",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "cosmos",
+        "bech32PrefixAccPub": "cosmospub",
+        "bech32PrefixValAddr": "cosmosvaloper",
+        "bech32PrefixValPub": "cosmosvaloperpub",
+        "bech32PrefixConsAddr": "cosmosvalcons",
+        "bech32PrefixConsPub": "cosmosvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uatom",
+            "fixed_min_gas_price": 0.005,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.03
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uatom"
+          }
+        ]
+      },
+      "description": "In a nutshell, Cosmos Hub bills itself as a project that solves some of the hardest problems facing the blockchain industry. It aims to offer an antidote to slow, expensive, unscalable and environmentally harmful proof-of-work protocols, like those used by Bitcoin, by offering an ecosystem of connected blockchains.\n\nThe project’s other goals include making blockchain technology less complex and difficult for developers thanks to a modular framework that demystifies decentralized apps. Last but not least, an Inter-blockchain Communication protocol makes it easier for blockchain networks to communicate with each other — preventing fragmentation in the industry.\n\nCosmos Hub's origins can be dated back to 2014, when Tendermint, a core contributor to the network, was founded. In 2016, a white paper for Cosmos was published — and a token sale was held the following year. ATOM tokens are earned through a hybrid proof-of-stake algorithm, and they help to keep the Cosmos Hub, the project’s flagship blockchain, secure. This cryptocurrency also has a role in the network’s governance.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-cosmoshub.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-cosmoshub.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/cosmos/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "terra",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Terra Classic",
+      "chain_id": "columbus-5",
+      "bech32_prefix": "terra",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "terra",
+        "bech32PrefixAccPub": "terrapub",
+        "bech32PrefixValAddr": "terravaloper",
+        "bech32PrefixValPub": "terravaloperpub",
+        "bech32PrefixConsAddr": "terravalcons",
+        "bech32PrefixConsPub": "terravalconspub"
+      },
+      "slip44": 330,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uluna",
+            "low_gas_price": 28.325,
+            "average_gas_price": 28.325,
+            "high_gas_price": 50
+          },
+          {
+            "denom": "usdr",
+            "low_gas_price": 0.52469,
+            "average_gas_price": 0.52469,
+            "high_gas_price": 0.52469
+          },
+          {
+            "denom": "uusd",
+            "low_gas_price": 0.75,
+            "average_gas_price": 0.75,
+            "high_gas_price": 0.75
+          },
+          {
+            "denom": "ukrw",
+            "low_gas_price": 850,
+            "average_gas_price": 850,
+            "high_gas_price": 850
+          },
+          {
+            "denom": "umnt",
+            "low_gas_price": 2142.855,
+            "average_gas_price": 2142.855,
+            "high_gas_price": 2142.855
+          },
+          {
+            "denom": "ueur",
+            "low_gas_price": 0.625,
+            "average_gas_price": 0.625,
+            "high_gas_price": 0.625
+          },
+          {
+            "denom": "ucny",
+            "low_gas_price": 4.9,
+            "average_gas_price": 4.9,
+            "high_gas_price": 4.9
+          },
+          {
+            "denom": "ujpy",
+            "low_gas_price": 81.85,
+            "average_gas_price": 81.85,
+            "high_gas_price": 81.85
+          },
+          {
+            "denom": "ugbp",
+            "low_gas_price": 0.55,
+            "average_gas_price": 0.55,
+            "high_gas_price": 0.55
+          },
+          {
+            "denom": "uinr",
+            "low_gas_price": 54.4,
+            "average_gas_price": 54.4,
+            "high_gas_price": 54.4
+          },
+          {
+            "denom": "ucad",
+            "low_gas_price": 0.95,
+            "average_gas_price": 0.95,
+            "high_gas_price": 0.95
+          },
+          {
+            "denom": "uchf",
+            "low_gas_price": 0.7,
+            "average_gas_price": 0.7,
+            "high_gas_price": 0.7
+          },
+          {
+            "denom": "uaud",
+            "low_gas_price": 0.95,
+            "average_gas_price": 0.95,
+            "high_gas_price": 0.95
+          },
+          {
+            "denom": "usgd",
+            "low_gas_price": 1,
+            "average_gas_price": 1,
+            "high_gas_price": 1
+          },
+          {
+            "denom": "uthb",
+            "low_gas_price": 23.1,
+            "average_gas_price": 23.1,
+            "high_gas_price": 23.1
+          },
+          {
+            "denom": "usek",
+            "low_gas_price": 6.25,
+            "average_gas_price": 6.25,
+            "high_gas_price": 6.25
+          },
+          {
+            "denom": "unok",
+            "low_gas_price": 6.25,
+            "average_gas_price": 6.25,
+            "high_gas_price": 6.25
+          },
+          {
+            "denom": "udkk",
+            "low_gas_price": 4.5,
+            "average_gas_price": 4.5,
+            "high_gas_price": 4.5
+          },
+          {
+            "denom": "uidr",
+            "low_gas_price": 10900,
+            "average_gas_price": 10900,
+            "high_gas_price": 10900
+          },
+          {
+            "denom": "uphp",
+            "low_gas_price": 38,
+            "average_gas_price": 38,
+            "high_gas_price": 38
+          },
+          {
+            "denom": "uhkd",
+            "low_gas_price": 5.85,
+            "average_gas_price": 5.85,
+            "high_gas_price": 5.85
+          },
+          {
+            "denom": "umyr",
+            "low_gas_price": 3,
+            "average_gas_price": 3,
+            "high_gas_price": 3
+          },
+          {
+            "denom": "utwd",
+            "low_gas_price": 20,
+            "average_gas_price": 20,
+            "high_gas_price": 20
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uluna"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-terra-ia.cosmosia.notional.ventures/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-terra-ia.cosmosia.notional.ventures/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://finder.terra.money/columbus-5/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "terra-classic-fee"
+      ]
+    },
+    {
+      "chain_name": "secretnetwork",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Secret Network",
+      "chain_id": "secret-4",
+      "bech32_prefix": "secret",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "secret",
+        "bech32PrefixAccPub": "secretpub",
+        "bech32PrefixValAddr": "secretvaloper",
+        "bech32PrefixValPub": "secretvaloperpub",
+        "bech32PrefixConsAddr": "secretvalcons",
+        "bech32PrefixConsPub": "secretvalconspub"
+      },
+      "slip44": 529,
+      "alternative_slip44s": [
+        118
+      ],
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uscrt",
+            "fixed_min_gas_price": 0.05,
+            "low_gas_price": 0.05,
+            "average_gas_price": 0.1,
+            "high_gas_price": 0.25
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uscrt"
+          }
+        ]
+      },
+      "description": "Secret Network is the first blockchain with customizable privacy. You get to choose what you share, with whom, and how. This protects users, and empowers developers to build a better Web3.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-secret.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-secret.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://secretnodes.com/secret/chains/secret-4/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "secretwasm",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
+    },
+    {
+      "chain_name": "akash",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Akash",
+      "chain_id": "akashnet-2",
+      "bech32_prefix": "akash",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "akash",
+        "bech32PrefixAccPub": "akashpub",
+        "bech32PrefixValAddr": "akashvaloper",
+        "bech32PrefixValPub": "akashvaloperpub",
+        "bech32PrefixConsAddr": "akashvalcons",
+        "bech32PrefixConsPub": "akashvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uakt",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.00025,
+            "average_gas_price": 0.0025,
+            "high_gas_price": 0.025
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uakt"
+          }
+        ]
+      },
+      "description": "Akash is open-source Supercloud that lets users buy and sell computing resources securely and efficiently. Purpose-built for public utility.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-akash.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-akash.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/akash/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "regen",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Regen",
+      "chain_id": "regen-1",
+      "bech32_prefix": "regen",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "regen",
+        "bech32PrefixAccPub": "regenpub",
+        "bech32PrefixValAddr": "regenvaloper",
+        "bech32PrefixValPub": "regenvaloperpub",
+        "bech32PrefixConsAddr": "regenvalcons",
+        "bech32PrefixConsPub": "regenvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uregen",
+            "low_gas_price": 0.015,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uregen"
+          }
+        ]
+      },
+      "description": "Regen Network, a platform to originate and invest in high-integrity carbon and biodiversity credits from ecological regeneration projects.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-regen.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-regen.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://regen.aneka.io/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "sentinel",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Sentinel",
+      "chain_id": "sentinelhub-2",
+      "bech32_prefix": "sent",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "sent",
+        "bech32PrefixAccPub": "sentpub",
+        "bech32PrefixValAddr": "sentvaloper",
+        "bech32PrefixValPub": "sentvaloperpub",
+        "bech32PrefixConsAddr": "sentvalcons",
+        "bech32PrefixConsPub": "sentvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "udvpn",
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.25,
+            "high_gas_price": 0.4
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "udvpn"
+          }
+        ]
+      },
+      "description": "The Sentinel ecosystem is a global network of autonomous dVPN applications that enable private and censorship resistant internet access.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-sentinel.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-sentinel.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/sentinel/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "persistence",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Persistence",
+      "chain_id": "core-1",
+      "bech32_prefix": "persistence",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "persistence",
+        "bech32PrefixAccPub": "persistencepub",
+        "bech32PrefixValAddr": "persistencevaloper",
+        "bech32PrefixValPub": "persistencevaloperpub",
+        "bech32PrefixConsAddr": "persistencevalcons",
+        "bech32PrefixConsPub": "persistencevalconspub"
+      },
+      "slip44": 118,
+      "alternative_slip44s": [
+        750
+      ],
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uxprt",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uxprt"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "description": "Persistence is an app chain for Liquid Staking powering an ecosystem of DeFi applications focused on unlocking the liquidity of staked assets.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-persistence.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-persistence.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/persistence/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "irisnet",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "IRISnet",
+      "chain_id": "irishub-1",
+      "bech32_prefix": "iaa",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "iaa",
+        "bech32PrefixAccPub": "iaapub",
+        "bech32PrefixValAddr": "iaavaloper",
+        "bech32PrefixValPub": "iaavaloperpub",
+        "bech32PrefixConsAddr": "iaavalcons",
+        "bech32PrefixConsPub": "iaavalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uiris",
+            "low_gas_price": 0.2,
+            "average_gas_price": 0.3,
+            "high_gas_price": 0.4
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uiris"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-iris.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-iris.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/iris/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "cryptoorgchain",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Cronos POS Chain",
+      "chain_id": "crypto-org-chain-mainnet-1",
+      "bech32_prefix": "cro",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "cro",
+        "bech32PrefixAccPub": "cropub",
+        "bech32PrefixValAddr": "crovaloper",
+        "bech32PrefixValPub": "crovaloperpub",
+        "bech32PrefixConsAddr": "crovalcons",
+        "bech32PrefixConsPub": "crovalconspub"
+      },
+      "slip44": 394,
+      "alternative_slip44s": [
+        118
+      ],
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "basecro",
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.03,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "basecro"
+          }
+        ]
+      },
+      "description": "Cronos PoS Chain is a public, open-source and permissionless blockchain - a fully decentralized network with high speed and low fees, designed to be a public good that helps drive mass adoption of blockchain technology through use cases like Payments, DeFi and NFTs.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-crypto-org.keplr.app/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-crypto-org.keplr.app/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/crypto-org/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "starname",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Starname",
+      "chain_id": "iov-mainnet-ibc",
+      "bech32_prefix": "star",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "star",
+        "bech32PrefixAccPub": "starpub",
+        "bech32PrefixValAddr": "starvaloper",
+        "bech32PrefixValPub": "starvaloperpub",
+        "bech32PrefixConsAddr": "starvalcons",
+        "bech32PrefixConsPub": "starvalconspub"
+      },
+      "slip44": 234,
+      "alternative_slip44s": [
+        118
+      ],
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uiov",
+            "low_gas_price": 1,
+            "average_gas_price": 2,
+            "high_gas_price": 3
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uiov"
+          }
+        ]
+      },
+      "description": "Starname is the best way to claim your part of the blockchain. You can use it for decentralized identification, payments, ownership and applications. Starname can be integrated into digital wallets, dapps and exchanges.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-iov.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-iov.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/starname/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "emoney",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "e-Money",
+      "chain_id": "emoney-3",
+      "bech32_prefix": "emoney",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "emoney",
+        "bech32PrefixAccPub": "emoneypub",
+        "bech32PrefixValAddr": "emoneyvaloper",
+        "bech32PrefixValPub": "emoneyvaloperpub",
+        "bech32PrefixConsAddr": "emoneyvalcons",
+        "bech32PrefixConsPub": "emoneyvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ungm",
+            "low_gas_price": 1,
+            "average_gas_price": 1,
+            "high_gas_price": 1
+          },
+          {
+            "denom": "eeur",
+            "low_gas_price": 1,
+            "average_gas_price": 1,
+            "high_gas_price": 1
+          },
+          {
+            "denom": "echf",
+            "low_gas_price": 1,
+            "average_gas_price": 1,
+            "high_gas_price": 1
+          },
+          {
+            "denom": "enok",
+            "low_gas_price": 1,
+            "average_gas_price": 1,
+            "high_gas_price": 1
+          },
+          {
+            "denom": "esek",
+            "low_gas_price": 1,
+            "average_gas_price": 1,
+            "high_gas_price": 1
+          },
+          {
+            "denom": "edkk",
+            "low_gas_price": 1,
+            "average_gas_price": 1,
+            "high_gas_price": 1
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ungm"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://emoney.validator.network"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://emoney.validator.network/api"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/emoney/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "juno",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Juno",
+      "chain_id": "juno-1",
+      "bech32_prefix": "juno",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "juno",
+        "bech32PrefixAccPub": "junopub",
+        "bech32PrefixValAddr": "junovaloper",
+        "bech32PrefixValPub": "junovaloperpub",
+        "bech32PrefixConsAddr": "junovalcons",
+        "bech32PrefixConsPub": "junovalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ujuno",
+            "fixed_min_gas_price": 0.075,
+            "low_gas_price": 0.075,
+            "average_gas_price": 0.1,
+            "high_gas_price": 0.125
+          },
+          {
+            "denom": "ibc/C4CFF46FD6DE35CA4CF4CE031E643C8FDC9BA4B99AE598E9B0ED98FE3A2319F9",
+            "fixed_min_gas_price": 0.003,
+            "low_gas_price": 0.003,
+            "average_gas_price": 0.0035,
+            "high_gas_price": 0.004
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ujuno"
+          }
+        ]
+      },
+      "description": "Juno is a completely community owned and operated smart contract platform.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-juno.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-juno.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/juno/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
+    },
+    {
+      "chain_name": "microtick",
+      "status": "killed",
+      "network_type": "mainnet",
+      "pretty_name": "Microtick",
+      "chain_id": "microtick-1",
+      "bech32_prefix": "micro",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "micro",
+        "bech32PrefixAccPub": "micropub",
+        "bech32PrefixValAddr": "microvaloper",
+        "bech32PrefixValPub": "microvaloperpub",
+        "bech32PrefixConsAddr": "microvalcons",
+        "bech32PrefixConsPub": "microvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "utick",
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "utick"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-microtick.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-microtick.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.microtick.zone/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "likecoin",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "LikeCoin",
+      "chain_id": "likecoin-mainnet-2",
+      "bech32_prefix": "like",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "like",
+        "bech32PrefixAccPub": "likepub",
+        "bech32PrefixValAddr": "likevaloper",
+        "bech32PrefixValPub": "likevaloperpub",
+        "bech32PrefixConsAddr": "likevalcons",
+        "bech32PrefixConsPub": "likevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "nanolike",
+            "fixed_min_gas_price": 1000,
+            "low_gas_price": 1000,
+            "average_gas_price": 10000,
+            "high_gas_price": 1000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "nanolike"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://mainnet-node.like.co/rpc"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://mainnet-node.like.co"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://likecoin.bigdipper.live/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "impacthub",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "ixo",
+      "chain_id": "ixo-5",
+      "bech32_prefix": "ixo",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "ixo",
+        "bech32PrefixAccPub": "ixopub",
+        "bech32PrefixValAddr": "ixovaloper",
+        "bech32PrefixValPub": "ixovaloperpub",
+        "bech32PrefixConsAddr": "ixovalcons",
+        "bech32PrefixConsPub": "ixovalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uixo",
+            "fixed_min_gas_price": 0.025,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uixo"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-impacthub.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-impacthub.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://blockscan.ixo.world/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "bitcanna",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "BitCanna",
+      "chain_id": "bitcanna-1",
+      "bech32_prefix": "bcna",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "bcna",
+        "bech32PrefixAccPub": "bcnapub",
+        "bech32PrefixValAddr": "bcnavaloper",
+        "bech32PrefixValPub": "bcnavaloperpub",
+        "bech32PrefixConsAddr": "bcnavalcons",
+        "bech32PrefixConsPub": "bcnavalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ubcna",
+            "fixed_min_gas_price": 0.001,
+            "low_gas_price": 0.001,
+            "average_gas_price": 0.0025,
+            "high_gas_price": 0.01
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ubcna"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.bitcanna.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.bitcanna.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/bitcanna/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "bitsong",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "BitSong",
+      "chain_id": "bitsong-2b",
+      "bech32_prefix": "bitsong",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "bitsong",
+        "bech32PrefixAccPub": "bitsongpub",
+        "bech32PrefixValAddr": "bitsongvaloper",
+        "bech32PrefixValPub": "bitsongvaloperpub",
+        "bech32PrefixConsAddr": "bitsongvalcons",
+        "bech32PrefixConsPub": "bitsongvalconspub"
+      },
+      "slip44": 639,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ubtsg",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 3,
+            "average_gas_price": 10,
+            "high_gas_price": 20
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ubtsg"
+          }
+        ]
+      },
+      "description": "Artists, Fans, Managers and Labels in One Single Holistic Ecosystem: $BTSG. Earn real-time royalties, discover exclusive content, mint and trade Fantokens, buy & sell NFTs.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.explorebitsong.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.explorebitsong.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorebitsong.com/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "kichain",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Ki",
+      "chain_id": "kichain-2",
+      "bech32_prefix": "ki",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "ki",
+        "bech32PrefixAccPub": "kipub",
+        "bech32PrefixValAddr": "kivaloper",
+        "bech32PrefixValPub": "kivaloperpub",
+        "bech32PrefixConsAddr": "kivalcons",
+        "bech32PrefixConsPub": "kivalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uxki",
+            "fixed_min_gas_price": 0.025,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.03,
+            "high_gas_price": 0.05
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uxki"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-mainnet.blockchain.ki"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-mainnet.blockchain.ki"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/ki-chain/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
+    },
+    {
+      "chain_name": "panacea",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Medibloc",
+      "chain_id": "panacea-3",
+      "bech32_prefix": "panacea",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "panacea",
+        "bech32PrefixAccPub": "panaceapub",
+        "bech32PrefixValAddr": "panaceavaloper",
+        "bech32PrefixValPub": "panaceavaloperpub",
+        "bech32PrefixConsAddr": "panaceavalcons",
+        "bech32PrefixConsPub": "panaceavalconspub"
+      },
+      "slip44": 371,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "umed",
+            "fixed_min_gas_price": 5,
+            "low_gas_price": 5,
+            "average_gas_price": 7,
+            "high_gas_price": 9
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "umed"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.gopanacea.org"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.gopanacea.org"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/medibloc/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "bostrom",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "bostrom",
+      "chain_id": "bostrom",
+      "bech32_prefix": "bostrom",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "bostrom",
+        "bech32PrefixAccPub": "bostrompub",
+        "bech32PrefixValAddr": "bostromvaloper",
+        "bech32PrefixValPub": "bostromvaloperpub",
+        "bech32PrefixConsAddr": "bostromvalcons",
+        "bech32PrefixConsPub": "bostromvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "boot",
+            "low_gas_price": 0,
+            "average_gas_price": 0,
+            "high_gas_price": 0.01
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "boot"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.bostrom.cybernode.ai"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.bostrom.cybernode.ai"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://cyb.ai/network/bostrom/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "comdex",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Comdex",
+      "chain_id": "comdex-1",
+      "bech32_prefix": "comdex",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "comdex",
+        "bech32PrefixAccPub": "comdexpub",
+        "bech32PrefixValAddr": "comdexvaloper",
+        "bech32PrefixValPub": "comdexvaloperpub",
+        "bech32PrefixConsAddr": "comdexvalcons",
+        "bech32PrefixConsPub": "comdexvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ucmdx",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ucmdx"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.comdex.one"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.comdex.one"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/comdex/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "cheqd",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Cheqd",
+      "chain_id": "cheqd-mainnet-1",
+      "bech32_prefix": "cheqd",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "cheqd",
+        "bech32PrefixAccPub": "cheqdpub",
+        "bech32PrefixValAddr": "cheqdvaloper",
+        "bech32PrefixValPub": "cheqdvaloperpub",
+        "bech32PrefixConsAddr": "cheqdvalcons",
+        "bech32PrefixConsPub": "cheqdvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ncheq",
+            "fixed_min_gas_price": 25,
+            "low_gas_price": 50,
+            "average_gas_price": 75,
+            "high_gas_price": 100
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ncheq"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.cheqd.net"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.cheqd.net"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.cheqd.io/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "stargaze",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Stargaze",
+      "chain_id": "stargaze-1",
+      "bech32_prefix": "stars",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "stars",
+        "bech32PrefixAccPub": "starspub",
+        "bech32PrefixValAddr": "starsvaloper",
+        "bech32PrefixValPub": "starsvaloperpub",
+        "bech32PrefixConsAddr": "starsvalcons",
+        "bech32PrefixConsPub": "starsvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ustars",
+            "fixed_min_gas_price": 1,
+            "low_gas_price": 1,
+            "average_gas_price": 1.1,
+            "high_gas_price": 1.2
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ustars"
+          }
+        ]
+      },
+      "description": "The premier community-focused blockchain for NFTs. Stargaze empowers creators, developers, collectors, and traders to participate on the platform. The Stargaze chain consists of various NFT-related apps such as a Launchpad, and a Marketplace with offers and auctions.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.stargaze-apis.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.stargaze-apis.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/stargaze/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "chihuahua",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Chihuahua",
+      "chain_id": "chihuahua-1",
+      "bech32_prefix": "chihuahua",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "chihuahua",
+        "bech32PrefixAccPub": "chihuahuapub",
+        "bech32PrefixValAddr": "chihuahuavaloper",
+        "bech32PrefixValPub": "chihuahuavaloperpub",
+        "bech32PrefixConsAddr": "chihuahuavalcons",
+        "bech32PrefixConsPub": "chihuahuavalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uhuahua",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 500,
+            "average_gas_price": 1250,
+            "high_gas_price": 2000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uhuahua"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.chihuahua.wtf"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.chihuahua.wtf"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/chihuahua/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "wasmd_0.24+"
+      ]
+    },
+    {
+      "chain_name": "lumnetwork",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Lum Network",
+      "chain_id": "lum-network-1",
+      "bech32_prefix": "lum",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "lum",
+        "bech32PrefixAccPub": "lumpub",
+        "bech32PrefixValAddr": "lumvaloper",
+        "bech32PrefixValPub": "lumvaloperpub",
+        "bech32PrefixConsAddr": "lumvalcons",
+        "bech32PrefixConsPub": "lumvalconspub"
+      },
+      "slip44": 880,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ulum",
+            "fixed_min_gas_price": 0.001,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ulum"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://node0.mainnet.lum.network/rpc"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://node0.mainnet.lum.network/rest"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/lum/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "vidulum",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Vidulum",
+      "chain_id": "vidulum-1",
+      "bech32_prefix": "vdl",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "vdl",
+        "bech32PrefixAccPub": "vdlpub",
+        "bech32PrefixValAddr": "vdlvaloper",
+        "bech32PrefixValPub": "vdlvaloperpub",
+        "bech32PrefixConsAddr": "vdlvalcons",
+        "bech32PrefixConsPub": "vdlvalconspub"
+      },
+      "slip44": 370,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uvdl",
+            "fixed_min_gas_price": 0.0002,
+            "low_gas_price": 0.002,
+            "average_gas_price": 0.005,
+            "high_gas_price": 0.007
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uvdl"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://mainnet-rpc.vidulum.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://mainnet-lcd.vidulum.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorers.vidulum.app/vidulum/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "desmos",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Desmos",
+      "chain_id": "desmos-mainnet",
+      "bech32_prefix": "desmos",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "desmos",
+        "bech32PrefixAccPub": "desmospub",
+        "bech32PrefixValAddr": "desmosvaloper",
+        "bech32PrefixValPub": "desmosvaloperpub",
+        "bech32PrefixConsAddr": "desmosvalcons",
+        "bech32PrefixConsPub": "desmosvalconspub"
+      },
+      "slip44": 852,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "udsm",
+            "fixed_min_gas_price": 0.001,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.03,
+            "high_gas_price": 0.05
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "udsm"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.mainnet.desmos.network"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.mainnet.desmos.network"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.desmos.network/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "dig",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Dig Chain",
+      "chain_id": "dig-1",
+      "bech32_prefix": "dig",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "dig",
+        "bech32PrefixAccPub": "digpub",
+        "bech32PrefixValAddr": "digvaloper",
+        "bech32PrefixValPub": "digvaloperpub",
+        "bech32PrefixConsAddr": "digvalcons",
+        "bech32PrefixConsPub": "digvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "udig",
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.03,
+            "high_gas_price": 0.035
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "udig"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-1-dig.notional.ventures"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-1-dig.notional.ventures"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/dig/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "sommelier",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Sommelier",
+      "chain_id": "sommelier-3",
+      "bech32_prefix": "somm",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "somm",
+        "bech32PrefixAccPub": "sommpub",
+        "bech32PrefixValAddr": "sommvaloper",
+        "bech32PrefixValPub": "sommvaloperpub",
+        "bech32PrefixConsAddr": "sommvalcons",
+        "bech32PrefixConsPub": "sommvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "usomm",
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "usomm"
+          }
+        ]
+      },
+      "description": "Automated vaults find best-in-class yields while mitigating risk.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-sommelier.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-sommelier.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/sommelier/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "sifchain",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Sifchain",
+      "chain_id": "sifchain-1",
+      "bech32_prefix": "sif",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "sif",
+        "bech32PrefixAccPub": "sifpub",
+        "bech32PrefixValAddr": "sifvaloper",
+        "bech32PrefixValPub": "sifvaloperpub",
+        "bech32PrefixConsAddr": "sifvalcons",
+        "bech32PrefixConsPub": "sifvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "rowan",
+            "low_gas_price": 1000000000000,
+            "average_gas_price": 1500000000000,
+            "high_gas_price": 2000000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "rowan"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.sifchain.finance"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-int.sifchain.finance"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/sifchain/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "bandchain",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Band Protocol",
+      "chain_id": "laozi-mainnet",
+      "bech32_prefix": "band",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "band",
+        "bech32PrefixAccPub": "bandpub",
+        "bech32PrefixValAddr": "bandvaloper",
+        "bech32PrefixValPub": "bandvaloperpub",
+        "bech32PrefixConsAddr": "bandvalcons",
+        "bech32PrefixConsPub": "bandvalconspub"
+      },
+      "slip44": 494,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uband",
+            "low_gas_price": 0.0025,
+            "average_gas_price": 0.003,
+            "high_gas_price": 0.005
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uband"
+          }
+        ]
+      },
+      "description": "Band Protocol is a cross-chain data oracle platform that aggregates and connects real-world data and APIs to smart contracts.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.laozi3.bandchain.org"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://laozi1.bandchain.org/api"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://cosmoscan.io/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "konstellation",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Konstellation",
+      "chain_id": "darchub",
+      "bech32_prefix": "darc",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "darc",
+        "bech32PrefixAccPub": "darcpub",
+        "bech32PrefixValAddr": "darcvaloper",
+        "bech32PrefixValPub": "darcvaloperpub",
+        "bech32PrefixConsAddr": "darcvalcons",
+        "bech32PrefixConsPub": "darcvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "udarc",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.0001,
+            "average_gas_price": 0.001,
+            "high_gas_price": 0.01
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "udarc"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://node1.konstellation.tech:26657"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://node1.konstellation.tech:1318"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/konstellation/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "umee",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Umee",
+      "chain_id": "umee-1",
+      "bech32_prefix": "umee",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "umee",
+        "bech32PrefixAccPub": "umeepub",
+        "bech32PrefixValAddr": "umeevaloper",
+        "bech32PrefixValPub": "umeevaloperpub",
+        "bech32PrefixConsAddr": "umeevalcons",
+        "bech32PrefixConsPub": "umeevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uumee",
+            "fixed_min_gas_price": 0.1,
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.12,
+            "high_gas_price": 0.2
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uumee"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-umee.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-umee.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/umee/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "gravitybridge",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Gravity Bridge",
+      "chain_id": "gravity-bridge-3",
+      "bech32_prefix": "gravity",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "gravity",
+        "bech32PrefixAccPub": "gravitypub",
+        "bech32PrefixValAddr": "gravityvaloper",
+        "bech32PrefixValPub": "gravityvaloperpub",
+        "bech32PrefixConsAddr": "gravityvalcons",
+        "bech32PrefixConsPub": "gravityvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ugraviton",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0,
+            "high_gas_price": 0.035
+          },
+          {
+            "denom": "gravity0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+            "low_gas_price": 0.0002,
+            "average_gas_price": 0.0005,
+            "high_gas_price": 0.0008
+          },
+          {
+            "denom": "gravity0xdAC17F958D2ee523a2206206994597C13D831ec7",
+            "low_gas_price": 0.0002,
+            "average_gas_price": 0.0005,
+            "high_gas_price": 0.0008
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ugraviton"
+          }
+        ]
+      },
+      "description": "An open, decentralized bridge that unlocks the power of interoperability & liquidity between blockchain ecosystems.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://gravitychain.io:26657"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://gravitychain.io:1317"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/gravity-bridge/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "decentr",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Decentr",
+      "chain_id": "mainnet-3",
+      "bech32_prefix": "decentr",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "decentr",
+        "bech32PrefixAccPub": "decentrpub",
+        "bech32PrefixValAddr": "decentrvaloper",
+        "bech32PrefixValPub": "decentrvaloperpub",
+        "bech32PrefixConsAddr": "decentrvalcons",
+        "bech32PrefixConsPub": "decentrvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "udec",
+            "fixed_min_gas_price": 0.025,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.025
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "udec"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://poseidon.mainnet.decentr.xyz"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.mainnet.decentr.xyz"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.decentr.net/transactions/${txHash}?networkId=mainnet"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "shentu",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Shentu",
+      "chain_id": "shentu-2.2",
+      "bech32_prefix": "shentu",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "shentu",
+        "bech32PrefixAccPub": "shentupub",
+        "bech32PrefixValAddr": "shentuvaloper",
+        "bech32PrefixValPub": "shentuvaloperpub",
+        "bech32PrefixConsAddr": "shentuvalcons",
+        "bech32PrefixConsPub": "shentuvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uctk",
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uctk"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://shenturpc.noopsbycertik.com/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.noopsbycertik.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/shentu/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "carbon",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Carbon",
+      "chain_id": "carbon-1",
+      "bech32_prefix": "swth",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "swth",
+        "bech32PrefixAccPub": "swthpub",
+        "bech32PrefixValAddr": "swthvaloper",
+        "bech32PrefixValPub": "swthvaloperpub",
+        "bech32PrefixConsAddr": "swthvalcons",
+        "bech32PrefixConsPub": "swthvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "swth",
+            "fixed_min_gas_price": 1,
+            "low_gas_price": 1,
+            "average_gas_price": 1,
+            "high_gas_price": 1,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "usc",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.0001,
+            "average_gas_price": 0.0001,
+            "high_gas_price": 0.0001,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "bnb.1.6.773edb",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 1000000,
+            "average_gas_price": 1000000,
+            "high_gas_price": 1000000,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "bneo.1.14.e2e5f6",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.0015,
+            "average_gas_price": 0.0015,
+            "high_gas_price": 0.0015,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "busd.1.6.754a80",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 100000000,
+            "average_gas_price": 100000000,
+            "high_gas_price": 100000000,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "cglp.1.19.1698d3",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 100000000,
+            "average_gas_price": 100000000,
+            "high_gas_price": 100000000,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "cgt/1",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 100000000,
+            "average_gas_price": 100000000,
+            "high_gas_price": 100000000,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "eth.1.19.c3b805",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 100000,
+            "average_gas_price": 100000,
+            "high_gas_price": 100000,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "eth.1.2.942d87",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 100000,
+            "average_gas_price": 100000,
+            "high_gas_price": 100000,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "ibc/07FA7831E1920D0C87C9388F86B0108677F6ED0C9DE7E4063F05ED675192405C",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.0035,
+            "average_gas_price": 0.0035,
+            "high_gas_price": 0.0035,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "ibc/16065EE5282C5217685C8F084FC44864C25C706AC37356B0D62811D50B96920F",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.0000075,
+            "average_gas_price": 0.0000075,
+            "high_gas_price": 0.0000075,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "ibc/2B58B8C147E8718EECCB3713271DF46DEE8A3A00A27242628604E31C2F370EF5",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.00005,
+            "average_gas_price": 0.00005,
+            "high_gas_price": 0.00005,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "ibc/3552CECB7BCE1891DB6070D37EC6E954C972B1400141308FCD85FD148BD06DE5",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.00032,
+            "average_gas_price": 0.00032,
+            "high_gas_price": 0.00032,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "ibc/35E771B8682D828173F4B795F6C307780F96DC64D6F914FAE4CC9B4666F66364",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 300000000,
+            "average_gas_price": 300000000,
+            "high_gas_price": 300000000,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "ibc/4E06CF24FEBFB3F5AF645377DCC0B70AA6183BAF6B918B8B6243FCDEB7D38118",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.0006,
+            "average_gas_price": 0.0006,
+            "high_gas_price": 0.0006,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "ibc/662914D0C1CEBCB070C68F061D035E8B10A07C79AB286E7342C85F3BE74612C5",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.00015,
+            "average_gas_price": 0.00015,
+            "high_gas_price": 0.00015,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "ibc/6C349F0EB135C5FA99301758F35B87DB88403D690E5E314AB080401FEE4066E5",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.0000075,
+            "average_gas_price": 0.0000075,
+            "high_gas_price": 0.0000075,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "ibc/75249A18DEFBEFE55F83B1C70CAD234DF164F174C6BC51682EE92C2C81C18C93",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.00015,
+            "average_gas_price": 0.00015,
+            "high_gas_price": 0.00015,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "ibc/92E974290AF9E2BC3AEEEC35305C8FD76AC5A22A74CF8D91270FDF5A1C41E861",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 200000000,
+            "average_gas_price": 200000000,
+            "high_gas_price": 200000000,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "ibc/A4DB47A9D3CF9A068D454513891B526702455D3EF08FB9EB558C561F9DC2B701",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.00001,
+            "average_gas_price": 0.00001,
+            "high_gas_price": 0.00001,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "ibc/B7864B03E1B9FD4F049243E92ABD691586F682137037A9F3FCA5222815620B3C",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.00001,
+            "average_gas_price": 0.00001,
+            "high_gas_price": 0.00001,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.00015,
+            "average_gas_price": 0.00015,
+            "high_gas_price": 0.00015,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "usdc.1.2.343151",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.0001,
+            "average_gas_price": 0.0001,
+            "high_gas_price": 0.0001,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "usdc.1.6.53ff75",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 100000000,
+            "average_gas_price": 100000000,
+            "high_gas_price": 100000000,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          },
+          {
+            "denom": "zil.1.18.1a4a06",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 6000,
+            "average_gas_price": 6000,
+            "high_gas_price": 6000,
+            "gas_costs": {
+              "cosmos_send": 100000000,
+              "ibc_transfer": 100000000
+            }
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "swth"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://tm-api.carbon.network"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.carbon.network"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://scan.carbon.network/transaction/${txHash}?net=main"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "injective",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Injective",
+      "chain_id": "injective-1",
+      "bech32_prefix": "inj",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "inj",
+        "bech32PrefixAccPub": "injpub",
+        "bech32PrefixValAddr": "injvaloper",
+        "bech32PrefixValPub": "injvaloperpub",
+        "bech32PrefixConsAddr": "injvalcons",
+        "bech32PrefixConsPub": "injvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "inj",
+            "fixed_min_gas_price": 160000000,
+            "low_gas_price": 500000000,
+            "average_gas_price": 700000000,
+            "high_gas_price": 900000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "inj"
+          }
+        ]
+      },
+      "description": "Injective’s mission is to create a truly free and inclusive financial system through decentralization.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://public.api.injective.network"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://public.lcd.injective.network"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.injective.network/transaction/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "cerberus",
+      "status": "killed",
+      "network_type": "mainnet",
+      "pretty_name": "Cerberus",
+      "chain_id": "cerberus-chain-1",
+      "bech32_prefix": "cerberus",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "cerberus",
+        "bech32PrefixAccPub": "cerberuspub",
+        "bech32PrefixValAddr": "cerberusvaloper",
+        "bech32PrefixValPub": "cerberusvaloperpub",
+        "bech32PrefixConsAddr": "cerberusvalcons",
+        "bech32PrefixConsPub": "cerberusvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ucrbrus",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ucrbrus"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.cerberus.zone:26657"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.cerberus.zone:1317"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://skynetexplorers.com/Cerberus/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "fetchhub",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Fetch.ai",
+      "chain_id": "fetchhub-4",
+      "bech32_prefix": "fetch",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "fetch",
+        "bech32PrefixAccPub": "fetchpub",
+        "bech32PrefixValAddr": "fetchvaloper",
+        "bech32PrefixValPub": "fetchvaloperpub",
+        "bech32PrefixConsAddr": "fetchvalcons",
+        "bech32PrefixConsPub": "fetchvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "afet",
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.035
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "afet"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-fetchhub.fetch.ai:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest-fetchhub.fetch.ai"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/fetchai/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "assetmantle",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "AssetMantle",
+      "chain_id": "mantle-1",
+      "bech32_prefix": "mantle",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "mantle",
+        "bech32PrefixAccPub": "mantlepub",
+        "bech32PrefixValAddr": "mantlevaloper",
+        "bech32PrefixValPub": "mantlevaloperpub",
+        "bech32PrefixConsAddr": "mantlevalcons",
+        "bech32PrefixConsPub": "mantlevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "umntl",
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "umntl"
+          }
+        ]
+      },
+      "description": "AssetMantle’s suite of products is focused on the NFT ecosystem, helping you up your game with digital asset ownership.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.assetmantle.one/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.assetmantle.one/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/asset-mantle/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "provenance",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Provenance",
+      "chain_id": "pio-mainnet-1",
+      "bech32_prefix": "pb",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "pb",
+        "bech32PrefixAccPub": "pbpub",
+        "bech32PrefixValAddr": "pbvaloper",
+        "bech32PrefixValPub": "pbvaloperpub",
+        "bech32PrefixConsAddr": "pbvalcons",
+        "bech32PrefixConsPub": "pbvalconspub"
+      },
+      "slip44": 505,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "nhash",
+            "fixed_min_gas_price": 1905,
+            "low_gas_price": 1905,
+            "average_gas_price": 2100,
+            "high_gas_price": 2500
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "nhash"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.provenance.io/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.provenance.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/provenance/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "galaxy",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Galaxy",
+      "chain_id": "galaxy-1",
+      "bech32_prefix": "galaxy",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "galaxy",
+        "bech32PrefixAccPub": "galaxypub",
+        "bech32PrefixValAddr": "galaxyvaloper",
+        "bech32PrefixValPub": "galaxyvaloperpub",
+        "bech32PrefixConsAddr": "galaxyvalcons",
+        "bech32PrefixConsPub": "galaxyvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uglx",
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.035
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uglx"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://galaxy-rpc.brocha.in"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://galaxy-rest.brocha.in"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.postcapitalist.io/galaxy/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "meme",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "MEME",
+      "chain_id": "meme-1",
+      "bech32_prefix": "meme",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "meme",
+        "bech32PrefixAccPub": "memepub",
+        "bech32PrefixValAddr": "memevaloper",
+        "bech32PrefixValPub": "memevaloperpub",
+        "bech32PrefixConsAddr": "memevalcons",
+        "bech32PrefixConsPub": "memevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "umeme",
+            "fixed_min_gas_price": 0.025,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.035,
+            "high_gas_price": 0.045
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "umeme"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-meme-1.meme.sx:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-meme-1.meme.sx:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.meme.sx/meme/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "evmos",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Evmos",
+      "chain_id": "evmos_9001-2",
+      "bech32_prefix": "evmos",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "evmos",
+        "bech32PrefixAccPub": "evmospub",
+        "bech32PrefixValAddr": "evmosvaloper",
+        "bech32PrefixValPub": "evmosvaloperpub",
+        "bech32PrefixConsAddr": "evmosvalcons",
+        "bech32PrefixConsPub": "evmosvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "aevmos",
+            "fixed_min_gas_price": 250000000,
+            "low_gas_price": 20000000000,
+            "average_gas_price": 25000000000,
+            "high_gas_price": 40000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "aevmos"
+          }
+        ]
+      },
+      "description": "Developers use Evmos as the Ethereum Canary Chain to deploy applications of the future. Get all the functionalities of Ethereum with the power of IBC and Interchain composability.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-evmos.keplr.app/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-evmos.keplr.app/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/evmos/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "terra2",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Terra",
+      "chain_id": "phoenix-1",
+      "bech32_prefix": "terra",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "terra",
+        "bech32PrefixAccPub": "terrapub",
+        "bech32PrefixValAddr": "terravaloper",
+        "bech32PrefixValPub": "terravaloperpub",
+        "bech32PrefixConsAddr": "terravalcons",
+        "bech32PrefixConsPub": "terravalconspub"
+      },
+      "slip44": 330,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uluna",
+            "fixed_min_gas_price": 0.015,
+            "low_gas_price": 0.015,
+            "average_gas_price": 0.015,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uluna"
+          }
+        ]
+      },
+      "description": "Fueled by a passionate community and deep developer talent pool, the Terra blockchain is built to enable the next generation of Web3 products and services.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://terra2-rpc.lavenderfive.com:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://phoenix-lcd.terra.dev/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://finder.terra.money/phoenix-1/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
+    },
+    {
+      "chain_name": "rizon",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Rizon",
+      "chain_id": "titan-1",
+      "bech32_prefix": "rizon",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "rizon",
+        "bech32PrefixAccPub": "rizonpub",
+        "bech32PrefixValAddr": "rizonvaloper",
+        "bech32PrefixValPub": "rizonvaloperpub",
+        "bech32PrefixConsAddr": "rizonvalcons",
+        "bech32PrefixConsPub": "rizonvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uatolo",
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.035
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uatolo"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpcapi.rizon.world/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://restapi.rizon.world/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/rizon/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "kava",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Kava",
+      "chain_id": "kava_2222-10",
+      "bech32_prefix": "kava",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "kava",
+        "bech32PrefixAccPub": "kavapub",
+        "bech32PrefixValAddr": "kavavaloper",
+        "bech32PrefixValPub": "kavavaloperpub",
+        "bech32PrefixConsAddr": "kavavalcons",
+        "bech32PrefixConsPub": "kavavalconspub"
+      },
+      "slip44": 459,
+      "alternative_slip44s": [
+        118
+      ],
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ukava",
+            "low_gas_price": 0.05,
+            "average_gas_price": 0.1,
+            "high_gas_price": 0.25
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ukava"
+          }
+        ]
+      },
+      "description": "Kava is a decentralized blockchain that combines the speed and interoperability of Cosmos with the developer power of Ethereum.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-kava.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-kava.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/kava/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "genesisl1",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "GenesisL1",
+      "chain_id": "genesis_29-2",
+      "bech32_prefix": "genesis",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "genesis",
+        "bech32PrefixAccPub": "genesispub",
+        "bech32PrefixValAddr": "genesisvaloper",
+        "bech32PrefixValPub": "genesisvaloperpub",
+        "bech32PrefixConsAddr": "genesisvalcons",
+        "bech32PrefixConsPub": "genesisvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "el1",
+            "low_gas_price": 51000000000,
+            "average_gas_price": 52000000000,
+            "high_gas_price": 53000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "el1"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://26657.genesisl1.org"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.genesisl1.org"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/genesisL1/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "kujira",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Kujira",
+      "chain_id": "kaiyo-1",
+      "bech32_prefix": "kujira",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "kujira",
+        "bech32PrefixAccPub": "kujirapub",
+        "bech32PrefixValAddr": "kujiravaloper",
+        "bech32PrefixValPub": "kujiravaloperpub",
+        "bech32PrefixConsAddr": "kujiravalcons",
+        "bech32PrefixConsPub": "kujiravalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ukuji",
+            "fixed_min_gas_price": 0.0034,
+            "low_gas_price": 0.0034,
+            "average_gas_price": 0.0051,
+            "high_gas_price": 0.00681
+          },
+          {
+            "denom": "factory/kujira1qk00h5atutpsv900x202pxx42npjr9thg58dnqpa72f2p7m2luase444a7/uusk",
+            "fixed_min_gas_price": 0.01186,
+            "low_gas_price": 0.01186,
+            "average_gas_price": 0.01779,
+            "high_gas_price": 0.02372
+          },
+          {
+            "denom": "ibc/295548A78785A1007F232DE286149A6FF512F180AF5657780FC89C009E2C348F",
+            "fixed_min_gas_price": 0.0119,
+            "low_gas_price": 0.0119,
+            "average_gas_price": 0.01785,
+            "high_gas_price": 0.02379
+          },
+          {
+            "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
+            "fixed_min_gas_price": 0.00129,
+            "low_gas_price": 0.00129,
+            "average_gas_price": 0.00193,
+            "high_gas_price": 0.00258
+          },
+          {
+            "denom": "ibc/47BD209179859CDE4A2806763D7189B6E6FE13A17880FE2B42DE1E6C1E329E23",
+            "fixed_min_gas_price": 0.01795,
+            "low_gas_price": 0.01795,
+            "average_gas_price": 0.02692,
+            "high_gas_price": 0.0359
+          },
+          {
+            "denom": "ibc/3607EB5B5E64DD1C0E12E07F077FF470D5BC4706AFCBC98FE1BA960E5AE4CE07",
+            "fixed_min_gas_price": 0.65943,
+            "low_gas_price": 0.65943,
+            "average_gas_price": 0.98915,
+            "high_gas_price": 1.31887
+          },
+          {
+            "denom": "ibc/F3AA7EF362EC5E791FE78A0F4CCC69FEE1F9A7485EB1A8CAB3F6601C00522F10",
+            "fixed_min_gas_price": 160416396197,
+            "low_gas_price": 160416396197,
+            "average_gas_price": 240624594296,
+            "high_gas_price": 320832792394
+          },
+          {
+            "denom": "ibc/EFF323CC632EC4F747C61BCE238A758EFDB7699C3226565F7C20DA06509D59A5",
+            "fixed_min_gas_price": 0.02689,
+            "low_gas_price": 0.02689,
+            "average_gas_price": 0.04034,
+            "high_gas_price": 0.05379
+          },
+          {
+            "denom": "ibc/DA59C009A0B3B95E0549E6BF7B075C8239285989FF457A8EDDBB56F10B2A6986",
+            "fixed_min_gas_price": 0.01495,
+            "low_gas_price": 0.01495,
+            "average_gas_price": 0.02243,
+            "high_gas_price": 0.02991
+          },
+          {
+            "denom": "ibc/A358D7F19237777AF6D8AD0E0F53268F8B18AE8A53ED318095C14D6D7F3B2DB5",
+            "fixed_min_gas_price": 0.03139,
+            "low_gas_price": 0.03139,
+            "average_gas_price": 0.04709,
+            "high_gas_price": 0.06278
+          },
+          {
+            "denom": "ibc/4F393C3FCA4190C0A6756CE7F6D897D5D1BE57D6CCB80D0BC87393566A7B6602",
+            "fixed_min_gas_price": 0.90403,
+            "low_gas_price": 0.90403,
+            "average_gas_price": 1.35605,
+            "high_gas_price": 1.80806
+          },
+          {
+            "denom": "ibc/004EBF085BBED1029326D56BE8A2E67C08CECE670A94AC1947DF413EF5130EB2",
+            "fixed_min_gas_price": 559196837,
+            "low_gas_price": 559196837,
+            "average_gas_price": 838795256,
+            "high_gas_price": 1118393675
+          },
+          {
+            "denom": "ibc/1B38805B1C75352B28169284F96DF56BDEBD9E8FAC005BDCC8CF0378C82AA8E7",
+            "fixed_min_gas_price": 5772801,
+            "low_gas_price": 5772801,
+            "average_gas_price": 8659201,
+            "high_gas_price": 11545602
+          },
+          {
+            "denom": "factory/kujira1643jxg8wasy5cfcn7xm8rd742yeazcksqlg4d7/umnta",
+            "fixed_min_gas_price": 0.01807,
+            "low_gas_price": 0.01807,
+            "average_gas_price": 0.02711,
+            "high_gas_price": 0.03615
+          },
+          {
+            "denom": "ibc/FE98AAD68F02F03565E9FA39A5E627946699B2B07115889ED812D8BA639576A9",
+            "fixed_min_gas_price": 0.01194,
+            "low_gas_price": 0.01194,
+            "average_gas_price": 0.01792,
+            "high_gas_price": 0.02389
+          },
+          {
+            "denom": "ibc/E5CA126979E2FFB4C70C072F8094D07ECF27773B37623AD2BF7582AD0726F0F3",
+            "fixed_min_gas_price": 0.00019,
+            "low_gas_price": 0.00019,
+            "average_gas_price": 0.00029,
+            "high_gas_price": 0.00039
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ukuji"
+          }
+        ]
+      },
+      "description": "A decentralized ecosystem for protocols, builders and web3 users seeking sustainable FinTech.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://kujira-rpc.polkachu.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://kujira-api.polkachu.com/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://finder.kujira.app/kaiyo-1/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "tgrade",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Tgrade",
+      "chain_id": "tgrade-mainnet-1",
+      "bech32_prefix": "tgrade",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "tgrade",
+        "bech32PrefixAccPub": "tgradepub",
+        "bech32PrefixValAddr": "tgradevaloper",
+        "bech32PrefixValPub": "tgradevaloperpub",
+        "bech32PrefixConsAddr": "tgradevalcons",
+        "bech32PrefixConsPub": "tgradevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "utgd",
+            "fixed_min_gas_price": 0.05,
+            "low_gas_price": 0.05,
+            "average_gas_price": 0.075,
+            "high_gas_price": 0.1
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "utgd"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.mainnet-1.tgrade.confio.run"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.mainnet-1.tgrade.confio.run"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://tgrade.aneka.io/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
+    },
+    {
+      "chain_name": "echelon",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Echelon",
+      "chain_id": "echelon_3000-3",
+      "bech32_prefix": "echelon",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "echelon",
+        "bech32PrefixAccPub": "echelonpub",
+        "bech32PrefixValAddr": "echelonvaloper",
+        "bech32PrefixValPub": "echelonvaloperpub",
+        "bech32PrefixConsAddr": "echelonvalcons",
+        "bech32PrefixConsPub": "echelonvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "aechelon",
+            "low_gas_price": 10000000000,
+            "average_gas_price": 25000000000,
+            "high_gas_price": 40000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "aechelon"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-echelon.whispernode.com/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-echelon.whispernode.com/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/echelon/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "odin",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Odin Protocol",
+      "chain_id": "odin-mainnet-freya",
+      "bech32_prefix": "odin",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "odin",
+        "bech32PrefixAccPub": "odinpub",
+        "bech32PrefixValAddr": "odinvaloper",
+        "bech32PrefixValPub": "odinvaloperpub",
+        "bech32PrefixConsAddr": "odinvalcons",
+        "bech32PrefixConsPub": "odinvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "loki",
+            "fixed_min_gas_price": 0.0125,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.05,
+            "high_gas_price": 0.06
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "loki"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://node.odin-freya-website.odinprotocol.io/mainnet/a/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://node.odin-freya-website.odinprotocol.io/mainnet/a/api/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://scan.odinprotocol.io/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
+    },
+    {
+      "chain_name": "crescent",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Crescent",
+      "chain_id": "crescent-1",
+      "bech32_prefix": "cre",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "cre",
+        "bech32PrefixAccPub": "crepub",
+        "bech32PrefixValAddr": "crevaloper",
+        "bech32PrefixValPub": "crevaloperpub",
+        "bech32PrefixConsAddr": "crevalcons",
+        "bech32PrefixConsPub": "crevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ucre",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.03
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ucre"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://mainnet.crescent.network:26657"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://mainnet.crescent.network:1317"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/crescent/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "lumenx",
+      "status": "killed",
+      "network_type": "mainnet",
+      "pretty_name": "LumenX",
+      "chain_id": "LumenX",
+      "bech32_prefix": "lumen",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "lumen",
+        "bech32PrefixAccPub": "lumenpub",
+        "bech32PrefixValAddr": "lumenvaloper",
+        "bech32PrefixValPub": "lumenvaloperpub",
+        "bech32PrefixConsAddr": "lumenvalcons",
+        "bech32PrefixConsPub": "lumenvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ulumen",
+            "fixed_min_gas_price": 0.0025,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.03
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ulumen"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-lumenx.cryptonet.pl/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-lumenx.cryptonet.pl/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/lumenx/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "oraichain",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Oraichain",
+      "chain_id": "Oraichain",
+      "bech32_prefix": "orai",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "orai",
+        "bech32PrefixAccPub": "oraipub",
+        "bech32PrefixValAddr": "oraivaloper",
+        "bech32PrefixValPub": "oraivaloperpub",
+        "bech32PrefixConsAddr": "oraivalcons",
+        "bech32PrefixConsPub": "oraivalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "orai",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.003,
+            "average_gas_price": 0.005,
+            "high_gas_price": 0.007
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "orai"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.orai.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.orai.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://scan.orai.io/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "cudos",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Cudos",
+      "chain_id": "cudos-1",
+      "bech32_prefix": "cudos",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "cudos",
+        "bech32PrefixAccPub": "cudospub",
+        "bech32PrefixValAddr": "cudosvaloper",
+        "bech32PrefixValPub": "cudosvaloperpub",
+        "bech32PrefixConsAddr": "cudosvalcons",
+        "bech32PrefixConsPub": "cudosvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "acudos",
+            "low_gas_price": 5000000000000,
+            "average_gas_price": 10000000000000,
+            "high_gas_price": 20000000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "acudos"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.cudos.org"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.cudos.org"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.cudos.org/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "agoric",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Agoric",
+      "chain_id": "agoric-3",
+      "bech32_prefix": "agoric",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "agoric",
+        "bech32PrefixAccPub": "agoricpub",
+        "bech32PrefixValAddr": "agoricvaloper",
+        "bech32PrefixValPub": "agoricvaloperpub",
+        "bech32PrefixConsAddr": "agoricvalcons",
+        "bech32PrefixConsPub": "agoricvalconspub"
+      },
+      "slip44": 564,
+      "alternative_slip44s": [
+        118
+      ],
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ubld",
+            "low_gas_price": 0.03,
+            "average_gas_price": 0.05,
+            "high_gas_price": 0.07
+          },
+          {
+            "denom": "uist",
+            "low_gas_price": 0.0034,
+            "average_gas_price": 0.007,
+            "high_gas_price": 0.02
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ubld"
+          }
+        ]
+      },
+      "description": "The Agoric platform makes it safe and seamless to build decentralized apps using your existing JavaScript knowledge.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://main.rpc.agoric.net"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://main.api.agoric.net"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://agoric.bigdipper.live/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "stride",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Stride",
+      "chain_id": "stride-1",
+      "bech32_prefix": "stride",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "stride",
+        "bech32PrefixAccPub": "stridepub",
+        "bech32PrefixValAddr": "stridevaloper",
+        "bech32PrefixValPub": "stridevaloperpub",
+        "bech32PrefixConsAddr": "stridevalcons",
+        "bech32PrefixConsPub": "stridevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ustrd",
+            "fixed_min_gas_price": 0.0005,
+            "low_gas_price": 0.0005,
+            "average_gas_price": 0.001,
+            "high_gas_price": 0.002
+          },
+          {
+            "denom": "stuatom",
+            "fixed_min_gas_price": 0.0001,
+            "low_gas_price": 0.0001,
+            "average_gas_price": 0.0002,
+            "high_gas_price": 0.0005
+          },
+          {
+            "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
+            "fixed_min_gas_price": 0.0001,
+            "low_gas_price": 0.0001,
+            "average_gas_price": 0.0002,
+            "high_gas_price": 0.0005
+          },
+          {
+            "denom": "stuosmo",
+            "fixed_min_gas_price": 0.001,
+            "low_gas_price": 0.001,
+            "average_gas_price": 0.002,
+            "high_gas_price": 0.004
+          },
+          {
+            "denom": "ibc/D24B4564BCD51D3D02D9987D92571EAC5915676A9BD6D9B0C1D0254CB8A5EA34",
+            "fixed_min_gas_price": 0.001,
+            "low_gas_price": 0.001,
+            "average_gas_price": 0.002,
+            "high_gas_price": 0.004
+          },
+          {
+            "denom": "stustars",
+            "fixed_min_gas_price": 1,
+            "low_gas_price": 1,
+            "average_gas_price": 1.1,
+            "high_gas_price": 1.2
+          },
+          {
+            "denom": "ibc/7EAE5BEF3A26B64AFBD89828AFDDB1DC7024A0276D22745201632C40E6E634D0",
+            "fixed_min_gas_price": 1,
+            "low_gas_price": 1,
+            "average_gas_price": 1.1,
+            "high_gas_price": 1.2
+          },
+          {
+            "denom": "stujuno",
+            "fixed_min_gas_price": 0.075,
+            "low_gas_price": 0.075,
+            "average_gas_price": 0.1,
+            "high_gas_price": 0.125
+          },
+          {
+            "denom": "ibc/DA356E369C3E5CF6A9F1DCD99CE8ED55FBD595E676A5CF033CE784C060492D5A",
+            "fixed_min_gas_price": 0.075,
+            "low_gas_price": 0.075,
+            "average_gas_price": 0.1,
+            "high_gas_price": 0.125
+          },
+          {
+            "denom": "stuluna",
+            "fixed_min_gas_price": 0.0125,
+            "low_gas_price": 0.0125,
+            "average_gas_price": 0.015,
+            "high_gas_price": 0.04
+          },
+          {
+            "denom": "ibc/E61BCB1126F42A2ED73B4CEA2221C9635BC2102F0417543C38071779F991942E",
+            "fixed_min_gas_price": 0.0125,
+            "low_gas_price": 0.0125,
+            "average_gas_price": 0.015,
+            "high_gas_price": 0.04
+          },
+          {
+            "denom": "staevmos",
+            "fixed_min_gas_price": 250000000,
+            "low_gas_price": 20000000000,
+            "average_gas_price": 25000000000,
+            "high_gas_price": 40000000000
+          },
+          {
+            "denom": "ibc/4B322204B4F59D770680FE4D7A565DDC3F37BFF035474B717476C66A4F83DD72",
+            "fixed_min_gas_price": 250000000,
+            "low_gas_price": 20000000000,
+            "average_gas_price": 25000000000,
+            "high_gas_price": 40000000000
+          },
+          {
+            "denom": "stinj",
+            "fixed_min_gas_price": 500000000,
+            "low_gas_price": 500000000,
+            "average_gas_price": 700000000,
+            "high_gas_price": 900000000
+          },
+          {
+            "denom": "ibc/A7454562FF29FE068F42F9DE4805ABEF54F599D1720B345D6518D9B5C64EA6D2",
+            "fixed_min_gas_price": 500000000,
+            "low_gas_price": 500000000,
+            "average_gas_price": 700000000,
+            "high_gas_price": 900000000
+          },
+          {
+            "denom": "stucmdx",
+            "fixed_min_gas_price": 0.02,
+            "low_gas_price": 0.02,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          },
+          {
+            "denom": "ibc/EB66980014602E6BD50A1CB9FFB8FA694DC3EC10A48D2C1C649D732954F88D4A",
+            "fixed_min_gas_price": 0.02,
+            "low_gas_price": 0.02,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          },
+          {
+            "denom": "stuumee",
+            "fixed_min_gas_price": 0.1,
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.12,
+            "high_gas_price": 0.2
+          },
+          {
+            "denom": "ibc/1A2271226209D309902AFF4F21BD21237CB514DD24EA2EE0423BF74C6135D8B8",
+            "fixed_min_gas_price": 0.1,
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.12,
+            "high_gas_price": 0.2
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ustrd"
+          }
+        ]
+      },
+      "description": "Stride is a blockchain that provides liquidity for staked tokens. Using Stride, you can earn both taking and DeFi yields across the Cosmos IBC ecosystem.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://stride-rpc.polkachu.com/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://stride-api.polkachu.com/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.stride.zone/stride/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "rebus",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Rebus",
+      "chain_id": "reb_1111-1",
+      "bech32_prefix": "rebus",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "rebus",
+        "bech32PrefixAccPub": "rebuspub",
+        "bech32PrefixValAddr": "rebusvaloper",
+        "bech32PrefixValPub": "rebusvaloperpub",
+        "bech32PrefixConsAddr": "rebusvalcons",
+        "bech32PrefixConsPub": "rebusvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "arebus",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "arebus"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://api.mainnet.rebus.money:26657"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.mainnet.rebus.money:1317"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://rebus.explorers.guru/transaction/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "teritori",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Teritori",
+      "chain_id": "teritori-1",
+      "bech32_prefix": "tori",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "tori",
+        "bech32PrefixAccPub": "toripub",
+        "bech32PrefixValAddr": "torivaloper",
+        "bech32PrefixValPub": "torivaloperpub",
+        "bech32PrefixConsAddr": "torivalcons",
+        "bech32PrefixConsPub": "torivalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "utori",
+            "low_gas_price": 0,
+            "average_gas_price": 0.25,
+            "high_gas_price": 0.5
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "utori"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.mainnet.teritori.com/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.mainnet.teritori.com/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.teritori.com/teritori/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "lambda",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Lambda",
+      "chain_id": "lambda_92000-1",
+      "bech32_prefix": "lamb",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "lamb",
+        "bech32PrefixAccPub": "lambpub",
+        "bech32PrefixValAddr": "lambvaloper",
+        "bech32PrefixValPub": "lambvaloperpub",
+        "bech32PrefixConsAddr": "lambvalcons",
+        "bech32PrefixConsPub": "lambvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ulamb",
+            "low_gas_price": 10000000000,
+            "average_gas_price": 25000000000,
+            "high_gas_price": 40000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ulamb"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.lambda.im"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.lambda.im"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.nodestake.top/lambda/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "unification",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Unification",
+      "chain_id": "FUND-MainNet-2",
+      "bech32_prefix": "und",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "und",
+        "bech32PrefixAccPub": "undpub",
+        "bech32PrefixValAddr": "undvaloper",
+        "bech32PrefixValPub": "undvaloperpub",
+        "bech32PrefixConsAddr": "undvalcons",
+        "bech32PrefixConsPub": "undvalconspub"
+      },
+      "slip44": 5555,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "nund",
+            "fixed_min_gas_price": 25,
+            "low_gas_price": 100,
+            "average_gas_price": 200,
+            "high_gas_price": 300
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "nund"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.unification.chainmasters.ninja"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.unification.chainmasters.ninja"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.unification.chainmasters.ninja/unification/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "jackal",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Jackal",
+      "chain_id": "jackal-1",
+      "bech32_prefix": "jkl",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "jkl",
+        "bech32PrefixAccPub": "jklpub",
+        "bech32PrefixValAddr": "jklvaloper",
+        "bech32PrefixValPub": "jklvaloperpub",
+        "bech32PrefixConsAddr": "jklvalcons",
+        "bech32PrefixConsPub": "jklvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ujkl",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.002,
+            "average_gas_price": 0.002,
+            "high_gas_price": 0.02
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ujkl"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.jackalprotocol.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.jackalprotocol.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/jackal/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "beezee",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "BeeZee",
+      "chain_id": "beezee-1",
+      "bech32_prefix": "bze",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "bze",
+        "bech32PrefixAccPub": "bzepub",
+        "bech32PrefixValAddr": "bzevaloper",
+        "bech32PrefixValPub": "bzevaloperpub",
+        "bech32PrefixConsAddr": "bzevalcons",
+        "bech32PrefixConsPub": "bzevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ubze",
+            "fixed_min_gas_price": 0.01,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ubze"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.getbze.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.getbze.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/beezee/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "acrechain",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Acrechain",
+      "chain_id": "acre_9052-1",
+      "bech32_prefix": "acre",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "acre",
+        "bech32PrefixAccPub": "acrepub",
+        "bech32PrefixValAddr": "acrevaloper",
+        "bech32PrefixValPub": "acrevaloperpub",
+        "bech32PrefixConsAddr": "acrevalcons",
+        "bech32PrefixConsPub": "acrevalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "aacre",
+            "fixed_min_gas_price": 250000000,
+            "low_gas_price": 20000000000,
+            "average_gas_price": 25000000000,
+            "high_gas_price": 40000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "aacre"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-acre.synergynodes.com/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-acre.synergynodes.com/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://cosmosrun.info/acre-mainnet/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "imversed",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Imversed",
+      "chain_id": "imversed_5555555-1",
+      "bech32_prefix": "imv",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "imv",
+        "bech32PrefixAccPub": "imvpub",
+        "bech32PrefixValAddr": "imvvaloper",
+        "bech32PrefixValPub": "imvvaloperpub",
+        "bech32PrefixConsAddr": "imvvalcons",
+        "bech32PrefixConsPub": "imvvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "aimv",
+            "fixed_min_gas_price": 250000000,
+            "low_gas_price": 20000000000,
+            "average_gas_price": 25000000000,
+            "high_gas_price": 40000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "aimv"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.imversed.network:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.imversed.network:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://txe.imversed.network/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "medasdigital",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Medas Digital Network",
+      "chain_id": "medasdigital-1",
+      "bech32_prefix": "medas",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "medas",
+        "bech32PrefixAccPub": "medaspub",
+        "bech32PrefixValAddr": "medasvaloper",
+        "bech32PrefixValPub": "medasvaloperpub",
+        "bech32PrefixConsAddr": "medasvalcons",
+        "bech32PrefixConsPub": "medasvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "umedas",
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.25,
+            "high_gas_price": 0.4
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "umedas"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.medas-digital.io:26657"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.medas-digital.io:1317"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/medasdigital/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "onomy",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Onomy",
+      "chain_id": "onomy-mainnet-1",
+      "bech32_prefix": "onomy",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "onomy",
+        "bech32PrefixAccPub": "onomypub",
+        "bech32PrefixValAddr": "onomyvaloper",
+        "bech32PrefixValPub": "onomyvaloperpub",
+        "bech32PrefixConsAddr": "onomyvalcons",
+        "bech32PrefixConsPub": "onomyvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "anom",
+            "low_gas_price": 0,
+            "average_gas_price": 0.03,
+            "high_gas_price": 0.06
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "anom"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-mainnet.onomy.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest-mainnet.onomy.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/onomy-protocol/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "planq",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Planq",
+      "chain_id": "planq_7070-2",
+      "bech32_prefix": "plq",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "plq",
+        "bech32PrefixAccPub": "plqpub",
+        "bech32PrefixValAddr": "plqvaloper",
+        "bech32PrefixValPub": "plqvaloperpub",
+        "bech32PrefixConsAddr": "plqvalcons",
+        "bech32PrefixConsPub": "plqvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "aplanq",
+            "fixed_min_gas_price": 20000000000,
+            "low_gas_price": 30000000000,
+            "average_gas_price": 35000000000,
+            "high_gas_price": 40000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "aplanq"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.planq.network/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.planq.network/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/planq/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "dyson",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Dyson Protocol",
+      "chain_id": "dyson-mainnet-01",
+      "bech32_prefix": "dys",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "dys",
+        "bech32PrefixAccPub": "dyspub",
+        "bech32PrefixValAddr": "dysvaloper",
+        "bech32PrefixValPub": "dysvaloperpub",
+        "bech32PrefixConsAddr": "dysvalcons",
+        "bech32PrefixConsPub": "dysvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "dys",
+            "low_gas_price": 0.0001,
+            "average_gas_price": 0.0002,
+            "high_gas_price": 0.0003
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "dys"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://dys-tm.dysonprotocol.com:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://dys-api.dysonprotocol.com:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.dys.dysonprotocol.com/dyson/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "mars",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Mars Hub",
+      "chain_id": "mars-1",
+      "bech32_prefix": "mars",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "mars",
+        "bech32PrefixAccPub": "marspub",
+        "bech32PrefixValAddr": "marsvaloper",
+        "bech32PrefixValPub": "marsvaloperpub",
+        "bech32PrefixConsAddr": "marsvalcons",
+        "bech32PrefixConsPub": "marsvalconspub"
+      },
+      "slip44": 118,
+      "alternative_slip44s": [
+        330
+      ],
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "umars",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0,
+            "high_gas_price": 0.01
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "umars"
+          }
+        ]
+      },
+      "description": "Lend, borrow and earn with an autonomous credit protocol in the Cosmos universe. Open to all, closed to none.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.marsprotocol.io/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.marsprotocol.io/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.marsprotocol.io/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "canto",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Canto",
+      "chain_id": "canto_7700-1",
+      "bech32_prefix": "canto",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "canto",
+        "bech32PrefixAccPub": "cantopub",
+        "bech32PrefixValAddr": "cantovaloper",
+        "bech32PrefixValPub": "cantovaloperpub",
+        "bech32PrefixConsAddr": "cantovalcons",
+        "bech32PrefixConsPub": "cantovalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "acanto",
+            "fixed_min_gas_price": 1000000000000,
+            "low_gas_price": 1000000000000,
+            "average_gas_price": 2000000000000,
+            "high_gas_price": 3000000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "acanto"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.canto.nodestake.top"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.canto.nodestake.top"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://cosmos-explorers.neobase.one/canto/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "quicksilver",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Quicksilver",
+      "chain_id": "quicksilver-2",
+      "bech32_prefix": "quick",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "quick",
+        "bech32PrefixAccPub": "quickpub",
+        "bech32PrefixValAddr": "quickvaloper",
+        "bech32PrefixValPub": "quickvaloperpub",
+        "bech32PrefixConsAddr": "quickvalcons",
+        "bech32PrefixConsPub": "quickvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uqck",
+            "fixed_min_gas_price": 0.0001,
+            "low_gas_price": 0.0001,
+            "average_gas_price": 0.0001,
+            "high_gas_price": 0.00025
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uqck"
+          }
+        ]
+      },
+      "description": "Liquid Stake your Cosmos assets with your preferred validator and receive liquid staked assets (qASSETs) that you can use for swapping, pooling, lending, and more, all while your original stake earns staking APY from securing the network.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-quicksilver.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-quicksilver.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/quicksilver/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "8ball",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "8ball",
+      "chain_id": "eightball-1",
+      "bech32_prefix": "8ball",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "8ball",
+        "bech32PrefixAccPub": "8ballpub",
+        "bech32PrefixValAddr": "8ballvaloper",
+        "bech32PrefixValPub": "8ballvaloperpub",
+        "bech32PrefixConsAddr": "8ballvalcons",
+        "bech32PrefixConsPub": "8ballvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uebl",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uebl"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.8ball.info"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.8ball.info"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.8ball.info/8ball/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "arkh",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Arkhadian",
+      "chain_id": "arkh",
+      "bech32_prefix": "arkh",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "arkh",
+        "bech32PrefixAccPub": "arkhpub",
+        "bech32PrefixValAddr": "arkhvaloper",
+        "bech32PrefixValPub": "arkhvaloperpub",
+        "bech32PrefixConsAddr": "arkhvalcons",
+        "bech32PrefixConsPub": "arkhvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "arkh",
+            "fixed_min_gas_price": 0.01,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.03
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "arkh"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://arkh-rpc.kynraze.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://arkh-api.kynraze.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.kynraze.com/arkhadian/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "noble",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Noble",
+      "chain_id": "noble-1",
+      "bech32_prefix": "noble",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "noble",
+        "bech32PrefixAccPub": "noblepub",
+        "bech32PrefixValAddr": "noblevaloper",
+        "bech32PrefixValPub": "noblevaloperpub",
+        "bech32PrefixConsAddr": "noblevalcons",
+        "bech32PrefixConsPub": "noblevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uusdc",
+            "fixed_min_gas_price": 0.1,
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.1,
+            "high_gas_price": 0.2
+          },
+          {
+            "denom": "ibc/EF48E6B1A1A19F47ECAEA62F5670C37C0580E86A9E88498B7E393EB6F49F33C0",
+            "fixed_min_gas_price": 0.01,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.01,
+            "high_gas_price": 0.02
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ustake"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "description": "The most reliable, secure, and frictionless way to natively issue a digital asset in Cosmos.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.mainnet.noble.strange.love"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.mainnet.noble.strange.love"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/noble/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "migaloo",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Migaloo",
+      "chain_id": "migaloo-1",
+      "bech32_prefix": "migaloo",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "migaloo",
+        "bech32PrefixAccPub": "migaloopub",
+        "bech32PrefixValAddr": "migaloovaloper",
+        "bech32PrefixValPub": "migaloovaloperpub",
+        "bech32PrefixConsAddr": "migaloovalcons",
+        "bech32PrefixConsPub": "migaloovalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uwhale",
+            "fixed_min_gas_price": 1,
+            "low_gas_price": 1,
+            "average_gas_price": 2,
+            "high_gas_price": 3
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uwhale"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://migaloo-rpc.lavenderfive.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://migaloo-api.lavenderfive.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/migaloo/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "omniflixhub",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "OmniFlix",
+      "chain_id": "omniflixhub-1",
+      "bech32_prefix": "omniflix",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "omniflix",
+        "bech32PrefixAccPub": "omniflixpub",
+        "bech32PrefixValAddr": "omniflixvaloper",
+        "bech32PrefixValPub": "omniflixvaloperpub",
+        "bech32PrefixConsAddr": "omniflixvalcons",
+        "bech32PrefixConsPub": "omniflixvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uflix",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.001,
+            "average_gas_price": 0.0025,
+            "high_gas_price": 0.025
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uflix"
+          }
+        ]
+      },
+      "description": "Decentralized media and network layer for Creators & Sovereign Communities powered by NFTs and related distribution protocols.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.omniflix.network"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.omniflix.network"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/omniflix/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "axelar",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Axelar",
+      "chain_id": "axelar-dojo-1",
+      "bech32_prefix": "axelar",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "axelar",
+        "bech32PrefixAccPub": "axelarpub",
+        "bech32PrefixValAddr": "axelarvaloper",
+        "bech32PrefixValPub": "axelarvaloperpub",
+        "bech32PrefixConsAddr": "axelarvalcons",
+        "bech32PrefixConsPub": "axelarvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uaxl",
+            "fixed_min_gas_price": 0.007,
+            "low_gas_price": 0.007,
+            "average_gas_price": 0.007,
+            "high_gas_price": 0.01
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uaxl"
+          }
+        ]
+      },
+      "description": "Axelar delivers secure cross-chain communication for Web3. Our infrastructure enables dApp users to interact with any asset or application, on any chain, with one click.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-axelar.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-axelar.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://axelarscan.io/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "axelar-evm-bridge"
+      ]
+    },
+    {
+      "chain_name": "bluzelle",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Bluzelle",
+      "chain_id": "bluzelle-9",
+      "bech32_prefix": "bluzelle",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "bluzelle",
+        "bech32PrefixAccPub": "bluzellepub",
+        "bech32PrefixValAddr": "bluzellevaloper",
+        "bech32PrefixValPub": "bluzellevaloperpub",
+        "bech32PrefixConsAddr": "bluzellevalcons",
+        "bech32PrefixConsPub": "bluzellevalconspub"
+      },
+      "slip44": 483,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ubnt",
+            "fixed_min_gas_price": 0.002,
+            "low_gas_price": 0.002,
+            "average_gas_price": 0.002,
+            "high_gas_price": 0.025
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ubnt"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://a.client.sentry.net.bluzelle.com:26657"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://a.client.sentry.net.bluzelle.com:1317"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://bd.explorer.net.bluzelle.com/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "gitopia",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Gitopia",
+      "chain_id": "gitopia",
+      "bech32_prefix": "gitopia",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "gitopia",
+        "bech32PrefixAccPub": "gitopiapub",
+        "bech32PrefixValAddr": "gitopiavaloper",
+        "bech32PrefixValPub": "gitopiavaloperpub",
+        "bech32PrefixConsAddr": "gitopiavalcons",
+        "bech32PrefixConsPub": "gitopiavalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ulore",
+            "fixed_min_gas_price": 0.001,
+            "low_gas_price": 0.0012,
+            "average_gas_price": 0.0016,
+            "high_gas_price": 0.0024
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ulore"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "description": "Gitopia is the next-generation Code Collaboration Platform fuelled by a decentralized network and interactive token economy. It is designed to optimize the open-source software development process through collaboration, transparency, and incentivization.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-gitopia.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-gitopia.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/gitopia/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "nolus",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Nolus",
+      "chain_id": "pirin-1",
+      "bech32_prefix": "nolus",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "nolus",
+        "bech32PrefixAccPub": "noluspub",
+        "bech32PrefixValAddr": "nolusvaloper",
+        "bech32PrefixValPub": "nolusvaloperpub",
+        "bech32PrefixConsAddr": "nolusvalcons",
+        "bech32PrefixConsPub": "nolusvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "unls",
+            "low_gas_price": 0,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.05
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "unls"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "description": "Elevate your game with up to 3x equity. Dive into a world of minimized risks and unlock the full potential of your assets.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://pirin-cl.nolus.network:26657"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://pirin-cl.nolus.network:1317"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.nolus.io/pirin-1/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "neutron",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Neutron",
+      "chain_id": "neutron-1",
+      "bech32_prefix": "neutron",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "neutron",
+        "bech32PrefixAccPub": "neutronpub",
+        "bech32PrefixValAddr": "neutronvaloper",
+        "bech32PrefixValPub": "neutronvaloperpub",
+        "bech32PrefixConsAddr": "neutronvalcons",
+        "bech32PrefixConsPub": "neutronvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "untrn",
+            "low_gas_price": 0.075,
+            "average_gas_price": 0.075,
+            "high_gas_price": 0.1125
+          },
+          {
+            "denom": "ibc/C4CFF46FD6DE35CA4CF4CE031E643C8FDC9BA4B99AE598E9B0ED98FE3A2319F9",
+            "low_gas_price": 0.007,
+            "average_gas_price": 0.007,
+            "high_gas_price": 0.0105
+          },
+          {
+            "denom": "ibc/F082B65C88E4B6D5EF1DB243CDA1D331D002759E938A0F5CD3FFDC5D53B3E349",
+            "low_gas_price": 0.08,
+            "average_gas_price": 0.08,
+            "high_gas_price": 0.12
+          },
+          {
+            "denom": "factory/neutron1ug740qrkquxzrk2hh29qrlx3sktkfml3je7juusc2te7xmvsscns0n2wry/wstETH",
+            "low_gas_price": 30125586.037,
+            "average_gas_price": 30125586.037,
+            "high_gas_price": 45188379.0555
+          },
+          {
+            "denom": "ibc/2CB87BCE0937B1D1DFCEE79BE4501AAF3C265E923509AEAC410AD85D27F35130",
+            "low_gas_price": 25641025641.026,
+            "average_gas_price": 25641025641.026,
+            "high_gas_price": 38461538461.5
+          },
+          {
+            "denom": "ibc/773B4D0A3CD667B2275D5A4A7A2F0909C0BA0F4059C0B9181E680DDF4965DCC7",
+            "low_gas_price": 0.006,
+            "average_gas_price": 0.006,
+            "high_gas_price": 0.009
+          },
+          {
+            "denom": "ibc/B7864B03E1B9FD4F049243E92ABD691586F682137037A9F3FCA5222815620B3C",
+            "low_gas_price": 0.006,
+            "average_gas_price": 0.006,
+            "high_gas_price": 0.009
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "untrn"
+          }
+        ]
+      },
+      "description": "The most secure CosmWasm platform in Cosmos, Neutron lets smart-contracts leverage bleeding-edge Interchain technology with minimal overhead.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-neutron.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-neutron.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/neutron/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "composable",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Composable",
+      "chain_id": "centauri-1",
+      "bech32_prefix": "centauri",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "centauri",
+        "bech32PrefixAccPub": "centauripub",
+        "bech32PrefixValAddr": "centaurivaloper",
+        "bech32PrefixValPub": "centaurivaloperpub",
+        "bech32PrefixConsAddr": "centaurivalcons",
+        "bech32PrefixConsPub": "centaurivalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ppica",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0,
+            "high_gas_price": 0
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ppica"
+          }
+        ]
+      },
+      "description": "Composable is the base layer connecting L1s and L2s. We are scaling IBC to other ecosystems, pushing the boundaries of trust-minimized interoperability. We abstract the cross-chain experience for users, delivering seamless chain-agnostic execution of user intentions.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-composable-ia.cosmosia.notional.ventures"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-composable-ia.cosmosia.notional.ventures"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/Centauri/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "realio",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Realio Network",
+      "chain_id": "realionetwork_3301-1",
+      "bech32_prefix": "realio",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "realio",
+        "bech32PrefixAccPub": "realiopub",
+        "bech32PrefixValAddr": "realiovaloper",
+        "bech32PrefixValPub": "realiovaloperpub",
+        "bech32PrefixConsAddr": "realiovalcons",
+        "bech32PrefixConsPub": "realiovalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ario",
+            "fixed_min_gas_price": 1000000000,
+            "low_gas_price": 4000000000,
+            "average_gas_price": 5000000000,
+            "high_gas_price": 8000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ario"
+          },
+          {
+            "denom": "arst"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://realio-rpc.genznodes.dev"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://realio-api.genznodes.dev"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.genznodes.dev/realio/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "quasar",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Quasar",
+      "chain_id": "quasar-1",
+      "bech32_prefix": "quasar",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "quasar",
+        "bech32PrefixAccPub": "quasarpub",
+        "bech32PrefixValAddr": "quasarvaloper",
+        "bech32PrefixValPub": "quasarvaloperpub",
+        "bech32PrefixConsAddr": "quasarvalcons",
+        "bech32PrefixConsPub": "quasarvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ibc/0471F1C4E7AFD3F07702BEF6DC365268D64570F7C1FDC98EA6098DD6DE59817B",
+            "fixed_min_gas_price": 0.01,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.03
+          },
+          {
+            "denom": "ibc/FA0006F056DB6719B8C16C551FC392B62F5729978FC0B125AC9A432DBB2AA1A5",
+            "fixed_min_gas_price": 0.01,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.03
+          },
+          {
+            "denom": "ibc/FA7775734CC73176B7425910DE001A1D2AD9B6D9E93129A5D0750EAD13E4E63A",
+            "fixed_min_gas_price": 0.01,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.03
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uqsr"
+          }
+        ]
+      },
+      "description": "Quasar is the first decentralized asset management (D.A.M.) platform enabled by IBC. A secure, permissionless, composable, and diversified interchain DeFi experience is finally here.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://quasar-rpc.polkachu.com/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://quasar-api.polkachu.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/quasar/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "archway",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Archway",
+      "chain_id": "archway-1",
+      "bech32_prefix": "archway",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "archway",
+        "bech32PrefixAccPub": "archwaypub",
+        "bech32PrefixValAddr": "archwayvaloper",
+        "bech32PrefixValPub": "archwayvaloperpub",
+        "bech32PrefixConsAddr": "archwayvalcons",
+        "bech32PrefixConsPub": "archwayvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "aarch",
+            "fixed_min_gas_price": 900000000000,
+            "low_gas_price": 1000000000000,
+            "average_gas_price": 1500000000000,
+            "high_gas_price": 2000000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "aarch"
+          }
+        ],
+        "lock_duration": {
+          "time": "1209600s"
+        }
+      },
+      "description": "An incentivized L1 blockchain that allows developers to capture the value their dapps create, enabling sustainable economic models.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.mainnet.archway.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.mainnet.archway.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/archway/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "empowerchain",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "EmpowerChain",
+      "chain_id": "empowerchain-1",
+      "bech32_prefix": "empower",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "empower",
+        "bech32PrefixAccPub": "empowerpub",
+        "bech32PrefixValAddr": "empowervaloper",
+        "bech32PrefixValPub": "empowervaloperpub",
+        "bech32PrefixConsAddr": "empowervalcons",
+        "bech32PrefixConsPub": "empowervalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "umpwr",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.03
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "umpwr"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://empower-rpc.polkachu.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://empower-api.polkachu.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/empower/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "kyve",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "KYVE",
+      "chain_id": "kyve-1",
+      "bech32_prefix": "kyve",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "kyve",
+        "bech32PrefixAccPub": "kyvepub",
+        "bech32PrefixValAddr": "kyvevaloper",
+        "bech32PrefixValPub": "kyvevaloperpub",
+        "bech32PrefixConsAddr": "kyvevalcons",
+        "bech32PrefixConsPub": "kyvevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ukyve",
+            "fixed_min_gas_price": 0.02,
+            "low_gas_price": 0.02,
+            "average_gas_price": 0.03,
+            "high_gas_price": 0.06
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ukyve"
+          }
+        ]
+      },
+      "description": "Revolutionizing data reliability in the Web3 space, KYVE Network provides fast and easy tooling for data validation, immutability, and retrieval, ensuring trustless data for seamless scalability and eliminating data risks and roadblocks.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-eu-1.kyve.network"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-eu-1.kyve.network"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://mintscan.io/kyve/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "sei",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Sei",
+      "chain_id": "pacific-1",
+      "bech32_prefix": "sei",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "sei",
+        "bech32PrefixAccPub": "seipub",
+        "bech32PrefixValAddr": "seivaloper",
+        "bech32PrefixValPub": "seivaloperpub",
+        "bech32PrefixConsAddr": "seivalcons",
+        "bech32PrefixConsPub": "seivalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "usei",
+            "fixed_min_gas_price": 0.1,
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.1,
+            "high_gas_price": 0.25
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "usei"
+          }
+        ]
+      },
+      "description": "Sei is the fastest Layer 1 blockchain, designed to scale with the industry.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.wallet.pacific-1.sei.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.wallet.pacific-1.sei.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/sei/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "passage",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Passage",
+      "chain_id": "passage-2",
+      "bech32_prefix": "pasg",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "pasg",
+        "bech32PrefixAccPub": "pasgpub",
+        "bech32PrefixValAddr": "pasgvaloper",
+        "bech32PrefixValPub": "pasgvaloperpub",
+        "bech32PrefixConsAddr": "pasgvalcons",
+        "bech32PrefixConsPub": "pasgvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "upasg",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.001,
+            "average_gas_price": 0.0025,
+            "high_gas_price": 0.01
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "upasg"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.passage.vitwit.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.passage.vitwit.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/passage/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "gateway",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Wormhole Gateway",
+      "chain_id": "wormchain",
+      "bech32_prefix": "wormhole",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "wormhole",
+        "bech32PrefixAccPub": "wormholepub",
+        "bech32PrefixValAddr": "wormholevaloper",
+        "bech32PrefixValPub": "wormholevaloperpub",
+        "bech32PrefixConsAddr": "wormholevalcons",
+        "bech32PrefixConsPub": "wormholevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "utest",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0,
+            "high_gas_price": 0
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uworm"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://wormchain-rpc.quickapi.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://wormchain-lcd.quickapi.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://bigdipper.live/wormhole/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "xpla",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "XPLA",
+      "chain_id": "dimension_37-1",
+      "bech32_prefix": "xpla",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "xpla",
+        "bech32PrefixAccPub": "xplapub",
+        "bech32PrefixValAddr": "xplavaloper",
+        "bech32PrefixValPub": "xplavaloperpub",
+        "bech32PrefixConsAddr": "xplavalcons",
+        "bech32PrefixConsPub": "xplavalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "axpla",
+            "fixed_min_gas_price": 850000000000,
+            "low_gas_price": 850000000000,
+            "average_gas_price": 1147500000000,
+            "high_gas_price": 1487500000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "axpla"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://dimension-rpc.xpla.dev"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://dimension-lcd.xpla.dev"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.xpla.io/mainnet/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "eth-address-gen",
+        "eth-key-sign",
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "sge",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "SGE",
+      "chain_id": "sgenet-1",
+      "bech32_prefix": "sge",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "sge",
+        "bech32PrefixAccPub": "sgepub",
+        "bech32PrefixValAddr": "sgevaloper",
+        "bech32PrefixValPub": "sgevaloperpub",
+        "bech32PrefixConsAddr": "sgevalcons",
+        "bech32PrefixConsPub": "sgevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "usge",
+            "fixed_min_gas_price": 0.001,
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.25,
+            "high_gas_price": 0.5
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "usge"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://sge-priv-rpc.kingnodes.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://sge-priv-rest.kingnodes.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://blockexplorer.sgenetwork.io/sge/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "stafihub",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "StaFi Hub",
+      "chain_id": "stafihub-1",
+      "bech32_prefix": "stafi",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "stafi",
+        "bech32PrefixAccPub": "stafipub",
+        "bech32PrefixValAddr": "stafivaloper",
+        "bech32PrefixValPub": "stafivaloperpub",
+        "bech32PrefixConsAddr": "stafivalcons",
+        "bech32PrefixConsPub": "stafivalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ufis",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ufis"
+          }
+        ],
+        "lock_duration": {
+          "time": "1209600s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://public-rpc1.stafihub.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://public-rest-rpc1.stafihub.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/stafi/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "doravota",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Dora Vota",
+      "chain_id": "vota-ash",
+      "bech32_prefix": "dora",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "dora",
+        "bech32PrefixAccPub": "dorapub",
+        "bech32PrefixValAddr": "doravaloper",
+        "bech32PrefixValPub": "doravaloperpub",
+        "bech32PrefixConsAddr": "doravalcons",
+        "bech32PrefixConsPub": "doravalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "peaka",
+            "fixed_min_gas_price": 100000000000,
+            "low_gas_price": 100000000000,
+            "average_gas_price": 100000000000,
+            "high_gas_price": 100000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "peaka"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://vota-rpc.dorafactory.org"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://vota-rest.dorafactory.org"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://vota-explorer.dorafactory.org/doravota/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "coreum",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Coreum",
+      "chain_id": "coreum-mainnet-1",
+      "bech32_prefix": "core",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "core",
+        "bech32PrefixAccPub": "corepub",
+        "bech32PrefixValAddr": "corevaloper",
+        "bech32PrefixValPub": "corevaloperpub",
+        "bech32PrefixConsAddr": "corevalcons",
+        "bech32PrefixConsPub": "corevalconspub"
+      },
+      "slip44": 990,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ucore",
+            "fixed_min_gas_price": 0.03125,
+            "low_gas_price": 0.0625,
+            "average_gas_price": 0.0625,
+            "high_gas_price": 62.5
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ucore"
+          }
+        ],
+        "lock_duration": {
+          "time": "168h"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://full-node.mainnet-1.coreum.dev:26657"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://full-node.mainnet-1.coreum.dev:1317"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/coreum/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "celestia",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Celestia",
+      "chain_id": "celestia",
+      "bech32_prefix": "celestia",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "celestia",
+        "bech32PrefixAccPub": "celestiapub",
+        "bech32PrefixValAddr": "celestiavaloper",
+        "bech32PrefixValPub": "celestiavaloperpub",
+        "bech32PrefixConsAddr": "celestiavalcons",
+        "bech32PrefixConsPub": "celestiavalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "utia",
+            "fixed_min_gas_price": 0.002,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.02,
+            "high_gas_price": 0.1
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "utia"
+          }
+        ]
+      },
+      "description": "Celestia is a modular data availability network that securely scales with the number of users, making it easy for anyone to launch their own blockchain.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-celestia.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-celestia.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/celestia/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "dydx",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "dYdX Protocol",
+      "chain_id": "dydx-mainnet-1",
+      "bech32_prefix": "dydx",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "dydx",
+        "bech32PrefixAccPub": "dydxpub",
+        "bech32PrefixValAddr": "dydxvaloper",
+        "bech32PrefixValPub": "dydxvaloperpub",
+        "bech32PrefixConsAddr": "dydxvalcons",
+        "bech32PrefixConsPub": "dydxvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "adydx",
+            "fixed_min_gas_price": 12500000000,
+            "low_gas_price": 12500000000,
+            "average_gas_price": 12500000000,
+            "high_gas_price": 20000000000
+          },
+          {
+            "denom": "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5",
+            "fixed_min_gas_price": 0.025,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.03
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "adydx"
+          }
+        ]
+      },
+      "description": "Our goal is to build open source code that can power a first class product and trading experience.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://dydx-rpc.lavenderfive.com:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://dydx-api.lavenderfive.com:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/dydx/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "fxcore",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "f(x)Core",
+      "chain_id": "fxcore",
+      "bech32_prefix": "fx",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "fx",
+        "bech32PrefixAccPub": "fxpub",
+        "bech32PrefixValAddr": "fxvaloper",
+        "bech32PrefixValPub": "fxvaloperpub",
+        "bech32PrefixConsAddr": "fxvalcons",
+        "bech32PrefixConsPub": "fxvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "FX",
+            "fixed_min_gas_price": 4000000000000,
+            "low_gas_price": 4000000000000,
+            "average_gas_price": 4200000000000,
+            "high_gas_price": 5000000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "FX"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://fx-json.functionx.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://fx-rest.functionx.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://starscan.io/fxcore/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "nomic",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Nomic",
+      "chain_id": "nomic-stakenet-3",
+      "bech32_prefix": "nomic",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "nomic",
+        "bech32PrefixAccPub": "nomic",
+        "bech32PrefixConsAddr": "nomic",
+        "bech32PrefixConsPub": "nomic",
+        "bech32PrefixValAddr": "nomic",
+        "bech32PrefixValPub": "nomic"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "unom",
+            "low_gas_price": 0,
+            "average_gas_price": 0,
+            "high_gas_price": 0
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "unom"
+          }
+        ],
+        "lock_duration": {
+          "time": "1209600s"
+        }
+      },
+      "description": "The superior way to use Bitcoin in Cosmos DeFi. Use IBC to securely and efficiently bridge your BTC to Osmosis and more.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://stakenet-rpc.nomic.io:2096"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://app.nomic.io:8443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://bigdipper.live/nomic/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "nois",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Nois",
+      "chain_id": "nois-1",
+      "bech32_prefix": "nois",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "nois",
+        "bech32PrefixAccPub": "noispub",
+        "bech32PrefixValAddr": "noisvaloper",
+        "bech32PrefixValPub": "noisvaloperpub",
+        "bech32PrefixConsAddr": "noisvalcons",
+        "bech32PrefixConsPub": "noisvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "unois",
+            "fixed_min_gas_price": 0.05,
+            "low_gas_price": 0.05,
+            "average_gas_price": 0.05,
+            "high_gas_price": 0.1
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "unois"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://nois-rpc.lavenderfive.com:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://nois-api.lavenderfive.com:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://app.ezstaking.io/nois/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "qwoyn",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Qwoyn",
+      "chain_id": "qwoyn-1",
+      "bech32_prefix": "qwoyn",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "qwoyn",
+        "bech32PrefixAccPub": "qwoynpub",
+        "bech32PrefixValAddr": "qwoynvaloper",
+        "bech32PrefixValPub": "qwoynvaloperpub",
+        "bech32PrefixConsAddr": "qwoynvalcons",
+        "bech32PrefixConsPub": "qwoynvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uqwoyn",
+            "fixed_min_gas_price": 0.03,
+            "low_gas_price": 0.03,
+            "average_gas_price": 0.05,
+            "high_gas_price": 0.075
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uqwoyn"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.qwoyn.studio:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.qwoyn.studio:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.theamsolutions.info/qwoyn-main/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "source",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Source",
+      "chain_id": "source-1",
+      "bech32_prefix": "source",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "source",
+        "bech32PrefixAccPub": "sourcepub",
+        "bech32PrefixValAddr": "sourcevaloper",
+        "bech32PrefixValPub": "sourcevaloperpub",
+        "bech32PrefixConsAddr": "sourcevalcons",
+        "bech32PrefixConsPub": "sourcevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "usource",
+            "fixed_min_gas_price": 0.05,
+            "low_gas_price": 0.05,
+            "average_gas_price": 0.075,
+            "high_gas_price": 0.1
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "usource"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.source.tcnetwork.io/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.source.tcnetwork.io/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.tcnetwork.io/source/transaction/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "haqq",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Haqq Network",
+      "chain_id": "haqq_11235-1",
+      "bech32_prefix": "haqq",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "haqq",
+        "bech32PrefixAccPub": "haqqpub",
+        "bech32PrefixValAddr": "haqqvaloper",
+        "bech32PrefixValPub": "haqqvaloperpub",
+        "bech32PrefixConsAddr": "haqqvalcons",
+        "bech32PrefixConsPub": "haqqvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "aISLM",
+            "fixed_min_gas_price": 250000000,
+            "low_gas_price": 20000000000,
+            "average_gas_price": 25000000000,
+            "high_gas_price": 40000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "aISLM"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.tm.haqq.network/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.cosmos.haqq.network/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/haqq/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "pundix",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Pundi X Chain",
+      "chain_id": "PUNDIX",
+      "bech32_prefix": "px",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "px",
+        "bech32PrefixAccPub": "pxpub",
+        "bech32PrefixValAddr": "pxvaloper",
+        "bech32PrefixValPub": "pxvaloperpub",
+        "bech32PrefixConsAddr": "pxvalcons",
+        "bech32PrefixConsPub": "pxvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ibc/55367B7B6572631B78A93C66EF9FDFCE87CDE372CC4ED7848DA78C1EB1DCDD78",
+            "fixed_min_gas_price": 2000000000000,
+            "low_gas_price": 2000000000000,
+            "average_gas_price": 2500000000000,
+            "high_gas_price": 3000000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ibc/55367B7B6572631B78A93C66EF9FDFCE87CDE372CC4ED7848DA78C1EB1DCDD78"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://px-json.pundix.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://px-rest.pundix.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://starscan.io/pundix/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "nyx",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Nym",
+      "chain_id": "nyx",
+      "bech32_prefix": "n",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "n",
+        "bech32PrefixAccPub": "npub",
+        "bech32PrefixValAddr": "nvaloper",
+        "bech32PrefixValPub": "nvaloperpub",
+        "bech32PrefixConsAddr": "nvalcons",
+        "bech32PrefixConsPub": "nvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "unym",
+            "fixed_min_gas_price": 0.025,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          },
+          {
+            "denom": "unyx",
+            "fixed_min_gas_price": 0.025,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "unyx"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.nymtech.net"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.nymtech.net"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/nyx/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm"
+      ]
+    }
+  ]
+}

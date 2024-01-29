@@ -1,0 +1,36 @@
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+name: Pull request workflow
+jobs:
+  validate_zone_data:
+    name: Validate Zone Data
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        shell: bash
+    
+    steps:
+    
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+          
+      - name: Git Sumbodule Update
+        run: |
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
+          
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19.6.0
+          
+      - name: Run code to Validate Zone Data
+        working-directory: ./.github/workflows/utility
+        run: node validate_zone_files.mjs

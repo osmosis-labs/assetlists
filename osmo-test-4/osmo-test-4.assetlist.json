@@ -1,5 +1,5 @@
 {
-  "chain_name": "osmosistestnet",
+  "chain_name": "osmosistestnet4",
   "assets": [
     {
       "description": "The native token of Osmosis",
@@ -19,6 +19,7 @@
       "name": "Osmosis",
       "display": "osmo",
       "symbol": "OSMO",
+      "traces": [],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
@@ -26,7 +27,9 @@
       "coingecko_id": "osmosis",
       "keywords": [
         "dex",
-        "staking"
+        "staking",
+        "osmosis-info",
+        "osmosis-price:ibc/FF3065989E34457F342D4EFB8692406D49D4E2B5C70F725F127862E22CE6BDCD:766"
       ]
     },
     {
@@ -44,13 +47,16 @@
       "name": "Ion",
       "display": "ion",
       "symbol": "ION",
+      "traces": [],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
       },
       "coingecko_id": "ion",
       "keywords": [
-        "memecoin"
+        "memecoin",
+        "osmosis-info",
+        "osmosis-price:uosmo:2"
       ]
     },
     {
@@ -68,11 +74,20 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/FF3065989E34457F342D4EFB8692406D49D4E2B5C70F725F127862E22CE6BDCD",
       "name": "USD Coin",
       "display": "ausdc",
       "symbol": "aUSDC",
       "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Circle"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -98,7 +113,10 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.svg"
       },
-      "coingecko_id": "usd-coin"
+      "coingecko_id": "usd-coin",
+      "keywords": [
+        "osmosis-info"
+      ]
     },
     {
       "description": "Wrapped Ether on Axelar",
@@ -115,11 +133,20 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/0BE7C3DAC50BB1C34565C76F01944DCC79B50CF359B63149B9E04E2A6736A6E6",
       "name": "Wrapped Ether",
       "display": "weth",
       "symbol": "wETH",
       "traces": [
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "ethereumtestnet",
+            "base_denom": "wei"
+          },
+          "provider": "Ethereum"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -161,11 +188,23 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/D38FD4C586C397DDAAB715C654DAEE3C3C40462CD410254AC7576208E947605B",
       "name": "Wrapped BNB",
       "display": "wbnb",
       "symbol": "wBNB",
       "traces": [
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "binancesmartchaintestnet",
+            "base_denom": "wei"
+          },
+          "chain": {
+            "contract": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd"
+          },
+          "provider": "Binance"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -208,11 +247,20 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/16F3EB18413FD15154B02F9929473A3C0A23902BF8044157E9E5E0FBEB24FCEE",
       "name": "Wrapped Matic",
       "display": "wmatic",
       "symbol": "wMATIC",
       "traces": [
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "polygontestnet",
+            "base_denom": "wei"
+          },
+          "provider": "Polygon"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -254,11 +302,20 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/7186C4B1A0596A1AB34C201E27D659B4A9837B46A328BCE5C0E452CD7146BC8F",
       "name": "Wrapped AVAX",
       "display": "avax",
       "symbol": "wAVAX",
       "traces": [
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "avalanchetestnet",
+            "base_denom": "wei"
+          },
+          "provider": "Avalanche"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -299,11 +356,20 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/3A8B6E50B8050FC8CD704CD48C7922EA221B5FDA672517E243DDFF603FF896ED",
       "name": "Wrapped Moonbeam",
       "display": "wglmr",
       "symbol": "wGLMR",
       "traces": [
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "moonbeamtestnet",
+            "base_denom": "Wei"
+          },
+          "provider": "Moonbeam"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -346,6 +412,7 @@
           "exponent": 6
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/ACA4C8A815A053CC027DB90D15915ADA31939FA331CE745862CDD00A2904FA17",
       "name": "Mars",
       "display": "mars",
@@ -365,8 +432,13 @@
         }
       ],
       "logo_URIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/marstestnet/images/mars.svg"
-      }
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.svg"
+      },
+      "keywords": [
+        "osmosis-info",
+        "osmosis-price:uosmo:768"
+      ]
     },
     {
       "description": "Wrapped FTM on Axelar.",
@@ -383,11 +455,23 @@
           "exponent": 18
         }
       ],
+      "type_asset": "ics20",
       "base": "ibc/F9E624EB89ABEE4CB1EC04D7941F613BD8383EE7DE323589A82066D0345EF6EB",
       "name": "Wrapped FTM",
       "display": "ftm",
       "symbol": "wFTM",
       "traces": [
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "fantomtestnet",
+            "base_denom": "wei"
+          },
+          "chain": {
+            "contract": "0x812666209b90344Ec8e528375298ab9045c2Bd08"
+          },
+          "provider": "Fantom"
+        },
         {
           "type": "bridge",
           "counterparty": {
@@ -412,6 +496,50 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/fantom/images/ftm.png"
       }
+    },
+    {
+      "description": "The native token of JUNO Chain",
+      "denom_units": [
+        {
+          "denom": "ibc/7E3DB8DA12B7A7E2056E2449434A6F745E3C29B50217538BE31A50375EF088C6",
+          "exponent": 0,
+          "aliases": [
+            "ujunox"
+          ]
+        },
+        {
+          "denom": "junox",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/7E3DB8DA12B7A7E2056E2449434A6F745E3C29B50217538BE31A50375EF088C6",
+      "name": "Juno Testnet",
+      "display": "junox",
+      "symbol": "JUNOX",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "junotestnet",
+            "base_denom": "ujunox",
+            "channel_id": "channel-140"
+          },
+          "chain": {
+            "channel_id": "channel-3316",
+            "path": "transfer/channel-3316/ujunox"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.svg"
+      },
+      "coingecko_id": "juno-network",
+      "keywords": [
+        "osmosis-info",
+        "osmosis-price:uosmo:789"
+      ]
     }
   ]
 }

@@ -6,148 +6,43 @@ Asset Lists are inpsired by the [Token Lists](https://tokenlists.org/) project o
 
 ## Prerequisite
 
-The `.assetlist.json` files herein are generated, which will be triggered by additions to the corresponding `osmosis.zone.schema` file, fetching the metadata from the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry). One prerequisite to adding an asset here is complete registration of the asset and it's originating chain (and the ibc connection between the chain and Osmosis) to the Cosmos Chain Registry, so make sure that's done first.
+The `.assetlist.json` files herein are generated, which will be triggered by additions to the corresponding `osmosis.zone_assets.json` file, fetching the metadata from the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry). One prerequisite to adding an asset here is complete registration of the asset and it's originating chain (and the IBC connection between the orgini chain and Osmosis, if not native to Osmosis) to the Cosmos Chain Registry, so please make sure that's done first.
 
 ## How to Add Assets
 
-To add an asset, add a new asset object to the very bottom of the _osmosis.zone.schema_ file, containing the asset's base denom and chain name.
+Please see the asset [listing requirements](https://github.com/osmosis-labs/assetlists/blob/main/LISTING.md) to display assets on Osmosis Zone web app. 
+
+To add an asset, add a new asset object to the very bottom of the _osmosis.zone_assets.json_ file, containing the asset's base denom and chain name.
 - `base_denom` is the indivisible, minimial (exponent 0) denomination unit for the asset, which is also the value defined as `base` for the asset in the Chain Registry.
-- `chain_name` must be the exact value defined as `chain_name` for the chain in the Chain Registry--it is also the name of the chain's directory in the Chain Registry. 
-- Be sure to also provide the pool_id of the liquidity pools containing the asset for each of the following pair assets, where it exists: OSMO, ATOM, USDC.axl, JUNO, SCRT, STARS. E.g.:
-```
-"pools": {
-  "OSMO": 123,
-  "ATOM": 124,
-  "USDC.axl": 126
-}
-```
-(If needed, and upon request, Osmosis may be able to provide a staging link with the new token added so you can deposit some onto Osmosis and create pools for it using a frontend UI.)
-- You may also notice some booleans: 
-  - `osmosis_frontier` requires that a pool ID be defined. It is used to keep track of which tokens appear on Osmosis Frontier.
-  - `osmosis_main` requires that 'osmosis-frontier' be `true`, and also requires either: Osmosis governance to approve that the token be shown on app.osmosis.zone (Main site), or that the token is incentivized by Osmosis--which is also approved by Osmosis governance(, unless its high market cap ranks it a top 100 asset). It is used to keep track of which tokens appear on Osmosis Main.
-  - `osmosis_info` requires that 'osmosis-frontier' be `true`, and that >=$1,000 USD-worth of total liquidity of the asset be in the defined pools. It is used to filter which assets will appear on the [Osmosis Info](https://info.osmosis.zone/) site and be queryable by the API.
+- `chain_name` must be the exact value defined as `chain_name` for the chain in the Chain Registry--it is also the name of the chain's directory in the Chain Registry.
+- `path` is required for all ics20 assets (assets that have been transferred from another chain to Osmosis via IBC), which includes the vast majority of tokens except for those deployed directly on Osmosis. It requires: the IBC port; the IBC channel; and the base denomination representation that is used as input for the IBC denomination hash function (which is usually just the base denom of the asset on the origin chain (e.g., uatom), but sometimes can be different)
+  - e.g., `"path": "transfer/channel-8008135/ucoin"`
+- In the Pull Request, be sure to add in the description, or leave a comment, of the pool_id of the liquidity pool(s)
+- You may also notice some booleans:
+  - `osmosis_verified` should always either be omitted or set to `false` unless modified by, or explicitly instructed otherwise by, Osmosis Labs. This indicates whether the 'Unverified Assets setting must be toggled to reveal the asset by default on various Osmosis Zone app pages (Swap, Assets, Pools).
+  - `osmosis_unlisted` should always be included and set to `true`(, meaning it will NOT show up on Osmosis Zone app,) until after the asset's respresntation, transfer experience, and explorer URL to the transaction hash have all been validated by Osmosis Labs, at which point it can be set to `false` (or, preferrably, removed).
 
 ## Zone Example
 
 An example asset object in `osmosis.zone.json`:
 
 ```
+{
+  "base_denom": "uosmo",
+  "chain_name": "osmosis",
+  "osmosis_verified": true
+},
 ...
 {
   "base_denom": "ustk",
   "chain_name": "steakchain",
-  "pools": {
-    "OSMO": 121,
-    "ATOM": 122
-  },
-  "osmosis_frontier": true,
-  "osmosis_info": true,
-  "osmosis_main": true,
+  "path": "transfer/channel-69/ustk",
+  "osmosis_verified": true
 },
 {
   "base_denom": "ufoocoin",
   "chain_name": "fubarchain",
-  "pools": {
-    "OSMO": 123,
-    "ATOM": 124
-  },
-  "osmosis_frontier": true,
-  "osmosis_info": true,
-  "osmosis_main": false
-}
-```
-
-## Assetlist Example
-
-An example generated assetlist JSON file:
-
-```
-{
-  "chain_name": "osmosis",
-  "assets": [
-    {
-      "description": "The native token of Steak Chain",
-      "denom_units": [
-        {
-          "denom": "ibc/1BE2B34B......8F7A8B8C",
-          "exponent": 0,
-          "aliases": [
-            "ustk"
-          ]
-        },
-        {
-          "denom": "steak",
-          "exponent": 6
-        }
-      ],
-      "base": "ibc/1BE2B34B......8F7A8B8C",
-      "display": "steak",
-      "symbol": "STK",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "steakchain",
-            "base_denom": "ustk"
-            "channel_id": "channel-45"
-          },
-          "chain": {
-            "channel-id": "channel-244"
-          }
-        }
-      ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/steakchain/images/stk.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/steakchain/images/stk.svg"
-      },
-      "keywords": [
-        "osmosis-main",
-        "osmosis-frontier",
-        "osmosis-info",
-        "OSMO:121",
-        "ATOM:122"
-      ]
-    },
-    {
-      "description": "Foocoin is the native token of the Foochain",
-      "denom_units": [
-        {
-          "denom": "ibc/6ED71011F...7E59D40A7B3E",
-          "exponent": 0,
-          "aliases": ["ufoocoin"]
-        },
-        {
-          "denom": "foocoin",
-          "exponent": 6
-        }
-      ],
-      "base": "ibc/6ED71011F...7E59D40A7B3E",
-      "display": "foocoin",
-      "symbol": "FOO",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "fubarchain",
-            "base_denom": "ufoocoin"
-            "channel_id": "channel-14"
-          },
-          "chain": {
-            "channel-id": "channel-201"
-          }
-        }
-      ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fubarchain/images/foo.png"
-      },
-      "coingecko_id": "foocoin-token",
-      "keywords": [
-        "osmosis-frontier",
-        "osmosis-info",
-        "OSMO:123",
-        "ATOM:124"
-      ]
-    }
-  ]
+  "path": "transfer/channel-420/ufoocoin",
+  "osmosis_unlisted": true
 }
 ```

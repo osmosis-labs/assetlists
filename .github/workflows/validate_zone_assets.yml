@@ -1,0 +1,27 @@
+on:
+  pull_request:
+    branches:
+      - main
+name: Pull request workflow
+jobs:
+  validate_zone_assets:
+    name: Validate zone assets
+    runs-on: ubuntu-latest
+    steps:
+    
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+          
+      - name: Install JSON-Schema-Validator
+        run: npm install -g jsonschema
+
+      - name: Validate Zone Assets schema
+        run: |
+          for file in $(find . -name 'osmosis.zone_assets.json'); do
+            if ! jsonschema -i "$file" ./zone_assets.schema.json; then
+              exit 1
+            fi
+          done

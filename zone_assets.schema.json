@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "title": "Osmosis Zone List",
+  "description": "Osmosis Zone List is a basic list of assets, in order as shown on the Osmosis Zone.",
+  "type": "object",
+  "required": [
+    "chain_name",
+    "assets"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "pattern": "^\\.\\./zone\\.schema\\.json$"
+    },
+    "chain_name": {
+      "type": "string"
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/asset"
+      }
+    }
+  },
+  "additionalPropserties": false,
+  "$defs": {
+    "asset": {
+      "type": "object",
+      "required": [
+        "chain_name",
+        "base_denom"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "chain_name": {
+          "type": "string",
+          "description": "Chain name as used in the Cosmos Chain Registry"
+        },
+        "base_denom": {
+          "type": "string",
+          "description": "Base denomination as used for the asset in the Cosmos Chain Registry"
+        },
+        "path": {
+          "type": "string",
+          "description": "The entire IBC path, with the port and channel data for each hop"
+        },
+        "osmosis_verified": {
+          "type": "boolean",
+          "description": "Whether the asset have verified status Osmosis Zone app."
+        },
+        "osmosis_unstable": {
+          "type": "boolean",
+          "description": "Whether the asset can reliably be transferred to or from Osmosis."
+        },
+        "osmosis_unlisted": {
+          "type": "boolean",
+          "description": "Whether the asset should be temporarily unlisted on the Osmosis Zone app."
+        },
+        "osmosis_validated": {
+          "type": "boolean",
+          "description": "Whether the asset has been confrimed by a human to display and function correctly on Osmosis Zone."
+        },
+        "canonical": {
+          "type": "object",
+          "required": [
+            "chain_name",
+            "base_denom"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "chain_name": {
+              "type": "string",
+              "description": "Chain name as used in the Cosmos Chain Registry"
+            },
+            "base_denom": {
+              "type": "string",
+              "description": "Base denomination as used for the asset in the Cosmos Chain Registry"
+            }
+          }
+        },
+        "transfer_methods": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the provider of the method or interface used to transfer the asset to/from the chain."
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "external_interface",
+                  "integrated_bridge",
+                  "fiat_onramp"
+                ]
+              },
+              "osmosis_validated": {
+                "type": "boolean",
+                "description": "Whether the transfer method has been tested by a human and confirm to be working correctly."
+              }
+            },
+            "oneOf": [
+              { "$ref": "#/$defs/external_interface" },
+              { "$ref": "#/$defs/integrated_bridge" },
+              { "$ref": "#/$defs/fiat_onramp" }
+            ]
+          }
+        },
+        "peg_mechanism": {
+          "type": "string",
+          "description": "The peg mechanism for synthetically created assets--most important for stablecoins.",
+          "enum": [
+            "collateralized",
+            "algorithmic",
+            "hybrid"
+          ]
+        },
+        "twitter_URL": {
+          "type": "string",
+          "pattern": "^https://(twitter\\.com|x\\.com)/.*$"
+        },
+        "override_properties": {
+          "type": "object",
+          "description": "Properties that should not follow the Chain Registry, and behave or appear differently on Osmosis Zone.",
+          "additionalProperties": true,
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "description": "The symbol of an asset. For example BTC."
+            },
+            "logo_URIs": {
+              "type": "object",
+              "properties": {
+                "png": {
+                  "type": "string",
+                  "format": "uri-reference",
+                  "pattern": "^https://raw\\.githubusercontent\\.com/cosmos/chain-registry/master/(|testnets/|_non-cosmos/)[a-z0-9]+/images/.+\\.png$"
+                },
+                "svg": {
+                  "type": "string",
+                  "format": "uri-reference",
+                  "pattern": "^https://raw\\.githubusercontent\\.com/cosmos/chain-registry/master/(|testnets/|_non-cosmos/)[a-z0-9]+/images/.+\\.svg$"
+                }
+              }
+            },
+            "coingecko_id": {
+              "type": "string",
+              "description": "[OPTIONAL] The coingecko id to fetch asset data from coingecko v3 api. See https://api.coingecko.com/api/v3/coins/list"
+            },
+            "name": {
+              "type": "string",
+              "description": "How the asset should be described. E.g., $USTC is named: 'Terra USD'."
+            }
+          }
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "l1",
+              "defi",
+              "store value",
+              "web3"
+            ]
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "external_interface": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "external_interface"
+        },
+        "counterparty": {
+          "type": "object",
+          "properties": {
+            "chain_name": {
+              "type": "string"
+            },
+            "base_denom": {
+              "type": "string"
+            }
+          }
+        },
+        "deposit_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the interface used for depositing the asset to this chain."
+        },
+        "withdraw_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the interface used for withdrawing the asset to this chain."
+        }
+      }
+    },
+    "integrated_bridge": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "integrated_bridge"
+        },
+        "counterparty": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "chain_name": {
+                "type": "string"
+              },
+              "base_denom": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "provider_asset_key"
+        ]
+      }
+    },
+    "fiat_onramp": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "fiat_onramp"
+        },
+        "name": {
+          "type": "string"
+        },
+        "provider_asset_key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider_asset_key"
+      ]
+    }
+  }
+}

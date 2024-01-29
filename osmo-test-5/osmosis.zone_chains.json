@@ -1,0 +1,160 @@
+{
+  "$schema": "../zone_chains.schema.json",
+  "chains": [
+    {
+      "chain_name": "osmosistestnet",
+      "rpc": "https://rpc.osmotest5.osmosis.zone/",
+      "rest": "https://lcd.osmotest5.osmosis.zone/",
+      "explorer_tx_url": "https://testnet.mintscan.io/osmosis-testnet/txs/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm",
+        "wasmd_0.24+",
+        "osmosis-txfees"
+      ]
+    },
+    {
+      "chain_name": "cosmoshubtestnet",
+      "rpc": "https://rpc-theta.osmotest5.osmosis.zone/",
+      "rest": "https://lcd-theta.osmotest5.osmosis.zone/",
+      "explorer_tx_url": "https://testnet.mintscan.io/osmosis-testnet/txs/${txHash}",
+      "keplr_features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "junotestnet",
+      "rpc": "https://rpc.uni.junonetwork.io",
+      "rest": "https://api.uni.junonetwork.io",
+      "explorer_tx_url": "https://testnet.mintscan.io/juno-testnet/txs/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
+    },
+    {
+      "chain_name": "marstestnet",
+      "rpc": "https://testnet-rpc.marsprotocol.io/",
+      "rest": "https://testnet-rest.marsprotocol.io/",
+      "explorer_tx_url": "https://testnet-explorer.marsprotocol.io/transactions/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "axelartestnet",
+      "rpc": "https://rpc-axelar-testnet.imperator.co:443",
+      "rest": "https://lcd-axelar-testnet.imperator.co:443",
+      "explorer_tx_url": "https://testnet.axelarscan.io/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go",
+        "axelar-evm-bridge"
+      ]
+    },
+    {
+      "chain_name": "nobletestnet",
+      "rpc": "https://rpc.testnet.noble.strange.love:443",
+      "rest": "https://api.testnet.noble.strange.love:443",
+      "explorer_tx_url": "https://testnet.mintscan.io/noble-testnet/txs/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "akashtestnet",
+      "rpc": "https://rpc.sandbox-01.aksh.pw",
+      "rest": "https://api.sandbox-01.aksh.pw",
+      "explorer_tx_url": "https://explorer.sandbox-01.aksh.pw/akash/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "kyvetestnet",
+      "rpc": "https://rpc-eu-1.kaon.kyve.network",
+      "rest": "https://api-eu-1.kaon.kyve.network",
+      "explorer_tx_url": "https://testnet.mintscan.io/kyve-testnet/txs/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "quicksilvertestnet",
+      "rpc": "https://rpc.test.quicksilver.zone:443",
+      "rest": "https://lcd.test.quicksilver.zone:443",
+      "explorer_tx_url": "https://testnet.quicksilver.explorers.guru/transaction/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "chain4energytestnet",
+      "rpc": "https://rpc-testnet.c4e.io",
+      "rest": "https://lcd-testnet.c4e.io",
+      "explorer_tx_url": "https://explorer-testnet.c4e.io/transactions/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "composabletestnet",
+      "rpc": "https://rpc-banksy.notional.ventures",
+      "rest": "https://api-banksy.notional.ventures",
+      "explorer_tx_url": "https://explorer.nodexcapital.com/composable-3/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "persistencetestnet2",
+      "rpc": "https://rpc.testnet2.persistence.one",
+      "rest": "https://rest.testnet2.persistence.one",
+      "explorer_tx_url": "https://testnet.mintscan.io/persistence-testnet/txs/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "xiontestnet",
+      "rpc": "https://rpc.xion-testnet-1.burnt.com:443",
+      "rest": "https://api.xion-testnet-1.burnt.com",
+      "explorer_tx_url": "https://pingpub.xion-testnet-1.burnt.com/xion-testnet-1/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "sagatestnet",
+      "rpc": "https://testnet-ssc.sagarpc.io/",
+      "rest": "https://testnet-ssc-lcd.sagarpc.io/",
+      "explorer_tx_url": "https://www.mintscan.io/saga-testnet/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "impacthubtestnet",
+      "rpc": "https://rpc.testnet.ixo.earth",
+      "rest": "https://testnet.ixo.earth/rest",
+      "explorer_tx_url": "https://blockscan-pandora.ixo.earth/transactions/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    }
+  ]
+}

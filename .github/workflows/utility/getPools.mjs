@@ -46,6 +46,29 @@ function get_base_url(domain) {
 }
 
 
+export async function queryPool(domain, pool_id) {
+
+  //--QUERY API--
+
+  let baseUrl = get_base_url(domain);
+  let url = baseUrl;
+  let param = `/${pool_id}`
+  if(param) {
+    url = baseUrl + param;
+  }
+
+  const options = {
+    method: 'GET',
+    accept: 'application/json'
+  }
+  let response = await fetch(url,options);
+  let result = await response.json();
+  if (!result.pool) { return; } else {
+    return result.pool;
+  }
+}
+
+
 async function queryPools(domain) {
   
   //--QUERY API--

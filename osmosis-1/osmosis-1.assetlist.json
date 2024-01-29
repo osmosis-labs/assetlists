@@ -464,7 +464,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1251"
+        "osmosis-price:uosmo:1265"
       ]
     },
     {
@@ -13335,6 +13335,57 @@
         "osmosis-main",
         "osmosis-info",
         "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1410"
+      ]
+    },
+    {
+      "description": "Stride's liquid staked DYDX",
+      "denom_units": [
+        {
+          "denom": "ibc/980E82A9F8E7CA8CD480F4577E73682A6D3855A267D1831485D7EBEF0E7A6C2C",
+          "exponent": 0,
+          "aliases": [
+            "stadydx"
+          ]
+        },
+        {
+          "denom": "stDYDX",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/980E82A9F8E7CA8CD480F4577E73682A6D3855A267D1831485D7EBEF0E7A6C2C",
+      "name": "Stride Staked DYDX",
+      "display": "stDYDX",
+      "symbol": "stDYDX",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "dydx",
+            "base_denom": "adydx"
+          },
+          "provider": "Stride"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stadydx",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326",
+            "path": "transfer/channel-326/stadydx"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdydx.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdydx.svg"
+      },
+      "keywords": [
+        "osmosis-main",
+        "osmosis-unlisted"
       ]
     }
   ]

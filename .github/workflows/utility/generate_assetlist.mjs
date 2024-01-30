@@ -81,7 +81,7 @@ async function asyncForEach(array, callback) {
 const generateAssets = async (chainName, assets, zone_assets) => {
   
   let pool_assets;
-  pool_assets = await returnAssets(chainName);
+  pool_assets = await getAssetsPricing(chainName);
   if (!pool_assets) { return; }
   
   await asyncForEach(zone_assets, async (zone_asset) => {

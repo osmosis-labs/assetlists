@@ -22,7 +22,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as chain_reg from './chain_registry.mjs';
-import { returnAssets } from './getPools.mjs';
+import { getAssetsPricing } from './getPools.mjs';
 
 
 const chainNameToChainIdMap = new Map([

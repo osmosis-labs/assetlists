@@ -178,17 +178,6 @@
         "type": {
           "const": "external_interface"
         },
-        "counterparty": {
-          "type": "object",
-          "properties": {
-            "chain_name": {
-              "type": "string"
-            },
-            "base_denom": {
-              "type": "string"
-            }
-          }
-        },
         "deposit_url": {
           "type": "string",
           "format": "uri",
@@ -212,19 +201,56 @@
           "items": {
             "type": "object",
             "properties": {
-              "chain_name": {
+              "sourceChainId": {
                 "type": "string"
               },
-              "base_denom": {
+              "unwrappedAssetId": {
+                "type": "string"
+              },
+              "wrappedAssetId": {
                 "type": "string"
               }
-            }
+            },
+            "required": [
+              "sourceChainId"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "unwrappedAssetId"
+                ]
+              },
+              {
+                "required": [
+                  "wrappedAssetId"
+                ]
+              }
+            ]
           }
         },
-        "required": [
-          "provider_asset_key"
-        ]
-      }
+        "unwrappedAssetId": {
+          "type": "string"
+        },
+        "wrappedAssetId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "counterparty"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "unwrappedAssetId"
+          ]
+        },
+        {
+          "required": [
+            "wrappedAssetId"
+          ]
+        }
+      ]
     },
     "fiat_onramp": {
       "type": "object",
@@ -235,12 +261,12 @@
         "name": {
           "type": "string"
         },
-        "provider_asset_key": {
+        "providerAssetId": {
           "type": "string"
         }
       },
       "required": [
-        "provider_asset_key"
+        "providerAssetId"
       ]
     }
   }

@@ -68,23 +68,23 @@
           "type": "integrated_bridge",
           "counterparty": [
             {
-              "chainName": "ethereum",
-              "sourceDenom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+              "sourceChainId": "Ethereum",
+              "unwrappedAssetId": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
             },
             {
-              "chainName": "avalanche",
-              "sourceDenom": "0xfab550568C688d5d8a52c7d794cb93edc26ec0ec"
+              "sourceChainId": "Avalanche",
+              "unwrappedAssetId": "0xfab550568C688d5d8a52c7d794cb93edc26ec0ec"
             },
             {
-              "chainName": "moonbeam",
-              "sourceDenom": "0xca01a1d0993565291051daff390892518acfad3a"
+              "sourceChainId": "Moonbeam",
+              "unwrappedAssetId": "0xca01a1d0993565291051daff390892518acfad3a"
             },
             {
-              "chainName": "polygon",
-              "sourceDenom": "0x750e4c4984a9e0f12978ea6742bc1c5d248f40ed"
+              "sourceChainId": "Polygon",
+              "unwrappedAssetId": "0x750e4c4984a9e0f12978ea6742bc1c5d248f40ed"
             }
           ],
-          "providerAssetId": "uusdc"
+          "unwrappedAssetId": "uusdc"
         },
         {
           "name": "Satellite",
@@ -161,15 +161,12 @@
           "type": "integrated_bridge",
           "counterparty": [
             {
-              "chainName": "ethereum",
-              "sourceDenom": "wei"
-            },
-            {
-              "chainName": "ethereum",
-              "sourceDenom": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+              "sourceChainId": "Ethereum",
+              "wrappedAssetId": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "unwrappedAssetId": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
             }
           ],
-          "providerAssetId": "weth-wei",
+          "wrappedAssetId": "weth-wei",
           "unwrappedAssetId": "eth"
         },
         {
@@ -784,7 +781,7 @@
       "verified": true,
       "apiInclude": true,
       "price": {
-        "pool": "899",
+        "pool": "1427",
         "denom": "uosmo"
       },
       "transferMethods": [
@@ -3825,8 +3822,8 @@
       "verified": true,
       "apiInclude": true,
       "price": {
-        "pool": "633",
-        "denom": "uosmo"
+        "pool": "872",
+        "denom": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858"
       },
       "categories": [
         "stablecoin"
@@ -4767,6 +4764,7 @@
       "commonKey": "L1",
       "name": "GenesisL1",
       "description": "L1 coin is the GenesisL1 blockchain utility, governance and EVM token",
+      "unstable": true,
       "relatedAssets": []
     },
     {
@@ -5290,6 +5288,7 @@
       "commonKey": "ODIN",
       "name": "Odin Protocol",
       "description": "Staking and governance token for ODIN Protocol",
+      "unstable": true,
       "relatedAssets": []
     },
     {
@@ -5342,6 +5341,7 @@
       "commonKey": "GEO",
       "name": "GEO",
       "description": "GEO token for ODIN Protocol",
+      "unstable": true,
       "relatedAssets": []
     },
     {
@@ -5394,6 +5394,7 @@
       "commonKey": "O9W",
       "name": "O9W",
       "description": "O9W token for ODIN Protocol",
+      "unstable": true,
       "relatedAssets": []
     },
     {
@@ -7770,7 +7771,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/hopers.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/hopers.svg"
       },
-      "coingeckoId": "hopers-io ",
+      "coingeckoId": "hopers-io",
       "verified": false,
       "price": {
         "pool": "894",
@@ -11235,6 +11236,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/casa.png"
       },
       "verified": false,
+      "apiInclude": true,
       "price": {
         "pool": "1028",
         "denom": "uosmo"
@@ -14343,8 +14345,8 @@
       "verified": true,
       "apiInclude": true,
       "price": {
-        "pool": "1325",
-        "denom": "uosmo"
+        "pool": "1337",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "name": "Levana",
       "description": "Levana native token",
@@ -14398,6 +14400,7 @@
       "commonKey": "PUPPY",
       "name": "Puppy",
       "description": "Puppy",
+      "unstable": true,
       "relatedAssets": []
     },
     {
@@ -14737,6 +14740,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/page.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/page.svg"
       },
+      "coingeckoId": "page",
       "verified": false,
       "apiInclude": true,
       "price": {
@@ -15127,10 +15131,9 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/circus.png"
       },
       "verified": false,
-      "apiInclude": true,
       "price": {
-        "pool": "1393",
-        "denom": "uosmo"
+        "pool": "1391",
+        "denom": "factory/osmo1s794h9rxggytja3a4pmwul53u98k06zy2qtrdvjnfuxruh7s8yjs6cyxgd/ucdt"
       },
       "transferMethods": [
         {
@@ -15330,6 +15333,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.svg"
       },
       "verified": true,
+      "apiInclude": true,
       "price": {
         "pool": "1422",
         "denom": "ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F"
@@ -15362,7 +15366,6 @@
       "commonKey": "BTC",
       "name": "Wrapped Bitcoin",
       "description": "",
-      "unlisted": true,
       "relatedAssets": []
     },
     {
@@ -15472,7 +15475,7 @@
       "symbol": "WOSMO",
       "decimals": 6,
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/WOSMO.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wosmo.png"
       },
       "verified": false,
       "apiInclude": true,
@@ -15551,6 +15554,124 @@
       "commonKey": "APOLLO",
       "name": "Apollo DAO",
       "description": "The deflationary utility token of the Apollo DAO project",
+      "relatedAssets": []
+    },
+    {
+      "chainName": "stride",
+      "sourceDenom": "stadydx",
+      "coinMinimalDenom": "ibc/980E82A9F8E7CA8CD480F4577E73682A6D3855A267D1831485D7EBEF0E7A6C2C",
+      "symbol": "stDYDX",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdydx.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdydx.svg"
+      },
+      "verified": true,
+      "apiInclude": true,
+      "price": {
+        "pool": "1423",
+        "denom": "ibc/831F0B1BBB1D08A2B75311892876D71565478C532967545476DF4C2D7492E48C"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "stride",
+            "sourceDenom": "stadydx",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-326",
+            "path": "transfer/channel-326/stadydx"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "stride",
+          "sourceDenom": "stadydx",
+          "chainType": "cosmos",
+          "chainId": "stride-1",
+          "symbol": "stDYDX",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdydx.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdydx.svg"
+          }
+        }
+      ],
+      "commonKey": "stDYDX",
+      "name": "Stride Staked DYDX",
+      "description": "Stride's liquid staked DYDX",
+      "sortWith": {
+        "chainName": "stride",
+        "sourceDenom": "ustrd"
+      },
+      "relatedAssets": []
+    },
+    {
+      "chainName": "stride",
+      "sourceDenom": "stutia",
+      "coinMinimalDenom": "ibc/698350B8A61D575025F3ED13E9AC9C0F45C89DEFE92F76D5838F1D3C1A7FF7C9",
+      "symbol": "stTIA",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/sttia.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/sttia.svg"
+      },
+      "verified": true,
+      "apiInclude": true,
+      "price": {
+        "pool": "1428",
+        "denom": "ibc/D79E7D83AB399BFFF93433E54FAA480C191248FC556924A2A8351AE2638B3877"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "stride",
+            "sourceDenom": "stutia",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-326",
+            "path": "transfer/channel-326/stutia"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "stride",
+          "sourceDenom": "stutia",
+          "chainType": "cosmos",
+          "chainId": "stride-1",
+          "symbol": "stTIA",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/sttia.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/sttia.svg"
+          }
+        }
+      ],
+      "commonKey": "stTIA",
+      "name": "Stride Staked TIA",
+      "description": "Stride's liquid staked TIA",
+      "sortWith": {
+        "chainName": "stride",
+        "sourceDenom": "ustrd"
+      },
       "relatedAssets": []
     }
   ]

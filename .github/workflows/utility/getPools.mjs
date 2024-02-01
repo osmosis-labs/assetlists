@@ -80,7 +80,7 @@ async function queryPools(domain) {
   console.log(domain);
   //console.log(baseUrl);
 
-  //queryApi.queryAPI(baseUrl, params, domain, fileName);
+  queryApi.queryAPI(baseUrl, params, domain, fileName);
 
   let storedResult = queryApi.readQueryResponse(domain, fileName);
   if (!storedResult?.pools) { return; }

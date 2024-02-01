@@ -177,7 +177,7 @@ function getRelatedAssets(asset) {
 
   //add to map with zero relationships
   relatedAssets.set(assetKey, []);
-  
+
   //get origin chain staking asset
   let chainStaking = chain_reg.getFileProperty(asset.chain_name, "chain", "staking");
   if(chainStaking && chainStaking.staking_tokens?.[0]?.denom) {

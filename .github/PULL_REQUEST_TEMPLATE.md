@@ -25,9 +25,11 @@ If adding a new chain, please ensure the following:
 <!-- If NOT adding a new asset, please remove this 'Adding Chains' section. -->
 If adding a new asset, please ensure the following:
 - [ ] Asset is registered to the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry).
+   - The `description` and/or `extended_description` of the asset in the Chain Registry is informative.
 - [ ] Add asset to bottom of `zone_assets.json`.
    - The IBC channel referenced in `path` must be registered to the Chain Registry.
    - `osmosis_unlisted` defaults to `true` (until the respesentation and transferring of the new asset has been validated)
+   - Note that it is recommended to include an X (fka, Twitter) profile URL with each asset.
 
 ### On-chain liquidity
 

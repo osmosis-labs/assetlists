@@ -692,7 +692,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:899"
+        "osmosis-price:uosmo:1427"
       ]
     },
     {
@@ -4009,7 +4009,8 @@
       },
       "keywords": [
         "osmosis-info",
-        "osmosis-price:uosmo:732"
+        "osmosis-price:uosmo:732",
+        "osmosis-unstable"
       ]
     },
     {
@@ -4446,7 +4447,8 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:777"
+        "osmosis-price:uosmo:777",
+        "osmosis-unstable"
       ]
     },
     {
@@ -4489,7 +4491,8 @@
       },
       "keywords": [
         "osmosis-info",
-        "osmosis-price:uosmo:787"
+        "osmosis-price:uosmo:787",
+        "osmosis-unstable"
       ]
     },
     {
@@ -4532,7 +4535,8 @@
       },
       "keywords": [
         "osmosis-info",
-        "osmosis-price:uosmo:805"
+        "osmosis-price:uosmo:805",
+        "osmosis-unstable"
       ]
     },
     {
@@ -6593,7 +6597,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/hopers.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/hopers.svg"
       },
-      "coingecko_id": "hopers-io ",
+      "coingecko_id": "hopers-io",
       "keywords": [
         "osmosis-price:uosmo:894"
       ]
@@ -11724,10 +11728,7 @@
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/nstk.svg"
       },
-      "coingecko_id": "unstake-fi",
-      "keywords": [
-        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1312"
-      ]
+      "coingecko_id": "unstake-fi"
     },
     {
       "description": "ohhNFT LP token.",
@@ -12326,7 +12327,8 @@
       },
       "keywords": [
         "osmosis-info",
-        "osmosis-price:uosmo:1332"
+        "osmosis-price:uosmo:1332",
+        "osmosis-unstable"
       ]
     },
     {
@@ -12661,6 +12663,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/page.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/page.svg"
       },
+      "coingecko_id": "page",
       "keywords": [
         "osmosis-info",
         "osmosis-price:uosmo:1344"
@@ -13150,6 +13153,7 @@
       },
       "keywords": [
         "osmosis-main",
+        "osmosis-info",
         "osmosis-price:ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F:1422"
       ]
     },
@@ -13387,6 +13391,56 @@
         "osmosis-main",
         "osmosis-info",
         "osmosis-price:ibc/831F0B1BBB1D08A2B75311892876D71565478C532967545476DF4C2D7492E48C:1423"
+      ]
+    },
+    {
+      "description": "Stride's liquid staked TIA",
+      "denom_units": [
+        {
+          "denom": "ibc/698350B8A61D575025F3ED13E9AC9C0F45C89DEFE92F76D5838F1D3C1A7FF7C9",
+          "exponent": 0,
+          "aliases": [
+            "stutia"
+          ]
+        },
+        {
+          "denom": "stTIA",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/698350B8A61D575025F3ED13E9AC9C0F45C89DEFE92F76D5838F1D3C1A7FF7C9",
+      "name": "Stride Staked TIA",
+      "display": "stTIA",
+      "symbol": "stTIA",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "celestia",
+            "base_denom": "utia"
+          },
+          "provider": "Stride"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stutia",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326",
+            "path": "transfer/channel-326/stutia"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/sttia.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/sttia.svg"
+      },
+      "keywords": [
+        "osmosis-unlisted"
       ]
     }
   ]

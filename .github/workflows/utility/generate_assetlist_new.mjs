@@ -616,33 +616,9 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
     }
 
 
-    //--Setup Zone_Config Asset--
-    let generated_zoneConfigAsset = {
-      chainName:        generated_asset.chain_name,
-      sourceDenom:      generated_asset.sourceDenom,
-      coinMinimalDenom: generated_asset.coinMinimalDenom,
-      symbol:           generated_asset.symbol,
-      decimals:         generated_asset.decimals,
-      logoURIs:         generated_asset.logo_URIs,
-      coingeckoId:      generated_asset.coingecko_id,
-      verified:         generated_asset.verified,
-      apiInclude:       generated_asset.api_include,
-      price:            generated_asset.price,
-      categories:       generated_asset.categories,
-      pegMechanism:     generated_asset.peg_mechanism,
-      transferMethods:  generated_asset.transfer_methods,
-      counterparty:     generated_asset.counterparty,
-      commonKey:        generated_asset.common_key,
-      name:             generated_asset.name,
-      description:      generated_asset.description,
-      unstable:         generated_asset.unstable,
-      sortWith:         generated_asset.sort_with,
-      twitterURL:       generated_asset.twitter_URL,
-      unlisted:         generated_asset.unlisted,
-      relatedAssets:    generated_asset.related_assets,
-    }
+
     //--Append Asset to Assetlist--
-    zone_config_assets.push(generated_zoneConfigAsset);
+    zone_config_assets.push(generated_asset);
 
 
     //--Setup Chain_Reg Asset--
@@ -668,6 +644,46 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
 
 }
 
+function reformatZoneConfigAssets(assets) {
+  
+  let reformattedAssets = [];
+
+  assets.forEach((asset) => {
+
+    //--Setup Zone_Config Asset--
+    let reformattedAsset = {
+      chainName:        asset.chain_name,
+      sourceDenom:      asset.sourceDenom,
+      coinMinimalDenom: asset.coinMinimalDenom,
+      symbol:           asset.symbol,
+      decimals:         asset.decimals,
+      logoURIs:         asset.logo_URIs,
+      coingeckoId:      asset.coingecko_id,
+      verified:         asset.verified,
+      apiInclude:       asset.api_include,
+      price:            asset.price,
+      categories:       asset.categories,
+      pegMechanism:     asset.peg_mechanism,
+      transferMethods:  asset.transfer_methods,
+      counterparty:     asset.counterparty,
+      commonKey:        asset.common_key,
+      name:             asset.name,
+      description:      asset.description,
+      unstable:         asset.unstable,
+      sortWith:         asset.sort_with,
+      twitterURL:       asset.twitter_URL,
+      unlisted:         asset.unlisted,
+      relatedAssets:    asset.relatedAssets,
+    }
+
+    //--Append to Chain_Reg Assetlist--
+    reformattedAssets.push(reformattedAsset);
+  
+  });
+
+  return reformattedAssets;
+}
+
 async function generateAssetlist(chainName) {
   let zoneConfig = zone.readFromFile(chainName, zone.noDir, zone.zoneConfigFileName)?.config;
   let zoneAssetlist = zone.readFromFile(chainName, zone.noDir, zone.zoneAssetlistFileName)?.assets;
@@ -676,13 +692,14 @@ async function generateAssetlist(chainName) {
   await generateAssets(chainName, zoneConfig, zoneAssetlist, zone_config_assets, chain_reg_assets);
   if (!zone_config_assets) { return; }
   zone_config_assets = await getAllRelatedAssets(zone_config_assets, zoneConfig);
-  let zone_config_assetlist = {
-    chainName: chainName,
-    assets: zone_config_assets
-  }
   let chain_reg_assetlist = {
     chain_name: chainName,
     assets: chain_reg_assets
+  }
+  zone_config_assets = reformatZoneConfigAssets(zone_config_assets);
+  let zone_config_assetlist = {
+    chainName: chainName,
+    assets: zone_config_assets
   }
   zone.writeToFile(chainName, zone.zoneConfigAssetlist, zone.assetlistFileName, zone_config_assetlist);
   zone.writeToFile(chainName, zone.chainRegAssetlist, zone.assetlistFileName, chain_reg_assetlist);

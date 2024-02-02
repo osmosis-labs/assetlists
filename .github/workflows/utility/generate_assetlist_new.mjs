@@ -388,7 +388,7 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
           if(last_trace.type == "bridge") {
             bridge_uses += 1;
           }
-          let comsos_chain_id = chain_reg.getFileProperty(last_trace.counterparty.chain_name, "chain", "chain_id")
+          let comsos_chain_id = chain_reg.getFileProperty(last_trace.counterparty.chain_name, "chain", "chain_id");
           if(comsos_chain_id) {
             counterparty.chainType = "cosmos";
             counterparty.chainId = comsos_chain_id;
@@ -408,7 +408,7 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
                 return;
               }
             });
-            if(!last_trace.counterparty.chain_type) {
+            if(!counterparty.chainType) {
               counterparty.chainType = "non-cosmos"
             }
           }

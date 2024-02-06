@@ -13929,6 +13929,152 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/sttia.svg"
         }
       ]
+    },
+    {
+      "description": "GLTO-ERC20 on injective",
+      "denom_units": [
+        {
+          "denom": "ibc/072E5B3D6F278B3E6A9C51D7EAD1A737148609512C5EBE8CBCB5663264A0DDB7",
+          "exponent": 0,
+          "aliases": [
+            "peggy0xd73175f9eb15eee81745d367ae59309Ca2ceb5e2"
+          ]
+        },
+        {
+          "denom": "glto",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/072E5B3D6F278B3E6A9C51D7EAD1A737148609512C5EBE8CBCB5663264A0DDB7",
+      "name": "Gelotto (Injective)",
+      "display": "glto",
+      "symbol": "injective.GLTO",
+      "traces": [
+        {
+          "type": "additional-mintage",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "cw20:juno1j0a9ymgngasfn3l5me8qpd53l5zlm9wurfdk7r65s5mg6tkxal3qpgf5se"
+          },
+          "provider": "Gelotto"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xd73175f9eb15eee81745d367ae59309Ca2ceb5e2"
+          },
+          "provider": "Peggy"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "injective",
+            "base_denom": "peggy0xd73175f9eb15eee81745d367ae59309Ca2ceb5e2",
+            "channel_id": "channel-8"
+          },
+          "chain": {
+            "channel_id": "channel-122",
+            "path": "transfer/channel-122/peggy0xd73175f9eb15eee81745d367ae59309Ca2ceb5e2"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/glto.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/glto.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "ethereum",
+            "base_denom": "0xd73175f9eb15eee81745d367ae59309Ca2ceb5e2"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/glto.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/glto.svg"
+        }
+      ],
+      "keywords": [
+        "osmosis_unlisted"
+      ]
+    },
+    {
+      "description": "The native governance and staking token of the Dymension Hub",
+      "denom_units": [
+        {
+          "denom": "ibc/9A76CDF0CBCEF37923F32518FA15E5DC92B9F56128292BC4D63C4AEA76CBB110",
+          "exponent": 0,
+          "aliases": [
+            "adym"
+          ]
+        },
+        {
+          "denom": "dym",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/9A76CDF0CBCEF37923F32518FA15E5DC92B9F56128292BC4D63C4AEA76CBB110",
+      "name": "Dymension Hub",
+      "display": "dym",
+      "symbol": "DYM",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "dymension",
+            "base_denom": "adym",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-19774",
+            "path": "transfer/channel-19774/adym"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.svg"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.svg"
+        }
+      ],
+      "coingecko_id": "dymension",
+      "keywords": [
+        "osmosis_unstable"
+      ]
+    },
+    {
+      "description": "Rapture insurance is the first ever P2P insurance platform on $OSMO. Get rewarded to take care of peoples loved ones after the Rapture.",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1279xudevmf5cw83vkhglct7jededp86k90k2le/RAPTR",
+          "exponent": 0
+        },
+        {
+          "denom": "RAPTR",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "base": "factory/osmo1279xudevmf5cw83vkhglct7jededp86k90k2le/RAPTR",
+      "name": "RAPTR",
+      "display": "RAPTR",
+      "symbol": "RAPTR",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/RAPTR.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/RAPTR.png"
+        }
+      ],
+      "keywords": [
+        "osmosis_unlisted"
+      ]
     }
   ]
 }

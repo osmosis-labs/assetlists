@@ -692,7 +692,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:1427"
+        "osmosis-price:uosmo:899"
       ]
     },
     {
@@ -987,7 +987,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:584"
+        "osmosis-price:uosmo:1095"
       ]
     },
     {
@@ -2475,7 +2475,6 @@
       },
       "coingecko_id": "marble",
       "keywords": [
-        "osmosis-info",
         "osmosis-price:uosmo:649"
       ]
     },
@@ -4778,7 +4777,6 @@
       "coingecko_id": "crescent-network",
       "keywords": [
         "osmosis-main",
-        "osmosis-info",
         "osmosis-price:uosmo:786"
       ]
     },
@@ -5092,7 +5090,7 @@
       },
       "coingecko_id": "stakeeasy-juno-derivative",
       "keywords": [
-        "osmosis-price:uosmo:793"
+        "osmosis-price:ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED:807"
       ]
     },
     {
@@ -5180,7 +5178,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:1098"
+        "osmosis-price:uosmo:806"
       ]
     },
     {
@@ -9610,7 +9608,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/casa.png"
       },
       "keywords": [
-        "osmosis-info",
         "osmosis-price:uosmo:1028"
       ]
     },
@@ -13062,7 +13059,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/chihuahua/images/woof.png"
       },
       "keywords": [
-        "osmosis-info",
         "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1365"
       ]
     },
@@ -13500,6 +13496,49 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/glto.svg"
       },
       "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "The native governance and staking token of the Dymension Hub",
+      "denom_units": [
+        {
+          "denom": "ibc/9A76CDF0CBCEF37923F32518FA15E5DC92B9F56128292BC4D63C4AEA76CBB110",
+          "exponent": 0,
+          "aliases": [
+            "adym"
+          ]
+        },
+        {
+          "denom": "dym",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/9A76CDF0CBCEF37923F32518FA15E5DC92B9F56128292BC4D63C4AEA76CBB110",
+      "name": "Dymension Hub",
+      "display": "dym",
+      "symbol": "DYM",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "dymension",
+            "base_denom": "adym",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-19774",
+            "path": "transfer/channel-19774/adym"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.svg"
+      },
+      "keywords": [
+        "osmosis-main",
         "osmosis-unlisted"
       ]
     }

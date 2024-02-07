@@ -79,11 +79,11 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
     if(zone_asset.chain_name != chainName) {
       let ibcHash = zone.calculateIbcHash(zone_asset.path);    //Calc IBC Hash Denom
       generated_asset.coinMinimalDenom = await ibcHash;    //Set IBC Hash Denom
-      local_asset = chain_reg.getAssetObject(chainName, ibcHash);
+      local_asset = chain_reg.getAssetObject(chainName, generated_asset.coinMinimalDenom);
     } else {
       generated_asset.coinMinimalDenom = zone_asset.base_denom;
     }
-    let asset = local_asset ? local_asset : origin_asset;
+    let asset = local_asset || origin_asset;
 
 
     

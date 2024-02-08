@@ -638,6 +638,7 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
     zone_config_assets.push(generated_asset);
 
 
+
     //--Setup Chain_Reg Asset--
     generated_chainRegAsset = {
       description: asset_description,
@@ -702,6 +703,22 @@ function reformatZoneConfigAssets(assets) {
   return reformattedAssets;
 }
 
+
+
+//--Get Remaining Assets only in Chain Registry--
+function getChainRegAssets (chainName, chain_reg_assets) {
+  let registered_assets = chain_reg_assets;
+  let assetPointers = chain_reg.getAssetPointersByChain(chainName);
+  assetPointers.forEach((assetPointer) => {
+    if (!chain_reg_assets.some(chain_reg_asset => chain_reg_asset.base == assetPointer.base_denom)) {
+      registered_assets.push(chain_reg.getAssetObject(assetPointer.chain_name, assetPointer.base_denom));
+    }
+  });
+  return registered_assets;
+}
+    
+
+
 async function generateAssetlist(chainName) {
   let zoneConfig = zone.readFromFile(chainName, zone.noDir, zone.zoneConfigFileName)?.config;
   let zoneAssetlist = zone.readFromFile(chainName, zone.noDir, zone.zoneAssetlistFileName)?.assets;
@@ -710,6 +727,7 @@ async function generateAssetlist(chainName) {
   await generateAssets(chainName, zoneConfig, zoneAssetlist, zone_config_assets, chain_reg_assets);
   if (!zone_config_assets) { return; }
   zone_config_assets = await getAllRelatedAssets(zone_config_assets, zoneConfig);
+  chain_reg_assets = getChainRegAssets(chainName, chain_reg_assets);
   let chain_reg_assetlist = {
     $schema: "../assetlist.schema.json",
     chain_name: chainName,

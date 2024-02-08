@@ -78,6 +78,12 @@ async function asyncForEach(array, callback) {
   }
 }
 
+function addArrayItem(item, array) {
+  if (!array.includes(item)) {
+    array.push(item);
+  }
+}
+
 const generateAssets = async (chainName, assets, zone_assets) => {
   
   let pool_assets;
@@ -270,7 +276,7 @@ const generateAssets = async (chainName, assets, zone_assets) => {
           if(!unit.aliases) {
             unit.aliases = [];
           }
-          unit.aliases.push(zone_asset.base_denom);
+          addArrayItem(zone_asset.base_denom, unit.aliases);
           unit.denom = generatedAsset.base;
         }
       });
@@ -305,24 +311,24 @@ const generateAssets = async (chainName, assets, zone_assets) => {
       keywords = generatedAsset.keywords;
     }
     if(zone_asset.osmosis_verified) {
-      keywords.push("osmosis-main");
+      addArrayItem("osmosis-main", keywords);
     }
     if (pool_assets.get(generatedAsset.base)) {
       if(pool_assets.get(generatedAsset.base).osmosis_info) {
-        keywords.push("osmosis-info");
+        addArrayItem("osmosis-info", keywords);
       }
       if(pool_assets.get(generatedAsset.base).osmosis_price) {
-        keywords.push(pool_assets.get(generatedAsset.base).osmosis_price);
+        addArrayItem(pool_assets.get(generatedAsset.base).osmosis_price, keywords);
       }
     }
     if(zone_asset.peg_mechanism) {
-      keywords.push("peg:" + zone_asset.peg_mechanism);
+      addArrayItem("peg:" + zone_asset.peg_mechanism, keywords);
     }
     if(zone_asset.osmosis_unstable) {
-      keywords.push("osmosis-unstable");
+      addArrayItem("osmosis-unstable", keywords);
     }
     if(zone_asset.osmosis_unlisted) {
-      keywords.push("osmosis-unlisted");
+      addArrayItem("osmosis-unlisted", keywords);
     }
     
     if(keywords.length > 0) {

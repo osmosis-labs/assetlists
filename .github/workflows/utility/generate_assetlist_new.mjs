@@ -42,6 +42,14 @@ async function asyncForEach(array, callback) {
 
 
 
+function addArrayItem(item, array) {
+  if (!array.includes(item)) {
+    array.push(item);
+  }
+}
+
+
+
 const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_assets, chain_reg_assets) => {
 
   let pool_assets;
@@ -451,7 +459,7 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
           if(!unit.aliases) {
             unit.aliases = [];
           }
-          unit.aliases.push(unit.denom);
+          addArrayItem(unit.denom, unit.aliases);
           unit.denom = generated_asset.coinMinimalDenom;
           return;
         }
@@ -593,13 +601,13 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
     let keywords = asset.keywords ? asset.keywords : [];
     //--Update Keywords--
     if(zone_asset.osmosis_unstable) {
-      keywords.push("osmosis_unstable");
+      addArrayItem("osmosis_unstable", keywords);
     }
     if(zone_asset.osmosis_unlisted) {
-      keywords.push("osmosis_unlisted");
+      addArrayItem("osmosis_unlisted", keywords);
     }
     if(zone_asset.verified) {
-      keywords.push("osmosis_verified");
+      addArrayItem("osmosis_verified", keywords);
     }
     if(!keywords.length) {
       keywords = undefined;

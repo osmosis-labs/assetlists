@@ -460,6 +460,9 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
             unit.aliases = [];
           }
           addArrayItem(unit.denom, unit.aliases);
+          if (asset.display == unit.denom) {
+            asset.display = generated_asset.coinMinimalDenom;
+          }
           unit.denom = generated_asset.coinMinimalDenom;
           return;
         }

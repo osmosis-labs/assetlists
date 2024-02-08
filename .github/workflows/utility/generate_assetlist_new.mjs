@@ -694,6 +694,7 @@ async function generateAssetlist(chainName) {
   if (!zone_config_assets) { return; }
   zone_config_assets = await getAllRelatedAssets(zone_config_assets, zoneConfig);
   let chain_reg_assetlist = {
+    $schema: "../assetlist.schema.json",
     chain_name: chainName,
     assets: chain_reg_assets
   }

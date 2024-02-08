@@ -618,6 +618,11 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
 
 
 
+    //--Get Address--
+    let chain_reg_address = zone_asset.chain_name == chainName ? asset.address : undefined;
+
+
+
     //--Append Asset to Assetlist--
     zone_config_assets.push(generated_asset);
 
@@ -627,6 +632,7 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
       description: asset_description,
       denom_units: denom_units,
       type_asset: type_asset,
+      address: chain_reg_address,
       base: generated_asset.coinMinimalDenom,
       name: generated_asset.name,
       display: asset.display,

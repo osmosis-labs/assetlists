@@ -131,7 +131,8 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
 
     //--Get CGID--
     generated_asset.coingecko_id = canonical_origin_asset.coingecko_id;
-  
+    let chain_reg_coingecko_id = zone_asset.chain_name == chainName ? generated_asset.coingecko_id : undefined;
+    
     
 
     //--Get Verified Status--
@@ -633,7 +634,7 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
       traces: traces,
       logo_URIs: generated_asset.logo_URIs,
       images: images,
-      coingecko_id: generated_asset.coingecko_id,
+      coingecko_id: chain_reg_coingecko_id,
       keywords: keywords
     }
     //--Append to Chain_Reg Assetlist--

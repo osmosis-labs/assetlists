@@ -604,13 +604,13 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
     let keywords = asset.keywords ? asset.keywords : [];
     //--Update Keywords--
     if(zone_asset.osmosis_unstable) {
-      addArrayItem("osmosis_unstable", keywords);
+      addArrayItem("osmosis-unstable", keywords);
     }
     if(zone_asset.osmosis_unlisted) {
-      addArrayItem("osmosis_unlisted", keywords);
+      addArrayItem("osmosis-unlisted", keywords);
     }
     if(zone_asset.verified) {
-      addArrayItem("osmosis_verified", keywords);
+      addArrayItem("osmosis-verified", keywords);
     }
     if(!keywords.length) {
       keywords = undefined;

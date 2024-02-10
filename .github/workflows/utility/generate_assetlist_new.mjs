@@ -26,6 +26,9 @@ const find_origin_trace_types = [
   "additional-mintage"
 ];
 
+//This defines how many days since listing qualifies an asset as a "New Asset"
+const daysForNewAssetCategory = 21;
+
 
 
 
@@ -165,6 +168,11 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
     
 
 
+     //--Get Listing Date--
+    generated_asset.listing_date = new Date(zone_asset.listing_date_time_utc);
+
+
+
     //--Get Categories--
     let categories = [];
     if(zone_asset.categories) {
@@ -179,6 +187,18 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
         categories.push("liquid_staking");
       }
     });
+
+    //-New Asset?-
+    const currentDate  = new Date();
+    // Calculate the difference in milliseconds between the current date and the listing date
+    let differenceInMilliseconds = currentDate - generated_asset.listing_date;
+    // Calculate the difference in weeks
+    let differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
+    if (differenceInDays <= daysForNewAssetCategory) {
+      categories.push("new_asset");
+    }
+
+    //-Save Asset's Categories-
     generated_asset.categories = categories.length > 0 ? categories : undefined;
     
 
@@ -692,7 +712,13 @@ function reformatZoneConfigAssets(assets) {
       sortWith:         asset.sort_with,
       twitterURL:       asset.twitter_URL,
       unlisted:         asset.unlisted,
+      listingDate:      asset.listing_date,
       relatedAssets:    asset.relatedAssets,
+    }
+
+
+    if (isNaN(asset.listing_date.getTime())) {      // Remove listing_date if it's null
+        delete reformattedAsset.listingDate;
     }
 
     //--Append to Chain_Reg Assetlist--

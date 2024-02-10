@@ -56,6 +56,10 @@
           "type": "boolean",
           "description": "Whether the asset should be temporarily unlisted on the Osmosis Zone app."
         },
+        "listing_date_time_utc": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+        },
         "osmosis_validated": {
           "type": "boolean",
           "description": "Whether the asset has been confrimed by a human to display and function correctly on Osmosis Zone."
@@ -171,10 +175,6 @@
           "minItems": 1
         }
       }
-    },
-    "listing_date_time_utc": {
-      "type": "string",
-      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
     },
     "external_interface": {
       "type": "object",

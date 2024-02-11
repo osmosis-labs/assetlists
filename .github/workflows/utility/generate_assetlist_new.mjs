@@ -167,8 +167,24 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
     }
     
 
+    
+    //--Staking token?--
+    //  used to get name and description
+    generated_asset.is_staking_token = false;
+    if(zone_asset.base_denom == chain_reg.getFileProperty(canonical_origin_chain_name, "chain", "staking")?.staking_tokens[0]?.denom) {
+      generated_asset.is_staking_token = true;
+    }
 
-     //--Get Listing Date--
+
+    //--Fee token?--
+    generated_asset.is_native_fee_token = false;
+    if(zone_asset.base_denom == chain_reg.getFileProperty(canonical_origin_chain_name, "chain", "fees")?.fee_tokens[0]?.denom) {
+      generated_asset.is_native_fee_token = true;
+    }
+
+
+
+    //--Get Listing Date--
     generated_asset.listing_date = new Date(zone_asset.listing_date_time_utc);
 
 
@@ -178,13 +194,20 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
     if(zone_asset.categories) {
       categories = zone_asset.categories;
     }
-    if(zone_asset.peg_mechanism && !categories.includes("stablecoin")) {
-      categories.push("stablecoin");
+
+    //-Stablecoin?-
+    if(zone_asset.peg_mechanism) {
+      addArrayItem("stablecoin", categories);
+      addArrayItem("defi", categories);
     }
+
+    //-LST/LSD-
     let traces = chain_reg.getAssetTraces(zone_asset.chain_name, zone_asset.base_denom);
     traces?.forEach((trace) => {
       if(trace.type == "liquid-stake") {
-        categories.push("liquid_staking");
+        addArrayItem("liquid_staking", categories);
+        addArrayItem("defi", categories);
+        return;
       }
     });
 
@@ -195,12 +218,31 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
     // Calculate the difference in weeks
     let differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
     if (differenceInDays <= daysForNewAssetCategory) {
-      categories.push("new_asset");
+      addArrayItem("new_asset", categories);
     }
+
+    //-DeFi-
+    //-staking-
+    if ((generated_asset.is_staking_token ||  generated_asset.is_native_fee_token) && categories.length == 0) {
+      addArrayItem("defi", categories);
+    }
+
+    //-Meme-
+    generated_asset.is_native_at_canonical_origin = true;
+    let first_5_chars = canonical_origin_asset.base.substring(0, 5);
+    if (first_5_chars == "facto" || first_5_chars == "cw20:") {
+      generated_asset.is_native_at_canonical_origin = false;
+    }
+    let has_no_categories = categories.length <= 0 ? true : false;
+    if (categories.length <= 0 && !generated_asset.is_native_at_canonical_origin) {
+      addArrayItem("meme", categories);
+    }
+
 
     //-Save Asset's Categories-
     generated_asset.categories = categories.length > 0 ? categories : undefined;
-    
+
+
 
 
     //--Get Peg Mechanism--
@@ -489,15 +531,6 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
       });
     }
 
-    
-
-
-    //--Staking token?--
-    //  used to get name and description
-    let is_staking_token = false;
-    if(zone_asset.base_denom == chain_reg.getFileProperty(canonical_origin_chain_name, "chain", "staking")?.staking_tokens[0]?.denom) {
-      is_staking_token = true;
-    }
 
 
 
@@ -507,7 +540,7 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
     let name = reference_asset.name;
 
     //  but use chain name instead if it's the staking token...
-    if(is_staking_token) {
+    if(generated_asset.is_staking_token) {
       name = chain_reg.getFileProperty(canonical_origin_chain_name, "chain", "pretty_name");
     }
 
@@ -527,7 +560,7 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
     let asset_description = reference_asset.description;
     let description = asset_description ? asset_description : "";
     //need to see if it's first staking token
-    if(is_staking_token) {
+    if(generated_asset.is_staking_token) {
       //it is a staking token, so we pull the chain_description
       let chain_description = chain_reg.getFileProperty(canonical_origin_chain_name, "chain", "description");
       if(chain_description) {

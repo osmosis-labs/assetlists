@@ -2337,6 +2337,9 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/konstellation/images/darc.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/konstellation/images/darc.svg"
         }
+      ],
+      "keywords": [
+        "osmosis-unstable"
       ]
     },
     {
@@ -4565,8 +4568,7 @@
         }
       ],
       "keywords": [
-        "osmosis_unstable",
-        "osmosis-unstable"
+        "osmosis_unstable"
       ]
     },
     {
@@ -4614,8 +4616,7 @@
         }
       ],
       "keywords": [
-        "osmosis_unstable",
-        "osmosis-unstable"
+        "osmosis_unstable"
       ]
     },
     {
@@ -4663,8 +4664,7 @@
         }
       ],
       "keywords": [
-        "osmosis_unstable",
-        "osmosis-unstable"
+        "osmosis_unstable"
       ]
     },
     {
@@ -13998,6 +13998,84 @@
       ]
     },
     {
+      "description": "Astroport is a neutral marketplace where anyone, from anywhere in the galaxy, can dock to trade their wares.",
+      "denom_units": [
+        {
+          "denom": "ibc/E5916C205E90C7C3481AFD8663A13C1D6C63145FB6C38DA9FC151FEE706F32EF",
+          "exponent": 0,
+          "aliases": [
+            "cw20:terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26"
+          ]
+        },
+        {
+          "denom": "astro",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/E5916C205E90C7C3481AFD8663A13C1D6C63145FB6C38DA9FC151FEE706F32EF",
+      "name": "Astroport",
+      "display": "astro",
+      "symbol": "ASTRO",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "terra2",
+            "base_denom": "cw20:terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26",
+            "port": "wasm.terra1e0mrzy8077druuu42vs0hu7ugguade0cj65dgtauyaw4gsl4kv0qtdf2au",
+            "channel_id": "channel-26"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-341",
+            "path": "transfer/channel-341/cw20:terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/astro.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/astro.png"
+        }
+      ],
+      "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "A clan of 11y bad kids crafting chaos on the Cosmos eco. One bad memecoin to rule them all  $BADKID. Airdropped to Badkids NFT holders and $STARS stakers. It's so bad, your wallet's throwing a tantrum for it.",
+      "denom_units": [
+        {
+          "denom": "factory/osmo10n8rv8npx870l69248hnp6djy6pll2yuzzn9x8/BADKID",
+          "exponent": 0
+        },
+        {
+          "denom": "BADKID",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo10n8rv8npx870l69248hnp6djy6pll2yuzzn9x8",
+      "base": "factory/osmo10n8rv8npx870l69248hnp6djy6pll2yuzzn9x8/BADKID",
+      "name": "BADKID",
+      "display": "BADKID",
+      "symbol": "BADKID",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/badkid.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/badkid.png"
+        }
+      ],
+      "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
       "denom_units": [
         {
           "denom": "ibc/0B3C3D06228578334B66B57FBFBA4033216CEB8119B27ACDEE18D92DA5B28D43",
@@ -14114,33 +14192,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nom.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nom.svg"
       }
-    },
-    {
-      "description": "A clan of 11y bad kids crafting chaos on the Cosmos eco. One bad memecoin to rule them all  $BADKID. Airdropped to Badkids NFT holders and $STARS stakers. It's so bad, your wallet's throwing a tantrum for it.",
-      "denom_units": [
-        {
-          "denom": "factory/osmo10n8rv8npx870l69248hnp6djy6pll2yuzzn9x8/BADKID",
-          "exponent": 0
-        },
-        {
-          "denom": "BADKID",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "sdk.coin",
-      "address": "osmo10n8rv8npx870l69248hnp6djy6pll2yuzzn9x8",
-      "base": "factory/osmo10n8rv8npx870l69248hnp6djy6pll2yuzzn9x8/BADKID",
-      "name": "BADKID",
-      "display": "BADKID",
-      "symbol": "BADKID",
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/badkid.png"
-      },
-      "images": [
-        {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/badkid.png"
-        }
-      ]
     }
   ]
 }

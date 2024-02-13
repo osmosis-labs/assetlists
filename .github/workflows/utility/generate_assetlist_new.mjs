@@ -253,8 +253,29 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
 
     //--Process Transfer Methods--
     generated_asset.transfer_methods = zone_asset.transfer_methods;
-    //-Replace snake_case with camelCase-
+
     generated_asset.transfer_methods?.forEach((transfer_method) => {
+      if (transfer_method.type == "integrated_bridge") {
+        transfer_method.counterparty.forEach((counterparty) => {
+          zoneConfig.evm_chains.some(evm_chain => {
+            if (evm_chain.chain_name == counterparty.chain_name) {
+              counterparty.evmChainId = evm_chain.chain_id;
+            }
+          });
+          zoneConfig.providers.some(provider => {
+            if (provider.integration == transfer_method.name) {
+              provider.api_keys?.sourceChainIds?.some(sourceChainId => {
+                if (sourceChainId.chain_name == counterparty.chain_name) {
+                  counterparty.sourceChainId = sourceChainId.sourceChainId;
+                }
+              });
+            }
+          });
+          delete counterparty.chain_name;
+        });
+      }
+
+      //-Replace snake_case with camelCase-
       transfer_method.depositUrl        = transfer_method.deposit_url        || undefined;
       delete                              transfer_method.deposit_url;
       transfer_method.withdrawUrl       = transfer_method.withdraw_url       || undefined;

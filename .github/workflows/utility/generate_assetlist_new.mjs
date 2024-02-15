@@ -160,7 +160,7 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
       if(price) {
         let price_parts = price.split(':');
         generated_asset.price = {
-          pool: price_parts[2],
+          poolId: price_parts[2],
           denom: price_parts[1]
         }
       }
@@ -670,7 +670,13 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
 
     //--Add Flags--
     generated_asset.unstable = zone_asset.osmosis_unstable;
+    generated_asset.disabled = zone_asset.osmosis_disabled || zone_asset.osmosis_unstable;
     generated_asset.unlisted = zone_asset.osmosis_unlisted;
+
+
+
+
+    generated_asset.tooltip_message = zone_asset.tooltip_message;
 
     
     
@@ -753,19 +759,20 @@ function reformatZoneConfigAssets(assets) {
       logoURIs:         asset.logo_URIs,
       coingeckoId:      asset.coingecko_id,
       verified:         asset.verified,
-      apiInclude:       asset.api_include,
       price:            asset.price,
       categories:       asset.categories,
       pegMechanism:     asset.peg_mechanism,
       transferMethods:  asset.transfer_methods,
       counterparty:     asset.counterparty,
-      commonKey:        asset.common_key,
+      variantGroupKey:  asset.common_key,
       name:             asset.name,
       description:      asset.description,
       unstable:         asset.unstable,
+      disabled:         asset.disabled,
+      tooltipMessage:   asset.tooltip_message,
       sortWith:         asset.sort_with,
       twitterURL:       asset.twitter_URL,
-      unlisted:         asset.unlisted,
+      preview:          asset.unlisted,
       listingDate:      asset.listing_date,
       relatedAssets:    asset.relatedAssets,
     }

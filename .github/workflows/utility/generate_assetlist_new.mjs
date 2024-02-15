@@ -218,7 +218,7 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
     // Calculate the difference in weeks
     let differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
     if (differenceInDays <= daysForNewAssetCategory) {
-      addArrayItem("new_asset", categories);
+      //addArrayItem("new_asset", categories);
     }
 
     //-DeFi-

@@ -747,7 +747,7 @@ function reformatZoneConfigAssets(assets) {
       logoURIs: asset.logo_URIs,
       coingeckoId: asset.coingecko_id,
       price: asset.price,
-      categories: asset.categories,
+      categories: asset.categories ?? [],
       pegMechanism: asset.peg_mechanism,
       transferMethods: asset.transfer_methods ?? [],
       counterparty: asset.counterparty ?? [],

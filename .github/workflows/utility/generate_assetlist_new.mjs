@@ -407,11 +407,18 @@ const generateAssets = async (
 
       generated_asset.transfer_methods = generated_asset.transfer_methods || [];
 
+      let comsos_chain_id = chain_reg.getFileProperty(
+        zone_asset.chain_name,
+        "chain",
+        "chain_id"
+      );
+
       let ibc_transfer_method = {
         name: "Osmosis IBC Transfer",
         type: "ibc",
         counterparty: {
           chainName: zone_asset.chain_name,
+          chainId: comsos_chain_id,
           sourceDenom: zone_asset.base_denom,
           port: trace.counterparty.port,
           channelId: trace.counterparty.channel_id,

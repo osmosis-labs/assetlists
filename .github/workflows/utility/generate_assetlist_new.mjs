@@ -39,6 +39,26 @@ function addArrayItem(item, array) {
   }
 }
 
+function getAssetDecimals(asset) {
+
+  let decimals;
+
+  //--Get Decimals--
+  asset.denom_units.forEach((unit) => {
+    if (asset.display === unit.denom || unit.aliases?.includes(asset.display)) {
+      decimals = unit.exponent;
+      return;
+    }
+  });
+
+  if (decimals === undefined) {
+    console.log("Error: $" + asset.symbol + " missing decimals!");
+  }
+
+  return decimals ?? 0;
+
+}
+
 const generateAssets = async (
   chainName,
   zoneConfig,
@@ -113,11 +133,13 @@ const generateAssets = async (
     generated_asset.symbol = reference_asset.symbol;
 
     //--Get Decimals--
-    asset.denom_units.forEach((unit) => {
-      if (unit.denom === asset.display) {
-        generated_asset.decimals = unit.exponent;
-      }
-    });
+    //asset.denom_units.forEach((unit) => {
+      //if (unit.denom === asset.display) {
+        //generated_asset.decimals = unit.exponent;
+      //}
+    //});
+
+    generated_asset.decimals = getAssetDecimals(asset);
 
     //--Get Logos--
     generated_asset.logo_URIs = reference_asset.logo_URIs;

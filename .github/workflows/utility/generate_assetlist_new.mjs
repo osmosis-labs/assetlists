@@ -43,13 +43,21 @@ function getAssetDecimals(asset) {
 
   let decimals;
 
-  //--Get Decimals--
   asset.denom_units.forEach((unit) => {
-    if (asset.display === unit.denom || unit.aliases?.includes(asset.display)) {
+    if (asset.display === unit.denom) {
       decimals = unit.exponent;
       return;
     }
   });
+
+  if (decimals === undefined) {
+    asset.denom_units.forEach((unit) => {
+      if (unit.aliases?.includes(asset.display)) {
+        decimals = unit.exponent;
+        return;
+      }
+    });
+  }
 
   if (decimals === undefined) {
     console.log("Error: $" + asset.symbol + " missing decimals!");
@@ -133,12 +141,6 @@ const generateAssets = async (
     generated_asset.symbol = reference_asset.symbol;
 
     //--Get Decimals--
-    //asset.denom_units.forEach((unit) => {
-      //if (unit.denom === asset.display) {
-        //generated_asset.decimals = unit.exponent;
-      //}
-    //});
-
     generated_asset.decimals = getAssetDecimals(asset);
 
     //--Get Logos--

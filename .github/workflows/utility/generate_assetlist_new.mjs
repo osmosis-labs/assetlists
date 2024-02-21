@@ -549,12 +549,7 @@ const generateAssets = async (
             last_trace.counterparty.base_denom,
             "denom_units"
           );
-          denom_units.forEach((unit) => {
-            if (unit.denom == display) {
-              counterparty.decimals = unit.exponent;
-              return;
-            }
-          });
+          counterparty.decimals = getAssetDecimals({display: display, denom_units: denom_units});
           counterparty.logoURIs = chain_reg.getAssetProperty(
             last_trace.counterparty.chain_name,
             last_trace.counterparty.base_denom,

@@ -846,7 +846,7 @@
       "base": "ibc/3FF92D26B407FD61AE95D975712A7C319CDE28DE4D80BDC9978D935932B991D7",
       "name": "Wrapped Polkadot (Axelar)",
       "display": "dot",
-      "symbol": "DOT.axl",
+      "symbol": "moonbeam.DOT.axl",
       "traces": [
         {
           "type": "bridge",
@@ -7114,7 +7114,7 @@
       "base": "ibc/231FD77ECCB2DB916D314019DA30FE013202833386B1908A191D16989AD80B5A",
       "name": "USD Coin (Polygon)",
       "display": "polygon-usdc",
-      "symbol": "polygon.USDC",
+      "symbol": "polygon.USDC.axl",
       "traces": [
         {
           "type": "synthetic",
@@ -7184,7 +7184,7 @@
       "base": "ibc/F17C9CA112815613C5B6771047A093054F837C3020CBA59DFFD9D780A8B2984C",
       "name": "USD Coin (Avalanche)",
       "display": "avalanche-usdc",
-      "symbol": "avalanche.USDC",
+      "symbol": "avalanche.USDC.axl",
       "traces": [
         {
           "type": "synthetic",
@@ -14186,7 +14186,6 @@
         }
       ],
       "logo_URIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/humans/images/heart-dark-mode.svg",
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/humans/images/heart-dark-mode.png"
       },
       "images": [
@@ -14251,6 +14250,54 @@
         {
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/evmos/images/berlin.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/evmos/images/berlin.svg"
+        }
+      ],
+      "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "The native token of Scorum",
+      "denom_units": [
+        {
+          "denom": "ibc/178248C262DE2E141EE6287EE7AB0854F05F25B0A3F40C4B912FA1C7E51F466E",
+          "exponent": 0,
+          "aliases": [
+            "nscr"
+          ]
+        },
+        {
+          "denom": "scr",
+          "exponent": 9
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/178248C262DE2E141EE6287EE7AB0854F05F25B0A3F40C4B912FA1C7E51F466E",
+      "name": "Scorum",
+      "display": "scr",
+      "symbol": "SCR",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "scorum",
+            "base_denom": "nscr",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-20100",
+            "path": "transfer/channel-20100/nscr"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/scorum/images/scr.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/scorum/images/scr.svg"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/scorum/images/scr.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/scorum/images/scr.svg"
         }
       ],
       "keywords": [

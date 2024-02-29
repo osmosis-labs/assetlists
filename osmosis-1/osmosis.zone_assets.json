@@ -248,7 +248,7 @@
       "path": "transfer/channel-208/dot-planck",
       "osmosis_verified": true,
       "override_properties": {
-        "symbol": "DOT.axl",
+        "symbol": "moonbeam.DOT.axl",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dot.axl.svg"
         }
@@ -925,19 +925,22 @@
       "chain_name": "odin",
       "base_denom": "loki",
       "path": "transfer/channel-258/loki",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "osmosis_unstable": true
     },
     {
       "chain_name": "odin",
       "base_denom": "mGeo",
       "path": "transfer/channel-258/mGeo",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "osmosis_unstable": true
     },
     {
       "chain_name": "odin",
       "base_denom": "mO9W",
       "path": "transfer/channel-258/mO9W",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "osmosis_unstable": true
     },
     {
       "chain_name": "kichain",
@@ -952,7 +955,7 @@
       "chain_name": "axelar",
       "base_denom": "wglmr-wei",
       "path": "transfer/channel-208/wglmr-wei",
-      "osmosis_verified": false,
+      "osmosis_verified": true,
       "override_properties": {
         "symbol": "GLMR",
         "name": "Moonbeam"
@@ -1358,7 +1361,7 @@
       "osmosis_verified": true,
       "override_properties": {
         "name": "USD Coin (Polygon)",
-        "symbol": "polygon.USDC",
+        "symbol": "polygon.USDC.axl",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/polygon.usdc.svg"
         }
@@ -1376,7 +1379,7 @@
       "osmosis_verified": true,
       "override_properties": {
         "name": "USD Coin (Avalanche)",
-        "symbol": "avalanche.USDC",
+        "symbol": "avalanche.USDC.axl",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/avalanche.usdc.svg"
         }
@@ -2688,6 +2691,32 @@
       "base_denom": "aheart",
       "path": "transfer/channel-20082/aheart",
       "twitter_URL": "https://twitter.com/humansdotai",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "override_properties": {
+        "logo_URIs": {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/humans/images/heart-dark-mode.png"
+        }
+      }
+    },
+    {
+      "chain_name": "evmos",
+      "path": "transfer/channel-204/erc20/0x1cFc8f1FE8D5668BAFF2724547EcDbd6f013a280",
+      "base_denom": "erc20/0x1cFc8f1FE8D5668BAFF2724547EcDbd6f013a280",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "transfer_methods": [
+        {
+            "name": "Evmos App",
+            "type": "external_interface",
+            "deposit_url": "https://app.evmos.org/assets"
+        }
+      ]
+    },
+    {
+      "chain_name": "scorum",
+      "base_denom": "nscr",
+      "path": "transfer/channel-20100/nscr",
       "osmosis_verified": false,
       "osmosis_unlisted": true
     },

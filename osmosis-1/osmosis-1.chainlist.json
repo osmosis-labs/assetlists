@@ -2040,7 +2040,7 @@
       "chain_name": "umee",
       "status": "live",
       "network_type": "mainnet",
-      "pretty_name": "Umee",
+      "pretty_name": "UX Chain",
       "chain_id": "umee-1",
       "bech32_prefix": "umee",
       "bech32_config": {
@@ -5781,10 +5781,10 @@
         "fee_tokens": [
           {
             "denom": "aarch",
-            "fixed_min_gas_price": 900000000000,
-            "low_gas_price": 1000000000000,
-            "average_gas_price": 1500000000000,
-            "high_gas_price": 2000000000000
+            "fixed_min_gas_price": 140000000000,
+            "low_gas_price": 196000000000,
+            "average_gas_price": 225400000000,
+            "high_gas_price": 254800000000
           }
         ]
       },
@@ -5954,10 +5954,10 @@
         "fee_tokens": [
           {
             "denom": "usei",
-            "fixed_min_gas_price": 0.1,
-            "low_gas_price": 0.1,
-            "average_gas_price": 0.1,
-            "high_gas_price": 0.25
+            "fixed_min_gas_price": 0.02,
+            "low_gas_price": 0.02,
+            "average_gas_price": 0.02,
+            "high_gas_price": 0.04
           }
         ]
       },
@@ -7004,8 +7004,8 @@
         "fee_tokens": [
           {
             "denom": "adym",
-            "low_gas_price": 20000000000,
-            "average_gas_price": 20000000000,
+            "low_gas_price": 5000000000,
+            "average_gas_price": 5000000000,
             "high_gas_price": 20000000000
           }
         ]
@@ -7040,6 +7040,119 @@
         "ibc-go",
         "eth-address-gen",
         "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "humans",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Humans.ai",
+      "chain_id": "humans_1089-1",
+      "bech32_prefix": "human",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "human",
+        "bech32PrefixAccPub": "humanpub",
+        "bech32PrefixValAddr": "humanvaloper",
+        "bech32PrefixValPub": "humanvaloperpub",
+        "bech32PrefixConsAddr": "humanvalcons",
+        "bech32PrefixConsPub": "humanvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "aheart",
+            "fixed_min_gas_price": 250000000,
+            "low_gas_price": 80000000000,
+            "average_gas_price": 100000000000,
+            "high_gas_price": 160000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "aheart"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.humans.nodestake.top"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.humans.nodestake.top"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/humans/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "scorum",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Scorum Network",
+      "chain_id": "scorum-1",
+      "bech32_prefix": "scorum",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "scorum",
+        "bech32PrefixAccPub": "scorumpub",
+        "bech32PrefixValAddr": "scorumvaloper",
+        "bech32PrefixValPub": "scorumvaloperpub",
+        "bech32PrefixConsAddr": "scorumvalcons",
+        "bech32PrefixConsPub": "scorumvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "gas",
+            "fixed_min_gas_price": 1,
+            "low_gas_price": 1,
+            "average_gas_price": 1,
+            "high_gas_price": 1
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "nsp"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://scorum-blockchain-mainnet-rpc-1.scorum.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://scorum-blockchain-mainnet-api-1.scorum.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://cosmos.scorum.com/scorum/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
       ]
     }
   ]

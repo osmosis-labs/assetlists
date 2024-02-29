@@ -6,7 +6,7 @@ Asset Lists are inpsired by the [Token Lists](https://tokenlists.org/) project o
 
 ## Prerequisite
 
-The `.assetlist.json` files herein are generated, which will be triggered by additions to the corresponding `osmosis.zone_assets.json` file, fetching the metadata from the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry). One prerequisite to adding an asset here is complete registration of the asset and it's originating chain (and the IBC connection between the orgini chain and Osmosis, if not native to Osmosis) to the Cosmos Chain Registry, so please make sure that's done first.
+The `.assetlist.json` files herein are generated, which will be triggered by additions to the corresponding `osmosis.zone_assets.json` file, fetching the metadata from the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry). One prerequisite to adding an asset here is complete registration of the asset and it's originating chain (and the IBC connection between the origin chain and Osmosis, if not native to Osmosis) to the Cosmos Chain Registry, so please make sure that's done first.
 
 ## How to Add Assets
 

@@ -1150,14 +1150,25 @@
         "ibc-transfer"
       ]
     },
-    {      "chain_name": "pylons",
+    {
+      "chain_name": "chain4energy",
+      "rpc": "https://rpc.c4e.io",
+      "rest": "https://lcd.c4e.io",
+      "explorer_tx_url": "https://explorer.c4e.io/transactions/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "pylons",
       "rpc": "https://rpc.pylons.nodestake.top/",
       "rest": "https://api.pylons.nodestake.top/",
       "explorer_tx_url": "https://pylons.explorers.guru/transaction/${txHash}",
       "keplr_features": [
         "ibc-transfer",
         "ibc-go"
-      ]
-    }
+        ]
+    } 
   ]
 }

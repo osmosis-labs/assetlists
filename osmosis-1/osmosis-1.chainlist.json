@@ -7154,6 +7154,62 @@
       "features": [
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "chain4energy",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Chain4Energy",
+      "chain_id": "perun-1",
+      "bech32_prefix": "c4e",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "c4e",
+        "bech32PrefixAccPub": "c4epub",
+        "bech32PrefixValAddr": "c4evaloper",
+        "bech32PrefixValPub": "c4evaloperpub",
+        "bech32PrefixConsAddr": "c4evalcons",
+        "bech32PrefixConsPub": "c4evalconspub"
+      },
+      "slip44": 4444,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uc4e",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uc4e"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.c4e.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.c4e.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.c4e.io/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
     }
   ]
 }

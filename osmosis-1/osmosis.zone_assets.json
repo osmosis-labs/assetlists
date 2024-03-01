@@ -2707,9 +2707,9 @@
       "osmosis_unlisted": true,
       "transfer_methods": [
         {
-            "name": "Evmos App",
-            "type": "external_interface",
-            "deposit_url": "https://app.evmos.org/assets"
+          "name": "Evmos App",
+          "type": "external_interface",
+          "deposit_url": "https://app.evmos.org/assets"
         }
       ]
     },
@@ -2727,6 +2727,21 @@
       "path": "transfer/channel-22172/uc4e",
       "osmosis_verified": false,
       "osmosis_unlisted": true
+    },
+    {
+      "chain_name": "terra2",
+      "base_denom": "cw20:terra1sxe8u2hjczlekwfkcq0rs28egt38pg3wqzfx4zcrese4fnvzzupsk9gjkq",
+      "path": "transfer/channel-341/cw20:terra1sxe8u2hjczlekwfkcq0rs28egt38pg3wqzfx4zcrese4fnvzzupsk9gjkq",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "transfer_methods": [
+        {
+          "name": "Osmosis Pro TFM IBC Transfer",
+          "type": "external_interface",
+          "deposit_url": "https://pro.osmosis.zone/ibc?chainTo=osmosis-1&chainFrom=phoenix-1&token0=terra1sxe8u2hjczlekwfkcq0rs28egt38pg3wqzfx4zcrese4fnvzzupsk9gjkq&token1=ibc%2F7D389F0ABF1E4D45BE6D7BBE36A2C50EA0559C01E076B02F8E381E685EC1F942",
+          "withdraw_url": "https://pro.osmosis.zone/ibc?chainFrom=osmosis-1&chainTo=phoenix-1&token0=ibc%2F7D389F0ABF1E4D45BE6D7BBE36A2C50EA0559C01E076B02F8E381E685EC1F942&token1=terra1sxe8u2hjczlekwfkcq0rs28egt38pg3wqzfx4zcrese4fnvzzupsk9gjkq"
+        }
+      ]
     }
   ]
 }

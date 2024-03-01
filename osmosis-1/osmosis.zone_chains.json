@@ -1128,6 +1128,37 @@
         "eth-address-gen",
         "eth-key-sign"
       ]
+    },
+    {
+      "chain_name": "humans",
+      "rpc": "https://rpc.humans.nodestake.top",
+      "rest": "https://api.humans.nodestake.top",
+      "explorer_tx_url": "https://www.mintscan.io/humans/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "scorum",
+      "rpc": "https://scorum-blockchain-mainnet-rpc-1.scorum.com",
+      "rest": "https://scorum-blockchain-mainnet-api-1.scorum.com",
+      "explorer_tx_url": "https://cosmos.scorum.com/scorum/transactions/${txHash}",
+      "keplr_features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "chain4energy",
+      "rpc": "https://rpc.c4e.io",
+      "rest": "https://lcd.c4e.io",
+      "explorer_tx_url": "https://explorer.c4e.io/transactions/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
     }
   ]
 }

@@ -28,7 +28,7 @@
         "staking",
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1263"
+        "osmosis-price:ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F:1430"
       ]
     },
     {
@@ -4161,7 +4161,7 @@
       "coingecko_id": "maker",
       "keywords": [
         "osmosis-main",
-        "osmosis-price:ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7:734"
+        "osmosis-price:uosmo:733"
       ]
     },
     {
@@ -7172,7 +7172,8 @@
       },
       "coingecko_id": "stride-staked-luna",
       "keywords": [
-        "osmosis-main"
+        "osmosis-main",
+        "osmosis-price:ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9:913"
       ]
     },
     {
@@ -9474,7 +9475,10 @@
       ],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/cub.png"
-      }
+      },
+      "keywords": [
+        "osmosis-price:ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9:1072"
+      ]
     },
     {
       "description": "BLUE CUB DAO is a community DAO on Terra",
@@ -9515,7 +9519,10 @@
       ],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/blue.png"
-      }
+      },
+      "keywords": [
+        "osmosis-price:ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9:1073"
+      ]
     },
     {
       "description": "The native token of Neutron chain.",
@@ -9891,7 +9898,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7:1298"
+        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1375"
       ]
     },
     {
@@ -10206,9 +10213,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qsomm.svg"
       },
       "keywords": [
-        "osmosis-main",
-        "osmosis-info",
-        "osmosis-price:ibc/9BBA9A1C257E971E38C1422780CE6F0B0686F0A3085E2D61118D904BFE0F5F5E:1087"
+        "osmosis-main"
       ]
     },
     {
@@ -10303,9 +10308,7 @@
       },
       "coingecko_id": "stride-staked-sommelier",
       "keywords": [
-        "osmosis-main",
-        "osmosis-info",
-        "osmosis-price:ibc/9BBA9A1C257E971E38C1422780CE6F0B0686F0A3085E2D61118D904BFE0F5F5E:1120"
+        "osmosis-main"
       ]
     },
     {
@@ -13916,8 +13919,8 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/bitmos.png"
       },
       "keywords": [
-        "osmosis-price:uosmo:1505",
-        "osmosis-unlisted"
+        "osmosis-info",
+        "osmosis-price:uosmo:1505"
       ]
     },
     {
@@ -13984,6 +13987,48 @@
       },
       "coingecko_id": "source-protocol",
       "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "The revenue token for Pylons",
+      "denom_units": [
+        {
+          "denom": "ibc/0835781EF3F3ADD053874323AB660C75B50B18B16733CAB783CA6BBD78244EDF",
+          "exponent": 0,
+          "aliases": [
+            "ubedrock"
+          ]
+        },
+        {
+          "denom": "rock",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/0835781EF3F3ADD053874323AB660C75B50B18B16733CAB783CA6BBD78244EDF",
+      "name": "Pylons",
+      "display": "rock",
+      "symbol": "ROCK",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "pylons",
+            "base_denom": "ubedrock",
+            "channel_id": "channel-29"
+          },
+          "chain": {
+            "channel_id": "channel-17683",
+            "path": "transfer/channel-17683/ubedrock"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pylons/images/pylons.png"
+      },
+      "keywords": [
+        "osmosis-price:uosmo:1386",
         "osmosis-unlisted"
       ]
     }

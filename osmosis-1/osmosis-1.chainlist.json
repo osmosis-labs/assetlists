@@ -5781,10 +5781,10 @@
         "fee_tokens": [
           {
             "denom": "aarch",
-            "fixed_min_gas_price": 900000000000,
-            "low_gas_price": 1000000000000,
-            "average_gas_price": 1500000000000,
-            "high_gas_price": 2000000000000
+            "fixed_min_gas_price": 140000000000,
+            "low_gas_price": 196000000000,
+            "average_gas_price": 225400000000,
+            "high_gas_price": 254800000000
           }
         ]
       },
@@ -7098,6 +7098,117 @@
         "ibc-go",
         "eth-address-gen",
         "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "scorum",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Scorum Network",
+      "chain_id": "scorum-1",
+      "bech32_prefix": "scorum",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "scorum",
+        "bech32PrefixAccPub": "scorumpub",
+        "bech32PrefixValAddr": "scorumvaloper",
+        "bech32PrefixValPub": "scorumvaloperpub",
+        "bech32PrefixConsAddr": "scorumvalcons",
+        "bech32PrefixConsPub": "scorumvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "gas",
+            "fixed_min_gas_price": 1,
+            "low_gas_price": 1,
+            "average_gas_price": 1,
+            "high_gas_price": 1
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "nsp"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://scorum-blockchain-mainnet-rpc-1.scorum.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://scorum-blockchain-mainnet-api-1.scorum.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://cosmos.scorum.com/scorum/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "chain4energy",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Chain4Energy",
+      "chain_id": "perun-1",
+      "bech32_prefix": "c4e",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "c4e",
+        "bech32PrefixAccPub": "c4epub",
+        "bech32PrefixValAddr": "c4evaloper",
+        "bech32PrefixValPub": "c4evaloperpub",
+        "bech32PrefixConsAddr": "c4evalcons",
+        "bech32PrefixConsPub": "c4evalconspub"
+      },
+      "slip44": 4444,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uc4e",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uc4e"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.c4e.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.c4e.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.c4e.io/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
       ]
     }
   ]

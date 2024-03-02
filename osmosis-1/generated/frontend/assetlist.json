@@ -889,7 +889,7 @@
       },
       "coingeckoId": "cosmos",
       "price": {
-        "poolId": "1399",
+        "poolId": "1400",
         "denom": "uosmo"
       },
       "categories": [
@@ -11186,8 +11186,8 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/medasdigital/images/medas.svg"
       },
       "price": {
-        "poolId": "1329",
-        "denom": "ibc/41999DF04D9441DAC0DF5D8291DF4333FBCBA810FFD63FDCE34FDF41EF37B6F7"
+        "poolId": "1266",
+        "denom": "ibc/573FCD90FACEE750F55A8864EF7D38265F07E5A9273FA0E8DAFD39951332B580"
       },
       "categories": [
         "defi"
@@ -21249,8 +21249,8 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nbtc.svg"
       },
       "price": {
-        "poolId": "1253",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1490",
+        "denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc"
       },
       "categories": [],
       "transferMethods": [
@@ -21956,8 +21956,8 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bostrom/images/hydrogen.svg"
       },
       "price": {
-        "poolId": "1326",
-        "denom": "ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4"
+        "poolId": "1330",
+        "denom": "uosmo"
       },
       "categories": [],
       "transferMethods": [
@@ -22294,7 +22294,12 @@
       "unstable": false,
       "disabled": false,
       "preview": false,
-      "relatedAssets": []
+      "relatedAssets": [
+        {
+          "chainName": "source",
+          "sourceDenom": "ibc/FC5A7360EEED0713AE3E83E9D55A69AF873056A172AC495890ACE4582FF9685A"
+        }
+      ]
     },
     {
       "chainName": "gateway",
@@ -24926,8 +24931,9 @@
       "verified": false,
       "unstable": false,
       "disabled": false,
-      "preview": true,
+      "preview": false,
       "twitterURL": "https://twitter.com/Gelotto2",
+      "listingDate": "2024-03-01T20:23:00.000Z",
       "relatedAssets": [
         {
           "chainName": "juno",
@@ -25570,6 +25576,10 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/scorum/images/scr.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/scorum/images/scr.svg"
       },
+      "price": {
+        "poolId": "1507",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+      },
       "categories": [],
       "transferMethods": [
         {
@@ -25675,6 +25685,10 @@
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/bitmos.png"
       },
+      "price": {
+        "poolId": "1505",
+        "denom": "uosmo"
+      },
       "categories": [
         "meme"
       ],
@@ -25764,6 +25778,142 @@
           "sourceDenom": "stujuno"
         }
       ]
+    },
+    {
+      "chainName": "source",
+      "sourceDenom": "ibc/FC5A7360EEED0713AE3E83E9D55A69AF873056A172AC495890ACE4582FF9685A",
+      "coinMinimalDenom": "ibc/C97473CD237EBA2F94FDFA6ABA5EC0E22FA140655D73D2A2754F03A347BBA40B",
+      "symbol": "SRCX",
+      "decimals": 9,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/srcx.png"
+      },
+      "coingeckoId": "source-protocol",
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "source",
+            "chainId": "source-1",
+            "sourceDenom": "ibc/FC5A7360EEED0713AE3E83E9D55A69AF873056A172AC495890ACE4582FF9685A",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-8945",
+            "path": "transfer/channel-8945/transfer/channel-1/erc20/0x091F9A57A3F58d758b6572E9d41675918EAC7F09"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "source",
+          "sourceDenom": "ibc/FC5A7360EEED0713AE3E83E9D55A69AF873056A172AC495890ACE4582FF9685A",
+          "chainType": "cosmos",
+          "chainId": "source-1",
+          "symbol": "SRCX",
+          "decimals": 9,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/srcx.png"
+          }
+        },
+        {
+          "chainName": "planq",
+          "sourceDenom": "erc20/0x091F9A57A3F58d758b6572E9d41675918EAC7F09",
+          "chainType": "cosmos",
+          "chainId": "planq_7070-2",
+          "symbol": "SRCX",
+          "decimals": 9,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/srcx.png"
+          }
+        },
+        {
+          "chainName": "binancesmartchain",
+          "sourceDenom": "0x454b90716a9435e7161a9aea5cf00e0acbe565ae",
+          "chainType": "evm",
+          "chainId": 56,
+          "address": "0x454b90716a9435e7161a9aea5cf00e0acbe565ae",
+          "symbol": "SRCX",
+          "decimals": 9,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/srcx.png"
+          }
+        }
+      ],
+      "variantGroupKey": "SRCX",
+      "name": "Source Token",
+      "description": "The SRCX token of Source Protocol.",
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true,
+      "relatedAssets": [
+        {
+          "chainName": "source",
+          "sourceDenom": "usource"
+        }
+      ]
+    },
+    {
+      "chainName": "pylons",
+      "sourceDenom": "ubedrock",
+      "coinMinimalDenom": "ibc/0835781EF3F3ADD053874323AB660C75B50B18B16733CAB783CA6BBD78244EDF",
+      "symbol": "ROCK",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pylons/images/pylons.png"
+      },
+      "price": {
+        "poolId": "1386",
+        "denom": "uosmo"
+      },
+      "categories": [
+        "defi"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "pylons",
+            "chainId": "pylons-mainnet-1",
+            "sourceDenom": "ubedrock",
+            "port": "transfer",
+            "channelId": "channel-29"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-17683",
+            "path": "transfer/channel-17683/ubedrock"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "pylons",
+          "sourceDenom": "ubedrock",
+          "chainType": "cosmos",
+          "chainId": "pylons-mainnet-1",
+          "symbol": "ROCK",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pylons/images/pylons.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ROCK",
+      "name": "Pylons",
+      "description": "The revenue token for Pylons",
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true,
+      "twitterURL": "https://twitter.com/pylonstech",
+      "relatedAssets": []
     }
   ]
 }

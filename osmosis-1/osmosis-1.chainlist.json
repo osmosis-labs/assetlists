@@ -7210,6 +7210,62 @@
         "ibc-go",
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "pylons",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Pylons",
+      "chain_id": "pylons-mainnet-1",
+      "bech32_prefix": "pylo",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "pylo",
+        "bech32PrefixAccPub": "pylopub",
+        "bech32PrefixValAddr": "pylovaloper",
+        "bech32PrefixValPub": "pylovaloperpub",
+        "bech32PrefixConsAddr": "pylovalcons",
+        "bech32PrefixConsPub": "pylovalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ubedrock",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0.5,
+            "high_gas_price": 1
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ubedrock"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.pylons.nodestake.top/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.pylons.nodestake.top/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://pylons.explorers.guru/transaction/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
     }
   ]
 }

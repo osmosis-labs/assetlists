@@ -6680,6 +6680,14 @@
       "symbol": "stkATOM",
       "traces": [
         {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "cosmoshub",
+            "base_denom": "uatom"
+          },
+          "provider": "pSTAKE"
+        },
+        {
           "type": "ibc",
           "counterparty": {
             "chain_name": "persistence",
@@ -12570,6 +12578,14 @@
       "symbol": "stkOSMO",
       "traces": [
         {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "osmosis",
+            "base_denom": "uosmo"
+          },
+          "provider": "pSTAKE"
+        },
+        {
           "type": "ibc",
           "counterparty": {
             "chain_name": "persistence",
@@ -14202,9 +14218,6 @@
             "dark_mode": true
           }
         }
-      ],
-      "keywords": [
-        "osmosis-unlisted"
       ]
     },
     {
@@ -14250,9 +14263,6 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/evmos/images/berlin.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/evmos/images/berlin.svg"
         }
-      ],
-      "keywords": [
-        "osmosis-unlisted"
       ]
     },
     {
@@ -14320,7 +14330,7 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/62118FB4D5FEDD5D2B18DC93648A745CD5E5B01D420E9B7A5FED5381CB13A7E8",
-      "name": "Chain4Energy",
+      "name": "C4E",
       "display": "c4e",
       "symbol": "C4E",
       "traces": [
@@ -14392,9 +14402,6 @@
         {
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/bitmos.png"
         }
-      ],
-      "keywords": [
-        "osmosis-unlisted"
       ]
     },
     {
@@ -14404,7 +14411,7 @@
           "denom": "ibc/C97473CD237EBA2F94FDFA6ABA5EC0E22FA140655D73D2A2754F03A347BBA40B",
           "exponent": 0,
           "aliases": [
-            "srcx",
+            "nsrcx",
             "ibc/FC5A7360EEED0713AE3E83E9D55A69AF873056A172AC495890ACE4582FF9685A"
           ]
         },
@@ -14463,9 +14470,6 @@
         {
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/srcx.png"
         }
-      ],
-      "keywords": [
-        "osmosis-unlisted"
       ]
     },
     {
@@ -14508,6 +14512,62 @@
       "images": [
         {
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pylons/images/pylons.png"
+        }
+      ]
+    },
+    {
+      "description": "BSKT tracks the top assets across the crypto ecosystem",
+      "denom_units": [
+        {
+          "denom": "ibc/CDD1E59BD5034C1B2597DD199782204EB397DB93200AA2E99C0AF3A66B2915FA",
+          "exponent": 0,
+          "aliases": [
+            "6gnCPhXtLnUD76HjQuSYPENLSZdG8RvDB1pTLM5aLSJA",
+            "wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/bqqqpqsxzelp2hdfd4cgmxr6ekpatlj8yt2eghk52vst",
+            "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/bqqqpqsxzelp2hdfd4cgmxr6ekpatlj8yt2eghk52vst"
+          ]
+        },
+        {
+          "denom": "wormhole/bqqqpqsxzelp2hdfd4cgmxr6ekpatlj8yt2eghk52vst/5",
+          "exponent": 5,
+          "aliases": [
+            "bskt"
+          ]
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/CDD1E59BD5034C1B2597DD199782204EB397DB93200AA2E99C0AF3A66B2915FA",
+      "name": "Basket",
+      "display": "wormhole/bqqqpqsxzelp2hdfd4cgmxr6ekpatlj8yt2eghk52vst/5",
+      "symbol": "BSKT",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "solana",
+            "base_denom": "6gnCPhXtLnUD76HjQuSYPENLSZdG8RvDB1pTLM5aLSJA"
+          },
+          "provider": "Wormhole"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gateway",
+            "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/bqqqpqsxzelp2hdfd4cgmxr6ekpatlj8yt2eghk52vst",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-2186",
+            "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/bqqqpqsxzelp2hdfd4cgmxr6ekpatlj8yt2eghk52vst"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/bskt.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/bskt.png"
         }
       ],
       "keywords": [
@@ -14631,6 +14691,33 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nom.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nom.svg"
       }
+    },
+    {
+      "description": "The governance and utility token of Yieldmos, the Interchain Automation Protocol",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1vdvnznwg597qngrq9mnfcfk0am9jdc9y446jewhcqdreqz4r75xq5j5zvy/ymos",
+          "exponent": 0
+        },
+        {
+          "denom": "ymos",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1vdvnznwg597qngrq9mnfcfk0am9jdc9y446jewhcqdreqz4r75xq5j5zvy",
+      "base": "factory/osmo1vdvnznwg597qngrq9mnfcfk0am9jdc9y446jewhcqdreqz4r75xq5j5zvy/ymos",
+      "name": "Yieldmos Coin",
+      "display": "ymos",
+      "symbol": "YMOS",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ymos.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ymos.png"
+        }
+      ]
     }
   ]
 }

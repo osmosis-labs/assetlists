@@ -13,8 +13,8 @@
       },
       "coingeckoId": "osmosis",
       "price": {
-        "poolId": "331",
-        "denom": "ibc/3642669AD14386D3E38F43F30CFCA859B3E8A05BF6BD6A23DEBD2115AD1325E9"
+        "poolId": "314",
+        "denom": "ibc/DE6792CF9E521F6AD6E9A4BDF6225C9571A3B74ACC0A529F92BC5122A39D2E58"
       },
       "categories": [
         "defi"
@@ -127,7 +127,7 @@
       "chainName": "axelartestnet",
       "sourceDenom": "uausdc",
       "coinMinimalDenom": "ibc/2164BDB48DE5501430E71286448D87C6D2240EC0E078CF113CAB85E21A352BB0",
-      "symbol": "aUSDC.axl",
+      "symbol": "aUSDC.axl.axl",
       "decimals": 6,
       "logoURIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
@@ -394,6 +394,16 @@
         "defi"
       ],
       "transferMethods": [
+        {
+          "name": "Nitro Bridge",
+          "type": "integrated_bridge",
+          "counterparty": [
+            {
+              "unwrappedAssetId": "0x5425890298aed601595a70ab815c96711a31bc65"
+            }
+          ],
+          "unwrappedAssetId": "uusdc"
+        },
         {
           "name": "Osmosis IBC Transfer",
           "type": "ibc",

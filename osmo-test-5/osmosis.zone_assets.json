@@ -52,7 +52,19 @@
       "override_properties": {
         "coingecko_id": "usd-coin"
       },
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "transfer_methods": [
+        {
+          "name": "Nitro Bridge",
+          "type": "integrated_bridge",
+          "counterparty": [
+            {
+              "chain_name": "avalanchetestnet",
+              "unwrappedAssetId": "0x5425890298aed601595a70ab815c96711a31bc65"
+            }
+          ]
+        }
+      ]
     },
     {
       "chain_name": "akashtestnet",

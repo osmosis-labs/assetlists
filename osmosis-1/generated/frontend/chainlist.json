@@ -2305,6 +2305,13 @@
           "coinMinimalDenom": "factory/osmo10n8rv8npx870l69248hnp6djy6pll2yuzzn9x8/BADKID",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/badkid.png"
+        },
+        {
+          "coinDenom": "YMOS",
+          "chainSuggestionDenom": "factory/osmo1vdvnznwg597qngrq9mnfcfk0am9jdc9y446jewhcqdreqz4r75xq5j5zvy/ymos",
+          "coinMinimalDenom": "factory/osmo1vdvnznwg597qngrq9mnfcfk0am9jdc9y446jewhcqdreqz4r75xq5j5zvy/ymos",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ymos.png"
         }
       ],
       "description": "Osmosis (OSMO) is the premier DEX and cross-chain DeFi hub within the Cosmos ecosystem, a network of over 50 sovereign, interoperable blockchains seamlessly connected through the Inter-Blockchain Communication Protocol (IBC). Pioneering in its approach, Osmosis offers a dynamic trading and liquidity provision experience, integrating non-IBC assets from other ecosystems, including Ethereum, Solana, Avalanche, and Polkadot. Initially adopting Balancer-style pools, Osmosis now also features a concentrated liquidity model that is orders of magnitude more capital efficient, meaning that significantly less liquidity is required to handle the same amount of trading volume with minimal slippage.\n\nAs a true appchain, Osmosis has greater control over the full blockchain stack than traditional smart contract DEXs, which must follow the code of the parent chain that it is built on. This fine-grained control has enabled, for example, the development of Superfluid Staking, an extension of Proof of Stake that allows assets at the application layer to be staked to secure the chain. The customizability of appchains also allows implementing features like the Protocol Revenue module, which enables Osmosis to conduct on-chain arbitrage on behalf of OSMO stakers, balancing prices across pools while generating real yield revenue from this volume. Additionally, as a sovereign appchain, Osmosis governance can vote on upgrades to the protocol. One example of this was the introduction of a Taker Fee, which switched on the collection of exchange fees to generate diverse yield from Osmosis volume and distribute it to OSMO stakers.\n\nOsmosis is bringing the full centralized exchange experience to the decentralized world by building a cross-chain native DEX and trading suite that connects all chains over IBC, including Ethereum and Bitcoin. To reach this goal, Osmosis hosts an ever-expanding suite of DeFi applications aimed at providing a one-stop experience that includes lending, credit, margin, DeFi strategy vaults, power perps, fiat on-ramps, NFTs, stablecoins, and more — all of the functionalities that centralized exchange offer and more, in the trust-minimized environment of decentralized finance.",
@@ -4738,6 +4745,29 @@
           "sourceDenom": "stk/adydx",
           "coinDecimals": 18,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/stkdydx.png"
+        },
+        {
+          "coinDenom": "stkSTARS",
+          "chainSuggestionDenom": "stk/ustars",
+          "sourceDenom": "stk/ustars",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/stkstars.png"
+        },
+        {
+          "coinDenom": "STARS",
+          "chainSuggestionDenom": "ibc/AD8E1D4AC4EA8FC79CC46E33319A3791477D4DEBFC30D5D874074B993422B41B",
+          "sourceDenom": "ibc/AD8E1D4AC4EA8FC79CC46E33319A3791477D4DEBFC30D5D874074B993422B41B",
+          "coinDecimals": 6,
+          "coinGeckoId": "stargaze",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/stars.png"
+        },
+        {
+          "coinDenom": "SHD",
+          "chainSuggestionDenom": "ibc/5D3B6445EA1D7064C4B1CCB588638589529556E1BCBADF13475021B42EA8C73B",
+          "sourceDenom": "ibc/5D3B6445EA1D7064C4B1CCB588638589529556E1BCBADF13475021B42EA8C73B",
+          "coinDecimals": 8,
+          "coinGeckoId": "shade-protocol",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/shd.png"
         }
       ],
       "description": "Persistence is an app chain for Liquid Staking powering an ecosystem of DeFi applications focused on unlocking the liquidity of staked assets.",
@@ -10948,16 +10978,6 @@
           }
         },
         {
-          "chainSuggestionDenom": "uatom",
-          "sourceDenom": "uatom",
-          "coinDecimals": 0,
-          "gasPriceStep": {
-            "low": 0.0001,
-            "average": 0.0002,
-            "high": 0.0005
-          }
-        },
-        {
           "coinDenom": "stATOM",
           "chainSuggestionDenom": "stuatom",
           "coinMinimalDenom": "ibc/C140AFD542AE77BD7DCC83F13FDD8C5E5BB8C4929785E6EC2F4C636F98F17901",
@@ -10969,16 +10989,6 @@
             "low": 0.0001,
             "average": 0.0002,
             "high": 0.0005
-          }
-        },
-        {
-          "chainSuggestionDenom": "uosmo",
-          "sourceDenom": "uosmo",
-          "coinDecimals": 0,
-          "gasPriceStep": {
-            "low": 0.001,
-            "average": 0.002,
-            "high": 0.004
           }
         },
         {
@@ -10996,16 +11006,6 @@
           }
         },
         {
-          "chainSuggestionDenom": "ustars",
-          "sourceDenom": "ustars",
-          "coinDecimals": 0,
-          "gasPriceStep": {
-            "low": 1,
-            "average": 1.1,
-            "high": 1.2
-          }
-        },
-        {
           "coinDenom": "stSTARS",
           "chainSuggestionDenom": "stustars",
           "coinMinimalDenom": "ibc/5DD1F95ED336014D00CE2520977EC71566D282F9749170ADC83A392E0EA7426A",
@@ -11017,16 +11017,6 @@
             "low": 1,
             "average": 1.1,
             "high": 1.2
-          }
-        },
-        {
-          "chainSuggestionDenom": "ujuno",
-          "sourceDenom": "ujuno",
-          "coinDecimals": 0,
-          "gasPriceStep": {
-            "low": 0.075,
-            "average": 0.1,
-            "high": 0.125
           }
         },
         {
@@ -11044,16 +11034,6 @@
           }
         },
         {
-          "chainSuggestionDenom": "uluna",
-          "sourceDenom": "uluna",
-          "coinDecimals": 0,
-          "gasPriceStep": {
-            "low": 0.0125,
-            "average": 0.015,
-            "high": 0.04
-          }
-        },
-        {
           "coinDenom": "stLUNA",
           "chainSuggestionDenom": "stuluna",
           "coinMinimalDenom": "ibc/C491E7582E94AE921F6A029790083CDE1106C28F3F6C4AD7F1340544C13EC372",
@@ -11065,16 +11045,6 @@
             "low": 0.0125,
             "average": 0.015,
             "high": 0.04
-          }
-        },
-        {
-          "chainSuggestionDenom": "aevmos",
-          "sourceDenom": "aevmos",
-          "coinDecimals": 0,
-          "gasPriceStep": {
-            "low": 20000000000,
-            "average": 25000000000,
-            "high": 40000000000
           }
         },
         {
@@ -11092,16 +11062,6 @@
           }
         },
         {
-          "chainSuggestionDenom": "inj",
-          "sourceDenom": "inj",
-          "coinDecimals": 0,
-          "gasPriceStep": {
-            "low": 500000000,
-            "average": 700000000,
-            "high": 900000000
-          }
-        },
-        {
           "coinDenom": "stINJ",
           "chainSuggestionDenom": "stinj",
           "sourceDenom": "stinj",
@@ -11114,16 +11074,6 @@
           }
         },
         {
-          "chainSuggestionDenom": "ucmdx",
-          "sourceDenom": "ucmdx",
-          "coinDecimals": 0,
-          "gasPriceStep": {
-            "low": 0.02,
-            "average": 0.025,
-            "high": 0.04
-          }
-        },
-        {
           "coinDenom": "stCMDX",
           "chainSuggestionDenom": "stucmdx",
           "sourceDenom": "stucmdx",
@@ -11133,16 +11083,6 @@
             "low": 0.02,
             "average": 0.025,
             "high": 0.04
-          }
-        },
-        {
-          "chainSuggestionDenom": "uumee",
-          "sourceDenom": "uumee",
-          "coinDecimals": 0,
-          "gasPriceStep": {
-            "low": 0.1,
-            "average": 0.12,
-            "high": 0.2
           }
         },
         {
@@ -11160,16 +11100,6 @@
           }
         },
         {
-          "chainSuggestionDenom": "utia",
-          "sourceDenom": "utia",
-          "coinDecimals": 0,
-          "gasPriceStep": {
-            "low": 0.01,
-            "average": 0.02,
-            "high": 0.1
-          }
-        },
-        {
           "coinDenom": "stTIA",
           "chainSuggestionDenom": "stutia",
           "coinMinimalDenom": "ibc/698350B8A61D575025F3ED13E9AC9C0F45C89DEFE92F76D5838F1D3C1A7FF7C9",
@@ -11180,16 +11110,6 @@
             "low": 0.01,
             "average": 0.02,
             "high": 0.1
-          }
-        },
-        {
-          "chainSuggestionDenom": "adydx",
-          "sourceDenom": "adydx",
-          "coinDecimals": 0,
-          "gasPriceStep": {
-            "low": 12500000000,
-            "average": 12500000000,
-            "high": 20000000000
           }
         },
         {
@@ -11485,6 +11405,21 @@
           "coinDecimals": 6,
           "coinGeckoId": "kujira",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/kuji.png"
+        },
+        {
+          "coinDenom": "USDC",
+          "chainSuggestionDenom": "uusdc",
+          "sourceDenom": "uusdc",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/USDCoin.png"
+        },
+        {
+          "coinDenom": "SCRT",
+          "chainSuggestionDenom": "uscrt",
+          "sourceDenom": "uscrt",
+          "coinDecimals": 6,
+          "coinGeckoId": "secret",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/scrt.png"
         }
       ],
       "apis": {
@@ -13848,9 +13783,9 @@
           "coinGeckoId": "neutron-3",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/ntrn.png",
           "gasPriceStep": {
-            "low": 0.075,
-            "average": 0.075,
-            "high": 0.1125
+            "low": 0.0053,
+            "average": 0.0053,
+            "high": 0.0053
           }
         },
         {
@@ -13861,9 +13796,9 @@
           "coinGeckoId": "cosmos",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
           "gasPriceStep": {
-            "low": 0.007,
-            "average": 0.007,
-            "high": 0.0105
+            "low": 0.0008,
+            "average": 0.0008,
+            "high": 0.0008
           }
         },
         {
@@ -13874,9 +13809,9 @@
           "coinGeckoId": "axlusdc",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.png",
           "gasPriceStep": {
-            "low": 0.08,
-            "average": 0.08,
-            "high": 0.12
+            "low": 0.008,
+            "average": 0.008,
+            "high": 0.008
           }
         },
         {
@@ -13887,9 +13822,9 @@
           "coinDecimals": 18,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wsteth.svg",
           "gasPriceStep": {
-            "low": 30125586.037,
-            "average": 30125586.037,
-            "high": 45188379.0555
+            "low": 2903231.6597,
+            "average": 2903231.6597,
+            "high": 2903231.6597
           }
         },
         {
@@ -13900,9 +13835,9 @@
           "coinGeckoId": "dydx",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.png",
           "gasPriceStep": {
-            "low": 25641025641.026,
-            "average": 25641025641.026,
-            "high": 38461538461.5
+            "low": 2564102564.1026,
+            "average": 2564102564.1026,
+            "high": 2564102564.1026
           }
         },
         {
@@ -13913,9 +13848,9 @@
           "coinGeckoId": "celestia",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/celestia/images/celestia.png",
           "gasPriceStep": {
-            "low": 0.006,
-            "average": 0.006,
-            "high": 0.009
+            "low": 0.0004,
+            "average": 0.0004,
+            "high": 0.0004
           }
         }
       ],
@@ -14346,6 +14281,20 @@
         "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quasar/images/quasar.png"
       },
       "feeCurrencies": [
+        {
+          "coinDenom": "QSR",
+          "chainSuggestionDenom": "uqsr",
+          "coinMinimalDenom": "ibc/1B708808D372E959CD4839C594960309283424C775F4A038AAEBE7F83A988477",
+          "sourceDenom": "uqsr",
+          "coinDecimals": 6,
+          "coinGeckoId": "quasar-2",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quasar/images/quasar.png",
+          "gasPriceStep": {
+            "low": 0.01,
+            "average": 0.025,
+            "high": 0.03
+          }
+        },
         {
           "coinDenom": "OSMO",
           "chainSuggestionDenom": "ibc/0471F1C4E7AFD3F07702BEF6DC365268D64570F7C1FDC98EA6098DD6DE59817B",
@@ -15022,6 +14971,14 @@
           "sourceDenom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/HJk1XMDRNUbRrpKkNZYui7SwWDMjXZAsySzqgyNcQoU3",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
+        },
+        {
+          "coinDenom": "BSKT",
+          "chainSuggestionDenom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/bqqqpqsxzelp2hdfd4cgmxr6ekpatlj8yt2eghk52vst",
+          "coinMinimalDenom": "ibc/CDD1E59BD5034C1B2597DD199782204EB397DB93200AA2E99C0AF3A66B2915FA",
+          "sourceDenom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/bqqqpqsxzelp2hdfd4cgmxr6ekpatlj8yt2eghk52vst",
+          "coinDecimals": 5,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/bskt.png"
         }
       ],
       "apis": {
@@ -15596,12 +15553,12 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://dydx-rpc.lavenderfive.com:443"
+            "address": "https://dydx-rpc.lavenderfive.com"
           }
         ],
         "rest": [
           {
-            "address": "https://dydx-api.lavenderfive.com:443"
+            "address": "https://dydx-api.lavenderfive.com"
           }
         ]
       },
@@ -15891,6 +15848,7 @@
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qwoyn/images/qwoyn.png"
         }
       ],
+      "description": "The Qwoyn Network stands as a cutting-edge gaming hub that embeds Web3 technologies into the core of interactive entertainment. It revolutionizes the gaming industry by ensuring true ownership of in-game assets for players, facilitated through blockchain. This approach not only enhances gameplay but also fosters a unique ecosystem of interoperability and innovation. As a beacon in the gaming world, Qwoyn Network is dedicated to merging the excitement of traditional gaming with the transformative potential of Web3, creating a seamless and enriched gaming experience.",
       "apis": {
         "rpc": [
           {
@@ -15968,6 +15926,7 @@
         {
           "coinDenom": "SRCX",
           "chainSuggestionDenom": "ibc/FC5A7360EEED0713AE3E83E9D55A69AF873056A172AC495890ACE4582FF9685A",
+          "coinMinimalDenom": "ibc/C97473CD237EBA2F94FDFA6ABA5EC0E22FA140655D73D2A2754F03A347BBA40B",
           "sourceDenom": "ibc/FC5A7360EEED0713AE3E83E9D55A69AF873056A172AC495890ACE4582FF9685A",
           "coinDecimals": 9,
           "coinGeckoId": "source-protocol",
@@ -16478,7 +16437,7 @@
       },
       "explorers": [
         {
-          "txPage": "https://cosmos.scorum.com/scorum/transactions/${txHash}"
+          "txPage": "https://ezstaking.app/scorum/txs/${txHash}"
         }
       ],
       "features": [
@@ -16489,7 +16448,7 @@
       "chain_name": "chain4energy",
       "status": "live",
       "networkType": "mainnet",
-      "prettyName": "Chain4Energy",
+      "prettyName": "C4E",
       "chain_id": "perun-1",
       "bech32Prefix": "c4e",
       "bech32Config": {
@@ -16500,7 +16459,7 @@
         "bech32PrefixConsAddr": "c4evalcons",
         "bech32PrefixConsPub": "c4evalconspub"
       },
-      "slip44": 4444,
+      "slip44": 118,
       "stakeCurrency": {
         "coinDenom": "C4E",
         "chainSuggestionDenom": "uc4e",
@@ -16557,6 +16516,72 @@
       "features": [
         "ibc-go",
         "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "pylons",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Pylons",
+      "chain_id": "pylons-mainnet-1",
+      "bech32Prefix": "pylo",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "pylo",
+        "bech32PrefixAccPub": "pylopub",
+        "bech32PrefixValAddr": "pylovaloper",
+        "bech32PrefixValPub": "pylovaloperpub",
+        "bech32PrefixConsAddr": "pylovalcons",
+        "bech32PrefixConsPub": "pylovalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDenom": "ROCK",
+        "chainSuggestionDenom": "ubedrock",
+        "coinMinimalDenom": "ibc/0835781EF3F3ADD053874323AB660C75B50B18B16733CAB783CA6BBD78244EDF",
+        "sourceDenom": "ubedrock",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pylons/images/pylons.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "ROCK",
+          "chainSuggestionDenom": "ubedrock",
+          "coinMinimalDenom": "ibc/0835781EF3F3ADD053874323AB660C75B50B18B16733CAB783CA6BBD78244EDF",
+          "sourceDenom": "ubedrock",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pylons/images/pylons.png"
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "ROCK",
+          "chainSuggestionDenom": "ubedrock",
+          "coinMinimalDenom": "ibc/0835781EF3F3ADD053874323AB660C75B50B18B16733CAB783CA6BBD78244EDF",
+          "sourceDenom": "ubedrock",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pylons/images/pylons.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.pylons.nodestake.top/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.pylons.nodestake.top/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://pylons.explorers.guru/transaction/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
       ]
     }
   ]

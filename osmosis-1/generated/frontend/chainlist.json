@@ -16583,6 +16583,83 @@
         "ibc-transfer",
         "ibc-go"
       ]
+    },
+    {
+      "chain_name": "aioz",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "AIOZ Network",
+      "chain_id": "aioz_168-1",
+      "bech32Prefix": "aioz",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "aioz",
+        "bech32PrefixAccPub": "aiozpub",
+        "bech32PrefixValAddr": "aiozvaloper",
+        "bech32PrefixValPub": "aiozvaloperpub",
+        "bech32PrefixConsAddr": "aiozvalcons",
+        "bech32PrefixConsPub": "aiozvalconspub"
+      },
+      "slip44": 60,
+      "stakeCurrency": {
+        "coinDenom": "AIOZ",
+        "chainSuggestionDenom": "attoaioz",
+        "coinMinimalDenom": "ibc/BB0AFE2AFBD6E883690DAE4B9168EAC2B306BCC9C9292DACBB4152BBB08DB25F",
+        "sourceDenom": "attoaioz",
+        "coinDecimals": 18,
+        "coinGeckoId": "aioz-network",
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aioz/images/aioz.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "AIOZ",
+          "chainSuggestionDenom": "attoaioz",
+          "coinMinimalDenom": "ibc/BB0AFE2AFBD6E883690DAE4B9168EAC2B306BCC9C9292DACBB4152BBB08DB25F",
+          "sourceDenom": "attoaioz",
+          "coinDecimals": 18,
+          "coinGeckoId": "aioz-network",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aioz/images/aioz.png",
+          "gasPriceStep": {
+            "low": 1000000000,
+            "average": 1000000000,
+            "high": 1500000000
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "AIOZ",
+          "chainSuggestionDenom": "attoaioz",
+          "coinMinimalDenom": "ibc/BB0AFE2AFBD6E883690DAE4B9168EAC2B306BCC9C9292DACBB4152BBB08DB25F",
+          "sourceDenom": "attoaioz",
+          "coinDecimals": 18,
+          "coinGeckoId": "aioz-network",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aioz/images/aioz.png"
+        }
+      ],
+      "description": "AIOZ Network is a DePIN for Web3 AI, Storage and Streaming.\n\nAIOZ empowers a faster, secure and decentralized future.\n\nPowered by a global network of DePINs, AIOZ rewards you for sharing your computational resources for storing, transcoding, and streaming digital media content and powering decentralized AI computation.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-dataseed.aioz.network"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-dataseed.aioz.network"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://explorer.aioz.network/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
     }
   ]
 }

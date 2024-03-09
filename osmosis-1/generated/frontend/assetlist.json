@@ -436,8 +436,8 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.axl.png"
       },
       "price": {
-        "poolId": "1090",
-        "denom": "uosmo"
+        "poolId": "1422",
+        "denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc"
       },
       "categories": [],
       "transferMethods": [
@@ -889,7 +889,7 @@
       },
       "coingeckoId": "cosmos",
       "price": {
-        "poolId": "1265",
+        "poolId": "1135",
         "denom": "uosmo"
       },
       "categories": [
@@ -1810,8 +1810,8 @@
       },
       "coingeckoId": "kava",
       "price": {
-        "poolId": "1504",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1105",
+        "denom": "uosmo"
       },
       "categories": [
         "defi"
@@ -4057,7 +4057,7 @@
       },
       "coingeckoId": "graviton",
       "price": {
-        "poolId": "1113",
+        "poolId": "625",
         "denom": "uosmo"
       },
       "categories": [
@@ -7330,8 +7330,8 @@
       },
       "coingeckoId": "maker",
       "price": {
-        "poolId": "734",
-        "denom": "ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7"
+        "poolId": "1517",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
       "transferMethods": [
@@ -9907,7 +9907,7 @@
       },
       "coingeckoId": "stride-staked-osmo",
       "price": {
-        "poolId": "833",
+        "poolId": "1252",
         "denom": "uosmo"
       },
       "categories": [
@@ -20390,8 +20390,8 @@
       },
       "coingeckoId": "collateralized-debt-token",
       "price": {
-        "poolId": "1268",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1226",
+        "denom": "uosmo"
       },
       "categories": [
         "stablecoin",
@@ -21000,8 +21000,8 @@
       },
       "coingeckoId": "celestia",
       "price": {
-        "poolId": "1248",
-        "denom": "uosmo"
+        "poolId": "1247",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "defi"
@@ -24150,8 +24150,8 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.svg"
       },
       "price": {
-        "poolId": "1422",
-        "denom": "ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F"
+        "poolId": "1436",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "meme"
@@ -26052,6 +26052,66 @@
           "sourceDenom": "erc20/tether/usdt"
         }
       ]
+    },
+    {
+      "chainName": "aioz",
+      "sourceDenom": "attoaioz",
+      "coinMinimalDenom": "ibc/BB0AFE2AFBD6E883690DAE4B9168EAC2B306BCC9C9292DACBB4152BBB08DB25F",
+      "symbol": "AIOZ",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aioz/images/aioz.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aioz/images/aioz.svg"
+      },
+      "coingeckoId": "aioz-network",
+      "categories": [
+        "defi"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis Pro TFM IBC Transfer",
+          "type": "external_interface",
+          "depositUrl": "https://pro.osmosis.zone/ibc?chainFrom=aioz_168-1&chainTo=osmosis-1&token0=attoaioz&token1=ibc%2FBB0AFE2AFBD6E883690DAE4B9168EAC2B306BCC9C9292DACBB4152BBB08DB25F"
+        },
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "aioz",
+            "chainId": "aioz_168-1",
+            "sourceDenom": "attoaioz",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-779",
+            "path": "transfer/channel-779/attoaioz"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "aioz",
+          "sourceDenom": "attoaioz",
+          "chainType": "cosmos",
+          "chainId": "aioz_168-1",
+          "symbol": "AIOZ",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aioz/images/aioz.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aioz/images/aioz.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "AIOZ",
+      "name": "AIOZ Network",
+      "description": "The native staking and governance token of the AIOZ Network.\n\nAIOZ Network is a DePIN for Web3 AI, Storage and Streaming.\n\nAIOZ empowers a faster, secure and decentralized future.\n\nPowered by a global network of DePINs, AIOZ rewards you for sharing your computational resources for storing, transcoding, and streaming digital media content and powering decentralized AI computation.",
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true,
+      "relatedAssets": []
     }
   ]
 }

@@ -7197,6 +7197,68 @@
         "ibc-transfer",
         "ibc-go"
       ]
+    },
+    {
+      "chain_name": "aioz",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "AIOZ Network",
+      "chain_id": "aioz_168-1",
+      "bech32_prefix": "aioz",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "aioz",
+        "bech32PrefixAccPub": "aiozpub",
+        "bech32PrefixValAddr": "aiozvaloper",
+        "bech32PrefixValPub": "aiozvaloperpub",
+        "bech32PrefixConsAddr": "aiozvalcons",
+        "bech32PrefixConsPub": "aiozvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "attoaioz",
+            "fixed_min_gas_price": 1000000000,
+            "low_gas_price": 1000000000,
+            "average_gas_price": 1000000000,
+            "high_gas_price": 1500000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "attoaioz"
+          }
+        ],
+        "lock_duration": {
+          "time": "2419200s"
+        }
+      },
+      "description": "AIOZ Network is a DePIN for Web3 AI, Storage and Streaming.\n\nAIOZ empowers a faster, secure and decentralized future.\n\nPowered by a global network of DePINs, AIOZ rewards you for sharing your computational resources for storing, transcoding, and streaming digital media content and powering decentralized AI computation.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-dataseed.aioz.network"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-dataseed.aioz.network"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.aioz.network/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
     }
   ]
 }

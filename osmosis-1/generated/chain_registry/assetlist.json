@@ -63,7 +63,8 @@
       ],
       "coingecko_id": "ion",
       "keywords": [
-        "memecoin"
+        "memecoin",
+        "defi"
       ]
     },
     {
@@ -14627,6 +14628,62 @@
       ]
     },
     {
+      "description": "Stride's liquid staked DYM",
+      "denom_units": [
+        {
+          "denom": "ibc/D53E785DC9C5C2CA50CADB1EFE4DE5D0C30418BE0E9C6F2AF9F092A247E8BC22",
+          "exponent": 0,
+          "aliases": [
+            "stadym"
+          ]
+        },
+        {
+          "denom": "stDYM",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/D53E785DC9C5C2CA50CADB1EFE4DE5D0C30418BE0E9C6F2AF9F092A247E8BC22",
+      "name": "Stride Staked DYM",
+      "display": "stDYM",
+      "symbol": "stDYM",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "dymension",
+            "base_denom": "adym"
+          },
+          "provider": "Stride"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stadym",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326",
+            "path": "transfer/channel-326/stadym"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdym.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdym.svg"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdym.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdym.svg"
+        }
+      ],
+      "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
       "denom_units": [
         {
           "denom": "ibc/0B3C3D06228578334B66B57FBFBA4033216CEB8119B27ACDEE18D92DA5B28D43",
@@ -14768,6 +14825,33 @@
       "images": [
         {
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ymos.png"
+        }
+      ]
+    },
+    {
+      "description": "The memecoin built for the Celestia community",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1nr8zfakf6jauye3uqa9lrmr5xumee5n42lv92z/toro",
+          "exponent": 0
+        },
+        {
+          "denom": "toro",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1nr8zfakf6jauye3uqa9lrmr5xumee5n42lv92z",
+      "base": "factory/osmo1nr8zfakf6jauye3uqa9lrmr5xumee5n42lv92z/toro",
+      "name": "TORO",
+      "display": "toro",
+      "symbol": "TORO",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/toro.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/toro.png"
         }
       ]
     }

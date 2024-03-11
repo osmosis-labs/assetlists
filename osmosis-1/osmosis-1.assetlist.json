@@ -28,7 +28,7 @@
         "staking",
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1221"
+        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1263"
       ]
     },
     {
@@ -54,6 +54,7 @@
       "coingecko_id": "ion",
       "keywords": [
         "memecoin",
+        "defi",
         "osmosis-main",
         "osmosis-info",
         "osmosis-price:uosmo:2"
@@ -237,7 +238,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc:1422"
+        "osmosis-price:uosmo:1090"
       ]
     },
     {
@@ -1134,7 +1135,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:1111"
+        "osmosis-price:uosmo:605"
       ]
     },
     {
@@ -4160,7 +4161,8 @@
       "coingecko_id": "maker",
       "keywords": [
         "osmosis-main",
-        "osmosis-price:ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7:734"
+        "osmosis-info",
+        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1517"
       ]
     },
     {
@@ -4640,7 +4642,8 @@
       "coingecko_id": "moonbeam",
       "keywords": [
         "osmosis-main",
-        "osmosis-price:uosmo:825"
+        "osmosis-info",
+        "osmosis-price:ibc/4F3B0EC2FE2D370D10C3671A1B7B06D2A964C721470C305CBB846ED60E6CAA20:1543"
       ]
     },
     {
@@ -8606,7 +8609,8 @@
       "coingecko_id": "filecoin",
       "keywords": [
         "osmosis-main",
-        "osmosis-price:uosmo:1006"
+        "osmosis-info",
+        "osmosis-price:ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4:1562"
       ]
     },
     {
@@ -10435,7 +10439,7 @@
       "coingecko_id": "bonk",
       "keywords": [
         "osmosis-main",
-        "osmosis-price:ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB:1130"
+        "osmosis-price:ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB:1129"
       ]
     },
     {
@@ -10550,7 +10554,8 @@
       "coingecko_id": "sui",
       "keywords": [
         "osmosis-main",
-        "osmosis-price:ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB:1127"
+        "osmosis-info",
+        "osmosis-price:ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4:1542"
       ]
     },
     {
@@ -10603,7 +10608,8 @@
       "coingecko_id": "aptos",
       "keywords": [
         "osmosis-main",
-        "osmosis-price:ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB:1125"
+        "osmosis-info",
+        "osmosis-price:ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4:1541"
       ]
     },
     {
@@ -11484,7 +11490,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:1248"
+        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1247"
       ]
     },
     {
@@ -13166,7 +13172,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1436"
+        "osmosis-price:ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F:1422"
       ]
     },
     {
@@ -14151,6 +14157,57 @@
       },
       "coingecko_id": "aioz-network",
       "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "Stride's liquid staked DYM",
+      "denom_units": [
+        {
+          "denom": "ibc/D53E785DC9C5C2CA50CADB1EFE4DE5D0C30418BE0E9C6F2AF9F092A247E8BC22",
+          "exponent": 0,
+          "aliases": [
+            "stadym"
+          ]
+        },
+        {
+          "denom": "stDYM",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/D53E785DC9C5C2CA50CADB1EFE4DE5D0C30418BE0E9C6F2AF9F092A247E8BC22",
+      "name": "Stride Staked DYM",
+      "display": "stDYM",
+      "symbol": "stDYM",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "dymension",
+            "base_denom": "adym"
+          },
+          "provider": "Stride"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stadym",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326",
+            "path": "transfer/channel-326/stadym"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdym.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdym.svg"
+      },
+      "keywords": [
+        "osmosis-main",
         "osmosis-unlisted"
       ]
     }

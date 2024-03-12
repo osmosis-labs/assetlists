@@ -1022,8 +1022,8 @@
     },
     {
       "chain_name": "dydx",
-      "rpc": "https://dydx-rpc.lavenderfive.com:443",
-      "rest": "https://dydx-api.lavenderfive.com:443",
+      "rpc": "https://dydx-rpc.lavenderfive.com",
+      "rest": "https://dydx-api.lavenderfive.com",
       "explorer_tx_url": "https://www.mintscan.io/dydx/txs/${txHash}",
       "keplr_features": [
         "ibc-go",
@@ -1122,6 +1122,59 @@
       "rpc": "https://rpc.dymension.nodestake.org/",
       "rest": "https://api.dymension.nodestake.org",
       "explorer_tx_url": "https://dym.fyi/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "humans",
+      "rpc": "https://rpc.humans.nodestake.top",
+      "rest": "https://api.humans.nodestake.top",
+      "explorer_tx_url": "https://www.mintscan.io/humans/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "scorum",
+      "rpc": "https://scorum-blockchain-mainnet-rpc-1.scorum.com",
+      "rest": "https://scorum-blockchain-mainnet-api-1.scorum.com",
+      "explorer_tx_url": "https://ezstaking.app/scorum/txs/${txHash}",
+      "keplr_features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "chain4energy",
+      "rpc": "https://rpc.c4e.io",
+      "rest": "https://lcd.c4e.io",
+      "explorer_tx_url": "https://explorer.c4e.io/transactions/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "pylons",
+      "rpc": "https://rpc.pylons.nodestake.top/",
+      "rest": "https://api.pylons.nodestake.top/",
+      "explorer_tx_url": "https://pylons.explorers.guru/transaction/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+        ]
+    },
+    {
+      "chain_name": "aioz",
+      "rpc": "https://rpc-dataseed.aioz.network",
+      "rest": "https://lcd-dataseed.aioz.network",
+      "explorer_tx_url": "https://explorer.aioz.network/tx/${txHash}",
       "keplr_features": [
         "ibc-transfer",
         "ibc-go",

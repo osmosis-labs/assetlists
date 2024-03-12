@@ -132,7 +132,7 @@
       "base": "ibc/2164BDB48DE5501430E71286448D87C6D2240EC0E078CF113CAB85E21A352BB0",
       "name": "USD Coin (Axelar)",
       "display": "ausdc",
-      "symbol": "aUSDC.axl",
+      "symbol": "aUSDC.axl.axl",
       "traces": [
         {
           "type": "synthetic",
@@ -643,13 +643,6 @@
           ]
         },
         {
-          "denom": "mxion",
-          "exponent": 3,
-          "aliases": [
-            "millixion"
-          ]
-        },
-        {
           "denom": "XION",
           "exponent": 6,
           "aliases": [
@@ -785,6 +778,92 @@
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/impacthub/images/ixo.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/impacthub/images/ixo.svg"
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "factory/osmo1zlkzu72774ynac53necz46u4ycqtp36wedrar0/willyz",
+          "exponent": 0
+        },
+        {
+          "denom": "willyz",
+          "exponent": 6
+        }
+      ],
+      "base": "factory/osmo1zlkzu72774ynac53necz46u4ycqtp36wedrar0/willyz",
+      "name": "Willyz",
+      "display": "willyz",
+      "symbol": "WILLYZ",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/osmosistestnet/images/willyz.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/osmosistestnet/images/willyz.svg"
+      },
+      "keywords": [
+        "memecoin"
+      ],
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/osmosistestnet/images/willyz.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/osmosistestnet/images/willyz.svg"
+        }
+      ]
+    },
+    {
+      "description": "The native EVM, governance and staking token of the Titan Chain",
+      "denom_units": [
+        {
+          "denom": "ibc/28EEF762052DB8C3D27A7BF625E9F86A1B3B689CC8D80C818CEDF2EB6CBA02A6",
+          "exponent": 0,
+          "aliases": [
+            "atkx"
+          ]
+        },
+        {
+          "denom": "utkx",
+          "exponent": 12,
+          "aliases": [
+            "microtkx"
+          ]
+        },
+        {
+          "denom": "mtkx",
+          "exponent": 15,
+          "aliases": [
+            "millitkx"
+          ]
+        },
+        {
+          "denom": "tkx",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/28EEF762052DB8C3D27A7BF625E9F86A1B3B689CC8D80C818CEDF2EB6CBA02A6",
+      "name": "tkx",
+      "display": "tkx",
+      "symbol": "TKX",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "titan",
+            "base_denom": "atkx",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-5969",
+            "path": "transfer/channel-5969/atkx"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/titantestnet/images/tkx.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/titantestnet/images/tkx.png"
         }
       ]
     }

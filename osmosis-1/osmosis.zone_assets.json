@@ -248,7 +248,7 @@
       "path": "transfer/channel-208/dot-planck",
       "osmosis_verified": true,
       "override_properties": {
-        "symbol": "DOT.axl",
+        "symbol": "moonbeam.DOT.axl",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dot.axl.svg"
         }
@@ -925,19 +925,22 @@
       "chain_name": "odin",
       "base_denom": "loki",
       "path": "transfer/channel-258/loki",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "osmosis_unstable": true
     },
     {
       "chain_name": "odin",
       "base_denom": "mGeo",
       "path": "transfer/channel-258/mGeo",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "osmosis_unstable": true
     },
     {
       "chain_name": "odin",
       "base_denom": "mO9W",
       "path": "transfer/channel-258/mO9W",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "osmosis_unstable": true
     },
     {
       "chain_name": "kichain",
@@ -952,7 +955,7 @@
       "chain_name": "axelar",
       "base_denom": "wglmr-wei",
       "path": "transfer/channel-208/wglmr-wei",
-      "osmosis_verified": false,
+      "osmosis_verified": true,
       "override_properties": {
         "symbol": "GLMR",
         "name": "Moonbeam"
@@ -1309,9 +1312,9 @@
       "osmosis_verified": false,
       "transfer_methods": [
         {
-          "name": "TFM IBC Transfer",
+          "name": "Osmosis Pro TFM IBC Transfer",
           "type": "external_interface",
-          "deposit_url": "https://tfm.com/bridge?chainTo=osmosis-1&chainFrom=planq_7070-2&token0=aplanq&token1=ibc%2FB1E0166EA0D759FDF4B207D1F5F12210D8BFE36F2345CEFC76948CE2B36DFBAF"
+          "deposit_url": "https://pro.osmosis.zone/ibc?chainTo=osmosis-1&chainFrom=planq_7070-2&token0=aplanq&token1=ibc%2FB1E0166EA0D759FDF4B207D1F5F12210D8BFE36F2345CEFC76948CE2B36DFBAF"
         }
       ]
     },
@@ -1358,7 +1361,7 @@
       "osmosis_verified": true,
       "override_properties": {
         "name": "USD Coin (Polygon)",
-        "symbol": "polygon.USDC",
+        "symbol": "polygon.USDC.axl",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/polygon.usdc.svg"
         }
@@ -1376,7 +1379,7 @@
       "osmosis_verified": true,
       "override_properties": {
         "name": "USD Coin (Avalanche)",
-        "symbol": "avalanche.USDC",
+        "symbol": "avalanche.USDC.axl",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/avalanche.usdc.svg"
         }
@@ -1740,10 +1743,10 @@
       "osmosis_verified": true,
       "transfer_methods": [
         {
-          "name": "TFM IBC Transfer",
+          "name": "Osmosis Pro TFM IBC Transfer",
           "type": "external_interface",
-          "deposit_url": "https://tfm.com/bridge?chainTo=osmosis-1&chainFrom=phoenix-1&token0=terra1lxx40s29qvkrcj8fsa3yzyehy7w50umdvvnls2r830rys6lu2zns63eelv&token1=ibc%2F98BCD43F190C6960D0005BC46BB765C827403A361C9C03C2FF694150A30284B0",
-          "withdraw_url": "https://tfm.com/bridge?chainFrom=osmosis-1&chainTo=phoenix-1&token0=ibc%2F98BCD43F190C6960D0005BC46BB765C827403A361C9C03C2FF694150A30284B0&token1=terra1lxx40s29qvkrcj8fsa3yzyehy7w50umdvvnls2r830rys6lu2zns63eelv"
+          "deposit_url": "https://pro.osmosis.zone/ibc?chainTo=osmosis-1&chainFrom=phoenix-1&token0=terra1lxx40s29qvkrcj8fsa3yzyehy7w50umdvvnls2r830rys6lu2zns63eelv&token1=ibc%2F98BCD43F190C6960D0005BC46BB765C827403A361C9C03C2FF694150A30284B0",
+          "withdraw_url": "https://pro.osmosis.zone/ibc?chainFrom=osmosis-1&chainTo=phoenix-1&token0=ibc%2F98BCD43F190C6960D0005BC46BB765C827403A361C9C03C2FF694150A30284B0&token1=terra1lxx40s29qvkrcj8fsa3yzyehy7w50umdvvnls2r830rys6lu2zns63eelv"
         }
       ]
     },
@@ -1775,10 +1778,10 @@
       "osmosis_verified": false,
       "transfer_methods": [
         {
-          "name": "TFM IBC Transfer",
+          "name": "Osmosis Pro TFM IBC Transfer",
           "type": "external_interface",
-          "deposit_url": "https://tfm.com/bridge?chainTo=osmosis-1&chainFrom=phoenix-1&token0=terra1lalvk0r6nhruel7fvzdppk3tup3mh5j4d4eadrqzfhle4zrf52as58hh9t&token1=ibc%2F6F18EFEBF1688AA77F7EAC17065609494DC1BA12AFC78E9AEC832AF70A11BEF3",
-          "withdraw_url": "https://tfm.com/bridge?chainFrom=osmosis-1&chainTo=phoenix-1&token0=ibc%2F6F18EFEBF1688AA77F7EAC17065609494DC1BA12AFC78E9AEC832AF70A11BEF3&token1=terra1lalvk0r6nhruel7fvzdppk3tup3mh5j4d4eadrqzfhle4zrf52as58hh9t"
+          "deposit_url": "https://pro.osmosis.zone/ibc?chainTo=osmosis-1&chainFrom=phoenix-1&token0=terra1lalvk0r6nhruel7fvzdppk3tup3mh5j4d4eadrqzfhle4zrf52as58hh9t&token1=ibc%2F6F18EFEBF1688AA77F7EAC17065609494DC1BA12AFC78E9AEC832AF70A11BEF3",
+          "withdraw_url": "https://pro.osmosis.zone/ibc?chainFrom=osmosis-1&chainTo=phoenix-1&token0=ibc%2F6F18EFEBF1688AA77F7EAC17065609494DC1BA12AFC78E9AEC832AF70A11BEF3&token1=terra1lalvk0r6nhruel7fvzdppk3tup3mh5j4d4eadrqzfhle4zrf52as58hh9t"
         }
       ]
     },
@@ -1789,10 +1792,10 @@
       "osmosis_verified": false,
       "transfer_methods": [
         {
-          "name": "TFM IBC Transfer",
+          "name": "Osmosis Pro TFM IBC Transfer",
           "type": "external_interface",
-          "deposit_url": "https://tfm.com/bridge?chainTo=osmosis-1&chainFrom=phoenix-1&token0=terra1gwrz9xzhqsygyr5asrgyq3pu0ewpn00mv2zenu86yvx2nlwpe8lqppv584&token1=ibc%2FDA961FE314B009C38595FFE3AF41225D8894D663B8C3F6650DCB5B6F8435592E",
-          "withdraw_url": "https://tfm.com/bridge?chainFrom=osmosis-1&chainTo=phoenix-1&token0=ibc%2FDA961FE314B009C38595FFE3AF41225D8894D663B8C3F6650DCB5B6F8435592E&token1=terra1gwrz9xzhqsygyr5asrgyq3pu0ewpn00mv2zenu86yvx2nlwpe8lqppv584"
+          "deposit_url": "https://pro.osmosis.zone/ibc?chainTo=osmosis-1&chainFrom=phoenix-1&token0=terra1gwrz9xzhqsygyr5asrgyq3pu0ewpn00mv2zenu86yvx2nlwpe8lqppv584&token1=ibc%2FDA961FE314B009C38595FFE3AF41225D8894D663B8C3F6650DCB5B6F8435592E",
+          "withdraw_url": "https://pro.osmosis.zone/ibc?chainFrom=osmosis-1&chainTo=phoenix-1&token0=ibc%2FDA961FE314B009C38595FFE3AF41225D8894D663B8C3F6650DCB5B6F8435592E&token1=terra1gwrz9xzhqsygyr5asrgyq3pu0ewpn00mv2zenu86yvx2nlwpe8lqppv584"
         }
       ]
     },
@@ -1881,9 +1884,9 @@
       "osmosis_verified": true,
       "transfer_methods": [
         {
-          "name": "TFM IBC Transfer",
+          "name": "Osmosis Pro TFM IBC Transfer",
           "type": "external_interface",
-          "deposit_url": "https://tfm.com/bridge?chainTo=osmosis-1&chainFrom=empowerchain-1&token0=umpwr&token1=ibc%2FDD3938D8131F41994C1F01F4EB5233DEE9A0A5B787545B9A07A321925655BF38"
+          "deposit_url": "https://pro.osmosis.zone/ibc?chainTo=osmosis-1&chainFrom=empowerchain-1&token0=umpwr&token1=ibc%2FDD3938D8131F41994C1F01F4EB5233DEE9A0A5B787545B9A07A321925655BF38"
         }
       ]
     },
@@ -1924,9 +1927,9 @@
       "osmosis_verified": true,
       "transfer_methods": [
         {
-          "name": "TFM IBC Transfer",
+          "name": "Osmosis Pro TFM IBC Transfer",
           "type": "external_interface",
-          "withdraw_url": "https://tfm.com/bridge?chainFrom=osmosis-1&chainTo=pacific-1&token0=ibc%2F71F11BC0AF8E526B80E44172EBA9D3F0A8E03950BB882325435691EBC9450B1D&token1=usei"
+          "withdraw_url": "https://pro.osmosis.zone/ibc?chainFrom=osmosis-1&chainTo=pacific-1&token0=ibc%2F71F11BC0AF8E526B80E44172EBA9D3F0A8E03950BB882325435691EBC9450B1D&token1=usei"
         }
       ]
     },
@@ -2480,10 +2483,10 @@
       "listing_date_time_utc": "2024-01-24T10:58:00Z",
       "transfer_methods": [
         {
-          "name": "TFM IBC Transfer",
+          "name": "Osmosis Pro TFM IBC Transfer",
           "type": "external_interface",
-          "deposit_url": "https://tfm.com/bridge?chainFrom=injective-1&chainTo=osmosis-1&token0=factory%2Finj1xtel2knkt8hmc9dnzpjz6kdmacgcfmlv5f308w%2Fninja&token1=ibc%2F183C0BB962D2F57C957E0B134CFA0AC9D6F755C02DE9DC2A59089BA23009DEC3",
-          "withdraw_url": "https://tfm.com/bridge?chainFrom=osmosis-1&chainTo=injective-1&token0=ibc%2F183C0BB962D2F57C957E0B134CFA0AC9D6F755C02DE9DC2A59089BA23009DEC3&token1=factory%2Finj1xtel2knkt8hmc9dnzpjz6kdmacgcfmlv5f308w%2Fninja"
+          "deposit_url": "https://pro.osmosis.zone/ibc?chainFrom=injective-1&chainTo=osmosis-1&token0=factory%2Finj1xtel2knkt8hmc9dnzpjz6kdmacgcfmlv5f308w%2Fninja&token1=ibc%2F183C0BB962D2F57C957E0B134CFA0AC9D6F755C02DE9DC2A59089BA23009DEC3",
+          "withdraw_url": "https://pro.osmosis.zone/ibc?chainFrom=osmosis-1&chainTo=injective-1&token0=ibc%2F183C0BB962D2F57C957E0B134CFA0AC9D6F755C02DE9DC2A59089BA23009DEC3&token1=factory%2Finj1xtel2knkt8hmc9dnzpjz6kdmacgcfmlv5f308w%2Fninja"
         }
       ]
     },
@@ -2604,7 +2607,7 @@
       "path": "transfer/channel-122/peggy0xd73175f9eb15eee81745d367ae59309Ca2ceb5e2",
       "twitter_URL": "https://twitter.com/Gelotto2",
       "osmosis_verified": false,
-      "osmosis_unlisted": true,
+      "listing_date_time_utc": "2024-03-01T20:23:00Z",
       "override_properties": {
         "symbol": "injective.GLTO",
         "name": "Gelotto (Injective)"
@@ -2622,9 +2625,9 @@
       "listing_date_time_utc": "2024-02-06T08:36:00Z",
       "transfer_methods": [
         {
-          "name": "TFM IBC Transfer",
+          "name": "Osmosis Pro TFM IBC Transfer",
           "type": "external_interface",
-          "deposit_url": "https://tfm.com/bridge?chainFrom=dymension_1100-1&chainTo=osmosis-1&token0=adym&token1=ibc%2F9A76CDF0CBCEF37923F32518FA15E5DC92B9F56128292BC4D63C4AEA76CBB110"
+          "deposit_url": "https://pro.osmosis.zone/ibc?chainFrom=dymension_1100-1&chainTo=osmosis-1&token0=adym&token1=ibc%2F9A76CDF0CBCEF37923F32518FA15E5DC92B9F56128292BC4D63C4AEA76CBB110"
         }
       ]
     },
@@ -2643,10 +2646,10 @@
       "osmosis_unlisted": true,
       "transfer_methods": [
         {
-          "name": "TFM IBC Transfer",
+          "name": "Osmosis Pro TFM IBC Transfer",
           "type": "external_interface",
-          "deposit_url": "https://tfm.com/bridge?chainTo=osmosis-1&chainFrom=phoenix-1&token0=terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26&token1=ibc%2F8410580A4F5421DFDBD888212624591E92A9E3B5C87D3C58913CE16ABD98B9B4",
-          "withdraw_url": "https://tfm.com/bridge?chainFrom=osmosis-1&chainTo=phoenix-1&token0=ibc%2F8410580A4F5421DFDBD888212624591E92A9E3B5C87D3C58913CE16ABD98B9B4&token1=terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26"
+          "deposit_url": "https://pro.osmosis.zone/ibc?chainTo=osmosis-1&chainFrom=phoenix-1&token0=terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26&token1=ibc%2F8410580A4F5421DFDBD888212624591E92A9E3B5C87D3C58913CE16ABD98B9B4",
+          "withdraw_url": "https://pro.osmosis.zone/ibc?chainFrom=osmosis-1&chainTo=phoenix-1&token0=ibc%2F8410580A4F5421DFDBD888212624591E92A9E3B5C87D3C58913CE16ABD98B9B4&token1=terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26"
         }
       ]
     },
@@ -2665,6 +2668,7 @@
       "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/HJk1XMDRNUbRrpKkNZYui7SwWDMjXZAsySzqgyNcQoU3",
       "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/HJk1XMDRNUbRrpKkNZYui7SwWDMjXZAsySzqgyNcQoU3",
       "osmosis_verified": true,
+      "listing_date_time_utc": "2024-02-20T20:45:00Z",
       "peg_mechanism": "collateralized",
       "override_properties": {
         "symbol": "solana.USDC.wh",
@@ -2680,9 +2684,130 @@
           "deposit_url": "https://portalbridge.com/cosmos/",
           "withdraw_url": "https://portalbridge.com/cosmos/"
         }
-      ],
+      ]
+    },
+    {
+      "chain_name": "humans",
+      "base_denom": "aheart",
+      "path": "transfer/channel-20082/aheart",
+      "twitter_URL": "https://twitter.com/humansdotai",
+      "osmosis_verified": false,
+      "listing_date_time_utc": "2024-03-08T16:25:00Z",
+      "override_properties": {
+        "logo_URIs": {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/humans/images/heart-dark-mode.png"
+        }
+      }
+    },
+    {
+      "chain_name": "evmos",
+      "path": "transfer/channel-204/erc20/0x1cFc8f1FE8D5668BAFF2724547EcDbd6f013a280",
+      "base_denom": "erc20/0x1cFc8f1FE8D5668BAFF2724547EcDbd6f013a280",
+      "osmosis_verified": false,
+      "listing_date_time_utc": "2024-03-07T18:18:00Z",
+      "transfer_methods": [
+        {
+          "name": "Evmos App",
+          "type": "external_interface",
+          "deposit_url": "https://app.evmos.org/assets"
+        }
+      ]
+    },
+    {
+      "chain_name": "scorum",
+      "base_denom": "nscr",
+      "path": "transfer/channel-20100/nscr",
+      "osmosis_verified": false,
       "osmosis_unlisted": true
     },
+    {
+
+      "chain_name": "chain4energy",
+      "base_denom": "uc4e",
+      "twitter_URL": "https://twitter.com/Chain4Energy",
+      "path": "transfer/channel-22172/uc4e",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true
+    },
+    {
+      "chain_name": "terra2",
+      "base_denom": "cw20:terra1sxe8u2hjczlekwfkcq0rs28egt38pg3wqzfx4zcrese4fnvzzupsk9gjkq",
+      "path": "transfer/channel-341/cw20:terra1sxe8u2hjczlekwfkcq0rs28egt38pg3wqzfx4zcrese4fnvzzupsk9gjkq",
+      "osmosis_verified": false,
+      "listing_date_time_utc": "2024-03-02T22:12:00Z",
+      "transfer_methods": [
+        {
+          "name": "Osmosis Pro TFM IBC Transfer",
+          "type": "external_interface",
+          "deposit_url": "https://pro.osmosis.zone/ibc?chainTo=osmosis-1&chainFrom=phoenix-1&token0=terra1sxe8u2hjczlekwfkcq0rs28egt38pg3wqzfx4zcrese4fnvzzupsk9gjkq&token1=ibc%2F7D389F0ABF1E4D45BE6D7BBE36A2C50EA0559C01E076B02F8E381E685EC1F942",
+          "withdraw_url": "https://pro.osmosis.zone/ibc?chainFrom=osmosis-1&chainTo=phoenix-1&token0=ibc%2F7D389F0ABF1E4D45BE6D7BBE36A2C50EA0559C01E076B02F8E381E685EC1F942&token1=terra1sxe8u2hjczlekwfkcq0rs28egt38pg3wqzfx4zcrese4fnvzzupsk9gjkq"
+        }
+      ]
+    },
+    {
+      "chain_name": "source",
+      "base_denom": "ibc/FC5A7360EEED0713AE3E83E9D55A69AF873056A172AC495890ACE4582FF9685A",
+      "path": "transfer/channel-8945/transfer/channel-1/erc20/0x091F9A57A3F58d758b6572E9d41675918EAC7F09",
+      "osmosis_verified": false,
+      "listing_date_time_utc": "2024-03-03T21:47:00Z",
+      "canonical": {
+        "chain_name": "binancesmartchain",
+        "base_denom": "0x454b90716a9435e7161a9aea5cf00e0acbe565ae"
+      }
+    },
+    {
+      "chain_name": "pylons",
+      "base_denom": "ubedrock",
+      "path": "transfer/channel-17683/ubedrock",
+      "osmosis_verified": false,
+      "listing_date_time_utc": "2024-03-03T22:27:00Z",
+      "twitter_URL": "https://twitter.com/pylonstech"
+    },
+    {
+      "chain_name": "gateway",
+      "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/bqqqpqsxzelp2hdfd4cgmxr6ekpatlj8yt2eghk52vst",
+      "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/bqqqpqsxzelp2hdfd4cgmxr6ekpatlj8yt2eghk52vst",
+      "twitter_URL": "https://twitter.com/bsktfi",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "categories": [
+        "defi"
+      ],
+      "canonical": {
+        "chain_name": "solana",
+        "base_denom": "6gnCPhXtLnUD76HjQuSYPENLSZdG8RvDB1pTLM5aLSJA"
+      },
+      "transfer_methods": [
+        {
+          "name": "Wormhole Portal Bridge",
+          "type": "external_interface",
+          "deposit_url": "https://portalbridge.com/cosmos/",
+          "withdraw_url": "https://portalbridge.com/cosmos/"
+        }
+      ]
+    },
+    {
+      "chain_name": "aioz",
+      "base_denom": "attoaioz",
+      "path": "transfer/channel-779/attoaioz",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "transfer_methods": [
+        {
+          "name": "Osmosis Pro TFM IBC Transfer",
+          "type": "external_interface",
+          "deposit_url": "https://pro.osmosis.zone/ibc?chainFrom=aioz_168-1&chainTo=osmosis-1&token0=attoaioz&token1=ibc%2FBB0AFE2AFBD6E883690DAE4B9168EAC2B306BCC9C9292DACBB4152BBB08DB25F"
+        }
+      ]
+    },
+    {
+      "chain_name": "stride",
+      "base_denom": "stadym",
+      "path": "transfer/channel-326/stadym",
+      "osmosis_verified": true,
+      "osmosis_unlisted": true,
+      "listing_date_time_utc": "2024-03-12T12:00:00Z"
+      },
     {
       "chain_name": "odin",
       "base_denom": "udoki",

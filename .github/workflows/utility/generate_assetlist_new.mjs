@@ -39,6 +39,34 @@ function addArrayItem(item, array) {
   }
 }
 
+function getAssetDecimals(asset) {
+
+  let decimals;
+
+  asset.denom_units.forEach((unit) => {
+    if (asset.display === unit.denom) {
+      decimals = unit.exponent;
+      return;
+    }
+  });
+
+  if (decimals === undefined) {
+    asset.denom_units.forEach((unit) => {
+      if (unit.aliases?.includes(asset.display)) {
+        decimals = unit.exponent;
+        return;
+      }
+    });
+  }
+
+  if (decimals === undefined) {
+    console.log("Error: $" + asset.symbol + " missing decimals!");
+  }
+
+  return decimals ?? 0;
+
+}
+
 const generateAssets = async (
   chainName,
   zoneConfig,
@@ -113,11 +141,7 @@ const generateAssets = async (
     generated_asset.symbol = reference_asset.symbol;
 
     //--Get Decimals--
-    asset.denom_units.forEach((unit) => {
-      if (unit.denom === asset.display) {
-        generated_asset.decimals = unit.exponent;
-      }
-    });
+    generated_asset.decimals = getAssetDecimals(asset);
 
     //--Get Logos--
     generated_asset.logo_URIs = reference_asset.logo_URIs;
@@ -525,12 +549,7 @@ const generateAssets = async (
             last_trace.counterparty.base_denom,
             "denom_units"
           );
-          denom_units.forEach((unit) => {
-            if (unit.denom == display) {
-              counterparty.decimals = unit.exponent;
-              return;
-            }
-          });
+          counterparty.decimals = getAssetDecimals({display: display, denom_units: denom_units});
           counterparty.logoURIs = chain_reg.getAssetProperty(
             last_trace.counterparty.chain_name,
             last_trace.counterparty.base_denom,

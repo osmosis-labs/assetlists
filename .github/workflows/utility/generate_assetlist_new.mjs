@@ -3,7 +3,7 @@
 
 //-- Imports --
 
-import * as chain_reg from "./chain_registry.mjs";
+import * as chain_reg from "../../../chain-registry/.github/workflows/utility/chain_registry.mjs";
 import * as zone from "./assetlist_functions.mjs";
 import { getAssetsPricing } from "./getPools.mjs";
 import { getAllRelatedAssets } from "./getRelatedAssets.mjs";
@@ -473,8 +473,9 @@ const generateAssets = async (
             if (providers) {
               providers.forEach((provider) => {
                 if (provider.provider == bridge_provider && provider.suffix) {
-                  generated_asset.symbol =
-                    generated_asset.symbol + provider.suffix;
+                  if (!generated_asset.symbol.endsWith(provider.suffix)) {
+                    generated_asset.symbol = generated_asset.symbol + provider.suffix;
+                  }
                 }
               });
             }

@@ -6,7 +6,7 @@ Asset Lists are inpsired by the [Token Lists](https://tokenlists.org/) project o
 
 ## Prerequisite
 
-The `.assetlist.json` files herein are generated, which will be triggered by additions to the corresponding `osmosis.zone_assets.json` file, fetching the metadata from the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry). One prerequisite to adding an asset here is complete registration of the asset and it's originating chain (and the IBC connection between the orgini chain and Osmosis, if not native to Osmosis) to the Cosmos Chain Registry, so please make sure that's done first.
+The `.assetlist.json` files herein are generated, which will be triggered by additions to the corresponding `osmosis.zone_assets.json` file, fetching the metadata from the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry). One prerequisite to adding an asset here is complete registration of the asset and it's originating chain (and the IBC connection between the origin chain and Osmosis, if not native to Osmosis) to the Cosmos Chain Registry, so please make sure that's done first.
 
 ## How to Add Assets
 
@@ -19,7 +19,7 @@ To add an asset, add a new asset object to the very bottom of the _osmosis.zone_
   - e.g., `"path": "transfer/channel-8008135/ucoin"`
 - In the Pull Request, be sure to add in the description, or leave a comment, of the pool_id of the liquidity pool(s)
 - You may also notice some booleans:
-  - `osmosis_verified` should always either be omitted or set to `false` unless modified by, or explicitly instructed otherwise by, Osmosis Labs. This indicates whether the 'Unverified Assets setting must be toggled to reveal the asset by default on various Osmosis Zone app pages (Swap, Assets, Pools).
+  - `osmosis_verified` should always be set to `false` unless modified by, or explicitly instructed otherwise by, Osmosis Labs. This indicates whether the 'Unverified Assets setting must be toggled to reveal the asset by default on various Osmosis Zone app pages (Swap, Assets, Pools).
   - `osmosis_unlisted` should always be included and set to `true`(, meaning it will NOT show up on Osmosis Zone app,) until after the asset's respresntation, transfer experience, and explorer URL to the transaction hash have all been validated by Osmosis Labs, at which point it can be set to `false` (or, preferrably, removed).
 
 ## Zone Example

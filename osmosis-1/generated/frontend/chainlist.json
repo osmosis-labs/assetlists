@@ -2312,6 +2312,13 @@
           "coinMinimalDenom": "factory/osmo1vdvnznwg597qngrq9mnfcfk0am9jdc9y446jewhcqdreqz4r75xq5j5zvy/ymos",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ymos.png"
+        },
+        {
+          "coinDenom": "TORO",
+          "chainSuggestionDenom": "factory/osmo1nr8zfakf6jauye3uqa9lrmr5xumee5n42lv92z/toro",
+          "coinMinimalDenom": "factory/osmo1nr8zfakf6jauye3uqa9lrmr5xumee5n42lv92z/toro",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/toro.png"
         }
       ],
       "description": "Osmosis (OSMO) is the premier DEX and cross-chain DeFi hub within the Cosmos ecosystem, a network of over 50 sovereign, interoperable blockchains seamlessly connected through the Inter-Blockchain Communication Protocol (IBC). Pioneering in its approach, Osmosis offers a dynamic trading and liquidity provision experience, integrating non-IBC assets from other ecosystems, including Ethereum, Solana, Avalanche, and Polkadot. Initially adopting Balancer-style pools, Osmosis now also features a concentrated liquidity model that is orders of magnitude more capital efficient, meaning that significantly less liquidity is required to handle the same amount of trading volume with minimal slippage.\n\nAs a true appchain, Osmosis has greater control over the full blockchain stack than traditional smart contract DEXs, which must follow the code of the parent chain that it is built on. This fine-grained control has enabled, for example, the development of Superfluid Staking, an extension of Proof of Stake that allows assets at the application layer to be staked to secure the chain. The customizability of appchains also allows implementing features like the Protocol Revenue module, which enables Osmosis to conduct on-chain arbitrage on behalf of OSMO stakers, balancing prices across pools while generating real yield revenue from this volume. Additionally, as a sovereign appchain, Osmosis governance can vote on upgrades to the protocol. One example of this was the introduction of a Taker Fee, which switched on the collection of exchange fees to generate diverse yield from Osmosis volume and distribute it to OSMO stakers.\n\nOsmosis is bringing the full centralized exchange experience to the decentralized world by building a cross-chain native DEX and trading suite that connects all chains over IBC, including Ethereum and Bitcoin. To reach this goal, Osmosis hosts an ever-expanding suite of DeFi applications aimed at providing a one-stop experience that includes lending, credit, margin, DeFi strategy vaults, power perps, fiat on-ramps, NFTs, stablecoins, and more — all of the functionalities that centralized exchange offer and more, in the trust-minimized environment of decentralized finance.",
@@ -5819,6 +5826,13 @@
           "sourceDenom": "cw20:juno1dtd45vxvv080v9x7hffysnmvrqm6ysecjdnvafqul28646hm04xs9gheh0",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/hera.png"
+        },
+        {
+          "coinDenom": "ARENA",
+          "chainSuggestionDenom": "factory/juno1vwmnqk0vyxc96qgffrure4nqxupjrql0zut8s02hadgp0n79r8xq5xdsxy/ARENA",
+          "sourceDenom": "factory/juno1vwmnqk0vyxc96qgffrure4nqxupjrql0zut8s02hadgp0n79r8xq5xdsxy/ARENA",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/arena.png"
         }
       ],
       "description": "Juno is a completely community owned and operated smart contract platform.",
@@ -9278,7 +9292,7 @@
         {
           "coinDenom": "ASTRO",
           "chainSuggestionDenom": "cw20:terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26",
-          "coinMinimalDenom": "ibc/E5916C205E90C7C3481AFD8663A13C1D6C63145FB6C38DA9FC151FEE706F32EF",
+          "coinMinimalDenom": "ibc/C25A2303FE24B922DAFFDCE377AC5A42E5EF746806D32E2ED4B610DE85C203F7",
           "sourceDenom": "cw20:terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26",
           "coinDecimals": 6,
           "coinGeckoId": "astroport-fi",
@@ -9759,7 +9773,7 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://rpc.genesisl1.org"
+            "address": "https://26657.genesisl1.org"
           }
         ],
         "rest": [
@@ -10491,8 +10505,10 @@
         {
           "coinDenom": "DOKI",
           "chainSuggestionDenom": "udoki",
+          "coinMinimalDenom": "ibc/C12C353A83CD1005FC38943410B894DBEC5F2ABC97FC12908F0FB03B970E8E1B",
           "sourceDenom": "udoki",
           "coinDecimals": 6,
+          "coinGeckoId": "doki",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/odin/images/doki_Logo.png"
         },
         {
@@ -11120,8 +11136,21 @@
           "coinDecimals": 18,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdydx.png",
           "gasPriceStep": {
-            "low": 12500000000,
-            "average": 12500000000,
+            "low": 15000000000,
+            "average": 15000000000,
+            "high": 20000000000
+          }
+        },
+        {
+          "coinDenom": "stDYM",
+          "chainSuggestionDenom": "stadym",
+          "coinMinimalDenom": "ibc/D53E785DC9C5C2CA50CADB1EFE4DE5D0C30418BE0E9C6F2AF9F092A247E8BC22",
+          "sourceDenom": "stadym",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdym.png",
+          "gasPriceStep": {
+            "low": 15000000000,
+            "average": 15000000000,
             "high": 20000000000
           }
         }
@@ -11212,6 +11241,14 @@
           "sourceDenom": "stutia",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/sttia.png"
+        },
+        {
+          "coinDenom": "stDYM",
+          "chainSuggestionDenom": "stadym",
+          "coinMinimalDenom": "ibc/D53E785DC9C5C2CA50CADB1EFE4DE5D0C30418BE0E9C6F2AF9F092A247E8BC22",
+          "sourceDenom": "stadym",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdym.png"
         },
         {
           "coinDenom": "stUMEE",
@@ -14723,18 +14760,25 @@
           "sourceDenom": "ibc/AB7C92666DE8C7A977666B8080CABF0127B652B9D40F7251E6914DE942D9942B",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/WOSMO.png"
+        },
+        {
+          "coinDenom": "OOZARU",
+          "chainSuggestionDenom": "sei1wlf9j5uv50rcg0u5j6xk00px5tflptzprj39keck27eg8g7qd7hqq6kvda",
+          "sourceDenom": "sei1wlf9j5uv50rcg0u5j6xk00px5tflptzprj39keck27eg8g7qd7hqq6kvda",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sei/images/oozaru.png"
         }
       ],
       "description": "Sei is the fastest Layer 1 blockchain, designed to scale with the industry.",
       "apis": {
         "rpc": [
           {
-            "address": "https://rpc.wallet.pacific-1.sei.io"
+            "address": "https://sei-rpc.polkachu.com"
           }
         ],
         "rest": [
           {
-            "address": "https://rest.wallet.pacific-1.sei.io"
+            "address": "https://sei-api.polkachu.com"
           }
         ]
       },
@@ -16619,9 +16663,9 @@
           "coinGeckoId": "aioz-network",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aioz/images/aioz.png",
           "gasPriceStep": {
-            "low": 1000000000,
-            "average": 1000000000,
-            "high": 1500000000
+            "low": 7000000000,
+            "average": 7000000000,
+            "high": 10000000000
           }
         }
       ],

@@ -28,7 +28,7 @@
         "staking",
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc:1434"
+        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1263"
       ]
     },
     {
@@ -178,7 +178,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:uosmo:1134"
+        "osmosis-price:uosmo:1281"
       ]
     },
     {
@@ -1301,7 +1301,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1301"
+        "osmosis-price:uosmo:1093"
       ]
     },
     {
@@ -2476,6 +2476,7 @@
       },
       "coingecko_id": "marble",
       "keywords": [
+        "osmosis-info",
         "osmosis-price:uosmo:649"
       ]
     },
@@ -10551,7 +10552,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4:1542"
+        "osmosis-price:ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4:1502"
       ]
     },
     {
@@ -11627,7 +11628,7 @@
       "keywords": [
         "osmosis-main",
         "osmosis-info",
-        "osmosis-price:ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F:1284"
+        "osmosis-price:factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc:1490"
       ]
     },
     {
@@ -14211,8 +14212,8 @@
       },
       "keywords": [
         "osmosis-main",
-        "osmosis-price:ibc/9A76CDF0CBCEF37923F32518FA15E5DC92B9F56128292BC4D63C4AEA76CBB110:1566",
-        "osmosis-unlisted"
+        "osmosis-info",
+        "osmosis-price:ibc/9A76CDF0CBCEF37923F32518FA15E5DC92B9F56128292BC4D63C4AEA76CBB110:1566"
       ]
     },
     {
@@ -14256,6 +14257,68 @@
       "keywords": [
         "osmosis-info",
         "osmosis-price:ibc/C360EF34A86D334F625E4CBB7DA3223AEA97174B61F35BB3758081A8160F7D9B:1573"
+      ]
+    },
+    {
+      "description": "Sail DAO Token",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1rckme96ptawr4zwexxj5g5gej9s2dmud8r2t9j0k0prn5mch5g4snzzwjv/sail",
+          "exponent": 0
+        },
+        {
+          "denom": "sail",
+          "exponent": 6
+        }
+      ],
+      "base": "factory/osmo1rckme96ptawr4zwexxj5g5gej9s2dmud8r2t9j0k0prn5mch5g4snzzwjv/sail",
+      "name": "Sail",
+      "display": "sail",
+      "symbol": "SAIL",
+      "traces": [],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sail.png"
+      }
+    },
+    {
+      "description": "SHARK is the apex price prediction market within Cosmos.",
+      "denom_units": [
+        {
+          "denom": "ibc/64D56DF9EC69BE554F49EBCE0199611062FF1137EF105E2F645C1997344F3834",
+          "exponent": 0,
+          "aliases": [
+            "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/shark"
+          ]
+        },
+        {
+          "denom": "SHARK",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/64D56DF9EC69BE554F49EBCE0199611062FF1137EF105E2F645C1997344F3834",
+      "name": "SHARK",
+      "display": "SHARK",
+      "symbol": "SHARK",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "migaloo",
+            "base_denom": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/shark",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-642",
+            "path": "transfer/channel-642/factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/shark"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/shark.png"
+      },
+      "keywords": [
+        "osmosis-unlisted"
       ]
     }
   ]

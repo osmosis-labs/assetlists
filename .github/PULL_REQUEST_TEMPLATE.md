@@ -33,8 +33,8 @@ If adding a new asset, please ensure the following:
 
 ### On-chain liquidity
 
-For each new asset, please provide the plan for on-chain liquidity of the asset: (choose one)
-- [ ] Ready -- A liquidity pool has been created. The pool ID is: ______
-- [ ] Soon -- A pool will be created. (See: [Pool Setup Guilde](https://docs.osmosis.zone/overview/integrate/pool-setup).)
-  - [ ] (optional) A preview of the Osmosis Zone app with the new asset added is requested for creating the pool. (Supercharged Liquidity pools cannot be created via Osmosis Zone app)
-- [ ] StreamSwap -- The token is, or will be, going through a StreamSwap stream; thus, the token should be listed without requiring on-chain liquidity. A Pool ID will be provided in this PR following the stream's completion once the team has had a chance to create a pool using the earned funds.
+For each new asset, please provide the plan for on-chain liquidity of the asset (See: [Pool Setup Guilde](https://docs.osmosis.zone/overview/integrate/pool-setup).): (choose one)
+- [ ] Ready -- A liquidity pool(s) has been created and has liquidity. The pool ID is: ______
+- [ ] Soon -- A pool will be created soon. Do not merge this PR until liquidity is ready. 
+  - [ ] (optional) A preview of the Osmosis Zone app with the new asset added is requested for creating the pool. (Note: This method is not recommended because the Supercharged Liquidity pool type cannot be created via the Osmosis Zone app)
+- [ ] StreamSwap -- The token is, or will be, going through a StreamSwap stream; thus, the token should be listed without requiring on-chain liquidity. A Pool ID will be provided in this PR following the stream's completion once the team has had a chance to create a pool using the earned funds. The StreamSwap Bootstrapping phase begins (when?): ______ 

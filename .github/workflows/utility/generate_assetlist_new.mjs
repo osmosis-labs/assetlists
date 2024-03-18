@@ -780,16 +780,16 @@ function reformatZoneConfigAssets(assets) {
       counterparty: asset.counterparty ?? [],
       variantGroupKey: asset.common_key,
       name: asset.name,
-      description: asset.description,
+      //description: asset.description,
       verified: asset.verified ?? false,
       unstable: asset.unstable ?? false,
       disabled: asset.disabled ?? false,
       preview: asset.unlisted ?? false,
       tooltipMessage: asset.tooltip_message,
       sortWith: asset.sort_with,
-      twitterURL: asset.twitter_URL,
+      //twitterURL: asset.twitter_URL,
       listingDate: asset.listing_date,
-      relatedAssets: asset.relatedAssets,
+      //relatedAssets: asset.relatedAssets,
     };
 
     if (isNaN(asset.listing_date.getTime())) {

@@ -2835,7 +2835,22 @@
       "path": "transfer/channel-2188/drop-core1zhs909jp9yktml6qqx9f0ptcq2xnhhj99cja03j3lfcsp2pgm86studdrz",
       "osmosis_verified": true,
       "osmosis_unlisted": true,
-      "listing_date_time_utc": "2024-03-18T19:51:00Z"
+      "listing_date_time_utc": "2024-03-18T19:51:00Z",
+      "override_properties": {
+        "name": "Ripple (Coreum)",
+        "symbol": "XRP.core",
+        "logo_URIs": {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/xrp.core.png"
+        }
+      },
+      "transfer_methods": [
+        {
+          "name": "Sologenic DEX Bridge",
+          "type": "external_interface",
+          "deposit_url": "https://sologenic.org/bridge?network=mainnet",
+          "withdraw_url": "https://sologenic.org/bridge?network=mainnet"
+        }
+      ]
     }
   ]
 }

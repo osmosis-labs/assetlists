@@ -17783,6 +17783,73 @@
       "disabled": false,
       "preview": false,
       "listingDate": "2024-03-15T19:51:00.000Z"
+    },
+    {
+      "chainName": "coreum",
+      "sourceDenom": "drop-core1zhs909jp9yktml6qqx9f0ptcq2xnhhj99cja03j3lfcsp2pgm86studdrz",
+      "coinMinimalDenom": "ibc/63A7CA0B6838AD8CAD6B5103998FF9B9B6A6F06FBB9638BFF51E63E0142339F3",
+      "symbol": "XRP.core",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/xrp.core.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Sologenic DEX Bridge",
+          "type": "external_interface",
+          "depositUrl": "https://sologenic.org/bridge?network=mainnet",
+          "withdrawUrl": "https://sologenic.org/bridge?network=mainnet"
+        },
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "coreum",
+            "chainId": "coreum-mainnet-1",
+            "sourceDenom": "drop-core1zhs909jp9yktml6qqx9f0ptcq2xnhhj99cja03j3lfcsp2pgm86studdrz",
+            "port": "transfer",
+            "channelId": "channel-2"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-2188",
+            "path": "transfer/channel-2188/drop-core1zhs909jp9yktml6qqx9f0ptcq2xnhhj99cja03j3lfcsp2pgm86studdrz"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "coreum",
+          "sourceDenom": "drop-core1zhs909jp9yktml6qqx9f0ptcq2xnhhj99cja03j3lfcsp2pgm86studdrz",
+          "chainType": "cosmos",
+          "chainId": "coreum-mainnet-1",
+          "symbol": "XRP",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/xrpl/images/xrp.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/xrpl/images/xrp.svg"
+          }
+        },
+        {
+          "chainName": "xrpl",
+          "sourceDenom": "drop",
+          "chainType": "non-cosmos",
+          "symbol": "XRP",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/xrpl/images/xrp.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/xrpl/images/xrp.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "XRP",
+      "name": "Ripple (Coreum)",
+      "verified": true,
+      "unstable": false,
+      "disabled": false,
+      "preview": true,
+      "listingDate": "2024-03-18T19:51:00.000Z"
     }
   ]
 }

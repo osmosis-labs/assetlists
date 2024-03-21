@@ -4,6 +4,7 @@
 //-- Imports --
 
 import * as chain_reg from "../../../chain-registry/.github/workflows/utility/chain_registry.mjs";
+//import * as chain_reg from "./chain_registry.mjs";
 import * as zone from "./assetlist_functions.mjs";
 import { getAssetsPricing } from "./getPools.mjs";
 import { getAllRelatedAssets } from "./getRelatedAssets.mjs";
@@ -64,6 +65,55 @@ function getAssetDecimals(asset) {
   }
 
   return decimals ?? 0;
+
+}
+
+function getAssetCoinGeckoID(chainName, zone_asset, purpose) {
+
+  //Purposes: ['osmosis_zone', 'chain_registry']
+
+  const property = "coingecko_id";
+  let trace_types = [];
+
+  let asset = zone_asset;
+
+  if (purpose === "osmosis_zone") {
+
+    trace_types = [
+      "ibc",
+      "ibc-cw20",
+      "additional-mintage",
+      "test-mintage"
+    ];
+
+    //for osmosis zone, the coingecko ID, should first be the override value, if provided
+    if (zone_asset.override_properties?.coingecko_id) {
+      return zone_asset.override_properties?.coingecko_id;
+    }
+
+    //or, use the canonical
+    if (zone_asset.canonical) {
+      asset = zone_asset.canonical;
+    }
+
+  } else if (purpose === "chain_registry") {
+
+    if (asset.chain_name !== chainName) { return; }
+
+    trace_types = [
+      "additional-mintage"
+    ];
+
+  } else {
+    console.log("Invalid purpose: ${purpose}");
+  }
+
+  return chain_reg.getAssetPropertyWithTraceCustom(
+    asset.chain_name,
+    asset.base_denom,
+    property,
+    trace_types
+  );
 
 }
 
@@ -148,11 +198,14 @@ const generateAssets = async (
     let images = reference_asset.images;
 
     //--Get CGID--
-    generated_asset.coingecko_id = canonical_origin_asset.coingecko_id;
-    let chain_reg_coingecko_id =
-      zone_asset.chain_name == chainName
-        ? generated_asset.coingecko_id
-        : undefined;
+    //generated_asset.coingecko_id = canonical_origin_asset.coingecko_id;
+    //let chain_reg_coingecko_id =
+      //zone_asset.chain_name == chainName
+        //? generated_asset.coingecko_id
+        //: undefined;
+    generated_asset.coingecko_id = getAssetCoinGeckoID(chainName, zone_asset, "osmosis_zone");
+    //generated_chainRegAsset.coingecko_id = getAssetCoinGeckoID(chainName, zone_asset, "chain_registry");
+
 
     //--Get Verified Status--
     generated_asset.verified = zone_asset.osmosis_verified;
@@ -752,7 +805,7 @@ const generateAssets = async (
       traces: traces,
       logo_URIs: generated_asset.logo_URIs,
       images: images,
-      coingecko_id: chain_reg_coingecko_id,
+      coingecko_id: getAssetCoinGeckoID(chainName, zone_asset, "chain_registry"),
       keywords: keywords,
     };
     //--Append to Chain_Reg Assetlist--

@@ -57,7 +57,9 @@ jobs:
 
       - name: Debug
         run: |
-          echo "steps.create_pr.outputs.pull_request_created; ${{ steps.create_pr.outputs.pull_request_created }}"
+          echo "Create PR outputs: ${{ toJson(steps.create_pr.outputs) }}"
+          echo "github.head_ref: ${{ github.head_ref }}"
+          echo "github: ${{ toJson(github) }}"
           
       - name: Merge Pull Request
         if: steps.create_pr.outputs.pull_request_created == 'true' && github.head_ref == 'update/query_pools'

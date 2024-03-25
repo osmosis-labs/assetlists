@@ -5,6 +5,8 @@ on:
     - cron: '0 0 * * *'  # Run daily
   workflow_dispatch:
 
+permissions: write-all
+
 jobs:
   update_saved_pools:
     name: Update Saved Pools Auto

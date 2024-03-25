@@ -53,15 +53,16 @@ jobs:
           new_string: "** Automatic pull request**"
           get_diff: true
           ignore_users: "dependabot"
+        id: create_pr
 
       - name: Debug
         run: |
-          echo "github.head_ref; ${{ github.head_ref }}"
-          echo "github.head_ref; ${{ steps.create_pr.outputs.pull_request_created }}"
+          echo "steps.create_pr.outputs.pull_request_created; ${{ steps.create_pr.outputs.pull_request_created }}"
           
       - name: Merge Pull Request
         if: steps.create_pr.outputs.pull_request_created == 'true' && github.head_ref == 'update/query_pools'
         run: |
+          echo "github.head_ref: ${{ github.head_ref }}"
           curl --location --request PUT 'https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.create_pr.outputs.pull_request_number }}/merge' \
           --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'Content-Type: application/json' \
@@ -70,4 +71,3 @@ jobs:
             "commit_message": "This pull request was automatically merged.",
             "merge_method": "squash"
           }'
-           echo "github.head_ref: ${{ github.head_ref }}"

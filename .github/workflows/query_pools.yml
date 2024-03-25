@@ -62,7 +62,7 @@ jobs:
           echo "github: ${{ toJson(github) }}"
           
       - name: Merge Pull Request
-        if: steps.create_pr.outputs.url && github.job == "update_saved_pools"
+        if: steps.create_pr.outputs.url && github.job == 'update_saved_pools'
         run: |
           PR_URL=${{ steps.create_pr.outputs.url }}
           PR_NUMBER=$(echo $PR_URL | awk -F'/' '{print $NF}')

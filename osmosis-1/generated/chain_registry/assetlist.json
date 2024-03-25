@@ -14884,6 +14884,54 @@
       ]
     },
     {
+      "description": "The native token of Nibiru network",
+      "denom_units": [
+        {
+          "denom": "ibc/4017C65CEA338196ECCEC3FE3FE8258F23D1DE88F1D95750CC912C7A1C1016FF",
+          "exponent": 0,
+          "aliases": [
+            "unibi"
+          ]
+        },
+        {
+          "denom": "nibi",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/4017C65CEA338196ECCEC3FE3FE8258F23D1DE88F1D95750CC912C7A1C1016FF",
+      "name": "Nibiru",
+      "display": "nibi",
+      "symbol": "NIBI",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "nibiru",
+            "base_denom": "unibi",
+            "channel_id": "channel-139"
+          },
+          "chain": {
+            "channel_id": "channel-21113",
+            "path": "transfer/channel-21113/unibi"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nibiru/images/nibiru.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nibiru/images/nibiru.svg"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nibiru/images/nibiru.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nibiru/images/nibiru.svg"
+        }
+      ],
+      "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
       "description": "The Revenue & Governance token of Unstake.fi",
       "denom_units": [
         {

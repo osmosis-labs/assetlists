@@ -13,8 +13,8 @@
       },
       "coingeckoId": "osmosis",
       "price": {
-        "poolId": "1263",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1434",
+        "denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc"
       },
       "categories": [
         "defi"
@@ -39,7 +39,7 @@
       },
       "coingeckoId": "ion",
       "price": {
-        "poolId": "2",
+        "poolId": "1100",
         "denom": "uosmo"
       },
       "categories": [],
@@ -2937,7 +2937,7 @@
       },
       "coingeckoId": "graviton",
       "price": {
-        "poolId": "625",
+        "poolId": "1113",
         "denom": "uosmo"
       },
       "categories": [
@@ -5244,6 +5244,10 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/rai.svg"
       },
       "coingeckoId": "rai",
+      "price": {
+        "poolId": "1604",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+      },
       "categories": [],
       "transferMethods": [
         {
@@ -10945,8 +10949,8 @@
       },
       "coingeckoId": "arbitrum",
       "price": {
-        "poolId": "1011",
-        "denom": "uosmo"
+        "poolId": "1580",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
       "transferMethods": [
@@ -13138,8 +13142,8 @@
       },
       "coingeckoId": "aptos",
       "price": {
-        "poolId": "1500",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1501",
+        "denom": "uosmo"
       },
       "categories": [],
       "transferMethods": [
@@ -15327,7 +15331,7 @@
       },
       "coingeckoId": "newt",
       "price": {
-        "poolId": "1334",
+        "poolId": "1598",
         "denom": "uosmo"
       },
       "categories": [
@@ -15574,8 +15578,8 @@
       },
       "coingeckoId": "islamic-coin",
       "price": {
-        "poolId": "1343",
-        "denom": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858"
+        "poolId": "1612",
+        "denom": "ibc/A8CA5EE328FA10C9519DF6057DA1F69682D28F7D0F5CCC7ECB72E3DCA2D157A4"
       },
       "categories": [
         "defi"
@@ -17887,6 +17891,63 @@
       ],
       "variantGroupKey": "SEIYAN",
       "name": "SEIYAN",
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true
+    },
+    {
+      "chainName": "nibiru",
+      "sourceDenom": "unibi",
+      "coinMinimalDenom": "ibc/4017C65CEA338196ECCEC3FE3FE8258F23D1DE88F1D95750CC912C7A1C1016FF",
+      "symbol": "NIBI",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nibiru/images/nibiru.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nibiru/images/nibiru.svg"
+      },
+      "coingeckoId": "nibiru",
+      "price": {
+        "poolId": "1620",
+        "denom": "uosmo"
+      },
+      "categories": [
+        "defi"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "nibiru",
+            "chainId": "cataclysm-1",
+            "sourceDenom": "unibi",
+            "port": "transfer",
+            "channelId": "channel-139"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-21113",
+            "path": "transfer/channel-21113/unibi"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "nibiru",
+          "sourceDenom": "unibi",
+          "chainType": "cosmos",
+          "chainId": "cataclysm-1",
+          "symbol": "NIBI",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nibiru/images/nibiru.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nibiru/images/nibiru.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "NIBI",
+      "name": "Nibiru",
       "verified": false,
       "unstable": false,
       "disabled": false,

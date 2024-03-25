@@ -1,5 +1,12 @@
-on: [workflow_dispatch]
 name: Update Saved Pools
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Run daily
+  workflow_dispatch:
+
+permissions: write-all
+
 jobs:
   update_saved_pools:
     name: Update Saved Pools
@@ -58,7 +65,6 @@ jobs:
       - name: Debug
         run: |
           echo "Create PR outputs: ${{ toJson(steps.create_pr.outputs) }}"
-          echo "github.head_ref: ${{ github.head_ref }}"
           echo "github: ${{ toJson(github) }}"
           
       - name: Merge Pull Request

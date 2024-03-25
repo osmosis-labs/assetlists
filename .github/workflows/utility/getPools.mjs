@@ -17,6 +17,8 @@ import * as zone from './assetlist_functions.mjs';
 
 //-- Globals --
 
+const poolsFileName = "all-pools.json";
+
 let pools = new Map();
 export let assets = new Map();
 let usd, osmo, atom;
@@ -73,25 +75,23 @@ async function queryPools(domain) {
   
   //--QUERY API--
 
+  console.log(domain);
+
   let baseUrl = get_base_url(domain);
   let params;
-  let fileName = "all-pools.json";
-
-  console.log(domain);
-  //console.log(baseUrl);
+  const fileName = poolsFileName;
 
   queryApi.queryAPI(baseUrl, params, domain, fileName);
 
-  let storedResult = queryApi.readQueryResponse(domain, fileName);
-  if (!storedResult?.pools) { return; }
-  getPools(storedResult.pools);
-
 }
 
-function getPools(all_pools) {
+function getPools(domain) {
+  
+  let all_pools = queryApi.readQueryResponse(domain, poolsFileName);
+  if (!all_pools?.pools) { return; }
   
   pools.clear();
-  all_pools.forEach((pool) => {
+  all_pools.pools.forEach((pool) => {
     pools.set(pool.id,Pool(pool));
   });
   
@@ -409,13 +409,20 @@ function getLargestRoute(routes, i){
 
 
 
-export async function getAssetsPricing(chain){
+export async function getAssetsPricing(chain) {
   getAssets(chain);
-  await queryPools(chain);
+  //await queryPools(chain);
+  getPools(chain);
   if (pools.size == 0) { return; }
   getRoutes();
   console.log(ticks);
   return assets;
+}
+
+export async function queryAllPools() {
+  zone.chainNames.forEach(async (chainName) => {
+    await queryPools(chainName);
+  });
 }
 
 async function main() {

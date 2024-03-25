@@ -40,15 +40,11 @@ jobs:
         run: |
           git config user.email "actions@example.com"
           git config user.name "GitHub Actions"
-
-          # Checkout the update/query_pools branch or create it if it doesn't exist
-          git checkout -b update/query_pools || (git checkout update/query_pools && git pull)
-          git push --set-upstream origin update/query_pools
           
           # Add, commit, and push changes
           git add .
           git commit -m "[AUTO] Query and Save Pools"
-          git push origin update/query_pools
+          git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           

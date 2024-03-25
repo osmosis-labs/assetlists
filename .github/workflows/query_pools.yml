@@ -56,7 +56,12 @@ jobs:
           
       - name: Merge Pull Request
         if: steps.create_pr.outputs.pull_request_created == 'true' && github.head_ref == 'update/query_pools'
-        uses: repo-sync/github-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          allow-author-approval: true
+        run: |
+          curl --location --request PUT 'https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.create_pr.outputs.pull_request_number }}/merge' \
+          --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+            "commit_title": "Automatically merged PR",
+            "commit_message": "This pull request was automatically merged.",
+            "merge_method": "squash"
+          }'

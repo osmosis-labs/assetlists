@@ -7266,6 +7266,67 @@
         "eth-address-gen",
         "eth-key-sign"
       ]
+    },
+    {
+      "chain_name": "nibiru",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Nibiru",
+      "chain_id": "cataclysm-1",
+      "bech32_prefix": "nibi",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "nibi",
+        "bech32PrefixAccPub": "nibipub",
+        "bech32PrefixValAddr": "nibivaloper",
+        "bech32PrefixValPub": "nibivaloperpub",
+        "bech32PrefixConsAddr": "nibivalcons",
+        "bech32PrefixConsPub": "nibivalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "unibi",
+            "fixed_min_gas_price": 0.025,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.05,
+            "high_gas_price": 0.1
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "unibi"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "description": "A Web3 hub ushering in the next era of money",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.nibiru.fi:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.nibiru.fi:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.nibiru.fi/cataclysm-1/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm"
+      ]
     }
   ]
 }

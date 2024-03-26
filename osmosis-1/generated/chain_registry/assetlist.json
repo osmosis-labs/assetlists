@@ -12025,7 +12025,7 @@
       "description": "The Revenue & Governance token of Unstake.fi",
       "denom_units": [
         {
-          "denom": "ibc/690EB0A0CA0DA2DC1E9CF62FB23C935AE5C7E9F57919CF89690521D5D70948A7",
+          "denom": "ibc/F74225B0AFD2F675AF56E9BE3F235486BCDE5C5E09AA88A97AFD2E052ABFE04C",
           "exponent": 0,
           "aliases": [
             "factory/kujira1aaudpfr9y23lt9d45hrmskphpdfaq9ajxd3ukh/unstk"
@@ -12037,7 +12037,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/690EB0A0CA0DA2DC1E9CF62FB23C935AE5C7E9F57919CF89690521D5D70948A7",
+      "base": "ibc/F74225B0AFD2F675AF56E9BE3F235486BCDE5C5E09AA88A97AFD2E052ABFE04C",
       "name": "Unstake Fi",
       "display": "nstk",
       "symbol": "NSTK",
@@ -14836,13 +14836,13 @@
       ]
     },
     {
-      "description": "The Original Meme Coin on SEI Network",
+      "description": "The Original Meme Coin of SEI Network",
       "denom_units": [
         {
-          "denom": "ibc/B61F272C20D301DD6D0C036BDCDF8CD83A95EE594FBDD9977910AE69F58936D3",
+          "denom": "ibc/86074B8DF625A75C25D52FA6112E3FD5446BA41FE418880C168CA99D10E22F05",
           "exponent": 0,
           "aliases": [
-            "sei1hrndqntlvtmx2kepr0zsfgr7nzjptcc72cr4ppk4yav58vvy7v3s4er8ed"
+            "cw20:sei1hrndqntlvtmx2kepr0zsfgr7nzjptcc72cr4ppk4yav58vvy7v3s4er8ed"
           ]
         },
         {
@@ -14851,21 +14851,23 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/B61F272C20D301DD6D0C036BDCDF8CD83A95EE594FBDD9977910AE69F58936D3",
+      "base": "ibc/86074B8DF625A75C25D52FA6112E3FD5446BA41FE418880C168CA99D10E22F05",
       "name": "SEIYAN",
       "display": "SEIYAN",
       "symbol": "SEIYAN",
       "traces": [
         {
-          "type": "ibc",
+          "type": "ibc-cw20",
           "counterparty": {
             "chain_name": "sei",
-            "base_denom": "sei1hrndqntlvtmx2kepr0zsfgr7nzjptcc72cr4ppk4yav58vvy7v3s4er8ed",
+            "base_denom": "cw20:sei1hrndqntlvtmx2kepr0zsfgr7nzjptcc72cr4ppk4yav58vvy7v3s4er8ed",
+            "port": "transfer",
             "channel_id": "channel-0"
           },
           "chain": {
+            "port": "transfer",
             "channel_id": "channel-782",
-            "path": "transfer/channel-782/sei1hrndqntlvtmx2kepr0zsfgr7nzjptcc72cr4ppk4yav58vvy7v3s4er8ed"
+            "path": "transfer/channel-782/cw20:sei1hrndqntlvtmx2kepr0zsfgr7nzjptcc72cr4ppk4yav58vvy7v3s4er8ed"
           }
         }
       ],
@@ -14879,6 +14881,94 @@
       ],
       "keywords": [
         "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "The native token of Nibiru network",
+      "denom_units": [
+        {
+          "denom": "ibc/4017C65CEA338196ECCEC3FE3FE8258F23D1DE88F1D95750CC912C7A1C1016FF",
+          "exponent": 0,
+          "aliases": [
+            "unibi"
+          ]
+        },
+        {
+          "denom": "nibi",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/4017C65CEA338196ECCEC3FE3FE8258F23D1DE88F1D95750CC912C7A1C1016FF",
+      "name": "Nibiru",
+      "display": "nibi",
+      "symbol": "NIBI",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "nibiru",
+            "base_denom": "unibi",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-21113",
+            "path": "transfer/channel-21113/unibi"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nibiru/images/nibiru.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nibiru/images/nibiru.svg"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nibiru/images/nibiru.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nibiru/images/nibiru.svg"
+        }
+      ]
+    },
+    {
+      "description": "The Revenue & Governance token of Unstake.fi",
+      "denom_units": [
+        {
+          "denom": "ibc/690EB0A0CA0DA2DC1E9CF62FB23C935AE5C7E9F57919CF89690521D5D70948A7",
+          "exponent": 0,
+          "aliases": [
+            "factory/kujira1aaudpfr9y23lt9d45hrmskphpdfaq9ajxd3ukh/unstk"
+          ]
+        },
+        {
+          "denom": "nstk",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/690EB0A0CA0DA2DC1E9CF62FB23C935AE5C7E9F57919CF89690521D5D70948A7",
+      "name": "Unstake Fi",
+      "display": "nstk",
+      "symbol": "NSTK",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "kujira",
+            "base_denom": "factory/kujira1aaudpfr9y23lt9d45hrmskphpdfaq9ajxd3ukh/unstk",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-259",
+            "path": "transfer/channel-259/factory:kujira1aaudpfr9y23lt9d45hrmskphpdfaq9ajxd3ukh:unstk"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/nstk.svg"
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/nstk.svg"
+        }
       ]
     },
     {
@@ -14943,7 +15033,7 @@
       "type_asset": "ics20",
       "base": "ibc/F49DFB3BC8105C57EE7F17EC2402438825B31212CFDD81681EB87911E934F32C",
       "name": "Nomic",
-      "display": "nomic",
+      "display": "nom",
       "symbol": "nomic.NOM",
       "traces": [
         {
@@ -15025,6 +15115,32 @@
       "images": [
         {
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/toro.png"
+        }
+      ]
+    },
+    {
+      "description": "BackBone Labs Liquid Staked OSMO",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1s3l0lcqc7tu0vpj6wdjz9wqpxv8nk6eraevje4fuwkyjnwuy82qsx3lduv/boneOsmo",
+          "exponent": 0
+        },
+        {
+          "denom": "bOSMO",
+          "exponent": 6
+        }
+      ],
+      "address": "osmo1s3l0lcqc7tu0vpj6wdjz9wqpxv8nk6eraevje4fuwkyjnwuy82qsx3lduv",
+      "base": "factory/osmo1s3l0lcqc7tu0vpj6wdjz9wqpxv8nk6eraevje4fuwkyjnwuy82qsx3lduv/boneOsmo",
+      "name": "BackBone Labs Liquid Staked OSMO",
+      "display": "bOSMO",
+      "symbol": "bOSMO",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bOSMO.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bOSMO.png"
         }
       ]
     }

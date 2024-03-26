@@ -4,7 +4,6 @@
 //-- Imports --
 
 import * as chain_reg from "../../../chain-registry/.github/workflows/utility/chain_registry.mjs";
-//import * as chain_reg from "./chain_registry.mjs";
 import * as zone from "./assetlist_functions.mjs";
 import { getAssetsPricing } from "./getPools.mjs";
 import { getAllRelatedAssets } from "./getRelatedAssets.mjs";

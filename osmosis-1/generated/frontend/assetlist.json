@@ -8973,6 +8973,10 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stluna.svg"
       },
       "coingeckoId": "stride-staked-luna",
+      "price": {
+        "poolId": "913",
+        "denom": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9"
+      },
       "categories": [
         "liquid_staking",
         "defi"
@@ -11773,6 +11777,10 @@
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/cub.png"
       },
+      "price": {
+        "poolId": "1072",
+        "denom": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9"
+      },
       "categories": [
         "meme"
       ],
@@ -11828,6 +11836,10 @@
       "decimals": 6,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/blue.png"
+      },
+      "price": {
+        "poolId": "1073",
+        "denom": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9"
       },
       "categories": [
         "meme"
@@ -12674,10 +12686,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qsomm.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qsomm.svg"
       },
-      "price": {
-        "poolId": "1087",
-        "denom": "ibc/9BBA9A1C257E971E38C1422780CE6F0B0686F0A3085E2D61118D904BFE0F5F5E"
-      },
       "categories": [
         "liquid_staking",
         "defi"
@@ -12791,10 +12799,6 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stsomm.svg"
       },
       "coingeckoId": "stride-staked-sommelier",
-      "price": {
-        "poolId": "1120",
-        "denom": "ibc/9BBA9A1C257E971E38C1422780CE6F0B0686F0A3085E2D61118D904BFE0F5F5E"
-      },
       "categories": [
         "liquid_staking",
         "defi"
@@ -14795,6 +14799,7 @@
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qwoyn/images/qwoyn.png"
       },
+      "coingeckoId": "qwoyn",
       "price": {
         "poolId": "1295",
         "denom": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858"
@@ -17953,6 +17958,66 @@
       "disabled": false,
       "preview": false,
       "listingDate": "2024-03-25T19:39:00.000Z"
+    },
+    {
+      "chainName": "injective",
+      "sourceDenom": "peggy0xA4426666addBE8c4985377d36683D17FB40c31Be",
+      "coinMinimalDenom": "ibc/B84F8CC583A54DA8173711C0B66B22FDC1954FEB1CA8DBC66C89919DAFE02000",
+      "symbol": "BEAST",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/beast.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "injective",
+            "chainId": "injective-1",
+            "sourceDenom": "peggy0xA4426666addBE8c4985377d36683D17FB40c31Be",
+            "port": "transfer",
+            "channelId": "channel-8"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-122",
+            "path": "transfer/channel-122/peggy0xA4426666addBE8c4985377d36683D17FB40c31Be"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "injective",
+          "sourceDenom": "peggy0xA4426666addBE8c4985377d36683D17FB40c31Be",
+          "chainType": "cosmos",
+          "chainId": "injective-1",
+          "symbol": "BEAST",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/beast.png"
+          }
+        },
+        {
+          "chainName": "ethereum",
+          "sourceDenom": "0xA4426666addBE8c4985377d36683D17FB40c31Be",
+          "chainType": "evm",
+          "chainId": 1,
+          "address": "0xA4426666addBE8c4985377d36683D17FB40c31Be",
+          "symbol": "BEAST",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/beast.png"
+          }
+        }
+      ],
+      "variantGroupKey": "BEAST",
+      "name": "Gelotto BEAST (Peggy)",
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true
     }
   ]
 }

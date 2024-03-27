@@ -7,6 +7,7 @@ import * as chain_reg from "../../../chain-registry/.github/workflows/utility/ch
 import * as zone from "./assetlist_functions.mjs";
 import { getAssetsPricing } from "./getPools.mjs";
 import { getAllRelatedAssets } from "./getRelatedAssets.mjs";
+import * as assetlist from "./generate_assetlist_functions.mjs";
 
 //-- Global Constants --
 
@@ -67,54 +68,6 @@ function getAssetDecimals(asset) {
 
 }
 
-function getAssetCoinGeckoID(chainName, zone_asset, purpose) {
-
-  //Purposes: ['osmosis_zone', 'chain_registry']
-
-  const property = "coingecko_id";
-  let trace_types = [];
-
-  let asset = zone_asset;
-
-  if (purpose === "osmosis_zone") {
-
-    trace_types = [
-      "ibc",
-      "ibc-cw20",
-      "additional-mintage",
-      "test-mintage"
-    ];
-
-    //for osmosis zone, the coingecko ID, should first be the override value, if provided
-    if (zone_asset.override_properties?.coingecko_id) {
-      return zone_asset.override_properties?.coingecko_id;
-    }
-
-    //or, use the canonical
-    if (zone_asset.canonical) {
-      asset = zone_asset.canonical;
-    }
-
-  } else if (purpose === "chain_registry") {
-
-    if (asset.chain_name !== chainName) { return; }
-
-    trace_types = [
-      "additional-mintage"
-    ];
-
-  } else {
-    console.log("Invalid purpose: ${purpose}");
-  }
-
-  return chain_reg.getAssetPropertyWithTraceCustom(
-    asset.chain_name,
-    asset.base_denom,
-    property,
-    trace_types
-  );
-
-}
 
 const generateAssets = async (
   chainName,
@@ -130,17 +83,43 @@ const generateAssets = async (
   }
 
   await asyncForEach(zone_assets, async (zone_asset) => {
+
     //--Create the Generated Asset Objects--
-    //  this will go into zone_asset_config
     let generated_asset = {};
+
+
+    //--Establish Key Asset Pointers--
+    let asset_pointers = {};
+
+    //source_asset (e.g., uosmo, uatom, uusdc on noble, pstake on persistence)
+    asset_pointers.source_asset = {
+      chain_name: zone_asset.chain_name,
+      base_denom: zone_asset.base_denom
+    }
+
+    //local_asset (e.g., uosmo, ibc/27..., factory/.../milkTIA, ...)
+    asset_pointers.local_asset = await assetlist.getLocalAsset(zone_asset, chainName);
+
+    //canonical_asset (e.g., pstake on Ethereum, usdc on ethereum)
+    asset_pointers.canonical_asset = assetlist.getCanonicalAsset(zone_asset, asset_pointers.source_asset);
+
+
+    //--Establish Key Asset Objects--
+    let frontend_asset = {};
+    let chain_reg_asset = {};
+
     //  this will go into [chain_reg] assetlist
     let generated_chainRegAsset = {};
 
     //--Identity (Chain Registry Pointer)--
     generated_asset.chain_name = zone_asset.chain_name;
     generated_asset.base_denom = zone_asset.base_denom;
+
     //--sourceDenom--
     generated_asset.sourceDenom = zone_asset.base_denom;
+
+    frontend_asset.sourceDenom = assetlist.getSourceDenom(asset_pointers);
+    frontend_asset.coinMinimalDenom = assetlist.getCoinMinimalDenom(asset_pointers);
 
     //--Get Origin Asset Object from Chain Registry--
     let origin_asset = chain_reg.getAssetObject(
@@ -188,6 +167,9 @@ const generateAssets = async (
 
     //--Get Symbol
     generated_asset.symbol = reference_asset.symbol;
+    
+    frontend_asset.symbol = assetlist.getSymbol(zone_asset, asset_pointers, zoneConfig);
+    
 
     //--Get Decimals--
     generated_asset.decimals = getAssetDecimals(asset);
@@ -197,13 +179,7 @@ const generateAssets = async (
     let images = reference_asset.images;
 
     //--Get CGID--
-    //generated_asset.coingecko_id = canonical_origin_asset.coingecko_id;
-    //let chain_reg_coingecko_id =
-      //zone_asset.chain_name == chainName
-        //? generated_asset.coingecko_id
-        //: undefined;
-    generated_asset.coingecko_id = getAssetCoinGeckoID(chainName, zone_asset, "osmosis_zone");
-    //generated_chainRegAsset.coingecko_id = getAssetCoinGeckoID(chainName, zone_asset, "chain_registry");
+    generated_asset.coingecko_id = assetlist.getAssetCoinGeckoID(chainName, zone_asset, assetlist.osmosis_zone_frontend_assetlist);
 
 
     //--Get Verified Status--
@@ -711,10 +687,10 @@ const generateAssets = async (
 
     //--Overrides Properties when Specified--
     if (zone_asset.override_properties) {
-      if (zone_asset.override_properties.coingecko_id) {
-        generated_asset.coingecko_id =
-          zone_asset.override_properties.coingecko_id;
-      }
+      //if (zone_asset.override_properties.coingecko_id) {
+        //generated_asset.coingecko_id =
+          //zone_asset.override_properties.coingecko_id;
+      //}
       if (zone_asset.override_properties.symbol) {
         generated_asset.symbol = zone_asset.override_properties.symbol;
       }
@@ -804,7 +780,7 @@ const generateAssets = async (
       traces: traces,
       logo_URIs: generated_asset.logo_URIs,
       images: images,
-      coingecko_id: getAssetCoinGeckoID(chainName, zone_asset, "chain_registry"),
+      coingecko_id: assetlist.getAssetCoinGeckoID(chainName, zone_asset, assetlist.chain_registry_osmosis_assetlist),
       keywords: keywords,
     };
     //--Append to Chain_Reg Assetlist--

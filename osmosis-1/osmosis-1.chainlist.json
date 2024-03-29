@@ -7327,6 +7327,65 @@
         "ibc-go",
         "cosmwasm"
       ]
+    },
+    {
+      "chain_name": "conscious",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "ConsciousDAO",
+      "chain_id": "cvn_2032-1",
+      "bech32_prefix": "cvn",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "cvn",
+        "bech32PrefixAccPub": "cvnpub",
+        "bech32PrefixValAddr": "cvnvaloper",
+        "bech32PrefixValPub": "cvnvaloperpub",
+        "bech32PrefixConsAddr": "cvnvalcons",
+        "bech32PrefixConsPub": "cvnvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "acvnt",
+            "fixed_min_gas_price": 100000000,
+            "low_gas_price": 100000000,
+            "average_gas_price": 200000000,
+            "high_gas_price": 300000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "acvnt"
+          }
+        ]
+      },
+      "description": "Developers use Evmos as the Ethereum Canary Chain to deploy applications of the future. Get all the functionalities of Ethereum with the power of IBC and Interchain composability.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.cvn.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.cvn.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/conscious/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
     }
   ]
 }

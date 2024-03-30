@@ -5377,7 +5377,8 @@
         "fee_tokens": [
           {
             "denom": "unls",
-            "low_gas_price": 0,
+            "fixed_min_gas_price": 0.025,
+            "low_gas_price": 0.025,
             "average_gas_price": 0.025,
             "high_gas_price": 0.05
           }
@@ -5640,10 +5641,10 @@
         "fee_tokens": [
           {
             "denom": "uqsr",
-            "fixed_min_gas_price": 0.01,
-            "low_gas_price": 0.01,
-            "average_gas_price": 0.025,
-            "high_gas_price": 0.03
+            "fixed_min_gas_price": 0.1,
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.25,
+            "high_gas_price": 0.3
           },
           {
             "denom": "ibc/0471F1C4E7AFD3F07702BEF6DC365268D64570F7C1FDC98EA6098DD6DE59817B",
@@ -7326,6 +7327,64 @@
         "ibc-transfer",
         "ibc-go",
         "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "conscious",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "ConsciousDAO",
+      "chain_id": "cvn_2032-1",
+      "bech32_prefix": "cvn",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "cvn",
+        "bech32PrefixAccPub": "cvnpub",
+        "bech32PrefixValAddr": "cvnvaloper",
+        "bech32PrefixValPub": "cvnvaloperpub",
+        "bech32PrefixConsAddr": "cvnvalcons",
+        "bech32PrefixConsPub": "cvnvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "acvnt",
+            "fixed_min_gas_price": 100000000,
+            "low_gas_price": 100000000,
+            "average_gas_price": 200000000,
+            "high_gas_price": 300000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "acvnt"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.cvn.io:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.cvn.io:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/conscious/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
       ]
     }
   ]

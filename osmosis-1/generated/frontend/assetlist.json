@@ -18049,6 +18049,59 @@
       "unstable": false,
       "disabled": false,
       "preview": true
+    },
+    {
+      "chainName": "conscious",
+      "sourceDenom": "acvnt",
+      "coinMinimalDenom": "ibc/D3FAF77F5DE21C18413B164751239BA7D521A9D8EA53BFE553AADF338A721480",
+      "symbol": "CVN",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/conscious/images/cvn.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/conscious/images/cvn.svg"
+      },
+      "coingeckoId": "consciousdao",
+      "categories": [
+        "defi"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "conscious",
+            "chainId": "cvn_2032-1",
+            "sourceDenom": "acvnt",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-35264",
+            "path": "transfer/channel-35264/acvnt"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "conscious",
+          "sourceDenom": "acvnt",
+          "chainType": "cosmos",
+          "chainId": "cvn_2032-1",
+          "symbol": "CVN",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/conscious/images/cvn.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/conscious/images/cvn.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "CVN",
+      "name": "ConsciousDAO",
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true
     }
   ]
 }

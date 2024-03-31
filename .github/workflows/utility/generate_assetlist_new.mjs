@@ -91,22 +91,64 @@ const generateAssets = async (
     //--Establish Key Asset Pointers--
     let asset_pointers = {};
 
+    //--Establish Asset Data--
+    let asset_data = {
+      chainName: chainName,
+      zone_config: zoneConfig,
+      zone_asset: zone_asset
+    }
+
     //source_asset (e.g., uosmo, uatom, uusdc on noble, pstake on persistence)
     asset_pointers.source_asset = {
       chain_name: zone_asset.chain_name,
       base_denom: zone_asset.base_denom
     }
 
+    assetlist.setSourceAsset(asset_data);
+
+    if (
+      asset_pointers.source_asset.chain_name != asset_data.source_asset.chain_name ||
+      asset_pointers.source_asset.base_denom != asset_data.source_asset.base_denom 
+    ) {
+      console.log("Source Asset Mismatch: ");
+      console.log(asset_pointers.source_asset);
+      console.log(asset_data.source_asset);
+    }
+
     //local_asset (e.g., uosmo, ibc/27..., factory/.../milkTIA, ...)
     asset_pointers.local_asset = await assetlist.getLocalAsset(zone_asset, chainName);
+
+    await assetlist.setLocalAsset(asset_data);
+
+    if (
+      asset_pointers.local_asset.chain_name != asset_data.local_asset.chain_name ||
+      asset_pointers.local_asset.base_denom != asset_data.local_asset.base_denom
+    ) {
+      console.log("Local Asset Mismatch: ");
+      console.log(asset_pointers.local_asset);
+      console.log(asset_data.local_asset);
+    }
 
     //canonical_asset (e.g., pstake on Ethereum, usdc on ethereum)
     asset_pointers.canonical_asset = assetlist.getCanonicalAsset(zone_asset, asset_pointers.source_asset);
 
+    assetlist.setCanonicalAsset(asset_data);
+
+    if (
+      asset_pointers.canonical_asset.chain_name != asset_data.canonical_asset.chain_name ||
+      asset_pointers.canonical_asset.base_denom != asset_data.canonical_asset.base_denom
+    ) {
+      console.log("Canonical Asset Mismatch: ");
+      console.log(asset_pointers.canonical_asset);
+      console.log(asset_data.canonical_asset);
+    }
 
     //--Establish Key Asset Objects--
     let frontend_asset = {};
     let chain_reg_asset = {};
+
+    asset_data.frontend = {};
+    asset_data.chain_reg = {};
 
     //  this will go into [chain_reg] assetlist
     let generated_chainRegAsset = {};
@@ -118,8 +160,28 @@ const generateAssets = async (
     //--sourceDenom--
     generated_asset.sourceDenom = zone_asset.base_denom;
 
+    assetlist.setSourceDenom(asset_data);
+
+    if (
+      generated_asset.sourceDenom != asset_data.frontend.sourceDenom
+    ) {
+      console.log("Source Denom Mismatch: ");
+      console.log(generated_asset.sourceDenom);
+      console.log(asset_data.frontend.sourceDenom);
+    }
+
     frontend_asset.sourceDenom = assetlist.getSourceDenom(asset_pointers);
     frontend_asset.coinMinimalDenom = assetlist.getCoinMinimalDenom(asset_pointers);
+
+    assetlist.setCoinMinimalDenom(asset_data);
+
+    if (
+      frontend_asset.coinMinimalDenom != asset_data.frontend.coinMinimalDenom
+    ) {
+      console.log("Coin Minimal Mismatch: ");
+      console.log(frontend_asset.coinMinimalDenom);
+      console.log(asset_data.frontend.coinMinimalDenom);
+    }
 
     //--Get Origin Asset Object from Chain Registry--
     let origin_asset = chain_reg.getAssetObject(
@@ -169,21 +231,47 @@ const generateAssets = async (
     generated_asset.symbol = reference_asset.symbol;
     
     frontend_asset.symbol = assetlist.getSymbol(zone_asset, asset_pointers, zoneConfig);
+
+    assetlist.setSymbol(asset_data);
     
 
     //--Get Decimals--
-    generated_asset.decimals = getAssetDecimals(asset);
+    generated_asset.decimals = assetlist.getAssetDecimals(asset);
+
+    assetlist.setDecimals(asset_data);
+
+    if (
+      generated_asset.decimals != asset_data.frontend.decimals
+    ) {
+      console.log("Decimals Mismatch: ");
+      console.log(generated_asset.decimals);
+      console.log(asset_data.frontend.decimals);
+    }
+
 
     //--Get Logos--
     generated_asset.logo_URIs = reference_asset.logo_URIs;
     let images = reference_asset.images;
 
+
+    assetlist.setLogoURIs(asset_data);
+
+    
+
+
     //--Get CGID--
     generated_asset.coingecko_id = assetlist.getAssetCoinGeckoID(chainName, zone_asset, assetlist.osmosis_zone_frontend_assetlist);
+
+    assetlist.setCoinGeckoId(asset_data);
 
 
     //--Get Verified Status--
     generated_asset.verified = zone_asset.osmosis_verified;
+
+    assetlist.setVerifiedStatus(asset_data);
+    assetlist.setUnstableStatus(asset_data);
+    assetlist.setDisabledStatus(asset_data);
+    assetlist.setPreviewStatus(asset_data);
 
     //--Get Best Pricing Reference Pool--
     let denom = generated_asset.coinMinimalDenom;
@@ -281,6 +369,12 @@ const generateAssets = async (
       !generated_asset.is_native_at_canonical_origin
     ) {
       addArrayItem("meme", categories);
+    }
+
+    if (generated_asset.categories != asset_data.frontend.categories) {
+      console.log("Category Mismatch: ");
+      console.log(generated_asset.categories);
+      console.log(asset_data.frontend.categories);
     }
 
     //-Save Asset's Categories-
@@ -578,7 +672,7 @@ const generateAssets = async (
             last_trace.counterparty.base_denom,
             "denom_units"
           );
-          counterparty.decimals = getAssetDecimals({display: display, denom_units: denom_units});
+          counterparty.decimals = assetlist.getAssetDecimals({display: display, denom_units: denom_units});
           counterparty.logoURIs = chain_reg.getAssetProperty(
             last_trace.counterparty.chain_name,
             last_trace.counterparty.base_denom,
@@ -594,6 +688,16 @@ const generateAssets = async (
           "symbol"
         );
       }
+    }
+
+    assetlist.setVariantGroupKey(asset_data);
+
+    if (
+      generated_asset.common_key != asset_data.frontend.variantGroupKey
+    ) {
+      console.log("Variant Group Key Mismatch: ");
+      console.log(generated_asset.common_key);
+      console.log(asset_data.frontend.variantGroupKey);
     }
 
     let denom_units = chain_reg.getAssetProperty(
@@ -640,6 +744,8 @@ const generateAssets = async (
 
     //  submit
     generated_asset.name = name;
+
+    assetlist.setName(asset_data);
 
     //--Add Description--
     let asset_description = reference_asset.description;
@@ -702,6 +808,52 @@ const generateAssets = async (
       }
     }
 
+    
+
+    if (
+      generated_asset.symbol != asset_data.frontend.symbol
+    ) {
+      console.log("Symbol Mismatch: ");
+      console.log(generated_asset.symbol);
+      console.log(asset_data.frontend.symbol);
+    }
+
+    if (
+      generated_asset.logo_URIs.png != asset_data.frontend.logoURIs.png ||
+      generated_asset.logo_URIs.svg != asset_data.frontend.logoURIs.svg
+    ) {
+      console.log("Logo Mismatch: ");
+      console.log(generated_asset.logo_URIs);
+      console.log(asset_data.frontend.logoURIs);
+    }
+
+    if (
+      generated_asset.coingecko_id != asset_data.frontend.coingeckoId
+    ) {
+      console.log("CGID Mismatch: ");
+      console.log(generated_asset.coingecko_id);
+      console.log(asset_data.frontend.coingeckoId);
+    }
+
+    if (
+      generated_asset.name != asset_data.frontend.name
+    ) {
+      console.log("Name Mismatch: ");
+      console.log(generated_asset.name);
+      console.log(asset_data.frontend.name);
+    }
+
+    assetlist.setChainName(asset_data);
+
+    if (
+      generated_asset.chain_name != asset_data.frontend.chainName
+    ) {
+      console.log("Chain Name Mismatch: ");
+      console.log(generated_asset.chain_name);
+      console.log(asset_data.frontend.chainName);
+    }
+
+
     //--Finalize Images--
     let match = 0;
     images.forEach((image) => {
@@ -758,6 +910,16 @@ const generateAssets = async (
       if (!type_asset) {
         type_asset = "sdk.coin";
       }
+    }
+
+    assetlist.setTypeAsset(asset_data);
+
+    if (
+      type_asset != asset_data.chain_reg.type_asset
+    ) {
+      console.log("Type Asset Mismatch: ");
+      console.log(type_asset);
+      console.log(asset_data.chain_reg.type_asset);
     }
 
     //--Get Address--

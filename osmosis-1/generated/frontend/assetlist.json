@@ -18002,6 +18002,12 @@
       "categories": [],
       "transferMethods": [
         {
+          "name": "Osmosis Pro TFM IBC Transfer",
+          "type": "external_interface",
+          "depositUrl": "https://pro.osmosis.zone/ibc?chainFrom=injective-1&chainTo=osmosis-1&token0=peggy0xA4426666addBE8c4985377d36683D17FB40c31Be&token1=ibc%2FB84F8CC583A54DA8173711C0B66B22FDC1954FEB1CA8DBC66C89919DAFE02000",
+          "withdrawUrl": "https://pro.osmosis.zone/ibc?chainFrom=osmosis-1&chainTo=injective-1&token0=ibc%2FB84F8CC583A54DA8173711C0B66B22FDC1954FEB1CA8DBC66C89919DAFE02000&token1=peggy0xA4426666addBE8c4985377d36683D17FB40c31Be"
+        },
+        {
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
@@ -18048,7 +18054,8 @@
       "verified": false,
       "unstable": false,
       "disabled": false,
-      "preview": true
+      "preview": false,
+      "listingDate": "2024-04-01T19:35:00.000Z"
     },
     {
       "chainName": "conscious",
@@ -18102,6 +18109,88 @@
       "unstable": false,
       "disabled": false,
       "preview": true
+    },
+    {
+      "chainName": "osmosis",
+      "sourceDenom": "factory/osmo1nr8zfakf6jauye3uqa9lrmr5xumee5n42lv92z/toro",
+      "coinMinimalDenom": "factory/osmo1nr8zfakf6jauye3uqa9lrmr5xumee5n42lv92z/toro",
+      "symbol": "TORO",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/toro.png"
+      },
+      "price": {
+        "poolId": "1624",
+        "denom": "uosmo"
+      },
+      "categories": [
+        "meme"
+      ],
+      "transferMethods": [],
+      "counterparty": [],
+      "name": "TORO",
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true
+    },
+    {
+      "chainName": "terra2",
+      "sourceDenom": "cw20:terra1xp9hrhthzddnl7j5du83gqqr4wmdjm5t0guzg9jp6jwrtpukwfjsjgy4f3",
+      "coinMinimalDenom": "ibc/06EF575844982382F4D1BC3830D294557A30EDB3CD223153AFC8DFEF06349C56",
+      "symbol": "SAYVE",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/sayve.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/sayve.svg"
+      },
+      "categories": [
+        "meme"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis Pro TFM IBC Transfer",
+          "type": "external_interface",
+          "depositUrl": "https://pro.osmosis.zone/ibc?chainTo=osmosis-1&chainFrom=phoenix-1&token0=terra1xp9hrhthzddnl7j5du83gqqr4wmdjm5t0guzg9jp6jwrtpukwfjsjgy4f3&token1=ibc%2F06EF575844982382F4D1BC3830D294557A30EDB3CD223153AFC8DFEF06349C56",
+          "withdrawUrl": "https://pro.osmosis.zone/ibc?chainFrom=osmosis-1&chainTo=phoenix-1&token0=ibc%2F06EF575844982382F4D1BC3830D294557A30EDB3CD223153AFC8DFEF06349C56&token1=terra1xp9hrhthzddnl7j5du83gqqr4wmdjm5t0guzg9jp6jwrtpukwfjsjgy4f3"
+        },
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "terra2",
+            "chainId": "phoenix-1",
+            "sourceDenom": "cw20:terra1xp9hrhthzddnl7j5du83gqqr4wmdjm5t0guzg9jp6jwrtpukwfjsjgy4f3",
+            "port": "wasm.terra1e0mrzy8077druuu42vs0hu7ugguade0cj65dgtauyaw4gsl4kv0qtdf2au",
+            "channelId": "channel-26"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-341",
+            "path": "transfer/channel-341/cw20:terra1xp9hrhthzddnl7j5du83gqqr4wmdjm5t0guzg9jp6jwrtpukwfjsjgy4f3"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "terra2",
+          "sourceDenom": "cw20:terra1xp9hrhthzddnl7j5du83gqqr4wmdjm5t0guzg9jp6jwrtpukwfjsjgy4f3",
+          "chainType": "cosmos",
+          "chainId": "phoenix-1",
+          "symbol": "SAYVE",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/sayve.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/sayve.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "SAYVE",
+      "name": "sayve",
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
     }
   ]
 }

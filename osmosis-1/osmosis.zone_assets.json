@@ -864,14 +864,31 @@
       "base_denom": "rai-wei",
       "path": "transfer/channel-208/rai-wei",
       "osmosis_verified": false,
-      "osmosis_unlisted": true,
-      "override_properties": {
-        "symbol": "RAI"
-      },
+      "listing_date_time_utc": "2024-03-29T20:12:00Z",
       "canonical": {
         "chain_name": "ethereum",
         "base_denom": "0x03ab458634910aad20ef5f1c8ee96f1d6ac54919"
-      }
+      },
+      "transfer_methods": [
+        {
+          "name": "Axelar Bridge",
+          "type": "integrated_bridge",
+          "counterparty": [
+            {
+              "chain_name": "ethereum",
+              "unwrappedAssetId": "0x03ab458634910aad20ef5f1c8ee96f1d6ac54919"
+            }
+          ],
+          "unwrappedAssetId": "rai-wei"
+        },
+        {
+          "name": "Satellite",
+          "type": "external_interface",
+          "deposit_url": "https://satellite.money/?source=ethereum&destination=osmosis&asset_denom=rai-we",
+          "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=rai-wei"
+        }
+      ],
+      "_comment": "$RAI from Etherem via Axelar"
     },
     {
       "chain_name": "axelar",
@@ -2898,6 +2915,14 @@
         }
       ],
       "_comment": "Gelotto Beast $BEAST"
+    },
+    {
+      "chain_name": "conscious",
+      "base_denom": "acvnt",
+      "path": "transfer/channel-35264/acvnt",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "_comment": "Conscious $CVN"
     }
   ]
 }

@@ -384,7 +384,9 @@ const generateAssets = async (
     generated_asset.peg_mechanism = zone_asset.peg_mechanism;
 
     //--Process Transfer Methods--
-    generated_asset.transfer_methods = zone_asset.transfer_methods;
+    //generated_asset.transfer_methods = zone_asset.transfer_methods;
+    generated_asset.transfer_methods = zone_asset.transfer_methods ? zone_asset.transfer_methods.map(obj => ({ ...obj })) : undefined;
+    //console.log(generated_asset.transfer_methods);
 
     generated_asset.transfer_methods?.forEach((transfer_method) => {
       if (transfer_method.type == "integrated_bridge") {
@@ -578,6 +580,8 @@ const generateAssets = async (
       generated_asset.transfer_methods.push(ibc_transfer_method);
       //generated_asset.transfer_methods.push(trace);
 
+
+
       //--Cleanup Trace--
       if (type === "ibc") {
         delete trace.chain.port;
@@ -605,6 +609,41 @@ const generateAssets = async (
           }
         });
       }
+    }
+
+    assetlist.setTransferMethods(asset_data);
+
+    if (
+      generated_asset.transfer_methods?.length != asset_data.frontend.transferMethods?.length ||
+      generated_asset.transfer_methods?.[0].name != asset_data.frontend.transferMethods?.[0].name ||
+      generated_asset.transfer_methods?.[0].type != asset_data.frontend.transferMethods?.[0].type ||
+      generated_asset.transfer_methods?.[0].counterparty?.chainName != asset_data.frontend.transferMethods?.[0].counterparty?.chainName ||
+      generated_asset.transfer_methods?.[0].counterparty?.chainId != asset_data.frontend.transferMethods?.[0].counterparty?.chainId ||
+      generated_asset.transfer_methods?.[0].counterparty?.sourceDenom != asset_data.frontend.transferMethods?.[0].counterparty?.sourceDenom ||
+      generated_asset.transfer_methods?.[0].counterparty?.port != asset_data.frontend.transferMethods?.[0].counterparty?.port ||
+      generated_asset.transfer_methods?.[0].counterparty?.channelId != asset_data.frontend.transferMethods?.[0].counterparty?.channelId ||
+      generated_asset.transfer_methods?.[0].chain?.port != asset_data.frontend.transferMethods?.[0].chain?.port ||
+      generated_asset.transfer_methods?.[0].chain?.channelId != asset_data.frontend.transferMethods?.[0].chain?.channelId ||
+      generated_asset.transfer_methods?.[0].chain?.path != asset_data.frontend.transferMethods?.[0].chain?.path ||
+      generated_asset.transfer_methods?.[0].depositUrl != asset_data.frontend.transferMethods?.[0].depositUrl ||
+      generated_asset.transfer_methods?.[0].withdrawUrl != asset_data.frontend.transferMethods?.[0].withdrawUrl
+    ) {
+      console.log("Transfer Methods Mismatch: ");
+      console.log(generated_asset.transfer_methods?.length != asset_data.frontend.transferMethods?.length);
+      console.log(generated_asset.transfer_methods?.[0].name != asset_data.frontend.transferMethods?.[0].name);
+      console.log(generated_asset.transfer_methods?.[0].type != asset_data.frontend.transferMethods?.[0].type);
+      console.log(generated_asset.transfer_methods?.[0].counterparty?.chainName != asset_data.frontend.transferMethods?.[0].counterparty?.chainName);
+      console.log(generated_asset.transfer_methods?.[0].counterparty?.chainId != asset_data.frontend.transferMethods?.[0].counterparty?.chainId);
+      console.log(generated_asset.transfer_methods?.[0].counterparty?.sourceDenom != asset_data.frontend.transferMethods?.[0].counterparty?.sourceDenom);
+      console.log(generated_asset.transfer_methods?.[0].counterparty?.port != asset_data.frontend.transferMethods?.[0].counterparty?.port);
+      console.log(generated_asset.transfer_methods?.[0].counterparty?.channelId != asset_data.frontend.transferMethods?.[0].counterparty?.channelId);
+      console.log(generated_asset.transfer_methods?.[0].chain?.port != asset_data.frontend.transferMethods?.[0].chain?.port);
+      console.log(generated_asset.transfer_methods?.[0].chain?.channelId != asset_data.frontend.transferMethods?.[0].chain?.channelId);
+      console.log(generated_asset.transfer_methods?.[0].chain?.path != asset_data.frontend.transferMethods?.[0].chain?.path);
+      console.log(generated_asset.transfer_methods?.[0].depositUrl != asset_data.frontend.transferMethods?.[0].depositUrl);
+      console.log(generated_asset.transfer_methods?.[0].withdrawUrl != asset_data.frontend.transferMethods?.[0].withdrawUrl);
+      console.log(generated_asset.transfer_methods);
+      console.log(asset_data.frontend.transferMethods);
     }
 
     //--Identify What the Token Represents--
@@ -688,6 +727,27 @@ const generateAssets = async (
           "symbol"
         );
       }
+    }
+
+    assetlist.setCounterparty(asset_data);
+
+    if (
+      generated_asset.counterparty?.length != asset_data.frontend.counterparty?.length ||
+      generated_asset.counterparty?.[0].chainName != asset_data.frontend.counterparty?.[0].chainName ||
+      generated_asset.counterparty?.[0].sourceDenom != asset_data.frontend.counterparty?.[0].sourceDenom ||
+      generated_asset.counterparty?.[0].chainType != asset_data.frontend.counterparty?.[0].chainType ||
+      generated_asset.counterparty?.[0].chainId != asset_data.frontend.counterparty?.[0].chainId ||
+      generated_asset.counterparty?.[0].address != asset_data.frontend.counterparty?.[0].address ||
+      generated_asset.counterparty?.[0].symbol != asset_data.frontend.counterparty?.[0].symbol ||
+      generated_asset.counterparty?.[0].decimals != asset_data.frontend.counterparty?.[0].decimals ||
+      generated_asset.counterparty?.[0].logoURIs.png != asset_data.frontend.counterparty?.[0].logoURIs.png ||
+      generated_asset.counterparty?.[0].logoURIs.svg != asset_data.frontend.counterparty?.[0].logoURIs.svg
+
+    ) {
+      console.log("Counterparty Mismatch: ");
+      console.log(generated_asset.symbol);
+      console.log(generated_asset.counterparty);
+      console.log(asset_data.frontend.counterparty);
     }
 
     assetlist.setVariantGroupKey(asset_data);

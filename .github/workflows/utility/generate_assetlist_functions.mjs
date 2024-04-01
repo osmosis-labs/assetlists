@@ -187,6 +187,83 @@ export async function getLocalAsset(zone_asset, envChainName) {
 
 }
 
+export function getAssetTrace(asset_data) {
+
+  const type = (asset_data.source_asset.base_denom.slice(0, 5) === "cw20:") ? "ibc-cw20" : "ibc";
+
+  const segments = asset_data.zone_asset.path.split("/");
+  if (segments?.length < 3) {
+    console.log("Invalid path provided.");
+    console.log(asset_data.zone_asset.path);
+    return;
+  }
+
+  let counterparty = {
+    chain_name: asset_data.source_asset.chain_name,
+    base_denom: asset_data.source_asset.base_denom
+  };
+
+  let chain = {
+    channel_id: segments[1]
+  };
+
+  //--Identify chain_1 and chain_2--
+  let chain_1, chain_2;
+  if (asset_data.source_asset.chain_name < asset_data.chainName) {
+    [chain_1, chain_2] = [counterparty, chain];
+  } else {
+    [chain_1, chain_2] = [chain, counterparty];
+  }
+
+  //--Find IBC Connection--
+  const channels = chain_reg.getIBCFileProperty(
+    asset_data.source_asset.chain_name,
+    asset_data.chainName,
+    "channels"
+  );
+
+  let foundChannel;
+  channels.forEach((channel) => {
+    if (
+      channel.chain_1.channel_id === chain_1.channel_id ||
+      channel.chain_2.channel_id === chain_2.channel_id
+    ) {
+      foundChannel = true;
+      chain_1.channel_id = channel.chain_1.channel_id;
+      chain_2.channel_id = channel.chain_2.channel_id;
+      if (type === "ibc-cw20") {
+        chain_1.port = channel.chain_1.port_id;
+        chain_2.port = channel.chain_2.port_id;
+        if (segments[0] !== chain.port) {
+          console.log("Port mismatch!");
+          console.log(segments[0]);
+          console.log(chain.port);
+          foundChannel = false;
+          return;
+        }
+      }
+      return;
+    }
+  });
+  if (!foundChannel) {
+    console.log("Channel not registered.");
+    console.log(asset_data.zone_asset.path);
+    console.log(channels);
+    return;
+  }
+
+  chain.path = asset_data.zone_asset.path;
+
+  const trace = {
+    type: type,
+    counterparty: counterparty,
+    chain: chain
+  }
+
+  return trace;
+
+}
+
 export async function setLocalAsset(asset_data) {
 
   if (
@@ -215,6 +292,14 @@ export async function setLocalAsset(asset_data) {
   } catch (error) {
     console.error(error);
   }
+
+  let traces = getAssetProperty(asset_data.source_asset, "traces");
+  if (!traces || traces?.length <= 0) {
+    traces = [];
+  }
+  const trace = getAssetTrace(asset_data);
+  traces.push(trace);
+  asset_data.local_asset.traces = traces;
 
 }
 
@@ -323,8 +408,10 @@ export function getSymbol(zone_asset, asset_pointers, zone_config) {
 
 export function getAssetProperty(asset, propertyName) {
   if (!asset[propertyName]) {
-    if(propertyName === "traces") {
+    if (propertyName === "traces") {
       asset.traces = getAssetTraces(asset);
+    } else if (propertyName === "decimals") {
+      asset.decimals = getAssetDecimals(asset);
     } else {
       asset[propertyName] = chain_reg.getAssetProperty(
         asset.chain_name,
@@ -411,7 +498,11 @@ export function getAssetTraces(asset) {
   let fullTraces = [];
 
   while (lastTrace) {
-    traces = chain_reg.getAssetProperty(lastTrace.counterparty.chain_name, lastTrace.counterparty.base_denom, "traces");
+    traces = chain_reg.getAssetProperty(
+      lastTrace.counterparty.chain_name,
+      lastTrace.counterparty.base_denom,
+      "traces"
+    );
     if (traces) {
       lastTrace = traces?.[traces.length - 1];
       fullTraces.push(lastTrace);
@@ -687,11 +778,155 @@ export function setTypeAsset(asset_data) {
 
 }
 
+export function setCounterparty(asset_data) {
 
-//chain name
-//asset name
-//variant group key, hmmm
+  const traces = getAssetProperty(asset_data.local_asset, "traces");
+
+  const trace_types = [
+    "ibc",
+    "ibc-cw20",
+    "bridge",
+    "wrapped",
+    //remove additnioal mintage later
+    "additional-mintage"
+  ];
+
+  let numBridgeHops = 0;
+
+  asset_data.frontend.counterparty = [];
+  let counterpartyAsset;
+  let evm_chain;
+
+  for (let i = traces?.length - 1; i >= 0; i--) {
+
+    if (!trace_types.includes(traces[i].type)) { break; }
+    if (traces[i].type === "bridge") {
+      if(numBridgeHops) { break; }
+      numBridgeHops += 1;
+    }
+
+    counterpartyAsset = {
+      chainName: traces[i].counterparty.chain_name,
+      sourceDenom: traces[i].counterparty.base_denom
+    }
+
+    const cosmosChainId = chain_reg.getFileProperty(
+        traces[i].counterparty.chain_name,
+        "chain",
+        "chain_id"
+      );
+    if (cosmosChainId) {
+      counterpartyAsset.chainType = "cosmos";
+      counterpartyAsset.chainId = cosmosChainId;
+    } else {
+      evm_chain = asset_data.zone_config.evm_chains?.find((evm_chain) => {
+        return evm_chain.chain_name === traces[i].counterparty.chain_name;
+      });
+      if (evm_chain) {
+        counterpartyAsset.chainType = "evm";
+        counterpartyAsset.chainId = evm_chain.chain_id;
+        counterpartyAsset.address = chain_reg.getAssetProperty(
+          traces[i].counterparty.chain_name,
+          traces[i].counterparty.base_denom,
+          "address");
+        if (!counterpartyAsset.address) {
+          counterpartyAsset.address = zero_address;
+        }
+      } else {
+        counterpartyAsset.chainType = "non-cosmos";
+      }
+    }
+    counterpartyAsset.symbol = getAssetProperty(traces[i].counterparty, "symbol");
+    counterpartyAsset.decimals = getAssetProperty(traces[i].counterparty, "decimals");
+    counterpartyAsset.logoURIs = getAssetProperty(traces[i].counterparty, "logo_URIs");
+
+    asset_data.frontend.counterparty.push(counterpartyAsset);
+
+  }
+
+  //temporary--just to make it match
+  if (asset_data.frontend.counterparty.length === 0) {
+    asset_data.frontend.counterparty = undefined;
+  }
+
+}
+
+export function setTransferMethods(asset_data) {
+
+  const external = "external_interface";
+  const bridge = "integrated_bridge";
+
+  let transfer_methods = asset_data.zone_asset.transfer_methods;
+  let transferMethods = transfer_methods ? transfer_methods.map(obj => ({ ...obj })) : [];
+
+  transferMethods.forEach((transferMethod) => {
+
+    if (transferMethod.type === external) {
+
+      //-Replace snake_case with camelCase-
+      //temporarily assigning transferMethod.depositUrl
+      transferMethod.depositUrl = transferMethod.depositUrl ?? transferMethod.deposit_url;
+      //delete transferMethod.deposit_url;
+      transferMethod.withdrawUrl = transferMethod.withdrawUrl ?? transferMethod.withdraw_url;
+      //delete transferMethod.withdraw_url;
+    
+    } else if (transferMethod.type === bridge) {
+
+      transferMethod.counterparty.forEach((counterparty) => {
+        asset_data.zone_config.evm_chains.some((evm_chain) => {
+          if (evm_chain.chain_name === counterparty.chain_name) {
+            counterparty.evmChainId = evm_chain.chain_id;
+          }
+        });
+        asset_data.zone_config.providers.some((provider) => {
+          if (provider.integration === transferMethod.name) {
+            provider.api_keys?.sourceChainIds?.some((sourceChainId) => {
+              if (sourceChainId.chain_name === counterparty.chain_name) {
+                counterparty.sourceChainId = sourceChainId.sourceChainId;
+              }
+            });
+          }
+        });
+        delete counterparty.chain_name;
+      });
+
+    }
+
+  });
+  
+  if (asset_data.source_asset.chain_name !== asset_data.chainName) {
+    const traces = getAssetProperty(asset_data.local_asset, "traces");
+    const trace = traces?.[traces.length - 1];
+    const ibcTransferMethod = {
+      name: "Osmosis IBC Transfer",
+      type: "ibc",
+      counterparty: {
+        chainName: trace.counterparty.chain_name,
+        chainId: chain_reg.getFileProperty(
+          trace.counterparty.chain_name,
+          "chain",
+          "chain_id"
+        ),
+        sourceDenom: trace.counterparty.base_denom,
+        port: trace.counterparty.port ?? "transfer",
+        channelId: trace.counterparty.channel_id
+      },
+      chain: {
+        port: trace.chain.port ?? "transfer",
+        channelId: trace.chain.channel_id,
+        path: trace.chain.path
+      }
+    }
+    transferMethods.push(ibcTransferMethod);
+  }
+
+  asset_data.frontend.transferMethods = transferMethods;
+
+  if (transferMethods?.length === 0) {
+    asset_data.frontend.transferMethods = undefined;
+  }
+
+}
+
+
 //price
-//counterparty
-//transfer methods
-//type_asset

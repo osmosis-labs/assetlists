@@ -4331,8 +4331,7 @@
         }
       ],
       "keywords": [
-        "osmosis_unlisted",
-        "osmosis-unlisted"
+        "osmosis_unlisted"
       ]
     },
     {
@@ -14929,6 +14928,112 @@
       ]
     },
     {
+      "description": "BEAST-ERC20 on injective",
+      "denom_units": [
+        {
+          "denom": "ibc/B84F8CC583A54DA8173711C0B66B22FDC1954FEB1CA8DBC66C89919DAFE02000",
+          "exponent": 0,
+          "aliases": [
+            "peggy0xA4426666addBE8c4985377d36683D17FB40c31Be"
+          ]
+        },
+        {
+          "denom": "beast",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/B84F8CC583A54DA8173711C0B66B22FDC1954FEB1CA8DBC66C89919DAFE02000",
+      "name": "Gelotto BEAST (Peggy)",
+      "display": "beast",
+      "symbol": "BEAST",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xA4426666addBE8c4985377d36683D17FB40c31Be"
+          },
+          "provider": "Peggy"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "injective",
+            "base_denom": "peggy0xA4426666addBE8c4985377d36683D17FB40c31Be",
+            "channel_id": "channel-8"
+          },
+          "chain": {
+            "channel_id": "channel-122",
+            "path": "transfer/channel-122/peggy0xA4426666addBE8c4985377d36683D17FB40c31Be"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/beast.png"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "ethereum",
+            "base_denom": "0xA4426666addBE8c4985377d36683D17FB40c31Be"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/beast.png"
+        }
+      ],
+      "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "Cvn is a Layer-1 blockchain built to deliver on the promise of DeFi",
+      "denom_units": [
+        {
+          "denom": "ibc/D3FAF77F5DE21C18413B164751239BA7D521A9D8EA53BFE553AADF338A721480",
+          "exponent": 0,
+          "aliases": [
+            "acvnt"
+          ]
+        },
+        {
+          "denom": "cvnt",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/D3FAF77F5DE21C18413B164751239BA7D521A9D8EA53BFE553AADF338A721480",
+      "name": "ConsciousDAO",
+      "display": "cvnt",
+      "symbol": "CVN",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "conscious",
+            "base_denom": "acvnt",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-35264",
+            "path": "transfer/channel-35264/acvnt"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/conscious/images/cvn.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/conscious/images/cvn.svg"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/conscious/images/cvn.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/conscious/images/cvn.svg"
+        }
+      ],
+      "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
       "description": "The Revenue & Governance token of Unstake.fi",
       "denom_units": [
         {
@@ -15143,6 +15248,25 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bOSMO.png"
         }
       ]
+    },
+    {
+      "description": "Memecoin for The International Brane Wave",
+      "denom_units": [
+        {
+          "denom": "factory/osmo13gu58hzw3e9aqpj25h67m7snwcjuccd7v4p55w/brnz",
+          "exponent": 0,
+          "aliases": [
+            "brnz"
+          ]
+        }
+      ],
+      "base": "factory/osmo13gu58hzw3e9aqpj25h67m7snwcjuccd7v4p55w/brnz",
+      "name": "Branez",
+      "display": "factory/osmo13gu58hzw3e9aqpj25h67m7snwcjuccd7v4p55w/brnz",
+      "symbol": "BRNZ",
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/BRNZ.svg"
+      }
     }
   ]
 }

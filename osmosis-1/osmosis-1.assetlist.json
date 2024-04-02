@@ -14506,8 +14506,7 @@
       },
       "keywords": [
         "osmosis-info",
-        "osmosis-price:uosmo:1630",
-        "osmosis-unlisted"
+        "osmosis-price:uosmo:1630"
       ]
     },
     {
@@ -14552,6 +14551,74 @@
       "keywords": [
         "osmosis-unlisted"
       ]
+    },
+    {
+      "description": "The memecoin built for the Celestia community",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1nr8zfakf6jauye3uqa9lrmr5xumee5n42lv92z/toro",
+          "exponent": 0
+        },
+        {
+          "denom": "toro",
+          "exponent": 6
+        }
+      ],
+      "address": "osmo1nr8zfakf6jauye3uqa9lrmr5xumee5n42lv92z",
+      "base": "factory/osmo1nr8zfakf6jauye3uqa9lrmr5xumee5n42lv92z/toro",
+      "name": "TORO",
+      "display": "toro",
+      "symbol": "TORO",
+      "traces": [],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/toro.png"
+      },
+      "keywords": [
+        "osmosis-price:uosmo:1624",
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "Sayve is a revolutionary language learning app in the Web3 era that combines gamification, blockchain technology, and a Metaverse experience to motivate users to learn languages while earning rewards.",
+      "denom_units": [
+        {
+          "denom": "ibc/06EF575844982382F4D1BC3830D294557A30EDB3CD223153AFC8DFEF06349C56",
+          "exponent": 0,
+          "aliases": [
+            "cw20:terra1xp9hrhthzddnl7j5du83gqqr4wmdjm5t0guzg9jp6jwrtpukwfjsjgy4f3"
+          ]
+        },
+        {
+          "denom": "sayve",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "address": "terra1xp9hrhthzddnl7j5du83gqqr4wmdjm5t0guzg9jp6jwrtpukwfjsjgy4f3",
+      "base": "ibc/06EF575844982382F4D1BC3830D294557A30EDB3CD223153AFC8DFEF06349C56",
+      "name": "sayve",
+      "display": "sayve",
+      "symbol": "SAYVE",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "terra2",
+            "base_denom": "cw20:terra1xp9hrhthzddnl7j5du83gqqr4wmdjm5t0guzg9jp6jwrtpukwfjsjgy4f3",
+            "port": "wasm.terra1e0mrzy8077druuu42vs0hu7ugguade0cj65dgtauyaw4gsl4kv0qtdf2au",
+            "channel_id": "channel-26"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-341",
+            "path": "transfer/channel-341/cw20:terra1xp9hrhthzddnl7j5du83gqqr4wmdjm5t0guzg9jp6jwrtpukwfjsjgy4f3"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/sayve.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/sayve.svg"
+      }
     }
   ]
 }

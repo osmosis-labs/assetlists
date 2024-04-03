@@ -15225,6 +15225,127 @@
       ]
     },
     {
+      "description": "The native fee, governance and staking token of the Tinkernet Parachain.",
+      "denom_units": [
+        {
+          "denom": "ibc/3A0A392E610A8D477851ABFEA74F3D828F36C015AB8E93B0FBB7566A6D13C4D6",
+          "exponent": 0,
+          "aliases": [
+            "2125",
+            "ibc/C58E5D2571042137CB68B1B9851C4E7211C05F7C2C79E21E0966AF0F063961F8"
+          ]
+        },
+        {
+          "denom": "tnkr",
+          "exponent": 12
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/3A0A392E610A8D477851ABFEA74F3D828F36C015AB8E93B0FBB7566A6D13C4D6",
+      "name": "Tinkernet",
+      "display": "tnkr",
+      "symbol": "TNKR",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "tinkernet",
+            "base_denom": "Planck"
+          },
+          "provider": "Tinkernet Parachain"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "picasso",
+            "base_denom": "2125",
+            "channel_id": "channel-17"
+          },
+          "chain": {
+            "channel_id": "channel-2",
+            "path": "transfer/channel-2/2125"
+          }
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "composable",
+            "base_denom": "ibc/C58E5D2571042137CB68B1B9851C4E7211C05F7C2C79E21E0966AF0F063961F8",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-1279",
+            "path": "transfer/channel-1279/transfer/channel-2/2125"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/tinkernet/images/tnkr.svg"
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/tinkernet/images/tnkr.svg"
+        }
+      ],
+      "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "W is the native token powering the Wormhole interoperability platform.",
+      "denom_units": [
+        {
+          "denom": "ibc/AC6EE43E608B5A7EEE460C960480BC1C3708010E32B2071C429DA259836E10C3",
+          "exponent": 0,
+          "aliases": [
+            "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/2Wb6ueMFc9WLc2eyYVha6qnwHKbwzUXdooXsg6XXVvos"
+          ]
+        },
+        {
+          "denom": "w",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/AC6EE43E608B5A7EEE460C960480BC1C3708010E32B2071C429DA259836E10C3",
+      "name": "Wormhole Token",
+      "display": "w",
+      "symbol": "W",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "solana",
+            "base_denom": "85VBFQZC9TZkfaptBWjvUw7YbZjy52A6mjtPGjstQAmQ"
+          },
+          "provider": "Wormhole"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gateway",
+            "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/2Wb6ueMFc9WLc2eyYVha6qnwHKbwzUXdooXsg6XXVvos",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-2186",
+            "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/2Wb6ueMFc9WLc2eyYVha6qnwHKbwzUXdooXsg6XXVvos"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/w.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/w.png"
+        }
+      ],
+      "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
       "description": "The Revenue & Governance token of Unstake.fi",
       "denom_units": [
         {

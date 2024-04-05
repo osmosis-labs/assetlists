@@ -7386,6 +7386,63 @@
         "eth-address-gen",
         "eth-key-sign"
       ]
+    },
+    {
+      "chain_name": "dhealth",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "dHealth",
+      "chain_id": "dhealth",
+      "bech32_prefix": "dh",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "dh",
+        "bech32PrefixAccPub": "dhpub",
+        "bech32PrefixValAddr": "dhvaloper",
+        "bech32PrefixValPub": "dhvaloperpub",
+        "bech32PrefixConsAddr": "dhvalcons",
+        "bech32PrefixConsPub": "dhvalconspub"
+      },
+      "slip44": 10111,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "udhp",
+            "fixed_min_gas_price": 0.01,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.03,
+            "high_gas_price": 0.035
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "udhp"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.dhealth.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.dhealth.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.dhealth.com/dhealth/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm"
+      ]
     }
   ]
 }

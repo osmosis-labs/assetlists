@@ -593,7 +593,7 @@ export function setUnstableStatus(asset_data) {
 
 export function setDisabledStatus(asset_data) {
 
-  asset_data.frontend.disabled = asset_data.zone_asset?.osmosis_disabled;
+  asset_data.frontend.disabled = asset_data.zone_asset?.osmosis_disabled || asset_data.zone_asset?.osmosis_unstable;
 
 }
 
@@ -605,17 +605,14 @@ export function setPreviewStatus(asset_data) {
 
 export function setListingDate(asset_data) {
 
-  asset_data.frontend.listingDate = asset_data.zone_asset?.listing_date_time_utc;
+  asset_data.frontend.listingDate = new Date(asset_data.zone_asset?.listing_date_time_utc);
 
 }
 
 export function setCategories(asset_data) {
 
-  asset_data.frontend.categories = asset_data.zone_asset?.categories;
-  if (!asset_data.frontend.categories) {
-    asset_data.frontend.categories = [];
-  }
-  if (asset_data.frontend.pegMechanism) {
+  asset_data.frontend.categories = asset_data.zone_asset?.categories || [];
+  if (asset_data.zone_asset?.peg_mechanism) {
     addArrayItem("stablecoin", asset_data.frontend.categories);
     addArrayItem("defi", asset_data.frontend.categories);
   }
@@ -646,6 +643,11 @@ export function setCategories(asset_data) {
     )
   ) {
     addArrayItem("meme", asset_data.frontend.categories);
+  }
+
+  //temporary
+  if (asset_data.frontend.categories.length === 0) {
+    asset_data.frontend.categories = undefined;
   }
 
 }
@@ -866,9 +868,9 @@ export function setTransferMethods(asset_data) {
       //-Replace snake_case with camelCase-
       //temporarily assigning transferMethod.depositUrl
       transferMethod.depositUrl = transferMethod.depositUrl ?? transferMethod.deposit_url;
-      //delete transferMethod.deposit_url;
+      delete transferMethod.deposit_url;
       transferMethod.withdrawUrl = transferMethod.withdrawUrl ?? transferMethod.withdraw_url;
-      //delete transferMethod.withdraw_url;
+      delete transferMethod.withdraw_url;
     
     } else if (transferMethod.type === bridge) {
 
@@ -928,5 +930,89 @@ export function setTransferMethods(asset_data) {
 
 }
 
+export function setTooltipMessage(asset_data) {
 
-//price
+  asset_data.frontend.tooltipMessage = asset_data.zone_asset?.tooltip_message;
+
+}
+
+export function setSortWith(asset_data) {
+
+  if (getAssetProperty(asset_data.canonical_asset, "coingecko_id")) { return; } 
+
+  const providers = asset_data.zone_config?.providers;
+  if (!providers) {return;}
+  
+  const traces = getAssetProperty(asset_data.canonical_asset, "traces");
+  traces?.forEach((trace) => {
+    if (trace.provider) {
+      providers.forEach((provider) => {
+        if (provider.provider === trace.provider && provider.token) {
+          asset_data.frontend.sortWith = {
+            chainName: provider.token.chain_name,
+            sourceDenom: provider.token.base_denom,
+          };
+          return;
+        }
+      });
+    }
+  });
+
+}
+
+export function setPrice(asset_data, pool_data) {
+
+  //--Get Best Pricing Reference Pool--
+  const denom = asset_data.local_asset.base_denom;
+  if (pool_data?.get(denom)) {
+    let price = pool_data.get(denom).osmosis_price ?? undefined;
+    if (price) {
+      let price_parts = price.split(":");
+      asset_data.frontend.price = {
+        poolId: price_parts[2],
+        denom: price_parts[1],
+      };
+    }
+  }
+
+}
+
+
+export function reformatFrontendAsset(frontend_asset) {
+
+  //--Setup Zone_Config Asset--
+  let reformattedAsset = {
+    chainName: frontend_asset.chainName,
+    sourceDenom: frontend_asset.sourceDenom,
+    coinMinimalDenom: frontend_asset.coinMinimalDenom,
+    symbol: frontend_asset.symbol,
+    decimals: frontend_asset.decimals,
+    logoURIs: frontend_asset.logoURIs,
+    coingeckoId: frontend_asset.coingeckoId,
+    price: frontend_asset.price,
+    categories: frontend_asset.categories ?? [],
+    pegMechanism: frontend_asset.pegMechanism,
+    transferMethods: frontend_asset.transferMethods ?? [],
+    counterparty: frontend_asset.counterparty ?? [],
+    variantGroupKey: frontend_asset.variantGroupKey,
+    name: frontend_asset.name,
+    //description: frontend_asset.description,
+    verified: frontend_asset.verified ?? false,
+    unstable: frontend_asset.unstable ?? false,
+    disabled: frontend_asset.disabled ?? false,
+    preview: frontend_asset.preview ?? false,
+    tooltipMessage: frontend_asset.tooltipMessage,
+    sortWith: frontend_asset.sortWith,
+    //twitterURL: frontend_asset.twitter_URL,
+    listingDate: frontend_asset.listingDate,
+    //relatedAssets: frontend_asset.relatedAssets,
+  };
+
+  if (isNaN(frontend_asset.listingDate?.getTime())) {
+    // Remove listing_date if it's null
+    delete reformattedAsset.listingDate;
+  }
+
+  return reformattedAsset;
+
+}

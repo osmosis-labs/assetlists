@@ -74,13 +74,17 @@ const generateAssets = async (
   zoneConfig,
   zone_assets,
   zone_config_assets,
+  frontend_assets,
   chain_reg_assets
 ) => {
+
+  //--Get Pool Data--
   let pool_assets;
   pool_assets = await getAssetsPricing(chainName);
   if (!pool_assets) {
     return;
   }
+  const pool_data = pool_assets;
 
   await asyncForEach(zone_assets, async (zone_asset) => {
 
@@ -288,6 +292,8 @@ const generateAssets = async (
       }
     }
 
+    assetlist.setPrice(asset_data, pool_data);
+
     //--Staking token?--
     //  used to get name and description
     generated_asset.is_staking_token = false;
@@ -311,6 +317,8 @@ const generateAssets = async (
 
     //--Get Listing Date--
     generated_asset.listing_date = new Date(zone_asset.listing_date_time_utc);
+
+    assetlist.setListingDate(asset_data);
 
     //--Get Categories--
     let categories = [];
@@ -371,17 +379,33 @@ const generateAssets = async (
       addArrayItem("meme", categories);
     }
 
-    if (generated_asset.categories != asset_data.frontend.categories) {
+    //-Save Asset's Categories-
+    generated_asset.categories = categories.length > 0 ? categories : undefined;
+
+    assetlist.setCategories(asset_data);
+
+    if (
+      generated_asset.categories?.[0] != asset_data.frontend.categories?.[0] ||
+      generated_asset.categories?.length != asset_data.frontend.categories?.length
+    ) {
       console.log("Category Mismatch: ");
+      console.log(asset_data.source_asset.base_denom);
       console.log(generated_asset.categories);
       console.log(asset_data.frontend.categories);
     }
 
-    //-Save Asset's Categories-
-    generated_asset.categories = categories.length > 0 ? categories : undefined;
-
     //--Get Peg Mechanism--
     generated_asset.peg_mechanism = zone_asset.peg_mechanism;
+    assetlist.setPegMechanism(asset_data);
+
+    if (
+      generated_asset.peg_mechanism != asset_data.frontend.pegMechanism
+    ) {
+      console.log("Peg Mechanism Mismatch: ");
+      console.log(asset_data.source_asset.base_denom);
+      console.log(generated_asset.peg_mechanism);
+      console.log(asset_data.frontend.pegMechanism);
+    }
 
     //--Process Transfer Methods--
     //generated_asset.transfer_methods = zone_asset.transfer_methods;
@@ -851,6 +875,17 @@ const generateAssets = async (
       });
     }
 
+    assetlist.setSortWith(asset_data);
+
+    if (
+      generated_asset.sort_with?.chain_name !== asset_data.frontend.sortWith?.chain_name ||
+      generated_asset.sort_with?.base_denom !== asset_data.frontend.sortWith?.base_denom
+    ) {
+      console.log("Sort With Mistmatch:");
+      console.log(generated_asset.sort_with);
+      console.log(asset_data.frontend.sortWith);
+    }
+
     //--Overrides Properties when Specified--
     if (zone_asset.override_properties) {
       //if (zone_asset.override_properties.coingecko_id) {
@@ -942,6 +977,7 @@ const generateAssets = async (
     generated_asset.unlisted = zone_asset.osmosis_unlisted;
 
     generated_asset.tooltip_message = zone_asset.tooltip_message;
+    assetlist.setTooltipMessage(asset_data);
 
     //--Get Keywords--
     let keywords = asset.keywords ? asset.keywords : [];
@@ -1007,6 +1043,13 @@ const generateAssets = async (
     };
     //--Append to Chain_Reg Assetlist--
     chain_reg_assets.push(generated_chainRegAsset);
+
+    //--Reformat Frontend Asset--
+    asset_data.frontend = assetlist.reformatFrontendAsset(asset_data.frontend);
+
+    //--Append to Frontend Assetlist--
+    frontend_assets.push(asset_data.frontend);
+
   });
 };
 
@@ -1087,12 +1130,14 @@ async function generateAssetlist(chainName) {
     zone.zoneAssetlistFileName
   )?.assets;
   let zone_config_assets = [];
+  let frontend_assets = [];
   let chain_reg_assets = [];
   await generateAssets(
     chainName,
     zoneConfig,
     zoneAssetlist,
     zone_config_assets,
+    frontend_assets,
     chain_reg_assets
   );
   if (!zone_config_assets) {
@@ -1113,11 +1158,21 @@ async function generateAssetlist(chainName) {
     chainName: chainName,
     assets: zone_config_assets,
   };
+  //zone.writeToFile(
+  //  chainName,
+  //  zone.zoneConfigAssetlist,
+  //  zone.assetlistFileName,
+  //  zone_config_assetlist
+  //);
+  let frontend_assetlist = {
+    chainName: chainName,
+    assets: frontend_assets,
+  };
   zone.writeToFile(
     chainName,
     zone.zoneConfigAssetlist,
     zone.assetlistFileName,
-    zone_config_assetlist
+    frontend_assetlist
   );
   zone.writeToFile(
     chainName,

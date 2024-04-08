@@ -543,7 +543,7 @@
       },
       "coingeckoId": "cosmos",
       "price": {
-        "poolId": "1400",
+        "poolId": "1265",
         "denom": "uosmo"
       },
       "categories": [
@@ -5399,8 +5399,8 @@
       },
       "coingeckoId": "kujira",
       "price": {
-        "poolId": "744",
-        "denom": "uosmo"
+        "poolId": "1161",
+        "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
       },
       "categories": [
         "defi"
@@ -7007,7 +7007,7 @@
       },
       "coingeckoId": "stride-staked-osmo",
       "price": {
-        "poolId": "833",
+        "poolId": "1252",
         "denom": "uosmo"
       },
       "categories": [
@@ -7172,7 +7172,7 @@
       },
       "coingeckoId": "usk",
       "price": {
-        "poolId": "1648",
+        "poolId": "1650",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
@@ -11720,7 +11720,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/stibcx.svg"
       },
       "price": {
-        "poolId": "1107",
+        "poolId": "1039",
         "denom": "uosmo"
       },
       "categories": [
@@ -12328,8 +12328,8 @@
       },
       "coingeckoId": "archway",
       "price": {
-        "poolId": "1375",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1298",
+        "denom": "ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7"
       },
       "categories": [
         "defi"
@@ -12709,6 +12709,10 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qsomm.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qsomm.svg"
       },
+      "price": {
+        "poolId": "1087",
+        "denom": "ibc/9BBA9A1C257E971E38C1422780CE6F0B0686F0A3085E2D61118D904BFE0F5F5E"
+      },
       "categories": [
         "liquid_staking",
         "defi"
@@ -12822,6 +12826,10 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stsomm.svg"
       },
       "coingeckoId": "stride-staked-sommelier",
+      "price": {
+        "poolId": "1120",
+        "denom": "ibc/9BBA9A1C257E971E38C1422780CE6F0B0686F0A3085E2D61118D904BFE0F5F5E"
+      },
       "categories": [
         "liquid_staking",
         "defi"
@@ -17561,6 +17569,10 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aioz/images/aioz.svg"
       },
       "coingeckoId": "aioz-network",
+      "price": {
+        "poolId": "1565",
+        "denom": "ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7"
+      },
       "categories": [
         "defi"
       ],
@@ -18495,6 +18507,59 @@
       ],
       "variantGroupKey": "DHP",
       "name": "dHealth",
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true
+    },
+    {
+      "chainName": "furya",
+      "sourceDenom": "ufury",
+      "coinMinimalDenom": "ibc/42D0FBF9DDC72D7359D309A93A6DF9F6FDEE3987EA1C5B3CDE95C06FCE183F12",
+      "symbol": "FURY",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.svg"
+      },
+      "coingeckoId": "fanfury",
+      "categories": [
+        "defi"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "furya",
+            "chainId": "furya-1",
+            "sourceDenom": "ufury",
+            "port": "transfer",
+            "channelId": "channel-3"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-8690",
+            "path": "transfer/channel-8690/ufury"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "furya",
+          "sourceDenom": "ufury",
+          "chainType": "cosmos",
+          "chainId": "furya-1",
+          "symbol": "FURY",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "FURY",
+      "name": "furya",
       "verified": false,
       "unstable": false,
       "disabled": false,

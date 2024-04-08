@@ -6,7 +6,7 @@ Asset Lists are inpsired by the [Token Lists](https://tokenlists.org/) project o
 
 ## Prerequisite
 
-The `.assetlist.json` files herein are generated, which will be triggered by additions to the corresponding `osmosis.zone_assets.json` file, fetching the metadata from the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry). One prerequisite to adding an asset here is complete registration of the asset and it's originating chain (and the IBC connection between the orgini chain and Osmosis, if not native to Osmosis) to the Cosmos Chain Registry, so please make sure that's done first.
+The `.assetlist.json` files herein are generated, which will be triggered by additions to the corresponding `osmosis.zone_assets.json` file, fetching the metadata from the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry). One prerequisite to adding an asset here is complete registration of the asset and it's originating chain (and the IBC connection between the origin chain and Osmosis, if not native to Osmosis) to the Cosmos Chain Registry, so please make sure that's done first.
 
 ## How to Add Assets
 
@@ -19,7 +19,7 @@ To add an asset, add a new asset object to the very bottom of the _osmosis.zone_
   - e.g., `"path": "transfer/channel-8008135/ucoin"`
 - In the Pull Request, be sure to add in the description, or leave a comment, of the pool_id of the liquidity pool(s)
 - You may also notice some booleans:
-  - `osmosis_verified` should always either be omitted or set to `false` unless modified by, or explicitly instructed otherwise by, Osmosis Labs. This indicates whether the 'Unverified Assets setting must be toggled to reveal the asset by default on various Osmosis Zone app pages (Swap, Assets, Pools).
+  - `osmosis_verified` should always be set to `false` unless modified by, or explicitly instructed otherwise by, Osmosis Labs or maintainers of this repository. This indicates whether the 'Unverified Assets setting must be toggled to reveal the asset by default on various Osmosis Zone app pages (Swap, Assets, Pools).
   - `osmosis_unlisted` should always be included and set to `true`(, meaning it will NOT show up on Osmosis Zone app,) until after the asset's respresntation, transfer experience, and explorer URL to the transaction hash have all been validated by Osmosis Labs, at which point it can be set to `false` (or, preferrably, removed).
 
 ## Zone Example
@@ -30,19 +30,35 @@ An example asset object in `osmosis.zone.json`:
 {
   "base_denom": "uosmo",
   "chain_name": "osmosis",
-  "osmosis_verified": true
+  "osmosis_verified": true,
 },
 ...
 {
   "base_denom": "ustk",
   "chain_name": "steakchain",
   "path": "transfer/channel-69/ustk",
-  "osmosis_verified": true
+  "osmosis_verified": true,
+  "listing_date_time_utc": "2024-01-24T10:58:00Z"
 },
 {
   "base_denom": "ufoocoin",
   "chain_name": "fubarchain",
   "path": "transfer/channel-420/ufoocoin",
+  "osmosis_verified": false
   "osmosis_unlisted": true
 }
 ```
+
+## Dependencies
+
+Note that there are apps, interfaces, and tools that look at this repository as a data dependency:
+- Osmosis Zone app (app.osmosis.zone):
+  - .../generated/frontend/assetlist.json
+  - .../generated/frontend/chainlist.json (soon, not yet migrated to v2)
+  - .../osmosis-1.chainlist.json
+  - .../osmo-test-5.chainlist.json
+- Osmosis Labs' Sidecar Query Service (SQS):
+  - .../osmosis-1.assetlist.json (ongoing migration to v2)
+- Numia Data Serivces (e.g., API):
+  - .../generated/frontend/assetlist.json
+  - .../generated/chain-registry/assetlist.json

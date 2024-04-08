@@ -302,8 +302,8 @@
     },
     {
       "chain_name": "sifchain",
-      "rpc": "https://rpc.sifchain.finance",
-      "rest": "https://api-int.sifchain.finance",
+      "rpc": "https://sifchain-rpc.publicnode.com",
+      "rest": "https://sifchain-rest.publicnode.com",
       "explorer_tx_url": "https://www.mintscan.io/sifchain/txs/${txHash}",
       "keplr_features": [
         "ibc-transfer"
@@ -534,8 +534,8 @@
     },
     {
       "chain_name": "odin",
-      "rpc": "https://node.odin-freya-website.odinprotocol.io/mainnet/a/",
-      "rest": "https://node.odin-freya-website.odinprotocol.io/mainnet/a/api/",
+      "rpc": "https://rpc.odinprotocol.io/",
+      "rest": "https://api.odinprotocol.io/",
       "explorer_tx_url": "https://scan.odinprotocol.io/transactions/${txHash}",
       "keplr_features": [
         "ibc-transfer",
@@ -929,8 +929,8 @@
     },
     {
       "chain_name": "sei",
-      "rpc": "https://rpc.wallet.pacific-1.sei.io",
-      "rest": "https://rest.wallet.pacific-1.sei.io",
+      "rpc": "https://sei-rpc.polkachu.com",
+      "rest": "https://sei-api.polkachu.com",
       "explorer_tx_url": "https://www.mintscan.io/sei/transactions/${txHash}",
       "keplr_features": [
         "ibc-transfer",
@@ -949,7 +949,7 @@
     },
     {
       "chain_name": "gateway",
-      "rpc": "https://wormchain-rpc.quickapi.com",
+      "rpc": "https://tncnt-eu-wormchain-main-01.rpc.p2p.world/",
       "rest": "https://wormchain-lcd.quickapi.com",
       "explorer_tx_url": "https://bigdipper.live/wormhole/transactions/${txHash}",
       "keplr_features": [
@@ -1022,8 +1022,8 @@
     },
     {
       "chain_name": "dydx",
-      "rpc": "https://dydx-rpc.lavenderfive.com:443",
-      "rest": "https://dydx-api.lavenderfive.com:443",
+      "rpc": "https://dydx-rpc.lavenderfive.com",
+      "rest": "https://dydx-api.lavenderfive.com",
       "explorer_tx_url": "https://www.mintscan.io/dydx/txs/${txHash}",
       "keplr_features": [
         "ibc-go",
@@ -1115,6 +1115,115 @@
         "ibc-transfer",
         "ibc-go",
         "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "dymension",
+      "rpc": "https://rpc.dymension.nodestake.org/",
+      "rest": "https://api.dymension.nodestake.org",
+      "explorer_tx_url": "https://dym.fyi/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "humans",
+      "rpc": "https://rpc.humans.nodestake.top",
+      "rest": "https://api.humans.nodestake.top",
+      "explorer_tx_url": "https://www.mintscan.io/humans/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "scorum",
+      "rpc": "https://scorum-blockchain-mainnet-rpc-1.scorum.com",
+      "rest": "https://scorum-blockchain-mainnet-api-1.scorum.com",
+      "explorer_tx_url": "https://ezstaking.app/scorum/txs/${txHash}",
+      "keplr_features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "chain4energy",
+      "rpc": "https://rpc.c4e.io",
+      "rest": "https://lcd.c4e.io",
+      "explorer_tx_url": "https://explorer.c4e.io/transactions/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "pylons",
+      "rpc": "https://rpc.pylons.nodestake.top/",
+      "rest": "https://api.pylons.nodestake.top/",
+      "explorer_tx_url": "https://pylons.explorers.guru/transaction/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+        ]
+    },
+    {
+      "chain_name": "aioz",
+      "rpc": "https://rpc-dataseed.aioz.network",
+      "rest": "https://lcd-dataseed.aioz.network",
+      "explorer_tx_url": "https://explorer.aioz.network/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "nibiru",
+      "rpc": "https://rpc.nibiru.fi:443",
+      "rest": "https://lcd.nibiru.fi:443",
+      "explorer_tx_url": "https://explorer.nibiru.fi/cataclysm-1/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "conscious",
+      "rpc": "https://rpc.cvn.io:443",
+      "rest": "https://rest.cvn.io:443",
+      "explorer_tx_url": "https://ping.pub/conscious/tx/${txHash}",
+      "keplr_features": [
+          "ibc-transfer",
+          "ibc-go",
+          "eth-address-gen",
+          "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "dhealth",
+      "rpc": "https://rpc.dhealth.com",
+      "rest": "https://lcd.dhealth.com",
+      "explorer_tx_url": "https://explorer.dhealth.com/dhealth/transactions/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "furya",
+      "rpc": "https://rpc.furya.xyz",
+      "rest": "https://api.furya.xyz",
+      "explorer_tx_url": "https://explorer.furya.wtf/furya/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
       ]
     }
   ]

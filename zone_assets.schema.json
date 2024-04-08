@@ -52,9 +52,21 @@
           "type": "boolean",
           "description": "Whether the asset can reliably be transferred to or from Osmosis."
         },
+        "osmosis_disabled": {
+          "type": "boolean",
+          "description": "Whether the asset Deposit and Withdraw functions are disabled on Osmosis."
+        },
         "osmosis_unlisted": {
           "type": "boolean",
           "description": "Whether the asset should be temporarily unlisted on the Osmosis Zone app."
+        },
+        "tooltip_message": {
+          "type": "string",
+          "description": "A custom on-hover tooltip message descirbing the asset on the Osmosis Zone app."
+        },
+        "listing_date_time_utc": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
         },
         "osmosis_validated": {
           "type": "boolean",
@@ -162,13 +174,16 @@
           "items": {
             "type": "string",
             "enum": [
-              "l1",
               "defi",
-              "store value",
-              "web3"
+              "meme"
             ]
           },
           "minItems": 1
+        },
+        "_comment": {
+          "type": "string",
+          "description": "Comment can be anything, but should be used to identify and asset by ticket symbol and name.",
+          "example": "Osmosis $OSMO"
         }
       }
     },
@@ -177,17 +192,6 @@
       "properties": {
         "type": {
           "const": "external_interface"
-        },
-        "counterparty": {
-          "type": "object",
-          "properties": {
-            "chain_name": {
-              "type": "string"
-            },
-            "base_denom": {
-              "type": "string"
-            }
-          }
         },
         "deposit_url": {
           "type": "string",
@@ -215,16 +219,53 @@
               "chain_name": {
                 "type": "string"
               },
-              "base_denom": {
+              "unwrappedAssetId": {
+                "type": "string"
+              },
+              "wrappedAssetId": {
                 "type": "string"
               }
-            }
+            },
+            "required": [
+              "chain_name"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "unwrappedAssetId"
+                ]
+              },
+              {
+                "required": [
+                  "wrappedAssetId"
+                ]
+              }
+            ]
           }
         },
-        "required": [
-          "provider_asset_key"
-        ]
-      }
+        "unwrappedAssetId": {
+          "type": "string"
+        },
+        "wrappedAssetId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "counterparty"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "unwrappedAssetId"
+          ]
+        },
+        {
+          "required": [
+            "wrappedAssetId"
+          ]
+        }
+      ]
     },
     "fiat_onramp": {
       "type": "object",
@@ -235,12 +276,12 @@
         "name": {
           "type": "string"
         },
-        "provider_asset_key": {
+        "providerAssetId": {
           "type": "string"
         }
       },
       "required": [
-        "provider_asset_key"
+        "providerAssetId"
       ]
     }
   }

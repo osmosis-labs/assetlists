@@ -36,13 +36,13 @@
     {
       "chain_name": "junotestnet",
       "base_denom": "ujunox",
-      "path": "transfer/channel-4167/ujunox",
+      "path": "transfer/channel-5498/ujunox",
       "osmosis_verified": true
     },
     {
       "chain_name": "marstestnet",
       "base_denom": "umars",
-      "path": "transfer/channel-4168/umars",
+      "path": "transfer/channel-5499/umars",
       "osmosis_verified": true
     },
     {
@@ -52,7 +52,20 @@
       "override_properties": {
         "coingecko_id": "usd-coin"
       },
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "transfer_methods": [
+        {
+          "name": "Nitro Bridge",
+          "type": "integrated_bridge",
+          "counterparty": [
+            {
+              "chain_name": "avalanchetestnet",
+              "unwrappedAssetId": "0x5425890298aed601595a70ab815c96711a31bc65"
+            }
+          ],
+          "unwrappedAssetId": "uusdc"
+        }
+      ]
     },
     {
       "chain_name": "akashtestnet",

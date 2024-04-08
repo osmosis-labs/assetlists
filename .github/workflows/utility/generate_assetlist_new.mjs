@@ -1,16 +1,12 @@
 // Purpose:
 //   to generate the zone_config json using the zone json and chain registry data
 
-
 //-- Imports --
 
-import * as chain_reg from './chain_registry.mjs';
-import * as zone from './assetlist_functions.mjs';
-import { getAssetsPricing } from './getPools.mjs';
-import { getAllRelatedAssets } from './getRelatedAssets.mjs';
-
-
-
+import * as chain_reg from "../../../chain-registry/.github/workflows/utility/chain_registry.mjs";
+import * as zone from "./assetlist_functions.mjs";
+import { getAssetsPricing } from "./getPools.mjs";
+import { getAllRelatedAssets } from "./getRelatedAssets.mjs";
 
 //-- Global Constants --
 
@@ -23,16 +19,13 @@ const find_origin_trace_types = [
   "ibc-cw20",
   "bridge",
   "wrapped",
-  "additional-mintage"
+  "additional-mintage",
 ];
 
-
-
-
-
+//This defines how many days since listing qualifies an asset as a "New Asset"
+const daysForNewAssetCategory = 21;
 
 //-- Functions --
-
 
 async function asyncForEach(array, callback) {
   for (let index = 0; index < array.length; index++) {
@@ -40,104 +33,181 @@ async function asyncForEach(array, callback) {
   }
 }
 
+function addArrayItem(item, array) {
+  if (!array.includes(item)) {
+    array.push(item);
+  }
+}
 
+function getAssetDecimals(asset) {
 
-const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_assets, chain_reg_assets) => {
+  let decimals;
 
+  asset.denom_units.forEach((unit) => {
+    if (asset.display === unit.denom) {
+      decimals = unit.exponent;
+      return;
+    }
+  });
+
+  if (decimals === undefined) {
+    asset.denom_units.forEach((unit) => {
+      if (unit.aliases?.includes(asset.display)) {
+        decimals = unit.exponent;
+        return;
+      }
+    });
+  }
+
+  if (decimals === undefined) {
+    console.log("Error: $" + asset.symbol + " missing decimals!");
+  }
+
+  return decimals ?? 0;
+
+}
+
+function getAssetCoinGeckoID(chainName, zone_asset, purpose) {
+
+  //Purposes: ['osmosis_zone', 'chain_registry']
+
+  const property = "coingecko_id";
+  let trace_types = [];
+
+  let asset = zone_asset;
+
+  if (purpose === "osmosis_zone") {
+
+    trace_types = [
+      "ibc",
+      "ibc-cw20",
+      "additional-mintage",
+      "test-mintage"
+    ];
+
+    //for osmosis zone, the coingecko ID, should first be the override value, if provided
+    if (zone_asset.override_properties?.coingecko_id) {
+      return zone_asset.override_properties?.coingecko_id;
+    }
+
+    //or, use the canonical
+    if (zone_asset.canonical) {
+      asset = zone_asset.canonical;
+    }
+
+  } else if (purpose === "chain_registry") {
+
+    if (asset.chain_name !== chainName) { return; }
+
+    trace_types = [
+      "additional-mintage"
+    ];
+
+  } else {
+    console.log("Invalid purpose: ${purpose}");
+  }
+
+  return chain_reg.getAssetPropertyWithTraceCustom(
+    asset.chain_name,
+    asset.base_denom,
+    property,
+    trace_types
+  );
+
+}
+
+const generateAssets = async (
+  chainName,
+  zoneConfig,
+  zone_assets,
+  zone_config_assets,
+  chain_reg_assets
+) => {
   let pool_assets;
   pool_assets = await getAssetsPricing(chainName);
-  if (!pool_assets) { return; }
-  
+  if (!pool_assets) {
+    return;
+  }
+
   await asyncForEach(zone_assets, async (zone_asset) => {
-
-
     //--Create the Generated Asset Objects--
     //  this will go into zone_asset_config
     let generated_asset = {};
     //  this will go into [chain_reg] assetlist
     let generated_chainRegAsset = {};
-    
 
-    
     //--Identity (Chain Registry Pointer)--
     generated_asset.chain_name = zone_asset.chain_name;
     generated_asset.base_denom = zone_asset.base_denom;
     //--sourceDenom--
     generated_asset.sourceDenom = zone_asset.base_denom;
 
-
     //--Get Origin Asset Object from Chain Registry--
-    let origin_asset = chain_reg.getAssetObject(zone_asset.chain_name, zone_asset.base_denom);
-
-
+    let origin_asset = chain_reg.getAssetObject(
+      zone_asset.chain_name,
+      zone_asset.base_denom
+    );
 
     //--Get Local Asset Object from Chain Registry--
     //--coinMinimalDenom (Denomination of the Asset when on the local chain)
     //---e.g., OSMO on Osmosis -> uosmo
     //---e.g., ATOM os Osmosis -> ibc/...
     let local_asset;
-    if(zone_asset.chain_name != chainName) {
-      let ibcHash = zone.calculateIbcHash(zone_asset.path);    //Calc IBC Hash Denom
-      generated_asset.coinMinimalDenom = await ibcHash;    //Set IBC Hash Denom
-      local_asset = chain_reg.getAssetObject(chainName, ibcHash);
+    if (zone_asset.chain_name != chainName) {
+      let ibcHash = zone.calculateIbcHash(zone_asset.path); //Calc IBC Hash Denom
+      generated_asset.coinMinimalDenom = await ibcHash; //Set IBC Hash Denom
+      local_asset = chain_reg.getAssetObject(
+        chainName,
+        generated_asset.coinMinimalDenom
+      );
     } else {
       generated_asset.coinMinimalDenom = zone_asset.base_denom;
     }
-    let asset = local_asset ? local_asset : origin_asset;
+    let asset = local_asset || origin_asset;
 
-
-    
     //--Get Canonical Asset from Chain Registry--
     //  used to override certain properties if this local variant is
     //  the canonical representation of a foreign asset
     let canonical_origin_asset = origin_asset;
     let canonical_origin_chain_name = zone_asset.chain_name;
-    if(zone_asset.canonical) {
+    if (zone_asset.canonical) {
       canonical_origin_chain_name = zone_asset.canonical.chain_name;
-      canonical_origin_asset = chain_reg.getAssetObject(zone_asset.canonical.chain_name, zone_asset.canonical.base_denom);
+      canonical_origin_asset = chain_reg.getAssetObject(
+        zone_asset.canonical.chain_name,
+        zone_asset.canonical.base_denom
+      );
     }
-
-
 
     //--Set Reference Asset--
     //  used to refer to what the asset represents, and allows for
     //  potential overrides defined in the local chain's assetlist
     let reference_asset = asset;
-    if(!local_asset && canonical_origin_asset) {
+    if (!local_asset && canonical_origin_asset) {
       reference_asset = canonical_origin_asset;
     }
 
-
-    
     //--Get Symbol
     generated_asset.symbol = reference_asset.symbol;
 
-
-
     //--Get Decimals--
-    asset.denom_units.forEach((unit) => {
-      if(unit.denom === asset.display) {
-        generated_asset.decimals = unit.exponent;
-      }
-    });
-
-
+    generated_asset.decimals = getAssetDecimals(asset);
 
     //--Get Logos--
     generated_asset.logo_URIs = reference_asset.logo_URIs;
     let images = reference_asset.images;
-    
-
 
     //--Get CGID--
-    generated_asset.coingecko_id = canonical_origin_asset.coingecko_id;
-  
-    
+    //generated_asset.coingecko_id = canonical_origin_asset.coingecko_id;
+    //let chain_reg_coingecko_id =
+      //zone_asset.chain_name == chainName
+        //? generated_asset.coingecko_id
+        //: undefined;
+    generated_asset.coingecko_id = getAssetCoinGeckoID(chainName, zone_asset, "osmosis_zone");
+    //generated_chainRegAsset.coingecko_id = getAssetCoinGeckoID(chainName, zone_asset, "chain_registry");
+
 
     //--Get Verified Status--
     generated_asset.verified = zone_asset.osmosis_verified;
-
-
 
     //--Get Best Pricing Reference Pool--
     let denom = generated_asset.coinMinimalDenom;
@@ -145,137 +215,216 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
       generated_asset.api_include = pool_assets.get(denom).osmosis_info;
       let price = "";
       price = pool_assets.get(denom).osmosis_price;
-      if(price) {
-        let price_parts = price.split(':');
+      if (price) {
+        let price_parts = price.split(":");
         generated_asset.price = {
-          pool: price_parts[2],
-          denom: price_parts[1]
-        }
+          poolId: price_parts[2],
+          denom: price_parts[1],
+        };
       }
     }
-    
 
+    //--Staking token?--
+    //  used to get name and description
+    generated_asset.is_staking_token = false;
+    if (
+      zone_asset.base_denom ==
+      chain_reg.getFileProperty(canonical_origin_chain_name, "chain", "staking")
+        ?.staking_tokens[0]?.denom
+    ) {
+      generated_asset.is_staking_token = true;
+    }
+
+    //--Fee token?--
+    generated_asset.is_native_fee_token = false;
+    if (
+      zone_asset.base_denom ==
+      chain_reg.getFileProperty(canonical_origin_chain_name, "chain", "fees")
+        ?.fee_tokens[0]?.denom
+    ) {
+      generated_asset.is_native_fee_token = true;
+    }
+
+    //--Get Listing Date--
+    generated_asset.listing_date = new Date(zone_asset.listing_date_time_utc);
 
     //--Get Categories--
     let categories = [];
-    if(zone_asset.categories) {
+    if (zone_asset.categories) {
       categories = zone_asset.categories;
     }
-    if(zone_asset.peg_mechanism && !categories.includes("stablecoin")) {
-      categories.push("stablecoin");
+
+    //-Stablecoin?-
+    if (zone_asset.peg_mechanism) {
+      addArrayItem("stablecoin", categories);
+      addArrayItem("defi", categories);
     }
-    let traces = chain_reg.getAssetTraces(zone_asset.chain_name, zone_asset.base_denom);
+
+    //-LST/LSD-
+    let traces = chain_reg.getAssetTraces(
+      zone_asset.chain_name,
+      zone_asset.base_denom
+    );
     traces?.forEach((trace) => {
-      if(trace.type == "liquid-stake") {
-        categories.push("liquid_staking");
+      if (trace.type == "liquid-stake") {
+        addArrayItem("liquid_staking", categories);
+        addArrayItem("defi", categories);
+        return;
       }
     });
-    generated_asset.categories = categories.length > 0 ? categories : undefined;
-    
 
+    //-New Asset?-
+    const currentDate = new Date();
+    // Calculate the difference in milliseconds between the current date and the listing date
+    let differenceInMilliseconds = currentDate - generated_asset.listing_date;
+    // Calculate the difference in weeks
+    let differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
+    if (differenceInDays <= daysForNewAssetCategory) {
+      //addArrayItem("new_asset", categories);
+    }
+
+    //-DeFi-
+    //-staking-
+    if (
+      (generated_asset.is_staking_token ||
+        generated_asset.is_native_fee_token) &&
+      categories.length == 0
+    ) {
+      addArrayItem("defi", categories);
+    }
+
+    //-Meme-
+    generated_asset.is_native_at_canonical_origin = true;
+    let first_5_chars = canonical_origin_asset.base.substring(0, 5);
+    if (first_5_chars == "facto" || first_5_chars == "cw20:") {
+      generated_asset.is_native_at_canonical_origin = false;
+    }
+    let has_no_categories = categories.length <= 0 ? true : false;
+    if (
+      categories.length <= 0 &&
+      !generated_asset.is_native_at_canonical_origin
+    ) {
+      addArrayItem("meme", categories);
+    }
+
+    //-Save Asset's Categories-
+    generated_asset.categories = categories.length > 0 ? categories : undefined;
 
     //--Get Peg Mechanism--
     generated_asset.peg_mechanism = zone_asset.peg_mechanism;
 
-
-
-
     //--Process Transfer Methods--
     generated_asset.transfer_methods = zone_asset.transfer_methods;
-    //-Replace snake_case with camelCase-
+
     generated_asset.transfer_methods?.forEach((transfer_method) => {
-      transfer_method.providerAssetId   = transfer_method.provider_asset_id  || undefined;
-      delete                              transfer_method.provider_asset_id;
-      transfer_method.unwrappedAssetId  = transfer_method.unwrapped_asset_id || undefined;
-      delete                              transfer_method.unwrapped_asset_id;
-      transfer_method.depositUrl        = transfer_method.deposit_url        || undefined;
-      delete                              transfer_method.deposit_url;
-      transfer_method.withdrawUrl       = transfer_method.withdraw_url       || undefined;
-      delete                              transfer_method.withdraw_url;
-      transfer_method.counterparty?.forEach((counterparty) => {
-        counterparty.chainName    = counterparty.chain_name || undefined;
-        delete                      counterparty.chain_name;
-        counterparty.sourceDenom  = counterparty.base_denom || undefined;
-        delete                      counterparty.base_denom;
-      });
-    })
+      if (transfer_method.type == "integrated_bridge") {
+        transfer_method.counterparty.forEach((counterparty) => {
+          zoneConfig.evm_chains.some((evm_chain) => {
+            if (evm_chain.chain_name == counterparty.chain_name) {
+              counterparty.evmChainId = evm_chain.chain_id;
+            }
+          });
+          zoneConfig.providers.some((provider) => {
+            if (provider.integration == transfer_method.name) {
+              provider.api_keys?.sourceChainIds?.some((sourceChainId) => {
+                if (sourceChainId.chain_name == counterparty.chain_name) {
+                  counterparty.sourceChainId = sourceChainId.sourceChainId;
+                }
+              });
+            }
+          });
+          delete counterparty.chain_name;
+        });
+      }
 
-
+      //-Replace snake_case with camelCase-
+      transfer_method.depositUrl = transfer_method.deposit_url || undefined;
+      delete transfer_method.deposit_url;
+      transfer_method.withdrawUrl = transfer_method.withdraw_url || undefined;
+      delete transfer_method.withdraw_url;
+    });
 
     let bridge_provider = "";
 
-
-
     //--Get Traces--
-    if(zone_asset.chain_name != chainName) {
-
+    if (zone_asset.chain_name != chainName) {
       if (!traces) {
         traces = [];
       }
 
       //--Set Up Trace for IBC Transfer--
-      
+
       let type = "ibc";
-      if (zone_asset.base_denom.slice(0,5) === "cw20:") {
+      if (zone_asset.base_denom.slice(0, 5) === "cw20:") {
         type = "ibc-cw20";
       }
-      
+
       let counterparty = {
         chain_name: zone_asset.chain_name,
         base_denom: zone_asset.base_denom,
-        port: "trans"
+        port: "trans",
       };
       if (type === "ibc-cw20") {
-        counterparty.port = "wasm."
+        counterparty.port = "wasm.";
       }
-      
-      let chain = {
-        port: "transfer"
-      };
 
+      let chain = {
+        port: "transfer",
+      };
 
       //--Identify chain_1 and chain_2--
       let chain_1 = chain;
       let chain_2 = counterparty;
       let chainOrder = 0;
-      if(zone_asset.chain_name < chainName) {
+      if (zone_asset.chain_name < chainName) {
         chain_1 = counterparty;
         chain_2 = chain;
         chainOrder = 1;
       }
-      
-      
+
       //--Find IBC Connection--
-      let channels = chain_reg.getIBCFileProperty(zone_asset.chain_name, chainName, "channels");
-      
-      
+      let channels = chain_reg.getIBCFileProperty(
+        zone_asset.chain_name,
+        chainName,
+        "channels"
+      );
+
       //--Find IBC Channel and Port Info--
-      
+
       //--with Path--
-      if(zone_asset.path) {
+      if (zone_asset.path) {
         let parts = zone_asset.path.split("/");
         chain.port = parts[0];
         chain.channel_id = parts[1];
         channels.forEach((channel) => {
-          if(!chainOrder) {
-            if(channel.chain_1.port_id === chain.port && channel.chain_1.channel_id === chain.channel_id) {
+          if (!chainOrder) {
+            if (
+              channel.chain_1.port_id === chain.port &&
+              channel.chain_1.channel_id === chain.channel_id
+            ) {
               counterparty.channel_id = channel.chain_2.channel_id;
               counterparty.port = channel.chain_2.port_id;
               return;
             }
           } else {
-            if(channel.chain_2.port_id === chain.port && channel.chain_2.channel_id === chain.channel_id) {
+            if (
+              channel.chain_2.port_id === chain.port &&
+              channel.chain_2.channel_id === chain.channel_id
+            ) {
               counterparty.channel_id = channel.chain_1.channel_id;
               counterparty.port = channel.chain_1.port_id;
               return;
             }
           }
         });
-        
-      //--without Path--
+
+        //--without Path--
       } else {
         channels.forEach((channel) => {
-          if(channel.chain_1.port_id.slice(0,5) === chain_1.port.slice(0,5) && channel.chain_2.port_id.slice(0,5) === chain_2.port.slice(0,5)) {
+          if (
+            channel.chain_1.port_id.slice(0, 5) === chain_1.port.slice(0, 5) &&
+            channel.chain_2.port_id.slice(0, 5) === chain_2.port.slice(0, 5)
+          ) {
             chain_1.channel_id = channel.chain_1.channel_id;
             chain_2.channel_id = channel.chain_2.channel_id;
             chain_1.port = channel.chain_1.port_id;
@@ -284,85 +433,101 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
           }
         });
       }
-      
-      
 
       //--Add Path--
-      if(traces.length > 0) {
-        if(traces[traces.length - 1].type === "ibc" || traces[traces.length - 1].type === "ibc-cw20") {
-          if(traces[traces.length - 1].chain.path) {
-            chain.path = chain.port + "/" + chain.channel_id + "/" + traces[traces.length - 1].chain.path;
+      if (traces.length > 0) {
+        if (
+          traces[traces.length - 1].type === "ibc" ||
+          traces[traces.length - 1].type === "ibc-cw20"
+        ) {
+          if (traces[traces.length - 1].chain.path) {
+            chain.path =
+              chain.port +
+              "/" +
+              chain.channel_id +
+              "/" +
+              traces[traces.length - 1].chain.path;
           } else {
             console.log(zone_asset.base_denom + "Missing Path");
           }
         }
       }
       if (!chain.path) {
-        if (zone_asset.base_denom.slice(0,7) === "factory" && zone_asset.chain_name === "kujira") {
-          let baseReplacement = zone_asset.base_denom.replace(/\//g,":");
-          chain.path = chain.port + "/" + chain.channel_id + "/" + baseReplacement;
+        if (
+          zone_asset.base_denom.slice(0, 7) === "factory" &&
+          zone_asset.chain_name === "kujira"
+        ) {
+          let baseReplacement = zone_asset.base_denom.replace(/\//g, ":");
+          chain.path =
+            chain.port + "/" + chain.channel_id + "/" + baseReplacement;
         } else {
-          chain.path = chain.port + "/" + chain.channel_id + "/" + zone_asset.base_denom;
+          chain.path =
+            chain.port + "/" + chain.channel_id + "/" + zone_asset.base_denom;
         }
       }
 
       //--Double Check Path--
       if (chain.path != zone_asset.path) {
-        console.log("Warning! Provided trace path does not match generated path.");
+        console.log(
+          "Warning! Provided trace path does not match generated path."
+        );
         console.log(zone_asset);
       }
-      
-      
+
       //--Create Trace Object--
       let trace = {
         type: type,
         counterparty: counterparty,
-        chain: chain
-      }
-
+        chain: chain,
+      };
 
       generated_asset.transfer_methods = generated_asset.transfer_methods || [];
+
+      let comsos_chain_id = chain_reg.getFileProperty(
+        zone_asset.chain_name,
+        "chain",
+        "chain_id"
+      );
 
       let ibc_transfer_method = {
         name: "Osmosis IBC Transfer",
         type: "ibc",
         counterparty: {
           chainName: zone_asset.chain_name,
+          chainId: comsos_chain_id,
           sourceDenom: zone_asset.base_denom,
           port: trace.counterparty.port,
-          channelId: trace.counterparty.channel_id
+          channelId: trace.counterparty.channel_id,
         },
         chain: {
           port: trace.chain.port,
           channelId: trace.chain.channel_id,
-          path: trace.chain.path
-        }
-      }
+          path: trace.chain.path,
+        },
+      };
       generated_asset.transfer_methods.push(ibc_transfer_method);
       //generated_asset.transfer_methods.push(trace);
 
-
-
       //--Cleanup Trace--
-      if(type === "ibc") {
+      if (type === "ibc") {
         delete trace.chain.port;
         delete trace.counterparty.port;
       }
 
       traces.push(trace);
 
-
-
       //--Get Bridge Provider--
-      if(!zone_asset.canonical) {
+      if (!zone_asset.canonical) {
         traces?.forEach((trace) => {
-          if(trace.type == "bridge") {
+          if (trace.type == "bridge") {
             bridge_provider = trace.provider;
             let providers = zoneConfig?.providers;
-            if(providers) {
+            if (providers) {
               providers.forEach((provider) => {
-                if(provider.provider == bridge_provider && provider.suffix) {
-                  generated_asset.symbol = generated_asset.symbol + provider.suffix;
+                if (provider.provider == bridge_provider && provider.suffix) {
+                  if (!generated_asset.symbol.endsWith(provider.suffix)) {
+                    generated_asset.symbol = generated_asset.symbol + provider.suffix;
+                  }
                 }
               });
             }
@@ -370,41 +535,41 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
           }
         });
       }
-
-
     }
 
-
     //--Identify What the Token Represents--
-    if(traces) {
-
+    if (traces) {
       let last_trace = "";
       let bridge_uses = 0;
       //iterate each trace, starting from the bottom
       for (let i = traces.length - 1; i >= 0; i--) {
-        if(!find_origin_trace_types.includes(traces[i].type)) {
+        if (!find_origin_trace_types.includes(traces[i].type)) {
           break;
         } else if (traces[i].type == "bridge" && bridge_uses) {
           break;
         } else {
-          if(!generated_asset.counterparty) {
+          if (!generated_asset.counterparty) {
             generated_asset.counterparty = [];
           }
           last_trace = traces[i];
           let counterparty = {
             chainName: last_trace.counterparty.chain_name,
-            sourceDenom: last_trace.counterparty.base_denom
+            sourceDenom: last_trace.counterparty.base_denom,
           };
-          if(last_trace.type == "bridge") {
+          if (last_trace.type == "bridge") {
             bridge_uses += 1;
           }
-          let comsos_chain_id = chain_reg.getFileProperty(last_trace.counterparty.chain_name, "chain", "chain_id")
-          if(comsos_chain_id) {
+          let comsos_chain_id = chain_reg.getFileProperty(
+            last_trace.counterparty.chain_name,
+            "chain",
+            "chain_id"
+          );
+          if (comsos_chain_id) {
             counterparty.chainType = "cosmos";
             counterparty.chainId = comsos_chain_id;
           } else {
             zoneConfig?.evm_chains?.forEach((evm_chain) => {
-              if(evm_chain.chain_name == last_trace.counterparty.chain_name) {
+              if (evm_chain.chain_name == last_trace.counterparty.chain_name) {
                 counterparty.chainType = "evm";
                 counterparty.chainId = evm_chain.chain_id;
                 counterparty.address = chain_reg.getAssetProperty(
@@ -412,14 +577,14 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
                   last_trace.counterparty.base_denom,
                   "address"
                 );
-                if(!counterparty.address) {
+                if (!counterparty.address) {
                   counterparty.address = zero_address;
                 }
                 return;
               }
             });
-            if(!last_trace.counterparty.chain_type) {
-              counterparty.chainType = "non-cosmos"
+            if (!counterparty.chainType) {
+              counterparty.chainType = "non-cosmos";
             }
           }
           counterparty.symbol = chain_reg.getAssetProperty(
@@ -427,14 +592,17 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
             last_trace.counterparty.base_denom,
             "symbol"
           );
-          let display = chain_reg.getAssetProperty(last_trace.counterparty.chain_name, last_trace.counterparty.base_denom, "display");
-          let denom_units = chain_reg.getAssetProperty(last_trace.counterparty.chain_name, last_trace.counterparty.base_denom, "denom_units");
-          denom_units.forEach((unit) => {
-            if(unit.denom == display) {
-              counterparty.decimals = unit.exponent;
-              return;
-            }
-          });
+          let display = chain_reg.getAssetProperty(
+            last_trace.counterparty.chain_name,
+            last_trace.counterparty.base_denom,
+            "display"
+          );
+          let denom_units = chain_reg.getAssetProperty(
+            last_trace.counterparty.chain_name,
+            last_trace.counterparty.base_denom,
+            "denom_units"
+          );
+          counterparty.decimals = getAssetDecimals({display: display, denom_units: denom_units});
           counterparty.logoURIs = chain_reg.getAssetProperty(
             last_trace.counterparty.chain_name,
             last_trace.counterparty.base_denom,
@@ -443,7 +611,7 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
           generated_asset.counterparty.push(counterparty);
         }
       }
-      if(last_trace) {
+      if (last_trace) {
         generated_asset.common_key = chain_reg.getAssetProperty(
           last_trace.counterparty.chain_name,
           last_trace.counterparty.base_denom,
@@ -452,32 +620,26 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
       }
     }
 
-
-    let denom_units = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, "denom_units");
+    let denom_units = chain_reg.getAssetProperty(
+      zone_asset.chain_name,
+      zone_asset.base_denom,
+      "denom_units"
+    );
     if (zone_asset.chain_name != chainName) {
-      denom_units.forEach(async function(unit) {
-        if(unit.denom === zone_asset.base_denom) {
-          if(!unit.aliases) {
+      denom_units.forEach(async function (unit) {
+        if (unit.denom === zone_asset.base_denom) {
+          if (!unit.aliases) {
             unit.aliases = [];
           }
-          unit.aliases.push(unit.denom);
+          addArrayItem(unit.denom, unit.aliases);
+          if (asset.display == unit.denom) {
+            asset.display = generated_asset.coinMinimalDenom;
+          }
           unit.denom = generated_asset.coinMinimalDenom;
           return;
         }
       });
     }
-
-    
-
-
-    //--Staking token?--
-    //  used to get name and description
-    let is_staking_token = false;
-    if(zone_asset.base_denom == chain_reg.getFileProperty(canonical_origin_chain_name, "chain", "staking")?.staking_tokens[0]?.denom) {
-      is_staking_token = true;
-    }
-
-
 
     //--Add Name--
     //  default to reference asset's name...
@@ -485,31 +647,37 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
     let name = reference_asset.name;
 
     //  but use chain name instead if it's the staking token...
-    if(is_staking_token) {
-      name = chain_reg.getFileProperty(canonical_origin_chain_name, "chain", "pretty_name");
+    if (generated_asset.is_staking_token) {
+      name = chain_reg.getFileProperty(
+        canonical_origin_chain_name,
+        "chain",
+        "pretty_name"
+      );
     }
 
     // and append bridge provider if it's not already there
-    if(bridge_provider) {
-      if(!name.includes(bridge_provider)) {
-        name = name + " " + "(" + bridge_provider + ")"
+    if (bridge_provider) {
+      if (!name.includes(bridge_provider)) {
+        name = name + " " + "(" + bridge_provider + ")";
       }
     }
 
     //  submit
     generated_asset.name = name;
 
-
-
     //--Add Description--
     let asset_description = reference_asset.description;
     let description = asset_description ? asset_description : "";
     //need to see if it's first staking token
-    if(is_staking_token) {
+    if (generated_asset.is_staking_token) {
       //it is a staking token, so we pull the chain_description
-      let chain_description = chain_reg.getFileProperty(canonical_origin_chain_name, "chain", "description");
-      if(chain_description) {
-        if(description) {
+      let chain_description = chain_reg.getFileProperty(
+        canonical_origin_chain_name,
+        "chain",
+        "description"
+      );
+      if (chain_description) {
+        if (description) {
           description = description + "\n\n";
         }
         description = description + chain_description;
@@ -517,26 +685,22 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
     }
     generated_asset.description = description;
 
-
-
     //--Get Twitter URL--
     generated_asset.twitter_URL = zone_asset.twitter_URL;
 
-
-
     //--Sorting--
     //how to sort tokens if they don't have cgid
-    if(!generated_asset.coingecko_id && !zone_asset.canonical){
+    if (!generated_asset.coingecko_id && !zone_asset.canonical) {
       traces?.forEach((trace) => {
-        if(trace.provider) {
+        if (trace.provider) {
           let providers = zoneConfig?.providers;
-          if(providers) {
+          if (providers) {
             providers.forEach((provider) => {
-              if(provider.provider == trace.provider && provider.token) {
+              if (provider.provider == trace.provider && provider.token) {
                 generated_asset.sort_with = {
                   chainName: provider.token.chain_name,
-                  sourceDenom: provider.token.base_denom
-                }
+                  sourceDenom: provider.token.base_denom,
+                };
                 return;
               }
             });
@@ -545,37 +709,31 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
       });
     }
 
-
-
     //--Overrides Properties when Specified--
-    if(zone_asset.override_properties) {
-      if(zone_asset.override_properties.coingecko_id) {
-        generated_asset.coingecko_id = zone_asset.override_properties.coingecko_id;
+    if (zone_asset.override_properties) {
+      if (zone_asset.override_properties.coingecko_id) {
+        generated_asset.coingecko_id =
+          zone_asset.override_properties.coingecko_id;
       }
-      if(zone_asset.override_properties.symbol) {
+      if (zone_asset.override_properties.symbol) {
         generated_asset.symbol = zone_asset.override_properties.symbol;
       }
-      if(zone_asset.override_properties.name) {
+      if (zone_asset.override_properties.name) {
         generated_asset.name = zone_asset.override_properties.name;
       }
-      if(zone_asset.override_properties.logo_URIs) {
+      if (zone_asset.override_properties.logo_URIs) {
         generated_asset.logo_URIs = zone_asset.override_properties.logo_URIs;
       }
     }
-
 
     //--Finalize Images--
     let match = 0;
     images.forEach((image) => {
       if (
-        (
-          !generated_asset.logo_URIs.png ||
-          generated_asset.logo_URIs.png == image.png
-        ) &&
-        (
-          !generated_asset.logo_URIs.svg ||
-          generated_asset.logo_URIs.svg == image.svg
-        )
+        (!generated_asset.logo_URIs.png ||
+          generated_asset.logo_URIs.png == image.png) &&
+        (!generated_asset.logo_URIs.svg ||
+          generated_asset.logo_URIs.svg == image.svg)
       ) {
         match = 1;
         return;
@@ -584,82 +742,61 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
     if (!match) {
       let new_image = {
         png: generated_asset.logo_URIs.png,
-        svg: generated_asset.logo_URIs.svg
-      }
+        svg: generated_asset.logo_URIs.svg,
+      };
       images.push(new_image);
     }
 
-
-
-
     //--Add Flags--
     generated_asset.unstable = zone_asset.osmosis_unstable;
+    generated_asset.disabled =
+      zone_asset.osmosis_disabled || zone_asset.osmosis_unstable;
     generated_asset.unlisted = zone_asset.osmosis_unlisted;
 
-    
-    
+    generated_asset.tooltip_message = zone_asset.tooltip_message;
+
     //--Get Keywords--
     let keywords = asset.keywords ? asset.keywords : [];
     //--Update Keywords--
-    if(zone_asset.osmosis_unstable) {
-      keywords.push("osmosis_unstable");
+    if (zone_asset.osmosis_unstable) {
+      addArrayItem("osmosis-unstable", keywords);
     }
-    if(zone_asset.osmosis_unlisted) {
-      keywords.push("osmosis_unlisted");
+    if (zone_asset.osmosis_unlisted) {
+      addArrayItem("osmosis-unlisted", keywords);
     }
-    if(zone_asset.verified) {
-      keywords.push("osmosis_verified");
+    if (zone_asset.verified) {
+      addArrayItem("osmosis-verified", keywords);
     }
-    if(!keywords.length) {
+    if (!keywords.length) {
       keywords = undefined;
     }
-
-
 
     //--Get type_asset--
     let type_asset = "ics20";
     if (zone_asset.chain_name == chainName) {
-      type_asset = chain_reg.getAssetProperty(zone_asset.chain_name, zone_asset.base_denom, "type_asset");
+      type_asset = chain_reg.getAssetProperty(
+        zone_asset.chain_name,
+        zone_asset.base_denom,
+        "type_asset"
+      );
       if (!type_asset) {
         type_asset = "sdk.coin";
       }
     }
 
+    //--Get Address--
+    let chain_reg_address =
+      zone_asset.chain_name == chainName ? asset.address : undefined;
 
-    //--Setup Zone_Config Asset--
-    let generated_zoneConfigAsset = {
-      chainName:        generated_asset.chain_name,
-      sourceDenom:      generated_asset.sourceDenom,
-      coinMinimalDenom: generated_asset.coinMinimalDenom,
-      symbol:           generated_asset.symbol,
-      decimals:         generated_asset.decimals,
-      logoURIs:         generated_asset.logo_URIs,
-      coingeckoId:      generated_asset.coingecko_id,
-      verified:         generated_asset.verified,
-      apiInclude:       generated_asset.api_include,
-      price:            generated_asset.price,
-      categories:       generated_asset.categories,
-      pegMechanism:     generated_asset.peg_mechanism,
-      transferMethods:  generated_asset.transfer_methods,
-      counterparty:     generated_asset.counterparty,
-      commonKey:        generated_asset.common_key,
-      name:             generated_asset.name,
-      description:      generated_asset.description,
-      unstable:         generated_asset.unstable,
-      sortWith:         generated_asset.sort_with,
-      twitterURL:       generated_asset.twitter_URL,
-      unlisted:         generated_asset.unlisted,
-      relatedAssets:    generated_asset.related_assets,
-    }
     //--Append Asset to Assetlist--
-    zone_config_assets.push(generated_zoneConfigAsset);
-
+    zone_config_assets.push(generated_asset);
 
     //--Setup Chain_Reg Asset--
     generated_chainRegAsset = {
       description: asset_description,
       denom_units: denom_units,
       type_asset: type_asset,
+      address: chain_reg_address,
       base: generated_asset.coinMinimalDenom,
       name: generated_asset.name,
       display: asset.display,
@@ -667,37 +804,130 @@ const generateAssets = async (chainName, zoneConfig, zone_assets, zone_config_as
       traces: traces,
       logo_URIs: generated_asset.logo_URIs,
       images: images,
-      coingecko_id: generated_asset.coingecko_id,
-      keywords: keywords
-    }
+      coingecko_id: getAssetCoinGeckoID(chainName, zone_asset, "chain_registry"),
+      keywords: keywords,
+    };
     //--Append to Chain_Reg Assetlist--
     chain_reg_assets.push(generated_chainRegAsset);
-    
-  
+  });
+};
+
+function reformatZoneConfigAssets(assets) {
+  let reformattedAssets = [];
+
+  assets.forEach((asset) => {
+    //--Setup Zone_Config Asset--
+    let reformattedAsset = {
+      chainName: asset.chain_name,
+      sourceDenom: asset.sourceDenom,
+      coinMinimalDenom: asset.coinMinimalDenom,
+      symbol: asset.symbol,
+      decimals: asset.decimals,
+      logoURIs: asset.logo_URIs,
+      coingeckoId: asset.coingecko_id,
+      price: asset.price,
+      categories: asset.categories ?? [],
+      pegMechanism: asset.peg_mechanism,
+      transferMethods: asset.transfer_methods ?? [],
+      counterparty: asset.counterparty ?? [],
+      variantGroupKey: asset.common_key,
+      name: asset.name,
+      //description: asset.description,
+      verified: asset.verified ?? false,
+      unstable: asset.unstable ?? false,
+      disabled: asset.disabled ?? false,
+      preview: asset.unlisted ?? false,
+      tooltipMessage: asset.tooltip_message,
+      sortWith: asset.sort_with,
+      //twitterURL: asset.twitter_URL,
+      listingDate: asset.listing_date,
+      //relatedAssets: asset.relatedAssets,
+    };
+
+    if (isNaN(asset.listing_date.getTime())) {
+      // Remove listing_date if it's null
+      delete reformattedAsset.listingDate;
+    }
+
+    //--Append to Chain_Reg Assetlist--
+    reformattedAssets.push(reformattedAsset);
   });
 
+  return reformattedAssets;
+}
+
+//--Get Remaining Assets only in Chain Registry--
+function getChainRegAssets(chainName, chain_reg_assets) {
+  let registered_assets = chain_reg_assets;
+  let assetPointers = chain_reg.getAssetPointersByChain(chainName);
+  assetPointers.forEach((assetPointer) => {
+    if (
+      !chain_reg_assets.some(
+        (chain_reg_asset) => chain_reg_asset.base == assetPointer.base_denom
+      )
+    ) {
+      registered_assets.push(
+        chain_reg.getAssetObject(
+          assetPointer.chain_name,
+          assetPointer.base_denom
+        )
+      );
+    }
+  });
+  return registered_assets;
 }
 
 async function generateAssetlist(chainName) {
-  let zoneConfig = zone.readFromFile(chainName, zone.noDir, zone.zoneConfigFileName)?.config;
-  let zoneAssetlist = zone.readFromFile(chainName, zone.noDir, zone.zoneAssetlistFileName)?.assets;
+  let zoneConfig = zone.readFromFile(
+    chainName,
+    zone.noDir,
+    zone.zoneConfigFileName
+  )?.config;
+  let zoneAssetlist = zone.readFromFile(
+    chainName,
+    zone.noDir,
+    zone.zoneAssetlistFileName
+  )?.assets;
   let zone_config_assets = [];
   let chain_reg_assets = [];
-  await generateAssets(chainName, zoneConfig, zoneAssetlist, zone_config_assets, chain_reg_assets);
-  if (!zone_config_assets) { return; }
-  zone_config_assets = await getAllRelatedAssets(zone_config_assets, zoneConfig);
+  await generateAssets(
+    chainName,
+    zoneConfig,
+    zoneAssetlist,
+    zone_config_assets,
+    chain_reg_assets
+  );
+  if (!zone_config_assets) {
+    return;
+  }
+  zone_config_assets = await getAllRelatedAssets(
+    zone_config_assets,
+    zoneConfig
+  );
+  chain_reg_assets = getChainRegAssets(chainName, chain_reg_assets);
+  let chain_reg_assetlist = {
+    $schema: "../assetlist.schema.json",
+    chain_name: chainName,
+    assets: chain_reg_assets,
+  };
+  zone_config_assets = reformatZoneConfigAssets(zone_config_assets);
   let zone_config_assetlist = {
     chainName: chainName,
-    assets: zone_config_assets
-  }
-  let chain_reg_assetlist = {
-    chain_name: chainName,
-    assets: chain_reg_assets
-  }
-  zone.writeToFile(chainName, zone.zoneConfigAssetlist, zone.assetlistFileName, zone_config_assetlist);
-  zone.writeToFile(chainName, zone.chainRegAssetlist, zone.assetlistFileName, chain_reg_assetlist);
+    assets: zone_config_assets,
+  };
+  zone.writeToFile(
+    chainName,
+    zone.zoneConfigAssetlist,
+    zone.assetlistFileName,
+    zone_config_assetlist
+  );
+  zone.writeToFile(
+    chainName,
+    zone.chainRegAssetlist,
+    zone.assetlistFileName,
+    chain_reg_assetlist
+  );
 }
-
 
 async function generateAssetlists() {
   for (const chainName of zone.chainNames) {
@@ -705,10 +935,8 @@ async function generateAssetlists() {
   }
 }
 
-
 function main() {
   generateAssetlists();
 }
-
 
 main();

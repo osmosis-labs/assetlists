@@ -29,7 +29,7 @@
         "dex",
         "staking",
         "osmosis-main",
-        "osmosis-price:ibc/3642669AD14386D3E38F43F30CFCA859B3E8A05BF6BD6A23DEBD2115AD1325E9:331"
+        "osmosis-price:ibc/DE6792CF9E521F6AD6E9A4BDF6225C9571A3B74ACC0A529F92BC5122A39D2E58:367"
       ]
     },
     {
@@ -56,7 +56,7 @@
       "keywords": [
         "memecoin",
         "osmosis-main",
-        "osmosis-price:uosmo:1"
+        "osmosis-price:ibc/DE6792CF9E521F6AD6E9A4BDF6225C9571A3B74ACC0A529F92BC5122A39D2E58:367"
       ]
     },
     {
@@ -99,7 +99,7 @@
       },
       "keywords": [
         "osmosis-main",
-        "osmosis-price:uosmo:308"
+        "osmosis-price:ibc/DE6792CF9E521F6AD6E9A4BDF6225C9571A3B74ACC0A529F92BC5122A39D2E58:367"
       ]
     },
     {
@@ -220,7 +220,7 @@
       "description": "The native token of JUNO Chain",
       "denom_units": [
         {
-          "denom": "ibc/315940955C3051051C55B195EE30F7265D5BE3D3A7CC48D74E5D9871DCED8B26",
+          "denom": "ibc/31D220286E6C224C0F72D890D0EB75A228D388089EF5C4D77212344F9EAF0183",
           "exponent": 0,
           "aliases": [
             "ujunox"
@@ -232,7 +232,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/315940955C3051051C55B195EE30F7265D5BE3D3A7CC48D74E5D9871DCED8B26",
+      "base": "ibc/31D220286E6C224C0F72D890D0EB75A228D388089EF5C4D77212344F9EAF0183",
       "name": "Juno Testnet",
       "display": "junox",
       "symbol": "JUNOX",
@@ -242,11 +242,11 @@
           "counterparty": {
             "chain_name": "junotestnet",
             "base_denom": "ujunox",
-            "channel_id": "channel-811"
+            "channel_id": "channel-889"
           },
           "chain": {
-            "channel_id": "channel-4167",
-            "path": "transfer/channel-4167/ujunox"
+            "channel_id": "channel-5498",
+            "path": "transfer/channel-5498/ujunox"
           }
         }
       ],
@@ -263,7 +263,7 @@
       "description": "The native token of Mars Protocol",
       "denom_units": [
         {
-          "denom": "ibc/18401C07347459EE2413C0AFDE3ACDB66AC9FD363B3E56A6FC1DFF1B69341FC3",
+          "denom": "ibc/66A7ADA623D33D0B66C6890FE3E1AF3D638D56CE2B56F8BDA210B2AA62016216",
           "exponent": 0,
           "aliases": [
             "umars"
@@ -275,7 +275,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/18401C07347459EE2413C0AFDE3ACDB66AC9FD363B3E56A6FC1DFF1B69341FC3",
+      "base": "ibc/66A7ADA623D33D0B66C6890FE3E1AF3D638D56CE2B56F8BDA210B2AA62016216",
       "name": "Mars Hub Testnet",
       "display": "mars",
       "symbol": "MARS",
@@ -285,11 +285,11 @@
           "counterparty": {
             "chain_name": "marstestnet",
             "base_denom": "umars",
-            "channel_id": "channel-27"
+            "channel_id": "channel-28"
           },
           "chain": {
-            "channel_id": "channel-4168",
-            "path": "transfer/channel-4168/umars"
+            "channel_id": "channel-5499",
+            "path": "transfer/channel-5499/umars"
           }
         }
       ],
@@ -433,6 +433,14 @@
       "symbol": "KYVE",
       "traces": [
         {
+          "type": "test-mintage",
+          "counterparty": {
+            "chain_name": "kyve",
+            "base_denom": "ukyve"
+          },
+          "provider": "Kyve"
+        },
+        {
           "type": "ibc",
           "counterparty": {
             "chain_name": "kyvetestnet",
@@ -446,7 +454,8 @@
         }
       ],
       "logo_URIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/kyvetestnet/images/kyve.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kyve/images/kyve-token.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kyve/images/kyve-token.svg"
       },
       "keywords": [
         "osmosis-main",
@@ -595,13 +604,6 @@
           ]
         },
         {
-          "denom": "mxion",
-          "exponent": 3,
-          "aliases": [
-            "millixion"
-          ]
-        },
-        {
           "denom": "XION",
           "exponent": 6,
           "aliases": [
@@ -677,7 +679,8 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.svg"
       },
       "keywords": [
-        "osmosis-main"
+        "osmosis-main",
+        "osmosis-price:uosmo:369"
       ]
     },
     {

@@ -9,7 +9,7 @@
 //
 
 import * as path from 'path';
-import * as chain_reg from './chain_registry.mjs';
+import * as chain_reg from '../../../chain-registry/.github/workflows/utility/chain_registry.mjs';
 import { queryPool } from './getPools.mjs';
 
 const root = "../../..";
@@ -30,7 +30,7 @@ Array.from(chainNameToChainIdMap.keys()).forEach((chainName) => {
 });
 
 export function validate_zone_files() {
-  
+
   const chainRegAssetPointers = chain_reg.getAssetPointers();
   Array.from(chainNameToChainIdMap.keys()).forEach((chainName) => {
     let zoneAssetsJson = chain_reg.readJsonFile(chainNameToZoneAssetsFileMap.get(chainName));
@@ -103,8 +103,8 @@ export function validate_zone_files() {
       }
 
       //see if ibc channel is registered
-      let VALID_PATH = false;
       if (zoneAsset.chain_name != chainName) {
+        let VALID_PATH = false;
         if (!zoneAsset.path) {
           throw new Error(`Path missing for ${zoneAsset.base_denom}. Please enter a Path.`);
         }
@@ -131,6 +131,22 @@ export function validate_zone_files() {
         });
         if (!VALID_PATH) {
           throw new Error(`IBC Channel for Path: ${zoneAsset.path} does not exist in the chain registry.`);
+        }
+      }
+
+      //see if canonical asset is valid
+      if (zoneAsset.canonical) {
+        let VALID_CANONICAL_ASSET = false;
+        if (!zoneAsset.canonical.chain_name || !zoneAsset.canonical.base_denom) {
+          throw new Error(`Canonical asset pointer incomplete for ${zoneAsset}. Please complete the asset pointer.`);
+        }
+        VALID_CANONICAL_ASSET = chain_reg.getAssetProperty(
+          zoneAsset.canonical.chain_name,
+          zoneAsset.canonical.base_denom,
+          "base"
+        );
+        if (!VALID_CANONICAL_ASSET) {
+          throw new Error(`Canonical asset reference: ${zoneAsset.canonical.chain_name},${zoneAsset.canonical.base_denom} does not exist in the Chain Registry.`);
         }
       }
 

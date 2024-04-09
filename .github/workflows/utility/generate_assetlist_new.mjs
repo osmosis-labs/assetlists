@@ -240,7 +240,7 @@ const generateAssets = async (
     
 
     //--Get Decimals--
-    generated_asset.decimals = assetlist.getAssetDecimals(asset);
+    generated_asset.decimals = assetlist.getAssetDecimals(generated_asset);
 
     assetlist.setDecimals(asset_data);
 
@@ -344,6 +344,9 @@ const generateAssets = async (
         return;
       }
     });
+
+    assetlist.setBase(asset_data);
+    assetlist.setDisplay(asset_data);
 
     //-New Asset?-
     const currentDate = new Date();
@@ -735,7 +738,7 @@ const generateAssets = async (
             last_trace.counterparty.base_denom,
             "denom_units"
           );
-          counterparty.decimals = assetlist.getAssetDecimals({display: display, denom_units: denom_units});
+          counterparty.decimals = assetlist.getAssetDecimals(last_trace.counterparty);
           counterparty.logoURIs = chain_reg.getAssetProperty(
             last_trace.counterparty.chain_name,
             last_trace.counterparty.base_denom,
@@ -753,7 +756,15 @@ const generateAssets = async (
       }
     }
 
+    if (asset_data.source_asset.base_denom === "uusdc") {
+      //console.log(asset_data.local_asset.traces);
+    }
+
     assetlist.setCounterparty(asset_data);
+
+    if (asset_data.source_asset.base_denom === "uusdc") {
+      //console.log(asset_data.local_asset.traces);
+    }
 
     if (
       generated_asset.counterparty?.length != asset_data.frontend.counterparty?.length ||
@@ -805,6 +816,8 @@ const generateAssets = async (
       });
     }
 
+    assetlist.setDenomUnits(asset_data);
+
     //--Add Name--
     //  default to reference asset's name...
     //  default to reference asset's name...
@@ -851,6 +864,16 @@ const generateAssets = async (
     }
     generated_asset.description = description;
 
+    assetlist.setDescription(asset_data);
+
+    if (
+      reference_asset.description != asset_data.chain_reg.description
+    ) {
+      console.log("Description Mistmatch:");
+      console.log(generated_asset.description);
+      console.log(asset_data.chain_reg.description);
+    }
+
     //--Get Twitter URL--
     generated_asset.twitter_URL = zone_asset.twitter_URL;
 
@@ -875,6 +898,7 @@ const generateAssets = async (
       });
     }
 
+    assetlist.setTraces(asset_data);
     assetlist.setSortWith(asset_data);
 
     if (
@@ -970,6 +994,8 @@ const generateAssets = async (
       images.push(new_image);
     }
 
+    assetlist.setImages(asset_data);
+
     //--Add Flags--
     generated_asset.unstable = zone_asset.osmosis_unstable;
     generated_asset.disabled =
@@ -994,6 +1020,8 @@ const generateAssets = async (
     if (!keywords.length) {
       keywords = undefined;
     }
+
+    assetlist.setKeywords(asset_data);
 
     //--Get type_asset--
     let type_asset = "ics20";
@@ -1042,7 +1070,9 @@ const generateAssets = async (
       keywords: keywords,
     };
     //--Append to Chain_Reg Assetlist--
-    chain_reg_assets.push(generated_chainRegAsset);
+    //chain_reg_assets.push(generated_chainRegAsset);
+    assetlist.reformatChainRegAsset(asset_data);
+    chain_reg_assets.push(asset_data.chain_reg);
 
     //--Reformat Frontend Asset--
     asset_data.frontend = assetlist.reformatFrontendAsset(asset_data.frontend);

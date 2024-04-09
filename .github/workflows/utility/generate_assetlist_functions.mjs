@@ -375,7 +375,7 @@ export function setCoinMinimalDenom(asset_data) {
 
 }
 
-
+//I think we don't use this anymore
 export function getSymbol(zone_asset, asset_pointers, zone_config) {
 
   if (zone_asset.override_properties?.symbol) {
@@ -412,6 +412,8 @@ export function getAssetProperty(asset, propertyName) {
       asset.traces = getAssetTraces(asset);
     } else if (propertyName === "decimals") {
       asset.decimals = getAssetDecimals(asset);
+    } else if (propertyName === "is_staking") {
+      asset.is_staking = getAssetIsStaking(asset);
     } else {
       asset[propertyName] = chain_reg.getAssetProperty(
         asset.chain_name,
@@ -466,17 +468,19 @@ export function getAssetDecimals(asset) {
   }
 
   let decimals;
-
-  getAssetProperty(asset, "denom_units")?.forEach((unit) => {
-    if (getAssetProperty(asset, "display") === unit.denom) {
+  
+  const display = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "display");
+  const denom_units = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "denom_units");
+  denom_units?.forEach((unit) => {
+    if (display === unit.denom) {
       decimals = unit.exponent;
       return;
     }
   });
 
   if (decimals === undefined) {
-    asset.denom_units?.forEach((unit) => {
-      if (unit.aliases?.includes(asset.display)) {
+    denom_units?.forEach((unit) => {
+      if (unit.aliases?.includes(display)) {
         decimals = unit.exponent;
         return;
       }
@@ -484,6 +488,16 @@ export function getAssetDecimals(asset) {
   }
 
   return decimals;
+
+}
+
+export function getAssetIsStaking(asset) {
+
+  if (asset.is_staking) {
+    return asset.is_staking;
+  }
+
+  return chain_reg.getFileProperty(asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom === asset.base_denom;
 
 }
 
@@ -516,26 +530,56 @@ export function getAssetTraces(asset) {
 
 }
 
+export function setTraces(asset_data) {
+
+  let traces = getAssetProperty(asset_data.local_asset, "traces");
+  if(traces?.length === 0) {
+    traces = undefined;
+  }
+  asset_data.chain_reg.traces = traces;
+
+}
+
 export function setDecimals(asset_data) {
 
-  asset_data.frontend.decimals = getAssetDecimals(asset_data.local_asset) ?? getAssetDecimals(asset_data.source_asset);
+  asset_data.frontend.decimals =
+    getAssetProperty(asset_data.local_asset, "decimals") ??
+    getAssetProperty(asset_data.source_asset, "decimals");
+
+}
+
+export function getPrimaryImage(asset_data) {
+
+  let image;
+
+  if (asset_data.zone_asset.override_properties?.logo_URIs) {
+    image = asset_data.zone_asset.override_properties.logo_URIs;
+  } else if (asset_data.zone_asset.canonical) {
+    image = getAssetProperty(asset_data.canonical_asset, "logo_URIs");
+  } else {
+    image = getAssetProperty(asset_data.local_asset, "logo_URIs") ?? getAssetProperty(asset_data.source_asset, "logo_URIs");
+  }
+
+  return image; 
 
 }
 
 export function setLogoURIs(asset_data) {
   
-  let logo_URIs;
-
-  if (asset_data.zone_asset.override_properties?.logo_URIs) {
-    logo_URIs = asset_data.zone_asset.override_properties.logo_URIs;
-  } else if (asset_data.zone_asset.canonical) {
-    logo_URIs = getAssetProperty(asset_data.canonical_asset, "logo_URIs");
-  } else {
-    logo_URIs = getAssetProperty(asset_data.local_asset, "logo_URIs") ?? getAssetProperty(asset_data.source_asset, "logo_URIs");
-  }
+  const logo_URIs = getPrimaryImage(asset_data);
 
   asset_data.frontend.logoURIs = logo_URIs;
   asset_data.chain_reg.logo_URIs = logo_URIs;
+
+}
+
+export function setImages(asset_data) {
+  
+  const image = getPrimaryImage(asset_data);
+  let images = [];
+  addArrayItem(image, images);
+
+  asset_data.chain_reg.images = images;
 
 }
 
@@ -576,6 +620,27 @@ export function setCoinGeckoId(asset_data) {
     "coingecko_id",
     trace_types
   );
+
+}
+
+export function setKeywords(asset_data) {
+  
+  let keywords = getAssetProperty(asset_data.local_asset, "keywords") || getAssetProperty(asset_data.canonical_asset, "keywords");
+  keywords = keywords || [];
+  //--Update Keywords--
+  if (asset_data.zone_asset?.osmosis_unstable) {
+    addArrayItem("osmosis-unstable", keywords);
+  }
+  if (asset_data.zone_asset?.osmosis_unlisted) {
+    addArrayItem("osmosis-unlisted", keywords);
+  }
+  if (asset_data.zone_asset?.verified) {
+    addArrayItem("osmosis-verified", keywords);
+  }
+  if (!keywords.length) {
+    keywords = undefined;
+  }
+  asset_data.chain_reg.keywords = keywords;
 
 }
 
@@ -624,15 +689,16 @@ export function setCategories(asset_data) {
     }
   });
   if (
-    chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "fees")?.fee_tokens[0]?.denom ==
+    chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "fees")?.fee_tokens[0]?.denom ===
     asset_data.canonical_asset.base_denom
   ) {
     addArrayItem("defi", asset_data.frontend.categories);
   }
-  if (
-    chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom ==
-    asset_data.canonical_asset.base_denom
-  ) {
+  if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
+  //if (
+  //  chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom ===
+  //  asset_data.canonical_asset.base_denom
+  //) {
     addArrayItem("defi", asset_data.frontend.categories);
   }
   if (
@@ -838,15 +904,22 @@ export function setCounterparty(asset_data) {
         counterpartyAsset.chainType = "non-cosmos";
       }
     }
-    counterpartyAsset.symbol = getAssetProperty(traces[i].counterparty, "symbol");
-    counterpartyAsset.decimals = getAssetProperty(traces[i].counterparty, "decimals");
-    counterpartyAsset.logoURIs = getAssetProperty(traces[i].counterparty, "logo_URIs");
+    counterpartyAsset.symbol = chain_reg.getAssetProperty(
+      traces[i].counterparty.chain_name,
+      traces[i].counterparty.base_denom,
+      "symbol"
+    );
+    counterpartyAsset.decimals = getAssetDecimals(traces[i].counterparty);
+    counterpartyAsset.logoURIs = chain_reg.getAssetProperty(
+      traces[i].counterparty.chain_name,
+      traces[i].counterparty.base_denom,
+      "logo_URIs"
+    );
 
     asset_data.frontend.counterparty.push(counterpartyAsset);
 
   }
 
-  //temporary--just to make it match
   if (asset_data.frontend.counterparty.length === 0) {
     asset_data.frontend.counterparty = undefined;
   }
@@ -977,6 +1050,67 @@ export function setPrice(asset_data, pool_data) {
 
 }
 
+export function setBase(asset_data) {
+  
+  asset_data.chain_reg.base = asset_data.local_asset.base_denom;
+
+}
+
+export function setDisplay(asset_data) {
+  
+  asset_data.chain_reg.display =
+    getAssetProperty(asset_data.local_asset, "display") || getAssetProperty(asset_data.source_asset, "display");
+
+}
+
+export function setDenomUnits(asset_data) {
+  
+  let denom_units = getAssetProperty(asset_data.local_asset, "denom_units");
+  if (denom_units) {
+    asset_data.chain_reg.denom_units = denom_units;
+    return;
+  }
+
+  denom_units = getAssetProperty(asset_data.source_asset, "denom_units");
+  let denom_unitsCopy = denom_units.map(unit => ({ ...unit }));
+  const zeroExponentUnitIndex = denom_unitsCopy.findIndex(unit => unit.exponent === 0);
+  if (zeroExponentUnitIndex === -1) {
+    console.log("Denom Units for ${asset_data.source_asset.base_denom}, ${asset_data.source_asset.chain_name} missing 0 exponent");
+  }
+  denom_unitsCopy[zeroExponentUnitIndex].aliases = denom_unitsCopy[zeroExponentUnitIndex].aliases || [];
+  addArrayItem(denom_unitsCopy[zeroExponentUnitIndex].denom, denom_unitsCopy[zeroExponentUnitIndex].aliases);
+  denom_unitsCopy[zeroExponentUnitIndex].denom = asset_data.local_asset.base_denom;
+
+  asset_data.chain_reg.denom_units = denom_unitsCopy;
+
+}
+
+export function setDescription(asset_data) {
+  
+  let description;
+  description = getAssetProperty(asset_data.local_asset, "description") || getAssetProperty(asset_data.canonical_asset, "description");
+  if (description) {
+    asset_data.chain_reg.description = description;
+  }
+  
+  //description = getAssetProperty(asset_data.canonical_asset, "description");
+
+  if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
+    const chain_description = chain_reg.getFileProperty(
+      asset_data.canonical_asset.chain_name,
+      "chain",
+      "description"
+    );
+    //console.log(chain_description);
+    description = (description ?? "") + (description && chain_description ? "\n\n" : "") + (chain_description ?? "");
+  }
+
+  //asset_data.chain_reg.description = description;
+  //asset_data.frontend_detail.description = description;
+
+  //console.log(description);
+
+}
 
 export function reformatFrontendAsset(frontend_asset) {
 
@@ -1014,5 +1148,29 @@ export function reformatFrontendAsset(frontend_asset) {
   }
 
   return reformattedAsset;
+
+}
+
+export function reformatChainRegAsset(asset_data) {
+
+  //--Setup Chain Registry Asset--
+  let reformattedAsset = {
+    description: asset_data.chain_reg.description,
+    denom_units: asset_data.chain_reg.denom_units,
+    type_asset: asset_data.chain_reg.type_asset,
+    address: asset_data.chain_reg.address,
+    base: asset_data.chain_reg.base,
+    name: asset_data.chain_reg.name,
+    display: asset_data.chain_reg.display,
+    symbol: asset_data.chain_reg.symbol,
+    traces: asset_data.chain_reg.traces,
+    logo_URIs: asset_data.chain_reg.logo_URIs,
+    images: asset_data.chain_reg.images,
+    coingecko_id: asset_data.chain_reg.coingecko_id,
+    keywords: asset_data.chain_reg.keywords
+  };
+
+  asset_data.chain_reg = reformattedAsset;
+  return;
 
 }

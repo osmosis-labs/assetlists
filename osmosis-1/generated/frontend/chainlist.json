@@ -17243,6 +17243,76 @@
         "ibc-transfer",
         "ibc-go"
       ]
+    },
+    {
+      "chain_name": "saga",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Saga",
+      "chain_id": "ssc-1",
+      "bech32Prefix": "saga",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "saga",
+        "bech32PrefixAccPub": "sagapub",
+        "bech32PrefixValAddr": "sagavaloper",
+        "bech32PrefixValPub": "sagavaloperpub",
+        "bech32PrefixConsAddr": "sagavalcons",
+        "bech32PrefixConsPub": "sagavalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "chainSuggestionDenom": "saga",
+        "sourceDenom": "saga",
+        "coinDecimals": 0
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "SAGA",
+          "chainSuggestionDenom": "usaga",
+          "coinMinimalDenom": "ibc/094FB70C3006906F67F5D674073D2DAFAFB41537E7033098F5C752F211E7B6C2",
+          "sourceDenom": "usaga",
+          "coinDecimals": 6,
+          "coinGeckoId": "saga",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/atom.png",
+          "gasPriceStep": {
+            "low": 0.01,
+            "average": 0.025,
+            "high": 0.04
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "SAGA",
+          "chainSuggestionDenom": "usaga",
+          "coinMinimalDenom": "ibc/094FB70C3006906F67F5D674073D2DAFAFB41537E7033098F5C752F211E7B6C2",
+          "sourceDenom": "usaga",
+          "coinDecimals": 6,
+          "coinGeckoId": "saga",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/atom.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-saga.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-saga.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://www.mintscan.io/saga/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
     }
   ]
 }

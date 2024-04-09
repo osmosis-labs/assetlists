@@ -4268,6 +4268,13 @@
           "sourceDenom": "cw20:terra1g6fm3yu79gv0rc8067n2nnfpf0vks6n0wpzaf4u7w48tdrmj98zsy7uu00",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/trit.png"
+        },
+        {
+          "coinDenom": "RAKOFF",
+          "chainSuggestionDenom": "cw20:terra1vhgq25vwuhdhn9xjll0rhl2s67jzw78a4g2t78y5kz89q9lsdskq2pxcj2",
+          "sourceDenom": "cw20:terra1vhgq25vwuhdhn9xjll0rhl2s67jzw78a4g2t78y5kz89q9lsdskq2pxcj2",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/rakoff.png"
         }
       ],
       "apis": {
@@ -9325,6 +9332,13 @@
           "sourceDenom": "erc20/0x1cFc8f1FE8D5668BAFF2724547EcDbd6f013a280",
           "coinDecimals": 18,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/evmos/images/berlin.png"
+        },
+        {
+          "coinDenom": "CROWDP",
+          "chainSuggestionDenom": "erc20/0xfbf4318d24a93753f11d365a6dcf8b830e98ab0f",
+          "sourceDenom": "erc20/0xfbf4318d24a93753f11d365a6dcf8b830e98ab0f",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/evmos/images/crowdp.png"
         }
       ],
       "description": "Developers use Evmos as the Ethereum Canary Chain to deploy applications of the future. Get all the functionalities of Ethereum with the power of IBC and Interchain composability.",
@@ -13070,6 +13084,20 @@
           "coinDecimals": 6,
           "coinGeckoId": "terra-luna-2",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/luna.png"
+        },
+        {
+          "coinDenom": "RAKOFF",
+          "chainSuggestionDenom": "ibc/44C29C91F202E20C8E28DFB1FA89B725C54171CD77B8948836C72E7A97E4A018",
+          "sourceDenom": "ibc/44C29C91F202E20C8E28DFB1FA89B725C54171CD77B8948836C72E7A97E4A018",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/rakoff.png"
+        },
+        {
+          "coinDenom": "GASH",
+          "chainSuggestionDenom": "factory/migaloo1r9x8fz4alekzr78k42rpmr9unpa7egsldpqeynmwl2nfvzexue9sn8l5rg/gash",
+          "sourceDenom": "factory/migaloo1r9x8fz4alekzr78k42rpmr9unpa7egsldpqeynmwl2nfvzexue9sn8l5rg/gash",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/gash.png"
         }
       ],
       "apis": {
@@ -17145,6 +17173,75 @@
         "ibc-transfer",
         "ibc-go",
         "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "furya",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "furya",
+      "chain_id": "furya-1",
+      "bech32Prefix": "furya",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "furya",
+        "bech32PrefixAccPub": "furyapub",
+        "bech32PrefixValAddr": "furyavaloper",
+        "bech32PrefixValPub": "furyavaloperpub",
+        "bech32PrefixConsAddr": "furyavalcons",
+        "bech32PrefixConsPub": "furyavalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDenom": "FURY",
+        "chainSuggestionDenom": "ufury",
+        "coinMinimalDenom": "ibc/42D0FBF9DDC72D7359D309A93A6DF9F6FDEE3987EA1C5B3CDE95C06FCE183F12",
+        "sourceDenom": "ufury",
+        "coinDecimals": 6,
+        "coinGeckoId": "fanfury",
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "FURY",
+          "chainSuggestionDenom": "ufury",
+          "coinMinimalDenom": "ibc/42D0FBF9DDC72D7359D309A93A6DF9F6FDEE3987EA1C5B3CDE95C06FCE183F12",
+          "sourceDenom": "ufury",
+          "coinDecimals": 6,
+          "coinGeckoId": "fanfury",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.png"
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "FURY",
+          "chainSuggestionDenom": "ufury",
+          "coinMinimalDenom": "ibc/42D0FBF9DDC72D7359D309A93A6DF9F6FDEE3987EA1C5B3CDE95C06FCE183F12",
+          "sourceDenom": "ufury",
+          "coinDecimals": 6,
+          "coinGeckoId": "fanfury",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.furya.xyz"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.furya.xyz"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://explorer.furya.wtf/furya/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
       ]
     }
   ]

@@ -18564,6 +18564,60 @@
       "unstable": false,
       "disabled": false,
       "preview": true
+    },
+    {
+      "chainName": "saga",
+      "sourceDenom": "usaga",
+      "coinMinimalDenom": "ibc/094FB70C3006906F67F5D674073D2DAFAFB41537E7033098F5C752F211E7B6C2",
+      "symbol": "SAGA",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/atom.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/atom.svg"
+      },
+      "coingeckoId": "saga",
+      "categories": [
+        "defi"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "saga",
+            "chainId": "ssc-1",
+            "sourceDenom": "usaga",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-38946",
+            "path": "transfer/channel-38946/usaga"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "saga",
+          "sourceDenom": "usaga",
+          "chainType": "cosmos",
+          "chainId": "ssc-1",
+          "symbol": "SAGA",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/atom.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/atom.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "SAGA",
+      "name": "Saga",
+      "verified": true,
+      "unstable": false,
+      "disabled": false,
+      "preview": true,
+      "listingDate": "2024-04-09T11:00:00.000Z"
     }
   ]
 }

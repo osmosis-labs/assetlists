@@ -7498,6 +7498,64 @@
         "ibc-transfer",
         "ibc-go"
       ]
+    },
+    {
+      "chain_name": "saga",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Saga",
+      "chain_id": "ssc-1",
+      "bech32_prefix": "saga",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "saga",
+        "bech32PrefixAccPub": "sagapub",
+        "bech32PrefixValAddr": "sagavaloper",
+        "bech32PrefixValPub": "sagavaloperpub",
+        "bech32PrefixConsAddr": "sagavalcons",
+        "bech32PrefixConsPub": "sagavalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "usaga",
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "saga"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-saga.keplr.app"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-saga.keplr.app"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/saga/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
     }
   ]
 }

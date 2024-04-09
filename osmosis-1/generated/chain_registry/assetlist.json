@@ -13871,6 +13871,114 @@
       ]
     },
     {
+      "description": "Stride's liquid staked SAGA",
+      "denom_units": [
+        {
+          "denom": "ibc/2CD9F8161C3FC332E78EF0C25F6E684D09379FB2F56EF9267E7EC139642EC57B",
+          "exponent": 0,
+          "aliases": [
+            "stusaga"
+          ]
+        },
+        {
+          "denom": "stSAGA",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/2CD9F8161C3FC332E78EF0C25F6E684D09379FB2F56EF9267E7EC139642EC57B",
+      "name": "Stride Staked SAGA",
+      "display": "stSAGA",
+      "symbol": "stSAGA",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "saga",
+            "base_denom": "usaga"
+          },
+          "provider": "Stride"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stusaga",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326",
+            "path": "transfer/channel-326/stusaga"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stsaga.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stsaga.svg"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stsaga.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stsaga.svg"
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/C04DFC9BCD893E57F2BEFE40F63EFD18D2768514DBD5F63ABD2FF7F48FC01D36",
+          "exponent": 0,
+          "aliases": [
+            "stinj"
+          ]
+        },
+        {
+          "denom": "stINJ",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/C04DFC9BCD893E57F2BEFE40F63EFD18D2768514DBD5F63ABD2FF7F48FC01D36",
+      "name": "Stride Staked INJ",
+      "display": "stINJ",
+      "symbol": "stINJ",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "injective",
+            "base_denom": "inj"
+          },
+          "provider": "Stride"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stinj",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326",
+            "path": "transfer/channel-326/stinj"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.svg"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.svg"
+        }
+      ],
+      "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
       "description": "GLTO-ERC20 on injective",
       "denom_units": [
         {
@@ -15438,6 +15546,51 @@
         "gaming",
         "staking",
         "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "The native staking and governance token of Saga.",
+      "denom_units": [
+        {
+          "denom": "ibc/094FB70C3006906F67F5D674073D2DAFAFB41537E7033098F5C752F211E7B6C2",
+          "exponent": 0,
+          "aliases": [
+            "usaga"
+          ]
+        },
+        {
+          "denom": "saga",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/094FB70C3006906F67F5D674073D2DAFAFB41537E7033098F5C752F211E7B6C2",
+      "name": "Saga",
+      "display": "saga",
+      "symbol": "SAGA",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "saga",
+            "base_denom": "usaga",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-38946",
+            "path": "transfer/channel-38946/usaga"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.svg"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.svg"
+        }
       ]
     },
     {

@@ -18734,6 +18734,56 @@
       "disabled": false,
       "preview": false,
       "listingDate": "2024-04-09T10:30:00.000Z"
+    },
+    {
+      "chainName": "neutron",
+      "sourceDenom": "factory/neutron13lkh47msw28yynspc5rnmty3yktk43wc3dsv0l/ATOM1KLFG",
+      "coinMinimalDenom": "ibc/0E77E090EC04C476DE2BC0A7056580AC47660DAEB7B0D4701C085E3A046AC7B7",
+      "symbol": "ATOM1KLFG",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/ATOM1KLFGc.png"
+      },
+      "categories": [
+        "meme"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "neutron",
+            "chainId": "neutron-1",
+            "sourceDenom": "factory/neutron13lkh47msw28yynspc5rnmty3yktk43wc3dsv0l/ATOM1KLFG",
+            "port": "transfer",
+            "channelId": "channel-10"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-874",
+            "path": "transfer/channel-874/factory/neutron13lkh47msw28yynspc5rnmty3yktk43wc3dsv0l/ATOM1KLFG"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "neutron",
+          "sourceDenom": "factory/neutron13lkh47msw28yynspc5rnmty3yktk43wc3dsv0l/ATOM1KLFG",
+          "chainType": "cosmos",
+          "chainId": "neutron-1",
+          "symbol": "ATOM1KLFG",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/ATOM1KLFGc.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ATOM1KLFG",
+      "name": "ATOM1KLFG",
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
     }
   ]
 }

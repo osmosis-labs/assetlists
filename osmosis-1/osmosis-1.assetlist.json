@@ -13515,6 +13515,56 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stsaga.svg"
       },
       "keywords": [
+        "osmosis-main"
+      ]
+    },
+    {
+      "description": "The INJ token is the native governance token for the Injective chain.",
+      "denom_units": [
+        {
+          "denom": "ibc/C04DFC9BCD893E57F2BEFE40F63EFD18D2768514DBD5F63ABD2FF7F48FC01D36",
+          "exponent": 0,
+          "aliases": [
+            "stinj"
+          ]
+        },
+        {
+          "denom": "stINJ",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/C04DFC9BCD893E57F2BEFE40F63EFD18D2768514DBD5F63ABD2FF7F48FC01D36",
+      "name": "Stride Staked INJ",
+      "display": "stINJ",
+      "symbol": "stINJ",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "injective",
+            "base_denom": "inj"
+          },
+          "provider": "Stride"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stinj",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326",
+            "path": "transfer/channel-326/stinj"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.svg"
+      },
+      "keywords": [
         "osmosis-main",
         "osmosis-unlisted"
       ]
@@ -15033,10 +15083,49 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.svg"
       },
-      "coingecko_id": "saga",
+      "coingecko_id": "saga-2",
       "keywords": [
         "osmosis-main"
       ]
+    },
+    {
+      "description": "$ATOM to $1,000 LFG!!",
+      "denom_units": [
+        {
+          "denom": "ibc/0E77E090EC04C476DE2BC0A7056580AC47660DAEB7B0D4701C085E3A046AC7B7",
+          "exponent": 0,
+          "aliases": [
+            "uatom1klfg",
+            "factory/neutron13lkh47msw28yynspc5rnmty3yktk43wc3dsv0l/ATOM1KLFG"
+          ]
+        },
+        {
+          "denom": "ATOM1KLFG",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/0E77E090EC04C476DE2BC0A7056580AC47660DAEB7B0D4701C085E3A046AC7B7",
+      "name": "ATOM1KLFG",
+      "display": "ATOM1KLFG",
+      "symbol": "ATOM1KLFG",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "neutron",
+            "base_denom": "factory/neutron13lkh47msw28yynspc5rnmty3yktk43wc3dsv0l/ATOM1KLFG",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-874",
+            "path": "transfer/channel-874/factory/neutron13lkh47msw28yynspc5rnmty3yktk43wc3dsv0l/ATOM1KLFG"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/ATOM1KLFGc.png"
+      }
     }
   ]
 }

@@ -260,7 +260,7 @@ const generateAssets = async (
 
     assetlist.setLogoURIs(asset_data);
 
-    
+    assetlist.setAddress(asset_data);
 
 
     //--Get CGID--

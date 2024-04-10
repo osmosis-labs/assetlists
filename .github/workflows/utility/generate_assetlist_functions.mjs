@@ -229,8 +229,8 @@ export function getAssetTrace(asset_data) {
       channel.chain_2.channel_id === chain_2.channel_id
     ) {
       foundChannel = true;
-      chain_1.channel_id = channel.chain_1.channel_id;
-      chain_2.channel_id = channel.chain_2.channel_id;
+      delete chain_1.channel_id;
+      delete chain_2.channel_id;
       if (type === "ibc-cw20") {
         chain_1.port = channel.chain_1.port_id;
         chain_2.port = channel.chain_2.port_id;
@@ -242,6 +242,8 @@ export function getAssetTrace(asset_data) {
           return;
         }
       }
+      chain_1.channel_id = channel.chain_1.channel_id;
+      chain_2.channel_id = channel.chain_2.channel_id;
       return;
     }
   });
@@ -575,9 +577,50 @@ export function setLogoURIs(asset_data) {
 
 export function setImages(asset_data) {
   
-  const image = getPrimaryImage(asset_data);
+  const primaryImage = getPrimaryImage(asset_data);
+
+  let matchingImageFound = false;
   let images = [];
-  addArrayItem(image, images);
+
+  let assetImages =
+    getAssetProperty(asset_data.local_asset, "images") ||
+    getAssetProperty(asset_data.canonical_asset, "images");
+
+  assetImages.forEach((image) => {
+    if (
+      (image.png === primaryImage.png && primaryImage.png) ||
+      (image.svg === primaryImage.svg && primaryImage.svg)
+    ) {
+      matchingImageFound = true;
+      let matchingImage = { ...image};
+      if ( matchingImage.png !== primaryImage.png && primaryImage.png ) {
+        matchingImage.png = primaryImage.png 
+      }
+      if ( matchingImage.svg !== primaryImage.svg && primaryImage.svg ) {
+        matchingImage.svg = primaryImage.svg 
+      }
+
+      if (asset_data.source_asset.base_denom === "yieldeth-wei") {
+        console.log(image);
+      }
+
+      //temporary -- this should be going to the start
+      //images.unshift(matchingImage);
+      images.push(matchingImage);
+    } else {
+      images.push({ ...image });
+    }
+  });
+
+  if (!matchingImageFound) {
+    
+    //temporary -- should be going to the start
+    //images.unshift({
+    images.push({
+      png: primaryImage.png,
+      svg: primaryImage.svg
+    });
+  }
 
   asset_data.chain_reg.images = images;
 
@@ -1082,6 +1125,12 @@ export function setDenomUnits(asset_data) {
   denom_unitsCopy[zeroExponentUnitIndex].denom = asset_data.local_asset.base_denom;
 
   asset_data.chain_reg.denom_units = denom_unitsCopy;
+
+}
+
+export function setAddress(asset_data) {
+  
+  asset_data.chain_reg.address = getAssetProperty(asset_data.local_asset, "address");
 
 }
 

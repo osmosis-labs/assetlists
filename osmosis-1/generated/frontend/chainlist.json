@@ -17150,7 +17150,7 @@
       "stakeCurrency": {
         "coinDenom": "DHP",
         "chainSuggestionDenom": "udhp",
-        "coinMinimalDenom": "ibc/3C7FF3745FF85CCA532C46498BA14796348FF867D3ED4574CC89A436B8579100",
+        "coinMinimalDenom": "ibc/320F8D6EC17E14436D19C6D844BB9A5AE9B9A209F6D18364A2191FF08E8732A9",
         "sourceDenom": "udhp",
         "coinDecimals": 6,
         "coinGeckoId": "dhealth",
@@ -17160,7 +17160,7 @@
         {
           "coinDenom": "DHP",
           "chainSuggestionDenom": "udhp",
-          "coinMinimalDenom": "ibc/3C7FF3745FF85CCA532C46498BA14796348FF867D3ED4574CC89A436B8579100",
+          "coinMinimalDenom": "ibc/320F8D6EC17E14436D19C6D844BB9A5AE9B9A209F6D18364A2191FF08E8732A9",
           "sourceDenom": "udhp",
           "coinDecimals": 6,
           "coinGeckoId": "dhealth",
@@ -17176,7 +17176,7 @@
         {
           "coinDenom": "DHP",
           "chainSuggestionDenom": "udhp",
-          "coinMinimalDenom": "ibc/3C7FF3745FF85CCA532C46498BA14796348FF867D3ED4574CC89A436B8579100",
+          "coinMinimalDenom": "ibc/320F8D6EC17E14436D19C6D844BB9A5AE9B9A209F6D18364A2191FF08E8732A9",
           "sourceDenom": "udhp",
           "coinDecimals": 6,
           "coinGeckoId": "dhealth",
@@ -17323,6 +17323,7 @@
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.png"
         }
       ],
+      "description": "Saga is a Layer 1 protocol that allows developers to automatically spin up VM-agnostic, parallelized and interoperable dedicated chains, or “Chainlets,” that provide applications with infinite horizontal scalability. Each Chainlet is a replica of the Saga Mainnet, with the same validator set and security model.\n\nSaga’s mission is to enable the next 1000 chains in gaming and entertainment as part of the growing Saga Multiverse. ",
       "apis": {
         "rpc": [
           {
@@ -17343,6 +17344,85 @@
       "features": [
         "ibc-transfer",
         "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "shido",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Shido",
+      "chain_id": "shido_9008-1",
+      "bech32Prefix": "shido",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "shido",
+        "bech32PrefixAccPub": "shidopub",
+        "bech32PrefixValAddr": "shidovaloper",
+        "bech32PrefixValPub": "shidovaloperpub",
+        "bech32PrefixConsAddr": "shidovalcons",
+        "bech32PrefixConsPub": "shidovalconspub"
+      },
+      "slip44": 60,
+      "stakeCurrency": {
+        "coinDenom": "SHIDO",
+        "chainSuggestionDenom": "shido",
+        "coinMinimalDenom": "ibc/BBE825F7D1673E1EBF05AB02000E23E6077967B79547A3733B60AE4ED62C4D32",
+        "sourceDenom": "shido",
+        "coinDecimals": 18,
+        "coinGeckoId": "shido-2",
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/shido/images/shido.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "SHIDO",
+          "chainSuggestionDenom": "shido",
+          "coinMinimalDenom": "ibc/BBE825F7D1673E1EBF05AB02000E23E6077967B79547A3733B60AE4ED62C4D32",
+          "sourceDenom": "shido",
+          "coinDecimals": 18,
+          "coinGeckoId": "shido-2",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/shido/images/shido.png",
+          "gasPriceStep": {
+            "low": 20000000000,
+            "average": 25000000000,
+            "high": 40000000000
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "SHIDO",
+          "chainSuggestionDenom": "shido",
+          "coinMinimalDenom": "ibc/BBE825F7D1673E1EBF05AB02000E23E6077967B79547A3733B60AE4ED62C4D32",
+          "sourceDenom": "shido",
+          "coinDecimals": 18,
+          "coinGeckoId": "shido-2",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/shido/images/shido.png"
+        }
+      ],
+      "description": "Developers use Shido as the Ethereum and Wasm Chain to deploy applications of the future. Get all the functionalities of Ethereum and Wasm with the power of IBC and Interchain composability.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://tendermint.shidoscan.com/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://swagger.shidoscan.com/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://shidoscan.com/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign",
+        "cosmwasm",
+        "wasmd_0.24+"
       ]
     }
   ]

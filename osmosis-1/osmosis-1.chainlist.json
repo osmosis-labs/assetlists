@@ -1946,6 +1946,7 @@
         "fee_tokens": [
           {
             "denom": "uband",
+            "fixed_min_gas_price": 0.0025,
             "low_gas_price": 0.0025,
             "average_gas_price": 0.003,
             "high_gas_price": 0.005
@@ -1957,7 +1958,10 @@
           {
             "denom": "uband"
           }
-        ]
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
       },
       "description": "Band Protocol is a cross-chain data oracle platform that aggregates and connects real-world data and APIs to smart contracts.",
       "apis": {
@@ -7542,6 +7546,7 @@
           "time": "1814400s"
         }
       },
+      "description": "Saga is a Layer 1 protocol that allows developers to automatically spin up VM-agnostic, parallelized and interoperable dedicated chains, or “Chainlets,” that provide applications with infinite horizontal scalability. Each Chainlet is a replica of the Saga Mainnet, with the same validator set and security model.\n\nSaga’s mission is to enable the next 1000 chains in gaming and entertainment as part of the growing Saga Multiverse. ",
       "apis": {
         "rpc": [
           {
@@ -7562,6 +7567,67 @@
       "features": [
         "ibc-transfer",
         "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "shido",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Shido",
+      "chain_id": "shido_9008-1",
+      "bech32_prefix": "shido",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "shido",
+        "bech32PrefixAccPub": "shidopub",
+        "bech32PrefixValAddr": "shidovaloper",
+        "bech32PrefixValPub": "shidovaloperpub",
+        "bech32PrefixConsAddr": "shidovalcons",
+        "bech32PrefixConsPub": "shidovalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "shido",
+            "fixed_min_gas_price": 250000000,
+            "low_gas_price": 20000000000,
+            "average_gas_price": 25000000000,
+            "high_gas_price": 40000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "shido"
+          }
+        ]
+      },
+      "description": "Developers use Shido as the Ethereum and Wasm Chain to deploy applications of the future. Get all the functionalities of Ethereum and Wasm with the power of IBC and Interchain composability.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://tendermint.shidoscan.com/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://swagger.shidoscan.com/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://shidoscan.com/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign",
+        "cosmwasm",
+        "wasmd_0.24+"
       ]
     }
   ]

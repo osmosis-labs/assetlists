@@ -18838,6 +18838,58 @@
       "unstable": false,
       "disabled": false,
       "preview": true
+    },
+    {
+      "chainName": "cifer",
+      "sourceDenom": "ucif",
+      "coinMinimalDenom": "ibc/EFC1776BEFB7842F2DC7BABD9A3050E188145C99007ECC5F3526FED45A68D5F5",
+      "symbol": "CIF",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cifer/images/cif.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cifer/images/cif.svg"
+      },
+      "categories": [
+        "defi"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "cifer",
+            "chainId": "cifer-2",
+            "sourceDenom": "ucif",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-39205",
+            "path": "transfer/channel-39205/ucif"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "cifer",
+          "sourceDenom": "ucif",
+          "chainType": "cosmos",
+          "chainId": "cifer-2",
+          "symbol": "CIF",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cifer/images/cif.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cifer/images/cif.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "CIF",
+      "name": "Cifer",
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true
     }
   ]
 }

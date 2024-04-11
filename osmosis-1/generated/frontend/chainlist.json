@@ -17424,6 +17424,80 @@
         "cosmwasm",
         "wasmd_0.24+"
       ]
+    },
+    {
+      "chain_name": "cifer",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Cifer",
+      "chain_id": "cifer-2",
+      "bech32Prefix": "cife",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "cife",
+        "bech32PrefixAccPub": "cifepub",
+        "bech32PrefixValAddr": "cifevaloper",
+        "bech32PrefixValPub": "cifevaloperpub",
+        "bech32PrefixConsAddr": "cifevalcons",
+        "bech32PrefixConsPub": "cifevalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDenom": "CIF",
+        "chainSuggestionDenom": "ucif",
+        "coinMinimalDenom": "ibc/EFC1776BEFB7842F2DC7BABD9A3050E188145C99007ECC5F3526FED45A68D5F5",
+        "sourceDenom": "ucif",
+        "coinDecimals": 6,
+        "coinGeckoId": "",
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cifer/images/cif.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "CIF",
+          "chainSuggestionDenom": "ucif",
+          "coinMinimalDenom": "ibc/EFC1776BEFB7842F2DC7BABD9A3050E188145C99007ECC5F3526FED45A68D5F5",
+          "sourceDenom": "ucif",
+          "coinDecimals": 6,
+          "coinGeckoId": "",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cifer/images/cif.png",
+          "gasPriceStep": {
+            "low": 1,
+            "average": 5,
+            "high": 10
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "CIF",
+          "chainSuggestionDenom": "ucif",
+          "coinMinimalDenom": "ibc/EFC1776BEFB7842F2DC7BABD9A3050E188145C99007ECC5F3526FED45A68D5F5",
+          "sourceDenom": "ucif",
+          "coinDecimals": 6,
+          "coinGeckoId": "",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cifer/images/cif.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://cif_node.cifer.ai"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.cifer.ai"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://www.mintscan.io/cifer/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
     }
   ]
 }

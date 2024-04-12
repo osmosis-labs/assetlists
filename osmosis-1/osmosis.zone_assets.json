@@ -1237,7 +1237,12 @@
       "chain_name": "juno",
       "base_denom": "cw20:juno1cltgm8v842gu54srmejewghnd6uqa26lzkpa635wzra9m9xuudkqa2gtcz",
       "path": "transfer/channel-169/cw20:juno1cltgm8v842gu54srmejewghnd6uqa26lzkpa635wzra9m9xuudkqa2gtcz",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "override_properties": {
+        "symbol": "FURY.legacy",
+        "name": "FURY.legacy"
+      },
+      "_comment": "FURY.legacy $FURY.legacy"
     },
     {
       "chain_name": "acrechain",
@@ -2471,7 +2476,7 @@
       "override_properties": {
         "symbol": "PAGE"
       },
-      "osmosis_verified": false,
+      "osmosis_verified": true,
       "canonical": {
         "chain_name": "ethereum",
         "base_denom": "0x60e683C6514Edd5F758A55b6f393BeBBAfaA8d5e"
@@ -2609,14 +2614,32 @@
       "base_denom": "stadydx",
       "path": "transfer/channel-326/stadydx",
       "osmosis_verified": true,
-      "listing_date_time_utc": "2024-01-29T12:48:00Z"
+      "listing_date_time_utc": "2024-01-29T12:48:00Z",
+      "_comment": "Stride Staked DYDX $stDYDX"
     },
     {
       "chain_name": "stride",
       "base_denom": "stutia",
       "path": "transfer/channel-326/stutia",
       "osmosis_verified": true,
-      "listing_date_time_utc": "2024-01-31T23:17:00Z"
+      "listing_date_time_utc": "2024-01-31T23:17:00Z",
+      "_comment": "Stride Staked TIA $stTIA"
+    },
+    {
+      "chain_name": "stride",
+      "base_denom": "stusaga",
+      "path": "transfer/channel-326/stusaga",
+      "osmosis_verified": true,
+      "listing_date_time_utc": "2024-04-09T15:50:00Z",
+      "_comment": "Stride Staked SAGA $stSAGA"
+    },
+    {
+      "chain_name": "stride",
+      "base_denom": "stinj",
+      "path": "transfer/channel-326/stinj",
+      "osmosis_verified": true,
+      "listing_date_time_utc": "2024-04-10T18:38:00Z",
+      "_comment": "Stride Staked INJ $stINJ"
     },
     {
       "chain_name": "injective",
@@ -3020,10 +3043,69 @@
       "chain_name": "dhealth",
       "base_denom": "udhp",
       "twitter_URL": "https://twitter.com/dhealth_network",
-      "path": "transfer/channel-37505/udhp",
+      "path": "transfer/channel-38776/udhp",
       "osmosis_verified": false,
       "osmosis_unlisted": true,
       "_comment": "dHealth Token $DHP"
+    },
+    {
+      "chain_name": "furya",
+      "base_denom": "ufury",
+      "twitter_URL": "https://twitter.com/furyachain",
+      "path": "transfer/channel-8690/ufury",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "_comment": "Fury Token $FURY"
+    },
+    {
+      "chain_name": "saga",
+      "base_denom": "usaga",
+      "path": "transfer/channel-38946/usaga",
+      "osmosis_verified": true,
+      "listing_date_time_utc": "2024-04-09T10:30:00Z",
+      "override_properties": {
+        "logo_URIs": {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga_white.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga_white.svg"
+        }
+      },
+      "_comment": "Saga $SAGA"
+    },
+    {
+      "chain_name": "neutron",
+      "base_denom": "factory/neutron13lkh47msw28yynspc5rnmty3yktk43wc3dsv0l/ATOM1KLFG",
+      "path": "transfer/channel-874/factory/neutron13lkh47msw28yynspc5rnmty3yktk43wc3dsv0l/ATOM1KLFG",
+      "osmosis_verified": false,
+      "twitter_URL": "https://twitter.com/ATOM1KLFG",
+      "listing_date_time_utc": "2024-04-09T16:00:00Z",
+      "_comment": "ATOM1KLFG $ATOM1KLFG"
+    },
+    {
+      "chain_name": "shido",
+      "base_denom": "shido",
+      "path": "transfer/channel-38921/shido",
+      "twitter_URL": "https://twitter.com/ShidoGlobal",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "_comment": "Shido $SHIDO"
+    },
+    {
+      "chain_name": "cifer",
+      "base_denom": "ucif",
+      "path": "transfer/channel-39205/ucif",
+      "twitter_URL": "https://twitter.com/cifer_ai",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "_comment": "CIF Token $CIF"
+    },
+    {
+      "chain_name": "injective",
+      "base_denom": "factory/inj1h0ypsdtjfcjynqu3m75z2zwwz5mmrj8rtk2g52/uhava",
+      "path": "transfer/channel-122/factory/inj1h0ypsdtjfcjynqu3m75z2zwwz5mmrj8rtk2g52/uhava",
+      "twitter_URL": "https://twitter.com/Hava_Coin",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "_comment": "Hava Coin $HAVA"
     },
     {
       "chain_name": "osmosis",

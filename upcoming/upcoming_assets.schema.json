@@ -1,0 +1,130 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "upcomingAssets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "assetName": {
+            "type": "string",
+            "description": "The name of the asset.",
+            "examples": ["Osmosis"]
+          },
+          "symbol": {
+            "type": "string",
+            "description": "The symbol of the asset.",
+            "examples": ["OSMO"]
+          },
+          "chainName": {
+            "type": "string",
+            "description": "The name of the blockchain or network where the asset originates.",
+            "examples": ["Osmosis"]
+          },
+          "logoURL": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL to the logo image of the asset.",
+            "pattern": "^https://raw.githubusercontent.com/.+\\.(png|svg)$",
+            "examples": [
+              "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png"
+            ]
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "image_sync": {
+                  "$ref": "#/$defs/pointer"
+                },
+                "png": {
+                  "type": "string",
+                  "format": "uri-reference",
+                  "pattern": "^https://raw\\.githubusercontent\\.com/cosmos/chain-registry/master/(|testnets/|_non-cosmos/)[a-z0-9]+/images/.+\\.png$"
+                },
+                "svg": {
+                  "type": "string",
+                  "format": "uri-reference",
+                  "pattern": "^https://raw\\.githubusercontent\\.com/cosmos/chain-registry/master/(|testnets/|_non-cosmos/)[a-z0-9]+/images/.+\\.svg$"
+                },
+                "theme": {
+                  "type": "object",
+                  "properties": {
+                    "primary_color_hex": {
+                     "type": "string",
+                     "pattern": "^#[0-9a-fA-F]{6}$"
+                    },
+                    "circle": {
+                      "type": "boolean"
+                    },
+                    "dark_mode": {
+                      "type": "boolean"
+                    }
+                  },
+                  "minProperties": 1,
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            },
+            "minItems": 1
+          },
+          "socials": {
+            "type": "object",
+            "minProperties": 1,
+            "properties": {
+              "website": {
+                "type": "string",
+                "format": "uri",
+                "description": "The URL to the website of the project/asset.",
+                "examples": [
+                  "https://namada.net/"
+                ]
+              },
+              "twitter": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "estimatedLaunchDate": {
+            "type": "string",
+            "pattern": "^(Q[1-4]|((Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)(\\s\\d{1,2},)?))?\\s\\d{4}$",
+            "description": "The estimated launch date of the asset. Accepts dates in the formats: month name + year (e.g., March 2024), month name + day + year (e.g., March 22, 2024), and quarter + year (e.g., Q2 2024).",
+            "examples": ["March 22, 2024"]
+          },
+          "showLaunchDate": {
+            "type": "boolean",
+            "description": "Indicates whether to show the launch date of the asset.",
+            "examples": [true, false]
+          },
+          "osmosisAirdrop": {
+            "type": "boolean",
+            "description": "Indicates whether Osmosis Stakers or LPs are eligible for an airdrop of the asset.",
+            "examples": [false]
+          },
+          "airdropInfoUrl": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL to the airdrop info of the project/asset.",
+            "examples": [
+              "https://rpgfdrop.namada.net/"
+            ]
+          }
+        },
+        "required": [
+          "assetName",
+          "symbol",
+          "chainName",
+          "images",
+          "estimatedLaunchDateUtc",
+          "showLaunchDate",
+          "osmosisAirdrop"
+        ]
+      }
+    }
+  },
+  "required": ["upcomingAssets"]
+}

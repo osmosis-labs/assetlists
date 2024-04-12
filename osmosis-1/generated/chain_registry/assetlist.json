@@ -6298,9 +6298,9 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/7CE5F388D661D82A0774E47B5129DA51CC7129BD1A70B5FA6BCEBB5B0A2FAEAF",
-      "name": "Fanfury",
+      "name": "FURY.legacy",
       "display": "fury",
-      "symbol": "FURY",
+      "symbol": "FURY.legacy",
       "traces": [
         {
           "type": "ibc-cw20",
@@ -13871,6 +13871,111 @@
       ]
     },
     {
+      "description": "Stride's liquid staked SAGA",
+      "denom_units": [
+        {
+          "denom": "ibc/2CD9F8161C3FC332E78EF0C25F6E684D09379FB2F56EF9267E7EC139642EC57B",
+          "exponent": 0,
+          "aliases": [
+            "stusaga"
+          ]
+        },
+        {
+          "denom": "stSAGA",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/2CD9F8161C3FC332E78EF0C25F6E684D09379FB2F56EF9267E7EC139642EC57B",
+      "name": "Stride Staked SAGA",
+      "display": "stSAGA",
+      "symbol": "stSAGA",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "saga",
+            "base_denom": "usaga"
+          },
+          "provider": "Stride"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stusaga",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326",
+            "path": "transfer/channel-326/stusaga"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stsaga.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stsaga.svg"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stsaga.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stsaga.svg"
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/C04DFC9BCD893E57F2BEFE40F63EFD18D2768514DBD5F63ABD2FF7F48FC01D36",
+          "exponent": 0,
+          "aliases": [
+            "stinj"
+          ]
+        },
+        {
+          "denom": "stINJ",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/C04DFC9BCD893E57F2BEFE40F63EFD18D2768514DBD5F63ABD2FF7F48FC01D36",
+      "name": "Stride Staked INJ",
+      "display": "stINJ",
+      "symbol": "stINJ",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "injective",
+            "base_denom": "inj"
+          },
+          "provider": "Stride"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stinj",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326",
+            "path": "transfer/channel-326/stinj"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.svg"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.svg"
+        }
+      ]
+    },
+    {
       "description": "GLTO-ERC20 on injective",
       "denom_units": [
         {
@@ -14706,7 +14811,7 @@
       ]
     },
     {
-      "description": "Sail DAO Token",
+      "description": "Sail DAO is a liquidity deployment and management DAO built as a collaboration between the Osmosis and Migaloo Blockchains.",
       "denom_units": [
         {
           "denom": "factory/osmo1rckme96ptawr4zwexxj5g5gej9s2dmud8r2t9j0k0prn5mch5g4snzzwjv/sail",
@@ -15343,7 +15448,7 @@
       "description": "The native token of dHealth",
       "denom_units": [
         {
-          "denom": "ibc/3C7FF3745FF85CCA532C46498BA14796348FF867D3ED4574CC89A436B8579100",
+          "denom": "ibc/320F8D6EC17E14436D19C6D844BB9A5AE9B9A209F6D18364A2191FF08E8732A9",
           "exponent": 0,
           "aliases": [
             "udhp"
@@ -15355,7 +15460,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/3C7FF3745FF85CCA532C46498BA14796348FF867D3ED4574CC89A436B8579100",
+      "base": "ibc/320F8D6EC17E14436D19C6D844BB9A5AE9B9A209F6D18364A2191FF08E8732A9",
       "name": "dHealth",
       "display": "dhp",
       "symbol": "DHP",
@@ -15365,11 +15470,11 @@
           "counterparty": {
             "chain_name": "dhealth",
             "base_denom": "udhp",
-            "channel_id": "channel-0"
+            "channel_id": "channel-1"
           },
           "chain": {
-            "channel_id": "channel-37505",
-            "path": "transfer/channel-37505/udhp"
+            "channel_id": "channel-38776",
+            "path": "transfer/channel-38776/udhp"
           }
         }
       ],
@@ -15381,6 +15486,256 @@
         {
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dhealth/images/dhp.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dhealth/images/dhp.svg"
+        }
+      ],
+      "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "The native token of Furya",
+      "denom_units": [
+        {
+          "denom": "ibc/42D0FBF9DDC72D7359D309A93A6DF9F6FDEE3987EA1C5B3CDE95C06FCE183F12",
+          "exponent": 0,
+          "aliases": [
+            "ufury"
+          ]
+        },
+        {
+          "denom": "fury",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/42D0FBF9DDC72D7359D309A93A6DF9F6FDEE3987EA1C5B3CDE95C06FCE183F12",
+      "name": "furya",
+      "display": "fury",
+      "symbol": "FURY",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "furya",
+            "base_denom": "ufury",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-8690",
+            "path": "transfer/channel-8690/ufury"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.svg"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.svg",
+          "theme": {
+            "primary_color_hex": "#eaf143"
+          }
+        }
+      ],
+      "keywords": [
+        "gaming",
+        "staking",
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "The native staking and governance token of Saga.",
+      "denom_units": [
+        {
+          "denom": "ibc/094FB70C3006906F67F5D674073D2DAFAFB41537E7033098F5C752F211E7B6C2",
+          "exponent": 0,
+          "aliases": [
+            "usaga"
+          ]
+        },
+        {
+          "denom": "saga",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/094FB70C3006906F67F5D674073D2DAFAFB41537E7033098F5C752F211E7B6C2",
+      "name": "Saga",
+      "display": "saga",
+      "symbol": "SAGA",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "saga",
+            "base_denom": "usaga",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-38946",
+            "path": "transfer/channel-38946/usaga"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga_white.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga_white.svg"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga.svg",
+          "theme": {
+            "primary_color_hex": "#000000",
+            "dark_mode": false
+          }
+        },
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga_white.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga_white.svg",
+          "theme": {
+            "primary_color_hex": "#FFFFFF",
+            "dark_mode": true
+          }
+        }
+      ]
+    },
+    {
+      "description": "$ATOM to $1,000 LFG!!",
+      "denom_units": [
+        {
+          "denom": "ibc/0E77E090EC04C476DE2BC0A7056580AC47660DAEB7B0D4701C085E3A046AC7B7",
+          "exponent": 0,
+          "aliases": [
+            "uatom1klfg",
+            "factory/neutron13lkh47msw28yynspc5rnmty3yktk43wc3dsv0l/ATOM1KLFG"
+          ]
+        },
+        {
+          "denom": "ATOM1KLFG",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/0E77E090EC04C476DE2BC0A7056580AC47660DAEB7B0D4701C085E3A046AC7B7",
+      "name": "ATOM1KLFG",
+      "display": "ATOM1KLFG",
+      "symbol": "ATOM1KLFG",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "neutron",
+            "base_denom": "factory/neutron13lkh47msw28yynspc5rnmty3yktk43wc3dsv0l/ATOM1KLFG",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-874",
+            "path": "transfer/channel-874/factory/neutron13lkh47msw28yynspc5rnmty3yktk43wc3dsv0l/ATOM1KLFG"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/ATOM1KLFGc.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/ATOM1KLFGc.png"
+        }
+      ]
+    },
+    {
+      "description": "The native EVM and Wasm, governance and staking token of the Shido Chain",
+      "denom_units": [
+        {
+          "denom": "ibc/BBE825F7D1673E1EBF05AB02000E23E6077967B79547A3733B60AE4ED62C4D32",
+          "exponent": 0,
+          "aliases": [
+            "shido"
+          ]
+        },
+        {
+          "denom": "SHIDO",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/BBE825F7D1673E1EBF05AB02000E23E6077967B79547A3733B60AE4ED62C4D32",
+      "name": "Shido",
+      "display": "SHIDO",
+      "symbol": "SHIDO",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "shido",
+            "base_denom": "shido",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-38921",
+            "path": "transfer/channel-38921/shido"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/shido/images/shido.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/shido/images/shido.svg"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/shido/images/shido.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/shido/images/shido.svg"
+        }
+      ],
+      "keywords": [
+        "osmosis-unlisted"
+      ]
+    },
+    {
+      "description": "Decentralized Machine Learning",
+      "denom_units": [
+        {
+          "denom": "ibc/EFC1776BEFB7842F2DC7BABD9A3050E188145C99007ECC5F3526FED45A68D5F5",
+          "exponent": 0,
+          "aliases": [
+            "ucif"
+          ]
+        },
+        {
+          "denom": "cif",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/EFC1776BEFB7842F2DC7BABD9A3050E188145C99007ECC5F3526FED45A68D5F5",
+      "name": "Cifer",
+      "display": "cif",
+      "symbol": "CIF",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "cifer",
+            "base_denom": "ucif",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-39205",
+            "path": "transfer/channel-39205/ucif"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cifer/images/cif.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cifer/images/cif.svg"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cifer/images/cif.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cifer/images/cif.svg"
         }
       ],
       "keywords": [

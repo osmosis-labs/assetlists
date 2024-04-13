@@ -2366,12 +2366,27 @@
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ibc.png"
         },
         {
+          "coinDenom": "ASTRO",
+          "chainSuggestionDenom": "ibc/B8C608CEE08C4F30A15A7955306F2EDAF4A02BB191CABC4185C1A57FD978DA1B",
+          "coinMinimalDenom": "ibc/B8C608CEE08C4F30A15A7955306F2EDAF4A02BB191CABC4185C1A57FD978DA1B",
+          "coinDecimals": 6,
+          "coinGeckoId": "astroport-fi",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/astro.png"
+        },
+        {
           "coinDenom": "TNKR",
           "chainSuggestionDenom": "ibc/3A0A392E610A8D477851ABFEA74F3D828F36C015AB8E93B0FBB7566A6D13C4D6",
           "coinMinimalDenom": "ibc/3A0A392E610A8D477851ABFEA74F3D828F36C015AB8E93B0FBB7566A6D13C4D6",
           "coinDecimals": 12,
           "coinGeckoId": "tinkernet",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/tinkernet/images/tnkr.svg"
+        },
+        {
+          "coinDenom": "RSTK",
+          "chainSuggestionDenom": "ibc/04FAC73DFF7F1DD59395948F2F043B0BBF978AD4533EE37E811340F501A08FFB",
+          "coinMinimalDenom": "ibc/04FAC73DFF7F1DD59395948F2F043B0BBF978AD4533EE37E811340F501A08FFB",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rstk.png"
         }
       ],
       "description": "Osmosis (OSMO) is the premier DEX and cross-chain DeFi hub within the Cosmos ecosystem, a network of over 50 sovereign, interoperable blockchains seamlessly connected through the Inter-Blockchain Communication Protocol (IBC). Pioneering in its approach, Osmosis offers a dynamic trading and liquidity provision experience, integrating non-IBC assets from other ecosystems, including Ethereum, Solana, Avalanche, and Polkadot. Initially adopting Balancer-style pools, Osmosis now also features a concentrated liquidity model that is orders of magnitude more capital efficient, meaning that significantly less liquidity is required to handle the same amount of trading volume with minimal slippage.\n\nAs a true appchain, Osmosis has greater control over the full blockchain stack than traditional smart contract DEXs, which must follow the code of the parent chain that it is built on. This fine-grained control has enabled, for example, the development of Superfluid Staking, an extension of Proof of Stake that allows assets at the application layer to be staked to secure the chain. The customizability of appchains also allows implementing features like the Protocol Revenue module, which enables Osmosis to conduct on-chain arbitrage on behalf of OSMO stakers, balancing prices across pools while generating real yield revenue from this volume. Additionally, as a sovereign appchain, Osmosis governance can vote on upgrades to the protocol. One example of this was the introduction of a Taker Fee, which switched on the collection of exchange fees to generate diverse yield from Osmosis volume and distribute it to OSMO stakers.\n\nOsmosis is bringing the full centralized exchange experience to the decentralized world by building a cross-chain native DEX and trading suite that connects all chains over IBC, including Ethereum and Bitcoin. To reach this goal, Osmosis hosts an ever-expanding suite of DeFi applications aimed at providing a one-stop experience that includes lending, credit, margin, DeFi strategy vaults, power perps, fiat on-ramps, NFTs, stablecoins, and more — all of the functionalities that centralized exchange offer and more, in the trust-minimized environment of decentralized finance.",
@@ -3501,11 +3516,11 @@
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/astro.png"
         },
         {
-          "coinDenom": "xASTRO",
+          "coinDenom": "xASTRO.cw20",
           "chainSuggestionDenom": "cw20:terra14lpnyzc9z4g3ugr4lhm8s4nle0tq8vcltkhzh7",
           "sourceDenom": "cw20:terra14lpnyzc9z4g3ugr4lhm8s4nle0tq8vcltkhzh7",
           "coinDecimals": 6,
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/xastro.png"
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/xastro-cw20.svg"
         },
         {
           "coinDenom": "HALO",
@@ -5006,7 +5021,8 @@
           "coinDenom": "XLM",
           "chainSuggestionDenom": "baseXLM",
           "sourceDenom": "baseXLM",
-          "coinDecimals": 7
+          "coinDecimals": 7,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/stellar/images/xlm.png"
         },
         {
           "coinDenom": "XLM",
@@ -5014,7 +5030,7 @@
           "sourceDenom": "ibc/34A1D4BF5FFCDB912F64FE71D54426D56970F873F1279983B69C713B3A62D10D",
           "coinDecimals": 7,
           "coinGeckoId": "stellar",
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cronos/images/cro.png"
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/stellar/images/xlm.png"
         }
       ],
       "description": "Cronos PoS Chain is a public, open-source and permissionless blockchain - a fully decentralized network with high speed and low fees, designed to be a public good that helps drive mass adoption of blockchain technology through use cases like Payments, DeFi and NFTs.",
@@ -8750,6 +8766,7 @@
         {
           "coinDenom": "HAVA",
           "chainSuggestionDenom": "factory/inj1h0ypsdtjfcjynqu3m75z2zwwz5mmrj8rtk2g52/uhava",
+          "coinMinimalDenom": "ibc/884EBC228DFCE8F1304D917A712AA9611427A6C1ECC3179B2E91D7468FB091A2",
           "sourceDenom": "factory/inj1h0ypsdtjfcjynqu3m75z2zwwz5mmrj8rtk2g52/uhava",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/hava.png"
@@ -8782,18 +8799,26 @@
           "sourceDenom": "peggy0xA4426666addBE8c4985377d36683D17FB40c31Be",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/beast.png"
+        },
+        {
+          "coinDenom": "ASTRO",
+          "chainSuggestionDenom": "ibc/063F4461F7317CFF10F50AB044E44932D22AAD84FA7107082744946E6DB7B7A8",
+          "sourceDenom": "ibc/063F4461F7317CFF10F50AB044E44932D22AAD84FA7107082744946E6DB7B7A8",
+          "coinDecimals": 6,
+          "coinGeckoId": "astroport-fi",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/astro.png"
         }
       ],
       "description": "Injective’s mission is to create a truly free and inclusive financial system through decentralization.",
       "apis": {
         "rpc": [
           {
-            "address": "https://public.api.injective.network"
+            "address": "https://injective-rpc.polkachu.com"
           }
         ],
         "rest": [
           {
-            "address": "https://public.lcd.injective.network"
+            "address": "https://injective-api.polkachu.com"
           }
         ]
       },
@@ -9418,12 +9443,18 @@
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/luna.png"
         },
         {
-          "coinDenom": "ASTRO",
+          "coinDenom": "ASTRO.cw20",
           "chainSuggestionDenom": "cw20:terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26",
           "coinMinimalDenom": "ibc/C25A2303FE24B922DAFFDCE377AC5A42E5EF746806D32E2ED4B610DE85C203F7",
           "sourceDenom": "cw20:terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26",
           "coinDecimals": 6,
-          "coinGeckoId": "astroport-fi",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/astro-cw20.svg"
+        },
+        {
+          "coinDenom": "ASTRO",
+          "chainSuggestionDenom": "ibc/8D8A7F7253615E5F76CB6252A1E1BD921D5EDB7BBAAF8913FB1C77FF125D9995",
+          "sourceDenom": "ibc/8D8A7F7253615E5F76CB6252A1E1BD921D5EDB7BBAAF8913FB1C77FF125D9995",
+          "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/astro.png"
         },
         {
@@ -9644,6 +9675,13 @@
           "sourceDenom": "cw20:terra1eh8eq60cjy997w5dc3a6exfzanlaurupav8klx7m9u9ddfgh25mqjwl5vj",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/LADS.png"
+        },
+        {
+          "coinDenom": "RSTK",
+          "chainSuggestionDenom": "ibc/F709DF4969CD26174C1A53AA95F3D98BE643C1A52C9981487766F96A1811F6A4",
+          "sourceDenom": "ibc/F709DF4969CD26174C1A53AA95F3D98BE643C1A52C9981487766F96A1811F6A4",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rstk.png"
         }
       ],
       "description": "Fueled by a passionate community and deep developer talent pool, the Terra blockchain is built to enable the next generation of Web3 products and services.",
@@ -10412,6 +10450,13 @@
           "sourceDenom": "factory/kujira15e8q5wzlk5k38gjxlhse3vu6vqnafysncx2ltexd6y9gx50vuj2qpt7dgv/boneKuji",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/bKUJI.png"
+        },
+        {
+          "coinDenom": "RSTK",
+          "chainSuggestionDenom": "ibc/82B298F9E74A9A211C55C67C7AB0C790836BD43672D5DD830F7AE2C5D010AD7D",
+          "sourceDenom": "ibc/82B298F9E74A9A211C55C67C7AB0C790836BD43672D5DD830F7AE2C5D010AD7D",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rstk.png"
         }
       ],
       "description": "A decentralized ecosystem for protocols, builders and web3 users seeking sustainable FinTech.",
@@ -13121,6 +13166,13 @@
           "sourceDenom": "factory/migaloo1r9x8fz4alekzr78k42rpmr9unpa7egsldpqeynmwl2nfvzexue9sn8l5rg/gash",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/gash.png"
+        },
+        {
+          "coinDenom": "RSTK",
+          "chainSuggestionDenom": "factory/migaloo1d0uma9qzcts4fzt7ml39xp44aut5k6qyjfzz4asalnecppppr3rsl52vvv/rstk",
+          "sourceDenom": "factory/migaloo1d0uma9qzcts4fzt7ml39xp44aut5k6qyjfzz4asalnecppppr3rsl52vvv/rstk",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rstk.png"
         }
       ],
       "apis": {
@@ -14185,11 +14237,27 @@
         },
         {
           "coinDenom": "ASTRO",
+          "chainSuggestionDenom": "factory/neutron1ffus553eet978k024lmssw0czsxwr97mggyv85lpcsdkft8v9ufsz3sa07/astro",
+          "coinMinimalDenom": "ibc/B8C608CEE08C4F30A15A7955306F2EDAF4A02BB191CABC4185C1A57FD978DA1B",
+          "sourceDenom": "factory/neutron1ffus553eet978k024lmssw0czsxwr97mggyv85lpcsdkft8v9ufsz3sa07/astro",
+          "coinDecimals": 6,
+          "coinGeckoId": "astroport-fi",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/astro.png"
+        },
+        {
+          "coinDenom": "xASTRO",
+          "chainSuggestionDenom": "factory/neutron1zlf3hutsa4qnmue53lz2tfxrutp8y2e3rj4nkghg3rupgl4mqy8s5jgxsn/xASTRO",
+          "coinMinimalDenom": "ibc/2ED09B03AA396BC2F35B741F4CA4A82D33A24A1007BFC1973299842DD626F564",
+          "sourceDenom": "factory/neutron1zlf3hutsa4qnmue53lz2tfxrutp8y2e3rj4nkghg3rupgl4mqy8s5jgxsn/xASTRO",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/xASTRO.svg"
+        },
+        {
+          "coinDenom": "ASTRO.cw20",
           "chainSuggestionDenom": "ibc/5751B8BCDA688FD0A8EC0B292EEF1CDEAB4B766B63EC632778B196D317C40C3A",
           "sourceDenom": "ibc/5751B8BCDA688FD0A8EC0B292EEF1CDEAB4B766B63EC632778B196D317C40C3A",
           "coinDecimals": 6,
-          "coinGeckoId": "astroport-fi",
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/astro.png"
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/astro-cw20.svg"
         },
         {
           "coinDenom": "CORGI",
@@ -15018,6 +15086,14 @@
           "sourceDenom": "cw20:sei1hrndqntlvtmx2kepr0zsfgr7nzjptcc72cr4ppk4yav58vvy7v3s4er8ed",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sei/images/SEIYAN.png"
+        },
+        {
+          "coinDenom": "ASTRO",
+          "chainSuggestionDenom": "ibc/1FF96B82FDE4B0E38FA0A8EC24A83E1EAC2615F338468A47473BAD3B45E066D2",
+          "sourceDenom": "ibc/1FF96B82FDE4B0E38FA0A8EC24A83E1EAC2615F338468A47473BAD3B45E066D2",
+          "coinDecimals": 6,
+          "coinGeckoId": "astroport-fi",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/astro.png"
         }
       ],
       "description": "Sei is the fastest Layer 1 blockchain, designed to scale with the industry.",
@@ -16404,7 +16480,7 @@
           "coinMinimalDenom": "ibc/6FD2938076A4C1BB3A324A676E76B0150A4443DAE0E002FB62AC0E6B604B1519",
           "sourceDenom": "bsc0x29a63F4B209C29B4DC47f06FFA896F32667DAD2C",
           "coinDecimals": 18,
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pundix/images/purse-token-logo.svg"
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pundix/images/purse-token-logo.png"
         }
       ],
       "apis": {
@@ -17480,12 +17556,12 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://cif_node.cifer.ai"
+            "address": "http://34.128.114.243:26657"
           }
         ],
         "rest": [
           {
-            "address": "https://api.cifer.ai"
+            "address": "http://34.128.114.243:1317"
           }
         ]
       },

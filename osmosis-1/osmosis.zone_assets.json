@@ -717,6 +717,27 @@
       ]
     },
     {
+      "chain_name": "gravitybridge",
+      "base_denom": "gravity0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+      "path": "transfer/channel-144/gravity0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+      "osmosis_verified": false,
+      "override_properties": {
+        "name": "Paxos Gold (Gravity Bridge)",
+        "symbol": "PAXG.grv",
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/paxg.grv.svg"
+        }
+      },
+      "transfer_methods": [
+        {
+          "name": "Gravity Bridge",
+          "type": "external_interface",
+          "deposit_url": "https://bridge.blockscape.network/?from=gravitybridge&to=osmosis",
+          "withdraw_url": "https://bridge.blockscape.network/?from=osmosis&to=gravitybridge"
+        }
+      ]
+    },
+    {
       "chain_name": "juno",
       "base_denom": "cw20:juno1y9rf7ql6ffwkv02hsgd4yruz23pn4w97p75e2slsnkm0mnamhzysvqnxaq",
       "path": "transfer/channel-169/cw20:juno1y9rf7ql6ffwkv02hsgd4yruz23pn4w97p75e2slsnkm0mnamhzysvqnxaq",

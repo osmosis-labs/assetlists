@@ -4261,6 +4261,82 @@
       }
     },
     {
+      "chainName": "gravitybridge",
+      "sourceDenom": "gravity0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+      "coinMinimalDenom": "ibc/A5CCD24BA902843B1003A7EEE5F937C632808B9CF4925601241B15C5A0A51A53",
+      "symbol": "PAXG.grv",
+      "decimals": 18,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/paxg.grv.svg"
+      },
+      "price": {
+        "poolId": "1492",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Gravity Bridge",
+          "type": "external_interface",
+          "depositUrl": "https://bridge.blockscape.network/?from=gravitybridge&to=osmosis",
+          "withdrawUrl": "https://bridge.blockscape.network/?from=osmosis&to=gravitybridge"
+        },
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "gravitybridge",
+            "chainId": "gravity-bridge-3",
+            "sourceDenom": "gravity0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+            "port": "transfer",
+            "channelId": "channel-10"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-144",
+            "path": "transfer/channel-144/gravity0x45804880De22913dAFE09f4980848ECE6EcbAf78"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "gravitybridge",
+          "sourceDenom": "gravity0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+          "chainType": "cosmos",
+          "chainId": "gravity-bridge-3",
+          "symbol": "PAXG",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/paxg.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/paxg.svg"
+          }
+        },
+        {
+          "chainName": "ethereum",
+          "sourceDenom": "0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+          "chainType": "evm",
+          "chainId": 1,
+          "address": "0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+          "symbol": "PAXG",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/paxg.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/paxg.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "PAXG",
+      "name": "Paxos Gold (Gravity Bridge)",
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "gravitybridge",
+        "sourceDenom": "ugrav"
+      }
+    },
+    {
       "chainName": "juno",
       "sourceDenom": "cw20:juno1y9rf7ql6ffwkv02hsgd4yruz23pn4w97p75e2slsnkm0mnamhzysvqnxaq",
       "coinMinimalDenom": "ibc/DB9755CB6FE55192948AE074D18FA815E1429D3D374D5BDA8D89623C6CF235C3",

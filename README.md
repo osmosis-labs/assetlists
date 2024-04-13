@@ -2,25 +2,33 @@
 
 ## Description
 
-Asset Lists are inpsired by the [Token Lists](https://tokenlists.org/) project on Ethereum, which helps discoverability of ERC20 tokens by mapping ERC20 contracts to their associated metadata. Asset Lists offer a similar mechanism to allow frontends and other UIs to fetch metadata associated with Cosmos SDK denominations, especially for assets sent over IBC, although, this standard is a work in progress. You'll notice that the format of `assets` in the assetlist.json structure is a strict superset json representation of the [`banktypes.DenomMetadata`](https://docs.cosmos.network/v0.47/modules/bank#denommetadata) from the Cosmos SDK; this is purposefully done so that this standard may eventually be migrated into a Cosmos SDK module in the future, so it can be easily maintained on chain instead of on GitHub. The assetlist JSON Schema can be found at the Chain Registry [here](https://github.com/cosmos/chain-registry/blob/master/assetlist.schema.json).
+Inspired by Ethereum's [Token Lists](https://tokenlists.org/) project, Asset Lists aim to enhance the discoverability of Cosmos SDK denominations by associating them with metadata. While primarily used for assets transferred over IBC, this standard is still evolving. The `assets` format in the assetlist.json structure closely mirrors Cosmos SDK's [`banktypes.DenomMetadata`](https://docs.cosmos.network/v0.47/modules/bank#denommetadata), paving the way for potential migration into a Cosmos SDK module for on-chain maintenance in the future. Find the assetlist JSON Schema at the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry/blob/master/assetlist.schema.json).
 
 ## Prerequisite
 
-The `.assetlist.json` files herein are generated, which will be triggered by additions to the corresponding `osmosis.zone_assets.json` file, fetching the metadata from the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry). One prerequisite to adding an asset here is complete registration of the asset and it's originating chain (and the IBC connection between the origin chain and Osmosis, if not native to Osmosis) to the Cosmos Chain Registry, so please make sure that's done first.
+The `assetlist.json` files herein are generated, which will be triggered by additions to the corresponding `osmosis.zone_assets.json` file, fetching the metadata from the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry). One prerequisite to adding an asset here is complete registration of the asset and it's originating chain (and the IBC channel connecting origin chain to Osmosis) to the Cosmos Chain Registry.
 
 ## How to Add Assets
 
-Please see the asset [listing requirements](https://github.com/osmosis-labs/assetlists/blob/main/LISTING.md) to display assets on Osmosis Zone web app. 
+Please see the asset [listing requirements](https://github.com/osmosis-labs/assetlists/blob/main/LISTING.md) for information about displaying assets on Osmosis Zone.
 
-To add an asset, add a new asset object to the very bottom of the _osmosis.zone_assets.json_ file, containing the asset's base denom and chain name.
-- `base_denom` is the indivisible, minimial (exponent 0) denomination unit for the asset, which is also the value defined as `base` for the asset in the Chain Registry.
-- `chain_name` must be the exact value defined as `chain_name` for the chain in the Chain Registry--it is also the name of the chain's directory in the Chain Registry.
-- `path` is required for all ics20 assets (assets that have been transferred from another chain to Osmosis via IBC), which includes the vast majority of tokens except for those deployed directly on Osmosis. It requires: the IBC port; the IBC channel; and the base denomination representation that is used as input for the IBC denomination hash function (which is usually just the base denom of the asset on the origin chain (e.g., uatom), but sometimes can be different)
-  - e.g., `"path": "transfer/channel-8008135/ucoin"`
-- In the Pull Request, be sure to add in the description, or leave a comment, of the pool_id of the liquidity pool(s)
-- You may also notice some booleans:
-  - `osmosis_verified` should always be set to `false` unless modified by, or explicitly instructed otherwise by, Osmosis Labs or maintainers of this repository. This indicates whether the 'Unverified Assets setting must be toggled to reveal the asset by default on various Osmosis Zone app pages (Swap, Assets, Pools).
-  - `osmosis_unlisted` should always be included and set to `true`(, meaning it will NOT show up on Osmosis Zone app,) until after the asset's respresntation, transfer experience, and explorer URL to the transaction hash have all been validated by Osmosis Labs, at which point it can be set to `false` (or, preferrably, removed).
+To add an asset, add a new asset object to the very bottom of the _osmosis.zone_assets.json_ file, containing some identifying and key details:
+- `base_denom` is the minimal/indivisible (i.e., exponent: 0) denomination unit for the asset, corresponding to its `base` at the Chain Registry.
+- `chain_name` must be the exact value defined as `chain_name` in the chain's _chain.json_ file at the Chain Registry.
+- `path` is required for all ics20 assets (i.e., assets that are transferred to Osmosis from another chain via IBC); the only exception are asset deployed directly on Osmosis (e.g., factory tokens). It is comprised of: the destination IBC port and channel for each IBC hop, followed by the base denom on the IBC-originating chain. The is used as input into the SHA256 hash function.
+  - e.g., `"path": "transfer/channel-0/uatom"`
+- `osmosis_verified` should always be set to `false` upon inital listing; this indicates whether the 'Unverified Assets' setting must be toggled to reveal the asset on Osmosis Zone. After meeting the requirements described in the listing requirements page, an additional PR may created to set it to `true`.
+- `listing_date_time_utc` is used to record when (UTC time) an asset is first listed on Osmosis Zone.
+  - e.g., `"listing_date_time_utc": "2024-01-24T10:58:00Z",`
+- `_comment` is free string property, best used for the asset's Name and Symbol, since the base_denom is not always an obvious indicator of which asset it is 
+
+There are also some additional details that may be defined for an asset: 
+- `transfer_methods` should be included whenever a basic IBC transfer initialatd via Osmosis Zone Deposit and Withdraw buttons is unable to carry-out an interchain transfer.
+- `peg_mechanism` should be defined for stablecoins, either as: "collateralized", "algorithmic", or "hybrid".
+- `override_properties` may be defined for cases where Osmosis Zone shall display the asset differently than how registered on its source chain.
+- `canonical` shall be defined for assets that are Osmosis' canonical representation of an asset different than its source (e.g., Axelar's WETH(.axl) is Osmosis' canonical representation of Ether $ETH on Osmosis)
+- `categories` are best manually defined for an asset, including: "defi" and "meme".
+
 
 ## Zone Example
 

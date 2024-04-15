@@ -13,8 +13,8 @@
       },
       "coingeckoId": "osmosis",
       "price": {
-        "poolId": "1400",
-        "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
+        "poolId": "1263",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "defi"
@@ -39,7 +39,7 @@
       },
       "coingeckoId": "ion",
       "price": {
-        "poolId": "2",
+        "poolId": "1100",
         "denom": "uosmo"
       },
       "categories": [],
@@ -1380,7 +1380,8 @@
         "denom": "uosmo"
       },
       "categories": [
-        "meme"
+        "meme",
+        "defi"
       ],
       "transferMethods": [
         {
@@ -1687,8 +1688,8 @@
       },
       "coingeckoId": "sentinel",
       "price": {
-        "poolId": "5",
-        "denom": "uosmo"
+        "poolId": "6",
+        "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
       },
       "categories": [
         "defi"
@@ -3399,8 +3400,8 @@
       },
       "coingeckoId": "injective-protocol",
       "price": {
-        "poolId": "725",
-        "denom": "uosmo"
+        "poolId": "1319",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "defi"
@@ -4261,82 +4262,6 @@
       }
     },
     {
-      "chainName": "gravitybridge",
-      "sourceDenom": "gravity0x45804880De22913dAFE09f4980848ECE6EcbAf78",
-      "coinMinimalDenom": "ibc/A5CCD24BA902843B1003A7EEE5F937C632808B9CF4925601241B15C5A0A51A53",
-      "symbol": "PAXG.grv",
-      "decimals": 18,
-      "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/paxg.grv.svg"
-      },
-      "price": {
-        "poolId": "1492",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Gravity Bridge",
-          "type": "external_interface",
-          "depositUrl": "https://bridge.blockscape.network/?from=gravitybridge&to=osmosis",
-          "withdrawUrl": "https://bridge.blockscape.network/?from=osmosis&to=gravitybridge"
-        },
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "gravitybridge",
-            "chainId": "gravity-bridge-3",
-            "sourceDenom": "gravity0x45804880De22913dAFE09f4980848ECE6EcbAf78",
-            "port": "transfer",
-            "channelId": "channel-10"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-144",
-            "path": "transfer/channel-144/gravity0x45804880De22913dAFE09f4980848ECE6EcbAf78"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "gravitybridge",
-          "sourceDenom": "gravity0x45804880De22913dAFE09f4980848ECE6EcbAf78",
-          "chainType": "cosmos",
-          "chainId": "gravity-bridge-3",
-          "symbol": "PAXG",
-          "decimals": 18,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/paxg.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/paxg.svg"
-          }
-        },
-        {
-          "chainName": "ethereum",
-          "sourceDenom": "0x45804880De22913dAFE09f4980848ECE6EcbAf78",
-          "chainType": "evm",
-          "chainId": 1,
-          "address": "0x45804880De22913dAFE09f4980848ECE6EcbAf78",
-          "symbol": "PAXG",
-          "decimals": 18,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/paxg.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/paxg.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "PAXG",
-      "name": "Paxos Gold (Gravity Bridge)",
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false,
-      "sortWith": {
-        "chainName": "gravitybridge",
-        "sourceDenom": "ugrav"
-      }
-    },
-    {
       "chainName": "juno",
       "sourceDenom": "cw20:juno1y9rf7ql6ffwkv02hsgd4yruz23pn4w97p75e2slsnkm0mnamhzysvqnxaq",
       "coinMinimalDenom": "ibc/DB9755CB6FE55192948AE074D18FA815E1429D3D374D5BDA8D89623C6CF235C3",
@@ -4634,7 +4559,8 @@
         "denom": "uosmo"
       },
       "categories": [
-        "meme"
+        "meme",
+        "defi"
       ],
       "transferMethods": [
         {
@@ -4795,8 +4721,8 @@
       },
       "coingeckoId": "terra-luna-2",
       "price": {
-        "poolId": "1163",
-        "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
+        "poolId": "726",
+        "denom": "uosmo"
       },
       "categories": [
         "defi"
@@ -5475,8 +5401,8 @@
       },
       "coingeckoId": "kujira",
       "price": {
-        "poolId": "744",
-        "denom": "uosmo"
+        "poolId": "1161",
+        "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
       },
       "categories": [
         "defi"
@@ -7896,8 +7822,8 @@
       },
       "coingeckoId": "composite",
       "price": {
-        "poolId": "1258",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "857",
+        "denom": "uosmo"
       },
       "categories": [
         "stablecoin",
@@ -9072,6 +8998,10 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stluna.svg"
       },
       "coingeckoId": "stride-staked-luna",
+      "price": {
+        "poolId": "913",
+        "denom": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9"
+      },
       "categories": [
         "liquid_staking",
         "defi"
@@ -11617,8 +11547,8 @@
       },
       "coingeckoId": "gitopia",
       "price": {
-        "poolId": "1158",
-        "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
+        "poolId": "1036",
+        "denom": "uosmo"
       },
       "categories": [
         "defi"
@@ -11872,6 +11802,10 @@
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/cub.png"
       },
+      "price": {
+        "poolId": "1072",
+        "denom": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9"
+      },
       "categories": [
         "meme"
       ],
@@ -11927,6 +11861,10 @@
       "decimals": 6,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/blue.png"
+      },
+      "price": {
+        "poolId": "1073",
+        "denom": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9"
       },
       "categories": [
         "meme"
@@ -14403,8 +14341,8 @@
       },
       "coingeckoId": "dydx",
       "price": {
-        "poolId": "1246",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1245",
+        "denom": "uosmo"
       },
       "categories": [
         "defi"
@@ -15352,8 +15290,8 @@
       },
       "coingeckoId": "levana-protocol",
       "price": {
-        "poolId": "1325",
-        "denom": "uosmo"
+        "poolId": "1337",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "defi"
@@ -15431,8 +15369,8 @@
       },
       "coingeckoId": "newt",
       "price": {
-        "poolId": "1645",
-        "denom": "uosmo"
+        "poolId": "1646",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "meme"
@@ -15496,6 +15434,7 @@
       ],
       "transferMethods": [],
       "counterparty": [],
+      "variantGroupKey": "milkTIA",
       "name": "milkTIA",
       "verified": true,
       "unstable": false,
@@ -15513,7 +15452,7 @@
       },
       "price": {
         "poolId": "1660",
-        "denom": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0"
+        "denom": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC"
       },
       "categories": [
         "meme"
@@ -16424,8 +16363,8 @@
       },
       "coingeckoId": "wrapped-bitcoin",
       "price": {
-        "poolId": "1434",
-        "denom": "uosmo"
+        "poolId": "1436",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "meme"
@@ -16752,7 +16691,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/sttia.svg"
       },
       "price": {
-        "poolId": "1476",
+        "poolId": "1428",
         "denom": "ibc/D79E7D83AB399BFFF93433E54FAA480C191248FC556924A2A8351AE2638B3877"
       },
       "categories": [
@@ -19162,6 +19101,136 @@
       "disabled": false,
       "preview": true,
       "listingDate": "2024-04-13T17:50:00.000Z"
+    },
+    {
+      "chainName": "gravitybridge",
+      "sourceDenom": "gravity0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+      "coinMinimalDenom": "ibc/A5CCD24BA902843B1003A7EEE5F937C632808B9CF4925601241B15C5A0A51A53",
+      "symbol": "PAXG.grv",
+      "decimals": 18,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/paxg.grv.svg"
+      },
+      "price": {
+        "poolId": "1492",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Gravity Bridge",
+          "type": "external_interface",
+          "depositUrl": "https://bridge.blockscape.network/?from=gravitybridge&to=osmosis",
+          "withdrawUrl": "https://bridge.blockscape.network/?from=osmosis&to=gravitybridge"
+        },
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "gravitybridge",
+            "chainId": "gravity-bridge-3",
+            "sourceDenom": "gravity0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+            "port": "transfer",
+            "channelId": "channel-10"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-144",
+            "path": "transfer/channel-144/gravity0x45804880De22913dAFE09f4980848ECE6EcbAf78"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "gravitybridge",
+          "sourceDenom": "gravity0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+          "chainType": "cosmos",
+          "chainId": "gravity-bridge-3",
+          "symbol": "PAXG",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/paxg.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/paxg.svg"
+          }
+        },
+        {
+          "chainName": "ethereum",
+          "sourceDenom": "0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+          "chainType": "evm",
+          "chainId": 1,
+          "address": "0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+          "symbol": "PAXG",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/paxg.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/paxg.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "PAXG",
+      "name": "Paxos Gold (Gravity Bridge)",
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "gravitybridge",
+        "sourceDenom": "ugrav"
+      },
+      "listingDate": "2024-04-13T19:14:00.000Z"
+    },
+    {
+      "chainName": "migaloo",
+      "sourceDenom": "factory/migaloo1d0uma9qzcts4fzt7ml39xp44aut5k6qyjfzz4asalnecppppr3rsl52vvv/rstk",
+      "coinMinimalDenom": "ibc/04FAC73DFF7F1DD59395948F2F043B0BBF978AD4533EE37E811340F501A08FFB",
+      "symbol": "RSTK",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rstk.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rstk.svg"
+      },
+      "categories": [
+        "meme"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "migaloo",
+            "chainId": "migaloo-1",
+            "sourceDenom": "factory/migaloo1d0uma9qzcts4fzt7ml39xp44aut5k6qyjfzz4asalnecppppr3rsl52vvv/rstk",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-642",
+            "path": "transfer/channel-642/factory/migaloo1d0uma9qzcts4fzt7ml39xp44aut5k6qyjfzz4asalnecppppr3rsl52vvv/rstk"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "migaloo",
+          "sourceDenom": "factory/migaloo1d0uma9qzcts4fzt7ml39xp44aut5k6qyjfzz4asalnecppppr3rsl52vvv/rstk",
+          "chainType": "cosmos",
+          "chainId": "migaloo-1",
+          "symbol": "RSTK",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rstk.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rstk.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "RSTK",
+      "name": "RESTAKE",
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "listingDate": "2024-04-14T01:25:00.000Z"
     }
   ]
 }

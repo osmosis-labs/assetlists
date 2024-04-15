@@ -44,107 +44,6 @@ export function addArrayItem(item, array) {
   }
 }
 
-export function getAssetCoinGeckoID(envChainName, zone_asset, purpose) {
-
-  const property = "coingecko_id";
-  let trace_types = [];
-
-  let asset = zone_asset;
-
-  if (
-    purpose === osmosis_zone_frontend_assetlist ||
-    purpose === osmosis_zone_frontend_asset_detail
-  ) {
-
-    //for osmosis zone, the coingecko ID, should first be the override value, if provided
-    if (zone_asset.override_properties?.coingecko_id) {
-      return zone_asset.override_properties?.coingecko_id;
-    }
-
-    trace_types = [
-      "ibc",
-      "ibc-cw20",
-      "additional-mintage",
-      "test-mintage"
-    ];
-
-    //or, use the canonical
-    if (zone_asset.canonical) {
-      asset = zone_asset.canonical;
-    }
-
-  } else if (purpose === chain_registry_osmosis_assetlist) {
-
-    if (asset.chain_name !== envChainName) { return; }
-
-    trace_types = [
-      "additional-mintage"
-    ];
-
-  } else {
-    console.log("Invalid purpose: ${purpose}");
-  }
-
-  return chain_reg.getAssetPropertyWithTraceCustom(
-    asset.chain_name,
-    asset.base_denom,
-    property,
-    trace_types
-  );
-
-}
-
-
-export function getAssetSymbol(envChainName, zone_asset, purpose) {
-
-  const property = "symbol";
-  let trace_types = [];
-
-  let asset = zone_asset;
-
-  if (
-    purpose === osmosis_zone_frontend_assetlist ||
-    purpose === osmosis_zone_frontend_asset_detail
-  ) {
-
-    //for osmosis zone, the symbol should first be the override value, if provided
-    if (zone_asset.override_properties?.symbol) {
-      return zone_asset.override_properties?.symbol;
-    }
-
-    trace_types = [
-      "ibc",
-      "ibc-cw20",
-      "additional-mintage",
-      "test-mintage"
-    ];
-
-    //or, use the canonical
-    if (zone_asset.canonical) {
-      asset = zone_asset.canonical;
-    }
-
-  } else if (purpose === chain_registry_osmosis_assetlist) {
-
-    if (asset.chain_name !== envChainName) { return; }
-
-    trace_types = [
-      "additional-mintage"
-    ];
-
-  } else {
-    console.log("Invalid purpose: ${purpose}");
-  }
-
-  return chain_reg.getAssetPropertyWithTraceCustom(
-    asset.chain_name,
-    asset.base_denom,
-    property,
-    trace_types
-  );
-
-}
-
 
 export async function setSourceAsset(asset_data) {
 
@@ -161,31 +60,6 @@ export async function setSourceAsset(asset_data) {
 
 }
 
-export async function getLocalAsset(zone_asset, envChainName) {
-
-  if (zone_asset.chain_name === envChainName) {
-    return {
-      chain_name: zone_asset.chain_name,
-      base_denom: zone_asset.base_denom
-    }
-  }
-
-  if (!zone_asset.path) {
-    console.log("No path provided.");
-    return;
-  }
-
-  try {
-    let ibcHash = await zone.calculateIbcHash(zone_asset.path);
-    return {
-      chain_name: envChainName,
-      base_denom: ibcHash
-    }
-  } catch (error) {
-    console.error(error);
-  }
-
-}
 
 export function getAssetTrace(asset_data) {
 
@@ -306,19 +180,6 @@ export async function setLocalAsset(asset_data) {
 }
 
 
-export function getCanonicalAsset(zone_asset, source_asset) {
-
-  if (zone_asset.canonical) {
-    return {
-      chain_name: zone_asset.canonical.chain_name,
-      base_denom: zone_asset.canonical.base_denom
-    }
-  }
-
-  return source_asset;
-
-}
-
 export function setCanonicalAsset(asset_data) {
   
   if (
@@ -351,24 +212,12 @@ export function setCanonicalAsset(asset_data) {
 }
 
 
-export function getSourceDenom(asset_pointers) {
-
-  return asset_pointers.source_asset.base_denom;
-
-}
-
 export function setSourceDenom(asset_data) {
 
   asset_data.frontend.sourceDenom = asset_data.source_asset.base_denom;
 
 }
 
-
-export function getCoinMinimalDenom(asset_pointers) {
-
-  return asset_pointers.local_asset.base_denom;
-
-}
 
 export function setCoinMinimalDenom(asset_data) {
 
@@ -377,36 +226,6 @@ export function setCoinMinimalDenom(asset_data) {
 
 }
 
-//I think we don't use this anymore
-export function getSymbol(zone_asset, asset_pointers, zone_config) {
-
-  if (zone_asset.override_properties?.symbol) {
-    return zone_asset.override_properties.symbol;
-  }
-
-  let symbol = chain_reg.getAssetProperty(
-    asset_pointers.canonical_asset.chain_name,
-    asset_pointers.canonical_asset.base_denom,
-    "symbol"
-  );
-
-  const traces = chain_reg.getAssetProperty(
-    asset_pointers.canonical_asset.chain_name,
-    asset_pointers.canonical_asset.base_denom,
-    "traces"
-  );
-
-  for (let i = (traces?.length || 0) - 1; i >= 0; i--) {
-    if (traces[i].type === "bridge") {
-      const bridge_provider = zone_config.providers.find(provider => provider.provider === traces[i].provider && provider.suffix);
-      if (!bridge_provider) { break; }
-      return symbol + bridge_provider.suffix;
-    }
-  }
-
-  return symbol;
-
-}
 
 export function getAssetProperty(asset, propertyName) {
   if (!asset[propertyName]) {
@@ -1161,42 +980,43 @@ export function setDescription(asset_data) {
 
 }
 
-export function reformatFrontendAsset(frontend_asset) {
+export function reformatFrontendAsset(asset_data) {
 
-  //--Setup Zone_Config Asset--
+  //--Setup Frontend Asset--
   let reformattedAsset = {
-    chainName: frontend_asset.chainName,
-    sourceDenom: frontend_asset.sourceDenom,
-    coinMinimalDenom: frontend_asset.coinMinimalDenom,
-    symbol: frontend_asset.symbol,
-    decimals: frontend_asset.decimals,
-    logoURIs: frontend_asset.logoURIs,
-    coingeckoId: frontend_asset.coingeckoId,
-    price: frontend_asset.price,
-    categories: frontend_asset.categories ?? [],
-    pegMechanism: frontend_asset.pegMechanism,
-    transferMethods: frontend_asset.transferMethods ?? [],
-    counterparty: frontend_asset.counterparty ?? [],
-    variantGroupKey: frontend_asset.variantGroupKey,
-    name: frontend_asset.name,
-    //description: frontend_asset.description,
-    verified: frontend_asset.verified ?? false,
-    unstable: frontend_asset.unstable ?? false,
-    disabled: frontend_asset.disabled ?? false,
-    preview: frontend_asset.preview ?? false,
-    tooltipMessage: frontend_asset.tooltipMessage,
-    sortWith: frontend_asset.sortWith,
-    //twitterURL: frontend_asset.twitter_URL,
-    listingDate: frontend_asset.listingDate,
-    //relatedAssets: frontend_asset.relatedAssets,
+    chainName: asset_data.frontend.chainName,
+    sourceDenom: asset_data.frontend.sourceDenom,
+    coinMinimalDenom: asset_data.frontend.coinMinimalDenom,
+    symbol: asset_data.frontend.symbol,
+    decimals: asset_data.frontend.decimals,
+    logoURIs: asset_data.frontend.logoURIs,
+    coingeckoId: asset_data.frontend.coingeckoId,
+    price: asset_data.frontend.price,
+    categories: asset_data.frontend.categories ?? [],
+    pegMechanism: asset_data.frontend.pegMechanism,
+    transferMethods: asset_data.frontend.transferMethods ?? [],
+    counterparty: asset_data.frontend.counterparty ?? [],
+    variantGroupKey: asset_data.frontend.variantGroupKey,
+    name: asset_data.frontend.name,
+    //description: asset_data.frontend.description,
+    verified: asset_data.frontend.verified ?? false,
+    unstable: asset_data.frontend.unstable ?? false,
+    disabled: asset_data.frontend.disabled ?? false,
+    preview: asset_data.frontend.preview ?? false,
+    tooltipMessage: asset_data.frontend.tooltipMessage,
+    sortWith: asset_data.frontend.sortWith,
+    //twitterURL: asset_data.frontend.twitter_URL,
+    listingDate: asset_data.frontend.listingDate,
+    //relatedAssets: asset_data.frontend.relatedAssets,
   };
 
-  if (isNaN(frontend_asset.listingDate?.getTime())) {
+  if (isNaN(asset_data.frontend.listingDate?.getTime())) {
     // Remove listing_date if it's null
     delete reformattedAsset.listingDate;
   }
 
-  return reformattedAsset;
+  asset_data.frontend = reformattedAsset;
+  return;
 
 }
 

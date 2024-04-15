@@ -1045,7 +1045,7 @@ export function reformatChainRegAsset(asset_data) {
     images: asset_data.chain_reg.images,
     coingecko_id: asset_data.chain_reg.coingecko_id,
     keywords: asset_data.chain_reg.keywords,
-    socails: asset_data.chain_reg.socials
+    socials: asset_data.chain_reg.socials
   };
 
   asset_data.chain_reg = reformattedAsset;

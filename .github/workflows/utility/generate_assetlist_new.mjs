@@ -9,22 +9,6 @@ import { getAssetsPricing } from "./getPools.mjs";
 import { getAllRelatedAssets } from "./getRelatedAssets.mjs";
 import * as assetlist from "./generate_assetlist_functions.mjs";
 
-//-- Global Constants --
-
-//This address corresponds to the native assset on all evm chains (e.g., wei on ethereum)
-const zero_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
-
-//This defines with types of traces are considered essentially the same asset
-const find_origin_trace_types = [
-  "ibc",
-  "ibc-cw20",
-  "bridge",
-  "wrapped",
-  "additional-mintage",
-];
-
-//This defines how many days since listing qualifies an asset as a "New Asset"
-const daysForNewAssetCategory = 21;
 
 //-- Functions --
 
@@ -33,41 +17,6 @@ async function asyncForEach(array, callback) {
     await callback(array[index], index, array);
   }
 }
-
-function addArrayItem(item, array) {
-  if (!array.includes(item)) {
-    array.push(item);
-  }
-}
-
-function getAssetDecimals(asset) {
-
-  let decimals;
-
-  asset.denom_units.forEach((unit) => {
-    if (asset.display === unit.denom) {
-      decimals = unit.exponent;
-      return;
-    }
-  });
-
-  if (decimals === undefined) {
-    asset.denom_units.forEach((unit) => {
-      if (unit.aliases?.includes(asset.display)) {
-        decimals = unit.exponent;
-        return;
-      }
-    });
-  }
-
-  if (decimals === undefined) {
-    console.log("Error: $" + asset.symbol + " missing decimals!");
-  }
-
-  return decimals ?? 0;
-
-}
-
 
 const generateAssets = async (
   chainName,
@@ -97,7 +46,8 @@ const generateAssets = async (
       zone_config: zoneConfig,
       zone_asset: zone_asset,
       frontend: {},
-      chain_reg: {}
+      chain_reg: {},
+      asset_detail: {}
     }
 
     //source_asset (the most recent ibc transfer source (not necessarily the origin))
@@ -139,6 +89,7 @@ const generateAssets = async (
     assetlist.setTooltipMessage(asset_data);
     assetlist.setKeywords(asset_data);
     assetlist.setTypeAsset(asset_data);
+    assetlist.setSocials(asset_data);
 
     //--Append to Chain_Reg Assetlist--
     assetlist.reformatChainRegAsset(asset_data);
@@ -150,7 +101,7 @@ const generateAssets = async (
 
     //--Append to Asset_Detail Assetlist--
     //assetlist.reformatAssetDetailAsset(asset_data);
-    //frontend_assets.push(asset_data.asset_detail);
+    //asset_details.push(asset_data.asset_detail);
 
   });
 };

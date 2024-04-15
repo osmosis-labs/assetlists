@@ -419,10 +419,6 @@ export function setImages(asset_data) {
         matchingImage.svg = primaryImage.svg 
       }
 
-      if (asset_data.source_asset.base_denom === "yieldeth-wei") {
-        console.log(image);
-      }
-
       //temporary -- this should be going to the start
       //images.unshift(matchingImage);
       images.push(matchingImage);
@@ -487,21 +483,22 @@ export function setCoinGeckoId(asset_data) {
 
 export function setKeywords(asset_data) {
 
-  let keywords = getAssetProperty(asset_data.local_asset, "keywords") || getAssetProperty(asset_data.canonical_asset, "keywords");
-  keywords = keywords || [];
+  let keywords = getAssetProperty(asset_data.canonical_asset, "keywords") || [];
+
   //--Update Keywords--
   if (asset_data.zone_asset?.osmosis_unstable) {
-    addArrayItem("osmosis-unstable", keywords);
+    addArrayItem("osmosis_unstable", keywords);
   }
   if (asset_data.zone_asset?.osmosis_unlisted) {
-    addArrayItem("osmosis-unlisted", keywords);
+    addArrayItem("osmosis_unlisted", keywords);
   }
   if (asset_data.zone_asset?.verified) {
-    addArrayItem("osmosis-verified", keywords);
+    addArrayItem("osmosis_verified", keywords);
   }
   if (!keywords.length) {
     keywords = undefined;
   }
+
   asset_data.chain_reg.keywords = keywords;
 
 }
@@ -953,7 +950,17 @@ export function setAddress(asset_data) {
 
 }
 
+export function setSocials(asset_data) {
+
+  asset_data.chain_reg.socials = getAssetProperty(asset_data.local_asset, "socials");
+  asset_data.asset_detail.socials = getAssetProperty(asset_data.canonical_asset, "socials");
+
+}
+
 export function setDescription(asset_data) {
+
+  //asset_data.chain_reg.description = getAssetProperty(asset_data.local_asset, "description");
+  asset_data.chain_reg.extended_description = getAssetProperty(asset_data.local_asset, "extended_description");
 
   let description;
   description = getAssetProperty(asset_data.local_asset, "description") || getAssetProperty(asset_data.canonical_asset, "description");
@@ -974,7 +981,7 @@ export function setDescription(asset_data) {
   }
 
   //asset_data.chain_reg.description = description;
-  //asset_data.frontend_detail.description = description;
+  asset_data.asset_detail.description = description;
 
   //console.log(description);
 
@@ -1025,6 +1032,7 @@ export function reformatChainRegAsset(asset_data) {
   //--Setup Chain Registry Asset--
   let reformattedAsset = {
     description: asset_data.chain_reg.description,
+    extended_description: asset_data.chain_reg.extended_description,
     denom_units: asset_data.chain_reg.denom_units,
     type_asset: asset_data.chain_reg.type_asset,
     address: asset_data.chain_reg.address,
@@ -1036,7 +1044,8 @@ export function reformatChainRegAsset(asset_data) {
     logo_URIs: asset_data.chain_reg.logo_URIs,
     images: asset_data.chain_reg.images,
     coingecko_id: asset_data.chain_reg.coingecko_id,
-    keywords: asset_data.chain_reg.keywords
+    keywords: asset_data.chain_reg.keywords,
+    socails: asset_data.chain_reg.socials
   };
 
   asset_data.chain_reg = reformattedAsset;

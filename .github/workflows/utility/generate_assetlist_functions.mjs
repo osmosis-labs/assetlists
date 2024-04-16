@@ -369,77 +369,23 @@ export function setDecimals(asset_data) {
 
 }
 
-export function getPrimaryImage(asset_data) {
-
-  let image;
-
-  if (asset_data.zone_asset.override_properties?.logo_URIs) {
-    image = asset_data.zone_asset.override_properties.logo_URIs;
-  } else if (asset_data.zone_asset.canonical) {
-    image = getAssetProperty(asset_data.canonical_asset, "logo_URIs");
-  } else {
-    image = getAssetProperty(asset_data.local_asset, "logo_URIs") ?? getAssetProperty(asset_data.source_asset, "logo_URIs");
-  }
-
-  return image; 
-
-}
-
-export function setLogoURIs(asset_data) {
-
-  const logo_URIs = getPrimaryImage(asset_data);
-
-  asset_data.frontend.logoURIs = logo_URIs;
-  asset_data.chain_reg.logo_URIs = logo_URIs;
-
-}
 
 export function setImages(asset_data) {
 
-  const primaryImage = getPrimaryImage(asset_data);
+  let images = getAssetProperty(asset_data.local_asset, "images") ?? getAssetProperty(asset_data.canonical_asset, "images");
 
-  let matchingImageFound = false;
-  let images = [];
+  let primaryImage = asset_data.zone_asset?.override_properties?.logo_URIs ?? images?.[0];
 
-  let assetImages =
-    getAssetProperty(asset_data.local_asset, "images") ||
-    getAssetProperty(asset_data.canonical_asset, "images");
+  asset_data.frontend.logoURIs = {...primaryImage};
+  delete asset_data.frontend.logoURIs.theme;
+  delete asset_data.frontend.logoURIs.image_sync;
 
-  assetImages.forEach((image) => {
-    if (
-      (image.png === primaryImage.png && primaryImage.png) ||
-      (image.svg === primaryImage.svg && primaryImage.svg)
-    ) {
-      matchingImageFound = true;
-      let matchingImage = { ...image};
-      if ( matchingImage.png !== primaryImage.png && primaryImage.png ) {
-        matchingImage.png = primaryImage.png 
-      }
-      if ( matchingImage.svg !== primaryImage.svg && primaryImage.svg ) {
-        matchingImage.svg = primaryImage.svg 
-      }
-
-      //temporary -- this should be going to the start
-      //images.unshift(matchingImage);
-      images.push(matchingImage);
-    } else {
-      images.push({ ...image });
-    }
-  });
-
-  if (!matchingImageFound) {
-
-    //temporary -- should be going to the start
-    //images.unshift({
-    images.push({
-      png: primaryImage.png,
-      svg: primaryImage.svg
-    });
-  }
+  asset_data.chain_reg.logo_URIs = getAssetProperty(asset_data.local_asset, "logo_URIs");
 
   asset_data.chain_reg.images = images;
 
 }
+
 
 export function setCoinGeckoId(asset_data) {
 

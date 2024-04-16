@@ -63,7 +63,6 @@ const generateAssets = async (
     assetlist.setCoinMinimalDenom(asset_data);
     assetlist.setSymbol(asset_data);
     assetlist.setDecimals(asset_data);
-    assetlist.setLogoURIs(asset_data);
     assetlist.setAddress(asset_data);
     assetlist.setCoinGeckoId(asset_data);
     assetlist.setVerifiedStatus(asset_data);
@@ -85,7 +84,9 @@ const generateAssets = async (
     assetlist.setTraces(asset_data);
     assetlist.setSortWith(asset_data);
     assetlist.setChainName(asset_data);
+    
     assetlist.setImages(asset_data);
+
     assetlist.setTooltipMessage(asset_data);
     assetlist.setKeywords(asset_data);
     assetlist.setTypeAsset(asset_data);

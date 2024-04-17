@@ -9,6 +9,18 @@
 
 <!-- The following checklist can be ticked after Creating the PR -->
 
+### Adding Assets
+
+<!-- If NOT adding a new asset, please remove this 'Adding Chains' section. -->
+If adding a new asset, please ensure the following:
+- [ ] Asset is registered to the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry).
+- [ ] Add asset to bottom of `zone_assets.json`.
+   - [ ] `chain_name` and `base_denom` are provided and use values exactly as defined at the Chain Registry.
+   - [ ] `path` is provided, and the IBC channel referenced is registered at the Chain Registry (unless native to Osmosis).
+   - [ ] `osmosis_verified` is set to `false`
+   - [ ] `listing_date_time_utc` is specified and accurate
+   - [ ] Optional: `transfer_methods`, `peg_mechanism`, `override_properties`, `canonical`, `categories`, where necessary (see [README](https://github.com/osmosis-labs/assetlists/tree/main?tab=readme-ov-file#how-to-add-assets) for details).
+
 ### Adding Chains
 
 <!-- If NOT adding a new chain, please remove this 'Adding Chains' section. -->
@@ -16,25 +28,26 @@ If adding a new chain, please ensure the following:
 - [ ] Chain is registered to the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry).
    - Chain's registration must have `staking` defined, with at least one `staking_token` denom specified.
    - Chain's registration must have `fees` defined; at least one fee token has low, average, and high gas prices defined.
+- [ ] IBC Connection between chain and Osmosis is registered.
 - [ ] Add chain to bottom of `zone_chains.json`
-   - RPC and REST must not have any CORS blocking of the Osmosis domain.
-   - RCP node must have WSS enabled.
+   - [ ] `rpc` and `rest` does not have any CORS blocking of the Osmosis domain, and RPC node has have WSS enabled.
+   - [ ] `explorer_tx_url` correctly directs to the transaction when the hash is inserted into the URL.
 
-### Adding Assets
+### Upgrading Asset to Verified
 
-<!-- If NOT adding a new asset, please remove this 'Adding Chains' section. -->
-If adding a new asset, please ensure the following:
-- [ ] Asset is registered to the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry).
-   - The `description` and/or `extended_description` of the asset in the Chain Registry is informative.
-- [ ] Add asset to bottom of `zone_assets.json`.
-   - The IBC channel referenced in `path` must be registered to the Chain Registry.
-   - `osmosis_unlisted` defaults to `true` (until the respesentation and transferring of the new asset has been validated)
-   - Note that it is recommended to include an X (fka, Twitter) profile URL with each asset.
+<!-- If NOT upgrading asset status, please remove this 'Upgrading Asset to Verified' section. -->
 
-### On-chain liquidity
+If upgrading an Asset to Verified, please see the requirements specified at [LISTING](https://github.com/osmosis-labs/assetlists/blob/main/LISTING.md#upgrade-asset-to-verified-status-permissioned), and ensure the following:
+- [ ] Asset is defined thoroughly at the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry).
+   - [ ] A meaningful `description` and `extended_description`.
+   - [ ] Associated `socials`, including `website` and `twitter`.
+   - [ ] Logo Image has a square Aspect Ratio and < 250 KB file size.
+- [ ] This pool contains contains at least $1k USD-worth of liquidity of the asset (Provide Pool ID): ______
 
-For each new asset, please provide the plan for on-chain liquidity of the asset (See: [Pool Setup Guilde](https://docs.osmosis.zone/overview/integrate/pool-setup).): (choose one)
-- [ ] Ready -- A liquidity pool(s) has been created and has liquidity. The pool ID is: ______
-- [ ] Soon -- A pool will be created soon. Do not merge this PR until liquidity is ready. 
-  - [ ] (optional) A preview of the Osmosis Zone app with the new asset added is requested for creating the pool. (Note: This method is not recommended because the Supercharged Liquidity pool type cannot be created via the Osmosis Zone app)
-- [ ] StreamSwap -- The token is, or will be, going through a StreamSwap stream; thus, the token should be listed without requiring on-chain liquidity. A Pool ID will be provided in this PR following the stream's completion once the team has had a chance to create a pool using the earned funds. The StreamSwap Bootstrapping phase begins (when?): ______ 
+'Verified' Status Validation Checklist (to be completed by Osmosis Zone maintainers):
+- [ ] Verify appearance and metadata
+- [ ] Accurate Price
+- [ ] Trading and routing functionality
+- [ ] Withdraw and Deposit
+   - [ ] Deposit Transaction URL (if in-app)
+

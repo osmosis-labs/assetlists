@@ -1148,7 +1148,7 @@
       "chain_name": "unification",
       "base_denom": "nund",
       "path": "transfer/channel-382/nund",
-      "osmosis_verified": false
+      "osmosis_verified": true
     },
     {
       "chain_name": "jackal",
@@ -2681,7 +2681,6 @@
       "chain_name": "terra2",
       "base_denom": "cw20:terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26",
       "path": "transfer/channel-21671/cw20:terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26",
-      "twitter_URL": "https://twitter.com/astroport_fi",
       "osmosis_verified": true,
       "listing_date_time_utc": "2024-03-13T17:30:00Z",
       "transfer_methods": [
@@ -2691,7 +2690,8 @@
           "deposit_url": "https://pro.osmosis.zone/ibc?chainTo=osmosis-1&chainFrom=phoenix-1&token0=terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26&token1=ibc%2FC25A2303FE24B922DAFFDCE377AC5A42E5EF746806D32E2ED4B610DE85C203F7",
           "withdraw_url": "https://pro.osmosis.zone/ibc?chainFrom=osmosis-1&chainTo=phoenix-1&token0=ibc%2FC25A2303FE24B922DAFFDCE377AC5A42E5EF746806D32E2ED4B610DE85C203F7&token1=terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26"
         }
-      ]
+      ],
+      "_comment": "Deprecated ASTRO (CW20) $ASTRO.cw20"
     },
     {
       "chain_name": "osmosis",
@@ -2733,11 +2733,6 @@
       "twitter_URL": "https://twitter.com/humansdotai",
       "osmosis_verified": true,
       "listing_date_time_utc": "2024-03-08T16:25:00Z",
-      "override_properties": {
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/humans/images/heart-dark-mode.png"
-        }
-      },
       "_comment": "Humans.ai $HEART"
     },
     {
@@ -3102,7 +3097,6 @@
       "chain_name": "injective",
       "base_denom": "factory/inj1h0ypsdtjfcjynqu3m75z2zwwz5mmrj8rtk2g52/uhava",
       "path": "transfer/channel-122/factory/inj1h0ypsdtjfcjynqu3m75z2zwwz5mmrj8rtk2g52/uhava",
-      "twitter_URL": "https://twitter.com/Hava_Coin",
       "transfer_methods": [
         {
           "name": "Osmosis Pro TFM IBC Transfer",
@@ -3111,8 +3105,11 @@
           "withdraw_url": "https://pro.osmosis.zone/ibc?chainFrom=osmosis-1&chainTo=injective-1&token0=ibc%2F884EBC228DFCE8F1304D917A712AA9611427A6C1ECC3179B2E91D7468FB091A2&token1=factory%2Finj1h0ypsdtjfcjynqu3m75z2zwwz5mmrj8rtk2g52%2Fuhava"
         }
       ],
-      "osmosis_verified": false,
-      "osmosis_unlisted": true,
+      "categories": [
+        "meme"
+      ],
+      "osmosis_verified": true,
+      "listing_date_time_utc": "2024-04-15T15:55:00Z",
       "_comment": "Hava Coin $HAVA"
     },
     {
@@ -3121,7 +3118,58 @@
       "twitter_URL": "https://twitter.com/IBCmemecoin",
       "osmosis_verified": false,
       "osmosis_unlisted": true,
+      "categories": [
+        "meme"
+      ],
       "_comment": "ImBeCiles $IBC"
+    },
+    {
+      "chain_name": "neutron",
+      "base_denom": "factory/neutron1ffus553eet978k024lmssw0czsxwr97mggyv85lpcsdkft8v9ufsz3sa07/astro",
+      "path": "transfer/channel-874/factory/neutron1ffus553eet978k024lmssw0czsxwr97mggyv85lpcsdkft8v9ufsz3sa07/astro",
+      "osmosis_verified": true,
+      "listing_date_time_utc": "2024-04-13T17:50:00Z",
+      "_comment": "Astroport $ASTRO"
+    },
+    {
+      "chain_name": "neutron",
+      "base_denom": "factory/neutron1zlf3hutsa4qnmue53lz2tfxrutp8y2e3rj4nkghg3rupgl4mqy8s5jgxsn/xASTRO",
+      "path": "transfer/channel-874/factory/neutron1zlf3hutsa4qnmue53lz2tfxrutp8y2e3rj4nkghg3rupgl4mqy8s5jgxsn/xASTRO",
+      "osmosis_verified": true,
+      "listing_date_time_utc": "2024-04-13T17:50:00Z",
+      "osmosis_unlisted": true,
+      "_comment": "Staked Astroport $xASTRO"
+    },
+    {
+      "chain_name": "gravitybridge",
+      "base_denom": "gravity0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+      "path": "transfer/channel-144/gravity0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+      "osmosis_verified": false,
+      "listing_date_time_utc": "2024-04-13T19:14:00Z",
+      "override_properties": {
+        "name": "Paxos Gold (Gravity Bridge)",
+        "symbol": "PAXG.grv",
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/paxg.grv.svg"
+        }
+      },
+      "transfer_methods": [
+        {
+          "name": "Gravity Bridge",
+          "type": "external_interface",
+          "deposit_url": "https://bridge.blockscape.network/?from=gravitybridge&to=osmosis",
+          "withdraw_url": "https://bridge.blockscape.network/?from=osmosis&to=gravitybridge"
+        }
+      ],
+      "_comment": "Gravity Bridged Paxos Gold $PAXG.grv"
+    },
+    {
+      "chain_name": "migaloo",
+      "base_denom": "factory/migaloo1d0uma9qzcts4fzt7ml39xp44aut5k6qyjfzz4asalnecppppr3rsl52vvv/rstk",
+      "path": "transfer/channel-642/factory/migaloo1d0uma9qzcts4fzt7ml39xp44aut5k6qyjfzz4asalnecppppr3rsl52vvv/rstk",
+      "osmosis_verified": false,
+      "listing_date_time_utc": "2024-04-14T01:25:00Z",
+      "_comment": "ReStake DAO $RSTK"
     }
   ]
 }

@@ -482,30 +482,34 @@ export function setListingDate(asset_data) {
 export function setCategories(asset_data) {
 
   asset_data.frontend.categories = asset_data.zone_asset?.categories || [];
+  // if has a "peg_mechanism", add "stablecoin" category
   if (asset_data.zone_asset?.peg_mechanism) {
     addArrayItem("stablecoin", asset_data.frontend.categories);
-    addArrayItem("defi", asset_data.frontend.categories);
   }
+
+  // if has a "liquid-stake" trace, add "liquid_staking" category
   getAssetProperty(asset_data.canonical_asset, "traces")?.forEach((trace) => {
     if (trace.type == "liquid-stake") {
       addArrayItem("liquid_staking", asset_data.frontend.categories);
-      addArrayItem("defi", asset_data.frontend.categories);
       return;
     }
   });
-  if (
-    chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "fees")?.fee_tokens[0]?.denom ===
-    asset_data.canonical_asset.base_denom
-  ) {
-    addArrayItem("defi", asset_data.frontend.categories);
-  }
-  if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
-  //if (
-  //  chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom ===
-  //  asset_data.canonical_asset.base_denom
-  //) {
-    addArrayItem("defi", asset_data.frontend.categories);
-  }
+
+  // if (
+  //   chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "fees")?.fee_tokens[0]?.denom ===
+  //   asset_data.canonical_asset.base_denom
+  // ) {
+  //   addArrayItem("defi", asset_data.frontend.categories);
+  // }
+  // if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
+  // //if (
+  // //  chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom ===
+  // //  asset_data.canonical_asset.base_denom
+  // //) {
+  //   addArrayItem("defi", asset_data.frontend.categories);
+  // }
+
+  // assume any factory or cw20 token without another category is a memecoin
   if (
     asset_data.frontend.categories.length <= 0 &&
     (

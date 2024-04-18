@@ -509,16 +509,18 @@ export function setCategories(asset_data) {
   //   addArrayItem("defi", asset_data.frontend.categories);
   // }
 
-  // assume any factory or cw20 token without another category is a memecoin
-  if (
-    asset_data.frontend.categories.length <= 0 &&
-    (
-      asset_data.canonical_asset.base_denom.substring(0, 7) === "factory" ||
-      asset_data.canonical_asset.base_denom.substring(0, 5) === "cw20:"
-    )
-  ) {
-    addArrayItem("meme", asset_data.frontend.categories);
-  }
+  // do not do this
+  
+  // // assume any factory or cw20 token without another category is a memecoin
+  // if (
+  //   asset_data.frontend.categories.length <= 0 &&
+  //   (
+  //     asset_data.canonical_asset.base_denom.substring(0, 7) === "factory" ||
+  //     asset_data.canonical_asset.base_denom.substring(0, 5) === "cw20:"
+  //   )
+  // ) {
+  //   addArrayItem("meme", asset_data.frontend.categories);
+  // }
 
   //temporary
   if (asset_data.frontend.categories.length === 0) {

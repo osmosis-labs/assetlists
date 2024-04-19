@@ -15433,7 +15433,7 @@
       "description": "The native token of dHealth",
       "denom_units": [
         {
-          "denom": "ibc/320F8D6EC17E14436D19C6D844BB9A5AE9B9A209F6D18364A2191FF08E8732A9",
+          "denom": "ibc/415797C6CE8DC6E9B4C894EE802B4CF47F74932D282C351A1D9DCB21D94B7162",
           "exponent": 0,
           "aliases": [
             "udhp"
@@ -15445,7 +15445,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/320F8D6EC17E14436D19C6D844BB9A5AE9B9A209F6D18364A2191FF08E8732A9",
+      "base": "ibc/415797C6CE8DC6E9B4C894EE802B4CF47F74932D282C351A1D9DCB21D94B7162",
       "name": "dHealth",
       "display": "dhp",
       "symbol": "DHP",
@@ -15455,18 +15455,14 @@
           "counterparty": {
             "chain_name": "dhealth",
             "base_denom": "udhp",
-            "channel_id": "channel-1"
+            "channel_id": "channel-2"
           },
           "chain": {
-            "channel_id": "channel-38776",
-            "path": "transfer/channel-38776/udhp"
+            "channel_id": "channel-73360",
+            "path": "transfer/channel-73360/udhp"
           }
         }
       ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dhealth/images/dhp.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dhealth/images/dhp.svg"
-      },
       "images": [
         {
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dhealth/images/dhp.png",
@@ -16023,6 +16019,54 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rstk.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rstk.svg"
         }
+      ]
+    },
+    {
+      "description": "The native token of dHealth",
+      "denom_units": [
+        {
+          "denom": "ibc/320F8D6EC17E14436D19C6D844BB9A5AE9B9A209F6D18364A2191FF08E8732A9",
+          "exponent": 0,
+          "aliases": [
+            "udhp"
+          ]
+        },
+        {
+          "denom": "dhp",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/320F8D6EC17E14436D19C6D844BB9A5AE9B9A209F6D18364A2191FF08E8732A9",
+      "name": "dHealth",
+      "display": "dhp",
+      "symbol": "DHP",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "dhealth",
+            "base_denom": "udhp",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-38776",
+            "path": "transfer/channel-38776/udhp"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dhealth/images/dhp.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dhealth/images/dhp.svg"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dhealth/images/dhp.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dhealth/images/dhp.svg"
+        }
+      ],
+      "keywords": [
+        "osmosis_unlisted"
       ]
     },
     {

@@ -485,24 +485,28 @@ export function setCategories(asset_data) {
   const meme = "meme";
   const liquid_staking = "liquid_staking";
   const stablecoin = "stablecoin";
-  //"sail-initiative",
-  //"bridges",
-  //"nft-protocol",
-  //"depin",
-  //"ai",
-  //"privacy",
-  //"social",
-  //"oracles",
-  //"dweb",
-  //"rwa",
-  //"gaming"
-
-  const approvedCategories = [defi, meme, liquid_staking, stablecoin];
+  const approvedCategories = [
+    defi,
+    meme,
+    liquid_staking,
+    stablecoin,
+    "sail_initiative",
+    "bridges",
+    "nft_protocol",
+    "depin",
+    "ai",
+    "privacy",
+    "social",
+    "oracles",
+    "dweb",
+    "rwa",
+    "gaming"
+  ];
   
   asset_data.frontend.categories = asset_data.zone_asset?.categories || [];
 
   //temporarily omit any categories that the frontend isn't able to handle.
-  asset_data.frontend.categories = asset_data.frontend.categories.filter(str => approvedCategories.includes(str));
+  //asset_data.frontend.categories = asset_data.frontend.categories.filter(str => approvedCategories.includes(str));
   
   // if has a "peg_mechanism", add "stablecoin" category
   if (asset_data.zone_asset?.peg_mechanism) {

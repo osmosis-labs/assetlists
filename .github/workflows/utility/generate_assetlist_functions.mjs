@@ -481,10 +481,10 @@ export function setListingDate(asset_data) {
 
 export function setCategories(asset_data) {
 
-  const defi = "defi",
-  const meme = "meme",
-  const liquid_staking = "liquid_staking",
-  const stablecoin = "stablecoin",
+  const defi = "defi";
+  const meme = "meme";
+  const liquid_staking = "liquid_staking";
+  const stablecoin = "stablecoin";
   //"sail-initiative",
   //"bridges",
   //"nft-protocol",

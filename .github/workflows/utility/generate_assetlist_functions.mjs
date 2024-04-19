@@ -481,16 +481,38 @@ export function setListingDate(asset_data) {
 
 export function setCategories(asset_data) {
 
+  const defi = "defi",
+  const meme = "meme",
+  const liquid_staking = "liquid_staking",
+  const stablecoin = "stablecoin",
+  //"sail-initiative",
+  //"bridges",
+  //"nft-protocol",
+  //"depin",
+  //"ai",
+  //"privacy",
+  //"social",
+  //"oracles",
+  //"dweb",
+  //"rwa",
+  //"gaming"
+
+  const approvedCategories = [defi, meme, liquid_staking, stablecoin];
+  
   asset_data.frontend.categories = asset_data.zone_asset?.categories || [];
+
+  //temporarily omit any categories that the frontend isn't able to handle.
+  asset_data.frontend.categories = asset_data.frontend.categories.filter(str => approvedCategories.includes(str));
+  
   // if has a "peg_mechanism", add "stablecoin" category
   if (asset_data.zone_asset?.peg_mechanism) {
-    addArrayItem("stablecoin", asset_data.frontend.categories);
+    addArrayItem(stablecoin, asset_data.frontend.categories);
   }
 
   // if has a "liquid-stake" trace, add "liquid_staking" category
   getAssetProperty(asset_data.canonical_asset, "traces")?.forEach((trace) => {
     if (trace.type == "liquid-stake") {
-      addArrayItem("liquid_staking", asset_data.frontend.categories);
+      addArrayItem(liquid_staking, asset_data.frontend.categories);
       return;
     }
   });
@@ -522,7 +544,6 @@ export function setCategories(asset_data) {
   //   addArrayItem("meme", asset_data.frontend.categories);
   // }
 
-  //temporary
   if (asset_data.frontend.categories.length === 0) {
     asset_data.frontend.categories = undefined;
   }

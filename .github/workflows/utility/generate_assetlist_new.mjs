@@ -23,7 +23,8 @@ const generateAssets = async (
   zoneConfig,
   zone_assets,
   frontend_assets,
-  chain_reg_assets
+  chain_reg_assets,
+  asset_detail_assets,
 ) => {
 
   //--Get Pool Data--
@@ -101,8 +102,8 @@ const generateAssets = async (
     frontend_assets.push(asset_data.frontend);
 
     //--Append to Asset_Detail Assetlist--
-    //assetlist.reformatAssetDetailAsset(asset_data);
-    //asset_details.push(asset_data.asset_detail);
+    assetlist.reformatAssetDetailAsset(asset_data);
+    asset_detail_assets.push(asset_data.asset_detail);
 
   });
 };
@@ -140,25 +141,23 @@ async function generateAssetlist(chainName) {
     zone.noDir,
     zone.zoneAssetlistFileName
   )?.assets;
+
   let frontend_assets = [];
   let chain_reg_assets = [];
+  let asset_detail_assets = [];
   await generateAssets(
     chainName,
     zoneConfig,
     zoneAssetlist,
     frontend_assets,
-    chain_reg_assets
+    chain_reg_assets,
+    asset_detail_assets
   );
+
   //zone_config_assets = await getAllRelatedAssets(
   //  zone_config_assets,
   //  zoneConfig
   //);
-  chain_reg_assets = getChainRegAssets(chainName, chain_reg_assets);
-  let chain_reg_assetlist = {
-    $schema: "../assetlist.schema.json",
-    chain_name: chainName,
-    assets: chain_reg_assets,
-  };
 
   let frontend_assetlist = {
     chainName: chainName,
@@ -170,6 +169,25 @@ async function generateAssetlist(chainName) {
     zone.assetlistFileName,
     frontend_assetlist
   );
+
+  let asset_detail_assetlist = {
+    chainName: chainName,
+    assets: asset_detail_assets,
+  };
+  zone.writeToFile(
+    chainName,
+    zone.assetDetailAssetlist,
+    zone.assetlistFileName,
+    asset_detail_assetlist
+  );
+  assetlist.localizeAssetDetail(asset_detail_assets);
+
+  chain_reg_assets = getChainRegAssets(chainName, chain_reg_assets);
+  let chain_reg_assetlist = {
+    $schema: "../assetlist.schema.json",
+    chain_name: chainName,
+    assets: chain_reg_assets,
+  };
   zone.writeToFile(
     chainName,
     zone.chainRegAssetlist,

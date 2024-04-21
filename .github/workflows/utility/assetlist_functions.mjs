@@ -31,7 +31,8 @@ const generatedDirectoryName = "generated";
 export const chainRegAssetlist = path.join(generatedDirectoryName, "chain_registry");
 export const zoneConfigAssetlist = path.join(generatedDirectoryName, "frontend");
 export const zoneConfigChainlist = path.join(generatedDirectoryName, "frontend");
-export const assetDetailAssetlist = path.join(generatedDirectoryName, "asset_detail");
+export const zoneAssetDetailAssetlist = path.join(generatedDirectoryName, "asset_detail");
+export const zoneAssetDetailLanguageFiles = path.join(generatedDirectoryName, "asset_detail", "language_files");
 
 //- Chain Names --
 export const chainNames = [

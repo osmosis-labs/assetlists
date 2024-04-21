@@ -8,6 +8,7 @@ import * as zone from "./assetlist_functions.mjs";
 import { getAssetsPricing } from "./getPools.mjs";
 import { getAllRelatedAssets } from "./getRelatedAssets.mjs";
 import * as assetlist from "./generate_assetlist_functions.mjs";
+import * as localization from "./localization.mjs";
 
 
 //-- Functions --
@@ -176,11 +177,13 @@ async function generateAssetlist(chainName) {
   };
   zone.writeToFile(
     chainName,
-    zone.assetDetailAssetlist,
+    zone.zoneAssetDetailAssetlist,
     zone.assetlistFileName,
     asset_detail_assetlist
   );
-  assetlist.localizeAssetDetail(asset_detail_assets);
+  //assetlist.localizeAssetDetailAssetlist(chainName);
+  //assetlist.localizeAssetDetail(asset_detail_assets);
+  localization.extractAssetDetailLocalizationInput(chainName, asset_detail_assets);
 
   chain_reg_assets = getChainRegAssets(chainName, chain_reg_assets);
   let chain_reg_assetlist = {

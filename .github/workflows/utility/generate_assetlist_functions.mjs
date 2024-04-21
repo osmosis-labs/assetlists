@@ -1064,23 +1064,3 @@ export function reformatAssetDetailAsset(asset_data) {
   return;
 
 }
-
-
-export function localizeAssetDetail(assets) {
-
-  const asset_detail_file_name_middle = "_asset_detail_";
-  const localized_file_extension = ".json";
-  let localization_code;
-  let asset_detail_file_name;
-
-  assets.forEach((asset) => {
-    localization_code = en;
-    asset_detail_file_name =
-      asset.symbol +
-      asset_detail_file_name_middle +
-      localization_code +
-      localized_file_extension;
-    //try to read asset_detail file
-  });
-
-}

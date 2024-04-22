@@ -26,13 +26,12 @@ export const assetlistFileName = "assetlist.json";
 export const chainlistFileName = "chainlist.json";
 
 //- Directory Names -
+export const assetlistsRoot = "../../..";
 export const noDir = "";
-const generatedDirectoryName = "generated";
+export const generatedDirectoryName = "generated";
 export const chainRegAssetlist = path.join(generatedDirectoryName, "chain_registry");
 export const zoneConfigAssetlist = path.join(generatedDirectoryName, "frontend");
 export const zoneConfigChainlist = path.join(generatedDirectoryName, "frontend");
-export const zoneAssetDetailAssetlist = path.join(generatedDirectoryName, "asset_detail");
-export const zoneAssetDetailLanguageFiles = path.join(generatedDirectoryName, "asset_detail", "language_files");
 
 //- Chain Names --
 export const chainNames = [
@@ -50,7 +49,6 @@ const chainNames_decommissioned = [
 
 function getFileLocation(chainName, directoryName, fileName) {
   
-  const assetlistsRoot = "../../..";
   const chainNameToChainIdMap = new Map([
     ["osmosis", "osmosis-1"],
     ["osmosistestnet4", "osmo-test-4"],
@@ -58,7 +56,7 @@ function getFileLocation(chainName, directoryName, fileName) {
   ]);
   return path.join(
     assetlistsRoot,
-    chainNameToChainIdMap.get(chainName),
+    chainNameToChainIdMap.get(chainName) || "",
     directoryName,
     fileName
   );
@@ -92,6 +90,24 @@ export function writeToFile(chainName, directoryName, fileName, value) {
     //console.log("Write successful!");
   } catch (err) {
     console.log(err);
+  }
+}
+
+
+
+export function getFilesInDirectory(directoryPath) {
+  try {
+    // Read the contents of the directory synchronously
+    const files = fs.readdirSync(directoryPath);
+
+    // Filter out only the files from the list of entries
+    const filePaths = files.map(file => path.join(directoryPath, file))
+      .filter(filePath => fs.statSync(filePath).isFile());
+
+    return filePaths;
+  } catch (error) {
+    console.error(`Error reading directory ${directoryPath}:`, error);
+    return [];
   }
 }
 

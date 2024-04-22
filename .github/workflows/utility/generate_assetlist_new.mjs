@@ -183,7 +183,7 @@ async function generateAssetlist(chainName) {
   );
   //assetlist.localizeAssetDetailAssetlist(chainName);
   //assetlist.localizeAssetDetail(asset_detail_assets);
-  localization.extractAssetDetailLocalizationInput(chainName, asset_detail_assets);
+  localization.setAssetDetailLocalizationInput(chainName, asset_detail_assets);
 
   chain_reg_assets = getChainRegAssets(chainName, chain_reg_assets);
   let chain_reg_assetlist = {

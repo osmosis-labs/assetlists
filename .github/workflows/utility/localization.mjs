@@ -64,7 +64,7 @@ export function setAssetDetailLocalizationInput(chainName, assets) {
 
 export function getLocalizationCodes() {
 
-  const directory = path.join(zone.assetlistsRoot, inlangInputOutput);
+  const directory = path.join(zone.assetlistsRoot, "languages");
   const filesInDirectory = zone.getFilesInDirectory(directory) || [];
   return filesInDirectory.map(file => path.basename(file, path.extname(file))) || [];
 
@@ -74,21 +74,40 @@ export function getLocalizationCodes() {
 export function getLocalizationOutput() {
   
   let inlangOutput = {};
+  let fileLocation;
 
   const localization_codes = getLocalizationCodes();
 
   localization_codes.forEach((localization_code) => {
   
-    inlangOutput[localization_code] = zone.readFromFile(
-      zone.noDir,
-      inlangInputOutput,
-      localization_code + file_extension
-    ) || {};
+    try {
+
+      // Read from the file
+      fileLocation = zone.getFileLocation(
+        zone.noDir,
+        inlangInputOutput,
+        localization_code + file_extension
+      );
+      const fileContent = fs.readFileSync(fileLocation);
+
+      // Parse the JSON content
+      inlangOutput[localization_code] = JSON.parse(fileContent);
+
+    } catch {}
 
     //extract relevant data from localizations
     setLocalizedDescriptions(inlangOutput[localization_code], localization_code);
 
-    //once done, delete the output
+    //once done, delete the input and output
+    if (inlangOutput[localization_code]) {
+      try {
+        // Delete the file synchronously
+        fs.unlinkSync(fileLocation);
+        console.log(`File ${fileLocation} deleted successfully`);
+      } catch (err) {
+        console.error(`Error deleting file ${fileLocation}:`, err);
+      }
+    }
 
   });
 
@@ -100,6 +119,8 @@ export function setLocalizedDescriptions(inlangOutput, localization_code) {
 
   let asset_detail;
   let asset_symbol;
+
+  if (!inlangOutput) { return; }
 
   zone.chainNames.forEach((chainName) => {
     if (!inlangOutput[chainName]) { return; }

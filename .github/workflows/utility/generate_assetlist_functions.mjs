@@ -7,7 +7,6 @@ import * as chain_reg from "../../../chain-registry/.github/workflows/utility/ch
 import * as zone from "./assetlist_functions.mjs";
 import { getAssetsPricing } from "./getPools.mjs";
 import { getAllRelatedAssets } from "./getRelatedAssets.mjs";
-import { localizeText } from "./localization.mjs";
 
 //-- Global Constants --
 
@@ -942,7 +941,20 @@ export function setAddress(asset_data) {
 export function setSocials(asset_data) {
 
   asset_data.chain_reg.socials = getAssetProperty(asset_data.local_asset, "socials");
+
   let socials = getAssetProperty(asset_data.canonical_asset, "socials");
+  asset_data.asset_detail.websiteURL = socials?.website;
+  asset_data.asset_detail.twitterURL = socials?.twitter;
+
+  if (socials) { return; }
+  
+  if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
+    let socials = chain_reg.getFileProperty(
+      asset_data.canonical_asset.chain_name,
+      "chain",
+      "socials"
+    )
+  }
   asset_data.asset_detail.websiteURL = socials?.website;
   asset_data.asset_detail.twitterURL = socials?.twitter;
 
@@ -1055,7 +1067,7 @@ export function reformatAssetDetailAsset(asset_data) {
     name: asset_data.asset_detail.name,
     symbol: asset_data.asset_detail.symbol,
     description: asset_data.asset_detail.description,
-    coingeckoId: asset_data.asset_detail.coingeckoId,
+    coingeckoID: asset_data.asset_detail.coingeckoId,
     websiteURL: asset_data.asset_detail.websiteURL,
     twitterURL: asset_data.asset_detail.twitterURL
   };

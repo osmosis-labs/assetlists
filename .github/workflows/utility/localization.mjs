@@ -6,6 +6,7 @@
 
 import * as zone from "./assetlist_functions.mjs";
 import * as path from 'path';
+import * as fs from 'fs';
 
 
 
@@ -25,18 +26,6 @@ export const inlangInputOutput = path.join("languages", "language_files");
 
 //-- Functions --
 
-export function localizeText(text, localization_code) {
-  
-  //const inlang = new InLang({
-    //languageFilesPath: '../../../osmosis-1/generated/asset_detail/locales',
-    //defaultLanguage: 'en', // Default language code
-  //});
-  
-  // Load language files
-  inlang.loadLanguageFiles();
-  
-}
-
 export function setAssetDetailLocalizationInput(chainName, assets) {
 
   let assetSymbolPlaceholder;
@@ -53,15 +42,9 @@ export function setAssetDetailLocalizationInput(chainName, assets) {
     if (!asset.description || !asset.symbol) { return; }
     assetSymbolPlaceholder = asset.symbol.replace(/\./g, "(dot)");
 
-    try {
-      currentDescription = zone.readFromFile(
-        chainName,
-        zoneAssetDetail,
-        asset.symbol + asset_detail_file_name_middle + default_localization_code + file_extension
-      )?.description;
-    } catch {
-      currentDescription = null;
-    }
+    currentDescription = getAssetDetail(chainName, asset.symbol, default_localization_code)?.description;
+
+    
     if (currentDescription === asset.description) { return; }
 
     inlangInput[chainName][assetSymbolPlaceholder] = {
@@ -69,7 +52,6 @@ export function setAssetDetailLocalizationInput(chainName, assets) {
     };
 
   });
-zoneAssetDetailAssetlist
   zone.writeToFile(
     zone.noDir,
     inlangInputOutput,
@@ -79,34 +61,40 @@ zoneAssetDetailAssetlist
 
 }
 
+
+export function getLocalizationCodes() {
+
+  const directory = path.join(zone.assetlistsRoot, inlangInputOutput);
+  const filesInDirectory = zone.getFilesInDirectory(directory) || [];
+  return filesInDirectory.map(file => path.basename(file, path.extname(file))) || [];
+
+}
+
+
 export function getLocalizationOutput() {
   
   let inlangOutput = {};
 
-  const directory = path.join(zone.assetlistsRoot, inlangInputOutput);
-  const filesInDirectory = zone.getFilesInDirectory(directory) || [];
-  const localization_codes = filesInDirectory.map(file => path.basename(file, path.extname(file))) || [];
+  const localization_codes = getLocalizationCodes();
 
   localization_codes.forEach((localization_code) => {
   
     inlangOutput[localization_code] = zone.readFromFile(
-      zone.assetlistsRoot,
+      zone.noDir,
       inlangInputOutput,
       localization_code + file_extension
     ) || {};
 
     //extract relevant data from localizations
-    getLocalizedDescriptions(inlangOutput[localization_code], localization_code);
+    setLocalizedDescriptions(inlangOutput[localization_code], localization_code);
+
+    //once done, delete the output
 
   });
 
 }
 
-export function getLocalizedDescriptions(inlangOutput, localization_code) {
-
-  const directory = path.join(zone.assetlistsRoot, inlangInputOutput);
-  const filesInDirectory = zone.getFilesInDirectory(directory) || [];
-  const localization_codes = filesInDirectory.map(file => path.basename(file, path.extname(file))) || [];
+export function setLocalizedDescriptions(inlangOutput, localization_code) {
 
   let assetDetailAssetlist;
 
@@ -124,17 +112,18 @@ export function getLocalizedDescriptions(inlangOutput, localization_code) {
     )?.assets || [];
 
     Object.keys(inlangOutput[chainName]).forEach((assetSymbolPlaceholder) => {
-      
+
       //prepare the object for Asset Detail
       asset_symbol = assetSymbolPlaceholder.replace(/\(dot\)/g, ".");
       asset_detail = assetDetailAssetlist.find(item => item.symbol === asset_symbol);
-      asset_detail.symbol = asset_symbol;
+      asset_detail.description = inlangOutput[chainName][assetSymbolPlaceholder].description
+      asset_detail = { localization: localization_code, ...asset_detail }
 
       //write Asset Detail
       zone.writeToFile(
         chainName,
         zoneAssetDetail,
-        asset_detail.symbol + asset_detail_file_name_middle + localization_code + file_extension,
+        asset_detail.symbol.toLowerCase() + asset_detail_file_name_middle + localization_code + file_extension,
         asset_detail
       );
     });
@@ -142,3 +131,84 @@ export function getLocalizedDescriptions(inlangOutput, localization_code) {
   });
 
 }
+
+
+export function getAssetDetail(chainName, asset_symbol, localization_code) {
+
+  let asset_detail = {};
+  try {
+
+    // Read from the file
+    let fileLocation = zone.getFileLocation(
+      chainName,
+      zoneAssetDetail,
+      asset_symbol.toLowerCase() + asset_detail_file_name_middle + localization_code + file_extension
+    );
+    const fileContent = fs.readFileSync(fileLocation);
+
+    // Parse the JSON content
+    asset_detail = JSON.parse(fileContent);
+
+  } catch {
+    asset_detail = {};
+  }
+  return asset_detail;
+
+}
+
+
+export function setAssetDetailAll() {
+  
+  const localization_codes = getLocalizationCodes();
+  let asset_detail, localized_asset_detail;
+
+  zone.chainNames.forEach((chainName) => {
+    
+    const asset_detail_assets = zone.readFromFile(
+      chainName,
+      zoneAssetDetail,
+      zone.assetlistFileName
+    )?.assets || [];
+    
+    //iterate asset_detail/assetlist
+    asset_detail_assets.forEach((asset) => {
+    
+      //compare against the english output file
+
+      asset_detail = getAssetDetail(chainName, asset.symbol, default_localization_code);
+
+      if (
+        asset_detail &&
+        asset.name === asset_detail?.name &&
+        asset.symbol === asset_detail?.symbol &&
+      //asset.description === asset_detail?.description &&
+        asset.coingeckoID === asset_detail?.coingeckoID &&
+        asset.websiteURL === asset_detail?.websiteURL &&
+        asset.twitterURL === asset_detail?.twitterURL
+      ) {
+        return;
+      }
+
+      localization_codes.forEach((localization_code) => {
+
+        localized_asset_detail = getAssetDetail(chainName, asset.symbol, localization_code);
+        asset_detail = { localization: localization_code, ...asset }
+        asset_detail.description = localized_asset_detail.description;
+        //console.log(asset_detail);
+        //console.log(localized_asset_detail);
+
+        //write Asset Detail
+        zone.writeToFile(
+          chainName,
+          zoneAssetDetail,
+          asset.symbol.toLowerCase() + asset_detail_file_name_middle + localization_code + file_extension,
+          asset_detail
+        );
+      
+      });
+    
+    });
+
+  });
+
+};

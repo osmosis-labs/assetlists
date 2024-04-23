@@ -177,12 +177,10 @@ async function generateAssetlist(chainName) {
   };
   zone.writeToFile(
     chainName,
-    zone.zoneAssetDetailAssetlist,
+    localization.zoneAssetDetail,
     zone.assetlistFileName,
     asset_detail_assetlist
   );
-  //assetlist.localizeAssetDetailAssetlist(chainName);
-  //assetlist.localizeAssetDetail(asset_detail_assets);
   localization.setAssetDetailLocalizationInput(chainName, asset_detail_assets);
 
   chain_reg_assets = getChainRegAssets(chainName, chain_reg_assets);

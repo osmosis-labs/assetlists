@@ -1,3 +1,4 @@
-import { getLocalizationOutput } from './localization.mjs';
+import { getLocalizationOutput, setAssetDetailAll } from './localization.mjs';
 
 getLocalizationOutput();
+setAssetDetailAll();

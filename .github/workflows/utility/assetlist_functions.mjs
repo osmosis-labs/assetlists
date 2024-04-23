@@ -47,8 +47,7 @@ const chainNames_decommissioned = [
 //-- Functions --
 
 
-function getFileLocation(chainName, directoryName, fileName) {
-  
+export function getFileLocation(chainName, directoryName, fileName) {
   const chainNameToChainIdMap = new Map([
     ["osmosis", "osmosis-1"],
     ["osmosistestnet4", "osmo-test-4"],
@@ -80,7 +79,7 @@ export function readFromFile(chainName, directoryName, fileName) {
 
 export function writeToFile(chainName, directoryName, fileName, value) {
   try {
-    fs.writeFile(
+    fs.writeFileSync(
       getFileLocation(chainName, directoryName, fileName),
       JSON.stringify(value,null,2),
       (err) => {
@@ -122,3 +121,31 @@ export async function calculateIbcHash(ibcHashInput) {
   return ibcHashOutput;
 }
 
+
+
+export function objectsAreEqual(obj1, obj2) {
+  // Get the keys of both objects
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+
+  // Check if the number of keys is the same
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  // Iterate over the keys of obj1
+  for (let key of keys1) {
+    // Check if obj2 has the same key
+    if (!obj2.hasOwnProperty(key)) {
+      return false;
+    }
+    
+    // Check if the values of the properties are the same
+    if (obj1[key] !== obj2[key]) {
+      return false;
+    }
+  }
+
+  // If all properties and values are the same, return true
+  return true;
+}

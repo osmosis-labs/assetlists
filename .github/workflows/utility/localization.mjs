@@ -97,6 +97,7 @@ export function getLocalizationOutput() {
 
     //extract relevant data from localizations
     setLocalizedDescriptions(inlangOutput[localization_code], localization_code);
+    //for more translated data, add function calls here
 
     //once done, delete the input and output
     if (inlangOutput[localization_code]) {

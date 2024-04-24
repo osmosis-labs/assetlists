@@ -10374,7 +10374,11 @@
         {
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/amposmo.png"
         }
-      ]
+      ],
+      "socials": {
+        "website": "https://www.erisprotocol.com/",
+        "twitter": "https://twitter.com/eris_protocol"
+      }
     },
     {
       "description": "The native staking token of Sei.",
@@ -15796,9 +15800,53 @@
         "osmosis_unlisted"
       ],
       "socials": {
-        "webiste": "https://www.ibcmeme.wtf",
+        "website": "https://www.ibcmeme.wtf",
         "twitter": "https://twitter.com/IBCmemecoin"
       }
+    },
+    {
+      "description": "The token of Crowdpunk DAO",
+      "denom_units": [
+        {
+          "denom": "ibc/B87F0F5255CC658408F167C2F7B987A8D914622E1F73BCC267406360588F2B1E",
+          "exponent": 0,
+          "aliases": [
+            "erc20/0xfbf4318d24a93753f11d365a6dcf8b830e98ab0f"
+          ]
+        },
+        {
+          "denom": "crowdp",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/B87F0F5255CC658408F167C2F7B987A8D914622E1F73BCC267406360588F2B1E",
+      "name": "Crowdpunk DAO",
+      "display": "crowdp",
+      "symbol": "CROWDP",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "evmos",
+            "base_denom": "erc20/0xfbf4318d24a93753f11d365a6dcf8b830e98ab0f",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-204",
+            "path": "transfer/channel-204/erc20/0xfbf4318d24a93753f11d365a6dcf8b830e98ab0f"
+          }
+        }
+      ],
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/evmos/images/crowdp.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/evmos/images/crowdp.svg"
+        }
+      ],
+      "keywords": [
+        "osmosis_unlisted"
+      ]
     },
     {
       "description": "Astroport is a neutral marketplace where anyone, from anywhere in the galaxy, can dock to trade their wares.",
@@ -16018,6 +16066,33 @@
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rstk.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rstk.svg"
+        }
+      ]
+    },
+    {
+      "description": "Bernese Mountain Dog. Thematic dog token to have fun and be friends with all other dog tokens. Fixed supply 132M",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1s6ht8qrm8x0eg8xag5x3ckx9mse9g4se248yss/BERNESE",
+          "exponent": 0
+        },
+        {
+          "denom": "BERNESE",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1s6ht8qrm8x0eg8xag5x3ckx9mse9g4se248yss",
+      "base": "factory/osmo1s6ht8qrm8x0eg8xag5x3ckx9mse9g4se248yss/BERNESE",
+      "name": "BERNESE",
+      "display": "BERNESE",
+      "symbol": "BERNESE",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bernese.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bernese.png"
         }
       ]
     },

@@ -33,6 +33,11 @@ jobs:
       - name: Run code to Generate Assetlist New
         working-directory: ./.github/workflows/utility
         run: node generate_assetlist_new.mjs
+
+      - name: Trigger Translation
+        run: |
+          # Replace the following command with the command to trigger translation using InLang CLI or API
+          pnpm inlang machine translate
       
       - name: Add Commit Push
         uses: devops-infra/action-commit-push@master

@@ -37,7 +37,7 @@ jobs:
       - name: Trigger Translation
         run: |
           # Replace the following command with the command to trigger translation using InLang CLI or API
-          inlang machine translate
+          pnpm inlang machine translate
       
       - name: Add Commit Push
         uses: devops-infra/action-commit-push@master

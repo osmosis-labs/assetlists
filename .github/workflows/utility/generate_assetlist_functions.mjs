@@ -248,9 +248,13 @@ export function getAssetProperty(asset, propertyName) {
 
 export function setSymbol(asset_data) {
 
+  let symbol;
+
   if (asset_data.zone_asset.override_properties?.symbol) {
-    asset_data.frontend.symbol = asset_data.zone_asset.override_properties.symbol;
-    asset_data.chain_reg.symbol = asset_data.zone_asset.override_properties.symbol;
+    symbol = asset_data.zone_asset.override_properties.symbol;
+    asset_data.frontend.symbol = symbol;
+    asset_data.chain_reg.symbol = symbol;
+    asset_data.asset_detail.symbol = symbol;
     return;
   }
 
@@ -260,7 +264,7 @@ export function setSymbol(asset_data) {
     "symbol"
   );
 
-  let symbol = asset_data.canonical_asset.symbol;
+  symbol = asset_data.canonical_asset.symbol;
 
   const traces = getAssetProperty(asset_data.canonical_asset, "traces");
 
@@ -279,6 +283,7 @@ export function setSymbol(asset_data) {
 
   asset_data.frontend.symbol = symbol;
   asset_data.chain_reg.symbol = symbol;
+  asset_data.asset_detail.symbol = symbol;
 
 }
 
@@ -390,6 +395,7 @@ export function setImages(asset_data) {
 export function setCoinGeckoId(asset_data) {
 
   let trace_types = [];
+  let coingecko_id;
 
   if (asset_data.source_asset.chain_name === asset_data.chainName) {
 
@@ -407,7 +413,9 @@ export function setCoinGeckoId(asset_data) {
   }
 
   if (asset_data.zone_asset.override_properties?.coingecko_id) {
-    asset_data.frontend.coingeckoId = asset_data.zone_asset.override_properties?.coingecko_id;
+    coingecko_id = asset_data.zone_asset.override_properties?.coingecko_id;
+    asset_data.frontend.coingeckoId = coingecko_id;
+    asset_data.asset_detail.coingeckoId = coingecko_id;
     return;
   }
 
@@ -418,12 +426,15 @@ export function setCoinGeckoId(asset_data) {
     "test-mintage"
   ];
 
-  asset_data.frontend.coingeckoId = chain_reg.getAssetPropertyWithTraceCustom(
+  coingecko_id = chain_reg.getAssetPropertyWithTraceCustom(
     asset_data.canonical_asset.chain_name,
     asset_data.canonical_asset.base_denom,
     "coingecko_id",
     trace_types
   );
+
+  asset_data.frontend.coingeckoId = coingecko_id;
+  asset_data.asset_detail.coingeckoId = coingecko_id;
 
 }
 
@@ -574,6 +585,7 @@ export function setName(asset_data) {
     name = asset_data.zone_asset?.override_properties?.name;
     asset_data.frontend.name = name;
     asset_data.chain_reg.name = name;
+    asset_data.asset_detail.name = name;
     return;
   }
 
@@ -614,12 +626,11 @@ export function setName(asset_data) {
   }
   asset_data.frontend.name = name;
   asset_data.chain_reg.name = name;
+  asset_data.asset_detail.name = name;
 
 }
 
 export function setVariantGroupKey(asset_data) {
-
-
 
   const trace_types = [
     "ibc",
@@ -930,37 +941,56 @@ export function setAddress(asset_data) {
 export function setSocials(asset_data) {
 
   asset_data.chain_reg.socials = getAssetProperty(asset_data.local_asset, "socials");
-  asset_data.asset_detail.socials = getAssetProperty(asset_data.canonical_asset, "socials");
+
+  let socials = getAssetProperty(asset_data.canonical_asset, "socials");
+  asset_data.asset_detail.websiteURL = socials?.website;
+  asset_data.asset_detail.twitterURL = socials?.twitter;
+
+  if (socials) { return; }
+  
+  if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
+    let socials = chain_reg.getFileProperty(
+      asset_data.canonical_asset.chain_name,
+      "chain",
+      "socials"
+    )
+  }
+  asset_data.asset_detail.websiteURL = socials?.website;
+  asset_data.asset_detail.twitterURL = socials?.twitter;
 
 }
 
 export function setDescription(asset_data) {
+  
+  let description, extended_description;
 
-  //asset_data.chain_reg.description = getAssetProperty(asset_data.local_asset, "description");
-  asset_data.chain_reg.extended_description = getAssetProperty(asset_data.local_asset, "extended_description");
-
-  let description;
+  //for Chain registry
   description = getAssetProperty(asset_data.local_asset, "description") || getAssetProperty(asset_data.canonical_asset, "description");
   if (description) {
     asset_data.chain_reg.description = description;
   }
+  asset_data.chain_reg.extended_description = getAssetProperty(asset_data.local_asset, "extended_description");
 
-  //description = getAssetProperty(asset_data.canonical_asset, "description");
-
-  if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
-    const chain_description = chain_reg.getFileProperty(
-      asset_data.canonical_asset.chain_name,
-      "chain",
-      "description"
-    );
-    //console.log(chain_description);
-    description = (description ?? "") + (description && chain_description ? "\n\n" : "") + (chain_description ?? "");
+  //for Asset Detail
+  extended_description = asset_data.zone_asset?.override_properties?.description;
+  if (extended_description) {
+    asset_data.asset_detail.description = extended_description;
+    return;
   }
-
-  //asset_data.chain_reg.description = description;
+  extended_description =
+    getAssetProperty(asset_data.local_asset, "extended_description") ||
+    getAssetProperty(asset_data.canonical_asset, "extended_description");
+  if (!extended_description) {
+    if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
+      extended_description = chain_reg.getFileProperty(
+        asset_data.canonical_asset.chain_name,
+        "chain",
+        "description"
+      );
+    }
+  }
+  description = (description ?? "") + (description && extended_description ? "\n\n" : "") + (extended_description ?? "");
   asset_data.asset_detail.description = description;
-
-  //console.log(description);
 
 }
 
@@ -1026,6 +1056,23 @@ export function reformatChainRegAsset(asset_data) {
   };
 
   asset_data.chain_reg = reformattedAsset;
+  return;
+
+}
+
+export function reformatAssetDetailAsset(asset_data) {
+
+  //--Setup Asset Detail Asset--
+  let reformattedAsset = {
+    name: asset_data.asset_detail.name,
+    symbol: asset_data.asset_detail.symbol,
+    description: asset_data.asset_detail.description,
+    coingeckoID: asset_data.asset_detail.coingeckoId,
+    websiteURL: asset_data.asset_detail.websiteURL,
+    twitterURL: asset_data.asset_detail.twitterURL
+  };
+
+  asset_data.asset_detail = reformattedAsset;
   return;
 
 }

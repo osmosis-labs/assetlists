@@ -20,7 +20,7 @@ const default_localization_code = "en";
 //-- Directories --
 
 export const zoneAssetDetail = path.join(zone.generatedDirectoryName, "asset_detail");
-export const inlangInputOutput = path.join("languages", "language_files");
+export const inlangInputOutput = "language_files";
 
 
 
@@ -42,7 +42,7 @@ export function setAssetDetailLocalizationInput(chainName, assets) {
         fs.mkdirSync(path.join(zone.assetlistsRoot, inlangInputOutput));
       } catch (error) {
         if (error.code === 'EEXIST') {
-          console.log("Language Files already directory exists.");
+          console.log("Language Files directory already exists.");
         } else {
           throw error;
         }

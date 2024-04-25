@@ -40,6 +40,7 @@ export function setAssetDetailLocalizationInput(chainName, assets) {
       // If the file doesn't exist, create the directory and the file
       try {
         fs.mkdirSync(path.join(zone.assetlistsRoot, inlangInputOutput));
+        console.log("Directory successfully created");
       } catch (error) {
         if (error.code === 'EEXIST') {
           console.log("Language Files directory already exists.");

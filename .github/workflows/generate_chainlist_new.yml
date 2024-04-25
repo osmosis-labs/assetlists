@@ -26,6 +26,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 19.6.0
+
+      - name: Install dependencies
+        run: npm install
           
       - name: Run code to Generate Chainlist New
         working-directory: ./.github/workflows/utility

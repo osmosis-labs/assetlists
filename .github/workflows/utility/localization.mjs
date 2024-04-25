@@ -31,11 +31,27 @@ export function setAssetDetailLocalizationInput(chainName, assets) {
   let assetSymbolPlaceholder;
   let currentDescription;
 
-  let inlangInput = zone.readFromFile(
-    zone.noDir,
-    inlangInputOutput,
-    default_localization_code + file_extension
-  ) || {};
+  let inlangInput;
+  const filePath = path.join(zone.assetlistsRoot, inlangInputOutput, default_localization_code + file_extension);
+  try {
+    inlangInput = JSON.parse(fs.readFileSync(filePath));
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      // If the file doesn't exist, create the directory and the file
+      try {
+        fs.mkdirSync(path.join(zone.assetlistsRoot, inlangInputOutput));
+      } catch (error) {
+        if (error.code === 'EEXIST') {
+          console.log("Language Files already directory exists.");
+        } else {
+          throw error;
+        }
+      }
+      inlangInput = {};
+    } else {
+        throw error;
+    }
+  }
   inlangInput[chainName] = inlangInput[chainName] || {};
 
   assets.forEach((asset) => {

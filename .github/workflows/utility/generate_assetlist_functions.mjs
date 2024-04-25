@@ -147,18 +147,15 @@ export async function setLocalAsset(asset_data) {
     !asset_data.zone_asset ||
     !asset_data.source_asset
   ) { return; }
-
   if (asset_data.zone_asset.chain_name === asset_data.chainName) {
     asset_data.local_asset = asset_data.source_asset;
     return;
   }
-
   if (!asset_data.zone_asset.path) {
     console.log("No path provided.");
     console.log(asset_data.zone_asset);
     return;
   }
-
   try {
     let ibcHash = await zone.calculateIbcHash(asset_data.zone_asset.path);
     asset_data.local_asset = {
@@ -168,7 +165,6 @@ export async function setLocalAsset(asset_data) {
   } catch (error) {
     console.error(error);
   }
-
   let traces = getAssetProperty(asset_data.source_asset, "traces");
   if (!traces || traces?.length <= 0) {
     traces = [];
@@ -176,7 +172,6 @@ export async function setLocalAsset(asset_data) {
   const trace = getAssetTrace(asset_data);
   traces.push(trace);
   asset_data.local_asset.traces = traces;
-
 }
 
 
@@ -336,8 +331,10 @@ export function getAssetTraces(asset) {
   };
   let traces;
   let fullTraces = [];
+  let counter = 0;
+  const limit = 50;
 
-  while (lastTrace) {
+  while (lastTrace && counter !== limit) {
     traces = chain_reg.getAssetProperty(
       lastTrace.counterparty.chain_name,
       lastTrace.counterparty.base_denom,
@@ -348,6 +345,11 @@ export function getAssetTraces(asset) {
       fullTraces.push(lastTrace);
     } else {
       lastTrace = undefined;
+    }
+    counter = counter + 1;
+    if (counter === limit) {
+      console.log("Traces too long!");
+      console.log(asset);
     }
   }
 

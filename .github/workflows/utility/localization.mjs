@@ -95,27 +95,85 @@ export function getLocalizationOutput() {
 
   const localization_codes = getLocalizationCodes();
 
+  //Read Language Files
   localization_codes.forEach((localization_code) => {
-  
     try {
-
-      // Read from the file
       fileLocation = zone.getFileLocation(
         zone.noDir,
         inlangInputOutput,
         localization_code + file_extension
       );
       const fileContent = fs.readFileSync(fileLocation);
-
-      // Parse the JSON content
       inlangOutput[localization_code] = JSON.parse(fileContent);
-
     } catch {}
+  });
 
-    //extract relevant data from localizations
-    setLocalizedDescriptions(inlangOutput[localization_code], localization_code);
-    //for more translated data, add function calls here
 
+  //Save Localization Output into new Object
+  let savedTranslations = {};
+  inlangOutput[default_localization_code].forEach((chain) => {
+    savedTranlsations[chain] = {};
+    chain.forEach((asset) => {
+      savedTranslations[chain][asset] = {};
+      asset.forEach((property) => {
+        savedTranslations[chain][asset][property] = {};
+        localization_codes.forEach((localization) => {
+          if (!inlangOutput[localization][chain][asset][property]) { return; }
+          savedTranslations[chain][asset][property][localization] = inlangOutput[localization][chain][asset][property];
+        });
+        if (Object.keys(savedTranslations[chain][asset][property]).length !== localization_codes.length) {
+          delete savedTranslations[chain][asset][property];
+        }
+      });
+      if (Object.keys(savedTranslations[chain][asset]).length === 0) {
+        delete savedTranslations[chain][asset];
+      }
+    });
+    if (Object.keys(savedTranslations[chain]).length === 0) {
+      delete savedTranslations[chain];
+    }
+  });
+
+
+  //Write Saved Localization Data to Files
+  savedTranslations.forEach((chain) => {
+
+    //Read Asset Detail
+    const assetDetailAssetlist = zone.readFromFile(
+      chain,
+      zone.zoneAssetDetail,
+      zone.assetlistFileName
+    )?.assets || [];
+
+    chain.forEach((asset) => {
+      
+      //Write to Localized Files
+
+      //Asset Detail:
+      const asset_symbol = Object.keys(asset).replace(/\(dot\)/g, ".");
+      let asset_detail = assetDetailAssetlist.find(item => item.symbol === asset_symbol);
+      asset.forEach((property) => {
+        asset_detail?[property] = savedTranslations[chain][asset][property];
+      });
+      asset_detail = { localization: localization_code, ...asset_detail }
+      zone.writeToFile(
+        chain,
+        zone.zoneAssetDetail,
+        asset_detail.symbol.toLowerCase() + asset_detail_file_name_middle + localization_code + file_extension,
+        asset_detail
+      );
+    
+    });
+
+  });
+
+
+  //extract relevant data from localizations
+  //setLocalizedDescriptions(inlangOutput[localization_code], localization_code);
+  //for more translated data, add function calls here
+
+
+  localization_codes.forEach((localization_code) => {
     //once done, delete the input and output
     if (inlangOutput[localization_code]) {
       try {
@@ -126,7 +184,6 @@ export function getLocalizationOutput() {
         console.error(`Error deleting file ${fileLocation}:`, err);
       }
     }
-
   });
 
 }
@@ -146,7 +203,7 @@ export function setLocalizedDescriptions(inlangOutput, localization_code) {
     //read Asset Detail
     assetDetailAssetlist = zone.readFromFile(
       chainName,
-      zoneAssetDetail,
+      zone.zoneAssetDetail,
       zone.assetlistFileName
     )?.assets || [];
 
@@ -161,7 +218,7 @@ export function setLocalizedDescriptions(inlangOutput, localization_code) {
       //write Asset Detail
       zone.writeToFile(
         chainName,
-        zoneAssetDetail,
+        zone.zoneAssetDetail,
         asset_detail.symbol.toLowerCase() + asset_detail_file_name_middle + localization_code + file_extension,
         asset_detail
       );
@@ -180,7 +237,7 @@ export function getAssetDetail(chainName, asset_symbol, localization_code) {
     // Read from the file
     let fileLocation = zone.getFileLocation(
       chainName,
-      zoneAssetDetail,
+      zone.zoneAssetDetail,
       asset_symbol.toLowerCase() + asset_detail_file_name_middle + localization_code + file_extension
     );
     const fileContent = fs.readFileSync(fileLocation);
@@ -205,7 +262,7 @@ export function setAssetDetailAll() {
     
     const asset_detail_assets = zone.readFromFile(
       chainName,
-      zoneAssetDetail,
+      zone.zoneAssetDetail,
       zone.assetlistFileName
     )?.assets || [];
     
@@ -239,7 +296,7 @@ export function setAssetDetailAll() {
         //write Asset Detail
         zone.writeToFile(
           chainName,
-          zoneAssetDetail,
+          zone.zoneAssetDetail,
           asset.symbol.toLowerCase() + asset_detail_file_name_middle + localization_code + file_extension,
           asset_detail
         );

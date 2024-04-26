@@ -90,15 +90,17 @@ export function getLocalizationCodes() {
 
 export function getLocalizationOutput() {
   
-  let inlangOutput = {};
-  let fileLocation;
+  const localized_properties = [
+    "description"
+  ];
 
   const localization_codes = getLocalizationCodes();
 
   //Read Language Files
+  let inlangOutput = {};
   localization_codes.forEach((localization_code) => {
     try {
-      fileLocation = zone.getFileLocation(
+      const fileLocation = zone.getFileLocation(
         zone.noDir,
         inlangInputOutput,
         localization_code + file_extension
@@ -146,25 +148,42 @@ export function getLocalizationOutput() {
     )?.assets || [];
 
     chain.forEach((asset) => {
-      
+
       //Write to Localized Files
-
-      //Asset Detail:
       const asset_symbol = Object.keys(asset).replace(/\(dot\)/g, ".");
-      let asset_detail = assetDetailAssetlist.find(item => item.symbol === asset_symbol);
-      asset.forEach((property) => {
-        asset_detail?[property] = savedTranslations[chain][asset][property];
-      });
-      asset_detail = { localization: localization_code, ...asset_detail }
-      zone.writeToFile(
-        chain,
-        zone.zoneAssetDetail,
-        asset_detail.symbol.toLowerCase() + asset_detail_file_name_middle + localization_code + file_extension,
-        asset_detail
-      );
-    
-    });
+      //Asset Detail
+      const updated_asset_detail = assetDetailAssetlist.find(item => item.symbol === asset_symbol); // param?
+      
+      localization_codes.forEach((localization_code) => { // function?
 
+        //Asset Detail
+        let localized_asset_detail = {
+          localization: localization_code
+        };
+        const fileLocation =
+          asset_detail.symbol.toLowerCase() + asset_detail_file_name_middle + localization_code + file_extension;
+        try {
+          const fileContent = fs.readFileSync(fileLocation);
+          const existing_asset_detail = JSON.parse(fileContent);
+        } catch {}
+        existing_asset_detail.forEach((property) => {   // this may contain existing translated data
+          localized_asset_detail[property] = property;
+        });
+        updated_asset_detail.forEach((property) => {   // this contains the most up to date data
+          if (localized_properties.includes(property)) { return; }   // but we skip any translated data
+          localized_asset_detail[property] = property;
+        });
+        asset.forEach((property) => {   // this contains new translated data
+          localized_asset_detail[property] = savedTranslations[chain][asset][property]; // param?
+        });
+        zone.writeToFile(
+          chain,
+          zone.zoneAssetDetail,
+          fileLocation,
+          localized_asset_detail
+        );
+      });
+    });
   });
 
 

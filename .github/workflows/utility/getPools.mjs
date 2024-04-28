@@ -23,7 +23,7 @@ let pools = new Map();
 export let assets = new Map();
 let usd, osmo, atom;
 let base_pairs = [usd, osmo, atom];
-const num_max_hops = 3;
+const num_max_hops = 7;
 const num_largest_pools = 5;
 
 let ticks = 0;
@@ -219,47 +219,23 @@ function getRoute(asset, route, hops, ignore_assets){
   // -- GET 5 LARGEST POOLS -- 
   
   if (!asset.largest_pools) {
-    let sizes = [];
-    asset_pools.forEach((pool) => {
-      if(isNaN(pool.pool_assets.get(asset.base).size)){ return }
-      sizes.push(pool.pool_assets.get(asset.base).size);
+
+    let candidate_pools = asset_pools.filter(pool => {
+      const size = pool.pool_assets.get(asset.base)?.size;
+      return size !== undefined && !isNaN(size) && size > 0;
     });
-    sizes.sort(function(a, b){return b - a});
-    let size_threshold;
-    if (asset.base == osmo) {
-      size_threshold = 500;
-    } else {
-      size_threshold = num_largest_pools;
-    }
-    if (sizes.length < size_threshold) {
-      size_threshold = sizes.length;
-    }
-    asset.largest_pools = [];
-    asset_pools.forEach((pool) => {
-      if(isNaN(pool.pool_assets.get(asset.base).size)){ return }
-      if(pool.pool_assets.get(asset.base).size >= sizes[size_threshold - 1]) {
-        asset.largest_pools.push(pool);
-      }
+    candidate_pools.sort((poolA, poolB) => {
+      const sizeA = poolA.pool_assets.get(asset.base)?.size || 0;
+      const sizeB = poolB.pool_assets.get(asset.base)?.size || 0;
+      return sizeB - sizeA;
     });
+    asset.largest_pools = candidate_pools.slice(0, num_largest_pools) || [];
+
   }
   
   // -- FOR EACH POOL --
   
   asset.largest_pools.forEach((pool) => {
-  
-    // -- CHECK FOR BASE PAIRS --
-  
-    for (let i = 0; i < base_pairs.length; i++) {
-      if (pool.pool_assets.get(base_pairs[i]) && base_pairs[i] != asset.base && assets.get(base_pairs[i]).largest_route) {
-        let hop = [{
-          source: asset.base,
-          pool: pool.id,
-          destination: base_pairs[i]
-        }];
-        assets.get(ignore_assets[0]).routes.push(route.concat(hop,assets.get(base_pairs[i]).largest_route));
-        return;
-      }
-    }
     
     pool.pool_assets.forEach((pool_asset, denom) => {
     
@@ -270,20 +246,27 @@ function getRoute(asset, route, hops, ignore_assets){
       }
       
       // -- IF PAIR ASSET ALREADY HAS A LARGEST ROUTE --
-    
+
       if (assets.get(denom).largest_route) {
-        if (assets.get(denom).largest_route.length + hops <= 6) {
+        if (hops + 1 + assets.get(denom).largest_route.length <= num_max_hops) {
+          // make sure it doesn't contain the ignore assets
+          if (assets.get(denom).largest_route.some(hop => {
+            return ignore_assets.some(ignore => hop.destination === ignore);
+          })) {
+            return;
+          }
           let hop = [{
             source: asset.base,
             pool: pool.id,
             destination: denom
           }];
           assets.get(ignore_assets[0]).routes.push(route.concat(hop,assets.get(denom).largest_route));
+          //asset.largest_route[0].routes.push(route.concat(hop,assets.get(denom).largest_route));
         }
         return;
       }
       
-      // -- FIND ROUTE RECURSIVELY UP TO 3 HOPS --
+      // -- FIND ROUTE RECURSIVELY UP TO n HOPS --
       
       if (hops < num_max_hops) {
         getRoute(
@@ -326,8 +309,8 @@ function getRoutes(){
     // -- REPORT ON ASSETS W/O ROUTES --
     
     if (asset.routes.length == 0) {
-      console.log(asset.base);
-      console.log("No Routes");
+      //console.log(asset.base);
+      //console.log("No Routes");
       return;
     }
     

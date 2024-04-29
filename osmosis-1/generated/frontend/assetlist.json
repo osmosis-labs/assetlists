@@ -7107,7 +7107,7 @@
       },
       "coingeckoId": "usk",
       "price": {
-        "poolId": "1648",
+        "poolId": "1650",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
@@ -8248,7 +8248,7 @@
       "coingeckoId": "arable-usd",
       "price": {
         "poolId": "895",
-        "denom": "ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7"
+        "denom": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858"
       },
       "categories": [],
       "transferMethods": [
@@ -11408,8 +11408,8 @@
       },
       "coingeckoId": "gitopia",
       "price": {
-        "poolId": "1036",
-        "denom": "uosmo"
+        "poolId": "1158",
+        "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
       },
       "categories": [
         "dweb"
@@ -12182,8 +12182,8 @@
       },
       "coingeckoId": "archway",
       "price": {
-        "poolId": "1298",
-        "denom": "ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7"
+        "poolId": "1375",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
       "transferMethods": [
@@ -14167,7 +14167,7 @@
       "logoURIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx-circle.svg"
       },
-      "coingeckoId": "dydx",
+      "coingeckoId": "dydx-chain",
       "price": {
         "poolId": "1245",
         "denom": "uosmo"
@@ -15182,8 +15182,8 @@
       },
       "coingeckoId": "newt",
       "price": {
-        "poolId": "1645",
-        "denom": "uosmo"
+        "poolId": "1646",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "meme"
@@ -15320,7 +15320,7 @@
       },
       "price": {
         "poolId": "1659",
-        "denom": "ibc/42A9553A7770F3D7B62F3A82AF04E7719B4FD6EAF31BE5645092AAC4A6C2201D"
+        "denom": "ibc/EDD6F0D66BCD49C1084FB2C35353B4ACD7B9191117CE63671B61320548F7C89D"
       },
       "categories": [
         "gaming",
@@ -17534,7 +17534,7 @@
       ],
       "variantGroupKey": "AIOZ",
       "name": "AIOZ Network",
-      "verified": false,
+      "verified": true,
       "unstable": false,
       "disabled": false,
       "preview": false,
@@ -17671,7 +17671,7 @@
       "transferMethods": [],
       "counterparty": [],
       "name": "Sail",
-      "verified": false,
+      "verified": true,
       "unstable": false,
       "disabled": false,
       "preview": false,
@@ -18479,7 +18479,8 @@
       "verified": false,
       "unstable": false,
       "disabled": false,
-      "preview": true
+      "preview": false,
+      "listingDate": "2024-04-29T16:37:00.000Z"
     },
     {
       "chainName": "saga",
@@ -19667,6 +19668,116 @@
       "disabled": false,
       "preview": false,
       "listingDate": "2024-04-25T15:30:00.000Z"
+    },
+    {
+      "chainName": "bitsong",
+      "sourceDenom": "ft2D8E7041556CE93E1EFD66C07C45D551A6AAAE09",
+      "coinMinimalDenom": "ibc/7ABF696369EFB3387DF22B6A24204459FE5EFD010220E8E5618DC49DB877047B",
+      "symbol": "CLAY",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitsong/images/ft2D8E7041556CE93E1EFD66C07C45D551A6AAAE09.png"
+      },
+      "price": {
+        "poolId": "751",
+        "denom": "ibc/4E5444C35610CC76FC94E7F7886B93121175C28262DDFDDE6F84E82BF2425452"
+      },
+      "categories": [
+        "social"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "bitsong",
+            "chainId": "bitsong-2b",
+            "sourceDenom": "ft2D8E7041556CE93E1EFD66C07C45D551A6AAAE09",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-73",
+            "path": "transfer/channel-73/ft2D8E7041556CE93E1EFD66C07C45D551A6AAAE09"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "bitsong",
+          "sourceDenom": "ft2D8E7041556CE93E1EFD66C07C45D551A6AAAE09",
+          "chainType": "cosmos",
+          "chainId": "bitsong-2b",
+          "symbol": "CLAY",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitsong/images/ft2D8E7041556CE93E1EFD66C07C45D551A6AAAE09.png"
+          }
+        }
+      ],
+      "variantGroupKey": "CLAY",
+      "name": "Adam Clay FanToken",
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "listingDate": "2024-04-29T12:00:00.000Z"
+    },
+    {
+      "chainName": "bitsong",
+      "sourceDenom": "ft99091610CCC66F4277C66D14AF2BC4C5EE52E27A",
+      "coinMinimalDenom": "ibc/B797E4F42CD33C50511B341E50C5CC0E8EF0D93B1E1247ABAA071583B8619202",
+      "symbol": "404DR",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitsong/images/ft99091610CCC66F4277C66D14AF2BC4C5EE52E27A.png"
+      },
+      "price": {
+        "poolId": "758",
+        "denom": "ibc/4E5444C35610CC76FC94E7F7886B93121175C28262DDFDDE6F84E82BF2425452"
+      },
+      "categories": [
+        "social"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "bitsong",
+            "chainId": "bitsong-2b",
+            "sourceDenom": "ft99091610CCC66F4277C66D14AF2BC4C5EE52E27A",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-73",
+            "path": "transfer/channel-73/ft99091610CCC66F4277C66D14AF2BC4C5EE52E27A"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "bitsong",
+          "sourceDenom": "ft99091610CCC66F4277C66D14AF2BC4C5EE52E27A",
+          "chainType": "cosmos",
+          "chainId": "bitsong-2b",
+          "symbol": "404DR",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitsong/images/ft99091610CCC66F4277C66D14AF2BC4C5EE52E27A.png"
+          }
+        }
+      ],
+      "variantGroupKey": "404DR",
+      "name": "404Deep Records Fantoken",
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "listingDate": "2024-04-29T12:00:00.000Z"
     }
   ]
 }

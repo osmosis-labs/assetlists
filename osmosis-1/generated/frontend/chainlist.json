@@ -1915,7 +1915,7 @@
           "chainSuggestionDenom": "ibc/831F0B1BBB1D08A2B75311892876D71565478C532967545476DF4C2D7492E48C",
           "coinMinimalDenom": "ibc/831F0B1BBB1D08A2B75311892876D71565478C532967545476DF4C2D7492E48C",
           "coinDecimals": 18,
-          "coinGeckoId": "dydx",
+          "coinGeckoId": "dydx-chain",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx-circle.svg"
         },
         {
@@ -2245,7 +2245,7 @@
           "chainSuggestionDenom": "ibc/980E82A9F8E7CA8CD480F4577E73682A6D3855A267D1831485D7EBEF0E7A6C2C",
           "coinMinimalDenom": "ibc/980E82A9F8E7CA8CD480F4577E73682A6D3855A267D1831485D7EBEF0E7A6C2C",
           "coinDecimals": 18,
-          "coinGeckoId": "dydx",
+          "coinGeckoId": "dydx-chain",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdydx.png"
         },
         {
@@ -5075,7 +5075,7 @@
           "chainSuggestionDenom": "ibc/23DC3FF0E4CBB53A1915E4C62507CB7796956E84C68CA49707787CB8BDE90A1E",
           "sourceDenom": "ibc/23DC3FF0E4CBB53A1915E4C62507CB7796956E84C68CA49707787CB8BDE90A1E",
           "coinDecimals": 18,
-          "coinGeckoId": "dydx",
+          "coinGeckoId": "dydx-chain",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.png"
         },
         {
@@ -6595,6 +6595,7 @@
         {
           "coinDenom": "CLAY",
           "chainSuggestionDenom": "ft2D8E7041556CE93E1EFD66C07C45D551A6AAAE09",
+          "coinMinimalDenom": "ibc/7ABF696369EFB3387DF22B6A24204459FE5EFD010220E8E5618DC49DB877047B",
           "sourceDenom": "ft2D8E7041556CE93E1EFD66C07C45D551A6AAAE09",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitsong/images/ft2D8E7041556CE93E1EFD66C07C45D551A6AAAE09.png"
@@ -6644,6 +6645,7 @@
         {
           "coinDenom": "404DR",
           "chainSuggestionDenom": "ft99091610CCC66F4277C66D14AF2BC4C5EE52E27A",
+          "coinMinimalDenom": "ibc/B797E4F42CD33C50511B341E50C5CC0E8EF0D93B1E1247ABAA071583B8619202",
           "sourceDenom": "ft99091610CCC66F4277C66D14AF2BC4C5EE52E27A",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitsong/images/ft99091610CCC66F4277C66D14AF2BC4C5EE52E27A.png"
@@ -6712,12 +6714,14 @@
       },
       "explorers": [
         {
-          "txPage": "https://explorebitsong.com/transactions/${txHash}"
+          "txPage": "https://www.mintscan.io/bitsong/txs/${txHash}"
         }
       ],
       "features": [
         "ibc-transfer",
-        "ibc-go"
+        "ibc-go",
+        "cosmwasm",
+        "wasmd_0.24+"
       ]
     },
     {
@@ -9979,6 +9983,14 @@
           "sourceDenom": "factory/terra1dndhtdr2v7ca8rrn67chlqw3cl3xhm3m2uxls62vghcg3fsh5tpss5xmcu/MOAR",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/moar.png"
+        },
+        {
+          "coinDenom": "USDt",
+          "chainSuggestionDenom": "ibc/9B19062D46CAB50361CE9B0A3E6D0A7A53AC9E7CB361F32A73CC733144A9A9E5",
+          "sourceDenom": "ibc/9B19062D46CAB50361CE9B0A3E6D0A7A53AC9E7CB361F32A73CC733144A9A9E5",
+          "coinDecimals": 6,
+          "coinGeckoId": "tether",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.svg"
         }
       ],
       "description": "Fueled by a passionate community and deep developer talent pool, the Terra blockchain is built to enable the next generation of Web3 products and services.",
@@ -14630,7 +14642,7 @@
           "chainSuggestionDenom": "ibc/6DF8CF5C976851D152E2C7270B0AB25C4F9D64C0A46513A68D6CBB2662A98DF4",
           "sourceDenom": "ibc/6DF8CF5C976851D152E2C7270B0AB25C4F9D64C0A46513A68D6CBB2662A98DF4",
           "coinDecimals": 18,
-          "coinGeckoId": "dydx",
+          "coinGeckoId": "dydx-chain",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.png"
         }
       ],
@@ -14741,7 +14753,7 @@
           "chainSuggestionDenom": "ibc/2CB87BCE0937B1D1DFCEE79BE4501AAF3C265E923509AEAC410AD85D27F35130",
           "sourceDenom": "ibc/2CB87BCE0937B1D1DFCEE79BE4501AAF3C265E923509AEAC410AD85D27F35130",
           "coinDecimals": 18,
-          "coinGeckoId": "dydx",
+          "coinGeckoId": "dydx-chain",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.png",
           "gasPriceStep": {
             "low": 2564102564.1026,
@@ -14825,7 +14837,7 @@
           "chainSuggestionDenom": "ibc/2CB87BCE0937B1D1DFCEE79BE4501AAF3C265E923509AEAC410AD85D27F35130",
           "sourceDenom": "ibc/2CB87BCE0937B1D1DFCEE79BE4501AAF3C265E923509AEAC410AD85D27F35130",
           "coinDecimals": 18,
-          "coinGeckoId": "dydx",
+          "coinGeckoId": "dydx-chain",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.png"
         },
         {
@@ -16568,7 +16580,7 @@
         "coinMinimalDenom": "ibc/831F0B1BBB1D08A2B75311892876D71565478C532967545476DF4C2D7492E48C",
         "sourceDenom": "adydx",
         "coinDecimals": 18,
-        "coinGeckoId": "dydx",
+        "coinGeckoId": "dydx-chain",
         "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.png"
       },
       "feeCurrencies": [
@@ -16578,7 +16590,7 @@
           "coinMinimalDenom": "ibc/831F0B1BBB1D08A2B75311892876D71565478C532967545476DF4C2D7492E48C",
           "sourceDenom": "adydx",
           "coinDecimals": 18,
-          "coinGeckoId": "dydx",
+          "coinGeckoId": "dydx-chain",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.png",
           "gasPriceStep": {
             "low": 12500000000,
@@ -16607,7 +16619,7 @@
           "coinMinimalDenom": "ibc/831F0B1BBB1D08A2B75311892876D71565478C532967545476DF4C2D7492E48C",
           "sourceDenom": "adydx",
           "coinDecimals": 18,
-          "coinGeckoId": "dydx",
+          "coinGeckoId": "dydx-chain",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.png"
         },
         {

@@ -19797,6 +19797,57 @@
       "disabled": false,
       "preview": false,
       "listingDate": "2024-04-30T12:00:00.000Z"
+    },
+    {
+      "chainName": "dymension",
+      "sourceDenom": "anim",
+      "coinMinimalDenom": "ibc/9A76CDF0CBCEF37923F32518FA15E5DC92B9F56128292BC4D63C4AEA76CBB110",
+      "symbol": "NIM",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.svg"
+      },
+      "price": {
+        "poolId": "1449",
+        "denom": "uosmo"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "dymension",
+            "chainId": "dymension_1100-1",
+            "sourceDenom": "anim",
+            "port": "transfer",
+            "channelId": "channel-2"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-19774",
+            "path": "transfer/channel-19774/adym"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "dymension",
+          "sourceDenom": "anim",
+          "chainType": "cosmos",
+          "chainId": "dymension_1100-1",
+          "symbol": "NIM",
+          "decimals": 18
+        }
+      ],
+      "variantGroupKey": "NIM",
+      "name": "NIM Network",
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "listingDate": "2024-05-01T18:25:00.000Z"
     }
   ]
 }

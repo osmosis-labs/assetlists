@@ -15080,7 +15080,7 @@
       "description": "Cvn is a Layer-1 blockchain built to deliver on the promise of DeFi",
       "denom_units": [
         {
-          "denom": "ibc/D3FAF77F5DE21C18413B164751239BA7D521A9D8EA53BFE553AADF338A721480",
+          "denom": "ibc/044B7B28AFE93CEC769CF529ADC626DA09EA0EFA3E0E3284D540E9E00E01E24A",
           "exponent": 0,
           "aliases": [
             "acvnt"
@@ -15092,7 +15092,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/D3FAF77F5DE21C18413B164751239BA7D521A9D8EA53BFE553AADF338A721480",
+      "base": "ibc/044B7B28AFE93CEC769CF529ADC626DA09EA0EFA3E0E3284D540E9E00E01E24A",
       "name": "ConsciousDAO",
       "display": "cvnt",
       "symbol": "CVN",
@@ -15102,11 +15102,11 @@
           "counterparty": {
             "chain_name": "conscious",
             "base_denom": "acvnt",
-            "channel_id": "channel-5"
+            "channel_id": "channel-6"
           },
           "chain": {
-            "channel_id": "channel-35264",
-            "path": "transfer/channel-35264/acvnt"
+            "channel_id": "channel-73971",
+            "path": "transfer/channel-73971/acvnt"
           }
         }
       ],
@@ -16693,8 +16693,8 @@
       ]
     },
     {
-      "description": "wLibra",
-      "extended_description": "wLibra is a wrapped version of Libra Coin from https://librabridge.com. Libra Coin is a fork from Facebook's Diem (Libra) blockchain that was announced in 2019. Libra Coin operates on its own high-performance Layer 1 blockchain, known as the 0L Network. In October 2021, Libra Coin began mining.\n\n Like Bitcoin, there were no pre-mined coins or dedicated token allocation to any parties; all coins were minted through a mining process. Unlike Bitcoin, which undergoes continuous issuance, Libra Coin has a fixed supply. By December 2023, all the Libra Coin had been issued, establishing a capped supply and making the coin permanently deflationary.\n\n Fiercely independent, the project has a long-term view because it is unburdened by venture capital funding, labs entities, a foundation, and the influence of other blockchain ecosystems. Carpe diem.",
+      "description": "wLibra is a bridged version of Libra Coin from 0L Network via LibraBridge.",
+      "extended_description": "Libra Coin is a fork from Facebook's Diem (Libra) blockchain that was announced in 2019. Libra Coin operates on its own high-performance Layer 1 blockchain, known as the 0L Network. In October 2021, Libra Coin began mining.\n\n Like Bitcoin, there were no pre-mined coins or dedicated token allocation to any parties; all coins were minted through a mining process. Unlike Bitcoin, which undergoes continuous issuance, Libra Coin has a fixed supply. By December 2023, all the Libra Coin had been issued, establishing a capped supply and making the coin permanently deflationary.\n\n Fiercely independent, the project has a long-term view because it is unburdened by venture capital funding, labs entities, a foundation, and the influence of other blockchain ecosystems. Carpe diem.",
       "denom_units": [
         {
           "denom": "factory/osmo19hdqma2mj0vnmgcxag6ytswjnr8a3y07q7e70p/wLIBRA",
@@ -16708,37 +16708,57 @@
       "type_asset": "sdk.coin",
       "address": "osmo19hdqma2mj0vnmgcxag6ytswjnr8a3y07q7e70p",
       "base": "factory/osmo19hdqma2mj0vnmgcxag6ytswjnr8a3y07q7e70p/wLIBRA",
-      "name": "wLIBRA",
+      "name": "Wrapped Libra Coin (LibraBridge)",
       "display": "wLIBRA",
       "symbol": "wLIBRA",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "0l",
+            "base_denom": "uLibra"
+          },
+          "provider": "LibraBridge"
+        }
+      ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/libra.png"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/0l/images/libra.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/0l/images/libra.png"
       },
       "images": [
         {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/libra.png"
+          "image_sync": {
+            "chain_name": "0l",
+            "base_denom": "uLibra"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/0l/images/libra.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/0l/images/libra.png"
         }
-      ]
+      ],
+      "socials": {
+        "website": "https://0l.network/",
+        "twitter": "https://twitter.com/0LNetwork"
+      }
     },
     {
-      "description": "The native governance and staking token of the Dymension Hub",
+      "description": "The native token of Nim Network.",
       "denom_units": [
         {
-          "denom": "ibc/9A76CDF0CBCEF37923F32518FA15E5DC92B9F56128292BC4D63C4AEA76CBB110",
+          "denom": "ibc/4AAC4F12E50C3078782F7321B91F94D83AA5983235ABC800BC3B551026003E2E",
           "exponent": 0,
           "aliases": [
-            "adym"
+            "anim"
           ]
         },
         {
-          "denom": "dym",
+          "denom": "nim",
           "exponent": 18
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/9A76CDF0CBCEF37923F32518FA15E5DC92B9F56128292BC4D63C4AEA76CBB110",
+      "base": "ibc/4AAC4F12E50C3078782F7321B91F94D83AA5983235ABC800BC3B551026003E2E",
       "name": "NIM Network",
-      "display": "dym",
+      "display": "nim",
       "symbol": "NIM",
       "traces": [
         {
@@ -16750,18 +16770,14 @@
           },
           "chain": {
             "channel_id": "channel-19774",
-            "path": "transfer/channel-19774/adym"
+            "path": "transfer/channel-19774/anim"
           }
         }
       ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.svg"
-      },
       "images": [
         {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.svg"
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/nim.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/nim.svg"
         }
       ],
       "keywords": [

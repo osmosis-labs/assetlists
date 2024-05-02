@@ -759,11 +759,14 @@ export function setCounterparty(asset_data) {
       "symbol"
     );
     counterpartyAsset.decimals = getAssetDecimals(traces[i].counterparty);
-    counterpartyAsset.logoURIs = chain_reg.getAssetProperty(
+    let counterpartyImage = chain_reg.getAssetProperty(
       traces[i].counterparty.chain_name,
       traces[i].counterparty.base_denom,
-      "logo_URIs"
-    );
+      "images"
+    )?.[0];
+    counterpartyAsset.logoURIs = {};
+    counterpartyAsset.logoURIs.png = counterpartyImage.png;
+    counterpartyAsset.logoURIs.svg = counterpartyImage.svg;
 
     asset_data.frontend.counterparty.push(counterpartyAsset);
 

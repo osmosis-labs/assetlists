@@ -13,7 +13,7 @@
       },
       "coingeckoId": "osmosis",
       "price": {
-        "poolId": "1263",
+        "poolId": "1464",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
@@ -404,8 +404,8 @@
       },
       "coingeckoId": "dai",
       "price": {
-        "poolId": "1261",
-        "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
+        "poolId": "1066",
+        "denom": "uosmo"
       },
       "categories": [
         "stablecoin"
@@ -543,8 +543,8 @@
       },
       "coingeckoId": "cosmos",
       "price": {
-        "poolId": "1251",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1400",
+        "denom": "uosmo"
       },
       "categories": [],
       "transferMethods": [
@@ -9459,7 +9459,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qosmo.svg"
       },
       "price": {
-        "poolId": "956",
+        "poolId": "1590",
         "denom": "uosmo"
       },
       "categories": [
@@ -10730,8 +10730,8 @@
       },
       "coingeckoId": "shade-protocol",
       "price": {
-        "poolId": "1621",
-        "denom": "uosmo"
+        "poolId": "1170",
+        "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
       },
       "categories": [
         "defi"
@@ -14115,8 +14115,8 @@
       },
       "coingeckoId": "celestia",
       "price": {
-        "poolId": "1247",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1248",
+        "denom": "uosmo"
       },
       "categories": [],
       "transferMethods": [
@@ -15265,7 +15265,7 @@
       },
       "price": {
         "poolId": "1660",
-        "denom": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0"
+        "denom": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC"
       },
       "categories": [
         "meme"
@@ -18318,8 +18318,8 @@
       },
       "coingeckoId": "wormhole",
       "price": {
-        "poolId": "1696",
-        "denom": "uosmo"
+        "poolId": "1651",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "bridges"
@@ -19458,6 +19458,10 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sfrax.pica.svg"
       },
       "coingeckoId": "staked-frax",
+      "price": {
+        "poolId": "1726",
+        "denom": "uosmo"
+      },
       "categories": [
         "liquid_staking"
       ],
@@ -19802,7 +19806,14 @@
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
-      "transferMethods": [],
+      "transferMethods": [
+        {
+          "name": "LibraBridge",
+          "type": "external_interface",
+          "depositUrl": "https://librabridge.com/",
+          "withdrawUrl": "https://librabridge.com/"
+        }
+      ],
       "counterparty": [
         {
           "chainName": "0l",
@@ -19818,7 +19829,7 @@
       ],
       "variantGroupKey": "LIBRA",
       "name": "Wrapped Libra Coin (LibraBridge)",
-      "verified": false,
+      "verified": true,
       "unstable": false,
       "disabled": false,
       "preview": false,

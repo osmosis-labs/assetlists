@@ -15,6 +15,10 @@ import * as fs from 'fs';
 const file_extension = ".json";
 const asset_detail_file_name_middle = "_asset_detail_";
 const default_localization_code = "en";
+const localization_codes = getLocalizationCodes();
+const localized_properties = [
+  "description"
+];
 
 
 //-- Directories --
@@ -89,48 +93,134 @@ export function getLocalizationCodes() {
 
 
 export function getLocalizationOutput() {
-  
+
+  //Read Language Files
   let inlangOutput = {};
-  let fileLocation;
-
-  const localization_codes = getLocalizationCodes();
-
   localization_codes.forEach((localization_code) => {
-  
     try {
-
-      // Read from the file
-      fileLocation = zone.getFileLocation(
+      const fileLocation = zone.getFileLocation(
         zone.noDir,
         inlangInputOutput,
         localization_code + file_extension
       );
       const fileContent = fs.readFileSync(fileLocation);
-
-      // Parse the JSON content
       inlangOutput[localization_code] = JSON.parse(fileContent);
-
     } catch {}
+  });
 
-    //extract relevant data from localizations
-    setLocalizedDescriptions(inlangOutput[localization_code], localization_code);
-    //for more translated data, add function calls here
 
+  //Save Localization Output into new Object
+  let savedTranslations = {};
+  for (const chainName in inlangOutput[default_localization_code]) {
+    const chain = inlangOutput[default_localization_code][chainName];
+    savedTranslations[chainName] = {};
+    for (const assetName in chain) {
+      const asset = chain[assetName];
+      savedTranslations[chainName][assetName] = {};
+      for (const propertyName in asset) {
+        const property = asset[propertyName];
+        savedTranslations[chainName][assetName][propertyName] = {};
+        localization_codes.forEach((localization) => {
+          if (!inlangOutput[localization]?.[chainName]?.[assetName]?.[propertyName]) { return; }
+          savedTranslations[chainName][assetName][propertyName][localization] = 
+            inlangOutput[localization][chainName][assetName][propertyName];
+        });
+        if (Object.keys(savedTranslations[chainName][assetName][propertyName]).length !== localization_codes.length) {
+          delete savedTranslations[chainName][assetName][propertyName];
+        }
+      }
+      if (Object.keys(savedTranslations[chainName][assetName]).length === 0) {
+        delete savedTranslations[chainName][assetName];
+      }
+    }
+    if (Object.keys(savedTranslations[chainName]).length === 0) {
+      delete savedTranslations[chainName];
+    }
+  }
+
+
+  //Write Saved Localization Data to Files
+  //savedTranslations.forEach((chain) => {
+  for (const chainName in savedTranslations) {
+    const chain = savedTranslations[chainName];
+
+    //Read Asset Detail
+    const assetDetailAssetlist = zone.readFromFile(
+      chainName,
+      zone.zoneAssetDetail,
+      zone.assetlistFileName
+    )?.assets || [];
+
+    //chain.forEach((asset) => {
+    for (const assetName in chain) {
+      const asset = chain[assetName];
+
+      //Write to Localized Files
+      const asset_symbol = assetName.replace(/\(dot\)/g, ".");
+      //Asset Detail
+      const updated_asset_detail = assetDetailAssetlist.find(item => item.symbol === asset_symbol);
+      
+      localization_codes.forEach((localization_code) => {
+
+        //Asset Detail
+        let localized_asset_detail = {
+          localization: localization_code
+        };
+
+        for (const propertyName in updated_asset_detail) {  // this contains the most up to date unlocalized data
+          const property = updated_asset_detail[propertyName];
+          if (localized_properties.includes(propertyName)) { continue; }   // but we skip any translated data
+          localized_asset_detail[propertyName] = property;
+        }
+
+        const existing_asset_detail = getAssetDetail(chainName, asset_symbol, localization_code);
+        
+        for (const propertyName in existing_asset_detail) {  // this may contain existing localized data
+          const property = existing_asset_detail[propertyName];
+          if (!localized_properties.includes(propertyName) || !updated_asset_detail[propertyName]) { continue; }
+          localized_asset_detail[propertyName] = property;
+        }
+
+        for (const propertyName in asset) {   // this contains new translated data
+          const property = asset[propertyName][localization_code];
+          localized_asset_detail[propertyName] = property;
+        }
+
+        const fileLocation =
+          asset_symbol.toLowerCase() + asset_detail_file_name_middle + localization_code + file_extension;
+
+        zone.writeToFile(
+          chainName,
+          zone.zoneAssetDetail,
+          fileLocation,
+          localized_asset_detail
+        );
+      });
+    }
+  }
+
+
+  //extract relevant data from localizations
+  //setLocalizedDescriptions(inlangOutput[localization_code], localization_code);
+  //for more translated data, add function calls here
+
+  localization_codes.forEach((localization_code) => {
     //once done, delete the input and output
+    let fileLocation = path.join(inlangInputOutput, localization_code);
     if (inlangOutput[localization_code]) {
       try {
         // Delete the file synchronously
-        fs.unlinkSync(fileLocation);
-        console.log(`File ${fileLocation} deleted successfully`);
+        //fs.unlinkSync(fileLocation);
+        console.log(`${fileLocation} deleted successfully`);
       } catch (err) {
-        console.error(`Error deleting file ${fileLocation}:`, err);
+        console.error(`Error deleting ${fileLocation}:`, err);
       }
     }
-
   });
 
 }
 
+//will soon be able to delete this
 export function setLocalizedDescriptions(inlangOutput, localization_code) {
 
   let assetDetailAssetlist;
@@ -146,7 +236,7 @@ export function setLocalizedDescriptions(inlangOutput, localization_code) {
     //read Asset Detail
     assetDetailAssetlist = zone.readFromFile(
       chainName,
-      zoneAssetDetail,
+      zone.zoneAssetDetail,
       zone.assetlistFileName
     )?.assets || [];
 
@@ -161,7 +251,7 @@ export function setLocalizedDescriptions(inlangOutput, localization_code) {
       //write Asset Detail
       zone.writeToFile(
         chainName,
-        zoneAssetDetail,
+        zone.zoneAssetDetail,
         asset_detail.symbol.toLowerCase() + asset_detail_file_name_middle + localization_code + file_extension,
         asset_detail
       );
@@ -180,7 +270,7 @@ export function getAssetDetail(chainName, asset_symbol, localization_code) {
     // Read from the file
     let fileLocation = zone.getFileLocation(
       chainName,
-      zoneAssetDetail,
+      zone.zoneAssetDetail,
       asset_symbol.toLowerCase() + asset_detail_file_name_middle + localization_code + file_extension
     );
     const fileContent = fs.readFileSync(fileLocation);
@@ -202,20 +292,19 @@ export function setAssetDetailAll() {
   let asset_detail, localized_asset_detail;
 
   zone.chainNames.forEach((chainName) => {
-    
-    const asset_detail_assets = zone.readFromFile(
+
+    //Read Asset Detail
+    const assetDetailAssetlist = zone.readFromFile(
       chainName,
-      zoneAssetDetail,
+      zone.zoneAssetDetail,
       zone.assetlistFileName
     )?.assets || [];
     
     //iterate asset_detail/assetlist
-    asset_detail_assets.forEach((asset) => {
+    assetDetailAssetlist.forEach((asset) => {
     
       //compare against the english output file
-
       asset_detail = getAssetDetail(chainName, asset.symbol, default_localization_code);
-
       if (
         asset_detail &&
         asset.name === asset_detail?.name &&
@@ -230,24 +319,21 @@ export function setAssetDetailAll() {
 
       localization_codes.forEach((localization_code) => {
 
-        localized_asset_detail = getAssetDetail(chainName, asset.symbol, localization_code);
+        const existing_asset_detail = getAssetDetail(chainName, asset.symbol, localization_code);
         asset_detail = { localization: localization_code, ...asset }
-        asset_detail.description = localized_asset_detail.description;
-        //console.log(asset_detail);
-        //console.log(localized_asset_detail);
+        localized_properties.forEach((property) => {
+          if (!asset[property]) { return; }
+          asset_detail[property] = existing_asset_detail[property];
+        });
 
         //write Asset Detail
         zone.writeToFile(
           chainName,
-          zoneAssetDetail,
+          zone.zoneAssetDetail,
           asset.symbol.toLowerCase() + asset_detail_file_name_middle + localization_code + file_extension,
           asset_detail
         );
-      
       });
-    
     });
-
   });
-
 };

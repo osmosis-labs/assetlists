@@ -15080,7 +15080,7 @@
       "description": "Cvn is a Layer-1 blockchain built to deliver on the promise of DeFi",
       "denom_units": [
         {
-          "denom": "ibc/D3FAF77F5DE21C18413B164751239BA7D521A9D8EA53BFE553AADF338A721480",
+          "denom": "ibc/044B7B28AFE93CEC769CF529ADC626DA09EA0EFA3E0E3284D540E9E00E01E24A",
           "exponent": 0,
           "aliases": [
             "acvnt"
@@ -15092,7 +15092,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/D3FAF77F5DE21C18413B164751239BA7D521A9D8EA53BFE553AADF338A721480",
+      "base": "ibc/044B7B28AFE93CEC769CF529ADC626DA09EA0EFA3E0E3284D540E9E00E01E24A",
       "name": "ConsciousDAO",
       "display": "cvnt",
       "symbol": "CVN",
@@ -15102,11 +15102,11 @@
           "counterparty": {
             "chain_name": "conscious",
             "base_denom": "acvnt",
-            "channel_id": "channel-5"
+            "channel_id": "channel-6"
           },
           "chain": {
-            "channel_id": "channel-35264",
-            "path": "transfer/channel-35264/acvnt"
+            "channel_id": "channel-73971",
+            "path": "transfer/channel-73971/acvnt"
           }
         }
       ],
@@ -15527,8 +15527,7 @@
       ],
       "keywords": [
         "gaming",
-        "staking",
-        "osmosis_unlisted"
+        "staking"
       ]
     },
     {
@@ -16614,6 +16613,179 @@
       ]
     },
     {
+      "description": "Adam Clay a BitSong Music FanToken",
+      "denom_units": [
+        {
+          "denom": "ibc/7ABF696369EFB3387DF22B6A24204459FE5EFD010220E8E5618DC49DB877047B",
+          "exponent": 0,
+          "aliases": [
+            "ft2D8E7041556CE93E1EFD66C07C45D551A6AAAE09"
+          ]
+        },
+        {
+          "denom": "clay",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/7ABF696369EFB3387DF22B6A24204459FE5EFD010220E8E5618DC49DB877047B",
+      "name": "Adam Clay FanToken",
+      "display": "clay",
+      "symbol": "CLAY",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitsong",
+            "base_denom": "ft2D8E7041556CE93E1EFD66C07C45D551A6AAAE09",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-73",
+            "path": "transfer/channel-73/ft2D8E7041556CE93E1EFD66C07C45D551A6AAAE09"
+          }
+        }
+      ],
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitsong/images/ft2D8E7041556CE93E1EFD66C07C45D551A6AAAE09.png"
+        }
+      ]
+    },
+    {
+      "description": "404Deep Records a BitSong Music FanToken",
+      "denom_units": [
+        {
+          "denom": "ibc/B797E4F42CD33C50511B341E50C5CC0E8EF0D93B1E1247ABAA071583B8619202",
+          "exponent": 0,
+          "aliases": [
+            "ft99091610CCC66F4277C66D14AF2BC4C5EE52E27A"
+          ]
+        },
+        {
+          "denom": "404dr",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/B797E4F42CD33C50511B341E50C5CC0E8EF0D93B1E1247ABAA071583B8619202",
+      "name": "404Deep Records Fantoken",
+      "display": "404dr",
+      "symbol": "404DR",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitsong",
+            "base_denom": "ft99091610CCC66F4277C66D14AF2BC4C5EE52E27A",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-73",
+            "path": "transfer/channel-73/ft99091610CCC66F4277C66D14AF2BC4C5EE52E27A"
+          }
+        }
+      ],
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitsong/images/ft99091610CCC66F4277C66D14AF2BC4C5EE52E27A.png"
+        }
+      ]
+    },
+    {
+      "description": "wLibra is a bridged version of Libra Coin from 0L Network via LibraBridge.",
+      "extended_description": "Libra Coin is a fork from Facebook's Diem (Libra) blockchain that was announced in 2019. Libra Coin operates on its own high-performance Layer 1 blockchain, known as the 0L Network. In October 2021, Libra Coin began mining.\n\n Like Bitcoin, there were no pre-mined coins or dedicated token allocation to any parties; all coins were minted through a mining process. Unlike Bitcoin, which undergoes continuous issuance, Libra Coin has a fixed supply. By December 2023, all the Libra Coin had been issued, establishing a capped supply and making the coin permanently deflationary.\n\n Fiercely independent, the project has a long-term view because it is unburdened by venture capital funding, labs entities, a foundation, and the influence of other blockchain ecosystems. Carpe diem.",
+      "denom_units": [
+        {
+          "denom": "factory/osmo19hdqma2mj0vnmgcxag6ytswjnr8a3y07q7e70p/wLIBRA",
+          "exponent": 0
+        },
+        {
+          "denom": "wLIBRA",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo19hdqma2mj0vnmgcxag6ytswjnr8a3y07q7e70p",
+      "base": "factory/osmo19hdqma2mj0vnmgcxag6ytswjnr8a3y07q7e70p/wLIBRA",
+      "name": "Wrapped Libra Coin (LibraBridge)",
+      "display": "wLIBRA",
+      "symbol": "wLIBRA",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "0l",
+            "base_denom": "uLibra"
+          },
+          "provider": "LibraBridge"
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/0l/images/libra.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/0l/images/libra.png"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "0l",
+            "base_denom": "uLibra"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/0l/images/libra.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/0l/images/libra.png"
+        }
+      ],
+      "socials": {
+        "website": "https://0l.network/",
+        "twitter": "https://twitter.com/0LNetwork"
+      }
+    },
+    {
+      "description": "The native token of Nim Network.",
+      "denom_units": [
+        {
+          "denom": "ibc/4AAC4F12E50C3078782F7321B91F94D83AA5983235ABC800BC3B551026003E2E",
+          "exponent": 0,
+          "aliases": [
+            "anim"
+          ]
+        },
+        {
+          "denom": "nim",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/4AAC4F12E50C3078782F7321B91F94D83AA5983235ABC800BC3B551026003E2E",
+      "name": "NIM Network",
+      "display": "nim",
+      "symbol": "NIM",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "dymension",
+            "base_denom": "anim",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-19774",
+            "path": "transfer/channel-19774/anim"
+          }
+        }
+      ],
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/nim.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/nim.svg"
+        }
+      ],
+      "keywords": [
+        "gaming",
+        "AI"
+      ]
+    },
+    {
       "description": "The native token of dHealth",
       "denom_units": [
         {
@@ -16893,6 +17065,34 @@
       "images": [
         {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/BRNZ.svg"
+        }
+      ]
+    },
+    {
+      "description": "ashLAB - Burned LAB",
+      "extended_description": "ashLAB - reciept token recieved when burning LAB via ASH DAOs Furnace",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1svj5kd8kzj7xxtrd6ftjk0856ffpyj4egz7f9pd9dge5wr4kwansmefq07/lab.ash",
+          "exponent": 0
+        },
+        {
+          "denom": "ashLAB",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1svj5kd8kzj7xxtrd6ftjk0856ffpyj4egz7f9pd9dge5wr4kwansmefq07",
+      "base": "factory/osmo1svj5kd8kzj7xxtrd6ftjk0856ffpyj4egz7f9pd9dge5wr4kwansmefq07/lab.ash",
+      "name": "Burned LAB",
+      "display": "ashLAB",
+      "symbol": "ashLAB",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ashLAB.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ashLAB.png"
         }
       ]
     }

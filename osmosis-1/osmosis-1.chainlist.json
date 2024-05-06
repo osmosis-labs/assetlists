@@ -5520,16 +5520,16 @@
       "chain_name": "composable",
       "status": "live",
       "network_type": "mainnet",
-      "pretty_name": "Composable",
+      "pretty_name": "Picasso",
       "chain_id": "centauri-1",
-      "bech32_prefix": "centauri",
+      "bech32_prefix": "pica",
       "bech32_config": {
-        "bech32PrefixAccAddr": "centauri",
-        "bech32PrefixAccPub": "centauripub",
-        "bech32PrefixValAddr": "centaurivaloper",
-        "bech32PrefixValPub": "centaurivaloperpub",
-        "bech32PrefixConsAddr": "centaurivalcons",
-        "bech32PrefixConsPub": "centaurivalconspub"
+        "bech32PrefixAccAddr": "pica",
+        "bech32PrefixAccPub": "picapub",
+        "bech32PrefixValAddr": "picavaloper",
+        "bech32PrefixValPub": "picavaloperpub",
+        "bech32PrefixConsAddr": "picavalcons",
+        "bech32PrefixConsPub": "picavalconspub"
       },
       "slip44": 118,
       "fees": {
@@ -7687,6 +7687,65 @@
       "features": [
         "ibc-go",
         "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "seda",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "SEDA",
+      "chain_id": "seda-1",
+      "bech32_prefix": "seda",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "seda",
+        "bech32PrefixAccPub": "sedapub",
+        "bech32PrefixValAddr": "sedavaloper",
+        "bech32PrefixValPub": "sedavaloperpub",
+        "bech32PrefixConsAddr": "sedavalcons",
+        "bech32PrefixConsPub": "sedavalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "aseda",
+            "fixed_min_gas_price": 10000000000,
+            "low_gas_price": 10000000000,
+            "average_gas_price": 10000000000,
+            "high_gas_price": 14000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "aseda"
+          }
+        ]
+      },
+      "description": "SEDA is a standard for modular data transport and querying. Any data type, for all networks.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.mainnet.seda.xyz"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.mainnet.seda.xyz"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.seda.xyz/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm",
+        "wasmd_0.24+"
       ]
     }
   ]

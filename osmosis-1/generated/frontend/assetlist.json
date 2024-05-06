@@ -19837,20 +19837,20 @@
     },
     {
       "chainName": "dymension",
-      "sourceDenom": "anim",
-      "coinMinimalDenom": "ibc/4AAC4F12E50C3078782F7321B91F94D83AA5983235ABC800BC3B551026003E2E",
+      "sourceDenom": "ibc/FB53D1684F155CBB86D9CE917807E42B59209EBE3AD3A92E15EF66586C073942",
+      "coinMinimalDenom": "ibc/279D69A6EF8E37456C8D2DC7A7C1C50F7A566EC4758F6DE17472A9FDE36C4426",
       "symbol": "NIM",
       "decimals": 18,
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/nim.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/nim.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nim/images/nim.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nim/images/nim.svg"
       },
       "categories": [],
       "transferMethods": [
         {
           "name": "Dymension Portal",
           "type": "external_interface",
-          "depositUrl": "https://portal.dymension.xyz/ibc?sourceId=dymension_1100-1&destinationId=osmosis-1"
+          "depositUrl": "https://portal.dymension.xyz/ibc/transfer?sourceId=dymension_1100-1&destinationId=osmosis-1"
         },
         {
           "name": "Osmosis IBC Transfer",
@@ -19858,33 +19858,45 @@
           "counterparty": {
             "chainName": "dymension",
             "chainId": "dymension_1100-1",
-            "sourceDenom": "anim",
+            "sourceDenom": "ibc/FB53D1684F155CBB86D9CE917807E42B59209EBE3AD3A92E15EF66586C073942",
             "port": "transfer",
             "channelId": "channel-2"
           },
           "chain": {
             "port": "transfer",
             "channelId": "channel-19774",
-            "path": "transfer/channel-19774/anim"
+            "path": "transfer/channel-19774/transfer/channel-49/anim"
           }
         }
       ],
       "counterparty": [
         {
           "chainName": "dymension",
-          "sourceDenom": "anim",
+          "sourceDenom": "ibc/FB53D1684F155CBB86D9CE917807E42B59209EBE3AD3A92E15EF66586C073942",
           "chainType": "cosmos",
           "chainId": "dymension_1100-1",
           "symbol": "NIM",
           "decimals": 18,
           "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/nim.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/nim.svg"
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nim/images/nim.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nim/images/nim.svg"
+          }
+        },
+        {
+          "chainName": "nim",
+          "sourceDenom": "anim",
+          "chainType": "cosmos",
+          "chainId": "nim_1122-1",
+          "symbol": "NIM",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nim/images/nim.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nim/images/nim.svg"
           }
         }
       ],
       "variantGroupKey": "NIM",
-      "name": "NIM Network",
+      "name": "Nim Network",
       "verified": false,
       "unstable": false,
       "disabled": false,

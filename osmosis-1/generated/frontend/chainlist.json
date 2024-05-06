@@ -15068,16 +15068,16 @@
       "chain_name": "composable",
       "status": "live",
       "networkType": "mainnet",
-      "prettyName": "Composable",
+      "prettyName": "Picasso",
       "chain_id": "centauri-1",
-      "bech32Prefix": "centauri",
+      "bech32Prefix": "pica",
       "bech32Config": {
-        "bech32PrefixAccAddr": "centauri",
-        "bech32PrefixAccPub": "centauripub",
-        "bech32PrefixValAddr": "centaurivaloper",
-        "bech32PrefixValPub": "centaurivaloperpub",
-        "bech32PrefixConsAddr": "centaurivalcons",
-        "bech32PrefixConsPub": "centaurivalconspub"
+        "bech32PrefixAccAddr": "pica",
+        "bech32PrefixAccPub": "picapub",
+        "bech32PrefixValAddr": "picavaloper",
+        "bech32PrefixValPub": "picavaloperpub",
+        "bech32PrefixConsAddr": "picavalcons",
+        "bech32PrefixConsPub": "picavalconspub"
       },
       "slip44": 118,
       "stakeCurrency": {
@@ -15087,7 +15087,7 @@
         "sourceDenom": "ppica",
         "coinDecimals": 12,
         "coinGeckoId": "picasso",
-        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/pica.svg"
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/picasso/images/pica.svg"
       },
       "feeCurrencies": [
         {
@@ -15097,7 +15097,7 @@
           "sourceDenom": "ppica",
           "coinDecimals": 12,
           "coinGeckoId": "picasso",
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/pica.svg"
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/picasso/images/pica.svg"
         }
       ],
       "currencies": [
@@ -15108,7 +15108,7 @@
           "sourceDenom": "ppica",
           "coinDecimals": 12,
           "coinGeckoId": "picasso",
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/pica.svg"
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/picasso/images/pica.svg"
         },
         {
           "coinDenom": "KSM",
@@ -17964,7 +17964,7 @@
       "stakeCurrency": {
         "coinDenom": "DHP",
         "chainSuggestionDenom": "udhp",
-        "coinMinimalDenom": "ibc/415797C6CE8DC6E9B4C894EE802B4CF47F74932D282C351A1D9DCB21D94B7162",
+        "coinMinimalDenom": "ibc/FD506CCA1FC574F2A8175FB574C981E9F6351E194AA48AC219BD67FF934E2F33",
         "sourceDenom": "udhp",
         "coinDecimals": 6,
         "coinGeckoId": "dhealth",
@@ -17974,7 +17974,7 @@
         {
           "coinDenom": "DHP",
           "chainSuggestionDenom": "udhp",
-          "coinMinimalDenom": "ibc/415797C6CE8DC6E9B4C894EE802B4CF47F74932D282C351A1D9DCB21D94B7162",
+          "coinMinimalDenom": "ibc/FD506CCA1FC574F2A8175FB574C981E9F6351E194AA48AC219BD67FF934E2F33",
           "sourceDenom": "udhp",
           "coinDecimals": 6,
           "coinGeckoId": "dhealth",
@@ -17990,7 +17990,7 @@
         {
           "coinDenom": "DHP",
           "chainSuggestionDenom": "udhp",
-          "coinMinimalDenom": "ibc/415797C6CE8DC6E9B4C894EE802B4CF47F74932D282C351A1D9DCB21D94B7162",
+          "coinMinimalDenom": "ibc/FD506CCA1FC574F2A8175FB574C981E9F6351E194AA48AC219BD67FF934E2F33",
           "sourceDenom": "udhp",
           "coinDecimals": 6,
           "coinGeckoId": "dhealth",
@@ -18315,6 +18315,83 @@
       "features": [
         "ibc-go",
         "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "seda",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "SEDA",
+      "chain_id": "seda-1",
+      "bech32Prefix": "seda",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "seda",
+        "bech32PrefixAccPub": "sedapub",
+        "bech32PrefixValAddr": "sedavaloper",
+        "bech32PrefixValPub": "sedavaloperpub",
+        "bech32PrefixConsAddr": "sedavalcons",
+        "bech32PrefixConsPub": "sedavalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDenom": "SEDA",
+        "chainSuggestionDenom": "aseda",
+        "coinMinimalDenom": "ibc/956AEF1DA92F70584266E87978C3F30A43B91EE6ABC62F03D097E79F6B99C4D8",
+        "sourceDenom": "aseda",
+        "coinDecimals": 18,
+        "coinGeckoId": "seda-2",
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/seda/images/seda.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "SEDA",
+          "chainSuggestionDenom": "aseda",
+          "coinMinimalDenom": "ibc/956AEF1DA92F70584266E87978C3F30A43B91EE6ABC62F03D097E79F6B99C4D8",
+          "sourceDenom": "aseda",
+          "coinDecimals": 18,
+          "coinGeckoId": "seda-2",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/seda/images/seda.png",
+          "gasPriceStep": {
+            "low": 10000000000,
+            "average": 10000000000,
+            "high": 14000000000
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "SEDA",
+          "chainSuggestionDenom": "aseda",
+          "coinMinimalDenom": "ibc/956AEF1DA92F70584266E87978C3F30A43B91EE6ABC62F03D097E79F6B99C4D8",
+          "sourceDenom": "aseda",
+          "coinDecimals": 18,
+          "coinGeckoId": "seda-2",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/seda/images/seda.png"
+        }
+      ],
+      "description": "SEDA is a standard for modular data transport and querying. Any data type, for all networks.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.mainnet.seda.xyz"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.mainnet.seda.xyz"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://explorer.seda.xyz/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm",
+        "wasmd_0.24+"
       ]
     }
   ]

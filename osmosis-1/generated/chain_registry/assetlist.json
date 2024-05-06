@@ -9878,7 +9878,7 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/56D7C03B8F6A07AD322EEE1BEF3AE996E09D1C1E34C27CF37E0D4A0AC5972516",
-      "name": "Composable",
+      "name": "Picasso",
       "display": "pica",
       "symbol": "PICA",
       "traces": [
@@ -15438,7 +15438,7 @@
       "description": "The native token of dHealth",
       "denom_units": [
         {
-          "denom": "ibc/415797C6CE8DC6E9B4C894EE802B4CF47F74932D282C351A1D9DCB21D94B7162",
+          "denom": "ibc/FD506CCA1FC574F2A8175FB574C981E9F6351E194AA48AC219BD67FF934E2F33",
           "exponent": 0,
           "aliases": [
             "udhp"
@@ -15450,7 +15450,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/415797C6CE8DC6E9B4C894EE802B4CF47F74932D282C351A1D9DCB21D94B7162",
+      "base": "ibc/FD506CCA1FC574F2A8175FB574C981E9F6351E194AA48AC219BD67FF934E2F33",
       "name": "dHealth",
       "display": "dhp",
       "symbol": "DHP",
@@ -15460,11 +15460,11 @@
           "counterparty": {
             "chain_name": "dhealth",
             "base_denom": "udhp",
-            "channel_id": "channel-2"
+            "channel_id": "channel-4"
           },
           "chain": {
-            "channel_id": "channel-73360",
-            "path": "transfer/channel-73360/udhp"
+            "channel_id": "channel-75030",
+            "path": "transfer/channel-75030/udhp"
           }
         }
       ],
@@ -16716,7 +16716,7 @@
           "type": "bridge",
           "counterparty": {
             "chain_name": "0l",
-            "base_denom": "uLibra"
+            "base_denom": "microlibra"
           },
           "provider": "LibraBridge"
         }
@@ -16729,7 +16729,7 @@
         {
           "image_sync": {
             "chain_name": "0l",
-            "base_denom": "uLibra"
+            "base_denom": "microlibra"
           },
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/0l/images/libra.svg",
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/0l/images/libra.png"
@@ -16783,6 +16783,47 @@
       "keywords": [
         "gaming",
         "AI"
+      ]
+    },
+    {
+      "description": "The native token of SEDA Chain.",
+      "denom_units": [
+        {
+          "denom": "ibc/956AEF1DA92F70584266E87978C3F30A43B91EE6ABC62F03D097E79F6B99C4D8",
+          "exponent": 0,
+          "aliases": [
+            "aseda"
+          ]
+        },
+        {
+          "denom": "seda",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/956AEF1DA92F70584266E87978C3F30A43B91EE6ABC62F03D097E79F6B99C4D8",
+      "name": "SEDA",
+      "display": "seda",
+      "symbol": "SEDA",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "seda",
+            "base_denom": "aseda",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-75016",
+            "path": "transfer/channel-75016/aseda"
+          }
+        }
+      ],
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/seda/images/seda.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/seda/images/seda.svg"
+        }
       ]
     },
     {

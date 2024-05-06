@@ -3878,30 +3878,31 @@
       "base_denom": "factory/osmo19hdqma2mj0vnmgcxag6ytswjnr8a3y07q7e70p/wLIBRA",
       "osmosis_verified": true,
       "listing_date_time_utc": "2024-04-30T12:00:00Z",
-      "transfer_methods": [
-        {
-          "name": "LibraBridge",
-          "type": "external_interface",
-          "deposit_url": "https://librabridge.com/",
-          "withdraw_url": "https://librabridge.com/"
-        }
-      ],
       "_comment": "Wrapped Libra Coin $wLIBRA"
     },
     {
       "chain_name": "dymension",
-      "base_denom": "anim",
-      "path": "transfer/channel-19774/anim",
+      "base_denom": "ibc/FB53D1684F155CBB86D9CE917807E42B59209EBE3AD3A92E15EF66586C073942",
+      "path": "transfer/channel-19774/transfer/channel-49/anim",
       "osmosis_verified": false,
       "listing_date_time_utc": "2024-05-01T18:25:00Z",
       "transfer_methods": [
         {
           "name": "Dymension Portal",
           "type": "external_interface",
-          "deposit_url": "https://portal.dymension.xyz/ibc?sourceId=dymension_1100-1&destinationId=osmosis-1"
+          "deposit_url": "https://portal.dymension.xyz/ibc/transfer?sourceId=dymension_1100-1&destinationId=osmosis-1"
         }
       ],
-      "_comment": "NIM Network $NIM"
+      "_comment": "Nim Network $NIM"
+    },
+    {
+      "chain_name": "seda",
+      "base_denom": "aseda",
+      "path": "transfer/channel-75016/aseda",
+      "osmosis_unlisted": false,
+      "osmosis_verified": false,
+      "listing_date_time_utc": "2024-05-03T13:00:00Z",
+      "_comment": "SEDA $SEDA"
     }
   ]
 }

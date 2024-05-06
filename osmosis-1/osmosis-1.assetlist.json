@@ -16169,10 +16169,11 @@
       "description": "The native token of Nim Network.",
       "denom_units": [
         {
-          "denom": "ibc/4AAC4F12E50C3078782F7321B91F94D83AA5983235ABC800BC3B551026003E2E",
+          "denom": "ibc/279D69A6EF8E37456C8D2DC7A7C1C50F7A566EC4758F6DE17472A9FDE36C4426",
           "exponent": 0,
           "aliases": [
-            "anim"
+            "anim",
+            "ibc/FB53D1684F155CBB86D9CE917807E42B59209EBE3AD3A92E15EF66586C073942"
           ]
         },
         {
@@ -16181,21 +16182,33 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/4AAC4F12E50C3078782F7321B91F94D83AA5983235ABC800BC3B551026003E2E",
-      "name": "NIM Network",
+      "base": "ibc/279D69A6EF8E37456C8D2DC7A7C1C50F7A566EC4758F6DE17472A9FDE36C4426",
+      "name": "Nim Network",
       "display": "nim",
       "symbol": "NIM",
       "traces": [
         {
           "type": "ibc",
           "counterparty": {
-            "chain_name": "dymension",
+            "chain_name": "nim",
             "base_denom": "anim",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-49",
+            "path": "transfer/channel-49/anim"
+          }
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "dymension",
+            "base_denom": "ibc/FB53D1684F155CBB86D9CE917807E42B59209EBE3AD3A92E15EF66586C073942",
             "channel_id": "channel-2"
           },
           "chain": {
             "channel_id": "channel-19774",
-            "path": "transfer/channel-19774/anim"
+            "path": "transfer/channel-19774/transfer/channel-49/anim"
           }
         }
       ],

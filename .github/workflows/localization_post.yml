@@ -28,10 +28,6 @@ jobs:
       - name: Run post-localization code
         working-directory: ./.github/workflows/utility
         run: node localization_post.mjs
-      
-      - name: Add Changes
-        run: |
-          git add .
 
       - name: Add Commit Push
         uses: devops-infra/action-commit-push@master

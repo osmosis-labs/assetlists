@@ -210,7 +210,7 @@ export function getLocalizationOutput() {
     if (inlangOutput[localization_code]) {
       try {
         // Delete the file synchronously
-        //fs.unlinkSync(fileLocation);
+        fs.unlinkSync(fileLocation);
         console.log(`${fileLocation} deleted successfully`);
       } catch (err) {
         console.error(`Error deleting ${fileLocation}:`, err);

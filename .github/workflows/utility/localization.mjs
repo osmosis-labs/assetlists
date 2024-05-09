@@ -206,14 +206,14 @@ export function getLocalizationOutput() {
 
   localization_codes.forEach((localization_code) => {
     //once done, delete the input and output
-    let fileLocation = path.join(inlangInputOutput, localization_code);
+    let fileLocation = path.join(zone.assetlistsRoot, inlangInputOutput, localization_code);
     if (inlangOutput[localization_code]) {
       try {
         // Delete the file synchronously
-        fs.unlinkSync(fileLocation);
-        console.log(`${fileLocation} deleted successfully`);
+        fs.unlinkSync(fileLocation + file_extension);
+        console.log(`${fileLocation}${file_extension} deleted successfully`);
       } catch (err) {
-        console.error(`Error deleting ${fileLocation}:`, err);
+        console.error(`Error deleting ${fileLocation}${file_extension}:`, err);
       }
     }
   });

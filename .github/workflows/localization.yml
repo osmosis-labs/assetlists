@@ -27,7 +27,7 @@ jobs:
 
       - name: Run localization
         working-directory: ./.github/workflows/utility
-        run: pnpm inlang machine translate --force
+        run: npm exec pnpm inlang machine translate --force
       
       - name: Add Commit Push
         uses: devops-infra/action-commit-push@master

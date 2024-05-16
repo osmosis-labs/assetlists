@@ -11742,7 +11742,8 @@
         "staking",
         "wasm",
         "assets",
-        "nft"
+        "nft",
+        "XRPL"
       ]
     },
     {
@@ -15276,9 +15277,6 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bOSMO.png"
         }
       ],
-      "keywords": [
-        "osmosis_unlisted"
-      ],
       "socials": {
         "website": "https://app.backbonelabs.io/",
         "twitter": "https://twitter.com/BackBone_Labs"
@@ -15496,9 +15494,6 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dhealth/images/dhp.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dhealth/images/dhp.svg"
         }
-      ],
-      "keywords": [
-        "osmosis_unlisted"
       ]
     },
     {
@@ -16380,7 +16375,7 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/078AD6F581E8115CDFBD8FFA29D8C71AFE250CE952AFF80040CBC64868D44AD3",
-      "name": "Tether",
+      "name": "Tether (Ethereum)",
       "display": "usdt",
       "symbol": "USDT.pica",
       "traces": [
@@ -17001,11 +16996,11 @@
       "display": "bwh",
       "symbol": "BWH",
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bwh.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/BWH.png"
       },
       "images": [
         {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bwh.png"
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/BWH.png"
         }
       ]
     },
@@ -17288,6 +17283,527 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qbld.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qbld.svg"
         }
+      ]
+    },
+    {
+      "description": "PEPE is a deflationary memecoin launched on Ethereum. ",
+      "denom_units": [
+        {
+          "denom": "ibc/5B5BFCC8A9F0D554A4245117F7798E85BE25B6C73DBFA2D6F369BD9DD6CACC6D",
+          "exponent": 0,
+          "aliases": [
+            "pepe-wei",
+            "ibc/6367C5AF2E2477FB13DD0C8CB0027FEDDF5AE947EE84C69FB75003E604E29D05"
+          ]
+        },
+        {
+          "denom": "pepe",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/5B5BFCC8A9F0D554A4245117F7798E85BE25B6C73DBFA2D6F369BD9DD6CACC6D",
+      "name": "Pepe",
+      "display": "pepe",
+      "symbol": "PEPE.pica",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0x6982508145454Ce325dDbE47a25d4ec3d2311933",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-52",
+            "path": "transfer/channel-52/0x6982508145454Ce325dDbE47a25d4ec3d2311933"
+          }
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "composable",
+            "base_denom": "ibc/6367C5AF2E2477FB13DD0C8CB0027FEDDF5AE947EE84C69FB75003E604E29D05",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-1279",
+            "path": "transfer/channel-1279/transfer/channel-52/0x6982508145454ce325ddbe47a25d4ec3d2311933"
+          }
+        }
+      ],
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "ethereum",
+            "base_denom": "0x6982508145454ce325ddbe47a25d4ec3d2311933"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/pepe.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/pepe.png"
+        }
+      ],
+      "keywords": [
+        "osmosis_unlisted"
+      ]
+    },
+    {
+      "description": "CRV is the governance token for Curve Finance.",
+      "denom_units": [
+        {
+          "denom": "ibc/080CE38C1E49595F2199E88BE7281F93FAEEF3FE354EECED0640625E8311C9CF",
+          "exponent": 0,
+          "aliases": [
+            "crv-wei",
+            "ibc/52C8C6197989684F891076F228F20CD1659AB6E1776E3B85E65CBBEC67DA5DED"
+          ]
+        },
+        {
+          "denom": "crv",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/080CE38C1E49595F2199E88BE7281F93FAEEF3FE354EECED0640625E8311C9CF",
+      "name": "Curve DAO",
+      "display": "crv",
+      "symbol": "CRV.pica",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xd533a949740bb3306d119cc777fa900ba034cd52",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-52",
+            "path": "transfer/channel-52/0xd533a949740bb3306d119cc777fa900ba034cd52"
+          }
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "composable",
+            "base_denom": "ibc/52C8C6197989684F891076F228F20CD1659AB6E1776E3B85E65CBBEC67DA5DED",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-1279",
+            "path": "transfer/channel-1279/transfer/channel-52/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+          }
+        }
+      ],
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "ethereum",
+            "base_denom": "0xd533a949740bb3306d119cc777fa900ba034cd52"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/crv.png"
+        }
+      ],
+      "keywords": [
+        "osmosis_unlisted"
+      ]
+    },
+    {
+      "description": "A Liquid Restaking Token (LRT) and Strategy Manager for EigenLayer.",
+      "denom_units": [
+        {
+          "denom": "ibc/39AAE0F5F918B731BEF1E02E9BAED33C242805F668B0A941AC509FB569FE51CB",
+          "exponent": 0,
+          "aliases": [
+            "ezeth-wei",
+            "ibc/0247E0E2C174135AADF4EA172D97FF5C15A64689A403E83603EAE4F0616DD365"
+          ]
+        },
+        {
+          "denom": "ezeth",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/39AAE0F5F918B731BEF1E02E9BAED33C242805F668B0A941AC509FB569FE51CB",
+      "name": "Renzo Restaked ETH",
+      "display": "ezeth",
+      "symbol": "ezETH.pica",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "wei"
+          },
+          "provider": "Renzo"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xbf5495efe5db9ce00f80364c8b423567e58d2110",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-52",
+            "path": "transfer/channel-52/0xbf5495efe5db9ce00f80364c8b423567e58d2110"
+          }
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "composable",
+            "base_denom": "ibc/0247E0E2C174135AADF4EA172D97FF5C15A64689A403E83603EAE4F0616DD365",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-1279",
+            "path": "transfer/channel-1279/transfer/channel-52/0xbf5495efe5db9ce00f80364c8b423567e58d2110"
+          }
+        }
+      ],
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "ethereum",
+            "base_denom": "0xbf5495efe5db9ce00f80364c8b423567e58d2110"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/ezeth.png"
+        }
+      ],
+      "keywords": [
+        "osmosis_unlisted"
+      ]
+    },
+    {
+      "description": "Ethena USDe is a synthetic dollar protocol built on Ethereum.",
+      "denom_units": [
+        {
+          "denom": "ibc/BFFE212A23384C4EB055CF6F95A1F5EC1BE0F9BD286FAA66C3748F0444E67D63",
+          "exponent": 0,
+          "aliases": [
+            "usde-wei",
+            "ibc/FFD9EB71B4480ED4D73F7370A2AEBDB48447A0AAE27265F8060A957F0FF71983"
+          ]
+        },
+        {
+          "denom": "usde",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/BFFE212A23384C4EB055CF6F95A1F5EC1BE0F9BD286FAA66C3748F0444E67D63",
+      "name": "Ethena USDe",
+      "display": "usde",
+      "symbol": "USDe.pica",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Ethena"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-52",
+            "path": "transfer/channel-52/0x4c9edd5852cd905f086c759e8383e09bff1e68b3"
+          }
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "composable",
+            "base_denom": "ibc/FFD9EB71B4480ED4D73F7370A2AEBDB48447A0AAE27265F8060A957F0FF71983",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-1279",
+            "path": "transfer/channel-1279/transfer/channel-52/0x4c9edd5852cd905f086c759e8383e09bff1e68b3"
+          }
+        }
+      ],
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "ethereum",
+            "base_denom": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usde.png"
+        }
+      ],
+      "keywords": [
+        "osmosis_unlisted"
+      ]
+    },
+    {
+      "description": "The native governance token of Ethena.",
+      "denom_units": [
+        {
+          "denom": "ibc/257FF64F160106F6EE43CEE7C761DA64C1346221895373CC810FFA1BFAC5A7CD",
+          "exponent": 0,
+          "aliases": [
+            "ena-wei",
+            "ibc/B089810D5A6316AD5E9C7808733DC4AB11C7BA3033221D28711FC7206BACB929"
+          ]
+        },
+        {
+          "denom": "ena",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/257FF64F160106F6EE43CEE7C761DA64C1346221895373CC810FFA1BFAC5A7CD",
+      "name": "Ethena",
+      "display": "ena",
+      "symbol": "ENA.pica",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0x57e114b691db790c35207b2e685d4a43181e6061",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-52",
+            "path": "transfer/channel-52/0x57e114b691db790c35207b2e685d4a43181e6061"
+          }
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "composable",
+            "base_denom": "ibc/B089810D5A6316AD5E9C7808733DC4AB11C7BA3033221D28711FC7206BACB929",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-1279",
+            "path": "transfer/channel-1279/transfer/channel-52/0x57e114b691db790c35207b2e685d4a43181e6061"
+          }
+        }
+      ],
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "ethereum",
+            "base_denom": "0x57e114b691db790c35207b2e685d4a43181e6061"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/ena.png"
+        }
+      ],
+      "keywords": [
+        "osmosis_unlisted"
+      ]
+    },
+    {
+      "description": "eETH is a natively restaked liquid staking token on Ethereum.",
+      "denom_units": [
+        {
+          "denom": "ibc/8D0FFEA4EDB04E3C1738C9599B66AE49683E0540FC4C1214AC84534C200D818B",
+          "exponent": 0,
+          "aliases": [
+            "eeth-wei",
+            "ibc/34C23BA6BAA2EAE0199D85AD1E2E214F76B0BFAD42BF75542D15F71264EEB05B"
+          ]
+        },
+        {
+          "denom": "eeth",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/8D0FFEA4EDB04E3C1738C9599B66AE49683E0540FC4C1214AC84534C200D818B",
+      "name": "ether.fi Staked ETH",
+      "display": "eeth",
+      "symbol": "eETH.pica",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "wei"
+          },
+          "provider": "EtherFi"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0x35fa164735182de50811e8e2e824cfb9b6118ac2",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-52",
+            "path": "transfer/channel-52/0x35fa164735182de50811e8e2e824cfb9b6118ac2"
+          }
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "composable",
+            "base_denom": "ibc/34C23BA6BAA2EAE0199D85AD1E2E214F76B0BFAD42BF75542D15F71264EEB05B",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-1279",
+            "path": "transfer/channel-1279/transfer/channel-52/0x35fa164735182de50811e8e2e824cfb9b6118ac2"
+          }
+        }
+      ],
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "ethereum",
+            "base_denom": "0x35fa164735182de50811e8e2e824cfb9b6118ac2"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eeth.png"
+        }
+      ],
+      "keywords": [
+        "osmosis_unlisted"
+      ]
+    },
+    {
+      "description": "pxETH is built on top of the Pirex platform and forms the foundation of the Dinero protocol.",
+      "denom_units": [
+        {
+          "denom": "ibc/D09BB89B2187EF13EF006B44510749B0F02FD0B34F8BB55C70D812A1FF6148C7",
+          "exponent": 0,
+          "aliases": [
+            "pxeth-wei",
+            "ibc/36EF1EA47A09689C81D848B08E5240FA9FF13B17DB7DCF48B77D4D0D9B152821"
+          ]
+        },
+        {
+          "denom": "pxeth",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/D09BB89B2187EF13EF006B44510749B0F02FD0B34F8BB55C70D812A1FF6148C7",
+      "name": "Dinero Staked ETH",
+      "display": "pxeth",
+      "symbol": "pxETH.pica",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "wei"
+          },
+          "provider": "Dinero"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0x04c154b66cb340f3ae24111cc767e0184ed00cc6",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-52",
+            "path": "transfer/channel-52/0x04c154b66cb340f3ae24111cc767e0184ed00cc6"
+          }
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "composable",
+            "base_denom": "ibc/36EF1EA47A09689C81D848B08E5240FA9FF13B17DB7DCF48B77D4D0D9B152821",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-1279",
+            "path": "transfer/channel-1279/transfer/channel-52/0x04c154b66cb340f3ae24111cc767e0184ed00cc6"
+          }
+        }
+      ],
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "ethereum",
+            "base_denom": "0x04c154b66cb340f3ae24111cc767e0184ed00cc6"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/pxeth.png"
+        }
+      ],
+      "keywords": [
+        "osmosis_unlisted"
+      ]
+    },
+    {
+      "description": "A collateralized-debt-position (CDP) stablecoin by Curve DAO.",
+      "denom_units": [
+        {
+          "denom": "ibc/63551E7BB24008F0AFC1CB051A423A5104F781F035F8B1A191264B7086A0A0F6",
+          "exponent": 0,
+          "aliases": [
+            "crvusd-wei",
+            "ibc/C9D79BE8E3E75CA2DFDC722C77D7B179C39A4802D59019C790A825FDE34B724A"
+          ]
+        },
+        {
+          "denom": "crvusd",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/63551E7BB24008F0AFC1CB051A423A5104F781F035F8B1A191264B7086A0A0F6",
+      "name": "crvUSD",
+      "display": "crvusd",
+      "symbol": "crvUSD.pica",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Curve Finance"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-52",
+            "path": "transfer/channel-52/0xf939e0a03fb07f59a73314e73794be0e57ac1b4e"
+          }
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "composable",
+            "base_denom": "ibc/C9D79BE8E3E75CA2DFDC722C77D7B179C39A4802D59019C790A825FDE34B724A",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-1279",
+            "path": "transfer/channel-1279/transfer/channel-52/0xf939e0a03fb07f59a73314e73794be0e57ac1b4e"
+          }
+        }
+      ],
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "ethereum",
+            "base_denom": "0xf939e0a03fb07f59a73314e73794be0e57ac1b4e"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/crvusd.png"
+        }
+      ],
+      "keywords": [
+        "osmosis_unlisted"
       ]
     },
     {

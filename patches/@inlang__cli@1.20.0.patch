@@ -1,0 +1,21 @@
+diff --git a/dist/main.js b/dist/main.js
+index d0860acd533b556f235ad3b7cec6e2a7a4b1497d..b0c0aeeef561e7158bb9b69ebb9cb4c084378170 100644
+--- a/dist/main.js
++++ b/dist/main.js
+@@ -78129,14 +78129,14 @@ var resolveModules = async (args) => {
+       }));
+       continue;
+     }
+-    const result = validatedModuleSettings({
++    /* const result = validatedModuleSettings({
+       settingsSchema: importedModule.data.default.settingsSchema,
+       moduleSettings: args.settings[importedModule.data.default.id]
+     });
+     if (result !== "isValid") {
+       moduleErrors.push(new ModuleSettingsAreInvalidError({ module: module3, errors: result }));
+       continue;
+-    }
++    } */
+     meta.push({
+       module: module3,
+       id: importedModule.data.default.id

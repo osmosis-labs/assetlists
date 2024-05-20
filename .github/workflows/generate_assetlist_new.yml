@@ -26,10 +26,21 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 19.6.0
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install pnpm
+        run: npm install -g pnpm
           
       - name: Run code to Generate Assetlist New
         working-directory: ./.github/workflows/utility
         run: node generate_assetlist_new.mjs
+
+      - name: Trigger Translation
+        run: |
+          # Replace the following command with the command to trigger translation using InLang CLI or API
+          # pnpm inlang machine translate --force
       
       - name: Add Commit Push
         uses: devops-infra/action-commit-push@master

@@ -147,18 +147,15 @@ export async function setLocalAsset(asset_data) {
     !asset_data.zone_asset ||
     !asset_data.source_asset
   ) { return; }
-
   if (asset_data.zone_asset.chain_name === asset_data.chainName) {
     asset_data.local_asset = asset_data.source_asset;
     return;
   }
-
   if (!asset_data.zone_asset.path) {
     console.log("No path provided.");
     console.log(asset_data.zone_asset);
     return;
   }
-
   try {
     let ibcHash = await zone.calculateIbcHash(asset_data.zone_asset.path);
     asset_data.local_asset = {
@@ -168,7 +165,6 @@ export async function setLocalAsset(asset_data) {
   } catch (error) {
     console.error(error);
   }
-
   let traces = getAssetProperty(asset_data.source_asset, "traces");
   if (!traces || traces?.length <= 0) {
     traces = [];
@@ -176,7 +172,6 @@ export async function setLocalAsset(asset_data) {
   const trace = getAssetTrace(asset_data);
   traces.push(trace);
   asset_data.local_asset.traces = traces;
-
 }
 
 
@@ -248,9 +243,13 @@ export function getAssetProperty(asset, propertyName) {
 
 export function setSymbol(asset_data) {
 
+  let symbol;
+
   if (asset_data.zone_asset.override_properties?.symbol) {
-    asset_data.frontend.symbol = asset_data.zone_asset.override_properties.symbol;
-    asset_data.chain_reg.symbol = asset_data.zone_asset.override_properties.symbol;
+    symbol = asset_data.zone_asset.override_properties.symbol;
+    asset_data.frontend.symbol = symbol;
+    asset_data.chain_reg.symbol = symbol;
+    asset_data.asset_detail.symbol = symbol;
     return;
   }
 
@@ -260,7 +259,7 @@ export function setSymbol(asset_data) {
     "symbol"
   );
 
-  let symbol = asset_data.canonical_asset.symbol;
+  symbol = asset_data.canonical_asset.symbol;
 
   const traces = getAssetProperty(asset_data.canonical_asset, "traces");
 
@@ -279,6 +278,7 @@ export function setSymbol(asset_data) {
 
   asset_data.frontend.symbol = symbol;
   asset_data.chain_reg.symbol = symbol;
+  asset_data.asset_detail.symbol = symbol;
 
 }
 
@@ -331,8 +331,10 @@ export function getAssetTraces(asset) {
   };
   let traces;
   let fullTraces = [];
+  let counter = 0;
+  const limit = 50;
 
-  while (lastTrace) {
+  while (lastTrace && counter !== limit) {
     traces = chain_reg.getAssetProperty(
       lastTrace.counterparty.chain_name,
       lastTrace.counterparty.base_denom,
@@ -343,6 +345,11 @@ export function getAssetTraces(asset) {
       fullTraces.push(lastTrace);
     } else {
       lastTrace = undefined;
+    }
+    counter = counter + 1;
+    if (counter === limit) {
+      console.log("Traces too long!");
+      console.log(asset);
     }
   }
 
@@ -390,6 +397,7 @@ export function setImages(asset_data) {
 export function setCoinGeckoId(asset_data) {
 
   let trace_types = [];
+  let coingecko_id;
 
   if (asset_data.source_asset.chain_name === asset_data.chainName) {
 
@@ -407,7 +415,9 @@ export function setCoinGeckoId(asset_data) {
   }
 
   if (asset_data.zone_asset.override_properties?.coingecko_id) {
-    asset_data.frontend.coingeckoId = asset_data.zone_asset.override_properties?.coingecko_id;
+    coingecko_id = asset_data.zone_asset.override_properties?.coingecko_id;
+    asset_data.frontend.coingeckoId = coingecko_id;
+    asset_data.asset_detail.coingeckoId = coingecko_id;
     return;
   }
 
@@ -418,12 +428,15 @@ export function setCoinGeckoId(asset_data) {
     "test-mintage"
   ];
 
-  asset_data.frontend.coingeckoId = chain_reg.getAssetPropertyWithTraceCustom(
+  coingecko_id = chain_reg.getAssetPropertyWithTraceCustom(
     asset_data.canonical_asset.chain_name,
     asset_data.canonical_asset.base_denom,
     "coingecko_id",
     trace_types
   );
+
+  asset_data.frontend.coingeckoId = coingecko_id;
+  asset_data.asset_detail.coingeckoId = coingecko_id;
 
 }
 
@@ -481,42 +494,73 @@ export function setListingDate(asset_data) {
 
 export function setCategories(asset_data) {
 
+  const defi = "defi";
+  const meme = "meme";
+  const liquid_staking = "liquid_staking";
+  const stablecoin = "stablecoin";
+  const approvedCategories = [
+    defi,
+    meme,
+    liquid_staking,
+    stablecoin,
+    "sail_initiative",
+    "bridges",
+    "nft_protocol",
+    "depin",
+    "ai",
+    "privacy",
+    "social",
+    "oracles",
+    "dweb",
+    "rwa",
+    "gaming"
+  ];
+  
   asset_data.frontend.categories = asset_data.zone_asset?.categories || [];
+
+  //temporarily omit any categories that the frontend isn't able to handle.
+  //asset_data.frontend.categories = asset_data.frontend.categories.filter(str => approvedCategories.includes(str));
+  
+  // if has a "peg_mechanism", add "stablecoin" category
   if (asset_data.zone_asset?.peg_mechanism) {
-    addArrayItem("stablecoin", asset_data.frontend.categories);
-    addArrayItem("defi", asset_data.frontend.categories);
+    addArrayItem(stablecoin, asset_data.frontend.categories);
   }
+
+  // if has a "liquid-stake" trace, add "liquid_staking" category
   getAssetProperty(asset_data.canonical_asset, "traces")?.forEach((trace) => {
     if (trace.type == "liquid-stake") {
-      addArrayItem("liquid_staking", asset_data.frontend.categories);
-      addArrayItem("defi", asset_data.frontend.categories);
+      addArrayItem(liquid_staking, asset_data.frontend.categories);
       return;
     }
   });
-  if (
-    chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "fees")?.fee_tokens[0]?.denom ===
-    asset_data.canonical_asset.base_denom
-  ) {
-    addArrayItem("defi", asset_data.frontend.categories);
-  }
-  if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
-  //if (
-  //  chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom ===
-  //  asset_data.canonical_asset.base_denom
-  //) {
-    addArrayItem("defi", asset_data.frontend.categories);
-  }
-  if (
-    asset_data.frontend.categories.length <= 0 &&
-    (
-      asset_data.canonical_asset.base_denom.substring(0, 7) === "factory" ||
-      asset_data.canonical_asset.base_denom.substring(0, 5) === "cw20:"
-    )
-  ) {
-    addArrayItem("meme", asset_data.frontend.categories);
-  }
 
-  //temporary
+  // if (
+  //   chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "fees")?.fee_tokens[0]?.denom ===
+  //   asset_data.canonical_asset.base_denom
+  // ) {
+  //   addArrayItem("defi", asset_data.frontend.categories);
+  // }
+  // if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
+  // //if (
+  // //  chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom ===
+  // //  asset_data.canonical_asset.base_denom
+  // //) {
+  //   addArrayItem("defi", asset_data.frontend.categories);
+  // }
+
+  // do not do this
+  
+  // // assume any factory or cw20 token without another category is a memecoin
+  // if (
+  //   asset_data.frontend.categories.length <= 0 &&
+  //   (
+  //     asset_data.canonical_asset.base_denom.substring(0, 7) === "factory" ||
+  //     asset_data.canonical_asset.base_denom.substring(0, 5) === "cw20:"
+  //   )
+  // ) {
+  //   addArrayItem("meme", asset_data.frontend.categories);
+  // }
+
   if (asset_data.frontend.categories.length === 0) {
     asset_data.frontend.categories = undefined;
   }
@@ -543,6 +587,7 @@ export function setName(asset_data) {
     name = asset_data.zone_asset?.override_properties?.name;
     asset_data.frontend.name = name;
     asset_data.chain_reg.name = name;
+    asset_data.asset_detail.name = name;
     return;
   }
 
@@ -583,12 +628,11 @@ export function setName(asset_data) {
   }
   asset_data.frontend.name = name;
   asset_data.chain_reg.name = name;
+  asset_data.asset_detail.name = name;
 
 }
 
 export function setVariantGroupKey(asset_data) {
-
-
 
   const trace_types = [
     "ibc",
@@ -715,11 +759,14 @@ export function setCounterparty(asset_data) {
       "symbol"
     );
     counterpartyAsset.decimals = getAssetDecimals(traces[i].counterparty);
-    counterpartyAsset.logoURIs = chain_reg.getAssetProperty(
+    let counterpartyImage = chain_reg.getAssetProperty(
       traces[i].counterparty.chain_name,
       traces[i].counterparty.base_denom,
-      "logo_URIs"
-    );
+      "images"
+    )?.[0];
+    counterpartyAsset.logoURIs = {};
+    counterpartyAsset.logoURIs.png = counterpartyImage.png;
+    counterpartyAsset.logoURIs.svg = counterpartyImage.svg;
 
     asset_data.frontend.counterparty.push(counterpartyAsset);
 
@@ -899,37 +946,56 @@ export function setAddress(asset_data) {
 export function setSocials(asset_data) {
 
   asset_data.chain_reg.socials = getAssetProperty(asset_data.local_asset, "socials");
-  asset_data.asset_detail.socials = getAssetProperty(asset_data.canonical_asset, "socials");
+
+  let socials = getAssetProperty(asset_data.canonical_asset, "socials");
+  asset_data.asset_detail.websiteURL = socials?.website;
+  asset_data.asset_detail.twitterURL = socials?.twitter;
+
+  if (socials) { return; }
+  
+  if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
+    let socials = chain_reg.getFileProperty(
+      asset_data.canonical_asset.chain_name,
+      "chain",
+      "socials"
+    )
+  }
+  asset_data.asset_detail.websiteURL = socials?.website;
+  asset_data.asset_detail.twitterURL = socials?.twitter;
 
 }
 
 export function setDescription(asset_data) {
+  
+  let description, extended_description;
 
-  //asset_data.chain_reg.description = getAssetProperty(asset_data.local_asset, "description");
-  asset_data.chain_reg.extended_description = getAssetProperty(asset_data.local_asset, "extended_description");
-
-  let description;
+  //for Chain registry
   description = getAssetProperty(asset_data.local_asset, "description") || getAssetProperty(asset_data.canonical_asset, "description");
   if (description) {
     asset_data.chain_reg.description = description;
   }
+  asset_data.chain_reg.extended_description = getAssetProperty(asset_data.local_asset, "extended_description");
 
-  //description = getAssetProperty(asset_data.canonical_asset, "description");
-
-  if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
-    const chain_description = chain_reg.getFileProperty(
-      asset_data.canonical_asset.chain_name,
-      "chain",
-      "description"
-    );
-    //console.log(chain_description);
-    description = (description ?? "") + (description && chain_description ? "\n\n" : "") + (chain_description ?? "");
+  //for Asset Detail
+  extended_description = asset_data.zone_asset?.override_properties?.description;
+  if (extended_description) {
+    asset_data.asset_detail.description = extended_description;
+    return;
   }
-
-  //asset_data.chain_reg.description = description;
+  extended_description =
+    getAssetProperty(asset_data.local_asset, "extended_description") ||
+    getAssetProperty(asset_data.canonical_asset, "extended_description");
+  if (!extended_description) {
+    if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
+      extended_description = chain_reg.getFileProperty(
+        asset_data.canonical_asset.chain_name,
+        "chain",
+        "description"
+      );
+    }
+  }
+  description = (description ?? "") + (description && extended_description ? "\n\n" : "") + (extended_description ?? "");
   asset_data.asset_detail.description = description;
-
-  //console.log(description);
 
 }
 
@@ -995,6 +1061,23 @@ export function reformatChainRegAsset(asset_data) {
   };
 
   asset_data.chain_reg = reformattedAsset;
+  return;
+
+}
+
+export function reformatAssetDetailAsset(asset_data) {
+
+  //--Setup Asset Detail Asset--
+  let reformattedAsset = {
+    name: asset_data.asset_detail.name,
+    symbol: asset_data.asset_detail.symbol,
+    description: asset_data.asset_detail.description,
+    coingeckoID: asset_data.asset_detail.coingeckoId,
+    websiteURL: asset_data.asset_detail.websiteURL,
+    twitterURL: asset_data.asset_detail.twitterURL
+  };
+
+  asset_data.asset_detail = reformattedAsset;
   return;
 
 }

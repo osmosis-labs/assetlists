@@ -31,6 +31,9 @@ jobs:
         with:
           node-version: 19.6.0
           
+      - name: Install dependencies
+        run: npm install
+          
       - name: Run code to Validate Zone Data
         working-directory: ./.github/workflows/utility
         run: node validate_zone_files.mjs

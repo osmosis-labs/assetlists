@@ -1,0 +1,7 @@
+{
+  "localization": "zh-cn",
+  "name": "Pyth Network",
+  "symbol": "PYTH",
+  "coingeckoID": "pyth-network",
+  "description": "Pyth 是一种协议，允许市场参与者在链上发布定价信息供其他人使用。该协议是三方之间的互动：\n-发布商将定价信息提交给 Pyth 的预言机程序。Pyth 为每种产品提供多个数据发布者，以提高系统的准确性和稳健性。\n-Pyth 的 oracle 程序结合了出版商的数据来生成单一的总价格和置信区间。<inlang-LineFeed>消费者读取由预言机程序生成的价格信息。<inlang-LineFeed>\nPyth 的预言机程序同时在 Solana 主网和 Pythnet 上运行。程序的每个实例都负责自己的一组价格信息。Solana 价格信息可供 Solana 协议使用。在这种情况下，由于预言机程序本身在 Solana 上运行，因此消费者可以立即获得最终价格，而无需进行任何额外工作。Pythnet 价格信息可在 12 个以上的区块链上使用。在 Pythnet 上构建的价格会跨链传输，以到达这些区块链上的消费者。<inlang-LineFeed><inlang-LineFeed>在这两种情况下，系统的关键组件是将来自每个发布者的数据组合在一起的预言机程序。该程序维护许多不同的 Solana 帐户，这些帐户列出了 Pyth 上的产品及其当前价格数据。发布者通过与每个 slot 上的预言机程序交互来发布其价格和置信度。该程序将此信息存储在其帐户中。 slot 中的第一次价格更新还会触发价格聚合，将前一个 slot 的价格数据组合成一个总价格和置信区间。此总价格写入 Solana 帐户，其他链上程序可以读取该帐户，并可以将其传输到其他区块链。"
+}

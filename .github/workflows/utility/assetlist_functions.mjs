@@ -26,11 +26,13 @@ export const assetlistFileName = "assetlist.json";
 export const chainlistFileName = "chainlist.json";
 
 //- Directory Names -
+export const assetlistsRoot = "../../..";
 export const noDir = "";
-const generatedDirectoryName = "generated";
+export const generatedDirectoryName = "generated";
 export const chainRegAssetlist = path.join(generatedDirectoryName, "chain_registry");
 export const zoneConfigAssetlist = path.join(generatedDirectoryName, "frontend");
 export const zoneConfigChainlist = path.join(generatedDirectoryName, "frontend");
+export const zoneAssetDetail = path.join(generatedDirectoryName, "asset_detail");
 
 //- Chain Names --
 export const chainNames = [
@@ -46,9 +48,7 @@ const chainNames_decommissioned = [
 //-- Functions --
 
 
-function getFileLocation(chainName, directoryName, fileName) {
-  
-  const assetlistsRoot = "../../..";
+export function getFileLocation(chainName, directoryName, fileName) {
   const chainNameToChainIdMap = new Map([
     ["osmosis", "osmosis-1"],
     ["osmosistestnet4", "osmo-test-4"],
@@ -56,7 +56,7 @@ function getFileLocation(chainName, directoryName, fileName) {
   ]);
   return path.join(
     assetlistsRoot,
-    chainNameToChainIdMap.get(chainName),
+    chainNameToChainIdMap.get(chainName) || "",
     directoryName,
     fileName
   );
@@ -80,7 +80,7 @@ export function readFromFile(chainName, directoryName, fileName) {
 
 export function writeToFile(chainName, directoryName, fileName, value) {
   try {
-    fs.writeFile(
+    fs.writeFileSync(
       getFileLocation(chainName, directoryName, fileName),
       JSON.stringify(value,null,2),
       (err) => {
@@ -95,6 +95,24 @@ export function writeToFile(chainName, directoryName, fileName, value) {
 
 
 
+export function getFilesInDirectory(directoryPath) {
+  try {
+    // Read the contents of the directory synchronously
+    const files = fs.readdirSync(directoryPath);
+
+    // Filter out only the files from the list of entries
+    const filePaths = files.map(file => path.join(directoryPath, file))
+      .filter(filePath => fs.statSync(filePath).isFile());
+
+    return filePaths;
+  } catch (error) {
+    console.error(`Error reading directory ${directoryPath}:`, error);
+    return [];
+  }
+}
+
+
+
 export async function calculateIbcHash(ibcHashInput) {
   const textAsBuffer = new TextEncoder().encode(ibcHashInput);
   const hashBuffer = await crypto.subtle.digest('SHA-256', textAsBuffer);
@@ -104,3 +122,31 @@ export async function calculateIbcHash(ibcHashInput) {
   return ibcHashOutput;
 }
 
+
+
+export function objectsAreEqual(obj1, obj2) {
+  // Get the keys of both objects
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+
+  // Check if the number of keys is the same
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  // Iterate over the keys of obj1
+  for (let key of keys1) {
+    // Check if obj2 has the same key
+    if (!obj2.hasOwnProperty(key)) {
+      return false;
+    }
+    
+    // Check if the values of the properties are the same
+    if (obj1[key] !== obj2[key]) {
+      return false;
+    }
+  }
+
+  // If all properties and values are the same, return true
+  return true;
+}

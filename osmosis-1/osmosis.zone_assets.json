@@ -3439,18 +3439,25 @@
       "_comment": "BackBone Labs Liquid Staked OSMO $bOSMO"
     },
     {
-      "chain_name": "pundix",
-      "base_denom": "ibc/55367B7B6572631B78A93C66EF9FDFCE87CDE372CC4ED7848DA78C1EB1DCDD78",
-      "path": "transfer/channel-12618/transfer/channel-0/eth0x0FD10b9899882a6f2fcb5c371E17e70FdEe00C38",
+      "chain_name": "fxcore",
+      "base_denom": "eth0x0FD10b9899882a6f2fcb5c371E17e70FdEe00C38",
+      "path": "transfer/channel-2716/eth0x0FD10b9899882a6f2fcb5c371E17e70FdEe00C38",
+      "transfer_methods": [
+        {
+          "name": "Starscan",
+          "type": "external_interface",
+          "deposit_url": "https://starscan.io/fxbridge?from=fxcore&to=osmosis&token=PUNDIX"
+        }
+      ],
       "canonical": {
         "chain_name": "ethereum",
         "base_denom": "0x0FD10b9899882a6f2fcb5c371E17e70FdEe00C38"
       },
+      "osmosis_verified": false,
       "categories": [
         "depin"
       ],
-      "osmosis_verified": false,
-      "osmosis_unlisted": true,
+      "listing_date_time_utc": "2024-05-21T16:00:00Z",
       "_comment": "PundiX $PUNDIX"
     },
     {

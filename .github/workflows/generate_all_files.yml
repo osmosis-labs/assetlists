@@ -38,10 +38,6 @@ jobs:
         working-directory: ./.github/workflows/utility
         run: node generate_chainlist_new.mjs
 
-      - name: Run code to Generate Assetlist
-        working-directory: ./.github/workflows/utility
-        run: node generate_assetlist.mjs
-
       - name: Run code to Generate Chainlist
         working-directory: ./.github/workflows/utility
         run: node generate_chainlist.mjs

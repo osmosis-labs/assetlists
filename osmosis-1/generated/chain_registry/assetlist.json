@@ -18946,6 +18946,404 @@
       ]
     },
     {
+      "description": "Tether, issued natively on Solana.",
+      "denom_units": [
+        {
+          "denom": "ibc/0233A3F2541FD43DBCA569B27AF886E97F5C03FC0305E4A8A3FAC6AC26249C7A",
+          "exponent": 0,
+          "aliases": [
+            "ibc/D105950618E47CA2AEC314282BC401625025F80A4F812808DEEBB1941C685575"
+          ]
+        },
+        {
+          "denom": "usdt",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/0233A3F2541FD43DBCA569B27AF886E97F5C03FC0305E4A8A3FAC6AC26249C7A",
+      "name": "Tether",
+      "display": "usdt",
+      "symbol": "USDT.pica",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Tether"
+        },
+        {
+          "type": "additional-mintage",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+          },
+          "provider": "Tether"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "solana",
+            "base_denom": "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-71",
+            "path": "transfer/channel-71/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"
+          }
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "composable",
+            "base_denom": "ibc/D105950618E47CA2AEC314282BC401625025F80A4F812808DEEBB1941C685575",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-1279",
+            "path": "transfer/channel-1279/transfer/channel-71/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"
+          }
+        }
+      ],
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "solana",
+            "base_denom": "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/usdt.png"
+        }
+      ],
+      "keywords": [
+        "osmosis_unlisted"
+      ]
+    },
+    {
+      "description": "A representative token for staked SOL, derived through the process of liquid staking SOL using the Edgevana protocol.",
+      "denom_units": [
+        {
+          "denom": "ibc/B83F9E20B4A07FA8846880000BD9D8985D89567A090F5E9390C64E81C39B4607",
+          "exponent": 0,
+          "aliases": [
+            "ibc/BADB5950C4A81AC201696EBCB33CD295137FA86F0AA620CDDE946D3700E0208C"
+          ]
+        },
+        {
+          "denom": "edgesol",
+          "exponent": 9
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/B83F9E20B4A07FA8846880000BD9D8985D89567A090F5E9390C64E81C39B4607",
+      "name": "Edgevana Staked SOL",
+      "display": "edgesol",
+      "symbol": "edgeSOL.pica",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "solana",
+            "base_denom": "Lamport"
+          },
+          "provider": "Edgevana"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "solana",
+            "base_denom": "edge86g9cVz87xcpKpy3J77vbp4wYd9idEV562CCntt",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-71",
+            "path": "transfer/channel-71/edge86g9cVz87xcpKpy3J77vbp4wYd9idEV562CCntt"
+          }
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "composable",
+            "base_denom": "ibc/BADB5950C4A81AC201696EBCB33CD295137FA86F0AA620CDDE946D3700E0208C",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-1279",
+            "path": "transfer/channel-1279/transfer/channel-71/edge86g9cVz87xcpKpy3J77vbp4wYd9idEV562CCntt"
+          }
+        }
+      ],
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "solana",
+            "base_denom": "edge86g9cVz87xcpKpy3J77vbp4wYd9idEV562CCntt"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/edgesol.png"
+        }
+      ],
+      "keywords": [
+        "osmosis_unlisted"
+      ]
+    },
+    {
+      "description": "A representative token for staked SOL, derived through the process of liquid staking SOL using the MarginFi protocol.",
+      "denom_units": [
+        {
+          "denom": "ibc/F618D130A2B8203D169811658BD0361F18DC2453085965FA0E5AEB8018DD54EE",
+          "exponent": 0,
+          "aliases": [
+            "ibc/55F5B582483FEFA5422794292B079B4D49A5BAB9881E7C801F9F271F1D234F1D"
+          ]
+        },
+        {
+          "denom": "lst",
+          "exponent": 9
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/F618D130A2B8203D169811658BD0361F18DC2453085965FA0E5AEB8018DD54EE",
+      "name": "Liquid Staking Token",
+      "display": "lst",
+      "symbol": "LST.pica",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "solana",
+            "base_denom": "Lamport"
+          },
+          "provider": "MarginFi"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "solana",
+            "base_denom": "LSTxxxnJzKDFSLr4dUkPcmCf5VyryEqzPLz5j4bpxFp",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-71",
+            "path": "transfer/channel-71/LSTxxxnJzKDFSLr4dUkPcmCf5VyryEqzPLz5j4bpxFp"
+          }
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "composable",
+            "base_denom": "ibc/55F5B582483FEFA5422794292B079B4D49A5BAB9881E7C801F9F271F1D234F1D",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-1279",
+            "path": "transfer/channel-1279/transfer/channel-71/LSTxxxnJzKDFSLr4dUkPcmCf5VyryEqzPLz5j4bpxFp"
+          }
+        }
+      ],
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "solana",
+            "base_denom": "mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/lst.png"
+        }
+      ],
+      "keywords": [
+        "osmosis_unlisted"
+      ]
+    },
+    {
+      "description": "A representative token for staked SOL, derived through the process of liquid staking SOL using Jito.",
+      "denom_units": [
+        {
+          "denom": "ibc/9A83BDF4C8C5FFDDE735533BC8CD4363714A6474AED1C2C492FB003BB77C7982",
+          "exponent": 0,
+          "aliases": [
+            "ibc/91A2FE07F8BDFC0552B1C9972FCCBF2CFD067DDE5F496D81E5132CE57762B0F2"
+          ]
+        },
+        {
+          "denom": "jitosol",
+          "exponent": 9
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/9A83BDF4C8C5FFDDE735533BC8CD4363714A6474AED1C2C492FB003BB77C7982",
+      "name": "Jito Staked SOL",
+      "display": "jitosol",
+      "symbol": "jitoSOL.pica",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "solana",
+            "base_denom": "Lamport"
+          },
+          "provider": "Jito"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "solana",
+            "base_denom": "J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-71",
+            "path": "transfer/channel-71/J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn"
+          }
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "composable",
+            "base_denom": "ibc/91A2FE07F8BDFC0552B1C9972FCCBF2CFD067DDE5F496D81E5132CE57762B0F2",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-1279",
+            "path": "transfer/channel-1279/transfer/channel-71/J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn"
+          }
+        }
+      ],
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "solana",
+            "base_denom": "J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/jitosol.png"
+        }
+      ],
+      "keywords": [
+        "osmosis_unlisted"
+      ]
+    },
+    {
+      "description": "SOL is the native cryptocurrency of the Solana blockchain.",
+      "denom_units": [
+        {
+          "denom": "ibc/0F9E9277B61A78CB31014D541ACA5BF6AB06DFC4524C4C836490B131DAAECD78",
+          "exponent": 0,
+          "aliases": [
+            "Lamport",
+            "ibc/2CC39C8141F257EBBA250F65B9D0F31DC8D153C225E51EC192DE6E3F65D43F0C"
+          ]
+        },
+        {
+          "denom": "wsol",
+          "exponent": 9
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/0F9E9277B61A78CB31014D541ACA5BF6AB06DFC4524C4C836490B131DAAECD78",
+      "name": "Wrapped Solana",
+      "display": "wsol",
+      "symbol": "wSOL.pica",
+      "traces": [
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "solana",
+            "base_denom": "Lamport"
+          },
+          "provider": "Solana"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "solana",
+            "base_denom": "So11111111111111111111111111111111111111112",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-71",
+            "path": "transfer/channel-71/So11111111111111111111111111111111111111112"
+          }
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "composable",
+            "base_denom": "ibc/2CC39C8141F257EBBA250F65B9D0F31DC8D153C225E51EC192DE6E3F65D43F0C",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-1279",
+            "path": "transfer/channel-1279/transfer/channel-71/So11111111111111111111111111111111111111112"
+          }
+        }
+      ],
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "solana",
+            "base_denom": "So11111111111111111111111111111111111111112"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/sol.svg"
+        }
+      ],
+      "keywords": [
+        "osmosis_unlisted"
+      ]
+    },
+    {
+      "description": "An alloy of USDT asset variants on Osmosis.",
+      "extended_description": "Multiple Tether USD variants on Osmosis comprise the liquidity backing of a tokenized transmuter pool to create an alloy of USDT.",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1em6xs47hd82806f5cxgyufguxrrc7l0aqx7nzzptjuqgswczk8csavdxek/alloyed/allUSDT",
+          "exponent": 0
+        },
+        {
+          "denom": "allUSDT",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1em6xs47hd82806f5cxgyufguxrrc7l0aqx7nzzptjuqgswczk8csavdxek",
+      "base": "factory/osmo1em6xs47hd82806f5cxgyufguxrrc7l0aqx7nzzptjuqgswczk8csavdxek/alloyed/allUSDT",
+      "name": "Alloyed USDT",
+      "display": "allUSDT",
+      "symbol": "allUSDT",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Tether"
+        },
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+          },
+          "provider": "Osmosis"
+        }
+      ],
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "ethereum",
+            "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.svg"
+        }
+      ],
+      "keywords": [
+        "osmosis_unlisted"
+      ],
+      "socials": {
+        "website": "https://osmosis.zone",
+        "twitter": "https://twitter.com/osmosiszone"
+      }
+    },
+    {
       "description": "PUNDIX token is the native token that functions within the Pundi X ecosystem, including PundiX Chain and XPOS.",
       "denom_units": [
         {

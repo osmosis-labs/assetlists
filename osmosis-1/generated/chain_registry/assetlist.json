@@ -15426,9 +15426,6 @@
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/chain4energy/images/c4e.png"
         }
-      ],
-      "keywords": [
-        "osmosis_unlisted"
       ]
     },
     {
@@ -16330,6 +16327,15 @@
       "display": "PUNDIX",
       "symbol": "PUNDIX",
       "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0x0FD10b9899882a6f2fcb5c371E17e70FdEe00C38",
+            "contract": "0x0FD10b9899882a6f2fcb5c371E17e70FdEe00C38"
+          },
+          "provider": "Function X"
+        },
         {
           "type": "ibc",
           "counterparty": {
@@ -18102,12 +18108,10 @@
       "name": "Shitmos",
       "display": "SHITMOS",
       "symbol": "SHITMOS",
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/SHITMOS.png"
-      },
       "images": [
         {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/SHITMOS.png"
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/shitmos.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/shitmos.svg"
         }
       ]
     },
@@ -19342,6 +19346,63 @@
         "website": "https://osmosis.zone",
         "twitter": "https://twitter.com/osmosiszone"
       }
+    },
+    {
+      "description": "Whinecoin is an experimental memecoin by the Sommelier Finance team.",
+      "denom_units": [
+        {
+          "denom": "ibc/A8C568580D613F16F7E9075EA9FAD69FEBE0CC1F4AF46C60255FEC4459C166F1",
+          "exponent": 0,
+          "aliases": [
+            "ATeTQcUkWGs7AZ15mCiFUWCW9EUL7KpDZEHCN1Y8pump",
+            "ibc/9D5DA3720001F91DD76B8F609A93F96688EC8185B54BF9A1A1450EB34FF2D912"
+          ]
+        },
+        {
+          "denom": "whine",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/A8C568580D613F16F7E9075EA9FAD69FEBE0CC1F4AF46C60255FEC4459C166F1",
+      "name": "WHINEcoin",
+      "display": "whine",
+      "symbol": "WHINE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "solana",
+            "base_denom": "ATeTQcUkWGs7AZ15mCiFUWCW9EUL7KpDZEHCN1Y8pump",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-71",
+            "path": "transfer/channel-71/ATeTQcUkWGs7AZ15mCiFUWCW9EUL7KpDZEHCN1Y8pump"
+          }
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "composable",
+            "base_denom": "ibc/9D5DA3720001F91DD76B8F609A93F96688EC8185B54BF9A1A1450EB34FF2D912",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-1279",
+            "path": "transfer/channel-1279/transfer/channel-71/ATeTQcUkWGs7AZ15mCiFUWCW9EUL7KpDZEHCN1Y8pump"
+          }
+        }
+      ],
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "solana",
+            "base_denom": "ATeTQcUkWGs7AZ15mCiFUWCW9EUL7KpDZEHCN1Y8pump"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/whine.png"
+        }
+      ]
     },
     {
       "description": "PUNDIX token is the native token that functions within the Pundi X ecosystem, including PundiX Chain and XPOS.",

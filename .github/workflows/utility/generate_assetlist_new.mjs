@@ -92,6 +92,10 @@ const generateAssets = async (
     assetlist.setTooltipMessage(asset_data);
     assetlist.setKeywords(asset_data);
     assetlist.setTypeAsset(asset_data);
+
+    assetlist.setIsAlloyed(asset_data);
+    assetlist.setContract(asset_data);
+
     assetlist.setSocials(asset_data);
 
     //--Append to Chain_Reg Assetlist--

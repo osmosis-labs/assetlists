@@ -965,6 +965,22 @@ export function setSocials(asset_data) {
 
 }
 
+export function setIsAlloyed(asset_data) {
+
+  asset_data.frontend.isAlloyed = asset_data.zone_asset.is_alloyed;
+
+}
+
+export function setContract(asset_data) {
+
+  if (asset_data.zone_asset.is_alloyed) {
+    
+    asset_data.frontend.contract = asset_data.chain_reg.contract || asset_data.canonical_asset.base_denom.replace(/^factory\//, '');
+
+  }
+
+}
+
 export function setDescription(asset_data) {
   
   let description, extended_description;
@@ -1018,6 +1034,8 @@ export function reformatFrontendAsset(asset_data) {
     variantGroupKey: asset_data.frontend.variantGroupKey,
     name: asset_data.frontend.name,
     //description: asset_data.frontend.description,
+    isAlloyed: asset_data.frontend.isAlloyed ?? false,
+    contract: asset_data.frontend.contract ?? false,
     verified: asset_data.frontend.verified ?? false,
     unstable: asset_data.frontend.unstable ?? false,
     disabled: asset_data.frontend.disabled ?? false,

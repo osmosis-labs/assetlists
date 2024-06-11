@@ -797,26 +797,6 @@ export function setTransferMethods(asset_data) {
       transferMethod.withdrawUrl = transferMethod.withdrawUrl ?? transferMethod.withdraw_url;
       delete transferMethod.withdraw_url;
 
-    } else if (transferMethod.type === bridge) {
-
-      transferMethod.counterparty.forEach((counterparty) => {
-        asset_data.zone_config.evm_chains.some((evm_chain) => {
-          if (evm_chain.chain_name === counterparty.chain_name) {
-            counterparty.evmChainId = evm_chain.chain_id;
-          }
-        });
-        asset_data.zone_config.providers.some((provider) => {
-          if (provider.integration === transferMethod.name) {
-            provider.api_keys?.sourceChainIds?.some((sourceChainId) => {
-              if (sourceChainId.chain_name === counterparty.chain_name) {
-                counterparty.sourceChainId = sourceChainId.sourceChainId;
-              }
-            });
-          }
-        });
-        delete counterparty.chain_name;
-      });
-
     }
 
   });

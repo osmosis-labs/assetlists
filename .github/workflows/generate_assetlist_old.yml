@@ -1,8 +1,8 @@
 on: [workflow_dispatch]
-name: Generate Assetlist
+name: Generate Assetlist (Old)
 jobs:
   generate_assetlist:
-    name: Generate Assetlist
+    name: Generate Assetlist (Old)
     runs-on: ubuntu-latest
     
     defaults:
@@ -32,7 +32,7 @@ jobs:
           
       - name: Run code to Generate Assetlist
         working-directory: ./.github/workflows/utility
-        run: node generate_assetlist.mjs
+        run: node generate_assetlist_old.mjs
       
       - name: Add Commit Push
         uses: devops-infra/action-commit-push@master

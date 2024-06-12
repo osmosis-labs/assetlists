@@ -117,7 +117,6 @@
             },
             "oneOf": [
               { "$ref": "#/$defs/external_interface" },
-              { "$ref": "#/$defs/integrated_bridge" },
               { "$ref": "#/$defs/fiat_onramp" }
             ]
           }
@@ -218,68 +217,6 @@
           "description": "The URL of the interface used for withdrawing the asset to this chain."
         }
       }
-    },
-    "integrated_bridge": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "const": "integrated_bridge"
-        },
-        "counterparty": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "chain_name": {
-                "type": "string"
-              },
-              "unwrappedAssetId": {
-                "type": "string"
-              },
-              "wrappedAssetId": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "chain_name"
-            ],
-            "anyOf": [
-              {
-                "required": [
-                  "unwrappedAssetId"
-                ]
-              },
-              {
-                "required": [
-                  "wrappedAssetId"
-                ]
-              }
-            ]
-          }
-        },
-        "unwrappedAssetId": {
-          "type": "string"
-        },
-        "wrappedAssetId": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "type",
-        "counterparty"
-      ],
-      "anyOf": [
-        {
-          "required": [
-            "unwrappedAssetId"
-          ]
-        },
-        {
-          "required": [
-            "wrappedAssetId"
-          ]
-        }
-      ]
     },
     "fiat_onramp": {
       "type": "object",

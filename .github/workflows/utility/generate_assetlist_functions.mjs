@@ -1035,7 +1035,7 @@ export function reformatFrontendAsset(asset_data) {
     name: asset_data.frontend.name,
     //description: asset_data.frontend.description,
     isAlloyed: asset_data.frontend.isAlloyed ?? false,
-    contract: asset_data.frontend.contract ?? false,
+    contract: asset_data.frontend.contract,
     verified: asset_data.frontend.verified ?? false,
     unstable: asset_data.frontend.unstable ?? false,
     disabled: asset_data.frontend.disabled ?? false,

@@ -955,7 +955,7 @@ export function setContract(asset_data) {
 
   if (asset_data.zone_asset.is_alloyed) {
     
-    asset_data.frontend.contract = asset_data.chain_reg.contract || asset_data.canonical_asset.base_denom.replace(/^factory\//, '');
+    asset_data.frontend.contract = asset_data.chain_reg.address;
 
   }
 

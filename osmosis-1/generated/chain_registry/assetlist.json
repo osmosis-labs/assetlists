@@ -15300,9 +15300,9 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/2BF9656CAB0384A31167DB9B0254F0FB1CB4346A229BD7E5CBDCBB911C3740F7",
-      "name": "Teledisko DAO",
+      "name": "Teledisko DAO - Legacy",
       "display": "berlin",
-      "symbol": "BERLIN",
+      "symbol": "BERLIN-legacy",
       "traces": [
         {
           "type": "ibc",
@@ -16523,7 +16523,7 @@
       "description": "The native token of Furya",
       "denom_units": [
         {
-          "denom": "ibc/42D0FBF9DDC72D7359D309A93A6DF9F6FDEE3987EA1C5B3CDE95C06FCE183F12",
+          "denom": "ibc/E4C60B9F95BF54CC085A5E39F6057ABD4DF92793D330EB884A36530F7E6804DE",
           "exponent": 0,
           "aliases": [
             "ufury"
@@ -16535,7 +16535,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/42D0FBF9DDC72D7359D309A93A6DF9F6FDEE3987EA1C5B3CDE95C06FCE183F12",
+      "base": "ibc/E4C60B9F95BF54CC085A5E39F6057ABD4DF92793D330EB884A36530F7E6804DE",
       "name": "furya",
       "display": "fury",
       "symbol": "FURY",
@@ -16545,29 +16545,18 @@
           "counterparty": {
             "chain_name": "furya",
             "base_denom": "ufury",
-            "channel_id": "channel-3"
+            "channel_id": "channel-8"
           },
           "chain": {
-            "channel_id": "channel-8690",
-            "path": "transfer/channel-8690/ufury"
+            "channel_id": "channel-74222",
+            "path": "transfer/channel-74222/ufury"
           }
         }
       ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.svg"
-      },
       "images": [
         {
-          "image_sync": {
-            "chain_name": "furya",
-            "base_denom": "ufury"
-          },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.svg",
-          "theme": {
-            "primary_color_hex": "#eaf143"
-          }
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/fury.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/fury.svg"
         }
       ],
       "keywords": [
@@ -18091,7 +18080,8 @@
       ]
     },
     {
-      "description": "Like cosmos, but shit",
+      "description": "The Cosmos Network's premier self-hatred memecoin.",
+      "extended_description": "Shitmos is a fair launched token deployed via the start.cooking liquidity bootstrapping protocol (LBP) on the Osmosis blockchain. It is powered by the Shitmos Economic Zone (SEZ), and it has been designed with the goal of uniting the Cosmos Network and interchain-at-large ecosystems by making crypto fun. The SEZ is a federation of nft collections on Stargaze that supports Shitmos by providing at least 2% of royalties towards open market purchases of Shitmos.",
       "denom_units": [
         {
           "denom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/shitmos",
@@ -18117,7 +18107,14 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/shitmos.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/shitmos.svg"
         }
-      ]
+      ],
+      "keywords": [
+        "memecoin"
+      ],
+      "socials": {
+        "website": "https://shitmos.wtf",
+        "twitter": "https://twitter.com/shitoncosmos"
+      }
     },
     {
       "description": "Quicksilver Liquid Staked JUNO",
@@ -19406,6 +19403,62 @@
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/whine.png"
         }
+      ]
+    },
+    {
+      "description": "The native token of Furya",
+      "denom_units": [
+        {
+          "denom": "ibc/42D0FBF9DDC72D7359D309A93A6DF9F6FDEE3987EA1C5B3CDE95C06FCE183F12",
+          "exponent": 0,
+          "aliases": [
+            "ufury"
+          ]
+        },
+        {
+          "denom": "fury",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/42D0FBF9DDC72D7359D309A93A6DF9F6FDEE3987EA1C5B3CDE95C06FCE183F12",
+      "name": "furya",
+      "display": "fury",
+      "symbol": "FURY",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "furya",
+            "base_denom": "ufury",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-8690",
+            "path": "transfer/channel-8690/ufury"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "furya",
+            "base_denom": "ufury"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/furya/images/ufury.svg",
+          "theme": {
+            "primary_color_hex": "#eaf143"
+          }
+        }
+      ],
+      "keywords": [
+        "gaming",
+        "staking"
       ]
     },
     {

@@ -930,16 +930,34 @@ export function setSocials(asset_data) {
   let socials = getAssetProperty(asset_data.canonical_asset, "socials");
   asset_data.asset_detail.websiteURL = socials?.website;
   asset_data.asset_detail.twitterURL = socials?.twitter;
-
   if (socials) { return; }
   
   if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
-    let socials = chain_reg.getFileProperty(
+    socials = chain_reg.getFileProperty(
       asset_data.canonical_asset.chain_name,
       "chain",
       "socials"
     )
   }
+  asset_data.asset_detail.websiteURL = socials?.website;
+  asset_data.asset_detail.twitterURL = socials?.twitter;
+  if (socials) { return; }
+
+  const trace_types = [
+    "ibc",
+    "ibc-cw20",
+    "bridge",
+    "wrapped",
+    "additional-mintage",
+    "synthetic"
+  ];
+
+  socials = chain_reg.getAssetPropertyWithTraceCustom(
+    asset_data.source_asset.chain_name,
+    asset_data.source_asset.base_denom,
+    "socials",
+    trace_types
+  );
   asset_data.asset_detail.websiteURL = socials?.website;
   asset_data.asset_detail.twitterURL = socials?.twitter;
 

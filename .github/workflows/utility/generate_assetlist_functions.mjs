@@ -722,10 +722,10 @@ export function setCounterparty(asset_data) {
       numBridgeHops += 1;
     }
 
-    counterpartyAsset = {
-      chainName: traces[i].counterparty.chain_name,
-      sourceDenom: traces[i].counterparty.base_denom
-    }
+    counterpartyAsset = {};
+    //  chainName: traces[i].counterparty.chain_name,
+    //  sourceDenom: traces[i].counterparty.base_denom
+    //}
 
     const cosmosChainId = chain_reg.getFileProperty(
         traces[i].counterparty.chain_name,
@@ -753,20 +753,20 @@ export function setCounterparty(asset_data) {
         counterpartyAsset.chainType = "non-cosmos";
       }
     }
-    counterpartyAsset.symbol = chain_reg.getAssetProperty(
-      traces[i].counterparty.chain_name,
-      traces[i].counterparty.base_denom,
-      "symbol"
-    );
-    counterpartyAsset.decimals = getAssetDecimals(traces[i].counterparty);
-    let counterpartyImage = chain_reg.getAssetProperty(
-      traces[i].counterparty.chain_name,
-      traces[i].counterparty.base_denom,
-      "images"
-    )?.[0];
-    counterpartyAsset.logoURIs = {};
-    counterpartyAsset.logoURIs.png = counterpartyImage.png;
-    counterpartyAsset.logoURIs.svg = counterpartyImage.svg;
+    //counterpartyAsset.symbol = chain_reg.getAssetProperty(
+    //  traces[i].counterparty.chain_name,
+    //  traces[i].counterparty.base_denom,
+    //  "symbol"
+    //);
+    //counterpartyAsset.decimals = getAssetDecimals(traces[i].counterparty);
+    //let counterpartyImage = chain_reg.getAssetProperty(
+    //  traces[i].counterparty.chain_name,
+    //  traces[i].counterparty.base_denom,
+    //  "images"
+    //)?.[0];
+    //counterpartyAsset.logoURIs = {};
+    //counterpartyAsset.logoURIs.png = counterpartyImage.png;
+    //counterpartyAsset.logoURIs.svg = counterpartyImage.svg;
 
     asset_data.frontend.counterparty.push(counterpartyAsset);
 

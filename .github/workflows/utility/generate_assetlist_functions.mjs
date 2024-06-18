@@ -574,11 +574,7 @@ export function setName(asset_data) {
 
 
     //but use chain name instead if it's the staking token...
-    if (
-      //chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom ==
-      //asset_data.canonical_asset.base_denom
-      getAssetProperty(asset_data.canonical_asset, "is_staking")
-    ) {
+    if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
       name = chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "pretty_name");
     }
 
@@ -964,32 +960,29 @@ export function setDescription(asset_data) {
   
   let description, extended_description;
 
-  //for Chain registry
-  description = getAssetProperty(asset_data.local_asset, "description") || getAssetProperty(asset_data.canonical_asset, "description");
-  if (description) {
-    asset_data.chain_reg.description = description;
-  }
+  asset_data.chain_reg.description = getAssetProperty(asset_data.local_asset, "description");
   asset_data.chain_reg.extended_description = getAssetProperty(asset_data.local_asset, "extended_description");
 
-  //for Asset Detail
-  extended_description = asset_data.zone_asset?.override_properties?.description;
-  if (extended_description) {
-    asset_data.asset_detail.description = extended_description;
-    return;
-  }
-  extended_description =
-    getAssetProperty(asset_data.local_asset, "extended_description") ||
-    getAssetProperty(asset_data.canonical_asset, "extended_description");
-  if (!extended_description) {
-    if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
-      extended_description = chain_reg.getFileProperty(
-        asset_data.canonical_asset.chain_name,
-        "chain",
-        "description"
-      );
+  if (asset_data.zone_asset?.override_properties?.description) {
+    description = asset_data.zone_asset?.override_properties?.description;
+  } else {
+    description =
+      getAssetProperty(asset_data.local_asset, "description") ||
+      getAssetProperty(asset_data.canonical_asset, "description");
+    extended_description =
+      getAssetProperty(asset_data.local_asset, "extended_description") ||
+      getAssetProperty(asset_data.canonical_asset, "extended_description");
+    if (!extended_description) {
+      if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
+        extended_description = chain_reg.getFileProperty(
+          asset_data.canonical_asset.chain_name,
+          "chain",
+          "description"
+        );
+      }
     }
+    description = (description ?? "") + (description && extended_description ? "\n\n" : "") + (extended_description ?? "");
   }
-  description = (description ?? "") + (description && extended_description ? "\n\n" : "") + (extended_description ?? "");
   asset_data.asset_detail.description = description;
 
 }

@@ -561,52 +561,55 @@ export function setName(asset_data) {
 
   let name;
 
+  asset_data.chain_reg.name =
+    getAssetProperty(asset_data.local_asset, "name") ??
+    getAssetProperty(asset_data.canonical_asset, "name");
+
+
   if (asset_data.zone_asset?.override_properties?.name) {
     name = asset_data.zone_asset?.override_properties?.name;
-    asset_data.frontend.name = name;
-    asset_data.chain_reg.name = name;
-    asset_data.asset_detail.name = name;
-    return;
-  }
-
-  //  but use chain name instead if it's the staking token...
-  if (
-    chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom ==
-    asset_data.canonical_asset.base_denom
-  ) {
-    name = chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "pretty_name");
   } else {
-    name = getAssetProperty(asset_data.canonical_asset, "name");
-  }
 
-  const traces = getAssetProperty(asset_data.canonical_asset, "traces");
-  if (!traces) {
-    asset_data.frontend.name = name;
-    asset_data.chain_reg.name = name;
-    return;
-  }
+    name = asset_data.chain_reg.name;
 
-  const trace_types = [
-    "ibc",
-    "ibc-cw20"
-  ];
 
-  let bridge_provider;
-
-  for (let i = traces?.length - 1; i >= 0; i--) {
-    if (trace_types.includes(traces[i].type)) { continue; }
-    if (traces[i].type === "bridge") {
-      bridge_provider = traces[i].provider;
+    //but use chain name instead if it's the staking token...
+    if (
+      //chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom ==
+      //asset_data.canonical_asset.base_denom
+      getAssetProperty(asset_data.canonical_asset, "is_staking")
+    ) {
+      name = chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "pretty_name");
     }
-    break;
-  }
 
-  if (bridge_provider && !name.includes(bridge_provider)) {
-    name = name + " " + "(" + bridge_provider + ")";
+
+    //append provider name in parentheses
+    const traces = getAssetProperty(asset_data.canonical_asset, "traces");
+    if (!traces) {
+      asset_data.frontend.name = name;
+      asset_data.chain_reg.name = name;
+      return;
+    }
+    const trace_types = [
+      "ibc",
+      "ibc-cw20"
+    ];
+    let bridge_provider;
+    for (let i = traces?.length - 1; i >= 0; i--) {
+      if (trace_types.includes(traces[i].type)) { continue; }
+      if (traces[i].type === "bridge") {
+        bridge_provider = traces[i].provider;
+      }
+      break;
+    }
+    if (bridge_provider && !name.includes(bridge_provider)) {
+      name = name + " " + "(" + bridge_provider + ")";
+    }
+
   }
   asset_data.frontend.name = name;
-  asset_data.chain_reg.name = name;
   asset_data.asset_detail.name = name;
+  
 
 }
 

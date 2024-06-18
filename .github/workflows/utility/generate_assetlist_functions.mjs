@@ -245,40 +245,32 @@ export function setSymbol(asset_data) {
 
   let symbol;
 
-  if (asset_data.zone_asset.override_properties?.symbol) {
+  asset_data.chain_reg.symbol =
+    getAssetProperty(asset_data.local_asset, "symbol") ??
+    getAssetProperty(asset_data.canonical_asset, "symbol");
+
+
+  if (asset_data.zone_asset?.override_properties?.symbol) {
     symbol = asset_data.zone_asset.override_properties.symbol;
-    asset_data.frontend.symbol = symbol;
-    asset_data.chain_reg.symbol = symbol;
-    asset_data.asset_detail.symbol = symbol;
-    return;
-  }
-
-  asset_data.canonical_asset.symbol = chain_reg.getAssetProperty(
-    asset_data.canonical_asset.chain_name,
-    asset_data.canonical_asset.base_denom,
-    "symbol"
-  );
-
-  symbol = asset_data.canonical_asset.symbol;
-
-  const traces = getAssetProperty(asset_data.canonical_asset, "traces");
-
-  for (let i = (traces?.length || 0) - 1; i >= 0; i--) {
-    if (traces[i].type === "bridge") {
-      const bridge_provider = asset_data.zone_config.providers.find(
-        provider =>
-          provider.provider === traces[i].provider && provider.suffix
-      );
-      if (bridge_provider) {
-        symbol = symbol + bridge_provider.suffix;
-        break;
+  } else {
+    symbol = asset_data.chain_reg.symbol;
+    const traces = getAssetProperty(asset_data.canonical_asset, "traces");
+    for (let i = (traces?.length || 0) - 1; i >= 0; i--) {
+      if (traces[i].type === "bridge") {
+        const bridge_provider = asset_data.zone_config.providers.find(
+          provider =>
+            provider.provider === traces[i].provider && provider.suffix
+        );
+        if (bridge_provider) {
+          symbol = symbol + bridge_provider.suffix;
+          break;
+        }
       }
     }
   }
-
   asset_data.frontend.symbol = symbol;
-  asset_data.chain_reg.symbol = symbol;
   asset_data.asset_detail.symbol = symbol;
+  
 
 }
 
@@ -442,23 +434,9 @@ export function setCoinGeckoId(asset_data) {
 
 export function setKeywords(asset_data) {
 
-  let keywords = getAssetProperty(asset_data.canonical_asset, "keywords") || [];
-
-  //--Update Keywords--
-  if (asset_data.zone_asset?.osmosis_unstable) {
-    addArrayItem("osmosis_unstable", keywords);
-  }
-  if (asset_data.zone_asset?.osmosis_unlisted) {
-    addArrayItem("osmosis_unlisted", keywords);
-  }
-  if (asset_data.zone_asset?.verified) {
-    addArrayItem("osmosis_verified", keywords);
-  }
-  if (!keywords.length) {
-    keywords = undefined;
-  }
-
-  asset_data.chain_reg.keywords = keywords;
+  asset_data.chain_reg.keywords =
+    getAssetProperty(asset_data.local_asset, "keywords")
+    getAssetProperty(asset_data.canonical_asset, "keywords");
 
 }
 

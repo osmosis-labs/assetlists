@@ -253,8 +253,32 @@ export function setSymbol(asset_data) {
   if (asset_data.zone_asset?.override_properties?.symbol) {
     symbol = asset_data.zone_asset.override_properties.symbol;
   } else {
-    symbol = asset_data.chain_reg.symbol;
+    symbol = asset_data.zone_asset.canonical ? 
+      getAssetProperty(asset_data.canonical_asset, "symbol") :
+      asset_data.chain_reg.symbol;
+    //add suffix
     const traces = getAssetProperty(asset_data.canonical_asset, "traces");
+    //add prefix
+    let origin_asset = {};
+    for (let i = (traces?.length || 0) - 1; i >= 0; i--) {
+      if (!find_origin_trace_types.includes(traces[i].type)) {
+        break;
+      }
+      if (chain_reg.getAssetProperty(traces[i].counterparty.chain_name, traces[i].counterparty.base_denom, "symbol") !== symbol) {
+        break;
+      }
+      origin_asset.chain_name = traces[i].counterparty.chain_name;
+      origin_asset.base_denom = traces[i].counterparty.base_denom;
+    }
+    if (
+      origin_asset.chain_name && origin_asset.base_denom &&
+      (
+        origin_asset.chain_name !== asset_data.canonical_asset.chain_name ||
+        origin_asset.base_denom !== asset_data.canonical_asset.base_denom
+      )
+    ) {
+      symbol = asset_data.canonical_asset.chain_name + "." + symbol;
+    }
     for (let i = (traces?.length || 0) - 1; i >= 0; i--) {
       if (traces[i].type === "bridge") {
         const bridge_provider = asset_data.zone_config.providers.find(
@@ -570,8 +594,9 @@ export function setName(asset_data) {
     name = asset_data.zone_asset?.override_properties?.name;
   } else {
 
-    name = asset_data.chain_reg.name;
-
+    name = asset_data.zone_asset.canonical ? 
+      getAssetProperty(asset_data.canonical_asset, "name") :
+      asset_data.chain_reg.name;
 
     //but use chain name instead if it's the staking token...
     if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
@@ -960,18 +985,21 @@ export function setDescription(asset_data) {
   
   let description, extended_description;
 
-  asset_data.chain_reg.description = getAssetProperty(asset_data.local_asset, "description");
+  asset_data.chain_reg.description =
+    getAssetProperty(asset_data.local_asset, "description") ??
+    getAssetProperty(asset_data.canonical_asset, "description");
   asset_data.chain_reg.extended_description = getAssetProperty(asset_data.local_asset, "extended_description");
 
   if (asset_data.zone_asset?.override_properties?.description) {
     description = asset_data.zone_asset?.override_properties?.description;
   } else {
-    description =
-      getAssetProperty(asset_data.local_asset, "description") ||
-      getAssetProperty(asset_data.canonical_asset, "description");
-    extended_description =
-      getAssetProperty(asset_data.local_asset, "extended_description") ||
-      getAssetProperty(asset_data.canonical_asset, "extended_description");
+    description = asset_data.zone_asset.canonical ? 
+      getAssetProperty(asset_data.canonical_asset, "description") :
+      asset_data.chain_reg.description;
+    extended_description = asset_data.zone_asset.canonical ? 
+      getAssetProperty(asset_data.canonical_asset, "extended_description") :
+      (getAssetProperty(asset_data.local_asset, "extended_description") ||
+      getAssetProperty(asset_data.canonical_asset, "extended_description"));
     if (!extended_description) {
       if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
         extended_description = chain_reg.getFileProperty(

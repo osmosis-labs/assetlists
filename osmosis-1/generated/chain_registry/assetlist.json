@@ -14459,6 +14459,7 @@
       ]
     },
     {
+      "description": "Wrapped Bitcoin (WBTC) is an ERC20 token backed 1:1 with Bitcoin. Completely transparent. 100% verifiable. Community led.",
       "denom_units": [
         {
           "denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc",
@@ -19981,6 +19982,48 @@
             "base_denom": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/ugrac"
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/grac.png"
+        }
+      ]
+    },
+    {
+      "description": "An alloy of BTC asset variants on Osmosis.",
+      "extended_description": "Multiple Bitcoin variants on Osmosis comprise the liquidity backing of a tokenized transmuter pool to create an alloy of BTC.",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1z6r6qdknhgsc0zeracktgpcxf43j6sekq07nw8sxduc9lg0qjjlqfu25e3/alloyed/allBTC",
+          "exponent": 0
+        },
+        {
+          "denom": "allBTC",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1z6r6qdknhgsc0zeracktgpcxf43j6sekq07nw8sxduc9lg0qjjlqfu25e3",
+      "base": "factory/osmo1z6r6qdknhgsc0zeracktgpcxf43j6sekq07nw8sxduc9lg0qjjlqfu25e3/alloyed/allBTC",
+      "name": "Alloyed BTC",
+      "display": "allBTC",
+      "symbol": "allBTC",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "bitcoin",
+            "base_denom": "sat"
+          },
+          "provider": "Osmosis"
+        }
+      ],
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allBTC.svg"
+        },
+        {
+          "image_sync": {
+            "chain_name": "bitcoin",
+            "base_denom": "sat"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/bitcoin/images/btc.png"
         }
       ]
     }

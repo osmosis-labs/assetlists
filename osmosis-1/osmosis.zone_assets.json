@@ -1883,7 +1883,9 @@
       "chain_name": "composable",
       "base_denom": "ppica",
       "path": "transfer/channel-1279/ppica",
-      "twitter_URL": "https://twitter.com/picasso_network",
+      "override_properties": {
+        "symbol": "PICA"
+      },
       "osmosis_verified": true,
       "transfer_methods": [
         {
@@ -1981,13 +1983,18 @@
       "chain_name": "kava",
       "base_denom": "erc20/tether/usdt",
       "path": "transfer/channel-143/erc20/tether/usdt",
+      "override_properties": {
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/kava.USDT.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/kava.USDT.png"
+        }
+      },
       "peg_mechanism": "collateralized",
       "osmosis_verified": true,
-      "canonical": {
-        "chain_name": "ethereum",
-        "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7"
-      },
-      "categories": ["stablecoin"]
+      "categories": [
+        "stablecoin"
+      ],
+      "_comment": "Tether USD $USDT via Kava ($kava.USDT)"
     },
     {
       "chain_name": "osmosis",
@@ -2605,8 +2612,13 @@
       "chain_name": "pundix",
       "base_denom": "bsc0x29a63F4B209C29B4DC47f06FFA896F32667DAD2C",
       "path": "transfer/channel-12618/bsc0x29a63F4B209C29B4DC47f06FFA896F32667DAD2C",
+      "canonical": {
+        "chain_name": "binancesmartchain",
+        "base_denom": "0x29a63F4B209C29B4DC47f06FFA896F32667DAD2C"
+      },
       "osmosis_verified": false,
-      "osmosis_unlisted": true
+      "osmosis_unlisted": true,
+      "_comment": "Purse $PURSE"
     },
     {
       "chain_name": "injective",
@@ -2685,6 +2697,10 @@
     {
       "chain_name": "osmosis",
       "base_denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc",
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+      },
       "osmosis_verified": true,
       "listing_date_time_utc": "2024-01-29T09:57:00Z"
     },
@@ -3057,6 +3073,10 @@
       "chain_name": "injective",
       "base_denom": "peggy0xA4426666addBE8c4985377d36683D17FB40c31Be",
       "path": "transfer/channel-122/peggy0xA4426666addBE8c4985377d36683D17FB40c31Be",
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0xA4426666addBE8c4985377d36683D17FB40c31Be"
+      },
       "osmosis_verified": false,
       "listing_date_time_utc": "2024-04-01T19:35:00Z",
       "transfer_methods": [
@@ -3549,6 +3569,10 @@
       "chain_name": "dymension",
       "base_denom": "ibc/FB53D1684F155CBB86D9CE917807E42B59209EBE3AD3A92E15EF66586C073942",
       "path": "transfer/channel-19774/transfer/channel-49/anim",
+      "canonical": {
+        "chain_name": "nim",
+        "base_denom": "anim"
+      },
       "osmosis_verified": false,
       "osmosis_unstable": true,
       "listing_date_time_utc": "2024-05-01T18:25:00Z",
@@ -3967,6 +3991,10 @@
     {
       "chain_name": "osmosis",
       "base_denom": "factory/osmo1em6xs47hd82806f5cxgyufguxrrc7l0aqx7nzzptjuqgswczk8csavdxek/alloyed/allUSDT",
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+      },
       "osmosis_verified": true,
       "peg_mechanism": "collateralized",
       "is_alloyed": true,
@@ -3979,8 +4007,12 @@
       "base_denom": "ibc/9D5DA3720001F91DD76B8F609A93F96688EC8185B54BF9A1A1450EB34FF2D912",
       "path": "transfer/channel-1279/transfer/channel-71/ATeTQcUkWGs7AZ15mCiFUWCW9EUL7KpDZEHCN1Y8pump",
       "osmosis_verified": false,
+      "canonical": {
+        "chain_name": "solana",
+        "base_denom": "ATeTQcUkWGs7AZ15mCiFUWCW9EUL7KpDZEHCN1Y8pump"
+      },
       "listing_date_time_utc": "2024-06-05T03:00:00Z",
-      "_comment": "WHINEcoin (Solana) $WHINE.pica",
+      "_comment": "WHINEcoin (Solana) $WHINE via Picasso",
       "transfer_methods": [
         {
           "name": "Picasso App",

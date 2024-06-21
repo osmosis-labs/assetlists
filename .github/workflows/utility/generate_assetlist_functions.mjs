@@ -245,40 +245,56 @@ export function setSymbol(asset_data) {
 
   let symbol;
 
-  if (asset_data.zone_asset.override_properties?.symbol) {
+  asset_data.chain_reg.symbol =
+    getAssetProperty(asset_data.local_asset, "symbol") ??
+    getAssetProperty(asset_data.canonical_asset, "symbol");
+
+
+  if (asset_data.zone_asset?.override_properties?.symbol) {
     symbol = asset_data.zone_asset.override_properties.symbol;
-    asset_data.frontend.symbol = symbol;
-    asset_data.chain_reg.symbol = symbol;
-    asset_data.asset_detail.symbol = symbol;
-    return;
-  }
-
-  asset_data.canonical_asset.symbol = chain_reg.getAssetProperty(
-    asset_data.canonical_asset.chain_name,
-    asset_data.canonical_asset.base_denom,
-    "symbol"
-  );
-
-  symbol = asset_data.canonical_asset.symbol;
-
-  const traces = getAssetProperty(asset_data.canonical_asset, "traces");
-
-  for (let i = (traces?.length || 0) - 1; i >= 0; i--) {
-    if (traces[i].type === "bridge") {
-      const bridge_provider = asset_data.zone_config.providers.find(
-        provider =>
-          provider.provider === traces[i].provider && provider.suffix
-      );
-      if (bridge_provider) {
-        symbol = symbol + bridge_provider.suffix;
+  } else {
+    symbol = asset_data.zone_asset.canonical ? 
+      getAssetProperty(asset_data.canonical_asset, "symbol") :
+      asset_data.chain_reg.symbol;
+    //add suffix
+    const traces = getAssetProperty(asset_data.canonical_asset, "traces");
+    //add prefix
+    let origin_asset = {};
+    for (let i = (traces?.length || 0) - 1; i >= 0; i--) {
+      if (!find_origin_trace_types.includes(traces[i].type)) {
         break;
+      }
+      if (chain_reg.getAssetProperty(traces[i].counterparty.chain_name, traces[i].counterparty.base_denom, "symbol") !== symbol) {
+        break;
+      }
+      origin_asset.chain_name = traces[i].counterparty.chain_name;
+      origin_asset.base_denom = traces[i].counterparty.base_denom;
+    }
+    if (
+      origin_asset.chain_name && origin_asset.base_denom &&
+      (
+        origin_asset.chain_name !== asset_data.canonical_asset.chain_name ||
+        origin_asset.base_denom !== asset_data.canonical_asset.base_denom
+      )
+    ) {
+      symbol = asset_data.canonical_asset.chain_name + "." + symbol;
+    }
+    for (let i = (traces?.length || 0) - 1; i >= 0; i--) {
+      if (traces[i].type === "bridge") {
+        const bridge_provider = asset_data.zone_config.providers.find(
+          provider =>
+            provider.provider === traces[i].provider && provider.suffix
+        );
+        if (bridge_provider) {
+          symbol = symbol + bridge_provider.suffix;
+          break;
+        }
       }
     }
   }
-
   asset_data.frontend.symbol = symbol;
-  asset_data.chain_reg.symbol = symbol;
   asset_data.asset_detail.symbol = symbol;
+  
 
 }
 
@@ -442,23 +458,9 @@ export function setCoinGeckoId(asset_data) {
 
 export function setKeywords(asset_data) {
 
-  let keywords = getAssetProperty(asset_data.canonical_asset, "keywords") || [];
-
-  //--Update Keywords--
-  if (asset_data.zone_asset?.osmosis_unstable) {
-    addArrayItem("osmosis_unstable", keywords);
-  }
-  if (asset_data.zone_asset?.osmosis_unlisted) {
-    addArrayItem("osmosis_unlisted", keywords);
-  }
-  if (asset_data.zone_asset?.verified) {
-    addArrayItem("osmosis_verified", keywords);
-  }
-  if (!keywords.length) {
-    keywords = undefined;
-  }
-
-  asset_data.chain_reg.keywords = keywords;
+  asset_data.chain_reg.keywords =
+    getAssetProperty(asset_data.local_asset, "keywords")
+    getAssetProperty(asset_data.canonical_asset, "keywords");
 
 }
 
@@ -583,52 +585,54 @@ export function setName(asset_data) {
 
   let name;
 
+  asset_data.chain_reg.name =
+    getAssetProperty(asset_data.local_asset, "name") ??
+    getAssetProperty(asset_data.canonical_asset, "name");
+
+
   if (asset_data.zone_asset?.override_properties?.name) {
     name = asset_data.zone_asset?.override_properties?.name;
-    asset_data.frontend.name = name;
-    asset_data.chain_reg.name = name;
-    asset_data.asset_detail.name = name;
-    return;
-  }
-
-  //  but use chain name instead if it's the staking token...
-  if (
-    chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom ==
-    asset_data.canonical_asset.base_denom
-  ) {
-    name = chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "pretty_name");
   } else {
-    name = getAssetProperty(asset_data.canonical_asset, "name");
-  }
 
-  const traces = getAssetProperty(asset_data.canonical_asset, "traces");
-  if (!traces) {
-    asset_data.frontend.name = name;
-    asset_data.chain_reg.name = name;
-    return;
-  }
+    name = asset_data.zone_asset.canonical ? 
+      getAssetProperty(asset_data.canonical_asset, "name") :
+      asset_data.chain_reg.name;
 
-  const trace_types = [
-    "ibc",
-    "ibc-cw20"
-  ];
-
-  let bridge_provider;
-
-  for (let i = traces?.length - 1; i >= 0; i--) {
-    if (trace_types.includes(traces[i].type)) { continue; }
-    if (traces[i].type === "bridge") {
-      bridge_provider = traces[i].provider;
+    //but use chain name instead if it's the staking token...
+    if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
+      name = chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "pretty_name");
     }
-    break;
-  }
 
-  if (bridge_provider && !name.includes(bridge_provider)) {
-    name = name + " " + "(" + bridge_provider + ")";
+
+    //append provider name in parentheses
+    if (asset_data.canonical) {
+      const traces = getAssetProperty(asset_data.canonical_asset, "traces");
+      if (!traces) {
+        asset_data.frontend.name = name;
+        asset_data.chain_reg.name = name;
+        return;
+      }
+      const trace_types = [
+        "ibc",
+        "ibc-cw20"
+      ];
+      let bridge_provider;
+      for (let i = traces?.length - 1; i >= 0; i--) {
+        if (trace_types.includes(traces[i].type)) { continue; }
+        if (traces[i].type === "bridge") {
+          bridge_provider = traces[i].provider;
+        }
+        break;
+      }
+      if (bridge_provider && !name.includes(bridge_provider)) {
+        name = name + " " + "(" + bridge_provider + ")";
+      }
+    }
+
   }
   asset_data.frontend.name = name;
-  asset_data.chain_reg.name = name;
   asset_data.asset_detail.name = name;
+  
 
 }
 
@@ -983,32 +987,32 @@ export function setDescription(asset_data) {
   
   let description, extended_description;
 
-  //for Chain registry
-  description = getAssetProperty(asset_data.local_asset, "description") || getAssetProperty(asset_data.canonical_asset, "description");
-  if (description) {
-    asset_data.chain_reg.description = description;
-  }
+  asset_data.chain_reg.description =
+    getAssetProperty(asset_data.local_asset, "description") ??
+    getAssetProperty(asset_data.canonical_asset, "description");
   asset_data.chain_reg.extended_description = getAssetProperty(asset_data.local_asset, "extended_description");
 
-  //for Asset Detail
-  extended_description = asset_data.zone_asset?.override_properties?.description;
-  if (extended_description) {
-    asset_data.asset_detail.description = extended_description;
-    return;
-  }
-  extended_description =
-    getAssetProperty(asset_data.local_asset, "extended_description") ||
-    getAssetProperty(asset_data.canonical_asset, "extended_description");
-  if (!extended_description) {
-    if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
-      extended_description = chain_reg.getFileProperty(
-        asset_data.canonical_asset.chain_name,
-        "chain",
-        "description"
-      );
+  if (asset_data.zone_asset?.override_properties?.description) {
+    description = asset_data.zone_asset?.override_properties?.description;
+  } else {
+    description = asset_data.zone_asset.canonical ? 
+      getAssetProperty(asset_data.canonical_asset, "description") :
+      asset_data.chain_reg.description;
+    extended_description = asset_data.zone_asset.canonical ? 
+      getAssetProperty(asset_data.canonical_asset, "extended_description") :
+      (getAssetProperty(asset_data.local_asset, "extended_description") ||
+      getAssetProperty(asset_data.canonical_asset, "extended_description"));
+    if (!extended_description) {
+      if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
+        extended_description = chain_reg.getFileProperty(
+          asset_data.canonical_asset.chain_name,
+          "chain",
+          "description"
+        );
+      }
     }
+    description = (description ?? "") + (description && extended_description ? "\n\n" : "") + (extended_description ?? "");
   }
-  description = (description ?? "") + (description && extended_description ? "\n\n" : "") + (extended_description ?? "");
   asset_data.asset_detail.description = description;
 
 }

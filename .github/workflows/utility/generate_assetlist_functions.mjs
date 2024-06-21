@@ -739,6 +739,7 @@ export function setCounterparty(asset_data) {
     if (cosmosChainId) {
       counterpartyAsset.chainType = "cosmos";
       counterpartyAsset.chainId = cosmosChainId;
+      counterpartyAsset.sourceDenom = asset_data.source_asset.base_denom;
     } else {
       evm_chain = asset_data.zone_config.evm_chains?.find((evm_chain) => {
         return evm_chain.chain_name === traces[i].counterparty.chain_name;
@@ -753,8 +754,10 @@ export function setCounterparty(asset_data) {
         if (!counterpartyAsset.address) {
           counterpartyAsset.address = zero_address;
         }
-      } else {
-        counterpartyAsset.chainType = "non-cosmos";
+      } else { //non-cosmos and non-evm
+        counterpartyAsset.chainId   = traces[i].counterparty.chain_name;
+        counterpartyAsset.chainType = traces[i].counterparty.chain_name;
+        counterpartyAsset.sourceDenom = traces[i].counterparty.base_denom;
       }
     }
     //counterpartyAsset.symbol = chain_reg.getAssetProperty(

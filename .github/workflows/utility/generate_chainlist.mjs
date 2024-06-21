@@ -114,13 +114,14 @@ function generateChains(chains, zone_chains) {
 
 
     // -- Get Images --
-    chain.images = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "images");
-    if (chain.images) {
-      chain.images = chain.images.filter(image => !image.text_position && image.layout !== "logo" && image.layout !== "logotype");
+    let images = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "images");
+    if (images) {
+      images = images.filter(image => !image.text_position && image.layout !== "logo" && image.layout !== "logotype");
     }
-    if (!chain.images && chain.staking) {
-      chain.images = chain_reg.getAssetProperty(zone_chain.chain_name, chain.staking?.[0], "images");
+    if (!images && chain.staking) {
+      images = chain_reg.getAssetProperty(zone_chain.chain_name, chain.staking?.[0], "images");
     }
+    chain.logoURIs = images?.[0];
     
     
     // -- Get Keplr Suggest Chain Features --

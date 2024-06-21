@@ -605,26 +605,28 @@ export function setName(asset_data) {
 
 
     //append provider name in parentheses
-    const traces = getAssetProperty(asset_data.canonical_asset, "traces");
-    if (!traces) {
-      asset_data.frontend.name = name;
-      asset_data.chain_reg.name = name;
-      return;
-    }
-    const trace_types = [
-      "ibc",
-      "ibc-cw20"
-    ];
-    let bridge_provider;
-    for (let i = traces?.length - 1; i >= 0; i--) {
-      if (trace_types.includes(traces[i].type)) { continue; }
-      if (traces[i].type === "bridge") {
-        bridge_provider = traces[i].provider;
+    if (asset_data.canonical) {
+      const traces = getAssetProperty(asset_data.canonical_asset, "traces");
+      if (!traces) {
+        asset_data.frontend.name = name;
+        asset_data.chain_reg.name = name;
+        return;
       }
-      break;
-    }
-    if (bridge_provider && !name.includes(bridge_provider)) {
-      name = name + " " + "(" + bridge_provider + ")";
+      const trace_types = [
+        "ibc",
+        "ibc-cw20"
+      ];
+      let bridge_provider;
+      for (let i = traces?.length - 1; i >= 0; i--) {
+        if (trace_types.includes(traces[i].type)) { continue; }
+        if (traces[i].type === "bridge") {
+          bridge_provider = traces[i].provider;
+        }
+        break;
+      }
+      if (bridge_provider && !name.includes(bridge_provider)) {
+        name = name + " " + "(" + bridge_provider + ")";
+      }
     }
 
   }

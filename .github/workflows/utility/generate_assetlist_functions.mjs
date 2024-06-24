@@ -638,15 +638,29 @@ export function setName(asset_data) {
 
 export function setVariantGroupKey(asset_data) {
 
+  if (asset_data.zone_asset.variant) {
+    asset_data.frontend.variantGroupKey = getAssetProperty(asset_data.zone_asset.variant, "symbol");
+    return;
+  } 
+
   const trace_types = [
     "ibc",
     "ibc-cw20",
     "bridge",
     "wrapped",
     "additional-mintage",
+    "synthetic"
   ];
 
   let traces = getAssetProperty(asset_data.source_asset, "traces");
+
+  if (
+    asset_data.source_asset.chain_name === asset_data.chainName &&
+    traces.length === 0
+  ) {
+    asset_data.frontend.variantGroupKey = getAssetProperty(asset_data.source_asset, "symbol");
+    return;
+  }
 
   let lastTrace = {};
   lastTrace.counterparty = {
@@ -654,26 +668,18 @@ export function setVariantGroupKey(asset_data) {
     base_denom: asset_data.source_asset.base_denom
   };
 
-  let numBridgeHops = 0;
-
   for (let i = traces?.length - 1; i >= 0; i--) {
 
-    if (!trace_types.includes(traces[i].type)) { break; }
-    if (traces[i].type === "bridge") {
-      if(numBridgeHops) { break; }
-      numBridgeHops += 1;
-    }
+    if (
+      !trace_types.includes(traces[i].type) ||
+      traces[i].counterparty.chain_name == "comex" ||
+      traces[i].counterparty.chain_name == "forex"
+    ) { break; }
     lastTrace = traces[i];
 
   }
 
-  if (
-    asset_data.source_asset.chain_name === asset_data.chainName &&
-    traces.length === 0
-  ) {
-    //asset_data.frontend.variantGroupKey = getAssetProperty(asset_data.source_asset, "symbol");
-    return;
-  }
+  
 
   asset_data.frontend.variantGroupKey = getAssetProperty(
     {

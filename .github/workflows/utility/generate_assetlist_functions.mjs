@@ -655,12 +655,22 @@ export function setVariantGroupKey(asset_data) {
     "symbol"
   );
 
+  let origin_asset = {
+    chain_name: asset_data.origin_asset.chain_name,
+    base_denom: asset_data.origin_asset.base_denom
+  }
+  let canonical_asset = {
+    chain_name: asset_data.canonical_asset.chain_name,
+    base_denom: asset_data.canonical_asset.base_denom
+  }
+
   //add to map
   if (
-    createKey(asset_data.origin_asset) === createKey(asset_data.canonical_asset)
+    createKey(origin_asset) === createKey(canonical_asset)
   ) {
     asset_data.variantGroupKeyToBaseMap.set(
-      createKey(asset_data.origin_asset),
+      asset_data.frontend.variantGroupKey,
+      //createKey(origin_asset),
       asset_data.local_asset.base_denom
     );
   }

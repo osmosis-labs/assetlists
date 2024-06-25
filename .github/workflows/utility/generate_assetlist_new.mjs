@@ -116,13 +116,15 @@ const generateAssets = async (
 
   });
 
+  //console.log(Array.from(variantGroupKeyToBaseMap));
+
   //iterate each asset
-  //frontend_assets.forEach((asset) => {
+  frontend_assets.forEach((asset) => {
     
     //convert variantGroupKey to base
-    //asset.variantGroupKey = variantGroupKeyToBaseMap.get(asset.variantGroupKey) || undefined;
+    asset.variantGroupKey = variantGroupKeyToBaseMap.get(asset.variantGroupKey) || undefined;
 
-  //});
+  });
 
 };
 

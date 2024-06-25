@@ -36,6 +36,8 @@ const generateAssets = async (
   }
   const pool_data = pool_assets;
 
+  let variantGroupKeyToBaseMap = new Map();
+
   await asyncForEach(zone_assets, async (zone_asset) => {
 
     //--Create the Generated Asset Objects--
@@ -49,7 +51,8 @@ const generateAssets = async (
       zone_asset: zone_asset,
       frontend: {},
       chain_reg: {},
-      asset_detail: {}
+      asset_detail: {},
+      variantGroupKeyToBaseMap: variantGroupKeyToBaseMap,
     }
 
     //source_asset (the most recent ibc transfer source (not necessarily the origin))
@@ -61,6 +64,7 @@ const generateAssets = async (
     //canonical_asset (e.g., pstake on Ethereum, usdc on ethereum)
     assetlist.setCanonicalAsset(asset_data);
 
+    assetlist.setOriginAsset(asset_data);
     assetlist.setSourceDenom(asset_data);
     assetlist.setCoinMinimalDenom(asset_data);
     assetlist.setSymbol(asset_data);
@@ -111,6 +115,17 @@ const generateAssets = async (
     asset_detail_assets.push(asset_data.asset_detail);
 
   });
+
+  //console.log(Array.from(variantGroupKeyToBaseMap));
+
+  //iterate each asset
+  frontend_assets.forEach((asset) => {
+    
+    //convert variantGroupKey to base
+    asset.variantGroupKey = variantGroupKeyToBaseMap.get(asset.variantGroupKey) || asset.coinMinimalDenom;
+
+  });
+
 };
 
 

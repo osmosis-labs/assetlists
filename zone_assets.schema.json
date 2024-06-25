@@ -94,6 +94,24 @@
             }
           }
         },
+        "origin": {
+          "type": "object",
+          "required": [
+            "chain_name",
+            "base_denom"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "chain_name": {
+              "type": "string",
+              "description": "Chain name as used in the Cosmos Chain Registry"
+            },
+            "base_denom": {
+              "type": "string",
+              "description": "Base denomination as used for the asset in the Cosmos Chain Registry"
+            }
+          }
+        },
         "transfer_methods": {
           "type": "array",
           "items": {

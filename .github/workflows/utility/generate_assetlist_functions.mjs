@@ -20,12 +20,9 @@ const find_origin_trace_types = [
   "bridge",
   "wrapped",
   "additional-mintage",
+  "synthetic"
 ];
 
-//Puposes
-export const chain_registry_osmosis_assetlist = "chain_registry_osmosis_assetlist"
-export const osmosis_zone_frontend_assetlist = "osmosis_zone_frontend_assetlist";
-export const osmosis_zone_frontend_asset_detail = "osmosis_zone_frontend_asset_detail"
 
 //This defines how many days since listing qualifies an asset as a "New Asset"
 const daysForNewAssetCategory = 21;
@@ -42,6 +39,11 @@ export function addArrayItem(item, array) {
   if (!array.includes(item)) {
     array.push(item);
   }
+}
+
+// Helper function to create a key string from an object
+export function createKey(obj) {
+  return JSON.stringify(obj);
 }
 
 
@@ -177,32 +179,42 @@ export async function setLocalAsset(asset_data) {
 
 export function setCanonicalAsset(asset_data) {
 
-  if (
-    !asset_data.zone_asset.canonical?.chain_name ||
-    !asset_data.zone_asset.canonical?.base_denom
-  ) {
-    asset_data.canonical_asset = asset_data.source_asset;
+  asset_data.canonical_asset = asset_data.zone_asset?.canonical ?? asset_data.source_asset;
+
+}
+
+
+export function setOriginAsset(asset_data) {
+
+  asset_data.origin_asset = {};
+
+  if (asset_data.zone_asset?.origin) {
+    asset_data.origin_asset = asset_data.zone_asset?.origin;
     return;
   }
 
-  if (
-    asset_data.zone_asset.canonical.chain_name == asset_data.source_asset.chain_name &&
-    asset_data.zone_asset.canonical.base_denom == asset_data.source_asset.base_denom
-  ) {
-    asset_data.canonical_asset = asset_data.source_asset;
+  let traces = getAssetProperty(asset_data.source_asset, "traces");
+
+  let lastTrace = {};
+  lastTrace.counterparty = {
+    chain_name: asset_data.source_asset.chain_name,
+    base_denom: asset_data.source_asset.base_denom
+  };
+
+  for (let i = traces?.length - 1; i >= 0; i--) {
+
+    if (
+      !find_origin_trace_types.includes(traces[i].type) ||
+      traces[i].counterparty.chain_name === "comex" ||
+      traces[i].counterparty.chain_name === "forex"
+    ) { break; }
+    lastTrace = traces[i];
+
   }
-  else if (
-    asset_data.zone_asset.canonical.chain_name == asset_data.local_asset.chain_name &&
-    asset_data.zone_asset.canonical.base_denom == asset_data.local_asset.base_denom
-  ) {
-    asset_data.canonical_asset = asset_data.local_asset;
-  }
-  else {
-    asset_data.canonical_asset = {
-      chain_name: asset_data.zone_asset.canonical.chain_name,
-      base_denom: asset_data.zone_asset.canonical.base_denom
-    }
-  }
+
+  //asset_data.origin_asset = lastTrace.counterparty;
+  asset_data.origin_asset.chain_name = lastTrace.counterparty.chain_name;
+  asset_data.origin_asset.base_denom = lastTrace.counterparty.base_denom;
 
 }
 
@@ -638,56 +650,20 @@ export function setName(asset_data) {
 
 export function setVariantGroupKey(asset_data) {
 
-  if (asset_data.zone_asset.variant) {
-    asset_data.frontend.variantGroupKey = getAssetProperty(asset_data.zone_asset.variant, "symbol");
-    return;
-  } 
-
-  const trace_types = [
-    "ibc",
-    "ibc-cw20",
-    "bridge",
-    "wrapped",
-    "additional-mintage",
-    "synthetic"
-  ];
-
-  let traces = getAssetProperty(asset_data.source_asset, "traces");
-
-  if (
-    asset_data.source_asset.chain_name === asset_data.chainName &&
-    traces.length === 0
-  ) {
-    asset_data.frontend.variantGroupKey = getAssetProperty(asset_data.source_asset, "symbol");
-    return;
-  }
-
-  let lastTrace = {};
-  lastTrace.counterparty = {
-    chain_name: asset_data.source_asset.chain_name,
-    base_denom: asset_data.source_asset.base_denom
-  };
-
-  for (let i = traces?.length - 1; i >= 0; i--) {
-
-    if (
-      !trace_types.includes(traces[i].type) ||
-      traces[i].counterparty.chain_name == "comex" ||
-      traces[i].counterparty.chain_name == "forex"
-    ) { break; }
-    lastTrace = traces[i];
-
-  }
-
-  
-
   asset_data.frontend.variantGroupKey = getAssetProperty(
-    {
-      chain_name: lastTrace.counterparty?.chain_name,
-      base_denom: lastTrace.counterparty?.base_denom
-    },
+    asset_data.origin_asset,
     "symbol"
   );
+
+  //add to map
+  if (
+    createKey(asset_data.origin_asset) === createKey(asset_data.canonical_asset)
+  ) {
+    asset_data.variantGroupKeyToBaseMap.set(
+      createKey(asset_data.origin_asset),
+      asset_data.local_asset.base_denom
+    );
+  }
 
 }
 
@@ -953,20 +929,11 @@ export function setSocials(asset_data) {
   asset_data.asset_detail.twitterURL = socials?.twitter;
   if (socials) { return; }
 
-  const trace_types = [
-    "ibc",
-    "ibc-cw20",
-    "bridge",
-    "wrapped",
-    "additional-mintage",
-    "synthetic"
-  ];
-
   socials = chain_reg.getAssetPropertyWithTraceCustom(
     asset_data.source_asset.chain_name,
     asset_data.source_asset.base_denom,
     "socials",
-    trace_types
+    find_origin_trace_types
   );
   asset_data.asset_detail.websiteURL = socials?.website;
   asset_data.asset_detail.twitterURL = socials?.twitter;

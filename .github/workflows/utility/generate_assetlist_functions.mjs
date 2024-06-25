@@ -650,11 +650,6 @@ export function setName(asset_data) {
 
 export function setVariantGroupKey(asset_data) {
 
-  asset_data.frontend.variantGroupKey = getAssetProperty(
-    asset_data.origin_asset,
-    "symbol"
-  );
-
   let origin_asset = {
     chain_name: asset_data.origin_asset.chain_name,
     base_denom: asset_data.origin_asset.base_denom
@@ -664,13 +659,14 @@ export function setVariantGroupKey(asset_data) {
     base_denom: asset_data.canonical_asset.base_denom
   }
 
+  asset_data.frontend.variantGroupKey = createKey(origin_asset);
+
   //add to map
   if (
-    createKey(origin_asset) === createKey(canonical_asset)
+    asset_data.frontend.variantGroupKey === createKey(canonical_asset)
   ) {
     asset_data.variantGroupKeyToBaseMap.set(
       asset_data.frontend.variantGroupKey,
-      //createKey(origin_asset),
       asset_data.local_asset.base_denom
     );
   }

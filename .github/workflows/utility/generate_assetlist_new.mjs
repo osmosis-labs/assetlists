@@ -122,7 +122,7 @@ const generateAssets = async (
   frontend_assets.forEach((asset) => {
     
     //convert variantGroupKey to base
-    asset.variantGroupKey = variantGroupKeyToBaseMap.get(asset.variantGroupKey) || undefined;
+    asset.variantGroupKey = variantGroupKeyToBaseMap.get(asset.variantGroupKey) || asset.coinMinimalDenom;
 
   });
 

@@ -23,6 +23,8 @@ const find_origin_trace_types = [
   "synthetic"
 ];
 
+let assetProperty = new Map();
+
 
 //This defines how many days since listing qualifies an asset as a "New Asset"
 const daysForNewAssetCategory = 21;
@@ -44,6 +46,10 @@ export function addArrayItem(item, array) {
 // Helper function to create a key string from an object
 export function createKey(obj) {
   return JSON.stringify(obj);
+}
+
+export function createCombinedKey(obj, additionalProperty) {
+  return `${createKey(obj)}:${additionalProperty}`;
 }
 
 
@@ -173,7 +179,7 @@ export async function setLocalAsset(asset_data) {
   }
   const trace = getAssetTrace(asset_data);
   traces.push(trace);
-  asset_data.local_asset.traces = traces;
+  assetProperty.set(createCombinedKey(asset_data.local_asset, "traces"), traces);
 }
 
 
@@ -235,22 +241,36 @@ export function setCoinMinimalDenom(asset_data) {
 
 
 export function getAssetProperty(asset, propertyName) {
-  if (!asset[propertyName]) {
-    if (propertyName === "traces") {
-      asset.traces = getAssetTraces(asset);
-    } else if (propertyName === "decimals") {
-      asset.decimals = getAssetDecimals(asset);
-    } else if (propertyName === "is_staking") {
-      asset.is_staking = getAssetIsStaking(asset);
+
+  const derivedProperties = [
+    "decimals",
+    "is_staking",
+    "traces"
+  ];
+
+  let assetPropertyKey = createCombinedKey(asset, propertyName);
+
+  if (!assetProperty.get(assetPropertyKey)) {
+    if (derivedProperties.includes(propertyName)) {
+      if (propertyName === "traces") {
+        assetProperty.set(assetPropertyKey, getAssetTraces(asset));
+      } else if (propertyName === "decimals") {
+        assetProperty.set(assetPropertyKey, getAssetDecimals(asset));
+      } else if (propertyName === "is_staking") {
+        assetProperty.set(assetPropertyKey, getAssetIsStaking(asset));
+      }
     } else {
-      asset[propertyName] = chain_reg.getAssetProperty(
-        asset.chain_name,
-        asset.base_denom,
-        propertyName
+      assetProperty.set(
+        assetPropertyKey,
+        chain_reg.getAssetProperty(
+          asset.chain_name,
+          asset.base_denom,
+          propertyName
+        )
       );
     }
   }
-  return asset[propertyName];
+  return assetProperty.get(assetPropertyKey);
 }
 
 export function setSymbol(asset_data) {

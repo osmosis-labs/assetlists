@@ -69,6 +69,10 @@
       "base_denom": "wbtc-satoshi",
       "path": "transfer/channel-208/wbtc-satoshi",
       "osmosis_verified": true,
+      "origin": {
+        "chain_name": "ethereum",
+        "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+      },
       "override_properties": {
         "symbol": "WBTC.axl",
         "logo_URIs": {
@@ -89,6 +93,7 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.axl.svg"
         }
       },
+      "_comment": "Tether USD (Ethereum via Axelar) $USDT.axl",
       "categories": ["stablecoin"]
     },
     {
@@ -613,6 +618,10 @@
       "base_denom": "gravity0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
       "path": "transfer/channel-144/gravity0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
       "osmosis_verified": false,
+      "origin": {
+        "chain_name": "ethereum",
+        "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+      },
       "override_properties": {
         "name": "Wrapped Bitcoin (Gravity Bridge)",
         "symbol": "WBTC.grv",
@@ -722,7 +731,7 @@
         }
       ],
       "categories": ["stablecoin"],
-      "_comment": "Tether USD (Gravity Bridge) $USDT.grv"
+      "_comment": "Tether USD (Ethereum via Gravity Bridge) $USDT.grv"
     },
     {
       "chain_name": "juno",
@@ -1985,8 +1994,8 @@
       "path": "transfer/channel-143/erc20/tether/usdt",
       "override_properties": {
         "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/kava.USDT.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/kava.USDT.png"
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.kava.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.kava.png"
         }
       },
       "peg_mechanism": "collateralized",
@@ -1994,7 +2003,7 @@
       "categories": [
         "stablecoin"
       ],
-      "_comment": "Tether USD $USDT via Kava ($kava.USDT)"
+      "_comment": "Tether USD (Kava via IBC) ($USDT.kava)"
     },
     {
       "chain_name": "osmosis",
@@ -2099,7 +2108,7 @@
       "override_properties": {
         "symbol": "USDT.wh",
         "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.hole.svg"
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.wh.svg"
         }
       },
       "transfer_methods": [
@@ -2111,7 +2120,7 @@
         }
       ],
       "categories": ["stablecoin"],
-      "_comment": "Tether USD (Wormhole) $USDT.wh"
+      "_comment": "Tether USD (Ethereum via Wormhole) $USDT.wh"
     },
     {
       "chain_name": "gateway",
@@ -2698,6 +2707,10 @@
     {
       "chain_name": "osmosis",
       "base_denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc",
+      "origin": {
+        "chain_name": "ethereum",
+        "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+      },
       "canonical": {
         "chain_name": "ethereum",
         "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
@@ -3459,7 +3472,7 @@
       "path": "transfer/channel-1279/transfer/channel-52/0xdac17f958d2ee523a2206206994597c13d831ec7",
       "osmosis_verified": false,
       "listing_date_time_utc": "2024-04-25T15:30:00Z",
-      "_comment": "Tether USD (Picasso) $USDT.pica",
+      "_comment": "Tether USD (Ethereum via Picasso) $USDT.pica",
       "transfer_methods": [
         {
           "name": "Picasso App",
@@ -3885,7 +3898,7 @@
       "path": "transfer/channel-1279/transfer/channel-71/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
       "osmosis_verified": false,
       "osmosis_unlisted": true,
-      "_comment": "Tether (Solana) $USDT.pica",
+      "_comment": "Tether USDT (Solana via Picasso) $USDT.solana.pica",
       "transfer_methods": [
         {
           "name": "Picasso App",
@@ -3897,7 +3910,7 @@
       "override_properties": {
         "symbol": "solana.USDT.pica",
         "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/solana.usdt.pica.png"
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.solana.pica.svg"
         }
       }
     },
@@ -4001,7 +4014,12 @@
       "is_alloyed": true,
       "listing_date_time_utc": "2024-06-17T19:30:00Z",
       "_comment": "Alloyed USDT $allUSDT",
-      "categories": ["stablecoin"]
+      "categories": ["stablecoin"],
+      "override_properties": {
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.svg"
+        }
+      }
     },
     {
       "chain_name": "composable",
@@ -4039,6 +4057,28 @@
       "is_alloyed": true,
       "listing_date_time_utc": "2024-06-19T10:30:00Z",
       "_comment": "Alloyed BTC $allBTC"
+    },
+    {
+      "chain_name": "bitsong",
+      "base_denom": "ft387C1C279D962ED80C09C1D592A92C4275FD7C5D",
+      "path": "transfer/channel-73/ft387C1C279D962ED80C09C1D592A92C4275FD7C5D",
+      "categories": [
+        "social"
+      ],
+      "osmosis_verified": false,
+      "listing_date_time_utc": "2024-06-25T12:00:00Z",
+      "_comment": "N43 FanToken $N43"
+    },
+    {
+      "chain_name": "terra",
+      "base_denom": "cw20:terra1vhgq25vwuhdhn9xjll0rhl2s67jzw78a4g2t78y5kz89q9lsdskq2pxcj2",
+      "path": "transfer/channel-78488/cw20:terra1vhgq25vwuhdhn9xjll0rhl2s67jzw78a4g2t78y5kz89q9lsdskq2pxcj2",
+      "categories": [
+        "meme"
+      ],
+      "osmosis_verified": false,
+      "listing_date_time_utc": "2024-06-29T21:00:00Z",
+      "_comment": "Rakoff Token $RAKOFF"
     }
   ]
 }

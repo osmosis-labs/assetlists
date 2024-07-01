@@ -253,7 +253,8 @@ export function getAssetProperty(asset, propertyName) {
   const derivedProperties = [
     "decimals",
     "is_staking",
-    "traces"
+    "traces",
+    "origin_to_canonical_hops"
   ];
 
   let assetPropertyKey = createCombinedKey(asset, propertyName);
@@ -279,6 +280,36 @@ export function getAssetProperty(asset, propertyName) {
     }
   }
   return assetProperty.get(assetPropertyKey);
+}
+
+export function getOriginToCanonicalHops(asset_data) {
+
+  if (asset_data.hops) {
+    return asset_data.hops;
+  }
+
+  asset_data.hops = [];
+
+  if (createKey(asset_data.canonical_asset) == createKey(asset_data.origin_asset)) {
+    return asset_data.hops;
+  }
+
+  const traces = getAssetProperty(asset_data.canonical_asset, "traces");
+
+  for (let i = (traces?.length || 0) - 1; i >= 0; i--) {
+
+    asset_data.hops.push(traces[i]);
+  
+    if (createKey(traces[i].counterparty) === createKey(asset_data.origin_asset)) {
+      break;
+    }
+
+  };
+
+  asset_data.hops.reverse();
+
+  return asset_data.hops;
+
 }
 
 export function setSymbol(asset_data) {
@@ -325,6 +356,7 @@ export function setSymbol(asset_data) {
     }
     */
     
+    /*
     if (createKey(asset_data.origin_asset) !== createKey(asset_data.canonical_asset)) {
 
       if (symbol === "wstETH") {
@@ -334,6 +366,30 @@ export function setSymbol(asset_data) {
       symbol = asset_data.canonical_asset.chain_name + "." + symbol;
     
     }
+    */
+
+
+    let hops = getOriginToCanonicalHops(asset_data);
+
+    if (symbol === "USDT") {
+        console.log(asset_data.origin_asset);
+        console.log(asset_data.canonical_asset);
+        console.log(asset_data.hops);
+      }
+
+    hops?.forEach((hop) => {
+    
+      if (symbol === "USDT") {
+        console.log(asset_data.origin_asset);
+        console.log(asset_data.canonical_asset);
+      }
+
+      symbol = symbol + "." + hop.counterparty.chain_name;
+      if (asset_data.zone_config.providers.find(provider => provider.provider === hop.provider && provider.suffix)) {
+        symbol = symbol + "." + provider.suffix;
+      }
+    
+    });
 
     for (let i = (traces?.length || 0) - 1; i >= 0; i--) {
       if (traces[i].type === "bridge") {

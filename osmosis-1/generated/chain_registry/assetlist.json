@@ -10053,7 +10053,7 @@
       "symbol": "sfrxETH",
       "traces": [
         {
-          "type": "liquid-stake",
+          "type": "synthetic",
           "counterparty": {
             "chain_name": "ethereum",
             "base_denom": "wei"
@@ -10061,7 +10061,7 @@
           "provider": "Frax"
         },
         {
-          "type": "wrapped",
+          "type": "liquid-stake",
           "counterparty": {
             "chain_name": "ethereum",
             "base_denom": "0x5e8422345238f34275888049021821e8e08caa1f"
@@ -17632,7 +17632,7 @@
       "symbol": "frxETH.pica",
       "traces": [
         {
-          "type": "liquid-stake",
+          "type": "synthetic",
           "counterparty": {
             "chain_name": "ethereum",
             "base_denom": "wei"
@@ -17698,7 +17698,7 @@
       "symbol": "sfrxETH.pica",
       "traces": [
         {
-          "type": "liquid-stake",
+          "type": "synthetic",
           "counterparty": {
             "chain_name": "ethereum",
             "base_denom": "wei"
@@ -17706,7 +17706,7 @@
           "provider": "Frax"
         },
         {
-          "type": "wrapped",
+          "type": "liquid-stake",
           "counterparty": {
             "chain_name": "ethereum",
             "base_denom": "0x5e8422345238f34275888049021821e8e08caa1f"
@@ -19632,6 +19632,48 @@
             "base_denom": "ft387C1C279D962ED80C09C1D592A92C4275FD7C5D"
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitsong/images/ft387C1C279D962ED80C09C1D592A92C4275FD7C5D.png"
+        }
+      ]
+    },
+    {
+      "description": "Rakoff Token is the Meme Token for Terra Classic",
+      "denom_units": [
+        {
+          "denom": "ibc/46579C587A0B8CF8B0A1FF6B0EFA2082F11876578E47FC81A9CAAD31F424AF98",
+          "exponent": 0,
+          "aliases": [
+            "cw20:terra1vhgq25vwuhdhn9xjll0rhl2s67jzw78a4g2t78y5kz89q9lsdskq2pxcj2"
+          ]
+        },
+        {
+          "denom": "rakoff",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/46579C587A0B8CF8B0A1FF6B0EFA2082F11876578E47FC81A9CAAD31F424AF98",
+      "name": "Rakoff Token",
+      "display": "rakoff",
+      "symbol": "RAKOFF",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "terra",
+            "base_denom": "cw20:terra1vhgq25vwuhdhn9xjll0rhl2s67jzw78a4g2t78y5kz89q9lsdskq2pxcj2",
+            "port": "wasm.terra19pfxzj9580h7rjd6z6sn5x2se76vgrc0etltr79g9z3t82jzp4hq63qguc",
+            "channel_id": "channel-108"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-78488",
+            "path": "transfer/channel-78488/cw20:terra1vhgq25vwuhdhn9xjll0rhl2s67jzw78a4g2t78y5kz89q9lsdskq2pxcj2"
+          }
+        }
+      ],
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/rakoff.png"
         }
       ]
     },

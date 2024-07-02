@@ -11423,19 +11423,6 @@
           "logoURIs": {
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/sfrxeth.svg"
           }
-        },
-        {
-          "chainName": "ethereum",
-          "sourceDenom": "0x5e8422345238f34275888049021821e8e08caa1f",
-          "chainType": "evm",
-          "chainId": 1,
-          "address": "0x5e8422345238f34275888049021821e8e08caa1f",
-          "symbol": "frxETH",
-          "decimals": 18,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/frxeth.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/frxeth.svg"
-          }
         }
       ],
       "variantGroupKey": "ibc/81F578C39006EB4B27FFFA9460954527910D73390991B379C03B18934D272F46",
@@ -11517,7 +11504,7 @@
           }
         }
       ],
-      "variantGroupKey": "ibc/B2BD584CD2A0A9CE53D4449667E26160C7D44A9C41AF50F602C201E5B3CCA46C",
+      "variantGroupKey": "ibc/2F21E6D4271DE3F561F20A02CD541DAF7405B1E9CB3B9B07E3C2AC7D8A4338A5",
       "name": "Wrapped Lido Staked Ether (Axelar)",
       "isAlloyed": false,
       "verified": true,
@@ -13121,7 +13108,11 @@
       "verified": true,
       "unstable": false,
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "sortWith": {
+        "chainName": "solana",
+        "sourceDenom": "85VBFQZC9TZkfaptBWjvUw7YbZjy52A6mjtPGjstQAmQ"
+      }
     },
     {
       "chainName": "gateway",
@@ -13459,7 +13450,11 @@
       "verified": true,
       "unstable": false,
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "sortWith": {
+        "chainName": "solana",
+        "sourceDenom": "85VBFQZC9TZkfaptBWjvUw7YbZjy52A6mjtPGjstQAmQ"
+      }
     },
     {
       "chainName": "gateway",
@@ -13544,7 +13539,11 @@
       "verified": true,
       "unstable": false,
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "sortWith": {
+        "chainName": "solana",
+        "sourceDenom": "85VBFQZC9TZkfaptBWjvUw7YbZjy52A6mjtPGjstQAmQ"
+      }
     },
     {
       "chainName": "noble",
@@ -17280,6 +17279,10 @@
       "unstable": false,
       "disabled": false,
       "preview": false,
+      "sortWith": {
+        "chainName": "solana",
+        "sourceDenom": "85VBFQZC9TZkfaptBWjvUw7YbZjy52A6mjtPGjstQAmQ"
+      },
       "listingDate": "2024-02-20T20:45:00.000Z"
     },
     {
@@ -19918,9 +19921,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/frxeth.pica.svg"
       },
       "coingeckoId": "frax-ether",
-      "categories": [
-        "liquid_staking"
-      ],
+      "categories": [],
       "transferMethods": [
         {
           "name": "Picasso App",
@@ -20045,22 +20046,9 @@
           "logoURIs": {
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/sfrxeth.svg"
           }
-        },
-        {
-          "chainName": "ethereum",
-          "sourceDenom": "0x5e8422345238f34275888049021821e8e08caa1f",
-          "chainType": "evm",
-          "chainId": 1,
-          "address": "0x5e8422345238f34275888049021821e8e08caa1f",
-          "symbol": "frxETH",
-          "decimals": 18,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/frxeth.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/frxeth.svg"
-          }
         }
       ],
-      "variantGroupKey": "ibc/F17CCB4F07948CC2D8B72952C2D0A84F2B763962F698774BB121B872AE4611B5",
+      "variantGroupKey": "ibc/81F578C39006EB4B27FFFA9460954527910D73390991B379C03B18934D272F46",
       "name": "Frax Staked Ether",
       "isAlloyed": false,
       "verified": true,
@@ -22005,6 +21993,58 @@
       "disabled": false,
       "preview": false,
       "listingDate": "2024-06-25T12:00:00.000Z"
+    },
+    {
+      "chainName": "terra",
+      "sourceDenom": "cw20:terra1vhgq25vwuhdhn9xjll0rhl2s67jzw78a4g2t78y5kz89q9lsdskq2pxcj2",
+      "coinMinimalDenom": "ibc/46579C587A0B8CF8B0A1FF6B0EFA2082F11876578E47FC81A9CAAD31F424AF98",
+      "symbol": "RAKOFF",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/rakoff.png"
+      },
+      "categories": [
+        "meme"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "terra",
+            "chainId": "columbus-5",
+            "sourceDenom": "cw20:terra1vhgq25vwuhdhn9xjll0rhl2s67jzw78a4g2t78y5kz89q9lsdskq2pxcj2",
+            "port": "wasm.terra19pfxzj9580h7rjd6z6sn5x2se76vgrc0etltr79g9z3t82jzp4hq63qguc",
+            "channelId": "channel-108"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-78488",
+            "path": "transfer/channel-78488/cw20:terra1vhgq25vwuhdhn9xjll0rhl2s67jzw78a4g2t78y5kz89q9lsdskq2pxcj2"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "terra",
+          "sourceDenom": "cw20:terra1vhgq25vwuhdhn9xjll0rhl2s67jzw78a4g2t78y5kz89q9lsdskq2pxcj2",
+          "chainType": "cosmos",
+          "chainId": "columbus-5",
+          "symbol": "RAKOFF",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/rakoff.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/46579C587A0B8CF8B0A1FF6B0EFA2082F11876578E47FC81A9CAAD31F424AF98",
+      "name": "Rakoff Token",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "listingDate": "2024-06-29T21:00:00.000Z"
     }
   ]
 }

@@ -64,7 +64,9 @@ const generateAssets = async (
     //canonical_asset (e.g., pstake on Ethereum, usdc on ethereum)
     assetlist.setCanonicalAsset(asset_data);
 
+    //origin_asset (e.g., WBTC.axl originates from WBTC on Ethereum--NOT BTC)
     assetlist.setOriginAsset(asset_data);
+
     assetlist.setSourceDenom(asset_data);
     assetlist.setCoinMinimalDenom(asset_data);
     assetlist.setSymbol(asset_data);

@@ -14,7 +14,7 @@ import { getAllRelatedAssets } from "./getRelatedAssets.mjs";
 const zero_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
 
 //This defines with types of traces are considered essentially the same asset
-const find_origin_trace_types = [
+const originTraceTypes = [
   "ibc",
   "ibc-cw20",
   "bridge",
@@ -23,7 +23,19 @@ const find_origin_trace_types = [
   "synthetic"
 ];
 
+const nonCryptoPlatforms = [
+  "forex",
+  "comex"
+];
+
+const traceTypesNeedingProvider = [
+  "bridge",
+  "synthetic"
+];
+
 let assetProperty = new Map();
+
+let additionalMintages = new Map();
 
 
 //This defines how many days since listing qualifies an asset as a "New Asset"
@@ -51,6 +63,26 @@ export function createKey(obj) {
 export function createCombinedKey(obj, additionalProperty) {
   return `${createKey(obj)}:${additionalProperty}`;
 }
+
+export function deepCopy(obj) {
+  if (obj === null || typeof obj !== 'object') {
+    return obj; // Return primitive types directly
+  }
+
+  // Create a new object or array based on the type of obj
+  const copy = Array.isArray(obj) ? [] : {};
+
+  // Iterate over each property in obj
+  for (let key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      // Recursively copy nested objects or arrays
+      copy[key] = deepCopy(obj[key]);
+    }
+  }
+
+  return copy;
+}
+
 
 
 export async function setSourceAsset(asset_data) {
@@ -173,7 +205,7 @@ export async function setLocalAsset(asset_data) {
   } catch (error) {
     console.error(error);
   }
-  let traces = getAssetProperty(asset_data.source_asset, "traces");
+  let traces = deepCopy(getAssetProperty(asset_data.source_asset, "traces"));
   if (!traces || traces?.length <= 0) {
     traces = [];
   }
@@ -192,43 +224,67 @@ export function setCanonicalAsset(asset_data) {
 
 export function setOriginAsset(asset_data) {
 
-  asset_data.origin_asset = {};
-
-  if (asset_data.zone_asset?.origin) {
-    asset_data.origin_asset = asset_data.zone_asset?.origin;
-    return;
+  let variant = {
+    asset_data: asset_data,
+    hops: [],
+    mintageNetwork: null
   }
 
   let traces = getAssetProperty(asset_data.canonical_asset, "traces");
-
-  let lastTrace = {};
-  lastTrace.counterparty = {
-    chain_name: asset_data.canonical_asset.chain_name,
-    base_denom: asset_data.canonical_asset.base_denom
+  let lastTrace = {
+    counterparty: asset_data.canonical_asset
   };
-
   for (let i = traces?.length - 1; i >= 0; i--) {
 
     if (
-      !find_origin_trace_types.includes(traces[i].type) ||
-      traces[i].counterparty.chain_name === "comex" ||
-      traces[i].counterparty.chain_name === "forex" ||
-      (
-        (
-          traces[i].type === "bridge" ||
-          traces[i].type === "synthetic"
-        ) &&
-        !asset_data.zone_config?.providers.find(provider => provider.provider === traces[i].provider && provider.suffix)
-      )
+      !originTraceTypes.includes(traces[i].type)
+        ||
+      nonCryptoPlatforms.includes(traces[i].counterparty.chain_name)
     ) { break; }
+
+    let provider = null;
+    if ( traceTypesNeedingProvider.includes(traces[i].type) ) {
+      provider = asset_data.zone_config?.providers.find(
+        provider =>  //where...
+          provider.provider === traces[i].provider
+            &&
+          provider.suffix
+      )
+      if (!provider) { break; }
+    }
+
+    const hop = {
+      type: traces[i].type,
+      provider: provider,
+      network: lastTrace.counterparty.chain_name
+    };
+
+    variant.hops.push(hop);
+
     lastTrace = traces[i];
 
   }
 
-  asset_data.origin_asset = {
-    chain_name: lastTrace.counterparty.chain_name,
-    base_denom: lastTrace.counterparty.base_denom
-  };
+  asset_data.origin_asset = deepCopy(lastTrace.counterparty);
+    
+
+  let variantGroup = getAssetProperty(asset_data.origin_asset, "variantGroup");
+  
+  asset_data.frontend.is_canonical = createKey(asset_data.origin_asset) === createKey(asset_data.canonical_asset);
+  if (asset_data.frontend.is_canonical) {
+    variantGroup.variantGroupKey = asset_data.local_asset.base_denom;
+  }
+
+  variant.hops.reverse();
+  if (lastTrace.type === "additional_mintage") {
+    variantGroup.additionalMintagesExist = true;
+    variant.mintageNetwork = hops[0].network;
+  } else {
+    variant.mintageNetwork = lastTrace.counterparty.chain_name;
+  }
+
+  variantGroup.variants.push(variant);
+
 
 }
 
@@ -248,13 +304,26 @@ export function setCoinMinimalDenom(asset_data) {
 }
 
 
+export function createVariantsObject(asset) {
+  
+  return {
+    asset: asset,
+    variantGroupKey: null,
+    additionalMintagesExist: false,
+    variants: []
+  };
+
+}
+
+
 export function getAssetProperty(asset, propertyName) {
 
   const derivedProperties = [
     "decimals",
     "is_staking",
     "traces",
-    "origin_to_canonical_hops"
+    "origin_to_canonical_hops",
+    "variantGroup"
   ];
 
   let assetPropertyKey = createCombinedKey(asset, propertyName);
@@ -267,6 +336,8 @@ export function getAssetProperty(asset, propertyName) {
         assetProperty.set(assetPropertyKey, getAssetDecimals(asset));
       } else if (propertyName === "is_staking") {
         assetProperty.set(assetPropertyKey, getAssetIsStaking(asset));
+      } else if (propertyName === "variantGroup") {
+        assetProperty.set(assetPropertyKey, createVariantsObject(asset));
       }
     } else {
       assetProperty.set(
@@ -282,36 +353,6 @@ export function getAssetProperty(asset, propertyName) {
   return assetProperty.get(assetPropertyKey);
 }
 
-export function getOriginToCanonicalHops(asset_data) {
-
-  if (asset_data.hops) {
-    return asset_data.hops;
-  }
-
-  asset_data.hops = [];
-
-  if (createKey(asset_data.canonical_asset) == createKey(asset_data.origin_asset)) {
-    return asset_data.hops;
-  }
-
-  const traces = getAssetProperty(asset_data.canonical_asset, "traces");
-
-  for (let i = (traces?.length || 0) - 1; i >= 0; i--) {
-
-    asset_data.hops.push(traces[i]);
-  
-    if (createKey(traces[i].counterparty) === createKey(asset_data.origin_asset)) {
-      break;
-    }
-
-  };
-
-  asset_data.hops.reverse();
-
-  return asset_data.hops;
-
-}
-
 export function setSymbol(asset_data) {
 
   let symbol;
@@ -320,93 +361,91 @@ export function setSymbol(asset_data) {
     getAssetProperty(asset_data.local_asset, "symbol") ??
     getAssetProperty(asset_data.canonical_asset, "symbol");
 
+  symbol = asset_data.zone_asset.canonical ? 
+    getAssetProperty(asset_data.origin_asset, "symbol") :
+    asset_data.chain_reg.symbol;
 
-  if (asset_data.zone_asset?.override_properties?.symbol) {
-    symbol = asset_data.zone_asset.override_properties.symbol;
+  let symbol_suffixes = [];
+
+  //Iterate the traces from canonical to origin
+  let traces = getAssetProperty(asset_data.canonical_asset, "traces");
+  let lastTrace = {};
+  lastTrace.counterparty = asset_data.canonical_asset;
+  for (let i = (traces?.length || 0) - 1; i >= 0; i--) {
+
+    //Detect a registered Provider
+    if (traces[i].provider) {
+      const provider = asset_data.zone_config.providers.find(
+        provider =>
+          provider.provider === traces[i].provider &&
+          provider.suffix
+      );
+      if (provider) {
+        symbol_suffixes.push(provider.suffix);
+        //symbol_suffixes.push("." + traces[i].counterparty.chain_name);
+      }
+    }
+
+    //Increment the iterator
+    lastTrace = traces[i];
+
+    //Stop when we hit the origin
+    if (createKey(traces[i].counterparty === createKey(asset_data.origin_asset))) {
+      break;
+    } 
+
+  }
+
+  if ( lastTrace.type !== "additional-mintage" ) {
+    //check for the flag
+    if (!additionalMintages.has(createKey(asset_data.origin_asset))) {
+      additionalMintages.set(createKey(asset_data.origin_asset), asset_data);
+    } else {
+      if (createKey(asset_data.origin_asset) !== createKey(asset_data.canonical_asset)) {
+        symbol_suffixes.push("." + lastTrace.counterparty.chain_name);
+      }
+    }
   } else {
-    symbol = asset_data.zone_asset.canonical ? 
-      getAssetProperty(asset_data.canonical_asset, "symbol") :
-      asset_data.chain_reg.symbol;
-    
-    //add suffix
-    const traces = getAssetProperty(asset_data.canonical_asset, "traces");
-    
-    //add prefix
-
-    /*
-    let origin_asset;
-    for (let i = (traces?.length || 0) - 1; i >= 0; i--) {
-      if (!find_origin_trace_types.includes(traces[i].type)) {
-        break;
-      }
-      if (chain_reg.getAssetProperty(traces[i].counterparty.chain_name, traces[i].counterparty.base_denom, "symbol") !== symbol) {
-        break;
-      }
-      origin_asset = traces[i].counterparty;
-    }
-    if (
-      //origin_asset.chain_name && origin_asset.base_denom &&
-      //(
-      //  origin_asset.chain_name !== asset_data.canonical_asset.chain_name ||
-      //  origin_asset.base_denom !== asset_data.canonical_asset.base_denom
-      //)
-      createKey(origin_asset) !== createKey
-    ) {
-      symbol = asset_data.canonical_asset.chain_name + "." + symbol;
-    }
-    */
-    
-    /*
-    if (createKey(asset_data.origin_asset) !== createKey(asset_data.canonical_asset)) {
-
-      if (symbol === "wstETH") {
-        console.log(asset_data.origin_asset);
-        console.log(asset_data.canonical_asset);
-      }
-      symbol = asset_data.canonical_asset.chain_name + "." + symbol;
-    
-    }
-    */
-
-
-    let hops = getOriginToCanonicalHops(asset_data);
-
-    if (symbol === "USDT") {
-        console.log(asset_data.origin_asset);
-        console.log(asset_data.canonical_asset);
-        console.log(asset_data.hops);
-      }
-
-    hops?.forEach((hop) => {
-    
-      if (symbol === "USDT") {
-        console.log(asset_data.origin_asset);
-        console.log(asset_data.canonical_asset);
-      }
-
-      symbol = symbol + "." + hop.counterparty.chain_name;
-      if (asset_data.zone_config.providers.find(provider => provider.provider === hop.provider && provider.suffix)) {
-        symbol = symbol + "." + provider.suffix;
-      }
-    
-    });
-
-    for (let i = (traces?.length || 0) - 1; i >= 0; i--) {
-      if (traces[i].type === "bridge") {
-        const bridge_provider = asset_data.zone_config.providers.find(
-          provider =>
-            provider.provider === traces[i].provider && provider.suffix
-        );
-        if (bridge_provider) {
-          symbol = symbol + bridge_provider.suffix;
-          break;
+    symbol_suffixes.push("." + asset_data.origin_asset.chain_name);
+    if (!additionalMintages.has(createKey(asset_data.origin_asset))) {
+      additionalMintages.set(createKey(asset_data.origin_asset), null);
+    } else {
+      const original_mintage_asset_data = additionalMintages.get(createKey(asset_data.origin_asset));
+      if (original_mintage_asset_data !== null) {
+        const original_symbol = getAssetProperty(asset_data.origin_asset, "symbol");
+        const insterted_subsymbol = "." + asset_data.origin_asset.chain_name;
+        const dotIndex = original_mintage_asset_data.frontend.symbol.indexOf('.');
+        let remainder = "";
+        if (dotIndex !== -1) {
+          remainder = original_mintage_asset_data.frontend.symbol.slice(dotIndex);
+          original_mintage_asset_data.frontend.symbol = 
+            original_symbol +
+            insterted_subsymbol +
+            remainder;
+          original_mintage_asset_data.asset_detail.symbol = original_mintage_asset_data.frontend.symbol;
         }
+        additionalMintages.set(createKey(asset_data.origin_asset), null);
       }
     }
   }
-  asset_data.frontend.symbol = symbol;
-  asset_data.asset_detail.symbol = symbol;
+
+  symbol_suffixes.reverse();
+
+  console.log(symbol_suffixes);
+    
+  asset_data.frontend.symbol = getAssetProperty(asset_data.origin_asset, "symbol");
+  symbol_suffixes.forEach((suffix) => {
+    asset_data.frontend.symbol =
+      asset_data.frontend.symbol +
+      suffix;
+    console.log(asset_data.frontend.symbol);
+  });
+
+  if (asset_data.zone_asset?.override_properties?.symbol) {
+    asset_data.frontend.symbol = asset_data.zone_asset.override_properties.symbol;
+  }
   
+  asset_data.asset_detail.symbol = asset_data.frontend.symbol;
 
 }
 
@@ -1030,7 +1069,7 @@ export function setSocials(asset_data) {
     asset_data.source_asset.chain_name,
     asset_data.source_asset.base_denom,
     "socials",
-    find_origin_trace_types
+    originTraceTypes
   );
   asset_data.asset_detail.websiteURL = socials?.website;
   asset_data.asset_detail.twitterURL = socials?.twitter;

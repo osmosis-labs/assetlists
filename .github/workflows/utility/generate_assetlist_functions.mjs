@@ -265,9 +265,16 @@ export function setOriginAsset(asset_data) {
 
   }
 
-  asset_data.origin_asset = deepCopy(lastTrace.counterparty);
-    
+  asset_data.frontend.variant = variant;
 
+  asset_data.origin_asset = {
+    chain_name: lastTrace.counterparty.chain_name,
+    base_denom: lastTrace.counterparty.base_denom,
+  };
+    
+  if (asset_data.origin_asset.channel_id) {
+    console.log(asset_data.origin_asset);  
+  }
   let variantGroup = getAssetProperty(asset_data.origin_asset, "variantGroup");
   
   asset_data.frontend.is_canonical = createKey(asset_data.origin_asset) === createKey(asset_data.canonical_asset);
@@ -276,14 +283,85 @@ export function setOriginAsset(asset_data) {
   }
 
   variant.hops.reverse();
-  if (lastTrace.type === "additional_mintage") {
+  if (variant.hops[0]?.type === "additional-mintage") {
     variantGroup.additionalMintagesExist = true;
-    variant.mintageNetwork = hops[0].network;
+    variant.mintageNetwork = variant.hops[0].network;
   } else {
     variant.mintageNetwork = lastTrace.counterparty.chain_name;
   }
 
   variantGroup.variants.push(variant);
+  
+
+}
+
+/*
+
+--Variant Group--
+
+variantGroup: {
+  asset: origin asset
+  variantGroupKey: base_denom of canonical ?? null
+  additionalMintagesExist: t/f
+  variants: [ {variant} ]
+}
+
+variant: {
+  mintageNetwork: chain_name
+  hops: [ {hop} ]
+}
+
+hop: {
+  type: trace type of last trace
+  provider: provider
+  network: counterparty
+}
+
+*/
+
+function getNetworkSuffix(chain_name) {
+  return chain_name; //TODO, covert chain_name to suffix. E.g., ethereum -> eth, base -> base, polygon -> matic, etc.
+}
+
+export function setSymbol(asset_data) {
+
+  let symbol = getAssetProperty(asset_data.origin_asset, "symbol");
+
+  asset_data.chain_reg.symbol =
+    getAssetProperty(asset_data.local_asset, "symbol") ??
+    getAssetProperty(asset_data.canonical_asset, "symbol");
+    //getAssetProperty(asset_data.source_asset, "symbol"); //change this to source asset, since canonical only applies to osmosis zone
+
+  if (asset_data.zone_asset?.override_properties?.symbol) {
+    symbol = asset_data.zone_asset?.override_properties?.symbol;
+    asset_data.frontend.symbol = symbol;
+    asset_data.asset_detail.symbol = symbol;
+    return;
+  }
+  
+  symbol = getAssetProperty(asset_data.origin_asset, "symbol");
+  
+  //If it's the canonical asset, then don't add suffixes
+  if (asset_data.frontend.is_canonical) {
+    asset_data.frontend.symbol = symbol;
+    asset_data.asset_detail.symbol = symbol;
+    return;
+  }
+  let variantGroup = getAssetProperty(asset_data.origin_asset, "variantGroup");
+  if (variantGroup.additionalMintagesExist) {
+    symbol = symbol + "." + getNetworkSuffix(asset_data.frontend.variant.mintageNetwork);
+  }
+  asset_data.frontend.variant.hops.forEach((hop) => {
+    if (hop.type === "additional-mintage" || hop.type === "wrapped") { return; }
+    else if ( traceTypesNeedingProvider.includes(hop.type) ) {
+      symbol = symbol + hop.provider.suffix;
+    } else {
+      symbol = symbol + "." + getNetworkSuffix(hop.network);
+    }
+  });
+  asset_data.frontend.symbol = symbol;
+  asset_data.asset_detail.symbol = symbol;
+  return;
 
 
 }
@@ -305,7 +383,7 @@ export function setCoinMinimalDenom(asset_data) {
 
 
 export function createVariantsObject(asset) {
-  
+
   return {
     asset: asset,
     variantGroupKey: null,
@@ -351,102 +429,6 @@ export function getAssetProperty(asset, propertyName) {
     }
   }
   return assetProperty.get(assetPropertyKey);
-}
-
-export function setSymbol(asset_data) {
-
-  let symbol;
-
-  asset_data.chain_reg.symbol =
-    getAssetProperty(asset_data.local_asset, "symbol") ??
-    getAssetProperty(asset_data.canonical_asset, "symbol");
-
-  symbol = asset_data.zone_asset.canonical ? 
-    getAssetProperty(asset_data.origin_asset, "symbol") :
-    asset_data.chain_reg.symbol;
-
-  let symbol_suffixes = [];
-
-  //Iterate the traces from canonical to origin
-  let traces = getAssetProperty(asset_data.canonical_asset, "traces");
-  let lastTrace = {};
-  lastTrace.counterparty = asset_data.canonical_asset;
-  for (let i = (traces?.length || 0) - 1; i >= 0; i--) {
-
-    //Detect a registered Provider
-    if (traces[i].provider) {
-      const provider = asset_data.zone_config.providers.find(
-        provider =>
-          provider.provider === traces[i].provider &&
-          provider.suffix
-      );
-      if (provider) {
-        symbol_suffixes.push(provider.suffix);
-        //symbol_suffixes.push("." + traces[i].counterparty.chain_name);
-      }
-    }
-
-    //Increment the iterator
-    lastTrace = traces[i];
-
-    //Stop when we hit the origin
-    if (createKey(traces[i].counterparty === createKey(asset_data.origin_asset))) {
-      break;
-    } 
-
-  }
-
-  if ( lastTrace.type !== "additional-mintage" ) {
-    //check for the flag
-    if (!additionalMintages.has(createKey(asset_data.origin_asset))) {
-      additionalMintages.set(createKey(asset_data.origin_asset), asset_data);
-    } else {
-      if (createKey(asset_data.origin_asset) !== createKey(asset_data.canonical_asset)) {
-        symbol_suffixes.push("." + lastTrace.counterparty.chain_name);
-      }
-    }
-  } else {
-    symbol_suffixes.push("." + asset_data.origin_asset.chain_name);
-    if (!additionalMintages.has(createKey(asset_data.origin_asset))) {
-      additionalMintages.set(createKey(asset_data.origin_asset), null);
-    } else {
-      const original_mintage_asset_data = additionalMintages.get(createKey(asset_data.origin_asset));
-      if (original_mintage_asset_data !== null) {
-        const original_symbol = getAssetProperty(asset_data.origin_asset, "symbol");
-        const insterted_subsymbol = "." + asset_data.origin_asset.chain_name;
-        const dotIndex = original_mintage_asset_data.frontend.symbol.indexOf('.');
-        let remainder = "";
-        if (dotIndex !== -1) {
-          remainder = original_mintage_asset_data.frontend.symbol.slice(dotIndex);
-          original_mintage_asset_data.frontend.symbol = 
-            original_symbol +
-            insterted_subsymbol +
-            remainder;
-          original_mintage_asset_data.asset_detail.symbol = original_mintage_asset_data.frontend.symbol;
-        }
-        additionalMintages.set(createKey(asset_data.origin_asset), null);
-      }
-    }
-  }
-
-  symbol_suffixes.reverse();
-
-  console.log(symbol_suffixes);
-    
-  asset_data.frontend.symbol = getAssetProperty(asset_data.origin_asset, "symbol");
-  symbol_suffixes.forEach((suffix) => {
-    asset_data.frontend.symbol =
-      asset_data.frontend.symbol +
-      suffix;
-    console.log(asset_data.frontend.symbol);
-  });
-
-  if (asset_data.zone_asset?.override_properties?.symbol) {
-    asset_data.frontend.symbol = asset_data.zone_asset.override_properties.symbol;
-  }
-  
-  asset_data.asset_detail.symbol = asset_data.frontend.symbol;
-
 }
 
 export function getAssetDecimals(asset) {
@@ -789,6 +771,20 @@ export function setName(asset_data) {
 
 export function setVariantGroupKey(asset_data) {
 
+  let variantGroupKey = getAssetProperty(asset_data.origin_asset, "variantGroup").variantGroupKey;
+
+  //console.log(variantGroupKey);
+
+  asset_data.frontend.variantGroupKey =
+    variantGroupKey
+      ??
+    asset_data.local_asset.base_denom;
+
+  if (asset_data.local_asset.base_denom === "ibc/078AD6F581E8115CDFBD8FFA29D8C71AFE250CE952AFF80040CBC64868D44AD3") {
+    console.log(getAssetProperty(asset_data.origin_asset, "variantGroup"));
+  }
+
+  /*
   asset_data.frontend.variantGroupKey = createKey(asset_data.origin_asset);
 
   //add to map
@@ -800,6 +796,7 @@ export function setVariantGroupKey(asset_data) {
       asset_data.local_asset.base_denom
     );
   }
+  */
 
 }
 

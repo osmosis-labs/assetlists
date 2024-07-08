@@ -122,6 +122,9 @@ function generateChains(chains, zone_chains) {
       images = chain_reg.getAssetProperty(zone_chain.chain_name, chain.staking?.[0], "images");
     }
     chain.logoURIs = images?.[0];
+    if (chain.logoURIs?.image_sync) {
+      delete chain.logoURIs.image_sync;
+    }
     
     
     // -- Get Keplr Suggest Chain Features --

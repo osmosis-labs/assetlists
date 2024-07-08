@@ -319,8 +319,25 @@ hop: {
 
 */
 
-function getNetworkSuffix(chain_name) {
-  return chain_name; //TODO, covert chain_name to suffix. E.g., ethereum -> eth, base -> base, polygon -> matic, etc.
+function getNetworkSuffix(chain_name, asset_data) {
+
+  let chain_abbreviation = asset_data.zone_config?.chains?.find(
+    chain => //where
+      chain.chain_name === chain_name
+        &&
+      chain.abbreviation
+    )?.abbreviation;
+  if (chain_abbreviation) {
+    return chain_abbreviation;
+  }
+
+  let bech32_prefix = chain_reg.getFileProperty(chain_name, "chain", "bech32_prefix");
+  if (bech32_prefix) {
+    return bech32_prefix;
+  }
+
+  return chain_name;
+
 }
 
 export function setSymbol(asset_data) {
@@ -349,14 +366,17 @@ export function setSymbol(asset_data) {
   }
   let variantGroup = getAssetProperty(asset_data.origin_asset, "variantGroup");
   if (variantGroup.additionalMintagesExist) {
-    symbol = symbol + "." + getNetworkSuffix(asset_data.frontend.variant.mintageNetwork);
+    symbol = symbol + "." + getNetworkSuffix(asset_data.frontend.variant.mintageNetwork, asset_data);
   }
   asset_data.frontend.variant.hops.forEach((hop) => {
     if (hop.type === "additional-mintage" || hop.type === "wrapped") { return; }
     else if ( traceTypesNeedingProvider.includes(hop.type) ) {
       symbol = symbol + hop.provider.suffix;
+      if (!hop.provider.destination_network) {
+        symbol = symbol + "." + getNetworkSuffix(hop.network, asset_data);
+      }
     } else {
-      symbol = symbol + "." + getNetworkSuffix(hop.network);
+      symbol = symbol + "." + getNetworkSuffix(hop.network, asset_data);
     }
   });
   asset_data.frontend.symbol = symbol;

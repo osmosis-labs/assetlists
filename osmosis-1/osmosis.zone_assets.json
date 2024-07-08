@@ -44,13 +44,6 @@
       "base_denom": "weth-wei",
       "path": "transfer/channel-208/weth-wei",
       "osmosis_verified": true,
-      "override_properties": {
-        "symbol": "ETH",
-        "name": "Ether",
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eth-white.png"
-        }
-      },
       "canonical": {
         "chain_name": "ethereum",
         "base_denom": "wei"
@@ -3909,7 +3902,7 @@
       "base_denom": "ibc/D105950618E47CA2AEC314282BC401625025F80A4F812808DEEBB1941C685575",
       "path": "transfer/channel-1279/transfer/channel-71/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
       "osmosis_verified": false,
-      "osmosis_unlisted": true,
+      "listing_date_time_utc": "2024-07-04T22:00:00Z",
       "_comment": "Tether USDT (Solana via Picasso) $USDT.solana.pica",
       "transfer_methods": [
         {
@@ -3931,7 +3924,7 @@
       "base_denom": "ibc/BADB5950C4A81AC201696EBCB33CD295137FA86F0AA620CDDE946D3700E0208C",
       "path": "transfer/channel-1279/transfer/channel-71/edge86g9cVz87xcpKpy3J77vbp4wYd9idEV562CCntt",
       "osmosis_verified": false,
-      "osmosis_unlisted": true,
+      "listing_date_time_utc": "2024-07-04T22:00:00Z",
       "_comment": "Edgevana Staked SOL $edgeSOL.pica",
       "transfer_methods": [
         {
@@ -3953,7 +3946,7 @@
       "base_denom": "ibc/55F5B582483FEFA5422794292B079B4D49A5BAB9881E7C801F9F271F1D234F1D",
       "path": "transfer/channel-1279/transfer/channel-71/LSTxxxnJzKDFSLr4dUkPcmCf5VyryEqzPLz5j4bpxFp",
       "osmosis_verified": false,
-      "osmosis_unlisted": true,
+      "listing_date_time_utc": "2024-07-04T22:00:00Z",
       "_comment": "Liquid Staking Token $LST.pica",
       "transfer_methods": [
         {
@@ -3975,7 +3968,7 @@
       "base_denom": "ibc/91A2FE07F8BDFC0552B1C9972FCCBF2CFD067DDE5F496D81E5132CE57762B0F2",
       "path": "transfer/channel-1279/transfer/channel-71/J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn",
       "osmosis_verified": false,
-      "osmosis_unlisted": true,
+      "listing_date_time_utc": "2024-07-04T22:00:00Z",
       "_comment": "Jito Staked SOL $jitoSOL.pica",
       "transfer_methods": [
         {
@@ -3997,7 +3990,7 @@
       "base_denom": "ibc/2CC39C8141F257EBBA250F65B9D0F31DC8D153C225E51EC192DE6E3F65D43F0C",
       "path": "transfer/channel-1279/transfer/channel-71/So11111111111111111111111111111111111111112",
       "osmosis_verified": false,
-      "osmosis_unlisted": true,
+      "listing_date_time_utc": "2024-07-04T22:00:00Z",
       "_comment": "Wrapped Solana $wSOL.pica",
       "transfer_methods": [
         {
@@ -4093,12 +4086,82 @@
       "_comment": "Rakoff Token $RAKOFF"
     },
     {
+      "chain_name": "axelar",
+      "base_denom": "arbitrum-weth-wei",
+      "path": "transfer/channel-208/arbitrum-weth-wei",
+      "osmosis_verified": false,
+      "override_properties": {
+        "symbol": "ETH.arb.axl",
+        "name": "Wrapped Ether (Arbitrum via Axelar)",
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.arb.axl.svg"
+        }
+      },
+      "transfer_methods": [
+        {
+          "name": "Satellite",
+          "type": "external_interface",
+          "deposit_url": "https://satellite.money/?source=ethereum&destination=osmosis&asset_denom=arbitrum-weth-wei",
+          "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=arbitrum-weth-wei"
+        }
+      ],
+      "listing_date_time_utc": "2024-07-03T19:00:00Z",
+      "_comment": "Wrapped Ether (Arbitrum via Axelar) $ETH.arb.axl"
+    },
+    {
+      "chain_name": "axelar",
+      "base_denom": "base-weth-wei",
+      "path": "transfer/channel-208/base-weth-wei",
+      "osmosis_verified": false,
+      "override_properties": {
+        "symbol": "ETH.base.axl",
+        "name": "Wrapped Ether (Base via Axelar)",
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.base.axl.svg"
+        }
+      },
+      "transfer_methods": [
+        {
+          "name": "Satellite",
+          "type": "external_interface",
+          "deposit_url": "https://satellite.money/?source=ethereum&destination=osmosis&asset_denom=base-weth-wei",
+          "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=base-weth-wei"
+        }
+      ],
+      "listing_date_time_utc": "2024-07-03T19:00:00Z",
+      "_comment": "Wrapped Ether (Base via Axelar) $ETH.base.axl"
+    },
+    {
+      "chain_name": "axelar",
+      "base_denom": "polygon-weth-wei",
+      "path": "transfer/channel-208/polygon-weth-wei",
+      "osmosis_verified": false,
+      "override_properties": {
+        "symbol": "ETH.matic.axl",
+        "name": "Wrapped Ether (Polygon via Axelar)",
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.matic.axl.svg"
+        }
+      },
+      "transfer_methods": [
+        {
+          "name": "Satellite",
+          "type": "external_interface",
+          "deposit_url": "https://satellite.money/?source=ethereum&destination=osmosis&asset_denom=polygon-weth-wei",
+          "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=polygon-weth-wei"
+        }
+      ],
+      "listing_date_time_utc": "2024-07-03T19:00:00Z",
+      "_comment": "Wrapped Ether (Polygon via Axelar) $ETH.matic.axl"
+    },
+    {
       "chain_name": "stride",
       "base_denom": "staISLM",
       "path": "transfer/channel-326/staISLM",
       "osmosis_verified": false,
       "categories": ["liquid_staking"],
-      "listing_date_time_utc": "2024-07-04T12:00:00Z"
+      "listing_date_time_utc": "2024-07-04T12:00:00Z",
+      "_comment": "Stride Staked ISLM $stISLM"
     }
   ]
 }

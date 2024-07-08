@@ -111,6 +111,17 @@ function generateChains(chains, zone_chains) {
     chain.explorers = [];
     chain.explorers[0] = {};
     chain.explorers[0].tx_page = zone_chain.explorer_tx_url;
+
+
+    // -- Get Images --
+    let images = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "images");
+    if (images) {
+      images = images.filter(image => !image.text_position && image.layout !== "logo" && image.layout !== "logotype");
+    }
+    if (!images && chain.staking) {
+      images = chain_reg.getAssetProperty(zone_chain.chain_name, chain.staking?.[0], "images");
+    }
+    chain.logoURIs = images?.[0];
     
     
     // -- Get Keplr Suggest Chain Features --

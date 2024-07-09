@@ -20,7 +20,8 @@ const originTraceTypes = [
   "bridge",
   "wrapped",
   "additional-mintage",
-  "synthetic"
+  "synthetic",
+  "legacy-mintage"
 ];
 
 const nonCryptoPlatforms = [
@@ -244,8 +245,6 @@ export function setOriginAsset(asset_data) {
       provider = asset_data.zone_config?.providers.find(
         provider =>  //where...
           provider.provider === traces[i].provider
-            &&
-          provider.suffix
       )
       if (!provider) { break; }
     }
@@ -277,7 +276,11 @@ export function setOriginAsset(asset_data) {
   }
 
   variant.hops.reverse();
-  if (variant.hops[0]?.type === "additional-mintage") {
+  if (
+    variant.hops[0]?.type === "additional-mintage"
+      ||
+    variant.hops[0]?.type === "legacy-mintage"
+  ) {
     variantGroup.additionalMintagesExist = true;
     variant.mintageNetwork = variant.hops[0].network;
   } else {
@@ -363,9 +366,15 @@ export function setSymbol(asset_data) {
     symbol = symbol + "." + getNetworkSuffix(asset_data.frontend.variant.mintageNetwork, asset_data);
   }
   asset_data.frontend.variant.hops.forEach((hop) => {
-    if (hop.type === "additional-mintage" || hop.type === "wrapped") { return; }
+    if (
+      hop.type === "additional-mintage"
+        ||
+      hop.type === "legacy-mintage"
+        ||
+      hop.type === "wrapped"
+    ) { return; }
     else if ( traceTypesNeedingProvider.includes(hop.type) ) {
-      symbol = symbol + hop.provider.suffix;
+      symbol = symbol + (hop.provider.suffix ?? "");
       if (!hop.provider.destination_network) {
         symbol = symbol + "." + getNetworkSuffix(hop.network, asset_data);
       }

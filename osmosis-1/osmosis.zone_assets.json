@@ -31,6 +31,7 @@
         }
       ],
       "override_properties": {
+        "symbol": "USDC.axl",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdc.axl.svg",
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdc.axl.png"
@@ -66,6 +67,7 @@
         "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
       },
       "override_properties": {
+        "symbol": "WBTC.axl",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.axl.svg",
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.axl.png"
@@ -79,6 +81,7 @@
       "peg_mechanism": "collateralized",
       "osmosis_verified": true,
       "override_properties": {
+        "symbol": "USDT.axl",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.axl.svg"
         }
@@ -103,11 +106,14 @@
       "base_denom": "busd-wei",
       "path": "transfer/channel-208/busd-wei",
       "osmosis_verified": true,
+      "override_properties": {
+        "symbol": "BUSD"
+      },
       "canonical": {
         "chain_name": "ethereum",
         "base_denom": "0x4fabb145d64652a948d72533023f6e7a623c7c53"
       },
-      "categories": ["stablecoin"]
+      "categories": [ "stablecoin" ]
     },
     {
       "chain_name": "cosmoshub",
@@ -132,6 +138,7 @@
       "path": "transfer/channel-208/wbnb-wei",
       "osmosis_verified": true,
       "override_properties": {
+        "symbol": "BNB",
         "name": "Binance Coin"
       },
       "canonical": {
@@ -145,6 +152,7 @@
       "path": "transfer/channel-208/wmatic-wei",
       "osmosis_verified": true,
       "override_properties": {
+        "symbol": "MATIC",
         "name": "Polygon",
         "logo_URIs": {
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polygon/images/matic-purple.png"
@@ -161,6 +169,7 @@
       "path": "transfer/channel-208/wavax-wei",
       "osmosis_verified": true,
       "override_properties": {
+        "symbol": "AVAX",
         "name": "Avalanche",
         "logo_URIs": {
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/avalanche/images/avax.png"
@@ -203,6 +212,7 @@
       "path": "transfer/channel-208/dot-planck",
       "osmosis_verified": true,
       "override_properties": {
+        "symbol": "moonbeam.DOT.axl",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dot.axl.svg"
         }
@@ -604,6 +614,7 @@
       },
       "override_properties": {
         "name": "Wrapped Bitcoin (Gravity Bridge)",
+        "symbol": "WBTC.grv",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.grv.svg"
         }
@@ -625,6 +636,7 @@
       "osmosis_verified": true,
       "override_properties": {
         "name": "Ether (Gravity Bridge)",
+        "symbol": "WETH.grv",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/weth.grv.svg"
         }
@@ -647,6 +659,7 @@
       "osmosis_verified": true,
       "override_properties": {
         "name": "USDC (Gravity Bridge)",
+        "symbol": "USDC.grv",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdc.grv.svg"
         }
@@ -670,6 +683,7 @@
       "osmosis_verified": false,
       "override_properties": {
         "name": "DAI Stablecoin (Gravity Bridge)",
+        "symbol": "DAI.grv",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dai.grv.svg"
         }
@@ -693,6 +707,7 @@
       "osmosis_verified": true,
       "override_properties": {
         "name": "Tether USD (Gravity Bridge)",
+        "symbol": "USDT.grv",
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.grv.svg"
         }
@@ -719,13 +734,15 @@
       "base_denom": "nhash",
       "path": "transfer/channel-222/nhash",
       "osmosis_verified": true,
-      "categories": ["rwa"]
+      "categories": [ "rwa" ],
+      "_comment": "Provenance $HASH"
     },
     {
       "chain_name": "galaxy",
       "base_denom": "uglx",
       "path": "transfer/channel-236/uglx",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "_comment": "Galaxy $GLX"
     },
     {
       "chain_name": "juno",
@@ -745,7 +762,8 @@
       "base_denom": "umeme",
       "path": "transfer/channel-238/umeme",
       "osmosis_verified": false,
-      "categories": ["meme"]
+      "categories": [ "meme" ],
+      "_comment": "Meme $MEME"
     },
     {
       "chain_name": "juno",
@@ -767,27 +785,31 @@
       "osmosis_verified": true,
       "override_properties": {
         "name": "Luna"
-      }
+      },
+      "_comment": "Terra Luna $LUNA"
     },
     {
       "chain_name": "rizon",
       "base_denom": "uatolo",
       "path": "transfer/channel-221/uatolo",
-      "osmosis_verified": false
+      "osmosis_verified": false,
+      "_comment": "Rizon $RIZON"
     },
     {
       "chain_name": "kava",
       "base_denom": "hard",
       "path": "transfer/channel-143/hard",
       "osmosis_verified": false,
-      "categories": ["defi"]
+      "categories": [ "defi" ],
+      "_comment": "Kava Hard $HARD"
     },
     {
       "chain_name": "kava",
       "base_denom": "swp",
       "path": "transfer/channel-143/swp",
       "osmosis_verified": false,
-      "categories": ["defi"]
+      "categories": [ "defi" ],
+      "_comment": "Kava Swap $SWP"
     },
     {
       "chain_name": "axelar",
@@ -798,14 +820,16 @@
         "chain_name": "ethereum",
         "base_denom": "0x514910771af9ca656af840dff83e8264ecf986ca"
       },
-      "categories": ["oracles"]
+      "categories": [ "oracles" ],
+      "_comment": "Chainlink (Axelar) $LINK"
     },
     {
       "chain_name": "genesisl1",
       "base_denom": "el1",
       "path": "transfer/channel-253/el1",
       "osmosis_verified": false,
-      "osmosis_unstable": true
+      "osmosis_unstable": true,
+      "_comment": "Genesis L1 $L1"
     },
     {
       "chain_name": "axelar",
@@ -817,7 +841,8 @@
         "chain_name": "ethereum",
         "base_denom": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9"
       },
-      "categories": ["defi"]
+      "categories": [ "defi" ],
+      "_comment": "Aave (Axelar) $AAVE"
     },
     {
       "chain_name": "axelar",
@@ -829,7 +854,8 @@
         "chain_name": "ethereum",
         "base_denom": "0x4d224452801aced8b2f0aebe155379bb5d594381"
       },
-      "categories": ["nft_protocol"]
+      "categories": [ "nft_protocol" ],
+      "_comment": "Ape (Axelar) $APE"
     },
     {
       "chain_name": "axelar",
@@ -840,7 +866,8 @@
         "chain_name": "ethereum",
         "base_denom": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2"
       },
-      "categories": ["defi"]
+      "categories": [ "defi" ],
+      "_comment": "Maker (Axelar) $MKR"
     },
     {
       "chain_name": "axelar",
@@ -861,7 +888,7 @@
         }
       ],
       "categories": ["stablecoin", "defi"],
-      "_comment": "$RAI from Etherem via Axelar"
+      "_comment": "Rai (from Etherem via Axelar) $RAI"
     },
     {
       "chain_name": "axelar",
@@ -873,7 +900,8 @@
         "chain_name": "ethereum",
         "base_denom": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce"
       },
-      "categories": ["meme"]
+      "categories": [ "meme" ],
+      "_comment": "Shiba Inu (Axelar) $SHIB"
     },
     {
       "chain_name": "kujira",
@@ -895,7 +923,8 @@
       "chain_name": "tgrade",
       "base_denom": "utgd",
       "path": "transfer/channel-263/utgd",
-      "osmosis_verified": true
+      "osmosis_verified": true,
+      "_comment": "Tardigrade $TGD"
     },
     {
       "chain_name": "echelon",
@@ -917,14 +946,16 @@
       "base_denom": "loki",
       "path": "transfer/channel-258/loki",
       "osmosis_verified": true,
-      "categories": ["ai"]
+      "categories": [ "ai" ],
+      "_comment": "Odin $ODIN"
     },
     {
       "chain_name": "odin",
       "base_denom": "mGeo",
       "path": "transfer/channel-258/mGeo",
       "osmosis_verified": false,
-      "osmosis_unstable": true
+      "osmosis_unstable": true,
+      "_comment": "GeoDB $GEO"
     },
     {
       "chain_name": "odin",

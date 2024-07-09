@@ -1095,27 +1095,47 @@ export function setDescription(asset_data) {
     getAssetProperty(asset_data.canonical_asset, "description");
   asset_data.chain_reg.extended_description = getAssetProperty(asset_data.local_asset, "extended_description");
 
+
   if (asset_data.zone_asset?.override_properties?.description) {
     description = asset_data.zone_asset?.override_properties?.description;
-  } else {
-    description = asset_data.zone_asset.canonical ? 
-      getAssetProperty(asset_data.canonical_asset, "description") :
-      asset_data.chain_reg.description;
-    extended_description = asset_data.zone_asset.canonical ? 
-      getAssetProperty(asset_data.canonical_asset, "extended_description") :
-      (getAssetProperty(asset_data.local_asset, "extended_description") ||
-      getAssetProperty(asset_data.canonical_asset, "extended_description"));
-    if (!extended_description) {
-      if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
-        extended_description = chain_reg.getFileProperty(
-          asset_data.canonical_asset.chain_name,
-          "chain",
-          "description"
-        );
-      }
-    }
-    description = (description ?? "") + (description && extended_description ? "\n\n" : "") + (extended_description ?? "");
+    asset_data.asset_detail.description = description;
+    return;
   }
+  
+  description =
+    asset_data.frontend.is_canonical
+      ? 
+    getAssetProperty(asset_data.canonical_asset, "description")
+      :
+    asset_data.chain_reg.description;
+
+  extended_description =
+    asset_data.frontend.is_canonical
+      ? 
+    getAssetProperty(asset_data.canonical_asset, "extended_description")
+      :
+    (
+      getAssetProperty(asset_data.local_asset, "extended_description")
+        ||
+      getAssetProperty(asset_data.canonical_asset, "extended_description")
+    );
+
+  if (!extended_description) {
+    if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
+      extended_description = chain_reg.getFileProperty(
+        asset_data.canonical_asset.chain_name,
+        "chain",
+        "description"
+      );
+    }
+  }
+
+  description =
+    (description ?? "")
+      +
+    (description && extended_description ? "\n\n" : "")
+      +
+    (extended_description ?? "");
   asset_data.asset_detail.description = description;
 
 }

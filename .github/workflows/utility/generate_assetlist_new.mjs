@@ -54,7 +54,6 @@ const generateAssets = async (
       frontend: {},
       chain_reg: {},
       asset_detail: {},
-      variantGroupKeyToBaseMap: variantGroupKeyToBaseMap,
     }
 
     //source_asset (the most recent ibc transfer source (not necessarily the origin))
@@ -125,16 +124,6 @@ const generateAssets = async (
     asset_detail_assets.push(asset_data.asset_detail);
 
   });
-
-  //console.log(Array.from(variantGroupKeyToBaseMap));
-
-  //iterate each asset
-  //frontend_assets.forEach((asset) => {
-    
-    //convert variantGroupKey to base
-    //asset.variantGroupKey = variantGroupKeyToBaseMap.get(asset.variantGroupKey) || asset.coinMinimalDenom;
-
-  //});
 
 };
 

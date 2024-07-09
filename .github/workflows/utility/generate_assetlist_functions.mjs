@@ -35,8 +35,6 @@ const traceTypesNeedingProvider = [
 
 let assetProperty = new Map();
 
-let additionalMintages = new Map();
-
 
 //This defines how many days since listing qualifies an asset as a "New Asset"
 const daysForNewAssetCategory = 21;
@@ -82,7 +80,6 @@ export function deepCopy(obj) {
 
   return copy;
 }
-
 
 
 export async function setSourceAsset(asset_data) {

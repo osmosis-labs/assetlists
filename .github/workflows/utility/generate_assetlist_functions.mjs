@@ -272,9 +272,6 @@ export function setOriginAsset(asset_data) {
     base_denom: lastTrace.counterparty.base_denom,
   };
     
-  if (asset_data.origin_asset.channel_id) {
-    console.log(asset_data.origin_asset);  
-  }
   let variantGroup = getAssetProperty(asset_data.origin_asset, "variantGroup");
   
   asset_data.frontend.is_canonical = createKey(asset_data.origin_asset) === createKey(asset_data.canonical_asset);
@@ -793,30 +790,10 @@ export function setVariantGroupKey(asset_data) {
 
   let variantGroupKey = getAssetProperty(asset_data.origin_asset, "variantGroup").variantGroupKey;
 
-  //console.log(variantGroupKey);
-
   asset_data.frontend.variantGroupKey =
     variantGroupKey
       ??
     asset_data.local_asset.base_denom;
-
-  if (asset_data.local_asset.base_denom === "ibc/078AD6F581E8115CDFBD8FFA29D8C71AFE250CE952AFF80040CBC64868D44AD3") {
-    console.log(getAssetProperty(asset_data.origin_asset, "variantGroup"));
-  }
-
-  /*
-  asset_data.frontend.variantGroupKey = createKey(asset_data.origin_asset);
-
-  //add to map
-  if (
-    asset_data.frontend.variantGroupKey === createKey(asset_data.canonical_asset)
-  ) {
-    asset_data.variantGroupKeyToBaseMap.set(
-      asset_data.frontend.variantGroupKey,
-      asset_data.local_asset.base_denom
-    );
-  }
-  */
 
 }
 

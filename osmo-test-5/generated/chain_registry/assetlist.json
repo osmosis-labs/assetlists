@@ -805,66 +805,6 @@
       ]
     },
     {
-      "description": "The native token of Archway Test Network.",
-      "denom_units": [
-        {
-          "denom": "ibc/5F10B4BED1A80DC44975D95D716AEF8CEBFB99B3F088C98361436A7D0CF5A830",
-          "exponent": 0,
-          "aliases": [
-            "aconst"
-          ]
-        },
-        {
-          "denom": "uconst",
-          "exponent": 12
-        },
-        {
-          "denom": "const",
-          "exponent": 18
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/5F10B4BED1A80DC44975D95D716AEF8CEBFB99B3F088C98361436A7D0CF5A830",
-      "name": "Archway",
-      "display": "const",
-      "symbol": "CONST",
-      "traces": [
-        {
-          "type": "test-mintage",
-          "counterparty": {
-            "chain_name": "archway",
-            "base_denom": "aarch"
-          },
-          "provider": "Archway Testnet"
-        },
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "archwaytestnet",
-            "base_denom": "aconst",
-            "channel_id": "channel-225"
-          },
-          "chain": {
-            "channel_id": "channel-7779",
-            "path": "transfer/channel-7779/aconst"
-          }
-        }
-      ],
-      "images": [
-        {
-          "image_sync": {
-            "chain_name": "archway",
-            "base_denom": "aarch"
-          },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/archway/images/archway.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/archway/images/archway.svg",
-          "theme": {
-            "primary_color_hex": "#fc4c04"
-          }
-        }
-      ]
-    },
-    {
       "description": "The native token of Chain4Energy",
       "denom_units": [
         {

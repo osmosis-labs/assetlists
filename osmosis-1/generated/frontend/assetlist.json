@@ -22308,6 +22308,80 @@
         "sourceDenom": "ustrd"
       },
       "listingDate": "2024-07-04T12:00:00.000Z"
+    },
+    {
+      "chainName": "dymension",
+      "sourceDenom": "ibc/5A26C8DC8DA66F4DD94326E67F94510188F5F7AFE2DB3933A0C823670E56EABF",
+      "coinMinimalDenom": "ibc/739D70CB432FE1C6D94AF306B68C14F4CFB0B9EDD1238D3A8718B1B0E84E8547",
+      "symbol": "MAND",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mande/images/mande.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mande/images/mande.svg"
+      },
+      "coingeckoId": "mande-network",
+      "price": {
+        "poolId": "1884",
+        "denom": "uosmo"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Dymension Portal",
+          "type": "external_interface",
+          "depositUrl": "https://portal.dymension.xyz/ibc/transfer?sourceId=dymension_1100-1&destinationId=osmosis-1"
+        },
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "dymension",
+            "chainId": "dymension_1100-1",
+            "sourceDenom": "ibc/5A26C8DC8DA66F4DD94326E67F94510188F5F7AFE2DB3933A0C823670E56EABF",
+            "port": "transfer",
+            "channelId": "channel-2"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-19774",
+            "path": "transfer/channel-19774/transfer/channel-51/amand"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "dymension",
+          "sourceDenom": "ibc/5A26C8DC8DA66F4DD94326E67F94510188F5F7AFE2DB3933A0C823670E56EABF",
+          "chainType": "cosmos",
+          "chainId": "dymension_1100-1",
+          "symbol": "MAND",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mande/images/mande.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mande/images/mande.svg"
+          }
+        },
+        {
+          "chainName": "mande",
+          "sourceDenom": "amand",
+          "chainType": "cosmos",
+          "chainId": "mande_18071918-1",
+          "symbol": "MAND",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mande/images/mande.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mande/images/mande.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/739D70CB432FE1C6D94AF306B68C14F4CFB0B9EDD1238D3A8718B1B0E84E8547",
+      "name": "Mande Network",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "disabled": true,
+      "preview": false,
+      "listingDate": "2024-07-09T17:30:00.000Z"
     }
   ]
 }

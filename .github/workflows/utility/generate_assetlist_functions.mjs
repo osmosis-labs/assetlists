@@ -20,7 +20,8 @@ const originTraceTypes = [
   "bridge",
   "wrapped",
   "additional-mintage",
-  "synthetic"
+  "synthetic",
+  "legacy-mintage"
 ];
 
 const nonCryptoPlatforms = [
@@ -244,8 +245,6 @@ export function setOriginAsset(asset_data) {
       provider = asset_data.zone_config?.providers.find(
         provider =>  //where...
           provider.provider === traces[i].provider
-            &&
-          provider.suffix
       )
       if (!provider) { break; }
     }
@@ -277,17 +276,43 @@ export function setOriginAsset(asset_data) {
   }
 
   variant.hops.reverse();
-  if (variant.hops[0]?.type === "additional-mintage") {
-    variantGroup.additionalMintagesExist = true;
-    variant.mintageNetwork = variant.hops[0].network;
-  } else {
-    variant.mintageNetwork = lastTrace.counterparty.chain_name;
+
+
+  //  To know whether there are additional mintages,
+  //  need to check for mintages of actual source asset
+  //  rather than just what the asset canonically represents
+  //  e.g., WBTC minted on Osmosis canonically represents the Ethereum mintage,
+  //  and if we were to go by that, the fact of the Osmosis mintage would be ignored.
+  traces = getAssetProperty(asset_data.source_asset, "traces");
+  lastTrace = {
+    counterparty: asset_data.source_asset
+  };
+  for (let i = traces?.length - 1; i >= 0; i--) {
+    if (
+      createKey({
+        chain_name: traces[i].counterparty.chain_name,
+        base_denom: traces[i].counterparty.base_denom
+      }) === createKey(asset_data.origin_asset)
+    ) {
+      if (
+        traces[i].type === "additional-mintage"
+          ||
+        traces[i].type === "legacy-mintage"
+      ) {
+        variant.mintageNetwork = lastTrace.counterparty.chain_name;
+        variantGroup.additionalMintagesExist = true;
+      } else {
+        variant.mintageNetwork = traces[i].counterparty.chain_name;
+      }
+      break;
+    }
+    lastTrace = traces[i];
   }
 
   variantGroup.variants.push(variant);
-  
 
 }
+
 
 /*
 
@@ -363,9 +388,15 @@ export function setSymbol(asset_data) {
     symbol = symbol + "." + getNetworkSuffix(asset_data.frontend.variant.mintageNetwork, asset_data);
   }
   asset_data.frontend.variant.hops.forEach((hop) => {
-    if (hop.type === "additional-mintage" || hop.type === "wrapped") { return; }
+    if (
+      hop.type === "additional-mintage"
+        ||
+      hop.type === "legacy-mintage"
+        ||
+      hop.type === "wrapped"
+    ) { return; }
     else if ( traceTypesNeedingProvider.includes(hop.type) ) {
-      symbol = symbol + hop.provider.suffix;
+      symbol = symbol + (hop.provider.suffix ?? "");
       if (!hop.provider.destination_network) {
         symbol = symbol + "." + getNetworkSuffix(hop.network, asset_data);
       }

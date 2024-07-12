@@ -101,8 +101,43 @@
         "destination_network": "persistence"
       },
       {
-        "provider": "Polkadot Parachain",
-        "suffix": ".xcm"
+        "provider": "Polkadot Parachain"
+      },
+      {
+        "provider": "Coreum",
+        "suffix": ".core",
+        "token": {
+          "chain_name": "coreum",
+          "base_denom": "ucore"
+        },
+        "destination_network": "coreum"
+      },
+      {
+        "provider": "Polygon PoS Bridge",
+        "suffix": ".matic",
+        "token": {
+          "chain_name": "polygon",
+          "base_denom": "wei"
+        },
+        "destination_network": "polygon"
+      },
+      {
+        "provider": "Arbitrum Bridge",
+        "suffix": ".arb",
+        "token": {
+          "chain_name": "arbitrum",
+          "base_denom": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1"
+        },
+        "destination_network": "arbitrum"
+      },
+      {
+        "provider": "Base Bridge",
+        "suffix": ".base",
+        "token": {
+          "chain_name": "base",
+          "base_denom": "0x4200000000000000000000000000000000000006"
+        },
+        "destination_network": "base"
       }
     ],
     "evm_chains": [
@@ -243,6 +278,14 @@
       {
         "chain_name": "polygon",
         "abbreviation": "matic"
+      },
+      {
+        "chain_name": "avalanche",
+        "abbreviation": "avax"
+      },
+      {
+        "chain_name": "solana",
+        "abbreviation": "sol"
       }
     ]
   }

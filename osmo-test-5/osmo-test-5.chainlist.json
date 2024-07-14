@@ -875,6 +875,66 @@
         "ibc-transfer",
         "ibc-go"
       ]
+    },
+    {
+      "chain_name": "archwaytestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Archway Testnet",
+      "chain_id": "constantine-3",
+      "bech32_prefix": "archway",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "archway",
+        "bech32PrefixAccPub": "archwaypub",
+        "bech32PrefixValAddr": "archwayvaloper",
+        "bech32PrefixValPub": "archwayvaloperpub",
+        "bech32PrefixConsAddr": "archwayvalcons",
+        "bech32PrefixConsPub": "archwayvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "aconst",
+            "low_gas_price": 1000000000000,
+            "average_gas_price": 1500000000000,
+            "high_gas_price": 2000000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "aconst"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.constantine.archway.io:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.constantine.archway.io:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/archway-testnet/tx/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/archwaytestnet/images/ArchwayBrandmark.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/archwaytestnet/images/ArchwayBrandmark.svg"
+      },
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm"
+      ]
     }
   ]
 }

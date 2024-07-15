@@ -826,6 +826,62 @@
       "unstable": false,
       "disabled": false,
       "preview": false
+    },
+    {
+      "chainName": "archwaytestnet",
+      "sourceDenom": "aconst",
+      "coinMinimalDenom": "ibc/5F10B4BED1A80DC44975D95D716AEF8CEBFB99B3F088C98361436A7D0CF5A830",
+      "symbol": "CONST",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/archway/images/archway.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/archway/images/archway.svg"
+      },
+      "coingeckoId": "archway",
+      "price": {
+        "poolId": "502",
+        "denom": "uosmo"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "archwaytestnet",
+            "chainId": "constantine-3",
+            "sourceDenom": "aconst",
+            "port": "transfer",
+            "channelId": "channel-225"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-7779",
+            "path": "transfer/channel-7779/aconst"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "archwaytestnet",
+          "sourceDenom": "aconst",
+          "chainType": "cosmos",
+          "chainId": "constantine-3",
+          "symbol": "CONST",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/archway/images/archway.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/archway/images/archway.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/5F10B4BED1A80DC44975D95D716AEF8CEBFB99B3F088C98361436A7D0CF5A830",
+      "name": "Archway Testnet",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
     }
   ]
 }

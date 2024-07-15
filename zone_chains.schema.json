@@ -65,6 +65,71 @@
             ]
           }
         },
+        "override_properties": {
+          "type": "object",
+          "description": "Properties that should not follow the Chain Registry, and behave or appear differently on Osmosis Zone.",
+          "additionalProperties": true,
+          "properties": {
+            "images": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "image_sync": {
+                    "$ref": "#/$defs/pointer"
+                  },
+                  "png": {
+                    "type": "string",
+                    "minLength": 1,
+                    "format": "uri-reference",
+                    "pattern": "^https://raw\\.githubusercontent\\.com/cosmos/chain-registry/master/(|testnets/|_non-cosmos/)[a-z0-9]+/images/.+\\.png$"
+                  },
+                  "svg": {
+                    "type": "string",
+                    "minLength": 1,
+                    "format": "uri-reference",
+                    "pattern": "^https://raw\\.githubusercontent\\.com/cosmos/chain-registry/master/(|testnets/|_non-cosmos/)[a-z0-9]+/images/.+\\.svg$"
+                  },
+                  "theme": {
+                    "type": "object",
+                    "properties": {
+                      "primary_color_hex": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$"
+                      },
+                      "background_color_hex": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "^(#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})|none)$"
+                      },
+                      "circle": {
+                        "type": "boolean"
+                      },
+                      "dark_mode": {
+                        "type": "boolean"
+                      },
+                      "monochrome": {
+                        "type": "boolean"
+                      }
+                    },
+                    "minProperties": 1,
+                    "additionalProperties": false
+                  }
+                },
+                "anyOf": [
+                  {
+                    "required": ["png"]
+                  },
+                  {
+                    "required": ["svg"]
+                  }
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
         "outage": {
           "type": "object",
           "properties": {

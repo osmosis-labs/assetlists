@@ -114,10 +114,10 @@ function generateChains(chains, zone_chains) {
 
 
     // -- Get Images --
-    let images = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "images");
-    if (images) {
-      images = images.filter(image => !image.text_position && image.layout !== "logo" && image.layout !== "logotype");
-    }
+    let images =
+      zone_chain.override_properties?.images
+        ||
+      chain_reg.getFileProperty(zone_chain.chain_name, "chain", "images");
     if (!images && chain.staking) {
       images = chain_reg.getAssetProperty(zone_chain.chain_name, chain.staking?.[0], "images");
     }

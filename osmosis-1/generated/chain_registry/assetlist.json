@@ -21118,6 +21118,51 @@
       ]
     },
     {
+      "description": "Ondo US Dollar Yield",
+      "denom_units": [
+        {
+          "denom": "ibc/23104D411A6EB6031FA92FB75F227422B84989969E91DCAD56A535DD7FF0A373",
+          "exponent": 0,
+          "aliases": [
+            "attousdy",
+            "ausdy"
+          ]
+        },
+        {
+          "denom": "usdy",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/23104D411A6EB6031FA92FB75F227422B84989969E91DCAD56A535DD7FF0A373",
+      "name": "Ondo US Dollar Yield",
+      "display": "usdy",
+      "symbol": "USDY",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "noble",
+            "base_denom": "ausdy",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-750",
+            "path": "transfer/channel-750/ausdy"
+          }
+        }
+      ],
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/usdy.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/usdy.svg",
+          "theme": {
+            "primary_color_hex": "#142c5c"
+          }
+        }
+      ]
+    },
+    {
       "description": "The native token of Furya",
       "denom_units": [
         {

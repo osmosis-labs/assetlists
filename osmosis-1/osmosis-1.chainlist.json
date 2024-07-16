@@ -123,7 +123,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.svg",
         "theme": {
-          "primary_color_hex": "#272d45"
+          "primary_color_hex": "#b7b9c8"
         }
       },
       "features": [
@@ -646,7 +646,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.svg",
         "theme": {
-          "primary_color_hex": "#242424"
+          "primary_color_hex": "#f95d64"
         }
       },
       "features": [
@@ -1694,7 +1694,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/stars.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/stars.svg",
         "theme": {
-          "primary_color_hex": "#b7dfbd"
+          "primary_color_hex": "#db2777"
         }
       },
       "features": [
@@ -3042,7 +3042,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fetchhub/images/fet.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fetchhub/images/fet.svg",
         "theme": {
-          "primary_color_hex": "#1c2444"
+          "primary_color_hex": "#2f3e74"
         }
       },
       "features": [
@@ -4454,10 +4454,10 @@
         }
       ],
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stride-chain-logo.png",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/strd.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/strd.svg",
         "theme": {
-          "primary_color_hex": "#242424"
+          "primary_color_hex": "#e4047c"
         }
       },
       "features": [
@@ -5800,10 +5800,11 @@
         }
       ],
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/axelar-chain-logo.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/axelar-chain-logo.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/axl.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/axl.svg",
         "theme": {
-          "primary_color_hex": "#040404"
+          "primary_color_hex": "#040404",
+          "circle": true
         }
       },
       "features": [
@@ -6093,10 +6094,12 @@
         }
       ],
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/neutron-black-logo.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/neutron-black-logo.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/neutron-raw.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/neutron-raw.svg",
         "theme": {
-          "primary_color_hex": "#040404"
+          "primary_color_hex": "#000000",
+          "background_color_hex": "#00000000",
+          "circle": false
         }
       },
       "features": [
@@ -6157,7 +6160,10 @@
         }
       ],
       "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/pica.svg"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/pica.svg",
+        "theme": {
+          "primary_color_hex": "#ff8500"
+        }
       },
       "features": [
         "ibc-transfer",
@@ -6433,6 +6439,14 @@
           "tx_page": "https://ping.pub/empower/tx/${txHash}"
         }
       ],
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/empowerchain/images/mpwr.svg",
+        "theme": {
+          "primary_color_hex": "#00e33a",
+          "background_color_hex": "#00e33a",
+          "circle": true
+        }
+      },
       "features": [
         "ibc-transfer",
         "ibc-go"
@@ -6680,9 +6694,11 @@
         }
       ],
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gateway/images/gateway_logo.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gateway/images/wormhole_icon.svg",
         "theme": {
-          "primary_color_hex": "#0F0C48"
+          "background_color_hex": "#231b3b",
+          "primary_color_hex": "#231b3b",
+          "circle": false
         }
       },
       "features": [
@@ -7718,7 +7734,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.svg",
         "theme": {
-          "primary_color_hex": "#f4e4d4"
+          "primary_color_hex": "#24201f"
         }
       },
       "features": [
@@ -7909,7 +7925,7 @@
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/chain4energy/images/c4e.png",
         "theme": {
-          "primary_color_hex": "#24344c"
+          "primary_color_hex": "#314768"
         }
       },
       "features": [
@@ -8568,6 +8584,132 @@
         "ibc-transfer",
         "cosmwasm",
         "wasmd_0.24+"
+      ]
+    },
+    {
+      "chain_name": "neutaro",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Neutaro",
+      "chain_id": "Neutaro-1",
+      "bech32_prefix": "neutaro",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "neutaro",
+        "bech32PrefixAccPub": "neutaropub",
+        "bech32PrefixValAddr": "neutarovaloper",
+        "bech32PrefixValPub": "neutarovaloperpub",
+        "bech32PrefixConsAddr": "neutarovalcons",
+        "bech32PrefixConsPub": "neutarovalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uneutaro",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0,
+            "high_gas_price": 0.035
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uneutaro"
+          }
+        ]
+      },
+      "description": "The Blockchain that is Pioneering Ethical Standards, Values, and Transparency in cross chain Blockchain Technology to drive innovation",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://api2.neutaro.tech/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rpc2.neutaro.tech/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://nms1.neutaro.tech/Neutaro/tx/{txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutaro/images/neutaro.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutaro/images/neutaro.svg",
+        "theme": {
+          "primary_color_hex": "#cbfb06"
+        }
+      },
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "firmachain",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "FirmaChain",
+      "chain_id": "colosseum-1",
+      "bech32_prefix": "firma",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "firma",
+        "bech32PrefixAccPub": "firmapub",
+        "bech32PrefixValAddr": "firmavaloper",
+        "bech32PrefixValPub": "firmavaloperpub",
+        "bech32PrefixConsAddr": "firmavalcons",
+        "bech32PrefixConsPub": "firmavalconspub"
+      },
+      "slip44": 7777777,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ufct",
+            "fixed_min_gas_price": 0.1,
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.15,
+            "high_gas_price": 0.2
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ufct"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://lcd-mainnet.firmachain.dev:26657"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-mainnet.firmachain.dev:1317"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.firmachain.dev/transactions/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/firmachain/images/fct.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/firmachain/images/fct.svg",
+        "theme": {
+          "primary_color_hex": "#1c1c1c"
+        }
+      },
+      "features": [
+        "ibc-transfer"
       ]
     }
   ]

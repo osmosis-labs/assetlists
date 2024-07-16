@@ -21016,6 +21016,153 @@
       }
     },
     {
+      "description": "The native token of Neutaro",
+      "denom_units": [
+        {
+          "denom": "ibc/DAED51CBD967A3BE0C467687970AFD97B202AFE4A1718B36936F49178AFE0133",
+          "exponent": 0,
+          "aliases": [
+            "uneutaro"
+          ]
+        },
+        {
+          "denom": "neutaro",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/DAED51CBD967A3BE0C467687970AFD97B202AFE4A1718B36936F49178AFE0133",
+      "name": "Neutaro",
+      "display": "neutaro",
+      "symbol": "NTMPI",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "neutaro",
+            "base_denom": "uneutaro",
+            "channel_id": "channel-4"
+          },
+          "chain": {
+            "channel_id": "channel-79092",
+            "path": "transfer/channel-79092/uneutaro"
+          }
+        }
+      ],
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutaro/images/neutaro.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutaro/images/neutaro.svg",
+          "theme": {
+            "primary_color_hex": "#cbfb06"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Pepe Bruce Jenner",
+      "denom_units": [
+        {
+          "denom": "ibc/E0D6A7FFAE26FA90C8F1AA3461A5A21E74DB154F183EAE56C96769F48F81FCA2",
+          "exponent": 0,
+          "aliases": [
+            "ANu4Wuq86WzRU8tykszQUJ66eQzFNfkwap2HcQ5UaFaU",
+            "wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/AbYYFgqSQEhe7NyXfo6w75GT7fCanVd9wNg4E9Df2puP",
+            "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/AbYYFgqSQEhe7NyXfo6w75GT7fCanVd9wNg4E9Df2puP"
+          ]
+        },
+        {
+          "denom": "wormhole/AbYYFgqSQEhe7NyXfo6w75GT7fCanVd9wNg4E9Df2puP/6",
+          "exponent": 6,
+          "aliases": [
+            "pbj",
+            "PBJ"
+          ]
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/E0D6A7FFAE26FA90C8F1AA3461A5A21E74DB154F183EAE56C96769F48F81FCA2",
+      "name": "Pepe Bruce Jenner",
+      "display": "wormhole/AbYYFgqSQEhe7NyXfo6w75GT7fCanVd9wNg4E9Df2puP/6",
+      "symbol": "PBJ",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "solana",
+            "base_denom": "ANu4Wuq86WzRU8tykszQUJ66eQzFNfkwap2HcQ5UaFaU"
+          },
+          "provider": "Wormhole"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gateway",
+            "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/AbYYFgqSQEhe7NyXfo6w75GT7fCanVd9wNg4E9Df2puP",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-2186",
+            "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/AbYYFgqSQEhe7NyXfo6w75GT7fCanVd9wNg4E9Df2puP"
+          }
+        }
+      ],
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/pbj.png",
+          "theme": {
+            "primary_color_hex": "#488000",
+            "background_color_hex": "#ee0000"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Ondo US Dollar Yield",
+      "denom_units": [
+        {
+          "denom": "ibc/23104D411A6EB6031FA92FB75F227422B84989969E91DCAD56A535DD7FF0A373",
+          "exponent": 0,
+          "aliases": [
+            "attousdy",
+            "ausdy"
+          ]
+        },
+        {
+          "denom": "usdy",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/23104D411A6EB6031FA92FB75F227422B84989969E91DCAD56A535DD7FF0A373",
+      "name": "Ondo US Dollar Yield",
+      "display": "usdy",
+      "symbol": "USDY",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "noble",
+            "base_denom": "ausdy",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-750",
+            "path": "transfer/channel-750/ausdy"
+          }
+        }
+      ],
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/usdy.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/usdy.svg",
+          "theme": {
+            "primary_color_hex": "#142c5c"
+          }
+        }
+      ]
+    },
+    {
       "description": "The native token of Furya",
       "denom_units": [
         {

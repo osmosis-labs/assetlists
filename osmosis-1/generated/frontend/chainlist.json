@@ -2989,6 +2989,19 @@
           "coinDecimals": 18,
           "coinGeckoId": "mande-network",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mande/images/mande.png"
+        },
+        {
+          "coinDenom": "TURD",
+          "chainSuggestionDenom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/turd",
+          "coinMinimalDenom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/turd",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/TURD.png"
+        },
+        {
+          "coinDenom": "allETH",
+          "chainSuggestionDenom": "factory/osmo1k6c8jln7ejuqwtqmay3yvzrg3kueaczl96pk067ldg8u835w0yhsw27twm/alloyed/allETH",
+          "coinMinimalDenom": "factory/osmo1k6c8jln7ejuqwtqmay3yvzrg3kueaczl96pk067ldg8u835w0yhsw27twm/alloyed/allETH",
+          "coinDecimals": 8
         }
       ],
       "description": "Osmosis (OSMO) is the premier DEX and cross-chain DeFi hub within the Cosmos ecosystem, a network of over 50 sovereign, interoperable blockchains seamlessly connected through the Inter-Blockchain Communication Protocol (IBC). Pioneering in its approach, Osmosis offers a dynamic trading and liquidity provision experience, integrating non-IBC assets from other ecosystems, including Ethereum, Solana, Avalanche, and Polkadot. Initially adopting Balancer-style pools, Osmosis now also features a concentrated liquidity model that is orders of magnitude more capital efficient, meaning that significantly less liquidity is required to handle the same amount of trading volume with minimal slippage.\n\nAs a true appchain, Osmosis has greater control over the full blockchain stack than traditional smart contract DEXs, which must follow the code of the parent chain that it is built on. This fine-grained control has enabled, for example, the development of Superfluid Staking, an extension of Proof of Stake that allows assets at the application layer to be staked to secure the chain. The customizability of appchains also allows implementing features like the Protocol Revenue module, which enables Osmosis to conduct on-chain arbitrage on behalf of OSMO stakers, balancing prices across pools while generating real yield revenue from this volume. Additionally, as a sovereign appchain, Osmosis governance can vote on upgrades to the protocol. One example of this was the introduction of a Taker Fee, which switched on the collection of exchange fees to generate diverse yield from Osmosis volume and distribute it to OSMO stakers.\n\nOsmosis is bringing the full centralized exchange experience to the decentralized world by building a cross-chain native DEX and trading suite that connects all chains over IBC, including Ethereum and Bitcoin. To reach this goal, Osmosis hosts an ever-expanding suite of DeFi applications aimed at providing a one-stop experience that includes lending, credit, margin, DeFi strategy vaults, power perps, fiat on-ramps, NFTs, stablecoins, and more — all of the functionalities that centralized exchange offer and more, in the trust-minimized environment of decentralized finance.",
@@ -19300,6 +19313,79 @@
       ],
       "features": [
         "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "firmachain",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "FirmaChain",
+      "chain_id": "colosseum-1",
+      "bech32Prefix": "firma",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "firma",
+        "bech32PrefixAccPub": "firmapub",
+        "bech32PrefixValAddr": "firmavaloper",
+        "bech32PrefixValPub": "firmavaloperpub",
+        "bech32PrefixConsAddr": "firmavalcons",
+        "bech32PrefixConsPub": "firmavalconspub"
+      },
+      "slip44": 7777777,
+      "stakeCurrency": {
+        "coinDenom": "FCT",
+        "chainSuggestionDenom": "ufct",
+        "coinMinimalDenom": "ibc/E43ABCC7E80E99E4E6E1226AE5695DDE0F83CB5C257CD04D47C36B8B90C1C839",
+        "sourceDenom": "ufct",
+        "coinDecimals": 6,
+        "coinGeckoId": "firmachain",
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/firmachain/images/fct.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "FCT",
+          "chainSuggestionDenom": "ufct",
+          "coinMinimalDenom": "ibc/E43ABCC7E80E99E4E6E1226AE5695DDE0F83CB5C257CD04D47C36B8B90C1C839",
+          "sourceDenom": "ufct",
+          "coinDecimals": 6,
+          "coinGeckoId": "firmachain",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/firmachain/images/fct.png",
+          "gasPriceStep": {
+            "low": 0.1,
+            "average": 0.15,
+            "high": 0.2
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "FCT",
+          "chainSuggestionDenom": "ufct",
+          "coinMinimalDenom": "ibc/E43ABCC7E80E99E4E6E1226AE5695DDE0F83CB5C257CD04D47C36B8B90C1C839",
+          "sourceDenom": "ufct",
+          "coinDecimals": 6,
+          "coinGeckoId": "firmachain",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/firmachain/images/fct.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://lcd-mainnet.firmachain.dev:26657"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-mainnet.firmachain.dev:1317"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://explorer.firmachain.dev/transactions/${txHash}"
+        }
+      ],
+      "features": [
         "ibc-transfer"
       ]
     }

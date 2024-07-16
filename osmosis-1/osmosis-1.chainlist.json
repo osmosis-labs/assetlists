@@ -8649,6 +8649,68 @@
         "ibc-go",
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "firmachain",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "FirmaChain",
+      "chain_id": "colosseum-1",
+      "bech32_prefix": "firma",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "firma",
+        "bech32PrefixAccPub": "firmapub",
+        "bech32PrefixValAddr": "firmavaloper",
+        "bech32PrefixValPub": "firmavaloperpub",
+        "bech32PrefixConsAddr": "firmavalcons",
+        "bech32PrefixConsPub": "firmavalconspub"
+      },
+      "slip44": 7777777,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ufct",
+            "fixed_min_gas_price": 0.1,
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.15,
+            "high_gas_price": 0.2
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ufct"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://lcd-mainnet.firmachain.dev:26657"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-mainnet.firmachain.dev:1317"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.firmachain.dev/transactions/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/firmachain/images/fct.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/firmachain/images/fct.svg",
+        "theme": {
+          "primary_color_hex": "#1c1c1c"
+        }
+      },
+      "features": [
+        "ibc-transfer"
+      ]
     }
   ]
 }

@@ -1010,11 +1010,19 @@ export function setCounterparty(asset_data) {
     counterpartyAsset.logoURIs.svg = counterpartyImage.svg;
     */
 
-    
-
     asset_data.frontend.counterparty.push(counterpartyAsset);
 
   }
+
+  asset_data.zone_asset?.override_properties?.counterparty?.forEach((asset) => {
+    console.log(asset);
+    asset_data.frontend.counterparty.push(
+      getCounterpartyAsset(
+        asset_data,
+        asset
+      )
+    );
+  });
 
   if (asset_data.frontend.counterparty.length === 0) {
     asset_data.frontend.counterparty = undefined;

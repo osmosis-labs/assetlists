@@ -8090,12 +8090,12 @@
           "provider": "Circle"
         },
         {
-          "type": "additional-mintage",
+          "type": "bridge",
           "counterparty": {
             "chain_name": "ethereum",
             "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
           },
-          "provider": "Circle"
+          "provider": "Polygon PoS Bridge"
         },
         {
           "type": "bridge",
@@ -20728,6 +20728,14 @@
           "provider": "Arbitrum Bridge"
         },
         {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "arbitrum",
+            "base_denom": "wei"
+          },
+          "provider": "Arbitrum"
+        },
+        {
           "type": "bridge",
           "counterparty": {
             "chain_name": "arbitrum",
@@ -20779,20 +20787,20 @@
       "symbol": "axlETH",
       "traces": [
         {
-          "type": "wrapped",
+          "type": "bridge",
           "counterparty": {
             "chain_name": "ethereum",
             "base_denom": "wei"
           },
-          "provider": "Ethereum"
+          "provider": "Base Bridge"
         },
         {
-          "type": "bridge",
+          "type": "wrapped",
           "counterparty": {
-            "chain_name": "ethereum",
-            "base_denom": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+            "chain_name": "base",
+            "base_denom": "wei"
           },
-          "provider": "Base Bridge"
+          "provider": "Base"
         },
         {
           "type": "bridge",
@@ -21190,7 +21198,7 @@
       ]
     },
     {
-      "description": "The native token of FirmaChain",
+      "description": "FIRMACHAIN adds a signing and verifying e-contract function to the blockchain. Unlocking new limits of electronic contracts with blockchain technology, FIRMACHAIN seeks to resolve all the social and legal issues (contracts, notarial, etc.) with written contracts through the use of electronic contracts based on FIRMACHAIN’s data blockchain.",
       "denom_units": [
         {
           "denom": "ibc/E43ABCC7E80E99E4E6E1226AE5695DDE0F83CB5C257CD04D47C36B8B90C1C839",
@@ -21206,7 +21214,7 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/E43ABCC7E80E99E4E6E1226AE5695DDE0F83CB5C257CD04D47C36B8B90C1C839",
-      "name": "FirmaChain",
+      "name": "FIRMACHAIN",
       "display": "fct",
       "symbol": "FCT",
       "traces": [

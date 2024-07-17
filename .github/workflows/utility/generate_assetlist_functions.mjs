@@ -48,6 +48,39 @@ export async function asyncForEach(array, callback) {
   }
 }
 
+export function deepEqual(obj1, obj2) {
+  if (obj1 === obj2) {
+    return true;
+  }
+
+  if (typeof obj1 !== 'object' || obj1 === null || typeof obj2 !== 'object' || obj2 === null) {
+    return false;
+  }
+
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  for (let key of keys1) {
+    if (!keys2.includes(key) || !deepEqual(obj1[key], obj2[key])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function addUniqueArrayItem(item, array) {
+  const exists = array.some(existingArrayItem => deepEqual(existingArrayItem, item));
+  if (!exists) {
+    array.push(item);
+  }
+  return array;
+}
+
 export function addArrayItem(item, array) {
   if (!array.includes(item)) {
     array.push(item);
@@ -919,103 +952,52 @@ function getCounterpartyAsset(asset_data, asset) {
     "images"
   )?.[0];
   counterpartyAsset.logoURIs = {
-    png: image.png,
-    svg: image.svg
+    png: image?.png,
+    svg: image?.svg
   };
-
+  
   return counterpartyAsset;
 
 }
 
 export function setCounterparty(asset_data) {
 
+  let counterpartyAssets = [];
+
+  //iterate over the asset's traces
   const traces = getAssetProperty(asset_data.local_asset, "traces");
-
-  const trace_types = [
-    "ibc",
-    "ibc-cw20",
-    "bridge",
-    "wrapped",
-    //remove additnioal mintage later
-    "additional-mintage"
-  ];
-
-  let numBridgeHops = 0;
-
-  asset_data.frontend.counterparty = [];
-  let counterpartyAsset;
-  let evm_chain;
-
-  for (let i = traces?.length - 1; i >= 0; i--) {
-
-    if (!trace_types.includes(traces[i].type)) { break; }
-    if (traces[i].type === "bridge") {
-      if(numBridgeHops) { break; }
-      numBridgeHops += 1;
-    }
-
-    counterpartyAsset = getCounterpartyAsset(
-      asset_data,
-      ({
-        chain_name: traces[i].counterparty.chain_name,
-        base_denom: traces[i].counterparty.base_denom
-      })
+  traces.reverse();
+  for (const trace of traces) {
+    let traceCounterpartyAsset = {
+      chain_name: trace.counterparty.chain_name,
+      base_denom: trace.counterparty.base_denom
+    };
+  
+    addUniqueArrayItem(
+      traceCounterpartyAsset,
+      counterpartyAssets
     );
 
-    /*
-    counterpartyAsset = {
-      chainName: traces[i].counterparty.chain_name,
-      sourceDenom: traces[i].counterparty.base_denom
-    }
-
-    const cosmosChainId = chain_reg.getFileProperty(
-        traces[i].counterparty.chain_name,
-        "chain",
-        "chain_id"
-      );
-    if (cosmosChainId) {
-      counterpartyAsset.chainType = "cosmos";
-      counterpartyAsset.chainId = cosmosChainId;
-    } else {
-      evm_chain = asset_data.zone_config.evm_chains?.find((evm_chain) => {
-        return evm_chain.chain_name === traces[i].counterparty.chain_name;
-      });
-      if (evm_chain) {
-        counterpartyAsset.chainType = "evm";
-        counterpartyAsset.chainId = evm_chain.chain_id;
-        counterpartyAsset.address = chain_reg.getAssetProperty(
-          traces[i].counterparty.chain_name,
-          traces[i].counterparty.base_denom,
-          "address");
-        if (!counterpartyAsset.address) {
-          counterpartyAsset.address = zero_address;
-        }
-      } else {
-        counterpartyAsset.chainType = "non-cosmos";
-      }
-    }
-    counterpartyAsset.symbol = chain_reg.getAssetProperty(
-      traces[i].counterparty.chain_name,
-      traces[i].counterparty.base_denom,
-      "symbol"
-    );
-    counterpartyAsset.decimals = getAssetDecimals(traces[i].counterparty);
-    let counterpartyImage = chain_reg.getAssetProperty(
-      traces[i].counterparty.chain_name,
-      traces[i].counterparty.base_denom,
-      "images"
-    )?.[0];
-    counterpartyAsset.logoURIs = {};
-    counterpartyAsset.logoURIs.png = counterpartyImage.png;
-    counterpartyAsset.logoURIs.svg = counterpartyImage.svg;
-    */
-
-    asset_data.frontend.counterparty.push(counterpartyAsset);
-
+    if (
+      deepEqual(
+        traceCounterpartyAsset,
+        asset_data.origin_asset
+      )
+    ) { break; }
   }
+  traces.reverse();
 
+  //add any manually specified counterparty assets
   asset_data.zone_asset?.override_properties?.counterparty?.forEach((asset) => {
-    console.log(asset);
+    addUniqueArrayItem(
+      asset,
+      counterpartyAssets
+    );
+  });
+
+  //turn counterparty asset pointers into actual counterparty asset objects
+  asset_data.frontend.counterparty = [];
+  counterpartyAssets.forEach((asset) => {
     asset_data.frontend.counterparty.push(
       getCounterpartyAsset(
         asset_data,
@@ -1023,7 +1005,6 @@ export function setCounterparty(asset_data) {
       )
     );
   });
-
   if (asset_data.frontend.counterparty.length === 0) {
     asset_data.frontend.counterparty = undefined;
   }

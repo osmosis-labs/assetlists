@@ -54,6 +54,18 @@
         "chain_name": "ethereum",
         "base_denom": "wei"
       },
+      "override_properties": {
+        "counterparty": [
+          {
+            "chain_name": "optimism",
+            "base_denom": "wei"
+          },
+          {
+            "chain_name": "optimism",
+            "base_denom": "0x4200000000000000000000000000000000000006"
+          }
+        ]
+      },
       "transfer_methods": [
         {
           "name": "Satellite",
@@ -68,16 +80,13 @@
       "base_denom": "wbtc-satoshi",
       "path": "transfer/channel-208/wbtc-satoshi",
       "osmosis_verified": true,
-      "origin": {
-        "chain_name": "ethereum",
-        "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
-      },
       "override_properties": {
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.axl.svg",
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.axl.png"
         }
-      }
+      },
+      "_comment": "Wrapped Bitcoin (Ethereum via Axelar) $WBTC.axl"
     },
     {
       "chain_name": "axelar",
@@ -674,10 +683,6 @@
       "base_denom": "gravity0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
       "path": "transfer/channel-144/gravity0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
       "osmosis_verified": false,
-      "origin": {
-        "chain_name": "ethereum",
-        "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
-      },
       "override_properties": {
         "name": "Wrapped Bitcoin (Gravity Bridge)",
         "logo_URIs": {
@@ -2465,6 +2470,38 @@
           {
             "chain_name": "arbitrum",
             "base_denom": "0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8"
+          },
+          {
+            "chain_name": "avalanche",
+            "base_denom": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E"
+          },
+          {
+            "chain_name": "avalanche",
+            "base_denom": "0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664"
+          },
+          {
+            "chain_name": "base",
+            "base_denom": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+          },
+          {
+            "chain_name": "base",
+            "base_denom": "0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA"
+          },
+          {
+            "chain_name": "optimism",
+            "base_denom": "0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85"
+          },
+          {
+            "chain_name": "optimism",
+            "base_denom": "0x7F5c764cBc14f9669B88837ca1490cCa17c31607"
+          },
+          {
+            "chain_name": "polygon",
+            "base_denom": "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359"
+          },
+          {
+            "chain_name": "polygon",
+            "base_denom": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
           }
         ]
       },
@@ -2988,10 +3025,6 @@
     {
       "chain_name": "osmosis",
       "base_denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc",
-      "origin": {
-        "chain_name": "ethereum",
-        "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
-      },
       "canonical": {
         "chain_name": "ethereum",
         "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"

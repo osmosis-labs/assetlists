@@ -842,6 +842,91 @@ export function setTypeAsset(asset_data) {
 
 }
 
+function getChainType(asset_data, chainName) {
+
+  let feeTokenDenom = chain_reg.getFileProperty(
+    chainName,
+    "chain",
+    "fees"
+  )?.fee_tokens?.[0];
+  if (feeTokenDenom) {
+    let feeTokenType = chain_reg.getAssetProperty(
+      chainName,
+      feeTokenDenom,
+      "type_asset"
+    );
+    if (
+      !feeTokenType
+        ||
+      feeTokenType === "sdk.coin"
+        ||
+      feeTokenType === "ics20"
+    ) { return "cosmos"; }
+    else if (
+      feeTokenType === "evm-base"
+        ||
+      feeTokenType === "erc20"
+    ) { return "evm"; }
+  }
+
+  let evm_chain = asset_data.zone_config.evm_chains?.find((evm_chain) => {
+    return evm_chain.chain_name === chainName;
+  });
+
+  if (evm_chain) {
+    return "evm";
+  }
+
+  return "non-cosmos";
+
+}
+
+function getChainId(asset_data, chainName) {
+
+  let chainId = chain_reg.getFileProperty(chainName, "chain", "chain_id");
+  if (!chainId) {
+    chainId = asset_data.zone_config.evm_chains?.find((evm_chain) => {
+      return evm_chain.chain_name === chainName;
+    })?.chain_id;
+  }
+  return chainId;
+
+}
+
+function getCounterpartyAsset(asset_data, asset) {
+
+  let counterpartyAsset = {};
+
+  counterpartyAsset.chainName = asset.chain_name;
+  counterpartyAsset.sourceDenom = asset.base_denom;
+
+  counterpartyAsset.chainType = getChainType(asset_data, asset.chain_name);
+
+  counterpartyAsset.chainId = getChainId(asset_data, asset.chain_name);
+
+  if (counterpartyAsset.chainType === "evm") {
+    counterpartyAsset.address = getAssetProperty(asset, "address");
+    if (!counterpartyAsset.address) {
+      counterpartyAsset.address = zero_address;
+    }
+  }
+  
+  counterpartyAsset.symbol = getAssetProperty(asset, "symbol");
+  counterpartyAsset.decimals = getAssetProperty(asset, "decimals");
+  
+  let image = getAssetProperty(
+    asset,
+    "images"
+  )?.[0];
+  counterpartyAsset.logoURIs = {
+    png: image.png,
+    svg: image.svg
+  };
+
+  return counterpartyAsset;
+
+}
+
 export function setCounterparty(asset_data) {
 
   const traces = getAssetProperty(asset_data.local_asset, "traces");
@@ -869,6 +954,15 @@ export function setCounterparty(asset_data) {
       numBridgeHops += 1;
     }
 
+    counterpartyAsset = getCounterpartyAsset(
+      asset_data,
+      ({
+        chain_name: traces[i].counterparty.chain_name,
+        base_denom: traces[i].counterparty.base_denom
+      })
+    );
+
+    /*
     counterpartyAsset = {
       chainName: traces[i].counterparty.chain_name,
       sourceDenom: traces[i].counterparty.base_denom
@@ -914,6 +1008,9 @@ export function setCounterparty(asset_data) {
     counterpartyAsset.logoURIs = {};
     counterpartyAsset.logoURIs.png = counterpartyImage.png;
     counterpartyAsset.logoURIs.svg = counterpartyImage.svg;
+    */
+
+    
 
     asset_data.frontend.counterparty.push(counterpartyAsset);
 

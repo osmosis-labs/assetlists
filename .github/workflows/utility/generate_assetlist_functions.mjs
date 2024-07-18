@@ -429,7 +429,27 @@ export function setSymbol(asset_data) {
       hop.type === "wrapped"
     ) { return; }
     else if ( traceTypesNeedingProvider.includes(hop.type) ) {
-      symbol = symbol + (hop.provider.suffix ?? "");
+      let suffix = hop.provider.suffix ?? "";
+      if ( suffix?.startsWith(".e.") ) {
+        if (
+          symbol.slice(symbol.length - 4) === ".eth"
+        ) {
+          symbol = symbol.slice(0, symbol.length - 4);
+        }
+        if (
+          deepEqual(
+            asset_data.origin_asset,
+            ({
+              chain_name: "ethereum",
+              base_denom: "wei"
+            })
+          )
+        ) {
+          suffix = suffix.slice(2);
+        }
+      }
+      symbol = symbol + suffix;
+      
       if (!hop.provider.destination_network) {
         symbol = symbol + "." + getNetworkSuffix(hop.network, asset_data);
       }

@@ -114,7 +114,7 @@
       },
       {
         "provider": "Polygon PoS Bridge",
-        "suffix": ".matic",
+        "suffix": ".e.matic",
         "token": {
           "chain_name": "polygon",
           "base_denom": "wei"
@@ -123,20 +123,25 @@
       },
       {
         "provider": "Arbitrum Bridge",
-        "suffix": ".arb",
+        "suffix": ".e.arb",
         "token": {
           "chain_name": "arbitrum",
-          "base_denom": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1"
+          "base_denom": "0x912CE59144191C1204E64559FE8253a0e49E6548"
         },
         "destination_network": "arbitrum"
       },
       {
-        "provider": "Base Bridge",
-        "suffix": ".base",
+        "provider": "Avalanche Bridge",
+        "suffix": ".e.avax",
         "token": {
-          "chain_name": "base",
-          "base_denom": "0x4200000000000000000000000000000000000006"
+          "chain_name": "avalanche",
+          "base_denom": "wei"
         },
+        "destination_network": "avalanche"
+      },
+      {
+        "provider": "Base Bridge",
+        "suffix": ".e.base",
         "destination_network": "base"
       }
     ],

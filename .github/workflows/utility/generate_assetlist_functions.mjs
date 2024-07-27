@@ -371,16 +371,16 @@ hop: {
 
 */
 
-function getNetworkSuffix(chain_name, asset_data) {
+function getNetworkSymbolSuffix(chain_name, asset_data) {
 
-  let chain_abbreviation = asset_data.zone_config?.chains?.find(
+  let chain_symbol_suffix = asset_data.zone_config?.chains?.find(
     chain => //where
       chain.chain_name === chain_name
         &&
-      chain.abbreviation
-    )?.abbreviation;
-  if (chain_abbreviation) {
-    return chain_abbreviation;
+      chain.symbol_suffix
+  )?.symbol_suffix;
+  if (chain_symbol_suffix) {
+    return chain_symbol_suffix;
   }
 
   let bech32_prefix = chain_reg.getFileProperty(chain_name, "chain", "bech32_prefix");
@@ -394,17 +394,17 @@ function getNetworkSuffix(chain_name, asset_data) {
 
 function getNetworkName(chain_name, asset_data) {
 
-  let chain_pretty_name = chain_reg.getFileProperty(chain_name, "chain", "pretty_name");
-  if (chain_pretty_name) {
-    return chain_pretty_name;
-  }
-
-  chain_pretty_name = asset_data.zone_config?.chains?.find(
+  let override_chain_pretty_name = asset_data.zone_config?.chains?.find(
     chain => //where
       chain.chain_name === chain_name
         &&
       chain.pretty_name
     )?.pretty_name;
+  if (override_chain_pretty_name) {
+    return override_chain_pretty_name;
+  }
+
+  let chain_pretty_name = chain_reg.getFileProperty(chain_name, "chain", "pretty_name");
   if (chain_pretty_name) {
     return chain_pretty_name;
   }
@@ -439,7 +439,7 @@ export function setSymbol(asset_data) {
   }
   let variantGroup = getAssetProperty(asset_data.origin_asset, "variantGroup");
   if (variantGroup.additionalMintagesExist) {
-    symbol = symbol + "." + getNetworkSuffix(asset_data.frontend.variant.mintageNetwork, asset_data);
+    symbol = symbol + "." + getNetworkSymbolSuffix(asset_data.frontend.variant.mintageNetwork, asset_data);
   }
   asset_data.frontend.variant.hops.forEach((hop) => {
     if (
@@ -450,7 +450,7 @@ export function setSymbol(asset_data) {
       hop.type === "wrapped"
     ) { return; }
     else if ( traceTypesNeedingProvider.includes(hop.type) ) {
-      let suffix = hop.provider.suffix ?? "";
+      let suffix = hop.provider.symbol_suffix ?? "";
       if ( suffix?.startsWith(".e.") ) {
         if (
           symbol.slice(symbol.length - 4) === ".eth"
@@ -472,10 +472,10 @@ export function setSymbol(asset_data) {
       symbol = symbol + suffix;
       
       if (!hop.provider.destination_network) {
-        symbol = symbol + "." + getNetworkSuffix(hop.network, asset_data);
+        symbol = symbol + "." + getNetworkSymbolSuffix(hop.network, asset_data);
       }
     } else {
-      symbol = symbol + "." + getNetworkSuffix(hop.network, asset_data);
+      symbol = symbol + "." + getNetworkSymbolSuffix(hop.network, asset_data);
     }
   });
   asset_data.frontend.symbol = symbol;
@@ -505,6 +505,16 @@ export function setName(asset_data) {
   //but use chain name instead if it's the staking token...
   if (getAssetProperty(asset_data.origin_asset, "is_staking")) {
     name = chain_reg.getFileProperty(asset_data.origin_asset.chain_name, "chain", "pretty_name");
+    //Check for Chain Name Override--E.G., "Ethereum Mainnet" -> "Ethereum"
+    let override_chain_pretty_name = asset_data.zone_config?.chains?.find(
+      chain => //where
+        chain.chain_name === asset_data.origin_asset.chain_name
+        &&
+        chain.pretty_name
+    )?.pretty_name;
+    if (override_chain_pretty_name) {
+      name = override_chain_pretty_name;
+    }
   } else {
     name = getAssetProperty(asset_data.origin_asset, "name");
   }
@@ -516,6 +526,11 @@ export function setName(asset_data) {
     return;
   }
 
+  //Need a way to know if last suffix is network
+  let last_suffix_is_network = false;
+  let this_suffix_is_network;
+
+  //Show Mintage Network, if needed
   let variantGroup = getAssetProperty(asset_data.origin_asset, "variantGroup");
   if (variantGroup.additionalMintagesExist) {
     name =  
@@ -523,6 +538,7 @@ export function setName(asset_data) {
       + " (" +
       getNetworkName(asset_data.frontend.variant.mintageNetwork, asset_data)
       + ")";
+    last_suffix_is_network = true;
   }
 
   asset_data.frontend.variant.hops.forEach((hop) => {
@@ -533,33 +549,72 @@ export function setName(asset_data) {
         ||
       hop.type === "wrapped"
     ) { return; }
-    else if ( traceTypesNeedingProvider.includes(hop.type) ) {
-      if (hop.provider.provider !== "Polkadot Parachain") {
-        name =
-          name + " (" +
-          hop.provider.provider
-          + ")";
+    else if (traceTypesNeedingProvider.includes(hop.type)) {
+
+      //Some trace providers don't need indication
+      if (
+        //hop.provider.provider !== "Polkadot Parachain"
+        //&&
+        hop.provider.name_suffix
+      ) {
+        this_suffix_is_network = false;
+        name = appendNameSuffix(
+          name,
+          hop.provider.name_suffix,
+          this_suffix_is_network,
+          last_suffix_is_network
+        );
+        last_suffix_is_network = false;
       }
       
-      if (!hop.provider.destination_network) {
-        name =
-          name
-          + " (" + 
-          getNetworkName(hop.network, asset_data)
-          + ")";
+      if (
+        !hop.provider.destination_network
+          ||
+        !hop.provider.name_suffix
+      ) {
+        this_suffix_is_network = true;
+        name = appendNameSuffix(
+          name,
+          getNetworkName(hop.network, asset_data),
+          this_suffix_is_network,
+          last_suffix_is_network
+        );
+        last_suffix_is_network = true;
       }
     } else {
-      name =
-        name
-        + " (" + 
-        getNetworkName(hop.network, asset_data)
-        + ")";
+
+      //if (hop.type === "ibc" && getChainType(hop.network) !== "cosmos" && chainName === "picasso")
+      this_suffix_is_network = true;
+      name = appendNameSuffix(
+        name,
+        getNetworkName(hop.network, asset_data),
+        this_suffix_is_network,
+        last_suffix_is_network
+      );
+      last_suffix_is_network = true;
     }
   });
 
   asset_data.frontend.name = name;
   asset_data.asset_detail.name = name;
   
+
+}
+
+function appendNameSuffix(name, suffix, this_suffix_is_network, last_suffix_is_network) {
+
+  let new_name = name;
+  if (!this_suffix_is_network && last_suffix_is_network) {
+    new_name = new_name.replace(/(\([^\(\)]*\))$/, (match) => {
+      return match.slice(0, -1) + " via " + suffix + ")";
+    });
+  } else {
+    new_name = new_name
+      + " (" +
+      suffix
+      + ")";
+  }
+  return new_name;
 
 }
 
@@ -939,7 +994,16 @@ export function setTypeAsset(asset_data) {
 
 function getChainType(asset_data, chainName) {
 
-  let feeTokenDenom = chain_reg.getFileProperty(
+  let chain_type = chain_reg.getFileProperty(
+    chainName,
+    "chain",
+    "chain_type"
+  );
+  if (chain_type === "cosmos") {
+    return "cosmos";
+  }
+
+  /*let feeTokenDenom = chain_reg.getFileProperty(
     chainName,
     "chain",
     "fees"
@@ -962,12 +1026,15 @@ function getChainType(asset_data, chainName) {
         ||
       feeTokenType === "erc20"
     ) { return "evm"; }
+  }*/
+
+  if (chain_type === "eip155") {
+    return "evm";
   }
 
   let evm_chain = asset_data.zone_config.evm_chains?.find((evm_chain) => {
     return evm_chain.chain_name === chainName;
   });
-
   if (evm_chain) {
     return "evm";
   }
@@ -979,11 +1046,15 @@ function getChainType(asset_data, chainName) {
 function getChainId(asset_data, chainName) {
 
   let chainId = chain_reg.getFileProperty(chainName, "chain", "chain_id");
+  if (getChainType(asset_data, chainName) === "evm") {
+    chainId = Number(chainId);
+  }
   if (!chainId) {
     chainId = asset_data.zone_config.evm_chains?.find((evm_chain) => {
       return evm_chain.chain_name === chainName;
     })?.chain_id;
   }
+  
   return chainId;
 
 }

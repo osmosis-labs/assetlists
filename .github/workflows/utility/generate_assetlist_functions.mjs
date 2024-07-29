@@ -371,21 +371,42 @@ hop: {
 
 */
 
-function getNetworkSuffix(chain_name, asset_data) {
+function getNetworkSymbolSuffix(chain_name, asset_data) {
 
-  let chain_abbreviation = asset_data.zone_config?.chains?.find(
+  let chain_symbol_suffix = asset_data.zone_config?.chains?.find(
     chain => //where
       chain.chain_name === chain_name
         &&
-      chain.abbreviation
-    )?.abbreviation;
-  if (chain_abbreviation) {
-    return chain_abbreviation;
+      chain.symbol_suffix
+  )?.symbol_suffix;
+  if (chain_symbol_suffix) {
+    return chain_symbol_suffix;
   }
 
   let bech32_prefix = chain_reg.getFileProperty(chain_name, "chain", "bech32_prefix");
   if (bech32_prefix) {
     return bech32_prefix;
+  }
+
+  return chain_name;
+
+}
+
+function getNetworkName(chain_name, asset_data) {
+
+  let override_chain_pretty_name = asset_data.zone_config?.chains?.find(
+    chain => //where
+      chain.chain_name === chain_name
+        &&
+      chain.pretty_name
+    )?.pretty_name;
+  if (override_chain_pretty_name) {
+    return override_chain_pretty_name;
+  }
+
+  let chain_pretty_name = chain_reg.getFileProperty(chain_name, "chain", "pretty_name");
+  if (chain_pretty_name) {
+    return chain_pretty_name;
   }
 
   return chain_name;
@@ -418,7 +439,7 @@ export function setSymbol(asset_data) {
   }
   let variantGroup = getAssetProperty(asset_data.origin_asset, "variantGroup");
   if (variantGroup.additionalMintagesExist) {
-    symbol = symbol + "." + getNetworkSuffix(asset_data.frontend.variant.mintageNetwork, asset_data);
+    symbol = symbol + "." + getNetworkSymbolSuffix(asset_data.frontend.variant.mintageNetwork, asset_data);
   }
   asset_data.frontend.variant.hops.forEach((hop) => {
     if (
@@ -429,7 +450,7 @@ export function setSymbol(asset_data) {
       hop.type === "wrapped"
     ) { return; }
     else if ( traceTypesNeedingProvider.includes(hop.type) ) {
-      let suffix = hop.provider.suffix ?? "";
+      let suffix = hop.provider.symbol_suffix ?? "";
       if ( suffix?.startsWith(".e.") ) {
         if (
           symbol.slice(symbol.length - 4) === ".eth"
@@ -451,10 +472,10 @@ export function setSymbol(asset_data) {
       symbol = symbol + suffix;
       
       if (!hop.provider.destination_network) {
-        symbol = symbol + "." + getNetworkSuffix(hop.network, asset_data);
+        symbol = symbol + "." + getNetworkSymbolSuffix(hop.network, asset_data);
       }
     } else {
-      symbol = symbol + "." + getNetworkSuffix(hop.network, asset_data);
+      symbol = symbol + "." + getNetworkSymbolSuffix(hop.network, asset_data);
     }
   });
   asset_data.frontend.symbol = symbol;
@@ -463,6 +484,140 @@ export function setSymbol(asset_data) {
 
 
 }
+
+
+export function setName(asset_data) {
+
+  let name;
+
+  asset_data.chain_reg.name =
+    getAssetProperty(asset_data.local_asset, "name") ??
+    getAssetProperty(asset_data.source_asset, "name");
+
+
+  if (asset_data.zone_asset?.override_properties?.name) {
+    name = asset_data.zone_asset?.override_properties?.name;
+    asset_data.frontend.name = name;
+    asset_data.asset_detail.name = name;
+    return;
+  }
+
+  //but use chain name instead if it's the staking token...
+  if (getAssetProperty(asset_data.origin_asset, "is_staking")) {
+    name = chain_reg.getFileProperty(asset_data.origin_asset.chain_name, "chain", "pretty_name");
+    //Check for Chain Name Override--E.G., "Ethereum Mainnet" -> "Ethereum"
+    let override_chain_pretty_name = asset_data.zone_config?.chains?.find(
+      chain => //where
+        chain.chain_name === asset_data.origin_asset.chain_name
+        &&
+        chain.pretty_name
+    )?.pretty_name;
+    if (override_chain_pretty_name) {
+      name = override_chain_pretty_name;
+    }
+  } else {
+    name = getAssetProperty(asset_data.origin_asset, "name");
+  }
+  
+  //If it's the canonical asset, then don't add suffixes
+  if (asset_data.frontend.is_canonical) {
+    asset_data.frontend.name = name;
+    asset_data.asset_detail.name = name;
+    return;
+  }
+
+  //Need a way to know if last suffix is network
+  let last_suffix_is_network = false;
+  let this_suffix_is_network;
+
+  //Show Mintage Network, if needed
+  let variantGroup = getAssetProperty(asset_data.origin_asset, "variantGroup");
+  if (variantGroup.additionalMintagesExist) {
+    name =  
+      name
+      + " (" +
+      getNetworkName(asset_data.frontend.variant.mintageNetwork, asset_data)
+      + ")";
+    last_suffix_is_network = true;
+  }
+
+  asset_data.frontend.variant.hops.forEach((hop) => {
+    if (
+      hop.type === "additional-mintage"
+        ||
+      hop.type === "legacy-mintage"
+        ||
+      hop.type === "wrapped"
+    ) { return; }
+    else if (traceTypesNeedingProvider.includes(hop.type)) {
+
+      //Some trace providers don't need indication
+      if (
+        //hop.provider.provider !== "Polkadot Parachain"
+        //&&
+        hop.provider.name_suffix
+      ) {
+        this_suffix_is_network = false;
+        name = appendNameSuffix(
+          name,
+          hop.provider.name_suffix,
+          this_suffix_is_network,
+          last_suffix_is_network
+        );
+        last_suffix_is_network = false;
+      }
+      
+      if (
+        !hop.provider.destination_network
+          ||
+        !hop.provider.name_suffix
+      ) {
+        this_suffix_is_network = true;
+        name = appendNameSuffix(
+          name,
+          getNetworkName(hop.network, asset_data),
+          this_suffix_is_network,
+          last_suffix_is_network
+        );
+        last_suffix_is_network = true;
+      }
+    } else {
+
+      //if (hop.type === "ibc" && getChainType(hop.network) !== "cosmos" && chainName === "picasso")
+      this_suffix_is_network = true;
+      name = appendNameSuffix(
+        name,
+        getNetworkName(hop.network, asset_data),
+        this_suffix_is_network,
+        last_suffix_is_network
+      );
+      last_suffix_is_network = true;
+    }
+  });
+
+  asset_data.frontend.name = name;
+  asset_data.asset_detail.name = name;
+  
+
+}
+
+function appendNameSuffix(name, suffix, this_suffix_is_network, last_suffix_is_network) {
+
+  let new_name = name;
+  if (!this_suffix_is_network && last_suffix_is_network) {
+    new_name = new_name.replace(/(\([^\(\)]*\))$/, (match) => {
+      return match.slice(0, -1) + " via " + suffix + ")";
+    });
+  } else {
+    new_name = new_name
+      + " (" +
+      suffix
+      + ")";
+  }
+  return new_name;
+
+}
+
 
 
 export function setSourceDenom(asset_data) {
@@ -812,64 +967,6 @@ export function setChainName(asset_data) {
 
 }
 
-export function setName(asset_data) {
-
-  let name;
-
-  asset_data.chain_reg.name =
-    getAssetProperty(asset_data.local_asset, "name") ??
-    getAssetProperty(asset_data.canonical_asset, "name");
-
-
-  if (asset_data.zone_asset?.override_properties?.name) {
-    name = asset_data.zone_asset?.override_properties?.name;
-    asset_data.frontend.name = name;
-    asset_data.asset_detail.name = name;
-    return;
-  }
-
-
-  name = asset_data.zone_asset.canonical ? 
-    getAssetProperty(asset_data.canonical_asset, "name") :
-    asset_data.chain_reg.name;
-
-  //but use chain name instead if it's the staking token...
-  if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
-    name = chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "pretty_name");
-  }
-
-
-  //append provider name in parentheses
-  if (asset_data.canonical) {
-    const traces = getAssetProperty(asset_data.canonical_asset, "traces");
-    if (!traces) {
-      asset_data.frontend.name = name;
-      asset_data.chain_reg.name = name;
-      return;
-    }
-    const trace_types = [
-      "ibc",
-      "ibc-cw20"
-    ];
-    let bridge_provider;
-    for (let i = traces?.length - 1; i >= 0; i--) {
-      if (trace_types.includes(traces[i].type)) { continue; }
-      if (traces[i].type === "bridge") {
-        bridge_provider = traces[i].provider;
-      }
-      break;
-    }
-    if (bridge_provider && !name.includes(bridge_provider)) {
-      name = name + " " + "(" + bridge_provider + ")";
-    }
-  }
-
-  asset_data.frontend.name = name;
-  asset_data.asset_detail.name = name;
-  
-
-}
-
 export function setVariantGroupKey(asset_data) {
 
   let variantGroupKey = getAssetProperty(asset_data.origin_asset, "variantGroup").variantGroupKey;
@@ -897,7 +994,16 @@ export function setTypeAsset(asset_data) {
 
 function getChainType(asset_data, chainName) {
 
-  let feeTokenDenom = chain_reg.getFileProperty(
+  let chain_type = chain_reg.getFileProperty(
+    chainName,
+    "chain",
+    "chain_type"
+  );
+  if (chain_type === "cosmos") {
+    return "cosmos";
+  }
+
+  /*let feeTokenDenom = chain_reg.getFileProperty(
     chainName,
     "chain",
     "fees"
@@ -920,12 +1026,15 @@ function getChainType(asset_data, chainName) {
         ||
       feeTokenType === "erc20"
     ) { return "evm"; }
+  }*/
+
+  if (chain_type === "eip155") {
+    return "evm";
   }
 
   let evm_chain = asset_data.zone_config.evm_chains?.find((evm_chain) => {
     return evm_chain.chain_name === chainName;
   });
-
   if (evm_chain) {
     return "evm";
   }
@@ -937,11 +1046,15 @@ function getChainType(asset_data, chainName) {
 function getChainId(asset_data, chainName) {
 
   let chainId = chain_reg.getFileProperty(chainName, "chain", "chain_id");
+  if (getChainType(asset_data, chainName) === "evm") {
+    chainId = Number(chainId);
+  }
   if (!chainId) {
     chainId = asset_data.zone_config.evm_chains?.find((evm_chain) => {
       return evm_chain.chain_name === chainName;
     })?.chain_id;
   }
+  
   return chainId;
 
 }

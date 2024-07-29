@@ -2338,6 +2338,14 @@
       "symbol": "VDL",
       "traces": [
         {
+          "type": "legacy-mintage",
+          "counterparty": {
+            "chain_name": "beezee",
+            "base_denom": "factory/bze13gzq40che93tgfm9kzmkpjamah5nj0j73pyhqk/uvdl"
+          },
+          "provider": "Vidulum"
+        },
+        {
           "type": "ibc",
           "counterparty": {
             "chain_name": "vidulum",
@@ -13715,12 +13723,12 @@
           "provider": "Lido"
         },
         {
-          "type": "additional-mintage",
+          "type": "bridge",
           "counterparty": {
             "chain_name": "ethereum",
             "base_denom": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0"
           },
-          "provider": "Lido"
+          "provider": "Lido wstETH Cosmos Bridge"
         },
         {
           "type": "ibc",
@@ -21836,6 +21844,76 @@
           "theme": {
             "primary_color_hex": "#f5bf09"
           }
+        }
+      ]
+    },
+    {
+      "description": "An alloy of SOL asset variants on Osmosis.",
+      "extended_description": "Multiple Solana variants on Osmosis comprise the liquidity backing of a tokenized transmuter pool to create an alloy of SOL.",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1n3n75av8awcnw4jl62n3l48e6e4sxqmaf97w5ua6ddu4s475q5qq9udvx4/alloyed/allSOL",
+          "exponent": 0
+        },
+        {
+          "denom": "allSOL",
+          "exponent": 9
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1n3n75av8awcnw4jl62n3l48e6e4sxqmaf97w5ua6ddu4s475q5qq9udvx4",
+      "base": "factory/osmo1n3n75av8awcnw4jl62n3l48e6e4sxqmaf97w5ua6ddu4s475q5qq9udvx4/alloyed/allSOL",
+      "name": "Alloyed SOL",
+      "display": "allSOL",
+      "symbol": "allSOL",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "solana",
+            "base_denom": "Lamport"
+          },
+          "provider": "Osmosis"
+        }
+      ],
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allSOL.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allSOL.png"
+        },
+        {
+          "image_sync": {
+            "chain_name": "solana",
+            "base_denom": "Lamport"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/sol.svg"
+        }
+      ]
+    },
+    {
+      "description": "COOK is the governance token for Start.Cooking, the premier token factory on Cosmos.",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/COOK",
+          "exponent": 0
+        },
+        {
+          "denom": "COOK",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8",
+      "base": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/COOK",
+      "name": "COOK",
+      "display": "COOK",
+      "symbol": "COOK",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/COOK.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/COOK.png"
         }
       ]
     }

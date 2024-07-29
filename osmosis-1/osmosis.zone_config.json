@@ -5,7 +5,8 @@
     "providers": [
       {
         "provider": "Axelar",
-        "suffix": ".axl",
+        "name_suffix": "Axelar",
+        "symbol_suffix": ".axl",
         "token": {
           "chain_name": "axelar",
           "base_denom": "uaxl"
@@ -51,7 +52,8 @@
       },
       {
         "provider": "Gravity Bridge",
-        "suffix": ".grv",
+        "name_suffix": "Gravity",
+        "symbol_suffix": ".grv",
         "token": {
           "chain_name": "gravitybridge",
           "base_denom": "ugrav"
@@ -60,7 +62,8 @@
       },
       {
         "provider": "Wormhole",
-        "suffix": ".wh",
+        "name_suffix": "Wormhole",
+        "symbol_suffix": ".wh",
         "token": {
           "chain_name": "solana",
           "base_denom": "85VBFQZC9TZkfaptBWjvUw7YbZjy52A6mjtPGjstQAmQ"
@@ -69,7 +72,8 @@
       },
       {
         "provider": "Picasso",
-        "suffix": ".pica",
+        "name_suffix": "Picasso",
+        "symbol_suffix": ".pica",
         "token": {
           "chain_name": "composable",
           "base_denom": "ppica"
@@ -94,6 +98,8 @@
       },
       {
         "provider": "Persistence",
+        "name_suffix": "",
+        "symbol_suffix": "",
         "token": {
           "chain_name": "persistence",
           "base_denom": "uxprt"
@@ -105,7 +111,8 @@
       },
       {
         "provider": "Coreum",
-        "suffix": ".core",
+        "name_suffix": "Coreum",
+        "symbol_suffix": ".core",
         "token": {
           "chain_name": "coreum",
           "base_denom": "ucore"
@@ -114,7 +121,8 @@
       },
       {
         "provider": "Polygon PoS Bridge",
-        "suffix": ".e.matic",
+        "name_suffix": "",
+        "symbol_suffix": ".e.matic",
         "token": {
           "chain_name": "polygon",
           "base_denom": "wei"
@@ -123,7 +131,8 @@
       },
       {
         "provider": "Arbitrum Bridge",
-        "suffix": ".e.arb",
+        "name_suffix": "",
+        "symbol_suffix": ".e.arb",
         "token": {
           "chain_name": "arbitrum",
           "base_denom": "0x912CE59144191C1204E64559FE8253a0e49E6548"
@@ -132,7 +141,8 @@
       },
       {
         "provider": "Avalanche Bridge",
-        "suffix": ".e.avax",
+        "name_suffix": "",
+        "symbol_suffix": ".e.avax",
         "token": {
           "chain_name": "avalanche",
           "base_denom": "wei"
@@ -141,7 +151,8 @@
       },
       {
         "provider": "Base Bridge",
-        "suffix": ".e.base",
+        "name_suffix": "",
+        "symbol_suffix": ".e.base",
         "destination_network": "base"
       },
       {
@@ -305,27 +316,44 @@
     "chains": [
       {
         "chain_name": "arbitrum",
-        "abbreviation": "arb"
-      },
-      {
-        "chain_name": "ethereum",
-        "abbreviation": "eth"
-      },
-      {
-        "chain_name": "moonbeam",
-        "abbreviation": "glmr"
-      },
-      {
-        "chain_name": "polygon",
-        "abbreviation": "matic"
+        "pretty_name": "Arbitrum",
+        "symbol_suffix": "arb",
+        "representative_asset": "0x912CE59144191C1204E64559FE8253a0e49E6548"
       },
       {
         "chain_name": "avalanche",
-        "abbreviation": "avax"
+        "pretty_name": "Avalanche",
+        "symbol_suffix": "avax",
+        "representative_asset": "wei"
+      },
+      {
+        "chain_name": "base",
+        "pretty_name": "Base",
+        "symbol_suffix": "base"
+      },
+      {
+        "chain_name": "ethereum",
+        "pretty_name": "Ethereum",
+        "symbol_suffix": "eth",
+        "representative_asset": "wei"
+      },
+      {
+        "chain_name": "moonbeam",
+        "pretty_name": "Moonbeam",
+        "symbol_suffix": "glmr",
+        "representative_asset": "Wei"
+      },
+      {
+        "chain_name": "polygon",
+        "pretty_name": "Polygon",
+        "symbol_suffix": "matic",
+        "representative_asset": "wei"
       },
       {
         "chain_name": "solana",
-        "abbreviation": "sol"
+        "pretty_name": "Solana",
+        "symbol_suffix": "sol",
+        "representative_asset": "Lamport"
       }
     ]
   }

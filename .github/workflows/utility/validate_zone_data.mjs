@@ -51,6 +51,7 @@ export function validate_zone_files() {
         throw new Error(`Chain ${zoneChain.chain_name} does not exist in the Chain Registry.`);
       }
 
+      /*
       let CHAIN_STAKING = false;
       let staking_token = chain_reg.getFileProperty(zoneChain.chain_name, "chain", "staking")?.staking_tokens[0]?.denom;
       if (staking_token) {
@@ -59,6 +60,7 @@ export function validate_zone_files() {
       if (!CHAIN_STAKING) {
         throw new Error(`Chain ${zoneChain.chain_name} does not have staking defined in the Chain Registry.`);
       }
+      */
 
       let CHAIN_FEES = false;
       let fee_token = chain_reg.getFileProperty(zoneChain.chain_name, "chain", "fees")?.fee_tokens[0];

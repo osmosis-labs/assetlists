@@ -431,12 +431,17 @@ export function setSymbol(asset_data) {
   
   symbol = getAssetProperty(asset_data.origin_asset, "symbol");
   
+
   //If it's the canonical asset, then don't add suffixes
   if (asset_data.frontend.is_canonical) {
     asset_data.frontend.symbol = symbol;
     asset_data.asset_detail.symbol = symbol;
     return;
   }
+
+  //Need a way to know if last suffix is network
+  let last_suffix_is_network = false;
+
   let variantGroup = getAssetProperty(asset_data.origin_asset, "variantGroup");
   if (variantGroup.additionalMintagesExist) {
     symbol = symbol + "." + getNetworkSymbolSuffix(asset_data.frontend.variant.mintageNetwork, asset_data);
@@ -470,14 +475,28 @@ export function setSymbol(asset_data) {
         }
       }
       symbol = symbol + suffix;
+      last_suffix_is_network = false;
       
       if (!hop.provider.destination_network) {
         symbol = symbol + "." + getNetworkSymbolSuffix(hop.network, asset_data);
+        last_suffix_is_network = true;
       }
     } else {
       symbol = symbol + "." + getNetworkSymbolSuffix(hop.network, asset_data);
+      last_suffix_is_network = true;
     }
   });
+
+  //Don't show Osmosis as a final destination network (e.g., native bridges like Router)
+  let ending = ".osmo";
+  if (
+    last_suffix_is_network
+      &&
+    symbol.endsWith(ending)
+  ) {
+    symbol = symbol.slice(0, -ending.length);
+  }
+
   asset_data.frontend.symbol = symbol;
   asset_data.asset_detail.symbol = symbol;
   return;
@@ -528,7 +547,7 @@ export function setName(asset_data) {
 
   //Need a way to know if last suffix is network
   let last_suffix_is_network = false;
-  let this_suffix_is_network;
+  let this_suffix_is_network = false;
 
   //Show Mintage Network, if needed
   let variantGroup = getAssetProperty(asset_data.origin_asset, "variantGroup");
@@ -552,11 +571,7 @@ export function setName(asset_data) {
     else if (traceTypesNeedingProvider.includes(hop.type)) {
 
       //Some trace providers don't need indication
-      if (
-        //hop.provider.provider !== "Polkadot Parachain"
-        //&&
-        hop.provider.name_suffix
-      ) {
+      if ( hop.provider.name_suffix ) {
         this_suffix_is_network = false;
         name = appendNameSuffix(
           name,
@@ -581,9 +596,8 @@ export function setName(asset_data) {
         );
         last_suffix_is_network = true;
       }
-    } else {
+    } else { //type: ibc and ibc-cw20
 
-      //if (hop.type === "ibc" && getChainType(hop.network) !== "cosmos" && chainName === "picasso")
       this_suffix_is_network = true;
       name = appendNameSuffix(
         name,
@@ -594,6 +608,16 @@ export function setName(asset_data) {
       last_suffix_is_network = true;
     }
   });
+
+  //Don't show Osmosis as a final destination network (e.g., native bridges like Router)
+  let ending = " (Osmosis)";
+  if (
+    last_suffix_is_network
+      &&
+    name.endsWith(ending)
+  ) {
+    name = name.slice(0, -ending.length);
+  }
 
   asset_data.frontend.name = name;
   asset_data.asset_detail.name = name;

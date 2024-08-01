@@ -23195,6 +23195,22 @@
           "type": "external_interface",
           "depositUrl": "https://stake.with.starlingcyber.net/#/ibc",
           "withdrawUrl": "https://stake.with.starlingcyber.net/#/ibc"
+        },
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "penumbra",
+            "chainId": "",
+            "sourceDenom": "upenumbra",
+            "port": "transfer",
+            "channelId": "channel-4"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-79703",
+            "path": "transfer/channel-79703/upenumbra"
+          }
         }
       ],
       "counterparty": [

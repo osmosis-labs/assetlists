@@ -3016,6 +3016,24 @@
           "coinMinimalDenom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/COOK",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/COOK.png"
+        },
+        {
+          "coinDenom": "UM",
+          "chainSuggestionDenom": "ibc/0FA9232B262B89E77D1335D54FB1E1F506A92A7E4B51524B400DC69C68D28372",
+          "coinMinimalDenom": "ibc/0FA9232B262B89E77D1335D54FB1E1F506A92A7E4B51524B400DC69C68D28372",
+          "coinDecimals": 6
+        },
+        {
+          "coinDenom": "TRX",
+          "chainSuggestionDenom": "factory/osmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9/TRX.rt",
+          "coinMinimalDenom": "factory/osmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9/TRX.rt",
+          "coinDecimals": 6
+        },
+        {
+          "coinDenom": "USDT",
+          "chainSuggestionDenom": "factory/osmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9/USDT.rt",
+          "coinMinimalDenom": "factory/osmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9/USDT.rt",
+          "coinDecimals": 6
         }
       ],
       "description": "Osmosis (OSMO) is the premier DEX and cross-chain DeFi hub within the Cosmos ecosystem, a network of over 50 sovereign, interoperable blockchains seamlessly connected through the Inter-Blockchain Communication Protocol (IBC). Pioneering in its approach, Osmosis offers a dynamic trading and liquidity provision experience, integrating non-IBC assets from other ecosystems, including Ethereum, Solana, Avalanche, and Polkadot. Initially adopting Balancer-style pools, Osmosis now also features a concentrated liquidity model that is orders of magnitude more capital efficient, meaning that significantly less liquidity is required to handle the same amount of trading volume with minimal slippage.\n\nAs a true appchain, Osmosis has greater control over the full blockchain stack than traditional smart contract DEXs, which must follow the code of the parent chain that it is built on. This fine-grained control has enabled, for example, the development of Superfluid Staking, an extension of Proof of Stake that allows assets at the application layer to be staked to secure the chain. The customizability of appchains also allows implementing features like the Protocol Revenue module, which enables Osmosis to conduct on-chain arbitrage on behalf of OSMO stakers, balancing prices across pools while generating real yield revenue from this volume. Additionally, as a sovereign appchain, Osmosis governance can vote on upgrades to the protocol. One example of this was the introduction of a Taker Fee, which switched on the collection of exchange fees to generate diverse yield from Osmosis volume and distribute it to OSMO stakers.\n\nOsmosis is bringing the full centralized exchange experience to the decentralized world by building a cross-chain native DEX and trading suite that connects all chains over IBC, including Ethereum and Bitcoin. To reach this goal, Osmosis hosts an ever-expanding suite of DeFi applications aimed at providing a one-stop experience that includes lending, credit, margin, DeFi strategy vaults, power perps, fiat on-ramps, NFTs, stablecoins, and more — all of the functionalities that centralized exchange offer and more, in the trust-minimized environment of decentralized finance.",
@@ -10592,6 +10610,13 @@
           "coinDecimals": 6,
           "coinGeckoId": "usd-coin",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/USDCoin.png"
+        },
+        {
+          "coinDenom": "COSMO",
+          "chainSuggestionDenom": "ibc/7DD1E57984A26E7B6CBA0D93032DC24AD5274536184DFA999D166EBF6E4AA469",
+          "sourceDenom": "ibc/7DD1E57984A26E7B6CBA0D93032DC24AD5274536184DFA999D166EBF6E4AA469",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/cosmo.png"
         }
       ],
       "description": "Fueled by a passionate community and deep developer talent pool, the Terra blockchain is built to enable the next generation of Web3 products and services.",
@@ -14263,11 +14288,7 @@
       },
       "slip44": 118,
       "stakeCurrency": {
-        "coinDenom": "STAKE",
-        "chainSuggestionDenom": "ustake",
-        "sourceDenom": "ustake",
-        "coinDecimals": 6,
-        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/stake.png"
+        "coinDecimals": 0
       },
       "feeCurrencies": [
         {
@@ -16915,10 +16936,7 @@
       },
       "slip44": 118,
       "stakeCurrency": {
-        "coinDenom": "WORM",
-        "chainSuggestionDenom": "uworm",
-        "sourceDenom": "uworm",
-        "coinDecimals": 6
+        "coinDecimals": 0
       },
       "feeCurrencies": [
         {
@@ -19538,7 +19556,7 @@
     },
     {
       "chain_name": "lava",
-      "status": "upcoming",
+      "status": "live",
       "networkType": "mainnet",
       "prettyName": "Lava",
       "chain_id": "lava-mainnet-1",
@@ -19558,6 +19576,7 @@
         "coinMinimalDenom": "ibc/1AEF145C549D4F9847C79E49710B198C294C7F4A107F4610DEE8E725FFC4B378",
         "sourceDenom": "ulava",
         "coinDecimals": 6,
+        "coinGeckoId": "lava-network",
         "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lava/images/lava.png"
       },
       "feeCurrencies": [
@@ -19567,11 +19586,12 @@
           "coinMinimalDenom": "ibc/1AEF145C549D4F9847C79E49710B198C294C7F4A107F4610DEE8E725FFC4B378",
           "sourceDenom": "ulava",
           "coinDecimals": 6,
+          "coinGeckoId": "lava-network",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lava/images/lava.png",
           "gasPriceStep": {
-            "low": 1e-9,
-            "average": 0.00005,
-            "high": 0.0001
+            "low": 0.00002,
+            "average": 0.025,
+            "high": 0.05
           }
         }
       ],
@@ -19582,6 +19602,7 @@
           "coinMinimalDenom": "ibc/1AEF145C549D4F9847C79E49710B198C294C7F4A107F4610DEE8E725FFC4B378",
           "sourceDenom": "ulava",
           "coinDecimals": 6,
+          "coinGeckoId": "lava-network",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lava/images/lava.png"
         }
       ],

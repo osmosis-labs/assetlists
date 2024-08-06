@@ -23219,7 +23219,7 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": false,
-      "disabled": false,
+      "disabled": true,
       "preview": false,
       "listingDate": "2024-07-31T20:00:00.000Z"
     },
@@ -23376,6 +23376,91 @@
       "disabled": false,
       "preview": false,
       "listingDate": "2024-08-02T22:20:00.000Z"
+    },
+    {
+      "chainName": "stride",
+      "sourceDenom": "stuband",
+      "coinMinimalDenom": "ibc/603140E681973C7A3A33B06B1D377AAD0F6AC376119735CECC04C9184A1AB080",
+      "symbol": "stBAND",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stband.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stband.svg"
+      },
+      "price": {
+        "poolId": "1959",
+        "denom": "ibc/F867AE2112EFE646EC71A25CD2DFABB8927126AC1E19F1BBF0FF693A4ECA05DE"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "stride",
+            "chainId": "stride-1",
+            "sourceDenom": "stuband",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-326",
+            "path": "transfer/channel-326/stuband"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "stride",
+          "sourceDenom": "stuband",
+          "chainType": "cosmos",
+          "chainId": "stride-1",
+          "symbol": "stBAND",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stband.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stband.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/603140E681973C7A3A33B06B1D377AAD0F6AC376119735CECC04C9184A1AB080",
+      "name": "Stride Staked BAND",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "stride",
+        "sourceDenom": "ustrd"
+      },
+      "listingDate": "2024-08-06T10:00:00.000Z"
+    },
+    {
+      "chainName": "osmosis",
+      "sourceDenom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/COOK",
+      "coinMinimalDenom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/COOK",
+      "symbol": "COOK",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/COOK.png"
+      },
+      "categories": [
+        "meme"
+      ],
+      "transferMethods": [],
+      "counterparty": [],
+      "variantGroupKey": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/COOK",
+      "name": "COOK",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "listingDate": "2024-08-06T14:30:00.000Z"
     }
   ]
 }

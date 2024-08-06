@@ -51,16 +51,6 @@
       "path": "transfer/channel-208/weth-wei",
       "osmosis_verified": true,
       "override_properties": {
-        "counterparty": [
-          {
-            "chain_name": "optimism",
-            "base_denom": "wei"
-          },
-          {
-            "chain_name": "optimism",
-            "base_denom": "0x4200000000000000000000000000000000000006"
-          }
-        ],
         "logo_URIs": {
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.axl.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.axl.svg"
@@ -4675,6 +4665,18 @@
       "canonical": {
         "chain_name": "ethereum",
         "base_denom": "wei"
+      },
+      "override_properties": {
+        "counterparty": [
+          {
+            "chain_name": "optimism",
+            "base_denom": "wei"
+          },
+          {
+            "chain_name": "optimism",
+            "base_denom": "0x4200000000000000000000000000000000000006"
+          }
+        ]
       }
     },
     {
@@ -4781,6 +4783,17 @@
       "categories": [
         "meme"
       ]
+    },
+    {
+      "chain_name": "osmosis",
+      "base_denom": "factory/osmo14mafhhp337yjj2aujplawz0tks6jd2lel4hkwz4agyzhvvztzaqsqzjq8x/alloyed/allTRX",
+      "osmosis_verified": true,
+      "is_alloyed": true,
+      "_comment": "Alloyed TRX $allTRX 2024-08-06T18:00:00Z",
+      "canonical": {
+        "chain_name": "tron",
+        "base_denom": "sun"
+      }
     }
   ]
 }

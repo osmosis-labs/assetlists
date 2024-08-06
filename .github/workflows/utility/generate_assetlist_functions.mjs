@@ -822,44 +822,23 @@ export function setImages(asset_data) {
 
 export function setCoinGeckoId(asset_data) {
 
-  let trace_types = [];
   let coingecko_id;
 
   if (asset_data.source_asset.chain_name === asset_data.chainName) {
-
-    trace_types = [
-      "additional-mintage"
-    ];
-
-    asset_data.chain_reg.coingecko_id = chain_reg.getAssetPropertyWithTraceCustom(
-      asset_data.source_asset.chain_name,
-      asset_data.source_asset.base_denom,
-      "coingecko_id",
-      trace_types
+    asset_data.chain_reg.coingecko_id = getAssetProperty(
+      asset_data.source_asset,
+      "coingecko_id"
     );
-
   }
 
   if (asset_data.zone_asset.override_properties?.coingecko_id) {
     coingecko_id = asset_data.zone_asset.override_properties?.coingecko_id;
-    asset_data.frontend.coingeckoId = coingecko_id;
-    asset_data.asset_detail.coingeckoId = coingecko_id;
-    return;
+  } else {
+    coingecko_id = getAssetProperty(
+      asset_data.canonical_asset,
+      "coingecko_id"
+    );
   }
-
-  trace_types = [
-    "ibc",
-    "ibc-cw20",
-    "additional-mintage",
-    "test-mintage"
-  ];
-
-  coingecko_id = chain_reg.getAssetPropertyWithTraceCustom(
-    asset_data.canonical_asset.chain_name,
-    asset_data.canonical_asset.base_denom,
-    "coingecko_id",
-    trace_types
-  );
 
   asset_data.frontend.coingeckoId = coingecko_id;
   asset_data.asset_detail.coingeckoId = coingecko_id;

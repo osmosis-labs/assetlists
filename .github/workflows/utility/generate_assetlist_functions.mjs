@@ -806,6 +806,9 @@ export function setDecimals(asset_data) {
 export function setImages(asset_data) {
 
   let images = getAssetProperty(asset_data.local_asset, "images") ?? getAssetProperty(asset_data.canonical_asset, "images");
+  asset_data.chain_reg.images = images;
+
+  images = getAssetProperty(asset_data.canonical_asset, "images");
 
   let primaryImage = asset_data.zone_asset?.override_properties?.logo_URIs ?? images?.[0];
 
@@ -814,8 +817,6 @@ export function setImages(asset_data) {
   delete asset_data.frontend.logoURIs.image_sync;
 
   asset_data.chain_reg.logo_URIs = getAssetProperty(asset_data.local_asset, "logo_URIs");
-
-  asset_data.chain_reg.images = images;
 
 }
 

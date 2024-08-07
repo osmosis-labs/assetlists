@@ -21592,6 +21592,140 @@
       }
     },
     {
+      "denom_units": [
+        {
+          "denom": "ibc/603140E681973C7A3A33B06B1D377AAD0F6AC376119735CECC04C9184A1AB080",
+          "exponent": 0,
+          "aliases": [
+            "stuband"
+          ]
+        },
+        {
+          "denom": "stBAND",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/603140E681973C7A3A33B06B1D377AAD0F6AC376119735CECC04C9184A1AB080",
+      "name": "Stride Staked BAND",
+      "display": "stBAND",
+      "symbol": "stBAND",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "bandchain",
+            "base_denom": "uband"
+          },
+          "provider": "Stride"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stuband",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326",
+            "path": "transfer/channel-326/stuband"
+          }
+        }
+      ],
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stband.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stband.svg",
+          "theme": {
+            "primary_color_hex": "#e40474"
+          }
+        }
+      ]
+    },
+    {
+      "description": "COOK is the governance token for Start.Cooking, the premier token factory on Cosmos.",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/COOK",
+          "exponent": 0
+        },
+        {
+          "denom": "COOK",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8",
+      "base": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/COOK",
+      "name": "COOK",
+      "display": "COOK",
+      "symbol": "COOK",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/COOK.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/COOK.png"
+        }
+      ]
+    },
+    {
+      "description": "TRONIX is the mainnet native token of the TRON Protocol issued by TRON DAO, known as TRX.",
+      "denom_units": [
+        {
+          "denom": "factory/osmo14mafhhp337yjj2aujplawz0tks6jd2lel4hkwz4agyzhvvztzaqsqzjq8x/alloyed/allTRX",
+          "exponent": 0,
+          "aliases": [
+            "sun"
+          ]
+        },
+        {
+          "denom": "trx",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo14mafhhp337yjj2aujplawz0tks6jd2lel4hkwz4agyzhvvztzaqsqzjq8x",
+      "base": "factory/osmo14mafhhp337yjj2aujplawz0tks6jd2lel4hkwz4agyzhvvztzaqsqzjq8x/alloyed/allTRX",
+      "name": "Alloyed TRX",
+      "display": "trx",
+      "symbol": "TRX",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "tron",
+            "base_denom": "sun"
+          },
+          "provider": "Osmosis"
+        }
+      ],
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allTRX.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allTRX.png",
+          "theme": {
+            "circle": true,
+            "primary_color_hex": "#FF060A",
+            "background_color_hex": "#FF060A"
+          }
+        },
+        {
+          "image_sync": {
+            "chain_name": "tron",
+            "base_denom": "sun"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/tron/images/trx.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/tron/images/trx.png",
+          "theme": {
+            "circle": true,
+            "primary_color_hex": "#FF060A",
+            "background_color_hex": "#FF060A"
+          }
+        }
+      ]
+    },
+    {
       "description": "The native token of Furya",
       "denom_units": [
         {
@@ -22096,33 +22230,6 @@
           "theme": {
             "primary_color_hex": "#f5bf09"
           }
-        }
-      ]
-    },
-    {
-      "description": "COOK is the governance token for Start.Cooking, the premier token factory on Cosmos.",
-      "denom_units": [
-        {
-          "denom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/COOK",
-          "exponent": 0
-        },
-        {
-          "denom": "COOK",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "sdk.coin",
-      "address": "osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8",
-      "base": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/COOK",
-      "name": "COOK",
-      "display": "COOK",
-      "symbol": "COOK",
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/COOK.png"
-      },
-      "images": [
-        {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/COOK.png"
         }
       ]
     },

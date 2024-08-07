@@ -5422,7 +5422,7 @@
     },
     {
       "chain_name": "8ball",
-      "status": "live",
+      "status": "killed",
       "network_type": "mainnet",
       "pretty_name": "8ball",
       "chain_id": "eightball-1",
@@ -7113,12 +7113,12 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://community.nuxian-node.ch:6797/dydx/trpc"
+            "address": "https://dydx-dao-api.polkachu.com"
           }
         ],
         "rest": [
           {
-            "address": "https://rest-dydx.ecostake.com:443"
+            "address": "https://dydx-dao-rpc.polkachu.com"
           }
         ]
       },
@@ -8817,6 +8817,69 @@
       },
       "features": [
         "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "routerchain",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Router Protocol",
+      "chain_id": "router_9600-1",
+      "bech32_prefix": "router",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "router",
+        "bech32PrefixAccPub": "routerpub",
+        "bech32PrefixValAddr": "routervaloper",
+        "bech32PrefixValPub": "routervaloperpub",
+        "bech32PrefixConsAddr": "routervalcons",
+        "bech32PrefixConsPub": "routervalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "route",
+            "fixed_min_gas_price": 0.006,
+            "low_gas_price": 0.006,
+            "average_gas_price": 0.006,
+            "high_gas_price": 0.01
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "route"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://sentry.tm.rpc.routerprotocol.com/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://sentry.lcd.routerprotocol.com/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://routerscan.io/transactions/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/routerchain/images/router.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/routerchain/images/router.svg",
+        "theme": {
+          "primary_color_hex": "#cb0766"
+        }
+      },
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
       ]
     }
   ]

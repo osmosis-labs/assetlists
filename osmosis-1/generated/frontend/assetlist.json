@@ -23261,7 +23261,8 @@
       "verified": false,
       "unstable": false,
       "disabled": false,
-      "preview": true
+      "preview": false,
+      "listingDate": "2024-08-07T18:30:00.000Z"
     },
     {
       "chainName": "osmosis",
@@ -23317,7 +23318,8 @@
       "verified": false,
       "unstable": false,
       "disabled": false,
-      "preview": true
+      "preview": false,
+      "listingDate": "2024-08-07T18:30:00.000Z"
     },
     {
       "chainName": "injective",
@@ -23496,6 +23498,61 @@
       "unstable": false,
       "disabled": false,
       "preview": false
+    },
+    {
+      "chainName": "routerchain",
+      "sourceDenom": "route",
+      "coinMinimalDenom": "ibc/3F8F00094F0F79D17750FF69C5F09B078084018570AAF4F1C92C86D3F73E6488",
+      "symbol": "ROUTE",
+      "decimals": 18,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/routerchain/images/router.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/routerchain/images/router.png"
+      },
+      "coingeckoId": "route",
+      "categories": [
+        "bridges"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "routerchain",
+            "chainId": "router_9600-1",
+            "sourceDenom": "route",
+            "port": "transfer",
+            "channelId": "channel-7"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-79180",
+            "path": "transfer/channel-79180/route"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "routerchain",
+          "sourceDenom": "route",
+          "chainType": "cosmos",
+          "chainId": "router_9600-1",
+          "symbol": "ROUTE",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/routerchain/images/router.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/routerchain/images/router.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/3F8F00094F0F79D17750FF69C5F09B078084018570AAF4F1C92C86D3F73E6488",
+      "name": "Router Protocol",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "listingDate": "2024-08-07T17:30:00.000Z"
     }
   ]
 }

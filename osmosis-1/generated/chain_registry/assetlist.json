@@ -21726,6 +21726,50 @@
       ]
     },
     {
+      "description": "The native token of Router Chain",
+      "denom_units": [
+        {
+          "denom": "ibc/3F8F00094F0F79D17750FF69C5F09B078084018570AAF4F1C92C86D3F73E6488",
+          "exponent": 0,
+          "aliases": [
+            "route"
+          ]
+        },
+        {
+          "denom": "ROUTE",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/3F8F00094F0F79D17750FF69C5F09B078084018570AAF4F1C92C86D3F73E6488",
+      "name": "Router Chain",
+      "display": "ROUTE",
+      "symbol": "ROUTE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "routerchain",
+            "base_denom": "route",
+            "channel_id": "channel-7"
+          },
+          "chain": {
+            "channel_id": "channel-79180",
+            "path": "transfer/channel-79180/route"
+          }
+        }
+      ],
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/routerchain/images/router.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/routerchain/images/router.png",
+          "theme": {
+            "primary_color_hex": "#cb0766"
+          }
+        }
+      ]
+    },
+    {
       "description": "The native token of Furya",
       "denom_units": [
         {

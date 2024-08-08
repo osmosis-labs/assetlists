@@ -13622,6 +13622,12 @@
       "pegMechanism": "collateralized",
       "transferMethods": [
         {
+          "name": "Noble Express",
+          "type": "external_interface",
+          "depositUrl": "https://express.noble.xyz/transfer?origin=solana&destination=osmosis",
+          "withdrawUrl": "https://express.noble.xyz/transfer?origin=osmosis&destination=solana"
+        },
+        {
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
@@ -13778,6 +13784,16 @@
           "chainId": 137,
           "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
           "symbol": "USDC.e",
+          "decimals": 6,
+          "logoURIs": {
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
+          }
+        },
+        {
+          "chainName": "solana",
+          "sourceDenom": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+          "chainType": "non-cosmos",
+          "symbol": "USDC",
           "decimals": 6,
           "logoURIs": {
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
@@ -22153,6 +22169,7 @@
       "symbol": "BTC",
       "decimals": 8,
       "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/bitcoin/images/btc.svg",
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/bitcoin/images/btc.png"
       },
       "coingeckoId": "bitcoin",

@@ -2460,6 +2460,10 @@
           {
             "chain_name": "polygon",
             "base_denom": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+          },
+          {
+            "chain_name": "solana",
+            "base_denom": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
           }
         ]
       },
@@ -2467,6 +2471,14 @@
         "chain_name": "ethereum",
         "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
       },
+      "transfer_methods": [
+        {
+          "name": "Noble Express",
+          "type": "external_interface",
+          "deposit_url": "https://express.noble.xyz/transfer?origin=solana&destination=osmosis",
+          "withdraw_url": "https://express.noble.xyz/transfer?origin=osmosis&destination=solana"
+        }
+      ],
       "categories": [
         "stablecoin"
       ]

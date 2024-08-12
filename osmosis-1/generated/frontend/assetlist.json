@@ -22187,7 +22187,8 @@
           "symbol": "BTC",
           "decimals": 8,
           "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/bitcoin/images/btc.png"
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/bitcoin/images/btc.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/bitcoin/images/btc.svg"
           }
         }
       ],
@@ -23179,8 +23180,8 @@
       "listingDate": "2024-07-30T15:00:00.000Z"
     },
     {
-      "chainName": "penumbra",
-      "sourceDenom": "upenumbra",
+      "chainName": "osmosis",
+      "sourceDenom": "ibc/0FA9232B262B89E77D1335D54FB1E1F506A92A7E4B51524B400DC69C68D28372",
       "coinMinimalDenom": "ibc/0FA9232B262B89E77D1335D54FB1E1F506A92A7E4B51524B400DC69C68D28372",
       "symbol": "UM",
       "decimals": 6,
@@ -23199,30 +23200,13 @@
           "type": "external_interface",
           "depositUrl": "https://stake.with.starlingcyber.net/#/ibc",
           "withdrawUrl": "https://stake.with.starlingcyber.net/#/ibc"
-        },
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "penumbra",
-            "chainId": "penumbra-1",
-            "sourceDenom": "upenumbra",
-            "port": "transfer",
-            "channelId": "channel-4"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-79703",
-            "path": "transfer/channel-79703/upenumbra"
-          }
         }
       ],
       "counterparty": [
         {
           "chainName": "penumbra",
           "sourceDenom": "upenumbra",
-          "chainType": "cosmos",
-          "chainId": "penumbra-1",
+          "chainType": "non-cosmos",
           "symbol": "UM",
           "decimals": 6,
           "logoURIs": {
@@ -23236,7 +23220,7 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": false,
-      "disabled": true,
+      "disabled": false,
       "preview": false,
       "listingDate": "2024-07-31T20:00:00.000Z"
     },
@@ -23514,7 +23498,8 @@
       "verified": true,
       "unstable": false,
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "listingDate": "2024-08-06T18:00:00.000Z"
     },
     {
       "chainName": "routerchain",
@@ -23570,6 +23555,370 @@
       "disabled": false,
       "preview": false,
       "listingDate": "2024-08-07T17:30:00.000Z"
+    },
+    {
+      "chainName": "osmosis",
+      "sourceDenom": "factory/osmo1nufyzqlm8qhu2w7lm0l4rrax0ec8rsk69mga4tel8eare7c7ljaqpk2lyg/alloyed/allOP",
+      "coinMinimalDenom": "factory/osmo1nufyzqlm8qhu2w7lm0l4rrax0ec8rsk69mga4tel8eare7c7ljaqpk2lyg/alloyed/allOP",
+      "symbol": "allOP",
+      "decimals": 18,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allOP.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allOP.png"
+      },
+      "categories": [],
+      "transferMethods": [],
+      "counterparty": [
+        {
+          "chainName": "optimism",
+          "sourceDenom": "0x4200000000000000000000000000000000000042",
+          "chainType": "evm",
+          "chainId": 10,
+          "address": "0x4200000000000000000000000000000000000042",
+          "symbol": "OP",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/optimism/images/op.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/optimism/images/op.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo1nufyzqlm8qhu2w7lm0l4rrax0ec8rsk69mga4tel8eare7c7ljaqpk2lyg/alloyed/allOP",
+      "name": "Alloyed OP",
+      "isAlloyed": true,
+      "contract": "osmo1nufyzqlm8qhu2w7lm0l4rrax0ec8rsk69mga4tel8eare7c7ljaqpk2lyg",
+      "verified": true,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "axelar",
+      "sourceDenom": "op-wei",
+      "coinMinimalDenom": "ibc/14A291DD362798D6805B7ABCB8D09AEEE02176108F89FA09AA43EA2EE096A2A9",
+      "symbol": "OP.axl",
+      "decimals": 18,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/op.axl.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/op.axl.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Satellite",
+          "type": "external_interface",
+          "depositUrl": "https://satellite.money/?source=optimism&destination=osmosis&asset_denom=op-wei",
+          "withdrawUrl": "https://satellite.money/?source=osmosis&destination=optimism&asset_denom=op-wei"
+        },
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "axelar",
+            "chainId": "axelar-dojo-1",
+            "sourceDenom": "op-wei",
+            "port": "transfer",
+            "channelId": "channel-3"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-208",
+            "path": "transfer/channel-208/op-wei"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "axelar",
+          "sourceDenom": "op-wei",
+          "chainType": "cosmos",
+          "chainId": "axelar-dojo-1",
+          "symbol": "OP",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/optimism/images/op.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/optimism/images/op.svg"
+          }
+        },
+        {
+          "chainName": "optimism",
+          "sourceDenom": "0x4200000000000000000000000000000000000042",
+          "chainType": "evm",
+          "chainId": 10,
+          "address": "0x4200000000000000000000000000000000000042",
+          "symbol": "OP",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/optimism/images/op.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/optimism/images/op.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/14A291DD362798D6805B7ABCB8D09AEEE02176108F89FA09AA43EA2EE096A2A9",
+      "name": "Optimism (Axelar)",
+      "isAlloyed": false,
+      "verified": true,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "axelar",
+        "sourceDenom": "uaxl"
+      },
+      "listingDate": "2024-08-12T18:00:00.000Z"
+    },
+    {
+      "chainName": "osmosis",
+      "sourceDenom": "factory/osmo1f588gk9dazpsueevdl2w6wfkmfmhg5gdvg2uerdlzl0atkasqhsq59qc6a/alloyed/allSHIB",
+      "coinMinimalDenom": "factory/osmo1f588gk9dazpsueevdl2w6wfkmfmhg5gdvg2uerdlzl0atkasqhsq59qc6a/alloyed/allSHIB",
+      "symbol": "allSHIB",
+      "decimals": 18,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allSHIB.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allSHIB.png"
+      },
+      "categories": [],
+      "transferMethods": [],
+      "counterparty": [
+        {
+          "chainName": "ethereum",
+          "sourceDenom": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
+          "chainType": "evm",
+          "chainId": 1,
+          "address": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
+          "symbol": "SHIB",
+          "decimals": 18,
+          "logoURIs": {
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/shib.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo1f588gk9dazpsueevdl2w6wfkmfmhg5gdvg2uerdlzl0atkasqhsq59qc6a/alloyed/allSHIB",
+      "name": "Alloyed SHIB",
+      "isAlloyed": true,
+      "contract": "osmo1f588gk9dazpsueevdl2w6wfkmfmhg5gdvg2uerdlzl0atkasqhsq59qc6a",
+      "verified": true,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "osmosis",
+      "sourceDenom": "factory/osmo1p7x454ex08s4f9ztmm7wfv7lvtgdkfztj2u7v7fezfcauy85q35qmqrdpk/alloyed/allARB",
+      "coinMinimalDenom": "factory/osmo1p7x454ex08s4f9ztmm7wfv7lvtgdkfztj2u7v7fezfcauy85q35qmqrdpk/alloyed/allARB",
+      "symbol": "allARB",
+      "decimals": 18,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allARB.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allARB.png"
+      },
+      "categories": [],
+      "transferMethods": [],
+      "counterparty": [
+        {
+          "chainName": "arbitrum",
+          "sourceDenom": "0x912CE59144191C1204E64559FE8253a0e49E6548",
+          "chainType": "evm",
+          "chainId": 42161,
+          "address": "0x912CE59144191C1204E64559FE8253a0e49E6548",
+          "symbol": "ARB",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/arbitrum/images/arb.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/arbitrum/images/arb.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo1p7x454ex08s4f9ztmm7wfv7lvtgdkfztj2u7v7fezfcauy85q35qmqrdpk/alloyed/allARB",
+      "name": "Alloyed ARB",
+      "isAlloyed": true,
+      "contract": "osmo1p7x454ex08s4f9ztmm7wfv7lvtgdkfztj2u7v7fezfcauy85q35qmqrdpk",
+      "verified": true,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "osmosis",
+      "sourceDenom": "factory/osmo18zdw5yvs6gfp95rp74qqwug9yduw2fyr8kplk2xgs726s9axc5usa2vpgw/alloyed/allLINK",
+      "coinMinimalDenom": "factory/osmo18zdw5yvs6gfp95rp74qqwug9yduw2fyr8kplk2xgs726s9axc5usa2vpgw/alloyed/allLINK",
+      "symbol": "allLINK",
+      "decimals": 18,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allLINK.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allLINK.png"
+      },
+      "categories": [],
+      "transferMethods": [],
+      "counterparty": [
+        {
+          "chainName": "ethereum",
+          "sourceDenom": "0x514910771af9ca656af840dff83e8264ecf986ca",
+          "chainType": "evm",
+          "chainId": 1,
+          "address": "0x514910771af9ca656af840dff83e8264ecf986ca",
+          "symbol": "LINK",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/link.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/link.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo18zdw5yvs6gfp95rp74qqwug9yduw2fyr8kplk2xgs726s9axc5usa2vpgw/alloyed/allLINK",
+      "name": "Alloyed LINK",
+      "isAlloyed": true,
+      "contract": "osmo18zdw5yvs6gfp95rp74qqwug9yduw2fyr8kplk2xgs726s9axc5usa2vpgw",
+      "verified": true,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "osmosis",
+      "sourceDenom": "factory/osmo1nnlxegt0scm9qkzys9c874t0ntapv4epfjy2w49c0xdrp3dr0v4ssmelzx/alloyed/allPEPE",
+      "coinMinimalDenom": "factory/osmo1nnlxegt0scm9qkzys9c874t0ntapv4epfjy2w49c0xdrp3dr0v4ssmelzx/alloyed/allPEPE",
+      "symbol": "allPEPE",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allPEPE.png"
+      },
+      "categories": [],
+      "transferMethods": [],
+      "counterparty": [
+        {
+          "chainName": "ethereum",
+          "sourceDenom": "0x6982508145454Ce325dDbE47a25d4ec3d2311933",
+          "chainType": "evm",
+          "chainId": 1,
+          "address": "0x6982508145454Ce325dDbE47a25d4ec3d2311933",
+          "symbol": "PEPE",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/pepe.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/pepe.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo1nnlxegt0scm9qkzys9c874t0ntapv4epfjy2w49c0xdrp3dr0v4ssmelzx/alloyed/allPEPE",
+      "name": "Alloyed PEPE",
+      "isAlloyed": true,
+      "contract": "osmo1nnlxegt0scm9qkzys9c874t0ntapv4epfjy2w49c0xdrp3dr0v4ssmelzx",
+      "verified": true,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "osmosis",
+      "sourceDenom": "factory/osmo1r53fx9fvcdzncrs7zkn4gw5vfelx5gk8k5wc6wqha2jpkh992rusr5tk02/alloyed/allDOT",
+      "coinMinimalDenom": "factory/osmo1r53fx9fvcdzncrs7zkn4gw5vfelx5gk8k5wc6wqha2jpkh992rusr5tk02/alloyed/allDOT",
+      "symbol": "allDOT",
+      "decimals": 18,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allDOT.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allDOT.png"
+      },
+      "categories": [],
+      "transferMethods": [],
+      "counterparty": [
+        {
+          "chainName": "polkadot",
+          "sourceDenom": "Planck",
+          "chainType": "non-cosmos",
+          "symbol": "DOT",
+          "decimals": 10,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polkadot/images/dot.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polkadot/images/dot.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo1r53fx9fvcdzncrs7zkn4gw5vfelx5gk8k5wc6wqha2jpkh992rusr5tk02/alloyed/allDOT",
+      "name": "Alloyed DOT",
+      "isAlloyed": true,
+      "contract": "osmo1r53fx9fvcdzncrs7zkn4gw5vfelx5gk8k5wc6wqha2jpkh992rusr5tk02",
+      "verified": true,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "composable",
+      "sourceDenom": "ibc/586C150919550F6106711C7557DAAAEAB765DDF05648BAC0D96487AE90394BA1",
+      "coinMinimalDenom": "ibc/C91210281CEB708DC6E41A47FC9EC298F45712273DD58C682BEBAD00DCB59DC2",
+      "symbol": "UWU.sol.pica",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/uwu.sol.pica.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Picasso App",
+          "type": "external_interface",
+          "depositUrl": "https://app.picasso.network/?from=SOLANA&to=OSMOSIS",
+          "withdrawUrl": "https://app.picasso.network/?from=OSMOSIS&to=SOLANA"
+        },
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "composable",
+            "chainId": "centauri-1",
+            "sourceDenom": "ibc/586C150919550F6106711C7557DAAAEAB765DDF05648BAC0D96487AE90394BA1",
+            "port": "transfer",
+            "channelId": "channel-3"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-1279",
+            "path": "transfer/channel-1279/transfer/channel-71/UwU8RVXB69Y6Dcju6cN2Qef6fykkq6UUNpB15rZku6Z"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "composable",
+          "sourceDenom": "ibc/586C150919550F6106711C7557DAAAEAB765DDF05648BAC0D96487AE90394BA1",
+          "chainType": "cosmos",
+          "chainId": "centauri-1",
+          "symbol": "UWU",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/unicorn/images/uwu.png"
+          }
+        },
+        {
+          "chainName": "solana",
+          "sourceDenom": "UwU8RVXB69Y6Dcju6cN2Qef6fykkq6UUNpB15rZku6Z",
+          "chainType": "non-cosmos",
+          "symbol": "UWU",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/unicorn/images/uwu.png"
+          }
+        },
+        {
+          "chainName": "unicorn",
+          "sourceDenom": "uwunicorn",
+          "chainType": "cosmos",
+          "chainId": "unicorn-420",
+          "symbol": "UWU",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/unicorn/images/uwu.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/C91210281CEB708DC6E41A47FC9EC298F45712273DD58C682BEBAD00DCB59DC2",
+      "name": "Unicorn (Solana) (Picasso)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "listingDate": "2024-08-12T23:00:00.000Z"
     }
   ]
 }

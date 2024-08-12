@@ -4749,7 +4749,8 @@
       "base_denom": "factory/osmo14mafhhp337yjj2aujplawz0tks6jd2lel4hkwz4agyzhvvztzaqsqzjq8x/alloyed/allTRX",
       "osmosis_verified": true,
       "is_alloyed": true,
-      "_comment": "Alloyed TRX $allTRX 2024-08-06T18:00:00Z",
+      "listing_date_time_utc": "2024-08-06T18:00:00Z",
+      "_comment": "Alloyed TRX $allTRX",
       "canonical": {
         "chain_name": "tron",
         "base_denom": "sun"
@@ -4764,6 +4765,91 @@
       "categories": [
         "bridges"
       ]
+    },
+    {
+      "chain_name": "osmosis",
+      "base_denom": "factory/osmo1nufyzqlm8qhu2w7lm0l4rrax0ec8rsk69mga4tel8eare7c7ljaqpk2lyg/alloyed/allOP",
+      "osmosis_verified": true,
+      "is_alloyed": true,
+      "_comment": "Alloyed OP $allOP 2024-08-12T18:00:00Z"
+    },
+    {
+      "chain_name": "axelar",
+      "base_denom": "op-wei",
+      "path": "transfer/channel-208/op-wei",
+      "osmosis_verified": true,
+      "override_properties": {
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/op.axl.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/op.axl.png"
+        }
+      },
+      "transfer_methods": [
+        {
+          "name": "Satellite",
+          "type": "external_interface",
+          "deposit_url": "https://satellite.money/?source=optimism&destination=osmosis&asset_denom=op-wei",
+          "withdraw_url": "https://satellite.money/?source=osmosis&destination=optimism&asset_denom=op-wei"
+        }
+      ],
+      "listing_date_time_utc": "2024-08-12T18:00:00Z",
+      "_comment": "Optimism (via Axelar) $OP.axl"
+    },
+    {
+      "chain_name": "osmosis",
+      "base_denom": "factory/osmo1f588gk9dazpsueevdl2w6wfkmfmhg5gdvg2uerdlzl0atkasqhsq59qc6a/alloyed/allSHIB",
+      "osmosis_verified": true,
+      "is_alloyed": true,
+      "_comment": "Alloyed SHIB $allSHIB 2024-08-12T18:00:00Z"
+    },
+    {
+      "chain_name": "osmosis",
+      "base_denom": "factory/osmo1p7x454ex08s4f9ztmm7wfv7lvtgdkfztj2u7v7fezfcauy85q35qmqrdpk/alloyed/allARB",
+      "osmosis_verified": true,
+      "is_alloyed": true,
+      "_comment": "Alloyed ARB $allARB 2024-08-12T18:00:00Z"
+    },
+    {
+      "chain_name": "osmosis",
+      "base_denom": "factory/osmo18zdw5yvs6gfp95rp74qqwug9yduw2fyr8kplk2xgs726s9axc5usa2vpgw/alloyed/allLINK",
+      "osmosis_verified": true,
+      "is_alloyed": true,
+      "_comment": "Alloyed LINK $allLINK 2024-08-12T18:00:00Z"
+    },
+    {
+      "chain_name": "osmosis",
+      "base_denom": "factory/osmo1nnlxegt0scm9qkzys9c874t0ntapv4epfjy2w49c0xdrp3dr0v4ssmelzx/alloyed/allPEPE",
+      "osmosis_verified": true,
+      "is_alloyed": true,
+      "_comment": "Alloyed PEPE $allPEPE 2024-08-12T18:00:00Z"
+    },
+    {
+      "chain_name": "osmosis",
+      "base_denom": "factory/osmo1r53fx9fvcdzncrs7zkn4gw5vfelx5gk8k5wc6wqha2jpkh992rusr5tk02/alloyed/allDOT",
+      "osmosis_verified": true,
+      "is_alloyed": true,
+      "_comment": "Alloyed DOT $allDOT 2024-08-12T18:00:00Z"
+    },
+    {
+      "chain_name": "composable",
+      "base_denom": "ibc/586C150919550F6106711C7557DAAAEAB765DDF05648BAC0D96487AE90394BA1",
+      "path": "transfer/channel-1279/transfer/channel-71/UwU8RVXB69Y6Dcju6cN2Qef6fykkq6UUNpB15rZku6Z",
+      "osmosis_verified": false,
+      "listing_date_time_utc": "2024-08-12T23:00:00Z",
+      "_comment": "Unicorn (Solana via Picasso) $UWU.pica",
+      "transfer_methods": [
+        {
+          "name": "Picasso App",
+          "type": "external_interface",
+          "deposit_url": "https://app.picasso.network/?from=SOLANA&to=OSMOSIS",
+          "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=SOLANA"
+        }
+      ],
+      "override_properties": {
+        "logo_URIs": {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/uwu.sol.pica.png"
+        }
+      }
     }
   ]
 }

@@ -4749,7 +4749,8 @@
       "base_denom": "factory/osmo14mafhhp337yjj2aujplawz0tks6jd2lel4hkwz4agyzhvvztzaqsqzjq8x/alloyed/allTRX",
       "osmosis_verified": true,
       "is_alloyed": true,
-      "_comment": "Alloyed TRX $allTRX 2024-08-06T18:00:00Z",
+      "listing_date_time_utc": "2024-08-06T18:00:00Z",
+      "_comment": "Alloyed TRX $allTRX",
       "canonical": {
         "chain_name": "tron",
         "base_denom": "sun"
@@ -4764,6 +4765,35 @@
       "categories": [
         "bridges"
       ]
+    },
+    {
+      "chain_name": "osmosis",
+      "base_denom": "factory/osmo1nufyzqlm8qhu2w7lm0l4rrax0ec8rsk69mga4tel8eare7c7ljaqpk2lyg/alloyed/allOP",
+      "osmosis_verified": true,
+      "is_alloyed": true,
+      "_comment": "Alloyed OP $allOP 2024-08-12T18:00:00Z"
+    },
+    {
+      "chain_name": "axelar",
+      "base_denom": "op-wei",
+      "path": "transfer/channel-208/op-wei",
+      "osmosis_verified": true,
+      "override_properties": {
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/op.axl.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/op.axl.png"
+        }
+      },
+      "transfer_methods": [
+        {
+          "name": "Satellite",
+          "type": "external_interface",
+          "deposit_url": "https://satellite.money/?source=optimism&destination=osmosis&asset_denom=op-wei",
+          "withdraw_url": "https://satellite.money/?source=osmosis&destination=optimism&asset_denom=op-wei"
+        }
+      ],
+      "listing_date_time_utc": "2024-08-12T18:00:00Z",
+      "_comment": "Optimism (via Axelar) $OP.axl"
     }
   ]
 }

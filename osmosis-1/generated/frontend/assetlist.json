@@ -23180,8 +23180,8 @@
       "listingDate": "2024-07-30T15:00:00.000Z"
     },
     {
-      "chainName": "penumbra",
-      "sourceDenom": "upenumbra",
+      "chainName": "osmosis",
+      "sourceDenom": "ibc/0FA9232B262B89E77D1335D54FB1E1F506A92A7E4B51524B400DC69C68D28372",
       "coinMinimalDenom": "ibc/0FA9232B262B89E77D1335D54FB1E1F506A92A7E4B51524B400DC69C68D28372",
       "symbol": "UM",
       "decimals": 6,
@@ -23200,30 +23200,13 @@
           "type": "external_interface",
           "depositUrl": "https://stake.with.starlingcyber.net/#/ibc",
           "withdrawUrl": "https://stake.with.starlingcyber.net/#/ibc"
-        },
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "penumbra",
-            "chainId": "penumbra-1",
-            "sourceDenom": "upenumbra",
-            "port": "transfer",
-            "channelId": "channel-4"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-79703",
-            "path": "transfer/channel-79703/upenumbra"
-          }
         }
       ],
       "counterparty": [
         {
           "chainName": "penumbra",
           "sourceDenom": "upenumbra",
-          "chainType": "cosmos",
-          "chainId": "penumbra-1",
+          "chainType": "non-cosmos",
           "symbol": "UM",
           "decimals": 6,
           "logoURIs": {
@@ -23237,7 +23220,7 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": false,
-      "disabled": true,
+      "disabled": false,
       "preview": false,
       "listingDate": "2024-07-31T20:00:00.000Z"
     },

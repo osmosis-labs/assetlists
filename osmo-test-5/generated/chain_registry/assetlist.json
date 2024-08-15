@@ -865,6 +865,49 @@
       ]
     },
     {
+      "description": "The native token of Symphony",
+      "denom_units": [
+        {
+          "denom": "ibc/F84DBD0020FABB8AF90D3F265CE32929B4ECBF93F14B22FD10F471D32DF5E125",
+          "exponent": 0,
+          "aliases": [
+            "note"
+          ]
+        },
+        {
+          "denom": "mld",
+          "exponent": 6,
+          "aliases": [
+            "melody"
+          ]
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/F84DBD0020FABB8AF90D3F265CE32929B4ECBF93F14B22FD10F471D32DF5E125",
+      "name": "Melody",
+      "display": "mld",
+      "symbol": "MLD",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "symphonytestnet",
+            "base_denom": "note",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-8686",
+            "path": "transfer/channel-8686/note"
+          }
+        }
+      ],
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/symphonytestnet/images/coin_icon.png"
+        }
+      ]
+    },
+    {
       "description": "The native token of Chain4Energy",
       "denom_units": [
         {

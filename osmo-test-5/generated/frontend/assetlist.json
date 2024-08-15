@@ -879,6 +879,55 @@
       "unstable": false,
       "disabled": false,
       "preview": false
+    },
+    {
+      "chainName": "symphonytestnet",
+      "sourceDenom": "note",
+      "coinMinimalDenom": "ibc/F84DBD0020FABB8AF90D3F265CE32929B4ECBF93F14B22FD10F471D32DF5E125",
+      "symbol": "MLD",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/symphonytestnet/images/coin_icon.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "symphonytestnet",
+            "chainId": "symphony-testnet-3",
+            "sourceDenom": "note",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-8686",
+            "path": "transfer/channel-8686/note"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "symphonytestnet",
+          "sourceDenom": "note",
+          "chainType": "cosmos",
+          "chainId": "symphony-testnet-3",
+          "symbol": "MLD",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/symphonytestnet/images/coin_icon.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/F84DBD0020FABB8AF90D3F265CE32929B4ECBF93F14B22FD10F471D32DF5E125",
+      "name": "Symphony Testnet",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
     }
   ]
 }

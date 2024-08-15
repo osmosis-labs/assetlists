@@ -718,8 +718,8 @@
         "fee_tokens": [
           {
             "denom": "uxion",
-            "fixed_min_gas_price": 0,
-            "low_gas_price": 0,
+            "fixed_min_gas_price": 0.025,
+            "low_gas_price": 0.025,
             "average_gas_price": 0.025,
             "high_gas_price": 0.04
           }
@@ -934,6 +934,67 @@
         "ibc-transfer",
         "ibc-go",
         "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "symphonytestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Symphony Testnet",
+      "chain_id": "symphony-testnet-3",
+      "bech32_prefix": "symphony",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "symphony",
+        "bech32PrefixAccPub": "symphonypub",
+        "bech32PrefixValAddr": "symphonyvaloper",
+        "bech32PrefixValPub": "symphonyvaloperpub",
+        "bech32PrefixConsAddr": "symphonyvalcons",
+        "bech32PrefixConsPub": "symphonyvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "note",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.0025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "note"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://symphony-rpc.kleomedes.network"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://symphony-api.kleomedes.network"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://testnet.ping.pub/symphony/tx/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/symphonytestnet/images/symphony_logo.png"
+      },
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm",
+        "wasmd_0.24+"
       ]
     }
   ]

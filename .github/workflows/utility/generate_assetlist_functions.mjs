@@ -868,7 +868,7 @@ export function setUnstableStatus(asset_data) {
 
 export function setDisabledStatus(asset_data) {
 
-  asset_data.frontend.disabled = asset_data.zone_asset?.osmosis_disabled || asset_data.zone_asset?.osmosis_unstable;
+  asset_data.frontend.disabled = asset_data.zone_asset?.osmosis_disabled;
 
 }
 
@@ -1340,6 +1340,12 @@ export function setContract(asset_data) {
 
 }
 
+export function setQuotesDisabled(asset_data) {
+
+  asset_data.frontend.quotes_disabled = asset_data.zone_asset.quotes_disabled;
+
+}
+
 export function setDescription(asset_data) {
   
   let description, extended_description;
@@ -1418,6 +1424,7 @@ export function reformatFrontendAsset(asset_data) {
     verified: asset_data.frontend.verified ?? false,
     unstable: asset_data.frontend.unstable ?? false,
     disabled: asset_data.frontend.disabled ?? false,
+    quotesDisabled: asset_data.frontend.quotesDisabled ?? false,
     preview: asset_data.frontend.preview ?? false,
     tooltipMessage: asset_data.frontend.tooltipMessage,
     sortWith: asset_data.frontend.sortWith,

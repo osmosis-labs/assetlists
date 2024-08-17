@@ -117,8 +117,10 @@
           "items": {
             "type": "object",
             "required": [
-              "type"
+              "type",
+              "name"
             ],
+            "additionalProperties": false,
             "properties": {
               "name": {
                 "type": "string",
@@ -129,12 +131,14 @@
                 "enum": [
                   "external_interface",
                   "integrated_bridge",
-                  "fiat_onramp"
+                  "fiat_onramp",
+                  "ibc"
                 ]
               },
-              "osmosis_validated": {
-                "type": "boolean",
-                "description": "Whether the transfer method has been tested by a human and confirm to be working correctly."
+              "logo": {
+                "type": "string",
+                "description": "local path and name for the logo representing this transfer method.",
+                "pattern": "^(external_interface|fiat_onramp)/[\\w.-]+\\.(png|svg)$"
               }
             },
             "oneOf": [

@@ -8209,7 +8209,7 @@
       ]
     },
     {
-      "description": "Mars protocol token",
+      "description": "Mars Protocol token (pre-migration)",
       "denom_units": [
         {
           "denom": "ibc/573FCD90FACEE750F55A8864EF7D38265F07E5A9273FA0E8DAFD39951332B580",
@@ -8219,16 +8219,24 @@
           ]
         },
         {
-          "denom": "mars",
+          "denom": "MARS.old",
           "exponent": 6
         }
       ],
       "type_asset": "ics20",
       "base": "ibc/573FCD90FACEE750F55A8864EF7D38265F07E5A9273FA0E8DAFD39951332B580",
       "name": "Mars Hub",
-      "display": "mars",
-      "symbol": "MARS",
+      "display": "MARS.old",
+      "symbol": "MARS.old",
       "traces": [
+        {
+          "type": "legacy-mintage",
+          "counterparty": {
+            "chain_name": "neutron",
+            "base_denom": "factory/neutron1ndu2wvkrxtane8se2tr48gv7nsm46y5gcqjhux/MARS"
+          },
+          "provider": "Mars Hub"
+        },
         {
           "type": "ibc",
           "counterparty": {
@@ -8243,8 +8251,8 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token-ibc.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token-ibc.svg"
       },
       "images": [
         {
@@ -8252,10 +8260,10 @@
             "chain_name": "mars",
             "base_denom": "umars"
           },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token-ibc.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token-ibc.svg",
           "theme": {
-            "primary_color_hex": "#d43c3f"
+            "primary_color_hex": "#FFFFFF"
           }
         }
       ]
@@ -21436,10 +21444,7 @@
       "denom_units": [
         {
           "denom": "factory/osmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9/TRX.rt",
-          "exponent": 0,
-          "aliases": [
-            "sun"
-          ]
+          "exponent": 0
         },
         {
           "denom": "trx",
@@ -21479,14 +21484,11 @@
       ]
     },
     {
-      "description": "USDT is the official stablecoin issued by Tether on the TRON network.",
+      "description": "A synthetic version of USDT issued by Router, which can be unwrapped to USDT on several chains.",
       "denom_units": [
         {
           "denom": "factory/osmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9/USDT.rt",
-          "exponent": 0,
-          "aliases": [
-            "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
-          ]
+          "exponent": 0
         },
         {
           "denom": "usdt",
@@ -21509,18 +21511,10 @@
           "provider": "Tether"
         },
         {
-          "type": "additional-mintage",
+          "type": "synthetic",
           "counterparty": {
             "chain_name": "ethereum",
             "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7"
-          },
-          "provider": "Tether"
-        },
-        {
-          "type": "bridge",
-          "counterparty": {
-            "chain_name": "tron",
-            "base_denom": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
           },
           "provider": "Router"
         }
@@ -21528,8 +21522,8 @@
       "images": [
         {
           "image_sync": {
-            "chain_name": "tron",
-            "base_denom": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+            "chain_name": "ethereum",
+            "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7"
           },
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.svg",
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.png",
@@ -21778,7 +21772,7 @@
         },
         {
           "denom": "op",
-          "exponent": 18
+          "exponent": 12
         }
       ],
       "type_asset": "sdk.coin",
@@ -21885,7 +21879,7 @@
         },
         {
           "denom": "shib",
-          "exponent": 18
+          "exponent": 12
         }
       ],
       "type_asset": "sdk.coin",
@@ -21935,7 +21929,7 @@
         },
         {
           "denom": "arb",
-          "exponent": 18
+          "exponent": 12
         }
       ],
       "type_asset": "sdk.coin",
@@ -21984,7 +21978,7 @@
         },
         {
           "denom": "link",
-          "exponent": 18
+          "exponent": 12
         }
       ],
       "type_asset": "sdk.coin",
@@ -22034,7 +22028,7 @@
         },
         {
           "denom": "pepe",
-          "exponent": 18
+          "exponent": 12
         }
       ],
       "type_asset": "sdk.coin",
@@ -22083,7 +22077,7 @@
         },
         {
           "denom": "dot",
-          "exponent": 18
+          "exponent": 10
         }
       ],
       "type_asset": "sdk.coin",
@@ -22189,6 +22183,59 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/unicorn/images/uwu.png",
           "theme": {
             "primary_color_hex": "#D44CE6"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Deenar gold-backed stablecoin",
+      "denom_units": [
+        {
+          "denom": "ibc/108604FDBE97DAEF128FD4ECFEB2A8AFC2D04A7162C97EAA2FD5BCB0869D0BBC",
+          "exponent": 0,
+          "aliases": [
+            "erc20/0x4FEBDDe47Ab9a76200e57eFcC80b212a07b3e6cE"
+          ]
+        },
+        {
+          "denom": "DEEN",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/108604FDBE97DAEF128FD4ECFEB2A8AFC2D04A7162C97EAA2FD5BCB0869D0BBC",
+      "name": "Deenar",
+      "display": "DEEN",
+      "symbol": "DEEN",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "comex",
+            "base_denom": "XAU"
+          },
+          "provider": "Deenar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "haqq",
+            "base_denom": "erc20/0x4FEBDDe47Ab9a76200e57eFcC80b212a07b3e6cE",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-1575",
+            "path": "transfer/channel-1575/erc20/0x4FEBDDe47Ab9a76200e57eFcC80b212a07b3e6cE"
+          }
+        }
+      ],
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/haqq/images/deen.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/haqq/images/deen.svg",
+          "theme": {
+            "primary_color_hex": "#ffbc05",
+            "circle": true
           }
         }
       ]
@@ -22765,6 +22812,58 @@
         "website": "https://github.com/raphaellafar/Cosmo",
         "twitter": "https://x.com/CosmoClub84"
       }
+    },
+    {
+      "description": "Mars Protocol is a cross-collateralized Money Market Protocol on Neutron and Osmosis",
+      "denom_units": [
+        {
+          "denom": "ibc/B67DF59507B3755EEDE0866C449445BD54B4DA82CCEBA89D775E53DC35664255",
+          "exponent": 0,
+          "aliases": [
+            "umars"
+          ]
+        },
+        {
+          "denom": "MARS",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/B67DF59507B3755EEDE0866C449445BD54B4DA82CCEBA89D775E53DC35664255",
+      "name": "Mars Hub",
+      "display": "MARS",
+      "symbol": "MARS",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "neutron",
+            "base_denom": "factory/neutron1ndu2wvkrxtane8se2tr48gv7nsm46y5gcqjhux/MARS",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-874",
+            "path": "transfer/channel-874/factory/neutron1ndu2wvkrxtane8se2tr48gv7nsm46y5gcqjhux/MARS"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "neutron",
+            "base_denom": "factory/neutron1ndu2wvkrxtane8se2tr48gv7nsm46y5gcqjhux/MARS"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.svg",
+          "theme": {
+            "primary_color_hex": "#ef4136"
+          }
+        }
+      ]
     }
   ]
 }

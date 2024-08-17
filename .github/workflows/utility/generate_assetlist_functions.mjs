@@ -868,7 +868,7 @@ export function setUnstableStatus(asset_data) {
 
 export function setDisabledStatus(asset_data) {
 
-  asset_data.frontend.disabled = asset_data.zone_asset?.osmosis_disabled || asset_data.zone_asset?.osmosis_unstable;
+  asset_data.frontend.disabled = asset_data.zone_asset?.osmosis_disabled;
 
 }
 
@@ -1340,6 +1340,20 @@ export function setContract(asset_data) {
 
 }
 
+export function setQuotesDisabled(asset_data) {
+
+  if (asset_data.zone_asset?.base_denom === "ibc/0FA9232B262B89E77D1335D54FB1E1F506A92A7E4B51524B400DC69C68D28372") {
+    console.log(asset_data.zone_asset?.base_denom);
+    console.log(asset_data.zone_asset?.quotes_disabled);
+  }
+  asset_data.frontend.quotesDisabled = asset_data.zone_asset?.quotes_disabled;
+  if (asset_data.zone_asset?.base_denom === "ibc/0FA9232B262B89E77D1335D54FB1E1F506A92A7E4B51524B400DC69C68D28372") {
+    console.log(asset_data.zone_asset?.base_denom);
+    console.log(asset_data.frontend.quotesDisabled);
+  }
+
+}
+
 export function setDescription(asset_data) {
   
   let description, extended_description;
@@ -1418,6 +1432,7 @@ export function reformatFrontendAsset(asset_data) {
     verified: asset_data.frontend.verified ?? false,
     unstable: asset_data.frontend.unstable ?? false,
     disabled: asset_data.frontend.disabled ?? false,
+    quotesDisabled: asset_data.frontend.quotesDisabled ?? false,
     preview: asset_data.frontend.preview ?? false,
     tooltipMessage: asset_data.frontend.tooltipMessage,
     sortWith: asset_data.frontend.sortWith,

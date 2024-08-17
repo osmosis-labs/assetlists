@@ -1342,7 +1342,15 @@ export function setContract(asset_data) {
 
 export function setQuotesDisabled(asset_data) {
 
-  asset_data.frontend.quotes_disabled = asset_data.zone_asset.quotes_disabled;
+  if (asset_data.zone_asset?.base_denom === "ibc/0FA9232B262B89E77D1335D54FB1E1F506A92A7E4B51524B400DC69C68D28372") {
+    console.log(asset_data.zone_asset?.base_denom);
+    console.log(asset_data.zone_asset?.quotes_disabled);
+  }
+  asset_data.frontend.quotesDisabled = asset_data.zone_asset?.quotes_disabled;
+  if (asset_data.zone_asset?.base_denom === "ibc/0FA9232B262B89E77D1335D54FB1E1F506A92A7E4B51524B400DC69C68D28372") {
+    console.log(asset_data.zone_asset?.base_denom);
+    console.log(asset_data.frontend.quotesDisabled);
+  }
 
 }
 

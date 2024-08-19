@@ -868,10 +868,6 @@
       "base_denom": "link-wei",
       "path": "transfer/channel-208/link-wei",
       "osmosis_verified": true,
-      "canonical": {
-        "chain_name": "ethereum",
-        "base_denom": "0x514910771af9ca656af840dff83e8264ecf986ca"
-      },
       "categories": [
         "oracles"
       ],
@@ -958,11 +954,6 @@
       "base_denom": "shib-wei",
       "path": "transfer/channel-208/shib-wei",
       "osmosis_verified": false,
-      "osmosis_unlisted": true,
-      "canonical": {
-        "chain_name": "ethereum",
-        "base_denom": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce"
-      },
       "categories": [
         "meme"
       ],
@@ -1840,11 +1831,7 @@
       "chain_name": "axelar",
       "base_denom": "arb-wei",
       "path": "transfer/channel-208/arb-wei",
-      "osmosis_verified": true,
-      "canonical": {
-        "chain_name": "arbitrum",
-        "base_denom": "0x912CE59144191C1204E64559FE8253a0e49E6548"
-      }
+      "osmosis_verified": true
     },
     {
       "chain_name": "juno",
@@ -1866,10 +1853,6 @@
       "base_denom": "pepe-wei",
       "path": "transfer/channel-208/pepe-wei",
       "osmosis_verified": true,
-      "canonical": {
-        "chain_name": "ethereum",
-        "base_denom": "0x6982508145454Ce325dDbE47a25d4ec3d2311933"
-      },
       "categories": [
         "meme"
       ]
@@ -2083,10 +2066,6 @@
       "base_denom": "ibc/3CC19CEC7E5A3E90E78A5A9ECC5A0E2F8F826A375CF1E096F4515CF09DA3E366",
       "path": "transfer/channel-1279/transfer/channel-2/transfer/channel-15/79228162514264337593543950342",
       "osmosis_verified": true,
-      "canonical": {
-        "chain_name": "polkadot",
-        "base_denom": "Planck"
-      },
       "transfer_methods": [
         {
           "name": "Picasso App",
@@ -2215,10 +2194,6 @@
       "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8sYgCzLRJC3J7qPn2bNbx6PiGcarhyx8rBhVaNnfvHCA",
       "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8sYgCzLRJC3J7qPn2bNbx6PiGcarhyx8rBhVaNnfvHCA",
       "osmosis_verified": true,
-      "canonical": {
-        "chain_name": "solana",
-        "base_denom": "Lamport"
-      },
       "transfer_methods": [
         {
           "name": "Osmosis Wormhole Connect",
@@ -4643,7 +4618,11 @@
       "base_denom": "factory/osmo1n3n75av8awcnw4jl62n3l48e6e4sxqmaf97w5ua6ddu4s475q5qq9udvx4/alloyed/allSOL",
       "osmosis_verified": true,
       "is_alloyed": true,
-      "_comment": "Alloyed SOL $allSOL 2024-07-22T17:00:00Z"
+      "_comment": "Alloyed SOL $allSOL 2024-07-22T17:00:00Z",
+      "canonical": {
+        "chain_name": "solana",
+        "base_denom": "Lamport"
+      }
     },
     {
       "chain_name": "lava",
@@ -4798,7 +4777,11 @@
       "base_denom": "factory/osmo1nufyzqlm8qhu2w7lm0l4rrax0ec8rsk69mga4tel8eare7c7ljaqpk2lyg/alloyed/allOP",
       "osmosis_verified": true,
       "is_alloyed": true,
-      "_comment": "Alloyed OP $allOP 2024-08-12T18:00:00Z"
+      "_comment": "Alloyed OP $allOP 2024-08-12T18:00:00Z",
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x4200000000000000000000000000000000000042"
+      },
     },
     {
       "chain_name": "axelar",
@@ -4827,35 +4810,64 @@
       "base_denom": "factory/osmo1f588gk9dazpsueevdl2w6wfkmfmhg5gdvg2uerdlzl0atkasqhsq59qc6a/alloyed/allSHIB",
       "osmosis_verified": true,
       "is_alloyed": true,
-      "_comment": "Alloyed SHIB $allSHIB 2024-08-12T18:00:00Z"
+      "_comment": "Alloyed SHIB $allSHIB 2024-08-12T18:00:00Z",
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce"
+      },
+      "categories": [
+        "meme"
+      ]
     },
     {
       "chain_name": "osmosis",
       "base_denom": "factory/osmo1p7x454ex08s4f9ztmm7wfv7lvtgdkfztj2u7v7fezfcauy85q35qmqrdpk/alloyed/allARB",
       "osmosis_verified": true,
       "is_alloyed": true,
-      "_comment": "Alloyed ARB $allARB 2024-08-12T18:00:00Z"
+      "_comment": "Alloyed ARB $allARB 2024-08-12T18:00:00Z",
+      "canonical": {
+        "chain_name": "arbitrum",
+        "base_denom": "0x912CE59144191C1204E64559FE8253a0e49E6548"
+      }
     },
     {
       "chain_name": "osmosis",
       "base_denom": "factory/osmo18zdw5yvs6gfp95rp74qqwug9yduw2fyr8kplk2xgs726s9axc5usa2vpgw/alloyed/allLINK",
       "osmosis_verified": true,
       "is_alloyed": true,
-      "_comment": "Alloyed LINK $allLINK 2024-08-12T18:00:00Z"
+      "_comment": "Alloyed LINK $allLINK 2024-08-12T18:00:00Z",
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x514910771af9ca656af840dff83e8264ecf986ca"
+      },
+      "categories": [
+        "oracles"
+      ]
     },
     {
       "chain_name": "osmosis",
       "base_denom": "factory/osmo1nnlxegt0scm9qkzys9c874t0ntapv4epfjy2w49c0xdrp3dr0v4ssmelzx/alloyed/allPEPE",
       "osmosis_verified": true,
       "is_alloyed": true,
-      "_comment": "Alloyed PEPE $allPEPE 2024-08-12T18:00:00Z"
+      "_comment": "Alloyed PEPE $allPEPE 2024-08-12T18:00:00Z",
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x6982508145454Ce325dDbE47a25d4ec3d2311933"
+      },
+      "categories": [
+        "meme"
+      ]
     },
     {
       "chain_name": "osmosis",
       "base_denom": "factory/osmo1r53fx9fvcdzncrs7zkn4gw5vfelx5gk8k5wc6wqha2jpkh992rusr5tk02/alloyed/allDOT",
       "osmosis_verified": true,
       "is_alloyed": true,
-      "_comment": "Alloyed DOT $allDOT 2024-08-12T18:00:00Z"
+      "_comment": "Alloyed DOT $allDOT 2024-08-12T18:00:00Z",
+      "canonical": {
+        "chain_name": "polkadot",
+        "base_denom": "Planck"
+      }
     },
     {
       "chain_name": "composable",

@@ -22277,6 +22277,102 @@
       }
     },
     {
+      "description": "The Representative factory token for Trump Kemistry",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1hg0zf0c9can4tvtulh5gmmxe4jpflre3yewxjl/XTRUMP",
+          "exponent": 0
+        },
+        {
+          "denom": "XTRUMP",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1hg0zf0c9can4tvtulh5gmmxe4jpflre3yewxjl",
+      "base": "factory/osmo1hg0zf0c9can4tvtulh5gmmxe4jpflre3yewxjl/XTRUMP",
+      "name": "XTRUMP",
+      "display": "XTRUMP",
+      "symbol": "XTRUMP",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/XTRUMP.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/XTRUMP.png",
+          "theme": {
+            "primary_color_hex": "#b02b27"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Tether USDt from Ethereum via Peggy bridge.",
+      "denom_units": [
+        {
+          "denom": "ibc/2AD3C64D19ADFBB522CD738B58F421102143F827C1CAFF574A8BF0B81017D53D",
+          "exponent": 0,
+          "aliases": [
+            "peggy0xdAC17F958D2ee523a2206206994597C13D831ec7"
+          ]
+        },
+        {
+          "denom": "usdt",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/2AD3C64D19ADFBB522CD738B58F421102143F827C1CAFF574A8BF0B81017D53D",
+      "name": "Tether USDT",
+      "display": "usdt",
+      "symbol": "USDT",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Tether"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+          },
+          "provider": "Peggy"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "injective",
+            "base_denom": "peggy0xdAC17F958D2ee523a2206206994597C13D831ec7",
+            "channel_id": "channel-8"
+          },
+          "chain": {
+            "channel_id": "channel-122",
+            "path": "transfer/channel-122/peggy0xdAC17F958D2ee523a2206206994597C13D831ec7"
+          }
+        }
+      ],
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "ethereum",
+            "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.png",
+          "theme": {
+            "circle": true,
+            "primary_color_hex": "#009393",
+            "background_color_hex": "#009393"
+          }
+        }
+      ]
+    },
+    {
       "description": "The native token of Furya",
       "denom_units": [
         {
@@ -22780,36 +22876,6 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/grac.png",
           "theme": {
             "primary_color_hex": "#f5bf09"
-          }
-        }
-      ]
-    },
-    {
-      "description": "The Representative factory token for Trump Kemistry",
-      "denom_units": [
-        {
-          "denom": "factory/osmo1hg0zf0c9can4tvtulh5gmmxe4jpflre3yewxjl/XTRUMP",
-          "exponent": 0
-        },
-        {
-          "denom": "XTRUMP",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "sdk.coin",
-      "address": "osmo1hg0zf0c9can4tvtulh5gmmxe4jpflre3yewxjl",
-      "base": "factory/osmo1hg0zf0c9can4tvtulh5gmmxe4jpflre3yewxjl/XTRUMP",
-      "name": "XTRUMP",
-      "display": "XTRUMP",
-      "symbol": "XTRUMP",
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/XTRUMP.png"
-      },
-      "images": [
-        {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/XTRUMP.png",
-          "theme": {
-            "primary_color_hex": "#b02b27"
           }
         }
       ]

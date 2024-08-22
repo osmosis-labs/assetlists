@@ -190,11 +190,12 @@
             },
             "counterparty": {
               "type": "array",
+              "description": "Define the counterparty variants that the Zone should look for.",
               "minItems": 1,
               "items": {
                 "type": "object",
                 "additionalProperties": false,
-                "required":[
+                "required": [
                   "chain_name",
                   "base_denom"
                 ],
@@ -207,6 +208,17 @@
                   }
                 }
               }
+            },
+            "ibc": {
+              "description": "Define the IBC connection when not pulling the data from the Chain Registry.",
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/ibc_transition"
+                },
+                {
+                  "$ref": "#/$defs/ibc_cw20_transition"
+                }
+              ]
             }
           }
         },
@@ -276,6 +288,146 @@
       "required": [
         "providerAssetId"
       ]
+    },
+    "ibc_transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "counterparty",
+        "chain"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1,
+          "enum": [
+            "ibc"
+          ]
+        },
+        "counterparty": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "chain_name",
+            "base_denom",
+            "channel_id"
+          ],
+          "properties": {
+            "chain_name": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The name of the counterparty chain. (must match exactly the chain name used in the Chain Registry)"
+            },
+            "base_denom": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The base unit of the asset on its source platform. E.g., when describing ATOM from Cosmos Hub, specify 'uatom', NOT 'atom' nor 'ATOM'; base units are unique per platform."
+            },
+            "channel_id": {
+              "$ref": "#/$defs/channel_id"
+            }
+          }
+        },
+        "chain": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "channel_id",
+            "path"
+          ],
+          "properties": {
+            "channel_id": {
+              "$ref": "#/$defs/channel_id"
+            },
+            "path": {
+              "$ref": "#/$defs/path"
+            }
+          }
+        }
+      }
+    },
+    "ibc_cw20_transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "counterparty",
+        "chain"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1,
+          "enum": [
+            "ibc-cw20"
+          ]
+        },
+        "counterparty": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "chain_name",
+            "base_denom",
+            "port",
+            "channel_id"
+          ],
+          "properties": {
+            "chain_name": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The name of the counterparty chain. (must match exactly the chain name used in the Chain Registry)"
+            },
+            "base_denom": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The base unit of the asset on its source platform. E.g., when describing ATOM from Cosmos Hub, specify 'uatom', NOT 'atom' nor 'ATOM'; base units are unique per platform."
+            },
+            "port": {
+              "$ref": "#/$defs/port"
+            },
+            "channel_id": {
+              "$ref": "#/$defs/channel_id"
+            }
+          }
+        },
+        "chain": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "port",
+            "channel_id",
+            "path"
+          ],
+          "properties": {
+            "port": {
+              "$ref": "#/$defs/port"
+            },
+            "channel_id": {
+              "$ref": "#/$defs/channel_id"
+            },
+            "path": {
+              "$ref": "#/$defs/path"
+            }
+          }
+        }
+      }
+    },
+    "port": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The port used to transfer IBC assets; often 'transfer', but sometimes varies, e.g., for outgoing cw20 transfers."
+    },
+    "channel_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^channel-(JEnb|\\d+)$",
+      "description": "The IBC transfer channel(, e.g., 'channel-1')."
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The port/channel/denom input string that generates the 'ibc/...' denom."
     }
   }
 }

@@ -51,9 +51,6 @@ export function validate_zone_files() {
         throw new Error(`Chain ${zoneChain.chain_name} does not exist in the Chain Registry.`);
       }
 
-      let network_type = chain_reg.getFileProperty(zoneChain.chain_name, "chain", "network_type");
-      let IS_MAINNET = network_type === "mainnet";
-
       /*
       let CHAIN_STAKING = false;
       let staking_token = chain_reg.getFileProperty(zoneChain.chain_name, "chain", "staking")?.staking_tokens[0]?.denom;
@@ -87,6 +84,8 @@ export function validate_zone_files() {
       }
 
     });
+
+    let IS_MAINNET = chain_reg.getFileProperty(chainName, "chain", "network_type") === "mainnet";
 
     zoneAssetsJson.assets.forEach((zoneAsset) => {
 

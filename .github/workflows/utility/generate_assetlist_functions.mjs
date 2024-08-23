@@ -34,6 +34,8 @@ const traceTypesNeedingProvider = [
   "synthetic"
 ];
 
+let IS_MAINNET;
+
 let assetProperty = new Map();
 
 
@@ -134,23 +136,67 @@ export async function setSourceAsset(asset_data) {
 
 export function getAssetTrace(asset_data) {
 
-  const type = (asset_data.source_asset.base_denom.slice(0, 5) === "cw20:") ? "ibc-cw20" : "ibc";
+  let trace;
 
-  const segments = asset_data.zone_asset.path.split("/");
-  if (segments?.length < 3) {
-    console.log("Invalid path provided.");
-    console.log(asset_data.zone_asset.path);
+  //Use IBC Override Data
+  const ZONE_ASSET_PATH_DEFINED = !!asset_data.zone_asset?.path;
+  const IBC_OVERRIDE_DATA = !!asset_data.zone_asset?.override_properties?.ibc;
+  if (IBC_OVERRIDE_DATA) {
+    if (ZONE_ASSET_PATH_DEFINED) {
+      if (asset_data.zone_asset?.path !== asset_data.zone_asset?.override_properties?.ibc?.chain?.path) {
+        console.log("Path doesn't match IBC Override Data.");
+        console.log(asset_data.zone_asset.path);
+        console.log(asset_data.zone_asset.override_properties.ibc);
+        return;
+      }
+    }
+    trace = asset_data.zone_asset?.override_properties?.ibc;
+    if (!ZONE_ASSET_PATH_DEFINED) {
+      return trace;
+    }
+  }
+
+
+  //Make sure Path is provided for Mainnet assets
+  if (!ZONE_ASSET_PATH_DEFINED) {
+    if (IS_MAINNET === undefined) {
+      IS_MAINNET = chain_reg.getFileProperty(asset_data.chainName, "chain", "network_type") === "mainnet";
+    }
+    if (IS_MAINNET) {
+      console.log("No path provided.");
+      console.log(asset_data.zone_asset);
+      return;
+    }
+  }
+
+
+
+  //--Find IBC Connection--
+  const channels = chain_reg.getIBCFileProperty(
+    asset_data.source_asset.chain_name,
+    asset_data.chainName,
+    "channels"
+  );
+  if (!channels) {
+    console.log("No IBC channels registered.");
     return;
   }
 
+
+  //Define the trace skeleton
+  const type = (asset_data.source_asset.base_denom.slice(0, 5) === "cw20:") ? "ibc-cw20" : "ibc";
   let counterparty = {
     chain_name: asset_data.source_asset.chain_name,
     base_denom: asset_data.source_asset.base_denom
   };
+  let chain = {};
+  trace = {
+    type: type,
+    counterparty: counterparty,
+    chain: chain
+  }
 
-  let chain = {
-    channel_id: segments[1]
-  };
+
 
   //--Identify chain_1 and chain_2--
   let chain_1, chain_2;
@@ -160,13 +206,51 @@ export function getAssetTrace(asset_data) {
     [chain_1, chain_2] = [chain, counterparty];
   }
 
-  //--Find IBC Connection--
-  const channels = chain_reg.getIBCFileProperty(
-    asset_data.source_asset.chain_name,
-    asset_data.chainName,
-    "channels"
-  );
 
+  //If no path, then use the first transfer/transfer channel
+  if (!IS_MAINNET && !ZONE_ASSET_PATH_DEFINED) {
+    if (type !== "ibc" || asset_data.source_asset.base_denom.startsWith("ibc/")) {
+      console.log("Path is required for non-standard IBC transfers.");
+      console.log(asset_data.zone_asset);
+      return;
+    }
+    let standardChannel;
+    for (let i = 0; i < channels.length; i++) {
+      console.log(channels[i]);
+      if (
+        channels[i].chain_1.port_id === "transfer" &&
+        channels[i].chain_2.port_id === "transfer"
+      ) {
+        standardChannel = channels[i];
+        console.log(standardChannel);
+        break;
+      }
+    }
+    console.log("Yes");
+    if (standardChannel) {
+      chain_1.channel_id = standardChannel.chain_1.channel_id;
+      chain_2.channel_id = standardChannel.chain_2.channel_id;
+      chain.path = "transfer/" + chain.channel_id + "/" + counterparty.base_denom;
+      return trace;
+    }
+    return;
+  }
+
+
+
+  //Identify chain-side channel-id from path
+  chain.path = asset_data.zone_asset?.path;
+  const segments = chain.path.split("/");
+  if (segments?.length < 3) {
+    console.log("Invalid path provided.");
+    console.log(chain.path);
+    return;
+  }
+  chain.channel_id = segments[1];
+
+    
+
+  //Find the matching channel
   let foundChannel;
   channels.forEach((channel) => {
     if (
@@ -194,22 +278,23 @@ export function getAssetTrace(asset_data) {
   });
   if (!foundChannel) {
     console.log("Channel not registered.");
-    console.log(asset_data.zone_asset.path);
+    console.log(chain.path);
     console.log(channels);
     return;
   }
 
-  chain.path = asset_data.zone_asset.path;
 
-  const trace = {
-    type: type,
-    counterparty: counterparty,
-    chain: chain
-  }
+
+  //Move path to the bottom of trace.chain object
+  delete chain.path;
+  chain.path = asset_data.zone_asset?.path;
+
+
 
   return trace;
 
 }
+
 
 export async function setLocalAsset(asset_data) {
 
@@ -222,13 +307,22 @@ export async function setLocalAsset(asset_data) {
     asset_data.local_asset = asset_data.source_asset;
     return;
   }
-  if (!asset_data.zone_asset.path) {
-    console.log("No path provided.");
+
+  let traces = deepCopy(getAssetProperty(asset_data.source_asset, "traces"));
+  if (!traces || traces?.length <= 0) {
+    traces = [];
+  }
+  const trace = getAssetTrace(asset_data);
+  traces.push(trace);
+
+  if (!trace?.chain?.path) {
+    console.log("No IBC path.");
+    console.log(trace);
     console.log(asset_data.zone_asset);
     return;
   }
   try {
-    let ibcHash = await zone.calculateIbcHash(asset_data.zone_asset.path);
+    let ibcHash = await zone.calculateIbcHash(trace?.chain?.path);
     asset_data.local_asset = {
       chain_name: asset_data.chainName,
       base_denom: ibcHash
@@ -236,12 +330,7 @@ export async function setLocalAsset(asset_data) {
   } catch (error) {
     console.error(error);
   }
-  let traces = deepCopy(getAssetProperty(asset_data.source_asset, "traces"));
-  if (!traces || traces?.length <= 0) {
-    traces = [];
-  }
-  const trace = getAssetTrace(asset_data);
-  traces.push(trace);
+
   assetProperty.set(createCombinedKey(asset_data.local_asset, "traces"), traces);
 }
 

@@ -85,6 +85,8 @@ export function validate_zone_files() {
 
     });
 
+    let IS_MAINNET = chain_reg.getFileProperty(chainName, "chain", "network_type") === "mainnet";
+
     zoneAssetsJson.assets.forEach((zoneAsset) => {
 
       let ASSET_EXISTS = false;
@@ -106,34 +108,7 @@ export function validate_zone_files() {
 
       //see if ibc channel is registered
       if (zoneAsset.chain_name != chainName) {
-        let VALID_PATH = false;
-        if (!zoneAsset.path) {
-          throw new Error(`Path missing for ${zoneAsset.base_denom}. Please enter a Path.`);
-        }
-          
-        let chain1 = false;
-        if (chain_reg.getIBCFileProperty(chainName, zoneAsset.chain_name, "chain_1").chain_name == chainName) {
-          chain1 = true;
-        }
-        let ibcChannels = chain_reg.getIBCFileProperty(chainName, zoneAsset.chain_name, "channels");
-        let thisChannel = "";
-        let thisPort = "";
-
-        VALID_PATH = ibcChannels.some((channel) => {
-          if (chain1) {
-            thisChannel = channel.chain_1.channel_id;
-            thisPort = channel.chain_1.port_id;
-          } else {
-            thisChannel = channel.chain_2.channel_id;
-            thisPort = channel.chain_2.port_id;
-          }
-          if (zoneAsset.path.startsWith(thisPort + '/' + thisChannel)) {
-            return true;
-          }
-        });
-        if (!VALID_PATH) {
-          throw new Error(`IBC Channel for Path: ${zoneAsset.path} does not exist in the chain registry.`);
-        }
+        checkAssetIBCData(zoneAsset, chainName, IS_MAINNET);
       }
 
       //see if canonical asset is valid
@@ -155,6 +130,46 @@ export function validate_zone_files() {
     }); 
   });
   
+}
+
+function checkAssetIBCData(zoneAsset, chainName, IS_MAINNET) {
+
+  if (
+    (
+      !IS_MAINNET && !zoneAsset.path
+    )
+      ||
+    zoneAsset.override_properties?.ibc
+  ) { return; }
+
+  if ( !zoneAsset.path ) {
+    throw new Error(`Path missing for ${zoneAsset.base_denom}. Please enter a Path.`);
+  }
+
+  let chain1 = false;
+  if (chain_reg.getIBCFileProperty(chainName, zoneAsset.chain_name, "chain_1").chain_name == chainName) {
+    chain1 = true;
+  }
+  let ibcChannels = chain_reg.getIBCFileProperty(chainName, zoneAsset.chain_name, "channels");
+  let thisChannel = "";
+  let thisPort = "";
+
+  let VALID_PATH = ibcChannels.some((channel) => {
+    if (chain1) {
+      thisChannel = channel.chain_1.channel_id;
+      thisPort = channel.chain_1.port_id;
+    } else {
+      thisChannel = channel.chain_2.channel_id;
+      thisPort = channel.chain_2.port_id;
+    }
+    if (zoneAsset.path.startsWith(thisPort + '/' + thisChannel)) {
+      return true;
+    }
+  });
+  if (!VALID_PATH) {
+    throw new Error(`IBC Channel for Path: ${zoneAsset.path} does not exist in the chain registry.`);
+  }
+
 }
 
 export async function validate_add_asset() {

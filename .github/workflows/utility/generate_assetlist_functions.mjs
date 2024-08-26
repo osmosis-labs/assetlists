@@ -216,17 +216,14 @@ export function getAssetTrace(asset_data) {
     }
     let standardChannel;
     for (let i = 0; i < channels.length; i++) {
-      console.log(channels[i]);
       if (
         channels[i].chain_1.port_id === "transfer" &&
         channels[i].chain_2.port_id === "transfer"
       ) {
         standardChannel = channels[i];
-        console.log(standardChannel);
         break;
       }
     }
-    console.log("Yes");
     if (standardChannel) {
       chain_1.channel_id = standardChannel.chain_1.channel_id;
       chain_2.channel_id = standardChannel.chain_2.channel_id;

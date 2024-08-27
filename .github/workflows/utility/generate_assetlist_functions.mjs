@@ -503,15 +503,16 @@ export function setSymbol(asset_data) {
 
   let symbol = getAssetProperty(asset_data.origin_asset, "symbol");
 
-  asset_data.chain_reg.symbol =
-    getAssetProperty(asset_data.local_asset, "symbol") ??
-    getAssetProperty(asset_data.canonical_asset, "symbol");
+  //asset_data.chain_reg.symbol =
+    //getAssetProperty(asset_data.local_asset, "symbol") ??
+    //getAssetProperty(asset_data.canonical_asset, "symbol");
     //getAssetProperty(asset_data.source_asset, "symbol"); //change this to source asset, since canonical only applies to osmosis zone
 
   if (asset_data.zone_asset?.override_properties?.symbol) {
     symbol = asset_data.zone_asset?.override_properties?.symbol;
     asset_data.frontend.symbol = symbol;
     asset_data.asset_detail.symbol = symbol;
+    asset_data.chain_reg.symbol = symbol;
     return;
   }
   
@@ -522,6 +523,7 @@ export function setSymbol(asset_data) {
   if (asset_data.frontend.is_canonical) {
     asset_data.frontend.symbol = symbol;
     asset_data.asset_detail.symbol = symbol;
+    asset_data.chain_reg.symbol = symbol;
     return;
   }
 
@@ -585,6 +587,7 @@ export function setSymbol(asset_data) {
 
   asset_data.frontend.symbol = symbol;
   asset_data.asset_detail.symbol = symbol;
+  asset_data.chain_reg.symbol = symbol;
   return;
 
 
@@ -595,15 +598,16 @@ export function setName(asset_data) {
 
   let name;
 
-  asset_data.chain_reg.name =
-    getAssetProperty(asset_data.local_asset, "name") ??
-    getAssetProperty(asset_data.source_asset, "name");
+  //asset_data.chain_reg.name =
+    //getAssetProperty(asset_data.local_asset, "name") ??
+    //getAssetProperty(asset_data.source_asset, "name");
 
 
   if (asset_data.zone_asset?.override_properties?.name) {
     name = asset_data.zone_asset?.override_properties?.name;
     asset_data.frontend.name = name;
     asset_data.asset_detail.name = name;
+    asset_data.chain_reg.name = name;
     return;
   }
 
@@ -628,6 +632,7 @@ export function setName(asset_data) {
   if (asset_data.frontend.is_canonical) {
     asset_data.frontend.name = name;
     asset_data.asset_detail.name = name;
+    asset_data.chain_reg.name = name;
     return;
   }
 
@@ -707,6 +712,7 @@ export function setName(asset_data) {
 
   asset_data.frontend.name = name;
   asset_data.asset_detail.name = name;
+  asset_data.chain_reg.name = name;
   
 
 }
@@ -891,18 +897,72 @@ export function setDecimals(asset_data) {
 
 export function setImages(asset_data) {
 
-  let images = getAssetProperty(asset_data.local_asset, "images") ?? getAssetProperty(asset_data.canonical_asset, "images");
-  asset_data.chain_reg.images = images;
+  let localImages = getAssetProperty(asset_data.local_asset, "images");
+  let canonicalImages = getAssetProperty(asset_data.canonical_asset, "images");
+  let primaryImage = asset_data.zone_asset?.override_properties?.logo_URIs ?? canonicalImages?.[0];
+  let images = [];
 
-  images = getAssetProperty(asset_data.canonical_asset, "images");
+  //Generated chain reg images array is:
+  //canonicalAsset's image (e.g., USDT) + localAsset's Images(e.g., allUSDT),
+  //with any override image placed at the beginning
+  let firstCanonicalImage = true;
+  canonicalImages?.forEach((canonicalImage) => {
+    addUniqueArrayItem(canonicalImage, images);
+    if (
+      firstCanonicalImage
+      &&
+      asset_data.canonical_asset.chain_name !== asset_data.chainName
+    ) {
+      images[0].image_sync = { ...asset_data.canonical_asset };
+      for (const key in images[0]) {
+        if (key !== "image_sync") {
+          const value = images[0][key];
+          delete images[0][key];
+          images[0][key] = value;
+        }
+      }
+    }
+    firstCanonicalImage = false;
+  });
 
-  let primaryImage = asset_data.zone_asset?.override_properties?.logo_URIs ?? images?.[0];
+  
+  localImages?.forEach((localImage) => {
+    let containsImage = false;
+    images?.forEach((image) => {
+      if (
+        (image.png && image.png === localImage.png)
+        ||
+        (image.svg && image.svg === localImage.svg)
+      ) {
+        containsImage = true;
+      }
+    });
+    
+    if (!containsImage) {
+      addUniqueArrayItem(localImage, images);
+    }
+  });
+
+  let newImagesArray = [];
+  images.forEach((image) => {
+    if (
+      (image.png && image.png === primaryImage.png)
+      ||
+      (image.svg && image.svg === primaryImage.svg)
+    ) {
+      primaryImage = { ...image };
+    } else {
+      newImagesArray.push(image);
+    }
+  });
+  newImagesArray.unshift(primaryImage);
 
   asset_data.frontend.logoURIs = {...primaryImage};
   delete asset_data.frontend.logoURIs.theme;
   delete asset_data.frontend.logoURIs.image_sync;
+  asset_data.chain_reg.logo_URIs = asset_data.frontend.logoURIs;
 
-  asset_data.chain_reg.logo_URIs = getAssetProperty(asset_data.local_asset, "logo_URIs");
+  asset_data.chain_reg.images = newImagesArray;
 
 }
 

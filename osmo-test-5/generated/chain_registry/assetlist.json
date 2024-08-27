@@ -131,7 +131,7 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/2164BDB48DE5501430E71286448D87C6D2240EC0E078CF113CAB85E21A352BB0",
-      "name": "USD Coin (Axelar)",
+      "name": "USD Coin (Axelar Testnet)",
       "display": "ausdc",
       "symbol": "aUSDC.axl",
       "traces": [
@@ -170,8 +170,8 @@
       "images": [
         {
           "image_sync": {
-            "chain_name": "ethereumtestnet",
-            "base_denom": "0x254d06f33bDc5b8ee05b2ea472107E300226659A"
+            "chain_name": "axelartestnet",
+            "base_denom": "uausdc"
           },
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
         }
@@ -194,7 +194,7 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/1F42AC9631DBE03009219ECCFE151786F53A038DE9F7A07C709158514F1D5942",
-      "name": "Wrapped Ether (Axelar)",
+      "name": "Ether (Axelar Testnet)",
       "display": "weth",
       "symbol": "ETH",
       "traces": [
@@ -233,8 +233,8 @@
       "images": [
         {
           "image_sync": {
-            "chain_name": "ethereumtestnet",
-            "base_denom": "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6"
+            "chain_name": "axelartestnet",
+            "base_denom": "eth-wei"
           },
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/weth.svg"
         }
@@ -507,12 +507,12 @@
       },
       "images": [
         {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kyve/images/kyve-token.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kyve/images/kyve-token.svg",
           "image_sync": {
-            "chain_name": "kyve",
-            "base_denom": "ukyve"
-          }
+            "chain_name": "kyvetestnet",
+            "base_denom": "tkyve"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kyve/images/kyve-token.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kyve/images/kyve-token.svg"
         }
       ]
     },
@@ -581,7 +581,7 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/539BC2B6E70117D220834D6DF8E27307655D1325C0CADF7E3AF90AB00D9F8D69",
-      "name": "Chain4Energy",
+      "name": "Chain4Energy Testnet",
       "display": "c4e",
       "symbol": "C4E",
       "traces": [
@@ -598,8 +598,15 @@
           }
         }
       ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/chain4energytestnet/images/c4e.png"
+      },
       "images": [
         {
+          "image_sync": {
+            "chain_name": "chain4energytestnet",
+            "base_denom": "uc4e"
+          },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/chain4energytestnet/images/c4e.png"
         }
       ]
@@ -674,7 +681,7 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/5C274155106FEB0C093F76A12BB67222E479E1EBE043F319CE4463E54F7A357C",
-      "name": "xion",
+      "name": "Xion Testnet",
       "display": "XION",
       "symbol": "XION",
       "traces": [
@@ -691,8 +698,15 @@
           }
         }
       ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xion/images/burnt-round.png"
+      },
       "images": [
         {
+          "image_sync": {
+            "chain_name": "xiontestnet",
+            "base_denom": "uxion"
+          },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xion/images/burnt-round.png"
         }
       ]
@@ -796,7 +810,7 @@
       "images": [
         {
           "image_sync": {
-            "chain_name": "impacthub",
+            "chain_name": "impacthubtestnet",
             "base_denom": "uixo"
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/impacthub/images/ixo.png",
@@ -825,7 +839,7 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/5F10B4BED1A80DC44975D95D716AEF8CEBFB99B3F088C98361436A7D0CF5A830",
-      "name": "Archway",
+      "name": "Archway Testnet",
       "display": "const",
       "symbol": "CONST",
       "traces": [
@@ -850,11 +864,15 @@
           }
         }
       ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/archway/images/archway.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/archway/images/archway.svg"
+      },
       "images": [
         {
           "image_sync": {
-            "chain_name": "archway",
-            "base_denom": "aarch"
+            "chain_name": "archwaytestnet",
+            "base_denom": "aconst"
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/archway/images/archway.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/archway/images/archway.svg",
@@ -884,7 +902,7 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/B8435C53F8B5CC87703531FF736508875DF473D0C231E93A3EF5C2C934E562A4",
-      "name": "Melody",
+      "name": "Symphony Testnet",
       "display": "mld",
       "symbol": "MLD",
       "traces": [
@@ -901,8 +919,15 @@
           }
         }
       ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/symphonytestnet/images/coin_icon.png"
+      },
       "images": [
         {
+          "image_sync": {
+            "chain_name": "symphonytestnet",
+            "base_denom": "note"
+          },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/symphonytestnet/images/coin_icon.png"
         }
       ]

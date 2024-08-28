@@ -93,7 +93,7 @@
           "chainSuggestionDenom": "ibc/66A7ADA623D33D0B66C6890FE3E1AF3D638D56CE2B56F8BDA210B2AA62016216",
           "coinMinimalDenom": "ibc/66A7ADA623D33D0B66C6890FE3E1AF3D638D56CE2B56F8BDA210B2AA62016216",
           "coinDecimals": 6,
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.png"
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.png"
         },
         {
           "coinDenom": "USDC",
@@ -393,7 +393,7 @@
         "coinMinimalDenom": "ibc/66A7ADA623D33D0B66C6890FE3E1AF3D638D56CE2B56F8BDA210B2AA62016216",
         "sourceDenom": "umars",
         "coinDecimals": 6,
-        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.png"
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.png"
       },
       "feeCurrencies": [
         {
@@ -402,7 +402,7 @@
           "coinMinimalDenom": "ibc/66A7ADA623D33D0B66C6890FE3E1AF3D638D56CE2B56F8BDA210B2AA62016216",
           "sourceDenom": "umars",
           "coinDecimals": 6,
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.png"
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.png"
         }
       ],
       "currencies": [
@@ -412,7 +412,7 @@
           "coinMinimalDenom": "ibc/66A7ADA623D33D0B66C6890FE3E1AF3D638D56CE2B56F8BDA210B2AA62016216",
           "sourceDenom": "umars",
           "coinDecimals": 6,
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token.png"
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.png"
         }
       ],
       "apis": {
@@ -1124,7 +1124,12 @@
           "coinMinimalDenom": "ibc/5C274155106FEB0C093F76A12BB67222E479E1EBE043F319CE4463E54F7A357C",
           "sourceDenom": "uxion",
           "coinDecimals": 6,
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xion/images/burnt-round.png"
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xion/images/burnt-round.png",
+          "gasPriceStep": {
+            "low": 0.025,
+            "average": 0.025,
+            "high": 0.04
+          }
         }
       ],
       "currencies": [
@@ -1403,6 +1408,76 @@
         "ibc-transfer",
         "ibc-go",
         "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "symphonytestnet",
+      "status": "live",
+      "networkType": "testnet",
+      "prettyName": "Symphony Testnet",
+      "chain_id": "symphony-testnet-3",
+      "bech32Prefix": "symphony",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "symphony",
+        "bech32PrefixAccPub": "symphonypub",
+        "bech32PrefixValAddr": "symphonyvaloper",
+        "bech32PrefixValPub": "symphonyvaloperpub",
+        "bech32PrefixConsAddr": "symphonyvalcons",
+        "bech32PrefixConsPub": "symphonyvalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDenom": "MLD",
+        "chainSuggestionDenom": "note",
+        "sourceDenom": "note",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/symphonytestnet/images/coin_icon.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "MLD",
+          "chainSuggestionDenom": "note",
+          "sourceDenom": "note",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/symphonytestnet/images/coin_icon.png",
+          "gasPriceStep": {
+            "low": 0.0025,
+            "average": 0.025,
+            "high": 0.04
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "MLD",
+          "chainSuggestionDenom": "note",
+          "sourceDenom": "note",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/symphonytestnet/images/coin_icon.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://symphony-rpc.kleomedes.network"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://symphony-api.kleomedes.network"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://testnet.ping.pub/symphony/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm",
+        "wasmd_0.24+"
       ]
     }
   ]

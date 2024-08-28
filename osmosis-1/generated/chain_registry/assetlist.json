@@ -23099,6 +23099,58 @@
       }
     },
     {
+      "description": "Mars Protocol is a cross-collateralized Money Market Protocol on Neutron and Osmosis",
+      "denom_units": [
+        {
+          "denom": "ibc/B67DF59507B3755EEDE0866C449445BD54B4DA82CCEBA89D775E53DC35664255",
+          "exponent": 0,
+          "aliases": [
+            "umars"
+          ]
+        },
+        {
+          "denom": "MARS",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/B67DF59507B3755EEDE0866C449445BD54B4DA82CCEBA89D775E53DC35664255",
+      "name": "Mars Protocol token",
+      "display": "MARS",
+      "symbol": "MARS",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "neutron",
+            "base_denom": "factory/neutron1ndu2wvkrxtane8se2tr48gv7nsm46y5gcqjhux/MARS",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-874",
+            "path": "transfer/channel-874/factory/neutron1ndu2wvkrxtane8se2tr48gv7nsm46y5gcqjhux/MARS"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "neutron",
+            "base_denom": "factory/neutron1ndu2wvkrxtane8se2tr48gv7nsm46y5gcqjhux/MARS"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.svg",
+          "theme": {
+            "primary_color_hex": "#ef4136"
+          }
+        }
+      ]
+    },
+    {
       "description": "The native token of Furya",
       "denom_units": [
         {
@@ -23602,58 +23654,6 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/grac.png",
           "theme": {
             "primary_color_hex": "#f5bf09"
-          }
-        }
-      ]
-    },
-    {
-      "description": "Mars Protocol is a cross-collateralized Money Market Protocol on Neutron and Osmosis",
-      "denom_units": [
-        {
-          "denom": "ibc/B67DF59507B3755EEDE0866C449445BD54B4DA82CCEBA89D775E53DC35664255",
-          "exponent": 0,
-          "aliases": [
-            "umars"
-          ]
-        },
-        {
-          "denom": "MARS",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/B67DF59507B3755EEDE0866C449445BD54B4DA82CCEBA89D775E53DC35664255",
-      "name": "Mars Hub",
-      "display": "MARS",
-      "symbol": "MARS",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "neutron",
-            "base_denom": "factory/neutron1ndu2wvkrxtane8se2tr48gv7nsm46y5gcqjhux/MARS",
-            "channel_id": "channel-10"
-          },
-          "chain": {
-            "channel_id": "channel-874",
-            "path": "transfer/channel-874/factory/neutron1ndu2wvkrxtane8se2tr48gv7nsm46y5gcqjhux/MARS"
-          }
-        }
-      ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.svg"
-      },
-      "images": [
-        {
-          "image_sync": {
-            "chain_name": "neutron",
-            "base_denom": "factory/neutron1ndu2wvkrxtane8se2tr48gv7nsm46y5gcqjhux/MARS"
-          },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.svg",
-          "theme": {
-            "primary_color_hex": "#ef4136"
           }
         }
       ]

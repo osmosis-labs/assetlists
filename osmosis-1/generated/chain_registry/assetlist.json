@@ -1384,7 +1384,9 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.svg",
           "theme": {
-            "primary_color_hex": "#242424"
+            "circle": true,
+            "primary_color_hex": "#E59636",
+            "background_color_hex": "#000000"
           }
         }
       ]
@@ -22808,6 +22810,7 @@
     },
     {
       "description": "CosmoUSD",
+      "extended_description": "Community loyalty points.",
       "denom_units": [
         {
           "denom": "factory/osmo104jtrwcljnxfljhml8mxrw7qetcsdmqvy3sprw/ucosmousd",
@@ -23208,6 +23211,61 @@
           },
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ton/images/ton.svg",
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ton/images/ton.png"
+        }
+      ]
+    },
+    {
+      "description": "An alloy of TON asset variants on Osmosis.",
+      "denom_units": [
+        {
+          "denom": "factory/osmo12lnwf54yd30p6amzaged2atln8k0l32n7ncxf04ctg7u7ymnsy7qkqgsw4/alloyed/allTON",
+          "exponent": 0
+        },
+        {
+          "denom": "ton",
+          "exponent": 9
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo12lnwf54yd30p6amzaged2atln8k0l32n7ncxf04ctg7u7ymnsy7qkqgsw4",
+      "base": "factory/osmo12lnwf54yd30p6amzaged2atln8k0l32n7ncxf04ctg7u7ymnsy7qkqgsw4/alloyed/allTON",
+      "name": "TON (The Open Network)",
+      "display": "ton",
+      "symbol": "TON",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "ton",
+            "base_denom": "nanoton"
+          },
+          "provider": "Osmosis"
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ton/images/ton.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ton/images/ton.png"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "ton",
+            "base_denom": "nanoton"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ton/images/ton.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ton/images/ton.png",
+          "theme": {
+            "circle": true,
+            "primary_color_hex": "#0088CC",
+            "background_color_hex": "#0088CC"
+          }
+        },
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allTON.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allTON.png",
+          "theme": {
+            "primary_color_hex": "#0088CC"
+          }
         }
       ]
     },
@@ -23718,6 +23776,24 @@
           }
         }
       ]
+    },
+    {
+      "description": "USDC supplied on Mars looped using Membrane by a vault",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1vf6e300hv2qe7r5rln8deft45ewgyytjnwfrdfcv5rgzrfy0s6cswjqf9r/mars-usdc-looped",
+          "exponent": 0
+        },
+        {
+          "denom": "loopedUSDCmars",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "base": "factory/osmo1vf6e300hv2qe7r5rln8deft45ewgyytjnwfrdfcv5rgzrfy0s6cswjqf9r/mars-usdc-looped",
+      "name": "Mars Looped USDC",
+      "display": "loopedUSDCmars",
+      "symbol": "loopedUSDCmars"
     }
   ]
 }

@@ -531,46 +531,55 @@ export function setSymbol(asset_data) {
   let last_suffix_is_network = false;
 
   let variantGroup = getAssetProperty(asset_data.origin_asset, "variantGroup");
+  let accumulative_suffix = "";
   if (variantGroup.additionalMintagesExist) {
-    symbol = symbol + "." + getNetworkSymbolSuffix(asset_data.frontend.variant.mintageNetwork, asset_data);
+    //symbol = symbol + "." + getNetworkSymbolSuffix(asset_data.frontend.variant.mintageNetwork, asset_data);
+    accumulative_suffix = "." + getNetworkSymbolSuffix(asset_data.frontend.variant.mintageNetwork, asset_data);
   }
   asset_data.frontend.variant.hops.forEach((hop) => {
     if (
       hop.type === "additional-mintage"
-        ||
+      ||
       hop.type === "legacy-mintage"
-        ||
+      ||
       hop.type === "wrapped"
     ) { return; }
-    else if ( traceTypesNeedingProvider.includes(hop.type) ) {
-      let suffix = hop.provider.symbol_suffix ?? "";
-      if ( suffix?.startsWith(".e.") ) {
-        if (
-          symbol.slice(symbol.length - 4) === ".eth"
-        ) {
-          symbol = symbol.slice(0, symbol.length - 4);
+    else if (traceTypesNeedingProvider.includes(hop.type)) {
+      let hop_suffix = hop.provider.symbol_suffix ?? "";
+      //if it's the canonical bridge of that network, we ignore the suffixes up to that point
+      if (hop.provider.canonical) {
+        accumulative_suffix = "." + getNetworkSymbolSuffix(hop.network, asset_data);
+      } else {
+
+        //if not canonical
+        if (hop_suffix?.startsWith(".e.")) {
+          if (
+            accumulative_suffix.slice(symbol.length - 4) === ".eth"
+          ) {
+            accumulative_suffix = accumulative_suffix.slice(0, accumulative_suffix.length - 4);
+          }
+          if (
+            deepEqual(
+              asset_data.origin_asset,
+              ({
+                chain_name: "ethereum",
+                base_denom: "wei"
+              })
+            )
+          ) {
+            hop_suffix = hop_suffix.slice(2);
+          }
         }
-        if (
-          deepEqual(
-            asset_data.origin_asset,
-            ({
-              chain_name: "ethereum",
-              base_denom: "wei"
-            })
-          )
-        ) {
-          suffix = suffix.slice(2);
+        accumulative_suffix = accumulative_suffix + hop_suffix;
+        last_suffix_is_network = false;
+
+        if (!hop.provider.destination_network) {
+          accumulative_suffix = accumulative_suffix + "." + getNetworkSymbolSuffix(hop.network, asset_data);
+          last_suffix_is_network = true;
         }
       }
-      symbol = symbol + suffix;
-      last_suffix_is_network = false;
-      
-      if (!hop.provider.destination_network) {
-        symbol = symbol + "." + getNetworkSymbolSuffix(hop.network, asset_data);
-        last_suffix_is_network = true;
-      }
-    } else {
-      symbol = symbol + "." + getNetworkSymbolSuffix(hop.network, asset_data);
+    } else { //is IBC
+      accumulative_suffix = accumulative_suffix + "." + getNetworkSymbolSuffix(hop.network, asset_data);
       last_suffix_is_network = true;
     }
   });
@@ -580,10 +589,12 @@ export function setSymbol(asset_data) {
   if (
     last_suffix_is_network
       &&
-    symbol.endsWith(ending)
+    accumulative_suffix.endsWith(ending)
   ) {
-    symbol = symbol.slice(0, -ending.length);
+    accumulative_suffix = accumulative_suffix.slice(0, -ending.length);
   }
+
+  symbol = symbol + accumulative_suffix;
 
   asset_data.frontend.symbol = symbol;
   asset_data.asset_detail.symbol = symbol;
@@ -640,12 +651,16 @@ export function setName(asset_data) {
   let last_suffix_is_network = false;
   let this_suffix_is_network = false;
 
+  let accumulative_suffix = "";
+
   //Show Mintage Network, if needed
   let variantGroup = getAssetProperty(asset_data.origin_asset, "variantGroup");
   if (variantGroup.additionalMintagesExist) {
-    name =  
-      name
-      + " (" +
+    //name =
+    accumulative_suffix =
+      //name
+        //+
+      " (" +
       getNetworkName(asset_data.frontend.variant.mintageNetwork, asset_data)
       + ")";
     last_suffix_is_network = true;
@@ -661,37 +676,45 @@ export function setName(asset_data) {
     ) { return; }
     else if (traceTypesNeedingProvider.includes(hop.type)) {
 
-      //Some trace providers don't need indication
-      if ( hop.provider.name_suffix ) {
-        this_suffix_is_network = false;
-        name = appendNameSuffix(
-          name,
-          hop.provider.name_suffix,
-          this_suffix_is_network,
-          last_suffix_is_network
-        );
-        last_suffix_is_network = false;
-      }
-      
-      if (
-        !hop.provider.destination_network
+      if (hop.provider.canonical) {
+        accumulative_suffix =
+          " (" +
+          getNetworkName(hop.network, asset_data)
+          + ")";
+      } else {
+
+        //Some trace providers don't need indication
+        if (hop.provider.name_suffix) {
+          this_suffix_is_network = false;
+          accumulative_suffix = appendNameSuffix(
+            accumulative_suffix,
+            hop.provider.name_suffix,
+            this_suffix_is_network,
+            last_suffix_is_network
+          );
+          last_suffix_is_network = false;
+        }
+
+        if (
+          !hop.provider.destination_network
           ||
-        !hop.provider.name_suffix
-      ) {
-        this_suffix_is_network = true;
-        name = appendNameSuffix(
-          name,
-          getNetworkName(hop.network, asset_data),
-          this_suffix_is_network,
-          last_suffix_is_network
-        );
-        last_suffix_is_network = true;
+          !hop.provider.name_suffix
+        ) {
+          this_suffix_is_network = true;
+          accumulative_suffix = appendNameSuffix(
+            accumulative_suffix,
+            getNetworkName(hop.network, asset_data),
+            this_suffix_is_network,
+            last_suffix_is_network
+          );
+          last_suffix_is_network = true;
+        }
       }
     } else { //type: ibc and ibc-cw20
 
       this_suffix_is_network = true;
-      name = appendNameSuffix(
-        name,
+      accumulative_suffix = appendNameSuffix(
+        accumulative_suffix,
         getNetworkName(hop.network, asset_data),
         this_suffix_is_network,
         last_suffix_is_network
@@ -705,10 +728,12 @@ export function setName(asset_data) {
   if (
     last_suffix_is_network
       &&
-    name.endsWith(ending)
+    accumulative_suffix.endsWith(ending)
   ) {
-    name = name.slice(0, -ending.length);
+    accumulative_suffix = accumulative_suffix.slice(0, -ending.length);
   }
+
+  name = name + accumulative_suffix;
 
   asset_data.frontend.name = name;
   asset_data.asset_detail.name = name;

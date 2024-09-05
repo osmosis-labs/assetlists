@@ -546,37 +546,36 @@ export function setSymbol(asset_data) {
     ) { return; }
     else if (traceTypesNeedingProvider.includes(hop.type)) {
       let hop_suffix = hop.provider.symbol_suffix ?? "";
-      //if it's the canonical bridge of that network, we ignore the suffixes up to that point
-      if (hop.provider.canonical) {
-        accumulative_suffix = "." + getNetworkSymbolSuffix(hop.network, asset_data);
-      } else {
 
-        //if not canonical
-        if (hop_suffix?.startsWith(".e.")) {
-          if (
-            accumulative_suffix.slice(symbol.length - 4) === ".eth"
-          ) {
-            accumulative_suffix = accumulative_suffix.slice(0, accumulative_suffix.length - 4);
-          }
-          if (
-            deepEqual(
-              asset_data.origin_asset,
-              ({
-                chain_name: "ethereum",
-                base_denom: "wei"
-              })
-            )
-          ) {
-            hop_suffix = hop_suffix.slice(2);
-          }
+      if (hop_suffix?.startsWith(".e.")) {
+        if (
+          accumulative_suffix.slice(accumulative_suffix.length - 4) === ".eth"
+        ) {
+          accumulative_suffix = accumulative_suffix.slice(0, accumulative_suffix.length - 4);
         }
+        if (
+          deepEqual(
+            asset_data.origin_asset,
+            ({
+              chain_name: "ethereum",
+              base_denom: "wei"
+            })
+          )
+        ) {
+          hop_suffix = hop_suffix.slice(2);
+        }
+      }
+
+      //Add Provider Suffix
+      if (!hop.provider.canonical) {
         accumulative_suffix = accumulative_suffix + hop_suffix;
         last_suffix_is_network = false;
+      }
 
-        if (!hop.provider.destination_network) {
-          accumulative_suffix = accumulative_suffix + "." + getNetworkSymbolSuffix(hop.network, asset_data);
-          last_suffix_is_network = true;
-        }
+      //Add Destination Network Suffix whenever the provider suffix is skipped or the destination network isn't assumed
+      if (!hop.provider.destination_network || hop.provider.canonical) {
+        accumulative_suffix = accumulative_suffix + "." + getNetworkSymbolSuffix(hop.network, asset_data);
+        last_suffix_is_network = true;
       }
     } else { //is IBC
       accumulative_suffix = accumulative_suffix + "." + getNetworkSymbolSuffix(hop.network, asset_data);
@@ -676,40 +675,35 @@ export function setName(asset_data) {
     ) { return; }
     else if (traceTypesNeedingProvider.includes(hop.type)) {
 
-      if (hop.provider.canonical) {
-        accumulative_suffix =
-          " (" +
-          getNetworkName(hop.network, asset_data)
-          + ")";
-      } else {
-
-        //Some trace providers don't need indication
-        if (hop.provider.name_suffix) {
-          this_suffix_is_network = false;
-          accumulative_suffix = appendNameSuffix(
-            accumulative_suffix,
-            hop.provider.name_suffix,
-            this_suffix_is_network,
-            last_suffix_is_network
-          );
-          last_suffix_is_network = false;
-        }
-
-        if (
-          !hop.provider.destination_network
-          ||
-          !hop.provider.name_suffix
-        ) {
-          this_suffix_is_network = true;
-          accumulative_suffix = appendNameSuffix(
-            accumulative_suffix,
-            getNetworkName(hop.network, asset_data),
-            this_suffix_is_network,
-            last_suffix_is_network
-          );
-          last_suffix_is_network = true;
-        }
+      //Some trace providers don't need indication
+      if (hop.provider.name_suffix && !hop.provider.canonical) {
+        this_suffix_is_network = false;
+        accumulative_suffix = appendNameSuffix(
+          accumulative_suffix,
+          hop.provider.name_suffix,
+          this_suffix_is_network,
+          last_suffix_is_network
+        );
+        last_suffix_is_network = false;
       }
+
+      if (
+        !hop.provider.destination_network
+          ||
+        hop.provider.canonical
+          ||
+        !hop.provider.name_suffix
+      ) {
+        this_suffix_is_network = true;
+        accumulative_suffix = appendNameSuffix(
+          accumulative_suffix,
+          getNetworkName(hop.network, asset_data),
+          this_suffix_is_network,
+          last_suffix_is_network
+        );
+        last_suffix_is_network = true;
+      }
+
     } else { //type: ibc and ibc-cw20
 
       this_suffix_is_network = true;

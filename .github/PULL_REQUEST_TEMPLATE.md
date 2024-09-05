@@ -39,8 +39,8 @@ If adding a new chain, please ensure the following:
 
 If upgrading an Asset to Verified, please see the requirements specified at [LISTING](https://github.com/osmosis-labs/assetlists/blob/main/LISTING.md#upgrade-asset-to-verified-status-permissioned), and ensure the following:
 - [ ] Asset is defined thoroughly at the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry).
-   - [ ] A meaningful `description` (and `extended_description`, unless has category: 'meme' or is a variant).
-   - [ ] Associated `socials`, including `website` and `twitter` (skip if variant) (skip if this is a non-primary asset best represented by its origin chain, in which case the origin chain's primary token must have socials defined).
+   - [ ] A meaningful `description` (and `extended_description`, unless: meme, variant, or non-primary chain token).
+   - [ ] Associated `socials`, including `website` and `twitter` (unless: meme, variant, or non-primary chain token).
    - [ ] **Logo Image** has a square Aspect Ratio, < 250 KB file size, and appropriate visual contrast with Osmosis Zone colors.
 - [ ]  **Liquidity**: This pool contains contains at least $1k USD-worth of liquidity of the asset (Provide Pool ID): ______ (Skip if alloy constituent)
 

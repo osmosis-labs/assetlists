@@ -26,14 +26,21 @@
  - Nearly all assets can become verified once validation has passed and basic requirements have been met, except those that:
    - Show signs of being a scam, or the team showing nefarious behaviour(, e.g., evidence of rug-pull or pump-n-dump), or
    - No pool exists that contains at least $1k USD-worth of liquidity of the asset
+ - Constituents of Alloyed Assets automatically qualify.
 
 #### Requirements
 
 Registered Asset Metadata at the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry):
  - All standard required values: Name, Symbol, Base, Display, Type_asset (sdk.coin vs cw20 vs erc20 vs ...), etc.
  - A meaningful `description`.
- - A detailed `extended_description` (not required for 'Memecoins'--must be categorized as "meme").
- - Associated `socials`, including `website` and `twitter` (not required for 'Memecoins'--must be categorized as "meme").
+ - A detailed `extended_description`.
+   - (not required for 'Memecoins'--must be categorized as "meme")
+   - (not required for variant assets, but the origin asset must have it defined e.g., USDT.eth.axl)
+   - (not required if it is a not a project's primary token (not a staking or fee token) and is best represented by its origin chain, in which case, the primary token of that chain must have it defined).
+ - Associated `socials`, including `website` and `twitter`
+   - (not required for 'Memecoins'--must be categorized as "meme")
+   - (not required for variant assets, but the origin asset must have it defined e.g., USDT.eth.axl)
+   - (not required if it is a not a project's primary token (not a staking or fee token) and is best represented by its origin chain, in which case, the primary token of that chain must have it defined).
  - Logo Image has a square Aspect Ratio and < 250 KB file size
 
 Asset appearance and functionality must be validated by Osmosis Zone maintainers. This includes:

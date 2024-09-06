@@ -622,7 +622,11 @@ export function setName(asset_data) {
   }
 
   //but use chain name instead if it's the staking token...
-  if (getAssetProperty(asset_data.origin_asset, "is_staking")) {
+  if (
+    !asset_data.zone_asset?.override_properties?.use_asset_name
+      &&
+    getAssetProperty(asset_data.origin_asset, "is_staking")
+  ) {
     name = chain_reg.getFileProperty(asset_data.origin_asset.chain_name, "chain", "pretty_name");
     //Check for Chain Name Override--E.G., "Ethereum Mainnet" -> "Ethereum"
     let override_chain_pretty_name = asset_data.zone_config?.chains?.find(

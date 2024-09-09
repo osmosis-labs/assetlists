@@ -4165,7 +4165,9 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai.svg",
         "theme": {
-          "primary_color_hex": "#040404"
+          "circle": false,
+          "dark_mode": false,
+          "primary_color_hex": "#000000"
         }
       },
       "features": [
@@ -8819,6 +8821,72 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/routerchain/images/router.svg",
         "theme": {
           "primary_color_hex": "#cb0766"
+        }
+      },
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "lorenzo",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Lorenzo Protocol",
+      "chain_id": "lorenzo_8329-1",
+      "bech32_prefix": "lrz",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "lrz",
+        "bech32PrefixAccPub": "lrzpub",
+        "bech32PrefixValAddr": "lrzvaloper",
+        "bech32PrefixValPub": "lrzvaloperpub",
+        "bech32PrefixConsAddr": "lrzvalcons",
+        "bech32PrefixConsPub": "lrzvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "stBTC",
+            "fixed_min_gas_price": 2000000,
+            "low_gas_price": 2000000,
+            "average_gas_price": 2000000,
+            "high_gas_price": 8000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "alrz"
+          }
+        ]
+      },
+      "description": "Lorenzo aims to be the premier Bitcoin platform for yield-bearing token issuance, trading, and settlement.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-cosmos.lorenzo-protocol.xyz"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://raw-api.lorenzo-protocol.xyz"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://scan.lorenzo-protocol.xyz/tx/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lorenzo/images/lorenzo.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lorenzo/images/lorenzo.svg",
+        "theme": {
+          "primary_color_hex": "#133348"
         }
       },
       "features": [

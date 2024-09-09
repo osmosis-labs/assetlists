@@ -20356,6 +20356,86 @@
         "eth-address-gen",
         "eth-key-sign"
       ]
+    },
+    {
+      "chain_name": "lorenzo",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Lorenzo Protocol",
+      "chain_id": "lorenzo_8329-1",
+      "bech32Prefix": "lrz",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "lrz",
+        "bech32PrefixAccPub": "lrzpub",
+        "bech32PrefixValAddr": "lrzvaloper",
+        "bech32PrefixValPub": "lrzvaloperpub",
+        "bech32PrefixConsAddr": "lrzvalcons",
+        "bech32PrefixConsPub": "lrzvalconspub"
+      },
+      "slip44": 60,
+      "stakeCurrency": {
+        "coinDenom": "LRZ",
+        "chainSuggestionDenom": "alrz",
+        "sourceDenom": "alrz",
+        "coinDecimals": 18,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lorenzo/images/lorenzo.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "stBTC",
+          "chainSuggestionDenom": "stBTC",
+          "coinMinimalDenom": "ibc/453B5B25834A5D4B8FE1E894E69D73F46424F28E8ED3D8E8CA654AEFF1EC5D3B",
+          "sourceDenom": "stBTC",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lorenzo/images/stBTC.png",
+          "gasPriceStep": {
+            "low": 2000000,
+            "average": 2000000,
+            "high": 8000000
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "LRZ",
+          "chainSuggestionDenom": "alrz",
+          "sourceDenom": "alrz",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lorenzo/images/lorenzo.png"
+        },
+        {
+          "coinDenom": "stBTC",
+          "chainSuggestionDenom": "stBTC",
+          "coinMinimalDenom": "ibc/453B5B25834A5D4B8FE1E894E69D73F46424F28E8ED3D8E8CA654AEFF1EC5D3B",
+          "sourceDenom": "stBTC",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lorenzo/images/stBTC.png"
+        }
+      ],
+      "description": "Lorenzo aims to be the premier Bitcoin platform for yield-bearing token issuance, trading, and settlement.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-cosmos.lorenzo-protocol.xyz"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://raw-api.lorenzo-protocol.xyz"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://scan.lorenzo-protocol.xyz/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
     }
   ]
 }

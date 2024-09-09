@@ -698,7 +698,7 @@
       "chainName": "axelar",
       "sourceDenom": "wmatic-wei",
       "coinMinimalDenom": "ibc/AB589511ED0DD5FA56171A39978AFBF1371DB986EC1C3526CE138A16377E39BB",
-      "symbol": "POL",
+      "symbol": "MATIC",
       "decimals": 18,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polygon/images/matic-purple.png",
@@ -6158,7 +6158,8 @@
       "symbol": "ORAI",
       "decimals": 6,
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-token.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-token.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-token.svg"
       },
       "coingeckoId": "oraichain-token",
       "price": {
@@ -6195,7 +6196,8 @@
           "symbol": "ORAI",
           "decimals": 6,
           "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-token.png"
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-token.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-token.svg"
           }
         }
       ],
@@ -24548,6 +24550,60 @@
       "disabled": false,
       "preview": false,
       "listingDate": "2024-09-03T15:15:00.000Z"
+    },
+    {
+      "chainName": "lorenzo",
+      "sourceDenom": "stBTC",
+      "coinMinimalDenom": "ibc/453B5B25834A5D4B8FE1E894E69D73F46424F28E8ED3D8E8CA654AEFF1EC5D3B",
+      "symbol": "stBTC",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lorenzo/images/stBTC.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lorenzo/images/stBTC.svg"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "lorenzo",
+            "chainId": "lorenzo_8329-1",
+            "sourceDenom": "stBTC",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-79840",
+            "path": "transfer/channel-79840/stBTC"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "lorenzo",
+          "sourceDenom": "stBTC",
+          "chainType": "cosmos",
+          "chainId": "lorenzo_8329-1",
+          "symbol": "stBTC",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lorenzo/images/stBTC.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lorenzo/images/stBTC.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/453B5B25834A5D4B8FE1E894E69D73F46424F28E8ED3D8E8CA654AEFF1EC5D3B",
+      "name": "Lorenzo stBTC",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "listingDate": "2024-09-09T18:00:00.000Z"
     }
   ]
 }

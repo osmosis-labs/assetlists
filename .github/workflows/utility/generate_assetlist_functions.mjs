@@ -17,6 +17,7 @@ const zero_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
 const originTraceTypes = [
   "ibc",
   "ibc-cw20",
+  "ibc-bridge",
   "bridge",
   "wrapped",
   "additional-mintage",
@@ -31,7 +32,8 @@ const nonCryptoPlatforms = [
 
 const traceTypesNeedingProvider = [
   "bridge",
-  "synthetic"
+  "synthetic",
+  "ibc-bridge"
 ];
 
 let IS_MAINNET;

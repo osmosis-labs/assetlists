@@ -996,6 +996,55 @@
         "cosmwasm",
         "wasmd_0.24+"
       ]
+    },
+    {
+      "chain_name": "kimatestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Kima",
+      "chain_id": "kima_testnet",
+      "bech32_prefix": "kima",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "kima",
+        "bech32PrefixAccPub": "kimapub",
+        "bech32PrefixValAddr": "kimavaloper",
+        "bech32PrefixValPub": "kimavaloperpub",
+        "bech32PrefixConsAddr": "kimavalcons",
+        "bech32PrefixConsPub": "kimavalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uKIMA",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.0025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-testnet.kima.finance/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-testnet.kima.finance"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer-testnet.kima.finance/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
     }
   ]
 }

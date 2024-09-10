@@ -1431,7 +1431,7 @@
         "chainSuggestionDenom": "note",
         "sourceDenom": "note",
         "coinDecimals": 6,
-        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/symphonytestnet/images/coin_icon.png"
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/symphonytestnet/images/mld.png"
       },
       "feeCurrencies": [
         {
@@ -1439,7 +1439,7 @@
           "chainSuggestionDenom": "note",
           "sourceDenom": "note",
           "coinDecimals": 6,
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/symphonytestnet/images/coin_icon.png",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/symphonytestnet/images/mld.png",
           "gasPriceStep": {
             "low": 0.0025,
             "average": 0.025,
@@ -1453,7 +1453,28 @@
           "chainSuggestionDenom": "note",
           "sourceDenom": "note",
           "coinDecimals": 6,
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/symphonytestnet/images/coin_icon.png"
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/symphonytestnet/images/mld.png"
+        },
+        {
+          "coinDenom": "HUSD",
+          "chainSuggestionDenom": "uusd",
+          "sourceDenom": "uusd",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/symphonytestnet/images/husd.png"
+        },
+        {
+          "coinDenom": "HKHD",
+          "chainSuggestionDenom": "ukhd",
+          "sourceDenom": "ukhd",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/symphonytestnet/images/hhkd.png"
+        },
+        {
+          "coinDenom": "HVND",
+          "chainSuggestionDenom": "uvnd",
+          "sourceDenom": "uvnd",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/symphonytestnet/images/hvnd.png"
         }
       ],
       "apis": {
@@ -1478,6 +1499,72 @@
         "ibc-transfer",
         "cosmwasm",
         "wasmd_0.24+"
+      ]
+    },
+    {
+      "chain_name": "kimatestnet",
+      "status": "live",
+      "networkType": "testnet",
+      "prettyName": "Kima",
+      "chain_id": "kima_testnet",
+      "bech32Prefix": "kima",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "kima",
+        "bech32PrefixAccPub": "kimapub",
+        "bech32PrefixValAddr": "kimavaloper",
+        "bech32PrefixValPub": "kimavaloperpub",
+        "bech32PrefixConsAddr": "kimavalcons",
+        "bech32PrefixConsPub": "kimavalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDecimals": 0
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "KIMA",
+          "chainSuggestionDenom": "uKIMA",
+          "coinMinimalDenom": "ibc/F3BE982F8F56E599A71939F174345C470D7C1F9D443F1822EF3DEA53783D2551",
+          "sourceDenom": "uKIMA",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/kimatestnet/images/kima.png",
+          "gasPriceStep": {
+            "low": 0.0025,
+            "average": 0.025,
+            "high": 0.04
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "KIMA",
+          "chainSuggestionDenom": "uKIMA",
+          "coinMinimalDenom": "ibc/F3BE982F8F56E599A71939F174345C470D7C1F9D443F1822EF3DEA53783D2551",
+          "sourceDenom": "uKIMA",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/kimatestnet/images/kima.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-testnet.kima.finance/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-testnet.kima.finance"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://explorer-testnet.kima.finance/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
       ]
     }
   ]

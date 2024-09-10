@@ -5708,7 +5708,8 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-token.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-token.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-token.svg"
       },
       "images": [
         {
@@ -5717,17 +5718,18 @@
             "base_denom": "orai"
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-token.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-token.svg",
           "theme": {
             "circle": true,
-            "dark_mode": true,
-            "primary_color_hex": "#040404"
+            "primary_color_hex": "#000000",
+            "background_color_hex": "#FFFFFF"
           }
         },
         {
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-white.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-white.svg",
           "theme": {
-            "circle": true,
+            "circle": false,
             "dark_mode": true,
             "primary_color_hex": "#FFFFFF"
           }
@@ -5736,7 +5738,7 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai.svg",
           "theme": {
-            "circle": true,
+            "circle": false,
             "dark_mode": false,
             "primary_color_hex": "#000000"
           }
@@ -23268,6 +23270,66 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allTON.png",
           "theme": {
             "primary_color_hex": "#0088CC"
+          }
+        }
+      ]
+    },
+    {
+      "description": "stBTC is the liquid principal token of the Lorenzo protocol, designed to represent staked Bitcoin within the Babylon ecosystem.\n\n",
+      "denom_units": [
+        {
+          "denom": "ibc/453B5B25834A5D4B8FE1E894E69D73F46424F28E8ED3D8E8CA654AEFF1EC5D3B",
+          "exponent": 0,
+          "aliases": [
+            "stBTC"
+          ]
+        },
+        {
+          "denom": "display_stBTC",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/453B5B25834A5D4B8FE1E894E69D73F46424F28E8ED3D8E8CA654AEFF1EC5D3B",
+      "name": "Lorenzo stBTC",
+      "display": "display_stBTC",
+      "symbol": "stBTC",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "bitcoin",
+            "base_denom": "sat"
+          },
+          "provider": "Lorenzo"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "lorenzo",
+            "base_denom": "stBTC",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-79840",
+            "path": "transfer/channel-79840/stBTC"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lorenzo/images/stBTC.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lorenzo/images/stBTC.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "lorenzo",
+            "base_denom": "stBTC"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lorenzo/images/stBTC.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lorenzo/images/stBTC.svg",
+          "theme": {
+            "primary_color_hex": "#133348"
           }
         }
       ]

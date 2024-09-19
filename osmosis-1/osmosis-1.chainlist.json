@@ -3970,7 +3970,7 @@
       },
       "explorers": [
         {
-          "tx_page": "https://scan.odinprotocol.io/transactions/${txHash}"
+          "tx_page": "https://runa.odinprotocol.io/transactions/${txHash}"
         }
       ],
       "logoURIs": {
@@ -8894,6 +8894,72 @@
         "ibc-go",
         "eth-address-gen",
         "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "andromeda",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Andromeda",
+      "chain_id": "andromeda-1",
+      "bech32_prefix": "andr",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "andr",
+        "bech32PrefixAccPub": "andrpub",
+        "bech32PrefixValAddr": "andrvaloper",
+        "bech32PrefixValPub": "andrvaloperpub",
+        "bech32PrefixConsAddr": "andrvalcons",
+        "bech32PrefixConsPub": "andrvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uandr",
+            "low_gas_price": 0.03,
+            "average_gas_price": 0.05,
+            "high_gas_price": 0.075
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uandr"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://andromeda-rpc.polkachu.com/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://andromeda-api.polkachu.com/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.stavr.tech/Andromeda-Mainnet/tx/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/andromeda/images/andromeda-logo.png",
+        "theme": {
+          "primary_color_hex": "#040404"
+        }
+      },
+      "features": [
+        "cosmwasm",
+        "wasmd_0.24+",
+        "ibc-transfer",
+        "ibc-go"
       ]
     }
   ]

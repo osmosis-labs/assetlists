@@ -571,7 +571,7 @@
       "chain_name": "odin",
       "rpc": "https://rpc.odinprotocol.io/",
       "rest": "https://api.odinprotocol.io/",
-      "explorer_tx_url": "https://scan.odinprotocol.io/transactions/${txHash}",
+      "explorer_tx_url": "https://runa.odinprotocol.io/transactions/${txHash}",
       "keplr_features": [
         "ibc-transfer",
         "ibc-go",
@@ -1371,6 +1371,18 @@
       "rpc": "https://sentry.tm.rpc.routerprotocol.com/",
       "rest": "https://sentry.lcd.routerprotocol.com/",
       "explorer_tx_url": "https://routerscan.io/transactions/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "lorenzo",
+      "rpc": "https://rpc-cosmos.lorenzo-protocol.xyz",
+      "rest": "https://raw-api.lorenzo-protocol.xyz",
+      "explorer_tx_url": "https://scan.lorenzo-protocol.xyz/tx/${txHash}",
       "keplr_features": [
         "ibc-transfer",
         "ibc-go",

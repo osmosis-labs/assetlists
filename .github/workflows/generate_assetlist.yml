@@ -1,8 +1,8 @@
 on: [workflow_dispatch]
-name: Generate Assetlist New
+name: Generate Assetlist
 jobs:
   generate_zone_config:
-    name: Generate Assetlist New
+    name: Generate Assetlist
     runs-on: ubuntu-latest
     
     defaults:
@@ -33,9 +33,9 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
           
-      - name: Run code to Generate Assetlist New
+      - name: Run code to Generate Assetlist
         working-directory: ./.github/workflows/utility
-        run: node generate_assetlist_new.mjs
+        run: node generate_assetlist.mjs
 
       - name: Trigger Translation
         run: |
@@ -48,17 +48,17 @@ jobs:
           github_token: "${{ secrets.GITHUB_TOKEN }}"
           add_timestamp: false
           commit_prefix: "[AUTO]"
-          commit_message: "New assetlist.json Update"
+          commit_message: "assetlist.json Update"
           force: false
-          target_branch: update/assetlist_new
+          target_branch: update/assetlist
       
       - name: Create A PR
         uses: devops-infra/action-pull-request@v0.4.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: update/assetlist_new
+          source_branch: update/assetlist
           target_branch: main
-          title: New assetlist.json Update
+          title: assetlist.json Update
           body: "**Automated pull request**"
           old_string: "**THIS IS AN AUTOMATED UPDATE OF ASSETLIST.JSON**"
           new_string: "** Automatic pull request**"

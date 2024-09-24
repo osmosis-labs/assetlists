@@ -16393,7 +16393,7 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/178248C262DE2E141EE6287EE7AB0854F05F25B0A3F40C4B912FA1C7E51F466E",
-      "name": "Scorum",
+      "name": "Scorum Network",
       "display": "scr",
       "symbol": "SCR",
       "traces": [
@@ -23437,7 +23437,7 @@
           "exponent": 18
         }
       ],
-      "type_asset": "erc20",
+      "type_asset": "sdk.coin",
       "address": "osmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9",
       "base": "factory/osmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9/AVAIL.rt",
       "name": "Avail (Ethereum via Router)",
@@ -23604,6 +23604,65 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/andromeda/images/andromeda-logo.png",
           "theme": {
             "primary_color_hex": "#040404"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Chain-key Bitcoin bridged via Omnity Network.",
+      "denom_units": [
+        {
+          "denom": "factory/osmo10c4y9csfs8q7mtvfg4p9gd8d0acx0hpc2mte9xqzthd7rd3348tsfhaesm/sICP-icrc-ckBTC",
+          "exponent": 0,
+          "aliases": [
+            "uckBTC"
+          ]
+        },
+        {
+          "denom": "ckBTC",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo10c4y9csfs8q7mtvfg4p9gd8d0acx0hpc2mte9xqzthd7rd3348tsfhaesm",
+      "base": "factory/osmo10c4y9csfs8q7mtvfg4p9gd8d0acx0hpc2mte9xqzthd7rd3348tsfhaesm/sICP-icrc-ckBTC",
+      "name": "Chain-key Bitcoin",
+      "display": "ckBTC",
+      "symbol": "ckBTC",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "bitcoin",
+            "base_denom": "sat"
+          },
+          "provider": "Omnity Network"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "internetcomputer",
+            "base_denom": "uckBTC"
+          },
+          "provider": "Omnity Network"
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/internetcomputer/images/ckbtc.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/internetcomputer/images/ckbtc.png"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "internetcomputer",
+            "base_denom": "uckBTC"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/internetcomputer/images/ckbtc.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/internetcomputer/images/ckbtc.png",
+          "theme": {
+            "circle": true,
+            "primary_color_hex": "#3B00B9",
+            "background_color_hex": "#3B00B9"
           }
         }
       ]
@@ -23975,6 +24034,7 @@
           ]
         }
       ],
+      "type_asset": "sdk.coin",
       "base": "factory/osmo13gu58hzw3e9aqpj25h67m7snwcjuccd7v4p55w/brnz",
       "name": "Branez",
       "display": "factory/osmo13gu58hzw3e9aqpj25h67m7snwcjuccd7v4p55w/brnz",
@@ -24086,6 +24146,282 @@
       "name": "Mars Looped USDC",
       "display": "loopedUSDCmars",
       "symbol": "loopedUSDCmars"
+    },
+    {
+      "description": "Fractionalized Pixel Wizards",
+      "extended_description": "Fractionalized Pixel Wizards NFT Via Fractal.fun",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1dywfmhyc8y0wga7qpzej0x0mgwqg25fj4eccp494w8yafzdpgamsx9ryyv/fWIZ",
+          "exponent": 0
+        },
+        {
+          "denom": "fWIZ",
+          "exponent": 9
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1dywfmhyc8y0wga7qpzej0x0mgwqg25fj4eccp494w8yafzdpgamsx9ryyv",
+      "base": "factory/osmo1dywfmhyc8y0wga7qpzej0x0mgwqg25fj4eccp494w8yafzdpgamsx9ryyv/fWIZ",
+      "name": "fWIZ",
+      "display": "fWIZ",
+      "symbol": "fWIZ",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fWIZ.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fWIZ.png",
+          "theme": {
+            "primary_color_hex": "#639BFF"
+          }
+        }
+      ],
+      "keywords": [
+        "nft"
+      ],
+      "socials": {
+        "website": "https://fractal.fun",
+        "twitter": "https://twitter.com/fractaldotfun"
+      }
+    },
+    {
+      "description": "Fractionalized Pixel Witches",
+      "extended_description": "Fractionalized Pixel Witches NFT Via Fractal.fun",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1dywfmhyc8y0wga7qpzej0x0mgwqg25fj4eccp494w8yafzdpgamsx9ryyv/fWITCH",
+          "exponent": 0
+        },
+        {
+          "denom": "fWITCH",
+          "exponent": 9
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1dywfmhyc8y0wga7qpzej0x0mgwqg25fj4eccp494w8yafzdpgamsx9ryyv",
+      "base": "factory/osmo1dywfmhyc8y0wga7qpzej0x0mgwqg25fj4eccp494w8yafzdpgamsx9ryyv/fWITCH",
+      "name": "fWITCH",
+      "display": "fWITCH",
+      "symbol": "fWITCH",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fWITCH.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fWITCH.png",
+          "theme": {
+            "primary_color_hex": "#639BFF"
+          }
+        }
+      ],
+      "keywords": [
+        "nft"
+      ],
+      "socials": {
+        "website": "https://fractal.fun",
+        "twitter": "https://twitter.com/fractaldotfun"
+      }
+    },
+    {
+      "description": "Fractionalized Cryptonium Maker",
+      "extended_description": "Fractionalized Cryptonium Maker NFT Via Fractal.fun",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1dywfmhyc8y0wga7qpzej0x0mgwqg25fj4eccp494w8yafzdpgamsx9ryyv/fCRYPTONIUM",
+          "exponent": 0
+        },
+        {
+          "denom": "fCRYPTONIUM",
+          "exponent": 9
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1dywfmhyc8y0wga7qpzej0x0mgwqg25fj4eccp494w8yafzdpgamsx9ryyv",
+      "base": "factory/osmo1dywfmhyc8y0wga7qpzej0x0mgwqg25fj4eccp494w8yafzdpgamsx9ryyv/fCRYPTONIUM",
+      "name": "fCRYPTONIUM",
+      "display": "fCRYPTONIUM",
+      "symbol": "fCRYPTONIUM",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fCRYPTONIUM.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fCRYPTONIUM.png",
+          "theme": {
+            "primary_color_hex": "#639BFF"
+          }
+        }
+      ],
+      "keywords": [
+        "nft"
+      ],
+      "socials": {
+        "website": "https://fractal.fun",
+        "twitter": "https://twitter.com/fractaldotfun"
+      }
+    },
+    {
+      "description": "Fractionalized Geckies",
+      "extended_description": "Fractionalized Geckies NFT Via Fractal.fun",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1dywfmhyc8y0wga7qpzej0x0mgwqg25fj4eccp494w8yafzdpgamsx9ryyv/fGECK",
+          "exponent": 0
+        },
+        {
+          "denom": "fGECK",
+          "exponent": 9
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1dywfmhyc8y0wga7qpzej0x0mgwqg25fj4eccp494w8yafzdpgamsx9ryyv",
+      "base": "factory/osmo1dywfmhyc8y0wga7qpzej0x0mgwqg25fj4eccp494w8yafzdpgamsx9ryyv/fGECK",
+      "name": "fGECK",
+      "display": "fGECK",
+      "symbol": "fGECK",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fGECK.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fGECK.png",
+          "theme": {
+            "primary_color_hex": "#639BFF"
+          }
+        }
+      ],
+      "keywords": [
+        "nft"
+      ],
+      "socials": {
+        "website": "https://fractal.fun",
+        "twitter": "https://twitter.com/fractaldotfun"
+      }
+    },
+    {
+      "description": "Fractionalized Atlas DAO",
+      "extended_description": "Fractionalized Atlas DAO NFT Via Fractal.fun",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1dywfmhyc8y0wga7qpzej0x0mgwqg25fj4eccp494w8yafzdpgamsx9ryyv/fATLAS",
+          "exponent": 0
+        },
+        {
+          "denom": "fATLAS",
+          "exponent": 9
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1dywfmhyc8y0wga7qpzej0x0mgwqg25fj4eccp494w8yafzdpgamsx9ryyv",
+      "base": "factory/osmo1dywfmhyc8y0wga7qpzej0x0mgwqg25fj4eccp494w8yafzdpgamsx9ryyv/fATLAS",
+      "name": "fATLAS",
+      "display": "fATLAS",
+      "symbol": "fATLAS",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fATLAS.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fATLAS.png",
+          "theme": {
+            "primary_color_hex": "#639BFF"
+          }
+        }
+      ],
+      "keywords": [
+        "nft"
+      ],
+      "socials": {
+        "website": "https://fractal.fun",
+        "twitter": "https://twitter.com/fractaldotfun"
+      }
+    },
+    {
+      "description": "Fractionalized Rekt Bulls",
+      "extended_description": "Fractionalized Rekt Bulls NFT Via Fractal.fun",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1dywfmhyc8y0wga7qpzej0x0mgwqg25fj4eccp494w8yafzdpgamsx9ryyv/fBULLS",
+          "exponent": 0
+        },
+        {
+          "denom": "fBULLS",
+          "exponent": 9
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1dywfmhyc8y0wga7qpzej0x0mgwqg25fj4eccp494w8yafzdpgamsx9ryyv",
+      "base": "factory/osmo1dywfmhyc8y0wga7qpzej0x0mgwqg25fj4eccp494w8yafzdpgamsx9ryyv/fBULLS",
+      "name": "fBULLS",
+      "display": "fBULLS",
+      "symbol": "fBULLS",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fBULLS.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fBULLS.png",
+          "theme": {
+            "primary_color_hex": "#639BFF"
+          }
+        }
+      ],
+      "keywords": [
+        "nft"
+      ],
+      "socials": {
+        "website": "https://fractal.fun",
+        "twitter": "https://twitter.com/fractaldotfun"
+      }
+    },
+    {
+      "description": "Roostock BTC bridged via Router.",
+      "type_asset": "sdk.coin",
+      "address": "osmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9/BTC.rt",
+          "exponent": 0,
+          "aliases": [
+            "0x542FDA317318eBf1d3DeAF76E0B632741a7e677d",
+            "sat"
+          ]
+        },
+        {
+          "denom": "rbtc",
+          "exponent": 18
+        }
+      ],
+      "base": "factory/osmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9/BTC.rt",
+      "name": "Rootstock Smart Bitcoin",
+      "display": "rbtc",
+      "symbol": "RBTC",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "rootstock",
+            "base_denom": "0x542FDA317318eBf1d3DeAF76E0B632741a7e677d"
+          },
+          "provider": "Router"
+        }
+      ],
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "rootstock",
+            "base_denom": "sat"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/rootstock/images/rbtc.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/rootstock/images/rbtc.png",
+          "theme": {
+            "circle": false,
+            "primary_color_hex": "#FF9931",
+            "background_color_hex": "#00000000"
+          }
+        }
+      ]
     }
   ]
 }

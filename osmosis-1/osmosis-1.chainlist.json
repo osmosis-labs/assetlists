@@ -8967,6 +8967,66 @@
         "ibc-transfer",
         "ibc-go"
       ]
+    },
+    {
+      "chain_name": "kimanetwork",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Kima Network",
+      "chain_id": "kima_network",
+      "bech32_prefix": "kima",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "kima",
+        "bech32PrefixAccPub": "kimapub",
+        "bech32PrefixValAddr": "kimavaloper",
+        "bech32PrefixValPub": "kimavaloperpub",
+        "bech32PrefixConsAddr": "kimavalcons",
+        "bech32PrefixConsPub": "kimavalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uKIMA",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.0025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uKIMA"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.kima.network/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.kima.network/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.kima.network/transactions/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.svg"
+      },
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
     }
   ]
 }

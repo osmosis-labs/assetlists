@@ -989,6 +989,57 @@
       "unstable": false,
       "disabled": false,
       "preview": false
+    },
+    {
+      "chainName": "nomictestnet",
+      "sourceDenom": "usat",
+      "coinMinimalDenom": "ibc/DC0EB16363A369425F3E77AD52BAD3CF76AE966D27506058959515867B5B267D",
+      "symbol": "nBTC",
+      "decimals": 14,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nbtc.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nbtc.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "nomictestnet",
+            "chainId": "nomic-testnet-6",
+            "sourceDenom": "usat",
+            "port": "transfer",
+            "channelId": "channel-2"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-4179",
+            "path": "transfer/channel-4179/usat"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "nomictestnet",
+          "sourceDenom": "usat",
+          "chainType": "cosmos",
+          "chainId": "nomic-testnet-6",
+          "symbol": "nBTC",
+          "decimals": 14,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nbtc.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nbtc.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/DC0EB16363A369425F3E77AD52BAD3CF76AE966D27506058959515867B5B267D",
+      "name": "Nomic Bitcoin",
+      "isAlloyed": false,
+      "verified": true,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
     }
   ]
 }

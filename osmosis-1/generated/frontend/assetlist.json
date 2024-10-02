@@ -301,8 +301,8 @@
       },
       "coingeckoId": "axelar-usdt",
       "price": {
-        "poolId": "1316",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1150",
+        "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
       },
       "categories": [
         "stablecoin"
@@ -1422,8 +1422,8 @@
       },
       "coingeckoId": "persistence",
       "price": {
-        "poolId": "1101",
-        "denom": "uosmo"
+        "poolId": "1773",
+        "denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc"
       },
       "categories": [
         "liquid_staking"
@@ -3830,7 +3830,7 @@
       "coingeckoId": "frax",
       "price": {
         "poolId": "679",
-        "denom": "ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4"
+        "denom": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC"
       },
       "categories": [
         "stablecoin"
@@ -5441,8 +5441,8 @@
       },
       "coingeckoId": "kujira",
       "price": {
-        "poolId": "744",
-        "denom": "uosmo"
+        "poolId": "1161",
+        "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
       },
       "categories": [
         "defi"
@@ -15001,8 +15001,8 @@
       },
       "coingeckoId": "wrapped-steth",
       "price": {
-        "poolId": "1742",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1988",
+        "denom": "factory/osmo1k6c8jln7ejuqwtqmay3yvzrg3kueaczl96pk067ldg8u835w0yhsw27twm/alloyed/allETH"
       },
       "categories": [
         "liquid_staking"
@@ -18221,8 +18221,8 @@
       },
       "coingeckoId": "sail-dao",
       "price": {
-        "poolId": "1815",
-        "denom": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9"
+        "poolId": "1745",
+        "denom": "uosmo"
       },
       "categories": [
         "sail_initiative"
@@ -19106,8 +19106,8 @@
       },
       "coingeckoId": "saga-2",
       "price": {
-        "poolId": "1670",
-        "denom": "uosmo"
+        "poolId": "1671",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "gaming"
@@ -22341,7 +22341,7 @@
       },
       "coingeckoId": "bitcoin",
       "price": {
-        "poolId": "1942",
+        "poolId": "1943",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
@@ -23201,8 +23201,8 @@
       },
       "coingeckoId": "ethereum",
       "price": {
-        "poolId": "1988",
-        "denom": "ibc/2F21E6D4271DE3F561F20A02CD541DAF7405B1E9CB3B9B07E3C2AC7D8A4338A5"
+        "poolId": "1948",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
       "transferMethods": [],
@@ -24554,11 +24554,11 @@
       "variantGroupKey": "ibc/B67DF59507B3755EEDE0866C449445BD54B4DA82CCEBA89D775E53DC35664255",
       "name": "Mars Protocol token",
       "isAlloyed": false,
-      "verified": false,
+      "verified": true,
       "unstable": false,
       "disabled": false,
       "preview": false,
-      "listingDate": "2024-08-28T20:00:00.000Z"
+      "listingDate": "2024-10-01T20:00:00.000Z"
     },
     {
       "chainName": "oraichain",
@@ -25196,6 +25196,60 @@
       "disabled": false,
       "preview": false,
       "listingDate": "2024-09-26T03:00:00.000Z"
+    },
+    {
+      "chainName": "kimanetwork",
+      "sourceDenom": "uKIMA",
+      "coinMinimalDenom": "ibc/A6712952E566B8A9F29D0A533F043C3CE3CF9870B01A2180E390133119C14A71",
+      "symbol": "KIMA",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.svg"
+      },
+      "categories": [
+        "bridges"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "kimanetwork",
+            "chainId": "kima_network",
+            "sourceDenom": "uKIMA",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-83350",
+            "path": "transfer/channel-83350/uKIMA"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "kimanetwork",
+          "sourceDenom": "uKIMA",
+          "chainType": "cosmos",
+          "chainId": "kima_network",
+          "symbol": "KIMA",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/A6712952E566B8A9F29D0A533F043C3CE3CF9870B01A2180E390133119C14A71",
+      "name": "Kima Network",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "listingDate": "2024-10-03T03:00:00.000Z"
     }
   ]
 }

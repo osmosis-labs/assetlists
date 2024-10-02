@@ -120,6 +120,26 @@
       "chain_name": "kimanetworktestnet",
       "base_denom": "uKIMA",
       "osmosis_verified": true
+    },
+    {
+      "chain_name": "nomictestnet",
+      "base_denom": "usat",
+      "osmosis_verified": true,
+      "_comment": "$nBTC",
+      "override_properties": {
+        "ibc": {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "nomictestnet",
+            "base_denom": "usat",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-4179",
+            "path": "transfer/channel-4179/usat"
+          }
+        }
+      }
     }
   ]
 }

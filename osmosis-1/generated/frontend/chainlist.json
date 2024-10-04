@@ -16664,6 +16664,13 @@
           "sourceDenom": "factory/neutron133xakkrfksq39wxy575unve2nyehg5npx75nph/GOP",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/gop.png"
+        },
+        {
+          "coinDenom": "ARENA",
+          "chainSuggestionDenom": "factory/neutron129ukd5cwahcjkccujz87rjemjukff7jf6sau72qrhva677xgz9gs4m4jeq/uarena",
+          "sourceDenom": "factory/neutron129ukd5cwahcjkccujz87rjemjukff7jf6sau72qrhva677xgz9gs4m4jeq/uarena",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/arena_dao.png"
         }
       ],
       "description": "The most secure CosmWasm platform in Cosmos, Neutron lets smart-contracts leverage bleeding-edge Interchain technology with minimal overhead.",
@@ -20732,6 +20739,74 @@
       "explorers": [
         {
           "txPage": "https://explorer.kima.network/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "stratos",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Stratos",
+      "chain_id": "stratos-1",
+      "bech32Prefix": "st",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "st",
+        "bech32PrefixAccPub": "stpub",
+        "bech32PrefixValAddr": "stvaloper",
+        "bech32PrefixValPub": "stvaloperpub",
+        "bech32PrefixConsAddr": "stvalcons",
+        "bech32PrefixConsPub": "stvalconspub"
+      },
+      "slip44": 606,
+      "stakeCurrency": {
+        "coinDecimals": 0
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "STOS",
+          "chainSuggestionDenom": "wei",
+          "coinMinimalDenom": "ibc/ABD49F44559CB3E557CC458459CB6A67CEBD66E23C7674A0B2B445230BDA1F6C",
+          "sourceDenom": "wei",
+          "coinDecimals": 18,
+          "coinGeckoId": "stratos",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stratos/images/stratos.png",
+          "gasPriceStep": {
+            "low": 1000000000,
+            "average": 1200000000,
+            "high": 1600000000
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "STOS",
+          "chainSuggestionDenom": "wei",
+          "coinMinimalDenom": "ibc/ABD49F44559CB3E557CC458459CB6A67CEBD66E23C7674A0B2B445230BDA1F6C",
+          "sourceDenom": "wei",
+          "coinDecimals": 18,
+          "coinGeckoId": "stratos",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stratos/images/stratos.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.thestratos.org"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.thestratos.org"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://explorer.thestratos.org/stratos/transactions/${txHash}"
         }
       ],
       "features": [

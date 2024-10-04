@@ -9027,6 +9027,61 @@
         "ibc-go",
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "stratos",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Stratos",
+      "chain_id": "stratos-1",
+      "bech32_prefix": "st",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "st",
+        "bech32PrefixAccPub": "stpub",
+        "bech32PrefixValAddr": "stvaloper",
+        "bech32PrefixValPub": "stvaloperpub",
+        "bech32PrefixConsAddr": "stvalcons",
+        "bech32PrefixConsPub": "stvalconspub"
+      },
+      "slip44": 606,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "wei",
+            "low_gas_price": 1000000000,
+            "average_gas_price": 1200000000,
+            "high_gas_price": 1600000000
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.thestratos.org"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.thestratos.org"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.thestratos.org/stratos/transactions/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stratos/images/stratos.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stratos/images/stratos.svg",
+        "theme": {
+          "primary_color_hex": "#04847c"
+        }
+      },
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
     }
   ]
 }

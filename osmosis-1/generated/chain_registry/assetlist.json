@@ -24003,6 +24003,62 @@
       ]
     },
     {
+      "description": "STOS coin is the token for the Stratos (STOS) cosmos based blockchain",
+      "denom_units": [
+        {
+          "denom": "ibc/ABD49F44559CB3E557CC458459CB6A67CEBD66E23C7674A0B2B445230BDA1F6C",
+          "exponent": 0,
+          "aliases": [
+            "wei"
+          ]
+        },
+        {
+          "denom": "gwei",
+          "exponent": 9
+        },
+        {
+          "denom": "stos",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/ABD49F44559CB3E557CC458459CB6A67CEBD66E23C7674A0B2B445230BDA1F6C",
+      "name": "Stratos",
+      "display": "stos",
+      "symbol": "STOS",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stratos",
+            "base_denom": "wei",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-81016",
+            "path": "transfer/channel-81016/wei"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stratos/images/stratos.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stratos/images/stratos.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "stratos",
+            "base_denom": "wei"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stratos/images/stratos.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stratos/images/stratos.svg",
+          "theme": {
+            "primary_color_hex": "#04847c"
+          }
+        }
+      ]
+    },
+    {
       "description": "The native token of Furya",
       "denom_units": [
         {

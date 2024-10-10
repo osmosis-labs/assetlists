@@ -23,23 +23,6 @@ const mapAssets = (sourceAssets) => {
   });
 };
 
-function getAssetOriginTrace(asset) {
-  if (asset.traces) {
-    const traces = asset.traces;
-    let trace;
-    for (let i = traces.length - 1; i >= 0; i--) {
-      if (traces[i].type === "bridge") { return traces[i]; }
-      if (
-        traces[i].type === "ibc" ||
-        traces[i].type === "ibc-cw20"
-      ) {
-        trace = traces[i];
-      } else { break; }
-    }
-    return trace;
-  }
-}
-
 function isStaking(chainName, baseDenom) {
 
   let stakingAssetDenom = chain_reg.getFileProperty(chainName, "chain", "staking")?.staking_tokens?.[0].denom;
@@ -51,83 +34,22 @@ function isStaking(chainName, baseDenom) {
 
 }
 
-function getOnchainAssetType(chainName, baseDenom) {
+function getAssetType(asset) {
 
-  const native_types = [
-    "bitcoin-like",
-    "evm-base",
-    "sdk.coin",
-    "svm-base",
-    "substrate",
-    "unknown"
-  ];
-
-  const assetType = chain_reg.getAssetProperty(chainName, baseDenom, "type_asset");
-
-  if (native_types.includes(assetType) || !assetType) {
-    if (isStaking(chainName, baseDenom)) {
-      return "staking";
-    } else {
-      return "native";
-    }
-  } else {
-    return assetType;
+  const ibc_type = "ics20";
+  if (asset.type_asset === ibc_type) {
+    return "ibc";
   }
 
-}
-
-function getLocalAssetType(chainName, asset) {
-
-  if (asset.type_asset === "ics20") {
-    return "ibc";
-  } else if (Array.isArray(asset.traces) && asset.traces.length > 0) {
+  const bridge_type = "bridge";
+  if (Array.isArray(asset.traces) && asset.traces.length > 0) {
     const typeOfLastTrace = asset.traces[asset.traces.length - 1]?.type;
-    if (typeOfLastTrace === "bridge") {
+    if (typeOfLastTrace === bridge_type) {
       return "bridge";
     }
   }
-  return getOnchainAssetType(chainName, asset.base);
 
-}
-
-function getOriginAssetType(localChainName, asset) {
-
-  const originTrace = getAssetOriginTrace(asset);
-  let chainName = localChainName;
-  let baseDenom = asset.base;
-  if (originTrace) {
-    chainName = originTrace.counterparty.chain_name;
-    baseDenom = originTrace.counterparty.base_denom;
-  }
-  return getOnchainAssetType(chainName, baseDenom);
-
-}
-
-function getOriginAssetDenom(asset) {
-
-  const originTrace = getAssetOriginTrace(asset);
-  if (!originTrace) {
-    return asset.base;
-  } else {
-    return originTrace.counterparty.base_denom;
-  }
-
-}
-
-function getOriginAssetChain(chainName, asset) {
-
-  const originTrace = getAssetOriginTrace(asset);
-  if (!originTrace) {
-    return chainName;
-  } else {
-    return originTrace.counterparty.chain_name;
-  }
-
-}
-
-function getAssetSymbol(asset) {
-
-  return asset.symbol;
+  return "native";
 
 }
 
@@ -137,14 +59,56 @@ function getAssetDecimals(chainName, asset) {
 
 }
 
-function getAssetIbcDetails(asset) {
+function getAssetPath(chainName, asset) {
 
-  let trace = asset.traces[asset.traces.length - 1];
-  if (trace.type === "ibc") {
-    trace.counterparty.port = "transfer";
-    trace.chain.port = "transfer";
+  if (Array.isArray(asset.traces) && asset.traces.length > 0) {
+    const traces = asset.traces;
+    let path = "";
+    for (let i = traces.length - 1; i >= 0; i--) {
+      if (traces[i].type === "bridge") {
+        path = getCosmoStationChainName(traces[i].counterparty.chain_name) + ">" + path;
+        break;
+      }
+      if (
+        traces[i].type === "ibc" ||
+        traces[i].type === "ibc-cw20"
+      ) {
+        path = getCosmoStationChainName(traces[i].counterparty.chain_name) + ">" + path;
+      } else { break; }
+    }
+    if (path) {
+      path += chainName;
+    }
+    return path;
   }
-  return trace;
+
+}
+
+function getIbcInfo(chainName, asset) {
+
+  const transferPort = "transfer";
+  const trace = asset.traces[asset.traces.length - 1];
+  let ibc_info = {};
+  ibc_info.path = getAssetPath(chainName, asset);
+  ibc_info.client = {
+    channel: trace.chain.channel_id,
+    port: trace.chain.port ?? transferPort
+  };
+  ibc_info.counter_party = {
+    channel: trace.counterparty.channel_id,
+    port: trace.counterparty.port ?? transferPort,
+    chain: getCosmoStationChainName(trace.counterparty.chain_name),
+    denom: trace.counterparty.base_denom
+  };
+  return ibc_info;
+
+}
+
+function getBridgeInfo(chainName, asset) {
+
+  let bridge_info = {};
+  bridge_info.path = getAssetPath(chainName, asset);
+  return bridge_info;
 
 }
 
@@ -162,36 +126,70 @@ function getAssetCoinGeckoId(chainName, asset) {
 
 }
 
-const processAsset = (chainName, asset) => {
-  // Customize this logic based on the transformations you need
-  let assetObject = {
-    denom: asset.base,
-    type: getLocalAssetType(chainName, asset),
-    origin_chain: getOriginAssetChain(chainName, asset),
-    origin_denom: getOriginAssetDenom(asset),
-    origin_type: getOriginAssetType(chainName, asset),
-    symbol: getAssetSymbol(asset),
-    decimals: getAssetDecimals(chainName, asset),
-    enable: true,
-    path: "path",
-  };
 
-  if (assetObject.type === "ibc") {
-    const assetIbcDetails = getAssetIbcDetails(asset);
-    //console.log(assetIbcDetails);
-    assetObject.channel = assetIbcDetails.chain.channel_id;
-    assetObject.port = assetIbcDetails.chain.port;
-    assetObject.counter_party = {
-      channel: assetIbcDetails.counterparty.channel_id,
-      port: assetIbcDetails.counterparty.port,
-      denom: assetIbcDetails.counterparty.base_denom
+//Global Var
+const cosmoStationChainsMap = new Map();
+
+async function saveCosmoStationChainNames() {
+
+  const cosmoStationApiUrl = "https://front.api.mintscan.io/v10/meta/support/chains";
+
+  try {
+    // Fetch data from the API
+    const response = await fetch(cosmoStationApiUrl);
+    if (!response.ok) {
+      throw new Error(`Error fetching data: ${response.statusText}`);
     }
-    //console.log(assetIbcDetails.counterparty.port);
+
+    const cosmoStationData = await response.json();
+    const cosmoStationChains = cosmoStationData.chains;
+
+    // Populate the map with chainId as key and cosmoStationChainName as value
+    if (Array.isArray(cosmoStationChains)) {
+      cosmoStationChains.forEach(chainObject => {
+        cosmoStationChainsMap.set(chainObject.chain_id, chainObject.chain);
+      });
+    }
+
+    console.log("Map initialized with chain ID to Cosmo Station chain name pairs.");
+  } catch (error) {
+    console.error('Error initializing Cosmo Station chains map:', error);
+  }
+  
+}
+
+function getCosmoStationChainName(chainRegistryChainName) {
+
+  // Get chain-id from chain name
+  const chainId = chain_reg.getFileProperty(chainRegistryChainName, "chain", "chain_id");
+  if (!chainId) {
+    return chainRegistryChainName;
   }
 
-  assetObject.image = "image";
-  assetObject.coinGeckoId = getAssetCoinGeckoId(chainName, asset);
+  //Get the chain name from the map
+  return cosmoStationChainsMap.get(chainId) || chainRegistryChainName;
 
+}
+
+
+const processAsset = (chainName, asset) => {
+
+  let assetObject = {};
+  assetObject.type = getAssetType(asset);
+  assetObject.denom = asset.base;
+  assetObject.name = asset.name;
+  assetObject.symbol = asset.symbol;
+  assetObject.decimals = getAssetDecimals(chainName, asset);
+  assetObject.description = asset.description;
+  assetObject.image = asset.images?.[0].png ?? asset.images?.[0].svg;
+  assetObject.color = asset.images?.[0].theme?.primary_color_hex;
+  assetObject.coinGeckoId = getAssetCoinGeckoId(chainName, asset);
+  if (assetObject.type === "ibc") {
+    assetObject.ibc_info = getIbcInfo(chainName, asset);
+  }
+  if (assetObject.type === "bridge") {
+    assetObject.bridge_info = getBridgeInfo(chainName, asset);
+  }
   return assetObject;
 };
 
@@ -201,9 +199,7 @@ const generateMintscanAssets = (chainName) => {
 
   // Read the source file
   const sourceData = zone.readFromFile(chainName, zone.chainRegAssetlist, zone.assetlistFileName);
-
   const transformedAssets = [];
-
   for (const asset of sourceData.assets) {
     // Process each asset using the custom processing function
     const transformedAsset = processAsset(chainName, asset);
@@ -218,7 +214,8 @@ const generateMintscanAssets = (chainName) => {
 };
 
 // Convert JSON
-function main() {
+async function main() {
+  await saveCosmoStationChainNames();
   let chainName = "osmosis";
   generateMintscanAssets(chainName);
 }

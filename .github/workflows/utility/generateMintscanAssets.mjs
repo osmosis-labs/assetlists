@@ -34,8 +34,9 @@ function getAssetOriginTrace(asset) {
         traces[i].type === "ibc-cw20"
       ) {
         trace = traces[i];
-      } else { return trace; }
+      } else { break; }
     }
+    return trace;
   }
 }
 

@@ -94,7 +94,7 @@ function getIbcInfo(chainName, asset) {
     channel: trace.chain.channel_id,
     port: trace.chain.port ?? transferPort
   };
-  ibc_info.counter_party = {
+  ibc_info.counterparty = {
     channel: trace.counterparty.channel_id,
     port: trace.counterparty.port ?? transferPort,
     chain: getCosmoStationChainName(trace.counterparty.chain_name),

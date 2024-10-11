@@ -9082,6 +9082,65 @@
         "ibc-go",
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "int3face",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Int3face Network",
+      "chain_id": "int3fce-1",
+      "bech32_prefix": "int3",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "int3",
+        "bech32PrefixAccPub": "int3pub",
+        "bech32PrefixValAddr": "int3valoper",
+        "bech32PrefixValPub": "int3valoperpub",
+        "bech32PrefixConsAddr": "int3valcons",
+        "bech32PrefixConsPub": "int3valconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uint3",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.0025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uint3"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.mainnet.int3face.zone/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.mainnet.int3face.zone/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://int3face.zone/explorer/int3face-1/tx/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
+      },
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
     }
   ]
 }

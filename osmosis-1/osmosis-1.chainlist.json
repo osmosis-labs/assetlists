@@ -1143,7 +1143,7 @@
       "chain_name": "impacthub",
       "status": "live",
       "network_type": "mainnet",
-      "pretty_name": "Impacts Hub",
+      "pretty_name": "Impact Hub",
       "chain_id": "ixo-5",
       "bech32_prefix": "ixo",
       "bech32_config": {
@@ -9220,6 +9220,69 @@
         "ibc-go",
         "cosmwasm",
         "wasmd_0.24+"
+      ]
+    },
+    {
+      "chain_name": "int3face",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Int3face",
+      "chain_id": "int3face-1",
+      "bech32_prefix": "int3",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "int3",
+        "bech32PrefixAccPub": "int3pub",
+        "bech32PrefixValAddr": "int3valoper",
+        "bech32PrefixValPub": "int3valoperpub",
+        "bech32PrefixConsAddr": "int3valcons",
+        "bech32PrefixConsPub": "int3valconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uint3",
+            "fixed_min_gas_price": 0.0025,
+            "low_gas_price": 0.0025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uint3"
+          }
+        ]
+      },
+      "description": "Int3face is a cross-chain bridge that connects the Cosmos ecosystem with other blockchains.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.mainnet.int3face.zone/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.mainnet.int3face.zone/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.int3face.zone/int3face-1/tx/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png",
+        "theme": {
+          "primary_color_hex": "#040404"
+        }
+      },
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
       ]
     }
   ]

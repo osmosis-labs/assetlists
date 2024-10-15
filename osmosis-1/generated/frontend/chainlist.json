@@ -7198,7 +7198,7 @@
       "chain_name": "impacthub",
       "status": "live",
       "networkType": "mainnet",
-      "prettyName": "Impacts Hub",
+      "prettyName": "Impact Hub",
       "chain_id": "ixo-5",
       "bech32Prefix": "ixo",
       "bech32Config": {
@@ -10109,9 +10109,9 @@
         },
         {
           "coinDenom": "DRUGS",
-          "chainSuggestionDenom": "factory/inj1sklcy2px26jj73ffs2f7fmxw77zsts66prrqxr/DRUGS",
-          "sourceDenom": "factory/inj1sklcy2px26jj73ffs2f7fmxw77zsts66prrqxr/DRUGS",
-          "coinDecimals": 9,
+          "chainSuggestionDenom": "factory/inj178zy7myyxewek7ka7v9hru8ycpvfnen6xeps89/DRUGS",
+          "sourceDenom": "factory/inj178zy7myyxewek7ka7v9hru8ycpvfnen6xeps89/DRUGS",
+          "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/drugs.png"
         }
       ],
@@ -21718,6 +21718,110 @@
         "ibc-go",
         "cosmwasm",
         "wasmd_0.24+"
+      ]
+    },
+    {
+      "chain_name": "int3face",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Int3face",
+      "chain_id": "int3face-1",
+      "bech32Prefix": "int3",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "int3",
+        "bech32PrefixAccPub": "int3pub",
+        "bech32PrefixValAddr": "int3valoper",
+        "bech32PrefixValPub": "int3valoperpub",
+        "bech32PrefixConsAddr": "int3valcons",
+        "bech32PrefixConsPub": "int3valconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDenom": "INT3",
+        "chainSuggestionDenom": "uint3",
+        "coinMinimalDenom": "ibc/7D29C888219883C47C623578ACACFC89CC29AA70FBF09C895A1EED911BF90F32",
+        "sourceDenom": "uint3",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "INT3",
+          "chainSuggestionDenom": "uint3",
+          "coinMinimalDenom": "ibc/7D29C888219883C47C623578ACACFC89CC29AA70FBF09C895A1EED911BF90F32",
+          "sourceDenom": "uint3",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png",
+          "gasPriceStep": {
+            "low": 0.0025,
+            "average": 0.025,
+            "high": 0.04
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "INT3",
+          "chainSuggestionDenom": "uint3",
+          "coinMinimalDenom": "ibc/7D29C888219883C47C623578ACACFC89CC29AA70FBF09C895A1EED911BF90F32",
+          "sourceDenom": "uint3",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
+        },
+        {
+          "coinDenom": "BTC",
+          "chainSuggestionDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-btc",
+          "coinMinimalDenom": "ibc/2F4258D6E1E01B203D6CA83F2C7E4959615053A21EC2C2FC196F7911CAC832EF",
+          "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-btc",
+          "coinDecimals": 8,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3btc.png"
+        },
+        {
+          "coinDenom": "BCH",
+          "chainSuggestionDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-cash-bch",
+          "coinMinimalDenom": "ibc/869E01805EBBDDCAEA588666CD5149728B7DC7D69F30D92F77AD67F77CEB3FDA",
+          "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-cash-bch",
+          "coinDecimals": 8,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3bch.png"
+        },
+        {
+          "coinDenom": "DOGE",
+          "chainSuggestionDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/dogecoin-doge",
+          "coinMinimalDenom": "ibc/B3DFDC2958A2BE482532DA3B6B5729B469BE7475598F7487D98B1B3E085245DE",
+          "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/dogecoin-doge",
+          "coinDecimals": 8,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3doge.png"
+        },
+        {
+          "coinDenom": "LTC",
+          "chainSuggestionDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/litecoin-ltc",
+          "coinMinimalDenom": "ibc/905326586AE1C86AC8B1CDB20BE957DE5FB23963EDD2C9ADD3E835CC22115A46",
+          "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/litecoin-ltc",
+          "coinDecimals": 8,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3ltc.png"
+        }
+      ],
+      "description": "Int3face is a cross-chain bridge that connects the Cosmos ecosystem with other blockchains.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.mainnet.int3face.zone/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.mainnet.int3face.zone/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://explorer.int3face.zone/int3face-1/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
       ]
     }
   ]

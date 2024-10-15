@@ -2063,7 +2063,7 @@
         }
       ],
       "variantGroupKey": "ibc/F3FF7A84A73B62921538642F9797C423D2B4C4ACB3C7FCFFCE7F12AA69909C4B",
-      "name": "Impacts Hub",
+      "name": "Impact Hub",
       "isAlloyed": false,
       "verified": true,
       "unstable": false,
@@ -5441,8 +5441,8 @@
       },
       "coingeckoId": "kujira",
       "price": {
-        "poolId": "744",
-        "denom": "uosmo"
+        "poolId": "1161",
+        "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
       },
       "categories": [
         "defi"
@@ -14587,8 +14587,8 @@
       },
       "coingeckoId": "celestia",
       "price": {
-        "poolId": "1248",
-        "denom": "uosmo"
+        "poolId": "1247",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
       "transferMethods": [
@@ -25484,6 +25484,345 @@
       "disabled": false,
       "preview": false,
       "listingDate": "2024-10-15T18:00:00.000Z"
+    },
+    {
+      "chainName": "int3face",
+      "sourceDenom": "uint3",
+      "coinMinimalDenom": "ibc/7D29C888219883C47C623578ACACFC89CC29AA70FBF09C895A1EED911BF90F32",
+      "symbol": "INT3",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
+      },
+      "categories": [
+        "bridges"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "int3face",
+            "chainId": "int3face-1",
+            "sourceDenom": "uint3",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-82819",
+            "path": "transfer/channel-82819/uint3"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "int3face",
+          "sourceDenom": "uint3",
+          "chainType": "cosmos",
+          "chainId": "int3face-1",
+          "symbol": "INT3",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/7D29C888219883C47C623578ACACFC89CC29AA70FBF09C895A1EED911BF90F32",
+      "name": "Int3face",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "listingDate": "2024-10-11T03:00:00.000Z"
+    },
+    {
+      "chainName": "int3face",
+      "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/dogecoin-doge",
+      "coinMinimalDenom": "ibc/B3DFDC2958A2BE482532DA3B6B5729B469BE7475598F7487D98B1B3E085245DE",
+      "symbol": "DOGE.int3",
+      "decimals": 8,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/doge.int3.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/doge.int3.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Int3face Bridge",
+          "type": "external_interface",
+          "depositUrl": "https://app.int3face.zone",
+          "withdrawUrl": "https://app.int3face.zone"
+        },
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "int3face",
+            "chainId": "int3face-1",
+            "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/dogecoin-doge",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-82819",
+            "path": "transfer/channel-82819/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/dogecoin-doge"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "int3face",
+          "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/dogecoin-doge",
+          "chainType": "cosmos",
+          "chainId": "int3face-1",
+          "symbol": "DOGE",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3doge.png"
+          }
+        },
+        {
+          "chainName": "dogecoin",
+          "sourceDenom": "shibe",
+          "chainType": "non-cosmos",
+          "symbol": "DOGE",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/dogecoin/images/doge.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/B3DFDC2958A2BE482532DA3B6B5729B469BE7475598F7487D98B1B3E085245DE",
+      "name": "Dogecoin (Int3)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "int3face",
+        "sourceDenom": "uint3"
+      },
+      "listingDate": "2024-10-11T03:00:00.000Z"
+    },
+    {
+      "chainName": "int3face",
+      "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-btc",
+      "coinMinimalDenom": "ibc/2F4258D6E1E01B203D6CA83F2C7E4959615053A21EC2C2FC196F7911CAC832EF",
+      "symbol": "BTC.int3",
+      "decimals": 8,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/btc.int3.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/btc.int3.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Int3face Bridge",
+          "type": "external_interface",
+          "depositUrl": "https://app.int3face.zone",
+          "withdrawUrl": "https://app.int3face.zone"
+        },
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "int3face",
+            "chainId": "int3face-1",
+            "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-btc",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-82819",
+            "path": "transfer/channel-82819/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-btc"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "int3face",
+          "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-btc",
+          "chainType": "cosmos",
+          "chainId": "int3face-1",
+          "symbol": "BTC",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3btc.png"
+          }
+        },
+        {
+          "chainName": "bitcoin",
+          "sourceDenom": "sat",
+          "chainType": "non-cosmos",
+          "symbol": "BTC",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/bitcoin/images/btc.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/bitcoin/images/btc.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo1z6r6qdknhgsc0zeracktgpcxf43j6sekq07nw8sxduc9lg0qjjlqfu25e3/alloyed/allBTC",
+      "name": "Bitcoin (Int3)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "int3face",
+        "sourceDenom": "uint3"
+      },
+      "listingDate": "2024-10-11T03:00:00.000Z"
+    },
+    {
+      "chainName": "int3face",
+      "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-cash-bch",
+      "coinMinimalDenom": "ibc/869E01805EBBDDCAEA588666CD5149728B7DC7D69F30D92F77AD67F77CEB3FDA",
+      "symbol": "BCH.int3",
+      "decimals": 8,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bch.int3.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bch.int3.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Int3face Bridge",
+          "type": "external_interface",
+          "depositUrl": "https://app.int3face.zone",
+          "withdrawUrl": "https://app.int3face.zone"
+        },
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "int3face",
+            "chainId": "int3face-1",
+            "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-cash-bch",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-82819",
+            "path": "transfer/channel-82819/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-cash-bch"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "int3face",
+          "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-cash-bch",
+          "chainType": "cosmos",
+          "chainId": "int3face-1",
+          "symbol": "BCH",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3bch.png"
+          }
+        },
+        {
+          "chainName": "bitcoincash",
+          "sourceDenom": "sat",
+          "chainType": "non-cosmos",
+          "symbol": "BCH",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/bitcoincash/images/bch.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/bitcoincash/images/bch.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/869E01805EBBDDCAEA588666CD5149728B7DC7D69F30D92F77AD67F77CEB3FDA",
+      "name": "Bitcoin Cash (Int3)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "int3face",
+        "sourceDenom": "uint3"
+      },
+      "listingDate": "2024-10-11T03:00:00.000Z"
+    },
+    {
+      "chainName": "int3face",
+      "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/litecoin-ltc",
+      "coinMinimalDenom": "ibc/905326586AE1C86AC8B1CDB20BE957DE5FB23963EDD2C9ADD3E835CC22115A46",
+      "symbol": "LTC.int3",
+      "decimals": 8,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ltc.int3.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ltc.int3.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Int3face Bridge",
+          "type": "external_interface",
+          "depositUrl": "https://app.int3face.zone",
+          "withdrawUrl": "https://app.int3face.zone"
+        },
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "int3face",
+            "chainId": "int3face-1",
+            "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/litecoin-ltc",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-82819",
+            "path": "transfer/channel-82819/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/litecoin-ltc"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "int3face",
+          "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/litecoin-ltc",
+          "chainType": "cosmos",
+          "chainId": "int3face-1",
+          "symbol": "LTC",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3ltc.png"
+          }
+        },
+        {
+          "chainName": "litecoin",
+          "sourceDenom": "litoshi",
+          "chainType": "non-cosmos",
+          "symbol": "LTC",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/dogecoin/images/ltc.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/dogecoin/images/ltc.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/905326586AE1C86AC8B1CDB20BE957DE5FB23963EDD2C9ADD3E835CC22115A46",
+      "name": "Litecoin (Int3)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "int3face",
+        "sourceDenom": "uint3"
+      },
+      "listingDate": "2024-10-11T03:00:00.000Z"
     }
   ]
 }

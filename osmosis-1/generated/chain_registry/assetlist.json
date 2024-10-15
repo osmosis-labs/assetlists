@@ -1906,7 +1906,7 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/F3FF7A84A73B62921538642F9797C423D2B4C4ACB3C7FCFFCE7F12AA69909C4B",
-      "name": "Impacts Hub",
+      "name": "Impact Hub",
       "display": "ixo",
       "symbol": "IXO",
       "traces": [
@@ -24208,6 +24208,308 @@
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.svg"
+        }
+      ]
+    },
+    {
+      "description": "Int3face blockchain native token",
+      "denom_units": [
+        {
+          "denom": "ibc/7D29C888219883C47C623578ACACFC89CC29AA70FBF09C895A1EED911BF90F32",
+          "exponent": 0,
+          "aliases": [
+            "uint3"
+          ]
+        },
+        {
+          "denom": "int3",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/7D29C888219883C47C623578ACACFC89CC29AA70FBF09C895A1EED911BF90F32",
+      "name": "Int3face",
+      "display": "int3",
+      "symbol": "INT3",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "int3face",
+            "base_denom": "uint3",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-82819",
+            "path": "transfer/channel-82819/uint3"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "int3face",
+            "base_denom": "uint3"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png",
+          "theme": {
+            "primary_color_hex": "#3d3d3d"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Dogecoin on Int3face",
+      "denom_units": [
+        {
+          "denom": "ibc/B3DFDC2958A2BE482532DA3B6B5729B469BE7475598F7487D98B1B3E085245DE",
+          "exponent": 0,
+          "aliases": [
+            "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/dogecoin-doge"
+          ]
+        },
+        {
+          "denom": "doge",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/B3DFDC2958A2BE482532DA3B6B5729B469BE7475598F7487D98B1B3E085245DE",
+      "name": "Dogecoin (Int3)",
+      "display": "doge",
+      "symbol": "DOGE.int3",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "dogecoin",
+            "base_denom": "shibe"
+          },
+          "provider": "Int3face"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "int3face",
+            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/dogecoin-doge",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-82819",
+            "path": "transfer/channel-82819/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/dogecoin-doge"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/doge.int3.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/doge.int3.png"
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/doge.int3.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/doge.int3.png"
+        },
+        {
+          "image_sync": {
+            "chain_name": "int3face",
+            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/dogecoin-doge"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3doge.png",
+          "theme": {
+            "primary_color_hex": "#3d3d3d"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Bitcoin on Int3face",
+      "denom_units": [
+        {
+          "denom": "ibc/2F4258D6E1E01B203D6CA83F2C7E4959615053A21EC2C2FC196F7911CAC832EF",
+          "exponent": 0,
+          "aliases": [
+            "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-btc"
+          ]
+        },
+        {
+          "denom": "btc",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/2F4258D6E1E01B203D6CA83F2C7E4959615053A21EC2C2FC196F7911CAC832EF",
+      "name": "Bitcoin (Int3)",
+      "display": "btc",
+      "symbol": "BTC.int3",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "bitcoin",
+            "base_denom": "sat"
+          },
+          "provider": "Int3face"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "int3face",
+            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-btc",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-82819",
+            "path": "transfer/channel-82819/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-btc"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/btc.int3.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/btc.int3.png"
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/btc.int3.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/btc.int3.png"
+        },
+        {
+          "image_sync": {
+            "chain_name": "int3face",
+            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-btc"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3btc.png",
+          "theme": {
+            "primary_color_hex": "#3d3d3d"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Bitcoin-Cash on Int3face",
+      "denom_units": [
+        {
+          "denom": "ibc/869E01805EBBDDCAEA588666CD5149728B7DC7D69F30D92F77AD67F77CEB3FDA",
+          "exponent": 0,
+          "aliases": [
+            "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-cash-bch"
+          ]
+        },
+        {
+          "denom": "bch",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/869E01805EBBDDCAEA588666CD5149728B7DC7D69F30D92F77AD67F77CEB3FDA",
+      "name": "Bitcoin Cash (Int3)",
+      "display": "bch",
+      "symbol": "BCH.int3",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "bitcoincash",
+            "base_denom": "sat"
+          },
+          "provider": "Int3face"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "int3face",
+            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-cash-bch",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-82819",
+            "path": "transfer/channel-82819/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-cash-bch"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bch.int3.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bch.int3.png"
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bch.int3.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bch.int3.png"
+        },
+        {
+          "image_sync": {
+            "chain_name": "int3face",
+            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-cash-bch"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3bch.png",
+          "theme": {
+            "primary_color_hex": "#3d3d3d"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Litecoin on Int3face",
+      "denom_units": [
+        {
+          "denom": "ibc/905326586AE1C86AC8B1CDB20BE957DE5FB23963EDD2C9ADD3E835CC22115A46",
+          "exponent": 0,
+          "aliases": [
+            "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/litecoin-ltc"
+          ]
+        },
+        {
+          "denom": "ltc",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/905326586AE1C86AC8B1CDB20BE957DE5FB23963EDD2C9ADD3E835CC22115A46",
+      "name": "Litecoin (Int3)",
+      "display": "ltc",
+      "symbol": "LTC.int3",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "litecoin",
+            "base_denom": "litoshi"
+          },
+          "provider": "Int3face"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "int3face",
+            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/litecoin-ltc",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-82819",
+            "path": "transfer/channel-82819/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/litecoin-ltc"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ltc.int3.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ltc.int3.png"
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ltc.int3.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ltc.int3.png"
+        },
+        {
+          "image_sync": {
+            "chain_name": "int3face",
+            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/litecoin-ltc"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3ltc.png",
+          "theme": {
+            "primary_color_hex": "#3d3d3d"
+          }
         }
       ]
     },

@@ -20834,6 +20834,891 @@
         "ibc-go",
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "pryzm",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Pryzm",
+      "chain_id": "pryzm-1",
+      "bech32Prefix": "pryzm",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "pryzm",
+        "bech32PrefixAccPub": "pryzmpub",
+        "bech32PrefixValAddr": "pryzmvaloper",
+        "bech32PrefixValPub": "pryzmvaloperpub",
+        "bech32PrefixConsAddr": "pryzmvalcons",
+        "bech32PrefixConsPub": "pryzmvalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDenom": "PRYZM",
+        "chainSuggestionDenom": "upryzm",
+        "sourceDenom": "upryzm",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pryzm.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "ATOM",
+          "chainSuggestionDenom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
+          "sourceDenom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
+          "coinDecimals": 6,
+          "coinGeckoId": "cosmos",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+          "gasPriceStep": {
+            "low": 0.0025,
+            "average": 0.003,
+            "high": 0.004
+          }
+        },
+        {
+          "coinDenom": "INJ",
+          "chainSuggestionDenom": "ibc/DE63D8AC34B752FB7D4CAA7594145EDE1C9FC256AC6D4043D0F12310EB8FC255",
+          "sourceDenom": "ibc/DE63D8AC34B752FB7D4CAA7594145EDE1C9FC256AC6D4043D0F12310EB8FC255",
+          "coinDecimals": 18,
+          "coinGeckoId": "injective-protocol",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/inj.png",
+          "gasPriceStep": {
+            "low": 500000000,
+            "average": 600000000,
+            "high": 700000000
+          }
+        },
+        {
+          "coinDenom": "OSMO",
+          "chainSuggestionDenom": "ibc/13B2C536BB057AC79D5616B8EA1B9540EC1F2170718CAFF6F0083C966FFFED0B",
+          "sourceDenom": "ibc/13B2C536BB057AC79D5616B8EA1B9540EC1F2170718CAFF6F0083C966FFFED0B",
+          "coinDecimals": 6,
+          "coinGeckoId": "osmosis",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
+          "gasPriceStep": {
+            "low": 0.025,
+            "average": 0.03,
+            "high": 0.04
+          }
+        },
+        {
+          "coinDenom": "TIA",
+          "chainSuggestionDenom": "ibc/BF28D9C17E0306B194D50F51C3B2590BEAD15E04E03ADD34C3A26E62D85C9676",
+          "sourceDenom": "ibc/BF28D9C17E0306B194D50F51C3B2590BEAD15E04E03ADD34C3A26E62D85C9676",
+          "coinDecimals": 6,
+          "coinGeckoId": "celestia",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/celestia/images/celestia.png",
+          "gasPriceStep": {
+            "low": 0.002,
+            "average": 0.003,
+            "high": 0.004
+          }
+        },
+        {
+          "coinDenom": "LUNA",
+          "chainSuggestionDenom": "ibc/B8AF5D92165F35AB31F3FC7C7B444B9D240760FA5D406C49D24862BD0284E395",
+          "sourceDenom": "ibc/B8AF5D92165F35AB31F3FC7C7B444B9D240760FA5D406C49D24862BD0284E395",
+          "coinDecimals": 6,
+          "coinGeckoId": "terra-luna-2",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/luna.png",
+          "gasPriceStep": {
+            "low": 0.015,
+            "average": 0.02,
+            "high": 0.03
+          }
+        },
+        {
+          "coinDenom": "USDC",
+          "chainSuggestionDenom": "ibc/BFAAB7870A9AAABF64A7366DAAA0B8E5065EAA1FCE762F45677DC24BE796EF65",
+          "sourceDenom": "ibc/BFAAB7870A9AAABF64A7366DAAA0B8E5065EAA1FCE762F45677DC24BE796EF65",
+          "coinDecimals": 6,
+          "coinGeckoId": "usd-coin",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png",
+          "gasPriceStep": {
+            "low": 0.02,
+            "average": 0.03,
+            "high": 0.04
+          }
+        },
+        {
+          "coinDenom": "AUUU",
+          "chainSuggestionDenom": "factory/pryzm1jnhcsa5ddjsjq2t97v6a82z542rduxvtw6wd9h/uauuu",
+          "sourceDenom": "factory/pryzm1jnhcsa5ddjsjq2t97v6a82z542rduxvtw6wd9h/uauuu",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/AUUU.png",
+          "gasPriceStep": {
+            "low": 0.01,
+            "average": 0.015,
+            "high": 0.02
+          }
+        },
+        {
+          "coinDenom": "DYDX",
+          "chainSuggestionDenom": "ibc/F8CA5236869F819BC006EEF088E67889A26E4140339757878F0F4E229CDDA858",
+          "sourceDenom": "ibc/F8CA5236869F819BC006EEF088E67889A26E4140339757878F0F4E229CDDA858",
+          "coinDecimals": 18,
+          "coinGeckoId": "dydx-chain",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.png",
+          "gasPriceStep": {
+            "low": 10000000000,
+            "average": 12000000000,
+            "high": 14000000000
+          }
+        },
+        {
+          "coinDenom": "stTIA",
+          "chainSuggestionDenom": "ibc/FA78980867B7E87F382CDA00275C55DDC248CABC7DEE27AC6868CCF97DD5E02F",
+          "sourceDenom": "ibc/FA78980867B7E87F382CDA00275C55DDC248CABC7DEE27AC6868CCF97DD5E02F",
+          "coinDecimals": 6,
+          "coinGeckoId": "celestia",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/sttia.png",
+          "gasPriceStep": {
+            "low": 0.002,
+            "average": 0.003,
+            "high": 0.004
+          }
+        },
+        {
+          "coinDenom": "stDYDX",
+          "chainSuggestionDenom": "ibc/120DC39B61CC121E91525C1D51624E41BBE74C537D7B0BE50BBFF9A00E37B6EE",
+          "sourceDenom": "ibc/120DC39B61CC121E91525C1D51624E41BBE74C537D7B0BE50BBFF9A00E37B6EE",
+          "coinDecimals": 18,
+          "coinGeckoId": "dydx-chain",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdydx.png",
+          "gasPriceStep": {
+            "low": 10000000000,
+            "average": 12000000000,
+            "high": 14000000000
+          }
+        },
+        {
+          "coinDenom": "dATOM",
+          "chainSuggestionDenom": "ibc/EA6E1E8BA2EB9F681C4BD12C8C81A46530A62934F2BD561B120A00F46946CE87",
+          "sourceDenom": "ibc/EA6E1E8BA2EB9F681C4BD12C8C81A46530A62934F2BD561B120A00F46946CE87",
+          "coinDecimals": 6,
+          "coinGeckoId": "drop-staked-atom",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/dATOM.svg",
+          "gasPriceStep": {
+            "low": 0.0025,
+            "average": 0.003,
+            "high": 0.004
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "PRYZM",
+          "chainSuggestionDenom": "upryzm",
+          "sourceDenom": "upryzm",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pryzm.png"
+        },
+        {
+          "coinDenom": "AUUU",
+          "chainSuggestionDenom": "factory/pryzm1jnhcsa5ddjsjq2t97v6a82z542rduxvtw6wd9h/uauuu",
+          "sourceDenom": "factory/pryzm1jnhcsa5ddjsjq2t97v6a82z542rduxvtw6wd9h/uauuu",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/AUUU.png"
+        },
+        {
+          "coinDenom": "ATOM",
+          "chainSuggestionDenom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
+          "sourceDenom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
+          "coinDecimals": 6,
+          "coinGeckoId": "cosmos",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png"
+        },
+        {
+          "coinDenom": "INJ",
+          "chainSuggestionDenom": "ibc/DE63D8AC34B752FB7D4CAA7594145EDE1C9FC256AC6D4043D0F12310EB8FC255",
+          "sourceDenom": "ibc/DE63D8AC34B752FB7D4CAA7594145EDE1C9FC256AC6D4043D0F12310EB8FC255",
+          "coinDecimals": 18,
+          "coinGeckoId": "injective-protocol",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/inj.png"
+        },
+        {
+          "coinDenom": "OSMO",
+          "chainSuggestionDenom": "ibc/13B2C536BB057AC79D5616B8EA1B9540EC1F2170718CAFF6F0083C966FFFED0B",
+          "sourceDenom": "ibc/13B2C536BB057AC79D5616B8EA1B9540EC1F2170718CAFF6F0083C966FFFED0B",
+          "coinDecimals": 6,
+          "coinGeckoId": "osmosis",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png"
+        },
+        {
+          "coinDenom": "TIA",
+          "chainSuggestionDenom": "ibc/BF28D9C17E0306B194D50F51C3B2590BEAD15E04E03ADD34C3A26E62D85C9676",
+          "sourceDenom": "ibc/BF28D9C17E0306B194D50F51C3B2590BEAD15E04E03ADD34C3A26E62D85C9676",
+          "coinDecimals": 6,
+          "coinGeckoId": "celestia",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/celestia/images/celestia.png"
+        },
+        {
+          "coinDenom": "LUNA",
+          "chainSuggestionDenom": "ibc/B8AF5D92165F35AB31F3FC7C7B444B9D240760FA5D406C49D24862BD0284E395",
+          "sourceDenom": "ibc/B8AF5D92165F35AB31F3FC7C7B444B9D240760FA5D406C49D24862BD0284E395",
+          "coinDecimals": 6,
+          "coinGeckoId": "terra-luna-2",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/luna.png"
+        },
+        {
+          "coinDenom": "USDC",
+          "chainSuggestionDenom": "ibc/BFAAB7870A9AAABF64A7366DAAA0B8E5065EAA1FCE762F45677DC24BE796EF65",
+          "sourceDenom": "ibc/BFAAB7870A9AAABF64A7366DAAA0B8E5065EAA1FCE762F45677DC24BE796EF65",
+          "coinDecimals": 6,
+          "coinGeckoId": "usd-coin",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png"
+        },
+        {
+          "coinDenom": "USDC.axl",
+          "chainSuggestionDenom": "ibc/B9E4FD154C92D3A23BEA029906C4C5FF2FE74CB7E3A058290B77197A263CF88B",
+          "sourceDenom": "ibc/B9E4FD154C92D3A23BEA029906C4C5FF2FE74CB7E3A058290B77197A263CF88B",
+          "coinDecimals": 6,
+          "coinGeckoId": "axlusdc",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.png"
+        },
+        {
+          "coinDenom": "DYDX",
+          "chainSuggestionDenom": "ibc/F8CA5236869F819BC006EEF088E67889A26E4140339757878F0F4E229CDDA858",
+          "sourceDenom": "ibc/F8CA5236869F819BC006EEF088E67889A26E4140339757878F0F4E229CDDA858",
+          "coinDecimals": 18,
+          "coinGeckoId": "dydx-chain",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.png"
+        },
+        {
+          "coinDenom": "stTIA",
+          "chainSuggestionDenom": "ibc/FA78980867B7E87F382CDA00275C55DDC248CABC7DEE27AC6868CCF97DD5E02F",
+          "sourceDenom": "ibc/FA78980867B7E87F382CDA00275C55DDC248CABC7DEE27AC6868CCF97DD5E02F",
+          "coinDecimals": 6,
+          "coinGeckoId": "celestia",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/sttia.png"
+        },
+        {
+          "coinDenom": "stDYDX",
+          "chainSuggestionDenom": "ibc/120DC39B61CC121E91525C1D51624E41BBE74C537D7B0BE50BBFF9A00E37B6EE",
+          "sourceDenom": "ibc/120DC39B61CC121E91525C1D51624E41BBE74C537D7B0BE50BBFF9A00E37B6EE",
+          "coinDecimals": 18,
+          "coinGeckoId": "dydx-chain",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdydx.png"
+        },
+        {
+          "coinDenom": "dATOM",
+          "chainSuggestionDenom": "ibc/EA6E1E8BA2EB9F681C4BD12C8C81A46530A62934F2BD561B120A00F46946CE87",
+          "sourceDenom": "ibc/EA6E1E8BA2EB9F681C4BD12C8C81A46530A62934F2BD561B120A00F46946CE87",
+          "coinDecimals": 6,
+          "coinGeckoId": "drop-staked-atom",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/dATOM.svg"
+        },
+        {
+          "coinDenom": "cATOM",
+          "chainSuggestionDenom": "c:uatom",
+          "sourceDenom": "c:uatom",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/cAtom.png"
+        },
+        {
+          "coinDenom": "cINJ",
+          "chainSuggestionDenom": "c:inj",
+          "sourceDenom": "c:inj",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/cInj.png"
+        },
+        {
+          "coinDenom": "cOSMO",
+          "chainSuggestionDenom": "c:uosmo",
+          "sourceDenom": "c:uosmo",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/cOsmo.png"
+        },
+        {
+          "coinDenom": "cLUNA",
+          "chainSuggestionDenom": "c:uluna",
+          "sourceDenom": "c:uluna",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/cLuna.png"
+        },
+        {
+          "coinDenom": "cAUUU",
+          "chainSuggestionDenom": "factory/pryzm1qg5ega6dykkxc307y25pecuufrjkxkaggkkxh7nad0vhyhtuhw3sk0s70x/cuauuu",
+          "sourceDenom": "factory/pryzm1qg5ega6dykkxc307y25pecuufrjkxkaggkkxh7nad0vhyhtuhw3sk0s70x/cuauuu",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/cAuuu.png"
+        },
+        {
+          "coinDenom": "cTIA",
+          "chainSuggestionDenom": "c:utia",
+          "sourceDenom": "c:utia",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/cTia.png"
+        },
+        {
+          "coinDenom": "pATOM-30Sep2024",
+          "chainSuggestionDenom": "p:uatom:30Sep2024",
+          "sourceDenom": "p:uatom:30Sep2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pAtom.png"
+        },
+        {
+          "coinDenom": "pATOM-31Dec2024",
+          "chainSuggestionDenom": "p:uatom:31Dec2024",
+          "sourceDenom": "p:uatom:31Dec2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pAtom.png"
+        },
+        {
+          "coinDenom": "pATOM-31Dec2025",
+          "chainSuggestionDenom": "p:uatom:31Dec2025",
+          "sourceDenom": "p:uatom:31Dec2025",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pAtom.png"
+        },
+        {
+          "coinDenom": "pOSMO-30Sep2024",
+          "chainSuggestionDenom": "p:uosmo:30Sep2024",
+          "sourceDenom": "p:uosmo:30Sep2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pOsmo.png"
+        },
+        {
+          "coinDenom": "pOSMO-31Dec2024",
+          "chainSuggestionDenom": "p:uosmo:31Dec2024",
+          "sourceDenom": "p:uosmo:31Dec2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pOsmo.png"
+        },
+        {
+          "coinDenom": "pOSMO-31Dec2025",
+          "chainSuggestionDenom": "p:uosmo:31Dec2025",
+          "sourceDenom": "p:uosmo:31Dec2025",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pOsmo.png"
+        },
+        {
+          "coinDenom": "pINJ-30Sep2024",
+          "chainSuggestionDenom": "p:inj:30Sep2024",
+          "sourceDenom": "p:inj:30Sep2024",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pInj.png"
+        },
+        {
+          "coinDenom": "pINJ-31Dec2024",
+          "chainSuggestionDenom": "p:inj:31Dec2024",
+          "sourceDenom": "p:inj:31Dec2024",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pInj.png"
+        },
+        {
+          "coinDenom": "pINJ-31Dec2025",
+          "chainSuggestionDenom": "p:inj:31Dec2025",
+          "sourceDenom": "p:inj:31Dec2025",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pInj.png"
+        },
+        {
+          "coinDenom": "pLUNA-30Sep2024",
+          "chainSuggestionDenom": "p:uluna:30Sep2024",
+          "sourceDenom": "p:uluna:30Sep2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pLuna.png"
+        },
+        {
+          "coinDenom": "pLUNA-31Dec2024",
+          "chainSuggestionDenom": "p:uluna:31Dec2024",
+          "sourceDenom": "p:uluna:31Dec2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pLuna.png"
+        },
+        {
+          "coinDenom": "pLUNA-31Dec2025",
+          "chainSuggestionDenom": "p:uluna:31Dec2025",
+          "sourceDenom": "p:uluna:31Dec2025",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pLuna.png"
+        },
+        {
+          "coinDenom": "pAUUU-30Sep2024",
+          "chainSuggestionDenom": "p:uauuu:30Sep2024",
+          "sourceDenom": "p:uauuu:30Sep2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pAuuu.png"
+        },
+        {
+          "coinDenom": "pAUUU-31Dec2024",
+          "chainSuggestionDenom": "p:uauuu:31Dec2024",
+          "sourceDenom": "p:uauuu:31Dec2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pAuuu.png"
+        },
+        {
+          "coinDenom": "pAUUU-31Dec2025",
+          "chainSuggestionDenom": "p:uauuu:31Dec2025",
+          "sourceDenom": "p:uauuu:31Dec2025",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pAuuu.png"
+        },
+        {
+          "coinDenom": "pstTIA-30Sep2024",
+          "chainSuggestionDenom": "p:stutia:30Sep2024",
+          "sourceDenom": "p:stutia:30Sep2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pstTia.png"
+        },
+        {
+          "coinDenom": "pstTIA-31Dec2024",
+          "chainSuggestionDenom": "p:stutia:31Dec2024",
+          "sourceDenom": "p:stutia:31Dec2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pstTia.png"
+        },
+        {
+          "coinDenom": "pstTIA-31Dec2025",
+          "chainSuggestionDenom": "p:stutia:31Dec2025",
+          "sourceDenom": "p:stutia:31Dec2025",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pstTia.png"
+        },
+        {
+          "coinDenom": "pstDYDX-30Sep2024",
+          "chainSuggestionDenom": "p:stadydx:30Sep2024",
+          "sourceDenom": "p:stadydx:30Sep2024",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pstDydx.png"
+        },
+        {
+          "coinDenom": "pstDYDX-31Dec2024",
+          "chainSuggestionDenom": "p:stadydx:31Dec2024",
+          "sourceDenom": "p:stadydx:31Dec2024",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pstDydx.png"
+        },
+        {
+          "coinDenom": "pstDYDX-31Dec2025",
+          "chainSuggestionDenom": "p:stadydx:31Dec2025",
+          "sourceDenom": "p:stadydx:31Dec2025",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pstDydx.png"
+        },
+        {
+          "coinDenom": "pdATOM-31Dec2024",
+          "chainSuggestionDenom": "p:udatom:31Dec2024",
+          "sourceDenom": "p:udatom:31Dec2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pdAtom.png"
+        },
+        {
+          "coinDenom": "pdATOM-30Jun2025",
+          "chainSuggestionDenom": "p:udatom:30Jun2025",
+          "sourceDenom": "p:udatom:30Jun2025",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pdAtom.png"
+        },
+        {
+          "coinDenom": "pdATOM-31Dec2025",
+          "chainSuggestionDenom": "p:udatom:31Dec2025",
+          "sourceDenom": "p:udatom:31Dec2025",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pdAtom.png"
+        },
+        {
+          "coinDenom": "pTIA-31Dec2024",
+          "chainSuggestionDenom": "p:utia:31Dec2024",
+          "sourceDenom": "p:utia:31Dec2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pTia.png"
+        },
+        {
+          "coinDenom": "pTIA-31Dec2025",
+          "chainSuggestionDenom": "p:utia:31Dec2025",
+          "sourceDenom": "p:utia:31Dec2025",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pTia.png"
+        },
+        {
+          "coinDenom": "yATOM-30Sep2024",
+          "chainSuggestionDenom": "y:uatom:30Sep2024",
+          "sourceDenom": "y:uatom:30Sep2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/yAtom.png"
+        },
+        {
+          "coinDenom": "yATOM-31Dec2024",
+          "chainSuggestionDenom": "y:uatom:31Dec2024",
+          "sourceDenom": "y:uatom:31Dec2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/yAtom.png"
+        },
+        {
+          "coinDenom": "yATOM-31Dec2025",
+          "chainSuggestionDenom": "y:uatom:31Dec2025",
+          "sourceDenom": "y:uatom:31Dec2025",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/yAtom.png"
+        },
+        {
+          "coinDenom": "yOSMO-30Sep2024",
+          "chainSuggestionDenom": "y:uosmo:30Sep2024",
+          "sourceDenom": "y:uosmo:30Sep2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/yOsmo.png"
+        },
+        {
+          "coinDenom": "yOSMO-31Dec2024",
+          "chainSuggestionDenom": "y:uosmo:31Dec2024",
+          "sourceDenom": "y:uosmo:31Dec2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/yOsmo.png"
+        },
+        {
+          "coinDenom": "yOSMO-31Dec2025",
+          "chainSuggestionDenom": "y:uosmo:31Dec2025",
+          "sourceDenom": "y:uosmo:31Dec2025",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/yOsmo.png"
+        },
+        {
+          "coinDenom": "yINJ-30Sep2024",
+          "chainSuggestionDenom": "y:inj:30Sep2024",
+          "sourceDenom": "y:inj:30Sep2024",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/yInj.png"
+        },
+        {
+          "coinDenom": "yINJ-31Dec2024",
+          "chainSuggestionDenom": "y:inj:31Dec2024",
+          "sourceDenom": "y:inj:31Dec2024",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/yInj.png"
+        },
+        {
+          "coinDenom": "yINJ-31Dec2025",
+          "chainSuggestionDenom": "y:inj:31Dec2025",
+          "sourceDenom": "y:inj:31Dec2025",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/yInj.png"
+        },
+        {
+          "coinDenom": "yLUNA-30Sep2024",
+          "chainSuggestionDenom": "y:uluna:30Sep2024",
+          "sourceDenom": "y:uluna:30Sep2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/yLuna.png"
+        },
+        {
+          "coinDenom": "yLUNA-31Dec2024",
+          "chainSuggestionDenom": "y:uluna:31Dec2024",
+          "sourceDenom": "y:uluna:31Dec2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/yLuna.png"
+        },
+        {
+          "coinDenom": "yLUNA-31Dec2025",
+          "chainSuggestionDenom": "y:uluna:31Dec2025",
+          "sourceDenom": "y:uluna:31Dec2025",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/yLuna.png"
+        },
+        {
+          "coinDenom": "yAUUU-30Sep2024",
+          "chainSuggestionDenom": "y:uauuu:30Sep2024",
+          "sourceDenom": "y:uauuu:30Sep2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/yAuuu.png"
+        },
+        {
+          "coinDenom": "yAUUU-31Dec2024",
+          "chainSuggestionDenom": "y:uauuu:31Dec2024",
+          "sourceDenom": "y:uauuu:31Dec2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/yAuuu.png"
+        },
+        {
+          "coinDenom": "yAUUU-31Dec2025",
+          "chainSuggestionDenom": "y:uauuu:31Dec2025",
+          "sourceDenom": "y:uauuu:31Dec2025",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/yAuuu.png"
+        },
+        {
+          "coinDenom": "ystTIA-30Sep2024",
+          "chainSuggestionDenom": "y:stutia:30Sep2024",
+          "sourceDenom": "y:stutia:30Sep2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/ystTia.png"
+        },
+        {
+          "coinDenom": "ystTIA-31Dec2024",
+          "chainSuggestionDenom": "y:stutia:31Dec2024",
+          "sourceDenom": "y:stutia:31Dec2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/ystTia.png"
+        },
+        {
+          "coinDenom": "ystTIA-31Dec2025",
+          "chainSuggestionDenom": "y:stutia:31Dec2025",
+          "sourceDenom": "y:stutia:31Dec2025",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/ystTia.png"
+        },
+        {
+          "coinDenom": "ystDYDX-30Sep2024",
+          "chainSuggestionDenom": "y:stadydx:30Sep2024",
+          "sourceDenom": "y:stadydx:30Sep2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/ystDydx.png"
+        },
+        {
+          "coinDenom": "ystDYDX-31Dec2024",
+          "chainSuggestionDenom": "y:stadydx:31Dec2024",
+          "sourceDenom": "y:stadydx:31Dec2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/ystDydx.png"
+        },
+        {
+          "coinDenom": "ystDYDX-31Dec2025",
+          "chainSuggestionDenom": "y:stadydx:31Dec2025",
+          "sourceDenom": "y:stadydx:31Dec2025",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/ystDydx.png"
+        },
+        {
+          "coinDenom": "ydATOM-31Dec2024",
+          "chainSuggestionDenom": "y:udatom:31Dec2024",
+          "sourceDenom": "y:udatom:31Dec2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/ydAtom.png"
+        },
+        {
+          "coinDenom": "ydATOM-30Jun2025",
+          "chainSuggestionDenom": "y:udatom:30Jun2025",
+          "sourceDenom": "y:udatom:30Jun2025",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/ydAtom.png"
+        },
+        {
+          "coinDenom": "ydATOM-31Dec2025",
+          "chainSuggestionDenom": "y:udatom:31Dec2025",
+          "sourceDenom": "y:udatom:31Dec2025",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/ydAtom.png"
+        },
+        {
+          "coinDenom": "yTIA-31Dec2024",
+          "chainSuggestionDenom": "y:utia:31Dec2024",
+          "sourceDenom": "y:utia:31Dec2024",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/yTia.png"
+        },
+        {
+          "coinDenom": "yTIA-31Dec2025",
+          "chainSuggestionDenom": "y:utia:31Dec2025",
+          "sourceDenom": "y:utia:31Dec2025",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/yTia.png"
+        },
+        {
+          "coinDenom": "USDC-USDC.axl-LP",
+          "chainSuggestionDenom": "lp:6:uusdc.axl-uusdc",
+          "sourceDenom": "lp:6:uusdc.axl-uusdc",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "ATOM-YIELD-LP",
+          "chainSuggestionDenom": "lp:0:uatom",
+          "sourceDenom": "lp:0:uatom",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "ATOM-BOOST-LP",
+          "chainSuggestionDenom": "lp:2:uatomypt-uatom",
+          "sourceDenom": "lp:2:uatomypt-uatom",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "ATOM-USDC-LP",
+          "chainSuggestionDenom": "lp:3:uatom-uusdc",
+          "sourceDenom": "lp:3:uatom-uusdc",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "INJ-YIELD-LP",
+          "chainSuggestionDenom": "lp:1:inj",
+          "sourceDenom": "lp:1:inj",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "INJ-BOOST-LP",
+          "chainSuggestionDenom": "lp:4:injypt-inj",
+          "sourceDenom": "lp:4:injypt-inj",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "INJ-USDC-LP",
+          "chainSuggestionDenom": "lp:5:inj-uusdc",
+          "sourceDenom": "lp:5:inj-uusdc",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "OSMO-YIELD-LP",
+          "chainSuggestionDenom": "lp:8:uosmo",
+          "coinMinimalDenom": "ibc/54B2D9DC9602A1CE2A0329D51C6A1C7C4ADE71477186AEAAA549318C4513A453",
+          "sourceDenom": "lp:8:uosmo",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "OSMO-BOOST-LP",
+          "chainSuggestionDenom": "lp:10:uosmoypt-uosmo",
+          "sourceDenom": "lp:10:uosmoypt-uosmo",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "OSMO-USDC-LP",
+          "chainSuggestionDenom": "lp:11:uosmo-uusdc",
+          "sourceDenom": "lp:11:uosmo-uusdc",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "LUNA-YIELD-LP",
+          "chainSuggestionDenom": "lp:9:uluna",
+          "sourceDenom": "lp:9:uluna",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "LUNA-BOOST-LP",
+          "chainSuggestionDenom": "lp:12:ulunaypt-uluna",
+          "sourceDenom": "lp:12:ulunaypt-uluna",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "LUNA-USDC-LP",
+          "chainSuggestionDenom": "lp:13:uluna-uusdc",
+          "sourceDenom": "lp:13:uluna-uusdc",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "AUUU-YIELD-LP",
+          "chainSuggestionDenom": "lp:14:uauuu",
+          "sourceDenom": "lp:14:uauuu",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "AUUU-BOOST-LP",
+          "chainSuggestionDenom": "lp:17:uauuuypt-uauuu",
+          "sourceDenom": "lp:17:uauuuypt-uauuu",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "AUUU-USDC-LP",
+          "chainSuggestionDenom": "lp:7:uauuu-uusdc",
+          "sourceDenom": "lp:7:uauuu-uusdc",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "stDYDX-YIELD-LP",
+          "chainSuggestionDenom": "lp:15:stadydx",
+          "sourceDenom": "lp:15:stadydx",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "stDYDX-BOOST-LP",
+          "chainSuggestionDenom": "lp:18:stadydxypt-adydx",
+          "sourceDenom": "lp:18:stadydxypt-adydx",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "DYDX-USDC-LP",
+          "chainSuggestionDenom": "lp:19:adydx-uusdc",
+          "sourceDenom": "lp:19:adydx-uusdc",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "stTIA-YIELD-LP",
+          "chainSuggestionDenom": "lp:16:stutia",
+          "sourceDenom": "lp:16:stutia",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "stTIA-BOOST-LP",
+          "chainSuggestionDenom": "lp:20:stutiaypt-utia",
+          "sourceDenom": "lp:20:stutiaypt-utia",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "TIA-YIELD-LP",
+          "chainSuggestionDenom": "lp:24:utia",
+          "sourceDenom": "lp:24:utia",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "TIA-BOOST-LP",
+          "chainSuggestionDenom": "lp:25:utiaypt-utia",
+          "sourceDenom": "lp:25:utiaypt-utia",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "TIA-USDC-LP",
+          "chainSuggestionDenom": "lp:21:utia-uusdc",
+          "sourceDenom": "lp:21:utia-uusdc",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "dATOM-YIELD-LP",
+          "chainSuggestionDenom": "lp:22:udatom",
+          "sourceDenom": "lp:22:udatom",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        },
+        {
+          "coinDenom": "dATOM-BOOST-LP",
+          "chainSuggestionDenom": "lp:23:udatomypt-uatom",
+          "sourceDenom": "lp:23:udatomypt-uatom",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png"
+        }
+      ],
+      "description": "Trade Your Future Yield, Today",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.pryzm.zone"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.pryzm.zone"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://chainsco.pe/pryzm/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
     }
   ]
 }

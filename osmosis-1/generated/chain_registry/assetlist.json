@@ -24163,6 +24163,55 @@
       ]
     },
     {
+      "description": "Pryzm's LP token for OSMO Yield pool",
+      "denom_units": [
+        {
+          "denom": "ibc/54B2D9DC9602A1CE2A0329D51C6A1C7C4ADE71477186AEAAA549318C4513A453",
+          "exponent": 0,
+          "aliases": [
+            "lp:8:uosmo"
+          ]
+        },
+        {
+          "denom": "lp:8:osmo",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/54B2D9DC9602A1CE2A0329D51C6A1C7C4ADE71477186AEAAA549318C4513A453",
+      "name": "OSMO Yield LP",
+      "display": "lp:8:osmo",
+      "symbol": "OSMO-YIELD-LP",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "pryzm",
+            "base_denom": "lp:8:uosmo",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-75755",
+            "path": "transfer/channel-75755/lp:8:uosmo"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "pryzm",
+            "base_denom": "lp:8:uosmo"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.svg"
+        }
+      ]
+    },
+    {
       "description": "The native token of Furya",
       "denom_units": [
         {

@@ -1,4 +1,4 @@
-
+﻿
 // Purpose:
 //   to generate the assets file for Mintscan asset recognition
 
@@ -171,6 +171,17 @@ function getCosmoStationChainName(chainRegistryChainName) {
 
 }
 
+function getAssetImage(asset) {
+
+  //Use CosmoStation's custom 3D logo if it's OSMO
+  if (asset.base === "uosmo") {
+    return "https://raw.githubusercontent.com/cosmostation/chainlist/master/chain/osmosis/asset/osmo.png";
+  }
+  //Otherwise, may use the Chain Registry logo
+  return asset.images?.[0].svg ?? asset.images?.[0].png;
+
+}
+
 
 const processAsset = (chainName, asset) => {
 
@@ -181,7 +192,7 @@ const processAsset = (chainName, asset) => {
   assetObject.symbol = asset.symbol;
   assetObject.decimals = getAssetDecimals(chainName, asset);
   assetObject.description = asset.description;
-  assetObject.image = asset.images?.[0].png ?? asset.images?.[0].svg;
+  assetObject.image = getAssetImage(asset);
   assetObject.color = asset.images?.[0].theme?.primary_color_hex;
   assetObject.coinGeckoId = getAssetCoinGeckoId(chainName, asset);
   if (assetObject.type === "ibc") {

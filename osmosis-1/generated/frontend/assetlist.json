@@ -3476,7 +3476,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/krt.svg"
       },
       "price": {
-        "poolId": "582",
+        "poolId": "581",
         "denom": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC"
       },
       "categories": [
@@ -14587,8 +14587,8 @@
       },
       "coingeckoId": "celestia",
       "price": {
-        "poolId": "1247",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1248",
+        "denom": "uosmo"
       },
       "categories": [],
       "transferMethods": [
@@ -19106,8 +19106,8 @@
       },
       "coingeckoId": "saga-2",
       "price": {
-        "poolId": "1670",
-        "denom": "uosmo"
+        "poolId": "1671",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "gaming"
@@ -25430,6 +25430,60 @@
       "disabled": false,
       "preview": false,
       "listingDate": "2024-10-14T18:00:00.000Z"
+    },
+    {
+      "chainName": "pryzm",
+      "sourceDenom": "lp:8:uosmo",
+      "coinMinimalDenom": "ibc/54B2D9DC9602A1CE2A0329D51C6A1C7C4ADE71477186AEAAA549318C4513A453",
+      "symbol": "OSMO-YIELD-LP",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.svg"
+      },
+      "categories": [
+        "defi"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "pryzm",
+            "chainId": "pryzm-1",
+            "sourceDenom": "lp:8:uosmo",
+            "port": "transfer",
+            "channelId": "channel-2"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-75755",
+            "path": "transfer/channel-75755/lp:8:uosmo"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "pryzm",
+          "sourceDenom": "lp:8:uosmo",
+          "chainType": "cosmos",
+          "chainId": "pryzm-1",
+          "symbol": "OSMO-YIELD-LP",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/lp.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/54B2D9DC9602A1CE2A0329D51C6A1C7C4ADE71477186AEAAA549318C4513A453",
+      "name": "OSMO Yield LP",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "listingDate": "2024-10-15T18:00:00.000Z"
     }
   ]
 }

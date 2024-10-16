@@ -17395,6 +17395,16 @@
       "name": "BackBone Labs Liquid Staked OSMO",
       "display": "bOSMO",
       "symbol": "bOSMO",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "osmosis",
+            "base_denom": "uosmo"
+          },
+          "provider": "BackBoneLabs"
+        }
+      ],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bOSMO.png"
       },
@@ -24509,6 +24519,460 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3ltc.png",
           "theme": {
             "primary_color_hex": "#3d3d3d"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Tether's USD stablecoin from Arbitrum on Axelar",
+      "denom_units": [
+        {
+          "denom": "ibc/57B63A0795B6BC0AC4EFD0D4DEE9FE71FCC1D0FFA87F6280C9CDEF4F6727A173",
+          "exponent": 0,
+          "aliases": [
+            "arbitrum-uusdt"
+          ]
+        },
+        {
+          "denom": "usdt",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/57B63A0795B6BC0AC4EFD0D4DEE9FE71FCC1D0FFA87F6280C9CDEF4F6727A173",
+      "name": "Tether USD (Ethereum) (Arbitrum via Axelar)",
+      "display": "usdt",
+      "symbol": "USDT.e.arb.axl",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Tether"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+          },
+          "provider": "Arbitrum Bridge"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "arbitrum",
+            "base_denom": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "arbitrum-uusdt",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208",
+            "path": "transfer/channel-208/arbitrum-uusdt"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.arb.axl.svg"
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.arb.axl.svg"
+        },
+        {
+          "image_sync": {
+            "chain_name": "axelar",
+            "base_denom": "arbitrum-uusdt"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdt.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdt.svg",
+          "theme": {
+            "primary_color_hex": "#54ac94"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Tether's USD stablecoin from Optimism on Axelar",
+      "denom_units": [
+        {
+          "denom": "ibc/EEA21E12A250B7FBBCBBBD1F7AA78984F5C12D684B32EBEEFC585FF596A7BCDA",
+          "exponent": 0,
+          "aliases": [
+            "optimism-uusdt"
+          ]
+        },
+        {
+          "denom": "usdt",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/EEA21E12A250B7FBBCBBBD1F7AA78984F5C12D684B32EBEEFC585FF596A7BCDA",
+      "name": "Tether USD (Axelar)",
+      "display": "usdt",
+      "symbol": "USDT.axl",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Tether"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+          },
+          "provider": "Optimism Bridge"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "optimism",
+            "base_denom": "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "optimism-uusdt",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208",
+            "path": "transfer/channel-208/optimism-uusdt"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.op.axl.svg"
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.op.axl.svg"
+        },
+        {
+          "image_sync": {
+            "chain_name": "axelar",
+            "base_denom": "optimism-uusdt"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdt.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdt.svg",
+          "theme": {
+            "primary_color_hex": "#54ac94"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Tether's USD stablecoin from Polygon on Axelar",
+      "denom_units": [
+        {
+          "denom": "ibc/2F6003A92088B989A159C593C551DF7B04FA0A0419CA3ED087E45E0006ECFF6E",
+          "exponent": 0,
+          "aliases": [
+            "polygon-uusdt"
+          ]
+        },
+        {
+          "denom": "usdt",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/2F6003A92088B989A159C593C551DF7B04FA0A0419CA3ED087E45E0006ECFF6E",
+      "name": "Tether USD (Ethereum) (Polygon via Axelar)",
+      "display": "usdt",
+      "symbol": "USDT.e.matic.axl",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Tether"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+          },
+          "provider": "Polygon PoS Bridge"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "polygon",
+            "base_denom": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "polygon-uusdt",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208",
+            "path": "transfer/channel-208/polygon-uusdt"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.pol.axl.svg"
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.pol.axl.svg"
+        },
+        {
+          "image_sync": {
+            "chain_name": "axelar",
+            "base_denom": "polygon-uusdt"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdt.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdt.svg",
+          "theme": {
+            "primary_color_hex": "#54ac94"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Coinbase Wrapped Bitcoin on Axelar",
+      "denom_units": [
+        {
+          "denom": "ibc/616C2EA69BC328F245CE449785CB0B526B462C48F19DCF9B3D30699579B4308A",
+          "exponent": 0,
+          "aliases": [
+            "cbbtc-satoshi"
+          ]
+        },
+        {
+          "denom": "cbbtc",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/616C2EA69BC328F245CE449785CB0B526B462C48F19DCF9B3D30699579B4308A",
+      "name": "Bitcoin (Base via Axelar)",
+      "display": "cbbtc",
+      "symbol": "BTC.e.base.axl",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "bitcoin",
+            "base_denom": "sat"
+          },
+          "provider": "Base Bridge"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "base",
+            "base_denom": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "cbbtc-satoshi",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208",
+            "path": "transfer/channel-208/cbbtc-satoshi"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbbtc.axl.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbbtc.axl.png"
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbbtc.axl.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbbtc.axl.png"
+        },
+        {
+          "image_sync": {
+            "chain_name": "axelar",
+            "base_denom": "cbbtc-satoshi"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/base/images/cbbtc.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/base/images/cbbtc.png",
+          "theme": {
+            "circle": true,
+            "primary_color_hex": "#0052FF"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Fire Bitcoin on Axelar",
+      "denom_units": [
+        {
+          "denom": "ibc/22C342A34DD0189AC2B2697EE76C360A9FBA53748ABA76E12C3A9E9F5F1E130F",
+          "exponent": 0,
+          "aliases": [
+            "fbtc-satoshi"
+          ]
+        },
+        {
+          "denom": "fbtc",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/22C342A34DD0189AC2B2697EE76C360A9FBA53748ABA76E12C3A9E9F5F1E130F",
+      "name": "Fire Bitcoin (Axelar)",
+      "display": "fbtc",
+      "symbol": "FBTC.axl",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "bitcoin",
+            "base_denom": "sat"
+          },
+          "provider": "Ignition"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "mantle",
+            "base_denom": "0xC96dE26018A54D51c097160568752c4E3BD6C364"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "fbtc-satoshi",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208",
+            "path": "transfer/channel-208/fbtc-satoshi"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fbtc.axl.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fbtc.axl.png"
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fbtc.axl.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fbtc.axl.png"
+        },
+        {
+          "image_sync": {
+            "chain_name": "axelar",
+            "base_denom": "fbtc-satoshi"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/mantle/images/fbtc.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/mantle/images/fbtc.svg",
+          "theme": {
+            "circle": false,
+            "primary_color_hex": "#8F00FF",
+            "background_color_hex": "#00000000"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Lombard Staked Bitcoin on Axelar",
+      "denom_units": [
+        {
+          "denom": "ibc/4AC81C97BBB5482536F6401328E0E10BCCD98F0F471DCF64319A811E25E53CAB",
+          "exponent": 0,
+          "aliases": [
+            "lbtc-satoshi"
+          ]
+        },
+        {
+          "denom": "lbtc",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/4AC81C97BBB5482536F6401328E0E10BCCD98F0F471DCF64319A811E25E53CAB",
+      "name": "Lombard Staked Bitcoin (Axelar)",
+      "display": "lbtc",
+      "symbol": "LBTC.axl",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "bitcoin",
+            "base_denom": "sat"
+          },
+          "provider": "Lombard"
+        },
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0x8236a87084f8B84306f72007F36F2618A5634494"
+          },
+          "provider": "Axelar"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "lbtc-satoshi",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208",
+            "path": "transfer/channel-208/lbtc-satoshi"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/lbtc.axl.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/lbtc.axl.png"
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/lbtc.axl.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/lbtc.axl.png"
+        },
+        {
+          "image_sync": {
+            "chain_name": "axelar",
+            "base_denom": "lbtc-satoshi"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/lbtc.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/lbtc.svg",
+          "theme": {
+            "circle": true,
+            "primary_color_hex": "#162E2F"
           }
         }
       ]

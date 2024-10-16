@@ -13,8 +13,8 @@
       },
       "coingeckoId": "osmosis",
       "price": {
-        "poolId": "1464",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1101",
+        "denom": "ibc/A0CC0CF735BFB30E730C70019D4218A1244FF383503FF7579C9201AB93CA9293"
       },
       "categories": [
         "defi"
@@ -143,8 +143,8 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.axl.svg"
       },
       "price": {
-        "poolId": "1134",
-        "denom": "uosmo"
+        "poolId": "1431",
+        "denom": "ibc/2F21E6D4271DE3F561F20A02CD541DAF7405B1E9CB3B9B07E3C2AC7D8A4338A5"
       },
       "categories": [],
       "transferMethods": [
@@ -514,7 +514,7 @@
       },
       "coingeckoId": "cosmos",
       "price": {
-        "poolId": "1251",
+        "poolId": "1282",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
@@ -1422,8 +1422,8 @@
       },
       "coingeckoId": "persistence",
       "price": {
-        "poolId": "1101",
-        "denom": "uosmo"
+        "poolId": "2197",
+        "denom": "factory/osmo1z6r6qdknhgsc0zeracktgpcxf43j6sekq07nw8sxduc9lg0qjjlqfu25e3/alloyed/allBTC"
       },
       "categories": [
         "liquid_staking"
@@ -3830,7 +3830,7 @@
       "coingeckoId": "frax",
       "price": {
         "poolId": "679",
-        "denom": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858"
+        "denom": "ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4"
       },
       "categories": [
         "stablecoin"
@@ -4744,8 +4744,8 @@
       },
       "coingeckoId": "terra-luna-2",
       "price": {
-        "poolId": "1728",
-        "denom": "uosmo"
+        "poolId": "1163",
+        "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
       },
       "categories": [],
       "transferMethods": [
@@ -8000,8 +8000,8 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/medasdigital/images/medas.svg"
       },
       "price": {
-        "poolId": "869",
-        "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
+        "poolId": "1346",
+        "denom": "ibc/D79E7D83AB399BFFF93433E54FAA480C191248FC556924A2A8351AE2638B3877"
       },
       "categories": [],
       "transferMethods": [
@@ -12643,8 +12643,8 @@
       },
       "coingeckoId": "tether",
       "price": {
-        "poolId": "1081",
-        "denom": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858"
+        "poolId": "1220",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "stablecoin"
@@ -13664,8 +13664,8 @@
       },
       "coingeckoId": "usd-coin",
       "price": {
-        "poolId": "1220",
-        "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
+        "poolId": "1223",
+        "denom": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858"
       },
       "categories": [
         "stablecoin"
@@ -14587,7 +14587,7 @@
       },
       "coingeckoId": "celestia",
       "price": {
-        "poolId": "1321",
+        "poolId": "1247",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
@@ -18741,7 +18741,20 @@
         "sail_initiative"
       ],
       "transferMethods": [],
-      "counterparty": [],
+      "counterparty": [
+        {
+          "chainName": "osmosis",
+          "sourceDenom": "uosmo",
+          "chainType": "cosmos",
+          "chainId": "osmosis-1",
+          "symbol": "OSMO",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
+          }
+        }
+      ],
       "variantGroupKey": "factory/osmo1s3l0lcqc7tu0vpj6wdjz9wqpxv8nk6eraevje4fuwkyjnwuy82qsx3lduv/boneOsmo",
       "name": "BackBone Labs Liquid Staked OSMO",
       "isAlloyed": false,
@@ -25823,6 +25836,457 @@
         "sourceDenom": "uint3"
       },
       "listingDate": "2024-10-11T03:00:00.000Z"
+    },
+    {
+      "chainName": "axelar",
+      "sourceDenom": "arbitrum-uusdt",
+      "coinMinimalDenom": "ibc/57B63A0795B6BC0AC4EFD0D4DEE9FE71FCC1D0FFA87F6280C9CDEF4F6727A173",
+      "symbol": "USDT.e.arb.axl",
+      "decimals": 6,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.arb.axl.svg"
+      },
+      "categories": [
+        "stablecoin"
+      ],
+      "pegMechanism": "collateralized",
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "axelar",
+            "chainId": "axelar-dojo-1",
+            "sourceDenom": "arbitrum-uusdt",
+            "port": "transfer",
+            "channelId": "channel-3"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-208",
+            "path": "transfer/channel-208/arbitrum-uusdt"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "axelar",
+          "sourceDenom": "arbitrum-uusdt",
+          "chainType": "cosmos",
+          "chainId": "axelar-dojo-1",
+          "symbol": "axlUSDT",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdt.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdt.svg"
+          }
+        },
+        {
+          "chainName": "arbitrum",
+          "sourceDenom": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
+          "chainType": "evm",
+          "chainId": 42161,
+          "address": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
+          "symbol": "USDT",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.svg"
+          }
+        },
+        {
+          "chainName": "ethereum",
+          "sourceDenom": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+          "chainType": "evm",
+          "chainId": 1,
+          "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+          "symbol": "USDT",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo1em6xs47hd82806f5cxgyufguxrrc7l0aqx7nzzptjuqgswczk8csavdxek/alloyed/allUSDT",
+      "name": "Tether USD (Ethereum) (Arbitrum via Axelar)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "axelar",
+        "sourceDenom": "uaxl"
+      }
+    },
+    {
+      "chainName": "axelar",
+      "sourceDenom": "optimism-uusdt",
+      "coinMinimalDenom": "ibc/EEA21E12A250B7FBBCBBBD1F7AA78984F5C12D684B32EBEEFC585FF596A7BCDA",
+      "symbol": "USDT.axl",
+      "decimals": 6,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.op.axl.svg"
+      },
+      "categories": [
+        "stablecoin"
+      ],
+      "pegMechanism": "collateralized",
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "axelar",
+            "chainId": "axelar-dojo-1",
+            "sourceDenom": "optimism-uusdt",
+            "port": "transfer",
+            "channelId": "channel-3"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-208",
+            "path": "transfer/channel-208/optimism-uusdt"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "axelar",
+          "sourceDenom": "optimism-uusdt",
+          "chainType": "cosmos",
+          "chainId": "axelar-dojo-1",
+          "symbol": "axlUSDT",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdt.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdt.svg"
+          }
+        },
+        {
+          "chainName": "optimism",
+          "sourceDenom": "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58",
+          "chainType": "evm",
+          "chainId": 10,
+          "address": "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58",
+          "symbol": "USDT",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/EEA21E12A250B7FBBCBBBD1F7AA78984F5C12D684B32EBEEFC585FF596A7BCDA",
+      "name": "Tether USD (Axelar)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "axelar",
+        "sourceDenom": "uaxl"
+      }
+    },
+    {
+      "chainName": "axelar",
+      "sourceDenom": "polygon-uusdt",
+      "coinMinimalDenom": "ibc/2F6003A92088B989A159C593C551DF7B04FA0A0419CA3ED087E45E0006ECFF6E",
+      "symbol": "USDT.e.matic.axl",
+      "decimals": 6,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.pol.axl.svg"
+      },
+      "categories": [
+        "stablecoin"
+      ],
+      "pegMechanism": "collateralized",
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "axelar",
+            "chainId": "axelar-dojo-1",
+            "sourceDenom": "polygon-uusdt",
+            "port": "transfer",
+            "channelId": "channel-3"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-208",
+            "path": "transfer/channel-208/polygon-uusdt"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "axelar",
+          "sourceDenom": "polygon-uusdt",
+          "chainType": "cosmos",
+          "chainId": "axelar-dojo-1",
+          "symbol": "axlUSDT",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdt.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdt.svg"
+          }
+        },
+        {
+          "chainName": "polygon",
+          "sourceDenom": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+          "chainType": "evm",
+          "chainId": 137,
+          "address": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+          "symbol": "USDT",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.svg"
+          }
+        },
+        {
+          "chainName": "ethereum",
+          "sourceDenom": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+          "chainType": "evm",
+          "chainId": 1,
+          "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+          "symbol": "USDT",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo1em6xs47hd82806f5cxgyufguxrrc7l0aqx7nzzptjuqgswczk8csavdxek/alloyed/allUSDT",
+      "name": "Tether USD (Ethereum) (Polygon via Axelar)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "axelar",
+        "sourceDenom": "uaxl"
+      }
+    },
+    {
+      "chainName": "axelar",
+      "sourceDenom": "cbbtc-satoshi",
+      "coinMinimalDenom": "ibc/616C2EA69BC328F245CE449785CB0B526B462C48F19DCF9B3D30699579B4308A",
+      "symbol": "BTC.e.base.axl",
+      "decimals": 8,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbbtc.axl.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbbtc.axl.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "axelar",
+            "chainId": "axelar-dojo-1",
+            "sourceDenom": "cbbtc-satoshi",
+            "port": "transfer",
+            "channelId": "channel-3"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-208",
+            "path": "transfer/channel-208/cbbtc-satoshi"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "axelar",
+          "sourceDenom": "cbbtc-satoshi",
+          "chainType": "cosmos",
+          "chainId": "axelar-dojo-1",
+          "symbol": "axl-cbBTC",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/base/images/cbbtc.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/base/images/cbbtc.svg"
+          }
+        },
+        {
+          "chainName": "base",
+          "sourceDenom": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "chainType": "evm",
+          "chainId": 8453,
+          "address": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "symbol": "cbBTC",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/base/images/cbbtc.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/base/images/cbbtc.svg"
+          }
+        },
+        {
+          "chainName": "bitcoin",
+          "sourceDenom": "sat",
+          "chainType": "non-cosmos",
+          "symbol": "BTC",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/bitcoin/images/btc.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/bitcoin/images/btc.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo1z6r6qdknhgsc0zeracktgpcxf43j6sekq07nw8sxduc9lg0qjjlqfu25e3/alloyed/allBTC",
+      "name": "Bitcoin (Base via Axelar)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "axelar",
+        "sourceDenom": "uaxl"
+      }
+    },
+    {
+      "chainName": "axelar",
+      "sourceDenom": "fbtc-satoshi",
+      "coinMinimalDenom": "ibc/22C342A34DD0189AC2B2697EE76C360A9FBA53748ABA76E12C3A9E9F5F1E130F",
+      "symbol": "FBTC.axl",
+      "decimals": 8,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fbtc.axl.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fbtc.axl.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "axelar",
+            "chainId": "axelar-dojo-1",
+            "sourceDenom": "fbtc-satoshi",
+            "port": "transfer",
+            "channelId": "channel-3"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-208",
+            "path": "transfer/channel-208/fbtc-satoshi"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "axelar",
+          "sourceDenom": "fbtc-satoshi",
+          "chainType": "cosmos",
+          "chainId": "axelar-dojo-1",
+          "symbol": "axlFBTC",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/mantle/images/fbtc.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/mantle/images/fbtc.svg"
+          }
+        },
+        {
+          "chainName": "mantle",
+          "sourceDenom": "0xC96dE26018A54D51c097160568752c4E3BD6C364",
+          "chainType": "non-cosmos",
+          "symbol": "FBTC",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/mantle/images/fbtc.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/mantle/images/fbtc.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/22C342A34DD0189AC2B2697EE76C360A9FBA53748ABA76E12C3A9E9F5F1E130F",
+      "name": "Fire Bitcoin (Axelar)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "axelar",
+        "sourceDenom": "uaxl"
+      }
+    },
+    {
+      "chainName": "axelar",
+      "sourceDenom": "lbtc-satoshi",
+      "coinMinimalDenom": "ibc/4AC81C97BBB5482536F6401328E0E10BCCD98F0F471DCF64319A811E25E53CAB",
+      "symbol": "LBTC.axl",
+      "decimals": 8,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/lbtc.axl.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/lbtc.axl.png"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "axelar",
+            "chainId": "axelar-dojo-1",
+            "sourceDenom": "lbtc-satoshi",
+            "port": "transfer",
+            "channelId": "channel-3"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-208",
+            "path": "transfer/channel-208/lbtc-satoshi"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "axelar",
+          "sourceDenom": "lbtc-satoshi",
+          "chainType": "cosmos",
+          "chainId": "axelar-dojo-1",
+          "symbol": "axlLBTC",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/lbtc.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/lbtc.svg"
+          }
+        },
+        {
+          "chainName": "ethereum",
+          "sourceDenom": "0x8236a87084f8B84306f72007F36F2618A5634494",
+          "chainType": "evm",
+          "chainId": 1,
+          "address": "0x8236a87084f8B84306f72007F36F2618A5634494",
+          "symbol": "LBTC",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/lbtc.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/lbtc.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/4AC81C97BBB5482536F6401328E0E10BCCD98F0F471DCF64319A811E25E53CAB",
+      "name": "Lombard Staked Bitcoin (Axelar)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "axelar",
+        "sourceDenom": "uaxl"
+      }
     }
   ]
 }

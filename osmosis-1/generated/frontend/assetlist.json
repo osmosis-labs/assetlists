@@ -13,8 +13,8 @@
       },
       "coingeckoId": "osmosis",
       "price": {
-        "poolId": "1101",
-        "denom": "ibc/A0CC0CF735BFB30E730C70019D4218A1244FF383503FF7579C9201AB93CA9293"
+        "poolId": "1464",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "defi"
@@ -514,7 +514,7 @@
       },
       "coingeckoId": "cosmos",
       "price": {
-        "poolId": "1282",
+        "poolId": "1251",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
@@ -1422,8 +1422,8 @@
       },
       "coingeckoId": "persistence",
       "price": {
-        "poolId": "2197",
-        "denom": "factory/osmo1z6r6qdknhgsc0zeracktgpcxf43j6sekq07nw8sxduc9lg0qjjlqfu25e3/alloyed/allBTC"
+        "poolId": "1101",
+        "denom": "uosmo"
       },
       "categories": [
         "liquid_staking"
@@ -3830,7 +3830,7 @@
       "coingeckoId": "frax",
       "price": {
         "poolId": "679",
-        "denom": "ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4"
+        "denom": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC"
       },
       "categories": [
         "stablecoin"
@@ -5441,8 +5441,8 @@
       },
       "coingeckoId": "kujira",
       "price": {
-        "poolId": "744",
-        "denom": "uosmo"
+        "poolId": "1161",
+        "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
       },
       "categories": [
         "defi"
@@ -23571,8 +23571,8 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/cosmo.png"
       },
       "price": {
-        "poolId": "2218",
-        "denom": "ibc/9A76CDF0CBCEF37923F32518FA15E5DC92B9F56128292BC4D63C4AEA76CBB110"
+        "poolId": "2217",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "rwa"
@@ -25437,7 +25437,7 @@
       "variantGroupKey": "factory/osmo1eqjda4pc6e09jtxzxggf6jl3jye2yn453ja58we5gxwzmf5ah28qvlnaz8/alloyed/allUNI",
       "name": "Uniswap",
       "isAlloyed": true,
-      "contract": "osmo1em6xs47hd82806f5cxgyufguxrrc7l0aqx7nzzptjuqgswczk8csavdxek",
+      "contract": "osmo1eqjda4pc6e09jtxzxggf6jl3jye2yn453ja58we5gxwzmf5ah28qvlnaz8",
       "verified": true,
       "unstable": false,
       "disabled": false,
@@ -26287,6 +26287,59 @@
         "chainName": "axelar",
         "sourceDenom": "uaxl"
       }
+    },
+    {
+      "chainName": "osmosis",
+      "sourceDenom": "factory/osmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9/BTC.rt",
+      "coinMinimalDenom": "factory/osmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9/BTC.rt",
+      "symbol": "RBTC.rt",
+      "decimals": 18,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/rbtc.rt.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/rbtc.rt.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Nitro Router",
+          "type": "external_interface",
+          "depositUrl": "https://app.routernitro.com/swap?toChain=osmosis-1&toToken=factory%2Fosmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9%2FBTC.rt&fromChain=30&fromToken=0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+          "withdrawUrl": "https://app.routernitro.com/swap?fromChain=osmosis-1&fromToken=factory%2Fosmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9%2FBTC.rt&toChain=30&toToken=0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "rootstock",
+          "sourceDenom": "0x542FDA317318eBf1d3DeAF76E0B632741a7e677d",
+          "chainType": "evm",
+          "chainId": 30,
+          "address": "0x542FDA317318eBf1d3DeAF76E0B632741a7e677d",
+          "symbol": "WRBTC",
+          "decimals": 18,
+          "logoURIs": {}
+        },
+        {
+          "chainName": "rootstock",
+          "sourceDenom": "sat",
+          "chainType": "evm",
+          "chainId": 30,
+          "address": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+          "symbol": "RBTC",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/rootstock/images/rbtc.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/rootstock/images/rbtc.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9/BTC.rt",
+      "name": "Rootstock (Router)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "listingDate": "2024-10-17T00:00:00.000Z"
     }
   ]
 }

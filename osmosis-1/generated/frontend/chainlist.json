@@ -1627,7 +1627,7 @@
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dot.pica.png"
         },
         {
-          "coinDenom": "QSR",
+          "coinDenom": "QSR.legacy",
           "chainSuggestionDenom": "ibc/1B708808D372E959CD4839C594960309283424C775F4A038AAEBE7F83A988477",
           "coinMinimalDenom": "ibc/1B708808D372E959CD4839C594960309283424C775F4A038AAEBE7F83A988477",
           "coinDecimals": 6,
@@ -17200,7 +17200,7 @@
       },
       "slip44": 118,
       "stakeCurrency": {
-        "coinDenom": "QSR",
+        "coinDenom": "QSR.legacy",
         "chainSuggestionDenom": "uqsr",
         "coinMinimalDenom": "ibc/1B708808D372E959CD4839C594960309283424C775F4A038AAEBE7F83A988477",
         "sourceDenom": "uqsr",
@@ -17210,7 +17210,7 @@
       },
       "feeCurrencies": [
         {
-          "coinDenom": "QSR",
+          "coinDenom": "QSR.legacy",
           "chainSuggestionDenom": "uqsr",
           "coinMinimalDenom": "ibc/1B708808D372E959CD4839C594960309283424C775F4A038AAEBE7F83A988477",
           "sourceDenom": "uqsr",
@@ -17265,7 +17265,7 @@
       ],
       "currencies": [
         {
-          "coinDenom": "QSR",
+          "coinDenom": "QSR.legacy",
           "chainSuggestionDenom": "uqsr",
           "coinMinimalDenom": "ibc/1B708808D372E959CD4839C594960309283424C775F4A038AAEBE7F83A988477",
           "sourceDenom": "uqsr",
@@ -20913,7 +20913,9 @@
       ],
       "features": [
         "ibc-go",
-        "ibc-transfer"
+        "ibc-transfer",
+        "eth-address-gen",
+        "eth-key-sign"
       ]
     },
     {

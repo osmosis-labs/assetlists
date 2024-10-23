@@ -21906,6 +21906,76 @@
         "ibc-go",
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "mantrachain",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "MANTRA",
+      "chain_id": "mantra-1",
+      "bech32Prefix": "mantra",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "mantra",
+        "bech32PrefixAccPub": "mantrapub",
+        "bech32PrefixValAddr": "mantravaloper",
+        "bech32PrefixValPub": "mantravaloperpub",
+        "bech32PrefixConsAddr": "mantravalcons",
+        "bech32PrefixConsPub": "mantravalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDenom": "OM",
+        "chainSuggestionDenom": "uom",
+        "coinMinimalDenom": "ibc/164807F6226F91990F358C6467EEE8B162E437BDCD3DADEC3F0CE20693720795",
+        "sourceDenom": "uom",
+        "coinDecimals": 6,
+        "coinGeckoId": "mantra-dao"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "OM",
+          "chainSuggestionDenom": "uom",
+          "coinMinimalDenom": "ibc/164807F6226F91990F358C6467EEE8B162E437BDCD3DADEC3F0CE20693720795",
+          "sourceDenom": "uom",
+          "coinDecimals": 6,
+          "coinGeckoId": "mantra-dao",
+          "gasPriceStep": {
+            "low": 0.01,
+            "average": 0.02,
+            "high": 0.03
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "OM",
+          "chainSuggestionDenom": "uom",
+          "coinMinimalDenom": "ibc/164807F6226F91990F358C6467EEE8B162E437BDCD3DADEC3F0CE20693720795",
+          "sourceDenom": "uom",
+          "coinDecimals": 6,
+          "coinGeckoId": "mantra-dao"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.mantrachain.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.mantrachain.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://www.mintscan.io/mantra/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
     }
   ]
 }

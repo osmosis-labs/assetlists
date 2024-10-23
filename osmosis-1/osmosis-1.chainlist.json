@@ -9287,6 +9287,69 @@
         "ibc-go",
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "mantrachain",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "MANTRA",
+      "chain_id": "mantra-1",
+      "bech32_prefix": "mantra",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "mantra",
+        "bech32PrefixAccPub": "mantrapub",
+        "bech32PrefixValAddr": "mantravaloper",
+        "bech32PrefixValPub": "mantravaloperpub",
+        "bech32PrefixConsAddr": "mantravalcons",
+        "bech32PrefixConsPub": "mantravalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uom",
+            "fixed_min_gas_price": 0.01,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.02,
+            "high_gas_price": 0.03
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uom"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.mantrachain.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.mantrachain.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/mantra/txs/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.svg",
+        "theme": {
+          "circle": false,
+          "primary_color_hex": "#fba0c1"
+        }
+      },
+      "features": [
+        "ibc-transfer"
+      ]
     }
   ]
 }

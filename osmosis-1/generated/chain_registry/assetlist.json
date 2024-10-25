@@ -25259,6 +25259,55 @@
       ]
     },
     {
+      "description": "The native staking and governance token of AtomOne",
+      "denom_units": [
+        {
+          "denom": "ibc/715283E4A955EB803AB1DD30B488587A4D63BF0B51BADA537053DEE479BA10D6",
+          "exponent": 0,
+          "aliases": [
+            "uatone"
+          ]
+        },
+        {
+          "denom": "atone",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/715283E4A955EB803AB1DD30B488587A4D63BF0B51BADA537053DEE479BA10D6",
+      "name": "AtomOne",
+      "display": "atone",
+      "symbol": "ATONE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "atomone",
+            "base_denom": "uatone",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-85309",
+            "path": "transfer/channel-85309/uatone"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/atomone/images/atomone.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/atomone/images/atomone.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "atomone",
+            "base_denom": "uatone"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/atomone/images/atomone.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/atomone/images/atomone.svg"
+        }
+      ]
+    },
+    {
       "description": "The native token of Furya",
       "denom_units": [
         {

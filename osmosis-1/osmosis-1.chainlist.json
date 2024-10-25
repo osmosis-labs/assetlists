@@ -9350,6 +9350,66 @@
       "features": [
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "atomone",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "AtomOne",
+      "chain_id": "atomone-1",
+      "bech32_prefix": "atone",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "atone",
+        "bech32PrefixAccPub": "atonepub",
+        "bech32PrefixValAddr": "atonevaloper",
+        "bech32PrefixValPub": "atonevaloperpub",
+        "bech32PrefixConsAddr": "atonevalcons",
+        "bech32PrefixConsPub": "atonevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uatone",
+            "fixed_min_gas_price": 0.001,
+            "low_gas_price": 0.006,
+            "average_gas_price": 0.006,
+            "high_gas_price": 0.009
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uatone"
+          }
+        ]
+      },
+      "description": "The Cosmos community, at a crossroads, confronts divergent views on key aspects such as mission, tokenomics, and security philosophy. AtomOne emerges as a beacon, offering an alternative fork to navigate these waters, equipped to handle contingencies and embodying a bastion for diverse political thought.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://atomone-rpc.allinbits.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://atomone-grpc.allinbits.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.allinbits.com/atomone/tx/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/atomone/images/atomone.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/atomone/images/atomone.svg"
+      },
+      "features": [
+        "ibc-transfer"
+      ]
     }
   ]
 }

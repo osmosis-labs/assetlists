@@ -5555,12 +5555,12 @@
       "base_denom": "factory/osmo1cranx3twqxfrgeqvgsu262gy54vafpc9xap6scye99v244zl970s7kw2sz/alloyed/allBCH",
       "osmosis_verified": true,
       "is_alloyed": true,
-      "listing_date_time_utc": "2024-10-18T20:00:00Z",
-      "_comment": "Alloyed Bitcoin Cash $allBCH",
       "canonical": {
         "chain_name": "bitcoincash",
         "base_denom": "sat"
-      }
+      },
+      "listing_date_time_utc": "2024-10-18T20:00:00Z",
+      "_comment": "Alloyed Bitcoin Cash $allBCH",
     },
     {
       "chain_name": "mantrachain",
@@ -5574,33 +5574,37 @@
       "_comment": "Mantra $OM"
     },
     {
+      "chain_name": "atomone",
+      "base_denom": "uatone",
+      "path": "transfer/channel-85309/uatone",
+      "osmosis_verified": false,
+      "_comment": "AtomOne $ATONE"
+    },
+    {
       "chain_name": "osmosis",
-      "base_denom": "ibc/21D8071EF5B02A86D945430D859A594CBF28287D38104A264BB9FD3B22BBF5DE",
+      "base_denom": "factory/osmo1n6asrjy9754q8y9jsxqf557zmsv3s3xa5m9eg5/uspice",
+      "osmosis_verified": false,
+      "categories": [
+        "meme"
+      ],
+      "listing_date_time_utc": "2024-10-25T19:00:00Z",
+      "_comment": "Spice $SPICE"
+    },
+    {
+      "chain_name": "axelar",
+      "base_denom": "yum",
       "path": "transfer/channel-208/yum",
       "osmosis_verified": false,
       "osmosis_unlisted": true,
-      "listing_date_time_utc": "2024-10-25T01:00:00Z",
       "canonical": {
         "chain_name": "ethereum",
         "base_denom": "0xcE682c89C63d2850Cb2ca898E44D6c7c30d897a6"
       },
-      "_comment": "Project token for Cacao Swap",
-      "override_properties": {
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/yum.png"
-        }
-      },
       "categories": [
         "defi"
       ],
-      "transfer_methods": [
-        {
-          "name": "Squid Bridge",
-          "type": "external_interface",
-          "deposit_url": "https://app.squidrouter.com",
-          "withdraw_url": "https://app.squidrouter.com"
-        }
-      ]
+      "listing_date_time_utc": "2024-10-25T01:00:00Z",
+      "_comment": "Cacao Swap $YUM"
     }
   ]
 }

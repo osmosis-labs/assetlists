@@ -170,10 +170,11 @@ function addAssetsToUpdateList(assetsToUpdate, coinGeckoIdToAssetMap) {
   assetsToUpdate.forEach((asset) => {
     let assetWithPlatformDetail = coinGeckoIdToAssetMap.get(asset);
     if (assetWithPlatformDetail) {
-      assetsToUpdateWithPlatformDetail.push(assetWithPlatformDetail);
+      assetsToUpdateWithPlatformDetail.push({ [asset]: assetWithPlatformDetail });
     }
   });
 
+  console.log(assetsToUpdateWithPlatformDetail);
   return assetsToUpdateWithPlatformDetail;
 
 }
@@ -206,27 +207,31 @@ async function findAssetsMissingOsmosisDemon(chainName, state, updates, updated)
   //if the coingecko asset already has the osmosis denom, save that in the coingecko assets file so we don't keep querying them
   console.log(assetsToAddToState);
   addAssetsToState(state, assetsToAddToState);
+  console.log(state);
 
   //if the coingecko asset doesn't have the osmosis denom, add the osmosis denom to the list of update assets
   console.log(assetsToUpdate);
   updates.denomUpdates = addAssetsToUpdateList(assetsToUpdate, coinGeckoIdToAssetMap);
 
   if (assetsToUpdate.length !== 0 || assetsToAddToState.length !== 0) {
-    updated = 1;
+    updated.value = 1;
   }
 
 }
 
 async function generateCoinGeckoUpdates(chainName, state) {
 
-  let updated = 0;
-  let updates;
+  let updated = { value: 0 };
+  let updates = {};
 
   await findAssetsMissingOsmosisDemon(chainName, state, updates, updated);
 
-  if (updated) {
+  console.log("Need to update?");
+  console.log(updated.value);
+  if (updated.value) {
     writeStateFile(chainName, state);
     writeUpdatesFile(chainName, updates);
+    console.log("Done");
   }
 
 }

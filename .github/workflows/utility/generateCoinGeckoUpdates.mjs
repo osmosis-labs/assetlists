@@ -41,17 +41,20 @@ const coinGeckoDir = path.join(zone.externalDir, coinGeckoDirName);
  * 
  */
 
-function readStateFile() {
-  const file = path.join(coinGeckoDir, coinGeckoStateFileName);
-  return chain_reg.readJsonFile(file);
+function readStateFile(chainName) {
+  return zone.readFromFile(chainName, coinGeckoDir, coinGeckoStateFileName);
+
 }
 
-function saveStateFile(state) {
-  let file = path.join(coinGeckoDir, coinGeckoStateFileName);
-  chain_reg.writeJsonFile(file, state)
+function writeStateFile(chainName, state) {
+  zone.writeToFile(chainName, coinGeckoDir, coinGeckoStateFileName, state);
 }
 
-function getAssetsRequiringOsmosisDenom(chainName) {
+function writeUpdatesFile(chainName, updates) {
+  zone.writeToFile(chainName, coinGeckoDir, coinGeckoUpdatesFileName, updates);
+}
+
+function getAssetsThatAreSupposedToHaveOsmosisDenom(chainName) {
 
   const traces = [
     "ibc",
@@ -59,59 +62,180 @@ function getAssetsRequiringOsmosisDenom(chainName) {
     "additional-mintage"
   ];
 
-  assetsRequiringOsmosisDenom = [];
+  let coinGeckoIdToAssetMap = new Map();
 
   //iterate osmosis assets
   const assets = chain_reg.getAssetPointersByChain(chainName);
   //  for each asset, get its coingecko ID, but only by certain traces.
   assets?.forEach((asset) => {
-    let coingeckoId = chain_reg.getAssetPropertyWithTraceCustom(chainName, asset.base, "coingecko_id", traces);
-    if (coingeckoId) {
-      let decimals = chain_reg.getAssetDecimals(chainName, asset.base);
-      let asset_object = {
-        coingeckoId: coingeckoId,
-        platform: chainName,
-        decimals: decimals,
-        contract: asset.base
+    let coinGeckoId = chain_reg.getAssetPropertyWithTraceCustom(chainName, asset.base_denom, "coingecko_id", traces);
+    if (coinGeckoId) {
+      let decimals = chain_reg.getAssetDecimals(chainName, asset.base_denom);
+      let detailPlatform = {
+        [chainName]: {
+          decimal_place: decimals,
+          contract_address: asset.base_denom
+        }
       };
-      assetsRequiringOsmosisDenom.push(asset_object);
+      coinGeckoIdToAssetMap.set(coinGeckoId, detailPlatform);
     }
   });
 
-  return assetsRequiringOsmosisDenom;
+  return coinGeckoIdToAssetMap;
 
 }
 
-function findAssetsMissingOsmosisDemon(chainName, state) {
+async function queryCoinGeckoAssetForOsmosisDenom(id) {
+
+  const coinGeckoAPI = "https://api.coingecko.com/api/v3/coins/";
+  const url = coinGeckoAPI + id;
+
+  try {
+    // Fetch data from the API
+    const response = await fetch(url);
+    if (!response.ok) {
+      console.log(`Error fetching data: ${response.statusText}`);
+      return;
+    }
+
+    const coinGeckoAssetData = await response.json();
+    console.log("Successfully fetched CoinGecko Asset Data.");
+    return coinGeckoAssetData;
+    
+  } catch (error) {
+    console.log('Error fetching CoinGecko asset data:', error);
+    return;
+  }
+
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function queryCoinGeckoAssetsForOsmosisDenom(chainName, coinGeckoIdToAssetMap, assetsToQuery, assetsToUpdate, assetsToAddToState) {
+
+  const queryCap = 3;
+  let numQueries = 0;
+
+  for (const asset of assetsToQuery) {
+
+    console.log(numQueries);
+    const coinGeckoAssetData = await queryCoinGeckoAssetForOsmosisDenom(asset);
+    const osmosisPlatform = coinGeckoAssetData?.detail_platforms?.[chainName];
+
+    if (osmosisPlatform) {
+      console.log(`${chainName} already included for ${asset}.`);
+      if (
+        osmosisPlatform.contract_address !== coinGeckoIdToAssetMap.get(asset)?.[chainName]?.contract_address
+          ||
+        osmosisPlatform.decimal_place !== coinGeckoIdToAssetMap.get(asset)?.[chainName]?.decimal_place
+      ) {
+        console.log(`Mismatch! ${osmosisPlatform.decimal_place} does not equal ${coinGeckoIdToAssetMap.get(asset)?.[chainName]?.decimal_place}.`);
+      } else {
+        assetsToAddToState.push(asset);
+      }
+    } else {
+      console.log(`Need to update: ${asset}`);
+      assetsToUpdate.push(asset);
+    }
+
+    if (numQueries >= queryCap) {
+      break;
+    } else {
+      numQueries++;
+      await sleep(2000);
+    }
+
+  }
+
+  return assetsToUpdate;
+
+}
+
+function addAssetsToState(state, assetsToAddToState) {
+
+  assetsToAddToState.forEach((asset) => {
+    state.assetsThatAlreadyHaveOsmosisDenom.push(asset);
+  });
+
+  console.log("Successfully updated state.");
+
+}
+
+
+function addAssetsToUpdateList(assetsToUpdate, coinGeckoIdToAssetMap) {
+
+  let assetsToUpdateWithPlatformDetail = [];
+  assetsToUpdate.forEach((asset) => {
+    let assetWithPlatformDetail = coinGeckoIdToAssetMap.get(asset);
+    if (assetWithPlatformDetail) {
+      assetsToUpdateWithPlatformDetail.push(assetWithPlatformDetail);
+    }
+  });
+
+  return assetsToUpdateWithPlatformDetail;
+
+}
+
+
+async function findAssetsMissingOsmosisDemon(chainName, state, updates, updated) {
+
+  if (state.pauseUpdate) {
+    return;
+  }
 
   //read state file, so we know which cgid's to skip
-  let denomState = state?.assetsWithOsmosisDenom;
+  let assetsToSkip = state?.assetsThatAlreadyHaveOsmosisDenom;
+  //console.log(assetsToSkip);
 
   //get a list of assets whose denom should be listed to the coingecko page
-  let assetsRequiringOsmosisDenom = getAssetsRequiringOsmosisDenom(chainName);
+  let coinGeckoIdToAssetMap = getAssetsThatAreSupposedToHaveOsmosisDenom(chainName);
+  const assetsThatAreSupposedToHaveOsmosisDenom = Array.from(coinGeckoIdToAssetMap.keys());
+  //console.log(coinGeckoIdToAssetMap);
 
-  //with the assets and their coingecko IDs, get the coingecko assets that already have the osmosis denom
-  //getAssetAlreadyConfigured(chainName, denomState);
+  //omit the assets that we already know ahve the osmosis denom in the coingecko asset
+  const assetsToQuery = zone.removeElements(assetsThatAreSupposedToHaveOsmosisDenom, assetsToSkip);
+  console.log(assetsToQuery);
 
-  //if the coingecko asset already has the osmosis denom, save that in the coingecko assets file.
+  //query the remaining coingecko assets to see if they still aren't on coingecko
+  let assetsToUpdate = [];
+  let assetsToAddToState = [];
+  await queryCoinGeckoAssetsForOsmosisDenom(chainName, coinGeckoIdToAssetMap, assetsToQuery, assetsToUpdate, assetsToAddToState);
 
-  //if the coingecko asset doesn't have the osmosis denom, add the osmosis denom to the list of recommended assets
+  //if the coingecko asset already has the osmosis denom, save that in the coingecko assets file so we don't keep querying them
+  console.log(assetsToAddToState);
+  addAssetsToState(state, assetsToAddToState);
 
-  //with the list of recommended assets, save to file and submit to coingecko
+  //if the coingecko asset doesn't have the osmosis denom, add the osmosis denom to the list of update assets
+  console.log(assetsToUpdate);
+  updates.denomUpdates = addAssetsToUpdateList(assetsToUpdate, coinGeckoIdToAssetMap);
+
+  if (assetsToUpdate.length !== 0 || assetsToAddToState.length !== 0) {
+    updated = 1;
+  }
 
 }
 
-function generateCoinGeckoUpdates(chainName, state) {
-  
-  findAssetsMissingOsmosisDemon(chainName, state);
-  saveUpdatesFile(chainName);
+async function generateCoinGeckoUpdates(chainName, state) {
+
+  let updated = 0;
+  let updates;
+
+  await findAssetsMissingOsmosisDemon(chainName, state, updates, updated);
+
+  if (updated) {
+    writeStateFile(chainName, state);
+    writeUpdatesFile(chainName, updates);
+  }
 
 }
 
 async function main() {
   let chainName = "osmosis";
-  const state = readStateFile();
-  generateCoinGeckoUpdates(chainName, state);
+  let state = readStateFile(chainName);
+  await generateCoinGeckoUpdates(chainName, state);
+  
 }
 
 main();

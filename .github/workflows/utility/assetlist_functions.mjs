@@ -156,3 +156,7 @@ export function objectsAreEqual(obj1, obj2) {
 export function removeElements(array1, array2) {
   return array1.filter(element => !array2?.includes(element));
 }
+
+export function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

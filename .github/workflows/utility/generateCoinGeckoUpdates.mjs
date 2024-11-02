@@ -59,35 +59,6 @@ function getAssetsThatAreSupposedToHaveOsmosisDenom(chainName) {
 
 }
 
-async function queryCoinGeckoAssetsForOsmosisDenom(chainName, coinGeckoIdToAssetMap, assetsToQuery, assetsToUpdate, confirmedAssets) {
-
-  for (let i = 0; i < numberOfUnseenAssetsToQuery && i < assetsToQuery?.length; i++) {
-    const asset = assetsToQuery[i];
-    const coinGeckoAssetData = await queryCoinGeckoId(asset); // result of API query
-    const osmosisPlatform = coinGeckoAssetData?.detail_platforms?.[chainName]; // extracts what we're interested in
-    if (osmosisPlatform) {
-      console.log(`${chainName} already included for ${asset}.`);
-      if (
-        osmosisPlatform.contract_address !== coinGeckoIdToAssetMap.get(asset)?.[chainName]?.contract_address
-          ||
-        osmosisPlatform.decimal_place !== coinGeckoIdToAssetMap.get(asset)?.[chainName]?.decimal_place
-      ) {
-        console.log(`Mismatch! ${osmosisPlatform.decimal_place} does not equal ${coinGeckoIdToAssetMap.get(asset)?.[chainName]?.decimal_place}.`);
-      } else {
-        confirmedAssets.push(asset);
-      }
-    } else {
-      console.log(`Need to update: ${asset}`);
-      assetsToUpdate.push(asset);
-    }
-    await zone.sleep(2000);
-
-  }
-
-  return;
-
-}
-
 function prepareAssetUpdatesForOsmosisDenom(assetsToUpdate, coinGeckoIdToAssetMap) {
   let assetsToUpdateWithPlatformDetail = [];
   assetsToUpdate.forEach((asset) => {
@@ -100,7 +71,7 @@ function prepareAssetUpdatesForOsmosisDenom(assetsToUpdate, coinGeckoIdToAssetMa
 }
 
 
-async function checkPendingUpdatesCoinGecko(condition, state, output) {
+async function checkPendingAssets(condition, state, output) {
   const query = {
     function: queryCoinGeckoId,
     limit: numberOfPendingAssetsToCheck,
@@ -109,7 +80,7 @@ async function checkPendingUpdatesCoinGecko(condition, state, output) {
   state_mgmt.checkPendingUpdates(query, condition, state, output);
 }
 
-async function checkNextAssets(memory, condition, keys, conditionMet, conditionNotMet) {
+async function checkUnseenAssets(condition, keys, conditionMet, conditionNotMet) {
   const query = {
     function: queryCoinGeckoId,
     limit: numberOfUnseenAssetsToQuery,
@@ -144,7 +115,7 @@ async function findAssetsMissingOsmosisDemon(memory, state, output) {
   let assetsToUpdate = [];
   let confirmedAssets = [];
   //await queryCoinGeckoAssetsForOsmosisDenom(memory.chainName, memory.coinGeckoIdToAssetMap, assetsToQuery, assetsToUpdate, confirmedAssets);
-  await checkNextAssets(memory, condition, assetsToQuery, confirmedAssets, assetsToUpdate);
+  await checkUnseenAssets(condition, assetsToQuery, confirmedAssets, assetsToUpdate);
   console.log(`Confirmed Assets: ${confirmedAssets}`);
   console.log(`Assets To Update: ${assetsToUpdate}`);
 
@@ -160,7 +131,7 @@ async function findAssetsMissingOsmosisDemon(memory, state, output) {
 
   //check the earliest pending asset
   //checkPendingUpdates(chainName, state, value, output, coinGeckoIdToAssetMap);
-  checkPendingUpdatesCoinGecko(memory, condition, state, output);
+  checkPendingAssets(condition, state, output);
 
 }
 

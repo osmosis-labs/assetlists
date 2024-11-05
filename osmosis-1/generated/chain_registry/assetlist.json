@@ -25323,7 +25323,7 @@
       "base": "factory/osmo1n6asrjy9754q8y9jsxqf557zmsv3s3xa5m9eg5/uspice",
       "name": "Spice",
       "display": "Spice",
-      "symbol": "Spice",
+      "symbol": "SPICE",
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/spice.png"
       },
@@ -25403,6 +25403,58 @@
         "website": "https://cacaoswap.app",
         "twitter": "https://x.com/CacaoSwap"
       }
+    },
+    {
+      "description": "GATA Yield DAO Governance Token powered by OmniFlixHub",
+      "denom_units": [
+        {
+          "denom": "ibc/50F886EFA15E1FF3D9226B177083A1EFF944176181C70B6131D74FE5AFB1F2C0",
+          "exponent": 0,
+          "aliases": [
+            "factory/omniflix1fwphj5p6qd8gtkehkzfgac38eur4uqzgz97uwvf6hsc0vjl004gqfj0xnv/ygata"
+          ]
+        },
+        {
+          "denom": "ygata",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/50F886EFA15E1FF3D9226B177083A1EFF944176181C70B6131D74FE5AFB1F2C0",
+      "name": "Yield GATA",
+      "display": "ygata",
+      "symbol": "YGATA",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "omniflixhub",
+            "base_denom": "factory/omniflix1fwphj5p6qd8gtkehkzfgac38eur4uqzgz97uwvf6hsc0vjl004gqfj0xnv/ygata",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-199",
+            "path": "transfer/channel-199/factory/omniflix1fwphj5p6qd8gtkehkzfgac38eur4uqzgz97uwvf6hsc0vjl004gqfj0xnv/ygata"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/omniflixhub/images/ygata.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/omniflixhub/images/ygata.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "omniflixhub",
+            "base_denom": "factory/omniflix1fwphj5p6qd8gtkehkzfgac38eur4uqzgz97uwvf6hsc0vjl004gqfj0xnv/ygata"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/omniflixhub/images/ygata.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/omniflixhub/images/ygata.svg",
+          "theme": {
+            "primary_color_hex": "#7b5aff"
+          }
+        }
+      ]
     },
     {
       "description": "The native token of Furya",

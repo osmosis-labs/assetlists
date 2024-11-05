@@ -26,8 +26,6 @@ async function queryCoinGeckoId(id) {
   return api_mgmt.queryApi(url);
 }
 
-//const extractDataPath = ['detail_platforms', chainName];
-
 function getAssetsThatAreSupposedToHaveOsmosisDenom(chainName) {
 
   const traces = [
@@ -80,6 +78,21 @@ async function checkPendingAssets(condition, state, output) {
   state_mgmt.checkPendingUpdates(query, condition, state, output);
 }
 
+async function checkPendingAssetsNew(condition, state, stateLocation, output, outputLocation) {
+  const getData = {
+    function: (query, keys, condition, conditionMet, conditionNotMet) => api_mgmt.queryKeys(query, keys, condition, conditionMet, conditionNotMet),
+    details: {
+      location: `detail_platforms.${memory.chainName}`
+    }
+  };
+  const query = {
+    function: queryCoinGeckoId,
+    limit: numberOfPendingAssetsToCheck,
+    sleepTime: querySleepTime
+  };
+  state_mgmt.checkPendingUpdatesNew(getData(query), condition, state, stateLocation, output, outputLocation);
+}
+
 async function checkUnseenAssets(condition, keys, conditionMet, conditionNotMet) {
   const query = {
     function: queryCoinGeckoId,
@@ -94,6 +107,14 @@ async function findAssetsMissingOsmosisDemon(memory, state, output) {
 
   //Which CoinGecko asset value am I concerned with? Whether the asset's Contracts contains the Osmosis Denom
   const value = "osmosisDenom";
+  const stateLocation = `${value}`;
+  const outputLocation = `${value}`;
+  const getData = {
+    function: (query, keys, condition, conditionMet, conditionNotMet) => api_mgmt.queryKeys(query, keys, condition, conditionMet, conditionNotMet),
+    details: {
+      location: `detail_platforms.${memory.chainName}`
+    }
+  };
   const condition = (data) => data?.detail_platforms?.[memory.chainName];
 
   //read state file, so we know which cgid's to skip
@@ -130,8 +151,8 @@ async function findAssetsMissingOsmosisDemon(memory, state, output) {
   state_mgmt.addToOutput(output, value, assetsToUpdate);
 
   //check the earliest pending asset
-  //checkPendingUpdates(chainName, state, value, output, coinGeckoIdToAssetMap);
   checkPendingAssets(condition, state, output);
+  //checkPendingAssetsNew(condition, state, stateLocation, output, outputLocation);
 
 }
 

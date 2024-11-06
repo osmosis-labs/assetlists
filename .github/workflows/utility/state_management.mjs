@@ -11,7 +11,7 @@ export const Status = Object.freeze({
 });
 
 export function saveUpdates(memory, state, output) {
-  console.log(`Update? ${state.update}`);
+  console.log(`Update? ${state.updated}`);
   if (state.updated) {
     delete state.updated;
     writeStateFile(memory.chainName, memory.dir, state);

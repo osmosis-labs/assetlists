@@ -100,7 +100,6 @@ async function checkUnseenAssets(memory, state, stateLocation, output, outputLoc
     apiResponse = undefined;
     await zone.sleep(querySleepTime);
   }
-
   if (!(newlyCompletedAssets.length > 0) && !(newlyPendingAssets.length > 0)) { return; }
 
   let pendingAssets = state_mgmt.getStructureValue(state, stateLocation)?.[Status.PENDING];
@@ -108,9 +107,11 @@ async function checkUnseenAssets(memory, state, stateLocation, output, outputLoc
   let outputAssets = state_mgmt.getStructureValue(output, outputLocation);
   state_mgmt.setStructureValue(state, `${stateLocation}.${Status.PENDING}`, pendingAssets.concat(newlyPendingAssets));
   state_mgmt.setStructureValue(state, `${stateLocation}.${Status.COMPLETED}`, completedAssets.concat(newlyCompletedAssets));
-
-  let updatedOutputAssets = prepareAssetUpdatesForOsmosisDenom(outputAssets.concat(completedAssets), memory.coinGeckoIdToAssetMap);
+  let updatedOutputAssets = outputAssets.concat(
+    prepareAssetUpdatesForOsmosisDenom(newlyPendingAssets, memory.coinGeckoIdToAssetMap)
+  );
   state_mgmt.setStructureValue(output, outputLocation, updatedOutputAssets);
+  state.updated = 1;
 
   console.log("Done Checking Assets");
 }
@@ -138,7 +139,9 @@ async function checkPendingAssets(memory, state, stateLocation, output, outputLo
   state_mgmt.setStructureValue(state, `${stateLocation}.${Status.PENDING}`, zone.removeElements(pendingAssets, newlyCompletedAssets));
   state_mgmt.setStructureValue(state, `${stateLocation}.${Status.COMPLETED}`, completedAssets.concat(newlyCompletedAssets));
   state_mgmt.setStructureValue(output, outputLocation, zone.removeElements(outputAssets, completedAssets));
-  state.update = 1;
+  state.updated = 1;
+
+  //TODO move top asset to bottom
 
   console.log("Done Checking Pending");
 }
@@ -169,29 +172,6 @@ async function findAssetsMissingOsmosisDemon(memory, state, output) {
 
   await checkUnseenAssets(memory, state, stateLocation, output, outputLocation, assetsToQuery);
 
-  //query the remaining coingecko assets to see if they still aren't on coingecko
-  /*
-  let assetsToUpdate = [];
-  let confirmedAssets = [];
-
-  await checkUnseenAssets(condition, assetsToQuery, confirmedAssets, assetsToUpdate);
-  console.log(`Confirmed Assets: ${confirmedAssets}`);
-  console.log(`Assets To Update: ${assetsToUpdate}`);
-
-  //if the coingecko asset already has the osmosis denom, save that in the coingecko assets file so we don't keep querying them
-  //console.log(assetsToAddToState);
-  state_mgmt.addToState(state, value, state_mgmt.Status.COMPLETED, confirmedAssets);
-  state_mgmt.addToState(state, value, state_mgmt.Status.PENDING, assetsToUpdate);
-  
-
-  //if the coingecko asset doesn't have the osmosis denom, add the osmosis denom to the list of update assets
-  //console.log(assetsToUpdate);
-  assetsToUpdate = prepareAssetUpdatesForOsmosisDenom(assetsToUpdate, memory.coinGeckoIdToAssetMap);
-  state_mgmt.addToOutput(output, value, assetsToUpdate);
-  */
-
-
-  //check the earliest pending asset
   await checkPendingAssets(memory, state, stateLocation, output, outputLocation);
 
 }

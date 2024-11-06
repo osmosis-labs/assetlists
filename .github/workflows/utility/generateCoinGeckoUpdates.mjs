@@ -10,6 +10,10 @@ import * as path from 'path';
 import * as state_mgmt from './state_management.mjs';
 import * as api_mgmt from './api_management.mjs';
 
+export const Status = Object.freeze({
+  PENDING: "PENDING",
+  COMPLETED: "COMPLETED"
+});
 
 //-- Globals --
 
@@ -68,38 +72,75 @@ function prepareAssetUpdatesForOsmosisDenom(assetsToUpdate, coinGeckoIdToAssetMa
   return assetsToUpdateWithPlatformDetail;
 }
 
-
-async function checkPendingAssets(condition, state, output) {
-  const query = {
-    function: queryCoinGeckoId,
-    limit: numberOfPendingAssetsToCheck,
-    sleepTime: querySleepTime
-  };
-  state_mgmt.checkPendingUpdates(query, condition, state, output);
-}
-
-async function checkPendingAssetsNew(condition, state, stateLocation, output, outputLocation) {
-  const getData = {
-    function: (query, keys, condition, conditionMet, conditionNotMet) => api_mgmt.queryKeys(query, keys, condition, conditionMet, conditionNotMet),
-    details: {
-      location: `detail_platforms.${memory.chainName}`
-    }
-  };
-  const query = {
-    function: queryCoinGeckoId,
-    limit: numberOfPendingAssetsToCheck,
-    sleepTime: querySleepTime
-  };
-  state_mgmt.checkPendingUpdatesNew(getData(query), condition, state, stateLocation, output, outputLocation);
-}
-
-async function checkUnseenAssets(condition, keys, conditionMet, conditionNotMet) {
+async function checkUnseenAssetsOld(condition, keys, conditionMet, conditionNotMet) {
   const query = {
     function: queryCoinGeckoId,
     limit: numberOfUnseenAssetsToQuery,
     sleepTime: querySleepTime
   };
   await api_mgmt.queryKeys(query, keys, condition, conditionMet, conditionNotMet);
+}
+
+async function checkUnseenAssets(memory, state, stateLocation, output, outputLocation, assets) {
+
+  if (!(assets.length > 0)) { return; }
+
+  let newlyCompletedAssets = [];
+  let newlyPendingAssets = [];
+  let limitedAssets = assets.slice(0, numberOfUnseenAssetsToQuery);
+  for (const asset of limitedAssets) {
+    console.log(asset);
+    let apiResponse = await queryCoinGeckoId(asset);
+    if (!apiResponse) { continue; }
+    if (apiResponse?.detail_platforms?.[memory.chainName]) {
+      newlyCompletedAssets.push(asset);
+    } else {
+      newlyPendingAssets.push(asset);
+    }
+    apiResponse = undefined;
+    await zone.sleep(querySleepTime);
+  }
+
+  if (!(newlyCompletedAssets.length > 0) && !(newlyPendingAssets.length > 0)) { return; }
+
+  let pendingAssets = state_mgmt.getStructureValue(state, stateLocation)?.[Status.PENDING];
+  let completedAssets = state_mgmt.getStructureValue(state, stateLocation)?.[Status.COMPLETED];
+  let outputAssets = state_mgmt.getStructureValue(output, outputLocation);
+  state_mgmt.setStructureValue(state, `${stateLocation}.${Status.PENDING}`, pendingAssets.concat(newlyPendingAssets));
+  state_mgmt.setStructureValue(state, `${stateLocation}.${Status.COMPLETED}`, completedAssets.concat(newlyCompletedAssets));
+
+  let updatedOutputAssets = prepareAssetUpdatesForOsmosisDenom(outputAssets.concat(completedAssets), memory.coinGeckoIdToAssetMap);
+  state_mgmt.setStructureValue(output, outputLocation, updatedOutputAssets);
+
+  console.log("Done Checking Assets");
+}
+
+async function checkPendingAssets(memory, state, stateLocation, output, outputLocation) {
+
+  let pendingAssets = state_mgmt.getStructureValue(state, stateLocation)?.[Status.PENDING];
+  if (!(pendingAssets.length > 0)) { return; }
+
+  let newlyCompletedAssets = [];
+  let limitedPendingAssets = pendingAssets.slice(0, numberOfPendingAssetsToCheck);
+  for (const asset of limitedPendingAssets) {
+    console.log(asset);
+    let apiResponse = await queryCoinGeckoId(asset);
+    if (apiResponse?.detail_platforms?.[memory.chainName]) {
+      newlyCompletedAssets.push(asset);
+    }
+    apiResponse = undefined;
+    await zone.sleep(querySleepTime);
+  }
+  if (!(newlyCompletedAssets.length > 0)) { return; }
+
+  let completedAssets = state_mgmt.getStructureValue(state, stateLocation)?.[Status.COMPLETED];
+  let outputAssets = state_mgmt.getStructureValue(output, outputLocation);
+  state_mgmt.setStructureValue(state, `${stateLocation}.${Status.PENDING}`, zone.removeElements(pendingAssets, newlyCompletedAssets));
+  state_mgmt.setStructureValue(state, `${stateLocation}.${Status.COMPLETED}`, completedAssets.concat(newlyCompletedAssets));
+  state_mgmt.setStructureValue(output, outputLocation, zone.removeElements(outputAssets, completedAssets));
+  state.update = 1;
+
+  console.log("Done Checking Pending");
 }
 
 
@@ -109,12 +150,6 @@ async function findAssetsMissingOsmosisDemon(memory, state, output) {
   const value = "osmosisDenom";
   const stateLocation = `${value}`;
   const outputLocation = `${value}`;
-  const getData = {
-    function: (query, keys, condition, conditionMet, conditionNotMet) => api_mgmt.queryKeys(query, keys, condition, conditionMet, conditionNotMet),
-    details: {
-      location: `detail_platforms.${memory.chainName}`
-    }
-  };
   const condition = (data) => data?.detail_platforms?.[memory.chainName];
 
   //read state file, so we know which cgid's to skip
@@ -132,10 +167,13 @@ async function findAssetsMissingOsmosisDemon(memory, state, output) {
   const assetsToQuery = zone.removeElements(requiredAssets, assetsToSkip);
   console.log(`Assets to Query: ${assetsToQuery}`);
 
+  await checkUnseenAssets(memory, state, stateLocation, output, outputLocation, assetsToQuery);
+
   //query the remaining coingecko assets to see if they still aren't on coingecko
+  /*
   let assetsToUpdate = [];
   let confirmedAssets = [];
-  //await queryCoinGeckoAssetsForOsmosisDenom(memory.chainName, memory.coinGeckoIdToAssetMap, assetsToQuery, assetsToUpdate, confirmedAssets);
+
   await checkUnseenAssets(condition, assetsToQuery, confirmedAssets, assetsToUpdate);
   console.log(`Confirmed Assets: ${confirmedAssets}`);
   console.log(`Assets To Update: ${assetsToUpdate}`);
@@ -144,22 +182,23 @@ async function findAssetsMissingOsmosisDemon(memory, state, output) {
   //console.log(assetsToAddToState);
   state_mgmt.addToState(state, value, state_mgmt.Status.COMPLETED, confirmedAssets);
   state_mgmt.addToState(state, value, state_mgmt.Status.PENDING, assetsToUpdate);
+  
 
   //if the coingecko asset doesn't have the osmosis denom, add the osmosis denom to the list of update assets
   //console.log(assetsToUpdate);
   assetsToUpdate = prepareAssetUpdatesForOsmosisDenom(assetsToUpdate, memory.coinGeckoIdToAssetMap);
   state_mgmt.addToOutput(output, value, assetsToUpdate);
+  */
+
 
   //check the earliest pending asset
-  checkPendingAssets(condition, state, output);
-  //checkPendingAssetsNew(condition, state, stateLocation, output, outputLocation);
+  await checkPendingAssets(memory, state, stateLocation, output, outputLocation);
 
 }
 
 async function generateCoinGeckoUpdates(memory, state, output) {
 
   await findAssetsMissingOsmosisDemon(memory, state, output);
-
   state_mgmt.saveUpdates(memory, state, output);
 
 }

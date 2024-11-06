@@ -1,6 +1,5 @@
 
 import * as zone from "./assetlist_functions.mjs";
-import * as api_mgmt from "./api_management.mjs";
 
 const outputFileName = "output.json";
 const stateFileName = "state.json";
@@ -11,7 +10,7 @@ export const Status = Object.freeze({
 });
 
 export function saveUpdates(memory, state, output) {
-  console.log(`Update? ${state.updated}`);
+  console.log(`Update? ${state.updated ? "Yes" : "No"}`);
   if (state.updated) {
     delete state.updated;
     writeStateFile(memory.chainName, memory.dir, state);
@@ -64,35 +63,4 @@ export function getStructureValue(structure, location) {
 export function setStructureValue(structure, location, value) {
   const ref = getNestedReference(structure, location, true);
   ref.parent[ref.key] = value;
-}
-
-export function addToState(state, value, status, items) {
-  state ??= {};
-  state[value] ??= {};
-  state[value][status] ??= [];
-  items?.forEach((item) => {
-    state[value][status].push(item);
-  });
-  state.updated = 1;
-}
-
-export function removeFromState(state, value, status, items) {
-  if (!state || !state[value] || !state[value][status]) { return; }
-  state[value][status] = zone.removeElements(state[value][status], items);
-  state.updated = 1;
-}
-
-export function addToOutput(output, value, items) {
-  output ??= {};
-  output[value] ??= {};
-  items?.forEach((item) => {
-    output[value].push(item);
-  });
-}
-
-export function removeFromOutput(output, value, items) {
-  if (!output || !output[value]) { return; }
-  items?.forEach((item) => {
-    output[value] = output[value].filter(obj => !obj[item]);
-  });
 }

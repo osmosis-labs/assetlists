@@ -72,14 +72,6 @@ function prepareAssetUpdatesForOsmosisDenom(assetsToUpdate, coinGeckoIdToAssetMa
   return assetsToUpdateWithPlatformDetail;
 }
 
-async function checkUnseenAssetsOld(condition, keys, conditionMet, conditionNotMet) {
-  const query = {
-    function: queryCoinGeckoId,
-    limit: numberOfUnseenAssetsToQuery,
-    sleepTime: querySleepTime
-  };
-  await api_mgmt.queryKeys(query, keys, condition, conditionMet, conditionNotMet);
-}
 
 async function checkUnseenAssets(memory, state, stateLocation, output, outputLocation, assets) {
 
@@ -126,22 +118,33 @@ async function checkPendingAssets(memory, state, stateLocation, output, outputLo
   for (const asset of limitedPendingAssets) {
     console.log(asset);
     let apiResponse = await queryCoinGeckoId(asset);
+    if (!apiResponse) { continue; }
     if (apiResponse?.detail_platforms?.[memory.chainName]) {
       newlyCompletedAssets.push(asset);
     }
     apiResponse = undefined;
     await zone.sleep(querySleepTime);
   }
-  if (!(newlyCompletedAssets.length > 0)) { return; }
 
-  let completedAssets = state_mgmt.getStructureValue(state, stateLocation)?.[Status.COMPLETED];
-  let outputAssets = state_mgmt.getStructureValue(output, outputLocation);
-  state_mgmt.setStructureValue(state, `${stateLocation}.${Status.PENDING}`, zone.removeElements(pendingAssets, newlyCompletedAssets));
-  state_mgmt.setStructureValue(state, `${stateLocation}.${Status.COMPLETED}`, completedAssets.concat(newlyCompletedAssets));
-  state_mgmt.setStructureValue(output, outputLocation, zone.removeElements(outputAssets, completedAssets));
+  //Move the top pending assets to the bottom
+  pendingAssets = zone.removeElements(pendingAssets, limitedPendingAssets).concat(limitedPendingAssets);
+  state_mgmt.setStructureValue(state, `${stateLocation}.${Status.PENDING}`, pendingAssets);
   state.updated = 1;
 
-  //TODO move top asset to bottom
+  //Make sure there is an actual update before proceeding
+  if (!(newlyCompletedAssets.length > 0)) { return; }
+
+  pendingAssets = zone.removeElements(pendingAssets, newlyCompletedAssets);
+  let completedAssets = state_mgmt.getStructureValue(state, stateLocation)?.[Status.COMPLETED].concat(newlyCompletedAssets);
+  let outputAssets = state_mgmt.getStructureValue(output, outputLocation);
+
+  //Save changes to state and output
+  state_mgmt.setStructureValue(state, `${stateLocation}.${Status.PENDING}`, pendingAssets);
+  state_mgmt.setStructureValue(state, `${stateLocation}.${Status.COMPLETED}`, completedAssets);
+  outputAssets = outputAssets.filter(
+    outputAsset => !newlyCompletedAssets.includes(Object.keys(outputAsset)[0])
+  );
+  state_mgmt.setStructureValue(output, outputLocation, outputAssets);
 
   console.log("Done Checking Pending");
 }
@@ -153,7 +156,6 @@ async function findAssetsMissingOsmosisDemon(memory, state, output) {
   const value = "osmosisDenom";
   const stateLocation = `${value}`;
   const outputLocation = `${value}`;
-  const condition = (data) => data?.detail_platforms?.[memory.chainName];
 
   //read state file, so we know which cgid's to skip
   const completeAssets = state?.[value]?.[state_mgmt.Status.COMPLETED] || [];

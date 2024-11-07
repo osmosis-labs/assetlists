@@ -1033,7 +1033,58 @@
           }
         }
       ],
-      "variantGroupKey": "ibc/72D483F0FD4229DBF3ACC78E648F0399C4ACADDFDBCDD9FE791FEE4443343422",
+      "variantGroupKey": "ibc/638E0A21E8ECEC0B6ABC661077F18B81EAEDB5400A71DDEB790610395ED61405",
+      "name": "Nomic Bitcoin",
+      "isAlloyed": false,
+      "verified": true,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "nomictestnet",
+      "sourceDenom": "usat",
+      "coinMinimalDenom": "ibc/638E0A21E8ECEC0B6ABC661077F18B81EAEDB5400A71DDEB790610395ED61405",
+      "symbol": "nBTC",
+      "decimals": 14,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nbtc.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nbtc.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "nomictestnet",
+            "chainId": "nomic-testnet-6",
+            "sourceDenom": "usat",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-9244",
+            "path": "transfer/channel-9244/usat"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "nomictestnet",
+          "sourceDenom": "usat",
+          "chainType": "cosmos",
+          "chainId": "nomic-testnet-6",
+          "symbol": "nBTC",
+          "decimals": 14,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nbtc.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nbtc.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/638E0A21E8ECEC0B6ABC661077F18B81EAEDB5400A71DDEB790610395ED61405",
       "name": "Nomic Bitcoin",
       "isAlloyed": false,
       "verified": true,

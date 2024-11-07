@@ -23,9 +23,7 @@
 ### Upgrade Asset to Verified Status (permissioned)
 
 #### Qualification Criteria
- - Nearly all assets can become verified once validation has passed and basic requirements have been met, except those that:
-   - Show signs of being a scam, or the team showing nefarious behaviour(, e.g., evidence of rug-pull or pump-n-dump), or
-   - No pool exists that contains at least $1k USD-worth of liquidity of the asset
+ - Nearly all assets can become Verified once validation has been completed and the requirements have been met, except those that show signs of being a scam, or the team showing nefarious behaviour(, e.g., evidence of rug-pull, pump-n-dump, or an extremely small user distribution)
  - Constituents of Alloyed Assets automatically qualify.
 
 #### Requirements
@@ -33,35 +31,41 @@
 Registered Asset Metadata at the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry):
  - All standard required values: Name, Symbol, Base, Display, Type_asset (sdk.coin vs cw20 vs erc20 vs ...), etc.
  - A meaningful `description`.
- - A detailed `extended_description`.
-   - (not required for 'Memecoins'--must be categorized as "meme")
-   - (not required for variant assets, but the origin asset must have it defined e.g., USDT.eth.axl)
-   - (not required if it is a not a project's primary token (not a staking or fee token) and is best represented by its origin chain, in which case, the primary token of that chain must have it defined).
- - Associated `socials`, including `website` and `twitter`
-   - (not required for 'Memecoins'--must be categorized as "meme")
-   - (not required for variant assets, but the origin asset must have it defined e.g., USDT.eth.axl)
-   - (not required if it is a not a project's primary token (not a staking or fee token) and is best represented by its origin chain, in which case, the primary token of that chain must have it defined).
+ - A detailed `extended_description` further explaining the function of the asset and/or describing the project it represents, and `socials`, including `website` and `twitter`.
+   - Not required for 'Memecoins'--must be categorized as "meme"
+   - Not required for variant or derivative assets, but the origin asset must have this defined
+     - e.g., not required for USDT.eth.axl, but is required for the original USDT
  - Logo Image has a square Aspect Ratio and < 250 KB file size
 
+Accessible liquidity of the asset on Osmosis:
+ - There must exist at least one pool containing the asset on the Osmosis chain, where:
+   - there is at least $1000-worth (USD) of each asset provided as liquidity,
+   - there is a (+ and -) 2% depth of $50 (~$5k of full range liquidity), and
+   - a bid/offer of $50-worth (USD) of any asset would quote at least $49 of any other asset
+     - This must work for all asset pairs in the pool
+     - This would be impossible for pools with a swap fee (or spread) >=2%, which would require special consideration
+
 Asset appearance and functionality must be validated by Osmosis Zone maintainers. This includes:
- - Verifying the asset's details (name, [ticker] symbol, logo image, and its origin chain's name)
- - Verifying that the asset has a price
- - Trading the asset
- - Withdraw and Deposit the asset to/from the source chain
-   - For in-app transfers,
+ - Verifying the asset's details (name, [ticker] symbol, logo, description, socials) can be seen on Osmosis Zone
+ - Verifying that the asset has a price on Osmosis Zone
+ - It is possible to trade the asset on Osmosis Zone
+ - It is possible to Withdraw and Deposit the asset to/from the source chain via Osmosis Zone (or redirects to an interface that can) 
+   - For transfers triggered from Osmosis Zone:
      - IBC transfers must resolve without errors (watch out for CORS blocking), and
-     - The RPC endpoint has WSS enabled so it can communicate the transfer status back to Osmosis Zone without having to refresh.
-   - For in-app Deposits,
-     - The transaction URL goes opens the correct transaction page on a working block explorer for the source chain.
-     - The Chain Suggestion (the method that adds the chain to a wallet) provides correct and sufficent data to complete all standard wallet actions for the source chain (includes the asset as a currency, provides all fee currencies and rate options, can query chain state and initiate transactions, etc.)
-   - For external interface transfers,
-     - The override URL(s) redirect users to the correct interface, including appropriate URL params where applicable.
+     - The RPC endpoint has WSS enabled so it can communicate the transfer status back to Osmosis Zone without the user having to refresh the page.
+   - For Deposits triggered from Osmosis Zone:
+     - The transaction URL opens the correct transaction page on a working block explorer for the counterparty chain.
+     - The Chain Suggestion (the method that adds the chain to a wallet like Keplr or Leap) provides correct and sufficent data to complete all standard wallet actions for the counterparty chain (includes the asset as a currency, provides all fee currencies and rate options, can query chain state and initiate transactions, etc.)
+   - For transfers from an external interface,
+     - The override URL(s) redirect users to the correct interface, including appropriate URL parameters where possible (to pre-select the asset and the 'from' and 'to' network).
 
 
 #### Notify about Verified Status Upgrade
 To propose that an asset should be upgraded to Verified status, please submit a Pull Requiest to this repository:
  - The PR should update the asset's `"osmosis_verified"` property value to `true` in the [zone_assets](https://github.com/osmosis-labs/assetlists/blob/main/osmosis-1/osmosis.zone_assets.json) file.
- - In the Descrption or Conversation of the PR, please provide the ID of a pool containing the asset (needed for validation)
+ - Add `listing_date_time_utc`, which is used to record when (UTC time) an asset is fully Verified on Osmosis Zone.
+   - e.g., `"listing_date_time_utc": "2024-01-24T10:58:00Z",`
+ - In the Descrption or Conversation of the Pull Request, please provide the Pool ID of a liquidity pool that meets the requirements specified above (needed for validation)
 
 
 

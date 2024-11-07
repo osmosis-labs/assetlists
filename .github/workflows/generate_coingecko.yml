@@ -1,0 +1,58 @@
+on: [workflow_dispatch]
+name: Generate CoinGecko
+jobs:
+  generate_assetlist:
+    name: Generate CoinGecko
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        shell: bash
+    
+    steps:
+    
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+          
+      - name: Git Sumbodule Update
+        run: |
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
+          
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19.6.0
+
+      - name: Install dependencies
+        run: npm install
+          
+      - name: Run code to Generate CoinGecko
+        working-directory: ./.github/workflows/utility
+        run: node generateCoinGeckoUpdates.mjs
+      
+      - name: Add Commit Push
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
+          add_timestamp: false
+          commit_prefix: "[AUTO]"
+          commit_message: "coingecko.json Update"
+          force: false
+          target_branch: update/coingecko
+      
+      - name: Create A PR
+        uses: devops-infra/action-pull-request@v0.4.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_branch: update/coingecko
+          target_branch: main
+          title: coingecko.json Update
+          body: "**Automated pull request**"
+          old_string: "**THIS IS AN AUTOMATED UPDATE OF COINGECKO.JSON**"
+          new_string: "** Automatic pull request**"
+          get_diff: true
+          ignore_users: "dependabot"

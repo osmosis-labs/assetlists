@@ -79,11 +79,11 @@ export function readFromFile(chainName, directoryName, fileName) {
 
 
 
-export function writeToFile(chainName, directoryName, fileName, value) {
+export function writeToFile(chainName, directoryName, fileName, value, indent=2) {
   try {
     fs.writeFileSync(
       getFileLocation(chainName, directoryName, fileName),
-      JSON.stringify(value,null,2),
+      JSON.stringify(value,null,indent),
       (err) => {
         if (err) throw err;
       }

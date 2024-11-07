@@ -190,8 +190,8 @@ const processAsset = (chainName, asset) => {
   assetObject.denom = asset.base;
   assetObject.name = asset.name;
   assetObject.symbol = asset.symbol;
-  assetObject.decimals = getAssetDecimals(chainName, asset);
   assetObject.description = asset.description;
+  assetObject.decimals = getAssetDecimals(chainName, asset);
   assetObject.image = getAssetImage(asset);
   assetObject.color = asset.images?.[0].theme?.primary_color_hex;
   assetObject.coinGeckoId = getAssetCoinGeckoId(chainName, asset);
@@ -220,7 +220,7 @@ const generateMintscanAssets = (chainName) => {
   }
 
   // Write the transformed data to the target file
-  zone.writeToFile(chainName, mintscanDir, mintscanAssetsFileName, transformedAssets);
+  zone.writeToFile(chainName, mintscanDir, mintscanAssetsFileName, transformedAssets, 4);
   console.log(`Conversion completed. Data saved.`);
 };
 

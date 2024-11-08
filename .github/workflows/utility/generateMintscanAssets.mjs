@@ -100,6 +100,16 @@ function getIbcInfo(chainName, asset) {
     chain: getCosmoStationChainName(trace.counterparty.chain_name),
     denom: trace.counterparty.base_denom
   };
+
+  //Remove "cw20:" from the start of the denom
+  ibc_info.counterparty.denom =
+    ibc_info.counterparty.denom.startsWith("cw20:")
+     ?
+    ibc_info.counterparty.denom.slice(5)
+     :
+    ibc_info.counterparty.denom;
+  //---
+
   return ibc_info;
 
 }

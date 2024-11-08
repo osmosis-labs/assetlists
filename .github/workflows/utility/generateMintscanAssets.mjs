@@ -122,7 +122,20 @@ function getBridgeInfo(chainName, asset) {
 
 }
 
-function getAssetCoinGeckoId(chainName, asset) {
+
+function getZoneAssetlist(chainName) {
+  return zone.readFromFile(chainName, zone.zoneConfigAssetlist, zone.assetlistFileName);
+}
+
+function getZoneAsset(chainName, asset) {
+  return getZoneAssetlist(chainName)?.assets?.find(assetlistAsset => assetlistAsset.coinMinimalDenom === asset.base);
+}
+
+function getAssetCoinGeckoIdFromZone(chainName, asset) {
+  return getZoneAsset(chainName, asset)?.coingeckoId;
+}
+
+function getAssetCoinGeckoIdFromChainReg(chainName, asset) {
 
   const traceTypes = [
     "ibc",
@@ -134,6 +147,16 @@ function getAssetCoinGeckoId(chainName, asset) {
   //find a way to make it return the canonical cgid when it's canonical
   return coinGeckoId;
 
+}
+
+function getAssetCoinGeckoId(chainName, asset) {
+  let coinGeckoId = undefined;
+  coinGeckoId = getAssetCoinGeckoIdFromZone(chainName, asset);
+  if (coinGeckoId) { return coinGeckoId; }
+  coinGeckoId = getAssetCoinGeckoIdFromChainReg(chainName, asset);
+  if (coinGeckoId) { return coinGeckoId; }
+  //coinGeckoId = getAssetCoinGeckoIdWithInheritance(chainName, asset);
+  return coinGeckoId;
 }
 
 

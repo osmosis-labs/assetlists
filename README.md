@@ -18,9 +18,7 @@ To add an asset, add a new asset object to the very bottom of the _osmosis.zone_
 - `path` is required for all ics20 assets (i.e., assets that are transferred to Osmosis from another chain via IBC); the only exception are asset deployed directly on Osmosis (e.g., factory tokens). It is comprised of: the destination IBC port and channel for each IBC hop, followed by the base denom on the IBC-originating chain. The is used as input into the SHA256 hash function.
   - e.g., `"path": "transfer/channel-0/uatom"`
 - `osmosis_verified` should always be set to `false` upon inital listing; this indicates whether the 'Unverified Assets' setting must be toggled to reveal the asset on Osmosis Zone. After meeting the requirements described in the listing requirements page, an additional PR may created to set it to `true`.
-- `listing_date_time_utc` is used to record when (UTC time) an asset is first listed on Osmosis Zone.
-  - e.g., `"listing_date_time_utc": "2024-01-24T10:58:00Z",`
-- `_comment` is free string property, best used for the asset's Name and Symbol, since the base_denom is not always an obvious indicator of which asset it is 
+- `_comment` is a free string property best used for the asset's Name and Symbol, since the base_denom is not always an obvious indicator of which asset it is 
 
 There are also some additional details that may be defined for an asset: 
 - `transfer_methods` should be included whenever a basic IBC transfer initialatd via Osmosis Zone Deposit and Withdraw buttons is unable to carry-out an interchain transfer.
@@ -39,6 +37,7 @@ An example asset object in `osmosis.zone.json`:
   "base_denom": "uosmo",
   "chain_name": "osmosis",
   "osmosis_verified": true,
+  "listing_date_time_utc": "2024-01-22T10:00:00Z"
 },
 ...
 {

@@ -16,11 +16,10 @@ If adding a new asset, please ensure the following:
 - [ ] Asset is registered to the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry).
 - [ ] Add asset to bottom of `zone_assets.json`.
    - [ ] `chain_name` and `base_denom` are provided and use values exactly as defined at the Chain Registry.
-   - [ ] `path` is provided, and the IBC channel referenced is registered at the Chain Registry (unless native to Osmosis).
+   - [ ] `path` is provided, and the IBC channel referenced is registered at the Chain Registry (skip if native to Osmosis).
    - [ ] `osmosis_verified` is set to `false`
-   - [ ] `listing_date_time_utc` is specified and accurate
    - [ ] Optional: `transfer_methods`, `peg_mechanism`, `override_properties`, `canonical`, `categories`, where necessary (see [README](https://github.com/osmosis-labs/assetlists/tree/main?tab=readme-ov-file#how-to-add-assets) for details).
-- [ ] I am aware that upgrading an asset to 'verified' status requires an additional PR to this repo (checklist below).  
+- [ ] I am aware that upgrading an asset to 'Verified' status requires an additional PR to this repo (checklist below).  
 
 ### Adding Chains
 
@@ -40,15 +39,17 @@ If adding a new chain, please ensure the following:
 
 If upgrading an Asset to Verified, please see the requirements specified at [LISTING](https://github.com/osmosis-labs/assetlists/blob/main/LISTING.md#upgrade-asset-to-verified-status-permissioned), and ensure the following:
 - [ ] Asset is defined thoroughly at the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry).
-   - [ ] A meaningful `description` (and `extended_description`, unless: meme, variant, or non-primary chain token).
-   - [ ] Associated `socials`, including `website` and `twitter` (unless: meme, variant, or non-primary chain token).
-   - [ ] **Logo Image** has a square Aspect Ratio, < 250 KB file size, and appropriate visual contrast with Osmosis Zone colors.
-- [ ]  **Liquidity**: This pool contains contains at least $1k USD-worth of liquidity of the asset (Provide Pool ID): ______ (Skip if alloy constituent)
+   - [ ] `listing_date_time_utc` is specified and accurate
+   - [ ] A meaningful `description` (and `extended_description`, unless: meme or variant/derivative asset).
+   - [ ] Associated `socials`, including `website` and `twitter` (unless: meme or variant/derivative asset).
+   - [ ] **Logo Image** has a square Aspect Ratio, < 250 KB file size, and appropriate visual contrast with Osmosis Zone's colors.
+- [ ]  **Liquidity**: This pool meets the liquidity requirements, and has a +-2% depth of $50 (~$5k full range liq.) (Provide Pool ID): ______ (Skip if alloy constituent)
 
 'Verified' Status Validation Checklist (to be completed by Osmosis Zone maintainers):
 - [ ] Verify appearance and metadata
 - [ ] Accurate Price
 - [ ] Trading and routing functionality
+   - [ ] $50 offer yields at least $49
 - [ ] Withdraw and Deposit
    - [ ] Deposit Transaction URL (if in-app)
 

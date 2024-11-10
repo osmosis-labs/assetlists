@@ -55,7 +55,8 @@ function getAssetType(asset) {
 
 function getAssetDecimals(chainName, asset) {
 
-  return chain_reg.getAssetDecimals(chainName, asset.base);
+  const decimals = getZoneAsset(chainName, asset)?.decimals || chain_reg.getAssetDecimals(chainName, asset.base);
+  return decimals;
 
 }
 

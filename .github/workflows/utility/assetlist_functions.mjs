@@ -77,8 +77,6 @@ export function readFromFile(chainName, directoryName, fileName) {
   }
 }
 
-
-
 export function writeToFile(chainName, directoryName, fileName, value, indent=2) {
   try {
     fs.writeFileSync(
@@ -92,6 +90,36 @@ export function writeToFile(chainName, directoryName, fileName, value, indent=2)
   } catch (err) {
     console.log(err);
   }
+}
+
+function getNestedReference(structure, location, createIfMissing = false) {
+  const keys = location
+    .replace(/\[(\d+)\]/g, '.$1') // Convert array indices to dot notation
+    .split('.'); // Split by dots
+  let current = structure;
+  for (let i = 0; i < keys.length - 1; i++) {
+    const key = keys[i];
+    if (!(key in current)) {
+      if (createIfMissing) {
+        const nextKey = keys[i + 1];
+        current[key] = /^\d+$/.test(nextKey) ? [] : {}; // Create an array if nextKey is a number, else create an object
+      } else {
+        return null; // If not creating and path doesn't exist, return null
+      }
+    }
+    current = current[key];
+  }
+  return { parent: current, key: keys[keys.length - 1] };
+}
+
+export function getStructureValue(structure, location) {
+  const ref = getNestedReference(structure, location);
+  return ref.parent[ref.key];
+}
+
+export function setStructureValue(structure, location, value) {
+  const ref = getNestedReference(structure, location, true);
+  ref.parent[ref.key] = value;
 }
 
 

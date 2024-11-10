@@ -55,7 +55,8 @@ function getAssetType(asset) {
 
 function getAssetDecimals(chainName, asset) {
 
-  return chain_reg.getAssetDecimals(chainName, asset.base);
+  const decimals = getZoneAsset(chainName, asset)?.decimals || chain_reg.getAssetDecimals(chainName, asset.base);
+  return decimals;
 
 }
 
@@ -100,6 +101,16 @@ function getIbcInfo(chainName, asset) {
     chain: getCosmoStationChainName(trace.counterparty.chain_name),
     denom: trace.counterparty.base_denom
   };
+
+  //Remove "cw20:" from the start of the denom
+  ibc_info.counterparty.denom =
+    ibc_info.counterparty.denom.startsWith("cw20:")
+     ?
+    ibc_info.counterparty.denom.slice(5)
+     :
+    ibc_info.counterparty.denom;
+  //---
+
   return ibc_info;
 
 }
@@ -112,7 +123,20 @@ function getBridgeInfo(chainName, asset) {
 
 }
 
-function getAssetCoinGeckoId(chainName, asset) {
+
+function getZoneAssetlist(chainName) {
+  return zone.readFromFile(chainName, zone.zoneConfigAssetlist, zone.assetlistFileName);
+}
+
+function getZoneAsset(chainName, asset) {
+  return getZoneAssetlist(chainName)?.assets?.find(assetlistAsset => assetlistAsset.coinMinimalDenom === asset.base);
+}
+
+function getAssetCoinGeckoIdFromZone(chainName, asset) {
+  return getZoneAsset(chainName, asset)?.coingeckoId;
+}
+
+function getAssetCoinGeckoIdFromChainReg(chainName, asset) {
 
   const traceTypes = [
     "ibc",
@@ -124,6 +148,16 @@ function getAssetCoinGeckoId(chainName, asset) {
   //find a way to make it return the canonical cgid when it's canonical
   return coinGeckoId;
 
+}
+
+function getAssetCoinGeckoId(chainName, asset) {
+  let coinGeckoId = undefined;
+  coinGeckoId = getAssetCoinGeckoIdFromZone(chainName, asset);
+  if (coinGeckoId) { return coinGeckoId; }
+  coinGeckoId = getAssetCoinGeckoIdFromChainReg(chainName, asset);
+  if (coinGeckoId) { return coinGeckoId; }
+  //coinGeckoId = getAssetCoinGeckoIdWithInheritance(chainName, asset);
+  return coinGeckoId;
 }
 
 

@@ -9,6 +9,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as chain_reg from './chain_registry.mjs';
+import * as json_mgmt from './json_management.mjs';
 
 
 
@@ -63,66 +64,13 @@ export function getFileLocation(chainName, directoryName, fileName) {
   );
 }
 
-
-
 export function readFromFile(chainName, directoryName, fileName) {
-  try {
-    return JSON.parse(
-      fs.readFileSync(
-        getFileLocation(chainName, directoryName, fileName)
-      )
-    );
-  } catch (err) {
-    console.log(err);
-  }
+  return json_mgmt.readFromFile(getFileLocation(chainName, directoryName, fileName));
 }
 
-export function writeToFile(chainName, directoryName, fileName, value, indent=2) {
-  try {
-    fs.writeFileSync(
-      getFileLocation(chainName, directoryName, fileName),
-      JSON.stringify(value,null,indent),
-      (err) => {
-        if (err) throw err;
-      }
-    );
-    //console.log("Write successful!");
-  } catch (err) {
-    console.log(err);
-  }
+export function writeToFile(chainName, directoryName, fileName, value, indent = 2) {
+  return json_mgmt.writeToFile(getFileLocation(chainName, directoryName, fileName), value, indent);
 }
-
-function getNestedReference(structure, location, createIfMissing = false) {
-  const keys = location
-    .replace(/\[(\d+)\]/g, '.$1') // Convert array indices to dot notation
-    .split('.'); // Split by dots
-  let current = structure;
-  for (let i = 0; i < keys.length - 1; i++) {
-    const key = keys[i];
-    if (!(key in current)) {
-      if (createIfMissing) {
-        const nextKey = keys[i + 1];
-        current[key] = /^\d+$/.test(nextKey) ? [] : {}; // Create an array if nextKey is a number, else create an object
-      } else {
-        return null; // If not creating and path doesn't exist, return null
-      }
-    }
-    current = current[key];
-  }
-  return { parent: current, key: keys[keys.length - 1] };
-}
-
-export function getStructureValue(structure, location) {
-  const ref = getNestedReference(structure, location);
-  return ref.parent[ref.key];
-}
-
-export function setStructureValue(structure, location, value) {
-  const ref = getNestedReference(structure, location, true);
-  ref.parent[ref.key] = value;
-}
-
-
 
 export function getFilesInDirectory(directoryPath) {
   try {
@@ -139,7 +87,6 @@ export function getFilesInDirectory(directoryPath) {
     return [];
   }
 }
-
 
 
 export async function calculateIbcHash(ibcHashInput) {
@@ -183,8 +130,4 @@ export function objectsAreEqual(obj1, obj2) {
 
 export function removeElements(array1, array2) {
   return array1.filter(element => !array2?.includes(element));
-}
-
-export function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
 }

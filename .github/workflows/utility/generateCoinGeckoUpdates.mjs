@@ -12,7 +12,8 @@ import * as json_mgmt from './json_management.mjs';
 
 export const Status = Object.freeze({
   PENDING: "PENDING",
-  COMPLETED: "COMPLETED"
+  COMPLETED: "COMPLETED",
+  CANCELED: "CANCELED" 
 });
 
 //-- Globals --
@@ -22,9 +23,9 @@ const stateFileName = "state.json";
 const coinGeckoDirName = "coingecko";
 const coinGeckoDir = path.join(zone.externalDir, coinGeckoDirName);
 
-const numberOfUnseenAssetsToQuery = 2;
-const numberOfPendingAssetsToCheck = 1;
-const querySleepTime = 2000;
+const numberOfUnseenAssetsToQuery = 50;
+const numberOfPendingAssetsToCheck = 0;
+const querySleepTime = 20000;
 
 async function queryCoinGeckoId(id) {
   const coinGeckoAPI = "https://api.coingecko.com/api/v3/coins/";
@@ -81,26 +82,34 @@ async function checkUnseenAssets(memory, state, stateLocation, output, outputLoc
 
   let newlyCompletedAssets = [];
   let newlyPendingAssets = [];
+  let newlyCanceledAssets = [];
   let limitedAssets = assets.slice(0, numberOfUnseenAssetsToQuery);
   for (const asset of limitedAssets) {
     console.log(asset);
     let apiResponse = await queryCoinGeckoId(asset);
     if (!apiResponse) { continue; }
-    if (apiResponse?.detail_platforms?.[memory.chainName]) {
-      newlyCompletedAssets.push(asset);
-    } else {
-      newlyPendingAssets.push(asset);
+    if (apiResponse?.detail_platforms) {
+      if (apiResponse?.detail_platforms?.[memory.chainName]) {
+        newlyCompletedAssets.push(asset);
+      } else {
+        newlyPendingAssets.push(asset);
+      }
+    }
+    else if (apiResponse == "Not Found") {
+      newlyCanceledAssets.push(asset);
     }
     apiResponse = undefined;
     await api_mgmt.sleep(querySleepTime);
   }
-  if (!(newlyCompletedAssets.length > 0) && !(newlyPendingAssets.length > 0)) { return; }
+  if (!(newlyCompletedAssets.length > 0) && !(newlyPendingAssets.length > 0) && !(newlyCanceledAssets.length > 0)) { return; }
 
-  let pendingAssets = json_mgmt.getStructureValue(state, stateLocation)?.[Status.PENDING];
-  let completedAssets = json_mgmt.getStructureValue(state, stateLocation)?.[Status.COMPLETED];
+  let pendingAssets = json_mgmt.getStructureValue(state, stateLocation)?.[Status.PENDING] || [];
+  let completedAssets = json_mgmt.getStructureValue(state, stateLocation)?.[Status.COMPLETED] || [];
+  let canceledAssets = json_mgmt.getStructureValue(state, stateLocation)?.[Status.CANCELED] || [];
   let outputAssets = json_mgmt.getStructureValue(output, outputLocation);
   json_mgmt.setStructureValue(state, `${stateLocation}.${Status.PENDING}`, pendingAssets.concat(newlyPendingAssets));
   json_mgmt.setStructureValue(state, `${stateLocation}.${Status.COMPLETED}`, completedAssets.concat(newlyCompletedAssets));
+  json_mgmt.setStructureValue(state, `${stateLocation}.${Status.CANCELED}`, canceledAssets.concat(newlyCanceledAssets));
   let updatedOutputAssets = outputAssets.concat(
     prepareAssetUpdatesForOsmosisDenom(newlyPendingAssets, memory.coinGeckoIdToAssetMap)
   );
@@ -116,6 +125,7 @@ async function checkPendingAssets(memory, state, stateLocation, output, outputLo
   if (!(pendingAssets.length > 0)) { return; }
 
   let newlyCompletedAssets = [];
+  let newlyCanceledAssets = [];
   let limitedPendingAssets = pendingAssets.slice(0, numberOfPendingAssetsToCheck);
   for (const asset of limitedPendingAssets) {
     console.log(asset);
@@ -123,6 +133,14 @@ async function checkPendingAssets(memory, state, stateLocation, output, outputLo
     if (!apiResponse) { continue; }
     if (apiResponse?.detail_platforms?.[memory.chainName]) {
       newlyCompletedAssets.push(asset);
+    }
+    if (apiResponse?.detail_platforms) {
+      if (apiResponse?.detail_platforms?.[memory.chainName]) {
+        newlyCompletedAssets.push(asset);
+      }
+    }
+    else {
+      newlyCanceledAssets.push(asset);
     }
     apiResponse = undefined;
     await api_mgmt.sleep(querySleepTime);
@@ -134,17 +152,23 @@ async function checkPendingAssets(memory, state, stateLocation, output, outputLo
   memory.updated = 1;
 
   //Make sure there is an actual update before proceeding
-  if (!(newlyCompletedAssets.length > 0)) { return; }
+  if (!(newlyCompletedAssets.length > 0) && !(newlyCanceledAssets.length > 0)) { return; }
 
   pendingAssets = zone.removeElements(pendingAssets, newlyCompletedAssets);
-  let completedAssets = json_mgmt.getStructureValue(state, stateLocation)?.[Status.COMPLETED].concat(newlyCompletedAssets);
-  let outputAssets = json_mgmt.getStructureValue(output, outputLocation);
+  pendingAssets = zone.removeElements(pendingAssets, newlyCanceledAssets);
+  let completedAssets = json_mgmt.getStructureValue(state, stateLocation)?.[Status.COMPLETED].concat(newlyCompletedAssets) || [];
+  let canceledAssets = json_mgmt.getStructureValue(state, stateLocation)?.[Status.COMPLETED].concat(newlyCompletedAssets) || [];
+  let outputAssets = json_mgmt.getStructureValue(output, outputLocation) || [];
 
   //Save changes to state and output
   json_mgmt.setStructureValue(state, `${stateLocation}.${Status.PENDING}`, pendingAssets);
   json_mgmt.setStructureValue(state, `${stateLocation}.${Status.COMPLETED}`, completedAssets);
+  json_mgmt.setStructureValue(state, `${stateLocation}.${Status.CANCELED}`, canceledAssets);
   outputAssets = outputAssets.filter(
     outputAsset => !newlyCompletedAssets.includes(Object.keys(outputAsset)[0])
+  );
+  outputAssets = outputAssets.filter(
+    outputAsset => !newlyCanceledAssets.includes(Object.keys(outputAsset)[0])
   );
   json_mgmt.setStructureValue(output, outputLocation, outputAssets);
 
@@ -160,9 +184,10 @@ async function findAssetsMissingOsmosisDemon(memory, state, output) {
   const outputLocation = `${value}`;
 
   //read state file, so we know which cgid's to skip
-  const completeAssets = state?.[value]?.[Status.COMPLETED] || [];
-  const pendingAssets = state?.[value]?.[Status.PENDING] || [];
-  let assetsToSkip = [...completeAssets, ...pendingAssets];
+  const completeAssets = json_mgmt.getStructureValue(state, stateLocation)?.[Status.COMPLETED] || [];
+  const pendingAssets = json_mgmt.getStructureValue(state, stateLocation)?.[Status.PENDING] || [];
+  const canceledAssets = json_mgmt.getStructureValue(state, stateLocation)?.[Status.CANCELED] || [];
+  let assetsToSkip = [...completeAssets, ...pendingAssets, ...canceledAssets];
   console.log(`Assets to Skip: ${assetsToSkip}`);
 
   //get a list of assets whose denom should be listed to the coingecko page

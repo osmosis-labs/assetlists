@@ -1960,7 +1960,7 @@
     },
     {
       "chain_name": "dig",
-      "status": "live",
+      "status": "killed",
       "network_type": "mainnet",
       "pretty_name": "Dig Chain",
       "chain_id": "dig-1",
@@ -4177,7 +4177,7 @@
     },
     {
       "chain_name": "cudos",
-      "status": "live",
+      "status": "killed",
       "network_type": "mainnet",
       "pretty_name": "Cudos",
       "chain_id": "cudos-1",
@@ -9408,6 +9408,54 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/atomone/images/atomone.svg"
       },
       "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "dungeon",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Dungeon Chain",
+      "chain_id": "dungeon-1",
+      "bech32_prefix": "dungeon",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "dungeon",
+        "bech32PrefixAccPub": "dungeonpub",
+        "bech32PrefixValAddr": "dungeonvaloper",
+        "bech32PrefixValPub": "dungeonvaloperpub",
+        "bech32PrefixConsAddr": "dungeonvalcons",
+        "bech32PrefixConsPub": "dungeonvalconspub"
+      },
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "udgn",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0,
+            "high_gas_price": 0.001
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-dungeonchain.apeironnodes.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-dungeonchain.apeironnodes.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/Dungeomchain/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
         "ibc-transfer"
       ]
     }

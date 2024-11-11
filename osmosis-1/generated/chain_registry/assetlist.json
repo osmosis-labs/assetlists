@@ -25457,6 +25457,56 @@
       ]
     },
     {
+      "description": "Dungeon native token",
+      "denom_units": [
+        {
+          "denom": "ibc/3B95D63B520C283BCA86F8CD426D57584039463FD684A5CBA31D2780B86A1995",
+          "exponent": 0,
+          "aliases": [
+            "udgn"
+          ]
+        },
+        {
+          "denom": "DGN",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/3B95D63B520C283BCA86F8CD426D57584039463FD684A5CBA31D2780B86A1995",
+      "name": "Dungeon Coin",
+      "display": "DGN",
+      "symbol": "DGN",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "dungeon",
+            "base_denom": "udgn",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-85791",
+            "path": "transfer/channel-85791/udgn"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dungeon/images/DGN.png"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "dungeon",
+            "base_denom": "udgn"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dungeon/images/DGN.png",
+          "theme": {
+            "circle": true
+          }
+        }
+      ]
+    },
+    {
       "description": "The native token of Furya",
       "denom_units": [
         {

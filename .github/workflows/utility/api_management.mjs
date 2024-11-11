@@ -4,7 +4,7 @@ export async function queryApi(url) {
     const response = await fetch(url);
     if (!response.ok) {
       console.log(`Error fetching data: ${response.statusText}`);
-      return;
+      return response.statusText;
     }
     const data = await response.json();
     console.log("Successfully fetched API Data.");

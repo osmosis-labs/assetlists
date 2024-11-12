@@ -23,9 +23,9 @@ const stateFileName = "state.json";
 const coinGeckoDirName = "coingecko";
 const coinGeckoDir = path.join(zone.externalDir, coinGeckoDirName);
 
-const numberOfUnseenAssetsToQuery = 50;
-const numberOfPendingAssetsToCheck = 0;
-const querySleepTime = 20000;
+const numberOfUnseenAssetsToQuery = 3;
+const numberOfPendingAssetsToCheck = 1;
+const querySleepTime = 2000;
 
 async function queryCoinGeckoId(id) {
   const coinGeckoAPI = "https://api.coingecko.com/api/v3/coins/";

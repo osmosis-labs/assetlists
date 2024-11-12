@@ -9,7 +9,8 @@
 //
 
 import * as path from 'path';
-import * as chain_reg from '../../../chain-registry/.github/workflows/utility/chain_registry.mjs';
+import * as chain_reg from "../../../chain-registry/.github/workflows/utility/chain_registry.mjs";
+chain_reg.setup();
 import { queryPool } from './getPools.mjs';
 
 const root = "../../..";

@@ -6,7 +6,8 @@
 //-- Imports --
 
 import * as zone from "./assetlist_functions.mjs";
-import * as chain_reg from '../../../chain-registry/.github/workflows/utility/chain_registry.mjs';
+import * as chain_reg from "../../../chain-registry/.github/workflows/utility/chain_registry.mjs";
+chain_reg.setup();
 import * as path from 'path';
 
 const mintscanAssetsFileName = "assets.json";

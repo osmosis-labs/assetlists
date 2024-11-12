@@ -14,7 +14,8 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import * as chain_reg from './chain_registry.mjs';
+import * as chain_reg from "../../../chain-registry/.github/workflows/utility/chain_registry.mjs";
+chain_reg.setup();
 
 
 const chainNameToChainIdMap = new Map([

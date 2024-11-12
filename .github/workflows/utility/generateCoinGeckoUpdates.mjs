@@ -5,7 +5,8 @@
 //-- Imports --
 
 import * as zone from "./assetlist_functions.mjs";
-import * as chain_reg from '../../../chain-registry/.github/workflows/utility/chain_registry.mjs';
+import * as chain_reg from "../../../chain-registry/.github/workflows/utility/chain_registry.mjs";
+chain_reg.setup();
 import * as path from 'path';
 import * as api_mgmt from './api_management.mjs';
 import * as json_mgmt from './json_management.mjs';

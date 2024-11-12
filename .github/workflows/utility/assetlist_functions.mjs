@@ -8,7 +8,6 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import * as chain_reg from './chain_registry.mjs';
 import * as json_mgmt from './json_management.mjs';
 
 

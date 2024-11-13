@@ -195,14 +195,21 @@ async function saveCosmoStationChainNames() {
 
 function getCosmoStationChainName(chainRegistryChainName) {
 
-  // Get chain-id from chain name
   const chainId = chain_reg.getFileProperty(chainRegistryChainName, "chain", "chain_id");
-  if (!chainId) {
-    return chainRegistryChainName;
-  }
+  let chainName = cosmoStationChainsMap.get(chainId) || chainRegistryChainName;
 
-  //Get the chain name from the map
-  return cosmoStationChainsMap.get(chainId) || chainRegistryChainName;
+  //-Exception List
+  switch (chainRegistryChainName) {
+    case "binancesmartchain": chainName = "bnb-smart-chain";  break;
+    case "impacthub":         chainName = "ixo";              break;
+    case "terra":             chainName = "terra-classic";    break;
+    case "terra2":            chainName = "terra";            break;
+    case "oraichain":         chainName = "orai-chain";       break;
+    default:                                                  break;
+  }
+  //---
+
+  return chainName;
 
 }
 

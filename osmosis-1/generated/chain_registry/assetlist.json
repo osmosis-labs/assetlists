@@ -23968,7 +23968,7 @@
       "description": "Kima is an asset-agnostic interoperability infrastructure that connects blockchain networks and legacy financial systems, enabling secure, scalable cross-chain transactions and seamless communication across ecosystems.",
       "denom_units": [
         {
-          "denom": "ibc/A6712952E566B8A9F29D0A533F043C3CE3CF9870B01A2180E390133119C14A71",
+          "denom": "ibc/629B5691DE993DCD07AA1B0587AD52A7FA4E8F28B77DE15BCBDF936CA6F76E6C",
           "exponent": 0,
           "aliases": [
             "uKIMA"
@@ -23980,7 +23980,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/A6712952E566B8A9F29D0A533F043C3CE3CF9870B01A2180E390133119C14A71",
+      "base": "ibc/629B5691DE993DCD07AA1B0587AD52A7FA4E8F28B77DE15BCBDF936CA6F76E6C",
       "name": "Kima Network",
       "display": "KIMA",
       "symbol": "KIMA",
@@ -23990,11 +23990,11 @@
           "counterparty": {
             "chain_name": "kimanetwork",
             "base_denom": "uKIMA",
-            "channel_id": "channel-0"
+            "channel_id": "channel-4"
           },
           "chain": {
-            "channel_id": "channel-83350",
-            "path": "transfer/channel-83350/uKIMA"
+            "channel_id": "channel-86496",
+            "path": "transfer/channel-86496/uKIMA"
           }
         }
       ],
@@ -25514,6 +25514,55 @@
       ]
     },
     {
+      "description": "Kima is an asset-agnostic interoperability infrastructure that connects blockchain networks and legacy financial systems, enabling secure, scalable cross-chain transactions and seamless communication across ecosystems.",
+      "denom_units": [
+        {
+          "denom": "ibc/A6712952E566B8A9F29D0A533F043C3CE3CF9870B01A2180E390133119C14A71",
+          "exponent": 0,
+          "aliases": [
+            "uKIMA"
+          ]
+        },
+        {
+          "denom": "KIMA",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/A6712952E566B8A9F29D0A533F043C3CE3CF9870B01A2180E390133119C14A71",
+      "name": "Kima Network",
+      "display": "KIMA",
+      "symbol": "KIMA",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "kimanetwork",
+            "base_denom": "uKIMA",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-83350",
+            "path": "transfer/channel-83350/uKIMA"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "kimanetwork",
+            "base_denom": "uKIMA"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.svg"
+        }
+      ]
+    },
+    {
       "description": "The native token of Furya",
       "denom_units": [
         {
@@ -25678,61 +25727,6 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dhealth/images/dhp.svg",
           "theme": {
             "primary_color_hex": "#140c7c"
-          }
-        }
-      ],
-      "keywords": [
-        "osmosis_unlisted"
-      ]
-    },
-    {
-      "description": "The native EVM and Wasm, governance and staking token of the Shido Chain",
-      "denom_units": [
-        {
-          "denom": "ibc/BBE825F7D1673E1EBF05AB02000E23E6077967B79547A3733B60AE4ED62C4D32",
-          "exponent": 0,
-          "aliases": [
-            "shido"
-          ]
-        },
-        {
-          "denom": "SHIDO",
-          "exponent": 18
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/BBE825F7D1673E1EBF05AB02000E23E6077967B79547A3733B60AE4ED62C4D32",
-      "name": "Shido",
-      "display": "SHIDO",
-      "symbol": "SHIDO",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "shido",
-            "base_denom": "shido",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-38921",
-            "path": "transfer/channel-38921/shido"
-          }
-        }
-      ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/shido/images/shido.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/shido/images/shido.svg"
-      },
-      "images": [
-        {
-          "image_sync": {
-            "chain_name": "shido",
-            "base_denom": "shido"
-          },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/shido/images/shido.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/shido/images/shido.svg",
-          "theme": {
-            "primary_color_hex": "#046ffc"
           }
         }
       ],

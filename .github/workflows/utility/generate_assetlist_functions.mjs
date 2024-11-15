@@ -453,9 +453,9 @@ export function setIdentityAsset(asset_data) {
 
 /*
 
---Variant Group--
+--Identity Group--
 
-variantGroup: {
+identityGroup: {
   asset: origin asset
   variantGroupKey: base_denom of canonical ?? null
   additionalMintagesExist: t/f
@@ -790,18 +790,6 @@ export function setCoinMinimalDenom(asset_data) {
 
 }
 
-
-export function createVariantsObject(asset) {
-
-  return {
-    asset: asset,
-    variantGroupKey: null,
-    additionalMintagesExist: false,
-    variants: []
-  };
-
-}
-
 export function createIdentityObject(asset) {
 
   return {
@@ -821,8 +809,7 @@ export function getAssetProperty(asset, propertyName) {
     "is_staking",
     "traces",
     "origin_to_canonical_hops",
-    "identityGroup",
-    "variantGroup"
+    "identityGroup"
   ];
 
   let assetPropertyKey = createCombinedKey(asset, propertyName);
@@ -837,8 +824,6 @@ export function getAssetProperty(asset, propertyName) {
         assetProperty.set(assetPropertyKey, getAssetIsStaking(asset));
       } else if (propertyName === "identityGroup") {
         assetProperty.set(assetPropertyKey, createIdentityObject(asset));
-      } else if (propertyName === "variantGroup") {
-        assetProperty.set(assetPropertyKey, createVariantsObject(asset));
       }
     } else {
       assetProperty.set(
@@ -1182,25 +1167,38 @@ export function setIdentityGroupKey(asset_data) {
 
 }
 
-export function setOriginGroupKey(asset_data) {
+export function setBestOriginAsset(asset_data, asset_datas) {
 
-  let variantGroupKey = getAssetProperty(asset_data.variant_asset, "variantGroup").originvariantGroupKeyGroupKey;
-
-  assetTraces = getAssetProperty(asset_data.asset, "traces");
-
-  for (const trace in assetTraces) {
-    if (trace.type in originTraceTypes) {
-      if (trace.type in traceTypesNeedingProvider) {
-        if (trace.provider in asset_data.zone_config) {
-          continue;
-        }
-      }
+  let assetTracesToOrigin = [];
+  const assetTraces = deepCopy(getAssetProperty(asset_data.source_asset, "traces"))?.reverse();
+  for (const trace of assetTraces) {
+    if (originTraceTypes.includes(trace.type)) {
+      assetTracesToOrigin.push(trace);
+    } else {
+      break;
     }
   }
-
-
+  if (asset_data.local_asset.base_denom === "ibc/078AD6F581E8115CDFBD8FFA29D8C71AFE250CE952AFF80040CBC64868D44AD3") {
+    console.log(assetTracesToOrigin?.[0].counterparty.base_denom);
+  }
+  let origin_asset_data;
+  assetTracesToOrigin.reverse();
+  if (asset_data.local_asset.base_denom === "ibc/078AD6F581E8115CDFBD8FFA29D8C71AFE250CE952AFF80040CBC64868D44AD3") {
+    console.log(assetTracesToOrigin?.[0].counterparty.base_denom);
+  }
+  for (const trace of assetTracesToOrigin) {
+    origin_asset_data = asset_datas.find(asset => 
+      asset.canonical_asset.base_denom === trace.counterparty.base_denom &&
+      asset.canonical_asset.chain_name === trace.counterparty.chain_name
+    );
+    if (origin_asset_data) {
+      break;
+    }
+  }
+  asset_data.frontend.originAsset = origin_asset_data?.local_asset.base_denom || asset_data.local_asset.base_denom;
 
 }
+
 
 export function setTypeAsset(asset_data) {
 
@@ -1630,7 +1628,8 @@ export function reformatFrontendAsset(asset_data) {
     pegMechanism: asset_data.frontend.pegMechanism,
     transferMethods: asset_data.frontend.transferMethods ?? [],
     counterparty: asset_data.frontend.counterparty ?? [],
-    variantGroupKey: asset_data.frontend.identityGroupKey,
+    //identity: asset_data.frontend.identityGroupKey,
+    variantGroupKey: asset_data.frontend.originAsset,
     name: asset_data.frontend.name,
     //description: asset_data.frontend.description,
     isAlloyed: asset_data.frontend.isAlloyed ?? false,
@@ -1641,7 +1640,6 @@ export function reformatFrontendAsset(asset_data) {
     preview: asset_data.frontend.preview ?? false,
     tooltipMessage: asset_data.frontend.tooltipMessage,
     sortWith: asset_data.frontend.sortWith,
-    //twitterURL: asset_data.frontend.twitter_URL,
     listingDate: asset_data.frontend.listingDate,
     //relatedAssets: asset_data.frontend.relatedAssets,
   };

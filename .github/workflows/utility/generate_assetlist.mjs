@@ -91,8 +91,8 @@ const generateAssets = async (
     assetlist.setPegMechanism(asset_data);
     assetlist.setTransferMethods(asset_data);
     assetlist.setCounterparty(asset_data);
-    //assetlist.setIdentity(asset_data);
     assetlist.setIdentityGroupKey(asset_data);
+    assetlist.setBestOriginAsset(asset_data, asset_datas);
     assetlist.setDenomUnits(asset_data);
     assetlist.setName(asset_data);
     assetlist.setDescription(asset_data);

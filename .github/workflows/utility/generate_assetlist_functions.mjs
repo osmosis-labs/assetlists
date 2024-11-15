@@ -42,6 +42,9 @@ let IS_MAINNET;
 let assetProperty = new Map();
 
 
+//This defines how many days since listing qualifies an asset as a "New Asset"
+const daysForNewAssetCategory = 21;
+
 //-- Functions --
 
 export async function asyncForEach(array, callback) {
@@ -332,24 +335,6 @@ export async function setLocalAsset(asset_data) {
 }
 
 
-//--Important Concepts--
-/*
- * Origin Asset: the original version of an asset where it's meant to have the same price
- * note: this includes bridged, wrapped, synthetic, additional-mintage
- * note: LSTs or Test-mintages don't count; they have a relation, but aren't meant to have the same price.
- * e.g., stOSMO has a trace back to OSMO, but stOSMO's origin is not OSMO, because the pricing intention is different
- * 
- * Identity Asset: An asset where the logo and ticker should persist due to wide recognition
- * e.g., WBTC.axl's identity is Wrapped Bitcoin $WBTC (and NOT $BTC)
- * e.g., but WBTC.axl's origin asset is Bitcoin $BTC, because the price is meant to be the same
- * note: this can include bridged, wrapped, synthetic, additional-mintage, ...
- * note: ...but the provider must be included in the zone_config file
- * 
- * Canonical Asset: an asset recognized by a platform to be the 'true' representation of some Asset
- * note: but stay within the identity group
- * 
- */
-
 export function setCanonicalAsset(asset_data) {
 
   asset_data.canonical_asset = asset_data.zone_asset?.canonical ?? asset_data.source_asset;
@@ -357,7 +342,7 @@ export function setCanonicalAsset(asset_data) {
 }
 
 
-export function setIdentityAsset(asset_data) {
+export function setOriginAsset(asset_data) {
 
   let variant = {
     asset_data: asset_data,
@@ -398,18 +383,18 @@ export function setIdentityAsset(asset_data) {
 
   }
 
-  asset_data.frontend.identity = variant;
+  asset_data.frontend.variant = variant;
 
-  asset_data.identity_asset = {
+  asset_data.origin_asset = {
     chain_name: lastTrace.counterparty.chain_name,
     base_denom: lastTrace.counterparty.base_denom,
   };
     
-  let identityGroup = getAssetProperty(asset_data.identity_asset, "identityGroup");
+  let variantGroup = getAssetProperty(asset_data.origin_asset, "variantGroup");
   
-  asset_data.frontend.is_canonical = createKey(asset_data.identity_asset) === createKey(asset_data.canonical_asset);
+  asset_data.frontend.is_canonical = createKey(asset_data.origin_asset) === createKey(asset_data.canonical_asset);
   if (asset_data.frontend.is_canonical) {
-    identityGroup.identityGroupKey = asset_data.local_asset.base_denom;
+    variantGroup.variantGroupKey = asset_data.local_asset.base_denom;
   }
 
   variant.hops.reverse();
@@ -429,7 +414,7 @@ export function setIdentityAsset(asset_data) {
       createKey({
         chain_name: traces[i].counterparty.chain_name,
         base_denom: traces[i].counterparty.base_denom
-      }) === createKey(asset_data.identity_asset)
+      }) === createKey(asset_data.origin_asset)
     ) {
       if (
         traces[i].type === "additional-mintage"
@@ -437,7 +422,7 @@ export function setIdentityAsset(asset_data) {
         traces[i].type === "legacy-mintage"
       ) {
         variant.mintageNetwork = lastTrace.counterparty.chain_name;
-        identityGroup.additionalMintagesExist = true;
+        variantGroup.additionalMintagesExist = true;
       } else {
         variant.mintageNetwork = traces[i].counterparty.chain_name;
       }
@@ -446,16 +431,16 @@ export function setIdentityAsset(asset_data) {
     lastTrace = traces[i];
   }
 
-  identityGroup.variants.push(variant);
+  variantGroup.variants.push(variant);
 
 }
 
 
 /*
 
---Identity Group--
+--Variant Group--
 
-identityGroup: {
+variantGroup: {
   asset: origin asset
   variantGroupKey: base_denom of canonical ?? null
   additionalMintagesExist: t/f
@@ -519,7 +504,7 @@ function getNetworkName(chain_name, asset_data) {
 
 export function setSymbol(asset_data) {
 
-  let symbol = getAssetProperty(asset_data.identity_asset, "symbol");
+  let symbol = getAssetProperty(asset_data.origin_asset, "symbol");
 
   //asset_data.chain_reg.symbol =
     //getAssetProperty(asset_data.local_asset, "symbol") ??
@@ -534,7 +519,7 @@ export function setSymbol(asset_data) {
     return;
   }
   
-  symbol = getAssetProperty(asset_data.identity_asset, "symbol");
+  symbol = getAssetProperty(asset_data.origin_asset, "symbol");
   
 
   //If it's the canonical asset, then don't add suffixes
@@ -548,12 +533,13 @@ export function setSymbol(asset_data) {
   //Need a way to know if last suffix is network
   let last_suffix_is_network = false;
 
-  let identityGroup = getAssetProperty(asset_data.identity_asset, "identityGroup");
+  let variantGroup = getAssetProperty(asset_data.origin_asset, "variantGroup");
   let accumulative_suffix = "";
-  if (identityGroup.additionalMintagesExist) {
-    accumulative_suffix = "." + getNetworkSymbolSuffix(asset_data.frontend.identity.mintageNetwork, asset_data);
+  if (variantGroup.additionalMintagesExist) {
+    //symbol = symbol + "." + getNetworkSymbolSuffix(asset_data.frontend.variant.mintageNetwork, asset_data);
+    accumulative_suffix = "." + getNetworkSymbolSuffix(asset_data.frontend.variant.mintageNetwork, asset_data);
   }
-  asset_data.frontend.identity.hops.forEach((hop) => {
+  asset_data.frontend.variant.hops.forEach((hop) => {
     if (
       hop.type === "additional-mintage"
       ||
@@ -572,7 +558,7 @@ export function setSymbol(asset_data) {
         }
         if (
           deepEqual(
-            asset_data.identity_asset,
+            asset_data.origin_asset,
             ({
               chain_name: "ethereum",
               base_denom: "wei"
@@ -642,13 +628,13 @@ export function setName(asset_data) {
   if (
     !asset_data.zone_asset?.override_properties?.use_asset_name
       &&
-    getAssetProperty(asset_data.identity_asset, "is_staking")
+    getAssetProperty(asset_data.origin_asset, "is_staking")
   ) {
-    name = chain_reg.getFileProperty(asset_data.identity_asset.chain_name, "chain", "pretty_name");
+    name = chain_reg.getFileProperty(asset_data.origin_asset.chain_name, "chain", "pretty_name");
     //Check for Chain Name Override--E.G., "Ethereum Mainnet" -> "Ethereum"
     let override_chain_pretty_name = asset_data.zone_config?.chains?.find(
       chain => //where
-        chain.chain_name === asset_data.identity_asset.chain_name
+        chain.chain_name === asset_data.origin_asset.chain_name
         &&
         chain.pretty_name
     )?.pretty_name;
@@ -656,7 +642,7 @@ export function setName(asset_data) {
       name = override_chain_pretty_name;
     }
   } else {
-    name = getAssetProperty(asset_data.identity_asset, "name");
+    name = getAssetProperty(asset_data.origin_asset, "name");
   }
   
   //If it's the canonical asset, then don't add suffixes
@@ -674,19 +660,19 @@ export function setName(asset_data) {
   let accumulative_suffix = "";
 
   //Show Mintage Network, if needed
-  let identityGroup = getAssetProperty(asset_data.identity_asset, "identityGroup");
-  if (identityGroup.additionalMintagesExist) {
+  let variantGroup = getAssetProperty(asset_data.origin_asset, "variantGroup");
+  if (variantGroup.additionalMintagesExist) {
     //name =
     accumulative_suffix =
       //name
         //+
       " (" +
-    getNetworkName(asset_data.frontend.identity.mintageNetwork, asset_data)
+      getNetworkName(asset_data.frontend.variant.mintageNetwork, asset_data)
       + ")";
     last_suffix_is_network = true;
   }
 
-  asset_data.frontend.identity.hops.forEach((hop) => {
+  asset_data.frontend.variant.hops.forEach((hop) => {
     if (
       hop.type === "additional-mintage"
         ||
@@ -790,11 +776,12 @@ export function setCoinMinimalDenom(asset_data) {
 
 }
 
-export function createIdentityObject(asset) {
+
+export function createVariantsObject(asset) {
 
   return {
     asset: asset,
-    identityGroupKey: null,
+    variantGroupKey: null,
     additionalMintagesExist: false,
     variants: []
   };
@@ -809,7 +796,7 @@ export function getAssetProperty(asset, propertyName) {
     "is_staking",
     "traces",
     "origin_to_canonical_hops",
-    "identityGroup"
+    "variantGroup"
   ];
 
   let assetPropertyKey = createCombinedKey(asset, propertyName);
@@ -822,8 +809,8 @@ export function getAssetProperty(asset, propertyName) {
         assetProperty.set(assetPropertyKey, getAssetDecimals(asset));
       } else if (propertyName === "is_staking") {
         assetProperty.set(assetPropertyKey, getAssetIsStaking(asset));
-      } else if (propertyName === "identityGroup") {
-        assetProperty.set(assetPropertyKey, createIdentityObject(asset));
+      } else if (propertyName === "variantGroup") {
+        assetProperty.set(assetPropertyKey, createVariantsObject(asset));
       }
     } else {
       assetProperty.set(
@@ -1156,49 +1143,16 @@ export function setChainName(asset_data) {
 
 }
 
-export function setIdentityGroupKey(asset_data) {
+export function setVariantGroupKey(asset_data) {
 
-  let identityGroupKey = getAssetProperty(asset_data.identity_asset, "identityGroup").identityGroupKey;
+  let variantGroupKey = getAssetProperty(asset_data.origin_asset, "variantGroup").variantGroupKey;
 
-  asset_data.frontend.identityGroupKey =
-    identityGroupKey
+  asset_data.frontend.variantGroupKey =
+    variantGroupKey
       ??
     asset_data.local_asset.base_denom;
 
 }
-
-export function setBestOriginAsset(asset_data, asset_datas) {
-
-  let assetTracesToOrigin = [];
-  const assetTraces = deepCopy(getAssetProperty(asset_data.source_asset, "traces"))?.reverse();
-  for (const trace of assetTraces) {
-    if (originTraceTypes.includes(trace.type)) {
-      assetTracesToOrigin.push(trace);
-    } else {
-      break;
-    }
-  }
-  if (asset_data.local_asset.base_denom === "ibc/078AD6F581E8115CDFBD8FFA29D8C71AFE250CE952AFF80040CBC64868D44AD3") {
-    console.log(assetTracesToOrigin?.[0].counterparty.base_denom);
-  }
-  let origin_asset_data;
-  assetTracesToOrigin.reverse();
-  if (asset_data.local_asset.base_denom === "ibc/078AD6F581E8115CDFBD8FFA29D8C71AFE250CE952AFF80040CBC64868D44AD3") {
-    console.log(assetTracesToOrigin?.[0].counterparty.base_denom);
-  }
-  for (const trace of assetTracesToOrigin) {
-    origin_asset_data = asset_datas.find(asset => 
-      asset.canonical_asset.base_denom === trace.counterparty.base_denom &&
-      asset.canonical_asset.chain_name === trace.counterparty.chain_name
-    );
-    if (origin_asset_data) {
-      break;
-    }
-  }
-  asset_data.frontend.originAsset = origin_asset_data?.local_asset.base_denom || asset_data.local_asset.base_denom;
-
-}
-
 
 export function setTypeAsset(asset_data) {
 
@@ -1336,7 +1290,7 @@ export function setCounterparty(asset_data) {
     if (
       deepEqual(
         traceCounterpartyAsset,
-        asset_data.identity_asset
+        asset_data.origin_asset
       )
     ) { break; }
   }
@@ -1628,8 +1582,7 @@ export function reformatFrontendAsset(asset_data) {
     pegMechanism: asset_data.frontend.pegMechanism,
     transferMethods: asset_data.frontend.transferMethods ?? [],
     counterparty: asset_data.frontend.counterparty ?? [],
-    //identity: asset_data.frontend.identityGroupKey,
-    variantGroupKey: asset_data.frontend.originAsset,
+    variantGroupKey: asset_data.frontend.variantGroupKey,
     name: asset_data.frontend.name,
     //description: asset_data.frontend.description,
     isAlloyed: asset_data.frontend.isAlloyed ?? false,
@@ -1640,6 +1593,7 @@ export function reformatFrontendAsset(asset_data) {
     preview: asset_data.frontend.preview ?? false,
     tooltipMessage: asset_data.frontend.tooltipMessage,
     sortWith: asset_data.frontend.sortWith,
+    //twitterURL: asset_data.frontend.twitter_URL,
     listingDate: asset_data.frontend.listingDate,
     //relatedAssets: asset_data.frontend.relatedAssets,
   };

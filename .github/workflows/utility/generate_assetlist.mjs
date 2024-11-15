@@ -39,8 +39,6 @@ const generateAssets = async (
 
   let asset_datas = [];
 
-  let variantGroupKeyToBaseMap = new Map();
-
   await asyncForEach(zone_assets, async (zone_asset) => {
 
     //--Create the Generated Asset Objects--
@@ -66,8 +64,8 @@ const generateAssets = async (
     //canonical_asset (e.g., pstake on Ethereum, usdc on ethereum)
     assetlist.setCanonicalAsset(asset_data);
 
-    //origin_asset (e.g., WBTC.axl originates from WBTC on Ethereum--NOT BTC)
-    assetlist.setOriginAsset(asset_data);
+    //Identity Asset (e.g., WBTC.axl originates from WBTC on Ethereum--NOT BTC)
+    assetlist.setIdentityAsset(asset_data);
 
     //Add to array of Asset data
     asset_datas.push(asset_data);
@@ -93,7 +91,8 @@ const generateAssets = async (
     assetlist.setPegMechanism(asset_data);
     assetlist.setTransferMethods(asset_data);
     assetlist.setCounterparty(asset_data);
-    assetlist.setVariantGroupKey(asset_data);
+    assetlist.setIdentityGroupKey(asset_data);
+    assetlist.setBestOriginAsset(asset_data, asset_datas);
     assetlist.setDenomUnits(asset_data);
     assetlist.setName(asset_data);
     assetlist.setDescription(asset_data);

@@ -3577,6 +3577,12 @@
           "coinMinimalDenom": "ibc/21D8071EF5B02A86D945430D859A594CBF28287D38104A264BB9FD3B22BBF5DE",
           "coinDecimals": 18,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/yum.png"
+        },
+        {
+          "coinDenom": "BOMU",
+          "chainSuggestionDenom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/bomu",
+          "coinMinimalDenom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/bomu",
+          "coinDecimals": 6
         }
       ],
       "description": "Osmosis (OSMO) is the premier DEX and cross-chain DeFi hub within the Cosmos ecosystem, a network of over 50 sovereign, interoperable blockchains seamlessly connected through the Inter-Blockchain Communication Protocol (IBC). Pioneering in its approach, Osmosis offers a dynamic trading and liquidity provision experience, integrating non-IBC assets from other ecosystems, including Ethereum, Solana, Avalanche, and Polkadot. Initially adopting Balancer-style pools, Osmosis now also features a concentrated liquidity model that is orders of magnitude more capital efficient, meaning that significantly less liquidity is required to handle the same amount of trading volume with minimal slippage.\n\nAs a true appchain, Osmosis has greater control over the full blockchain stack than traditional smart contract DEXs, which must follow the code of the parent chain that it is built on. This fine-grained control has enabled, for example, the development of Superfluid Staking, an extension of Proof of Stake that allows assets at the application layer to be staked to secure the chain. The customizability of appchains also allows implementing features like the Protocol Revenue module, which enables Osmosis to conduct on-chain arbitrage on behalf of OSMO stakers, balancing prices across pools while generating real yield revenue from this volume. Additionally, as a sovereign appchain, Osmosis governance can vote on upgrades to the protocol. One example of this was the introduction of a Taker Fee, which switched on the collection of exchange fees to generate diverse yield from Osmosis volume and distribute it to OSMO stakers.\n\nOsmosis is bringing the full centralized exchange experience to the decentralized world by building a cross-chain native DEX and trading suite that connects all chains over IBC, including Ethereum and Bitcoin. To reach this goal, Osmosis hosts an ever-expanding suite of DeFi applications aimed at providing a one-stop experience that includes lending, credit, margin, DeFi strategy vaults, power perps, fiat on-ramps, NFTs, stablecoins, and more — all of the functionalities that centralized exchange offer and more, in the trust-minimized environment of decentralized finance.",
@@ -20566,18 +20572,18 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://rpc2.neutaro.tech/"
+            "address": "https://rpc2.neutaro.io/"
           }
         ],
         "rest": [
           {
-            "address": "https://api2.neutaro.tech/"
+            "address": "https://api2.neutaro.io/"
           }
         ]
       },
       "explorers": [
         {
-          "txPage": "https://nms1.neutaro.tech/Neutaro/tx/{txHash}"
+          "txPage": "https://explorer.neutaro.io/Neutaro/tx/{txHash}"
         }
       ],
       "features": [
@@ -22289,7 +22295,79 @@
       },
       "explorers": [
         {
-          "txPage": "https://ping.pub/Dungeomchain/tx/${txHash}"
+          "txPage": "https://ping.pub/Dungeonchain/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "synternet",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Synternet",
+      "chain_id": "synternet-1",
+      "bech32Prefix": "synt",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "synt",
+        "bech32PrefixAccPub": "syntpub",
+        "bech32PrefixValAddr": "syntvaloper",
+        "bech32PrefixValPub": "syntvaloperpub",
+        "bech32PrefixConsAddr": "syntvalcons",
+        "bech32PrefixConsPub": "syntvalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDenom": "SYNT",
+        "chainSuggestionDenom": "usynt",
+        "coinMinimalDenom": "ibc/1B454982D3746951510D3845145B83628D4ED380D95722C8077776C4689F973A",
+        "sourceDenom": "usynt",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/synternet/images/synt.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "SYNT",
+          "chainSuggestionDenom": "usynt",
+          "coinMinimalDenom": "ibc/1B454982D3746951510D3845145B83628D4ED380D95722C8077776C4689F973A",
+          "sourceDenom": "usynt",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/synternet/images/synt.png",
+          "gasPriceStep": {
+            "low": 0.01,
+            "average": 0.025,
+            "high": 0.03
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "SYNT",
+          "chainSuggestionDenom": "usynt",
+          "coinMinimalDenom": "ibc/1B454982D3746951510D3845145B83628D4ED380D95722C8077776C4689F973A",
+          "sourceDenom": "usynt",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/synternet/images/synt.png"
+        }
+      ],
+      "description": "Synternet is the backbone of the Data Layer, a protocol serving as the customizable execution layer between all blockchains. It enables builders to See, Interpret and Act on any data from any chain, supercharging their applications.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.synternet.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.synternet.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://explorer.synternet.com/transactions/${txHash}"
         }
       ],
       "features": [

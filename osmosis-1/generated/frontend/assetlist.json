@@ -4298,7 +4298,7 @@
       },
       "price": {
         "poolId": "2246",
-        "denom": "ibc/297C64CC42B5A8D8F82FE2EBE208A6FE8F94B86037FA28C4529A23701C228F7A"
+        "denom": "ibc/41999DF04D9441DAC0DF5D8291DF4333FBCBA810FFD63FDCE34FDF41EF37B6F7"
       },
       "categories": [],
       "transferMethods": [
@@ -10889,7 +10889,7 @@
       },
       "price": {
         "poolId": "2246",
-        "denom": "ibc/297C64CC42B5A8D8F82FE2EBE208A6FE8F94B86037FA28C4529A23701C228F7A"
+        "denom": "ibc/41999DF04D9441DAC0DF5D8291DF4333FBCBA810FFD63FDCE34FDF41EF37B6F7"
       },
       "categories": [],
       "transferMethods": [
@@ -15806,7 +15806,7 @@
       },
       "price": {
         "poolId": "1659",
-        "denom": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0"
+        "denom": "ibc/EDD6F0D66BCD49C1084FB2C35353B4ACD7B9191117CE63671B61320548F7C89D"
       },
       "categories": [
         "gaming",
@@ -15863,7 +15863,7 @@
       },
       "price": {
         "poolId": "1659",
-        "denom": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0"
+        "denom": "ibc/EDD6F0D66BCD49C1084FB2C35353B4ACD7B9191117CE63671B61320548F7C89D"
       },
       "categories": [
         "meme"
@@ -22356,7 +22356,7 @@
       },
       "coingeckoId": "bitcoin",
       "price": {
-        "poolId": "1942",
+        "poolId": "1943",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
@@ -24151,8 +24151,8 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/UWU.pica.png"
       },
       "price": {
-        "poolId": "2047",
-        "denom": "uosmo"
+        "poolId": "2222",
+        "denom": "factory/osmo1s794h9rxggytja3a4pmwul53u98k06zy2qtrdvjnfuxruh7s8yjs6cyxgd/ucdt"
       },
       "categories": [
         "meme"
@@ -25575,8 +25575,8 @@
         {
           "name": "Int3face Bridge",
           "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone",
-          "withdrawUrl": "https://app.int3face.zone"
+          "depositUrl": "https://app.int3face.zone/bridge",
+          "withdrawUrl": "https://app.int3face.zone/bridge"
         },
         {
           "name": "Osmosis IBC Transfer",
@@ -25646,8 +25646,8 @@
         {
           "name": "Int3face Bridge",
           "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone",
-          "withdrawUrl": "https://app.int3face.zone"
+          "depositUrl": "https://app.int3face.zone/bridge",
+          "withdrawUrl": "https://app.int3face.zone/bridge"
         },
         {
           "name": "Osmosis IBC Transfer",
@@ -25718,8 +25718,8 @@
         {
           "name": "Int3face Bridge",
           "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone",
-          "withdrawUrl": "https://app.int3face.zone"
+          "depositUrl": "https://app.int3face.zone/bridge",
+          "withdrawUrl": "https://app.int3face.zone/bridge"
         },
         {
           "name": "Osmosis IBC Transfer",
@@ -25790,8 +25790,8 @@
         {
           "name": "Int3face Bridge",
           "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone",
-          "withdrawUrl": "https://app.int3face.zone"
+          "depositUrl": "https://app.int3face.zone/bridge",
+          "withdrawUrl": "https://app.int3face.zone/bridge"
         },
         {
           "name": "Osmosis IBC Transfer",
@@ -26373,7 +26373,14 @@
       "categories": [
         "meme"
       ],
-      "transferMethods": [],
+      "transferMethods": [
+        {
+          "name": "Int3face Bridge",
+          "type": "external_interface",
+          "depositUrl": "https://app.int3face.zone/bridge",
+          "withdrawUrl": "https://app.int3face.zone/bridge"
+        }
+      ],
       "counterparty": [
         {
           "chainName": "dogecoin",
@@ -26841,6 +26848,33 @@
       "disabled": false,
       "preview": false,
       "listingDate": "2024-11-18T12:49:15.000Z"
+    },
+    {
+      "chainName": "osmosis",
+      "sourceDenom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/bomu",
+      "coinMinimalDenom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/bomu",
+      "symbol": "BOMU",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bomu.png"
+      },
+      "price": {
+        "poolId": "2319",
+        "denom": "uosmo"
+      },
+      "categories": [
+        "meme"
+      ],
+      "transferMethods": [],
+      "counterparty": [],
+      "variantGroupKey": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/bomu",
+      "name": "$bomu",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "listingDate": "2024-11-16T22:31:35.000Z"
     }
   ]
 }

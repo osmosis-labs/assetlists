@@ -9452,9 +9452,72 @@
       },
       "explorers": [
         {
-          "tx_page": "https://ping.pub/Dungeomchain/tx/${txHash}"
+          "tx_page": "https://ping.pub/Dungeonchain/tx/${txHash}"
         }
       ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "synternet",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Synternet",
+      "chain_id": "synternet-1",
+      "bech32_prefix": "synt",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "synt",
+        "bech32PrefixAccPub": "syntpub",
+        "bech32PrefixValAddr": "syntvaloper",
+        "bech32PrefixValPub": "syntvaloperpub",
+        "bech32PrefixConsAddr": "syntvalcons",
+        "bech32PrefixConsPub": "syntvalconspub"
+      },
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "usynt",
+            "fixed_min_gas_price": 0.01,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.03
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "usynt"
+          }
+        ]
+      },
+      "description": "Synternet is the backbone of the Data Layer, a protocol serving as the customizable execution layer between all blockchains. It enables builders to See, Interpret and Act on any data from any chain, supercharging their applications.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.synternet.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.synternet.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.synternet.com/transactions/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/synternet/images/synt.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/synternet/images/synt.svg",
+        "theme": {
+          "primary_color_hex": "#272d45"
+        }
+      },
       "features": [
         "ibc-go",
         "ibc-transfer"

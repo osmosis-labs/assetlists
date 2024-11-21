@@ -38,7 +38,7 @@ chain_reg.setup();
 import * as path from 'path';
 
 const stateFileName = "state.json";
-const stateDirName = "frontend"; //might delete later
+const stateDirName = "state";
 const stateDir = path.join(zone.generatedDirectoryName, stateDirName);
 
 const stateLocations = [
@@ -89,10 +89,6 @@ const generateState = (chainName) => {
   let state = zone.readFromFile(chainName, stateDir, stateFileName) || {};
   //console.log(`state is: ${state}`);
 
-  // Read the zone_assets file
-  //const sourceData = zone.readFromFile(chainName, zone.noDir, zone.zoneAssetlistFileName);
-  //console.log(`sourceData is: ${sourceData}`);
-
   // Read the generate assetlist
   const assetlist = zone.readFromFile(chainName, zone.zoneConfigAssetlist, zone.assetlistFileName);
   //console.log(`Generated Assetlist is: ${assetlist}`);
@@ -124,7 +120,11 @@ const generateState = (chainName) => {
 
   // Write the state to the state file
   zone.writeToFile(chainName, stateDir, stateFileName, state);
-  console.log(`Update completed. Data saved.`);
+  console.log(`Update state completed. Data saved.`);
+
+  // Write the state to the state file
+  //zone.writeToFile(chainName, zoneConfigAssetlist, zone.assetlistFileName, assetlist);
+  //console.log(`Update assetlist completed. Data saved.`);
 
 };
 

@@ -1612,7 +1612,7 @@ export function setDescription(asset_data) {
 
 }
 
-export function reformatFrontendAsset(asset_data) {
+export function reformatFrontendAssetFromAssetData(asset_data) {
 
   //--Setup Frontend Asset--
   let reformattedAsset = {
@@ -1650,6 +1650,48 @@ export function reformatFrontendAsset(asset_data) {
   }
 
   asset_data.frontend = reformattedAsset;
+  return;
+}
+
+export function reformatFrontendAsset(asset) {
+
+  //--Setup Frontend Asset--
+  let reformattedAsset = {
+    chainName: asset.chainName,
+    sourceDenom: asset.sourceDenom,
+    coinMinimalDenom: asset.coinMinimalDenom,
+    symbol: asset.symbol,
+    decimals: asset.decimals,
+    logoURIs: asset.logoURIs,
+    coingeckoId: asset.coingeckoId,
+    price: asset.price,
+    categories: asset.categories ?? [],
+    pegMechanism: asset.pegMechanism,
+    transferMethods: asset.transferMethods ?? [],
+    counterparty: asset.counterparty ?? [],
+    //identity: asset.identityGroupKey,
+    variantGroupKey: asset.originAsset,
+    name: asset.name,
+    //description: asset.description,
+    isAlloyed: asset.isAlloyed ?? false,
+    contract: asset.contract,
+    verified: asset.verified ?? false,
+    unstable: asset.unstable ?? false,
+    disabled: asset.disabled ?? false,
+    preview: asset.preview ?? false,
+    tooltipMessage: asset.tooltipMessage,
+    sortWith: asset.sortWith,
+    listingDate: asset.listingDate,
+    //relatedAssets: asset.relatedAssets,
+  };
+
+  // Check if listingDate exists and is a valid date
+  if (!asset.listingDate || isNaN(new Date(asset.listingDate).getTime())) {
+    // Remove listingDate from reformattedAsset if it's invalid or doesn't exist
+    delete reformattedAsset.listingDate;
+  }
+
+  asset = reformattedAsset;
   return;
 
 }

@@ -39,7 +39,6 @@ If adding a new chain, please ensure the following:
 
 If upgrading an Asset to Verified, please see the requirements specified at [LISTING](https://github.com/osmosis-labs/assetlists/blob/main/LISTING.md#upgrade-asset-to-verified-status-permissioned), and ensure the following:
 - [ ] Asset is defined thoroughly at the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry).
-   - [ ] `listing_date_time_utc` is specified and accurate
    - [ ] A meaningful `description` (and `extended_description`, unless: meme or variant/derivative asset).
    - [ ] Associated `socials`, including `website` and `twitter` (unless: meme or variant/derivative asset).
    - [ ] **Logo Image** has a square Aspect Ratio, < 250 KB file size, and appropriate visual contrast with Osmosis Zone's colors.
@@ -49,7 +48,7 @@ If upgrading an Asset to Verified, please see the requirements specified at [LIS
 - [ ] Verify appearance and metadata
 - [ ] Accurate Price
 - [ ] Trading and routing functionality
-   - [ ] $50 offer yields at least $49
+   - [ ] $50 USDC offer yields at least $49-worth of this Asset
 - [ ] Withdraw and Deposit
    - [ ] Deposit Transaction URL (if in-app)
 

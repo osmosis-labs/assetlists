@@ -37,7 +37,7 @@ An example asset object in `osmosis.zone.json`:
   "base_denom": "uosmo",
   "chain_name": "osmosis",
   "osmosis_verified": true,
-  "listing_date_time_utc": "2024-01-22T10:00:00Z"
+  "_comment": "Osmosis $OSMO"
 },
 ...
 {
@@ -45,14 +45,15 @@ An example asset object in `osmosis.zone.json`:
   "chain_name": "steakchain",
   "path": "transfer/channel-69/ustk",
   "osmosis_verified": true,
-  "listing_date_time_utc": "2024-01-24T10:58:00Z"
+  "_comment": "Steak $STK"
 },
 {
   "base_denom": "ufoocoin",
   "chain_name": "fubarchain",
   "path": "transfer/channel-420/ufoocoin",
   "osmosis_verified": false
-  "osmosis_unlisted": true
+  "osmosis_unlisted": true,
+  "_comment": "Foocoin $FOO"
 }
 ```
 
@@ -65,7 +66,7 @@ Note that there are apps, interfaces, and tools that look at this repository as 
   - .../osmosis-1.chainlist.json
   - .../osmo-test-5.chainlist.json
 - Osmosis Labs' Sidecar Query Service (SQS):
-  - .../osmosis-1.assetlist.json (ongoing migration to v2)
+  - .../generated/frontend/assetlist.json
 - Numia Data Serivces (e.g., API):
   - .../generated/frontend/assetlist.json
   - .../generated/chain-registry/assetlist.json

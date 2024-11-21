@@ -63,8 +63,6 @@ Asset appearance and functionality must be validated by Osmosis Zone maintainers
 #### Notify about Verified Status Upgrade
 To propose that an asset should be upgraded to Verified status, please submit a Pull Requiest to this repository:
  - The PR should update the asset's `"osmosis_verified"` property value to `true` in the [zone_assets](https://github.com/osmosis-labs/assetlists/blob/main/osmosis-1/osmosis.zone_assets.json) file.
- - Add `listing_date_time_utc`, which is used to record when (UTC time) an asset is fully Verified on Osmosis Zone.
-   - e.g., `"listing_date_time_utc": "2024-01-24T10:58:00Z",`
  - In the Descrption or Conversation of the Pull Request, please provide the Pool ID of a liquidity pool that meets the requirements specified above (needed for validation)
 
 

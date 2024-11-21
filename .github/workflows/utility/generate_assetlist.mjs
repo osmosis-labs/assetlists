@@ -11,6 +11,8 @@ import { getAllRelatedAssets } from "./getRelatedAssets.mjs";
 import * as assetlist from "./generate_assetlist_functions.mjs";
 import * as localization from "./localization.mjs";
 
+import * as state from "./update_assetlist_state.mjs";
+
 
 //-- Functions --
 
@@ -116,7 +118,7 @@ const generateAssets = async (
     chain_reg_assets.push(asset_data.chain_reg);
 
     //--Append to Frontend Assetlist--
-    assetlist.reformatFrontendAsset(asset_data);
+    assetlist.reformatFrontendAssetFromAssetData(asset_data);
     frontend_assets.push(asset_data.frontend);
 
     //--Append to Asset_Detail Assetlist--
@@ -173,15 +175,24 @@ async function generateAssetlist(chainName) {
     asset_detail_assets
   );
 
+  let frontend_assetlist = {
+    chainName: chainName,
+    assets: frontend_assets,
+  };
+
+  //state
+  state.updateState(chainName, frontend_assetlist);
+
+  //post processing for reordering properties
+  //frontend_assets.forEach(asset => console.log(asset.coinMinimalDenom));
+  frontend_assets.forEach(asset => assetlist.reformatFrontendAsset(asset));
+
   //zone_config_assets = await getAllRelatedAssets(
   //  zone_config_assets,
   //  zoneConfig
   //);
 
-  let frontend_assetlist = {
-    chainName: chainName,
-    assets: frontend_assets,
-  };
+  
   zone.writeToFile(
     chainName,
     zone.zoneConfigAssetlist,

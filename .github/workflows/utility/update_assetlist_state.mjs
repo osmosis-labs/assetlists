@@ -77,21 +77,26 @@ function getStateAsset(base_denom, state) {
     stateAsset = {
       base_denom: base_denom
     };
+    state.assets.push(stateAsset);
   }
-  state.assets.push(stateAsset);
   return stateAsset;
 }
 
 // Main function to convert one JSON file to another
-const generateState = (chainName) => {
+const generateState = (chainName, assetlist) => {
 
   // Read the existing State file
-  let state = zone.readFromFile(chainName, stateDir, stateFileName) || {};
-  //console.log(`state is: ${state}`);
-
-  // Read the generate assetlist
-  const assetlist = zone.readFromFile(chainName, zone.zoneConfigAssetlist, zone.assetlistFileName);
-  //console.log(`Generated Assetlist is: ${assetlist}`);
+  let state = {};
+  try {
+    state = zone.readFromFile(chainName, stateDir, stateFileName);
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      console.warn(`File not found: ${error.message}`);
+      state = {}; // Assign empty object if file doesn't exist
+    } else {
+      throw error; // Re-throw for unexpected errors
+    }
+  }
 
 
   // Iterate each asset
@@ -101,7 +106,7 @@ const generateState = (chainName) => {
     let stateAsset;
 
     //see if it's verified, and skip if not
-    if (asset.verified) { 
+    if (assetlistAsset.verified) { 
 
       //get the state asset
       stateAsset = getStateAsset(assetlistAsset.coinMinimalDenom, state);
@@ -122,15 +127,39 @@ const generateState = (chainName) => {
   zone.writeToFile(chainName, stateDir, stateFileName, state);
   console.log(`Update state completed. Data saved.`);
 
-  // Write the state to the state file
-  //zone.writeToFile(chainName, zoneConfigAssetlist, zone.assetlistFileName, assetlist);
-  //console.log(`Update assetlist completed. Data saved.`);
-
 };
 
-// Convert JSON
-function main() {
-  chainNames.forEach(chainName => generateState(chainName));
+
+function getAssetlistFromFile(chainNAme) {
+
+  // Read the generate assetlist
+  const assetlist = zone.readFromFile(chainName, zone.zoneConfigAssetlist, zone.assetlistFileName);
+  //console.log(`Generated Assetlist is: ${assetlist}`);
+
 }
 
-main();
+function saveAssetlistToFile(chainName, assetlist) {
+
+  // Write the state to the state file
+  zone.writeToFile(chainName, zone.zoneConfigAssetlist, zone.assetlistFileName, assetlist);
+  console.log(`Update assetlist completed. Data saved.`);
+
+}
+
+
+export function updateState(chainName, assetlist) {
+  let assetlistFromFile = false;
+  if (!assetlist) {
+    assetlist = getAssetlistFromFile(chainName);
+    assetlistFromFile = true;
+  }
+  generateState(chainName, assetlist);
+  if (assetlistFromFile) {
+    saveAssetlistToFile(chainName, assetlist);
+  }
+}
+
+
+function main() {
+  zone.chainNames.forEach(chainName => generateState(chainName));
+}

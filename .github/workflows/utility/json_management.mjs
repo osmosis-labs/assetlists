@@ -38,6 +38,7 @@ export function readFromFile(location) {
     );
   } catch (err) {
     console.log(err);
+    return err;
   }
 }
 
@@ -52,5 +53,6 @@ export function writeToFile(location, value, indent = 2) {
     );
   } catch (err) {
     console.log(err);
+    return err;
   }
 }

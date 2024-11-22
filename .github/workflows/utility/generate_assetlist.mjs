@@ -10,8 +10,12 @@ import { getAssetsPricing } from "./getPools.mjs";
 import { getAllRelatedAssets } from "./getRelatedAssets.mjs";
 import * as assetlist from "./generate_assetlist_functions.mjs";
 import * as localization from "./localization.mjs";
-
 import * as state from "./update_assetlist_state.mjs";
+
+
+//-- Flags --
+const getPools = true;
+const getRelatedAssets = false; //not implemented
 
 
 //-- Functions --
@@ -33,9 +37,11 @@ const generateAssets = async (
 
   //--Get Pool Data--
   let pool_assets;
-  pool_assets = await getAssetsPricing(chainName);
-  if (!pool_assets) {
-    return;
+  if (getPools) {
+    pool_assets = await getAssetsPricing(chainName);
+    if (!pool_assets) {
+      return;
+    }
   }
   const pool_data = pool_assets;
 
@@ -59,6 +65,12 @@ const generateAssets = async (
 
     //source_asset (the most recent ibc transfer source (not necessarily the origin))
     assetlist.setSourceAsset(asset_data);
+
+    //make usre it exists
+    if (!chain_reg.getAssetProperty(asset_data.source_asset.chain_name, asset_data.source_asset.base_denom, "base")) {
+      console.log(`Asset does not exist! ${asset_data.source_asset.chain_name}, ${asset_data.source_asset.base_denom}`);
+      return;
+    }
 
     //local_asset (e.g., uosmo, ibc/27..., factory/.../milkTIA, ...)
     await assetlist.setLocalAsset(asset_data);

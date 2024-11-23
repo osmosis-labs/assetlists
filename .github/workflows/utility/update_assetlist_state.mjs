@@ -130,11 +130,12 @@ const generateState = (chainName, assetlist) => {
 };
 
 
-function getAssetlistFromFile(chainNAme) {
+function getAssetlistFromFile(chainName) {
 
   // Read the generate assetlist
   const assetlist = zone.readFromFile(chainName, zone.zoneConfigAssetlist, zone.assetlistFileName);
   //console.log(`Generated Assetlist is: ${assetlist}`);
+  return assetlist;
 
 }
 

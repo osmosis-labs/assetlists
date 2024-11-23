@@ -17,9 +17,10 @@ import * as json_mgmt from './json_management.mjs';
 //-- Gloabl Constants --
 
 //- Input Files -
-export const zoneConfigFileName    = "osmosis.zone_config.json";
-export const zoneAssetlistFileName = "osmosis.zone_assets.json";
-export const zoneChainlistFileName = "osmosis.zone_chains.json";
+export const zoneConfigFileName     = "osmosis.zone_config.json";
+export const zoneAssetlistFileName  = "osmosis.zone_assets.json";
+export const zoneAssetsFileName     = "osmosis.zone_assets.json";
+export const zoneChainlistFileName  = "osmosis.zone_chains.json";
 
 //- Generated Files -
 export const assetlistFileName = "assetlist.json";
@@ -31,6 +32,7 @@ export const noDir = "";
 export const generatedDirectoryName = "generated";
 export const chainRegAssetlist = path.join(generatedDirectoryName, "chain_registry");
 export const zoneConfigAssetlist = path.join(generatedDirectoryName, "frontend");
+export const frontendAssetlistDir = path.join(generatedDirectoryName, "frontend");
 export const zoneConfigChainlist = path.join(generatedDirectoryName, "frontend");
 export const externalDir = path.join(generatedDirectoryName, "external");
 export const zoneAssetDetail = path.join(generatedDirectoryName, "asset_detail");

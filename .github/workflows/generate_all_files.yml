@@ -45,6 +45,14 @@ jobs:
       - name: Run code to Generate Chainlist
         working-directory: ./.github/workflows/utility
         run: node generate_chainlist.mjs
+
+      - name: Run code to Update State
+        working-directory: ./.github/workflows/utility
+        run: node update_assetlist_state.mjs
+
+      - name: Run code to Generate Zone Assets Comments
+        working-directory: ./.github/workflows/utility
+        run: node generateComments.mjs
       
       - name: Add Commit Push
         uses: devops-infra/action-commit-push@master

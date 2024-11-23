@@ -53,6 +53,14 @@ jobs:
       - name: Run code to Generate Zone Assets Comments
         working-directory: ./.github/workflows/utility
         run: node generateComments.mjs
+
+      - name: Run localization
+        working-directory: ./.github/workflows/utility
+        run: npx pnpm inlang machine translate --force
+
+      - name: Run post-localization code
+        working-directory: ./.github/workflows/utility
+        run: node localization_post.mjs
       
       - name: Add Commit Push
         uses: devops-infra/action-commit-push@master

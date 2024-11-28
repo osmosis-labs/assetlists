@@ -30,30 +30,36 @@ const stateFileName = "state.json";
 const stateDirName = "state";
 const stateDir = path.join(zone.generatedDirectoryName, stateDirName);
 
-const testRPC = "";
-const testREST = "";
-const statusEndpoint = "status";
+const rpcEndpoints = [
+  "status"
+];
+const restEndpoints = [];
 
 const testChains = [
   "osmosis",
   "agoric"
 ];
 
-const currentDateUTC = new Date().toISOString();
+const currentDateUTC = new Date();
+const numDaysInMs = 30 * 24 * 60 * 60 * 1000; // set to 30 days in milliseconds
 
 //-- Functions --
 
 function constructEndpointUrl(address, endpoint) {
-  console.log(`Endpoint: ${address}/${endpoint}`);
-  if (!address || !endpoint) { return; }
-  return path.join(address, endpoint);
+  if (!address || !endpoint) {
+    console.error("Invalid address or endpoint:", { address, endpoint });
+    return null;
+  }
+  return new URL(endpoint, address).toString();
 }
+
 
 function queryEndpoint(address, endpoint) {
   const endpointUrl = constructEndpointUrl(address, endpoint);
   if (!endpointUrl) { return; }
-  const result = api_mgmt.queryApi(endpointUrl);
-  return result;
+  console.log(endpointUrl);
+  return api_mgmt.queryApi(endpointUrl);
+  //return "yo";
 }
 
 function getChainlist(chainName) {
@@ -64,26 +70,48 @@ function getCounterpartyChainRpc(counterpartyChain) {
   return counterpartyChain?.apis?.rpc?.[0]?.address;
 }
 
-function validateCounterpartyChain(counterpartyChain) {
-  const rpcAddress = getCounterpartyChainRpc(counterpartyChain);
-  console.log(`Address: ${rpcAddress}`);
-  if (!rpcAddress) { return; }
+function getCounterpartyChainRest(counterpartyChain) {
+  return counterpartyChain?.apis?.rest?.[0]?.address;
+}
 
-  //--STATUS--
-  //const statusEndpointResult = queryEndpoint(rpcAddress, statusEndpoint);
-  const statusEndpointResult = "yo"; //temporary
-  console.log(`Status Endpoint Result: ${statusEndpointResult}`);
-  let testStatus = {
-    query: statusEndpoint,
-    result: statusEndpointResult
+async function validateCounterpartyChain(counterpartyChain) {
+
+  let results = [];
+
+//--RPC--
+  let address = getCounterpartyChainRpc(counterpartyChain);
+  let endpoints = rpcEndpoints;
+  for (const endpoint of endpoints) {
+    if (!address) { break; }
+    const response = await queryEndpoint(address, endpoint);
+    let result = {
+      endpoint: endpoint,
+      query: constructEndpointUrl(address, endpoint),
+      validResponse: response ? true : false
+    }
+    if (endpoint === "status") {
+      const latestBlockTime = new Date(response?.result?.sync_info?.latest_block_time);
+      const lenientDateUTC = new Date(currentDateUTC - 60 * 60 * 1000);
+      result.stale = latestBlockTime < lenientDateUTC;
+    }
+    results.push(result);
   }
-  //--
+//--
 
+//--REST--
+  address = getCounterpartyChainRest(counterpartyChain);
+  endpoints = restEndpoints;
+  for (const endpoint of endpoints) {
+    if (!address) { break; }
+    results.push({
+      query: constructEndpointUrl(address, endpoint),
+      response: await queryEndpoint(address, endpoint) ? true : false
+    });
+  }
+//--
 
-  let results = [
-    testStatus
-  ];
   return results;
+
 }
 
 function constructValidationRecord(counterpartyChainName, validationResults) {
@@ -94,10 +122,27 @@ function constructValidationRecord(counterpartyChainName, validationResults) {
   };
 }
 
-function addValidationRecordsToState(chainName, validationRecords) {
+function addValidationRecordsToState(state, chainName, validationRecords) {
 
   
-  // Read the existing State file
+  getState(chainName);
+
+  if (!state.chains) { state.chains = []; }
+  validationRecords.forEach((validationRecord) => {
+    const index = state.chains.findIndex(chain => chain.chain_name === validationRecord.chain_name);
+    if (index !== -1) {
+      state.chains[index] = validationRecord;
+    } else {
+      state.chains.push(validationRecord);
+    }
+  });
+  zone.writeToFile(chainName, stateDir, stateFileName, state);
+
+
+}
+
+function getState(chainName) {
+
   let state = {};
   try {
     state = zone.readFromFile(chainName, stateDir, stateFileName);
@@ -109,19 +154,7 @@ function addValidationRecordsToState(chainName, validationRecords) {
       throw error; // Re-throw for unexpected errors
     }
   }
-
-  if (!state.chains) { state.chains = []; }
-  validationRecords.forEach((validationRecord) => {
-    const index = state.chains.findIndex(chain => chain.chain_name === validationRecord.chain_name);
-    if (index !== -1) {
-      state.chains[index] = validationRecord;
-    } else {
-      state.chains.push(validationRecord);
-    }
-  });
-
-  zone.writeToFile(chainName, stateDir, stateFileName, state);
-
+  return state;
 
 }
 
@@ -131,17 +164,34 @@ async function validateEndpointsForAllCounterpartyChains(chainName) {
   const chainlist = getChainlist(chainName)?.chains;
   if (!chainlist) { return; }
 
+  let state = getState(chainName);
+
   let validationRecords = [];
+  for (const counterpartyChain of chainlist) {
 
-  chainlist.forEach((counterpartyChain) => {
-    if (!testChains.includes(counterpartyChain.chain_name)) { return; } // temporary--only the test chains will proceed
-    const validationResults = validateCounterpartyChain(counterpartyChain);
+    if (!testChains.includes(counterpartyChain.chain_name)) { continue; } // temporary--only the test chains will proceed
+
+    //See if it was recently queried, and skip if so
+    const stateChain = state.chains?.find(chain => chain.chain_name === counterpartyChain.chain_name);
+    if (stateChain) {
+      const queryDate = new Date(stateChain.queryDate);
+      if (!isNaN(queryDate.getTime())) {
+        const RECENTLY_QUERIED = currentDateUTC.getTime() - queryDate.getTime() <= numDaysInMs;
+        if (RECENTLY_QUERIED) {
+          console.log(`Skipping chain ${counterpartyChain.chain_name} - queried recently.`);
+          continue;  // Skip the rest of this iteration
+        }
+      }
+    }
+    
+    const validationResults = await validateCounterpartyChain(counterpartyChain);
+    //console.log(`Validation Results: ${JSON.stringify(validationResults, null, 2)}`);
     const validationRecord = constructValidationRecord(counterpartyChain.chain_name, validationResults);
-    console.log(`Validation Record: ${validationRecord}`);
+    //console.log(`Validation Record: ${JSON.stringify(validationRecord, null, 2) }`);
     validationRecords.push(validationRecord);
-  });
-
-  addValidationRecordsToState(chainName, await validationRecords);
+  }
+  //console.log(`Validation Records: ${JSON.stringify(validationRecords, null, 2)}`);
+  addValidationRecordsToState(state, chainName, validationRecords);
 
 }
 

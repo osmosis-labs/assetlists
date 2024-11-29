@@ -20,6 +20,9 @@ chain_reg.setup();
 import * as path from 'path';
 import * as api_mgmt from "./api_management.mjs";
 
+import WebSocket from 'ws';
+import https from 'https';
+
 //-- Globals --
 
 const chainlistFileName = "chainlist.json";
@@ -30,63 +33,150 @@ const stateFileName = "state.json";
 const stateDirName = "state";
 const stateDir = path.join(zone.generatedDirectoryName, stateDirName);
 
+//NODES
+const RPC_NODE = "rpc";
+const REST_NODE = "rest";
+
+//PROTOCOLS
+const HTTPS_PROTOCOL = "https:"
+const WSS_PROTOCOL = "wss:"
+
+//ENDPOINTS
 const rpcEndpoints = [
   "status"
 ];
+const wssEndpoints = [
+  "websocket"
+];
 const restEndpoints = [];
 
-const testChains = [
-  "osmosis",
-  "agoric"
-];
 
+const numChainsToQuery = 2;
 const currentDateUTC = new Date();
-const numDaysInMs = 30 * 24 * 60 * 60 * 1000; // set to 30 days in milliseconds
+const oneDayInMs = 24 * 60 * 60 * 1000;
+const successReQueryDelay = 7 * oneDayInMs;
+const failureReQueryDelay = 30 * oneDayInMs;
+const osmosisDomain = "https://osmosis.zone";
 
 //-- Functions --
 
-function constructEndpointUrl(address, endpoint) {
-  if (!address || !endpoint) {
-    console.error("Invalid address or endpoint:", { address, endpoint });
+function constructUrl(baseUrl, endpoint, protocol = HTTPS_PROTOCOL) {
+  if (!baseUrl || !endpoint) {
+    console.error("Invalid baseUrl or endpoint:", { baseUrl, endpoint });
     return null;
   }
-  return new URL(endpoint, address).toString();
+  try {
+    let url = new URL(endpoint, baseUrl);
+    url.protocol = protocol;
+    return url;
+  } catch (error) {
+    console.error("Failed to construct URL:", error.message);
+    return null;
+  }
 }
 
-
-function queryEndpoint(address, endpoint) {
-  const endpointUrl = constructEndpointUrl(address, endpoint);
-  if (!endpointUrl) { return; }
-  console.log(endpointUrl);
-  return api_mgmt.queryApi(endpointUrl);
-  //return "yo";
+function queryUrl(url, protocol = HTTPS_PROTOCOL) {
+  if (!url) { return; }
+  console.log(url.toString());
+  if (protocol === HTTPS_PROTOCOL) {
+    return api_mgmt.queryApi(url.toString());
+  } else if (protocol === WSS_PROTOCOL) {
+    return testWSS(url);
+  }
 }
+
+const testWSS = (url, timeoutMs = 10000) => {
+  return new Promise((resolve) => {
+    let timeout; // Reference for the timeout to clear later
+
+    try {
+      const ws = new WebSocket(url.toString());
+
+      ws.on('open', () => {
+        console.log(`Connection to ${url.toString()} successful!`);
+        clearTimeout(timeout); // Clear the timeout to avoid unnecessary resolution
+        ws.close();
+        resolve(true); // Resolve with true for success
+      });
+
+      ws.on('error', (err) => {
+        console.error(`Error connecting to ${url.toString()}:`, err.message);
+        clearTimeout(timeout);
+        resolve(false); // Resolve with false for failure
+      });
+
+      // Timeout handling
+      timeout = setTimeout(() => {
+        console.warn(`Connection to ${url.toString()} timed out.`);
+        ws.close(); // Close the WebSocket if still open
+        resolve(false); // Resolve with false for timeout
+      }, timeoutMs);
+    } catch (err) {
+      console.error('Unexpected error:', err.message);
+      resolve(null); // Resolve with null for unexpected errors
+    }
+  });
+};
+
+
+//testWSS('wss://second-server.com'); // Replace with the WSS URL
+
+const checkCORS = (url) => {
+  const options = {
+    method: 'OPTIONS',
+    headers: {
+      Origin: osmosisDomain,
+    },
+  };
+
+  const req = https.request(url, options, (res) => {
+    console.log(`Status: ${res.statusCode}`);
+    console.log('Headers:', res.headers);
+    if (res.headers['access-control-allow-origin']) {
+      console.log('CORS Policy:', res.headers['access-control-allow-origin']);
+    } else {
+      console.log('No CORS headers returned.');
+    }
+  });
+
+  req.on('error', (err) => {
+    console.error('Error:', err.message);
+  });
+
+  req.end();
+};
+
+//checkCORS('https://second-server.com'); // Replace with the base URL of the second server
 
 function getChainlist(chainName) {
   return zone.readFromFile(chainName, chainlistDir, chainlistFileName);
 }
 
-function getCounterpartyChainRpc(counterpartyChain) {
-  return counterpartyChain?.apis?.rpc?.[0]?.address;
+function getCounterpartyChainAddress(counterpartyChain, nodeType) {
+  if (!counterpartyChain || !nodeType) { return; }
+  if (nodeType === RPC_NODE) {
+    return counterpartyChain?.apis?.rpc?.[0]?.address;
+  } else if (nodeType === REST_NODE) {
+    return counterpartyChain?.apis?.rest?.[0]?.address;
+  }
+  return;
 }
 
-function getCounterpartyChainRest(counterpartyChain) {
-  return counterpartyChain?.apis?.rest?.[0]?.address;
-}
 
 async function validateCounterpartyChain(counterpartyChain) {
 
   let results = [];
 
 //--RPC--
-  let address = getCounterpartyChainRpc(counterpartyChain);
+  let address = getCounterpartyChainAddress(counterpartyChain, RPC_NODE);
   let endpoints = rpcEndpoints;
   for (const endpoint of endpoints) {
     if (!address) { break; }
-    const response = await queryEndpoint(address, endpoint);
+    const url = constructUrl(address, endpoint, HTTPS_PROTOCOL);
+    const response = await queryUrl(url);
     let result = {
       endpoint: endpoint,
-      query: constructEndpointUrl(address, endpoint),
+      query: url,
       validResponse: response ? true : false
     }
     if (endpoint === "status") {
@@ -98,14 +188,33 @@ async function validateCounterpartyChain(counterpartyChain) {
   }
 //--
 
+//--WSS--
+  address = getCounterpartyChainAddress(counterpartyChain, RPC_NODE);
+  endpoints = wssEndpoints;
+  for (const endpoint of endpoints) {
+    if (!address) { break; }
+    console.log(`Endpoint is: ${endpoint}`);
+    const url = constructUrl(address, endpoint, WSS_PROTOCOL);
+    let response = await queryUrl(url, WSS_PROTOCOL);
+    console.log(`Repsonse: ${response}`);
+    results.push({
+      endpoint: endpoint,
+      query: url,
+      validResponse: response/*await queryUrl(url, WSS_PROTOCOL)*/ ? true : false
+    });
+  }
+//--
+
 //--REST--
-  address = getCounterpartyChainRest(counterpartyChain);
+  address = getCounterpartyChainAddress(counterpartyChain, REST_NODE);
   endpoints = restEndpoints;
   for (const endpoint of endpoints) {
     if (!address) { break; }
+    const url = constructUrl(address, endpoint, HTTPS_PROTOCOL);
     results.push({
-      query: constructEndpointUrl(address, endpoint),
-      response: await queryEndpoint(address, endpoint) ? true : false
+      endpoint: endpoint,
+      query: url,
+      validResponse: await queryUrl(url, HTTPS_PROTOCOL) ? true : false
     });
   }
 //--
@@ -114,10 +223,41 @@ async function validateCounterpartyChain(counterpartyChain) {
 
 }
 
+function determineValidationSuccess(validationResults) {
+
+  //--Status--
+  const statusValidationResult = validationResults.find(
+    validationResult => validationResult.endpoint === "status"
+  );
+  if (!statusValidationResult?.validResponse || statusValidationResult?.stale) {
+    return false;
+  }
+  //--
+
+  //--WSS--
+  const wssValidationResult = validationResults.find(
+    validationResult => validationResult.endpoint === "websocket"
+  );
+  if (!wssValidationResult?.validResponse) {
+    return false;
+  }
+  //--
+
+  //--CORS--
+  //--
+
+  //--REST--
+  //--
+
+  return true;
+
+}
+
 function constructValidationRecord(counterpartyChainName, validationResults) {
   return {
     chain_name: counterpartyChainName,
     queryDate: currentDateUTC,
+    endpointSuccess: determineValidationSuccess(validationResults),
     validationResults: validationResults
   };
 }
@@ -158,39 +298,52 @@ function getState(chainName) {
 
 }
 
+function chainRecentlyQueried(state, chain_name) {
+  const stateChain = state.chains?.find(chain => chain.chain_name === chain_name);
+  if (stateChain) {
+    const queryDate = new Date(stateChain.queryDate);
+    if (!isNaN(queryDate.getTime())) {
+      const WAS_SUCCESSFUL = stateChain.endpointSuccess;
+      if (WAS_SUCCESSFUL) {
+        return currentDateUTC.getTime() - queryDate.getTime() <= successReQueryDelay;
+      } else {
+        return currentDateUTC.getTime() - queryDate.getTime() <= failureReQueryDelay;
+      }
+    }
+  }
+  return false;
+}
+
 async function validateEndpointsForAllCounterpartyChains(chainName) {
 
   if (chainName !== "osmosis") { return; } // temporary--just focusing on mainnet for now
+
+
   const chainlist = getChainlist(chainName)?.chains;
   if (!chainlist) { return; }
 
   let state = getState(chainName);
-
   let validationRecords = [];
+
+  let numChainsQueried = 0;
   for (const counterpartyChain of chainlist) {
 
-    if (!testChains.includes(counterpartyChain.chain_name)) { continue; } // temporary--only the test chains will proceed
+    //Check the Query Counter
+    if (numChainsQueried >= numChainsToQuery) { break; }
 
-    //See if it was recently queried, and skip if so
-    const stateChain = state.chains?.find(chain => chain.chain_name === counterpartyChain.chain_name);
-    if (stateChain) {
-      const queryDate = new Date(stateChain.queryDate);
-      if (!isNaN(queryDate.getTime())) {
-        const RECENTLY_QUERIED = currentDateUTC.getTime() - queryDate.getTime() <= numDaysInMs;
-        if (RECENTLY_QUERIED) {
-          console.log(`Skipping chain ${counterpartyChain.chain_name} - queried recently.`);
-          continue;  // Skip the rest of this iteration
-        }
-      }
-    }
-    
+    //Skip Recently Queried Chains
+    if (chainRecentlyQueried(state, counterpartyChain.chain_name)) { continue; }
+
+    //Validate the Endpoints
     const validationResults = await validateCounterpartyChain(counterpartyChain);
-    //console.log(`Validation Results: ${JSON.stringify(validationResults, null, 2)}`);
     const validationRecord = constructValidationRecord(counterpartyChain.chain_name, validationResults);
-    //console.log(`Validation Record: ${JSON.stringify(validationRecord, null, 2) }`);
     validationRecords.push(validationRecord);
+
+    //Iterate Query Counter
+    numChainsQueried++;
+
   }
-  //console.log(`Validation Records: ${JSON.stringify(validationRecords, null, 2)}`);
+
   addValidationRecordsToState(state, chainName, validationRecords);
 
 }

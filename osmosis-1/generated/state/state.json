@@ -1056,7 +1056,8 @@
   "chains": [
     {
       "chain_name": "osmosis",
-      "queryDate": "2024-11-28T00:14:39.931Z",
+      "queryDate": "2024-11-28T20:01:35.626Z",
+      "endpointSuccess": true,
       "validationResults": [
         {
           "endpoint": "status",
@@ -1075,6 +1076,469 @@
           "query": "https://agoric.rpc.kjnodes.com/status",
           "validResponse": true,
           "stale": false
+        }
+      ]
+    },
+    {
+      "chain_name": "cosmoshub",
+      "queryDate": "2024-11-28T19:48:29.752Z",
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://rpc-cosmoshub.keplr.app/status",
+          "validResponse": true,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "chain_name": "terra",
+      "queryDate": "2024-11-28T19:59:22.237Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://rpc-terra-ia.cosmosia.notional.ventures/status",
+          "validResponse": false,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "chain_name": "secretnetwork",
+      "queryDate": "2024-11-29T19:40:11.120Z",
+      "endpointSuccess": true,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://rpc-secret.keplr.app/status",
+          "validResponse": true,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "chain_name": "akash",
+      "queryDate": "2024-11-29T19:40:11.120Z",
+      "endpointSuccess": true,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://rpc-akash.keplr.app/status",
+          "validResponse": true,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "chain_name": "regen",
+      "queryDate": "2024-11-29T19:40:47.793Z",
+      "endpointSuccess": true,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://rpc-regen.keplr.app/status",
+          "validResponse": true,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "chain_name": "sentinel",
+      "queryDate": "2024-11-29T19:40:47.793Z",
+      "endpointSuccess": true,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://rpc-sentinel.keplr.app/status",
+          "validResponse": true,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "chain_name": "persistence",
+      "queryDate": "2024-11-29T20:12:36.729Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "wss://rpc-persistence.keplr.app/status",
+          "validResponse": false,
+          "stale": false
+        },
+        {
+          "query": "wss://rpc-persistence.keplr.app/websocket",
+          "response": false
+        }
+      ]
+    },
+    {
+      "chain_name": "irisnet",
+      "queryDate": "2024-11-29T20:12:36.729Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "wss://rpc-iris.keplr.app/status",
+          "validResponse": false,
+          "stale": false
+        },
+        {
+          "query": "wss://rpc-iris.keplr.app/websocket",
+          "response": false
+        }
+      ]
+    },
+    {
+      "chain_name": "cryptoorgchain",
+      "queryDate": "2024-11-29T20:14:33.157Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "wss://rpc-crypto-org.keplr.app/status",
+          "validResponse": false,
+          "stale": false
+        },
+        {
+          "query": "wss://rpc-crypto-org.keplr.app/websocket",
+          "response": false
+        }
+      ]
+    },
+    {
+      "chain_name": "starname",
+      "queryDate": "2024-11-29T20:14:33.157Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "wss://rpc-iov.keplr.app/status",
+          "validResponse": false,
+          "stale": false
+        },
+        {
+          "query": "wss://rpc-iov.keplr.app/websocket",
+          "response": false
+        }
+      ]
+    },
+    {
+      "chain_name": "emoney",
+      "queryDate": "2024-11-29T20:17:00.151Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "wss://emoney.validator.network/status",
+          "validResponse": false,
+          "stale": false
+        },
+        {
+          "query": "wss://emoney.validator.network/websocket",
+          "response": false
+        }
+      ]
+    },
+    {
+      "chain_name": "juno",
+      "queryDate": "2024-11-29T20:17:00.151Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "wss://rpc-juno.keplr.app/status",
+          "validResponse": false,
+          "stale": false
+        },
+        {
+          "query": "wss://rpc-juno.keplr.app/websocket",
+          "response": false
+        }
+      ]
+    },
+    {
+      "chain_name": "microtick",
+      "queryDate": "2024-11-29T20:21:27.706Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://rpc-microtick.keplr.app/status",
+          "validResponse": false,
+          "stale": false
+        },
+        {
+          "query": "wss://rpc-microtick.keplr.app/websocket",
+          "response": false
+        }
+      ]
+    },
+    {
+      "chain_name": "likecoin",
+      "queryDate": "2024-11-29T20:21:27.706Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://mainnet-node.like.co/status",
+          "validResponse": true,
+          "stale": false
+        },
+        {
+          "query": "wss://mainnet-node.like.co/websocket",
+          "response": false
+        }
+      ]
+    },
+    {
+      "chain_name": "impacthub",
+      "queryDate": "2024-11-29T20:22:52.644Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://ixo-rpc.ibs.team/status",
+          "validResponse": true,
+          "stale": false
+        },
+        {
+          "query": "wss://ixo-rpc.ibs.team/websocket",
+          "response": false
+        }
+      ]
+    },
+    {
+      "chain_name": "bitcanna",
+      "queryDate": "2024-11-29T20:22:52.644Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://rpc.bitcanna.io/status",
+          "validResponse": true,
+          "stale": false
+        },
+        {
+          "query": "wss://rpc.bitcanna.io/websocket",
+          "response": false
+        }
+      ]
+    },
+    {
+      "chain_name": "bitsong",
+      "queryDate": "2024-11-29T20:24:23.894Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://rpc.explorebitsong.com/status",
+          "validResponse": true,
+          "stale": false
+        },
+        {
+          "endpoint": "websocket",
+          "query": "wss://rpc.explorebitsong.com/websocket",
+          "validResponse": false
+        }
+      ]
+    },
+    {
+      "chain_name": "kichain",
+      "queryDate": "2024-11-29T20:24:23.894Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://rpc-mainnet.blockchain.ki/status",
+          "validResponse": true,
+          "stale": false
+        },
+        {
+          "endpoint": "websocket",
+          "query": "wss://rpc-mainnet.blockchain.ki/websocket",
+          "validResponse": false
+        }
+      ]
+    },
+    {
+      "chain_name": "panacea",
+      "queryDate": "2024-11-29T20:26:07.087Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://rpc.gopanacea.org/status",
+          "validResponse": true,
+          "stale": false
+        },
+        {
+          "endpoint": "websocket",
+          "query": "wss://rpc.gopanacea.org/websocket",
+          "validResponse": false
+        }
+      ]
+    },
+    {
+      "chain_name": "bostrom",
+      "queryDate": "2024-11-29T20:26:07.087Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://rpc.bostrom.cybernode.ai/status",
+          "validResponse": true,
+          "stale": false
+        },
+        {
+          "endpoint": "websocket",
+          "query": "wss://rpc.bostrom.cybernode.ai/websocket",
+          "validResponse": false
+        }
+      ]
+    },
+    {
+      "chain_name": "comdex",
+      "queryDate": "2024-11-29T20:27:08.875Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://rpc.comdex.one/status",
+          "validResponse": true,
+          "stale": false
+        },
+        {
+          "endpoint": "websocket",
+          "query": "wss://rpc.comdex.one/websocket",
+          "validResponse": false
+        }
+      ]
+    },
+    {
+      "chain_name": "cheqd",
+      "queryDate": "2024-11-29T20:27:08.875Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://rpc.cheqd.net/status",
+          "validResponse": true,
+          "stale": false
+        },
+        {
+          "endpoint": "websocket",
+          "query": "wss://rpc.cheqd.net/websocket",
+          "validResponse": false
+        }
+      ]
+    },
+    {
+      "chain_name": "stargaze",
+      "queryDate": "2024-11-29T20:32:12.985Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://rpc.stargaze-apis.com/status",
+          "validResponse": true,
+          "stale": false
+        },
+        {
+          "endpoint": "websocket",
+          "query": "wss://rpc.stargaze-apis.com/websocket",
+          "validResponse": false
+        }
+      ]
+    },
+    {
+      "chain_name": "chihuahua",
+      "queryDate": "2024-11-29T20:32:12.985Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://rpc.chihuahua.wtf/status",
+          "validResponse": true,
+          "stale": false
+        },
+        {
+          "endpoint": "websocket",
+          "query": "wss://rpc.chihuahua.wtf/websocket",
+          "validResponse": false
+        }
+      ]
+    },
+    {
+      "chain_name": "lumnetwork",
+      "queryDate": "2024-11-29T20:32:26.713Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://node0.mainnet.lum.network/status",
+          "validResponse": false,
+          "stale": false
+        },
+        {
+          "endpoint": "websocket",
+          "query": "wss://node0.mainnet.lum.network/websocket",
+          "validResponse": false
+        }
+      ]
+    },
+    {
+      "chain_name": "vidulum",
+      "queryDate": "2024-11-29T20:32:26.713Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://mainnet-rpc.vidulum.app/status",
+          "validResponse": false,
+          "stale": false
+        },
+        {
+          "endpoint": "websocket",
+          "query": "wss://mainnet-rpc.vidulum.app/websocket",
+          "validResponse": false
+        }
+      ]
+    },
+    {
+      "chain_name": "desmos",
+      "queryDate": "2024-11-29T20:35:46.232Z",
+      "endpointSuccess": true,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://rpc.mainnet.desmos.network/status",
+          "validResponse": true,
+          "stale": false
+        },
+        {
+          "endpoint": "websocket",
+          "query": "wss://rpc.mainnet.desmos.network/websocket",
+          "validResponse": true
+        }
+      ]
+    },
+    {
+      "chain_name": "dig",
+      "queryDate": "2024-11-29T20:35:46.232Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://rpc-1-dig.notional.ventures/status",
+          "validResponse": false,
+          "stale": false
+        },
+        {
+          "endpoint": "websocket",
+          "query": "wss://rpc-1-dig.notional.ventures/websocket",
+          "validResponse": false
         }
       ]
     }

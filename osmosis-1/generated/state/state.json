@@ -1685,6 +1685,52 @@
           "validResponse": true
         }
       ]
+    },
+    {
+      "chain_name": "carbon",
+      "queryDate": "2024-11-30T00:41:29.694Z",
+      "endpointSuccess": true,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://tm-api.carbon.network/status",
+          "validResponse": true,
+          "stale": false
+        },
+        {
+          "endpoint": "websocket",
+          "query": "wss://tm-api.carbon.network/websocket",
+          "validResponse": true
+        },
+        {
+          "endpoint": "/cosmos/base/tendermint/v1beta1/node_info",
+          "query": "https://api.carbon.network/cosmos/base/tendermint/v1beta1/node_info",
+          "validResponse": true
+        }
+      ]
+    },
+    {
+      "chain_name": "injective",
+      "queryDate": "2024-11-30T00:41:29.694Z",
+      "endpointSuccess": false,
+      "validationResults": [
+        {
+          "endpoint": "status",
+          "query": "https://injective-rpc.polkachu.com/status",
+          "validResponse": true,
+          "stale": false
+        },
+        {
+          "endpoint": "websocket",
+          "query": "wss://injective-rpc.polkachu.com/websocket",
+          "validResponse": false
+        },
+        {
+          "endpoint": "/cosmos/base/tendermint/v1beta1/node_info",
+          "query": "https://injective-api.polkachu.com/cosmos/base/tendermint/v1beta1/node_info",
+          "validResponse": true
+        }
+      ]
     }
   ]
 }

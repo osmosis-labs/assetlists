@@ -48,7 +48,9 @@ const rpcEndpoints = [
 const wssEndpoints = [
   "websocket"
 ];
-const restEndpoints = [];
+const restEndpoints = [
+  "/cosmos/base/tendermint/v1beta1/node_info"
+];
 
 
 const numChainsToQuery = 2;

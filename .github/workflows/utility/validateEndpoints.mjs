@@ -323,27 +323,27 @@ async function validateEndpointsForAllCounterpartyChains(chainName) {
   if (!chainlist) { return; }
 
   let state = getState(chainName);
-  let validationRecords = [];
+  let chainQueryQueue = [];
+  
 
   let numChainsQueried = 0;
   for (const counterpartyChain of chainlist) {
-
-    //Check the Query Counter
     if (numChainsQueried >= numChainsToQuery) { break; }
-
-    //Skip Recently Queried Chains
-    if (chainRecentlyQueried(state, counterpartyChain.chain_name)) { continue; }
-
-    //Validate the Endpoints
-    const validationResults = await validateCounterpartyChain(counterpartyChain);
-    const validationRecord = constructValidationRecord(counterpartyChain.chain_name, validationResults);
-    validationRecords.push(validationRecord);
-
-    //Iterate Query Counter
+    if (chainRecentlyQueried(state, counterpartyChain.chain_name)) { continue; }  //Skip Recently Queried Chains
+    chainQueryQueue.push(counterpartyChain);
     numChainsQueried++;
-
   }
 
+  // Generate validation promises and return records directly
+  const validationPromises = chainQueryQueue.map(async (counterpartyChain) => {
+    const validationResults = await validateCounterpartyChain(counterpartyChain);
+    return constructValidationRecord(counterpartyChain.chain_name, validationResults);
+  });
+
+  // Wait for all validations and collect the records
+  const validationRecords = await Promise.all(validationPromises);
+
+  // Add validation records to state
   addValidationRecordsToState(state, chainName, validationRecords);
 
 }

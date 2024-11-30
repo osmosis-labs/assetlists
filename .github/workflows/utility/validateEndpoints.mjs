@@ -164,64 +164,78 @@ function getCounterpartyChainAddress(counterpartyChain, nodeType) {
 
 
 async function validateCounterpartyChain(counterpartyChain) {
+  const results = [];
 
-  let results = [];
+  //--RPC--
+  const rpcValidation = (async () => {
+    const address = getCounterpartyChainAddress(counterpartyChain, RPC_NODE);
+    if (!address) return [];
+    return Promise.all(
+      rpcEndpoints.map(async (endpoint) => {
+        const url = constructUrl(address, endpoint, HTTPS_PROTOCOL);
+        const response = await queryUrl(url);
+        const result = {
+          endpoint,
+          query: url,
+          validResponse: response ? true : false,
+        };
+        if (endpoint === "status") {
+          const latestBlockTime = new Date(response?.result?.sync_info?.latest_block_time);
+          const lenientDateUTC = new Date(currentDateUTC - 60 * 60 * 1000);
+          result.stale = latestBlockTime < lenientDateUTC;
+        }
+        return result;
+      })
+    );
+  })();
+  //--END RPC--
 
-//--RPC--
-  let address = getCounterpartyChainAddress(counterpartyChain, RPC_NODE);
-  let endpoints = rpcEndpoints;
-  for (const endpoint of endpoints) {
-    if (!address) { break; }
-    const url = constructUrl(address, endpoint, HTTPS_PROTOCOL);
-    const response = await queryUrl(url);
-    let result = {
-      endpoint: endpoint,
-      query: url,
-      validResponse: response ? true : false
-    }
-    if (endpoint === "status") {
-      const latestBlockTime = new Date(response?.result?.sync_info?.latest_block_time);
-      const lenientDateUTC = new Date(currentDateUTC - 60 * 60 * 1000);
-      result.stale = latestBlockTime < lenientDateUTC;
-    }
-    results.push(result);
-  }
-//--
+  //--WSS--
+  const wssValidation = (async () => {
+    const address = getCounterpartyChainAddress(counterpartyChain, RPC_NODE);
+    if (!address) return [];
+    return Promise.all(
+      wssEndpoints.map(async (endpoint) => {
+        const url = constructUrl(address, endpoint, WSS_PROTOCOL);
+        const response = await queryUrl(url, WSS_PROTOCOL);
+        return {
+          endpoint,
+          query: url,
+          validResponse: response ? true : false,
+        };
+      })
+    );
+  })();
+  //--END WSS--
 
-//--WSS--
-  address = getCounterpartyChainAddress(counterpartyChain, RPC_NODE);
-  endpoints = wssEndpoints;
-  for (const endpoint of endpoints) {
-    if (!address) { break; }
-    console.log(`Endpoint is: ${endpoint}`);
-    const url = constructUrl(address, endpoint, WSS_PROTOCOL);
-    let response = await queryUrl(url, WSS_PROTOCOL);
-    console.log(`Repsonse: ${response}`);
-    results.push({
-      endpoint: endpoint,
-      query: url,
-      validResponse: response/*await queryUrl(url, WSS_PROTOCOL)*/ ? true : false
-    });
-  }
-//--
+  //--REST--
+  const restValidation = (async () => {
+    const address = getCounterpartyChainAddress(counterpartyChain, REST_NODE);
+    if (!address) return [];
+    return Promise.all(
+      restEndpoints.map(async (endpoint) => {
+        const url = constructUrl(address, endpoint, HTTPS_PROTOCOL);
+        const response = await queryUrl(url, HTTPS_PROTOCOL);
+        return {
+          endpoint,
+          query: url,
+          validResponse: response ? true : false,
+        };
+      })
+    );
+  })();
+  //--END REST--
 
-//--REST--
-  address = getCounterpartyChainAddress(counterpartyChain, REST_NODE);
-  endpoints = restEndpoints;
-  for (const endpoint of endpoints) {
-    if (!address) { break; }
-    const url = constructUrl(address, endpoint, HTTPS_PROTOCOL);
-    results.push({
-      endpoint: endpoint,
-      query: url,
-      validResponse: await queryUrl(url, HTTPS_PROTOCOL) ? true : false
-    });
-  }
-//--
+  // Run all validations concurrently and merge results
+  const [rpcResults, wssResults, restResults] = await Promise.all([
+    rpcValidation,
+    wssValidation,
+    restValidation,
+  ]);
 
-  return results;
-
+  return [...rpcResults, ...wssResults, ...restResults];
 }
+
 
 function determineValidationSuccess(validationResults) {
 

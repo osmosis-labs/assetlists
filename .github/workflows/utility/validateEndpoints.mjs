@@ -41,6 +41,13 @@ const REST_NODE = "rest";
 const HTTPS_PROTOCOL = "https:"
 const WSS_PROTOCOL = "wss:"
 
+//TESTS
+const RPC_CORS = "RPC CORS";
+const REST_CORS = "REST CORS";
+const RPC_WSS = "RPC WSS";
+const RPC_ENDPOINTS = "RPC Endpoints";
+const REST_ENDPOINTS = "REST Endpoints";
+
 //ENDPOINTS
 const rpcEndpoints = [
   "status"
@@ -87,6 +94,33 @@ function queryUrl(url, protocol = HTTPS_PROTOCOL) {
   }
 }
 
+const queryRestEndpoint = (url) => {
+  return new Promise((resolve) => {
+    const req = https.request(url, { method: 'GET' }, (res) => {
+      // Check for valid status code
+      if (res.statusCode >= 200 && res.statusCode < 300) {
+        resolve(true); // Success
+      } else {
+        console.error(`Invalid response from ${url}: ${res.statusCode}`);
+        resolve(false); // Invalid response
+      }
+    });
+
+    req.on('error', (err) => {
+      console.error(`Error connecting to ${url}:`, err.message);
+      resolve(false); // Connection error
+    });
+
+    req.setTimeout(5000, () => {
+      console.error(`Request to ${url} timed out.`);
+      req.destroy();
+      resolve(false);
+    });
+
+    req.end();
+  });
+};
+
 const testWSS = (url, timeoutMs = 10000) => {
   return new Promise((resolve) => {
     let timeout; // Reference for the timeout to clear later
@@ -131,21 +165,37 @@ const checkCORS = (url) => {
     },
   };
 
-  const req = https.request(url, options, (res) => {
-    console.log(`Status: ${res.statusCode}`);
-    console.log('Headers:', res.headers);
-    if (res.headers['access-control-allow-origin']) {
-      console.log('CORS Policy:', res.headers['access-control-allow-origin']);
-    } else {
-      console.log('No CORS headers returned.');
-    }
-  });
+  return new Promise((resolve) => {
+    const req = https.request(url, options, (res) => {
+      //console.log(`Status: ${res.statusCode}`);
+      //console.log('Headers:', res.headers);
+      if (res.headers['access-control-allow-origin']) {
+        if (
+          res.headers['access-control-allow-origin'] === osmosisDomain
+            ||
+          res.headers['access-control-allow-origin'] === "*"
+        ) { resolve(true); }
+        console.log(`${url} CORS Policy:`, res.headers['access-control-allow-origin']);
+        resolve(false);
+      } else {
+        console.log('No CORS headers returned.');
+        resolve(true);
+      }
+    });
 
-  req.on('error', (err) => {
-    console.error('Error:', err.message);
-  });
+    req.on('error', (err) => {
+      console.error(`Error connecting to ${url.toString()}:`, err.message);
+      resolve(false); // Resolve with false for failure
+    });
 
-  req.end();
+    req.setTimeout(10000, () => { // Set timeout to 10 seconds
+      console.error(`Request to ${url.toString()} timed out.`);
+      req.destroy(); // Clean up the request
+      resolve(false);
+    });
+
+    req.end();
+  });
 };
 
 //checkCORS('https://second-server.com'); // Replace with the base URL of the second server
@@ -166,10 +216,44 @@ function getCounterpartyChainAddress(counterpartyChain, nodeType) {
 
 
 async function validateCounterpartyChain(counterpartyChain) {
-  const results = [];
 
-  //--RPC--
-  const rpcValidation = (async () => {
+  //--RPC CORS--
+  const rpcCorsValidation = (async () => {
+    const address = getCounterpartyChainAddress(counterpartyChain, RPC_NODE);
+    if (!address) return [];
+    return Promise.all([
+      (async () => {
+        const response = await checkCORS(address, HTTPS_PROTOCOL);
+        return {
+          test: RPC_CORS,
+          url: address,
+          success: response,
+        };
+      })(),
+    ]);
+  })();
+  //--
+
+  //--RPC WSS--
+  const rpcWssValidation = (async () => {
+    const address = getCounterpartyChainAddress(counterpartyChain, RPC_NODE);
+    if (!address) return [];
+    return Promise.all(
+      wssEndpoints.map(async (endpoint) => {
+        const url = constructUrl(address, endpoint, WSS_PROTOCOL);
+        const response = await testWSS(url);
+        return {
+          test: RPC_WSS,
+          url: url,
+          success: response,
+        };
+      })
+    );
+  })();
+  //--
+
+  //--RPC Endpoints--
+  const rpcEndpointsValidation = (async () => {
     const address = getCounterpartyChainAddress(counterpartyChain, RPC_NODE);
     if (!address) return [];
     return Promise.all(
@@ -177,9 +261,9 @@ async function validateCounterpartyChain(counterpartyChain) {
         const url = constructUrl(address, endpoint, HTTPS_PROTOCOL);
         const response = await queryUrl(url);
         const result = {
-          endpoint,
-          query: url,
-          validResponse: response ? true : false,
+          test: RPC_ENDPOINTS,
+          url: url,
+          success: response ? true : false,
         };
         if (endpoint === "status") {
           const latestBlockTime = new Date(response?.result?.sync_info?.latest_block_time);
@@ -190,90 +274,70 @@ async function validateCounterpartyChain(counterpartyChain) {
       })
     );
   })();
-  //--END RPC--
+  //--
 
-  //--WSS--
-  const wssValidation = (async () => {
-    const address = getCounterpartyChainAddress(counterpartyChain, RPC_NODE);
+  //--REST CORS--
+  const restCorsValidation = (async () => {
+    const address = getCounterpartyChainAddress(counterpartyChain, REST_NODE);
     if (!address) return [];
-    return Promise.all(
-      wssEndpoints.map(async (endpoint) => {
-        const url = constructUrl(address, endpoint, WSS_PROTOCOL);
-        const response = await queryUrl(url, WSS_PROTOCOL);
+    return Promise.all([
+      (async () => {
+        const response = await checkCORS(address, HTTPS_PROTOCOL);
         return {
-          endpoint,
-          query: url,
-          validResponse: response ? true : false,
+          test: REST_CORS,
+          url: address,
+          success: response,
         };
-      })
-    );
+      })(),
+    ]);
   })();
-  //--END WSS--
+  //--
 
-  //--REST--
-  const restValidation = (async () => {
+  //--REST Endpoints--
+  const restEndpointsValidation = (async () => {
     const address = getCounterpartyChainAddress(counterpartyChain, REST_NODE);
     if (!address) return [];
     return Promise.all(
       restEndpoints.map(async (endpoint) => {
         const url = constructUrl(address, endpoint, HTTPS_PROTOCOL);
-        const response = await queryUrl(url, HTTPS_PROTOCOL);
+        const response = await queryRestEndpoint(url);
+        console.log(response);
         return {
-          endpoint,
-          query: url,
-          validResponse: response ? true : false,
+          test: REST_ENDPOINTS,
+          url: url,
+          success: response ? true : false,
         };
       })
     );
   })();
-  //--END REST--
+  //--
 
   // Run all validations concurrently and merge results
-  const [rpcResults, wssResults, restResults] = await Promise.all([
-    rpcValidation,
-    wssValidation,
-    restValidation,
+  const [rpcCorsResults, rpcWssResults, rpcEndpointResults, restCorsResults, restEndpointsResults] = await Promise.all([
+    rpcCorsValidation,
+    rpcWssValidation,
+    rpcEndpointsValidation,
+    restCorsValidation,
+    restEndpointsValidation,
   ]);
 
-  return [...rpcResults, ...wssResults, ...restResults];
+  return [...rpcCorsResults, ...rpcWssResults, ...rpcEndpointResults, ...restCorsResults, ...restEndpointsResults];
 }
 
 
 function determineValidationSuccess(validationResults) {
-
-  //--Status--
-  const statusValidationResult = validationResults.find(
-    validationResult => validationResult.endpoint === "status"
-  );
-  if (!statusValidationResult?.validResponse || statusValidationResult?.stale) {
-    return false;
+  for (const validationResult of validationResults) {
+    if (!validationResult.success) { return false; }
+    if (validationResults.stale) { return false; }
   }
-  //--
-
-  //--WSS--
-  const wssValidationResult = validationResults.find(
-    validationResult => validationResult.endpoint === "websocket"
-  );
-  if (!wssValidationResult?.validResponse) {
-    return false;
-  }
-  //--
-
-  //--CORS--
-  //--
-
-  //--REST--
-  //--
-
   return true;
-
 }
 
 function constructValidationRecord(counterpartyChainName, validationResults) {
   return {
     chain_name: counterpartyChainName,
-    queryDate: currentDateUTC,
-    endpointSuccess: determineValidationSuccess(validationResults),
+    validationDate: currentDateUTC,
+    validationSuccess: determineValidationSuccess(validationResults),
     validationResults: validationResults
   };
 }
@@ -293,7 +357,7 @@ function addValidationRecordsToState(state, chainName, validationRecords) {
     }
   });
   zone.writeToFile(chainName, stateDir, stateFileName, state);
-
+  console.log("Saved State.");
 
 }
 
@@ -317,13 +381,13 @@ function getState(chainName) {
 function chainRecentlyQueried(state, chain_name) {
   const stateChain = state.chains?.find(chain => chain.chain_name === chain_name);
   if (stateChain) {
-    const queryDate = new Date(stateChain.queryDate);
-    if (!isNaN(queryDate.getTime())) {
-      const WAS_SUCCESSFUL = stateChain.endpointSuccess;
+    const validationDate = new Date(stateChain.validationDate);
+    if (!isNaN(validationDate.getTime())) {
+      const WAS_SUCCESSFUL = stateChain.validationSuccess;
       if (WAS_SUCCESSFUL) {
-        return currentDateUTC.getTime() - queryDate.getTime() <= successReQueryDelay;
+        return currentDateUTC.getTime() - validationDate.getTime() <= successReQueryDelay;
       } else {
-        return currentDateUTC.getTime() - queryDate.getTime() <= failureReQueryDelay;
+        return currentDateUTC.getTime() - validationDate.getTime() <= failureReQueryDelay;
       }
     }
   }

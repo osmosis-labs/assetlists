@@ -75,8 +75,13 @@ function constructUrl(baseUrl, endpoint, protocol = HTTPS_PROTOCOL) {
     return null;
   }
   try {
-    let url = new URL(endpoint, baseUrl);
+    const url = new URL(baseUrl);
     url.protocol = protocol;
+    // Append the endpoint to the path
+    const joinedPath = [url.pathname.replace(/\/$/, ""), endpoint.replace(/^\//, "")]
+      .filter(Boolean) // Remove empty components
+      .join("/");
+    url.pathname = joinedPath;
     return url;
   } catch (error) {
     console.error("Failed to construct URL:", error.message);
@@ -397,14 +402,11 @@ function chainRecentlyQueried(state, chain_name) {
 async function validateEndpointsForAllCounterpartyChains(chainName) {
 
   if (chainName !== "osmosis") { return; } // temporary--just focusing on mainnet for now
-
-
   const chainlist = getChainlist(chainName)?.chains;
   if (!chainlist) { return; }
 
   let state = getState(chainName);
   let chainQueryQueue = [];
-  
 
   let numChainsQueried = 0;
   for (const counterpartyChain of chainlist) {
@@ -432,4 +434,33 @@ function main() {
   zone.chainNames.forEach(chainName => validateEndpointsForAllCounterpartyChains(chainName));
 }
 
+async function validateSpecificChain(chainName, chain_name) {
+
+  const chainlist = getChainlist(chainName)?.chains;
+  if (!chainlist) { return; }
+
+  let state = getState(chainName);
+  let chainQueryQueue = [];
+
+  for (const counterpartyChain of chainlist) {
+    if (counterpartyChain.chain_name !== chain_name) { continue; }
+    chainQueryQueue.push(counterpartyChain);
+    break;
+  }
+
+  // Generate validation promises and return records directly
+  const validationPromises = chainQueryQueue.map(async (counterpartyChain) => {
+    const validationResults = await validateCounterpartyChain(counterpartyChain);
+    return constructValidationRecord(counterpartyChain.chain_name, validationResults);
+  });
+
+  // Wait for all validations and collect the records
+  const validationRecords = await Promise.all(validationPromises);
+
+  // Add validation records to state
+  addValidationRecordsToState(state, chainName, validationRecords);
+
+}
+
 main();
+//validateSpecificChain("osmosis", "bandchain");

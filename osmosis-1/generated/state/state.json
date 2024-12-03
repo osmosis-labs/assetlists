@@ -1620,9 +1620,19 @@
     },
     {
       "chain_name": "bandchain",
-      "validationDate": "2024-11-30T00:13:54.415Z",
+      "validationDate": "2024-12-03T22:33:29.843Z",
       "validationSuccess": true,
       "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc.laozi3.bandchain.org",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc.laozi3.bandchain.org/websocket",
+          "success": true
+        },
         {
           "test": "RPC Endpoints",
           "url": "https://rpc.laozi3.bandchain.org/status",
@@ -1630,8 +1640,13 @@
           "stale": false
         },
         {
-          "test": "RPC WSS",
-          "url": "wss://rpc.laozi3.bandchain.org/websocket",
+          "test": "REST CORS",
+          "url": "https://laozi1.bandchain.org/api",
+          "success": true
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://laozi1.bandchain.org/api/cosmos/base/tendermint/v1beta1/node_info",
           "success": true
         }
       ]

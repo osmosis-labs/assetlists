@@ -1397,7 +1397,8 @@
       "rpc": "https://andromeda-rpc.polkachu.com/",
       "rest": "https://andromeda-api.polkachu.com/",
       "explorer_tx_url": "https://explorer.stavr.tech/Andromeda-Mainnet/tx/${txHash}",
-      "keplr_features": ["cosmwasm",
+      "keplr_features": [
+        "cosmwasm",
         "wasmd_0.24+",
         "ibc-transfer",
         "ibc-go"
@@ -1408,7 +1409,8 @@
       "rpc": "https://rpc.kima.network/",
       "rest": "https://api.kima.network/",
       "explorer_tx_url": "https://explorer.kima.network/transactions/${txHash}",
-      "keplr_features": ["ibc-go", 
+      "keplr_features": [
+        "ibc-go", 
         "ibc-transfer"
       ]
     },
@@ -1483,6 +1485,16 @@
         "ibc-go",
         "ibc-transfer"
       ]
-    }    
+    },
+    {
+      "chain_name": "xion",
+      "rpc": "https://rpc.xion-mainnet-1.burnt.com",
+      "rest": "https://api.xion-mainnet-1.burnt.com",
+      "explorer_tx_url": "https://explorer.burnt.com/xion-mainnet-1/tx/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    }
   ]
 }

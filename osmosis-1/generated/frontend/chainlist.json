@@ -22696,6 +22696,82 @@
         "ibc-go",
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "xion",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Xion Mainnet",
+      "chain_id": "xion-mainnet-1",
+      "bech32Prefix": "xion",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "xion",
+        "bech32PrefixAccPub": "xionpub",
+        "bech32PrefixValAddr": "xionvaloper",
+        "bech32PrefixValPub": "xionvaloperpub",
+        "bech32PrefixConsAddr": "xionvalcons",
+        "bech32PrefixConsPub": "xionvalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDenom": "XION",
+        "chainSuggestionDenom": "uxion",
+        "coinMinimalDenom": "ibc/2E3784772E70F7B3A638BA88F65C8BE125D3CDB6E28C6AABC51098C94F5E16A5",
+        "sourceDenom": "uxion",
+        "coinDecimals": 6,
+        "coinGeckoId": "xion-2",
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xion/images/burnt-round.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "XION",
+          "chainSuggestionDenom": "uxion",
+          "coinMinimalDenom": "ibc/2E3784772E70F7B3A638BA88F65C8BE125D3CDB6E28C6AABC51098C94F5E16A5",
+          "sourceDenom": "uxion",
+          "coinDecimals": 6,
+          "coinGeckoId": "xion-2",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xion/images/burnt-round.png",
+          "gasPriceStep": {
+            "low": 0.001,
+            "average": 0.001,
+            "high": 0.01
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "XION",
+          "chainSuggestionDenom": "uxion",
+          "coinMinimalDenom": "ibc/2E3784772E70F7B3A638BA88F65C8BE125D3CDB6E28C6AABC51098C94F5E16A5",
+          "sourceDenom": "uxion",
+          "coinDecimals": 6,
+          "coinGeckoId": "xion-2",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xion/images/burnt-round.png"
+        }
+      ],
+      "description": "XION is the first walletless L1 blockchain purpose built for consumer adoption through chain abstraction.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.xion-mainnet-1.burnt.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.xion-mainnet-1.burnt.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://explorer.burnt.com/xion-mainnet-1/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm"
+      ]
     }
   ]
 }

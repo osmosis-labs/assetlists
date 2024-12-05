@@ -25795,6 +25795,57 @@
       ]
     },
     {
+      "description": "XION is the first walletless L1 blockchain purpose built for consumer adoption through chain abstraction.",
+      "denom_units": [
+        {
+          "denom": "ibc/2E3784772E70F7B3A638BA88F65C8BE125D3CDB6E28C6AABC51098C94F5E16A5",
+          "exponent": 0,
+          "aliases": [
+            "microxion",
+            "uxion"
+          ]
+        },
+        {
+          "denom": "XION",
+          "exponent": 6,
+          "aliases": [
+            "xion"
+          ]
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/2E3784772E70F7B3A638BA88F65C8BE125D3CDB6E28C6AABC51098C94F5E16A5",
+      "name": "Xion Mainnet",
+      "display": "XION",
+      "symbol": "XION",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "xion",
+            "base_denom": "uxion",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-89321",
+            "path": "transfer/channel-89321/uxion"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xion/images/burnt-round.png"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "xion",
+            "base_denom": "uxion"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xion/images/burnt-round.png"
+        }
+      ]
+    },
+    {
       "description": "Kima is an asset-agnostic interoperability infrastructure that connects blockchain networks and legacy financial systems, enabling secure, scalable cross-chain transactions and seamless communication across ecosystems.",
       "denom_units": [
         {

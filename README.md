@@ -17,7 +17,7 @@ To add an asset, add a new asset object to the very bottom of the _osmosis.zone_
 - `chain_name` must be the exact value defined as `chain_name` in the chain's _chain.json_ file at the Chain Registry.
 - `path` is required for all ics20 assets (i.e., assets that are transferred to Osmosis from another chain via IBC); the only exception are asset deployed directly on Osmosis (e.g., factory tokens). It is comprised of: the destination IBC port and channel for each IBC hop, followed by the base denom on the IBC-originating chain. The is used as input into the SHA256 hash function.
   - e.g., `"path": "transfer/channel-0/uatom"`
-- `osmosis_verified` should always be set to `false` upon inital listing; this indicates whether the 'Unverified Assets' setting must be toggled to reveal the asset on Osmosis Zone. After meeting the requirements described in the listing requirements page, an additional PR may created to set it to `true`.
+- `osmosis_verified` should always be set to `false` upon initial listing; this indicates whether the 'Unverified Assets' setting must be toggled to reveal the asset on Osmosis Zone. After meeting the requirements described in the listing requirements page, an additional PR may created to set it to `true`.
 
 There are also some additional details that may be defined for an asset: 
 - `transfer_methods` should be included whenever a basic IBC transfer initialatd via Osmosis Zone Deposit and Withdraw buttons is unable to carry-out an interchain transfer.
@@ -66,6 +66,6 @@ Note that there are apps, interfaces, and tools that look at this repository as 
   - .../osmo-test-5.chainlist.json
 - Osmosis Labs' Sidecar Query Service (SQS):
   - .../generated/frontend/assetlist.json
-- Numia Data Serivces (e.g., API):
+- Numia Data Services (e.g., API):
   - .../generated/frontend/assetlist.json
   - .../generated/chain-registry/assetlist.json

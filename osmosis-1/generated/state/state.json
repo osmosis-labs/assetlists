@@ -2132,29 +2132,29 @@
     },
     {
       "chain_name": "kujira",
-      "validationDate": "2024-12-01T05:13:05.688Z",
+      "validationDate": "2024-12-10T23:36:54.972Z",
       "validationSuccess": false,
       "validationResults": [
         {
           "test": "RPC CORS",
-          "url": "https://kujira-rpc.polkachu.com",
+          "url": "https://rpc.lavenderfive.com:443/kujira",
           "success": true
         },
         {
           "test": "RPC WSS",
-          "url": "wss://kujira-rpc.polkachu.com/websocket",
-          "success": false
+          "url": "wss://rpc.lavenderfive.com/kujira/websocket",
+          "success": true
         },
         {
           "test": "RPC Endpoints",
-          "url": "https://kujira-rpc.polkachu.com/status",
+          "url": "https://rpc.lavenderfive.com/kujira/status",
           "success": true,
-          "stale": true
+          "stale": false
         },
         {
           "test": "REST CORS",
           "url": "https://kujira-api.polkachu.com/",
-          "success": true
+          "success": false
         },
         {
           "test": "REST Endpoints",
@@ -2490,6 +2490,72 @@
           "test": "REST Endpoints",
           "url": "https://rest.mainnet.teritori.com/cosmos/base/tendermint/v1beta1/node_info",
           "success": true
+        }
+      ]
+    },
+    {
+      "chain_name": "celestia",
+      "validationDate": "2024-12-05T19:18:30.860Z",
+      "validationSuccess": true,
+      "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc.lunaroasis.net",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc.lunaroasis.net/websocket",
+          "success": true
+        },
+        {
+          "test": "RPC Endpoints",
+          "url": "https://rpc.lunaroasis.net/status",
+          "success": true,
+          "stale": false
+        },
+        {
+          "test": "REST CORS",
+          "url": "https://public-celestia-lcd.numia.xyz",
+          "success": true
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://public-celestia-lcd.numia.xyz/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
+        }
+      ]
+    },
+    {
+      "chain_name": "noble",
+      "validationDate": "2024-12-06T20:41:32.098Z",
+      "validationSuccess": false,
+      "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://noble-rpc.polkachu.com",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://noble-rpc.polkachu.com/websocket",
+          "success": true
+        },
+        {
+          "test": "RPC Endpoints",
+          "url": "https://noble-rpc.polkachu.com/status",
+          "success": true,
+          "stale": false
+        },
+        {
+          "test": "REST CORS",
+          "url": "https://noble-api.polkachu.com",
+          "success": false
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://noble-api.polkachu.com/cosmos/base/tendermint/v1beta1/node_info",
+          "success": false
         }
       ]
     }

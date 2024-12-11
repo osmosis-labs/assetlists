@@ -55,15 +55,15 @@ Asset appearance and functionality must be validated by Osmosis Zone maintainers
      - The RPC endpoint has WSS enabled so it can communicate the transfer status back to Osmosis Zone without the user having to refresh the page.
    - For Deposits triggered from Osmosis Zone:
      - The transaction URL opens the correct transaction page on a working block explorer for the counterparty chain.
-     - The Chain Suggestion (the method that adds the chain to a wallet like Keplr or Leap) provides correct and sufficent data to complete all standard wallet actions for the counterparty chain (includes the asset as a currency, provides all fee currencies and rate options, can query chain state and initiate transactions, etc.)
+     - The Chain Suggestion (the method that adds the chain to a wallet like Keplr or Leap) provides correct and sufficient data to complete all standard wallet actions for the counterparty chain (includes the asset as a currency, provides all fee currencies and rate options, can query chain state and initiate transactions, etc.)
    - For transfers from an external interface,
      - The override URL(s) redirect users to the correct interface, including appropriate URL parameters where possible (to pre-select the asset and the 'from' and 'to' network).
 
 
 #### Notify about Verified Status Upgrade
-To propose that an asset should be upgraded to Verified status, please submit a Pull Requiest to this repository:
+To propose that an asset should be upgraded to Verified status, please submit a Pull Request to this repository:
  - The PR should update the asset's `"osmosis_verified"` property value to `true` in the [zone_assets](https://github.com/osmosis-labs/assetlists/blob/main/osmosis-1/osmosis.zone_assets.json) file.
- - In the Descrption or Conversation of the Pull Request, please provide the Pool ID of a liquidity pool that meets the requirements specified above (needed for validation)
+ - In the Description or Conversation of the Pull Request, please provide the Pool ID of a liquidity pool that meets the requirements specified above (needed for validation)
 
 
 

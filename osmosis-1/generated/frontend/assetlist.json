@@ -230,8 +230,8 @@
       },
       "coingeckoId": "axlwbtc",
       "price": {
-        "poolId": "1422",
-        "denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc"
+        "poolId": "1090",
+        "denom": "uosmo"
       },
       "categories": [],
       "transferMethods": [
@@ -3295,8 +3295,8 @@
       },
       "coingeckoId": "assetmantle",
       "price": {
-        "poolId": "1865",
-        "denom": "ibc/D176154B0C63D1F9C6DCFB4F70349EBF2E2B5A87A05902F57A6AE92B863E9AEC"
+        "poolId": "690",
+        "denom": "uosmo"
       },
       "categories": [
         "nft_protocol"
@@ -3825,7 +3825,7 @@
       "coingeckoId": "frax",
       "price": {
         "poolId": "679",
-        "denom": "ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4"
+        "denom": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC"
       },
       "categories": [
         "stablecoin"
@@ -4138,7 +4138,7 @@
       },
       "price": {
         "poolId": "702",
-        "denom": "ibc/0E43EDE2E2A3AFA36D0CD38BDDC0B49FECA64FA426A82E102F304E430ECF46EE"
+        "denom": "ibc/9F9B07EF9AD291167CF5700628145DE1DEB777C2CFC7907553B24446515F6D0E"
       },
       "categories": [
         "stablecoin"
@@ -10205,7 +10205,7 @@
       },
       "price": {
         "poolId": "2245",
-        "denom": "ibc/2F5C084037D951B24D100F15CC013A131DF786DCE1B1DBDC48F018A9B9A138DE"
+        "denom": "ibc/00B6E60AD3D65CBEF5579AC8AF609527C0B57535B6E32D96C80A735344FD9DCC"
       },
       "categories": [],
       "transferMethods": [
@@ -13070,7 +13070,7 @@
       "coingeckoId": "bonk",
       "price": {
         "poolId": "2368",
-        "denom": "factory/osmo10pk4crey8fpdyqd62rsau0y02e3rk055w5u005ah6ly7k849k5tsf72x40/alloyed/allDOGE"
+        "denom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/wiha"
       },
       "categories": [
         "meme"
@@ -14585,8 +14585,8 @@
       },
       "coingeckoId": "celestia",
       "price": {
-        "poolId": "1247",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1248",
+        "denom": "uosmo"
       },
       "categories": [],
       "transferMethods": [
@@ -16673,8 +16673,8 @@
       },
       "coingeckoId": "wrapped-bitcoin",
       "price": {
-        "poolId": "1490",
-        "denom": "ibc/75345531D87BD90BF108BE7240BD721CB2CB0A1F16D4EBA71B09EC3C43E15C8F"
+        "poolId": "1422",
+        "denom": "ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F"
       },
       "categories": [],
       "transferMethods": [],
@@ -19161,8 +19161,8 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/ATOM1KLFGc.png"
       },
       "price": {
-        "poolId": "2364",
-        "denom": "ibc/BF685448E564B5A4AC8F6E0493A0B979D0E0BF5EC11F7E15D25A0A2160C944DD"
+        "poolId": "1679",
+        "denom": "uosmo"
       },
       "categories": [
         "meme"
@@ -21657,7 +21657,7 @@
       },
       "price": {
         "poolId": "2312",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "denom": "factory/osmo1em6xs47hd82806f5cxgyufguxrrc7l0aqx7nzzptjuqgswczk8csavdxek/alloyed/allUSDT"
       },
       "categories": [
         "meme"
@@ -27164,6 +27164,104 @@
         "chainName": "int3face",
         "sourceDenom": "uint3"
       }
+    },
+    {
+      "chainName": "fetchhub",
+      "sourceDenom": "nanomobx",
+      "coinMinimalDenom": "ibc/CD20AC50CE57F1CF2EA680D7D47733DA9213641D2D116C5806A880F508609A7A",
+      "symbol": "MOBX",
+      "decimals": 9,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fetchhub/images/mobx.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fetchhub/images/mobx.svg"
+      },
+      "price": {
+        "poolId": "1002",
+        "denom": "uosmo"
+      },
+      "categories": [
+        "ai"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "fetchhub",
+            "chainId": "fetchhub-4",
+            "sourceDenom": "nanomobx",
+            "port": "transfer",
+            "channelId": "channel-10"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-229",
+            "path": "transfer/channel-229/nanomobx"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "fetchhub",
+          "sourceDenom": "nanomobx",
+          "chainType": "cosmos",
+          "chainId": "fetchhub-4",
+          "symbol": "MOBX",
+          "decimals": 9,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fetchhub/images/mobx.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fetchhub/images/mobx.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/CD20AC50CE57F1CF2EA680D7D47733DA9213641D2D116C5806A880F508609A7A",
+      "name": "MOBIX",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true
+    },
+    {
+      "chainName": "osmosis",
+      "sourceDenom": "factory/osmo10c4y9csfs8q7mtvfg4p9gd8d0acx0hpc2mte9xqzthd7rd3348tsfhaesm/sICP-native-ICP",
+      "coinMinimalDenom": "factory/osmo10c4y9csfs8q7mtvfg4p9gd8d0acx0hpc2mte9xqzthd7rd3348tsfhaesm/sICP-native-ICP",
+      "symbol": "ICP",
+      "decimals": 8,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/internetcomputer/images/icp.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/internetcomputer/images/icp.png"
+      },
+      "coingeckoId": "internet-computer",
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Omnity Bridge",
+          "type": "external_interface",
+          "depositUrl": "https://bridge.omnity.network/icp",
+          "withdrawUrl": "https://bridge.omnity.network/icp"
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "internetcomputer",
+          "sourceDenom": "e8s",
+          "chainType": "non-cosmos",
+          "symbol": "ICP",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/internetcomputer/images/icp.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/internetcomputer/images/icp.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo10c4y9csfs8q7mtvfg4p9gd8d0acx0hpc2mte9xqzthd7rd3348tsfhaesm/sICP-native-ICP",
+      "name": "Internet Computer",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
     }
   ]
 }

@@ -25972,6 +25972,109 @@
       ]
     },
     {
+      "description": "The MOBX coin rewards the use of eco-friendly micromobility transportation.",
+      "denom_units": [
+        {
+          "denom": "ibc/CD20AC50CE57F1CF2EA680D7D47733DA9213641D2D116C5806A880F508609A7A",
+          "exponent": 0,
+          "aliases": [
+            "nanomobx"
+          ]
+        },
+        {
+          "denom": "mobx",
+          "exponent": 9
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/CD20AC50CE57F1CF2EA680D7D47733DA9213641D2D116C5806A880F508609A7A",
+      "name": "MOBIX",
+      "display": "mobx",
+      "symbol": "MOBX",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "fetchhub",
+            "base_denom": "nanomobx",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-229",
+            "path": "transfer/channel-229/nanomobx"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fetchhub/images/mobx.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fetchhub/images/mobx.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "fetchhub",
+            "base_denom": "nanomobx"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fetchhub/images/mobx.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fetchhub/images/mobx.svg",
+          "theme": {
+            "primary_color_hex": "#04ae9b"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Internet Computer bridged via Omnity Network.",
+      "denom_units": [
+        {
+          "denom": "factory/osmo10c4y9csfs8q7mtvfg4p9gd8d0acx0hpc2mte9xqzthd7rd3348tsfhaesm/sICP-native-ICP",
+          "exponent": 0,
+          "aliases": [
+            "e8s"
+          ]
+        },
+        {
+          "denom": "icp",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo10c4y9csfs8q7mtvfg4p9gd8d0acx0hpc2mte9xqzthd7rd3348tsfhaesm",
+      "base": "factory/osmo10c4y9csfs8q7mtvfg4p9gd8d0acx0hpc2mte9xqzthd7rd3348tsfhaesm/sICP-native-ICP",
+      "name": "Internet Computer",
+      "display": "icp",
+      "symbol": "ICP",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "internetcomputer",
+            "base_denom": "e8s"
+          },
+          "provider": "Omnity Network"
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/internetcomputer/images/icp.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/internetcomputer/images/icp.png"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "internetcomputer",
+            "base_denom": "e8s"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/internetcomputer/images/icp.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/internetcomputer/images/icp.png",
+          "theme": {
+            "circle": true,
+            "primary_color_hex": "#29ABE2",
+            "background_color_hex": "#E3E3E3"
+          }
+        }
+      ]
+    },
+    {
       "description": "Kima is an asset-agnostic interoperability infrastructure that connects blockchain networks and legacy financial systems, enabling secure, scalable cross-chain transactions and seamless communication across ecosystems.",
       "denom_units": [
         {

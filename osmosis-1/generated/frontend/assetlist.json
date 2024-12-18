@@ -13,7 +13,7 @@
       },
       "coingeckoId": "osmosis",
       "price": {
-        "poolId": "1263",
+        "poolId": "1464",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
@@ -3825,7 +3825,7 @@
       "coingeckoId": "frax",
       "price": {
         "poolId": "679",
-        "denom": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC"
+        "denom": "ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4"
       },
       "categories": [
         "stablecoin"
@@ -22321,7 +22321,7 @@
       },
       "coingeckoId": "bitcoin",
       "price": {
-        "poolId": "1943",
+        "poolId": "1942",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
@@ -24072,7 +24072,7 @@
       "coingeckoId": "polkadot",
       "price": {
         "poolId": "2532",
-        "denom": "ibc/884EBC228DFCE8F1304D917A712AA9611427A6C1ECC3179B2E91D7468FB091A2"
+        "denom": "ibc/3A0A392E610A8D477851ABFEA74F3D828F36C015AB8E93B0FBB7566A6D13C4D6"
       },
       "categories": [],
       "transferMethods": [],
@@ -27268,6 +27268,56 @@
       "disabled": true,
       "preview": false,
       "listingDate": "2024-12-18T19:04:57.225Z"
+    },
+    {
+      "chainName": "elys",
+      "sourceDenom": "uelys",
+      "coinMinimalDenom": "ibc/643EBFFC9D4533E93A5CF144FE786A6FB326F4C0C6224F7CB7563CC374EE56EE",
+      "symbol": "ELYS",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/elys/images/elys.png"
+      },
+      "coingeckoId": "elys",
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "elys",
+            "chainId": "elys-1",
+            "sourceDenom": "uelys",
+            "port": "transfer",
+            "channelId": "channel-6"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-91017",
+            "path": "transfer/channel-91017/uelys"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "elys",
+          "sourceDenom": "uelys",
+          "chainType": "cosmos",
+          "chainId": "elys-1",
+          "symbol": "ELYS",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/elys/images/elys.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/643EBFFC9D4533E93A5CF144FE786A6FB326F4C0C6224F7CB7563CC374EE56EE",
+      "name": "Elys Network",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
     }
   ]
 }

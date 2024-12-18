@@ -23016,6 +23016,137 @@
         "ibc-transfer",
         "cosmwasm"
       ]
+    },
+    {
+      "chain_name": "elys",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Elys Network",
+      "chain_id": "elys-1",
+      "bech32Prefix": "elys",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "elys",
+        "bech32PrefixAccPub": "elyspub",
+        "bech32PrefixValAddr": "elysvaloper",
+        "bech32PrefixValPub": "elysvaloperpub",
+        "bech32PrefixConsAddr": "elysvalcons",
+        "bech32PrefixConsPub": "elysvalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDenom": "ELYS",
+        "chainSuggestionDenom": "uelys",
+        "coinMinimalDenom": "ibc/643EBFFC9D4533E93A5CF144FE786A6FB326F4C0C6224F7CB7563CC374EE56EE",
+        "sourceDenom": "uelys",
+        "coinDecimals": 6,
+        "coinGeckoId": "elys",
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/elys/images/elys.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "ELYS",
+          "chainSuggestionDenom": "uelys",
+          "coinMinimalDenom": "ibc/643EBFFC9D4533E93A5CF144FE786A6FB326F4C0C6224F7CB7563CC374EE56EE",
+          "sourceDenom": "uelys",
+          "coinDecimals": 6,
+          "coinGeckoId": "elys",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/elys/images/elys.png",
+          "gasPriceStep": {
+            "low": 0.01,
+            "average": 0.025,
+            "high": 0.03
+          }
+        },
+        {
+          "coinDenom": "USDC",
+          "chainSuggestionDenom": "ibc/F082B65C88E4B6D5EF1DB243CDA1D331D002759E938A0F5CD3FFDC5D53B3E349",
+          "sourceDenom": "ibc/F082B65C88E4B6D5EF1DB243CDA1D331D002759E938A0F5CD3FFDC5D53B3E349",
+          "coinDecimals": 6,
+          "coinGeckoId": "usd-coin",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png",
+          "gasPriceStep": {
+            "low": 0.01,
+            "average": 0.025,
+            "high": 0.03
+          }
+        },
+        {
+          "coinDenom": "ATOM",
+          "chainSuggestionDenom": "ibc/C4CFF46FD6DE35CA4CF4CE031E643C8FDC9BA4B99AE598E9B0ED98FE3A2319F9",
+          "sourceDenom": "ibc/C4CFF46FD6DE35CA4CF4CE031E643C8FDC9BA4B99AE598E9B0ED98FE3A2319F9",
+          "coinDecimals": 6,
+          "coinGeckoId": "cosmos",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+          "gasPriceStep": {
+            "low": 0.01,
+            "average": 0.025,
+            "high": 0.03
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "ELYS",
+          "chainSuggestionDenom": "uelys",
+          "coinMinimalDenom": "ibc/643EBFFC9D4533E93A5CF144FE786A6FB326F4C0C6224F7CB7563CC374EE56EE",
+          "sourceDenom": "uelys",
+          "coinDecimals": 6,
+          "coinGeckoId": "elys",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/elys/images/elys.png"
+        },
+        {
+          "coinDenom": "EDEN",
+          "chainSuggestionDenom": "ueden",
+          "sourceDenom": "ueden",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/elys/images/eden.png"
+        },
+        {
+          "coinDenom": "USDC",
+          "chainSuggestionDenom": "ibc/F082B65C88E4B6D5EF1DB243CDA1D331D002759E938A0F5CD3FFDC5D53B3E349",
+          "sourceDenom": "ibc/F082B65C88E4B6D5EF1DB243CDA1D331D002759E938A0F5CD3FFDC5D53B3E349",
+          "coinDecimals": 6,
+          "coinGeckoId": "usd-coin",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png"
+        },
+        {
+          "coinDenom": "ATOM",
+          "chainSuggestionDenom": "ibc/C4CFF46FD6DE35CA4CF4CE031E643C8FDC9BA4B99AE598E9B0ED98FE3A2319F9",
+          "sourceDenom": "ibc/C4CFF46FD6DE35CA4CF4CE031E643C8FDC9BA4B99AE598E9B0ED98FE3A2319F9",
+          "coinDecimals": 6,
+          "coinGeckoId": "cosmos",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png"
+        },
+        {
+          "coinDenom": "AXL",
+          "chainSuggestionDenom": "ibc/9463E39D230614B313B487836D13A392BD1731928713D4C8427A083627048DB3",
+          "sourceDenom": "ibc/9463E39D230614B313B487836D13A392BD1731928713D4C8427A083627048DB3",
+          "coinDecimals": 6,
+          "coinGeckoId": "axelar",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/axl.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.elys.network:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.elys.network"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://explorer.nodestake.org/elys/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
     }
   ]
 }

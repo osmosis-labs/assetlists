@@ -9694,6 +9694,65 @@
         "ibc-go",
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "aaronetwork",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Aaron Network",
+      "chain_id": "aaronetwork",
+      "bech32_prefix": "aaron",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "aaron",
+        "bech32PrefixAccPub": "aaronpub",
+        "bech32PrefixValAddr": "aaronvaloper",
+        "bech32PrefixValPub": "aaronvaloperpub",
+        "bech32PrefixConsAddr": "aaronvalcons",
+        "bech32PrefixConsPub": "aaronvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uaaron",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0,
+            "average_gas_price": 0,
+            "high_gas_price": 0.001
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uaaron"
+          }
+        ],
+        "lock_duration": {
+          "time": "86400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://mainnet-rpc.aaronetwork.xyz"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://mainnet-api.aaronetwork.xyz"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.aaronetwork.xyz/Aaron%20Network/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
     }
   ]
 }

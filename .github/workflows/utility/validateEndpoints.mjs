@@ -48,6 +48,14 @@ const RPC_WSS = "RPC WSS";
 const RPC_ENDPOINTS = "RPC Endpoints";
 const REST_ENDPOINTS = "REST Endpoints";
 
+const tests = [
+  RPC_CORS,
+  REST_CORS,
+  RPC_WSS,
+  RPC_ENDPOINTS,
+  REST_ENDPOINTS
+];
+
 //ENDPOINTS
 const rpcEndpoints = [
   "status"
@@ -69,33 +77,115 @@ const osmosisDomain = "https://osmosis.zone";
 
 //-- Functions --
 
+// Function to get the node type based on the test type
+function getNodeType(test) {
+  switch (test) {
+    case RPC_CORS:
+    case RPC_WSS:
+    case RPC_ENDPOINTS:
+      return RPC_NODE;
+    case REST_CORS:
+    case REST_ENDPOINTS:
+      return REST_NODE;
+    default:
+      throw new Error(`Unsupported test type: ${test}`);
+  }
+}
+
+// Function to get the protocol based on the test type
+function getQueryProtocol(test) {
+  switch (test) {
+    case RPC_CORS:
+    case REST_CORS:
+    case REST_ENDPOINTS:
+    case RPC_ENDPOINTS:
+      return HTTPS_PROTOCOL;
+    case RPC_WSS:
+      return WSS_PROTOCOL;
+    default:
+      throw new Error(`Unsupported test type: ${test}`);
+  }
+}
+
+// Function to get the endpoints array based on the test type
+function getEndpointsArray(test) {
+  switch (test) {
+    case RPC_CORS:
+    case REST_CORS:
+      return ["/"]; // Placeholder for CORS tests
+    case RPC_ENDPOINTS:
+      return rpcEndpoints;
+    case RPC_WSS:
+      return wssEndpoints;
+    case REST_ENDPOINTS:
+      return restEndpoints;
+    default:
+      throw new Error(`Unsupported test type: ${test}`);
+  }
+}
+
+const queryUrl = (url, test) => {
+  switch (test) {
+    case RPC_WSS:
+      return queryWSS(url);
+    case RPC_CORS:
+    case REST_CORS:
+      return queryCORS(url);
+    case RPC_ENDPOINTS:
+    case REST_ENDPOINTS:
+      return queryHTTP(url);
+    default:
+      throw new Error(`Unknown test type: ${test}`);
+  }
+};
+
+const evaluateWSSResult = (result) => {
+  return result.success || false;
+};
+
+const evaluateCORSResult = (result) => {
+  return result.corsPolicy === osmosisDomain || result.corsPolicy === "*";
+};
+
+const evaluateHTTPResult = (result) => {
+  return result.success || false;
+};
+
+const evaluateResult = (result, test) => {
+  console.log(`${test}:`);
+  switch (test) {
+    case RPC_WSS:
+      return evaluateWSSResult(result);
+    case RPC_CORS:
+    case REST_CORS:
+      return evaluateCORSResult(result);
+    case RPC_ENDPOINTS:
+    case REST_ENDPOINTS:
+      return evaluateHTTPResult(result);
+    default:
+      throw new Error(`Unknown test type: ${test}`);
+  }
+};
+
 function constructUrl(baseUrl, endpoint, protocol = HTTPS_PROTOCOL) {
   if (!baseUrl || !endpoint) {
     console.error("Invalid baseUrl or endpoint:", { baseUrl, endpoint });
     return null;
   }
+
   try {
     const url = new URL(baseUrl);
     url.protocol = protocol;
-    // Append the endpoint to the path
-    const joinedPath = [url.pathname.replace(/\/$/, ""), endpoint.replace(/^\//, "")]
+
+    // Append the endpoint correctly
+    url.pathname = [url.pathname.replace(/\/$/, ""), endpoint.replace(/^\//, "")]
       .filter(Boolean) // Remove empty components
       .join("/");
-    url.pathname = joinedPath;
-    return url;
+
+    return url.toString(); // Return as a string if preferred
   } catch (error) {
     console.error("Failed to construct URL:", error.message);
     return null;
-  }
-}
-
-function queryUrl(url, protocol = HTTPS_PROTOCOL) {
-  if (!url) { return; }
-  console.log(url.toString());
-  if (protocol === HTTPS_PROTOCOL) {
-    return api_mgmt.queryApi(url.toString());
-  } else if (protocol === WSS_PROTOCOL) {
-    return testWSS(url);
   }
 }
 
@@ -149,60 +239,6 @@ const queryWSS = (url, timeoutMs = 10000) => {
     }
   });
 };
-
-const queryCORSOld = (url) => {
-  const options = {
-    method: 'OPTIONS',
-    headers: {
-      Origin: osmosisDomain,
-    },
-  };
-
-  return new Promise((resolve) => {
-    let timeout; // Reference for the timeout
-
-    const req = https.request(url, options, (res) => {
-      clearTimeout(timeout); // Clear timeout on response
-      const result = {
-        success: true,
-        errorCode: res.statusCode, // Use res.statusCode here for successful response
-        headers: res.headers,
-        message: `CORS Policy: ${res.headers['access-control-allow-origin']}`,
-        corsPolicy: res.headers['access-control-allow-origin'] || null,
-      };
-
-      resolve(result);
-    });
-
-    req.on('error', (err) => {
-      clearTimeout(timeout); // Clear timeout on error
-      console.error(`Error connecting to ${url.toString()}:`, err.message);
-      resolve({
-        success: false,
-        errorCode: null, // No statusCode available in error case
-        headers: null,
-        message: err.message,
-        corsPolicy: null,
-      });
-    });
-
-    // Set timeout and handle its behavior
-    timeout = setTimeout(() => {
-      console.error(`Request to ${url.toString()} for CORS timed out.`);
-      req.destroy(); // Clean up the request
-      resolve({
-        success: false,
-        errorCode: null, // No statusCode available in timeout case
-        headers: null,
-        message: "Request timed out",
-        corsPolicy: null,
-      });
-    }, 5000); // Timeout after 5 seconds
-
-    req.end(); // End the request
-  });
-};
-
       
 
 const queryCORS = (url) => {
@@ -341,55 +377,6 @@ const logResult = (url, result, success) => {
   console.log(`Compatible?: ${success}`);
 };
 
-const evaluateWSSResult = (result) => {
-  return result.success || false;
-};
-
-const testWSS = async (url) => {
-  const result = await queryWSS(url);
-  console.log("Testing WSS");
-  const success = evaluateWSSResult(result);
-  logResult(url, result, success);
-  return success;
-};
-
-const evaluateCORSResult = (result) => {
-  return result.corsPolicy === osmosisDomain || result.corsPolicy === "*";
-};
-
-const testCORS = async (url) => {
-  const result = await queryCORS(url);
-  console.log("Testing CORS");
-  const success = evaluateCORSResult(result);
-  logResult(url, result, success);
-  return success;
-};
-
-const evaluateRESTResult = (result) => {
-  return result.success || false;
-};
-
-const testREST = async (url) => {
-  const result = await queryREST(url, { method: 'GET' });
-  console.log("Testing REST");
-  const success = evaluateRESTResult(result);
-  logResult(url, result, success);
-  return success;
-};
-
-const evaluateRPCResult = (result) => {
-  return result.success || false;
-};
-
-const testRPC = async (url) => {
-  const result = await queryHTTP(url, { method: 'GET' });
-  console.log("Testing RPC");
-  const success = evaluateRPCResult(result);
-  logResult(url, result, success);
-  return result;
-};
-
-
 function getChainlist(chainName) {
   return zone.readFromFile(chainName, chainlistDir, chainlistFileName);
 }
@@ -407,110 +394,46 @@ function getCounterpartyChainAddress(counterpartyChain, nodeType) {
 
 async function validateCounterpartyChain(counterpartyChain) {
 
-  //--RPC CORS--
-  const rpcCorsValidation = (async () => {
-    const url = getCounterpartyChainAddress(counterpartyChain, RPC_NODE);
-    if (!url) return [];
-    return Promise.all([
-      (async () => {
-        const CORS_RESULT = await testCORS(url);
-        return {
-          test: RPC_CORS,
-          url: url,
-          success: CORS_RESULT,
-        };
-      })(),
-    ]);
-  })();
-  //--
+  // Helper function to perform validation for a given test type
+  const validate = async (test) => {
+    const nodeType = getNodeType(test);
+    const baseUrl = getCounterpartyChainAddress(counterpartyChain, nodeType);
+    const protocol = getQueryProtocol(test);
+    const endpoints = getEndpointsArray(test);
 
-  //--RPC WSS--
-  const rpcWssValidation = (async () => {
-    const url = getCounterpartyChainAddress(counterpartyChain, RPC_NODE);
-    if (!url) return [];
     return Promise.all(
-      wssEndpoints.map(async (endpoint) => {
-        const constructedUrl = constructUrl(url, endpoint, WSS_PROTOCOL);
-        const response = await testWSS(constructedUrl);
-        return {
-          test: RPC_WSS,
-          url: constructedUrl,
-          success: response,
-        };
-      })
-    );
-  })();
-  //--
+      endpoints.map(async (endpoint) => {
+        const url = constructUrl(baseUrl, endpoint, protocol);
+        const result = await queryUrl(url, test);
+        const success = evaluateResult(result, test);
+        logResult(url, result, success);
 
-  //--RPC Endpoints--
-  const rpcEndpointsValidation = (async () => {
-    const url = getCounterpartyChainAddress(counterpartyChain, RPC_NODE);
-    if (!url) return [];
-    return Promise.all(
-      rpcEndpoints.map(async (endpoint) => {
-        const constructedUrl = constructUrl(url, endpoint, HTTPS_PROTOCOL);
-        const RPC_RESULT = await testRPC(constructedUrl);
-        const result = {
-          test: RPC_ENDPOINTS,
-          url: constructedUrl,
-          success: RPC_RESULT.success,
+        const validationResult = {
+          test,
+          url,
+          success,
         };
+
         if (endpoint === "status") {
-          const latestBlockTime = new Date(RPC_RESULT?.sync_info?.latest_block_time);
+          const latestBlockTime = new Date(result?.sync_info?.latest_block_time);
           const lenientDateUTC = new Date(currentDateUTC - 60 * 60 * 1000);
-          result.stale = latestBlockTime < lenientDateUTC;
+          validationResult.stale = latestBlockTime < lenientDateUTC;
         }
-        return result;
+
+        return validationResult;
       })
     );
-  })();
-  //--
+  };
 
-  //--REST CORS--
-  const restCorsValidation = (async () => {
-    const url = getCounterpartyChainAddress(counterpartyChain, REST_NODE);
-    if (!url) return [];
-    return Promise.all([
-      (async () => {
-        const CORS_RESULT = await testCORS(url);
-        return {
-          test: REST_CORS,
-          url: url,
-          success: CORS_RESULT,
-        };
-      })(),
-    ]);
-  })();
-  //--
+  // List of test types to validate
+  const testTypes = [RPC_CORS, RPC_WSS, RPC_ENDPOINTS, REST_CORS, REST_ENDPOINTS];
 
-  //--REST Endpoints--
-  const restEndpointsValidation = (async () => {
-    const url = getCounterpartyChainAddress(counterpartyChain, REST_NODE);
-    if (!url) return [];
-    return Promise.all(
-      restEndpoints.map(async (endpoint) => {
-        const constructedUrl = constructUrl(url, endpoint, HTTPS_PROTOCOL);
-        const REST_RESULT = await testREST(url);
-        return {
-          test: REST_ENDPOINTS,
-          url: constructedUrl,
-          success: REST_RESULT,
-        };
-      })
-    );
-  })();
-  //--
+  // Run all validations concurrently
+  const results = await Promise.all(testTypes.map(validate));
 
-  // Run all validations concurrently and merge results
-  const [rpcCorsResults, rpcWssResults, rpcEndpointResults, restCorsResults, restEndpointsResults] = await Promise.all([
-    rpcCorsValidation,
-    rpcWssValidation,
-    rpcEndpointsValidation,
-    restCorsValidation,
-    restEndpointsValidation,
-  ]);
+  // Flatten and return all results
+  return results.flat();
 
-  return [...rpcCorsResults, ...rpcWssResults, ...rpcEndpointResults, ...restCorsResults, ...restEndpointsResults];
 }
 
 
@@ -646,5 +569,5 @@ async function validateSpecificChain(chainName, chain_name) {
 
 }
 
-//main();
-validateSpecificChain("osmosis", "kujira");
+main();
+//validateSpecificChain("osmosis", "konstellation");

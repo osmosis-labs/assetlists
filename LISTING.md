@@ -87,7 +87,7 @@ Registered Asset Metadata at the [Cosmos Chain Registry](https://github.com/cosm
 
 Integrations with Key Apps:
  - Recognition by key Block Explorers:
-   - Mintscan (Assets are added at [Cosmostation's Chainlist](https://github.com/cosmostation/chainlist/blob/main/chain/osmosis/assets.json))
+   - Mintscan (Assets are added at [Cosmostation's Chainlist](https://github.com/cosmostation/chainlist/blob/main/chain/osmosis/assets_2.json))
    - Celatone (Assets are added at [Celatone's Data Repository](https://github.com/alleslabs/aldus/blob/main/data/assets.json))
  - Recognition by key Data Aggregators:
    - CoinGecko (See: [How to list new Cryptocurrencies on CoinGecko](https://support.coingecko.com/hc/en-us/articles/7291312302617-How-to-list-new-cryptocurrencies-on-CoinGecko))

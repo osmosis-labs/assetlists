@@ -33,6 +33,10 @@ jobs:
       - name: Run code to Query Pools
         working-directory: ./.github/workflows/utility
         run: node queryPools.mjs
+
+      - name: Run code to Validate Endpoints
+        working-directory: ./.github/workflows/utility
+        run: node validateEndpoints.mjs routineBulkValidation
           
       - name: Run code to Generate Assetlist
         working-directory: ./.github/workflows/utility

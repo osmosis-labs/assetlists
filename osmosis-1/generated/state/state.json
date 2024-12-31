@@ -1389,69 +1389,133 @@
     },
     {
       "chain_name": "cryptoorgchain",
-      "validationDate": "2024-11-29T20:14:33.157Z",
+      "validationDate": "2024-12-31T22:39:28.231Z",
       "validationSuccess": false,
       "validationResults": [
         {
+          "test": "RPC CORS",
+          "url": "https://rpc-crypto-org.keplr.app/",
+          "success": false
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc-crypto-org.keplr.app/websocket",
+          "success": true
+        },
+        {
           "test": "RPC Endpoints",
-          "url": "wss://rpc-crypto-org.keplr.app/status",
-          "success": false,
+          "url": "https://rpc-crypto-org.keplr.app/status",
+          "success": true,
           "stale": false
         },
         {
-          "url": "wss://rpc-crypto-org.keplr.app/websocket",
-          "response": false
+          "test": "REST CORS",
+          "url": "https://lcd-crypto-org.keplr.app/",
+          "success": false
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://lcd-crypto-org.keplr.app/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ]
     },
     {
       "chain_name": "starname",
-      "validationDate": "2024-11-29T20:14:33.157Z",
+      "validationDate": "2024-12-31T22:39:28.231Z",
       "validationSuccess": false,
       "validationResults": [
         {
+          "test": "RPC CORS",
+          "url": "https://rpc-iov.keplr.app/",
+          "success": false
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc-iov.keplr.app/websocket",
+          "success": false
+        },
+        {
           "test": "RPC Endpoints",
-          "url": "wss://rpc-iov.keplr.app/status",
+          "url": "https://rpc-iov.keplr.app/status",
           "success": false,
           "stale": false
         },
         {
-          "url": "wss://rpc-iov.keplr.app/websocket",
-          "response": false
+          "test": "REST CORS",
+          "url": "https://lcd-iov.keplr.app/",
+          "success": false
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://lcd-iov.keplr.app/cosmos/base/tendermint/v1beta1/node_info",
+          "success": false
         }
       ]
     },
     {
       "chain_name": "emoney",
-      "validationDate": "2024-11-29T20:17:00.151Z",
+      "validationDate": "2024-12-31T22:39:28.231Z",
       "validationSuccess": false,
       "validationResults": [
         {
+          "test": "RPC CORS",
+          "url": "https://emoney.validator.network/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://emoney.validator.network/websocket",
+          "success": true
+        },
+        {
           "test": "RPC Endpoints",
-          "url": "wss://emoney.validator.network/status",
-          "success": false,
+          "url": "https://emoney.validator.network/status",
+          "success": true,
           "stale": false
         },
         {
-          "url": "wss://emoney.validator.network/websocket",
-          "response": false
+          "test": "REST CORS",
+          "url": "https://emoney.validator.network/api",
+          "success": false
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://emoney.validator.network/api/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ]
     },
     {
       "chain_name": "juno",
-      "validationDate": "2024-11-29T20:17:00.151Z",
+      "validationDate": "2024-12-31T22:39:28.231Z",
       "validationSuccess": false,
       "validationResults": [
         {
+          "test": "RPC CORS",
+          "url": "https://rpc-juno.keplr.app/",
+          "success": false
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc-juno.keplr.app/websocket",
+          "success": true
+        },
+        {
           "test": "RPC Endpoints",
-          "url": "wss://rpc-juno.keplr.app/status",
-          "success": false,
+          "url": "https://rpc-juno.keplr.app/status",
+          "success": true,
           "stale": false
         },
         {
-          "url": "wss://rpc-juno.keplr.app/websocket",
-          "response": false
+          "test": "REST CORS",
+          "url": "https://lcd-juno.keplr.app/",
+          "success": false
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://lcd-juno.keplr.app/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ]
     },

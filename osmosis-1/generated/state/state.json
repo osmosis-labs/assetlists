@@ -1158,9 +1158,14 @@
     },
     {
       "chain_name": "terra",
-      "validationDate": "2024-12-01T04:23:39.361Z",
+      "validationDate": "2024-12-31T22:35:55.075Z",
       "validationSuccess": false,
       "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc-terra-ia.cosmosia.notional.ventures/",
+          "success": false
+        },
         {
           "test": "RPC WSS",
           "url": "wss://rpc-terra-ia.cosmosia.notional.ventures/websocket",
@@ -1173,6 +1178,11 @@
           "stale": false
         },
         {
+          "test": "REST CORS",
+          "url": "https://api-terra-ia.cosmosia.notional.ventures/",
+          "success": false
+        },
+        {
           "test": "REST Endpoints",
           "url": "https://api-terra-ia.cosmosia.notional.ventures/cosmos/base/tendermint/v1beta1/node_info",
           "success": false
@@ -1181,8 +1191,14 @@
     },
     {
       "chain_name": "secretnetwork",
-      "validationDate": "2024-12-01T04:23:39.361Z",
+      "validationDate": "2024-12-31T22:35:55.075Z",
+      "validationSuccess": false,
       "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc-secret.keplr.app/",
+          "success": true
+        },
         {
           "test": "RPC WSS",
           "url": "wss://rpc-secret.keplr.app/websocket",
@@ -1195,9 +1211,14 @@
           "stale": false
         },
         {
+          "test": "REST CORS",
+          "url": "https://lcd-secret.keplr.app/",
+          "success": false
+        },
+        {
           "test": "REST Endpoints",
           "url": "https://lcd-secret.keplr.app/cosmos/base/tendermint/v1beta1/node_info",
-          "success": true
+          "success": false
         }
       ]
     },
@@ -1302,35 +1323,67 @@
     },
     {
       "chain_name": "persistence",
-      "validationDate": "2024-11-29T20:12:36.729Z",
+      "validationDate": "2024-12-31T22:35:55.075Z",
       "validationSuccess": false,
       "validationResults": [
         {
+          "test": "RPC CORS",
+          "url": "https://rpc-persistence.keplr.app/",
+          "success": false
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc-persistence.keplr.app/websocket",
+          "success": true
+        },
+        {
           "test": "RPC Endpoints",
-          "url": "wss://rpc-persistence.keplr.app/status",
-          "success": false,
+          "url": "https://rpc-persistence.keplr.app/status",
+          "success": true,
           "stale": false
         },
         {
-          "url": "wss://rpc-persistence.keplr.app/websocket",
-          "response": false
+          "test": "REST CORS",
+          "url": "https://lcd-persistence.keplr.app/",
+          "success": false
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://lcd-persistence.keplr.app/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ]
     },
     {
       "chain_name": "irisnet",
-      "validationDate": "2024-11-29T20:12:36.729Z",
-      "validationSuccess": false,
+      "validationDate": "2024-12-31T22:35:55.075Z",
+      "validationSuccess": true,
       "validationResults": [
         {
+          "test": "RPC CORS",
+          "url": "https://rpc-iris.keplr.app/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc-iris.keplr.app/websocket",
+          "success": true
+        },
+        {
           "test": "RPC Endpoints",
-          "url": "wss://rpc-iris.keplr.app/status",
-          "success": false,
+          "url": "https://rpc-iris.keplr.app/status",
+          "success": true,
           "stale": false
         },
         {
-          "url": "wss://rpc-iris.keplr.app/websocket",
-          "response": false
+          "test": "REST CORS",
+          "url": "https://lcd-iris.keplr.app/",
+          "success": true
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://lcd-iris.keplr.app/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ]
     },

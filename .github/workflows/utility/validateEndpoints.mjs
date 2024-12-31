@@ -594,4 +594,4 @@ if (functions[funcName]) {
 /*
  * validateSpecificChain("osmosis", "konstellation");
  * > node validateEndpoints.mjs validateSpecificChain "osmosis" "konstellation"
- * /
+ */

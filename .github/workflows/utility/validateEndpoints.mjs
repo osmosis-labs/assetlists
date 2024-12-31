@@ -68,7 +68,7 @@ const restEndpoints = [
 ];
 
 
-const numChainsToQuery = 2;
+const numChainsToQuery = 4;
 const currentDateUTC = new Date();
 const oneDayInMs = 24 * 60 * 60 * 1000;
 const successReQueryDelay = 7 * oneDayInMs;
@@ -537,7 +537,7 @@ async function validateEndpointsForAllCounterpartyChains(chainName) {
 
 }
 
-function main() {
+function routineBulkValidation() {
   zone.chainNames.forEach(chainName => validateEndpointsForAllCounterpartyChains(chainName));
 }
 
@@ -569,5 +569,29 @@ async function validateSpecificChain(chainName, chain_name) {
 
 }
 
-main();
-//validateSpecificChain("osmosis", "konstellation");
+//routineBulkValidation();
+
+const functions = {
+  routineBulkValidation: () => {
+    console.log("Running routineBulkValidation...");
+    routineBulkValidation();
+  },
+  validateSpecificChain: (chainName, chain_name) => {
+    console.log("Running validateSpecificChain...");
+    validateSpecificChain(chainName, chain_name);
+  },
+};
+
+const [, , funcName, ...args] = process.argv;
+
+if (functions[funcName]) {
+  functions[funcName](...args);
+} else {
+  console.error(`Error: Unknown function '${funcName}'`);
+  process.exit(1); // Exit with error code if the function is unknown
+}
+
+/*
+ * validateSpecificChain("osmosis", "konstellation");
+ * > node validateEndpoints.mjs validateSpecificChain "osmosis" "konstellation"
+ * /

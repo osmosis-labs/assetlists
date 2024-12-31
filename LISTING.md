@@ -69,7 +69,7 @@ To propose that an asset should be upgraded to Verified status, please submit a 
 
 ### Full Integration for Best Experience (recommended)
 
-Osmosis Frontend aims to foster a polished and complete user experience when users intereact with an asset. This is best provided when the asset has all metadata registered correctly and thoroughly, as well as be recognized by key external interfaces, and have sufficient and efficient liquidity on Osmosis.
+Osmosis Frontend aims to foster a polished and complete user experience when users interact with an asset. This is best provided when the asset has all metadata registered correctly and thoroughly, as well as be recognized by key external interfaces, and have sufficient and efficient liquidity on Osmosis.
 
 Registered Asset Metadata at the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry):
  - The correct `coingecko_id`:
@@ -87,11 +87,11 @@ Registered Asset Metadata at the [Cosmos Chain Registry](https://github.com/cosm
 
 Integrations with Key Apps:
  - Recognition by key Block Explorers:
-   - Mintscan (Assets are added at [Cosmostation's Chainlist](https://github.com/cosmostation/chainlist/blob/main/chain/osmosis/assets.json))
+   - Mintscan (Assets are added at [Cosmostation's Chainlist](https://github.com/cosmostation/chainlist/blob/main/chain/osmosis/assets_2.json))
    - Celatone (Assets are added at [Celatone's Data Repository](https://github.com/alleslabs/aldus/blob/main/data/assets.json))
  - Recognition by key Data Aggregators:
    - CoinGecko (See: [How to list new Cryptocurrencies on CoinGecko](https://support.coingecko.com/hc/en-us/articles/7291312302617-How-to-list-new-cryptocurrencies-on-CoinGecko))
-     - Has Price, Supply, and Market Capitzalization Data
+     - Has Price, Supply, and Market Capitalization Data
      - Includes Osmosis Market(s)
        - I.E., Osmosis Pools containing the asset should be discoverable from the asset's CoinGecko page. E.G.:
          ![image](https://github.com/JeremyParish69/assetlists/assets/95667791/34ea402b-1a0f-4e43-9bfc-b750c9ab9430)

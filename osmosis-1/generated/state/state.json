@@ -1521,9 +1521,19 @@
     },
     {
       "chain_name": "microtick",
-      "validationDate": "2024-11-29T20:21:27.706Z",
+      "validationDate": "2025-01-06T19:25:53.070Z",
       "validationSuccess": false,
       "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc-microtick.keplr.app/",
+          "success": false
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc-microtick.keplr.app/websocket",
+          "success": false
+        },
         {
           "test": "RPC Endpoints",
           "url": "https://rpc-microtick.keplr.app/status",
@@ -1531,33 +1541,65 @@
           "stale": false
         },
         {
-          "url": "wss://rpc-microtick.keplr.app/websocket",
-          "response": false
+          "test": "REST CORS",
+          "url": "https://lcd-microtick.keplr.app/",
+          "success": false
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://lcd-microtick.keplr.app/cosmos/base/tendermint/v1beta1/node_info",
+          "success": false
         }
       ]
     },
     {
       "chain_name": "likecoin",
-      "validationDate": "2024-11-29T20:21:27.706Z",
-      "validationSuccess": false,
+      "validationDate": "2025-01-06T19:25:53.070Z",
+      "validationSuccess": true,
       "validationResults": [
         {
+          "test": "RPC CORS",
+          "url": "https://mainnet-node.like.co/rpc",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://mainnet-node.like.co/rpc/websocket",
+          "success": true
+        },
+        {
           "test": "RPC Endpoints",
-          "url": "https://mainnet-node.like.co/status",
+          "url": "https://mainnet-node.like.co/rpc/status",
           "success": true,
           "stale": false
         },
         {
-          "url": "wss://mainnet-node.like.co/websocket",
-          "response": false
+          "test": "REST CORS",
+          "url": "https://mainnet-node.like.co/",
+          "success": true
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://mainnet-node.like.co/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ]
     },
     {
       "chain_name": "impacthub",
-      "validationDate": "2024-11-29T20:22:52.644Z",
+      "validationDate": "2025-01-06T19:25:53.070Z",
       "validationSuccess": false,
       "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://ixo-rpc.ibs.team/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://ixo-rpc.ibs.team/websocket",
+          "success": true
+        },
         {
           "test": "RPC Endpoints",
           "url": "https://ixo-rpc.ibs.team/status",
@@ -1565,16 +1607,32 @@
           "stale": false
         },
         {
-          "url": "wss://ixo-rpc.ibs.team/websocket",
-          "response": false
+          "test": "REST CORS",
+          "url": "https://ixo-api.ibs.team/",
+          "success": false
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://ixo-api.ibs.team/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ]
     },
     {
       "chain_name": "bitcanna",
-      "validationDate": "2024-11-29T20:22:52.644Z",
-      "validationSuccess": false,
+      "validationDate": "2025-01-06T19:25:53.070Z",
+      "validationSuccess": true,
       "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc.bitcanna.io/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc.bitcanna.io/websocket",
+          "success": true
+        },
         {
           "test": "RPC Endpoints",
           "url": "https://rpc.bitcanna.io/status",
@@ -1582,8 +1640,14 @@
           "stale": false
         },
         {
-          "url": "wss://rpc.bitcanna.io/websocket",
-          "response": false
+          "test": "REST CORS",
+          "url": "https://lcd.bitcanna.io/",
+          "success": true
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://lcd.bitcanna.io/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ]
     },

@@ -1356,7 +1356,7 @@
     },
     {
       "chain_name": "irisnet",
-      "validationDate": "2024-12-31T22:35:55.075Z",
+      "validationDate": "2025-01-10T19:07:47.545Z",
       "validationSuccess": true,
       "validationResults": [
         {
@@ -1653,9 +1653,19 @@
     },
     {
       "chain_name": "bitsong",
-      "validationDate": "2024-11-29T20:24:23.894Z",
-      "validationSuccess": false,
+      "validationDate": "2025-01-10T19:07:47.545Z",
+      "validationSuccess": true,
       "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc.explorebitsong.com/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc.explorebitsong.com/websocket",
+          "success": true
+        },
         {
           "test": "RPC Endpoints",
           "url": "https://rpc.explorebitsong.com/status",
@@ -1663,17 +1673,32 @@
           "stale": false
         },
         {
-          "test": "RPC WSS",
-          "url": "wss://rpc.explorebitsong.com/websocket",
-          "success": false
+          "test": "REST CORS",
+          "url": "https://lcd.explorebitsong.com/",
+          "success": true
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://lcd.explorebitsong.com/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ]
     },
     {
       "chain_name": "kichain",
-      "validationDate": "2024-11-29T20:24:23.894Z",
+      "validationDate": "2025-01-10T19:07:47.545Z",
       "validationSuccess": false,
       "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc-mainnet.blockchain.ki/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc-mainnet.blockchain.ki/websocket",
+          "success": true
+        },
         {
           "test": "RPC Endpoints",
           "url": "https://rpc-mainnet.blockchain.ki/status",
@@ -1681,17 +1706,32 @@
           "stale": false
         },
         {
-          "test": "RPC WSS",
-          "url": "wss://rpc-mainnet.blockchain.ki/websocket",
+          "test": "REST CORS",
+          "url": "https://api-mainnet.blockchain.ki/",
           "success": false
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://api-mainnet.blockchain.ki/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ]
     },
     {
       "chain_name": "panacea",
-      "validationDate": "2024-11-29T20:26:07.087Z",
+      "validationDate": "2025-01-10T19:07:47.545Z",
       "validationSuccess": false,
       "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc.gopanacea.org/",
+          "success": false
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc.gopanacea.org/websocket",
+          "success": true
+        },
         {
           "test": "RPC Endpoints",
           "url": "https://rpc.gopanacea.org/status",
@@ -1699,9 +1739,14 @@
           "stale": false
         },
         {
-          "test": "RPC WSS",
-          "url": "wss://rpc.gopanacea.org/websocket",
+          "test": "REST CORS",
+          "url": "https://api.gopanacea.org/",
           "success": false
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://api.gopanacea.org/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ]
     },

@@ -1290,12 +1290,12 @@
     },
     {
       "chain_name": "sentinel",
-      "validationDate": "2024-12-11T20:55:33.462Z",
+      "validationDate": "2025-01-14T18:38:05.918Z",
       "validationSuccess": false,
       "validationResults": [
         {
-          "test": "RPC WSS",
-          "url": "https://rpc-sentinel.keplr.app",
+          "test": "RPC CORS",
+          "url": "https://rpc-sentinel.keplr.app/",
           "success": false
         },
         {
@@ -1311,13 +1311,13 @@
         },
         {
           "test": "REST CORS",
-          "url": "https://lcd-sentinel.keplr.app",
+          "url": "https://lcd-sentinel.keplr.app/",
           "success": false
         },
         {
           "test": "REST Endpoints",
           "url": "https://lcd-sentinel.keplr.app/cosmos/base/tendermint/v1beta1/node_info",
-          "success": false
+          "success": true
         }
       ]
     },
@@ -1554,7 +1554,7 @@
     },
     {
       "chain_name": "likecoin",
-      "validationDate": "2025-01-06T19:25:53.070Z",
+      "validationDate": "2025-01-14T18:38:05.918Z",
       "validationSuccess": true,
       "validationResults": [
         {
@@ -1620,7 +1620,7 @@
     },
     {
       "chain_name": "bitcanna",
-      "validationDate": "2025-01-06T19:25:53.070Z",
+      "validationDate": "2025-01-14T18:38:05.918Z",
       "validationSuccess": true,
       "validationResults": [
         {
@@ -1752,9 +1752,19 @@
     },
     {
       "chain_name": "bostrom",
-      "validationDate": "2024-11-29T20:26:07.087Z",
-      "validationSuccess": false,
+      "validationDate": "2025-01-14T18:38:05.918Z",
+      "validationSuccess": true,
       "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc.bostrom.cybernode.ai/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc.bostrom.cybernode.ai/websocket",
+          "success": true
+        },
         {
           "test": "RPC Endpoints",
           "url": "https://rpc.bostrom.cybernode.ai/status",
@@ -1762,9 +1772,14 @@
           "stale": false
         },
         {
-          "test": "RPC WSS",
-          "url": "wss://rpc.bostrom.cybernode.ai/websocket",
-          "success": false
+          "test": "REST CORS",
+          "url": "https://lcd.bostrom.cybernode.ai/",
+          "success": true
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://lcd.bostrom.cybernode.ai/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ]
     },

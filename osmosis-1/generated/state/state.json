@@ -1785,9 +1785,19 @@
     },
     {
       "chain_name": "comdex",
-      "validationDate": "2024-11-29T20:27:08.875Z",
+      "validationDate": "2025-01-15T18:43:23.237Z",
       "validationSuccess": false,
       "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc.comdex.one/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc.comdex.one/websocket",
+          "success": false
+        },
         {
           "test": "RPC Endpoints",
           "url": "https://rpc.comdex.one/status",
@@ -1795,17 +1805,32 @@
           "stale": false
         },
         {
-          "test": "RPC WSS",
-          "url": "wss://rpc.comdex.one/websocket",
+          "test": "REST CORS",
+          "url": "https://rest.comdex.one/",
           "success": false
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://rest.comdex.one/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ]
     },
     {
       "chain_name": "cheqd",
-      "validationDate": "2024-11-29T20:27:08.875Z",
-      "validationSuccess": false,
+      "validationDate": "2025-01-15T18:43:23.237Z",
+      "validationSuccess": true,
       "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc.cheqd.net/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc.cheqd.net/websocket",
+          "success": true
+        },
         {
           "test": "RPC Endpoints",
           "url": "https://rpc.cheqd.net/status",
@@ -1813,17 +1838,32 @@
           "stale": false
         },
         {
-          "test": "RPC WSS",
-          "url": "wss://rpc.cheqd.net/websocket",
-          "success": false
+          "test": "REST CORS",
+          "url": "https://api.cheqd.net/",
+          "success": true
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://api.cheqd.net/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ]
     },
     {
       "chain_name": "stargaze",
-      "validationDate": "2024-11-29T20:32:12.985Z",
-      "validationSuccess": false,
+      "validationDate": "2025-01-15T18:43:23.237Z",
+      "validationSuccess": true,
       "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc.stargaze-apis.com/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc.stargaze-apis.com/websocket",
+          "success": true
+        },
         {
           "test": "RPC Endpoints",
           "url": "https://rpc.stargaze-apis.com/status",
@@ -1831,17 +1871,32 @@
           "stale": false
         },
         {
-          "test": "RPC WSS",
-          "url": "wss://rpc.stargaze-apis.com/websocket",
-          "success": false
+          "test": "REST CORS",
+          "url": "https://rest.stargaze-apis.com/",
+          "success": true
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://rest.stargaze-apis.com/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ]
     },
     {
       "chain_name": "chihuahua",
-      "validationDate": "2024-11-29T20:32:12.985Z",
+      "validationDate": "2025-01-15T18:43:23.237Z",
       "validationSuccess": false,
       "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc.chihuahua.wtf/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc.chihuahua.wtf/websocket",
+          "success": true
+        },
         {
           "test": "RPC Endpoints",
           "url": "https://rpc.chihuahua.wtf/status",
@@ -1849,9 +1904,14 @@
           "stale": false
         },
         {
-          "test": "RPC WSS",
-          "url": "wss://rpc.chihuahua.wtf/websocket",
+          "test": "REST CORS",
+          "url": "https://api.chihuahua.wtf/",
           "success": false
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://api.chihuahua.wtf/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ]
     },

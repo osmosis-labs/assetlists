@@ -1075,6 +1075,10 @@
     {
       "base_denom": "factory/osmo10c4y9csfs8q7mtvfg4p9gd8d0acx0hpc2mte9xqzthd7rd3348tsfhaesm/sICP-native-ICP",
       "listingDate": "2024-12-18T19:04:57.225Z"
+    },
+    {
+      "base_denom": "ibc/BC26A7A805ECD6822719472BCB7842A48EF09DF206182F8F259B2593EB5D23FB",
+      "listingDate": "2025-01-16T18:18:09.528Z"
     }
   ],
   "chains": [
@@ -1917,27 +1921,52 @@
     },
     {
       "chain_name": "lumnetwork",
-      "validationDate": "2024-11-29T20:32:26.713Z",
+      "validationDate": "2025-01-16T18:15:52.966Z",
       "validationSuccess": false,
       "validationResults": [
         {
+          "test": "RPC CORS",
+          "url": "https://node0.mainnet.lum.network/rpc",
+          "success": false
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://node0.mainnet.lum.network/rpc/websocket",
+          "success": false
+        },
+        {
           "test": "RPC Endpoints",
-          "url": "https://node0.mainnet.lum.network/status",
+          "url": "https://node0.mainnet.lum.network/rpc/status",
           "success": false,
           "stale": false
         },
         {
-          "test": "RPC WSS",
-          "url": "wss://node0.mainnet.lum.network/websocket",
+          "test": "REST CORS",
+          "url": "https://node0.mainnet.lum.network/rest",
+          "success": false
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://node0.mainnet.lum.network/rest/cosmos/base/tendermint/v1beta1/node_info",
           "success": false
         }
       ]
     },
     {
       "chain_name": "vidulum",
-      "validationDate": "2024-11-29T20:32:26.713Z",
+      "validationDate": "2025-01-16T18:15:52.966Z",
       "validationSuccess": false,
       "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://mainnet-rpc.vidulum.app/",
+          "success": false
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://mainnet-rpc.vidulum.app/websocket",
+          "success": false
+        },
         {
           "test": "RPC Endpoints",
           "url": "https://mainnet-rpc.vidulum.app/status",
@@ -1945,20 +1974,25 @@
           "stale": false
         },
         {
-          "test": "RPC WSS",
-          "url": "wss://mainnet-rpc.vidulum.app/websocket",
+          "test": "REST CORS",
+          "url": "https://mainnet-lcd.vidulum.app/",
+          "success": false
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://mainnet-lcd.vidulum.app/cosmos/base/tendermint/v1beta1/node_info",
           "success": false
         }
       ]
     },
     {
       "chain_name": "desmos",
-      "validationDate": "2024-12-11T20:55:33.462Z",
-      "validationSuccess": false,
+      "validationDate": "2025-01-16T18:15:52.966Z",
+      "validationSuccess": true,
       "validationResults": [
         {
-          "test": "RPC WSS",
-          "url": "https://rpc.mainnet.desmos.network",
+          "test": "RPC CORS",
+          "url": "https://rpc.mainnet.desmos.network/",
           "success": true
         },
         {
@@ -1974,21 +2008,31 @@
         },
         {
           "test": "REST CORS",
-          "url": "https://api.mainnet.desmos.network",
+          "url": "https://api.mainnet.desmos.network/",
           "success": true
         },
         {
           "test": "REST Endpoints",
           "url": "https://api.mainnet.desmos.network/cosmos/base/tendermint/v1beta1/node_info",
-          "success": false
+          "success": true
         }
       ]
     },
     {
       "chain_name": "dig",
-      "validationDate": "2024-11-29T20:35:46.232Z",
+      "validationDate": "2025-01-16T18:15:52.966Z",
       "validationSuccess": false,
       "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc-1-dig.notional.ventures/",
+          "success": false
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc-1-dig.notional.ventures/websocket",
+          "success": false
+        },
         {
           "test": "RPC Endpoints",
           "url": "https://rpc-1-dig.notional.ventures/status",
@@ -1996,8 +2040,13 @@
           "stale": false
         },
         {
-          "test": "RPC WSS",
-          "url": "wss://rpc-1-dig.notional.ventures/websocket",
+          "test": "REST CORS",
+          "url": "https://api-1-dig.notional.ventures/",
+          "success": false
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://api-1-dig.notional.ventures/cosmos/base/tendermint/v1beta1/node_info",
           "success": false
         }
       ]

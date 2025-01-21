@@ -1079,6 +1079,10 @@
     {
       "base_denom": "ibc/BC26A7A805ECD6822719472BCB7842A48EF09DF206182F8F259B2593EB5D23FB",
       "listingDate": "2025-01-16T18:18:09.528Z"
+    },
+    {
+      "base_denom": "ibc/E750D31033DC1CF4A044C3AA0A8117401316DC918FBEBC4E3D34F91B09D5F54C",
+      "listingDate": "2025-01-21T19:39:24.567Z"
     }
   ],
   "chains": [
@@ -1558,7 +1562,7 @@
     },
     {
       "chain_name": "likecoin",
-      "validationDate": "2025-01-14T18:38:05.918Z",
+      "validationDate": "2025-01-21T19:39:22.583Z",
       "validationSuccess": true,
       "validationResults": [
         {
@@ -1624,7 +1628,7 @@
     },
     {
       "chain_name": "bitcanna",
-      "validationDate": "2025-01-14T18:38:05.918Z",
+      "validationDate": "2025-01-21T19:39:22.583Z",
       "validationSuccess": true,
       "validationResults": [
         {
@@ -1756,7 +1760,7 @@
     },
     {
       "chain_name": "bostrom",
-      "validationDate": "2025-01-14T18:38:05.918Z",
+      "validationDate": "2025-01-21T19:39:22.583Z",
       "validationSuccess": true,
       "validationResults": [
         {
@@ -2119,34 +2123,34 @@
     },
     {
       "chain_name": "bandchain",
-      "validationDate": "2024-12-11T21:03:07.581Z",
-      "validationSuccess": false,
+      "validationDate": "2025-01-21T19:39:22.583Z",
+      "validationSuccess": true,
       "validationResults": [
         {
-          "test": "RPC WSS",
-          "url": "https://rpc.laozi3.bandchain.org",
+          "test": "RPC CORS",
+          "url": "https://band-rpc.ibs.team/",
           "success": true
         },
         {
           "test": "RPC WSS",
-          "url": "wss://rpc.laozi3.bandchain.org/websocket",
+          "url": "wss://band-rpc.ibs.team/websocket",
           "success": true
         },
         {
           "test": "RPC Endpoints",
-          "url": "https://rpc.laozi3.bandchain.org/status",
+          "url": "https://band-rpc.ibs.team/status",
           "success": true,
           "stale": false
         },
         {
           "test": "REST CORS",
-          "url": "https://laozi1.bandchain.org/api",
-          "success": false
+          "url": "https://band-api.ibs.team/",
+          "success": true
         },
         {
           "test": "REST Endpoints",
-          "url": "https://laozi1.bandchain.org/api/cosmos/base/tendermint/v1beta1/node_info",
-          "success": false
+          "url": "https://band-api.ibs.team/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ]
     },

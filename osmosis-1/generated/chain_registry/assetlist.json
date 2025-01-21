@@ -25278,6 +25278,7 @@
     },
     {
       "description": "The native staking and governance token of AtomOne",
+      "extended_description": "AtomOne is a community-driven fork of the Cosmos Hub, originating from concerns raised around Cosmos Hub Proposal 82 and Proposal 848. AtomOne aims to provide a security-conscious, constitutionally governed, streamlined IBC/ICS hub, preserving the foundational ethos of the Cosmos Hub.",
       "denom_units": [
         {
           "denom": "ibc/BC26A7A805ECD6822719472BCB7842A48EF09DF206182F8F259B2593EB5D23FB",
@@ -25323,7 +25324,11 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/atomone/images/atomone.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/atomone/images/atomone.svg"
         }
-      ]
+      ],
+      "socials": {
+        "website": "https://atom.one",
+        "twitter": "https://x.com/_atomone"
+      }
     },
     {
       "description": "The Spice memecoin",
@@ -26345,7 +26350,7 @@
     },
     {
       "description": "A multi-chain dogecoin twin, trustlessly created by chain-key cryptography and Internet Computer smart contracts that directly hold raw dogecoin.",
-      "extended_description": "Chain-key Dogecoin (ckDOGE) is a bridge token that is backed 1:1 by DOGE held 100% on the ICP mainnet. ckDOGEdoes not rely on a centralized bridge to facilitate the conversion between DOGE and ckDOGE, which makes it substantially more secure when compared to other traditional 'wrapped' tokens.",
+      "extended_description": "Chain-key Dogecoin (ckDOGE) is a bridge token that is backed 1:1 by DOGE held 100% on the ICP mainnet. ckDOGE does not rely on a centralized bridge to facilitate the conversion between DOGE and ckDOGE, which makes it substantially more secure when compared to other traditional 'wrapped' tokens.",
       "denom_units": [
         {
           "denom": "factory/osmo10c4y9csfs8q7mtvfg4p9gd8d0acx0hpc2mte9xqzthd7rd3348tsfhaesm/dogecoin-native-DOGE",
@@ -26396,6 +26401,198 @@
         "website": "https://internetcomputer.org",
         "twitter": "https://x.com/dfinity"
       }
+    },
+    {
+      "description": "Drop staked TIA",
+      "denom_units": [
+        {
+          "denom": "ibc/C7A810C6ED1FC3FFC7C834A534D400EADC94FF7D3BE13DDD4C042AEF1816DFB4",
+          "exponent": 0,
+          "aliases": [
+            "factory/neutron1ut4c6pv4u6vyu97yw48y8g7mle0cat54848v6m97k977022lzxtsaqsgmq/udtia"
+          ]
+        },
+        {
+          "denom": "dTIA",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/C7A810C6ED1FC3FFC7C834A534D400EADC94FF7D3BE13DDD4C042AEF1816DFB4",
+      "name": "dTIA",
+      "display": "dTIA",
+      "symbol": "dTIA",
+      "traces": [
+        {
+          "type": "liquid-stake",
+          "counterparty": {
+            "chain_name": "celestia",
+            "base_denom": "utia"
+          },
+          "provider": "Drop Protocol"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "neutron",
+            "base_denom": "factory/neutron1ut4c6pv4u6vyu97yw48y8g7mle0cat54848v6m97k977022lzxtsaqsgmq/udtia",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-874",
+            "path": "transfer/channel-874/factory/neutron1ut4c6pv4u6vyu97yw48y8g7mle0cat54848v6m97k977022lzxtsaqsgmq/udtia"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/dTIA.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "neutron",
+            "base_denom": "factory/neutron1ut4c6pv4u6vyu97yw48y8g7mle0cat54848v6m97k977022lzxtsaqsgmq/udtia"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/dTIA.svg"
+        }
+      ]
+    },
+    {
+      "description": "A receipt token for lent USDT issued by the Neptune Protocol.",
+      "denom_units": [
+        {
+          "denom": "ibc/6569248F0ADF74C0751A48AE8D19F28B40565629265956DA4BEBFBFD73F72F0A",
+          "exponent": 0,
+          "aliases": [
+            "inj1cy9hes20vww2yr6crvs75gxy5hpycya2hmjg9s"
+          ]
+        },
+        {
+          "denom": "nUSDT",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/6569248F0ADF74C0751A48AE8D19F28B40565629265956DA4BEBFBFD73F72F0A",
+      "name": "Neptune Receipt USDT",
+      "display": "nUSDT",
+      "symbol": "nUSDT",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "injective",
+            "base_denom": "inj1cy9hes20vww2yr6crvs75gxy5hpycya2hmjg9s",
+            "channel_id": "channel-8"
+          },
+          "chain": {
+            "channel_id": "channel-122",
+            "path": "transfer/channel-122/inj1cy9hes20vww2yr6crvs75gxy5hpycya2hmjg9s"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/nusdt.png"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "injective",
+            "base_denom": "inj1cy9hes20vww2yr6crvs75gxy5hpycya2hmjg9s"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/nusdt.png",
+          "theme": {
+            "primary_color_hex": "#54ac94"
+          }
+        }
+      ]
+    },
+    {
+      "description": "A receipt token for lent USDC issued by the Neptune Protocol.",
+      "denom_units": [
+        {
+          "denom": "ibc/7D22B3B8C52261AB0A5F8360B5F472C9A14A05ADFEF858C3573D09AFF10CE1BE",
+          "exponent": 0,
+          "aliases": [
+            "inj1dafy7fv7qczzatd98dv8hekx6ssckrflswpjaz"
+          ]
+        },
+        {
+          "denom": "nUSDC",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/7D22B3B8C52261AB0A5F8360B5F472C9A14A05ADFEF858C3573D09AFF10CE1BE",
+      "name": "Neptune Receipt USDC",
+      "display": "nUSDC",
+      "symbol": "nUSDC",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Circle"
+        },
+        {
+          "type": "additional-mintage",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+          },
+          "provider": "Circle"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "noble",
+            "base_denom": "uusdc",
+            "channel_id": "channel-31"
+          },
+          "chain": {
+            "channel_id": "channel-148",
+            "path": "transfer/channel-148/uusdc"
+          }
+        },
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "injective",
+            "base_denom": "ibc/2CBC2EA121AE42563B08028466F37B600F2D7D4282342DE938283CC3FB2BC00E",
+            "contract": "inj1nc7gjkf2mhp34a6gquhurg8qahnw5kxs5u3s4u"
+          },
+          "provider": "Neptune"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "injective",
+            "base_denom": "inj1dafy7fv7qczzatd98dv8hekx6ssckrflswpjaz",
+            "channel_id": "channel-8"
+          },
+          "chain": {
+            "channel_id": "channel-122",
+            "path": "transfer/channel-122/inj1dafy7fv7qczzatd98dv8hekx6ssckrflswpjaz"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/nusdc.png"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "injective",
+            "base_denom": "inj1dafy7fv7qczzatd98dv8hekx6ssckrflswpjaz"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/nusdc.png",
+          "theme": {
+            "primary_color_hex": "#2775ca"
+          }
+        }
+      ]
     },
     {
       "description": "Kima is an asset-agnostic interoperability infrastructure that connects blockchain networks and legacy financial systems, enabling secure, scalable cross-chain transactions and seamless communication across ecosystems.",
@@ -26952,58 +27149,49 @@
       ]
     },
     {
-      "description": "Drop staked TIA",
+      "description": "Tek ovah!",
+      "extended_description": "Free yourself from your self. Embrace your status as a $PLEB.",
       "denom_units": [
         {
-          "denom": "ibc/C7A810C6ED1FC3FFC7C834A534D400EADC94FF7D3BE13DDD4C042AEF1816DFB4",
+          "denom": "ibc/EA0C8F1121425943740B2D1B1DC5BDD717D49A9D5A639DC7074C10E9212CC794",
           "exponent": 0,
           "aliases": [
-            "factory/neutron1ut4c6pv4u6vyu97yw48y8g7mle0cat54848v6m97k977022lzxtsaqsgmq/udtia"
+            "factory/stars1k7qsxdxh8calmt4txk75e6hdntefslegwddqnlwjjqgjkmcfqy0qa97sn8/pleb"
           ]
         },
         {
-          "denom": "dTIA",
+          "denom": "PLEB",
           "exponent": 6
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/C7A810C6ED1FC3FFC7C834A534D400EADC94FF7D3BE13DDD4C042AEF1816DFB4",
-      "name": "dTIA",
-      "display": "dTIA",
-      "symbol": "dTIA",
+      "base": "ibc/EA0C8F1121425943740B2D1B1DC5BDD717D49A9D5A639DC7074C10E9212CC794",
+      "name": "Pleb Coin",
+      "display": "PLEB",
+      "symbol": "PLEB",
       "traces": [
-        {
-          "type": "liquid-stake",
-          "counterparty": {
-            "chain_name": "celestia",
-            "base_denom": "utia"
-          },
-          "provider": "Drop Protocol"
-        },
         {
           "type": "ibc",
           "counterparty": {
-            "chain_name": "neutron",
-            "base_denom": "factory/neutron1ut4c6pv4u6vyu97yw48y8g7mle0cat54848v6m97k977022lzxtsaqsgmq/udtia",
-            "channel_id": "channel-10"
+            "chain_name": "stargaze",
+            "base_denom": "factory/stars1k7qsxdxh8calmt4txk75e6hdntefslegwddqnlwjjqgjkmcfqy0qa97sn8/pleb",
+            "channel_id": "channel-0"
           },
           "chain": {
-            "channel_id": "channel-874",
-            "path": "transfer/channel-874/factory/neutron1ut4c6pv4u6vyu97yw48y8g7mle0cat54848v6m97k977022lzxtsaqsgmq/udtia"
+            "channel_id": "channel-75",
+            "path": "transfer/channel-75/factory/stars1k7qsxdxh8calmt4txk75e6hdntefslegwddqnlwjjqgjkmcfqy0qa97sn8/pleb"
           }
         }
       ],
       "logo_URIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/dTIA.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/pleb.png"
       },
-      "images": [
-        {
-          "image_sync": {
-            "chain_name": "neutron",
-            "base_denom": "factory/neutron1ut4c6pv4u6vyu97yw48y8g7mle0cat54848v6m97k977022lzxtsaqsgmq/udtia"
-          },
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/dTIA.svg"
-        }
+      "socials": {
+        "website": "https://www.stargaze.zone/m/stargazepleb/tokens",
+        "twitter": "https://x.com/Pixl_Plebs"
+      },
+      "keywords": [
+        "meme"
       ]
     }
   ]

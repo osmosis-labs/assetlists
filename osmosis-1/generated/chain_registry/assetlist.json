@@ -26595,6 +26595,108 @@
       ]
     },
     {
+      "description": "A Stablecoin native to the Kopi blockchain",
+      "denom_units": [
+        {
+          "denom": "ibc/9D96CA156072940327E338910A956609A6533F08A231F455D02E5563EACCDD92",
+          "exponent": 0,
+          "aliases": [
+            "ukusd"
+          ]
+        },
+        {
+          "denom": "kUSD",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/9D96CA156072940327E338910A956609A6533F08A231F455D02E5563EACCDD92",
+      "name": "kUSD",
+      "display": "kUSD",
+      "symbol": "kUSD",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Kopi"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "kopi",
+            "base_denom": "ukusd",
+            "channel_id": "channel-6"
+          },
+          "chain": {
+            "channel_id": "channel-88475",
+            "path": "transfer/channel-88475/ukusd"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kopi/images/kusd.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "kopi",
+            "base_denom": "ukusd"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kopi/images/kusd.svg"
+        }
+      ]
+    },
+    {
+      "description": "The native token of kopi",
+      "denom_units": [
+        {
+          "denom": "ibc/CC5F27D641567D2E767E01BF454A9683FA181A9B313ABF9A7FC70DB798C073CD",
+          "exponent": 0,
+          "aliases": [
+            "ukopi"
+          ]
+        },
+        {
+          "denom": "XKP",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/CC5F27D641567D2E767E01BF454A9683FA181A9B313ABF9A7FC70DB798C073CD",
+      "name": "Kopi",
+      "display": "XKP",
+      "symbol": "XKP",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "kopi",
+            "base_denom": "ukopi",
+            "channel_id": "channel-6"
+          },
+          "chain": {
+            "channel_id": "channel-88475",
+            "path": "transfer/channel-88475/ukopi"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kopi/images/kopi.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "kopi",
+            "base_denom": "ukopi"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kopi/images/kopi.svg"
+        }
+      ]
+    },
+    {
       "description": "Kima is an asset-agnostic interoperability infrastructure that connects blockchain networks and legacy financial systems, enabling secure, scalable cross-chain transactions and seamless communication across ecosystems.",
       "denom_units": [
         {

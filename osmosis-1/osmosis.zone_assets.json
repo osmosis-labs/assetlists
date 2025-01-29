@@ -149,11 +149,10 @@
       "path": "transfer/channel-208/wbnb-wei",
       "osmosis_verified": true,
       "override_properties": {
-        "name": "Binance Coin"
-      },
-      "canonical": {
-        "chain_name": "binancesmartchain",
-        "base_denom": "wei"
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bnb.axl.svg"
+        },
+        "use_asset_name": true
       },
       "_comment": "Binance Coin $BNB"
     },
@@ -2464,9 +2463,10 @@
       "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh",
       "osmosis_verified": true,
       "osmosis_disabled": true,
-      "canonical": {
-        "chain_name": "sui",
-        "base_denom": "0x2::sui::SUI"
+      "override_properties": {
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sui.wh.svg"
+        }
       },
       "transfer_methods": [
         {
@@ -2491,12 +2491,8 @@
       "osmosis_verified": true,
       "override_properties": {
         "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/aptos/images/apt-dm.svg"
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/apt.wh.svg"
         }
-      },
-      "canonical": {
-        "chain_name": "aptos",
-        "base_denom": "0x1::aptos_coin::AptosCoin"
       },
       "transfer_methods": [
         {
@@ -5535,11 +5531,13 @@
       "osmosis_verified": false,
       "override_properties": {
         "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbbtc.axl.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbbtc.axl.png"
-        }
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbBTC.base.axl.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbBTC.base.axl.png"
+        },
+        "name": "Coinbase Wrapped BTC (Base via Axelar)",
+        "symbol": "$cbBTC.base.axl"
       },
-      "_comment": "Coinbase Wrapped BTC (Axelar) $cbBTC.axl"
+      "_comment": "Coinbase Wrapped BTC (Base via Axelar) $cbBTC.base.axl"
     },
     {
       "chain_name": "axelar",
@@ -6027,6 +6025,9 @@
       "base_denom": "factory/osmo1zetxzc5nka4jm203ljjtjf933jwjh45ge6spfeef447rnnhqxc4qrazrcz/alloyed/allBNB",
       "osmosis_verified": false,
       "is_alloyed": true,
+      "override_properties": {
+        "use_asset_name": true
+      },
       "canonical": {
         "chain_name": "binancesmartchain",
         "base_denom": "wei"

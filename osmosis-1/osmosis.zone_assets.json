@@ -148,11 +148,11 @@
       "base_denom": "wbnb-wei",
       "path": "transfer/channel-208/wbnb-wei",
       "osmosis_verified": true,
-      "use_asset_name": true,
       "override_properties": {
         "logo_URIs": {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bnb.axl.svg"
         }
+        "use_asset_name": true,
       },
       "_comment": "Binance Coin $BNB"
     },
@@ -6025,7 +6025,9 @@
       "base_denom": "factory/osmo1zetxzc5nka4jm203ljjtjf933jwjh45ge6spfeef447rnnhqxc4qrazrcz/alloyed/allBNB",
       "osmosis_verified": false,
       "is_alloyed": true,
-      "use_asset_name": true,
+      "override_properties": {
+        "use_asset_name": true
+      },
       "canonical": {
         "chain_name": "binancesmartchain",
         "base_denom": "wei"

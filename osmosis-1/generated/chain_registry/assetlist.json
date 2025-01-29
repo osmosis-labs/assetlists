@@ -641,9 +641,9 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/F4A070A6D78496D53127EA85C094A9EC87DFC1F36071B8CCDDBD020F933D213D",
-      "name": "Binance Coin",
+      "name": "Binance Coin (Axelar)",
       "display": "wbnb",
-      "symbol": "BNB",
+      "symbol": "BNB.axl",
       "traces": [
         {
           "type": "wrapped",
@@ -678,10 +678,25 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/bnb.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/bnb.svg"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bnb.axl.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bnb.axl.png"
       },
       "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bnb.axl.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bnb.axl.png"
+        },
+        {
+          "image_sync": {
+            "chain_name": "axelar",
+            "base_denom": "wbnb-wei"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/wbnb.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/wbnb.svg",
+          "theme": {
+            "primary_color_hex": "#f3bb0c"
+          }
+        },
         {
           "image_sync": {
             "chain_name": "binancesmartchain",
@@ -12374,9 +12389,9 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/B1C287C2701774522570010EEBCD864BCB7AB714711B3AA218699FDD75E832F5",
-      "name": "Sui",
+      "name": "Sui (Wormhole)",
       "display": "wormhole/46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh/8",
-      "symbol": "SUI",
+      "symbol": "SUI.wh",
       "traces": [
         {
           "type": "bridge",
@@ -12400,13 +12415,18 @@
         }
       ],
       "logo_URIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/sui/images/sui.svg"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sui.wh.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sui.wh.png"
       },
       "images": [
         {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sui.wh.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sui.wh.png"
+        },
+        {
           "image_sync": {
-            "chain_name": "sui",
-            "base_denom": "0x2::sui::SUI"
+            "chain_name": "gateway",
+            "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh"
           },
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/sui/images/sui.svg"
         }
@@ -12430,9 +12450,9 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/A4D176906C1646949574B48C1928D475F2DF56DE0AC04E1C99B08F90BC21ABDE",
-      "name": "Aptos Coin",
+      "name": "Aptos Coin (Wormhole)",
       "display": "wormhole/5wS2fGojbL9RhGEAeQBdkHPUAciYDxjDTMYvdf9aDn2r/8",
-      "symbol": "APT",
+      "symbol": "APT.wh",
       "traces": [
         {
           "type": "bridge",
@@ -12456,21 +12476,26 @@
         }
       ],
       "logo_URIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/aptos/images/apt-dm.svg"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/apt.wh.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/apt.wh.png"
       },
       "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/apt.wh.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/apt.wh.png"
+        },
+        {
+          "image_sync": {
+            "chain_name": "gateway",
+            "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5wS2fGojbL9RhGEAeQBdkHPUAciYDxjDTMYvdf9aDn2r"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/aptos/images/aptos.svg"
+        },
         {
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/aptos/images/apt-dm.svg",
           "theme": {
             "dark_mode": true
           }
-        },
-        {
-          "image_sync": {
-            "chain_name": "aptos",
-            "base_denom": "0x1::aptos_coin::AptosCoin"
-          },
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/aptos/images/aptos.svg"
         }
       ]
     },
@@ -24790,9 +24815,9 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/616C2EA69BC328F245CE449785CB0B526B462C48F19DCF9B3D30699579B4308A",
-      "name": "Coinbase Wrapped BTC (Axelar)",
+      "name": "Coinbase Wrapped BTC (Base via Axelar)",
       "display": "cbbtc",
-      "symbol": "cbBTC.axl",
+      "symbol": "$cbBTC.base.axl",
       "traces": [
         {
           "type": "synthetic",
@@ -24824,13 +24849,13 @@
         }
       ],
       "logo_URIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbbtc.axl.svg",
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbbtc.axl.png"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbBTC.base.axl.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbBTC.base.axl.png"
       },
       "images": [
         {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbbtc.axl.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbbtc.axl.png"
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbBTC.base.axl.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbBTC.base.axl.png"
         },
         {
           "image_sync": {

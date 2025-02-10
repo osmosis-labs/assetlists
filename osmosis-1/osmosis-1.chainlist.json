@@ -10299,6 +10299,71 @@
         "ibc-transfer",
         "cosmwasm"
       ]
+    },
+    {
+      "chain_name": "sidechain",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Side Chain",
+      "chain_id": "sidechain-1",
+      "bech32_prefix": "side",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "side",
+        "bech32PrefixAccPub": "sidepub",
+        "bech32PrefixValAddr": "sidevaloper",
+        "bech32PrefixValPub": "sidevaloperpub",
+        "bech32PrefixConsAddr": "sidevalcons",
+        "bech32PrefixConsPub": "sidevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uside",
+            "fixed_min_gas_price": 0.0006,
+            "low_gas_price": 0.0006,
+            "average_gas_price": 0.0008,
+            "high_gas_price": 0.001
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uside"
+          }
+        ]
+      },
+      "description": "The other side of Bitcoin, a fully Bitcoin-Compatible L1 blockchain for the BTCFi",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.side.one"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.side.one"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://ping.pub/side/tx/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sidechain/images/side.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sidechain/images/side.svg",
+        "theme": {
+          "primary_color_hex": "#f7771a"
+        }
+      },
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm"
+      ]
     }
   ]
 }

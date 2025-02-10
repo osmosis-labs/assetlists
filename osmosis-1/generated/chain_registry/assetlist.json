@@ -27263,10 +27263,18 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/8765FF0D37A7A85357ED28061EDEBC736743216DB06FE92231957CE158FB351E",
-      "name": "BTC-pegged token on Side Chain",
+      "name": "Side Bitcoin",
       "display": "sBTC",
-      "symbol": "SBTC",
+      "symbol": "sBTC",
       "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "bitcoin",
+            "base_denom": "sat"
+          },
+          "provider": "Side Chain"
+        },
         {
           "type": "ibc",
           "counterparty": {

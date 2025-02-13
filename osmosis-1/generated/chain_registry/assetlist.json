@@ -26624,7 +26624,7 @@
       "description": "A Stablecoin native to the Kopi blockchain",
       "denom_units": [
         {
-          "denom": "ibc/9D96CA156072940327E338910A956609A6533F08A231F455D02E5563EACCDD92",
+          "denom": "ibc/2C43B074A5C7C3FB32EB8FA85239FCF887312BC960F373BC1EF1EE8517A0B996",
           "exponent": 0,
           "aliases": [
             "ukusd"
@@ -26636,7 +26636,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/9D96CA156072940327E338910A956609A6533F08A231F455D02E5563EACCDD92",
+      "base": "ibc/2C43B074A5C7C3FB32EB8FA85239FCF887312BC960F373BC1EF1EE8517A0B996",
       "name": "kUSD",
       "display": "kUSD",
       "symbol": "kUSD",
@@ -26654,11 +26654,11 @@
           "counterparty": {
             "chain_name": "kopi",
             "base_denom": "ukusd",
-            "channel_id": "channel-6"
+            "channel_id": "channel-10"
           },
           "chain": {
-            "channel_id": "channel-88475",
-            "path": "transfer/channel-88475/ukusd"
+            "channel_id": "channel-97998",
+            "path": "transfer/channel-97998/ukusd"
           }
         }
       ],
@@ -26679,7 +26679,7 @@
       "description": "The native token of kopi",
       "denom_units": [
         {
-          "denom": "ibc/CC5F27D641567D2E767E01BF454A9683FA181A9B313ABF9A7FC70DB798C073CD",
+          "denom": "ibc/86E7DAA73DD4AEA7319C77A81CF202A02BD094AE8550EEEAB06DF31749B6E05C",
           "exponent": 0,
           "aliases": [
             "ukopi"
@@ -26691,7 +26691,7 @@
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/CC5F27D641567D2E767E01BF454A9683FA181A9B313ABF9A7FC70DB798C073CD",
+      "base": "ibc/86E7DAA73DD4AEA7319C77A81CF202A02BD094AE8550EEEAB06DF31749B6E05C",
       "name": "Kopi",
       "display": "XKP",
       "symbol": "XKP",
@@ -26701,11 +26701,11 @@
           "counterparty": {
             "chain_name": "kopi",
             "base_denom": "ukopi",
-            "channel_id": "channel-6"
+            "channel_id": "channel-10"
           },
           "chain": {
-            "channel_id": "channel-88475",
-            "path": "transfer/channel-88475/ukopi"
+            "channel_id": "channel-97998",
+            "path": "transfer/channel-97998/ukopi"
           }
         }
       ],
@@ -27302,6 +27302,153 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sidechain/images/sBTC.png",
           "theme": {
             "primary_color_hex": "#f7771a"
+          }
+        }
+      ]
+    },
+    {
+      "description": "An alloy of DYDX asset variants on Osmosis.",
+      "extended_description": "Multiple DYDX variants on Osmosis comprise the liquidity backing of a tokenized transmuter pool to create an alloy of DYDX.",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1zem8r6dv6u38f6qpg546zy30946av8h5srgug0s4gcyy6cfecf3seac083/alloyed/allDYDX",
+          "exponent": 0
+        },
+        {
+          "denom": "allDYDX",
+          "exponent": 12
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1zem8r6dv6u38f6qpg546zy30946av8h5srgug0s4gcyy6cfecf3seac083",
+      "base": "factory/osmo1zem8r6dv6u38f6qpg546zy30946av8h5srgug0s4gcyy6cfecf3seac083/alloyed/allDYDX",
+      "name": "dYdX Protocol",
+      "display": "allDYDX",
+      "symbol": "DYDX",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "dydx",
+            "base_denom": "adydx"
+          },
+          "provider": "Osmosis"
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "dydx",
+            "base_denom": "adydx"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.svg",
+          "theme": {
+            "primary_color_hex": "#21212f"
+          }
+        },
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx-circle.svg",
+          "theme": {
+            "circle": true
+          }
+        }
+      ]
+    },
+    {
+      "description": "An alloy of FET asset variants on Osmosis.",
+      "extended_description": "Multiple FET variants on Osmosis comprise the liquidity backing of a tokenized transmuter pool to create an alloy of FET.",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1mdvn6lmykp2z345ncpf647dztslyll8cyhwj9pltrc0lf7nva3cqvrp6qs/alloyed/allFET",
+          "exponent": 0
+        },
+        {
+          "denom": "allFET",
+          "exponent": 12
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1mdvn6lmykp2z345ncpf647dztslyll8cyhwj9pltrc0lf7nva3cqvrp6qs",
+      "base": "factory/osmo1mdvn6lmykp2z345ncpf647dztslyll8cyhwj9pltrc0lf7nva3cqvrp6qs/alloyed/allFET",
+      "name": "Fetch.ai",
+      "display": "allFET",
+      "symbol": "FET",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "fetchhub",
+            "base_denom": "afet"
+          },
+          "provider": "Osmosis"
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fetchhub/images/fet.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fetchhub/images/fet.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "fetchhub",
+            "base_denom": "afet"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fetchhub/images/fet.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fetchhub/images/fet.svg",
+          "theme": {
+            "primary_color_hex": "#1c2444"
+          }
+        }
+      ]
+    },
+    {
+      "description": "An alloy of AIOZ asset variants on Osmosis.",
+      "extended_description": "Multiple AIOZ variants on Osmosis comprise the liquidity backing of a tokenized transmuter pool to create an alloy of AIOZ.",
+      "denom_units": [
+        {
+          "denom": "factory/osmo17ceugf0nnkk228k2sulemn0s9pl3yg554462eexxs3pgq8p629us98gqae/alloyed/allAIOZ",
+          "exponent": 0
+        },
+        {
+          "denom": "allAIOZ",
+          "exponent": 12
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo17ceugf0nnkk228k2sulemn0s9pl3yg554462eexxs3pgq8p629us98gqae",
+      "base": "factory/osmo17ceugf0nnkk228k2sulemn0s9pl3yg554462eexxs3pgq8p629us98gqae/alloyed/allAIOZ",
+      "name": "AIOZ Network",
+      "display": "allAIOZ",
+      "symbol": "AIOZ",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "aioz",
+            "base_denom": "attoaioz"
+          },
+          "provider": "Osmosis"
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aioz/images/aioz.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aioz/images/aioz.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "aioz",
+            "base_denom": "attoaioz"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aioz/images/aioz.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aioz/images/aioz.svg",
+          "theme": {
+            "primary_color_hex": "#24241c"
           }
         }
       ]

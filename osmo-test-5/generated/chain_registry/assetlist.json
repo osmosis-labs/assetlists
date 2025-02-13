@@ -21,6 +21,16 @@
       "name": "Osmosis Testnet",
       "display": "osmo",
       "symbol": "OSMO",
+      "traces": [
+        {
+          "type": "test-mintage",
+          "counterparty": {
+            "chain_name": "osmosis",
+            "base_denom": "uosmo"
+          },
+          "provider": "Osmosis"
+        }
+      ],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
@@ -53,6 +63,16 @@
       "name": "Ion",
       "display": "ion",
       "symbol": "ION",
+      "traces": [
+        {
+          "type": "test-mintage",
+          "counterparty": {
+            "chain_name": "osmosis",
+            "base_denom": "uion"
+          },
+          "provider": "Osmosis"
+        }
+      ],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
@@ -206,6 +226,14 @@
       "display": "weth",
       "symbol": "ETH",
       "traces": [
+        {
+          "type": "test-mintage",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "wei"
+          },
+          "provider": "Ethereum"
+        },
         {
           "type": "wrapped",
           "counterparty": {
@@ -564,6 +592,14 @@
       "symbol": "QCK",
       "traces": [
         {
+          "type": "test-mintage",
+          "counterparty": {
+            "chain_name": "quicksilver",
+            "base_denom": "uqck"
+          },
+          "provider": "Quicksilver"
+        },
+        {
           "type": "ibc",
           "counterparty": {
             "chain_name": "quicksilvertestnet",
@@ -657,6 +693,14 @@
       "display": "xprt",
       "symbol": "XPRT",
       "traces": [
+        {
+          "type": "test-mintage",
+          "counterparty": {
+            "chain_name": "persistence",
+            "base_denom": "uxprt"
+          },
+          "provider": "Persistence"
+        },
         {
           "type": "ibc",
           "counterparty": {
@@ -977,7 +1021,7 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/6DF48956F5C1CD055E347364102A8FD39281381983E557365C3961320677545C",
-      "name": "KIMA",
+      "name": "Kima Network Testnet",
       "display": "KIMA",
       "symbol": "KIMA",
       "traces": [

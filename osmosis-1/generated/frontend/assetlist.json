@@ -13,8 +13,8 @@
       },
       "coingeckoId": "osmosis",
       "price": {
-        "poolId": "1464",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1135",
+        "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
       },
       "categories": [
         "defi"
@@ -3229,8 +3229,8 @@
       "preview": false
     },
     {
-      "chainName": "osmosis",
-      "sourceDenom": "ibc/5D1F516200EE8C6B2354102143B78A2DEDA25EDE771AC0F8DC3C1837C8FD4447",
+      "chainName": "fetchhub",
+      "sourceDenom": "afet",
       "coinMinimalDenom": "ibc/5D1F516200EE8C6B2354102143B78A2DEDA25EDE771AC0F8DC3C1837C8FD4447",
       "symbol": "FET.fet",
       "decimals": 18,
@@ -3246,7 +3246,24 @@
       "categories": [
         "ai"
       ],
-      "transferMethods": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "fetchhub",
+            "chainId": "fetchhub-4",
+            "sourceDenom": "afet",
+            "port": "transfer",
+            "channelId": "channel-10"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-229",
+            "path": "transfer/channel-229/afet"
+          }
+        }
+      ],
       "counterparty": [
         {
           "chainName": "fetchhub",
@@ -3261,7 +3278,7 @@
           }
         }
       ],
-      "variantGroupKey": "factory/osmo1mdvn6lmykp2z345ncpf647dztslyll8cyhwj9pltrc0lf7nva3cqvrp6qs/alloyed/allFET",
+      "variantGroupKey": "ibc/5D1F516200EE8C6B2354102143B78A2DEDA25EDE771AC0F8DC3C1837C8FD4447",
       "name": "Fetch.ai (Fetch.ai)",
       "isAlloyed": false,
       "verified": true,
@@ -10085,8 +10102,8 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/celestims.png"
       },
       "price": {
-        "poolId": "2235",
-        "denom": "factory/osmo1rckme96ptawr4zwexxj5g5gej9s2dmud8r2t9j0k0prn5mch5g4snzzwjv/sail"
+        "poolId": "974",
+        "denom": "uosmo"
       },
       "categories": [],
       "transferMethods": [
@@ -10790,8 +10807,8 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fil.axl.svg"
       },
       "price": {
-        "poolId": "1562",
-        "denom": "ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4"
+        "poolId": "2414",
+        "denom": "factory/osmo18zdw5yvs6gfp95rp74qqwug9yduw2fyr8kplk2xgs726s9axc5usa2vpgw/alloyed/allLINK"
       },
       "categories": [
         "dweb",
@@ -11121,8 +11138,8 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/silica.png"
       },
       "price": {
-        "poolId": "1023",
-        "denom": "ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F"
+        "poolId": "983",
+        "denom": "uosmo"
       },
       "categories": [],
       "transferMethods": [
@@ -14186,8 +14203,8 @@
       },
       "coingeckoId": "collateralized-debt-token",
       "price": {
-        "poolId": "1268",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "2698",
+        "denom": "ibc/BC26A7A805ECD6822719472BCB7842A48EF09DF206182F8F259B2593EB5D23FB"
       },
       "categories": [
         "stablecoin",
@@ -14625,8 +14642,8 @@
       "preview": false
     },
     {
-      "chainName": "osmosis",
-      "sourceDenom": "ibc/831F0B1BBB1D08A2B75311892876D71565478C532967545476DF4C2D7492E48C",
+      "chainName": "dydx",
+      "sourceDenom": "adydx",
       "coinMinimalDenom": "ibc/831F0B1BBB1D08A2B75311892876D71565478C532967545476DF4C2D7492E48C",
       "symbol": "DYDX.dydx",
       "decimals": 18,
@@ -14641,7 +14658,24 @@
       "categories": [
         "defi"
       ],
-      "transferMethods": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "dydx",
+            "chainId": "dydx-mainnet-1",
+            "sourceDenom": "adydx",
+            "port": "transfer",
+            "channelId": "channel-3"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-6787",
+            "path": "transfer/channel-6787/adydx"
+          }
+        }
+      ],
       "counterparty": [
         {
           "chainName": "dydx",
@@ -14656,7 +14690,7 @@
           }
         }
       ],
-      "variantGroupKey": "factory/osmo1zem8r6dv6u38f6qpg546zy30946av8h5srgug0s4gcyy6cfecf3seac083/alloyed/allDYDX",
+      "variantGroupKey": "ibc/831F0B1BBB1D08A2B75311892876D71565478C532967545476DF4C2D7492E48C",
       "name": "dYdX Protocol (dYdX Protocol)",
       "isAlloyed": false,
       "verified": true,
@@ -14977,8 +15011,8 @@
       },
       "coingeckoId": "wrapped-steth",
       "price": {
-        "poolId": "1988",
-        "denom": "factory/osmo1k6c8jln7ejuqwtqmay3yvzrg3kueaczl96pk067ldg8u835w0yhsw27twm/alloyed/allETH"
+        "poolId": "1742",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "liquid_staking"
@@ -15142,8 +15176,8 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bostrom/images/hydrogen.svg"
       },
       "price": {
-        "poolId": "1560",
-        "denom": "ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4"
+        "poolId": "1330",
+        "denom": "uosmo"
       },
       "categories": [],
       "transferMethods": [
@@ -15197,8 +15231,8 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bostrom/images/tocyb.svg"
       },
       "price": {
-        "poolId": "986",
-        "denom": "uosmo"
+        "poolId": "1310",
+        "denom": "ibc/4F3B0EC2FE2D370D10C3671A1B7B06D2A964C721470C305CBB846ED60E6CAA20"
       },
       "categories": [],
       "transferMethods": [
@@ -16969,7 +17003,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/sttia.svg"
       },
       "price": {
-        "poolId": "1428",
+        "poolId": "1476",
         "denom": "ibc/D79E7D83AB399BFFF93433E54FAA480C191248FC556924A2A8351AE2638B3877"
       },
       "categories": [
@@ -17991,8 +18025,8 @@
       "preview": false
     },
     {
-      "chainName": "osmosis",
-      "sourceDenom": "ibc/BB0AFE2AFBD6E883690DAE4B9168EAC2B306BCC9C9292DACBB4152BBB08DB25F",
+      "chainName": "aioz",
+      "sourceDenom": "attoaioz",
       "coinMinimalDenom": "ibc/BB0AFE2AFBD6E883690DAE4B9168EAC2B306BCC9C9292DACBB4152BBB08DB25F",
       "symbol": "AIOZ.aioz",
       "decimals": 18,
@@ -18014,6 +18048,22 @@
           "name": "Osmosis Pro TFM IBC Transfer",
           "type": "external_interface",
           "depositUrl": "https://pro.osmosis.zone/ibc?chainFrom=aioz_168-1&chainTo=osmosis-1&token0=attoaioz&token1=ibc%2FBB0AFE2AFBD6E883690DAE4B9168EAC2B306BCC9C9292DACBB4152BBB08DB25F"
+        },
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "aioz",
+            "chainId": "aioz_168-1",
+            "sourceDenom": "attoaioz",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-779",
+            "path": "transfer/channel-779/attoaioz"
+          }
         }
       ],
       "counterparty": [
@@ -18030,7 +18080,7 @@
           }
         }
       ],
-      "variantGroupKey": "factory/osmo17ceugf0nnkk228k2sulemn0s9pl3yg554462eexxs3pgq8p629us98gqae/alloyed/allAIOZ",
+      "variantGroupKey": "ibc/BB0AFE2AFBD6E883690DAE4B9168EAC2B306BCC9C9292DACBB4152BBB08DB25F",
       "name": "AIOZ (AIOZ)",
       "isAlloyed": false,
       "verified": true,
@@ -23141,8 +23191,8 @@
       },
       "coingeckoId": "ethereum",
       "price": {
-        "poolId": "1948",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1988",
+        "denom": "ibc/2F21E6D4271DE3F561F20A02CD541DAF7405B1E9CB3B9B07E3C2AC7D8A4338A5"
       },
       "categories": [],
       "transferMethods": [],
@@ -28361,7 +28411,7 @@
           }
         }
       ],
-      "variantGroupKey": "factory/osmo1zem8r6dv6u38f6qpg546zy30946av8h5srgug0s4gcyy6cfecf3seac083/alloyed/allDYDX",
+      "variantGroupKey": "ibc/831F0B1BBB1D08A2B75311892876D71565478C532967545476DF4C2D7492E48C",
       "name": "dYdX Protocol",
       "isAlloyed": true,
       "contract": "osmo1zem8r6dv6u38f6qpg546zy30946av8h5srgug0s4gcyy6cfecf3seac083",
@@ -28401,7 +28451,7 @@
           }
         }
       ],
-      "variantGroupKey": "factory/osmo1mdvn6lmykp2z345ncpf647dztslyll8cyhwj9pltrc0lf7nva3cqvrp6qs/alloyed/allFET",
+      "variantGroupKey": "ibc/5D1F516200EE8C6B2354102143B78A2DEDA25EDE771AC0F8DC3C1837C8FD4447",
       "name": "Fetch.ai",
       "isAlloyed": true,
       "contract": "osmo1mdvn6lmykp2z345ncpf647dztslyll8cyhwj9pltrc0lf7nva3cqvrp6qs",
@@ -28441,7 +28491,7 @@
           }
         }
       ],
-      "variantGroupKey": "factory/osmo17ceugf0nnkk228k2sulemn0s9pl3yg554462eexxs3pgq8p629us98gqae/alloyed/allAIOZ",
+      "variantGroupKey": "ibc/BB0AFE2AFBD6E883690DAE4B9168EAC2B306BCC9C9292DACBB4152BBB08DB25F",
       "name": "AIOZ Network",
       "isAlloyed": true,
       "contract": "osmo17ceugf0nnkk228k2sulemn0s9pl3yg554462eexxs3pgq8p629us98gqae",

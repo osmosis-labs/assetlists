@@ -14,7 +14,7 @@ import * as state from "./update_assetlist_state.mjs";
 
 
 //-- Flags --
-const getPools = true;
+const getPools = false; //turn back to true!!!!
 const getRelatedAssets = false; //not implemented
 
 
@@ -55,7 +55,7 @@ const generateAssets = async (
 
     //--Establish Asset Data--
     let asset_data = {
-      chainName: chainName,
+      chainName: chainName, //osmosis vs osmosistestnet vs osmosistestnet4 vs ...
       zone_config: zoneConfig,
       zone_asset: zone_asset,
       frontend: {},
@@ -76,15 +76,18 @@ const generateAssets = async (
     await assetlist.setLocalAsset(asset_data);
 
     //canonical_asset (e.g., pstake on Ethereum, usdc on ethereum)
-    assetlist.setCanonicalAsset(asset_data);
+    //assetlist.setCanonicalAsset(asset_data);
 
     //Identity Asset (e.g., WBTC.axl originates from WBTC on Ethereum--NOT BTC)
-    assetlist.setIdentityAsset(asset_data);
+    //assetlist.setIdentityAsset(asset_data);
 
     //Add to array of Asset data
     asset_datas.push(asset_data);
 
   });
+
+  assetlist.setCanonicalAssets(asset_datas);
+  assetlist.setIdentityAssets(asset_datas);
 
   asset_datas.forEach((asset_data) => {
     assetlist.setSourceDenom(asset_data);

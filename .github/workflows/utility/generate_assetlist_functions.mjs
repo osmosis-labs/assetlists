@@ -94,6 +94,13 @@ export function createKey(obj) {
   return JSON.stringify(obj);
 }
 
+export function createAssetKey(assetObject) {
+  if (!assetObject?.chain_name || !assetObject?.base_denom) {
+    console.log("Argument is not an asset object. Cannot create asset key.");
+  }
+  return `${assetObject.chain_name}:${assetObject.base_denom}`;
+}
+
 export function createCombinedKey(obj, additionalProperty) {
   return `${createKey(obj)}:${additionalProperty}`;
 }
@@ -118,20 +125,21 @@ export function deepCopy(obj) {
 }
 
 
-export async function setSourceAsset(asset_data) {
-
-  if (
-    !asset_data.zone_asset
-  ) { return; }
-
+export function setSourceAsset(asset_data) {
   asset_data.source_asset = {
-    chain_name: asset_data.zone_asset.chain_name,
-    base_denom: asset_data.zone_asset.base_denom
+    chain_name: asset_data?.zone_asset?.chain_name,
+    base_denom: asset_data?.zone_asset?.base_denom
   }
-
-  return;
-
 }
+
+function getZoneAssetKey(asset_data) {
+  return { chain_name: asset_data?.zone_asset?.chain_name, base_denom: asset_data?.zone_asset?.base_denom }
+}
+
+//which is source asset? ibc source...
+//export function getIbcSourceAsset(asset_data) {
+
+//}
 
 
 export function getAssetTrace(asset_data) {
@@ -355,6 +363,40 @@ export function setCanonicalAsset(asset_data) {
   asset_data.canonical_asset = asset_data.zone_asset?.canonical ?? asset_data.source_asset;
 
 }
+
+export function setCanonicalAssets(asset_datas) {
+
+  //Create a Set of hardcoded Canonical Assets--will be used to make sure there is no conflict
+  const hardcodedCanonicalAssets = new Set();
+  asset_datas.forEach((asset_data) => {
+    if (!asset_data.zone_asset?.canonical) { return; }
+    const assetKey = createAssetKey(asset_data.zone_asset?.canonical);
+    if (hardcodedCanonicalAssets.has(assetKey)) {
+      throw error(`Error: Canonical Asset already exists: ${assetKey}. Overwriting...`);
+    }
+    hardcodedCanonicalAssets.add(assetKey);
+  });
+
+  asset_datas.forEach((asset_data) => {
+    if (asset_data.zone_asset?.canonical) { //when canonical is hardcoded for this asset...
+      asset_data.canonical_asset = asset_data.zone_asset.canonical;
+      return;
+    }
+    if (hardcodedCanonicalAssets.has(createAssetKey(asset_data.source_asset))) { //when another asset already has hardcoded claim the source asset...
+      console.log(`${createAssetKey(asset_data.source_asset)} is already used as canonical asset. Using local asset instead.`);
+      asset_data.canonical_asset = asset_data.local_asset;
+      return;
+    }
+    asset_data.canonical_asset = asset_data.source_asset; //otherwise default to using source asset
+  });
+}
+
+export function setIdentityAssets(asset_datas) {
+  asset_datas.forEach((asset_data) => {
+    setIdentityAsset(asset_data);
+  });
+}
+
 
 
 export function setIdentityAsset(asset_data) {

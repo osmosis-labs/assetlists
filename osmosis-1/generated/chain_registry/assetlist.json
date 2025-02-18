@@ -3076,7 +3076,8 @@
             "primary_color_hex": "#1c2444"
           }
         }
-      ]
+      ],
+      "coingecko_id": "fetch-ai"
     },
     {
       "description": "The native token of Asset Mantle",
@@ -13574,7 +13575,8 @@
             "primary_color_hex": "#21212f"
           }
         }
-      ]
+      ],
+      "coingecko_id": "dydx-chain"
     },
     {
       "description": "The native staking token of the Function X",
@@ -16805,7 +16807,8 @@
             "primary_color_hex": "#24241c"
           }
         }
-      ]
+      ],
+      "coingecko_id": "aioz-network"
     },
     {
       "description": "Stride's liquid staked DYM",
@@ -27450,6 +27453,102 @@
           "theme": {
             "primary_color_hex": "#24241c"
           }
+        }
+      ]
+    },
+    {
+      "description": "The SAM token is a native memecoin on Oraichain.",
+      "denom_units": [
+        {
+          "denom": "ibc/E72E62E74112F379BB760D02515DA215408CCBF401CD4C9BC0A3DBD72A7076E1",
+          "exponent": 0,
+          "aliases": [
+            "factory/orai15rmny3cxv33rnzdr2lfdhjtslyzmrr0vdd28kp/SAM"
+          ]
+        },
+        {
+          "denom": "sam",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/E72E62E74112F379BB760D02515DA215408CCBF401CD4C9BC0A3DBD72A7076E1",
+      "name": "SAM",
+      "display": "sam",
+      "symbol": "SAM",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "oraichain",
+            "base_denom": "factory/orai15rmny3cxv33rnzdr2lfdhjtslyzmrr0vdd28kp/SAM",
+            "channel_id": "channel-13"
+          },
+          "chain": {
+            "channel_id": "channel-216",
+            "path": "transfer/channel-216/factory/orai15rmny3cxv33rnzdr2lfdhjtslyzmrr0vdd28kp/SAM"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/sam.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/sam.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "oraichain",
+            "base_denom": "factory/orai15rmny3cxv33rnzdr2lfdhjtslyzmrr0vdd28kp/SAM"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/sam.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/sam.svg"
+        }
+      ]
+    },
+    {
+      "description": "Staking coin of Emporion",
+      "denom_units": [
+        {
+          "denom": "ibc/6178310C049238B538203D57BFF17481C7E8E11C9D7EA204D2C9B1E67D914F78",
+          "exponent": 0,
+          "aliases": [
+            "factory/juno1zjqsel42pj5e6wvxxw7hjs9gn06yqz4m3ffyua3x2v44m4l8trjsr92q9s/empr"
+          ]
+        },
+        {
+          "denom": "EMPR",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/6178310C049238B538203D57BFF17481C7E8E11C9D7EA204D2C9B1E67D914F78",
+      "name": "EMPR",
+      "display": "EMPR",
+      "symbol": "EMPR",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "juno",
+            "base_denom": "factory/juno1zjqsel42pj5e6wvxxw7hjs9gn06yqz4m3ffyua3x2v44m4l8trjsr92q9s/empr",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-42",
+            "path": "transfer/channel-42/factory/juno1zjqsel42pj5e6wvxxw7hjs9gn06yqz4m3ffyua3x2v44m4l8trjsr92q9s/empr"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/empr.png"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "juno",
+            "base_denom": "factory/juno1zjqsel42pj5e6wvxxw7hjs9gn06yqz4m3ffyua3x2v44m4l8trjsr92q9s/empr"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/empr.png"
         }
       ]
     },

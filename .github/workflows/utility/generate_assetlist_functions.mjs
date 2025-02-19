@@ -1212,7 +1212,7 @@ export function setIdentityGroupKey(asset_data) {
 export function setBestOriginAsset(asset_data, asset_datas) {
 
   let assetTracesToOrigin = [];
-  const assetTraces = deepCopy(getAssetProperty(asset_data.source_asset, "traces"))?.reverse();
+  const assetTraces = deepCopy(getAssetProperty(asset_data.local_asset, "traces"))?.reverse();
   for (const trace of assetTraces) {
     if (originTraceTypes.includes(trace.type)) {
       assetTracesToOrigin.push(trace);
@@ -1220,14 +1220,8 @@ export function setBestOriginAsset(asset_data, asset_datas) {
       break;
     }
   }
-  if (asset_data.local_asset.base_denom === "ibc/078AD6F581E8115CDFBD8FFA29D8C71AFE250CE952AFF80040CBC64868D44AD3") {
-    console.log(assetTracesToOrigin?.[0].counterparty.base_denom);
-  }
   let origin_asset_data;
   assetTracesToOrigin.reverse();
-  if (asset_data.local_asset.base_denom === "ibc/078AD6F581E8115CDFBD8FFA29D8C71AFE250CE952AFF80040CBC64868D44AD3") {
-    console.log(assetTracesToOrigin?.[0].counterparty.base_denom);
-  }
   for (const trace of assetTracesToOrigin) {
     origin_asset_data = asset_datas.find(asset => 
       asset.canonical_asset.base_denom === trace.counterparty.base_denom &&
@@ -1237,6 +1231,7 @@ export function setBestOriginAsset(asset_data, asset_datas) {
       break;
     }
   }
+
   asset_data.frontend.originAsset = origin_asset_data?.local_asset.base_denom || asset_data.local_asset.base_denom;
 
 }

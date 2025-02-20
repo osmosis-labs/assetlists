@@ -1083,6 +1083,14 @@
     {
       "base_denom": "ibc/E750D31033DC1CF4A044C3AA0A8117401316DC918FBEBC4E3D34F91B09D5F54C",
       "listingDate": "2025-01-21T19:39:24.567Z"
+    },
+    {
+      "base_denom": "ibc/50F886EFA15E1FF3D9226B177083A1EFF944176181C70B6131D74FE5AFB1F2C0",
+      "listingDate": "2025-02-20T19:58:18.010Z"
+    },
+    {
+      "base_denom": "ibc/DC1DF96AB7F5109433C3D5FDADE83F8EC2D522B80FAB0593BC1A2781F36AD633",
+      "listingDate": "2025-02-20T19:58:18.010Z"
     }
   ],
   "chains": [
@@ -2057,7 +2065,7 @@
     },
     {
       "chain_name": "sommelier",
-      "validationDate": "2025-01-21T09:22:26.171Z",
+      "validationDate": "2025-02-20T19:57:47.446Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -2156,7 +2164,7 @@
     },
     {
       "chain_name": "konstellation",
-      "validationDate": "2025-01-22T20:25:30.039Z",
+      "validationDate": "2025-02-20T19:57:47.446Z",
       "validationSuccess": true,
       "validationResults": [
         {
@@ -2222,12 +2230,12 @@
     },
     {
       "chain_name": "gravitybridge",
-      "validationDate": "2024-12-11T21:06:36.707Z",
+      "validationDate": "2025-02-20T19:57:47.446Z",
       "validationSuccess": false,
       "validationResults": [
         {
-          "test": "RPC WSS",
-          "url": "https://gravitychain.io:26657",
+          "test": "RPC CORS",
+          "url": "https://gravitychain.io:26657/",
           "success": true
         },
         {
@@ -2243,46 +2251,46 @@
         },
         {
           "test": "REST CORS",
-          "url": "https://gravitychain.io:1317",
+          "url": "https://gravitychain.io:1317/",
           "success": false
         },
         {
           "test": "REST Endpoints",
           "url": "https://gravitychain.io:1317/cosmos/base/tendermint/v1beta1/node_info",
-          "success": false
+          "success": true
         }
       ]
     },
     {
       "chain_name": "decentr",
-      "validationDate": "2024-12-11T21:06:36.707Z",
+      "validationDate": "2025-02-20T19:57:47.446Z",
       "validationSuccess": false,
       "validationResults": [
         {
-          "test": "RPC WSS",
-          "url": "https://poseidon.mainnet.decentr.xyz",
-          "success": true
+          "test": "RPC CORS",
+          "url": "https://poseidon.mainnet.decentr.xyz/",
+          "success": false
         },
         {
           "test": "RPC WSS",
           "url": "wss://poseidon.mainnet.decentr.xyz/websocket",
-          "success": true
+          "success": false
         },
         {
           "test": "RPC Endpoints",
           "url": "https://poseidon.mainnet.decentr.xyz/status",
-          "success": true,
+          "success": false,
           "stale": false
         },
         {
           "test": "REST CORS",
-          "url": "https://rest.mainnet.decentr.xyz",
+          "url": "https://rest.mainnet.decentr.xyz/",
           "success": false
         },
         {
           "test": "REST Endpoints",
           "url": "https://rest.mainnet.decentr.xyz/cosmos/base/tendermint/v1beta1/node_info",
-          "success": true
+          "success": false
         }
       ]
     },

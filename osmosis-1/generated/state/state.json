@@ -2168,7 +2168,7 @@
     },
     {
       "chain_name": "konstellation",
-      "validationDate": "2025-02-20T19:57:47.446Z",
+      "validationDate": "2025-02-28T19:18:30.565Z",
       "validationSuccess": true,
       "validationResults": [
         {
@@ -2366,9 +2366,19 @@
     },
     {
       "chain_name": "injective",
-      "validationDate": "2024-11-30T00:41:29.694Z",
+      "validationDate": "2025-02-28T19:18:30.565Z",
       "validationSuccess": false,
       "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://injective-rpc.polkachu.com/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://injective-rpc.polkachu.com/websocket",
+          "success": true
+        },
         {
           "test": "RPC Endpoints",
           "url": "https://injective-rpc.polkachu.com/status",
@@ -2376,8 +2386,8 @@
           "stale": false
         },
         {
-          "test": "RPC WSS",
-          "url": "wss://injective-rpc.polkachu.com/websocket",
+          "test": "REST CORS",
+          "url": "https://injective-api.polkachu.com/",
           "success": false
         },
         {
@@ -2389,12 +2399,12 @@
     },
     {
       "chain_name": "cerberus",
-      "validationDate": "2024-12-01T04:49:29.084Z",
+      "validationDate": "2025-02-28T19:18:30.565Z",
       "validationSuccess": false,
       "validationResults": [
         {
           "test": "RPC CORS",
-          "url": "https://rpc.cerberus.zone:26657",
+          "url": "https://rpc.cerberus.zone:26657/",
           "success": false
         },
         {
@@ -2407,12 +2417,22 @@
           "url": "https://rpc.cerberus.zone:26657/status",
           "success": false,
           "stale": false
+        },
+        {
+          "test": "REST CORS",
+          "url": "https://api.cerberus.zone:1317/",
+          "success": false
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://api.cerberus.zone:1317/cosmos/base/tendermint/v1beta1/node_info",
+          "success": false
         }
       ]
     },
     {
       "chain_name": "fetchhub",
-      "validationDate": "2024-12-23T23:14:40.466Z",
+      "validationDate": "2025-02-28T19:18:30.565Z",
       "validationSuccess": true,
       "validationResults": [
         {

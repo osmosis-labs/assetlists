@@ -5115,21 +5115,21 @@
           "chainSuggestionDenom": "factory/osmo1zem8r6dv6u38f6qpg546zy30946av8h5srgug0s4gcyy6cfecf3seac083/alloyed/allDYDX",
           "coinMinimalDenom": "factory/osmo1zem8r6dv6u38f6qpg546zy30946av8h5srgug0s4gcyy6cfecf3seac083/alloyed/allDYDX",
           "coinDecimals": 12,
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.png"
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dydx.dydx.png"
         },
         {
           "coinDenom": "FET",
           "chainSuggestionDenom": "factory/osmo1mdvn6lmykp2z345ncpf647dztslyll8cyhwj9pltrc0lf7nva3cqvrp6qs/alloyed/allFET",
           "coinMinimalDenom": "factory/osmo1mdvn6lmykp2z345ncpf647dztslyll8cyhwj9pltrc0lf7nva3cqvrp6qs/alloyed/allFET",
           "coinDecimals": 12,
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fetchhub/images/fet.png"
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fet.fet.png"
         },
         {
           "coinDenom": "AIOZ",
           "chainSuggestionDenom": "factory/osmo17ceugf0nnkk228k2sulemn0s9pl3yg554462eexxs3pgq8p629us98gqae/alloyed/allAIOZ",
           "coinMinimalDenom": "factory/osmo17ceugf0nnkk228k2sulemn0s9pl3yg554462eexxs3pgq8p629us98gqae/alloyed/allAIOZ",
           "coinDecimals": 12,
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aioz/images/aioz.png"
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/aioz.aioz.png"
         },
         {
           "coinDenom": "BIKE",
@@ -9913,6 +9913,13 @@
           "sourceDenom": "factory/stars1rru5m2wh3fylpheqh8h5g968jwhe7rctkfm7u0gwk7ka4vx3q5tqukjl4z/hood",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/hood.png"
+        },
+        {
+          "coinDenom": "BIKE",
+          "chainSuggestionDenom": "ibc/8A443E18BB2C30A0D635569935BB0364018EA97A372ADA5D7145378A40D3D967",
+          "sourceDenom": "ibc/8A443E18BB2C30A0D635569935BB0364018EA97A372ADA5D7145378A40D3D967",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/BIKE.png"
         }
       ],
       "description": "The premier community-focused blockchain for NFTs. Stargaze empowers creators, developers, collectors, and traders to participate on the platform. The Stargaze chain consists of various NFT-related apps such as a Launchpad, and a Marketplace with offers and auctions.",
@@ -14851,6 +14858,7 @@
           "coinMinimalDenom": "ibc/E72E62E74112F379BB760D02515DA215408CCBF401CD4C9BC0A3DBD72A7076E1",
           "sourceDenom": "factory/orai15rmny3cxv33rnzdr2lfdhjtslyzmrr0vdd28kp/SAM",
           "coinDecimals": 6,
+          "coinGeckoId": "sam-2",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/sam.png"
         }
       ],
@@ -20715,7 +20723,7 @@
       "chain_name": "fxcore",
       "status": "live",
       "networkType": "mainnet",
-      "prettyName": "f(x)Core",
+      "prettyName": "Pundi AIFX",
       "chain_id": "fxcore",
       "bech32Prefix": "fx",
       "bech32Config": {
@@ -20728,31 +20736,37 @@
       },
       "slip44": 60,
       "stakeCurrency": {
-        "coinDenom": "FX",
-        "chainSuggestionDenom": "FX",
-        "coinMinimalDenom": "ibc/2B30802A0B03F91E4E16D6175C9B70F2911377C1CAE9E50FF011C821465463F9",
-        "sourceDenom": "FX",
+        "coinDenom": "PUNDIAI",
+        "chainSuggestionDenom": "apundiai",
+        "sourceDenom": "apundiai",
         "coinDecimals": 18,
-        "coinGeckoId": "fx-coin",
-        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/fx.png"
+        "coinGeckoId": "pundi-aifx",
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/PUNDIAI.png"
       },
       "feeCurrencies": [
         {
-          "coinDenom": "FX",
-          "chainSuggestionDenom": "FX",
-          "coinMinimalDenom": "ibc/2B30802A0B03F91E4E16D6175C9B70F2911377C1CAE9E50FF011C821465463F9",
-          "sourceDenom": "FX",
+          "coinDenom": "PUNDIAI",
+          "chainSuggestionDenom": "apundiai",
+          "sourceDenom": "apundiai",
           "coinDecimals": 18,
-          "coinGeckoId": "fx-coin",
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/fx.png",
+          "coinGeckoId": "pundi-aifx",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/PUNDIAI.png",
           "gasPriceStep": {
-            "low": 4000000000000,
-            "average": 4200000000000,
-            "high": 5000000000000
+            "low": 5100000000,
+            "average": 5100000000,
+            "high": 5200000000
           }
         }
       ],
       "currencies": [
+        {
+          "coinDenom": "PUNDIAI",
+          "chainSuggestionDenom": "apundiai",
+          "sourceDenom": "apundiai",
+          "coinDecimals": 18,
+          "coinGeckoId": "pundi-aifx",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/PUNDIAI.png"
+        },
         {
           "coinDenom": "FX",
           "chainSuggestionDenom": "FX",

@@ -1141,13 +1141,34 @@
     },
     {
       "chain_name": "agoric",
-      "validationDate": "2024-11-28T00:14:39.931Z",
+      "validationDate": "2025-03-04T19:03:05.715Z",
+      "validationSuccess": true,
       "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://agoric.rpc.kjnodes.com/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://agoric.rpc.kjnodes.com/websocket",
+          "success": true
+        },
         {
           "test": "RPC Endpoints",
           "url": "https://agoric.rpc.kjnodes.com/status",
           "success": true,
           "stale": false
+        },
+        {
+          "test": "REST CORS",
+          "url": "https://main.api.agoric.net/",
+          "success": true
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://main.api.agoric.net/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ]
     },
@@ -2968,29 +2989,29 @@
     },
     {
       "chain_name": "oraichain",
-      "validationDate": "2024-12-11T21:22:04.657Z",
-      "validationSuccess": true,
+      "validationDate": "2025-03-04T19:03:05.715Z",
+      "validationSuccess": false,
       "validationResults": [
         {
-          "test": "REST Endpoints",
+          "test": "RPC CORS",
           "url": "https://rpc.orai.io/",
           "success": true
         },
         {
-          "test": "REST Endpoints",
+          "test": "RPC WSS",
           "url": "wss://rpc.orai.io/websocket",
           "success": true
         },
         {
-          "test": "REST Endpoints",
+          "test": "RPC Endpoints",
           "url": "https://rpc.orai.io/status",
           "success": true,
           "stale": false
         },
         {
-          "test": "REST Endpoints",
+          "test": "REST CORS",
           "url": "https://lcd.orai.io/",
-          "success": true
+          "success": false
         },
         {
           "test": "REST Endpoints",
@@ -3001,27 +3022,27 @@
     },
     {
       "chain_name": "cudos",
-      "validationDate": "2024-12-11T21:22:29.071Z",
+      "validationDate": "2025-03-04T19:03:05.715Z",
       "validationSuccess": false,
       "validationResults": [
         {
-          "test": "REST Endpoints",
+          "test": "RPC CORS",
           "url": "https://rpc.cudos.org/",
           "success": false
         },
         {
-          "test": "REST Endpoints",
+          "test": "RPC WSS",
           "url": "wss://rpc.cudos.org/websocket",
           "success": false
         },
         {
-          "test": "REST Endpoints",
+          "test": "RPC Endpoints",
           "url": "https://rpc.cudos.org/status",
           "success": false,
           "stale": false
         },
         {
-          "test": "REST Endpoints",
+          "test": "REST CORS",
           "url": "https://rest.cudos.org/",
           "success": false
         },
@@ -3034,29 +3055,29 @@
     },
     {
       "chain_name": "stride",
-      "validationDate": "2024-12-11T21:22:29.071Z",
-      "validationSuccess": true,
+      "validationDate": "2025-03-04T19:03:05.715Z",
+      "validationSuccess": false,
       "validationResults": [
         {
-          "test": "REST Endpoints",
+          "test": "RPC CORS",
           "url": "https://stride-rpc.polkachu.com/",
           "success": true
         },
         {
-          "test": "REST Endpoints",
+          "test": "RPC WSS",
           "url": "wss://stride-rpc.polkachu.com/websocket",
           "success": true
         },
         {
-          "test": "REST Endpoints",
+          "test": "RPC Endpoints",
           "url": "https://stride-rpc.polkachu.com/status",
           "success": true,
           "stale": false
         },
         {
-          "test": "REST Endpoints",
+          "test": "REST CORS",
           "url": "https://stride-api.polkachu.com/",
-          "success": true
+          "success": false
         },
         {
           "test": "REST Endpoints",

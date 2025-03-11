@@ -1145,7 +1145,7 @@
     },
     {
       "chain_name": "agoric",
-      "validationDate": "2025-03-04T19:03:05.715Z",
+      "validationDate": "2025-03-11T20:59:04.545Z",
       "validationSuccess": true,
       "validationResults": [
         {
@@ -3383,6 +3383,105 @@
         {
           "test": "REST Endpoints",
           "url": "https://rest.getbze.com/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
+        }
+      ]
+    },
+    {
+      "chain_name": "acrechain",
+      "validationDate": "2025-03-11T20:59:04.545Z",
+      "validationSuccess": false,
+      "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc-acre.synergynodes.com/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc-acre.synergynodes.com/websocket",
+          "success": true
+        },
+        {
+          "test": "RPC Endpoints",
+          "url": "https://rpc-acre.synergynodes.com/status",
+          "success": true,
+          "stale": false
+        },
+        {
+          "test": "REST CORS",
+          "url": "https://lcd-acre.synergynodes.com/",
+          "success": false
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://lcd-acre.synergynodes.com/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
+        }
+      ]
+    },
+    {
+      "chain_name": "imversed",
+      "validationDate": "2025-03-11T20:59:04.545Z",
+      "validationSuccess": false,
+      "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc.imversed.network/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc.imversed.network/websocket",
+          "success": false
+        },
+        {
+          "test": "RPC Endpoints",
+          "url": "https://rpc.imversed.network/status",
+          "success": false,
+          "stale": false
+        },
+        {
+          "test": "REST CORS",
+          "url": "https://rest.imversed.network/",
+          "success": true
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://rest.imversed.network/cosmos/base/tendermint/v1beta1/node_info",
+          "success": false
+        }
+      ]
+    },
+    {
+      "chain_name": "medasdigital",
+      "validationDate": "2025-03-11T20:59:04.545Z",
+      "validationSuccess": true,
+      "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc.medas-digital.io:26657/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc.medas-digital.io:26657/websocket",
+          "success": true
+        },
+        {
+          "test": "RPC Endpoints",
+          "url": "https://rpc.medas-digital.io:26657/status",
+          "success": true,
+          "stale": false
+        },
+        {
+          "test": "REST CORS",
+          "url": "https://lcd.medas-digital.io:1317/",
+          "success": true
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://lcd.medas-digital.io:1317/cosmos/base/tendermint/v1beta1/node_info",
           "success": true
         }
       ]

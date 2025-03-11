@@ -1103,6 +1103,10 @@
     {
       "base_denom": "factory/osmo1mdvn6lmykp2z345ncpf647dztslyll8cyhwj9pltrc0lf7nva3cqvrp6qs/alloyed/allFET",
       "legacyAsset": true
+    },
+    {
+      "base_denom": "ibc/8765FF0D37A7A85357ED28061EDEBC736743216DB06FE92231957CE158FB351E",
+      "listingDate": "2025-03-11T18:42:07.755Z"
     }
   ],
   "chains": [
@@ -3220,7 +3224,7 @@
     },
     {
       "chain_name": "lambda",
-      "validationDate": "2024-12-11T21:26:41.532Z",
+      "validationDate": "2025-03-11T18:39:52.538Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -3253,7 +3257,7 @@
     },
     {
       "chain_name": "unification",
-      "validationDate": "2024-12-11T21:24:37.516Z",
+      "validationDate": "2025-03-11T18:39:52.538Z",
       "validationSuccess": true,
       "validationResults": [
         {
@@ -3313,6 +3317,72 @@
         {
           "test": "REST Endpoints",
           "url": "https://api.passage.vitwit.com/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
+        }
+      ]
+    },
+    {
+      "chain_name": "jackal",
+      "validationDate": "2025-03-11T18:39:52.538Z",
+      "validationSuccess": true,
+      "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc.jackalprotocol.com/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc.jackalprotocol.com/websocket",
+          "success": true
+        },
+        {
+          "test": "RPC Endpoints",
+          "url": "https://rpc.jackalprotocol.com/status",
+          "success": true,
+          "stale": false
+        },
+        {
+          "test": "REST CORS",
+          "url": "https://api.jackalprotocol.com/",
+          "success": true
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://api.jackalprotocol.com/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
+        }
+      ]
+    },
+    {
+      "chain_name": "beezee",
+      "validationDate": "2025-03-11T18:39:52.538Z",
+      "validationSuccess": true,
+      "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc.getbze.com/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc.getbze.com/websocket",
+          "success": true
+        },
+        {
+          "test": "RPC Endpoints",
+          "url": "https://rpc.getbze.com/status",
+          "success": true,
+          "stale": false
+        },
+        {
+          "test": "REST CORS",
+          "url": "https://rest.getbze.com/",
+          "success": true
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://rest.getbze.com/cosmos/base/tendermint/v1beta1/node_info",
           "success": true
         }
       ]

@@ -1085,6 +1085,61 @@
       "disabled": false,
       "preview": false,
       "listingDate": "2024-11-21T20:39:12.845Z"
+    },
+    {
+      "chainName": "manifesttestnet",
+      "sourceDenom": "umfx",
+      "coinMinimalDenom": "ibc/71C8E0B309E2F2A4C66F85E7C34C4415A3D26E489DBDF3FFF4EDCBE15B229B14",
+      "symbol": "MFX",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.svg"
+      },
+      "price": {
+        "poolId": "919",
+        "denom": "ibc/DE6792CF9E521F6AD6E9A4BDF6225C9571A3B74ACC0A529F92BC5122A39D2E58"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "manifesttestnet",
+            "chainId": "manifest-ledger-testnet",
+            "sourceDenom": "umfx",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-10183",
+            "path": "transfer/channel-10183/umfx"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "manifesttestnet",
+          "sourceDenom": "umfx",
+          "chainType": "cosmos",
+          "chainId": "manifest-ledger-testnet",
+          "symbol": "MFX",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/71C8E0B309E2F2A4C66F85E7C34C4415A3D26E489DBDF3FFF4EDCBE15B229B14",
+      "name": "Manifest Testnet Token",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
     }
   ]
 }

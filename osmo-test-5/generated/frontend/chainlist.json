@@ -1874,6 +1874,506 @@
         "ibc-go",
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "manifesttestnet",
+      "status": "live",
+      "networkType": "testnet",
+      "prettyName": "Manifest Testnet",
+      "chain_id": "manifest-ledger-testnet",
+      "bech32Prefix": "manifest",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "manifest",
+        "bech32PrefixAccPub": "manifestpub",
+        "bech32PrefixValAddr": "manifestvaloper",
+        "bech32PrefixValPub": "manifestvaloperpub",
+        "bech32PrefixConsAddr": "manifestvalcons",
+        "bech32PrefixConsPub": "manifestvalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDenom": "POA",
+        "chainSuggestionDenom": "upoa",
+        "sourceDenom": "upoa",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "MFX",
+          "chainSuggestionDenom": "umfx",
+          "coinMinimalDenom": "ibc/71C8E0B309E2F2A4C66F85E7C34C4415A3D26E489DBDF3FFF4EDCBE15B229B14",
+          "sourceDenom": "umfx",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png",
+          "gasPriceStep": {
+            "low": 0.01,
+            "average": 0.02,
+            "high": 0.1
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "MFX",
+          "chainSuggestionDenom": "umfx",
+          "coinMinimalDenom": "ibc/71C8E0B309E2F2A4C66F85E7C34C4415A3D26E489DBDF3FFF4EDCBE15B229B14",
+          "sourceDenom": "umfx",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "POA",
+          "chainSuggestionDenom": "upoa",
+          "sourceDenom": "upoa",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "OSMO",
+          "chainSuggestionDenom": "ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518",
+          "sourceDenom": "ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518",
+          "coinDecimals": 6,
+          "coinGeckoId": "osmosis",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png"
+        },
+        {
+          "coinDenom": "AAA",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/uaaa",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/uaaa",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "ABUS",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/uabus",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/uabus",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "BITCH",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ubitch",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ubitch",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "BLERG",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ublerg",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ublerg",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "CATS",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ucats",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ucats",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "CORAL",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ucoral",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ucoral",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "CURES",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ucures",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ucures",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "DBLT",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/udblt",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/udblt",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "FOCAL",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ufocal",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ufocal",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "FRAME",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/uframe",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/uframe",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "GCATT",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ugcatt",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ugcatt",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "GREY",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ugrey",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ugrey",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "GWATT",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ugwatt",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ugwatt",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "HIVE",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/uhive",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/uhive",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "INDIS",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/uindis",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/uindis",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "LENDX",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ulendx",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/ulendx",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "MEGA",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/umega",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/umega",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "PGSQL",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upgsql",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upgsql",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "PWROO",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwroo",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwroo",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "PWROZ",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwroz",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwroz",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "PWRZE",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrze",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrze",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "PWRZF",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrzf",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrzf",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "PWRZN",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrzn",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrzn",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "PWRZO",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrzo",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrzo",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "PWRZR",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrzr",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrzr",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "PWRZS",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrzs",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrzs",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "PWRZT",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrzt",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrzt",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "PWRZV",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrzv",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrzv",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "PWRZX",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrzx",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrzx",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "PWRZZ",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrzz",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwrzz",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "SOLA",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/usola",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/usola",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "SOLB",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/usolb",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/usolb",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "SOLC",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/usolc",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/usolc",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "SOLD",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/usold",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/usold",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "SOLE",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/usole",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/usole",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "SPDT",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/uspdt",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/uspdt",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "SUNSW",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/usunsw",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/usunsw",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "TFAAA",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/utfaaa",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/utfaaa",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "TRACE",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/utrace",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/utrace",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "TST",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/utst",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/utst",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "WIND",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/uwind",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/uwind",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "WMVT",
+          "chainSuggestionDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/uwmvt",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/uwmvt",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "TIMMY",
+          "chainSuggestionDenom": "factory/manifest1c799jddmlz7segvg6jrw6w2k6svwafganjdznard3tc74n7td7rqdqe6ks/utimmy",
+          "sourceDenom": "factory/manifest1c799jddmlz7segvg6jrw6w2k6svwafganjdznard3tc74n7td7rqdqe6ks/utimmy",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "UMEGA",
+          "chainSuggestionDenom": "factory/manifest1czvrq3ufn045q5k50tjl4qu8kcmagve9ghty3c/uumega",
+          "sourceDenom": "factory/manifest1czvrq3ufn045q5k50tjl4qu8kcmagve9ghty3c/uumega",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "ANSONATOR",
+          "chainSuggestionDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/uansonator",
+          "sourceDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/uansonator",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "ASDASDASD",
+          "chainSuggestionDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/uasdasdasd",
+          "sourceDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/uasdasdasd",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "CUTE",
+          "chainSuggestionDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/ucute",
+          "sourceDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/ucute",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "DANCINGPENGUIN",
+          "chainSuggestionDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/udancingpenguin",
+          "sourceDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/udancingpenguin",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "DRIPPY",
+          "chainSuggestionDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/udrippy",
+          "sourceDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/udrippy",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "GOZER",
+          "chainSuggestionDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/ugozer",
+          "sourceDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/ugozer",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "SIMPLE",
+          "chainSuggestionDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/usimple",
+          "sourceDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/usimple",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "SPOOF",
+          "chainSuggestionDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/uspoof",
+          "sourceDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/uspoof",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "TACO",
+          "chainSuggestionDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/utaco",
+          "sourceDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/utaco",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "WMVT",
+          "chainSuggestionDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/uwmvt",
+          "sourceDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/uwmvt",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "FUNZIE",
+          "chainSuggestionDenom": "factory/manifest1rme50egv6kwxq5skm60s0n7hd6ynuf33p5g87e/ufunzie",
+          "sourceDenom": "factory/manifest1rme50egv6kwxq5skm60s0n7hd6ynuf33p5g87e/ufunzie",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "SNOOP",
+          "chainSuggestionDenom": "factory/manifest1rme50egv6kwxq5skm60s0n7hd6ynuf33p5g87e/usnoop",
+          "sourceDenom": "factory/manifest1rme50egv6kwxq5skm60s0n7hd6ynuf33p5g87e/usnoop",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "ADAM",
+          "chainSuggestionDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/uadam",
+          "sourceDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/uadam",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "AGA",
+          "chainSuggestionDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/uaga",
+          "sourceDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/uaga",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        },
+        {
+          "coinDenom": "GAS",
+          "chainSuggestionDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/ugas",
+          "sourceDenom": "factory/manifest1hj5fveer5cjtn4wd6wstzugjfdxzl0xp8ws9ct/ugas",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://nodes.liftedinit.tech/manifest/testnet/rpc"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://nodes.liftedinit.tech/manifest/testnet/api"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://testnet.manifest.explorers.guru/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
     }
   ]
 }

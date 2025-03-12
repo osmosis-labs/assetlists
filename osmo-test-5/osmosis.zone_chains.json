@@ -6,7 +6,13 @@
       "rpc": "https://rpc.osmotest5.osmosis.zone/",
       "rest": "https://lcd.osmotest5.osmosis.zone/",
       "explorer_tx_url": "https://mintscan.io/osmosis-testnet/tx/${txHash}",
-      "keplr_features": ["ibc-go", "ibc-transfer", "cosmwasm", "wasmd_0.24+", "osmosis-txfees"]
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm",
+        "wasmd_0.24+",
+        "osmosis-txfees"
+      ]
     },
     {
       "chain_name": "cosmoshubtestnet",
@@ -133,6 +139,13 @@
       "rest": "https://testnet-api.nomic.io:8443",
       "explorer_tx_url": "https://${txHash}",
       "keplr_features": ["ibc-go", "ibc-transfer"]
+    },
+    {
+      "chain_name": "manifesttestnet",
+      "rpc": "https://nodes.liftedinit.tech/manifest/testnet/rpc",
+      "rest": "https://nodes.liftedinit.tech/manifest/testnet/api",
+      "explorer_tx_url": "https://testnet.manifest.explorers.guru/transactions/${txHash}",
+      "keplr_features": ["ibc-go", "ibc-transfer", "cosmwasm", "wasmd_0.24+"]
     }
   ]
 }

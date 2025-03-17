@@ -166,7 +166,7 @@
       },
       "canonical": {
         "chain_name": "polygon",
-        "base_denom": "wei"
+        "base_denom": "0x0000000000000000000000000000000000001010"
       },
       "_comment": "Polygon $POL"
     },
@@ -2653,6 +2653,12 @@
           "type": "external_interface",
           "deposit_url": "https://express.noble.xyz/transfer?origin=solana&destination=osmosis",
           "withdraw_url": "https://express.noble.xyz/transfer?origin=osmosis&destination=solana"
+        },
+        {
+          "name": "Skip:Go",
+          "type": "external_interface",
+          "deposit_url": "https://go.skip.build/?src_chain=solana&src_asset=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&dest_chain=osmosis-1&dest_asset=ibc%2F498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4",
+          "withdraw_url": "https://go.skip.build/?src_chain=osmosis-1&src_asset=ibc%2F498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4&dest_chain=solana&dest_asset=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
         }
       ],
       "categories": [
@@ -5775,8 +5781,8 @@
         {
           "name": "Sologenic Coreum Bridge",
           "type": "external_interface",
-          "deposit_url": "https://sologenic.org/coreum-bridge",
-          "withdraw_url": "https://sologenic.org/coreum-bridge"
+          "deposit_url": "https://sologenic.org/bridge/coreum-bridge",
+          "withdraw_url": "https://sologenic.org/bridge/coreum-bridge"
         }
       ],
       "_comment": "Ripple $XRP"
@@ -6066,7 +6072,7 @@
       "chain_name": "sidechain",
       "base_denom": "sat",
       "path": "transfer/channel-98081/sat",
-      "osmosis_verified": false,
+      "osmosis_verified": true,
       "_comment": "Side Bitcoin $sBTC"
     },
     {
@@ -6143,6 +6149,37 @@
       "categories": [
         "defi"
       ]
+    },
+    {
+      "chain_name": "stargaze",
+      "base_denom": "factory/stars1rru5m2wh3fylpheqh8h5g968jwhe7rctkfm7u0gwk7ka4vx3q5tqukjl4z/hood",
+      "path": "transfer/channel-75/factory/stars1rru5m2wh3fylpheqh8h5g968jwhe7rctkfm7u0gwk7ka4vx3q5tqukjl4z/hood",
+      "osmosis_verified": false,
+      "_comment": "HOOD $HOOD"
+    },
+    {
+      "chain_name": "osmosis",
+      "base_denom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/t7s",
+      "osmosis_verified": false,
+      "listing_date_time_utc": "2025-03-02T09:07:35Z",
+      "_comment": "The seven green shade $T7S",
+      "categories": [
+        "meme"
+      ]
+    },
+    {
+      "chain_name": "osmosis",
+      "base_denom": "factory/osmo12cf6l99qrchfppmjp80gvkpnle2tuxpck2cf6fz030w74mq49u4qm3dh4d/alloyed/allDYM",
+      "osmosis_verified": false,
+      "is_alloyed": true,
+      "_comment": "Dymension Hub (Alloy) $allDYM"
+    },
+    {
+      "chain_name": "osmosis",
+      "base_denom": "factory/osmo1fg7y3j86fkp93yxpq5q8lk8c64k8wxj3qw8us49msgpr2gsgddjqxpgr9m/alloyed/allPOL",
+      "osmosis_verified": false,
+      "is_alloyed": true,
+      "_comment": "Polygon (ex-MATIC) (Alloy) $allPOL"
     },
     {
       "chain_name": "stargaze",

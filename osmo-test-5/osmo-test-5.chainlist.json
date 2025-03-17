@@ -1128,6 +1128,71 @@
         "ibc-go",
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "manifesttestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Manifest Testnet",
+      "chain_id": "manifest-ledger-testnet",
+      "bech32_prefix": "manifest",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "manifest",
+        "bech32PrefixAccPub": "manifestpub",
+        "bech32PrefixValAddr": "manifestvaloper",
+        "bech32PrefixValPub": "manifestvaloperpub",
+        "bech32PrefixConsAddr": "manifestvalcons",
+        "bech32PrefixConsPub": "manifestvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "umfx",
+            "fixed_min_gas_price": 0.001,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.02,
+            "high_gas_price": 0.1
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "upoa"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://nodes.liftedinit.tech/manifest/testnet/rpc"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://nodes.liftedinit.tech/manifest/testnet/api"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://testnet.manifest.explorers.guru/transactions/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.svg",
+        "theme": {
+          "primary_color_hex": "#A087FF"
+        }
+      },
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
     }
   ]
 }

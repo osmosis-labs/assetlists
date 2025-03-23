@@ -1364,8 +1364,8 @@
       },
       "coingeckoId": "chihuahua-token",
       "price": {
-        "poolId": "606",
-        "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
+        "poolId": "1111",
+        "denom": "uosmo"
       },
       "categories": [
         "meme"
@@ -5292,8 +5292,8 @@
       },
       "coingeckoId": "rai",
       "price": {
-        "poolId": "1604",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1603",
+        "denom": "uosmo"
       },
       "categories": [
         "stablecoin",
@@ -6555,8 +6555,8 @@
       },
       "coingeckoId": "stride",
       "price": {
-        "poolId": "806",
-        "denom": "uosmo"
+        "poolId": "2765",
+        "denom": "factory/osmo1z6r6qdknhgsc0zeracktgpcxf43j6sekq07nw8sxduc9lg0qjjlqfu25e3/alloyed/allBTC"
       },
       "categories": [
         "liquid_staking"
@@ -7708,8 +7708,8 @@
       },
       "coingeckoId": "bzedge",
       "price": {
-        "poolId": "856",
-        "denom": "uosmo"
+        "poolId": "2786",
+        "denom": "factory/osmo1z6r6qdknhgsc0zeracktgpcxf43j6sekq07nw8sxduc9lg0qjjlqfu25e3/alloyed/allBTC"
       },
       "categories": [],
       "transferMethods": [
@@ -8051,8 +8051,8 @@
       },
       "coingeckoId": "posthuman",
       "price": {
-        "poolId": "1255",
-        "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
+        "poolId": "1738",
+        "denom": "uosmo"
       },
       "categories": [],
       "transferMethods": [
@@ -8934,8 +8934,8 @@
       }
     },
     {
-      "chainName": "osmosis",
-      "sourceDenom": "ibc/573FCD90FACEE750F55A8864EF7D38265F07E5A9273FA0E8DAFD39951332B580",
+      "chainName": "mars",
+      "sourceDenom": "umars",
       "coinMinimalDenom": "ibc/573FCD90FACEE750F55A8864EF7D38265F07E5A9273FA0E8DAFD39951332B580",
       "symbol": "MARS.mars",
       "decimals": 6,
@@ -8952,7 +8952,24 @@
         "defi",
         "built_on_osmosis"
       ],
-      "transferMethods": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "mars",
+            "chainId": "mars-1",
+            "sourceDenom": "umars",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-557",
+            "path": "transfer/channel-557/umars"
+          }
+        }
+      ],
       "counterparty": [
         {
           "chainName": "mars",
@@ -8984,7 +9001,7 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": false,
-      "disabled": false,
+      "disabled": true,
       "preview": false
     },
     {
@@ -11121,8 +11138,8 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/silica.png"
       },
       "price": {
-        "poolId": "1023",
-        "denom": "ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F"
+        "poolId": "983",
+        "denom": "uosmo"
       },
       "categories": [],
       "transferMethods": [
@@ -12628,8 +12645,8 @@
       },
       "coingeckoId": "tether",
       "price": {
-        "poolId": "1220",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1081",
+        "denom": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858"
       },
       "categories": [
         "stablecoin"
@@ -13057,7 +13074,7 @@
       "coingeckoId": "bonk",
       "price": {
         "poolId": "2368",
-        "denom": "factory/osmo10pk4crey8fpdyqd62rsau0y02e3rk055w5u005ah6ly7k849k5tsf72x40/alloyed/allDOGE"
+        "denom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/wiha"
       },
       "categories": [
         "meme"
@@ -13657,8 +13674,8 @@
       },
       "coingeckoId": "usd-coin",
       "price": {
-        "poolId": "1223",
-        "denom": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858"
+        "poolId": "1220",
+        "denom": "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"
       },
       "categories": [
         "stablecoin"
@@ -14192,8 +14209,8 @@
       },
       "coingeckoId": "collateralized-debt-token",
       "price": {
-        "poolId": "1268",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "2780",
+        "denom": "uion"
       },
       "categories": [
         "stablecoin",
@@ -14586,8 +14603,8 @@
       },
       "coingeckoId": "celestia",
       "price": {
-        "poolId": "1475",
-        "denom": "factory/osmo1f5vfcph2dvfeqcqkhetwv75fda69z7e5c2dldm3kvgj23crkv6wqcn47a0/umilkTIA"
+        "poolId": "1247",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
       "transferMethods": [
@@ -15719,8 +15736,8 @@
       },
       "coingeckoId": "milkyway-staked-tia",
       "price": {
-        "poolId": "1339",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1475",
+        "denom": "ibc/D79E7D83AB399BFFF93433E54FAA480C191248FC556924A2A8351AE2638B3877"
       },
       "categories": [
         "liquid_staking",
@@ -19725,8 +19742,8 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bernese.png"
       },
       "price": {
-        "poolId": "2038",
-        "denom": "factory/osmo1z0qrq605sjgcqpylfl4aa6s90x738j7m58wyatt0tdzflg2ha26q67k743/wbtc"
+        "poolId": "2178",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "meme"
@@ -27406,8 +27423,8 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/chihuahua/images/chihuahua.png"
       },
       "price": {
-        "poolId": "2651",
-        "denom": "uosmo"
+        "poolId": "2845",
+        "denom": "ibc/B9E0A1A524E98BB407D3CED8720EFEFD186002F90C1B1B7964811DD0CCC12228"
       },
       "categories": [
         "meme"
@@ -27459,6 +27476,10 @@
       "decimals": 6,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/chihuahua/images/wirelibertyfence.png"
+      },
+      "price": {
+        "poolId": "2843",
+        "denom": "ibc/794CF0A448ECA518B9FEAB3356BD283E8762460F8FE87A013E6F9DBA6C53601C"
       },
       "categories": [
         "meme"

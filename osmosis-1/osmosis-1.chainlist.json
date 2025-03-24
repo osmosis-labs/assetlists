@@ -10368,6 +10368,65 @@
         "ibc-transfer",
         "cosmwasm"
       ]
+    },
+    {
+      "chain_name": "nillion",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Nillion",
+      "chain_id": "nillion-1",
+      "bech32_prefix": "nillion",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "nillion",
+        "bech32PrefixAccPub": "nillionpub",
+        "bech32PrefixValAddr": "nillionvaloper",
+        "bech32PrefixValPub": "nillionvaloperpub",
+        "bech32PrefixConsAddr": "nillionvalcons",
+        "bech32PrefixConsPub": "nillionvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "unil",
+            "low_gas_price": 0.0001,
+            "average_gas_price": 0.0001,
+            "high_gas_price": 0.00025
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "unil"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://nillion-rpc.lavenderfive.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://nillion-api.lavenderfive.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://nillion.explorers.guru/transaction/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nillion/images/nil.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nillion/images/nil.png"
+      },
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
     }
   ]
 }

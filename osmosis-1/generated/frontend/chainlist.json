@@ -25560,6 +25560,74 @@
         "ibc-transfer",
         "cosmwasm"
       ]
+    },
+    {
+      "chain_name": "nillion",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Nillion",
+      "chain_id": "nillion-1",
+      "bech32Prefix": "nillion",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "nillion",
+        "bech32PrefixAccPub": "nillionpub",
+        "bech32PrefixValAddr": "nillionvaloper",
+        "bech32PrefixValPub": "nillionvaloperpub",
+        "bech32PrefixConsAddr": "nillionvalcons",
+        "bech32PrefixConsPub": "nillionvalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDenom": "NIL",
+        "chainSuggestionDenom": "unil",
+        "coinMinimalDenom": "ibc/D37860EB1D2669F34B47A7BC48885853D5AB23642EF958CDEA35EB6074087064",
+        "sourceDenom": "unil",
+        "coinDecimals": 6
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "NIL",
+          "chainSuggestionDenom": "unil",
+          "coinMinimalDenom": "ibc/D37860EB1D2669F34B47A7BC48885853D5AB23642EF958CDEA35EB6074087064",
+          "sourceDenom": "unil",
+          "coinDecimals": 6,
+          "gasPriceStep": {
+            "low": 0.0001,
+            "average": 0.0001,
+            "high": 0.00025
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "NIL",
+          "chainSuggestionDenom": "unil",
+          "coinMinimalDenom": "ibc/D37860EB1D2669F34B47A7BC48885853D5AB23642EF958CDEA35EB6074087064",
+          "sourceDenom": "unil",
+          "coinDecimals": 6
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://nillion-rpc.lavenderfive.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://nillion-api.lavenderfive.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://nillion.explorers.guru/transaction/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
     }
   ]
 }

@@ -511,7 +511,7 @@
       },
       "coingeckoId": "cosmos",
       "price": {
-        "poolId": "1282",
+        "poolId": "1251",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
@@ -10209,7 +10209,7 @@
       },
       "price": {
         "poolId": "2245",
-        "denom": "ibc/297C64CC42B5A8D8F82FE2EBE208A6FE8F94B86037FA28C4529A23701C228F7A"
+        "denom": "ibc/2F5C084037D951B24D100F15CC013A131DF786DCE1B1DBDC48F018A9B9A138DE"
       },
       "categories": [],
       "transferMethods": [
@@ -12059,8 +12059,8 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/casa.png"
       },
       "price": {
-        "poolId": "2245",
-        "denom": "ibc/297C64CC42B5A8D8F82FE2EBE208A6FE8F94B86037FA28C4529A23701C228F7A"
+        "poolId": "1028",
+        "denom": "uosmo"
       },
       "categories": [],
       "transferMethods": [
@@ -14209,8 +14209,8 @@
       },
       "coingeckoId": "collateralized-debt-token",
       "price": {
-        "poolId": "2780",
-        "denom": "uion"
+        "poolId": "1268",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "stablecoin",
@@ -15736,7 +15736,7 @@
       },
       "coingeckoId": "milkyway-staked-tia",
       "price": {
-        "poolId": "1335",
+        "poolId": "1475",
         "denom": "ibc/D79E7D83AB399BFFF93433E54FAA480C191248FC556924A2A8351AE2638B3877"
       },
       "categories": [
@@ -23200,8 +23200,8 @@
       },
       "coingeckoId": "ethereum",
       "price": {
-        "poolId": "1982",
-        "denom": "factory/osmo1z6r6qdknhgsc0zeracktgpcxf43j6sekq07nw8sxduc9lg0qjjlqfu25e3/alloyed/allBTC"
+        "poolId": "1948",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
       "transferMethods": [],
@@ -28819,11 +28819,11 @@
       "variantGroupKey": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/t7s",
       "name": "The Seven Green Shade",
       "isAlloyed": false,
-      "verified": false,
+      "verified": true,
       "unstable": false,
       "disabled": false,
       "preview": false,
-      "listingDate": "2025-03-02T09:07:35.000Z"
+      "listingDate": "2025-03-24T18:34:25.587Z"
     },
     {
       "chainName": "osmosis",
@@ -28906,6 +28906,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nillion/images/nil.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nillion/images/nil.svg"
       },
+      "coingeckoId": "nillion",
       "categories": [],
       "transferMethods": [
         {
@@ -28941,6 +28942,59 @@
       ],
       "variantGroupKey": "ibc/D37860EB1D2669F34B47A7BC48885853D5AB23642EF958CDEA35EB6074087064",
       "name": "Nillion",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "stargaze",
+      "sourceDenom": "factory/stars1rru5m2wh3fylpheqh8h5g968jwhe7rctkfm7u0gwk7ka4vx3q5tqukjl4z/hood",
+      "coinMinimalDenom": "ibc/48047CBAA27D0526BA9E6BEC9D77D9B796AA95E35C95891C7F19C3F0D32473F6",
+      "symbol": "HOOD",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/hood.png"
+      },
+      "price": {
+        "poolId": "2827",
+        "denom": "factory/osmo1z6r6qdknhgsc0zeracktgpcxf43j6sekq07nw8sxduc9lg0qjjlqfu25e3/alloyed/allBTC"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "stargaze",
+            "chainId": "stargaze-1",
+            "sourceDenom": "factory/stars1rru5m2wh3fylpheqh8h5g968jwhe7rctkfm7u0gwk7ka4vx3q5tqukjl4z/hood",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-75",
+            "path": "transfer/channel-75/factory/stars1rru5m2wh3fylpheqh8h5g968jwhe7rctkfm7u0gwk7ka4vx3q5tqukjl4z/hood"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "stargaze",
+          "sourceDenom": "factory/stars1rru5m2wh3fylpheqh8h5g968jwhe7rctkfm7u0gwk7ka4vx3q5tqukjl4z/hood",
+          "chainType": "cosmos",
+          "chainId": "stargaze-1",
+          "symbol": "HOOD",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/hood.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/48047CBAA27D0526BA9E6BEC9D77D9B796AA95E35C95891C7F19C3F0D32473F6",
+      "name": "HOOD",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

@@ -1,5 +1,7 @@
 # Rules for Asset Listings
 
+For instructions on how to registrer and enlist, please see our [Registration Guide](https://docs.osmosis.zone/overview/integrate/registration).
+
 ## Osmosis Chain
  - Completely permissionless
 

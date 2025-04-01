@@ -1,14 +1,13 @@
 # Rules for Asset Listings
 
-For instructions on how to registrer and enlist, please see our [Registration Guide](https://docs.osmosis.zone/overview/integrate/registration).
-
 ## Osmosis Chain
  - Completely permissionless
 
 ## Osmosis Zone App
 
 ### Prerequisites
- - Asset, origin chain, and required IBC connection are registered to the Cosmos Chain Registry
+ - Asset, origin chain, and required IBC connection are registered to the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry)
+   - For instructions on how to registrer and enlist, please see our [Registration Guide](https://docs.osmosis.zone/overview/integrate/registration)
  - At least one integrated wallet supports the origin chain, asset
    - (Note: native wallet support is not required as long as some chain suggestion or addChain method works)
  - A transfer/bridge interface exists for non-standard asset transfers

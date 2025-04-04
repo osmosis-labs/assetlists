@@ -25009,6 +25009,74 @@
       ]
     },
     {
+      "chain_name": "dungeon",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Dungeon Chain",
+      "chain_id": "dungeon-1",
+      "bech32Prefix": "dungeon",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "dungeon",
+        "bech32PrefixAccPub": "dungeonpub",
+        "bech32PrefixValAddr": "dungeonvaloper",
+        "bech32PrefixValPub": "dungeonvaloperpub",
+        "bech32PrefixConsAddr": "dungeonvalcons",
+        "bech32PrefixConsPub": "dungeonvalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDecimals": 0
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "DGN",
+          "chainSuggestionDenom": "udgn",
+          "coinMinimalDenom": "ibc/CD6412358F33B372A355CF22786D8C19477C15092B56BD56188679EED8556964",
+          "sourceDenom": "udgn",
+          "coinDecimals": 6,
+          "coinGeckoId": "dragon-coin-2",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dungeon/images/DGN.png",
+          "gasPriceStep": {
+            "low": 0.05,
+            "average": 0.07,
+            "high": 0.09
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "DGN",
+          "chainSuggestionDenom": "udgn",
+          "coinMinimalDenom": "ibc/CD6412358F33B372A355CF22786D8C19477C15092B56BD56188679EED8556964",
+          "sourceDenom": "udgn",
+          "coinDecimals": 6,
+          "coinGeckoId": "dragon-coin-2",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dungeon/images/DGN.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://dungeon-wallet.rpc.quasarstaking.ai"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://dungeon-wallet.api.quasarstaking.ai"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://ping.pub/Dungeonchain/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
       "chain_name": "synternet",
       "status": "live",
       "networkType": "mainnet",

@@ -161,14 +161,23 @@
       "base_denom": "wmatic-wei",
       "path": "transfer/channel-208/wmatic-wei",
       "osmosis_verified": true,
+      "transfer_methods": [
+        {
+          "name": "Satellite",
+          "type": "external_interface",
+          "deposit_url": "https://satellite.money/?source=polygon&destination=osmosis&asset_denom=matic",
+          "withdraw_url": "https://satellite.money/?source=osmosis&destination=polygon&asset_denom=matic"
+        }
+      ],
       "override_properties": {
-        "name": "Polygon"
+        "symbol": "POL.axl",
+        "name": "Polygon (Axelar)",
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/pol.axl.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/pol.axl.png"
+        }
       },
-      "canonical": {
-        "chain_name": "polygon",
-        "base_denom": "0x0000000000000000000000000000000000001010"
-      },
-      "_comment": "Polygon $POL"
+      "_comment": "Polygon (Axelar) $POL.axl"
     },
     {
       "chain_name": "axelar",
@@ -3348,7 +3357,15 @@
           "deposit_url": "https://portal.dymension.xyz/ibc/transfer?sourceId=dymension_1100-1&destinationId=osmosis-1"
         }
       ],
-      "_comment": "Dymension Hub $DYM"
+      "override_properties": {
+        "symbol": "DYM.dym",
+        "name": "Dymension (Dymension Hub)",
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dym.dym.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dym.dym.png"
+        }
+      },
+      "_comment": "Dymension (Dymension Hub) $DYM.dym"
     },
     {
       "chain_name": "osmosis",
@@ -6188,6 +6205,10 @@
       "base_denom": "factory/osmo12cf6l99qrchfppmjp80gvkpnle2tuxpck2cf6fz030w74mq49u4qm3dh4d/alloyed/allDYM",
       "osmosis_verified": false,
       "is_alloyed": true,
+      "canonical": {
+        "chain_name": "dymension",
+        "base_denom": "adym"
+      },
       "_comment": "Dymension Hub (Alloy) $allDYM"
     },
     {
@@ -6195,6 +6216,10 @@
       "base_denom": "factory/osmo1fg7y3j86fkp93yxpq5q8lk8c64k8wxj3qw8us49msgpr2gsgddjqxpgr9m/alloyed/allPOL",
       "osmosis_verified": false,
       "is_alloyed": true,
+      "canonical": {
+        "chain_name": "polygon",
+        "base_denom": "0x0000000000000000000000000000000000001010"
+      },
       "_comment": "Polygon (ex-MATIC) (Alloy) $allPOL"
     },
     {
@@ -6226,6 +6251,22 @@
       "base_denom": "unit-move",
       "path": "transfer/channel-208/unit-move",
       "osmosis_verified": false,
+      "transfer_methods": [
+        {
+          "name": "Satellite",
+          "type": "external_interface",
+          "deposit_url": "https://satellite.money/?source=ethereum&destination=osmosis&asset_denom=unit-move",
+          "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=unit-move"
+        }
+      ],
+      "override_properties": {
+        "symbol": "MOVE.eth.axl",
+        "name": "Movement (Ethereum via Axelar)",
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/move.axl.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/move.axl.png"
+        }
+      },
       "_comment": "Movement (Ethereum via Axelar) $MOVE.eth.axl"
     },
     {
@@ -6233,6 +6274,10 @@
       "base_denom": "factory/osmo1v90ezcqkv5utjc52vg4w2gztmcpt7l4vqxzuryj6zl3qr8wy539quxeafk/alloyed/allMOVE",
       "osmosis_verified": false,
       "is_alloyed": true,
+      "canonical": {
+        "chain_name": "movement",
+        "base_denom": "0xa"
+      ),
       "_comment": "Movement (Alloy) $allMOVE"
     },
     {

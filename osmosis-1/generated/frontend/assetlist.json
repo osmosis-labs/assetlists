@@ -13,7 +13,7 @@
       },
       "coingeckoId": "osmosis",
       "price": {
-        "poolId": "1221",
+        "poolId": "1464",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
@@ -698,19 +698,24 @@
       "chainName": "axelar",
       "sourceDenom": "wmatic-wei",
       "coinMinimalDenom": "ibc/AB589511ED0DD5FA56171A39978AFBF1371DB986EC1C3526CE138A16377E39BB",
-      "symbol": "POL",
+      "symbol": "POL.axl",
       "decimals": 18,
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polygon/images/matic-purple.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polygon/images/matic-purple.svg"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/pol.axl.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/pol.axl.png"
       },
-      "coingeckoId": "polygon-ecosystem-token",
       "price": {
         "poolId": "789",
         "denom": "uosmo"
       },
       "categories": [],
       "transferMethods": [
+        {
+          "name": "Satellite",
+          "type": "external_interface",
+          "depositUrl": "https://satellite.money/?source=polygon&destination=osmosis&asset_denom=matic",
+          "withdrawUrl": "https://satellite.money/?source=osmosis&destination=polygon&asset_denom=matic"
+        },
         {
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
@@ -768,13 +773,17 @@
           }
         }
       ],
-      "variantGroupKey": "ibc/AB589511ED0DD5FA56171A39978AFBF1371DB986EC1C3526CE138A16377E39BB",
-      "name": "Polygon",
+      "variantGroupKey": "factory/osmo1fg7y3j86fkp93yxpq5q8lk8c64k8wxj3qw8us49msgpr2gsgddjqxpgr9m/alloyed/allPOL",
+      "name": "Polygon (Axelar)",
       "isAlloyed": false,
       "verified": true,
       "unstable": false,
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "sortWith": {
+        "chainName": "axelar",
+        "sourceDenom": "uaxl"
+      }
     },
     {
       "chainName": "axelar",
@@ -4060,8 +4069,8 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdc.grv.svg"
       },
       "price": {
-        "poolId": "2779",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "2665",
+        "denom": "ibc/71B441E27F1BBB44DD0891BCD370C2794D404D60A4FFE5AECCD9B1E28BC89805"
       },
       "categories": [
         "stablecoin"
@@ -6159,7 +6168,7 @@
       },
       "coingeckoId": "oraichain-token",
       "price": {
-        "poolId": "2173",
+        "poolId": "799",
         "denom": "uosmo"
       },
       "categories": [
@@ -10209,7 +10218,7 @@
       },
       "price": {
         "poolId": "2245",
-        "denom": "ibc/297C64CC42B5A8D8F82FE2EBE208A6FE8F94B86037FA28C4529A23701C228F7A"
+        "denom": "ibc/00B6E60AD3D65CBEF5579AC8AF609527C0B57535B6E32D96C80A735344FD9DCC"
       },
       "categories": [],
       "transferMethods": [
@@ -10807,8 +10816,8 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fil.axl.svg"
       },
       "price": {
-        "poolId": "1562",
-        "denom": "ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4"
+        "poolId": "2414",
+        "denom": "factory/osmo18zdw5yvs6gfp95rp74qqwug9yduw2fyr8kplk2xgs726s9axc5usa2vpgw/alloyed/allLINK"
       },
       "categories": [
         "dweb",
@@ -11138,8 +11147,8 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/silica.png"
       },
       "price": {
-        "poolId": "983",
-        "denom": "uosmo"
+        "poolId": "1023",
+        "denom": "ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F"
       },
       "categories": [],
       "transferMethods": [
@@ -11417,8 +11426,8 @@
       },
       "coingeckoId": "rocket-pool-eth",
       "price": {
-        "poolId": "1026",
-        "denom": "ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5"
+        "poolId": "1030",
+        "denom": "ibc/4D7A6F2A7744B1534C984A21F9EDFFF8809FC71A9E9243FFB702073E7FCA513A"
       },
       "categories": [
         "liquid_staking"
@@ -11485,8 +11494,8 @@
       },
       "coingeckoId": "staked-frax-ether",
       "price": {
-        "poolId": "1025",
-        "denom": "ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5"
+        "poolId": "1030",
+        "denom": "ibc/4D7A6F2A7744B1534C984A21F9EDFFF8809FC71A9E9243FFB702073E7FCA513A"
       },
       "categories": [
         "liquid_staking"
@@ -11552,8 +11561,8 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wstETH.axl.svg"
       },
       "price": {
-        "poolId": "1024",
-        "denom": "ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5"
+        "poolId": "1030",
+        "denom": "ibc/4D7A6F2A7744B1534C984A21F9EDFFF8809FC71A9E9243FFB702073E7FCA513A"
       },
       "categories": [
         "liquid_staking"
@@ -12060,7 +12069,7 @@
       },
       "price": {
         "poolId": "2245",
-        "denom": "ibc/297C64CC42B5A8D8F82FE2EBE208A6FE8F94B86037FA28C4529A23701C228F7A"
+        "denom": "ibc/00B6E60AD3D65CBEF5579AC8AF609527C0B57535B6E32D96C80A735344FD9DCC"
       },
       "categories": [],
       "transferMethods": [
@@ -14209,8 +14218,8 @@
       },
       "coingeckoId": "collateralized-debt-token",
       "price": {
-        "poolId": "2885",
-        "denom": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858"
+        "poolId": "1268",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "stablecoin",
@@ -14603,8 +14612,8 @@
       },
       "coingeckoId": "celestia",
       "price": {
-        "poolId": "1247",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1475",
+        "denom": "factory/osmo1f5vfcph2dvfeqcqkhetwv75fda69z7e5c2dldm3kvgj23crkv6wqcn47a0/umilkTIA"
       },
       "categories": [],
       "transferMethods": [
@@ -15736,8 +15745,8 @@
       },
       "coingeckoId": "milkyway-staked-tia",
       "price": {
-        "poolId": "1475",
-        "denom": "ibc/D79E7D83AB399BFFF93433E54FAA480C191248FC556924A2A8351AE2638B3877"
+        "poolId": "1339",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "liquid_staking",
@@ -17271,11 +17280,11 @@
       "chainName": "dymension",
       "sourceDenom": "adym",
       "coinMinimalDenom": "ibc/9A76CDF0CBCEF37923F32518FA15E5DC92B9F56128292BC4D63C4AEA76CBB110",
-      "symbol": "DYM",
+      "symbol": "DYM.dym",
       "decimals": 18,
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.svg"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dym.dym.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dym.dym.png"
       },
       "coingeckoId": "dymension",
       "price": {
@@ -17320,8 +17329,8 @@
           }
         }
       ],
-      "variantGroupKey": "ibc/9A76CDF0CBCEF37923F32518FA15E5DC92B9F56128292BC4D63C4AEA76CBB110",
-      "name": "Dymension Hub",
+      "variantGroupKey": "factory/osmo12cf6l99qrchfppmjp80gvkpnle2tuxpck2cf6fz030w74mq49u4qm3dh4d/alloyed/allDYM",
+      "name": "Dymension (Dymension Hub)",
       "isAlloyed": false,
       "verified": true,
       "unstable": false,
@@ -18232,7 +18241,7 @@
       },
       "price": {
         "poolId": "2254",
-        "denom": "ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4"
+        "denom": "ibc/4F3B0EC2FE2D370D10C3671A1B7B06D2A964C721470C305CBB846ED60E6CAA20"
       },
       "categories": [
         "sail_initiative"
@@ -20483,8 +20492,8 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/0l/images/libra.png"
       },
       "price": {
-        "poolId": "1721",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1785",
+        "denom": "uosmo"
       },
       "categories": [],
       "transferMethods": [],
@@ -22347,7 +22356,7 @@
       },
       "coingeckoId": "bitcoin",
       "price": {
-        "poolId": "1943",
+        "poolId": "1942",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
@@ -23200,8 +23209,8 @@
       },
       "coingeckoId": "ethereum",
       "price": {
-        "poolId": "1982",
-        "denom": "factory/osmo1z6r6qdknhgsc0zeracktgpcxf43j6sekq07nw8sxduc9lg0qjjlqfu25e3/alloyed/allBTC"
+        "poolId": "1948",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
       "transferMethods": [],
@@ -23555,7 +23564,7 @@
       },
       "price": {
         "poolId": "2842",
-        "denom": "ibc/6AE98883D4D5D5FF9E50D7130F1305DA2FFA0C652D1DD9C123657C6B4EB2DF8A"
+        "denom": "ibc/0B3D528E74E3DEAADF8A68F393887AC7E06028904D02173561B0D27F6E751D0A"
       },
       "categories": [
         "rwa"
@@ -24507,8 +24516,8 @@
       },
       "coingeckoId": "mars-protocol-a7fcbcfb-fd61-4017-92f0-7ee9f9cc6da3",
       "price": {
-        "poolId": "2267",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "2857",
+        "denom": "ibc/92BE0717F4678905E53F4E45B2DED18BC0CB97BF1F8B6A25AFEDF3D5A879B4D5"
       },
       "categories": [
         "defi",
@@ -27062,8 +27071,8 @@
       },
       "coingeckoId": "ripple",
       "price": {
-        "poolId": "2501",
-        "denom": "ibc/F3166F4D31D6BA1EC6C9F5536F5DDDD4CC93DBA430F7419E7CDC41C497944A65"
+        "poolId": "2435",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
       "transferMethods": [
@@ -28528,8 +28537,8 @@
       },
       "coingeckoId": "fetch-ai",
       "price": {
-        "poolId": "2806",
-        "denom": "ibc/D79E7D83AB399BFFF93433E54FAA480C191248FC556924A2A8351AE2638B3877"
+        "poolId": "2746",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
       "transferMethods": [],
@@ -28896,12 +28905,13 @@
       "chainName": "osmosis",
       "sourceDenom": "factory/osmo12cf6l99qrchfppmjp80gvkpnle2tuxpck2cf6fz030w74mq49u4qm3dh4d/alloyed/allDYM",
       "coinMinimalDenom": "factory/osmo12cf6l99qrchfppmjp80gvkpnle2tuxpck2cf6fz030w74mq49u4qm3dh4d/alloyed/allDYM",
-      "symbol": "allDYM",
+      "symbol": "DYM",
       "decimals": 12,
       "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allDYM.svg",
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allDYM.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.svg"
       },
+      "coingeckoId": "dymension",
       "price": {
         "poolId": "2880",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
@@ -28922,8 +28932,8 @@
           }
         }
       ],
-      "variantGroupKey": "ibc/9A76CDF0CBCEF37923F32518FA15E5DC92B9F56128292BC4D63C4AEA76CBB110",
-      "name": "Dymension Hub (Alloy)",
+      "variantGroupKey": "factory/osmo12cf6l99qrchfppmjp80gvkpnle2tuxpck2cf6fz030w74mq49u4qm3dh4d/alloyed/allDYM",
+      "name": "Dymension Hub",
       "isAlloyed": true,
       "contract": "osmo12cf6l99qrchfppmjp80gvkpnle2tuxpck2cf6fz030w74mq49u4qm3dh4d",
       "verified": false,
@@ -28935,12 +28945,13 @@
       "chainName": "osmosis",
       "sourceDenom": "factory/osmo1fg7y3j86fkp93yxpq5q8lk8c64k8wxj3qw8us49msgpr2gsgddjqxpgr9m/alloyed/allPOL",
       "coinMinimalDenom": "factory/osmo1fg7y3j86fkp93yxpq5q8lk8c64k8wxj3qw8us49msgpr2gsgddjqxpgr9m/alloyed/allPOL",
-      "symbol": "allPOL",
+      "symbol": "POL",
       "decimals": 12,
       "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allPOL.svg",
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allPOL.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polygon/images/matic-purple.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polygon/images/matic-purple.svg"
       },
+      "coingeckoId": "polygon-ecosystem-token",
       "price": {
         "poolId": "2881",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
@@ -28962,8 +28973,8 @@
           }
         }
       ],
-      "variantGroupKey": "ibc/AB589511ED0DD5FA56171A39978AFBF1371DB986EC1C3526CE138A16377E39BB",
-      "name": "Polygon (ex-MATIC) (Alloy)",
+      "variantGroupKey": "factory/osmo1fg7y3j86fkp93yxpq5q8lk8c64k8wxj3qw8us49msgpr2gsgddjqxpgr9m/alloyed/allPOL",
+      "name": "Polygon (ex-MATIC)",
       "isAlloyed": true,
       "contract": "osmo1fg7y3j86fkp93yxpq5q8lk8c64k8wxj3qw8us49msgpr2gsgddjqxpgr9m",
       "verified": false,
@@ -29115,11 +29126,17 @@
       "symbol": "MOVE.eth.axl",
       "decimals": 8,
       "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/movement/images/move.svg",
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/movement/images/move.png"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/move.axl.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/move.axl.png"
       },
       "categories": [],
       "transferMethods": [
+        {
+          "name": "Satellite",
+          "type": "external_interface",
+          "depositUrl": "https://satellite.money/?source=ethereum&destination=osmosis&asset_denom=unit-move",
+          "withdrawUrl": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=unit-move"
+        },
         {
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
@@ -29175,7 +29192,7 @@
           }
         }
       ],
-      "variantGroupKey": "ibc/D19DA6AE5B3CB19A035FCB51DEE5A36392E0D64D51C20D159A155D1581911A39",
+      "variantGroupKey": "factory/osmo1v90ezcqkv5utjc52vg4w2gztmcpt7l4vqxzuryj6zl3qr8wy539quxeafk/alloyed/allMOVE",
       "name": "Movement (Ethereum via Axelar)",
       "isAlloyed": false,
       "verified": false,
@@ -29191,12 +29208,13 @@
       "chainName": "osmosis",
       "sourceDenom": "factory/osmo1v90ezcqkv5utjc52vg4w2gztmcpt7l4vqxzuryj6zl3qr8wy539quxeafk/alloyed/allMOVE",
       "coinMinimalDenom": "factory/osmo1v90ezcqkv5utjc52vg4w2gztmcpt7l4vqxzuryj6zl3qr8wy539quxeafk/alloyed/allMOVE",
-      "symbol": "allMOVE",
+      "symbol": "MOVE",
       "decimals": 8,
       "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allMOVE.svg",
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allMOVE.png"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/movement/images/move.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/movement/images/move.png"
       },
+      "coingeckoId": "movement",
       "price": {
         "poolId": "2876",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
@@ -29217,7 +29235,7 @@
         }
       ],
       "variantGroupKey": "factory/osmo1v90ezcqkv5utjc52vg4w2gztmcpt7l4vqxzuryj6zl3qr8wy539quxeafk/alloyed/allMOVE",
-      "name": "Movement (Alloy)",
+      "name": "Movement",
       "isAlloyed": true,
       "contract": "osmo1v90ezcqkv5utjc52vg4w2gztmcpt7l4vqxzuryj6zl3qr8wy539quxeafk",
       "verified": false,

@@ -10483,6 +10483,65 @@
         "ibc-go",
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "babylon",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Babylon Genesis",
+      "chain_id": "bbn-1",
+      "bech32_prefix": "bbn",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "bbn",
+        "bech32PrefixAccPub": "bbnpub",
+        "bech32PrefixValAddr": "bbnvaloper",
+        "bech32PrefixValPub": "bbnvaloperpub",
+        "bech32PrefixConsAddr": "bbnvalcons",
+        "bech32PrefixConsPub": "bbnvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ubbn",
+            "low_gas_price": 0.007,
+            "average_gas_price": 0.007,
+            "high_gas_price": 0.01
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ubbn"
+          }
+        ]
+      },
+      "description": "Babylon Genesis enables Bitcoin tokens to be used as an economic security layer for Proof of Stake (PoS) systems without relying on bridges, wrapping, or third-party custody.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://babylon-rpc.polkachu.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://babylon-api.polkachu.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/babylon/transactions/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/babylon/images/logo.svg"
+      },
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
     }
   ]
 }

@@ -1077,6 +1077,7 @@ export function setCoinGeckoId(asset_data) {
 
   asset_data.frontend.coingeckoId = coingecko_id;
   asset_data.asset_detail.coingeckoId = coingecko_id;
+  asset_data.chain_reg.coingecko_id = coingecko_id;
 
 }
 

@@ -980,8 +980,10 @@ export function setImages(asset_data) {
 
   let localImages = getAssetProperty(asset_data.local_asset, "images");
   let canonicalImages = getAssetProperty(asset_data.canonical_asset, "images");
-  let primaryImage = asset_data.zone_asset?.override_properties?.logo_URIs ?? canonicalImages?.[0];
+  let primaryImage = asset_data.zone_asset?.override_properties?.logo_URIs ?? canonicalImages?.[0] ?? localImages?.[0];
   let images = [];
+
+
 
   //Generated chain reg images array is:
   //canonicalAsset's image (e.g., USDT) + localAsset's Images(e.g., allUSDT),
@@ -1023,6 +1025,11 @@ export function setImages(asset_data) {
       addUniqueArrayItem(localImage, images);
     }
   });
+
+  if (!primaryImage) {
+    console.log(asset_data);
+    console.log(canonicalImages);
+  }
 
   let newImagesArray = [];
   images.forEach((image) => {

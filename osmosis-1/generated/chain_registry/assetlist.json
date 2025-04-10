@@ -28298,6 +28298,53 @@
       }
     },
     {
+      "description": "The native token of Babylon Genesis.",
+      "denom_units": [
+        {
+          "denom": "ibc/EC3A4ACBA1CFBEE698472D3563B70985AEA5A7144C319B61B3EBDFB57B5E1535",
+          "exponent": 0,
+          "aliases": [
+            "ubbn"
+          ]
+        },
+        {
+          "denom": "BABY",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/EC3A4ACBA1CFBEE698472D3563B70985AEA5A7144C319B61B3EBDFB57B5E1535",
+      "name": "Babylon Genesis",
+      "display": "BABY",
+      "symbol": "BABY",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "babylon",
+            "base_denom": "ubbn",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-101635",
+            "path": "transfer/channel-101635/ubbn"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/babylon/images/logo.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "babylon",
+            "base_denom": "ubbn"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/babylon/images/logo.svg"
+        }
+      ]
+    },
+    {
       "description": "PUNDIX token is the native token that functions within the Pundi X ecosystem, including PundiX Chain and XPOS.",
       "denom_units": [
         {

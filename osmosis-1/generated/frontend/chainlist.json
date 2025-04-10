@@ -5223,6 +5223,22 @@
           "coinMinimalDenom": "factory/osmo1v90ezcqkv5utjc52vg4w2gztmcpt7l4vqxzuryj6zl3qr8wy539quxeafk/alloyed/allMOVE",
           "coinDecimals": 8,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allMOVE.png"
+        },
+        {
+          "coinDenom": "LBTC.atom",
+          "chainSuggestionDenom": "ibc/89EE10FCF78800B572BAAC7080AEFA301B5F3BBC51C5371E907EB129C5B900E7",
+          "coinMinimalDenom": "ibc/89EE10FCF78800B572BAAC7080AEFA301B5F3BBC51C5371E907EB129C5B900E7",
+          "coinDecimals": 8,
+          "coinGeckoId": "lombard-staked-btc",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/lbtc.atom.png"
+        },
+        {
+          "coinDenom": "solvBTC.atom",
+          "chainSuggestionDenom": "ibc/2CC08A10459B40B0251B8CB9C036C98BED1ABBD5F03772E371DCD0FFDA3EC7F3",
+          "coinMinimalDenom": "ibc/2CC08A10459B40B0251B8CB9C036C98BED1ABBD5F03772E371DCD0FFDA3EC7F3",
+          "coinDecimals": 18,
+          "coinGeckoId": "solv-btc",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/solvBTC.atom.png"
         }
       ],
       "description": "Osmosis (OSMO) is the premier DEX and cross-chain DeFi hub within the Cosmos ecosystem, a network of over 50 sovereign, interoperable blockchains seamlessly connected through the Inter-Blockchain Communication Protocol (IBC). Pioneering in its approach, Osmosis offers a dynamic trading and liquidity provision experience, integrating non-IBC assets from other ecosystems, including Ethereum, Solana, Avalanche, and Polkadot. Initially adopting Balancer-style pools, Osmosis now also features a concentrated liquidity model that is orders of magnitude more capital efficient, meaning that significantly less liquidity is required to handle the same amount of trading volume with minimal slippage.\n\nAs a true appchain, Osmosis has greater control over the full blockchain stack than traditional smart contract DEXs, which must follow the code of the parent chain that it is built on. This fine-grained control has enabled, for example, the development of Superfluid Staking, an extension of Proof of Stake that allows assets at the application layer to be staked to secure the chain. The customizability of appchains also allows implementing features like the Protocol Revenue module, which enables Osmosis to conduct on-chain arbitrage on behalf of OSMO stakers, balancing prices across pools while generating real yield revenue from this volume. Additionally, as a sovereign appchain, Osmosis governance can vote on upgrades to the protocol. One example of this was the introduction of a Taker Fee, which switched on the collection of exchange fees to generate diverse yield from Osmosis volume and distribute it to OSMO stakers.\n\nOsmosis is bringing the full centralized exchange experience to the decentralized world by building a cross-chain native DEX and trading suite that connects all chains over IBC, including Ethereum and Bitcoin. To reach this goal, Osmosis hosts an ever-expanding suite of DeFi applications aimed at providing a one-stop experience that includes lending, credit, margin, DeFi strategy vaults, power perps, fiat on-ramps, NFTs, stablecoins, and more — all of the functionalities that centralized exchange offer and more, in the trust-minimized environment of decentralized finance.",
@@ -5335,6 +5351,7 @@
         {
           "coinDenom": "LBTC",
           "chainSuggestionDenom": "ibc/DBD9E339E1B093A052D76BECFFDE8435EAC114CF2133346B4D691F3F2068C957",
+          "coinMinimalDenom": "ibc/89EE10FCF78800B572BAAC7080AEFA301B5F3BBC51C5371E907EB129C5B900E7",
           "sourceDenom": "ibc/DBD9E339E1B093A052D76BECFFDE8435EAC114CF2133346B4D691F3F2068C957",
           "coinDecimals": 8,
           "coinGeckoId": "lombard-staked-btc",
@@ -5343,6 +5360,7 @@
         {
           "coinDenom": "SolvBTC",
           "chainSuggestionDenom": "ibc/0C4417F123459B47B6933939BF6F128C362B0C1F9EDA6A6EBC08860E4672AF7E",
+          "coinMinimalDenom": "ibc/2CC08A10459B40B0251B8CB9C036C98BED1ABBD5F03772E371DCD0FFDA3EC7F3",
           "sourceDenom": "ibc/0C4417F123459B47B6933939BF6F128C362B0C1F9EDA6A6EBC08860E4672AF7E",
           "coinDecimals": 18
         },
@@ -5368,7 +5386,7 @@
           "coinDenom": "stBTC",
           "chainSuggestionDenom": "ibc/286A30F7F093357CE113A2E3B9A2E497F7A691CAFC624ABC615DE147DCE9FD17",
           "sourceDenom": "ibc/286A30F7F093357CE113A2E3B9A2E497F7A691CAFC624ABC615DE147DCE9FD17",
-          "coinDecimals": 8
+          "coinDecimals": 18
         },
         {
           "coinDenom": "mBTC",
@@ -5380,7 +5398,7 @@
           "coinDenom": "kBTC",
           "chainSuggestionDenom": "ibc/AE65FB498AFB35CC06301BEE6EA8063DC41CE04D80A8D167258B73D7A863DA8D",
           "sourceDenom": "ibc/AE65FB498AFB35CC06301BEE6EA8063DC41CE04D80A8D167258B73D7A863DA8D",
-          "coinDecimals": 8
+          "coinDecimals": 18
         },
         {
           "coinDenom": "eBTC",
@@ -18992,6 +19010,13 @@
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.png"
         },
         {
+          "coinDenom": "dNTRN",
+          "chainSuggestionDenom": "factory/neutron1frc0p5czd9uaaymdkug2njz7dc7j65jxukp9apmt9260a8egujkspms2t2/udntrn",
+          "sourceDenom": "factory/neutron1frc0p5czd9uaaymdkug2njz7dc7j65jxukp9apmt9260a8egujkspms2t2/udntrn",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/dNTRN.svg"
+        },
+        {
           "coinDenom": "dATOM",
           "chainSuggestionDenom": "factory/neutron1k6hr0f83e7un2wjf29cspk7j69jrnskk65k3ek2nj9dztrlzpj6q00rtsa/udatom",
           "coinMinimalDenom": "ibc/C1B4D4804EB8F95FFB75E6395A301F0AD6D7DDE5C3A45571B70E46A368DD353E",
@@ -26062,6 +26087,7 @@
           "chainSuggestionDenom": "ibc/2CC08A10459B40B0251B8CB9C036C98BED1ABBD5F03772E371DCD0FFDA3EC7F3",
           "sourceDenom": "ibc/2CC08A10459B40B0251B8CB9C036C98BED1ABBD5F03772E371DCD0FFDA3EC7F3",
           "coinDecimals": 18,
+          "coinGeckoId": "solv-btc",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/SolvBTC.png"
         },
         {
@@ -26069,6 +26095,7 @@
           "chainSuggestionDenom": "ibc/E06DD7851FC6E344788BD87B2E53384D676374FF0168CEFEDE072E4FB83037A1",
           "sourceDenom": "ibc/E06DD7851FC6E344788BD87B2E53384D676374FF0168CEFEDE072E4FB83037A1",
           "coinDecimals": 18,
+          "coinGeckoId": "solv-protocol-solvbtc-bbn",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/xSolvBTC.png"
         },
         {

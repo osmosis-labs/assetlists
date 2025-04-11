@@ -28451,6 +28451,53 @@
       ]
     },
     {
+      "description": "Drop staked NTRN",
+      "denom_units": [
+        {
+          "denom": "ibc/5D8012FB4C44BA0A7D355E37B8AC2CFA4DDBD6EE20F2056D8D4DF07C9D6015F3",
+          "exponent": 0,
+          "aliases": [
+            "factory/neutron1frc0p5czd9uaaymdkug2njz7dc7j65jxukp9apmt9260a8egujkspms2t2/udntrn"
+          ]
+        },
+        {
+          "denom": "dNTRN",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/5D8012FB4C44BA0A7D355E37B8AC2CFA4DDBD6EE20F2056D8D4DF07C9D6015F3",
+      "name": "dNTRN",
+      "display": "dNTRN",
+      "symbol": "dNTRN",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "neutron",
+            "base_denom": "factory/neutron1frc0p5czd9uaaymdkug2njz7dc7j65jxukp9apmt9260a8egujkspms2t2/udntrn",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-874",
+            "path": "transfer/channel-874/factory/neutron1frc0p5czd9uaaymdkug2njz7dc7j65jxukp9apmt9260a8egujkspms2t2/udntrn"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/dNTRN.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "neutron",
+            "base_denom": "factory/neutron1frc0p5czd9uaaymdkug2njz7dc7j65jxukp9apmt9260a8egujkspms2t2/udntrn"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/dNTRN.svg"
+        }
+      ]
+    },
+    {
       "description": "PUNDIX token is the native token that functions within the Pundi X ecosystem, including PundiX Chain and XPOS.",
       "denom_units": [
         {

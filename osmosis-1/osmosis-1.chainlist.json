@@ -10542,6 +10542,70 @@
         "ibc-go",
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "initia",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Initia",
+      "chain_id": "interwoven-1",
+      "bech32_prefix": "init",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "init",
+        "bech32PrefixAccPub": "initpub",
+        "bech32PrefixValAddr": "initvaloper",
+        "bech32PrefixValPub": "initvaloperpub",
+        "bech32PrefixConsAddr": "initvalcons",
+        "bech32PrefixConsPub": "initvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uinit",
+            "fixed_min_gas_price": 0.015,
+            "low_gas_price": 0.015,
+            "average_gas_price": 0.015,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uinit"
+          }
+        ]
+      },
+      "description": "Initia Mainnet",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.initia.xyz"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.initia.xyz"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://scan.initia.xyz/interwoven-1/txs/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/initia/images/INIT.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/initia/images/INIT.png",
+        "theme": {
+          "circle": true
+        }
+      },
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
     }
   ]
 }

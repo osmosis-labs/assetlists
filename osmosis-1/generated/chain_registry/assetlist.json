@@ -28574,6 +28574,59 @@
       }
     },
     {
+      "description": "The native token of Initia",
+      "denom_units": [
+        {
+          "denom": "ibc/DD7EA9AF1E58E9FDD7F9810976817E203D5B87BAEF7AEA592FA34DF73310620B",
+          "exponent": 0,
+          "aliases": [
+            "uinit"
+          ]
+        },
+        {
+          "denom": "INIT",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/DD7EA9AF1E58E9FDD7F9810976817E203D5B87BAEF7AEA592FA34DF73310620B",
+      "name": "Initia",
+      "display": "INIT",
+      "symbol": "INIT",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "initia",
+            "base_denom": "uinit",
+            "channel_id": "channel-68"
+          },
+          "chain": {
+            "channel_id": "channel-102122",
+            "path": "transfer/channel-102122/uinit"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/initia/images/INIT.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/initia/images/INIT.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "initia",
+            "base_denom": "uinit"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/initia/images/INIT.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/initia/images/INIT.svg",
+          "theme": {
+            "circle": true,
+            "primary_color_hex": "#040404"
+          }
+        }
+      ]
+    },
+    {
       "description": "PUNDIX token is the native token that functions within the Pundi X ecosystem, including PundiX Chain and XPOS.",
       "denom_units": [
         {

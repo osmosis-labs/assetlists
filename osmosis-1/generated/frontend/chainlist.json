@@ -16256,6 +16256,13 @@
           "coinDecimals": 6,
           "coinGeckoId": "posthuman",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/phmn.png"
+        },
+        {
+          "coinDenom": "GGE",
+          "chainSuggestionDenom": "factory/bze12gyp30f29zg26nuqrwdhl26ej4q066pt572fhm/GGE",
+          "sourceDenom": "factory/bze12gyp30f29zg26nuqrwdhl26ej4q066pt572fhm/GGE",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/beezee/images/gge.png"
         }
       ],
       "apis": {
@@ -26264,7 +26271,7 @@
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/weth.svg"
         },
         {
-          "coinDenom": "satUniBTC",
+          "coinDenom": "satUniBTC.e",
           "chainSuggestionDenom": "cw20:bbn1j2nchmpuhkq0yj93g84txe33j5lhw2y7p3anhqjhvamqxsev6rmsneu85x",
           "sourceDenom": "cw20:bbn1j2nchmpuhkq0yj93g84txe33j5lhw2y7p3anhqjhvamqxsev6rmsneu85x",
           "coinDecimals": 8,
@@ -26287,6 +26294,75 @@
       "explorers": [
         {
           "txPage": "https://www.mintscan.io/babylon/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "initia",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Initia",
+      "chain_id": "interwoven-1",
+      "bech32Prefix": "init",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "init",
+        "bech32PrefixAccPub": "initpub",
+        "bech32PrefixValAddr": "initvaloper",
+        "bech32PrefixValPub": "initvaloperpub",
+        "bech32PrefixConsAddr": "initvalcons",
+        "bech32PrefixConsPub": "initvalconspub"
+      },
+      "slip44": 60,
+      "stakeCurrency": {
+        "coinDenom": "INIT",
+        "chainSuggestionDenom": "uinit",
+        "coinMinimalDenom": "ibc/DD7EA9AF1E58E9FDD7F9810976817E203D5B87BAEF7AEA592FA34DF73310620B",
+        "sourceDenom": "uinit",
+        "coinDecimals": 6
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "INIT",
+          "chainSuggestionDenom": "uinit",
+          "coinMinimalDenom": "ibc/DD7EA9AF1E58E9FDD7F9810976817E203D5B87BAEF7AEA592FA34DF73310620B",
+          "sourceDenom": "uinit",
+          "coinDecimals": 6,
+          "gasPriceStep": {
+            "low": 0.015,
+            "average": 0.015,
+            "high": 0.04
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "INIT",
+          "chainSuggestionDenom": "uinit",
+          "coinMinimalDenom": "ibc/DD7EA9AF1E58E9FDD7F9810976817E203D5B87BAEF7AEA592FA34DF73310620B",
+          "sourceDenom": "uinit",
+          "coinDecimals": 6
+        }
+      ],
+      "description": "Initia Mainnet",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.initia.xyz"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.initia.xyz"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://scan.initia.xyz/interwoven-1/txs/${txHash}"
         }
       ],
       "features": [

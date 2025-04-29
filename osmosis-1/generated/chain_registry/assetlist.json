@@ -28627,6 +28627,58 @@
       ]
     },
     {
+      "description": "The native token of MilkyWay",
+      "denom_units": [
+        {
+          "denom": "ibc/9D8D4CAE9D8F15B69E93969304AF3878D14BDED39FEAF0060566D6AC22288779",
+          "exponent": 0,
+          "aliases": [
+            "umilk"
+          ]
+        },
+        {
+          "denom": "milk",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/9D8D4CAE9D8F15B69E93969304AF3878D14BDED39FEAF0060566D6AC22288779",
+      "name": "MilkyWay",
+      "display": "milk",
+      "symbol": "MILK",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "milkyway",
+            "base_denom": "umilk",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-89298",
+            "path": "transfer/channel-89298/umilk"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milk.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milk.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "milkyway",
+            "base_denom": "umilk"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milk.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milk.svg",
+          "theme": {
+            "primary_color_hex": "#760dbb"
+          }
+        }
+      ]
+    },
+    {
       "description": "PUNDIX token is the native token that functions within the Pundi X ecosystem, including PundiX Chain and XPOS.",
       "denom_units": [
         {

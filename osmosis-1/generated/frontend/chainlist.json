@@ -26374,6 +26374,223 @@
         "eth-address-gen",
         "eth-key-sign"
       ]
+    },
+    {
+      "chain_name": "milkyway",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "MilkyWay",
+      "chain_id": "milkyway",
+      "bech32Prefix": "milk",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "milk",
+        "bech32PrefixAccPub": "milkpub",
+        "bech32PrefixValAddr": "milkvaloper",
+        "bech32PrefixValPub": "milkvaloperpub",
+        "bech32PrefixConsAddr": "milkvalcons",
+        "bech32PrefixConsPub": "milkvalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDenom": "MILK",
+        "chainSuggestionDenom": "umilk",
+        "coinMinimalDenom": "ibc/9D8D4CAE9D8F15B69E93969304AF3878D14BDED39FEAF0060566D6AC22288779",
+        "sourceDenom": "umilk",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milk.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "MILK",
+          "chainSuggestionDenom": "umilk",
+          "coinMinimalDenom": "ibc/9D8D4CAE9D8F15B69E93969304AF3878D14BDED39FEAF0060566D6AC22288779",
+          "sourceDenom": "umilk",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milk.png",
+          "gasPriceStep": {
+            "low": 0.02,
+            "average": 0.03,
+            "high": 0.035
+          }
+        },
+        {
+          "coinDenom": "milkTIA",
+          "chainSuggestionDenom": "ibc/16065EE5282C5217685C8F084FC44864C25C706AC37356B0D62811D50B96920F",
+          "sourceDenom": "ibc/16065EE5282C5217685C8F084FC44864C25C706AC37356B0D62811D50B96920F",
+          "coinDecimals": 6,
+          "coinGeckoId": "milkyway-staked-tia",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milktia.png",
+          "gasPriceStep": {
+            "low": 0.0025,
+            "average": 0.003,
+            "high": 0.0035
+          }
+        },
+        {
+          "coinDenom": "TIA",
+          "chainSuggestionDenom": "ibc/6C349F0EB135C5FA99301758F35B87DB88403D690E5E314AB080401FEE4066E5",
+          "sourceDenom": "ibc/6C349F0EB135C5FA99301758F35B87DB88403D690E5E314AB080401FEE4066E5",
+          "coinDecimals": 6,
+          "coinGeckoId": "celestia",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/celestia/images/celestia.png",
+          "gasPriceStep": {
+            "low": 0.0025,
+            "average": 0.003,
+            "high": 0.0035
+          }
+        },
+        {
+          "coinDenom": "stTIA",
+          "chainSuggestionDenom": "ibc/8D4FC51F696E03711B9B37A5787FB89BD2DDBAF788813478B002D552A12F9157",
+          "sourceDenom": "ibc/8D4FC51F696E03711B9B37A5787FB89BD2DDBAF788813478B002D552A12F9157",
+          "coinDecimals": 6,
+          "coinGeckoId": "celestia",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/sttia.png",
+          "gasPriceStep": {
+            "low": 0.0025,
+            "average": 0.003,
+            "high": 0.0035
+          }
+        },
+        {
+          "coinDenom": "TIA",
+          "chainSuggestionDenom": "ibc/F1183DB3D428313A6FD329DF18219F9D6B83257D07D292EA9EC1D877E89EC2B0",
+          "sourceDenom": "ibc/F1183DB3D428313A6FD329DF18219F9D6B83257D07D292EA9EC1D877E89EC2B0",
+          "coinDecimals": 6,
+          "coinGeckoId": "celestia",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/celestia/images/celestia.png",
+          "gasPriceStep": {
+            "low": 0.0025,
+            "average": 0.003,
+            "high": 0.0035
+          }
+        },
+        {
+          "coinDenom": "dTIA",
+          "chainSuggestionDenom": "ibc/4795C86F72EC2CB54E885A4A5B401BED9C333E008311ED9C4DE01BF546B44A21",
+          "sourceDenom": "ibc/4795C86F72EC2CB54E885A4A5B401BED9C333E008311ED9C4DE01BF546B44A21",
+          "coinDecimals": 6,
+          "coinGeckoId": "celestia",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/dTIA.svg",
+          "gasPriceStep": {
+            "low": 0.0025,
+            "average": 0.003,
+            "high": 0.0035
+          }
+        },
+        {
+          "coinDenom": "USDC",
+          "chainSuggestionDenom": "ibc/F5FABF52B54E65064B57BF6DBD8E5FAD22CEE9F4B8A57ADBB20CCD0173AA72A4",
+          "sourceDenom": "ibc/F5FABF52B54E65064B57BF6DBD8E5FAD22CEE9F4B8A57ADBB20CCD0173AA72A4",
+          "coinDecimals": 6,
+          "coinGeckoId": "usd-coin",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png",
+          "gasPriceStep": {
+            "low": 0.0025,
+            "average": 0.003,
+            "high": 0.0035
+          }
+        },
+        {
+          "coinDenom": "milkBABY",
+          "chainSuggestionDenom": "factory/milk1qg5ega6dykkxc307y25pecuufrjkxkaggkkxh7nad0vhyhtuhw3ssgcye4/umilkBBN",
+          "sourceDenom": "factory/milk1qg5ega6dykkxc307y25pecuufrjkxkaggkkxh7nad0vhyhtuhw3ssgcye4/umilkBBN",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milkbaby.png",
+          "gasPriceStep": {
+            "low": 0.0025,
+            "average": 0.003,
+            "high": 0.0035
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "MILK",
+          "chainSuggestionDenom": "umilk",
+          "coinMinimalDenom": "ibc/9D8D4CAE9D8F15B69E93969304AF3878D14BDED39FEAF0060566D6AC22288779",
+          "sourceDenom": "umilk",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milk.png"
+        },
+        {
+          "coinDenom": "TIA",
+          "chainSuggestionDenom": "ibc/F1183DB3D428313A6FD329DF18219F9D6B83257D07D292EA9EC1D877E89EC2B0",
+          "sourceDenom": "ibc/F1183DB3D428313A6FD329DF18219F9D6B83257D07D292EA9EC1D877E89EC2B0",
+          "coinDecimals": 6,
+          "coinGeckoId": "celestia",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/celestia/images/celestia.png"
+        },
+        {
+          "coinDenom": "TIA",
+          "chainSuggestionDenom": "ibc/6C349F0EB135C5FA99301758F35B87DB88403D690E5E314AB080401FEE4066E5",
+          "sourceDenom": "ibc/6C349F0EB135C5FA99301758F35B87DB88403D690E5E314AB080401FEE4066E5",
+          "coinDecimals": 6,
+          "coinGeckoId": "celestia",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/celestia/images/celestia.png"
+        },
+        {
+          "coinDenom": "milkTIA",
+          "chainSuggestionDenom": "ibc/16065EE5282C5217685C8F084FC44864C25C706AC37356B0D62811D50B96920F",
+          "sourceDenom": "ibc/16065EE5282C5217685C8F084FC44864C25C706AC37356B0D62811D50B96920F",
+          "coinDecimals": 6,
+          "coinGeckoId": "milkyway-staked-tia",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milktia.png"
+        },
+        {
+          "coinDenom": "stTIA",
+          "chainSuggestionDenom": "ibc/8D4FC51F696E03711B9B37A5787FB89BD2DDBAF788813478B002D552A12F9157",
+          "sourceDenom": "ibc/8D4FC51F696E03711B9B37A5787FB89BD2DDBAF788813478B002D552A12F9157",
+          "coinDecimals": 6,
+          "coinGeckoId": "celestia",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/sttia.png"
+        },
+        {
+          "coinDenom": "dTIA",
+          "chainSuggestionDenom": "ibc/4795C86F72EC2CB54E885A4A5B401BED9C333E008311ED9C4DE01BF546B44A21",
+          "sourceDenom": "ibc/4795C86F72EC2CB54E885A4A5B401BED9C333E008311ED9C4DE01BF546B44A21",
+          "coinDecimals": 6,
+          "coinGeckoId": "celestia",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/dTIA.svg"
+        },
+        {
+          "coinDenom": "USDC",
+          "chainSuggestionDenom": "ibc/F5FABF52B54E65064B57BF6DBD8E5FAD22CEE9F4B8A57ADBB20CCD0173AA72A4",
+          "sourceDenom": "ibc/F5FABF52B54E65064B57BF6DBD8E5FAD22CEE9F4B8A57ADBB20CCD0173AA72A4",
+          "coinDecimals": 6,
+          "coinGeckoId": "usd-coin",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png"
+        },
+        {
+          "coinDenom": "milkBABY",
+          "chainSuggestionDenom": "factory/milk1qg5ega6dykkxc307y25pecuufrjkxkaggkkxh7nad0vhyhtuhw3ssgcye4/umilkBBN",
+          "sourceDenom": "factory/milk1qg5ega6dykkxc307y25pecuufrjkxkaggkkxh7nad0vhyhtuhw3ssgcye4/umilkBBN",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milkbaby.png"
+        }
+      ],
+      "description": "MilkyWay (MILK) is the first modular staking portal, designed to redefine security and scalability within the modular ecosystem. As a pioneer of modular staking, MilkyWay integrates liquid staking and restaking solutions to address fragmented trust and enhance crypto-economic security across networks.\n\nLaunched in December 2023 as the first liquid staking solution for the Celestia ecosystem, MilkyWay empowered users to unlock staked TIA positions and engage with various DeFi protocols. This initial phase introduced milkTIA which has seen widespread adoption to become the leading LST for TIA. Building on this success, MilkyWay is now entering Phase 2: a multi-asset, multi-chain modular restaking protocol.\n\nMilkyWay’s architecture is purpose-built for modularity . Unlike traditional solutions, its modular design allows Actively Validated Services (AVSs) to fully customize, or “Plug-in” their security solutions through programmable rules, including asset delegation and slashing mechanisms. By restaking native and liquid staked assets, users can provide security to AVSs or any off-chain program and system that require its own unique validation process for verification. This approach ensures seamless integration while minimizing operational complexity.\n\nThrough programmable rules, AVSs can define asset allocation and stake distribution, offering both operator-centric and AVS-centric models for greater control. Slashing rules further enhance security through customizable mechanisms like stake slash, jail slash, and burn slash, enabling AVSs to align these features with their risk profiles. These extensible features ensure MilkyWay evolves alongside the needs of its AVS partners, redefining staking and restaking with a focus on trust, innovation, and modularity.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.mainnet.milkyway.zone"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.mainnet.milkyway.zone"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://www.mintscan.io/milkyway/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
     }
   ]
 }

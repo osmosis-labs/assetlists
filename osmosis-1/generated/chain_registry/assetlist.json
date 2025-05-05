@@ -2428,10 +2428,14 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/beezee/images/vdl.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/beezee/images/vdl.svg"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/VDL.vdl.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/VDL.vdl.png"
       },
       "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/VDL.vdl.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/VDL.vdl.png"
+        },
         {
           "image_sync": {
             "chain_name": "vidulum",
@@ -29157,6 +29161,108 @@
             "circle": true,
             "primary_color_hex": "#009393",
             "background_color_hex": "#009393"
+          }
+        }
+      ]
+    },
+    {
+      "description": "GEEGEE (GGE) on Cosmos is a community driven meme coin. Sharing knowledge and create visibility. How strong can we be? ☀️",
+      "denom_units": [
+        {
+          "denom": "ibc/AAC5DA36E48226B906DE694EA8B0464DE5EE45D7449984E4D799F33B8089CD6B",
+          "exponent": 0,
+          "aliases": [
+            "factory/bze12gyp30f29zg26nuqrwdhl26ej4q066pt572fhm/GGE"
+          ]
+        },
+        {
+          "denom": "GGE",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/AAC5DA36E48226B906DE694EA8B0464DE5EE45D7449984E4D799F33B8089CD6B",
+      "name": "GEEGEE",
+      "display": "GGE",
+      "symbol": "GGE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "beezee",
+            "base_denom": "factory/bze12gyp30f29zg26nuqrwdhl26ej4q066pt572fhm/GGE",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-340",
+            "path": "transfer/channel-340/factory/bze12gyp30f29zg26nuqrwdhl26ej4q066pt572fhm/GGE"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/beezee/images/gge.png"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "beezee",
+            "base_denom": "factory/bze12gyp30f29zg26nuqrwdhl26ej4q066pt572fhm/GGE"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/beezee/images/gge.png",
+          "theme": {
+            "primary_color_hex": "#FEFEFE"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Vidulum App Token",
+      "denom_units": [
+        {
+          "denom": "ibc/40B814E343DAADAF39FF4491727C7FE6286EE0A9A787CF839B318461C6FEDF95",
+          "exponent": 0,
+          "aliases": [
+            "factory/bze13gzq40che93tgfm9kzmkpjamah5nj0j73pyhqk/uvdl"
+          ]
+        },
+        {
+          "denom": "vdl",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/40B814E343DAADAF39FF4491727C7FE6286EE0A9A787CF839B318461C6FEDF95",
+      "name": "Vidulum",
+      "display": "vdl",
+      "symbol": "VDL",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "beezee",
+            "base_denom": "factory/bze13gzq40che93tgfm9kzmkpjamah5nj0j73pyhqk/uvdl",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-340",
+            "path": "transfer/channel-340/factory/bze13gzq40che93tgfm9kzmkpjamah5nj0j73pyhqk/uvdl"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/beezee/images/vdl.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/beezee/images/vdl.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "beezee",
+            "base_denom": "factory/bze13gzq40che93tgfm9kzmkpjamah5nj0j73pyhqk/uvdl"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/beezee/images/vdl.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/beezee/images/vdl.svg",
+          "theme": {
+            "primary_color_hex": "#3454bc"
           }
         }
       ]

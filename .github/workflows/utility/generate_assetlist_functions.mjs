@@ -979,7 +979,10 @@ export function setDecimals(asset_data) {
 export function setImages(asset_data) {
 
   let localImages = getAssetProperty(asset_data.local_asset, "images");
-  let canonicalImages = getAssetProperty(asset_data.canonical_asset, "images");
+  let canonicalImages = asset_data.canonical_asset ? chain_reg.getAssetPropertyWithTrace(
+    asset_data.canonical_asset?.chain_name,
+    asset_data.canonical_asset?.base_denom,
+    "images") : undefined;
   let primaryImage = asset_data.zone_asset?.override_properties?.logo_URIs ?? canonicalImages?.[0] ?? localImages?.[0];
   let images = [];
 
@@ -1617,7 +1620,7 @@ export function setDescription(asset_data) {
     asset_data.asset_detail.description = description;
     return;
   }
-  
+
   description =
     asset_data.frontend.is_canonical
       ? 

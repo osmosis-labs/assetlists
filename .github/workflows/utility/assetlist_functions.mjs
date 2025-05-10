@@ -9,6 +9,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as json_mgmt from './json_management.mjs';
+import { webcrypto as crypto } from 'crypto';
 
 
 

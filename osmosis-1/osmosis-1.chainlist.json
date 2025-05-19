@@ -6452,6 +6452,41 @@
             "low_gas_price": 0.025,
             "average_gas_price": 0.025,
             "high_gas_price": 0.05
+          },
+          {
+            "denom": "ibc/F5FABF52B54E65064B57BF6DBD8E5FAD22CEE9F4B8A57ADBB20CCD0173AA72A4",
+            "fixed_min_gas_price": 0.05,
+            "low_gas_price": 0.05,
+            "average_gas_price": 0.07,
+            "high_gas_price": 0.09
+          },
+          {
+            "denom": "ibc/18161D8EFBD00FF5B7683EF8E923B8913453567FBE3FB6672D75712B0DEB6682",
+            "fixed_min_gas_price": 0.05,
+            "low_gas_price": 0.05,
+            "average_gas_price": 0.07,
+            "high_gas_price": 0.09
+          },
+          {
+            "denom": "ibc/6CDD4663F2F09CD62285E2D45891FC149A3568E316CE3EBBE201A71A78A69388",
+            "fixed_min_gas_price": 0.0058,
+            "low_gas_price": 0.0058,
+            "average_gas_price": 0.0072,
+            "high_gas_price": 0.0088
+          },
+          {
+            "denom": "ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518",
+            "fixed_min_gas_price": 0.088,
+            "low_gas_price": 0.088,
+            "average_gas_price": 0.11,
+            "high_gas_price": 0.13
+          },
+          {
+            "denom": "ibc/3D6BC6E049CAEB905AC97031A42800588C58FB471EBDC7A3530FFCD0C3DC9E09",
+            "fixed_min_gas_price": 0.1,
+            "low_gas_price": 0.1,
+            "average_gas_price": 0.12,
+            "high_gas_price": 0.14
           }
         ]
       },
@@ -10577,7 +10612,7 @@
           }
         ]
       },
-      "description": "Initia Mainnet",
+      "description": "Initia L1 is a Layer 1 blockchain designed to serve as the coordination layer and central hub for all Initia rollups. This layer provides essential services to Rollups, including: Network Security, Governance, Liquidity Solutions, Bridging and Interoperability.",
       "apis": {
         "rpc": [
           {
@@ -10607,6 +10642,122 @@
         "ibc-transfer",
         "eth-address-gen",
         "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "milkyway",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "MilkyWay",
+      "chain_id": "milkyway",
+      "bech32_prefix": "milk",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "milk",
+        "bech32PrefixAccPub": "milkpub",
+        "bech32PrefixValAddr": "milkvaloper",
+        "bech32PrefixValPub": "milkvaloperpub",
+        "bech32PrefixConsAddr": "milkvalcons",
+        "bech32PrefixConsPub": "milkvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "umilk",
+            "fixed_min_gas_price": 0.01,
+            "low_gas_price": 0.02,
+            "average_gas_price": 0.03,
+            "high_gas_price": 0.035
+          },
+          {
+            "denom": "ibc/16065EE5282C5217685C8F084FC44864C25C706AC37356B0D62811D50B96920F",
+            "fixed_min_gas_price": 0.002,
+            "low_gas_price": 0.0025,
+            "average_gas_price": 0.003,
+            "high_gas_price": 0.0035
+          },
+          {
+            "denom": "ibc/6C349F0EB135C5FA99301758F35B87DB88403D690E5E314AB080401FEE4066E5",
+            "fixed_min_gas_price": 0.002,
+            "low_gas_price": 0.0025,
+            "average_gas_price": 0.003,
+            "high_gas_price": 0.0035
+          },
+          {
+            "denom": "ibc/8D4FC51F696E03711B9B37A5787FB89BD2DDBAF788813478B002D552A12F9157",
+            "fixed_min_gas_price": 0.002,
+            "low_gas_price": 0.0025,
+            "average_gas_price": 0.003,
+            "high_gas_price": 0.0035
+          },
+          {
+            "denom": "ibc/F1183DB3D428313A6FD329DF18219F9D6B83257D07D292EA9EC1D877E89EC2B0",
+            "fixed_min_gas_price": 0.002,
+            "low_gas_price": 0.0025,
+            "average_gas_price": 0.003,
+            "high_gas_price": 0.0035
+          },
+          {
+            "denom": "ibc/4795C86F72EC2CB54E885A4A5B401BED9C333E008311ED9C4DE01BF546B44A21",
+            "fixed_min_gas_price": 0.002,
+            "low_gas_price": 0.0025,
+            "average_gas_price": 0.003,
+            "high_gas_price": 0.0035
+          },
+          {
+            "denom": "ibc/F5FABF52B54E65064B57BF6DBD8E5FAD22CEE9F4B8A57ADBB20CCD0173AA72A4",
+            "fixed_min_gas_price": 0.002,
+            "low_gas_price": 0.0025,
+            "average_gas_price": 0.003,
+            "high_gas_price": 0.0035
+          },
+          {
+            "denom": "factory/milk1qg5ega6dykkxc307y25pecuufrjkxkaggkkxh7nad0vhyhtuhw3ssgcye4/umilkBBN",
+            "fixed_min_gas_price": 0.002,
+            "low_gas_price": 0.0025,
+            "average_gas_price": 0.003,
+            "high_gas_price": 0.0035
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "umilk"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "description": "MilkyWay (MILK) is the first modular staking portal, designed to redefine security and scalability within the modular ecosystem. As a pioneer of modular staking, MilkyWay integrates liquid staking and restaking solutions to address fragmented trust and enhance crypto-economic security across networks.\n\nLaunched in December 2023 as the first liquid staking solution for the Celestia ecosystem, MilkyWay empowered users to unlock staked TIA positions and engage with various DeFi protocols. This initial phase introduced milkTIA which has seen widespread adoption to become the leading LST for TIA. Building on this success, MilkyWay is now entering Phase 2: a multi-asset, multi-chain modular restaking protocol.\n\nMilkyWay’s architecture is purpose-built for modularity . Unlike traditional solutions, its modular design allows Actively Validated Services (AVSs) to fully customize, or “Plug-in” their security solutions through programmable rules, including asset delegation and slashing mechanisms. By restaking native and liquid staked assets, users can provide security to AVSs or any off-chain program and system that require its own unique validation process for verification. This approach ensures seamless integration while minimizing operational complexity.\n\nThrough programmable rules, AVSs can define asset allocation and stake distribution, offering both operator-centric and AVS-centric models for greater control. Slashing rules further enhance security through customizable mechanisms like stake slash, jail slash, and burn slash, enabling AVSs to align these features with their risk profiles. These extensible features ensure MilkyWay evolves alongside the needs of its AVS partners, redefining staking and restaking with a focus on trust, innovation, and modularity.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.mainnet.milkyway.zone"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.mainnet.milkyway.zone"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://www.mintscan.io/milkyway/transactions/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milkyway.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milkyway.svg",
+        "theme": {
+          "primary_color_hex": "#9182FD"
+        }
+      },
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
       ]
     }
   ]

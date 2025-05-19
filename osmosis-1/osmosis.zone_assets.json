@@ -482,6 +482,12 @@
       "path": "transfer/channel-124/uvdl",
       "osmosis_verified": true,
       "osmosis_unstable": true,
+      "override_properties": {
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/VDL.vdl.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/VDL.vdl.png"
+        }
+      },
       "_comment": "Vidulum (Vidulum) $VDL.vdl"
     },
     {
@@ -5453,8 +5459,8 @@
         {
           "name": "Int3face Bridge",
           "type": "external_interface",
-          "deposit_url": "https://int3face.zone/bridge?fromChain=dogecoin&toChain=osmosis&fromToken=DOGE",
-          "withdraw_url": "https://int3face.zone/bridge?fromChain=osmosis&toChain=dogecoin&fromToken=DOGE.int3"
+          "deposit_url": "https://app.int3face.zone/bridge?fromChain=dogecoin&toChain=osmosis&fromToken=DOGE",
+          "withdraw_url": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=dogecoin&fromToken=DOGE.int3"
         }
       ],
       "override_properties": {
@@ -5587,9 +5593,9 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbBTC.base.axl.png"
         },
         "name": "Coinbase Wrapped BTC (Base via Axelar)",
-        "symbol": "$cbBTC.base.axl"
+        "symbol": "cbBTC.base.axl"
       },
-      "_comment": "Coinbase Wrapped BTC (Base via Axelar) $$cbBTC.base.axl"
+      "_comment": "Coinbase Wrapped BTC (Base via Axelar) $cbBTC.base.axl"
     },
     {
       "chain_name": "axelar",
@@ -5641,7 +5647,7 @@
       "chain_name": "osmosis",
       "base_denom": "factory/osmo10pk4crey8fpdyqd62rsau0y02e3rk055w5u005ah6ly7k849k5tsf72x40/alloyed/allDOGE",
       "osmosis_verified": true,
-      "osmosis_disabled": true,
+      "osmosis_disabled": false,
       "is_alloyed": true,
       "canonical": {
         "chain_name": "dogecoin",
@@ -5900,7 +5906,7 @@
       "chain_name": "elys",
       "base_denom": "uelys",
       "path": "transfer/channel-91017/uelys",
-      "osmosis_verified": false,
+      "osmosis_verified": true,
       "_comment": "Elys Network $ELYS"
     },
     {
@@ -6305,13 +6311,12 @@
       "categories": [
         "liquid_staking"
       ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/lbtc.atom.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/lbtc.atom.png"
-        }
+      "override_properties": {},
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x8236a87084f8B84306f72007F36F2618A5634494"
       },
-      "_comment": "Lombard Staked Bitcoin (Lombard Ledger) (Cosmos Hub) $LBTC.lom.atom"
+      "_comment": "Lombard Staked Bitcoin $LBTC"
     },
     {
       "chain_name": "cosmoshub",
@@ -6321,13 +6326,12 @@
       "categories": [
         "liquid_staking"
       ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/solvbtc.atom.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/solvbtc.atom.png"
-        }
+      "override_properties": {},
+      "canonical": {
+        "chain_name": "ethereum",
+        "base_denom": "0x7a56e1c57c7475ccf742a1832b028f0456652f97"
       },
-      "_comment": "SolvBTC (Eureka) $solvBTC.atom"
+      "_comment": "SolvBTC $solvBTC"
     },
     {
       "chain_name": "neutron",
@@ -6368,6 +6372,134 @@
         "defi"
       ],
       "_comment": "Initia $INIT"
+    },
+    {
+      "chain_name": "milkyway",
+      "base_denom": "umilk",
+      "path": "transfer/channel-89298/umilk",
+      "osmosis_verified": true,
+      "categories": [
+        "liquid_staking"
+      ],
+      "_comment": "MilkyWay $MILK"
+    },
+    {
+      "chain_name": "planq",
+      "base_denom": "erc20/0xF630B96760B91f6FCbE8b3C24f2786AcA3D03648",
+      "path": "transfer/channel-492/erc20/0xF630B96760B91f6FCbE8b3C24f2786AcA3D03648",
+      "osmosis_verified": false,
+      "_comment": "Anubis $ANUBI"
+    },
+    {
+      "chain_name": "planq",
+      "base_denom": "erc20/0x8F4d86ABa1b47832C46f11e0fFD0F7aDa4498345",
+      "path": "transfer/channel-492/erc20/0x8F4d86ABa1b47832C46f11e0fFD0F7aDa4498345",
+      "osmosis_verified": false,
+      "_comment": "Astonic $ATC"
+    },
+    {
+      "chain_name": "planq",
+      "base_denom": "erc20/0xA2871B267a7d888F830251F6B4D9d3DFf184995a",
+      "path": "transfer/channel-492/erc20/0xA2871B267a7d888F830251F6B4D9d3DFf184995a",
+      "osmosis_verified": false,
+      "_comment": "Astonic USD $aUSD"
+    },
+    {
+      "chain_name": "planq",
+      "base_denom": "erc20/0xd5be2932FEbD73019ba1d5d97DFC35E1Ab09E501",
+      "path": "transfer/channel-492/erc20/0xd5be2932FEbD73019ba1d5d97DFC35E1Ab09E501",
+      "osmosis_verified": false,
+      "_comment": "Astonic EUR $aEUR"
+    },
+    {
+      "chain_name": "planq",
+      "base_denom": "erc20/0x240642C6f69878A0b199065f25EDf82023BC59ce",
+      "path": "transfer/channel-492/erc20/0x240642C6f69878A0b199065f25EDf82023BC59ce",
+      "osmosis_verified": false,
+      "_comment": "Astonic BRL $aBRL"
+    },
+    {
+      "chain_name": "cosmoshub",
+      "base_denom": "ibc/D742E8566B0B8CC8F569D950051C09CF57988A88F0E45574BFB3079D41DE6462",
+      "path": "transfer/channel-0/transfer/08-wasm-1369/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+      "osmosis_verified": false,
+      "override_properties": {
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.atom.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.atom.png"
+        }
+      },
+      "_comment": "Wrapped Bitcoin (Ethereum via Eureka) $WBTC.eth.atom"
+    },
+    {
+      "chain_name": "cosmoshub",
+      "base_denom": "ibc/C0B53D3D23827AE38058BED0BDCD554229278AF530A8D265FCF6DFF7C4B2ADFF",
+      "path": "transfer/channel-0/transfer/08-wasm-1369/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "osmosis_verified": false,
+      "override_properties": {
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.atom.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.atom.png"
+        }
+      },
+      "_comment": "Ethereum (Eureka) $ETH.atom"
+    },
+    {
+      "chain_name": "cosmoshub",
+      "base_denom": "ibc/E7E51FFF94A8B55BE84CEB0345E5CAF0A5DAEB374C6806CE908098B8996C7782",
+      "path": "transfer/channel-0/transfer/08-wasm-1369/0xdac17f958d2ee523a2206206994597c13d831ec7",
+      "osmosis_verified": false,
+      "override_properties": {
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.atom.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.atom.png"
+        }
+      },
+      "_comment": "Tether USD (Ethereum via Eureka) $USDT.eth.atom"
+    },
+    {
+      "chain_name": "beezee",
+      "base_denom": "factory/bze12gyp30f29zg26nuqrwdhl26ej4q066pt572fhm/GGE",
+      "path": "transfer/channel-340/factory/bze12gyp30f29zg26nuqrwdhl26ej4q066pt572fhm/GGE",
+      "osmosis_verified": false,
+      "_comment": "GEEGEE $GGE"
+    },
+    {
+      "chain_name": "beezee",
+      "base_denom": "factory/bze13gzq40che93tgfm9kzmkpjamah5nj0j73pyhqk/uvdl",
+      "path": "transfer/channel-340/factory/bze13gzq40che93tgfm9kzmkpjamah5nj0j73pyhqk/uvdl",
+      "osmosis_verified": false,
+      "_comment": "Vidulum $VDL"
+    },
+    {
+      "chain_name": "osmosis",
+      "base_denom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/stlth",
+      "osmosis_verified": true,
+      "listing_date_time_utc": "2025-05-09T07:26:04Z",
+      "_comment": "Stealth $STLTH",
+      "categories": [
+        "meme"
+      ]
+    },
+    {
+      "chain_name": "milkyway",
+      "base_denom": "factory/milk1qg5ega6dykkxc307y25pecuufrjkxkaggkkxh7nad0vhyhtuhw3ssgcye4/umilkBBN",
+      "path": "transfer/channel-89298/factory/milk1qg5ega6dykkxc307y25pecuufrjkxkaggkkxh7nad0vhyhtuhw3ssgcye4/umilkBBN",
+      "osmosis_verified": false,
+      "categories": [
+        "liquid_staking"
+      ],
+      "_comment": "milkBABY $milkBABY"
+    },
+    {
+      "chain_name": "osmosis",
+      "base_denom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/mtc",
+      "osmosis_verified": false,
+      "listing_date_time_utc": "2025-05-13T12:02:06Z",
+      "_comment": "Matcha Club $MTC",
+      "categories": [
+        "meme"
+      ]
     },
     {
       "chain_name": "arkeo",

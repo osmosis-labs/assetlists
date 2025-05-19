@@ -2428,10 +2428,14 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/beezee/images/vdl.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/beezee/images/vdl.svg"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/VDL.vdl.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/VDL.vdl.png"
       },
       "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/VDL.vdl.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/VDL.vdl.png"
+        },
         {
           "image_sync": {
             "chain_name": "vidulum",
@@ -24900,7 +24904,7 @@
       "base": "ibc/616C2EA69BC328F245CE449785CB0B526B462C48F19DCF9B3D30699579B4308A",
       "name": "Coinbase Wrapped BTC (Base via Axelar)",
       "display": "cbbtc",
-      "symbol": "$cbBTC.base.axl",
+      "symbol": "cbBTC.base.axl",
       "traces": [
         {
           "type": "synthetic",
@@ -28312,9 +28316,9 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/89EE10FCF78800B572BAAC7080AEFA301B5F3BBC51C5371E907EB129C5B900E7",
-      "name": "Lombard Staked Bitcoin (Lombard Ledger) (Cosmos Hub)",
+      "name": "Lombard Staked Bitcoin",
       "display": "lbtc",
-      "symbol": "LBTC.lom.atom",
+      "symbol": "LBTC",
       "traces": [
         {
           "type": "liquid-stake",
@@ -28358,21 +28362,25 @@
         }
       ],
       "logo_URIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/lbtc.atom.svg",
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/lbtc.atom.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/lbtc.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/lbtc.svg"
       },
       "images": [
         {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/lbtc.atom.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/lbtc.atom.png"
-        },
-        {
           "image_sync": {
-            "chain_name": "cosmoshub",
-            "base_denom": "ibc/DBD9E339E1B093A052D76BECFFDE8435EAC114CF2133346B4D691F3F2068C957"
+            "chain_name": "ethereum",
+            "base_denom": "0x8236a87084f8B84306f72007F36F2618A5634494"
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/lbtc.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/lbtc.svg"
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/lbtc.svg",
+          "theme": {
+            "circle": true,
+            "primary_color_hex": "#162E2F"
+          }
+        },
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/lbtc.atom.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/lbtc.atom.png"
         }
       ]
     },
@@ -28393,9 +28401,9 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/2CC08A10459B40B0251B8CB9C036C98BED1ABBD5F03772E371DCD0FFDA3EC7F3",
-      "name": "SolvBTC (Eureka)",
+      "name": "SolvBTC",
       "display": "solvbtc",
-      "symbol": "solvBTC.atom",
+      "symbol": "solvBTC",
       "traces": [
         {
           "type": "liquid-stake",
@@ -28622,6 +28630,722 @@
           "theme": {
             "circle": true,
             "primary_color_hex": "#040404"
+          }
+        }
+      ]
+    },
+    {
+      "description": "The native token of MilkyWay",
+      "denom_units": [
+        {
+          "denom": "ibc/9D8D4CAE9D8F15B69E93969304AF3878D14BDED39FEAF0060566D6AC22288779",
+          "exponent": 0,
+          "aliases": [
+            "umilk"
+          ]
+        },
+        {
+          "denom": "milk",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/9D8D4CAE9D8F15B69E93969304AF3878D14BDED39FEAF0060566D6AC22288779",
+      "name": "MilkyWay",
+      "display": "milk",
+      "symbol": "MILK",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "milkyway",
+            "base_denom": "umilk",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-89298",
+            "path": "transfer/channel-89298/umilk"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milk.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milk.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "milkyway",
+            "base_denom": "umilk"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milk.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milk.svg",
+          "theme": {
+            "primary_color_hex": "#760dbb"
+          }
+        }
+      ]
+    },
+    {
+      "description": "The token of Anubis.",
+      "denom_units": [
+        {
+          "denom": "ibc/F223D443CFBDFEDA198A63BE5633DC24ADE5B9F93822CF7BD641F99FEA2B56A7",
+          "exponent": 0,
+          "aliases": [
+            "erc20/0xF630B96760B91f6FCbE8b3C24f2786AcA3D03648"
+          ]
+        },
+        {
+          "denom": "anubi",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/F223D443CFBDFEDA198A63BE5633DC24ADE5B9F93822CF7BD641F99FEA2B56A7",
+      "name": "Anubis",
+      "display": "anubi",
+      "symbol": "ANUBI",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "planq",
+            "base_denom": "erc20/0xF630B96760B91f6FCbE8b3C24f2786AcA3D03648",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-492",
+            "path": "transfer/channel-492/erc20/0xF630B96760B91f6FCbE8b3C24f2786AcA3D03648"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/planq/images/anubis.png"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "planq",
+            "base_denom": "erc20/0xF630B96760B91f6FCbE8b3C24f2786AcA3D03648"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/planq/images/anubis.png"
+        }
+      ]
+    },
+    {
+      "description": "The token of Astonic.",
+      "denom_units": [
+        {
+          "denom": "ibc/856C6F01E48EC9A89EFF35B2B75C3BC0CDF51C23AB094CCC6AE31B6D30C2A6ED",
+          "exponent": 0,
+          "aliases": [
+            "erc20/0x8F4d86ABa1b47832C46f11e0fFD0F7aDa4498345"
+          ]
+        },
+        {
+          "denom": "astonic",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/856C6F01E48EC9A89EFF35B2B75C3BC0CDF51C23AB094CCC6AE31B6D30C2A6ED",
+      "name": "Astonic",
+      "display": "astonic",
+      "symbol": "ATC",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "planq",
+            "base_denom": "erc20/0x8F4d86ABa1b47832C46f11e0fFD0F7aDa4498345",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-492",
+            "path": "transfer/channel-492/erc20/0x8F4d86ABa1b47832C46f11e0fFD0F7aDa4498345"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/planq/images/atc.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "planq",
+            "base_denom": "erc20/0x8F4d86ABa1b47832C46f11e0fFD0F7aDa4498345"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/planq/images/atc.svg"
+        }
+      ]
+    },
+    {
+      "description": "Astonic USD (aUSD) is a stable asset pegged to the US Dollar.",
+      "denom_units": [
+        {
+          "denom": "ibc/1C657376F808E4E06B75EB18169B68B31042EAC8AE3D8FBAD0224F1170AFDF45",
+          "exponent": 0,
+          "aliases": [
+            "erc20/0xA2871B267a7d888F830251F6B4D9d3DFf184995a"
+          ]
+        },
+        {
+          "denom": "ausd",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/1C657376F808E4E06B75EB18169B68B31042EAC8AE3D8FBAD0224F1170AFDF45",
+      "name": "Astonic USD",
+      "display": "ausd",
+      "symbol": "aUSD",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Astonic"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "planq",
+            "base_denom": "erc20/0xA2871B267a7d888F830251F6B4D9d3DFf184995a",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-492",
+            "path": "transfer/channel-492/erc20/0xA2871B267a7d888F830251F6B4D9d3DFf184995a"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/planq/images/ausd.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "planq",
+            "base_denom": "erc20/0xA2871B267a7d888F830251F6B4D9d3DFf184995a"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/planq/images/ausd.svg"
+        }
+      ]
+    },
+    {
+      "description": "Astonic EUR (aEUR) is a stable asset pegged to the Euro.",
+      "denom_units": [
+        {
+          "denom": "ibc/484650D35669EBFD1A7D9E57D0B557B92664C4AF2C92DBC20C317F1F06DCBC4B",
+          "exponent": 0,
+          "aliases": [
+            "erc20/0xd5be2932FEbD73019ba1d5d97DFC35E1Ab09E501"
+          ]
+        },
+        {
+          "denom": "aeur",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/484650D35669EBFD1A7D9E57D0B557B92664C4AF2C92DBC20C317F1F06DCBC4B",
+      "name": "Astonic EUR",
+      "display": "aeur",
+      "symbol": "aEUR",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "EUR"
+          },
+          "provider": "Astonic"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "planq",
+            "base_denom": "erc20/0xd5be2932FEbD73019ba1d5d97DFC35E1Ab09E501",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-492",
+            "path": "transfer/channel-492/erc20/0xd5be2932FEbD73019ba1d5d97DFC35E1Ab09E501"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/planq/images/aeur.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "planq",
+            "base_denom": "erc20/0xd5be2932FEbD73019ba1d5d97DFC35E1Ab09E501"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/planq/images/aeur.svg"
+        }
+      ]
+    },
+    {
+      "description": "Astonic BRL (aBRL) is a stable asset pegged to the Brazilian Real.",
+      "denom_units": [
+        {
+          "denom": "ibc/75D92821E64E9449B113A6CC156AE933DBD4B9BE9EE753B2550DE8DC71947E69",
+          "exponent": 0,
+          "aliases": [
+            "erc20/0x240642C6f69878A0b199065f25EDf82023BC59ce"
+          ]
+        },
+        {
+          "denom": "abrl",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/75D92821E64E9449B113A6CC156AE933DBD4B9BE9EE753B2550DE8DC71947E69",
+      "name": "Astonic BRL",
+      "display": "abrl",
+      "symbol": "aBRL",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "BRL"
+          },
+          "provider": "Astonic"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "planq",
+            "base_denom": "erc20/0x240642C6f69878A0b199065f25EDf82023BC59ce",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-492",
+            "path": "transfer/channel-492/erc20/0x240642C6f69878A0b199065f25EDf82023BC59ce"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/planq/images/abrl.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "planq",
+            "base_denom": "erc20/0x240642C6f69878A0b199065f25EDf82023BC59ce"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/planq/images/abrl.svg"
+        }
+      ]
+    },
+    {
+      "description": "Wrapped Bitcoin via Eureka",
+      "denom_units": [
+        {
+          "denom": "ibc/88386AC48152D48B34B082648DF836F975506F0B57DBBFC10A54213B1BF484CB",
+          "exponent": 0
+        },
+        {
+          "denom": "wbtc",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/88386AC48152D48B34B082648DF836F975506F0B57DBBFC10A54213B1BF484CB",
+      "name": "Wrapped Bitcoin (Ethereum via Eureka)",
+      "display": "wbtc",
+      "symbol": "WBTC.eth.atom",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "bitcoin",
+            "base_denom": "sat"
+          },
+          "provider": "BitGo, Kyber, and Ren"
+        },
+        {
+          "type": "ibc-bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+            "channel_id": "cosmoshub-0"
+          },
+          "chain": {
+            "channel_id": "08-wasm-1369",
+            "path": "transfer/08-wasm-1369/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+          },
+          "provider": "Eureka"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "cosmoshub",
+            "base_denom": "ibc/D742E8566B0B8CC8F569D950051C09CF57988A88F0E45574BFB3079D41DE6462",
+            "channel_id": "channel-141"
+          },
+          "chain": {
+            "channel_id": "channel-0",
+            "path": "transfer/channel-0/transfer/08-wasm-1369/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.atom.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.atom.png"
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.atom.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.atom.png"
+        },
+        {
+          "image_sync": {
+            "chain_name": "cosmoshub",
+            "base_denom": "ibc/D742E8566B0B8CC8F569D950051C09CF57988A88F0E45574BFB3079D41DE6462"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.svg",
+          "theme": {
+            "primary_color_hex": "#f39444"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Ether via Eureka",
+      "denom_units": [
+        {
+          "denom": "ibc/20850C646CDDDC2270E9BBDB08558B5FEE57B647EC6827F41096AABFD8A0471B",
+          "exponent": 0
+        },
+        {
+          "denom": "eth",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/20850C646CDDDC2270E9BBDB08558B5FEE57B647EC6827F41096AABFD8A0471B",
+      "name": "Ethereum (Eureka)",
+      "display": "eth",
+      "symbol": "ETH.atom",
+      "traces": [
+        {
+          "type": "wrapped",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "wei"
+          },
+          "provider": "Ethereum"
+        },
+        {
+          "type": "ibc-bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "08-wasm-1369",
+            "path": "transfer/08-wasm-1369/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+          },
+          "provider": "Eureka"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "cosmoshub",
+            "base_denom": "ibc/C0B53D3D23827AE38058BED0BDCD554229278AF530A8D265FCF6DFF7C4B2ADFF",
+            "channel_id": "channel-141"
+          },
+          "chain": {
+            "channel_id": "channel-0",
+            "path": "transfer/channel-0/transfer/08-wasm-1369/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.atom.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.atom.png"
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.atom.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.atom.png"
+        },
+        {
+          "image_sync": {
+            "chain_name": "cosmoshub",
+            "base_denom": "ibc/C0B53D3D23827AE38058BED0BDCD554229278AF530A8D265FCF6DFF7C4B2ADFF"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eth-white.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eth-white.svg",
+          "theme": {
+            "primary_color_hex": "#303030"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Tether USD via Eureka",
+      "denom_units": [
+        {
+          "denom": "ibc/7BC2F718C47C0749791F2612A914C8C39D1A4F533A27AF7285D924D4B617DDA6",
+          "exponent": 0
+        },
+        {
+          "denom": "usdt",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/7BC2F718C47C0749791F2612A914C8C39D1A4F533A27AF7285D924D4B617DDA6",
+      "name": "Tether USD (Ethereum via Eureka)",
+      "display": "usdt",
+      "symbol": "USDT.eth.atom",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "forex",
+            "base_denom": "USD"
+          },
+          "provider": "Tether"
+        },
+        {
+          "type": "ibc-bridge",
+          "counterparty": {
+            "chain_name": "ethereum",
+            "base_denom": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "08-wasm-1369",
+            "path": "transfer/08-wasm-1369/0xdac17f958d2ee523a2206206994597c13d831ec7"
+          },
+          "provider": "Eureka"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "cosmoshub",
+            "base_denom": "ibc/E7E51FFF94A8B55BE84CEB0345E5CAF0A5DAEB374C6806CE908098B8996C7782",
+            "channel_id": "channel-141"
+          },
+          "chain": {
+            "channel_id": "channel-0",
+            "path": "transfer/channel-0/transfer/08-wasm-1369/0xdac17f958d2ee523a2206206994597c13d831ec7"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.atom.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.atom.png"
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.atom.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.atom.png"
+        },
+        {
+          "image_sync": {
+            "chain_name": "cosmoshub",
+            "base_denom": "ibc/E7E51FFF94A8B55BE84CEB0345E5CAF0A5DAEB374C6806CE908098B8996C7782"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.png",
+          "theme": {
+            "circle": true,
+            "primary_color_hex": "#009393",
+            "background_color_hex": "#009393"
+          }
+        }
+      ]
+    },
+    {
+      "description": "GEEGEE (GGE) on Cosmos is a community driven meme coin. Sharing knowledge and create visibility. How strong can we be? ☀️",
+      "denom_units": [
+        {
+          "denom": "ibc/AAC5DA36E48226B906DE694EA8B0464DE5EE45D7449984E4D799F33B8089CD6B",
+          "exponent": 0,
+          "aliases": [
+            "factory/bze12gyp30f29zg26nuqrwdhl26ej4q066pt572fhm/GGE"
+          ]
+        },
+        {
+          "denom": "GGE",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/AAC5DA36E48226B906DE694EA8B0464DE5EE45D7449984E4D799F33B8089CD6B",
+      "name": "GEEGEE",
+      "display": "GGE",
+      "symbol": "GGE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "beezee",
+            "base_denom": "factory/bze12gyp30f29zg26nuqrwdhl26ej4q066pt572fhm/GGE",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-340",
+            "path": "transfer/channel-340/factory/bze12gyp30f29zg26nuqrwdhl26ej4q066pt572fhm/GGE"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/beezee/images/gge.png"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "beezee",
+            "base_denom": "factory/bze12gyp30f29zg26nuqrwdhl26ej4q066pt572fhm/GGE"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/beezee/images/gge.png",
+          "theme": {
+            "primary_color_hex": "#FEFEFE"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Vidulum App Token",
+      "denom_units": [
+        {
+          "denom": "ibc/40B814E343DAADAF39FF4491727C7FE6286EE0A9A787CF839B318461C6FEDF95",
+          "exponent": 0,
+          "aliases": [
+            "factory/bze13gzq40che93tgfm9kzmkpjamah5nj0j73pyhqk/uvdl"
+          ]
+        },
+        {
+          "denom": "vdl",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/40B814E343DAADAF39FF4491727C7FE6286EE0A9A787CF839B318461C6FEDF95",
+      "name": "Vidulum",
+      "display": "vdl",
+      "symbol": "VDL",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "beezee",
+            "base_denom": "factory/bze13gzq40che93tgfm9kzmkpjamah5nj0j73pyhqk/uvdl",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-340",
+            "path": "transfer/channel-340/factory/bze13gzq40che93tgfm9kzmkpjamah5nj0j73pyhqk/uvdl"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/beezee/images/vdl.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/beezee/images/vdl.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "beezee",
+            "base_denom": "factory/bze13gzq40che93tgfm9kzmkpjamah5nj0j73pyhqk/uvdl"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/beezee/images/vdl.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/beezee/images/vdl.svg",
+          "theme": {
+            "primary_color_hex": "#3454bc"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Real power moves quietly.",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/stlth",
+          "exponent": 0
+        },
+        {
+          "denom": "STLTH",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8",
+      "base": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/stlth",
+      "name": "Stealth",
+      "display": "STLTH",
+      "symbol": "STLTH",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/STLTH.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/STLTH.png"
+        }
+      ]
+    },
+    {
+      "description": "MilkyWay's liquid staked BABY",
+      "denom_units": [
+        {
+          "denom": "ibc/040D0BE35BED6A09D9418C29961FDA0EE0C3B0C71053B2E3FE38FBA7E50FFEF6",
+          "exponent": 0,
+          "aliases": [
+            "factory/milk1qg5ega6dykkxc307y25pecuufrjkxkaggkkxh7nad0vhyhtuhw3ssgcye4/umilkBBN"
+          ]
+        },
+        {
+          "denom": "milkBABY",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/040D0BE35BED6A09D9418C29961FDA0EE0C3B0C71053B2E3FE38FBA7E50FFEF6",
+      "name": "milkBABY",
+      "display": "milkBABY",
+      "symbol": "milkBABY",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "milkyway",
+            "base_denom": "factory/milk1qg5ega6dykkxc307y25pecuufrjkxkaggkkxh7nad0vhyhtuhw3ssgcye4/umilkBBN",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-89298",
+            "path": "transfer/channel-89298/factory/milk1qg5ega6dykkxc307y25pecuufrjkxkaggkkxh7nad0vhyhtuhw3ssgcye4/umilkBBN"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milkbaby.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milkbaby.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "milkyway",
+            "base_denom": "factory/milk1qg5ega6dykkxc307y25pecuufrjkxkaggkkxh7nad0vhyhtuhw3ssgcye4/umilkBBN"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milkbaby.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/milkyway/images/milkbaby.svg",
+          "theme": {
+            "primary_color_hex": "#d18dfc"
           }
         }
       ]

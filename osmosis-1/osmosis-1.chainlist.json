@@ -10759,6 +10759,72 @@
         "ibc-go",
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "arkeo",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Arkeo",
+      "chain_id": "arkeo-main-v1",
+      "bech32_prefix": "arkeo",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "arkeo",
+        "bech32PrefixAccPub": "arkeopub",
+        "bech32PrefixValAddr": "arkeovaloper",
+        "bech32PrefixValPub": "arkeovaloperpub",
+        "bech32PrefixConsAddr": "arkeovalcons",
+        "bech32PrefixConsPub": "arkeovalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uarkeo",
+            "fixed_min_gas_price": 0.001,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uarkeo"
+          }
+        ],
+        "lock_duration": {
+          "time": "1209600s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-seed.arkeo.network/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest-seed.arkeo.network/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://viewblock.io/arkeo/tx/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/arkeo/images/arkeo.svg",
+        "theme": {
+          "circle": true,
+          "primary_color_hex": "#3BE0FF"
+        }
+      },
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
     }
   ]
 }

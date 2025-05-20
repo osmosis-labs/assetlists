@@ -29378,6 +29378,56 @@
       ]
     },
     {
+      "description": "Arkeo is a decentralized marketplace that connects API providers with consumers, bringing web2 data on-chain in a secure and incentivized manner.",
+      "denom_units": [
+        {
+          "denom": "ibc/AD969E97A63B64B30A6E4D9F598341A403B849F5ACFEAA9F18DBD9255305EC65",
+          "exponent": 0,
+          "aliases": [
+            "uarkeo"
+          ]
+        },
+        {
+          "denom": "arkeo",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/AD969E97A63B64B30A6E4D9F598341A403B849F5ACFEAA9F18DBD9255305EC65",
+      "name": "Arkeo",
+      "display": "arkeo",
+      "symbol": "ARKEO",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "arkeo",
+            "base_denom": "uarkeo",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-103074",
+            "path": "transfer/channel-103074/uarkeo"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/arkeo/images/arkeo.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "arkeo",
+            "base_denom": "uarkeo"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/arkeo/images/arkeo.svg",
+          "theme": {
+            "primary_color_hex": "#3BE0FF"
+          }
+        }
+      ]
+    },
+    {
       "description": "PUNDIX token is the native token that functions within the Pundi X ecosystem, including PundiX Chain and XPOS.",
       "denom_units": [
         {

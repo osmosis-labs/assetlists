@@ -511,7 +511,7 @@
       },
       "coingeckoId": "cosmos",
       "price": {
-        "poolId": "1282",
+        "poolId": "1251",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
@@ -14610,8 +14610,8 @@
       },
       "coingeckoId": "celestia",
       "price": {
-        "poolId": "1248",
-        "denom": "uosmo"
+        "poolId": "1247",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
       "transferMethods": [
@@ -30328,6 +30328,61 @@
       "disabled": false,
       "preview": false,
       "listingDate": "2025-05-13T12:02:06.000Z"
+    },
+    {
+      "chainName": "arkeo",
+      "sourceDenom": "uarkeo",
+      "coinMinimalDenom": "ibc/AD969E97A63B64B30A6E4D9F598341A403B849F5ACFEAA9F18DBD9255305EC65",
+      "symbol": "ARKEO",
+      "decimals": 8,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/arkeo/images/arkeo.svg"
+      },
+      "price": {
+        "poolId": "2964",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+      },
+      "categories": [
+        "defi"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "arkeo",
+            "chainId": "arkeo-main-v1",
+            "sourceDenom": "uarkeo",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-103074",
+            "path": "transfer/channel-103074/uarkeo"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "arkeo",
+          "sourceDenom": "uarkeo",
+          "chainType": "cosmos",
+          "chainId": "arkeo-main-v1",
+          "symbol": "ARKEO",
+          "decimals": 8,
+          "logoURIs": {
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/arkeo/images/arkeo.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/AD969E97A63B64B30A6E4D9F598341A403B849F5ACFEAA9F18DBD9255305EC65",
+      "name": "Arkeo",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
     }
   ]
 }

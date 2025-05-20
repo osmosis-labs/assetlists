@@ -26806,6 +26806,77 @@
         "ibc-go",
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "arkeo",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Arkeo",
+      "chain_id": "arkeo-main-v1",
+      "bech32Prefix": "arkeo",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "arkeo",
+        "bech32PrefixAccPub": "arkeopub",
+        "bech32PrefixValAddr": "arkeovaloper",
+        "bech32PrefixValPub": "arkeovaloperpub",
+        "bech32PrefixConsAddr": "arkeovalcons",
+        "bech32PrefixConsPub": "arkeovalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDenom": "ARKEO",
+        "chainSuggestionDenom": "uarkeo",
+        "coinMinimalDenom": "ibc/AD969E97A63B64B30A6E4D9F598341A403B849F5ACFEAA9F18DBD9255305EC65",
+        "sourceDenom": "uarkeo",
+        "coinDecimals": 8,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/arkeo/images/arkeo.svg"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "ARKEO",
+          "chainSuggestionDenom": "uarkeo",
+          "coinMinimalDenom": "ibc/AD969E97A63B64B30A6E4D9F598341A403B849F5ACFEAA9F18DBD9255305EC65",
+          "sourceDenom": "uarkeo",
+          "coinDecimals": 8,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/arkeo/images/arkeo.svg",
+          "gasPriceStep": {
+            "low": 0.01,
+            "average": 0.025,
+            "high": 0.04
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "ARKEO",
+          "chainSuggestionDenom": "uarkeo",
+          "coinMinimalDenom": "ibc/AD969E97A63B64B30A6E4D9F598341A403B849F5ACFEAA9F18DBD9255305EC65",
+          "sourceDenom": "uarkeo",
+          "coinDecimals": 8,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/arkeo/images/arkeo.svg"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-seed.arkeo.network/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest-seed.arkeo.network/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://viewblock.io/arkeo/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
     }
   ]
 }

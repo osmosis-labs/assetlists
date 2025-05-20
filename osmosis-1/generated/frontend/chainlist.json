@@ -5342,6 +5342,13 @@
           "coinMinimalDenom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/stlth",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/STLTH.png"
+        },
+        {
+          "coinDenom": "MTC",
+          "chainSuggestionDenom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/mtc",
+          "coinMinimalDenom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/mtc",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/MTC.png"
         }
       ],
       "description": "Osmosis (OSMO) is the premier DEX and cross-chain DeFi hub within the Cosmos ecosystem, a network of over 50 sovereign, interoperable blockchains seamlessly connected through the Inter-Blockchain Communication Protocol (IBC). Pioneering in its approach, Osmosis offers a dynamic trading and liquidity provision experience, integrating non-IBC assets from other ecosystems, including Ethereum, Solana, Avalanche, and Polkadot. Initially adopting Balancer-style pools, Osmosis now also features a concentrated liquidity model that is orders of magnitude more capital efficient, meaning that significantly less liquidity is required to handle the same amount of trading volume with minimal slippage.\n\nAs a true appchain, Osmosis has greater control over the full blockchain stack than traditional smart contract DEXs, which must follow the code of the parent chain that it is built on. This fine-grained control has enabled, for example, the development of Superfluid Staking, an extension of Proof of Stake that allows assets at the application layer to be staked to secure the chain. The customizability of appchains also allows implementing features like the Protocol Revenue module, which enables Osmosis to conduct on-chain arbitrage on behalf of OSMO stakers, balancing prices across pools while generating real yield revenue from this volume. Additionally, as a sovereign appchain, Osmosis governance can vote on upgrades to the protocol. One example of this was the introduction of a Taker Fee, which switched on the collection of exchange fees to generate diverse yield from Osmosis volume and distribute it to OSMO stakers.\n\nOsmosis is bringing the full centralized exchange experience to the decentralized world by building a cross-chain native DEX and trading suite that connects all chains over IBC, including Ethereum and Bitcoin. To reach this goal, Osmosis hosts an ever-expanding suite of DeFi applications aimed at providing a one-stop experience that includes lending, credit, margin, DeFi strategy vaults, power perps, fiat on-ramps, NFTs, stablecoins, and more — all of the functionalities that centralized exchange offer and more, in the trust-minimized environment of decentralized finance.",
@@ -10219,6 +10226,13 @@
           "sourceDenom": "ibc/FEF6B2D5C0F7D3C3EE2E27D1C01EAE9CA04A7201661E69215726E7F84AFCD0FB",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/T7S.png"
+        },
+        {
+          "coinDenom": "STLTH",
+          "chainSuggestionDenom": "ibc/D8B11C80BF6D03FD7DFF43EE3CCFDA70009B1FA8594F291EE0E2353070F4CABB",
+          "sourceDenom": "ibc/D8B11C80BF6D03FD7DFF43EE3CCFDA70009B1FA8594F291EE0E2353070F4CABB",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/STLTH.png"
         }
       ],
       "description": "The premier community-focused blockchain for NFTs. Stargaze empowers creators, developers, collectors, and traders to participate on the platform. The Stargaze chain consists of various NFT-related apps such as a Launchpad, and a Marketplace with offers and auctions.",
@@ -26039,14 +26053,14 @@
       "networkType": "mainnet",
       "prettyName": "Side Chain",
       "chain_id": "sidechain-1",
-      "bech32Prefix": "side",
+      "bech32Prefix": "bc",
       "bech32Config": {
-        "bech32PrefixAccAddr": "side",
-        "bech32PrefixAccPub": "sidepub",
-        "bech32PrefixValAddr": "sidevaloper",
-        "bech32PrefixValPub": "sidevaloperpub",
-        "bech32PrefixConsAddr": "sidevalcons",
-        "bech32PrefixConsPub": "sidevalconspub"
+        "bech32PrefixAccAddr": "bc",
+        "bech32PrefixAccPub": "bcpub",
+        "bech32PrefixValAddr": "bcvaloper",
+        "bech32PrefixValPub": "bcvaloperpub",
+        "bech32PrefixConsAddr": "bcvalcons",
+        "bech32PrefixConsPub": "bcvalconspub"
       },
       "slip44": 118,
       "stakeCurrency": {
@@ -26435,11 +26449,11 @@
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/uniBTC.svg"
         },
         {
-          "coinDenom": "satSolvBTC.e",
+          "coinDenom": "satXSolvBTC.e",
           "chainSuggestionDenom": "cw20:bbn1rl75n93kk075clrt72hqa7md6mwl78u28sghs380xuvlmksw6x3q07n2tc",
           "sourceDenom": "cw20:bbn1rl75n93kk075clrt72hqa7md6mwl78u28sghs380xuvlmksw6x3q07n2tc",
           "coinDecimals": 18,
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/solvBTC.svg"
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/xSolvBTC.png"
         },
         {
           "coinDenom": "satLBTC.e",
@@ -26454,6 +26468,27 @@
           "sourceDenom": "cw20:bbn13vejhl4x0arsq7wajcmlu5hx3phmxdcrp3s2jvy65ucyt9kfkh7qr2laaa",
           "coinDecimals": 8,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/FBTC.png"
+        },
+        {
+          "coinDenom": "satWBTC.e",
+          "chainSuggestionDenom": "cw20:bbn1m83xl7pshe9dt25ztlnlqfy8ksaxdp5e098fcl372fjdacpusdcqjp4zx3",
+          "sourceDenom": "cw20:bbn1m83xl7pshe9dt25ztlnlqfy8ksaxdp5e098fcl372fjdacpusdcqjp4zx3",
+          "coinDecimals": 8,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.svg"
+        },
+        {
+          "coinDenom": "satPumpBTC.e",
+          "chainSuggestionDenom": "cw20:bbn1zwg6c8rzk8htpn67cj4vrq5y2qdhfgtzvslyy9574s4j8j5xynlqg0qzs2",
+          "sourceDenom": "cw20:bbn1zwg6c8rzk8htpn67cj4vrq5y2qdhfgtzvslyy9574s4j8j5xynlqg0qzs2",
+          "coinDecimals": 8,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/pumpBTC.svg"
+        },
+        {
+          "coinDenom": "satStBTC.e",
+          "chainSuggestionDenom": "cw20:bbn17awjw4g3a7wn5eruejf6hmshc8y06wpz6qu7ue32xygcueu55zqs33aq93",
+          "sourceDenom": "cw20:bbn17awjw4g3a7wn5eruejf6hmshc8y06wpz6qu7ue32xygcueu55zqs33aq93",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/stbtc.svg"
         }
       ],
       "description": "Babylon Genesis enables Bitcoin tokens to be used as an economic security layer for Proof of Stake (PoS) systems without relying on bridges, wrapping, or third-party custody.",

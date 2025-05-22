@@ -4818,11 +4818,19 @@
       "base_denom": "factory/osmo1n3n75av8awcnw4jl62n3l48e6e4sxqmaf97w5ua6ddu4s475q5qq9udvx4/alloyed/allSOL",
       "osmosis_verified": true,
       "is_alloyed": true,
-      "_comment": "Solana $SOL",
       "canonical": {
         "chain_name": "solana",
         "base_denom": "Lamport"
-      }
+      },
+      "transfer_methods": [
+        {
+          "name": "Osmosis Wormhole Connect",
+          "type": "external_interface",
+          "deposit_url": "/wormhole?from=solana&to=osmosis&token=SOL",
+          "withdraw_url": "/wormhole?from=osmosis&to=solana&token=SOL"
+        }
+      ],
+      "_comment": "Solana $SOL"
     },
     {
       "chain_name": "lava",

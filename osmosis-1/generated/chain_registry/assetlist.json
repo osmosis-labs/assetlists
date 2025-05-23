@@ -29386,6 +29386,74 @@
       ]
     },
     {
+      "description": "Solana (SOL) native coin bridged via Int3face bridge",
+      "denom_units": [
+        {
+          "denom": "ibc/A1465DD6AF456FCD0D998869608DFEEDA4F4C11EC0A12AF92A994A3F8CBEE546",
+          "exponent": 0,
+          "aliases": [
+            "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/solana-sol"
+          ]
+        },
+        {
+          "denom": "sol",
+          "exponent": 9
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/A1465DD6AF456FCD0D998869608DFEEDA4F4C11EC0A12AF92A994A3F8CBEE546",
+      "name": "Solana (Int3)",
+      "display": "sol",
+      "symbol": "SOL.int3",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "solana",
+            "base_denom": "Lamport"
+          },
+          "provider": "Int3face"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "int3face",
+            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/solana-sol",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-82819",
+            "path": "transfer/channel-82819/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/solana-sol"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/SOL.int3.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/SOL.int3.png"
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/SOL.int3.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/SOL.int3.png"
+        },
+        {
+          "image_sync": {
+            "chain_name": "int3face",
+            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/solana-sol"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/sol.int3.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/sol.int3.svg",
+          "theme": {
+            "primary_color_hex": "#3d3d3d"
+          }
+        },
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sol.int3.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sol.int3.svg"
+        }
+      ]
+    },
+    {
       "description": "PUNDIX token is the native token that functions within the Pundi X ecosystem, including PundiX Chain and XPOS.",
       "denom_units": [
         {
@@ -30107,70 +30175,6 @@
         "website": "https://coreumcommunitydao.com/",
         "twitter": "https://x.com/Cor3_Community"
       }
-    },
-    {
-      "description": "Solana (SOL) native coin bridged via Int3face bridge",
-      "denom_units": [
-        {
-          "denom": "ibc/A1465DD6AF456FCD0D998869608DFEEDA4F4C11EC0A12AF92A994A3F8CBEE546",
-          "exponent": 0,
-          "aliases": [
-            "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/solana-sol"
-          ]
-        },
-        {
-          "denom": "sol",
-          "exponent": 9
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/A1465DD6AF456FCD0D998869608DFEEDA4F4C11EC0A12AF92A994A3F8CBEE546",
-      "name": "SOL (Int3)",
-      "display": "sol",
-      "symbol": "SOL.int3",
-      "traces": [
-        {
-          "type": "bridge",
-          "counterparty": {
-            "chain_name": "solana",
-            "base_denom": "Lamport"
-          },
-          "provider": "Int3face"
-        },
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "int3face",
-            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/solana-sol",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-82819",
-            "path": "transfer/channel-82819/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/solana-sol"
-          }
-        }
-      ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sol.int3.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sol.int3.svg"
-      },
-      "images": [
-        {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sol.int3.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sol.int3.svg"
-        },
-        {
-          "image_sync": {
-            "chain_name": "int3face",
-            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/solana-sol"
-          },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/sol.int3.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/sol.int3.svg",
-          "theme": {
-            "primary_color_hex": "#3d3d3d"
-          }
-        }
-      ]
     }
   ]
 }

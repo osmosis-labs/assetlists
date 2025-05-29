@@ -6546,6 +6546,27 @@
       "path": "transfer/channel-94814/uphoton",
       "osmosis_verified": false,
       "_comment": "Photon $PHOTON"
+    },
+    {
+      "chain_name": "int3face",
+      "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/xrpl-xrp",
+      "path": "transfer/channel-82819/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/xrpl-xrp",
+      "osmosis_verified": false,
+      "transfer_methods": [
+        {
+          "name": "Int3face Bridge",
+          "type": "external_interface",
+          "deposit_url": "https://app.int3face.zone/bridge?fromChain=xrpl&toChain=osmosis&fromToken=XRP",
+          "withdraw_url": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=xrpl&fromToken=XRP.int3"
+        }
+      ],
+      "override_properties": {
+        "logo_URIs": {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/XRP.int3.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/XRP.int3.png"
+        }
+      },
+      "_comment": "Ripple (Int3) $XRP.int3"
     }
   ]
 }

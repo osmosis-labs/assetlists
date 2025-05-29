@@ -13,8 +13,8 @@
       },
       "coingeckoId": "osmosis",
       "price": {
-        "poolId": "1464",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1248",
+        "denom": "ibc/D79E7D83AB399BFFF93433E54FAA480C191248FC556924A2A8351AE2638B3877"
       },
       "categories": [
         "defi"
@@ -2727,7 +2727,7 @@
       "coingeckoId": "sommelier",
       "price": {
         "poolId": "2945",
-        "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
+        "denom": "uosmo"
       },
       "categories": [
         "defi"
@@ -4530,8 +4530,8 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/raw.svg"
       },
       "price": {
-        "poolId": "2320",
-        "denom": "ibc/8C8F6349F656C943543C6B040377BE44123D01F712277815C3C13098BB98818C"
+        "poolId": "699",
+        "denom": "ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7"
       },
       "categories": [
         "defi"
@@ -12931,7 +12931,7 @@
       "coingeckoId": "stride-staked-sommelier",
       "price": {
         "poolId": "2945",
-        "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
+        "denom": "uosmo"
       },
       "categories": [
         "liquid_staking"
@@ -18749,8 +18749,8 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bOSMO.png"
       },
       "price": {
-        "poolId": "1882",
-        "denom": "factory/osmo17fel472lgzs87ekt9dvk0zqyh5gl80sqp4sk4n/LAB"
+        "poolId": "1922",
+        "denom": "uosmo"
       },
       "categories": [
         "liquid_staking",
@@ -22350,8 +22350,8 @@
       },
       "coingeckoId": "bitcoin",
       "price": {
-        "poolId": "1943",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1982",
+        "denom": "factory/osmo1k6c8jln7ejuqwtqmay3yvzrg3kueaczl96pk067ldg8u835w0yhsw27twm/alloyed/allETH"
       },
       "categories": [],
       "transferMethods": [],
@@ -26529,8 +26529,8 @@
       },
       "coingeckoId": "atomone",
       "price": {
-        "poolId": "2715",
-        "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
+        "poolId": "2648",
+        "denom": "factory/osmo1z6r6qdknhgsc0zeracktgpcxf43j6sekq07nw8sxduc9lg0qjjlqfu25e3/alloyed/allBTC"
       },
       "categories": [],
       "transferMethods": [
@@ -27450,7 +27450,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aaronetwork/images/aaron.png"
       },
       "price": {
-        "poolId": "2950",
+        "poolId": "2615",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
@@ -30479,6 +30479,10 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/atomone/images/photon.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/atomone/images/photon.svg"
       },
+      "price": {
+        "poolId": "2982",
+        "denom": "ibc/BC26A7A805ECD6822719472BCB7842A48EF09DF206182F8F259B2593EB5D23FB"
+      },
       "categories": [],
       "transferMethods": [
         {
@@ -30519,6 +30523,78 @@
       "unstable": false,
       "disabled": false,
       "preview": false
+    },
+    {
+      "chainName": "int3face",
+      "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/xrpl-xrp",
+      "coinMinimalDenom": "ibc/013DE940BE791C79142EAD4DF071E1ED280DFEAB8A9DCB5932A4603A74C25CBB",
+      "symbol": "XRP.int3",
+      "decimals": 6,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/XRP.int3.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/XRP.int3.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Int3face Bridge",
+          "type": "external_interface",
+          "depositUrl": "https://app.int3face.zone/bridge?fromChain=xrpl&toChain=osmosis&fromToken=XRP",
+          "withdrawUrl": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=xrpl&fromToken=XRP.int3"
+        },
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "int3face",
+            "chainId": "int3face-1",
+            "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/xrpl-xrp",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-82819",
+            "path": "transfer/channel-82819/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/xrpl-xrp"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "int3face",
+          "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/xrpl-xrp",
+          "chainType": "cosmos",
+          "chainId": "int3face-1",
+          "symbol": "XRP",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/xrpl/images/xrp.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/xrpl/images/xrp.svg"
+          }
+        },
+        {
+          "chainName": "xrpl",
+          "sourceDenom": "drop",
+          "chainType": "non-cosmos",
+          "symbol": "XRP",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/xrpl/images/xrp.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/xrpl/images/xrp.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo1qnglc04tmhg32uc4kxlxh55a5cmhj88cpa3rmtly484xqu82t79sfv94w0/alloyed/allXRP",
+      "name": "Ripple (Int3)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "int3face",
+        "sourceDenom": "uint3"
+      }
     }
   ]
 }

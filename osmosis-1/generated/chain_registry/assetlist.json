@@ -29503,6 +29503,71 @@
       ]
     },
     {
+      "description": "Ripple (XRP) on Int3face",
+      "denom_units": [
+        {
+          "denom": "ibc/013DE940BE791C79142EAD4DF071E1ED280DFEAB8A9DCB5932A4603A74C25CBB",
+          "exponent": 0,
+          "aliases": [
+            "drop",
+            "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/xrpl-xrp"
+          ]
+        },
+        {
+          "denom": "xrp",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/013DE940BE791C79142EAD4DF071E1ED280DFEAB8A9DCB5932A4603A74C25CBB",
+      "name": "Ripple (Int3)",
+      "display": "xrp",
+      "symbol": "XRP.int3",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "xrpl",
+            "base_denom": "drop"
+          },
+          "provider": "Int3face"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "int3face",
+            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/xrpl-xrp",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-82819",
+            "path": "transfer/channel-82819/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/xrpl-xrp"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/XRP.int3.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/XRP.int3.png"
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/XRP.int3.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/XRP.int3.png"
+        },
+        {
+          "image_sync": {
+            "chain_name": "int3face",
+            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/xrpl-xrp"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/xrpl/images/xrp.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/xrpl/images/xrp.svg",
+          "theme": {
+            "primary_color_hex": "#040404"
+          }
+        }
+      ]
+    },
+    {
       "description": "PUNDIX token is the native token that functions within the Pundi X ecosystem, including PundiX Chain and XPOS.",
       "denom_units": [
         {

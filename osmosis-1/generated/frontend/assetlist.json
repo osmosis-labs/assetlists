@@ -6564,8 +6564,8 @@
       },
       "coingeckoId": "stride",
       "price": {
-        "poolId": "806",
-        "denom": "uosmo"
+        "poolId": "1243",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [
         "liquid_staking"
@@ -6848,7 +6848,7 @@
       },
       "coingeckoId": "axelar",
       "price": {
-        "poolId": "1094",
+        "poolId": "812",
         "denom": "uosmo"
       },
       "categories": [
@@ -14611,8 +14611,8 @@
       },
       "coingeckoId": "celestia",
       "price": {
-        "poolId": "1247",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1248",
+        "denom": "uosmo"
       },
       "categories": [],
       "transferMethods": [
@@ -17022,7 +17022,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/sttia.svg"
       },
       "price": {
-        "poolId": "1428",
+        "poolId": "1476",
         "denom": "ibc/D79E7D83AB399BFFF93433E54FAA480C191248FC556924A2A8351AE2638B3877"
       },
       "categories": [
@@ -22351,7 +22351,7 @@
       },
       "coingeckoId": "bitcoin",
       "price": {
-        "poolId": "1942",
+        "poolId": "1943",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
@@ -26536,8 +26536,8 @@
       },
       "coingeckoId": "atomone",
       "price": {
-        "poolId": "2632",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "2715",
+        "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
       },
       "categories": [],
       "transferMethods": [
@@ -30612,6 +30612,55 @@
         "chainName": "int3face",
         "sourceDenom": "uint3"
       }
+    },
+    {
+      "chainName": "migaloo",
+      "sourceDenom": "factory/migaloo1t862qdu9mj5hr3j727247acypym3ej47axu22rrapm4tqlcpuseqltxwq5/ophir",
+      "coinMinimalDenom": "ibc/3AF2E322D4B54BB97EEE24760ED25B725842A9B62C759402AB8AADD75915FD14",
+      "symbol": "OPHIR",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/ophir.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "migaloo",
+            "chainId": "migaloo-1",
+            "sourceDenom": "factory/migaloo1t862qdu9mj5hr3j727247acypym3ej47axu22rrapm4tqlcpuseqltxwq5/ophir",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-642",
+            "path": "transfer/channel-642/factory/migaloo1t862qdu9mj5hr3j727247acypym3ej47axu22rrapm4tqlcpuseqltxwq5/ophir"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "migaloo",
+          "sourceDenom": "factory/migaloo1t862qdu9mj5hr3j727247acypym3ej47axu22rrapm4tqlcpuseqltxwq5/ophir",
+          "chainType": "cosmos",
+          "chainId": "migaloo-1",
+          "symbol": "OPHIR",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/ophir.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/3AF2E322D4B54BB97EEE24760ED25B725842A9B62C759402AB8AADD75915FD14",
+      "name": "OPHIR",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true
     }
   ]
 }

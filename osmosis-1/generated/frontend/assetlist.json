@@ -511,7 +511,7 @@
       },
       "coingeckoId": "cosmos",
       "price": {
-        "poolId": "1251",
+        "poolId": "1282",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
@@ -14611,8 +14611,8 @@
       },
       "coingeckoId": "celestia",
       "price": {
-        "poolId": "1247",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "poolId": "1248",
+        "denom": "uosmo"
       },
       "categories": [],
       "transferMethods": [
@@ -30800,7 +30800,7 @@
       "symbol": "mBTC.atom",
       "decimals": 8,
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/mbtc.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/mbtc.png"
       },
       "categories": [],
       "transferMethods": [
@@ -31090,6 +31090,78 @@
       ],
       "variantGroupKey": "ibc/3FC3D99F9E5003057353AD968A6E3AC12AE50741B41441666BAB3890485C9D00",
       "name": "Midas BTC Yield Token (Eureka)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "cosmoshub",
+        "sourceDenom": "uatom"
+      }
+    },
+    {
+      "chainName": "cosmoshub",
+      "sourceDenom": "ibc/09E95F57939E344EE36109AC41780B8A51F1FE0548A5203C5957674FF64C0F26",
+      "coinMinimalDenom": "ibc/0EF5630576C66968EF0787868CF09FD866FAD131BC148D24A148358A85F0EB62",
+      "symbol": "PAXG.atom",
+      "decimals": 18,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/paxg.atom.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/paxg.atom.png"
+      },
+      "price": {
+        "poolId": "3001",
+        "denom": "factory/osmo1s6ht8qrm8x0eg8xag5x3ckx9mse9g4se248yss/BERNESE"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "cosmoshub",
+            "chainId": "cosmoshub-4",
+            "sourceDenom": "ibc/09E95F57939E344EE36109AC41780B8A51F1FE0548A5203C5957674FF64C0F26",
+            "port": "transfer",
+            "channelId": "channel-141"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-0",
+            "path": "transfer/channel-0/transfer/08-wasm-1369/0x45804880de22913dafe09f4980848ece6ecbaf78"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "cosmoshub",
+          "sourceDenom": "ibc/09E95F57939E344EE36109AC41780B8A51F1FE0548A5203C5957674FF64C0F26",
+          "chainType": "cosmos",
+          "chainId": "cosmoshub-4",
+          "symbol": "PAXG",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/paxg.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/paxg.svg"
+          }
+        },
+        {
+          "chainName": "ethereum",
+          "sourceDenom": "0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+          "chainType": "evm",
+          "chainId": 1,
+          "address": "0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+          "symbol": "PAXG",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/paxg.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/paxg.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/0EF5630576C66968EF0787868CF09FD866FAD131BC148D24A148358A85F0EB62",
+      "name": "Paxos Gold (Eureka)",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

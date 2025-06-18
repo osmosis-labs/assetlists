@@ -980,7 +980,22 @@ export function setImages(asset_data) {
 
   let localImages = getAssetProperty(asset_data.local_asset, "images");
   let canonicalImages = getAssetProperty(asset_data.canonical_asset, "images");
-  let primaryImage = asset_data.zone_asset?.override_properties?.logo_URIs ?? canonicalImages?.[0] ?? localImages?.[0];
+  let primaryImage =
+    asset_data.zone_asset?.override_properties?.logo_URIs ??
+    canonicalImages?.[0] ??
+    localImages?.[0] ??
+    chain_reg.getAssetPropertyFromOriginWithTraceCustom(
+      asset_data.canonical_asset.chain_name,
+      asset_data.canonical_asset.base_denom,
+      "images",
+      chain_reg.traceTypesAll
+    )?.[0] ??
+    chain_reg.getAssetPropertyFromOriginWithTraceCustom(
+      asset_data.canonical_asset.chain_name,
+      asset_data.canonical_asset.base_denom,
+      "logo_URIs",
+      chain_reg.traceTypesAll
+    );
   let images = [];
 
 
@@ -1027,8 +1042,8 @@ export function setImages(asset_data) {
   });
 
   if (!primaryImage) {
-    console.log(asset_data);
-    console.log(canonicalImages);
+    //console.log(asset_data);
+    //console.log(canonicalImages);
   }
 
   let newImagesArray = [];

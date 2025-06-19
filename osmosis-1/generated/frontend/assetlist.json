@@ -511,7 +511,7 @@
       },
       "coingeckoId": "cosmos",
       "price": {
-        "poolId": "1282",
+        "poolId": "1251",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
@@ -3836,7 +3836,7 @@
       "coingeckoId": "frax",
       "price": {
         "poolId": "679",
-        "denom": "ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4"
+        "denom": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC"
       },
       "categories": [
         "stablecoin"
@@ -14611,8 +14611,8 @@
       },
       "coingeckoId": "celestia",
       "price": {
-        "poolId": "1248",
-        "denom": "uosmo"
+        "poolId": "1247",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
       "transferMethods": [
@@ -26684,8 +26684,8 @@
       },
       "coingeckoId": "yield-gata",
       "price": {
-        "poolId": "2940",
-        "denom": "ibc/BC26A7A805ECD6822719472BCB7842A48EF09DF206182F8F259B2593EB5D23FB"
+        "poolId": "2669",
+        "denom": "ibc/CEE970BB3D26F4B907097B6B660489F13F3B0DA765B83CC7D9A0BC0CE220FA6F"
       },
       "categories": [],
       "transferMethods": [
@@ -31111,8 +31111,8 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/paxg.atom.png"
       },
       "price": {
-        "poolId": "3001",
-        "denom": "factory/osmo1s6ht8qrm8x0eg8xag5x3ckx9mse9g4se248yss/BERNESE"
+        "poolId": "3002",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
       "transferMethods": [
@@ -31171,6 +31171,45 @@
         "chainName": "cosmoshub",
         "sourceDenom": "uatom"
       }
+    },
+    {
+      "chainName": "osmosis",
+      "sourceDenom": "ibc/22632ABDBBD528D348728DB854CE4FDE6588DB90B268000E50606BFD2CFDA053",
+      "coinMinimalDenom": "ibc/22632ABDBBD528D348728DB854CE4FDE6588DB90B268000E50606BFD2CFDA053",
+      "symbol": "NAM",
+      "decimals": 6,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/namada/images/namada.svg"
+      },
+      "categories": [
+        "privacy"
+      ],
+      "transferMethods": [
+        {
+          "name": "Namadillo",
+          "type": "external_interface",
+          "depositUrl": "https://www.namadillo.app/ibc/withdraw?asset=unam",
+          "withdrawUrl": "https://www.namadillo.app/ibc?asset=unam"
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "namada",
+          "sourceDenom": "unam",
+          "chainType": "non-cosmos",
+          "chainId": "namada.5f5de2dd1b88cba30586420",
+          "symbol": "NAM",
+          "decimals": 6,
+          "logoURIs": {}
+        }
+      ],
+      "variantGroupKey": "ibc/22632ABDBBD528D348728DB854CE4FDE6588DB90B268000E50606BFD2CFDA053",
+      "name": "Namada",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": true,
+      "preview": true
     }
   ]
 }

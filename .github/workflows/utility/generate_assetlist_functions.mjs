@@ -1416,13 +1416,17 @@ function getChainType(asset_data, chainName) {
 function getChainId(asset_data, chainName) {
 
   let chainId = chain_reg.getFileProperty(chainName, "chain", "chain_id");
-  if (getChainType(asset_data, chainName) === "evm") {
+  let chainType = getChainType(asset_data, chainName);
+  if (chainType === "evm") {
     chainId = Number(chainId);
   }
   if (!chainId) {
     chainId = asset_data.zone_config.evm_chains?.find((evm_chain) => {
       return evm_chain.chain_name === chainName;
     })?.chain_id;
+  }
+  if (chainType != "evm" && chainType != "cosmos") {
+    return undefined;
   }
   
   return chainId;

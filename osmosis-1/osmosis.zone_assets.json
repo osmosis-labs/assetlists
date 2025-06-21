@@ -6628,7 +6628,7 @@
       "base_denom": "ibc/9CB24EF57DF00EFFCE3B52FC1225EDEDF98B31DB8C792B43C7E3D4AD9B3982CF",
       "path": "transfer/channel-0/transfer/08-wasm-1369/0x6a9a65b84843f5fd4ac9a0471c4fc11afffbce4a",
       "osmosis_verified": false,
-      "_comment": "enzoBTC (Eureka) $enzoBTC.atom"
+      "_comment": "lorenzo Wrapped Bitcoin (Eureka) $enzoBTC.atom"
     },
     {
       "chain_name": "cosmoshub",
@@ -6650,7 +6650,29 @@
       },
       "_comment": "Paxos Gold (Eureka) $PAXG.atom"
     },
-   {
+    {
+      "chain_name": "osmosis",
+      "base_denom": "ibc/C7110DEC66869DAE9BE9C3C60F4B5313B16A2204AE020C3B0527DD6B322386A3",
+      "osmosis_verified": true,
+      "osmosis_disabled": true,
+      "canonical": {
+        "chain_name": "namada",
+        "base_denom": "unam"
+      },
+      "transfer_methods": [
+        {
+          "name": "Namadillo",
+          "type": "external_interface",
+          "deposit_url": "https://namadillo.app/ibc/withdraw?asset=tnam1q9gr66cvu4hrzm0sd5kmlnjje82gs3xlfg3v6nu7",
+          "withdraw_url": "https://namadillo.app/ibc?asset=ibc%2FC7110DEC66869DAE9BE9C3C60F4B5313B16A2204AE020C3B0527DD6B322386A3"
+        }
+      ],
+      "categories": [
+        "privacy"
+      ],
+      "_comment": "Namada $NAM"
+    },
+    {
       "chain_name": "bitbadges",
       "base_denom": "ubadge",
       "path": "transfer/channel-104311/ubadge",
@@ -6658,4 +6680,4 @@
       "_comment": "BitBadges $BADGE"
     }
   ]
-} 
+}

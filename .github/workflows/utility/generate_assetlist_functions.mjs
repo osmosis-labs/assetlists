@@ -976,9 +976,94 @@ export function setDecimals(asset_data) {
 }
 
 
-export function setImages(asset_data) {
+export function getImages(asset_data) {
 
   let localImages = getAssetProperty(asset_data.local_asset, "images");
+  let canonicalImages = getAssetProperty(asset_data.canonical_asset, "images");
+  let primaryImage =
+    asset_data.zone_asset?.override_properties?.logo_URIs ??
+    canonicalImages?.[0] ??
+    localImages?.[0] ??
+    chain_reg.getAssetPropertyFromOriginWithTraceCustom(
+      asset_data.canonical_asset.chain_name,
+      asset_data.canonical_asset.base_denom,
+      "images",
+      chain_reg.traceTypesAll
+    )?.[0] ??
+    chain_reg.getAssetPropertyFromOriginWithTraceCustom(
+      asset_data.canonical_asset.chain_name,
+      asset_data.canonical_asset.base_denom,
+      "logo_URIs",
+      chain_reg.traceTypesAll
+    );
+  let images = [];
+
+
+  //Generated chain reg images array is:
+  //canonicalAsset's image (e.g., USDT) + localAsset's Images(e.g., allUSDT),
+  //with any override image placed at the beginning
+  let firstCanonicalImage = true;
+  canonicalImages?.forEach((canonicalImage) => {
+    addUniqueArrayItem(canonicalImage, images);
+    if (
+      firstCanonicalImage
+      &&
+      asset_data.canonical_asset.chain_name !== asset_data.chainName
+    ) {
+      images[0].image_sync = { ...asset_data.canonical_asset };
+      for (const key in images[0]) {
+        if (key !== "image_sync") {
+          const value = images[0][key];
+          delete images[0][key];
+          images[0][key] = value;
+        }
+      }
+    }
+    firstCanonicalImage = false;
+  });
+
+
+  localImages?.forEach((localImage) => {
+    let containsImage = false;
+    images?.forEach((image) => {
+      if (
+        (image.png && image.png === localImage.png)
+        ||
+        (image.svg && image.svg === localImage.svg)
+      ) {
+        containsImage = true;
+      }
+    });
+
+    if (!containsImage) {
+      addUniqueArrayItem(localImage, images);
+    }
+  });
+
+  let newImagesArray = [];
+  images.forEach((image) => {
+    if (
+      (image.png && image.png === primaryImage.png)
+      ||
+      (image.svg && image.svg === primaryImage.svg)
+    ) {
+      primaryImage = { ...image };
+    } else {
+      newImagesArray.push(image);
+    }
+  });
+  newImagesArray.unshift(primaryImage);
+
+  return {
+    primaryImage: primaryImage,
+    newImagesArray: newImagesArray
+  };
+
+}
+
+export function setImages(asset_data) {
+
+  /*let localImages = getAssetProperty(asset_data.local_asset, "images");
   let canonicalImages = getAssetProperty(asset_data.canonical_asset, "images");
   let primaryImage =
     asset_data.zone_asset?.override_properties?.logo_URIs ??
@@ -1058,7 +1143,11 @@ export function setImages(asset_data) {
       newImagesArray.push(image);
     }
   });
-  newImagesArray.unshift(primaryImage);
+  newImagesArray.unshift(primaryImage);*/
+
+  const imagesObj = getImages(asset_data);
+  let primaryImage = imagesObj.primaryImage;
+  let newImagesArray = imagesObj.newImagesArray;
 
   asset_data.frontend.logoURIs = {...primaryImage};
   delete asset_data.frontend.logoURIs.theme;
@@ -1327,13 +1416,17 @@ function getChainType(asset_data, chainName) {
 function getChainId(asset_data, chainName) {
 
   let chainId = chain_reg.getFileProperty(chainName, "chain", "chain_id");
-  if (getChainType(asset_data, chainName) === "evm") {
+  let chainType = getChainType(asset_data, chainName);
+  if (chainType === "evm") {
     chainId = Number(chainId);
   }
   if (!chainId) {
     chainId = asset_data.zone_config.evm_chains?.find((evm_chain) => {
       return evm_chain.chain_name === chainName;
     })?.chain_id;
+  }
+  if (chainType != "evm" && chainType != "cosmos") {
+    return undefined;
   }
   
   return chainId;
@@ -1360,11 +1453,13 @@ function getCounterpartyAsset(asset_data, asset) {
   
   counterpartyAsset.symbol = getAssetProperty(asset, "symbol");
   counterpartyAsset.decimals = getAssetProperty(asset, "decimals");
-  
+
+  //HERE
   let image = getAssetProperty(
     asset,
     "images"
   )?.[0];
+  image = image ? image : getImages(asset_data)?.newImagesArray?.[0];
   counterpartyAsset.logoURIs = {
     png: image?.png,
     svg: image?.svg

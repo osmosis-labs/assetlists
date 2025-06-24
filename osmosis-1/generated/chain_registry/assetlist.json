@@ -30160,6 +30160,63 @@
       }
     },
     {
+      "description": "Rewards token designed to incentivize participation in Coreum Community DAO",
+      "extended_description": "The Coreum Community DAO (CCD) token incentivizes and rewards members for their contributions and support in community growth and educational initiatives.",
+      "denom_units": [
+        {
+          "denom": "ibc/BA368CD4ED32975C333F69DA8FE0AB482D2E0F3C04227053EEB9B597A6789F6E",
+          "exponent": 0,
+          "aliases": [
+            "uccd-core1hnwd78wappjmgygyzr9mwspm7uzytrkcp9pfvv"
+          ]
+        },
+        {
+          "denom": "ccd",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/BA368CD4ED32975C333F69DA8FE0AB482D2E0F3C04227053EEB9B597A6789F6E",
+      "name": "Coreum Community DAO Token",
+      "display": "ccd",
+      "symbol": "CCD",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "coreum",
+            "base_denom": "uccd-core1hnwd78wappjmgygyzr9mwspm7uzytrkcp9pfvv",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-2188",
+            "path": "transfer/channel-2188/uccd-core1hnwd78wappjmgygyzr9mwspm7uzytrkcp9pfvv"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/ccd.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/ccd.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "coreum",
+            "base_denom": "uccd-core1hnwd78wappjmgygyzr9mwspm7uzytrkcp9pfvv"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/ccd.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/ccd.svg",
+          "theme": {
+            "primary_color_hex": "#a50dda"
+          }
+        }
+      ],
+      "socials": {
+        "website": "https://coreumcommunitydao.com/",
+        "twitter": "https://x.com/Cor3_Community"
+      }
+    },
+    {
       "description": "The native token of Namada.",
       "denom_units": [
         {
@@ -30203,6 +30260,53 @@
             "base_denom": "unam"
           },
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/namada/images/namada.svg"
+        }
+      ]
+    },
+    {
+      "description": "$BADGE is the native in-app credits token for BitBadges.",
+      "denom_units": [
+        {
+          "denom": "ibc/AEA658A560ADC30785492AB06B707BC260E7DAB3686A5A2A6F33CB3FFB1E1462",
+          "exponent": 0,
+          "aliases": [
+            "ubadge"
+          ]
+        },
+        {
+          "denom": "badge",
+          "exponent": 9
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/AEA658A560ADC30785492AB06B707BC260E7DAB3686A5A2A6F33CB3FFB1E1462",
+      "name": "BitBadges Credits",
+      "display": "badge",
+      "symbol": "BADGE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bitbadges",
+            "base_denom": "ubadge",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-104311",
+            "path": "transfer/channel-104311/ubadge"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitbadges/images/bitbadgeslogo.png"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "bitbadges",
+            "base_denom": "ubadge"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitbadges/images/bitbadgeslogo.png"
         }
       ]
     },
@@ -30871,63 +30975,6 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.svg"
         }
       ]
-    },
-    {
-      "description": "Rewards token designed to incentivize participation in Coreum Community DAO",
-      "extended_description": "The Coreum Community DAO (CCD) token incentivizes and rewards members for their contributions and support in community growth and educational initiatives.",
-      "denom_units": [
-        {
-          "denom": "ibc/BA368CD4ED32975C333F69DA8FE0AB482D2E0F3C04227053EEB9B597A6789F6E",
-          "exponent": 0,
-          "aliases": [
-            "uccd-core1hnwd78wappjmgygyzr9mwspm7uzytrkcp9pfvv"
-          ]
-        },
-        {
-          "denom": "ccd",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/BA368CD4ED32975C333F69DA8FE0AB482D2E0F3C04227053EEB9B597A6789F6E",
-      "name": "Coreum Community DAO Token",
-      "display": "ccd",
-      "symbol": "CCD",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "coreum",
-            "base_denom": "uccd-core1hnwd78wappjmgygyzr9mwspm7uzytrkcp9pfvv",
-            "channel_id": "channel-2"
-          },
-          "chain": {
-            "channel_id": "channel-2188",
-            "path": "transfer/channel-2188/uccd-core1hnwd78wappjmgygyzr9mwspm7uzytrkcp9pfvv"
-          }
-        }
-      ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/ccd.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/ccd.svg"
-      },
-      "images": [
-        {
-          "image_sync": {
-            "chain_name": "coreum",
-            "base_denom": "uccd-core1hnwd78wappjmgygyzr9mwspm7uzytrkcp9pfvv"
-          },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/ccd.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/ccd.svg",
-          "theme": {
-            "primary_color_hex": "#a50dda"
-          }
-        }
-      ],
-      "socials": {
-        "website": "https://coreumcommunitydao.com/",
-        "twitter": "https://x.com/Cor3_Community"
-      }
     }
   ]
 }

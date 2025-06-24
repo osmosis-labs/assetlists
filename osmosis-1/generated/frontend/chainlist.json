@@ -21174,6 +21174,7 @@
         {
           "coinDenom": "CCD",
           "chainSuggestionDenom": "uccd-core1hnwd78wappjmgygyzr9mwspm7uzytrkcp9pfvv",
+          "coinMinimalDenom": "ibc/BA368CD4ED32975C333F69DA8FE0AB482D2E0F3C04227053EEB9B597A6789F6E",
           "sourceDenom": "uccd-core1hnwd78wappjmgygyzr9mwspm7uzytrkcp9pfvv",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/ccd.png"
@@ -27448,6 +27449,84 @@
       "explorers": [
         {
           "txPage": "https://viewblock.io/arkeo/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "bitbadges",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "BitBadges",
+      "chain_id": "bitbadges-1",
+      "bech32Prefix": "bb",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "bb",
+        "bech32PrefixAccPub": "bbpub",
+        "bech32PrefixValAddr": "bbvaloper",
+        "bech32PrefixValPub": "bbvaloperpub",
+        "bech32PrefixConsAddr": "bbvalcons",
+        "bech32PrefixConsPub": "bbvalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDenom": "STAKE",
+        "chainSuggestionDenom": "ustake",
+        "sourceDenom": "ustake",
+        "coinDecimals": 9,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitbadges/images/bitbadgeslogo.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "BADGE",
+          "chainSuggestionDenom": "ubadge",
+          "coinMinimalDenom": "ibc/AEA658A560ADC30785492AB06B707BC260E7DAB3686A5A2A6F33CB3FFB1E1462",
+          "sourceDenom": "ubadge",
+          "coinDecimals": 9,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitbadges/images/bitbadgeslogo.png",
+          "gasPriceStep": {
+            "low": 0.00025,
+            "average": 0.0025,
+            "high": 0.025
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "BADGE",
+          "chainSuggestionDenom": "ubadge",
+          "coinMinimalDenom": "ibc/AEA658A560ADC30785492AB06B707BC260E7DAB3686A5A2A6F33CB3FFB1E1462",
+          "sourceDenom": "ubadge",
+          "coinDecimals": 9,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitbadges/images/bitbadgeslogo.png"
+        },
+        {
+          "coinDenom": "STAKE",
+          "chainSuggestionDenom": "ustake",
+          "sourceDenom": "ustake",
+          "coinDecimals": 9,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitbadges/images/bitbadgeslogo.png"
+        }
+      ],
+      "description": "BitBadges is the all-in-one, multi-chain platform for building your digital identity.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://node.bitbadges.io/rpc"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://node.bitbadges.io/api"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://explorer.bitbadges.io/BitBadges%20Mainnet/tx/${txHash}"
         }
       ],
       "features": [

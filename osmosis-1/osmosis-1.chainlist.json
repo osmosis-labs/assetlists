@@ -10826,6 +10826,66 @@
         "ibc-go",
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "bitbadges",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "BitBadges",
+      "chain_id": "bitbadges-1",
+      "bech32_prefix": "bb",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "bb",
+        "bech32PrefixAccPub": "bbpub",
+        "bech32PrefixValAddr": "bbvaloper",
+        "bech32PrefixValPub": "bbvaloperpub",
+        "bech32PrefixConsAddr": "bbvalcons",
+        "bech32PrefixConsPub": "bbvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ubadge",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.00025,
+            "average_gas_price": 0.0025,
+            "high_gas_price": 0.025
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ustake"
+          }
+        ]
+      },
+      "description": "BitBadges is the all-in-one, multi-chain platform for building your digital identity.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://node.bitbadges.io/rpc"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://node.bitbadges.io/api"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.bitbadges.io/BitBadges%20Mainnet/tx/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitbadges/images/bitbadgeslogo.png"
+      },
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
     }
   ]
 }

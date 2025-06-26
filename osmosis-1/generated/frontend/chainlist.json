@@ -5383,6 +5383,14 @@
           "coinDecimals": 6,
           "coinGeckoId": "namada",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/namada/images/namada.svg"
+        },
+        {
+          "coinDenom": "XRP.xrplevm",
+          "chainSuggestionDenom": "ibc/46EB46DB30D3BBC6F404A9232C09785F36D40DA05C662A8E295712ECBAFF1609",
+          "coinMinimalDenom": "ibc/46EB46DB30D3BBC6F404A9232C09785F36D40DA05C662A8E295712ECBAFF1609",
+          "coinDecimals": 0,
+          "coinGeckoId": "ripple",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/xrpl/images/xrp.png"
         }
       ],
       "description": "Osmosis (OSMO) is the premier DEX and cross-chain DeFi hub within the Cosmos ecosystem, a network of over 50 sovereign, interoperable blockchains seamlessly connected through the Inter-Blockchain Communication Protocol (IBC). Pioneering in its approach, Osmosis offers a dynamic trading and liquidity provision experience, integrating non-IBC assets from other ecosystems, including Ethereum, Solana, Avalanche, and Polkadot. Initially adopting Balancer-style pools, Osmosis now also features a concentrated liquidity model that is orders of magnitude more capital efficient, meaning that significantly less liquidity is required to handle the same amount of trading volume with minimal slippage.\n\nAs a true appchain, Osmosis has greater control over the full blockchain stack than traditional smart contract DEXs, which must follow the code of the parent chain that it is built on. This fine-grained control has enabled, for example, the development of Superfluid Staking, an extension of Proof of Stake that allows assets at the application layer to be staked to secure the chain. The customizability of appchains also allows implementing features like the Protocol Revenue module, which enables Osmosis to conduct on-chain arbitrage on behalf of OSMO stakers, balancing prices across pools while generating real yield revenue from this volume. Additionally, as a sovereign appchain, Osmosis governance can vote on upgrades to the protocol. One example of this was the introduction of a Taker Fee, which switched on the collection of exchange fees to generate diverse yield from Osmosis volume and distribute it to OSMO stakers.\n\nOsmosis is bringing the full centralized exchange experience to the decentralized world by building a cross-chain native DEX and trading suite that connects all chains over IBC, including Ethereum and Bitcoin. To reach this goal, Osmosis hosts an ever-expanding suite of DeFi applications aimed at providing a one-stop experience that includes lending, credit, margin, DeFi strategy vaults, power perps, fiat on-ramps, NFTs, stablecoins, and more — all of the functionalities that centralized exchange offer and more, in the trust-minimized environment of decentralized finance.",
@@ -27532,6 +27540,75 @@
       "features": [
         "ibc-go",
         "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "xrplevm",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "XRPL EVM",
+      "chain_id": "xrplevm_1440000-1",
+      "bech32Prefix": "ethm",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "ethm",
+        "bech32PrefixAccPub": "ethmpub",
+        "bech32PrefixValAddr": "ethmvaloper",
+        "bech32PrefixValPub": "ethmvaloperpub",
+        "bech32PrefixConsAddr": "ethmvalcons",
+        "bech32PrefixConsPub": "ethmvalconspub"
+      },
+      "slip44": 60,
+      "stakeCurrency": {
+        "coinDecimals": 0
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "XRP",
+          "chainSuggestionDenom": "axrp",
+          "coinMinimalDenom": "ibc/46EB46DB30D3BBC6F404A9232C09785F36D40DA05C662A8E295712ECBAFF1609",
+          "sourceDenom": "axrp",
+          "coinDecimals": 18,
+          "coinGeckoId": "ripple",
+          "gasPriceStep": {
+            "low": 200000000000,
+            "average": 250000000000,
+            "high": 400000000000
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "XRP",
+          "chainSuggestionDenom": "axrp",
+          "coinMinimalDenom": "ibc/46EB46DB30D3BBC6F404A9232C09785F36D40DA05C662A8E295712ECBAFF1609",
+          "sourceDenom": "axrp",
+          "coinDecimals": 18,
+          "coinGeckoId": "ripple"
+        }
+      ],
+      "description": "The XRPL Ethereum Virtual Machine (EVM) is an innovative extension of the XRP Ledger developed by Peersyst in collaboration with Ripple that integrates Ethereum's smart contract capabilities via a dedicated sidechain. Built on the Cosmos SDK with a fork of evmOS, this sidechain utilizes a Proof-of-Authority (PoA) consensus model, ensuring high performance and low latency while maintaining the fundamental attributes of the XRP Ledger. It connects to the XRP Ledger through the Axelar network, employing XRP—bridged from the XRPL—as its native currency. This allows for seamless asset transfers and communication between the XRPL and the EVM sidechain. Moreover, the XRPL EVM supports Inter-Blockchain Communication (IBC), promoting interoperability with other blockchains in the Cosmos ecosystem.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://cosmos-rpc-mainnet.aws.peersyst.tech/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://cosmos-api-mainnet.aws.peersyst.tech/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://explorer-mainnet.aws.peersyst.tech/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "eth-address-gen",
+        "eth-key-sign"
       ]
     }
   ]

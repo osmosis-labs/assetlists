@@ -10886,6 +10886,66 @@
         "ibc-go",
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "xrplevm",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "XRPL EVM",
+      "chain_id": "xrplevm_1440000-1",
+      "bech32_prefix": "ethm",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "ethm",
+        "bech32PrefixAccPub": "ethmpub",
+        "bech32PrefixValAddr": "ethmvaloper",
+        "bech32PrefixValPub": "ethmvaloperpub",
+        "bech32PrefixConsAddr": "ethmvalcons",
+        "bech32PrefixConsPub": "ethmvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "axrp",
+            "fixed_min_gas_price": 250000000,
+            "low_gas_price": 200000000000,
+            "average_gas_price": 250000000000,
+            "high_gas_price": 400000000000
+          }
+        ]
+      },
+      "description": "The XRPL Ethereum Virtual Machine (EVM) is an innovative extension of the XRP Ledger developed by Peersyst in collaboration with Ripple that integrates Ethereum's smart contract capabilities via a dedicated sidechain. Built on the Cosmos SDK with a fork of evmOS, this sidechain utilizes a Proof-of-Authority (PoA) consensus model, ensuring high performance and low latency while maintaining the fundamental attributes of the XRP Ledger. It connects to the XRP Ledger through the Axelar network, employing XRP—bridged from the XRPL—as its native currency. This allows for seamless asset transfers and communication between the XRPL and the EVM sidechain. Moreover, the XRPL EVM supports Inter-Blockchain Communication (IBC), promoting interoperability with other blockchains in the Cosmos ecosystem.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://cosmos-rpc-mainnet.aws.peersyst.tech/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://cosmos-api-mainnet.aws.peersyst.tech/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer-mainnet.aws.peersyst.tech/tx/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xrplevm/images/xrplevm.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xrplevm/images/xrplevm.svg",
+        "theme": {
+          "circle": true,
+          "primary_color_hex": "#FFFFFF"
+        }
+      },
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
     }
   ]
 }

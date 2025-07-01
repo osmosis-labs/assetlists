@@ -35,12 +35,6 @@
           "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=uusdc"
         }
       ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdc.axl.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdc.axl.png"
-        }
-      },
       "categories": [
         "stablecoin"
       ],
@@ -51,12 +45,6 @@
       "base_denom": "weth-wei",
       "path": "transfer/channel-208/weth-wei",
       "osmosis_verified": true,
-      "override_properties": {
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.axl.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.axl.svg"
-        }
-      },
       "transfer_methods": [
         {
           "name": "Satellite",
@@ -72,12 +60,6 @@
       "base_denom": "wbtc-satoshi",
       "path": "transfer/channel-208/wbtc-satoshi",
       "osmosis_verified": true,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.axl.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.axl.png"
-        }
-      },
       "_comment": "Wrapped Bitcoin (Ethereum via Axelar) $WBTC.eth.axl"
     },
     {
@@ -86,11 +68,6 @@
       "path": "transfer/channel-208/uusdt",
       "peg_mechanism": "collateralized",
       "osmosis_verified": true,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.axl.svg"
-        }
-      },
       "_comment": "Tether USD (Ethereum via Axelar) $USDT.eth.axl",
       "categories": [
         "stablecoin"
@@ -149,9 +126,6 @@
       "path": "transfer/channel-208/wbnb-wei",
       "osmosis_verified": true,
       "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bnb.axl.svg"
-        },
         "use_asset_name": true
       },
       "_comment": "Binance Coin (Axelar) $BNB.axl"
@@ -171,11 +145,7 @@
       ],
       "override_properties": {
         "symbol": "POL.axl",
-        "name": "Polygon (Axelar)",
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/pol.axl.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/pol.axl.png"
-        }
+        "name": "Polygon (Axelar)"
       },
       "_comment": "Polygon (Axelar) $POL.axl"
     },
@@ -185,10 +155,7 @@
       "path": "transfer/channel-208/wavax-wei",
       "osmosis_verified": true,
       "override_properties": {
-        "name": "Avalanche",
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/avalanche/images/avax.png"
-        }
+        "name": "Avalanche"
       },
       "canonical": {
         "chain_name": "avalanche",
@@ -229,11 +196,6 @@
       "base_denom": "dot-planck",
       "path": "transfer/channel-208/dot-planck",
       "osmosis_verified": true,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dot.axl.svg"
-        }
-      },
       "_comment": "Polkadot (Moonbeam via Axelar) $DOT.glmr.axl"
     },
     {
@@ -482,12 +444,6 @@
       "path": "transfer/channel-124/uvdl",
       "osmosis_verified": true,
       "osmosis_unstable": true,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/VDL.vdl.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/VDL.vdl.png"
-        }
-      },
       "_comment": "Vidulum (Vidulum) $VDL.vdl"
     },
     {
@@ -612,11 +568,7 @@
       ],
       "override_properties": {
         "name": "Fetch.ai (Fetch.ai)",
-        "symbol": "FET.fet",
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fet.fet.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fet.fet.png"
-        }
+        "symbol": "FET.fet"
       },
       "_comment": "Fetch.ai (Fetch.ai) $FET.fet"
     },
@@ -732,10 +684,7 @@
       "path": "transfer/channel-144/gravity0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
       "osmosis_verified": false,
       "override_properties": {
-        "name": "Wrapped Bitcoin (Gravity Bridge)",
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.grv.svg"
-        }
+        "name": "Wrapped Bitcoin (Gravity Bridge)"
       },
       "transfer_methods": [
         {
@@ -753,10 +702,7 @@
       "path": "transfer/channel-144/gravity0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
       "osmosis_verified": true,
       "override_properties": {
-        "name": "Ether (Gravity Bridge)",
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/weth.grv.svg"
-        }
+        "name": "Ether (Gravity Bridge)"
       },
       "transfer_methods": [
         {
@@ -775,10 +721,7 @@
       "peg_mechanism": "collateralized",
       "osmosis_verified": true,
       "override_properties": {
-        "name": "USDC (Gravity Bridge)",
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdc.grv.svg"
-        }
+        "name": "USDC (Gravity Bridge)"
       },
       "transfer_methods": [
         {
@@ -800,10 +743,7 @@
       "peg_mechanism": "collateralized",
       "osmosis_verified": false,
       "override_properties": {
-        "name": "DAI Stablecoin (Gravity Bridge)",
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dai.grv.svg"
-        }
+        "name": "DAI Stablecoin (Gravity Bridge)"
       },
       "transfer_methods": [
         {
@@ -825,10 +765,7 @@
       "peg_mechanism": "collateralized",
       "osmosis_verified": true,
       "override_properties": {
-        "name": "Tether USD (Gravity Bridge)",
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.grv.svg"
-        }
+        "name": "Tether USD (Gravity Bridge)"
       },
       "transfer_methods": [
         {
@@ -953,12 +890,6 @@
       "categories": [
         "oracles"
       ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/link.axl.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/link.axl.png"
-        }
-      },
       "_comment": "Chainlink (Axelar) $LINK.axl"
     },
     {
@@ -1044,12 +975,6 @@
       "categories": [
         "meme"
       ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/shib.axl.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/shib.axl.png"
-        }
-      },
       "_comment": "Shiba Inu (Axelar) $SHIB.axl"
     },
     {
@@ -1631,11 +1556,6 @@
       "path": "transfer/channel-208/polygon-uusdc",
       "peg_mechanism": "collateralized",
       "osmosis_verified": true,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/polygon.usdc.svg"
-        }
-      },
       "categories": [
         "stablecoin"
       ],
@@ -1648,10 +1568,7 @@
       "peg_mechanism": "collateralized",
       "osmosis_verified": true,
       "override_properties": {
-        "name": "USD Coin (Avalanche)",
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/avalanche.usdc.svg"
-        }
+        "name": "USD Coin (Avalanche)"
       },
       "categories": [
         "stablecoin"
@@ -1952,12 +1869,6 @@
       "base_denom": "wfil-wei",
       "path": "transfer/channel-208/wfil-wei",
       "osmosis_verified": true,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fil.axl.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fil.axl.png"
-        }
-      },
       "categories": [
         "dweb",
         "depin"
@@ -2001,12 +1912,6 @@
       "base_denom": "arb-wei",
       "path": "transfer/channel-208/arb-wei",
       "osmosis_verified": true,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/arb.axl.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/arb.axl.png"
-        }
-      },
       "_comment": "Arbitrum (Axelar) $ARB.axl"
     },
     {
@@ -2034,12 +1939,6 @@
       "categories": [
         "meme"
       ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/pepe.axl.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/pepe.axl.png"
-        }
-      },
       "_comment": "Pepe (Axelar) $PEPE.axl"
     },
     {
@@ -2100,9 +1999,6 @@
       "path": "transfer/channel-208/wsteth-wei",
       "osmosis_verified": true,
       "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wstETH.axl.svg"
-        },
         "symbol": "wstETH.eth.axl"
       },
       "origin": {
@@ -2273,11 +2169,7 @@
       ],
       "override_properties": {
         "symbol": "DOT.pica",
-        "name": "Polkadot (Picasso)",
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dot.pica.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dot.pica.png"
-        }
+        "name": "Polkadot (Picasso)"
       },
       "_comment": "Polkadot (Picasso) $DOT.pica"
     },
@@ -2334,12 +2226,6 @@
       "chain_name": "kava",
       "base_denom": "erc20/tether/usdt",
       "path": "transfer/channel-143/erc20/tether/usdt",
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.kava.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.kava.png"
-        }
-      },
       "peg_mechanism": "collateralized",
       "osmosis_verified": true,
       "categories": [
@@ -2415,12 +2301,6 @@
           "withdraw_url": "/wormhole?from=osmosis&to=solana&token=SOL"
         }
       ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sol.wh.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sol.wh.png"
-        }
-      },
       "_comment": "Solana (Wormhole) $SOL.wh"
     },
     {
@@ -2451,11 +2331,6 @@
       "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/8iuAc6DSeLvi2JDUtwJxLytsZT8R19itXebZsNReLLNi",
       "osmosis_verified": true,
       "peg_mechanism": "collateralized",
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.wh.svg"
-        }
-      },
       "transfer_methods": [
         {
           "name": "Osmosis Wormhole Connect",
@@ -2475,11 +2350,6 @@
       "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/46YEtoSN1AcwgGSRoWruoS6bnVh8XpMp5aQTpKohCJYh",
       "osmosis_verified": true,
       "osmosis_disabled": true,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sui.wh.svg"
-        }
-      },
       "transfer_methods": [
         {
           "name": "Osmosis Wormhole Connect",
@@ -2495,11 +2365,6 @@
       "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5wS2fGojbL9RhGEAeQBdkHPUAciYDxjDTMYvdf9aDn2r",
       "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5wS2fGojbL9RhGEAeQBdkHPUAciYDxjDTMYvdf9aDn2r",
       "osmosis_verified": true,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/apt.wh.svg"
-        }
-      },
       "transfer_methods": [
         {
           "name": "Osmosis Wormhole Connect",
@@ -2540,11 +2405,6 @@
       "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/GGh9Ufn1SeDGrhzEkMyRKt5568VbbxZK2yvWNsd6PbXt",
       "osmosis_verified": true,
       "peg_mechanism": "collateralized",
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdc.hole.svg"
-        }
-      },
       "transfer_methods": [
         {
           "name": "Osmosis Wormhole Connect",
@@ -2563,11 +2423,6 @@
       "base_denom": "factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5BWqpR48Lubd55szM5i62zK7TFkddckhbT48yy6mNbDp",
       "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/5BWqpR48Lubd55szM5i62zK7TFkddckhbT48yy6mNbDp",
       "osmosis_verified": true,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/weth.hole.svg"
-        }
-      },
       "transfer_methods": [
         {
           "name": "Osmosis Wormhole Connect",
@@ -2585,9 +2440,6 @@
       "peg_mechanism": "collateralized",
       "osmosis_verified": true,
       "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
-        },
         "counterparty": [
           {
             "chain_name": "arbitrum",
@@ -2817,11 +2669,7 @@
       "osmosis_verified": true,
       "override_properties": {
         "name": "dYdX Protocol (dYdX Protocol)",
-        "symbol": "DYDX.dydx",
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dydx.dydx.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dydx.dydx.png"
-        }
+        "symbol": "DYDX.dydx"
       },
       "categories": [
         "defi"
@@ -3341,11 +3189,7 @@
       ],
       "override_properties": {
         "symbol": "DYM.dym",
-        "name": "Dymension (Dymension Hub)",
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dym.dym.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dym.dym.png"
-        }
+        "name": "Dymension (Dymension Hub)"
       },
       "_comment": "Dymension (Dymension Hub) $DYM.dym"
     },
@@ -3393,12 +3237,6 @@
       "path": "transfer/channel-2186/factory/wormhole14ejqjyq8um4p3xfqj74yld5waqljf88fz25yxnma0cngspxe3les00fpjx/HJk1XMDRNUbRrpKkNZYui7SwWDMjXZAsySzqgyNcQoU3",
       "osmosis_verified": true,
       "peg_mechanism": "collateralized",
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/solana.USDC.wh.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/solana.USDC.wh.png"
-        }
-      },
       "transfer_methods": [
         {
           "name": "Osmosis Wormhole Connect",
@@ -3529,11 +3367,7 @@
       ],
       "override_properties": {
         "name": "AIOZ Network (AIOZ Network)",
-        "symbol": "AIOZ.aioz",
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/aioz.aioz.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/aioz.aioz.png"
-        }
+        "symbol": "AIOZ.aioz"
       },
       "categories": [
         "ai",
@@ -3586,10 +3420,7 @@
       "path": "transfer/channel-2188/drop-core1zhs909jp9yktml6qqx9f0ptcq2xnhhj99cja03j3lfcsp2pgm86studdrz",
       "osmosis_verified": true,
       "override_properties": {
-        "name": "Ripple (Coreum)",
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/xrp.core.png"
-        }
+        "name": "Ripple (Coreum)"
       },
       "transfer_methods": [
         {
@@ -3885,10 +3716,7 @@
       "path": "transfer/channel-144/gravity0x45804880De22913dAFE09f4980848ECE6EcbAf78",
       "osmosis_verified": false,
       "override_properties": {
-        "name": "Paxos Gold (Gravity Bridge)",
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/paxg.grv.svg"
-        }
+        "name": "Paxos Gold (Gravity Bridge)"
       },
       "transfer_methods": [
         {
@@ -3932,12 +3760,7 @@
           "deposit_url": "https://app.picasso.network/?from=ETHEREUM&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=ETHEREUM"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.pica.svg"
-        }
-      }
+      ]
     },
     {
       "chain_name": "composable",
@@ -3952,12 +3775,7 @@
           "deposit_url": "https://app.picasso.network/?from=ETHEREUM&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=ETHEREUM"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/dai.pica.svg"
-        }
-      }
+      ]
     },
     {
       "chain_name": "composable",
@@ -3972,12 +3790,7 @@
           "deposit_url": "https://app.picasso.network/?from=ETHEREUM&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=ETHEREUM"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fxs.pica.svg"
-        }
-      }
+      ]
     },
     {
       "chain_name": "composable",
@@ -3992,12 +3805,7 @@
           "deposit_url": "https://app.picasso.network/?from=ETHEREUM&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=ETHEREUM"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/frax.pica.svg"
-        }
-      }
+      ]
     },
     {
       "chain_name": "composable",
@@ -4012,12 +3820,7 @@
           "deposit_url": "https://app.picasso.network/?from=ETHEREUM&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=ETHEREUM"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.pica.svg"
-        }
-      }
+      ]
     },
     {
       "chain_name": "composable",
@@ -4032,12 +3835,7 @@
           "deposit_url": "https://app.picasso.network/?from=ETHEREUM&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=ETHEREUM"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sfrax.pica.svg"
-        }
-      }
+      ]
     },
     {
       "chain_name": "composable",
@@ -4052,12 +3850,7 @@
           "deposit_url": "https://app.picasso.network/?from=ETHEREUM&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=ETHEREUM"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/frxeth.pica.svg"
-        }
-      }
+      ]
     },
     {
       "chain_name": "composable",
@@ -4072,12 +3865,7 @@
           "deposit_url": "https://app.picasso.network/?from=ETHEREUM&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=ETHEREUM"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sfrxeth.pica.svg"
-        }
-      }
+      ]
     },
     {
       "chain_name": "bitsong",
@@ -4239,12 +4027,7 @@
           "deposit_url": "https://app.picasso.network/?from=ETHEREUM&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=ETHEREUM"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/pepe.pica.png"
-        }
-      }
+      ]
     },
     {
       "chain_name": "composable",
@@ -4260,12 +4043,7 @@
           "deposit_url": "https://app.picasso.network/?from=ETHEREUM&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=ETHEREUM"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/crv.pica.png"
-        }
-      }
+      ]
     },
     {
       "chain_name": "composable",
@@ -4281,12 +4059,7 @@
           "deposit_url": "https://app.picasso.network/?from=ETHEREUM&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=ETHEREUM"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ezeth.pica.png"
-        }
-      }
+      ]
     },
     {
       "chain_name": "composable",
@@ -4302,12 +4075,7 @@
           "deposit_url": "https://app.picasso.network/?from=ETHEREUM&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=ETHEREUM"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usde.pica.png"
-        }
-      }
+      ]
     },
     {
       "chain_name": "composable",
@@ -4323,12 +4091,7 @@
           "deposit_url": "https://app.picasso.network/?from=ETHEREUM&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=ETHEREUM"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ena.pica.png"
-        }
-      }
+      ]
     },
     {
       "chain_name": "composable",
@@ -4344,12 +4107,7 @@
           "deposit_url": "https://app.picasso.network/?from=ETHEREUM&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=ETHEREUM"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eeth.pica.png"
-        }
-      }
+      ]
     },
     {
       "chain_name": "composable",
@@ -4365,12 +4123,7 @@
           "deposit_url": "https://app.picasso.network/?from=ETHEREUM&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=ETHEREUM"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/pxeth.pica.png"
-        }
-      }
+      ]
     },
     {
       "chain_name": "composable",
@@ -4386,12 +4139,7 @@
           "deposit_url": "https://app.picasso.network/?from=ETHEREUM&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=ETHEREUM"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/crvUSD.pica.png"
-        }
-      }
+      ]
     },
     {
       "chain_name": "osmosis",
@@ -4433,12 +4181,7 @@
           "deposit_url": "https://app.picasso.network/?from=SOLANA&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=SOLANA"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.solana.pica.svg"
-        }
-      }
+      ]
     },
     {
       "chain_name": "composable",
@@ -4453,12 +4196,7 @@
           "deposit_url": "https://app.picasso.network/?from=SOLANA&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=SOLANA"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/edgesol.pica.png"
-        }
-      }
+      ]
     },
     {
       "chain_name": "composable",
@@ -4473,12 +4211,7 @@
           "deposit_url": "https://app.picasso.network/?from=SOLANA&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=SOLANA"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/lst.pica.png"
-        }
-      }
+      ]
     },
     {
       "chain_name": "composable",
@@ -4493,12 +4226,7 @@
           "deposit_url": "https://app.picasso.network/?from=SOLANA&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=SOLANA"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/jitosol.pica.png"
-        }
-      }
+      ]
     },
     {
       "chain_name": "composable",
@@ -4513,12 +4241,7 @@
           "deposit_url": "https://app.picasso.network/?from=SOLANA&to=OSMOSIS",
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=SOLANA"
         }
-      ],
-      "override_properties": {
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wsol.pica.png"
-        }
-      }
+      ]
     },
     {
       "chain_name": "osmosis",
@@ -4535,9 +4258,6 @@
         "stablecoin"
       ],
       "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdt.svg"
-        },
         "counterparty": [
           {
             "chain_name": "arbitrum",
@@ -4623,10 +4343,7 @@
       "path": "transfer/channel-208/arbitrum-weth-wei",
       "osmosis_verified": false,
       "override_properties": {
-        "name": "Wrapped Ether (Arbitrum via Axelar)",
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.arb.axl.svg"
-        }
+        "name": "Wrapped Ether (Arbitrum via Axelar)"
       },
       "transfer_methods": [
         {
@@ -4644,10 +4361,7 @@
       "path": "transfer/channel-208/base-weth-wei",
       "osmosis_verified": false,
       "override_properties": {
-        "name": "Wrapped Ether (Base via Axelar)",
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.base.axl.svg"
-        }
+        "name": "Wrapped Ether (Base via Axelar)"
       },
       "transfer_methods": [
         {
@@ -4665,10 +4379,7 @@
       "path": "transfer/channel-208/polygon-weth-wei",
       "osmosis_verified": false,
       "override_properties": {
-        "name": "Wrapped Ether (Polygon via Axelar)",
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.matic.axl.svg"
-        }
+        "name": "Wrapped Ether (Polygon via Axelar)"
       },
       "transfer_methods": [
         {
@@ -4968,12 +4679,6 @@
       "base_denom": "op-wei",
       "path": "transfer/channel-208/op-wei",
       "osmosis_verified": true,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/op.axl.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/op.axl.png"
-        }
-      },
       "transfer_methods": [
         {
           "name": "Satellite",
@@ -5067,10 +4772,7 @@
       ],
       "override_properties": {
         "name": "Unicorn (Picasso)",
-        "symbol": "UWU.pica",
-        "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/UWU.pica.png"
-        }
+        "symbol": "UWU.pica"
       }
     },
     {
@@ -5111,11 +4813,7 @@
       "osmosis_verified": true,
       "override_properties": {
         "symbol": "USDT.inj",
-        "name": "Tether USD (Injective)",
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.inj.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.inj.png"
-        }
+        "name": "Tether USD (Injective)"
       },
       "_comment": "Tether USD (Injective) $USDT.inj",
       "categories": [
@@ -5183,11 +4881,7 @@
         "defi"
       ],
       "override_properties": {
-        "use_asset_name": true,
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ton.orai.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ton.orai.png"
-        }
+        "use_asset_name": true
       },
       "transfer_methods": [
         {
@@ -5391,12 +5085,6 @@
       "categories": [
         "defi"
       ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/uni.axl.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/uni.axl.png"
-        }
-      },
       "_comment": "Uniswap (Axelar) $UNI.axl"
     },
     {
@@ -5447,12 +5135,6 @@
           "withdraw_url": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=dogecoin&fromToken=DOGE.int3"
         }
       ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/doge.int3.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/doge.int3.png"
-        }
-      },
       "_comment": "Dogecoin (Int3) $DOGE.int3"
     },
     {
@@ -5468,12 +5150,6 @@
           "withdraw_url": "https://app.int3face.zone/bridge"
         }
       ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/btc.int3.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/btc.int3.png"
-        }
-      },
       "_comment": "Bitcoin (Int3) $BTC.int3"
     },
     {
@@ -5489,12 +5165,6 @@
           "withdraw_url": "https://app.int3face.zone/bridge"
         }
       ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bch.int3.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/bch.int3.png"
-        }
-      },
       "_comment": "Bitcoin Cash (Int3) $BCH.int3"
     },
     {
@@ -5510,12 +5180,6 @@
           "withdraw_url": "https://app.int3face.zone/bridge"
         }
       ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ltc.int3.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ltc.int3.png"
-        }
-      },
       "_comment": "Litecoin (Int3) $LTC.int3"
     },
     {
@@ -5524,11 +5188,6 @@
       "path": "transfer/channel-208/arbitrum-uusdt",
       "peg_mechanism": "collateralized",
       "osmosis_verified": false,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.arb.axl.svg"
-        }
-      },
       "_comment": "Tether USD (Ethereum) (Arbitrum via Axelar) $USDT.e.arb.axl",
       "categories": [
         "stablecoin"
@@ -5540,11 +5199,6 @@
       "path": "transfer/channel-208/optimism-uusdt",
       "peg_mechanism": "collateralized",
       "osmosis_verified": false,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.op.axl.svg"
-        }
-      },
       "_comment": "Tether USD (Ethereum) (optimism via Axelar) $USDT.e.op.axl",
       "categories": [
         "stablecoin"
@@ -5556,11 +5210,6 @@
       "path": "transfer/channel-208/polygon-uusdt",
       "peg_mechanism": "collateralized",
       "osmosis_verified": false,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.pol.axl.svg"
-        }
-      },
       "_comment": "Tether USD (Ethereum) (Polygon via Axelar) $USDT.e.matic.axl",
       "categories": [
         "stablecoin"
@@ -5572,10 +5221,6 @@
       "path": "transfer/channel-208/cbbtc-satoshi",
       "osmosis_verified": false,
       "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbBTC.base.axl.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/cbBTC.base.axl.png"
-        },
         "name": "Coinbase Wrapped BTC (Base via Axelar)",
         "symbol": "cbBTC.base.axl"
       },
@@ -5586,12 +5231,6 @@
       "base_denom": "fbtc-satoshi",
       "path": "transfer/channel-208/fbtc-satoshi",
       "osmosis_verified": false,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fbtc.axl.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/fbtc.axl.png"
-        }
-      },
       "_comment": "Fire Bitcoin (Axelar) $FBTC.axl"
     },
     {
@@ -5599,12 +5238,6 @@
       "base_denom": "lbtc-satoshi",
       "path": "transfer/channel-208/lbtc-satoshi",
       "osmosis_verified": false,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/lbtc.axl.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/lbtc.axl.png"
-        }
-      },
       "_comment": "Lombard Staked Bitcoin (Ethereum via Axelar) $LBTC.eth.axl"
     },
     {
@@ -5619,12 +5252,6 @@
           "withdraw_url": "https://app.routernitro.com/swap?fromChain=osmosis-1&fromToken=factory%2Fosmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9%2FBTC.rt&toChain=30&toToken=0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
         }
       ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/rbtc.rt.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/rbtc.rt.png"
-        }
-      },
       "_comment": "Rootstock (Router) $RBTC.rt"
     },
     {
@@ -5860,11 +5487,7 @@
         }
       ],
       "override_properties": {
-        "use_asset_name": true,
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ton.int3.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ton.int3.png"
-        }
+        "use_asset_name": true
       },
       "_comment": "Toncoin (Int3) $TON.int3"
     },
@@ -6256,11 +5879,7 @@
       ],
       "override_properties": {
         "symbol": "MOVE.eth.axl",
-        "name": "Movement (Ethereum via Axelar)",
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/move.eth.axl.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/move.eth.axl.png"
-        }
+        "name": "Movement (Ethereum via Axelar)"
       },
       "_comment": "Movement (Ethereum via Axelar) $MOVE.eth.axl"
     },
@@ -6418,12 +6037,6 @@
       "base_denom": "ibc/D742E8566B0B8CC8F569D950051C09CF57988A88F0E45574BFB3079D41DE6462",
       "path": "transfer/channel-0/transfer/08-wasm-1369/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
       "osmosis_verified": false,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.atom.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/wbtc.atom.png"
-        }
-      },
       "_comment": "Wrapped Bitcoin (Ethereum via Eureka) $WBTC.eth.atom"
     },
     {
@@ -6431,12 +6044,6 @@
       "base_denom": "ibc/C0B53D3D23827AE38058BED0BDCD554229278AF530A8D265FCF6DFF7C4B2ADFF",
       "path": "transfer/channel-0/transfer/08-wasm-1369/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
       "osmosis_verified": false,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.atom.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/eth.atom.png"
-        }
-      },
       "_comment": "Ethereum (Eureka) $ETH.atom"
     },
     {
@@ -6444,12 +6051,6 @@
       "base_denom": "ibc/E7E51FFF94A8B55BE84CEB0345E5CAF0A5DAEB374C6806CE908098B8996C7782",
       "path": "transfer/channel-0/transfer/08-wasm-1369/0xdac17f958d2ee523a2206206994597c13d831ec7",
       "osmosis_verified": false,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.atom.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/usdt.atom.png"
-        }
-      },
       "_comment": "Tether USD (Ethereum via Eureka) $USDT.eth.atom"
     },
     {
@@ -6519,12 +6120,6 @@
           "withdraw_url": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=solana&fromToken=SOL.int3"
         }
       ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/SOL.int3.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/SOL.int3.png"
-        }
-      },
       "_comment": "Solana (Int3) $SOL.int3"
     },
     {
@@ -6547,12 +6142,6 @@
           "withdraw_url": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=xrpl&fromToken=XRP.int3"
         }
       ],
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/XRP.int3.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/XRP.int3.png"
-        }
-      },
       "_comment": "Ripple (xrpl via Int3) $XRP.xrpl.int3"
     },
     {
@@ -6617,12 +6206,6 @@
       "base_denom": "ibc/09E95F57939E344EE36109AC41780B8A51F1FE0548A5203C5957674FF64C0F26",
       "path": "transfer/channel-0/transfer/08-wasm-1369/0x45804880de22913dafe09f4980848ece6ecbaf78",
       "osmosis_verified": false,
-      "override_properties": {
-        "logo_URIs": {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/paxg.atom.svg",
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/paxg.atom.png"
-        }
-      },
       "_comment": "Paxos Gold (Eureka) $PAXG.atom"
     },
     {

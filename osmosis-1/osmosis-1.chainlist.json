@@ -10946,6 +10946,71 @@
         "eth-address-gen",
         "eth-key-sign"
       ]
+    },
+    {
+      "chain_name": "taketitan",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "TakeTitan",
+      "chain_id": "taketitan-1",
+      "bech32_prefix": "titan",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "titan",
+        "bech32PrefixAccPub": "titanpub",
+        "bech32PrefixValAddr": "titanvaloper",
+        "bech32PrefixValPub": "titanvaloperpub",
+        "bech32PrefixConsAddr": "titanvalcons",
+        "bech32PrefixConsPub": "titanvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "utitan",
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.03,
+            "high_gas_price": 0.035
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "utitan"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.taketitan.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.taketitan.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://blockexplorer.taketitan.com/taketitan/tx/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/taketitan/images/taketitan.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/taketitan/images/taketitan.svg",
+        "theme": {
+          "primary_color_hex": "#41918c"
+        }
+      },
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
     }
   ]
 }

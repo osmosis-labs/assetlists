@@ -30065,6 +30065,59 @@
       ]
     },
     {
+      "description": "USDN token",
+      "denom_units": [
+        {
+          "denom": "ibc/0C39BD03B5C57A1753A9B73164705871A9B549F1A5226CFD7E39BE7BF73CF8CF",
+          "exponent": 0,
+          "aliases": [
+            "microusdn",
+            "uusdn"
+          ]
+        },
+        {
+          "denom": "usdn",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/0C39BD03B5C57A1753A9B73164705871A9B549F1A5226CFD7E39BE7BF73CF8CF",
+      "name": "Noble Dollar",
+      "display": "usdn",
+      "symbol": "USDN",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "noble",
+            "base_denom": "uusdn",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-750",
+            "path": "transfer/channel-750/uusdn"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/USDN.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/USDN.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "noble",
+            "base_denom": "uusdn"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/USDN.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/USDN.svg",
+          "theme": {
+            "primary_color_hex": "#2E8564"
+          }
+        }
+      ]
+    },
+    {
       "description": "PUNDIX token is the native token that functions within the Pundi X ecosystem, including PundiX Chain and XPOS.",
       "denom_units": [
         {

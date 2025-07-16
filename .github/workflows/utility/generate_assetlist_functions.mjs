@@ -637,7 +637,8 @@ export function setSymbol(asset_data) {
         last_suffix_is_network = true;
       }
     } else { //is IBC
-      accumulative_suffix = accumulative_suffix + "." + getNetworkSymbolSuffix(hop.network, asset_data);
+      //accumulative_suffix = accumulative_suffix + "." + getNetworkSymbolSuffix(hop.network, asset_data);
+      accumulative_suffix = accumulative_suffix + "." + getNetworkSymbolSuffix(asset_data.source_asset.chain_name, asset_data);
       last_suffix_is_network = true;
     }
   });
@@ -650,6 +651,12 @@ export function setSymbol(asset_data) {
     accumulative_suffix.endsWith(ending)
   ) {
     accumulative_suffix = accumulative_suffix.slice(0, -ending.length);
+  }
+
+  //check for special long paths
+  let picasso_ending = ".composablepolkadot.pica.pica";
+  if (accumulative_suffix.endsWith(picasso_ending)) {
+    accumulative_suffix = accumulative_suffix.slice(0, -picasso_ending.length) + ".pica";
   }
 
   symbol = symbol + accumulative_suffix;
@@ -772,7 +779,7 @@ export function setName(asset_data) {
       this_suffix_is_network = true;
       accumulative_suffix = appendNameSuffix(
         accumulative_suffix,
-        getNetworkName(hop.network, asset_data),
+        getNetworkName(asset_data.identity_asset.chain_name, asset_data),
         this_suffix_is_network,
         last_suffix_is_network
       );
@@ -788,6 +795,12 @@ export function setName(asset_data) {
     accumulative_suffix.endsWith(ending)
   ) {
     accumulative_suffix = accumulative_suffix.slice(0, -ending.length);
+  }
+
+  //check for special long paths
+  let picasso_ending = " (composablepolkadot via Picasso) (Picasso)";
+  if (accumulative_suffix.endsWith(picasso_ending)) {
+    accumulative_suffix = accumulative_suffix.slice(0, -picasso_ending.length) + " (Picasso)";
   }
 
   name = name + accumulative_suffix;

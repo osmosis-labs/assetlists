@@ -1015,6 +1015,8 @@ export function getImages(asset_data) {
   //Generated chain reg images array is:
   //canonicalAsset's image (e.g., USDT) + localAsset's Images(e.g., allUSDT),
   //with any override image placed at the beginning
+
+  //This adds image_sync, but only for the first image
   let firstCanonicalImage = true;
   canonicalImages?.forEach((canonicalImage) => {
     addUniqueArrayItem(canonicalImage, images);
@@ -1024,7 +1026,7 @@ export function getImages(asset_data) {
       asset_data.canonical_asset.chain_name !== asset_data.chainName
     ) {
       images[0].image_sync = { ...asset_data.canonical_asset };
-      for (const key in images[0]) {
+      for (const key in images[0]) { //all this does is re-order the properties to have image_sync first
         if (key !== "image_sync") {
           const value = images[0][key];
           delete images[0][key];
@@ -1067,6 +1069,38 @@ export function getImages(asset_data) {
   });
   newImagesArray.unshift(primaryImage);
 
+  let darkModeImagesArray = [];
+  canonicalImages?.forEach((image) => {
+    if (
+      image.theme?.dark_mode === true
+    ) {
+      darkModeImagesArray.push({ ...image });
+    }
+  });
+
+  if (darkModeImagesArray.length) {
+    primaryImage = { ...darkModeImagesArray[0] };
+    for (const image of darkModeImagesArray) {
+      if (
+        image.theme.circle === true
+      ) {
+        primaryImage = { ...image };
+        break;
+      }
+    }
+  } else {
+    if (canonicalImages) {
+      for (const image of canonicalImages) {
+        if (
+          image.theme?.circle === true
+        ) {
+          primaryImage = { ...image };
+          break;
+        }
+      }
+    }
+  }
+
   return {
     primaryImage: primaryImage,
     newImagesArray: newImagesArray
@@ -1075,88 +1109,6 @@ export function getImages(asset_data) {
 }
 
 export function setImages(asset_data) {
-
-  /*let localImages = getAssetProperty(asset_data.local_asset, "images");
-  let canonicalImages = getAssetProperty(asset_data.canonical_asset, "images");
-  let primaryImage =
-    asset_data.zone_asset?.override_properties?.logo_URIs ??
-    canonicalImages?.[0] ??
-    localImages?.[0] ??
-    chain_reg.getAssetPropertyFromOriginWithTraceCustom(
-      asset_data.canonical_asset.chain_name,
-      asset_data.canonical_asset.base_denom,
-      "images",
-      chain_reg.traceTypesAll
-    )?.[0] ??
-    chain_reg.getAssetPropertyFromOriginWithTraceCustom(
-      asset_data.canonical_asset.chain_name,
-      asset_data.canonical_asset.base_denom,
-      "logo_URIs",
-      chain_reg.traceTypesAll
-    );
-  let images = [];
-
-
-
-  //Generated chain reg images array is:
-  //canonicalAsset's image (e.g., USDT) + localAsset's Images(e.g., allUSDT),
-  //with any override image placed at the beginning
-  let firstCanonicalImage = true;
-  canonicalImages?.forEach((canonicalImage) => {
-    addUniqueArrayItem(canonicalImage, images);
-    if (
-      firstCanonicalImage
-      &&
-      asset_data.canonical_asset.chain_name !== asset_data.chainName
-    ) {
-      images[0].image_sync = { ...asset_data.canonical_asset };
-      for (const key in images[0]) {
-        if (key !== "image_sync") {
-          const value = images[0][key];
-          delete images[0][key];
-          images[0][key] = value;
-        }
-      }
-    }
-    firstCanonicalImage = false;
-  });
-
-  
-  localImages?.forEach((localImage) => {
-    let containsImage = false;
-    images?.forEach((image) => {
-      if (
-        (image.png && image.png === localImage.png)
-        ||
-        (image.svg && image.svg === localImage.svg)
-      ) {
-        containsImage = true;
-      }
-    });
-    
-    if (!containsImage) {
-      addUniqueArrayItem(localImage, images);
-    }
-  });
-
-  if (!primaryImage) {
-    //console.log(asset_data);
-    //console.log(canonicalImages);
-  }
-
-  let newImagesArray = [];
-  images.forEach((image) => {
-    if (
-      (image.png && image.png === primaryImage.png)
-      ||
-      (image.svg && image.svg === primaryImage.svg)
-    ) {
-      primaryImage = { ...image };
-    } else {
-      newImagesArray.push(image);
-    }
-  });
-  newImagesArray.unshift(primaryImage);*/
 
   const imagesObj = getImages(asset_data);
   let primaryImage = imagesObj.primaryImage;

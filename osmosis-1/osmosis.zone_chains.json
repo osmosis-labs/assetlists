@@ -1600,6 +1600,38 @@
         "ibc-go",
         "ibc-transfer"
       ]
+    },
+    {
+      "chain_name": "bitbadges",
+      "rpc": "https://rpc.bitbadges.io",
+      "rest": "https://lcd.bitbadges.io",
+      "explorer_tx_url": "https://explorer.bitbadges.io/BitBadges%20Mainnet/tx/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "xrplevm",
+      "rpc": "https://cosmos-rpc.xrplevm.org",
+      "rest": "https://cosmos-api.xrplevm.org",
+      "explorer_tx_url": "https://xrpl.exploreme.pro/transactions/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "taketitan",
+      "rpc": "https://rpc.taketitan.com",
+      "rest": "https://lcd.taketitan.com",
+      "explorer_tx_url": "https://blockexplorer.taketitan.com/taketitan/tx/${txHash}",
+      "keplr_features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
     }
   ]
 }

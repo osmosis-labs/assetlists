@@ -637,7 +637,8 @@ export function setSymbol(asset_data) {
         last_suffix_is_network = true;
       }
     } else { //is IBC
-      accumulative_suffix = accumulative_suffix + "." + getNetworkSymbolSuffix(hop.network, asset_data);
+      //accumulative_suffix = accumulative_suffix + "." + getNetworkSymbolSuffix(hop.network, asset_data);
+      accumulative_suffix = accumulative_suffix + "." + getNetworkSymbolSuffix(asset_data.source_asset.chain_name, asset_data);
       last_suffix_is_network = true;
     }
   });
@@ -650,6 +651,12 @@ export function setSymbol(asset_data) {
     accumulative_suffix.endsWith(ending)
   ) {
     accumulative_suffix = accumulative_suffix.slice(0, -ending.length);
+  }
+
+  //check for special long paths
+  let picasso_ending = ".composablepolkadot.pica.pica";
+  if (accumulative_suffix.endsWith(picasso_ending)) {
+    accumulative_suffix = accumulative_suffix.slice(0, -picasso_ending.length) + ".pica";
   }
 
   symbol = symbol + accumulative_suffix;
@@ -772,7 +779,7 @@ export function setName(asset_data) {
       this_suffix_is_network = true;
       accumulative_suffix = appendNameSuffix(
         accumulative_suffix,
-        getNetworkName(hop.network, asset_data),
+        getNetworkName(asset_data.identity_asset.chain_name, asset_data),
         this_suffix_is_network,
         last_suffix_is_network
       );
@@ -788,6 +795,12 @@ export function setName(asset_data) {
     accumulative_suffix.endsWith(ending)
   ) {
     accumulative_suffix = accumulative_suffix.slice(0, -ending.length);
+  }
+
+  //check for special long paths
+  let picasso_ending = " (composablepolkadot via Picasso) (Picasso)";
+  if (accumulative_suffix.endsWith(picasso_ending)) {
+    accumulative_suffix = accumulative_suffix.slice(0, -picasso_ending.length) + " (Picasso)";
   }
 
   name = name + accumulative_suffix;
@@ -976,7 +989,7 @@ export function setDecimals(asset_data) {
 }
 
 
-export function setImages(asset_data) {
+export function getImages(asset_data) {
 
   let localImages = getAssetProperty(asset_data.local_asset, "images");
   let canonicalImages = getAssetProperty(asset_data.canonical_asset, "images");
@@ -999,10 +1012,11 @@ export function setImages(asset_data) {
   let images = [];
 
 
-
   //Generated chain reg images array is:
   //canonicalAsset's image (e.g., USDT) + localAsset's Images(e.g., allUSDT),
   //with any override image placed at the beginning
+
+  //This adds image_sync, but only for the first image
   let firstCanonicalImage = true;
   canonicalImages?.forEach((canonicalImage) => {
     addUniqueArrayItem(canonicalImage, images);
@@ -1012,7 +1026,7 @@ export function setImages(asset_data) {
       asset_data.canonical_asset.chain_name !== asset_data.chainName
     ) {
       images[0].image_sync = { ...asset_data.canonical_asset };
-      for (const key in images[0]) {
+      for (const key in images[0]) { //all this does is re-order the properties to have image_sync first
         if (key !== "image_sync") {
           const value = images[0][key];
           delete images[0][key];
@@ -1023,7 +1037,7 @@ export function setImages(asset_data) {
     firstCanonicalImage = false;
   });
 
-  
+
   localImages?.forEach((localImage) => {
     let containsImage = false;
     images?.forEach((image) => {
@@ -1035,16 +1049,11 @@ export function setImages(asset_data) {
         containsImage = true;
       }
     });
-    
+
     if (!containsImage) {
       addUniqueArrayItem(localImage, images);
     }
   });
-
-  if (!primaryImage) {
-    //console.log(asset_data);
-    //console.log(canonicalImages);
-  }
 
   let newImagesArray = [];
   images.forEach((image) => {
@@ -1059,6 +1068,51 @@ export function setImages(asset_data) {
     }
   });
   newImagesArray.unshift(primaryImage);
+
+  let darkModeImagesArray = [];
+  canonicalImages?.forEach((image) => {
+    if (
+      image.theme?.dark_mode === true
+    ) {
+      darkModeImagesArray.push({ ...image });
+    }
+  });
+
+  if (darkModeImagesArray.length) {
+    primaryImage = { ...darkModeImagesArray[0] };
+    for (const image of darkModeImagesArray) {
+      if (
+        image.theme.circle === true
+      ) {
+        primaryImage = { ...image };
+        break;
+      }
+    }
+  } else {
+    if (canonicalImages) {
+      for (const image of canonicalImages) {
+        if (
+          image.theme?.circle === true
+        ) {
+          primaryImage = { ...image };
+          break;
+        }
+      }
+    }
+  }
+
+  return {
+    primaryImage: primaryImage,
+    newImagesArray: newImagesArray
+  };
+
+}
+
+export function setImages(asset_data) {
+
+  const imagesObj = getImages(asset_data);
+  let primaryImage = imagesObj.primaryImage;
+  let newImagesArray = imagesObj.newImagesArray;
 
   asset_data.frontend.logoURIs = {...primaryImage};
   delete asset_data.frontend.logoURIs.theme;
@@ -1327,13 +1381,17 @@ function getChainType(asset_data, chainName) {
 function getChainId(asset_data, chainName) {
 
   let chainId = chain_reg.getFileProperty(chainName, "chain", "chain_id");
-  if (getChainType(asset_data, chainName) === "evm") {
+  let chainType = getChainType(asset_data, chainName);
+  if (chainType === "evm") {
     chainId = Number(chainId);
   }
   if (!chainId) {
     chainId = asset_data.zone_config.evm_chains?.find((evm_chain) => {
       return evm_chain.chain_name === chainName;
     })?.chain_id;
+  }
+  if (chainType != "evm" && chainType != "cosmos") {
+    return undefined;
   }
   
   return chainId;
@@ -1360,11 +1418,13 @@ function getCounterpartyAsset(asset_data, asset) {
   
   counterpartyAsset.symbol = getAssetProperty(asset, "symbol");
   counterpartyAsset.decimals = getAssetProperty(asset, "decimals");
-  
+
+  //HERE
   let image = getAssetProperty(
     asset,
     "images"
   )?.[0];
+  image = image ? image : getImages(asset_data)?.newImagesArray?.[0];
   counterpartyAsset.logoURIs = {
     png: image?.png,
     svg: image?.svg

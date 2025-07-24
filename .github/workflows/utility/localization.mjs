@@ -13,7 +13,6 @@ import * as fs from 'fs';
 //-- Globals --
 
 const file_extension = ".json";
-const asset_detail_file_name_middle = "_asset_detail_";
 const default_localization_code = "en";
 const localization_codes = getLocalizationCodes();
 const localized_properties = [
@@ -32,7 +31,7 @@ export const inlangInputOutput = "language_files";
 
 export function setAssetDetailLocalizationInput(chainName, assets) {
 
-  let assetSymbolPlaceholder;
+  //let assetSymbolPlaceholder;
   let currentDescription;
 
   let inlangInput;
@@ -61,14 +60,12 @@ export function setAssetDetailLocalizationInput(chainName, assets) {
 
   assets.forEach((asset) => {
     if (!asset.description || !asset.symbol) { return; }
-    assetSymbolPlaceholder = asset.symbol.replace(/\./g, "(dot)");
 
-    currentDescription = getAssetDetail(chainName, asset.symbol, default_localization_code)?.description;
-
+    currentDescription = getAssetDetail(chainName, asset.base, default_localization_code)?.description;
     
     if (currentDescription === asset.description) { return; }
 
-    inlangInput[chainName][assetSymbolPlaceholder] = {
+    inlangInput[chainName][asset.base] = {
         description: asset.description
     };
 
@@ -155,10 +152,8 @@ export function getLocalizationOutput() {
     for (const assetName in chain) {
       const asset = chain[assetName];
 
-      //Write to Localized Files
-      const asset_symbol = assetName.replace(/\(dot\)/g, ".");
       //Asset Detail
-      const updated_asset_detail = assetDetailAssetlist.find(item => item.symbol === asset_symbol);
+      const updated_asset_detail = assetDetailAssetlist.find(item => item.base === asset.base);
       
       localization_codes.forEach((localization_code) => {
 
@@ -173,7 +168,7 @@ export function getLocalizationOutput() {
           localized_asset_detail[propertyName] = property;
         }
 
-        const existing_asset_detail = getAssetDetail(chainName, asset_symbol, localization_code);
+        const existing_asset_detail = getAssetDetail(chainName, asset.base, localization_code);
         
         for (const propertyName in existing_asset_detail) {  // this may contain existing localized data
           const property = existing_asset_detail[propertyName];
@@ -187,7 +182,7 @@ export function getLocalizationOutput() {
         }
 
         const fileLocation =
-          asset_symbol.toLowerCase() + asset_detail_file_name_middle + localization_code + file_extension;
+          asset.base.replace(/\//g, "%2F") + "_" + localization_code + file_extension;
 
         zone.writeToFile(
           chainName,
@@ -226,7 +221,7 @@ export function setLocalizedDescriptions(inlangOutput, localization_code) {
   let assetDetailAssetlist;
 
   let asset_detail;
-  let asset_symbol;
+  //let asset_base;
 
   if (!inlangOutput) { return; }
 
@@ -240,19 +235,18 @@ export function setLocalizedDescriptions(inlangOutput, localization_code) {
       zone.assetlistFileName
     )?.assets || [];
 
-    Object.keys(inlangOutput[chainName]).forEach((assetSymbolPlaceholder) => {
+    Object.keys(inlangOutput[chainName]).forEach((asset) => {
 
       //prepare the object for Asset Detail
-      asset_symbol = assetSymbolPlaceholder.replace(/\(dot\)/g, ".");
-      asset_detail = assetDetailAssetlist.find(item => item.symbol === asset_symbol);
-      asset_detail.description = inlangOutput[chainName][assetSymbolPlaceholder].description
+      asset_detail = assetDetailAssetlist.find(item => item.base === asset.base);
+      asset_detail.description = inlangOutput[chainName][asset.base].description
       asset_detail = { localization: localization_code, ...asset_detail }
 
       //write Asset Detail
       zone.writeToFile(
         chainName,
         zone.zoneAssetDetail,
-        asset_detail.symbol.toLowerCase() + asset_detail_file_name_middle + localization_code + file_extension,
+        asset.base.replace(/\//g, "%2F") + "_" + localization_code + file_extension,
         asset_detail
       );
     });
@@ -262,7 +256,7 @@ export function setLocalizedDescriptions(inlangOutput, localization_code) {
 }
 
 
-export function getAssetDetail(chainName, asset_symbol, localization_code) {
+export function getAssetDetail(chainName, asset_base, localization_code) {
 
   let asset_detail = {};
   try {
@@ -271,7 +265,7 @@ export function getAssetDetail(chainName, asset_symbol, localization_code) {
     let fileLocation = zone.getFileLocation(
       chainName,
       zone.zoneAssetDetail,
-      asset_symbol.toLowerCase() + asset_detail_file_name_middle + localization_code + file_extension
+      asset_base.replace(/\//g, "%2F") + "_" + localization_code + file_extension
     );
     const fileContent = fs.readFileSync(fileLocation);
 
@@ -304,9 +298,10 @@ export function setAssetDetailAll() {
     assetDetailAssetlist.forEach((asset) => {
     
       //compare against the english output file
-      asset_detail = getAssetDetail(chainName, asset.symbol, default_localization_code);
+      asset_detail = getAssetDetail(chainName, asset.base, default_localization_code);
       if (
         asset_detail &&
+        asset.base === asset_detail?.base &&
         asset.name === asset_detail?.name &&
         asset.symbol === asset_detail?.symbol &&
       //asset.description === asset_detail?.description &&
@@ -319,7 +314,7 @@ export function setAssetDetailAll() {
 
       localization_codes.forEach((localization_code) => {
 
-        const existing_asset_detail = getAssetDetail(chainName, asset.symbol, localization_code);
+        const existing_asset_detail = getAssetDetail(chainName, asset.base, localization_code);
         asset_detail = { localization: localization_code, ...asset }
         localized_properties.forEach((property) => {
           if (!asset[property]) { return; }
@@ -330,7 +325,7 @@ export function setAssetDetailAll() {
         zone.writeToFile(
           chainName,
           zone.zoneAssetDetail,
-          asset.symbol.toLowerCase() + asset_detail_file_name_middle + localization_code + file_extension,
+          asset.base + "_" + localization_code + file_extension,
           asset_detail
         );
       });

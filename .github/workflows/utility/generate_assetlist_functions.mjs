@@ -1592,6 +1592,7 @@ export function setPrice(asset_data, pool_data) {
 export function setBase(asset_data) {
 
   asset_data.chain_reg.base = asset_data.local_asset.base_denom;
+  asset_data.asset_detail.base = asset_data.local_asset.base_denom;
 
 }
 
@@ -1845,6 +1846,7 @@ export function reformatAssetDetailAsset(asset_data) {
 
   //--Setup Asset Detail Asset--
   let reformattedAsset = {
+    base: asset_data.asset_detail.base,
     name: asset_data.asset_detail.name,
     symbol: asset_data.asset_detail.symbol,
     description: asset_data.asset_detail.description,

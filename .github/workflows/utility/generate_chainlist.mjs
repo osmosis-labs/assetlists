@@ -126,6 +126,9 @@ function generateChains(chains, zone_chains) {
     if (chain.logoURIs?.image_sync) {
       delete chain.logoURIs.image_sync;
     }
+    if (chain.logoURIs?.theme) {
+      delete chain.logoURIs.theme;
+    }
     
     
     // -- Get Keplr Suggest Chain Features --

@@ -10616,6 +10616,68 @@
         "ibc-transfer",
         "ibc-go"
       ]
+    },
+    {
+      "chain_name": "hippoprotocol",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Hippo Protocol",
+      "chain_id": "hippo-protocol-1",
+      "bech32_prefix": "hippo",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "hippo",
+        "bech32PrefixAccPub": "hippopub",
+        "bech32PrefixValAddr": "hippovaloper",
+        "bech32PrefixValPub": "hippovaloperpub",
+        "bech32PrefixConsAddr": "hippovalcons",
+        "bech32PrefixConsPub": "hippovalconspub"
+      },
+      "slip44": 0,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ahp",
+            "low_gas_price": 4000000000000,
+            "average_gas_price": 5000000000000,
+            "high_gas_price": 10000000000000
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ahp"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "description": "One Protocol. Every Patient. Infinite Possibility.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.hippo-protocol.com/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.hippo-protocol.com/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://river.hippoprotocol.ai/hippo-protocol/tx/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hippoprotocol/images/logo.svg"
+      },
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
     }
   ]
 }

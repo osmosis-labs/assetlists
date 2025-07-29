@@ -187,11 +187,12 @@ export function getAssetDetail(chainName, asset_base) {
     // Read from the file
     asset_detail = zone.readFromFile(
       chainName,
-      zone.zoneAssetDetial,
+      zone.zoneAssetDetail,
       getAssetDetailFileName(asset_base)
     );
 
-  } catch {}
+  } catch { }
+
   return asset_detail;
 
 }
@@ -231,9 +232,9 @@ export function setAssetDetailAll() {
       let change = false;
 
       for (const propertyName in asset) {
-        if (localized_properties.include(propertyName)) continue;
+        if (localized_properties.includes(propertyName)) continue;
         if (asset_detail[propertyName] !== asset[propertyName]) {
-          asset_detail[propertyName] === asset[propertyName];
+          asset_detail[propertyName] = asset[propertyName];
           change = true;
         }
       }

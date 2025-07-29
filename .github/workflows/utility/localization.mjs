@@ -182,7 +182,7 @@ export function getLocalizationOutput() {
         }
 
         const fileLocation =
-          asset.base.replace(/\//g, "%2F") + "_" + localization_code + file_extension;
+          assetName.replace(/\//g, "%2F") + "_" + localization_code + file_extension;
 
         zone.writeToFile(
           chainName,

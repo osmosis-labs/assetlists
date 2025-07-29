@@ -177,45 +177,6 @@ export function getLocalizationOutput() {
 
 }
 
-//will soon be able to delete this
-export function setLocalizedDescriptions(inlangOutput, localization_code) {
-
-  let assetDetailAssetlist;
-
-  let asset_detail;
-
-  if (!inlangOutput) { return; }
-
-  zone.chainNames.forEach((chainName) => {
-    if (!inlangOutput[chainName]) { return; }
-
-    //read Asset Detail
-    assetDetailAssetlist = zone.readFromFile(
-      chainName,
-      zone.zoneAssetDetail,
-      zone.assetlistFileName
-    )?.assets || [];
-
-    Object.keys(inlangOutput[chainName]).forEach((asset) => {
-
-      //prepare the object for Asset Detail
-      asset_detail = assetDetailAssetlist.find(item => item.base === asset.base);
-      asset_detail.description = inlangOutput[chainName][asset.base].description
-      asset_detail = { localization: localization_code, ...asset_detail }
-
-      //write Asset Detail
-      zone.writeToFile(
-        chainName,
-        zone.zoneAssetDetail,
-        asset.base.replace(/\//g, "%2F") + "_" + localization_code + file_extension,
-        asset_detail
-      );
-    });
-    
-  });
-
-}
-
 
 export function getAssetDetail(chainName, asset_base) {
 

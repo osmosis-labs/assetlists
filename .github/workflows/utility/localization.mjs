@@ -31,9 +31,6 @@ export const inlangInputOutput = "language_files";
 
 export function setAssetDetailLocalizationInput(chainName, assets) {
 
-  //let assetSymbolPlaceholder;
-  let currentDescription;
-
   let inlangInput;
   const filePath = path.join(zone.assetlistsRoot, inlangInputOutput, default_localization_code + file_extension);
   try {
@@ -59,17 +56,21 @@ export function setAssetDetailLocalizationInput(chainName, assets) {
   inlangInput[chainName] = inlangInput[chainName] || {};
 
   assets.forEach((asset) => {
-    if (!asset.description || !asset.symbol) { return; }
 
-    currentDescription = getAssetDetail(chainName, asset.base, default_localization_code)?.description;
-    
-    if (currentDescription === asset.description) { return; }
+    for (const propertyName in localized_properties) {
 
-    inlangInput[chainName][asset.base] = {
-        description: asset.description
-    };
+      if (!asset[propertyName]) { return; }
+      const currentValue = getAssetDetail(chainName, asset.base)?.[propertyName]?.[default_localization_code];
+      if (currentValue === asset[propertyName]) { return; }
+
+      inlangInput[chainName][asset.base] = {
+        [propertyName]: asset[propertyName]
+      };
+
+    }
 
   });
+
   zone.writeToFile(
     zone.noDir,
     inlangInputOutput,
@@ -141,63 +142,24 @@ export function getLocalizationOutput() {
   for (const chainName in savedTranslations) {
     const chain = savedTranslations[chainName];
 
-    //Read Asset Detail
-    const assetDetailAssetlist = zone.readFromFile(
-      chainName,
-      zone.zoneAssetDetail,
-      zone.assetlistFileName
-    )?.assets || [];
+    for (const asset_base in chain) {
+      const localized_asset_detail_properties = chain[asset_base];
 
-    //chain.forEach((asset) => {
-    for (const assetName in chain) {
-      const asset = chain[assetName];
+      let asset_detail = getAssetDetail(chainName, asset_base) || {};
 
-      //Asset Detail
-      const updated_asset_detail = assetDetailAssetlist.find(item => item.base === asset.base);
-      
-      localization_codes.forEach((localization_code) => {
+      for (const propertyName in localized_asset_detail_properties) {   // this only contains new localized data
+        asset_detail[propertyName] = localized_asset_detail_properties[propertyName];
+      }
 
-        //Asset Detail
-        let localized_asset_detail = {
-          localization: localization_code
-        };
+      zone.writeToFile(
+        chainName,
+        zone.zoneAssetDetail,
+        getAssetDetailFileName(asset_base),
+        asset_detail
+      );
 
-        for (const propertyName in updated_asset_detail) {  // this contains the most up to date unlocalized data
-          const property = updated_asset_detail[propertyName];
-          if (localized_properties.includes(propertyName)) { continue; }   // but we skip any translated data
-          localized_asset_detail[propertyName] = property;
-        }
-
-        const existing_asset_detail = getAssetDetail(chainName, asset.base, localization_code);
-        
-        for (const propertyName in existing_asset_detail) {  // this may contain existing localized data
-          const property = existing_asset_detail[propertyName];
-          if (!localized_properties.includes(propertyName) || !updated_asset_detail[propertyName]) { continue; }
-          localized_asset_detail[propertyName] = property;
-        }
-
-        for (const propertyName in asset) {   // this contains new translated data
-          const property = asset[propertyName][localization_code];
-          localized_asset_detail[propertyName] = property;
-        }
-
-        const fileLocation =
-          asset.base.replace(/\//g, "%2F") + "_" + localization_code + file_extension;
-
-        zone.writeToFile(
-          chainName,
-          zone.zoneAssetDetail,
-          fileLocation,
-          localized_asset_detail
-        );
-      });
     }
   }
-
-
-  //extract relevant data from localizations
-  //setLocalizedDescriptions(inlangOutput[localization_code], localization_code);
-  //for more translated data, add function calls here
 
   localization_codes.forEach((localization_code) => {
     //once done, delete the input and output
@@ -221,7 +183,6 @@ export function setLocalizedDescriptions(inlangOutput, localization_code) {
   let assetDetailAssetlist;
 
   let asset_detail;
-  //let asset_base;
 
   if (!inlangOutput) { return; }
 
@@ -256,34 +217,41 @@ export function setLocalizedDescriptions(inlangOutput, localization_code) {
 }
 
 
-export function getAssetDetail(chainName, asset_base, localization_code) {
+export function getAssetDetail(chainName, asset_base) {
 
   let asset_detail = {};
+
   try {
 
     // Read from the file
-    let fileLocation = zone.getFileLocation(
+    asset_detail = zone.readFromFile(
       chainName,
-      zone.zoneAssetDetail,
-      asset_base.replace(/\//g, "%2F") + "_" + localization_code + file_extension
+      zone.zoneAssetDetial,
+      getAssetDetailFileName(asset_base)
     );
-    const fileContent = fs.readFileSync(fileLocation);
 
-    // Parse the JSON content
-    asset_detail = JSON.parse(fileContent);
-
-  } catch {
-    asset_detail = {};
-  }
+  } catch {}
   return asset_detail;
 
 }
 
+export function setAssetDetail(chainName, asset_base, asset_detail) {
+
+  zone.writeToFile(
+    chainName,
+    zone.zoneAssetDetail,
+    getAssetDetailFileName(asset_base),
+    asset_detail
+  );
+
+}
+
+export function getAssetDetailFileName(asset_base) {
+  return asset_base.replace(/\//g, "%2F") + file_extension;
+}
+
 
 export function setAssetDetailAll() {
-  
-  const localization_codes = getLocalizationCodes();
-  let asset_detail, localized_asset_detail;
 
   zone.chainNames.forEach((chainName) => {
 
@@ -297,38 +265,28 @@ export function setAssetDetailAll() {
     //iterate asset_detail/assetlist
     assetDetailAssetlist.forEach((asset) => {
     
-      //compare against the english output file
-      asset_detail = getAssetDetail(chainName, asset.base, default_localization_code);
-      if (
-        asset_detail &&
-        asset.base === asset_detail?.base &&
-        asset.name === asset_detail?.name &&
-        asset.symbol === asset_detail?.symbol &&
-      //asset.description === asset_detail?.description &&
-        asset.coingeckoID === asset_detail?.coingeckoID &&
-        asset.websiteURL === asset_detail?.websiteURL &&
-        asset.twitterURL === asset_detail?.twitterURL
-      ) {
-        return;
+      let asset_detail = getAssetDetail(chainName, asset.base) || {};
+
+      let change = false;
+
+      for (const propertyName in asset) {
+        if (localized_properties.include(propertyName)) continue;
+        if (asset_detail[propertyName] !== asset[propertyName]) {
+          asset_detail[propertyName] === asset[propertyName];
+          change = true;
+        }
       }
 
-      localization_codes.forEach((localization_code) => {
-
-        const existing_asset_detail = getAssetDetail(chainName, asset.base, localization_code);
-        asset_detail = { localization: localization_code, ...asset }
-        localized_properties.forEach((property) => {
-          if (!asset[property]) { return; }
-          asset_detail[property] = existing_asset_detail[property];
-        });
-
-        //write Asset Detail
+      //write Asset Detail
+      if (change) {
         zone.writeToFile(
           chainName,
           zone.zoneAssetDetail,
-          asset.base + "_" + localization_code + file_extension,
+          getAssetDetailFileName(asset.base),
           asset_detail
         );
-      });
+      }
+
     });
   });
 };

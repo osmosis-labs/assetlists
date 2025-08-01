@@ -6184,6 +6184,36 @@
       "path": "transfer/channel-104931/ahp",
       "osmosis_verified": false,
       "_comment": "Hippo Protocol $HP"
+    },
+    {
+      "chain_name": "int3face",
+      "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/solana-pengu",
+      "path": "transfer/channel-82819/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/solana-pengu",
+      "osmosis_verified": false,
+      "transfer_methods": [
+        {
+          "name": "Int3face Bridge",
+          "type": "external_interface",
+          "deposit_url": "https://app.int3face.zone/bridge?fromChain=solana&toChain=osmosis&fromToken=PENGU",
+          "withdraw_url": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=solana&fromToken=iPENGU"
+        }
+      ],
+      "_comment": "Pengu (Int3) $PENGU.int3"
+    },
+    {
+      "chain_name": "int3face",
+      "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/solana-trump",
+      "path": "transfer/channel-82819/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/solana-trump",
+      "osmosis_verified": false,
+      "transfer_methods": [
+        {
+          "name": "Int3face Bridge",
+          "type": "external_interface",
+          "deposit_url": "https://app.int3face.zone/bridge?fromChain=solana&toChain=osmosis&fromToken=TRUMP",
+          "withdraw_url": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=solana&fromToken=iTRUMP"
+        }
+      ],
+      "_comment": "Trump (Int3) $TRUMP.int3"
     }
   ]
 }

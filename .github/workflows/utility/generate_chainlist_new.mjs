@@ -215,6 +215,12 @@ async function generateChains(chains, zone_chains, local_chain_name) {
           high: fee.high_gas_price,
         };
       }
+      if (fee.gas_costs) {
+        currency.gasCosts = {
+          cosmosSend: fee.gas_costs?.cosmos_send,
+          ibcTransfer: fee.gas_costs?.ibc_transfer,
+        };
+      }
       fee_currencies.push(currency);
       currency = {};
     });

@@ -10678,6 +10678,130 @@
         "ibc-transfer",
         "ibc-go"
       ]
+    },
+    {
+      "chain_name": "qfs",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Quantum Financial Systems",
+      "chain_id": "qfs-1",
+      "bech32_prefix": "qfs",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "qfs",
+        "bech32PrefixAccPub": "qfspub",
+        "bech32PrefixValAddr": "qfsvaloper",
+        "bech32PrefixValPub": "qfsvaloperpub",
+        "bech32PrefixConsAddr": "qfsvalcons",
+        "bech32PrefixConsPub": "qfsvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uqfs",
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.03,
+            "high_gas_price": 0.035
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uqfs"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.qfsone.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.qfsone.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://blockexplorer.qfsone.com/qfs/tx/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qfs/images/qfs.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qfs/images/qfs.svg"
+      },
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "mtgbp",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "mtgbp",
+      "chain_id": "mtgbp-1",
+      "bech32_prefix": "mtgbp",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "mtgbp",
+        "bech32PrefixAccPub": "mtgbppub",
+        "bech32PrefixValAddr": "mtgbpvaloper",
+        "bech32PrefixValPub": "mtgbpvaloperpub",
+        "bech32PrefixConsAddr": "mtgbpvalcons",
+        "bech32PrefixConsPub": "mtgbpvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "umtgbp",
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.03,
+            "high_gas_price": 0.035
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "umtgbp"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.mtgbp.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.mtgbp.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://blockexplorer.mtgbp.com/mtgbp/tx/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mtgbp/images/mtgbp.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mtgbp/images/mtgbp.svg"
+      },
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
     }
   ]
 }

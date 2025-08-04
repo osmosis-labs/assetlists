@@ -5430,6 +5430,20 @@
           "coinDecimals": 6,
           "coinGeckoId": "pudgy-penguins",
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/pengu.int3.png"
+        },
+        {
+          "coinDenom": "QFS",
+          "chainSuggestionDenom": "ibc/83A99F99AF326090B74CD5D17EE61776C7791B537EE6808F4951A184EDCCA0D9",
+          "coinMinimalDenom": "ibc/83A99F99AF326090B74CD5D17EE61776C7791B537EE6808F4951A184EDCCA0D9",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qfs/images/qfs.png"
+        },
+        {
+          "coinDenom": "MTGBP",
+          "chainSuggestionDenom": "ibc/698687E700D8B255FAB6B8145CE25B12591C99296965DB5C2C5DD5FE0AB685BF",
+          "coinMinimalDenom": "ibc/698687E700D8B255FAB6B8145CE25B12591C99296965DB5C2C5DD5FE0AB685BF",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mtgbp/images/mtgbp.png"
         }
       ],
       "description": "Osmosis (OSMO) is the premier DEX and cross-chain DeFi hub within the Cosmos ecosystem, a network of over 50 sovereign, interoperable blockchains seamlessly connected through the Inter-Blockchain Communication Protocol (IBC). Pioneering in its approach, Osmosis offers a dynamic trading and liquidity provision experience, integrating non-IBC assets from other ecosystems, including Ethereum, Solana, Avalanche, and Polkadot. Initially adopting Balancer-style pools, Osmosis now also features a concentrated liquidity model that is orders of magnitude more capital efficient, meaning that significantly less liquidity is required to handle the same amount of trading volume with minimal slippage.\n\nAs a true appchain, Osmosis has greater control over the full blockchain stack than traditional smart contract DEXs, which must follow the code of the parent chain that it is built on. This fine-grained control has enabled, for example, the development of Superfluid Staking, an extension of Proof of Stake that allows assets at the application layer to be staked to secure the chain. The customizability of appchains also allows implementing features like the Protocol Revenue module, which enables Osmosis to conduct on-chain arbitrage on behalf of OSMO stakers, balancing prices across pools while generating real yield revenue from this volume. Additionally, as a sovereign appchain, Osmosis governance can vote on upgrades to the protocol. One example of this was the introduction of a Taker Fee, which switched on the collection of exchange fees to generate diverse yield from Osmosis volume and distribute it to OSMO stakers.\n\nOsmosis is bringing the full centralized exchange experience to the decentralized world by building a cross-chain native DEX and trading suite that connects all chains over IBC, including Ethereum and Bitcoin. To reach this goal, Osmosis hosts an ever-expanding suite of DeFi applications aimed at providing a one-stop experience that includes lending, credit, margin, DeFi strategy vaults, power perps, fiat on-ramps, NFTs, stablecoins, and more — all of the functionalities that centralized exchange offer and more, in the trust-minimized environment of decentralized finance.",
@@ -13494,6 +13508,13 @@
           "sourceDenom": "cw20:terra10aa3zdkrc7jwuf8ekl3zq7e7m42vmzqehcmu74e4egc7xkm5kr2s0muyst",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/solid.png"
+        },
+        {
+          "coinDenom": "CAPA",
+          "chainSuggestionDenom": "cw20:terra1t4p3u8khpd7f8qzurwyafxt648dya6mp6vur3vaapswt6m24gkuqrfdhar",
+          "sourceDenom": "cw20:terra1t4p3u8khpd7f8qzurwyafxt648dya6mp6vur3vaapswt6m24gkuqrfdhar",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/Capapult.png"
         }
       ],
       "description": "Fueled by a passionate community and deep developer talent pool, the Terra blockchain is built to enable the next generation of Web3 products and services.",
@@ -27907,6 +27928,148 @@
       "explorers": [
         {
           "txPage": "https://river.hippoprotocol.ai/hippo-protocol/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "qfs",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Quantum Financial Systems",
+      "chain_id": "qfs-1",
+      "bech32Prefix": "qfs",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "qfs",
+        "bech32PrefixAccPub": "qfspub",
+        "bech32PrefixValAddr": "qfsvaloper",
+        "bech32PrefixValPub": "qfsvaloperpub",
+        "bech32PrefixConsAddr": "qfsvalcons",
+        "bech32PrefixConsPub": "qfsvalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDenom": "QFS",
+        "chainSuggestionDenom": "uqfs",
+        "coinMinimalDenom": "ibc/83A99F99AF326090B74CD5D17EE61776C7791B537EE6808F4951A184EDCCA0D9",
+        "sourceDenom": "uqfs",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qfs/images/qfs.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "QFS",
+          "chainSuggestionDenom": "uqfs",
+          "coinMinimalDenom": "ibc/83A99F99AF326090B74CD5D17EE61776C7791B537EE6808F4951A184EDCCA0D9",
+          "sourceDenom": "uqfs",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qfs/images/qfs.png",
+          "gasPriceStep": {
+            "low": 0.025,
+            "average": 0.03,
+            "high": 0.035
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "QFS",
+          "chainSuggestionDenom": "uqfs",
+          "coinMinimalDenom": "ibc/83A99F99AF326090B74CD5D17EE61776C7791B537EE6808F4951A184EDCCA0D9",
+          "sourceDenom": "uqfs",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qfs/images/qfs.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.qfsone.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.qfsone.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://blockexplorer.qfsone.com/qfs/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "mtgbp",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "mtgbp",
+      "chain_id": "mtgbp-1",
+      "bech32Prefix": "mtgbp",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "mtgbp",
+        "bech32PrefixAccPub": "mtgbppub",
+        "bech32PrefixValAddr": "mtgbpvaloper",
+        "bech32PrefixValPub": "mtgbpvaloperpub",
+        "bech32PrefixConsAddr": "mtgbpvalcons",
+        "bech32PrefixConsPub": "mtgbpvalconspub"
+      },
+      "slip44": 118,
+      "stakeCurrency": {
+        "coinDenom": "MTGBP",
+        "chainSuggestionDenom": "umtgbp",
+        "coinMinimalDenom": "ibc/698687E700D8B255FAB6B8145CE25B12591C99296965DB5C2C5DD5FE0AB685BF",
+        "sourceDenom": "umtgbp",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mtgbp/images/mtgbp.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "MTGBP",
+          "chainSuggestionDenom": "umtgbp",
+          "coinMinimalDenom": "ibc/698687E700D8B255FAB6B8145CE25B12591C99296965DB5C2C5DD5FE0AB685BF",
+          "sourceDenom": "umtgbp",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mtgbp/images/mtgbp.png",
+          "gasPriceStep": {
+            "low": 0.025,
+            "average": 0.03,
+            "high": 0.035
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "MTGBP",
+          "chainSuggestionDenom": "umtgbp",
+          "coinMinimalDenom": "ibc/698687E700D8B255FAB6B8145CE25B12591C99296965DB5C2C5DD5FE0AB685BF",
+          "sourceDenom": "umtgbp",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mtgbp/images/mtgbp.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.mtgbp.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.mtgbp.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://blockexplorer.mtgbp.com/mtgbp/tx/${txHash}"
         }
       ],
       "features": [

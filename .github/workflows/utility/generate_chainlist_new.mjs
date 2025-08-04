@@ -109,6 +109,25 @@ async function generateChains(chains, zone_chains, local_chain_name) {
       "alternative_slip44s"
     );
 
+    // -- Get Chain Logo --
+    chain.logo_URIs = chain_reg.getFileProperty(
+      zone_chain.chain_name,
+      "chain",
+      "logo_URIs"
+    );
+    if (!chain.logo_URIs) {
+      let chain_images = chain_reg.getFileProperty(
+        zone_chain.chain_name,
+        "chain",
+        "images"
+      );
+      if (chain_images) {
+        chain.logo_URIs = chain_images[0];
+        delete chain.logo_URIs.image_sync;
+        delete chain.logo_URIs.theme;
+      }
+    }
+
     // -- Define Curreny Object Skeleton --
     let base_denom;
     let symbol;
@@ -148,6 +167,9 @@ async function generateChains(chains, zone_chains, local_chain_name) {
       "logo_URIs"
     );
     image_URL = logo_URIs?.png ? logo_URIs?.png : logo_URIs?.svg;
+    if (!chain.logo_URIs) {
+      chain.logo_URIs = logo_URIs;
+    }
     currency = {
       coinDenom: symbol,
       chainSuggestionDenom: base_denom,
@@ -196,6 +218,9 @@ async function generateChains(chains, zone_chains, local_chain_name) {
         "logo_URIs"
       );
       image_URL = logo_URIs?.png ? logo_URIs?.png : logo_URIs?.svg;
+      if (!chain.logo_URIs) {
+        chain.logo_URIs = logo_URIs;
+      }
       currency = {
         coinDenom: symbol,
         chainSuggestionDenom: base_denom,
@@ -213,6 +238,12 @@ async function generateChains(chains, zone_chains, local_chain_name) {
           low: fee.low_gas_price,
           average: fee.average_gas_price,
           high: fee.high_gas_price,
+        };
+      }
+      if (fee.gas_costs) {
+        currency.gasCosts = {
+          cosmosSend: fee.gas_costs?.cosmos_send,
+          ibcTransfer: fee.gas_costs?.ibc_transfer,
         };
       }
       fee_currencies.push(currency);

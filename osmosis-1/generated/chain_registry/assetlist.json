@@ -30529,6 +30529,56 @@
       ]
     },
     {
+      "description": "The native token of Symphony",
+      "denom_units": [
+        {
+          "denom": "ibc/41AD5D4AFA42104295D08E564ADC7B40FD9DAB4BCD3002ECFA8BDD1309B65F24",
+          "exponent": 0,
+          "aliases": [
+            "note"
+          ]
+        },
+        {
+          "denom": "mld",
+          "exponent": 6,
+          "aliases": [
+            "melody"
+          ]
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/41AD5D4AFA42104295D08E564ADC7B40FD9DAB4BCD3002ECFA8BDD1309B65F24",
+      "name": "Symphony",
+      "display": "mld",
+      "symbol": "MLD",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "symphony",
+            "base_denom": "note",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-104867",
+            "path": "transfer/channel-104867/note"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/mld.png"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "symphony",
+            "base_denom": "note"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/mld.png"
+        }
+      ]
+    },
+    {
       "description": "PUNDIX token is the native token that functions within the Pundi X ecosystem, including PundiX Chain and XPOS.",
       "denom_units": [
         {

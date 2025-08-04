@@ -28762,6 +28762,103 @@
         "ibc-transfer",
         "ibc-go"
       ]
+    },
+    {
+      "chain_name": "symphony",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Symphony",
+      "chain_id": "symphony-1",
+      "bech32Prefix": "symphony",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "symphony",
+        "bech32PrefixAccPub": "symphonypub",
+        "bech32PrefixValAddr": "symphonyvaloper",
+        "bech32PrefixValPub": "symphonyvaloperpub",
+        "bech32PrefixConsAddr": "symphonyvalcons",
+        "bech32PrefixConsPub": "symphonyvalconspub"
+      },
+      "slip44": 118,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/symphony_logo.png"
+      },
+      "stakeCurrency": {
+        "coinDenom": "MLD",
+        "chainSuggestionDenom": "note",
+        "coinMinimalDenom": "ibc/41AD5D4AFA42104295D08E564ADC7B40FD9DAB4BCD3002ECFA8BDD1309B65F24",
+        "sourceDenom": "note",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/mld.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "MLD",
+          "chainSuggestionDenom": "note",
+          "coinMinimalDenom": "ibc/41AD5D4AFA42104295D08E564ADC7B40FD9DAB4BCD3002ECFA8BDD1309B65F24",
+          "sourceDenom": "note",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/mld.png",
+          "gasPriceStep": {
+            "low": 0.00025,
+            "average": 0.0025,
+            "high": 0.004
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "MLD",
+          "chainSuggestionDenom": "note",
+          "coinMinimalDenom": "ibc/41AD5D4AFA42104295D08E564ADC7B40FD9DAB4BCD3002ECFA8BDD1309B65F24",
+          "sourceDenom": "note",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/mld.png"
+        },
+        {
+          "coinDenom": "HUSD",
+          "chainSuggestionDenom": "uusd",
+          "sourceDenom": "uusd",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/husd.png"
+        },
+        {
+          "coinDenom": "HKHD",
+          "chainSuggestionDenom": "ukhd",
+          "sourceDenom": "ukhd",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/hhkd.png"
+        },
+        {
+          "coinDenom": "HVND",
+          "chainSuggestionDenom": "uvnd",
+          "sourceDenom": "uvnd",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/hvnd.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-main-symphony.vinjan.xyz"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-main-symphony.vinjan.xyz"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://ping.pub/symphony/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
     }
   ]
 }

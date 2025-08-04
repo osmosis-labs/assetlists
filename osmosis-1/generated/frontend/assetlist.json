@@ -4073,7 +4073,7 @@
       },
       "price": {
         "poolId": "2665",
-        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+        "denom": "ibc/71B441E27F1BBB44DD0891BCD370C2794D404D60A4FFE5AECCD9B1E28BC89805"
       },
       "categories": [
         "stablecoin"
@@ -22338,7 +22338,7 @@
       },
       "coingeckoId": "bitcoin",
       "price": {
-        "poolId": "1943",
+        "poolId": "1942",
         "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
       },
       "categories": [],
@@ -23557,7 +23557,7 @@
       },
       "price": {
         "poolId": "2995",
-        "denom": "ibc/71F11BC0AF8E526B80E44172EBA9D3F0A8E03950BB882325435691EBC9450B1D"
+        "denom": "factory/osmo1nqu7rc5mj5p2cgyfp7gl3lw7kw99cltple3xtzl2cs5fyw0r2tasr7xv48/alloyed/allSUI"
       },
       "categories": [
         "rwa"
@@ -31906,6 +31906,59 @@
       ],
       "variantGroupKey": "ibc/698687E700D8B255FAB6B8145CE25B12591C99296965DB5C2C5DD5FE0AB685BF",
       "name": "mtgbp",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "symphony",
+      "sourceDenom": "note",
+      "coinMinimalDenom": "ibc/41AD5D4AFA42104295D08E564ADC7B40FD9DAB4BCD3002ECFA8BDD1309B65F24",
+      "symbol": "MLD",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/mld.png"
+      },
+      "price": {
+        "poolId": "3084",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "symphony",
+            "chainId": "symphony-1",
+            "sourceDenom": "note",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-104867",
+            "path": "transfer/channel-104867/note"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "symphony",
+          "sourceDenom": "note",
+          "chainType": "cosmos",
+          "chainId": "symphony-1",
+          "symbol": "MLD",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/mld.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/41AD5D4AFA42104295D08E564ADC7B40FD9DAB4BCD3002ECFA8BDD1309B65F24",
+      "name": "Symphony",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

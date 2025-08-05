@@ -144,46 +144,48 @@ async function generateChains(chains, zone_chains, local_chain_name) {
       "chain",
       "staking"
     );
-    base_denom = chain_reg_staking?.staking_tokens[0]?.denom;
-    local_base_denom = await getLocalBaseDenom(
-      zone_chain.chain_name,
-      base_denom,
-      local_chain_name
-    );
-    symbol = chain_reg.getAssetProperty(
-      zone_chain.chain_name,
-      base_denom,
-      "symbol"
-    );
-    decimals = chain_reg.getAssetDecimals(zone_chain.chain_name, base_denom);
-    coingecko_id = chain_reg.getAssetPropertyWithTraceIBC(
-      zone_chain.chain_name,
-      base_denom,
-      "coingecko_id"
-    );
-    logo_URIs = chain_reg.getAssetProperty(
-      zone_chain.chain_name,
-      base_denom,
-      "logo_URIs"
-    );
-    image_URL = logo_URIs?.png ? logo_URIs?.png : logo_URIs?.svg;
-    if (!chain.logo_URIs) {
-      chain.logo_URIs = logo_URIs;
+    if (chain_reg_staking) {
+      base_denom = chain_reg_staking?.staking_tokens[0]?.denom;
+      local_base_denom = await getLocalBaseDenom(
+        zone_chain.chain_name,
+        base_denom,
+        local_chain_name
+      );
+      symbol = chain_reg.getAssetProperty(
+        zone_chain.chain_name,
+        base_denom,
+        "symbol"
+      );
+      decimals = chain_reg.getAssetDecimals(zone_chain.chain_name, base_denom);
+      coingecko_id = chain_reg.getAssetPropertyWithTraceIBC(
+        zone_chain.chain_name,
+        base_denom,
+        "coingecko_id"
+      );
+      logo_URIs = chain_reg.getAssetProperty(
+        zone_chain.chain_name,
+        base_denom,
+        "logo_URIs"
+      );
+      image_URL = logo_URIs?.png ? logo_URIs?.png : logo_URIs?.svg;
+      if (!chain.logo_URIs) {
+        chain.logo_URIs = logo_URIs;
+      }
+      currency = {
+        coinDenom: symbol,
+        chainSuggestionDenom: base_denom,
+        coinMinimalDenom: local_base_denom,
+        sourceDenom: base_denom,
+        coinDecimals: decimals ? decimals : 0,
+        coinGeckoId: coingecko_id,
+        coinImageUrl: image_URL,
+      };
+      if (base_denom == local_base_denom) {
+        delete currency.sourceDenom;
+      }
+      chain.stakeCurrency = currency;
+      currency = {};
     }
-    currency = {
-      coinDenom: symbol,
-      chainSuggestionDenom: base_denom,
-      coinMinimalDenom: local_base_denom,
-      sourceDenom: base_denom,
-      coinDecimals: decimals ? decimals : 0,
-      coinGeckoId: coingecko_id,
-      coinImageUrl: image_URL,
-    };
-    if (base_denom == local_base_denom) {
-      delete currency.sourceDenom;
-    }
-    chain.stakeCurrency = currency;
-    currency = {};
 
     // -- Get Fees --
     let fee_currencies = [];

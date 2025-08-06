@@ -174,7 +174,7 @@ async function generateChains(chains, zone_chains, local_chain_name) {
       currency = {
         coinDenom: symbol,
         chainSuggestionDenom: base_denom,
-        coinMinimalDenom: local_base_denom,
+        coinMinimalDenom: local_base_denom || "",
         sourceDenom: base_denom,
         coinDecimals: decimals ? decimals : 0,
         coinGeckoId: coingecko_id,

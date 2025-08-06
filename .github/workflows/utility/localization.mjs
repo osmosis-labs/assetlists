@@ -57,7 +57,7 @@ export function setAssetDetailLocalizationInput(chainName, assets) {
 
   assets.forEach((asset) => {
 
-    for (const propertyName in localized_properties) {
+    for (const propertyName of localized_properties) {
 
       if (!asset[propertyName]) { return; }
       const currentValue = getAssetDetail(chainName, asset.base)?.[propertyName]?.[default_localization_code];

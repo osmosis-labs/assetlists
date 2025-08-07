@@ -18,7 +18,7 @@ If adding a new asset, please ensure the following:
    - [ ] `chain_name` and `base_denom` are provided and use values exactly as defined at the Chain Registry.
    - [ ] `path` is provided, and the IBC channel referenced is registered at the Chain Registry (skip if native to Osmosis).
    - [ ] `osmosis_verified` is set to `false`
-   - [ ] Optional: `transfer_methods`, `peg_mechanism`, `override_properties`, `canonical`, `categories`, where necessary (see [README](https://github.com/osmosis-labs/assetlists/tree/main?tab=readme-ov-file#how-to-add-assets) for details).
+   - [ ] Optional: `transfer_methods`, `override_properties`, `canonical`, `categories`, where necessary (see [README](https://github.com/osmosis-labs/assetlists/tree/main?tab=readme-ov-file#how-to-add-assets) for details).
 - [ ] I am aware that upgrading an asset to 'Verified' status requires an additional PR to this repo (checklist below).  
 
 ### Adding Chains

@@ -21,7 +21,6 @@ To add an asset, add a new asset object to the very bottom of the _osmosis.zone_
 
 There are also some additional details that may be defined for an asset: 
 - `transfer_methods` should be included whenever a basic IBC transfer initialatd via Osmosis Zone Deposit and Withdraw buttons is unable to carry-out an interchain transfer.
-- `peg_mechanism` should be defined for stablecoins, either as: "collateralized", "algorithmic", or "hybrid".
 - `override_properties` may be defined for cases where Osmosis Zone shall display the asset differently than how registered on its source chain.
 - `canonical` shall be defined for assets that are Osmosis' canonical representation of an asset different than its source (e.g., Axelar's WETH(.axl) is Osmosis' canonical representation of Ether $ETH on Osmosis)
 - `categories` are best manually defined for an asset, including: "defi" and "meme".

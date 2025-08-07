@@ -18,6 +18,15 @@ const localization_codes = getLocalizationCodes();
 const localized_properties = [
   "description"
 ];
+const asset_detail_properties = [
+  "name",
+  "symbol",
+  "base",
+  "description",
+  "coingeckoID",
+  "websiteURL",
+  "twitterURL"
+];
 
 
 //-- Directories --
@@ -180,18 +189,15 @@ export function getLocalizationOutput() {
 
 export function getAssetDetail(chainName, asset_base) {
 
-  let asset_detail = {};
+  let asset_detail = zone.readFromFile(
+    chainName,
+    zone.zoneAssetDetail,
+    getAssetDetailFileName(asset_base)
+  );
 
-  try {
-
-    // Read from the file
-    asset_detail = zone.readFromFile(
-      chainName,
-      zone.zoneAssetDetail,
-      getAssetDetailFileName(asset_base)
-    );
-
-  } catch { }
+  if (asset_detail?.errno) {
+    return {};
+  }
 
   return asset_detail;
 
@@ -226,9 +232,9 @@ export function setAssetDetailAll() {
     
     //iterate asset_detail/assetlist
     assetDetailAssetlist.forEach((asset) => {
-    
-      let asset_detail = getAssetDetail(chainName, asset.base) || {};
 
+      let asset_detail = getAssetDetail(chainName, asset.base) || {};
+      
       let change = false;
 
       for (const propertyName in asset) {

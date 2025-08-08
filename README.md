@@ -60,7 +60,7 @@ An example asset object in `osmosis.zone.json`:
 Note that there are apps, interfaces, and tools that look at this repository as a data dependency:
 - Osmosis Zone app (app.osmosis.zone):
   - .../generated/frontend/assetlist.json
-  - .../generated/frontend/chainlist.json (soon, not yet migrated to v2)
+  - .../generated/frontend/chainlist.json (soon)
   - .../osmosis-1.chainlist.json
   - .../osmo-test-5.chainlist.json
 - Osmosis Labs' Sidecar Query Service (SQS):

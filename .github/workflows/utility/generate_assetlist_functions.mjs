@@ -561,6 +561,8 @@ function getNetworkName(chain_name, asset_data) {
 
 export function setSymbol(asset_data) {
 
+  asset_data.chain_reg.symbol = getAssetProperty(asset_data.source_asset, "symbol");
+
   let symbol = getAssetProperty(asset_data.identity_asset, "symbol");
 
   //asset_data.chain_reg.symbol =
@@ -572,18 +574,18 @@ export function setSymbol(asset_data) {
     symbol = asset_data.zone_asset?.override_properties?.symbol;
     asset_data.frontend.symbol = symbol;
     asset_data.asset_detail.symbol = symbol;
-    asset_data.chain_reg.symbol = symbol;
+    //asset_data.chain_reg.symbol = symbol;
     return;
   }
   
-  symbol = getAssetProperty(asset_data.identity_asset, "symbol");
+  //symbol = getAssetProperty(asset_data.identity_asset, "symbol");
   
 
   //If it's the canonical asset, then don't add suffixes
   if (asset_data.frontend.is_canonical) {
     asset_data.frontend.symbol = symbol;
     asset_data.asset_detail.symbol = symbol;
-    asset_data.chain_reg.symbol = symbol;
+    //asset_data.chain_reg.symbol = symbol;
     return;
   }
 
@@ -663,7 +665,7 @@ export function setSymbol(asset_data) {
 
   asset_data.frontend.symbol = symbol;
   asset_data.asset_detail.symbol = symbol;
-  asset_data.chain_reg.symbol = symbol;
+  //asset_data.chain_reg.symbol = symbol;
   return;
 
 
@@ -674,7 +676,7 @@ export function setName(asset_data) {
 
   let name;
 
-  //asset_data.chain_reg.name =
+  asset_data.chain_reg.name = getAssetProperty(asset_data.source_asset, "name");
     //getAssetProperty(asset_data.local_asset, "name") ??
     //getAssetProperty(asset_data.source_asset, "name");
 
@@ -807,7 +809,7 @@ export function setName(asset_data) {
 
   asset_data.frontend.name = name;
   asset_data.asset_detail.name = name;
-  asset_data.chain_reg.name = name;
+  //asset_data.chain_reg.name = name;
   
 
 }
@@ -973,10 +975,7 @@ export function getAssetTraces(asset) {
 export function setTraces(asset_data) {
 
   let traces = getAssetProperty(asset_data.local_asset, "traces");
-  if(traces?.length === 0) {
-    traces = undefined;
-  }
-  asset_data.chain_reg.traces = traces;
+  asset_data.chain_reg.traces = traces?.length ? [ traces.at(-1) ] : undefined;
 
 }
 
@@ -1112,14 +1111,17 @@ export function setImages(asset_data) {
 
   const imagesObj = getImages(asset_data);
   let primaryImage = imagesObj.primaryImage;
-  let newImagesArray = imagesObj.newImagesArray;
+  //let newImagesArray = imagesObj.newImagesArray;
 
   asset_data.frontend.logoURIs = {...primaryImage};
   delete asset_data.frontend.logoURIs.theme;
   delete asset_data.frontend.logoURIs.image_sync;
-  asset_data.chain_reg.logo_URIs = asset_data.frontend.logoURIs;
+  //asset_data.chain_reg.logo_URIs = asset_data.frontend.logoURIs;
 
-  asset_data.chain_reg.images = newImagesArray;
+  //asset_data.chain_reg.images = newImagesArray;
+
+  asset_data.chain_reg.logo_URIs = getAssetProperty(asset_data.local_asset, "logo_URIs");
+  asset_data.chain_reg.images = getAssetProperty(asset_data.local_asset, "images");
 
 }
 
@@ -1128,7 +1130,9 @@ export function setCoinGeckoId(asset_data) {
 
   let coingecko_id;
 
-  if (asset_data.source_asset.chain_name === asset_data.chainName) {
+  asset_data.chain_reg.coingecko_id = getAssetProperty(asset_data.source_asset, "coingecko_id");
+
+  if (asset_data.source_asset.chain_name === asset_data.chainName) { // this is how I do bulk corrections
     asset_data.chain_reg.coingecko_id = getAssetProperty(
       asset_data.source_asset,
       "coingecko_id"
@@ -1151,9 +1155,9 @@ export function setCoinGeckoId(asset_data) {
 
 export function setKeywords(asset_data) {
 
-  asset_data.chain_reg.keywords =
-    getAssetProperty(asset_data.local_asset, "keywords")
-    getAssetProperty(asset_data.canonical_asset, "keywords");
+  asset_data.chain_reg.keywords = getAssetProperty(asset_data.local_asset, "keywords");
+    //getAssetProperty(asset_data.local_asset, "keywords")
+    //getAssetProperty(asset_data.canonical_asset, "keywords");
 
 }
 
@@ -1598,8 +1602,8 @@ export function setBase(asset_data) {
 
 export function setDisplay(asset_data) {
 
-  asset_data.chain_reg.display =
-    getAssetProperty(asset_data.local_asset, "display") || getAssetProperty(asset_data.source_asset, "display");
+  asset_data.chain_reg.display = getAssetProperty(asset_data.source_asset, "display");
+    //getAssetProperty(asset_data.local_asset, "display") || getAssetProperty(asset_data.source_asset, "display");
 
 }
 
@@ -1682,9 +1686,10 @@ export function setDescription(asset_data) {
   
   let description, extended_description;
 
-  asset_data.chain_reg.description =
-    getAssetProperty(asset_data.local_asset, "description") ??
-    getAssetProperty(asset_data.canonical_asset, "description");
+  //asset_data.chain_reg.description =
+    //getAssetProperty(asset_data.local_asset, "description") ??
+    //getAssetProperty(asset_data.canonical_asset, "description");
+  asset_data.chain_reg.description = getAssetProperty(asset_data.local_asset, "description");
   asset_data.chain_reg.extended_description = getAssetProperty(asset_data.local_asset, "extended_description");
 
 
@@ -1699,7 +1704,11 @@ export function setDescription(asset_data) {
       ? 
     getAssetProperty(asset_data.canonical_asset, "description")
       :
-    asset_data.chain_reg.description;
+    (
+      getAssetProperty(asset_data.local_asset, "description")
+      ||
+      getAssetProperty(asset_data.canonical_asset, "description")
+    )
 
   extended_description =
     asset_data.frontend.is_canonical
@@ -1820,21 +1829,21 @@ export function reformatChainRegAsset(asset_data) {
 
   //--Setup Chain Registry Asset--
   let reformattedAsset = {
-    description: asset_data.chain_reg.description,
-    extended_description: asset_data.chain_reg.extended_description,
-    denom_units: asset_data.chain_reg.denom_units,
-    type_asset: asset_data.chain_reg.type_asset,
-    address: asset_data.chain_reg.address,
-    base: asset_data.chain_reg.base,
-    name: asset_data.chain_reg.name,
-    display: asset_data.chain_reg.display,
-    symbol: asset_data.chain_reg.symbol,
-    traces: asset_data.chain_reg.traces,
-    logo_URIs: asset_data.chain_reg.logo_URIs,
-    images: asset_data.chain_reg.images,
-    coingecko_id: asset_data.chain_reg.coingecko_id,
-    keywords: asset_data.chain_reg.keywords,
-    socials: asset_data.chain_reg.socials
+    description: asset_data.chain_reg.description, //should be local
+    extended_description: asset_data.chain_reg.extended_description, //should be local
+    denom_units: asset_data.chain_reg.denom_units, //should be ibc-base, with source's base as alias, and then display
+    type_asset: asset_data.chain_reg.type_asset, //req logic
+    address: asset_data.chain_reg.address, //local
+    base: asset_data.chain_reg.base, //req logic
+    name: asset_data.chain_reg.name, //should be source
+    display: asset_data.chain_reg.display, // should be source
+    symbol: asset_data.chain_reg.symbol, //should be source
+    traces: asset_data.chain_reg.traces, //should only be the latest hop
+    logo_URIs: asset_data.chain_reg.logo_URIs, //should be local
+    images: asset_data.chain_reg.images, // should be local with image_sync
+    coingecko_id: asset_data.chain_reg.coingecko_id, // should be source
+    keywords: asset_data.chain_reg.keywords, // local, skip osmosis-zone specifc ones
+    socials: asset_data.chain_reg.socials // local
   };
 
   asset_data.chain_reg = reformattedAsset;

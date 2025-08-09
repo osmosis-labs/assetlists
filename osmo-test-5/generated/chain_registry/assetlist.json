@@ -151,42 +151,10 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/2164BDB48DE5501430E71286448D87C6D2240EC0E078CF113CAB85E21A352BB0",
-      "name": "USDC (Axelar Testnet)",
+      "name": "USD Coin",
       "display": "ausdc",
-      "symbol": "aUSDC.axl",
+      "symbol": "aUSDC",
       "traces": [
-        {
-          "type": "synthetic",
-          "counterparty": {
-            "chain_name": "forex",
-            "base_denom": "USD"
-          },
-          "provider": "Circle"
-        },
-        {
-          "type": "test-mintage",
-          "counterparty": {
-            "chain_name": "ethereum",
-            "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
-          },
-          "provider": "Ethereum"
-        },
-        {
-          "type": "wrapped",
-          "counterparty": {
-            "chain_name": "ethereumtestnet",
-            "base_denom": "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
-          },
-          "provider": "Axelar"
-        },
-        {
-          "type": "bridge",
-          "counterparty": {
-            "chain_name": "ethereumtestnet",
-            "base_denom": "0x254d06f33bDc5b8ee05b2ea472107E300226659A"
-          },
-          "provider": "Axelar"
-        },
         {
           "type": "ibc",
           "counterparty": {
@@ -206,8 +174,8 @@
       "images": [
         {
           "image_sync": {
-            "chain_name": "axelartestnet",
-            "base_denom": "uausdc"
+            "chain_name": "ethereumtestnet",
+            "base_denom": "0x254d06f33bDc5b8ee05b2ea472107E300226659A"
           },
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
         }
@@ -230,34 +198,10 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/1F42AC9631DBE03009219ECCFE151786F53A038DE9F7A07C709158514F1D5942",
-      "name": "Ether (Axelar Testnet)",
+      "name": "Wrapped Ether",
       "display": "weth",
-      "symbol": "ETH",
+      "symbol": "axlWETH",
       "traces": [
-        {
-          "type": "test-mintage",
-          "counterparty": {
-            "chain_name": "ethereum",
-            "base_denom": "wei"
-          },
-          "provider": "Ethereum"
-        },
-        {
-          "type": "wrapped",
-          "counterparty": {
-            "chain_name": "ethereumtestnet",
-            "base_denom": "wei"
-          },
-          "provider": "Ethereum"
-        },
-        {
-          "type": "bridge",
-          "counterparty": {
-            "chain_name": "ethereumtestnet",
-            "base_denom": "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6"
-          },
-          "provider": "Axelar"
-        },
         {
           "type": "ibc",
           "counterparty": {
@@ -277,8 +221,8 @@
       "images": [
         {
           "image_sync": {
-            "chain_name": "axelartestnet",
-            "base_denom": "eth-wei"
+            "chain_name": "ethereumtestnet",
+            "base_denom": "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6"
           },
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/weth.svg"
         }
@@ -306,14 +250,6 @@
       "symbol": "JUNOX",
       "traces": [
         {
-          "type": "test-mintage",
-          "counterparty": {
-            "chain_name": "juno",
-            "base_denom": "ujuno"
-          },
-          "provider": "Juno"
-        },
-        {
           "type": "ibc",
           "counterparty": {
             "chain_name": "junotestnet6",
@@ -333,13 +269,14 @@
       "images": [
         {
           "image_sync": {
-            "chain_name": "junotestnet6",
+            "chain_name": "junotestnet",
             "base_denom": "ujunox"
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.svg"
         }
-      ]
+      ],
+      "coingecko_id": "juno-network"
     },
     {
       "description": "The native token of Mars Protocol",
@@ -413,30 +350,6 @@
       "symbol": "USDC",
       "traces": [
         {
-          "type": "synthetic",
-          "counterparty": {
-            "chain_name": "forex",
-            "base_denom": "USD"
-          },
-          "provider": "Circle"
-        },
-        {
-          "type": "additional-mintage",
-          "counterparty": {
-            "chain_name": "ethereum",
-            "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
-          },
-          "provider": "Circle"
-        },
-        {
-          "type": "test-mintage",
-          "counterparty": {
-            "chain_name": "noble",
-            "base_denom": "uusdc"
-          },
-          "provider": "Circle"
-        },
-        {
           "type": "ibc",
           "counterparty": {
             "chain_name": "nobletestnet",
@@ -459,14 +372,14 @@
             "chain_name": "nobletestnet",
             "base_denom": "uusdc"
           },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg",
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png",
           "theme": {
-            "circle": true,
-            "primary_color_hex": "#2775CA"
+            "circle": true
           }
         }
-      ]
+      ],
+      "coingecko_id": "usd-coin"
     },
     {
       "description": "Akash Token (AKT) is the Akash Network's native utility token, used as the primary means to govern, secure the blockchain, incentivize participants, and provide a default mechanism to store and exchange value.",
@@ -539,14 +452,6 @@
       "symbol": "KYVE",
       "traces": [
         {
-          "type": "test-mintage",
-          "counterparty": {
-            "chain_name": "kyve",
-            "base_denom": "ukyve"
-          },
-          "provider": "Kyve"
-        },
-        {
           "type": "ibc",
           "counterparty": {
             "chain_name": "kyvetestnet",
@@ -565,17 +470,15 @@
       },
       "images": [
         {
-          "image_sync": {
-            "chain_name": "kyvetestnet",
-            "base_denom": "tkyve"
-          },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kyve/images/kyve-token.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kyve/images/kyve-token.svg",
-          "theme": {
-            "primary_color_hex": "#335350"
+          "image_sync": {
+            "chain_name": "kyve",
+            "base_denom": "ukyve"
           }
         }
-      ]
+      ],
+      "coingecko_id": "kyve-network"
     },
     {
       "description": "QCK - native token of Quicksilver",
@@ -600,14 +503,6 @@
       "symbol": "QCK",
       "traces": [
         {
-          "type": "test-mintage",
-          "counterparty": {
-            "chain_name": "quicksilver",
-            "base_denom": "uqck"
-          },
-          "provider": "Quicksilver"
-        },
-        {
           "type": "ibc",
           "counterparty": {
             "chain_name": "quicksilvertestnet2",
@@ -631,10 +526,10 @@
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qck.png"
         }
-      ]
+      ],
+      "coingecko_id": "quicksilver"
     },
     {
-      "description": "The native token of Chain4Energy",
       "denom_units": [
         {
           "denom": "ibc/539BC2B6E70117D220834D6DF8E27307655D1325C0CADF7E3AF90AB00D9F8D69",
@@ -666,18 +561,6 @@
             "path": "transfer/channel-7735/uc4e"
           }
         }
-      ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/chain4energytestnet/images/c4e.png"
-      },
-      "images": [
-        {
-          "image_sync": {
-            "chain_name": "chain4energytestnet",
-            "base_denom": "uc4e"
-          },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/chain4energytestnet/images/c4e.png"
-        }
       ]
     },
     {
@@ -701,14 +584,6 @@
       "display": "xprt",
       "symbol": "XPRT",
       "traces": [
-        {
-          "type": "test-mintage",
-          "counterparty": {
-            "chain_name": "persistence",
-            "base_denom": "uxprt"
-          },
-          "provider": "Persistence"
-        },
         {
           "type": "ibc",
           "counterparty": {
@@ -735,7 +610,8 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.svg"
         }
-      ]
+      ],
+      "coingecko_id": "persistence"
     },
     {
       "description": "The native token of Saga Testnet",
@@ -809,14 +685,6 @@
       "symbol": "IXO",
       "traces": [
         {
-          "type": "test-mintage",
-          "counterparty": {
-            "chain_name": "impacthub",
-            "base_denom": "uixo"
-          },
-          "provider": "impacthub"
-        },
-        {
           "type": "ibc",
           "counterparty": {
             "chain_name": "impacthubtestnet",
@@ -836,19 +704,16 @@
       "images": [
         {
           "image_sync": {
-            "chain_name": "impacthubtestnet",
+            "chain_name": "impacthub",
             "base_denom": "uixo"
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/impacthub/images/ixo.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/impacthub/images/ixo.svg",
-          "theme": {
-            "primary_color_hex": "#2c4484"
-          }
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/impacthub/images/ixo.svg"
         }
-      ]
+      ],
+      "coingecko_id": "ixo"
     },
     {
-      "description": "The native token of Archway Test Network.",
       "denom_units": [
         {
           "denom": "ibc/5F10B4BED1A80DC44975D95D716AEF8CEBFB99B3F088C98361436A7D0CF5A830",
@@ -873,14 +738,6 @@
       "symbol": "CONST",
       "traces": [
         {
-          "type": "test-mintage",
-          "counterparty": {
-            "chain_name": "archway",
-            "base_denom": "aarch"
-          },
-          "provider": "Archway Testnet"
-        },
-        {
           "type": "ibc",
           "counterparty": {
             "chain_name": "archwaytestnet",
@@ -893,26 +750,9 @@
           }
         }
       ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/archway/images/arch.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/archway/images/arch.svg"
-      },
-      "images": [
-        {
-          "image_sync": {
-            "chain_name": "archwaytestnet",
-            "base_denom": "aconst"
-          },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/archway/images/arch.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/archway/images/arch.svg",
-          "theme": {
-            "primary_color_hex": "#fc4c04"
-          }
-        }
-      ]
+      "coingecko_id": "archway"
     },
     {
-      "description": "The native token of Symphony",
       "denom_units": [
         {
           "denom": "ibc/C5B7196709BDFC3A312B06D7292892FA53F379CD3D556B65DB00E1531D471BBA",
@@ -947,22 +787,9 @@
             "path": "transfer/channel-9540/note"
           }
         }
-      ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/mld.png"
-      },
-      "images": [
-        {
-          "image_sync": {
-            "chain_name": "symphonytestnet",
-            "base_denom": "note"
-          },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/mld.png"
-        }
       ]
     },
     {
-      "description": "Kima is an asset-agnostic interoperability infrastructure that connects blockchain networks and legacy financial systems, enabling secure, scalable cross-chain transactions and seamless communication across ecosystems.",
       "denom_units": [
         {
           "denom": "ibc/6DF48956F5C1CD055E347364102A8FD39281381983E557365C3961320677545C",
@@ -983,14 +810,6 @@
       "symbol": "KIMA",
       "traces": [
         {
-          "type": "test-mintage",
-          "counterparty": {
-            "chain_name": "kimanetwork",
-            "base_denom": "uKIMA"
-          },
-          "provider": "Kima Network"
-        },
-        {
           "type": "ibc",
           "counterparty": {
             "chain_name": "kimanetworktestnet",
@@ -1002,24 +821,9 @@
             "path": "transfer/channel-9247/uKIMA"
           }
         }
-      ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.svg"
-      },
-      "images": [
-        {
-          "image_sync": {
-            "chain_name": "kimanetworktestnet",
-            "base_denom": "uKIMA"
-          },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.svg"
-        }
       ]
     },
     {
-      "description": "Bitcoin. On Cosmos.",
       "denom_units": [
         {
           "denom": "ibc/8D294CE85345F171AAF6B1FF6E64B5A9EE197C99CDAD64D79EA4ACAB270AC95C",
@@ -1040,22 +844,6 @@
       "symbol": "nBTC",
       "traces": [
         {
-          "type": "test-mintage",
-          "counterparty": {
-            "chain_name": "bitcoin",
-            "base_denom": "sat"
-          },
-          "provider": "Bitcoin"
-        },
-        {
-          "type": "bridge",
-          "counterparty": {
-            "chain_name": "bitcointestnet",
-            "base_denom": "sat"
-          },
-          "provider": "Nomic"
-        },
-        {
           "type": "ibc",
           "counterparty": {
             "chain_name": "nomictestnet",
@@ -1065,23 +853,6 @@
           "chain": {
             "channel_id": "channel-9688",
             "path": "transfer/channel-9688/usat"
-          }
-        }
-      ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nbtc.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nbtc.svg"
-      },
-      "images": [
-        {
-          "image_sync": {
-            "chain_name": "nomictestnet",
-            "base_denom": "usat"
-          },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nbtc.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nbtc.svg",
-          "theme": {
-            "primary_color_hex": "#8436e6"
           }
         }
       ]
@@ -1955,10 +1726,7 @@
             "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/dogecoin-doge"
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/doge.int3.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/doge.int3.svg",
-          "theme": {
-            "primary_color_hex": "#3d3d3d"
-          }
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/doge.int3.svg"
         }
       ]
     },
@@ -2019,10 +1787,7 @@
             "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-btc"
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/btc.int3.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/btc.int3.svg",
-          "theme": {
-            "primary_color_hex": "#3d3d3d"
-          }
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/btc.int3.svg"
         }
       ]
     },
@@ -2083,10 +1848,7 @@
             "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/bitcoin-cash-bch"
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/bch.int3.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/bch.int3.svg",
-          "theme": {
-            "primary_color_hex": "#3d3d3d"
-          }
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/bch.int3.svg"
         }
       ]
     },
@@ -2147,10 +1909,7 @@
             "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/litecoin-ltc"
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/ltc.int3.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/ltc.int3.svg",
-          "theme": {
-            "primary_color_hex": "#3d3d3d"
-          }
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/ltc.int3.svg"
         }
       ]
     },
@@ -2211,10 +1970,7 @@
             "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/ton-ton"
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/ton.int3.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/ton.int3.svg",
-          "theme": {
-            "primary_color_hex": "#3d3d3d"
-          }
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/ton.int3.svg"
         }
       ]
     },
@@ -2275,10 +2031,7 @@
             "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/solana-sol"
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/sol.int3.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/sol.int3.svg",
-          "theme": {
-            "primary_color_hex": "#3d3d3d"
-          }
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/sol.int3.svg"
         }
       ]
     },
@@ -2339,10 +2092,7 @@
             "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/xrpl-xrp"
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/xrp.int3.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/xrp.int3.svg",
-          "theme": {
-            "primary_color_hex": "#3d3d3d"
-          }
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/xrp.int3.svg"
         }
       ]
     }

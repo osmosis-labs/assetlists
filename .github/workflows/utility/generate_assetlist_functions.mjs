@@ -1602,16 +1602,21 @@ export function setBase(asset_data) {
 
 export function setDisplay(asset_data) {
 
-  asset_data.chain_reg.display = getAssetProperty(asset_data.source_asset, "display");
-    //getAssetProperty(asset_data.local_asset, "display") || getAssetProperty(asset_data.source_asset, "display");
+  //asset_data.chain_reg.display = getAssetProperty(asset_data.source_asset, "display");
+  asset_data.chain_reg.display =
+    getAssetProperty(asset_data.local_asset, "display") ||
+    getAssetProperty(asset_data.source_asset, "display");
 
 }
 
 export function setDenomUnits(asset_data) {
 
   let denom_units = getAssetProperty(asset_data.local_asset, "denom_units");
+  //let denom_units = getAssetProperty(asset_data.source_asset, "denom_units");
+  //if (asset_data.source_asset.chain_name === asset_data.chainName) {
   if (denom_units) {
     asset_data.chain_reg.denom_units = denom_units;
+    //console.log(asset_data.chain_reg.denom_units);
     return;
   }
 

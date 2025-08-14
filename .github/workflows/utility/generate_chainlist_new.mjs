@@ -13,7 +13,7 @@
 //-- Imports --
 
 import * as chain_reg from "../../../chain-registry/.github/workflows/utility/chain_registry.mjs";
-chain_reg.setup();
+//chain_reg.setup();
 import * as zone from "./assetlist_functions.mjs";
 
 //-- Globals --
@@ -42,6 +42,31 @@ async function getLocalBaseDenom(chain_name, base_denom, local_chain_name) {
       return await zone.calculateIbcHash(asset.path);
     }
   }
+}
+
+async function generateChainRegChains(chainRegChains, local_chain_name) {
+
+  let networkType = chain_reg.getFileProperty(local_chain_name, "chain", "network_type");
+  if (networkType !== "mainnet" || networkType !== "testnet") {
+    console.log(`Network Type for ${local_chain_name} is invalid: ${networkType}`);
+    return;
+  }
+
+  let chains = [];
+  chains = chain_reg.getChains();
+  const numAllChains = chains.length;
+  if (chains.length <= 0) {
+    console.log("No chains found");
+  }
+  chains = chain_reg.filterChainsByFileProperty(chains, "chain", "network_type", networkType);
+  if (chains.length <= 0 || chains.length === numAllChains) {
+    console.log("Incorrect filtering");
+  }
+
+  //iterate chains
+
+  return;
+
 }
 
 async function generateChains(chains, zone_chains, local_chain_name) {
@@ -342,6 +367,9 @@ async function generateChainlist(chainName) {
   );
   let chains = [];
   chains = await generateChains(chains, zoneChainlist.chains, chainName);
+  let chainRegChains = [];
+  /*chainRegChains = */await generateChainRegChains(chainRegChains, chain_reg.chains, chainName);
+  //console.log(chainRegChains);
   let chainlist = {
     zone: chainName,
     chains: chains,

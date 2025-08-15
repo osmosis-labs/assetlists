@@ -1668,7 +1668,19 @@
       "rpc": "https://rpc-main-symphony.vinjan.xyz",
       "rest": "https://api-main-symphony.vinjan.xyz",
       "explorer_tx_url": "https://ping.pub/symphony/tx/${txHash}",
-      "keplr_features": ["ibc-go", "ibc-transfer", "cosmwasm", "wasmd_0.24+"]
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
+    },
+    {
+      "chain_name": "manifest",
+      "rpc": "https://nodes.manifest.network/manifest/rpc",
+      "rest": "https://nodes.manifest.network/manifest/api",
+      "explorer_tx_url": "https://explorer.manifest.network/transaction/${txHash}",
+      "keplr_features": []
     }
   ]
 }

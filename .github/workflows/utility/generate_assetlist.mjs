@@ -14,7 +14,7 @@ import * as state from "./update_assetlist_state.mjs";
 
 
 //-- Flags --
-const getPools = true;
+const getPools = false;
 const getRelatedAssets = false; //not implemented
 
 

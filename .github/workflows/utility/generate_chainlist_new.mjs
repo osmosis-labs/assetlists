@@ -13,7 +13,7 @@
 //-- Imports --
 
 import * as chain_reg from "../../../chain-registry/.github/workflows/utility/chain_registry.mjs";
-//chain_reg.setup();
+chain_reg.setup();
 import * as zone from "./assetlist_functions.mjs";
 
 //-- Globals --
@@ -28,34 +28,34 @@ async function asyncForEach(array, callback) {
   }
 }
 
-//getIbcDenom
-async function getLocalBaseDenom(chain_name, base_denom, local_chain_name) {
-  if (chain_name == local_chain_name) {
-    return base_denom;
-  }
-  for (const asset of zoneAssetlist.assets) {
-    if (
-      asset.base_denom == base_denom &&
-      asset.chain_name == chain_name &&
-      asset.path
-    ) {
-      return await zone.calculateIbcHash(asset.path);
-    }
-  }
-}
-
-function getZoneChains(chainName) {
-  return zone.readFromFile(chainName, zone.noDir, zone.zoneChainlistFileName);
-}
-
-function getCounterpartyChainsFromAssetlist(chainName) {
-
-  //Read Assetlist File
+function getZoneAssetlist(chainName) {
   zoneAssetlist = zone.readFromFile(
     chainName,
     zone.zoneConfigAssetlist,
     zone.assetlistFileName
   );
+}
+
+//getIbcDenom
+async function getLocalBaseDenom(chain_name, base_denom, local_chain_name) {
+
+  if (chain_name == local_chain_name) return base_denom;
+  if (!zoneAssetlist) { getZoneAssetlist(local_chain_name); }
+
+  for (const asset of zoneAssetlist.assets) {//zoneAssetlist not populated?
+    if (
+      asset.base_denom == base_denom &&
+      asset.chain_name == chain_name &&
+      asset.path
+    ) {
+      return await zone.calculateIbcHash(asset.path) || "";//the OR "" is temporary
+    }
+  }
+}
+
+function getCounterpartyChainsFromAssetlist(chainName) {
+
+  getZoneAssetlist(chainName);
 
   //Write list of all counterparty chains
   let counterpartyChainNames = [];
@@ -87,16 +87,17 @@ function getMininmalChainProperties(chain) {
   //-- Get Pretty Name --
   chain.prettyName = chain_reg.getFileProperty(chain_name, "chain", "pretty_name");
   if (!chain.prettyName) return false;
+
   // -- Get Chain Logo --
-  const logo_URIs = chain_reg.getFileProperty(chain_name, "chain", "logo_URIs");
-  if (!logo_URIs) {
+  chain.logo_URIs = chain_reg.getFileProperty(chain_name, "chain", "logo_URIs");
+  if (!chain.logo_URIs) {
     let image = chain_reg.getFileProperty(chain_name, "chain", "images")?.[0];
     if (image) {
       chain.logo_URIs = image;
       delete chain.logo_URIs.image_sync;
       delete chain.logo_URIs.theme;
     } else {
-      let stakingTokenDenom = chain_reg_staking?.staking_tokens[0].denom;
+      let stakingTokenDenom = chain_reg.getFileProperty(chain_name, "chain", "staking")?.staking_tokens?.[0].denom;
       if (stakingTokenDenom) {
         let stakingTokenLogoURIs = chain_reg.getAssetProperty(chain_name, stakingTokenDenom, "logo_URIs");
         if (!stakingTokenLogoURIs) {
@@ -116,7 +117,7 @@ function getMininmalChainProperties(chain) {
 
 }
 
-function getSuggestionCurrencyProperties(currency, chain_name/*, asset = {}*/) {
+async function getSuggestionCurrencyProperties(currency, chain_name/*, asset = {}*/) {
 
   const base_denom = currency.base_denom;
   if (!currency.base_denom) return false;
@@ -126,31 +127,33 @@ function getSuggestionCurrencyProperties(currency, chain_name/*, asset = {}*/) {
   // -- Get Properties Pt. 1 --
   currency.coinDenom = chain_reg.getAssetProperty(chain_name, base_denom, "symbol");
   if (!currency.coinDenom) return false;
-  chainSuggestionDenom = base_denom;
+  currency.chainSuggestionDenom = base_denom;
 
   //TODO: Confirm that we would be able to get rid of this (still will use the same property name)
   // -- Get Osmosis-local Base Denom
-  coinMinimalDenom = await getLocalBaseDenom(
+  currency.coinMinimalDenom = await getLocalBaseDenom(
     chain_name,
     base_denom,
     local_chain_name
   ) || "";
 
   // -- Get Properties Pt. 2 --
-  sourceDenom: base_denom;
+  currency.sourceDenom = base_denom;
   currency.coinDecimals = chain_reg.getAssetDecimals(chain_name, base_denom) || 0;
   currency.coinGeckoId = chain_reg.getAssetPropertyWithTraceIBC(chain_name, base_denom, "coingecko_id");
+  if (!currency.coinGeckoId) delete currency.coinGeckoId;
 
   // -- Get Logo --
-  logo_URIs = chain_reg.getAssetProperty(chain_name, base_denom, "logo_URIs");
+  let logo_URIs = chain_reg.getAssetProperty(chain_name, base_denom, "logo_URIs");
   if (!logo_URIs) {
     logo_URIs = chain_reg.getAssetProperty(chain_name, base_denom, "images")?.[0];
   }
   currency.coinImageUrl = logo_URIs?.png ? logo_URIs?.png : logo_URIs?.svg;
-  if (!coinImageUrl) return false;
+  if (!currency.coinImageUrl) return false;
 
+  //TODO, also delete this once approved
   // -- Handle Exceptions --
-  if (base_denom == local_base_denom) {
+  if (base_denom == currency.coinMinimalDenom) {
     delete currency.sourceDenom;
   }
 
@@ -178,10 +181,10 @@ function getChainSuggestionFeatures(chain, zoneChain) {
   feature = "ibc-go";
   const recommended_version = chain_reg.getFileProperty(chain.chain_name, "chain", "codebase")?.recommended_version;
   if (recommended_version) {
-    const versions = chain_reg.getFileProperty(chain.chain_name, "version", "versions");
+    const versions = chain_reg.getFileProperty(chain.chain_name, "versions", "versions");
     for (const version of versions) {
       if (version.recommended_version === recommended_version) {
-        if (version.ibc.type === "go") {
+        if (version.ibc?.type === "go") {
           features.push(feature);
         }
       }
@@ -193,18 +196,17 @@ function getChainSuggestionFeatures(chain, zoneChain) {
 
 }
 
-function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
-
+async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
+  
   const chain_name = minimalChain.chain_name;
   let chain = {
-    chain_name: chain_name;
+    chain_name: chain_name
   }
 
   //Make sure it's a Cosmos Chain
   let chainType = chain_reg.getFileProperty(chain_name, "chain", "chain_type");
   if (chainType !== "cosmos") return false;
-
-
+  console.log("test3");
   // -- Get Basic Metadata --
   chain.status = chain_reg.getFileProperty(chain_name, "chain", "status");
   if (!chain.status) return false;
@@ -213,7 +215,7 @@ function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   chain.prettyName = minimalChain.prettyName;
   chain.chain_id = chain_reg.getFileProperty(chain_name, "chain", "chain_id");
   if (!chain.chain_id) return false;
-
+  console.log("test4");
   // -- Get bech32_config --
   chain.bech32Prefix = chain_reg.getFileProperty(chain_name, "chain", "bech32_prefix");
   if (!chain.bech32Prefix) return false;
@@ -223,31 +225,32 @@ function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
     bech32_config[key] = chain.bech32Prefix?.concat(value);
   });
   chain.bech32Config = bech32_config;
-
+  console.log("test5");
   // -- Get SLIP44 --
   chain.slip44 = chain_reg.getFileProperty(chain_name, "chain", "slip44");
   if (!chain.slip44) return false;
   chain.alternativeSlip44s = chain_reg.getFileProperty(chain_name, "chain", "alternative_slip44s");
-
+  if (!chain.alternativeSlip44s) delete chain.alternativeSlip44s;
+  console.log("test6");
   // -- Get Chain Logo --
   chain.logo_URIs = minimalChain.logo_URIs;
 
   // -- Check that Chain Fees Exist --
   let chainFees = chain_reg.getFileProperty(chain_name, "chain", "fees");
   if (!chainFees) return false;
-
+  console.log("test7");
   // -- Get APIs --
   let apis = chain_reg.getFileProperty(chain.chain_name, "chain", "apis");
   let rest = zoneChain.rest || apis?.rest?.[0].address
   if (!rest) return false;
   let rpc = zoneChain.rpc || apis?.rpc?.[0].address
   if (!rpc) return false;
-
+  console.log("test8");
   // -- Get Explorer Tx URL --
   let explorers = chain_reg.getFileProperty(chain.chain_name, "chain", "explorers");
   let explorer = zoneChain.explorer_tx_url || explorers?.[0].txPage;
   if (!explorer) return false;
-
+  console.log("test9");
   // -- By this point, we have the minimum required data to be able to suggest the chain --
 
   // -- Get Staking --
@@ -258,7 +261,7 @@ function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
     let currency = {
       base_denom: base_denom
     }
-    const hasMetadata = getCurrencyProperties(currency, chain_name);
+    const hasMetadata = getSuggestionCurrencyProperties(currency, chain_name);
     chain.stakeCurrency = hasMetadata ? currency : {};
   }
 
@@ -293,8 +296,9 @@ function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   });
   //Double-check that there is at least one valid feeCurrency
   if (chain.feeCurrencies.length <= 0) return false;
+  console.log("test10");
 
-  // -- Get Currencies --
+  /*// -- Get Currencies --
   chain.currencies = [];
   let chain_assets = chain_reg.getFileProperty(chain_name, "assetlist", "assets");
 
@@ -304,16 +308,16 @@ function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
     let currency = {
       base_denom: asset.base
     }
-    const hasMetadata = getSuggestionCurrencyProperties(currency, chain_name/*, asset*/);//Here it's looking up the values for each asset again, but we're already passing in the asset. It's like all we really needed was the base denom
+    const hasMetadata = getSuggestionCurrencyProperties(currency, chain_name*//*, asset*//*);//Here it's looking up the values for each asset again, but we're already passing in the asset. It's like all we really needed was the base denom
     if (!hasMetadata) return;
 
     chain.currencies.push(currency);
 
-  });
+  });*/
 
   // -- Get Description --
   chain.description = chain_reg.getFileProperty(chain_name, "chain", "description");
-
+  if (!chain.description) delete chain.description;
 
   // -- Create APIs Property --
   chain.apis = {};
@@ -333,7 +337,8 @@ function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   getChainSuggestionFeatures(chain, zoneChain);
 
   // -- Override Minimal Chain Object with new Suggestion-compatible Chain Object --
-  minimalChain = chain;
+  Object.assign(minimalChain, chain);
+  //since minimalChain is a reference, I want each property (and sub object) in chain object to be added to minimalChain
 
   return true;
 
@@ -343,31 +348,36 @@ function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
 function getZoneChainOverrideProperties(chain, zoneChain) {
 
   // -- Get Outage Alerts --
-  chain.outage = zoneChain.outage;
+  if (zoneChain.outage) chain.outage = zoneChain.outage;
 
   return true;
 
 }
 
-async function generateChains(chains, zone_chains, local_chain_name) {
+async function generateChains(chains, zoneChainlist, local_chain_name) {
   //zone_chains.forEach(async (zone_chain) => {
-  await asyncForEach(zone_chains, async (zoneChain) => {
+
+  await asyncForEach(zoneChainlist.chains, async (zoneChain) => {
 
     // -- Start Chain Object --
     let chain = {
-      chain_name: zone_chain.chain_name
+      chain_name: zoneChain.chain_name
     };
     // -- Minimal Metadata Requirements --
     let hasMinimalRequirements = getMininmalChainProperties(chain);
     if (!hasMinimalRequirements) return;
 
     // -- Suggestion Metadata Requirements --
-    let ableToSuggest = getSuggestionChainProperties(chain, zoneChain);
+    let ableToSuggest = await getSuggestionChainProperties(chain, zoneChain);
     if (!ableToSuggest) {
+      console.log("test2");
+      console.log(chain);
       chains.push(chain);
       return;
     }
-
+    console.log("test33");
+    console.log(chain);
+    
     // -- Get Manually Provided Values from Zone Chains --
     getZoneChainOverrideProperties(chain, zoneChain);
 
@@ -378,11 +388,16 @@ async function generateChains(chains, zone_chains, local_chain_name) {
   return;
 }
 
+function getZoneChains(chainName, zoneChainlist) {
+  zoneChainlist.chains = zone.readFromFile(chainName, zone.noDir, zone.zoneChainlistFileName)?.chains;
+}
+
 async function generateChainlist(chainName) {
 
-  let zoneChainlist = getZoneChains(chainName);
+  let zoneChainlist = {};
+  await getZoneChains(chainName, zoneChainlist);
   let chains = [];
-  await generateChains(chains, zoneChainlist.chains, chainName);
+  await generateChains(chains, zoneChainlist, chainName);
 
   let generatedChainlist = {
     zone: chainName,
@@ -398,7 +413,7 @@ async function generateChainlist(chainName) {
 }
 
 async function generateChainlists() {
-  for (const chainName of zone.chainNames) {
+  for (const chainName of zone.chainNames) {//mainnet, testnet, etc.
     await generateChainlist(chainName);
   }
 }

@@ -30,10 +30,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run code to Query Pools
-        working-directory: ./.github/workflows/utility
-        run: node queryPools.mjs
-
       - name: Run code to Validate Endpoints
         working-directory: ./.github/workflows/utility
         run: node validateEndpoints.mjs routineBulkValidation

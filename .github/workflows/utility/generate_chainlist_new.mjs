@@ -149,13 +149,15 @@ async function getSuggestionCurrencyProperties(currency, chain_name/*, asset = {
     logo_URIs = chain_reg.getAssetProperty(chain_name, base_denom, "images")?.[0];
   }
   currency.coinImageUrl = logo_URIs?.png ? logo_URIs?.png : logo_URIs?.svg;
-  if (!currency.coinImageUrl) return false;
+  //if (!currency.coinImageUrl) return false; // TODO: determine whether logo is required
 
   //TODO, also delete this once approved
   // -- Handle Exceptions --
   if (base_denom == currency.coinMinimalDenom) {
     delete currency.sourceDenom;
   }
+
+  delete currency.base_denom;
 
   return true;
 
@@ -170,29 +172,43 @@ function getChainSuggestionFeatures(chain, zoneChain) {
   const coinType = chain.slip44;
   feature = "eth-key-sign";
   if (!features.includes(feature)) {
-    if (coinType === 60) features.push(feature);
+    if (coinType === 60) zone.addUniqueArrayItem(feature, features);
   }
   feature = "eth-address-gen";
   if (!features.includes(feature)) {
-    if (coinType === 60) features.push(feature);
+    if (coinType === 60) zone.addUniqueArrayItem(feature, features);
   }
-
-  //ibc-go
-  feature = "ibc-go";
+  
   const recommended_version = chain_reg.getFileProperty(chain.chain_name, "chain", "codebase")?.recommended_version;
   if (recommended_version) {
     const versions = chain_reg.getFileProperty(chain.chain_name, "versions", "versions");
     for (const version of versions) {
       if (version.recommended_version === recommended_version) {
+
+        //ibc-go
+        feature = "ibc-go";
         if (version.ibc?.type === "go") {
-          features.push(feature);
+          zone.addUniqueArrayItem(feature, features);
         }
+
+        //cosmwasm
+        feature = "cosmwasm";
+        if (version.cosmwasm) {
+          zone.addUniqueArrayItem(feature, features);
+        }
+
       }
     }
   }
 
   //not sure how to derive wasmd_0.24+
-  
+  //keplr might be able to get this on their own, but it look like it needs "cosmwasm" to know whether to look for it
+  //still, the osmosis zone frontend needs this, so we may have to derive this ourselves.
+  //It's probably best to just have to manually specify it
+
+  if (features.length > 0) {
+    chain.features = features;
+  }
 
 }
 
@@ -206,16 +222,17 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   //Make sure it's a Cosmos Chain
   let chainType = chain_reg.getFileProperty(chain_name, "chain", "chain_type");
   if (chainType !== "cosmos") return false;
-  console.log("test3");
+
   // -- Get Basic Metadata --
   chain.status = chain_reg.getFileProperty(chain_name, "chain", "status");
   if (!chain.status) return false;
   chain.networkType = chain_reg.getFileProperty(chain_name, "chain", "network_type");
   if (!chain.networkType) return false;
   chain.prettyName = minimalChain.prettyName;
+  delete minimalChain.prettyName;
   chain.chain_id = chain_reg.getFileProperty(chain_name, "chain", "chain_id");
   if (!chain.chain_id) return false;
-  console.log("test4");
+
   // -- Get bech32_config --
   chain.bech32Prefix = chain_reg.getFileProperty(chain_name, "chain", "bech32_prefix");
   if (!chain.bech32Prefix) return false;
@@ -225,32 +242,33 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
     bech32_config[key] = chain.bech32Prefix?.concat(value);
   });
   chain.bech32Config = bech32_config;
-  console.log("test5");
+
   // -- Get SLIP44 --
   chain.slip44 = chain_reg.getFileProperty(chain_name, "chain", "slip44");
   if (!chain.slip44) return false;
   chain.alternativeSlip44s = chain_reg.getFileProperty(chain_name, "chain", "alternative_slip44s");
   if (!chain.alternativeSlip44s) delete chain.alternativeSlip44s;
-  console.log("test6");
+
   // -- Get Chain Logo --
   chain.logo_URIs = minimalChain.logo_URIs;
+  delete minimalChain.logo_URIs;
 
   // -- Check that Chain Fees Exist --
   let chainFees = chain_reg.getFileProperty(chain_name, "chain", "fees");
   if (!chainFees) return false;
-  console.log("test7");
+
   // -- Get APIs --
   let apis = chain_reg.getFileProperty(chain.chain_name, "chain", "apis");
   let rest = zoneChain.rest || apis?.rest?.[0].address
   if (!rest) return false;
   let rpc = zoneChain.rpc || apis?.rpc?.[0].address
   if (!rpc) return false;
-  console.log("test8");
+
   // -- Get Explorer Tx URL --
   let explorers = chain_reg.getFileProperty(chain.chain_name, "chain", "explorers");
   let explorer = zoneChain.explorer_tx_url || explorers?.[0].txPage;
   if (!explorer) return false;
-  console.log("test9");
+
   // -- By this point, we have the minimum required data to be able to suggest the chain --
 
   // -- Get Staking --
@@ -272,7 +290,7 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
     let currency = {
       base_denom: fee.denom
     }
-    const hasMetadata = getSuggestionCurrencyProperties(currency, chain_name);
+    const hasMetadata = await getSuggestionCurrencyProperties(currency, chain_name); //await is temporary to enforce property order
     if (!hasMetadata) return;
 
     // -- Gas Pricing --
@@ -296,9 +314,9 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   });
   //Double-check that there is at least one valid feeCurrency
   if (chain.feeCurrencies.length <= 0) return false;
-  console.log("test10");
 
-  /*// -- Get Currencies --
+
+  // -- Get Currencies --
   chain.currencies = [];
   let chain_assets = chain_reg.getFileProperty(chain_name, "assetlist", "assets");
 
@@ -308,12 +326,16 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
     let currency = {
       base_denom: asset.base
     }
-    const hasMetadata = getSuggestionCurrencyProperties(currency, chain_name*//*, asset*//*);//Here it's looking up the values for each asset again, but we're already passing in the asset. It's like all we really needed was the base denom
+    const hasMetadata = await getSuggestionCurrencyProperties(currency, chain_name, asset);//Here it's looking up the values for each asset again, but we're already passing in the asset. It's like all we really needed was the base denom
     if (!hasMetadata) return;
+
+    if (chain_name !== "osmosis" && chain_name !== "osmosistestnet5") {
+      delete currency.coinMinimalDenom; //TODO: temporary while this property it unused for regular currencies
+    }
 
     chain.currencies.push(currency);
 
-  });*/
+  });
 
   // -- Get Description --
   chain.description = chain_reg.getFileProperty(chain_name, "chain", "description");
@@ -370,13 +392,9 @@ async function generateChains(chains, zoneChainlist, local_chain_name) {
     // -- Suggestion Metadata Requirements --
     let ableToSuggest = await getSuggestionChainProperties(chain, zoneChain);
     if (!ableToSuggest) {
-      console.log("test2");
-      console.log(chain);
       chains.push(chain);
       return;
     }
-    console.log("test33");
-    console.log(chain);
     
     // -- Get Manually Provided Values from Zone Chains --
     getZoneChainOverrideProperties(chain, zoneChain);

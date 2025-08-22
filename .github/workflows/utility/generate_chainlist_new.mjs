@@ -28,21 +28,16 @@ async function asyncForEach(array, callback) {
   }
 }
 
-function getZoneAssetlist(chainName) {
-  zoneAssetlist = zone.readFromFile(
-    chainName,
-    zone.zoneConfigAssetlist,
-    zone.assetlistFileName
-  );
-}
-
 //getIbcDenom
 async function getLocalBaseDenom(chain_name, base_denom, local_chain_name) {
 
   if (chain_name == local_chain_name) return base_denom;
-  if (!zoneAssetlist) { getZoneAssetlist(local_chain_name); }
 
-  for (const asset of zoneAssetlist.assets) {//zoneAssetlist not populated?
+  let assets = [];
+  getZoneAssets(local_chain_name, assets);
+  if (assets.length <= 0) return;
+
+  for (const asset of assets) {//zoneAssetlist not populated?
     if (
       asset.base_denom == base_denom &&
       asset.chain_name == chain_name &&
@@ -51,27 +46,6 @@ async function getLocalBaseDenom(chain_name, base_denom, local_chain_name) {
       return await zone.calculateIbcHash(asset.path) || "";//the OR "" is temporary
     }
   }
-}
-
-function getCounterpartyChainsFromAssetlist(chainName) {
-
-  getZoneAssetlist(chainName);
-
-  //Write list of all counterparty chains
-  let counterpartyChainNames = [];
-  //iterate each chain in the file
-  zoneAssetlist?.assets?.forEach((asset) => {
-    //iterate each counterparty
-    asset.counterparty?.forEach((counterparty) => {
-      //add chain name to list (but don't add duplicates)
-      zone.addUniqueArrayItem(counterparty.chain_name, counterpartyChainNames);
-    });
-  });
-
-  //TODO: remove the cout--just for testing
-  console.log("counterpartyChainNames:")
-  console.log(counterpartyChainNames);
-
 }
 
 function getMininmalChainProperties(chain) {
@@ -258,15 +232,15 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   if (!chainFees) return false;
 
   // -- Get APIs --
-  let apis = chain_reg.getFileProperty(chain.chain_name, "chain", "apis");
-  let rest = zoneChain.rest || apis?.rest?.[0].address
+  let apis = chain_reg.getFileProperty(chain_name, "chain", "apis");
+  let rest = zoneChain.rest || apis?.rest?.[0]?.address
   if (!rest) return false;
-  let rpc = zoneChain.rpc || apis?.rpc?.[0].address
+  let rpc = zoneChain.rpc || apis?.rpc?.[0]?.address
   if (!rpc) return false;
 
   // -- Get Explorer Tx URL --
   let explorers = chain_reg.getFileProperty(chain.chain_name, "chain", "explorers");
-  let explorer = zoneChain.explorer_tx_url || explorers?.[0].txPage;
+  let explorer = zoneChain.explorer_tx_url || explorers?.[0]?.txPage;
   if (!explorer) return false;
 
   // -- By this point, we have the minimum required data to be able to suggest the chain --
@@ -326,6 +300,22 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
     let currency = {
       base_denom: asset.base
     }
+
+    //remove ics20 assets
+    if (chain_reg.getAssetProperty(chain_name, currency.base_denom, "type_asset") === "ics20") {
+      //but only if it's source chain is a cosmos chain
+      const traces = chain_reg.getAssetProperty(chain_name, currency.base_denom, "traces");
+      if (traces) {
+        const counterpartyChain = traces?.[traces.length - 1]?.counterparty?.chain_name;
+        if (counterpartyChain) {
+          const chainType = chain_reg.getFileProperty(counterpartyChain, "chain", "chain_type");
+          if (chainType === "cosmos") {
+            return;
+          }
+        }
+      }
+    }
+
     const hasMetadata = await getSuggestionCurrencyProperties(currency, chain_name, asset);//Here it's looking up the values for each asset again, but we're already passing in the asset. It's like all we really needed was the base denom
     if (!hasMetadata) return;
 
@@ -376,50 +366,101 @@ function getZoneChainOverrideProperties(chain, zoneChain) {
 
 }
 
-async function generateChains(chains, zoneChainlist, local_chain_name) {
+async function generateChains(generatedChains, chainsToGenerate, local_chain_name) {
   //zone_chains.forEach(async (zone_chain) => {
 
-  await asyncForEach(zoneChainlist.chains, async (zoneChain) => {
+  await asyncForEach(chainsToGenerate, async (chainToGenerate) => {
 
     // -- Start Chain Object --
     let chain = {
-      chain_name: zoneChain.chain_name
+      chain_name: chainToGenerate.chain_name
     };
     // -- Minimal Metadata Requirements --
     let hasMinimalRequirements = getMininmalChainProperties(chain);
     if (!hasMinimalRequirements) return;
 
     // -- Suggestion Metadata Requirements --
-    let ableToSuggest = await getSuggestionChainProperties(chain, zoneChain);
+    let ableToSuggest = await getSuggestionChainProperties(chain, chainToGenerate);
     if (!ableToSuggest) {
-      chains.push(chain);
+      generatedChains.push(chain);
       return;
     }
     
     // -- Get Manually Provided Values from Zone Chains --
-    getZoneChainOverrideProperties(chain, zoneChain);
+    getZoneChainOverrideProperties(chain, chainToGenerate);
 
     // -- Push Chain --
-    chains.push(chain);
+    generatedChains.push(chain);
 
   });
   return;
 }
 
-function getZoneChains(chainName, zoneChainlist) {
-  zoneChainlist.chains = zone.readFromFile(chainName, zone.noDir, zone.zoneChainlistFileName)?.chains;
+function getZoneChains(chainName, zoneChains) {
+  Object.assign(zoneChains,
+    zone.readFromFile(
+      chainName,
+      zone.noDir,
+      zone.zoneChainlistFileName
+    )?.chains || []
+  );
+}
+
+function getZoneAssets(chainName, assets) {
+  Object.assign(assets,
+    zone.readFromFile(
+      chainName,
+      zone.frontendAssetlistDir,
+      zone.assetlistFileName
+    )?.assets || []
+  );
+}
+
+function getCounterpartyChainsFromAssets(chainName, chains = []) {
+
+  //'assets' is an array of assets (formatted for frontend), which contains...
+  //...all zone_assets + all other qualifying assets from the chain registry.
+
+  //'chains' is an array of chains to add to the chainlist
+  //by this stage, it should already have all the chains from zone_chains
+  //this function adds to 'chains' any additional chains that are mentioned...
+  //...as a counterparty chain for any asset in 'assets'
+
+  let assets = [];
+  getZoneAssets(chainName, assets);
+  let chainNames = chains.map(chain => chain.chain_name);
+
+  //iterate each chain in the file
+  assets?.forEach((asset) => {
+    //iterate each counterparty
+    asset.counterparty?.forEach((counterparty) => {
+      //add chain name to list (but don't add duplicates)
+      //zone.addUniqueArrayItem(counterparty.chain_name, chainNames);
+      if (!chainNames.includes(counterparty.chain_name)) {
+        let chain = {
+          chain_name: counterparty.chain_name
+        }
+        chains.push(chain);
+      }
+    });
+  });
+
 }
 
 async function generateChainlist(chainName) {
 
-  let zoneChainlist = {};
-  await getZoneChains(chainName, zoneChainlist);
   let chains = [];
-  await generateChains(chains, zoneChainlist, chainName);
+  await getZoneChains(chainName, chains); // manually specified chains from zone_chains file
+
+  //still need to get qualifying assets
+  getCounterpartyChainsFromAssets(chainName, chains); // get additional chains
+
+  let generatedChains = [];
+  await generateChains(generatedChains, chains, chainName);//remove chainName once confirmed that it's not needed
 
   let generatedChainlist = {
     zone: chainName,
-    chains: chains,
+    chains: generatedChains,
   };
 
   zone.writeToFile(

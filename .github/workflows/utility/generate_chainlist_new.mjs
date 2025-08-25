@@ -154,11 +154,6 @@ function getChainSuggestionFeatures(chain, zoneChain) {
     if (coinType === 60) zone.addUniqueArrayItem(feature, features);
   }*/
 
-  if (chain.chain_name.startWith("osmosis")) {
-    feature = "osmosis-txfees";
-    zone.addUniqueArrayItem(feature, features);
-  }
-
   const recommended_version = chain_reg.getFileProperty(chain.chain_name, "chain", "codebase")?.recommended_version;
   if (recommended_version) {
     const versions = chain_reg.getFileProperty(chain.chain_name, "versions", "versions");

@@ -28,8 +28,8 @@ async function asyncForEach(array, callback) {
   }
 }
 
-//getIbcDenom
-async function getLocalBaseDenom(chain_name, base_denom, local_chain_name) {
+//getIbcDenom // delete?
+/*async function getLocalBaseDenom(chain_name, base_denom, local_chain_name) {
 
   if (chain_name == local_chain_name) return base_denom;
 
@@ -46,7 +46,7 @@ async function getLocalBaseDenom(chain_name, base_denom, local_chain_name) {
       return await zone.calculateIbcHash(asset.path) || "";//the OR "" is temporary
     }
   }
-}
+}*/
 
 function getMininmalChainProperties(chain) {
 
@@ -96,23 +96,24 @@ async function getSuggestionCurrencyProperties(currency, chain_name/*, asset = {
   const base_denom = currency.base_denom;
   if (!currency.base_denom) return false;
 
-  const local_chain_name = "osmosis";//delete later
+  //const local_chain_name = "osmosis";//delete later
 
   // -- Get Properties Pt. 1 --
   currency.coinDenom = chain_reg.getAssetProperty(chain_name, base_denom, "symbol");
   if (!currency.coinDenom) return false;
-  currency.chainSuggestionDenom = base_denom;
+  //currency.chainSuggestionDenom = base_denom; // delete this once we know we don't need it
 
   //TODO: Confirm that we would be able to get rid of this (still will use the same property name)
   // -- Get Osmosis-local Base Denom
-  currency.coinMinimalDenom = await getLocalBaseDenom(
+  /*currency.coinMinimalDenom = await getLocalBaseDenom(
     chain_name,
     base_denom,
     local_chain_name
-  ) || "";
+  ) || "";*/
+  currency.coinMinimalDenom = base_denom;
 
   // -- Get Properties Pt. 2 --
-  currency.sourceDenom = base_denom;
+  //currency.sourceDenom = base_denom; // delete this once we know we don't need it
   currency.coinDecimals = chain_reg.getAssetDecimals(chain_name, base_denom) || 0;
   currency.coinGeckoId = chain_reg.getAssetPropertyWithTraceIBC(chain_name, base_denom, "coingecko_id");
   if (!currency.coinGeckoId) delete currency.coinGeckoId;
@@ -127,9 +128,9 @@ async function getSuggestionCurrencyProperties(currency, chain_name/*, asset = {
 
   //TODO, also delete this once approved
   // -- Handle Exceptions --
-  if (base_denom == currency.coinMinimalDenom) {
+  /*if (base_denom == currency.coinMinimalDenom) {
     delete currency.sourceDenom;
-  }
+  }*/
 
   delete currency.base_denom;
 
@@ -143,7 +144,7 @@ function getChainSuggestionFeatures(chain, zoneChain) {
   let feature = "";
 
   //eth-key-sign, eth-address-gen === coinType 60
-  const coinType = chain.slip44;
+  /*const coinType = chain.slip44;
   feature = "eth-key-sign";
   if (!features.includes(feature)) {
     if (coinType === 60) zone.addUniqueArrayItem(feature, features);
@@ -151,8 +152,13 @@ function getChainSuggestionFeatures(chain, zoneChain) {
   feature = "eth-address-gen";
   if (!features.includes(feature)) {
     if (coinType === 60) zone.addUniqueArrayItem(feature, features);
+  }*/
+
+  if (chain.chain_name.startWith("osmosis")) {
+    feature = "osmosis-txfees";
+    zone.addUniqueArrayItem(feature, features);
   }
-  
+
   const recommended_version = chain_reg.getFileProperty(chain.chain_name, "chain", "codebase")?.recommended_version;
   if (recommended_version) {
     const versions = chain_reg.getFileProperty(chain.chain_name, "versions", "versions");
@@ -319,9 +325,9 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
     const hasMetadata = await getSuggestionCurrencyProperties(currency, chain_name, asset);//Here it's looking up the values for each asset again, but we're already passing in the asset. It's like all we really needed was the base denom
     if (!hasMetadata) return;
 
-    if (chain_name !== "osmosis" && chain_name !== "osmosistestnet5") {
+    /*if (chain_name !== "osmosis" && chain_name !== "osmosistestnet5") {
       delete currency.coinMinimalDenom; //TODO: temporary while this property it unused for regular currencies
-    }
+    }*/
 
     chain.currencies.push(currency);
 

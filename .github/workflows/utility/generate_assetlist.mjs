@@ -26,6 +26,106 @@ async function asyncForEach(array, callback) {
   }
 }
 
+async function getAssetsFromChainRegistry(localChainName, asset_datas) {
+
+  //get network_type (mainnet vs testnet)
+  const localNetworkType = chain_reg.getFileProperty(localChainName, "chain", "network_type");
+  if (localNetworkType !== "mainnet" && localNetworkType !== "testnet" && localNetworkType !== "devnet") return;
+
+  //try each chain of that network_type
+  let chains = chain_reg.getChains() || [];
+
+  await asyncForEach(chains, async (chainName) => {
+
+    if (chainName === localChainName) return; //we'll check assets under this chain separately
+
+    const networkType = chain_reg.getFileProperty(chainName, "chain", "network_type");
+    if (networkType !== localNetworkType) return; // must match the local chain's network type
+
+    const chainType = chain_reg.getFileProperty(chainName, "chain", "chain_type");
+    if (chainType !== "cosmos") return; // must be a cosmos chain
+
+    // Checkpoint: the chain now qualifies, but we still need to check that there exists an ibc connection
+
+    //get IBC channels
+    const channels = chain_reg.getIbcFileProperty(chainName, localChainName, "channels") || [];
+    if (channels.length <= 0) return;
+
+    //find the transfer/transfer channel
+    const defaultChannel = channels.find(channel => (
+      channel.chain_1.port_id === "transfer" && channel.chain_2.port_id === "transfer"
+    ));
+
+    //find the only cw20 channel
+    const cw20Channels = channels.filter(channel => (
+      channel.chain_1.port_id.startsWith("cw20:") || channel.chain_2.port_id.startsWith("cw20:")
+    ));
+    let cw20Channel;
+    if (cw20Channels.length === 1) cw20Channel = cw20Channels[0];
+
+    if (!defaultChannel && !cw20Channel) return;
+    const isChain1 = chainName === [chainName, localChainName].sort() ? true : false;
+
+    // Checkpoint: now that we know there exists an ibc connection, we can iterate the assets
+
+    //get the chain's assets
+    const assets = chain_reg.getFileProperty(chainName, "assetlist", "assets") || [];
+
+    //iterate the assets
+    assets.forEach((asset) => {
+
+      //get asset type
+      const typeAsset = asset.type_asset;
+      if (typeAsset !== "sdk.coin" && typeAsset !== "cw20") return;
+
+      //set base_denom
+      const baseDenom = asset.base;
+
+      //--Establish Asset Data--
+      let asset_data = {
+        chainName: localChainName, //osmosis vs osmosistestnet vs osmosistestnet4 vs ...
+        zone_config: {},
+        zone_asset: {},
+        frontend: {},
+        chain_reg: {},
+        asset_detail: {},
+      }
+
+      //we should check to make sure it's not already in the zone_assets
+      let existingAsset = asset_datas.find((asset_data) => {
+        asset_data.zone_asset.chain_name === chainName && asset_data.zone_asset.base_denom === baseDenom
+      }); 
+      // but this doesn't check cases where it's registered directly under osmosis
+      if (existingAsset) return;
+
+      asset_data.zone_asset.chain_name = chainName;
+      asset_data.zone_asset.base_Denom = baseDenom;
+
+      //source_asset (the most recent ibc transfer source (not necessarily the origin))
+      assetlist.setSourceAsset(asset_data);
+
+      const channel = typeAsset === "cw20" ? cw20Channel : defaultChannel;
+      const channel_id = isChain1 ? channel.chain_2.channel_id : channel.chain_1.channel_id;
+      const path = "transfer" & "/" & channel_id & "/" & baseDenom;
+
+      asset_data.zone_asset.path = path;
+
+      await assetlist.setLocalAsset(asset_data);
+
+      existingAsset = asset_datas.find((existingAssetData) => (
+        existingAssetData.local_asset.base_denom === asset_data.local_asset.base_denom
+      ));
+      if (existingAsset) return;
+
+      //add to asset_datas array
+      asset_datas.push(asset_data);
+
+    });
+
+  });
+
+}
+
 const generateAssets = async (
   chainName,
   zoneConfig,
@@ -66,7 +166,7 @@ const generateAssets = async (
     //source_asset (the most recent ibc transfer source (not necessarily the origin))
     assetlist.setSourceAsset(asset_data);
 
-    //make usre it exists
+    //make sure it exists
     if (!chain_reg.getAssetProperty(asset_data.source_asset.chain_name, asset_data.source_asset.base_denom, "base")) {
       console.log(`Asset does not exist! ${asset_data.source_asset.chain_name}, ${asset_data.source_asset.base_denom}`);
       return;
@@ -85,6 +185,9 @@ const generateAssets = async (
     asset_datas.push(asset_data);
 
   });
+
+  //get assets from chain registry
+  await getAssetsFromChainRegistry(chainName, asset_datas);
 
   assetlist.setCanonicalAssets(asset_datas);
   assetlist.setIdentityAssets(asset_datas);
@@ -185,9 +288,9 @@ async function generateAssetlist(chainName) {
     chainName,
     zoneConfig,
     zoneAssetlist,
-    frontend_assets,
-    chain_reg_assets,
-    asset_detail_assets
+    frontend_assets, //saves to generated/frontend/assetlist.json
+    chain_reg_assets, //saves to generated/chain_registry/assetlist.json
+    asset_detail_assets //saves to generated/asset_detail/assetlist.json
   );
 
   let frontend_assetlist = {

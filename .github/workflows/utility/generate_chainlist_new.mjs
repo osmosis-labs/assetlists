@@ -77,10 +77,14 @@ function getMininmalChainProperties(chain) {
         if (!stakingTokenLogoURIs) {
           let stakingTokenImage = chain_reg.getAssetProperty(chain_name, stakingTokenDenom, "images")?.[0];
           if (stakingTokenImage) {
-            chain.logo_URIs = image;
+            chain.logo_URIs = stakingTokenImage;
             delete chain.logo_URIs.image_sync;
             delete chain.logo_URIs.theme;
           }
+        } else {
+          chain.logo_URIs = stakingTokenLogoURIs;
+          delete chain.logo_URIs.image_sync;
+          delete chain.logo_URIs.theme;
         }
       }
     }
@@ -204,7 +208,7 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   chain.networkType = chain_reg.getFileProperty(chain_name, "chain", "network_type");
   if (!chain.networkType) return false;
   chain.prettyName = minimalChain.prettyName;
-  delete minimalChain.prettyName;
+  
   chain.chain_id = chain_reg.getFileProperty(chain_name, "chain", "chain_id");
   if (!chain.chain_id) return false;
 
@@ -226,7 +230,6 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
 
   // -- Get Chain Logo --
   chain.logo_URIs = minimalChain.logo_URIs;
-  delete minimalChain.logo_URIs;
 
   // -- Check that Chain Fees Exist --
   let chainFees = chain_reg.getFileProperty(chain_name, "chain", "fees");
@@ -245,6 +248,9 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   if (!explorer) return false;
 
   // -- By this point, we have the minimum required data to be able to suggest the chain --
+
+  delete minimalChain.prettyName;
+  delete minimalChain.logo_URIs;
 
   // -- Get Staking --
   let chain_staking = chain_reg.getFileProperty(chain_name, "chain", "staking");

@@ -89,6 +89,160 @@
       ]
     },
     {
+      "chain_name": "cosmoshubtestnet",
+      "status": "live",
+      "networkType": "testnet",
+      "prettyName": "[DEPRECATED] Cosmos Hub Public Testnet, will be sunset 2024-12-01",
+      "chain_id": "theta-testnet-001",
+      "bech32Prefix": "cosmos",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "cosmos",
+        "bech32PrefixAccPub": "cosmospub",
+        "bech32PrefixValAddr": "cosmosvaloper",
+        "bech32PrefixValPub": "cosmosvaloperpub",
+        "bech32PrefixConsAddr": "cosmosvalcons",
+        "bech32PrefixConsPub": "cosmosvalconspub"
+      },
+      "slip44": 118,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.svg"
+      },
+      "stakeCurrency": {
+        "coinDenom": "ATOM",
+        "coinMinimalDenom": "uatom",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "ATOM",
+          "coinMinimalDenom": "uatom",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+          "gasPriceStep": {
+            "low": 0.01,
+            "average": 0.025,
+            "high": 0.03
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "ATOM",
+          "coinMinimalDenom": "uatom",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.sentry-01.theta-testnet.polypore.xyz:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.sentry-01.theta-testnet.polypore.xyz/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://mintscan.io/osmosis-testnet/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "junotestnet6",
+      "status": "killed",
+      "networkType": "testnet",
+      "prettyName": "Juno Testnet",
+      "chain_id": "uni-6",
+      "bech32Prefix": "juno",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "juno",
+        "bech32PrefixAccPub": "junopub",
+        "bech32PrefixValAddr": "junovaloper",
+        "bech32PrefixValPub": "junovaloperpub",
+        "bech32PrefixConsAddr": "junovalcons",
+        "bech32PrefixConsPub": "junovalconspub"
+      },
+      "slip44": 118,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.svg"
+      },
+      "stakeCurrency": {
+        "coinDenom": "JUNOX",
+        "coinMinimalDenom": "ujunox",
+        "coinDecimals": 6,
+        "coinGeckoId": "juno-network",
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "JUNOX",
+          "coinMinimalDenom": "ujunox",
+          "coinDecimals": 6,
+          "coinGeckoId": "juno-network",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png",
+          "gasPriceStep": {
+            "low": 0.003,
+            "average": 0.0045,
+            "high": 0.006
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "JUNOX",
+          "coinMinimalDenom": "ujunox",
+          "coinDecimals": 6,
+          "coinGeckoId": "juno-network",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png"
+        },
+        {
+          "coinDenom": "NEXX",
+          "coinMinimalDenom": "factory/juno12klaltyqvg2j6v034jwdxrk5n4242ttse4sdpt/NEXX",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/nexx.png"
+        },
+        {
+          "coinDenom": "ARENA",
+          "coinMinimalDenom": "factory/juno12dgadj3wwv5jn0ec7tw5cgvq526nn4gnt2tujlmd57p2ra6k87esl36r9k/ARENA",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/arena.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.uni.junonetwork.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.uni.junonetwork.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://mintscan.io/juno-testnet/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
+    },
+    {
       "chain_name": "marstestnet",
       "status": "live",
       "networkType": "testnet",
@@ -153,6 +307,121 @@
       ]
     },
     {
+      "chain_name": "axelartestnet",
+      "status": "live",
+      "networkType": "testnet",
+      "prettyName": "Axelar Testnet",
+      "chain_id": "axelar-testnet-lisbon-3",
+      "bech32Prefix": "axelar",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "axelar",
+        "bech32PrefixAccPub": "axelarpub",
+        "bech32PrefixValAddr": "axelarvaloper",
+        "bech32PrefixValPub": "axelarvaloperpub",
+        "bech32PrefixConsAddr": "axelarvalcons",
+        "bech32PrefixConsPub": "axelarvalconspub"
+      },
+      "slip44": 118,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/axl.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/axl.svg"
+      },
+      "stakeCurrency": {
+        "coinDenom": "AXL",
+        "coinMinimalDenom": "uaxl",
+        "coinDecimals": 6,
+        "coinGeckoId": "axelar",
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/axl.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "AXL",
+          "coinMinimalDenom": "uaxl",
+          "coinDecimals": 6,
+          "coinGeckoId": "axelar",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/axl.png",
+          "gasPriceStep": {
+            "low": 0.007,
+            "average": 0.007,
+            "high": 0.01
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "AXL",
+          "coinMinimalDenom": "uaxl",
+          "coinDecimals": 6,
+          "coinGeckoId": "axelar",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/axl.png"
+        },
+        {
+          "coinDenom": "aUSDC",
+          "coinMinimalDenom": "uausdc",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
+        },
+        {
+          "coinDenom": "axlWETH",
+          "coinMinimalDenom": "eth-wei",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/weth.svg"
+        },
+        {
+          "coinDenom": "WDEV",
+          "coinMinimalDenom": "wglmr-wei",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/moonbeam/images/glmr.svg"
+        },
+        {
+          "coinDenom": "WMATIC",
+          "coinMinimalDenom": "wmatic-wei",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polygon/images/wmatic.svg"
+        },
+        {
+          "coinDenom": "WBNB",
+          "coinMinimalDenom": "wbnb-wei",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/wbnb.png"
+        },
+        {
+          "coinDenom": "WAVAX",
+          "coinMinimalDenom": "wavax-wei",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/avalanche/images/wavax.svg"
+        },
+        {
+          "coinDenom": "WFTM",
+          "coinMinimalDenom": "wftm-wei",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/fantom/images/ftm.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-axelar-testnet.imperator.co:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd-axelar-testnet.imperator.co:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://testnet.axelarscan.io/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "axelar-evm-bridge"
+      ]
+    },
+    {
       "chain_name": "akashtestnet",
       "status": "live",
       "networkType": "testnet",
@@ -214,6 +483,78 @@
       "explorers": [
         {
           "txPage": "https://explorer.sandbox-01.aksh.pw/akash/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "kyvetestnet",
+      "status": "live",
+      "networkType": "testnet",
+      "prettyName": "KYVE Kaon",
+      "chain_id": "kaon-1",
+      "bech32Prefix": "kyve",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "kyve",
+        "bech32PrefixAccPub": "kyvepub",
+        "bech32PrefixValAddr": "kyvevaloper",
+        "bech32PrefixValPub": "kyvevaloperpub",
+        "bech32PrefixConsAddr": "kyvevalcons",
+        "bech32PrefixConsPub": "kyvevalconspub"
+      },
+      "slip44": 118,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kyve/images/kyve-token.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kyve/images/kyve-token.svg"
+      },
+      "stakeCurrency": {
+        "coinDenom": "KYVE",
+        "coinMinimalDenom": "tkyve",
+        "coinDecimals": 6,
+        "coinGeckoId": "kyve-network",
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kyve/images/kyve-token.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "KYVE",
+          "coinMinimalDenom": "tkyve",
+          "coinDecimals": 6,
+          "coinGeckoId": "kyve-network",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kyve/images/kyve-token.png",
+          "gasPriceStep": {
+            "low": 0.02,
+            "average": 0.03,
+            "high": 0.06
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "KYVE",
+          "coinMinimalDenom": "tkyve",
+          "coinDecimals": 6,
+          "coinGeckoId": "kyve-network",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kyve/images/kyve-token.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-eu-1.kaon.kyve.network"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-eu-1.kaon.kyve.network"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://mintscan.io/kyve-testnet/tx/${txHash}"
         }
       ],
       "features": [
@@ -359,6 +700,161 @@
       "features": [
         "ibc-transfer",
         "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "composabletestnet",
+      "status": "live",
+      "networkType": "testnet",
+      "prettyName": "Composable Testnet",
+      "chain_id": "banksy-testnet-3",
+      "bech32Prefix": "centauri",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "centauri",
+        "bech32PrefixAccPub": "centauripub",
+        "bech32PrefixValAddr": "centaurivaloper",
+        "bech32PrefixValPub": "centaurivaloperpub",
+        "bech32PrefixConsAddr": "centaurivalcons",
+        "bech32PrefixConsPub": "centaurivalconspub"
+      },
+      "slip44": 118,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/composable.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/composable.svg"
+      },
+      "stakeCurrency": {
+        "coinDenom": "PICA",
+        "coinMinimalDenom": "ppica",
+        "coinDecimals": 12,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/composable.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "PICA",
+          "coinMinimalDenom": "ppica",
+          "coinDecimals": 12,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/composable.png"
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "PICA",
+          "coinMinimalDenom": "ppica",
+          "coinDecimals": 12,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/composable.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-banksy.notional.ventures"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-banksy.notional.ventures"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://explorer.nodexcapital.com/composable-3/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "persistencetestnet2",
+      "status": "live",
+      "networkType": "testnet",
+      "prettyName": "Persistence Testnet",
+      "chain_id": "test-core-2",
+      "bech32Prefix": "persistence",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "persistence",
+        "bech32PrefixAccPub": "persistencepub",
+        "bech32PrefixValAddr": "persistencevaloper",
+        "bech32PrefixValPub": "persistencevaloperpub",
+        "bech32PrefixConsAddr": "persistencevalcons",
+        "bech32PrefixConsPub": "persistencevalconspub"
+      },
+      "slip44": 118,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.svg"
+      },
+      "stakeCurrency": {
+        "coinDenom": "XPRT",
+        "coinMinimalDenom": "uxprt",
+        "coinDecimals": 6,
+        "coinGeckoId": "persistence",
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "XPRT",
+          "coinMinimalDenom": "uxprt",
+          "coinDecimals": 6,
+          "coinGeckoId": "persistence",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.png",
+          "gasPriceStep": {
+            "low": 0.05,
+            "average": 0.125,
+            "high": 0.2
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "XPRT",
+          "coinMinimalDenom": "uxprt",
+          "coinDecimals": 6,
+          "coinGeckoId": "persistence",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.png"
+        },
+        {
+          "coinDenom": "stkATOM",
+          "coinMinimalDenom": "stk/uatom",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/stkatom.png"
+        },
+        {
+          "coinDenom": "stkOSMO",
+          "coinMinimalDenom": "stk/uosmo",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/stkosmo.png"
+        },
+        {
+          "coinDenom": "stkDV4TNT",
+          "coinMinimalDenom": "stk/adv4tnt",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/stkdv4tnt.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.testnet2.persistence.one"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.testnet2.persistence.one"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://mintscan.io/persistence-testnet/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "cosmwasm"
       ]
     },
     {
@@ -737,6 +1233,75 @@
         "ibc-transfer",
         "cosmwasm",
         "wasmd_0.24+"
+      ]
+    },
+    {
+      "chain_name": "kimanetworktestnet",
+      "status": "live",
+      "networkType": "testnet",
+      "prettyName": "Kima Network Testnet",
+      "chain_id": "kima_testnet",
+      "bech32Prefix": "kima",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "kima",
+        "bech32PrefixAccPub": "kimapub",
+        "bech32PrefixValAddr": "kimavaloper",
+        "bech32PrefixValPub": "kimavaloperpub",
+        "bech32PrefixConsAddr": "kimavalcons",
+        "bech32PrefixConsPub": "kimavalconspub"
+      },
+      "slip44": 118,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.svg"
+      },
+      "stakeCurrency": {
+        "coinDenom": "KIMA",
+        "coinMinimalDenom": "uKIMA",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "KIMA",
+          "coinMinimalDenom": "uKIMA",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.png",
+          "gasPriceStep": {
+            "low": 0.0025,
+            "average": 0.025,
+            "high": 0.04
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "KIMA",
+          "coinMinimalDenom": "uKIMA",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-testnet.kima.finance/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api-testnet.kima.finance"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://explorer-testnet.kima.finance/transactions/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
       ]
     },
     {

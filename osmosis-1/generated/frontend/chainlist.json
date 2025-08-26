@@ -14765,6 +14765,74 @@
       ]
     },
     {
+      "chain_name": "doravota",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Dora Vota",
+      "chain_id": "vota-ash",
+      "bech32Prefix": "dora",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "dora",
+        "bech32PrefixAccPub": "dorapub",
+        "bech32PrefixValAddr": "doravaloper",
+        "bech32PrefixValPub": "doravaloperpub",
+        "bech32PrefixConsAddr": "doravalcons",
+        "bech32PrefixConsPub": "doravalconspub"
+      },
+      "slip44": 118,
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/doravota/images/dora.svg"
+      },
+      "stakeCurrency": {
+        "coinDenom": "DORA",
+        "coinMinimalDenom": "peaka",
+        "coinDecimals": 18,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/doravota/images/dora.svg"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "DORA",
+          "coinMinimalDenom": "peaka",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/doravota/images/dora.svg",
+          "gasPriceStep": {
+            "low": 100000000000,
+            "average": 100000000000,
+            "high": 100000000000
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "DORA",
+          "coinMinimalDenom": "peaka",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/doravota/images/dora.svg"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://vota-rpc.dorafactory.org"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://vota-rest.dorafactory.org"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://vota-explorer.dorafactory.org/doravota/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go"
+      ]
+    },
+    {
       "chain_name": "coreum",
       "status": "live",
       "networkType": "mainnet",
@@ -15030,6 +15098,93 @@
       "features": [
         "ibc-go",
         "ibc-transfer"
+      ]
+    },
+    {
+      "chain_name": "fxcore",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Pundi AIFX",
+      "chain_id": "fxcore",
+      "bech32Prefix": "fx",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "fx",
+        "bech32PrefixAccPub": "fxpub",
+        "bech32PrefixValAddr": "fxvaloper",
+        "bech32PrefixValPub": "fxvaloperpub",
+        "bech32PrefixConsAddr": "fxvalcons",
+        "bech32PrefixConsPub": "fxvalconspub"
+      },
+      "slip44": 60,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/PUNDIAI.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/PUNDIAI.svg"
+      },
+      "stakeCurrency": {
+        "coinDenom": "PUNDIAI",
+        "coinMinimalDenom": "apundiai",
+        "coinDecimals": 18,
+        "coinGeckoId": "pundi-aifx",
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/PUNDIAI.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "PUNDIAI",
+          "coinMinimalDenom": "apundiai",
+          "coinDecimals": 18,
+          "coinGeckoId": "pundi-aifx",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/PUNDIAI.png",
+          "gasPriceStep": {
+            "low": 5000000000,
+            "average": 5100000000,
+            "high": 5200000000
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "PUNDIAI",
+          "coinMinimalDenom": "apundiai",
+          "coinDecimals": 18,
+          "coinGeckoId": "pundi-aifx",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/PUNDIAI.png"
+        },
+        {
+          "coinDenom": "FX",
+          "coinMinimalDenom": "FX",
+          "coinDecimals": 18,
+          "coinGeckoId": "fx-coin",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/fx.png"
+        },
+        {
+          "coinDenom": "PUNDIX",
+          "coinMinimalDenom": "eth0x0FD10b9899882a6f2fcb5c371E17e70FdEe00C38",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pundix/images/pundi-x-token-logo.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://fx-json.functionx.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://fx-rest.functionx.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://starscan.io/fxcore/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-transfer",
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
       ]
     },
     {
@@ -19276,6 +19431,69 @@
       ]
     },
     {
+      "chain_name": "aaronetwork",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Aaron Network",
+      "chain_id": "aaronetwork",
+      "bech32Prefix": "aaron",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "aaron",
+        "bech32PrefixAccPub": "aaronpub",
+        "bech32PrefixValAddr": "aaronvaloper",
+        "bech32PrefixValPub": "aaronvaloperpub",
+        "bech32PrefixConsAddr": "aaronvalcons",
+        "bech32PrefixConsPub": "aaronvalconspub"
+      },
+      "slip44": 118,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aaronetwork/images/aaron.png"
+      },
+      "stakeCurrency": {
+        "coinDenom": "AARON",
+        "coinMinimalDenom": "uaaron",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aaronetwork/images/aaron.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "AARON",
+          "coinMinimalDenom": "uaaron",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aaronetwork/images/aaron.png"
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "AARON",
+          "coinMinimalDenom": "uaaron",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aaronetwork/images/aaron.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://mainnet-rpc.aaronetwork.xyz"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://mainnet-api.aaronetwork.xyz"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://ping.aaronetwork.xyz/Aaron%20Network/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "ibc-transfer"
+      ]
+    },
+    {
       "chain_name": "kopi",
       "status": "live",
       "networkType": "mainnet",
@@ -20252,6 +20470,7 @@
     },
     {
       "chain_name": "hippoprotocol",
+      "prettyName": "Hippo Protocol",
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hippoprotocol/images/logo.svg"
       }

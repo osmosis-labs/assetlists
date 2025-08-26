@@ -420,8 +420,8 @@ export function setIdentityAsset(asset_data) {
     ) { break; }
 
     let provider = null;
-    if ( traceTypesNeedingProvider.includes(traces[i].type) ) {
-      provider = asset_data.zone_config?.providers.find(
+    if (traceTypesNeedingProvider.includes(traces[i].type)) {
+      provider = asset_data.zone_config?.providers?.find(
         provider =>  //where...
           provider.provider === traces[i].provider
       )

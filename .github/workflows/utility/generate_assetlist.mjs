@@ -48,7 +48,7 @@ async function getAssetsFromChainRegistry(localChainName, asset_datas) {
     // Checkpoint: the chain now qualifies, but we still need to check that there exists an ibc connection
 
     //get IBC channels
-    const channels = chain_reg.getIbcFileProperty(chainName, localChainName, "channels") || [];
+    const channels = chain_reg.getIBCFileProperty(chainName, localChainName, "channels") || [];
     if (channels.length <= 0) return;
 
     //find the transfer/transfer channel
@@ -64,7 +64,7 @@ async function getAssetsFromChainRegistry(localChainName, asset_datas) {
     if (cw20Channels.length === 1) cw20Channel = cw20Channels[0];
 
     if (!defaultChannel && !cw20Channel) return;
-    const isChain1 = chainName === [chainName, localChainName].sort() ? true : false;
+    const isChain1 = chainName === [chainName, localChainName].sort()?.[0] ? true : false;
 
     // Checkpoint: now that we know there exists an ibc connection, we can iterate the assets
 
@@ -72,7 +72,8 @@ async function getAssetsFromChainRegistry(localChainName, asset_datas) {
     const assets = chain_reg.getFileProperty(chainName, "assetlist", "assets") || [];
 
     //iterate the assets
-    assets.forEach((asset) => {
+    await asyncForEach(assets, async (asset) => {
+    //assets.forEach((asset) => {
 
       //get asset type
       const typeAsset = asset.type_asset;
@@ -99,14 +100,15 @@ async function getAssetsFromChainRegistry(localChainName, asset_datas) {
       if (existingAsset) return;
 
       asset_data.zone_asset.chain_name = chainName;
-      asset_data.zone_asset.base_Denom = baseDenom;
+      asset_data.zone_asset.base_denom = baseDenom;
 
       //source_asset (the most recent ibc transfer source (not necessarily the origin))
       assetlist.setSourceAsset(asset_data);
 
       const channel = typeAsset === "cw20" ? cw20Channel : defaultChannel;
+      if (typeAsset === "cw20" && !cw20Channel) return;
       const channel_id = isChain1 ? channel.chain_2.channel_id : channel.chain_1.channel_id;
-      const path = "transfer" & "/" & channel_id & "/" & baseDenom;
+      const path = "transfer" + "/" + channel_id + "/" + baseDenom;
 
       asset_data.zone_asset.path = path;
 

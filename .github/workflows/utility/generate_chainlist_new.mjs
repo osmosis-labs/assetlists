@@ -86,6 +86,23 @@ function getMininmalChainProperties(chain) {
           delete chain.logo_URIs.image_sync;
           delete chain.logo_URIs.theme;
         }
+      } else {
+        let feeTokenDenom = chain_reg.getFileProperty(chain_name, "chain", "fees")?.fee_tokens?.[0].denom;
+        if (feeTokenDenom) {
+          let feeTokenLogoURIs = chain_reg.getAssetProperty(chain_name, feeTokenDenom, "logo_URIs");
+          if (!feeTokenLogoURIs) {
+            let feeTokenImage = chain_reg.getAssetProperty(chain_name, feeTokenDenom, "images")?.[0];
+            if (feeTokenImage) {
+              chain.logo_URIs = feeTokenImage;
+              delete chain.logo_URIs.image_sync;
+              delete chain.logo_URIs.theme;
+            }
+          } else {
+            chain.logo_URIs = feeTokenLogoURIs;
+            delete chain.logo_URIs.image_sync;
+            delete chain.logo_URIs.theme;
+          }
+        }
       }
     }
   }
@@ -443,11 +460,12 @@ function getCounterpartyChainsFromAssets(chainName, chains = []) {
     asset.counterparty?.forEach((counterparty) => {
       //add chain name to list (but don't add duplicates)
       //zone.addUniqueArrayItem(counterparty.chain_name, chainNames);
-      if (!chainNames.includes(counterparty.chain_name)) {
+      if (!chainNames.includes(counterparty.chainName)) {
         let chain = {
-          chain_name: counterparty.chain_name
+          chain_name: counterparty.chainName
         }
         chains.push(chain);
+        chainNames.push(counterparty.chainName);
       }
     });
   });

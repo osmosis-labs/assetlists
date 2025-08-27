@@ -1513,29 +1513,32 @@ export function setTransferMethods(asset_data) {
   });
 
   if (asset_data.source_asset.chain_name !== asset_data.chainName) {
-    const traces = getAssetProperty(asset_data.local_asset, "traces");
-    const trace = traces?.[traces.length - 1];
-    const ibcTransferMethod = {
-      name: "Osmosis IBC Transfer",
-      type: "ibc",
-      counterparty: {
-        chainName: trace.counterparty.chain_name,
-        chainId: chain_reg.getFileProperty(
-          trace.counterparty.chain_name,
-          "chain",
-          "chain_id"
-        ),
-        sourceDenom: trace.counterparty.base_denom,
-        port: trace.counterparty.port ?? "transfer",
-        channelId: trace.counterparty.channel_id
-      },
-      chain: {
-        port: trace.chain.port ?? "transfer",
-        channelId: trace.chain.channel_id,
-        path: trace.chain.path
+    const live = chain_reg.getFileProperty(asset_data.source_asset.chain_name, "chain", "status");
+    if (live === "live") {
+      const traces = getAssetProperty(asset_data.local_asset, "traces");
+      const trace = traces?.[traces.length - 1];
+      const ibcTransferMethod = {
+        name: "Osmosis IBC Transfer",
+        type: "ibc",
+        counterparty: {
+          chainName: trace.counterparty.chain_name,
+          chainId: chain_reg.getFileProperty(
+            trace.counterparty.chain_name,
+            "chain",
+            "chain_id"
+          ),
+          sourceDenom: trace.counterparty.base_denom,
+          port: trace.counterparty.port ?? "transfer",
+          channelId: trace.counterparty.channel_id
+        },
+        chain: {
+          port: trace.chain.port ?? "transfer",
+          channelId: trace.chain.channel_id,
+          path: trace.chain.path
+        }
       }
+      transferMethods.push(ibcTransferMethod);
     }
-    transferMethods.push(ibcTransferMethod);
   }
 
   asset_data.frontend.transferMethods = transferMethods;

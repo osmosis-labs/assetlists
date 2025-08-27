@@ -28,25 +28,79 @@ async function asyncForEach(array, callback) {
   }
 }
 
-//getIbcDenom // delete?
-/*async function getLocalBaseDenom(chain_name, base_denom, local_chain_name) {
+function getChainImage(chain_name) {
 
-  if (chain_name == local_chain_name) return base_denom;
-
-  let assets = [];
-  getZoneAssets(local_chain_name, assets);
-  if (assets.length <= 0) return;
-
-  for (const asset of assets) {//zoneAssetlist not populated?
-    if (
-      asset.base_denom == base_denom &&
-      asset.chain_name == chain_name &&
-      asset.path
-    ) {
-      return await zone.calculateIbcHash(asset.path) || "";//the OR "" is temporary
-    }
+  const logo_URIs = chain_reg.getFileProperty(chain_name, "chain", "logo_URIs");
+  if (logo_URIs) return logo_URIs;
+  let image = chain_reg.getFileProperty(chain_name, "chain", "images")?.[0];
+  if (image) {
+    delete image.image_sync;
+    delete image.theme;
+    return image;
   }
-}*/
+
+}
+
+function getAssetImage(chain_name, base_denom) {
+
+  const logo_URIs = chain_reg.getAssetProperty(chain_name, base_denom, "logo_URIs");
+  if (logo_URIs) return logo_URIs;
+  let image = chain_reg.getAssetProperty(chain_name, base_denom, "images")?.[0];
+  if (image) {
+    delete image.image_sync;
+    delete image.theme;
+    return image;
+  }
+
+}
+
+function getChainLogo(chain_name) {
+
+  let logo_URIs = getChainImage(chain_name);
+  if (logo_URIs) return logo_URIs;
+
+  let stakingTokenDenom = chain_reg.getFileProperty(chain_name, "chain", "staking")?.staking_tokens?.[0]?.denom;
+  if (stakingTokenDenom) {
+    logo_URIs = getAssetImage(chain_name, stakingTokenDenom);
+    if (logo_URIs) return logo_URIs;
+  }
+
+  let feeTokenDenom = chain_reg.getFileProperty(chain_name, "chain", "fees")?.fee_tokens?.[0]?.denom;
+  if (feeTokenDenom) {
+    logo_URIs = getAssetImage(chain_name, feeTokenDenom);
+    if (logo_URIs) return logo_URIs;
+  }
+
+  if (chain_reg.getFileProperty(chain_name, "chain", "network_type") !== "mainnet") {
+    const testnetIndex = chain_name.indexOf("testnet");
+    const devnetIndex = chain_name.indexOf("devnet");
+
+    // pick the first occurrence if either exists
+    let cutIndex = -1;
+    if (testnetIndex !== -1 && devnetIndex !== -1) {
+      cutIndex = Math.min(testnetIndex, devnetIndex);
+    } else if (testnetIndex !== -1) {
+      cutIndex = testnetIndex;
+    } else if (devnetIndex !== -1) {
+      cutIndex = devnetIndex;
+    }
+
+    // if neither word is found, return the whole string
+    const mainnetName = cutIndex !== -1 ? chain_name.slice(0, cutIndex) : chain_name;
+
+    if (cutIndex) {
+      console.log("found one");
+      console.log(mainnetName);
+    }
+
+    if (!mainnetName) return;
+
+    let logo_URIs = getChainLogo(mainnetName);
+    if (logo_URIs) return logo_URIs;
+
+  }
+
+}
 
 function getMininmalChainProperties(chain) {
 
@@ -63,78 +117,25 @@ function getMininmalChainProperties(chain) {
   if (!chain.prettyName) return false;
 
   // -- Get Chain Logo --
-  chain.logo_URIs = chain_reg.getFileProperty(chain_name, "chain", "logo_URIs");
-  if (!chain.logo_URIs) {
-    let image = chain_reg.getFileProperty(chain_name, "chain", "images")?.[0];
-    if (image) {
-      chain.logo_URIs = image;
-      delete chain.logo_URIs.image_sync;
-      delete chain.logo_URIs.theme;
-    } else {
-      let stakingTokenDenom = chain_reg.getFileProperty(chain_name, "chain", "staking")?.staking_tokens?.[0].denom;
-      if (stakingTokenDenom) {
-        let stakingTokenLogoURIs = chain_reg.getAssetProperty(chain_name, stakingTokenDenom, "logo_URIs");
-        if (!stakingTokenLogoURIs) {
-          let stakingTokenImage = chain_reg.getAssetProperty(chain_name, stakingTokenDenom, "images")?.[0];
-          if (stakingTokenImage) {
-            chain.logo_URIs = stakingTokenImage;
-            delete chain.logo_URIs.image_sync;
-            delete chain.logo_URIs.theme;
-          }
-        } else {
-          chain.logo_URIs = stakingTokenLogoURIs;
-          delete chain.logo_URIs.image_sync;
-          delete chain.logo_URIs.theme;
-        }
-      } else {
-        let feeTokenDenom = chain_reg.getFileProperty(chain_name, "chain", "fees")?.fee_tokens?.[0].denom;
-        if (feeTokenDenom) {
-          let feeTokenLogoURIs = chain_reg.getAssetProperty(chain_name, feeTokenDenom, "logo_URIs");
-          if (!feeTokenLogoURIs) {
-            let feeTokenImage = chain_reg.getAssetProperty(chain_name, feeTokenDenom, "images")?.[0];
-            if (feeTokenImage) {
-              chain.logo_URIs = feeTokenImage;
-              delete chain.logo_URIs.image_sync;
-              delete chain.logo_URIs.theme;
-            }
-          } else {
-            chain.logo_URIs = feeTokenLogoURIs;
-            delete chain.logo_URIs.image_sync;
-            delete chain.logo_URIs.theme;
-          }
-        }
-      }
-    }
-  }
+  chain.logo_URIs = getChainLogo(chain_name);
   if (!chain.logo_URIs) return false;
 
   return true;
 
 }
 
-async function getSuggestionCurrencyProperties(currency, chain_name/*, asset = {}*/) {
+async function getSuggestionCurrencyProperties(currency, chain_name) {
 
   const base_denom = currency.base_denom;
   if (!currency.base_denom) return false;
 
-  //const local_chain_name = "osmosis";//delete later
-
   // -- Get Properties Pt. 1 --
   currency.coinDenom = chain_reg.getAssetProperty(chain_name, base_denom, "symbol");
   if (!currency.coinDenom) return false;
-  //currency.chainSuggestionDenom = base_denom; // delete this once we know we don't need it
 
-  //TODO: Confirm that we would be able to get rid of this (still will use the same property name)
-  // -- Get Osmosis-local Base Denom
-  /*currency.coinMinimalDenom = await getLocalBaseDenom(
-    chain_name,
-    base_denom,
-    local_chain_name
-  ) || "";*/
   currency.coinMinimalDenom = base_denom;
 
   // -- Get Properties Pt. 2 --
-  //currency.sourceDenom = base_denom; // delete this once we know we don't need it
   currency.coinDecimals = chain_reg.getAssetDecimals(chain_name, base_denom) || 0;
   currency.coinGeckoId = chain_reg.getAssetPropertyWithTraceIBC(chain_name, base_denom, "coingecko_id");
   if (!currency.coinGeckoId) delete currency.coinGeckoId;
@@ -147,12 +148,6 @@ async function getSuggestionCurrencyProperties(currency, chain_name/*, asset = {
   currency.coinImageUrl = logo_URIs?.png ? logo_URIs?.png : logo_URIs?.svg;
   //if (!currency.coinImageUrl) return false; // TODO: determine whether logo is required
 
-  //TODO, also delete this once approved
-  // -- Handle Exceptions --
-  /*if (base_denom == currency.coinMinimalDenom) {
-    delete currency.sourceDenom;
-  }*/
-
   delete currency.base_denom;
 
   return true;
@@ -163,17 +158,6 @@ function getChainSuggestionFeatures(chain, zoneChain) {
 
   let features = zoneChain.keplr_features || [];
   let feature = "";
-
-  //eth-key-sign, eth-address-gen === coinType 60
-  /*const coinType = chain.slip44;
-  feature = "eth-key-sign";
-  if (!features.includes(feature)) {
-    if (coinType === 60) zone.addUniqueArrayItem(feature, features);
-  }
-  feature = "eth-address-gen";
-  if (!features.includes(feature)) {
-    if (coinType === 60) zone.addUniqueArrayItem(feature, features);
-  }*/
 
   const recommended_version = chain_reg.getFileProperty(chain.chain_name, "chain", "codebase")?.recommended_version;
   if (recommended_version) {
@@ -342,10 +326,6 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
 
     const hasMetadata = await getSuggestionCurrencyProperties(currency, chain_name, asset);//Here it's looking up the values for each asset again, but we're already passing in the asset. It's like all we really needed was the base denom
     if (!hasMetadata) return;
-
-    /*if (chain_name !== "osmosis" && chain_name !== "osmosistestnet5") {
-      delete currency.coinMinimalDenom; //TODO: temporary while this property it unused for regular currencies
-    }*/
 
     chain.currencies.push(currency);
 

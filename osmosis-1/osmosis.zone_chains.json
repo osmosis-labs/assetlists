@@ -37,8 +37,8 @@
     },
     {
       "chain_name": "terra",
-      "rpc": "https://rpc-terra-ia.cosmosia.notional.ventures/",
-      "rest": "https://api-terra-ia.cosmosia.notional.ventures/",
+      "rpc": "https://rpc.terra-classic.hexxagon.io",
+      "rest": "https://lcd.terra-classic.hexxagon.io",
       "explorer_tx_url": "https://finder.terra.money/columbus-5/tx/${txHash}",
       "keplr_features": [
         "ibc-transfer",
@@ -1668,7 +1668,19 @@
       "rpc": "https://rpc-main-symphony.vinjan.xyz",
       "rest": "https://api-main-symphony.vinjan.xyz",
       "explorer_tx_url": "https://ping.pub/symphony/tx/${txHash}",
-      "keplr_features": ["ibc-go", "ibc-transfer", "cosmwasm", "wasmd_0.24+"]
+      "keplr_features": [
+        "ibc-go",
+        "ibc-transfer",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
+    },
+    {
+      "chain_name": "manifest",
+      "rpc": "https://rpc.manifest.network",
+      "rest": "https://api.manifest.network",
+      "explorer_tx_url": "https://explorer.manifest.network/transaction/${txHash}",
+      "keplr_features": []
     }
   ]
 }

@@ -18430,7 +18430,8 @@
       ]
     },
     {
-      "description": "Rakoff Token is the Meme Token for Terra Classic",
+      "description": "Juris Protocol is the premier lending platform for the Terra Ecosystem, delivering decentralized lending and borrowing markets to enhance financial accessibility and utility.",
+      "extended_description": "Juris Protocol is a sophisticated DeFi platform built on Terra Classic, leveraging CosmWasm smart contracts to provide secure, transparent lending and borrowing solutions. Designed to empower users, it supports assets like USTC and LUNC, driving yield opportunities and ecosystem growth. Terra Classic, originally engineered for algorithmic stablecoins, uses LUNC to stabilize its financial infrastructure. Juris Protocol advances this vision with audited contracts, KYC-verified governance, and an IBC bridge for seamless Cosmos integration, ensuring a robust, user-focused DeFi experience.",
       "denom_units": [
         {
           "denom": "ibc/46579C587A0B8CF8B0A1FF6B0EFA2082F11876578E47FC81A9CAAD31F424AF98",
@@ -18476,7 +18477,12 @@
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/juris.png"
         }
-      ]
+      ],
+      "coingecko_id": "juris-protocol",
+      "socials": {
+        "website": "https://jurisprotocol.com/",
+        "twitter": "https://x.com/jurisprotocol"
+      }
     },
     {
       "denom_units": [
@@ -26811,6 +26817,85 @@
       ]
     },
     {
+      "description": "Manifest native token",
+      "extended_description": "MFX is the foundational utility token powering the Manifest Network ecosystem - a decentralized platform bridging Web2 reliability with Web3 freedom. As the primary medium of exchange, MFX facilitates transactions across Manifest's privacy-first AI infrastructure, providing access to decentralized compute resources, industry-leading GPUs, blockchain-secured storage, and comprehensive deployment tools.  MFX represents more than just currency; it embodies Manifest's mission to democratize access to sovereign technologies and ethical AI applications, empowering developers to build scalable solutions that prioritize individual autonomy and data privacy without sacrificing performance or reliability. By holding MFX, users gain privileged access to a global network spanning multiple continents, designed for visionaries building the next generation of self-sovereign, ethical technology.",
+      "denom_units": [
+        {
+          "denom": "ibc/1A3DE66CCE39FA151DA710B21E06C8FBC47178C1DCE7BB35D2A79466F754CD51",
+          "exponent": 0,
+          "aliases": [
+            "umfx"
+          ]
+        },
+        {
+          "denom": "mfx",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/1A3DE66CCE39FA151DA710B21E06C8FBC47178C1DCE7BB35D2A79466F754CD51",
+      "name": "Manifest Token",
+      "display": "mfx",
+      "symbol": "MFX",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "manifest",
+            "base_denom": "umfx",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-100418",
+            "path": "transfer/channel-100418/umfx"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.svg"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.svg"
+        }
+      ],
+      "coingecko_id": "manifest-2"
+    },
+    {
+      "description": "Community-secured Meme token on Osmosis",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1are7fpe5l6jzm9sjn7u4qkq6q77wwrrsxzlyw8lcegmmaxdukvuq4h46dx/LABS",
+          "exponent": 0
+        },
+        {
+          "denom": "labs",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "base": "factory/osmo1are7fpe5l6jzm9sjn7u4qkq6q77wwrrsxzlyw8lcegmmaxdukvuq4h46dx/LABS",
+      "name": "Labrador",
+      "display": "labs",
+      "symbol": "LABS",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/LABS.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/LABS.png"
+        }
+      ],
+      "keywords": [
+        "meme"
+      ],
+      "socials": {
+        "website": "https://daodao.zone/dao/osmo10hgl747acm8h648xv9qrxkv3vyvv266yffs4aka7qjcr0659lnqs4ypu7v"
+      }
+    },
+    {
       "description": "PUNDIX token is the native token that functions within the Pundi X ecosystem, including PundiX Chain and XPOS.",
       "denom_units": [
         {
@@ -27410,52 +27495,6 @@
       "images": [
         {
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/allin.png"
-        }
-      ]
-    },
-    {
-      "description": "Manifest native token",
-      "extended_description": "MFX is the foundational utility token powering the Manifest Network ecosystem - a decentralized platform bridging Web2 reliability with Web3 freedom. As the primary medium of exchange, MFX facilitates transactions across Manifest's privacy-first AI infrastructure, providing access to decentralized compute resources, industry-leading GPUs, blockchain-secured storage, and comprehensive deployment tools.  MFX represents more than just currency; it embodies Manifest's mission to democratize access to sovereign technologies and ethical AI applications, empowering developers to build scalable solutions that prioritize individual autonomy and data privacy without sacrificing performance or reliability. By holding MFX, users gain privileged access to a global network spanning multiple continents, designed for visionaries building the next generation of self-sovereign, ethical technology.",
-      "denom_units": [
-        {
-          "denom": "ibc/1A3DE66CCE39FA151DA710B21E06C8FBC47178C1DCE7BB35D2A79466F754CD51",
-          "exponent": 0,
-          "aliases": [
-            "umfx"
-          ]
-        },
-        {
-          "denom": "mfx",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/1A3DE66CCE39FA151DA710B21E06C8FBC47178C1DCE7BB35D2A79466F754CD51",
-      "name": "Manifest",
-      "display": "mfx",
-      "symbol": "MFX",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "manifest",
-            "base_denom": "umfx",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-100418",
-            "path": "transfer/channel-100418/umfx"
-          }
-        }
-      ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.svg"
-      },
-      "images": [
-        {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.svg"
         }
       ]
     },

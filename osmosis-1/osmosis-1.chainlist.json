@@ -783,12 +783,12 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://rpc-terra-ia.cosmosia.notional.ventures/"
+            "address": "https://rpc.terra-classic.hexxagon.io"
           }
         ],
         "rest": [
           {
-            "address": "https://api-terra-ia.cosmosia.notional.ventures/"
+            "address": "https://lcd.terra-classic.hexxagon.io"
           }
         ]
       },
@@ -10864,6 +10864,63 @@
         "cosmwasm",
         "wasmd_0.24+"
       ]
+    },
+    {
+      "chain_name": "manifest",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Manifest",
+      "chain_id": "manifest-ledger-mainnet",
+      "bech32_prefix": "manifest",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "manifest",
+        "bech32PrefixAccPub": "manifestpub",
+        "bech32PrefixValAddr": "manifestvaloper",
+        "bech32PrefixValPub": "manifestvaloperpub",
+        "bech32PrefixConsAddr": "manifestvalcons",
+        "bech32PrefixConsPub": "manifestvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "umfx",
+            "fixed_min_gas_price": 1,
+            "low_gas_price": 1.05,
+            "average_gas_price": 1.1,
+            "high_gas_price": 3
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "upoa"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.manifest.network"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.manifest.network"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.manifest.network/transaction/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.svg"
+      },
+      "features": []
     }
   ]
 }

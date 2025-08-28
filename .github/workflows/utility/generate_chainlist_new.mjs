@@ -118,7 +118,6 @@ function getMininmalChainProperties(chain) {
 
   // -- Get Chain Logo --
   chain.logo_URIs = getChainLogo(chain_name);
-  if (!chain.logo_URIs) return false;
 
   return true;
 

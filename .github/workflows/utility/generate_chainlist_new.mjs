@@ -252,6 +252,8 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   delete minimalChain.prettyName;
   delete minimalChain.logo_URIs;
 
+  let requiredCurrencies = [];
+
   // -- Get Staking --
   let chain_staking = chain_reg.getFileProperty(chain_name, "chain", "staking");
   if (chain_staking) {
@@ -262,6 +264,8 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
     }
     const hasMetadata = getSuggestionCurrencyProperties(currency, chain_name);
     chain.stakeCurrency = hasMetadata ? currency : {};
+    if (hasMetadata) requiredCurrencies.push(currency); //all staking tokens must be added to currencies
+
   }
 
   // -- Get Fees --
@@ -274,6 +278,9 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
     const hasMetadata = await getSuggestionCurrencyProperties(currency, chain_name); //await is temporary to enforce property order
     if (!hasMetadata) return;
 
+    if (currency.coinMinimalDenom !== chain.stakeCurrency?.coinMinimalDenom)
+      requiredCurrencies.push({ ...currency }); //all fee tokens must be added to currencies
+      
     // -- Gas Pricing --
     if (fee.low_gas_price && fee.average_gas_price && fee.high_gas_price) {
       currency.gasPriceStep = {
@@ -291,6 +298,8 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
 
     // -- Add to Chain --
     chain.feeCurrencies.push(currency);
+    /*if (currency.coinMinimalDenom === chain.stakeCurrency?.coinMinimalDenom) return;
+    requiredCurrencies.push(currency); //all fee tokens must be added to currencies*/
 
   });
   //Double-check that there is at least one valid feeCurrency
@@ -298,7 +307,8 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
 
 
   // -- Get Currencies --
-  chain.currencies = [];
+  //chain.currencies = [];
+  chain.currencies = [...requiredCurrencies];
   let chain_assets = chain_reg.getFileProperty(chain_name, "assetlist", "assets");
 
   //chain_reg_assets?.forEach((asset) => {
@@ -326,7 +336,8 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
     const hasMetadata = await getSuggestionCurrencyProperties(currency, chain_name, asset);//Here it's looking up the values for each asset again, but we're already passing in the asset. It's like all we really needed was the base denom
     if (!hasMetadata) return;
 
-    chain.currencies.push(currency);
+    if (requiredCurrencies.some(asset => asset.coinMinimalDenom === currency.coinMinimalDenom)) return;
+    chain.currencies.push(currency); //only add currencies that haven't already been added
 
   });
 

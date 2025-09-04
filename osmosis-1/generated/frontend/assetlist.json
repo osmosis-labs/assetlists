@@ -30347,6 +30347,59 @@
       "unstable": false,
       "disabled": false,
       "preview": false
+    },
+    {
+      "chainName": "intento",
+      "sourceDenom": "uinto",
+      "coinMinimalDenom": "ibc/BE072C03DA544CF282499418E7BC64D38614879B3EE95F9AD91E6C37267D4836",
+      "symbol": "INTO",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/intento/images/into.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/intento/images/into.svg"
+      },
+      "categories": [
+        "defi"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "intento",
+            "chainId": "intento-1",
+            "sourceDenom": "uinto",
+            "port": "transfer",
+            "channelId": "channel-3"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-106076",
+            "path": "transfer/channel-106076/uinto"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "intento",
+          "sourceDenom": "uinto",
+          "chainType": "cosmos",
+          "chainId": "intento-1",
+          "symbol": "INTO",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/intento/images/into.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/intento/images/into.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/BE072C03DA544CF282499418E7BC64D38614879B3EE95F9AD91E6C37267D4836",
+      "name": "Intento",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
     }
   ]
 }

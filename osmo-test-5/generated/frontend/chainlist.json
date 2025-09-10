@@ -1878,6 +1878,74 @@
       ]
     },
     {
+      "chain_name": "lumeratestnet",
+      "status": "live",
+      "networkType": "testnet",
+      "prettyName": "Lumera",
+      "chain_id": "lumera-testnet-2",
+      "bech32Prefix": "lumera",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "lumera",
+        "bech32PrefixAccPub": "lumerapub",
+        "bech32PrefixValAddr": "lumeravaloper",
+        "bech32PrefixValPub": "lumeravaloperpub",
+        "bech32PrefixConsAddr": "lumeravalcons",
+        "bech32PrefixConsPub": "lumeravalconspub"
+      },
+      "slip44": 118,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lumera/images/lumera.png"
+      },
+      "stakeCurrency": {
+        "coinDenom": "LUME",
+        "coinMinimalDenom": "ulume",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lumera/images/lumera.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "LUME",
+          "coinMinimalDenom": "ulume",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lumera/images/lumera.png",
+          "gasPriceStep": {
+            "low": 0.025,
+            "average": 0.025,
+            "high": 0.025
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "LUME",
+          "coinMinimalDenom": "ulume",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lumera/images/lumera.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.testnet.lumera.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.testnet.lumera.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://portal.testnet.lumera.io/lumera-testnet-2/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "cosmwasm"
+      ]
+    },
+    {
       "chain_name": "osmosis",
       "prettyName": "Osmosis",
       "logo_URIs": {

@@ -906,6 +906,44 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/CCB7E815618185A792DA0A42E649270CB462A43E660885FB747CE57486A9F5F6",
+          "exponent": 0,
+          "aliases": [
+            "microlume",
+            "ulume"
+          ]
+        },
+        {
+          "denom": "LUME",
+          "exponent": 6,
+          "aliases": [
+            "lume"
+          ]
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/CCB7E815618185A792DA0A42E649270CB462A43E660885FB747CE57486A9F5F6",
+      "name": "Lumera",
+      "display": "LUME",
+      "symbol": "LUME",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "lumeratestnet",
+            "base_denom": "ulume",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-10884",
+            "path": "transfer/channel-10884/ulume"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "factory/osmo1zlkzu72774ynac53necz46u4ycqtp36wedrar0/willyz",
           "exponent": 0
         },

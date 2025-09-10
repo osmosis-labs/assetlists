@@ -1162,6 +1162,65 @@
         "cosmwasm",
         "wasmd_0.24+"
       ]
+    },
+    {
+      "chain_name": "lumeratestnet",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Lumera",
+      "chain_id": "lumera-testnet-2",
+      "bech32_prefix": "lumera",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "lumera",
+        "bech32PrefixAccPub": "lumerapub",
+        "bech32PrefixValAddr": "lumeravaloper",
+        "bech32PrefixValPub": "lumeravaloperpub",
+        "bech32PrefixConsAddr": "lumeravalcons",
+        "bech32PrefixConsPub": "lumeravalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "ulume",
+            "fixed_min_gas_price": 0.025,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.025
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "ulume"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.testnet.lumera.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://lcd.testnet.lumera.io"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://portal.testnet.lumera.io/lumera-testnet-2/tx/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lumera/images/lumera.png"
+      },
+      "features": [
+        "ibc-go",
+        "cosmwasm"
+      ]
     }
   ]
 }

@@ -1053,6 +1053,55 @@
       "unstable": false,
       "disabled": false,
       "preview": false
+    },
+    {
+      "chainName": "lumeratestnet",
+      "sourceDenom": "ulume",
+      "coinMinimalDenom": "ibc/CCB7E815618185A792DA0A42E649270CB462A43E660885FB747CE57486A9F5F6",
+      "symbol": "LUME",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lumera/images/lumera.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "lumeratestnet",
+            "chainId": "lumera-testnet-2",
+            "sourceDenom": "ulume",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-10884",
+            "path": "transfer/channel-10884/ulume"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "lumeratestnet",
+          "sourceDenom": "ulume",
+          "chainType": "cosmos",
+          "chainId": "lumera-testnet-2",
+          "symbol": "LUME",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lumera/images/lumera.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/CCB7E815618185A792DA0A42E649270CB462A43E660885FB747CE57486A9F5F6",
+      "name": "Lumera",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
     }
   ]
 }

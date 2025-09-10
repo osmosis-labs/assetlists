@@ -10785,6 +10785,68 @@
         "ibc-go",
         "cosmwasm"
       ]
+    },
+    {
+      "chain_name": "sunrise",
+      "status": "live",
+      "network_type": "mainnet",
+      "pretty_name": "Sunrise",
+      "chain_id": "sunrise-1",
+      "bech32_prefix": "sunrise",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "sunrise",
+        "bech32PrefixAccPub": "sunrisepub",
+        "bech32PrefixValAddr": "sunrisevaloper",
+        "bech32PrefixValPub": "sunrisevaloperpub",
+        "bech32PrefixConsAddr": "sunrisevalcons",
+        "bech32PrefixConsPub": "sunrisevalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uusdrise",
+            "fixed_min_gas_price": 0.002,
+            "low_gas_price": 0.01,
+            "average_gas_price": 0.02,
+            "high_gas_price": 0.1
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uvrise"
+          }
+        ],
+        "lock_duration": {
+          "time": "1814400s"
+        }
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://a.consensus.sunrise-1.sunriselayer.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://a.consensus.sunrise-1.sunriselayer.io:1318"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://risescan.sunriselayer.io/txs/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/sunrise.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/sunrise.png"
+      },
+      "features": [
+        "ibc-go"
+      ]
     }
   ]
 }

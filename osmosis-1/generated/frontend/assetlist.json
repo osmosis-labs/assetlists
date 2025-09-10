@@ -30400,6 +30400,112 @@
       "unstable": false,
       "disabled": false,
       "preview": false
+    },
+    {
+      "chainName": "sunrise",
+      "sourceDenom": "urise",
+      "coinMinimalDenom": "ibc/5DD535CC5244A556F78ACAFD1067D93C0FB335E69600343840D66E76CE46B30B",
+      "symbol": "RISE",
+      "decimals": 6,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/sunrise.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/sunrise.png"
+      },
+      "categories": [
+        "defi"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "sunrise",
+            "chainId": "sunrise-1",
+            "sourceDenom": "urise",
+            "port": "transfer",
+            "channelId": "channel-3"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-106275",
+            "path": "transfer/channel-106275/urise"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "sunrise",
+          "sourceDenom": "urise",
+          "chainType": "cosmos",
+          "chainId": "sunrise-1",
+          "symbol": "RISE",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/sunrise.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/sunrise.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/5DD535CC5244A556F78ACAFD1067D93C0FB335E69600343840D66E76CE46B30B",
+      "name": "Sunrise RISE",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "sunrise",
+      "sourceDenom": "uusdrise",
+      "coinMinimalDenom": "ibc/2B46DD47EBAA57FB76436A1E5758BDE6356A8CE04D9FE879F95F838FAAD231B6",
+      "symbol": "USDrise",
+      "decimals": 6,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/usdrise.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/usdrise.png"
+      },
+      "categories": [
+        "stablecoin"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "sunrise",
+            "chainId": "sunrise-1",
+            "sourceDenom": "uusdrise",
+            "port": "transfer",
+            "channelId": "channel-3"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-106275",
+            "path": "transfer/channel-106275/uusdrise"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "sunrise",
+          "sourceDenom": "uusdrise",
+          "chainType": "cosmos",
+          "chainId": "sunrise-1",
+          "symbol": "USDrise",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/usdrise.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/usdrise.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/2B46DD47EBAA57FB76436A1E5758BDE6356A8CE04D9FE879F95F838FAAD231B6",
+      "name": "Sunrise USDrise",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
     }
   ]
 }

@@ -6285,6 +6285,23 @@
       "categories": [
         "meme"
       ],
+      "transfer_methods": [
+      {
+        "name": "Osmosis IBC Transfer",
+        "type": "ibc",
+        "counterparty": {
+          "chainName": "cosmoshub",
+          "chainId": "cosmoshub-4",
+          "sourceDenom": "uatom",
+          "port": "transfer",
+          "channelId": "channel-141"
+        },
+        "chain": {
+          "port": "transfer",
+          "channelId": "channel-0",
+          "path": "transfer/channel-0/uatom"
+        }
+      },
       "_comment": "Quark $QUARK"
     },
     {

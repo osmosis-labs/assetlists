@@ -22213,6 +22213,86 @@
       ]
     },
     {
+      "chain_name": "sunrise",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Sunrise",
+      "chain_id": "sunrise-1",
+      "bech32Prefix": "sunrise",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "sunrise",
+        "bech32PrefixAccPub": "sunrisepub",
+        "bech32PrefixValAddr": "sunrisevaloper",
+        "bech32PrefixValPub": "sunrisevaloperpub",
+        "bech32PrefixConsAddr": "sunrisevalcons",
+        "bech32PrefixConsPub": "sunrisevalconspub"
+      },
+      "slip44": 118,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/sunrise.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/sunrise.svg"
+      },
+      "stakeCurrency": {
+        "coinDenom": "vRISE",
+        "coinMinimalDenom": "uvrise",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/vrise.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "USDrise",
+          "coinMinimalDenom": "uusdrise",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/usdrise.png",
+          "gasPriceStep": {
+            "low": 0.01,
+            "average": 0.02,
+            "high": 0.1
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "vRISE",
+          "coinMinimalDenom": "uvrise",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/vrise.png"
+        },
+        {
+          "coinDenom": "USDrise",
+          "coinMinimalDenom": "uusdrise",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/usdrise.png"
+        },
+        {
+          "coinDenom": "RISE",
+          "coinMinimalDenom": "urise",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/sunrise.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://a.consensus.sunrise-1.sunriselayer.io"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://a.consensus.sunrise-1.sunriselayer.io:1318"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://risescan.sunriselayer.io/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go"
+      ]
+    },
+    {
       "chain_name": "ethereum",
       "prettyName": "Ethereum Mainnet",
       "logo_URIs": {

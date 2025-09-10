@@ -26979,6 +26979,78 @@
       ]
     },
     {
+      "denom_units": [
+        {
+          "denom": "ibc/5DD535CC5244A556F78ACAFD1067D93C0FB335E69600343840D66E76CE46B30B",
+          "exponent": 0,
+          "aliases": [
+            "microRISE",
+            "microrise",
+            "urise"
+          ]
+        },
+        {
+          "denom": "rise",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/5DD535CC5244A556F78ACAFD1067D93C0FB335E69600343840D66E76CE46B30B",
+      "name": "Sunrise RISE",
+      "display": "rise",
+      "symbol": "RISE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "sunrise",
+            "base_denom": "urise",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-106275",
+            "path": "transfer/channel-106275/urise"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/2B46DD47EBAA57FB76436A1E5758BDE6356A8CE04D9FE879F95F838FAAD231B6",
+          "exponent": 0,
+          "aliases": [
+            "microUSDrise",
+            "microusdrise",
+            "uusdrise"
+          ]
+        },
+        {
+          "denom": "usdrise",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/2B46DD47EBAA57FB76436A1E5758BDE6356A8CE04D9FE879F95F838FAAD231B6",
+      "name": "Sunrise USDrise",
+      "display": "usdrise",
+      "symbol": "USDrise",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "sunrise",
+            "base_denom": "uusdrise",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-106275",
+            "path": "transfer/channel-106275/uusdrise"
+          }
+        }
+      ]
+    },
+    {
       "description": "PUNDIX token is the native token that functions within the Pundi X ecosystem, including PundiX Chain and XPOS.",
       "denom_units": [
         {

@@ -14436,7 +14436,7 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": false,
-      "disabled": false,
+      "disabled": true,
       "preview": false
     },
     {
@@ -30507,6 +30507,55 @@
       ],
       "variantGroupKey": "ibc/2B46DD47EBAA57FB76436A1E5758BDE6356A8CE04D9FE879F95F838FAAD231B6",
       "name": "Sunrise USDrise",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "lumera",
+      "sourceDenom": "ulume",
+      "coinMinimalDenom": "ibc/32C4AEE2B3C4F767A351FA821AB0140B10CB690CDED27D9FCC857859B44432B9",
+      "symbol": "LUME",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lumera/images/lumera.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "lumera",
+            "chainId": "lumera-mainnet-1",
+            "sourceDenom": "ulume",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-106313",
+            "path": "transfer/channel-106313/ulume"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "lumera",
+          "sourceDenom": "ulume",
+          "chainType": "cosmos",
+          "chainId": "lumera-mainnet-1",
+          "symbol": "LUME",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lumera/images/lumera.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/32C4AEE2B3C4F767A351FA821AB0140B10CB690CDED27D9FCC857859B44432B9",
+      "name": "Lumera",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

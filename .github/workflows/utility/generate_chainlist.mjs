@@ -61,32 +61,16 @@ function generateChains(chains, zone_chains) {
   
     // -- Chain Object --
     let chain = {};
-    
-    // -- Get chain_name (no override - used for registry lookup) --
     chain.chain_name = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "chain_name");
-    
-    // -- Get chain_id (no override - fundamental network identifier) --
+    chain.status = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "status");
+    chain.network_type = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "network_type");
+    chain.pretty_name = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "pretty_name");
     chain.chain_id = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "chain_id");
-
-    // -- Get status with override support --
-    chain.status = zone_chain.override_properties?.status || 
-                   chain_reg.getFileProperty(zone_chain.chain_name, "chain", "status");
-    
-    // -- Get network_type with override support --
-    chain.network_type = zone_chain.override_properties?.network_type || 
-                         chain_reg.getFileProperty(zone_chain.chain_name, "chain", "network_type");
-    
-    // -- Get pretty_name with override support --
-    chain.pretty_name = zone_chain.override_properties?.pretty_name || 
-                        chain_reg.getFileProperty(zone_chain.chain_name, "chain", "pretty_name");
     
     
-    // -- Get bech32_config with override support --
-    chain.bech32_prefix = zone_chain.override_properties?.bech32_prefix || 
-                          chain_reg.getFileProperty(zone_chain.chain_name, "chain", "bech32_prefix");
-    
-    let bech32_config = zone_chain.override_properties?.bech32_config || 
-                        chain_reg.getFileProperty(zone_chain.chain_name, "chain", "bech32_config");
+    // -- Get bech32_config --
+    chain.bech32_prefix = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "bech32_prefix");
+    let bech32_config = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "bech32_config");
     if (!bech32_config) {
       bech32_config = {};
     }
@@ -97,42 +81,37 @@ function generateChains(chains, zone_chains) {
     chain.bech32_config = bech32_config;
 
 
-    // -- Get SLIP44 with override support --
-    chain.slip44 = zone_chain.override_properties?.slip44 || 
-                   chain_reg.getFileProperty(zone_chain.chain_name, "chain", "slip44");
-    chain.alternative_slip44s = zone_chain.override_properties?.alternative_slip44s || 
-                               chain_reg.getFileProperty(zone_chain.chain_name, "chain", "alternative_slip44s");
+    // -- Get SLIP44 --
+    chain.slip44 = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "slip44");
+    chain.alternative_slip44s = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "alternative_slip44s");
 
 
-    // -- Get Fees with override support --
-    chain.fees = zone_chain.override_properties?.fees || 
-                 chain_reg.getFileProperty(zone_chain.chain_name, "chain", "fees");
+    // -- Get Fees --
+    chain.fees = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "fees");
     
     
-    // -- Get Staking with override support --
-    chain.staking = zone_chain.override_properties?.staking || 
-                    chain_reg.getFileProperty(zone_chain.chain_name, "chain", "staking");
+    // -- Get Staking --
+    chain.staking = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "staking");
 
     
-    // -- Get Description with override support --
-    chain.description = zone_chain.override_properties?.description || 
-                        chain_reg.getFileProperty(zone_chain.chain_name, "chain", "description");
+    // -- Get Description --
+    chain.description = chain_reg.getFileProperty(zone_chain.chain_name, "chain", "description");
     
     
-    // -- Get APIs with override support --
+    // -- Get APIs --
     chain.apis = {};
     chain.apis.rpc = [];
     chain.apis.rpc[0] = {};
-    chain.apis.rpc[0].address = zone_chain.override_properties?.rpc || zone_chain.rpc;
+    chain.apis.rpc[0].address = zone_chain.rpc;
     chain.apis.rest = [];
     chain.apis.rest[0] = {};
-    chain.apis.rest[0].address = zone_chain.override_properties?.rest || zone_chain.rest;
+    chain.apis.rest[0].address = zone_chain.rest;
     
     
-    // -- Get Explorer Tx URL with override support --
+    // -- Get Explorer Tx URL --
     chain.explorers = [];
     chain.explorers[0] = {};
-    chain.explorers[0].tx_page = zone_chain.override_properties?.explorer_tx_url || zone_chain.explorer_tx_url;
+    chain.explorers[0].tx_page = zone_chain.explorer_tx_url;
 
 
     // -- Get Images --
@@ -152,12 +131,12 @@ function generateChains(chains, zone_chains) {
     }
     
     
-    // -- Get Keplr Suggest Chain Features with override support --
-    chain.features = zone_chain.override_properties?.keplr_features || zone_chain.keplr_features;
+    // -- Get Keplr Suggest Chain Features --
+    chain.features = zone_chain.keplr_features;
     
     
-    // -- Get Outage Alerts with override support --
-    chain.outage = zone_chain.override_properties?.outage || zone_chain.outage;
+    // -- Get Outage Alerts --
+    chain.outage = zone_chain.outage;
     
     
     // -- Push Chain Object --

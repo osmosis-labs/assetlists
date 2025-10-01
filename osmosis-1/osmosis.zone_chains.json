@@ -1215,7 +1215,20 @@
       "chain_name": "atomone",
       "rpc": "https://atomone-rpc.allinbits.com",
       "rest": "https://atomone-api.allinbits.com",
-      "explorer_tx_url": "https://www.mintscan.io/atomone/tx/${txHash}"
+      "explorer_tx_url": "https://www.mintscan.io/atomone/tx/${txHash}",
+      "override_properties": {
+        "fees": {
+          "fee_tokens": [
+            {
+              "denom": "uphoton",
+              "fixed_min_gas_price": 0.225,
+              "low_gas_price": 0.225,
+              "average_gas_price": 0.3,
+              "high_gas_price": 0.5
+            }
+          ]
+        }
+      }
     },
     {
       "chain_name": "dungeon1",

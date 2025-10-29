@@ -21,7 +21,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: true
           
-      - name: Git Sumbodule Update
+      - name: Git Submodule Update
         run: |
           git submodule update --init --recursive
           git submodule update --recursive --remote

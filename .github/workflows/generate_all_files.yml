@@ -1,3 +1,10 @@
+# Description: Bundle workflow that runs the complete asset generation pipeline
+# Includes: Endpoint validation, assetlist generation, chainlist generation (new and legacy),
+#           state updates, comment generation, and localization
+# Schedule: Runs every Monday at 12:00 UTC
+# Trigger: Manual via workflow_dispatch or scheduled cron
+# Output: Creates PR with all generated files to branch 'update/assetlist_all'
+
 on:
   schedule:
     - cron: "0 12 * * 1"   # Every Monday 12:00 UTC

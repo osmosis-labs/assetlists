@@ -1,3 +1,8 @@
+# Description: Generates coingecko.json file with CoinGecko market data integration
+# Included in: NOT included in Generate All Files bundle (standalone only)
+# Trigger: Manual via workflow_dispatch only
+# Output: Creates PR with coingecko.json to branch 'update/coingecko'
+
 on: [workflow_dispatch]
 name: Generate CoinGecko
 jobs:

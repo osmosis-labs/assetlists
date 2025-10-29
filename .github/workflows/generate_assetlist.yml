@@ -1,3 +1,8 @@
+# Description: Generates the assetlist.json file from zone and chain registry data
+# Included in: Generate All Files bundle workflow (runs every Monday at 12:00 UTC)
+# Trigger: Manual via workflow_dispatch only (standalone run)
+# Output: Creates PR with assetlist.json to branch 'update/assetlist'
+
 on: [workflow_dispatch]
 name: Generate Assetlist
 jobs:

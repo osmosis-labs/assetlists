@@ -1,3 +1,8 @@
+# Description: Validates zone data files using custom validation scripts
+# Included in: NOT included in Generate All Files bundle (standalone/PR validation)
+# Trigger: Automatically on pull requests to main, or manual via workflow_dispatch
+# Output: Pass/fail validation status for PR checks
+
 on:
   workflow_dispatch:
   pull_request:

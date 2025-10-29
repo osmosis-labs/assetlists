@@ -1,3 +1,8 @@
+# Description: Generates mintscan.json file with Mintscan asset data integration
+# Included in: NOT included in Generate All Files bundle (standalone only)
+# Trigger: Manual via workflow_dispatch only
+# Output: Creates PR with mintscan.json to branch 'update/mintscan'
+
 on: [workflow_dispatch]
 name: Generate Mintscan
 jobs:

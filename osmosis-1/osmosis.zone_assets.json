@@ -1288,7 +1288,7 @@
       "categories": [
         "defi"
       ],
-      "_comment": "Shade (old) $SHD(old)"
+      "_comment": "Shade (old) $SHD.old"
     },
     {
       "chain_name": "secretnetwork",
@@ -1367,7 +1367,7 @@
       "chain_name": "medasdigital",
       "base_denom": "umedas",
       "path": "transfer/channel-87042/umedas",
-      "osmosis_verified": false,
+      "osmosis_verified": true,
       "_comment": "Medas Digital Network $MEDAS"
     },
     {
@@ -2104,7 +2104,7 @@
           "withdraw_url": "https://app.picasso.network/?from=OSMOSIS&to=POLKADOT"
         }
       ],
-      "_comment": "Polkadot (Picasso) $DOT.pica"
+      "_comment": "Polkadot (Picasso via Picasso) (Picasso) $DOT.pica"
     },
     {
       "chain_name": "quasar",
@@ -6370,6 +6370,20 @@
       "path": "transfer/channel-107268/aTSC",
       "osmosis_verified": false,
       "_comment": "TSC $TSC"
+    {
+      "chain_name": "int3face",
+      "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec",
+      "path": "transfer/channel-82819/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec",
+      "osmosis_verified": false,
+      "transfer_methods": [
+        {
+          "name": "Int3face Bridge",
+          "type": "external_interface",
+          "deposit_url": "https://app.int3face.zone/bridge",
+          "withdraw_url": "https://app.int3face.zone/bridge"
+        }
+      ],
+      "_comment": "Zcash (Int3) $ZEC.int3"
     }
   ]
 }

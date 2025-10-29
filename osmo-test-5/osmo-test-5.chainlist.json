@@ -53,7 +53,8 @@
         }
       ],
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmosis-chain-logo.png"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png"
       },
       "features": [
         "ibc-go",
@@ -345,6 +346,65 @@
     {
       "chain_name": "akashtestnet",
       "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Sandbox",
+      "chain_id": "sandbox-2",
+      "bech32_prefix": "akash",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "akash",
+        "bech32PrefixAccPub": "akashpub",
+        "bech32PrefixValAddr": "akashvaloper",
+        "bech32PrefixValPub": "akashvaloperpub",
+        "bech32PrefixConsAddr": "akashvalcons",
+        "bech32PrefixConsPub": "akashvalconspub"
+      },
+      "slip44": 118,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "uakt",
+            "fixed_min_gas_price": 0,
+            "low_gas_price": 0.025,
+            "average_gas_price": 0.025,
+            "high_gas_price": 0.04
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "uakt"
+          }
+        ]
+      },
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.sandbox-2.aksh.pw:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.sandbox-2.aksh.pw:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://explorer.sandbox-2.aksh.pw/akash/tx/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.svg"
+      },
+      "features": [
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "akashtestnet1",
+      "status": "killed",
       "network_type": "testnet",
       "pretty_name": "Sandbox",
       "chain_id": "sandbox-01",
@@ -911,8 +971,8 @@
         }
       ],
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/archwaytestnet/images/ArchwayBrandmark.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/archwaytestnet/images/ArchwayBrandmark.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/archway/images/archway.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/archway/images/archway.svg"
       },
       "features": [
         "ibc-go",

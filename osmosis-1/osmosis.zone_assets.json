@@ -6369,12 +6369,15 @@
       "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec",
       "path": "transfer/channel-82819/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec",
       "osmosis_verified": false,
+      "categories": [
+        "privacy"
+      ],
       "transfer_methods": [
         {
           "name": "Int3face Bridge",
           "type": "external_interface",
-          "deposit_url": "https://app.int3face.zone/bridge",
-          "withdraw_url": "https://app.int3face.zone/bridge"
+          "deposit_url": "https://app.int3face.zone/bridge?fromChain=zcash&toChain=osmosis&fromToken=ZEC",
+          "withdraw_url": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=zcash&fromToken=iZEC"
         }
       ],
       "_comment": "Zcash (Int3) $ZEC.int3"

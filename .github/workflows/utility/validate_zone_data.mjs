@@ -152,8 +152,18 @@ function checkAssetIBCData(zoneAsset, chainName, IS_MAINNET) {
   const ibcChannels = chain_reg.getIBCFileProperty(chainName, zoneAsset.chain_name, "channels");
 
   if (!chain1Data || !ibcChannels) {
-    console.log(`Warning: No IBC connection found for ${zoneAsset.chain_name} (${zoneAsset.base_denom}). Skipping IBC validation.`);
-    return;
+    // Check if chain is killed/archived in chain registry
+    const chainStatus = chain_reg.getFileProperty(zoneAsset.chain_name, "chain", "status");
+    const isKilledChain = chainStatus === "killed";
+
+    // Allow archived/legacy assets or killed chains to skip IBC validation
+    if (zoneAsset.archived || zoneAsset.legacy || isKilledChain) {
+      const reason = isKilledChain ? "killed chain" : "archived/legacy asset";
+      console.log(`Info: ${reason} ${zoneAsset.chain_name}:${zoneAsset.base_denom} has no IBC connection (expected).`);
+      return;
+    }
+    // For non-archived assets with live chains, this is an error
+    throw new Error(`No IBC connection found for ${zoneAsset.chain_name} (${zoneAsset.base_denom}). Chain status: ${chainStatus || 'unknown'}`);
   }
 
   let chain1 = false;

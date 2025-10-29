@@ -1,4 +1,8 @@
-on: [workflow_dispatch]
+on:
+  schedule:
+    - cron: "0 12 * * 1"   # Every Monday 12:00 UTC
+  workflow_dispatch:
+
 name: Generate All Files
 jobs:
   generate_zone_config:

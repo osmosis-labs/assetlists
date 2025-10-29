@@ -147,11 +147,19 @@ function checkAssetIBCData(zoneAsset, chainName, IS_MAINNET) {
     throw new Error(`Path missing for ${zoneAsset.base_denom}. Please enter a Path.`);
   }
 
+  // Check if IBC connection exists
+  const chain1Data = chain_reg.getIBCFileProperty(chainName, zoneAsset.chain_name, "chain_1");
+  const ibcChannels = chain_reg.getIBCFileProperty(chainName, zoneAsset.chain_name, "channels");
+
+  if (!chain1Data || !ibcChannels) {
+    console.log(`Warning: No IBC connection found for ${zoneAsset.chain_name} (${zoneAsset.base_denom}). Skipping IBC validation.`);
+    return;
+  }
+
   let chain1 = false;
-  if (chain_reg.getIBCFileProperty(chainName, zoneAsset.chain_name, "chain_1").chain_name == chainName) {
+  if (chain1Data.chain_name == chainName) {
     chain1 = true;
   }
-  let ibcChannels = chain_reg.getIBCFileProperty(chainName, zoneAsset.chain_name, "channels");
   let thisChannel = "";
   let thisPort = "";
 

@@ -18,7 +18,8 @@
       },
       "slip44": 118,
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmosis-chain-logo.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
       },
       "stakeCurrency": {
         "coinDenom": "OSMO",
@@ -169,15 +170,15 @@
       },
       "slip44": 118,
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/juno.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/juno.svg"
       },
       "stakeCurrency": {
         "coinDenom": "JUNOX",
         "coinMinimalDenom": "ujunox",
         "coinDecimals": 6,
         "coinGeckoId": "juno-network",
-        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png"
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/juno.png"
       },
       "feeCurrencies": [
         {
@@ -185,7 +186,7 @@
           "coinMinimalDenom": "ujunox",
           "coinDecimals": 6,
           "coinGeckoId": "juno-network",
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/juno.png",
           "gasPriceStep": {
             "low": 0.003,
             "average": 0.0045,
@@ -199,7 +200,7 @@
           "coinMinimalDenom": "ujunox",
           "coinDecimals": 6,
           "coinGeckoId": "juno-network",
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png"
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/juno.png"
         },
         {
           "coinDenom": "NEXX",
@@ -502,6 +503,74 @@
     {
       "chain_name": "akashtestnet",
       "status": "live",
+      "networkType": "testnet",
+      "prettyName": "Sandbox",
+      "chain_id": "sandbox-2",
+      "bech32Prefix": "akash",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "akash",
+        "bech32PrefixAccPub": "akashpub",
+        "bech32PrefixValAddr": "akashvaloper",
+        "bech32PrefixValPub": "akashvaloperpub",
+        "bech32PrefixConsAddr": "akashvalcons",
+        "bech32PrefixConsPub": "akashvalconspub"
+      },
+      "slip44": 118,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.svg"
+      },
+      "stakeCurrency": {
+        "coinDenom": "AKT",
+        "coinMinimalDenom": "uakt",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "AKT",
+          "coinMinimalDenom": "uakt",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.png",
+          "gasPriceStep": {
+            "low": 0.025,
+            "average": 0.025,
+            "high": 0.04
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "AKT",
+          "coinMinimalDenom": "uakt",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.sandbox-2.aksh.pw:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.sandbox-2.aksh.pw:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://explorer.sandbox-2.aksh.pw/akash/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go"
+      ]
+    },
+    {
+      "chain_name": "akashtestnet1",
+      "status": "killed",
       "networkType": "testnet",
       "prettyName": "Sandbox",
       "chain_id": "sandbox-01",
@@ -1150,8 +1219,8 @@
       },
       "slip44": 118,
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/archwaytestnet/images/ArchwayBrandmark.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/archwaytestnet/images/ArchwayBrandmark.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/archway/images/archway.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/archway/images/archway.svg"
       },
       "stakeCurrency": {
         "coinDenom": "CONST",
@@ -1946,6 +2015,14 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
+      }
+    },
+    {
+      "chain_name": "junotestnet",
+      "prettyName": "Juno Testnet",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/juno.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/juno.svg"
       }
     }
   ]

@@ -318,25 +318,38 @@ export async function setLocalAsset(asset_data) {
     traces = [];
   }
   const trace = getAssetTrace(asset_data);
-  traces.push(trace);
 
-  if (!trace?.chain?.path) {
-    console.log("No IBC path.");
+  // If getAssetTrace failed but we have a path in zone_asset, use that path directly
+  let pathToUse = trace?.chain?.path || asset_data.zone_asset?.path;
+
+  if (!pathToUse) {
+    console.log("No IBC path available - cannot calculate local asset.");
     console.log(trace);
     console.log(asset_data.zone_asset);
     return;
   }
+
+  // Only add trace if it was successfully retrieved
+  if (trace?.chain?.path) {
+    traces.push(trace);
+  } else {
+    console.log(`Warning: Using path from zone_asset for ${asset_data.zone_asset.chain_name}:${asset_data.zone_asset.base_denom} (IBC connection not found in registry)`);
+  }
+
   try {
-    let ibcHash = await zone.calculateIbcHash(trace?.chain?.path);
+    let ibcHash = await zone.calculateIbcHash(pathToUse);
     asset_data.local_asset = {
       chain_name: asset_data.chainName,
       base_denom: ibcHash
     }
   } catch (error) {
     console.error(error);
+    return;
   }
 
-  assetProperty.set(createCombinedKey(asset_data.local_asset, "traces"), traces);
+  if (traces.length > 0) {
+    assetProperty.set(createCombinedKey(asset_data.local_asset, "traces"), traces);
+  }
 }
 
 

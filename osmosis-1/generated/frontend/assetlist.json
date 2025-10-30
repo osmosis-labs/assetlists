@@ -30532,13 +30532,15 @@
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/zec.int3.png"
       },
-      "categories": [],
+      "categories": [
+        "privacy"
+      ],
       "transferMethods": [
         {
           "name": "Int3face Bridge",
           "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone/bridge",
-          "withdrawUrl": "https://app.int3face.zone/bridge"
+          "depositUrl": "https://app.int3face.zone/bridge?fromChain=zcash&toChain=osmosis&fromToken=ZEC",
+          "withdrawUrl": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=zcash&fromToken=iZEC"
         },
         {
           "name": "Osmosis IBC Transfer",
@@ -30580,7 +30582,7 @@
           }
         }
       ],
-      "variantGroupKey": "ibc/18A91A3DDFD9776A247AE1B4B3298D754D1627B85F288DCEA473B7239F7B7A0E",
+      "variantGroupKey": "factory/osmo1twk0c4kcwnhkyn6pzxe0qsk6a3nrye2w2sy309d60sljfysugagsd7e3mn/alloyed/allZEC",
       "name": "Zcash (Int3)",
       "isAlloyed": false,
       "verified": false,
@@ -30591,6 +30593,47 @@
         "chainName": "int3face",
         "sourceDenom": "uint3"
       }
+    },
+    {
+      "chainName": "osmosis",
+      "sourceDenom": "factory/osmo1twk0c4kcwnhkyn6pzxe0qsk6a3nrye2w2sy309d60sljfysugagsd7e3mn/alloyed/allZEC",
+      "coinMinimalDenom": "factory/osmo1twk0c4kcwnhkyn6pzxe0qsk6a3nrye2w2sy309d60sljfysugagsd7e3mn/alloyed/allZEC",
+      "symbol": "ZEC",
+      "decimals": 8,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/zcash/images/zec.png"
+      },
+      "coingeckoId": "zcash",
+      "categories": [
+        "privacy"
+      ],
+      "transferMethods": [
+        {
+          "name": "Int3face Bridge",
+          "type": "external_interface",
+          "depositUrl": "https://app.int3face.zone/bridge?fromChain=zcash&toChain=osmosis&fromToken=ZEC",
+          "withdrawUrl": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=zcash&fromToken=iZEC"
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "zcash",
+          "sourceDenom": "zatoshi",
+          "chainType": "non-cosmos",
+          "symbol": "ZEC",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/zcash/images/zec.png"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo1twk0c4kcwnhkyn6pzxe0qsk6a3nrye2w2sy309d60sljfysugagsd7e3mn/alloyed/allZEC",
+      "name": "Zcash",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
     }
   ]
 }

@@ -1,3 +1,8 @@
+# Description: Generates the new chainlist.json file from chain registry data
+# Included in: Generate All Files bundle workflow (runs every Monday at 12:00 UTC)
+# Trigger: Manual via workflow_dispatch only (standalone run)
+# Output: Creates PR with new chainlist.json to branch 'update/chainlist_new'
+
 on: [workflow_dispatch]
 name: Generate Chainlist New
 jobs:
@@ -12,20 +17,20 @@ jobs:
     steps:
     
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: true
           
-      - name: Git Sumbodule Update
+      - name: Git Submodule Update
         run: |
           git submodule update --init --recursive
           git submodule update --recursive --remote
           
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 19.6.0
+          node-version: 20.x
 
       - name: Install dependencies
         run: npm install

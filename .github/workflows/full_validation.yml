@@ -1,0 +1,79 @@
+on:
+  workflow_dispatch:
+    inputs:
+      regenerate_chainlist:
+        description: 'Regenerate chainlist after validation'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+name: Full Endpoint Validation
+jobs:
+  full_validation:
+    name: Validate All Chain Endpoints
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+
+      - name: Git Submodule Update
+        run: |
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19.6.0
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Full Validation (All Chains)
+        working-directory: ./.github/workflows/utility
+        run: node validateEndpoints.mjs fullValidation osmosis
+
+      - name: Regenerate Chainlist with Validated Endpoints
+        if: ${{ github.event.inputs.regenerate_chainlist == 'true' }}
+        working-directory: ./.github/workflows/utility
+        run: node generate_chainlist_new.mjs
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --exit-code || echo "changes=true" >> $GITHUB_OUTPUT
+
+      - name: Add Commit Push
+        if: steps.git-check.outputs.changes == 'true'
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
+          add_timestamp: false
+          commit_prefix: "[AUTO]"
+          commit_message: "Full endpoint validation and chainlist update"
+          force: false
+          target_branch: update/full_validation
+
+      - name: Create A PR
+        if: steps.git-check.outputs.changes == 'true'
+        uses: devops-infra/action-pull-request@v0.4.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_branch: update/full_validation
+          target_branch: main
+          title: Full Endpoint Validation Update
+          body: "**Automated full validation of all chain endpoints**\n\nThis PR includes:\n- Full validation results for all chains\n- Updated chainlist with working backup endpoints promoted to primary\n- Backup endpoint information stored in validation state"
+          get_diff: true
+          ignore_users: "dependabot"

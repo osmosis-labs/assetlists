@@ -1,3 +1,8 @@
+# Description: Updates the chain-registry submodule to the latest remote version
+# Included in: NOT included in Generate All Files bundle (standalone only)
+# Trigger: Manual via workflow_dispatch only
+# Output: Creates PR with submodule update to branch 'update/chain_reg'
+
 on: [workflow_dispatch]
 name: Manually Update Chain Registry
 jobs:
@@ -12,12 +17,12 @@ jobs:
     steps:
     
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: true
           
-      - name: Git Sumbodule Update
+      - name: Git Submodule Update
         run: |
           git submodule update --init --recursive
           git submodule update --recursive --remote

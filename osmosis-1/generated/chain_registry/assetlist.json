@@ -6067,8 +6067,7 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/usk.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/usk.svg"
         }
-      ],
-      "coingecko_id": "usk"
+      ]
     },
     {
       "description": "Staking and governance coin for the Unification Blockchain",
@@ -6373,8 +6372,7 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/sienna.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/sienna.svg"
         }
-      ],
-      "coingecko_id": "sienna"
+      ]
     },
     {
       "description": "The native token cw20 for SCRT Staking Derivatives on Secret Network",
@@ -7975,8 +7973,7 @@
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qck.png"
         }
-      ],
-      "coingecko_id": "quicksilver"
+      ]
     },
     {
       "description": "The native token of Arkhadian",
@@ -27198,6 +27195,41 @@
       ]
     },
     {
+      "denom_units": [
+        {
+          "denom": "ibc/1FB5A95F9666C1CF414AEF5F9BB557D695FC7513CF7C3CACC3B253E6FCF7AE5E",
+          "exponent": 0,
+          "aliases": [
+            "uSEED",
+            "factory/neutron133xakkrfksq39wxy575unve2nyehg5npx75nph/seed"
+          ]
+        },
+        {
+          "denom": "SEED",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/1FB5A95F9666C1CF414AEF5F9BB557D695FC7513CF7C3CACC3B253E6FCF7AE5E",
+      "name": "SEED",
+      "display": "SEED",
+      "symbol": "SEED",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "neutron",
+            "base_denom": "factory/neutron133xakkrfksq39wxy575unve2nyehg5npx75nph/seed",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-874",
+            "path": "transfer/channel-874/factory/neutron133xakkrfksq39wxy575unve2nyehg5npx75nph/seed"
+          }
+        }
+      ]
+    },
+    {
       "description": "PUNDIX token is the native token that functions within the Pundi X ecosystem, including PundiX Chain and XPOS.",
       "denom_units": [
         {
@@ -27938,6 +27970,33 @@
             "base_denom": "cw20:terra12f3f5fzfzxckc0qlv3rmwwkjfhzevpwmx77345n0zuu2678vxf0sm6vvcw"
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/GRDX.png"
+        }
+      ]
+    },
+    {
+      "description": "$9 Dollers is programmed\n\nMade with ❤️",
+      "denom_units": [
+        {
+          "denom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/ninedollers",
+          "exponent": 0
+        },
+        {
+          "denom": "NINEDOLLERS",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8",
+      "base": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/ninedollers",
+      "name": "Nine Dollers",
+      "display": "NINEDOLLERS",
+      "symbol": "NINEDOLLERS",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/NINEDOLLERS.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/NINEDOLLERS.png"
         }
       ]
     }

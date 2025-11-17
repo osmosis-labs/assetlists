@@ -6762,7 +6762,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/usk.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/usk.svg"
       },
-      "coingeckoId": "usk",
       "categories": [
         "stablecoin",
         "defi"
@@ -7089,7 +7088,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/sienna.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/sienna.svg"
       },
-      "coingeckoId": "sienna",
       "categories": [
         "defi"
       ],
@@ -8919,7 +8917,6 @@
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qck.png"
       },
-      "coingeckoId": "quicksilver",
       "categories": [
         "liquid_staking"
       ],
@@ -30637,6 +30634,57 @@
       "counterparty": [],
       "variantGroupKey": "factory/osmo1c3sjhsneuajqn4ke84kqqaf26ct5cjs8z5ale0yv7096wh6fyf6qxmgkph/leg",
       "name": "LEG",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "neutron",
+      "sourceDenom": "factory/neutron133xakkrfksq39wxy575unve2nyehg5npx75nph/seed",
+      "coinMinimalDenom": "ibc/1FB5A95F9666C1CF414AEF5F9BB557D695FC7513CF7C3CACC3B253E6FCF7AE5E",
+      "symbol": "SEED",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/seed.png"
+      },
+      "categories": [
+        "meme"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "neutron",
+            "chainId": "neutron-1",
+            "sourceDenom": "factory/neutron133xakkrfksq39wxy575unve2nyehg5npx75nph/seed",
+            "port": "transfer",
+            "channelId": "channel-10"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-874",
+            "path": "transfer/channel-874/factory/neutron133xakkrfksq39wxy575unve2nyehg5npx75nph/seed"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "neutron",
+          "sourceDenom": "factory/neutron133xakkrfksq39wxy575unve2nyehg5npx75nph/seed",
+          "chainType": "cosmos",
+          "chainId": "neutron-1",
+          "symbol": "SEED",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/seed.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/1FB5A95F9666C1CF414AEF5F9BB557D695FC7513CF7C3CACC3B253E6FCF7AE5E",
+      "name": "SEED",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

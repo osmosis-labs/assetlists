@@ -1,3 +1,8 @@
+# Description: Generates mintscan.json file with Mintscan asset data integration
+# Included in: NOT included in Generate All Files bundle (standalone only)
+# Trigger: Manual via workflow_dispatch only
+# Output: Creates PR with mintscan.json to branch 'update/mintscan'
+
 on: [workflow_dispatch]
 name: Generate Mintscan
 jobs:
@@ -12,20 +17,20 @@ jobs:
     steps:
     
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: true
           
-      - name: Git Sumbodule Update
+      - name: Git Submodule Update
         run: |
           git submodule update --init --recursive
           git submodule update --recursive --remote
           
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 19.6.0
+          node-version: 20.x
 
       - name: Install dependencies
         run: npm install

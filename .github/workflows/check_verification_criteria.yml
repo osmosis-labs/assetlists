@@ -55,7 +55,7 @@ jobs:
           REPORT_PATH="$CHAIN_NAME/generated/verification_reports/verification_report_latest.json"
 
           if [ -f "$REPORT_PATH" ]; then
-            echo "## Verification Report Summary" >> $GITHUB_STEP_SUMMARY
+            echo "## 📊 Verification Report Summary" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
 
             READY=$(jq -r '.summary.readyForVerification' "$REPORT_PATH")
@@ -69,14 +69,128 @@ jobs:
             echo "- 📊 **Total Checked**: $TOTAL" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
 
+            # Assets Ready for Verification
             if [ "$READY" -gt 0 ]; then
-              echo "### Assets Ready for Verification" >> $GITHUB_STEP_SUMMARY
+              echo "### ✅ Assets Ready for Verification" >> $GITHUB_STEP_SUMMARY
               echo "" >> $GITHUB_STEP_SUMMARY
-              jq -r '.results[] | select(.readyForVerification == true) | "- **\(.chain_name)/\(.base_denom)** - \(.comment)"' "$REPORT_PATH" >> $GITHUB_STEP_SUMMARY
+              jq -r '.results[] | select(.readyForVerification == true) | "- **\(.comment // .base_denom)** (\(.chain_name))"' "$REPORT_PATH" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
             fi
 
+            # Check Failure Breakdown
+            if [ "$FAILED" -gt 0 ]; then
+              echo "### ❌ Check Failure Breakdown" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "| Check | Failed Assets | Percentage |" >> $GITHUB_STEP_SUMMARY
+              echo "|-------|---------------|------------|" >> $GITHUB_STEP_SUMMARY
+              jq -r '.analysis.failureBreakdown[] | "| \(.check) | \(.count) | \(.percentage)% |"' "$REPORT_PATH" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            # High Liquidity Assets Failing
+            HIGH_LIQ_COUNT=$(jq -r '.analysis.highLiquidityFailing | length' "$REPORT_PATH")
+            if [ "$HIGH_LIQ_COUNT" -gt 0 ]; then
+              echo "### 💰 High Liquidity Assets Failing Verification (Top 10)" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "These assets have sufficient pool liquidity (\$1000+) but fail other checks:" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "| Asset | Chain | Pool Liquidity | Other Failures |" >> $GITHUB_STEP_SUMMARY
+              echo "|-------|-------|----------------|----------------|" >> $GITHUB_STEP_SUMMARY
+              jq -r '.analysis.highLiquidityFailing[] | "| \(.comment // .base_denom) | \(.chain_name) | \(.poolLiquidity) | \(.otherFailures | join(", ")) |"' "$REPORT_PATH" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            # Socials Failure Reasons
+            SOCIALS_COUNT=$(jq -r '.analysis.socialsFailureReasons | length' "$REPORT_PATH")
+            if [ "$SOCIALS_COUNT" -gt 0 ]; then
+              echo "### 🌐 Socials Failure Reasons" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "| Reason | Count |" >> $GITHUB_STEP_SUMMARY
+              echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+              jq -r '.analysis.socialsFailureReasons | to_entries | sort_by(-.value) | .[] | "| \(.key) | \(.value) |"' "$REPORT_PATH" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            # Description Failures
+            DESC_COUNT=$(jq -r '[.results[] | select(.checks.description.passed == false)] | length' "$REPORT_PATH")
+            if [ "$DESC_COUNT" -gt 0 ]; then
+              echo "### 📝 Description Failures ($DESC_COUNT assets)" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "Assets missing or with insufficient descriptions:" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              jq -r '.results[] | select(.checks.description.passed == false) | "- **\(.comment // .base_denom)** (\(.chain_name)) - \(.checks.description.details)"' "$REPORT_PATH" | head -20 >> $GITHUB_STEP_SUMMARY
+              if [ "$DESC_COUNT" -gt 20 ]; then
+                echo "" >> $GITHUB_STEP_SUMMARY
+                echo "_...and $(($DESC_COUNT - 20)) more. See full report for details._" >> $GITHUB_STEP_SUMMARY
+              fi
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            # Extended Description Failures
+            EXT_DESC_COUNT=$(jq -r '[.results[] | select(.checks.extendedDescription.passed == false and (.checks.extendedDescription.skipped // false) == false)] | length' "$REPORT_PATH")
+            if [ "$EXT_DESC_COUNT" -gt 0 ]; then
+              echo "### 📄 Extended Description Failures ($EXT_DESC_COUNT assets)" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "Assets missing detailed extended descriptions:" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              jq -r '.results[] | select(.checks.extendedDescription.passed == false and (.checks.extendedDescription.skipped // false) == false) | "- **\(.comment // .base_denom)** (\(.chain_name)) - \(.checks.extendedDescription.details)"' "$REPORT_PATH" | head -20 >> $GITHUB_STEP_SUMMARY
+              if [ "$EXT_DESC_COUNT" -gt 20 ]; then
+                echo "" >> $GITHUB_STEP_SUMMARY
+                echo "_...and $(($EXT_DESC_COUNT - 20)) more. See full report for details._" >> $GITHUB_STEP_SUMMARY
+              fi
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            # Logo Failures
+            LOGO_COUNT=$(jq -r '[.results[] | select(.checks.logo.passed == false)] | length' "$REPORT_PATH")
+            if [ "$LOGO_COUNT" -gt 0 ]; then
+              echo "### 🖼️ Logo Failures ($LOGO_COUNT assets)" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "Assets with logo issues (not square, too large, or missing):" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "| Asset | Chain | Issue |" >> $GITHUB_STEP_SUMMARY
+              echo "|-------|-------|-------|" >> $GITHUB_STEP_SUMMARY
+              jq -r '.results[] | select(.checks.logo.passed == false) | "| \(.comment // .base_denom) | \(.chain_name) | \(.checks.logo.details) |"' "$REPORT_PATH" | head -20 >> $GITHUB_STEP_SUMMARY
+              if [ "$LOGO_COUNT" -gt 20 ]; then
+                echo "" >> $GITHUB_STEP_SUMMARY
+                echo "_...and $(($LOGO_COUNT - 20)) more. See full report for details._" >> $GITHUB_STEP_SUMMARY
+              fi
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            # Pool Liquidity Failures
+            LIQ_COUNT=$(jq -r '[.results[] | select(.checks.poolLiquidity.passed == false)] | length' "$REPORT_PATH")
+            if [ "$LIQ_COUNT" -gt 0 ]; then
+              echo "### 💧 Pool Liquidity Failures ($LIQ_COUNT assets)" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "Assets with insufficient liquidity (< \$1000):" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              jq -r '.results[] | select(.checks.poolLiquidity.passed == false) | "- **\(.comment // .base_denom)** (\(.chain_name)) - \(.checks.poolLiquidity.details)"' "$REPORT_PATH" | head -20 >> $GITHUB_STEP_SUMMARY
+              if [ "$LIQ_COUNT" -gt 20 ]; then
+                echo "" >> $GITHUB_STEP_SUMMARY
+                echo "_...and $(($LIQ_COUNT - 20)) more. See full report for details._" >> $GITHUB_STEP_SUMMARY
+              fi
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            # Bid Depth Failures
+            BID_COUNT=$(jq -r '[.results[] | select(.checks.bidDepth.passed == false)] | length' "$REPORT_PATH")
+            if [ "$BID_COUNT" -gt 0 ]; then
+              echo "### 📊 Bid Depth Failures ($BID_COUNT assets)" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "Assets failing 2% slippage test (\$50 swap depth):" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              jq -r '.results[] | select(.checks.bidDepth.passed == false) | "- **\(.comment // .base_denom)** (\(.chain_name)) - \(.checks.bidDepth.details)"' "$REPORT_PATH" | head -20 >> $GITHUB_STEP_SUMMARY
+              if [ "$BID_COUNT" -gt 20 ]; then
+                echo "" >> $GITHUB_STEP_SUMMARY
+                echo "_...and $(($BID_COUNT - 20)) more. See full report for details._" >> $GITHUB_STEP_SUMMARY
+              fi
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            echo "---" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
-            echo "📥 Download the full reports from the workflow artifacts." >> $GITHUB_STEP_SUMMARY
+            echo "📥 **Download the full JSON report** from the workflow artifacts for complete details." >> $GITHUB_STEP_SUMMARY
           else
             echo "⚠️ Report file not found at $REPORT_PATH" >> $GITHUB_STEP_SUMMARY
           fi

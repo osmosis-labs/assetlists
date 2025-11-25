@@ -15,10 +15,29 @@
 import * as chain_reg from "../../../chain-registry/.github/workflows/utility/chain_registry.mjs";
 chain_reg.setup();
 import * as zone from "./assetlist_functions.mjs";
+import * as path from 'path';
+import * as fs from 'fs';
 
 //-- Globals --
 
 let zoneAssetlist;
+
+// Load validation state
+function getValidationState(chainName) {
+  try {
+    const stateFilePath = path.join('..', '..', '..', chainName, 'generated', 'state', 'state.json');
+    const stateContent = fs.readFileSync(stateFilePath, 'utf8');
+    return JSON.parse(stateContent);
+  } catch (error) {
+    console.warn(`Could not load validation state: ${error.message}`);
+    return null;
+  }
+}
+
+function getValidationRecord(state, chain_name) {
+  if (!state || !state.chains) return null;
+  return state.chains.find(c => c.chain_name === chain_name);
+}
 
 //-- Functions --
 
@@ -243,11 +262,13 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
                   chain_reg.getFileProperty(chain_name, "chain", "fees");
   if (!chainFees) return false;
 
-  // -- Get APIs with override support --
+  // -- Get APIs --
   let apis = chain_reg.getFileProperty(chain_name, "chain", "apis");
-  let rest = zoneChain.override_properties?.rest || zoneChain.rest || apis?.rest?.[0]?.address
+
+  // For validation: ensure we have at least one RPC and REST endpoint
+  let rest = zoneChain.rest || apis?.rest?.[0]?.address;
   if (!rest) return false;
-  let rpc = zoneChain.override_properties?.rpc || zoneChain.rpc || apis?.rpc?.[0]?.address
+  let rpc = zoneChain.rpc || apis?.rpc?.[0]?.address;
   if (!rpc) return false;
 
   // -- Get Explorer Tx URL with override support --
@@ -356,13 +377,66 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   if (!chain.description) delete chain.description;
 
   // -- Create APIs Property --
+  // Priority: validated working endpoint first, then zone_chains, then all other chain registry entries
   chain.apis = {};
-  chain.apis.rpc = [];
-  chain.apis.rpc[0] = {};
-  chain.apis.rpc[0].address = rpc;
-  chain.apis.rest = [];
-  chain.apis.rest[0] = {};
-  chain.apis.rest[0].address = rest;
+
+  // Collect all unique endpoints
+  const allRpcEndpoints = [];
+  const allRestEndpoints = [];
+
+  // Add zone_chains endpoints
+  if (zoneChain.rpc) {
+    allRpcEndpoints.push(zoneChain.rpc);
+  }
+  if (zoneChain.rest) {
+    allRestEndpoints.push(zoneChain.rest);
+  }
+
+  // Add chain registry endpoints (excluding duplicates)
+  if (apis?.rpc?.length > 0) {
+    apis.rpc.forEach(endpoint => {
+      if (!allRpcEndpoints.includes(endpoint.address)) {
+        allRpcEndpoints.push(endpoint.address);
+      }
+    });
+  }
+  if (apis?.rest?.length > 0) {
+    apis.rest.forEach(endpoint => {
+      if (!allRestEndpoints.includes(endpoint.address)) {
+        allRestEndpoints.push(endpoint.address);
+      }
+    });
+  }
+
+  // Check validation state and reorder if a backup was used
+  const validationState = getValidationState('osmosis-1');
+  const validationRecord = getValidationRecord(validationState, chain_name);
+
+  if (validationRecord?.backupUsed) {
+    const { rpcAddress, restAddress, rpcEndpointIndex, restEndpointIndex } = validationRecord.backupUsed;
+
+    // Move validated working RPC endpoint to the front
+    if (rpcAddress && allRpcEndpoints.includes(rpcAddress)) {
+      allRpcEndpoints.splice(allRpcEndpoints.indexOf(rpcAddress), 1);
+      allRpcEndpoints.unshift(rpcAddress);
+      if (rpcEndpointIndex > 0) {
+        console.log(`Using validated RPC endpoint [${rpcEndpointIndex}] for ${chain_name}: ${rpcAddress}`);
+      }
+    }
+
+    // Move validated working REST endpoint to the front
+    if (restAddress && allRestEndpoints.includes(restAddress)) {
+      allRestEndpoints.splice(allRestEndpoints.indexOf(restAddress), 1);
+      allRestEndpoints.unshift(restAddress);
+      if (restEndpointIndex > 0) {
+        console.log(`Using validated REST endpoint [${restEndpointIndex}] for ${chain_name}: ${restAddress}`);
+      }
+    }
+  }
+
+  // Build final APIs arrays
+  chain.apis.rpc = allRpcEndpoints.map(address => ({ address }));
+  chain.apis.rest = allRestEndpoints.map(address => ({ address }));
 
   // -- Create Explorers Propterty --
   chain.explorers = [];

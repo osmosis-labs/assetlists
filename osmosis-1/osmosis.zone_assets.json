@@ -28,10 +28,10 @@
       "osmosis_verified": true,
       "transfer_methods": [
         {
-          "name": "Satellite",
+          "name": "Squid",
           "type": "external_interface",
-          "deposit_url": "https://satellite.money/?source=ethereum&destination=osmosis&asset_denom=uusdc",
-          "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=uusdc"
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48,ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858,0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
         }
       ],
       "categories": [
@@ -46,10 +46,10 @@
       "osmosis_verified": true,
       "transfer_methods": [
         {
-          "name": "Satellite",
+          "name": "Squid",
           "type": "external_interface",
-          "deposit_url": "https://satellite.money/?source=ethereum&destination=osmosis&asset_denom=weth-wei",
-          "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=weth-wei"
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2,ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5,0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
         }
       ],
       "_comment": "Ethereum (Axelar) $ETH.axl"
@@ -59,13 +59,29 @@
       "base_denom": "wbtc-satoshi",
       "path": "transfer/channel-208/wbtc-satoshi",
       "osmosis_verified": true,
-      "_comment": "Wrapped Bitcoin (Ethereum via Axelar) $WBTC.eth.axl"
+      "_comment": "Wrapped Bitcoin (Ethereum via Axelar) $WBTC.eth.axl",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x2260fac5e5542a773aa44fbcfedf7c193bc2c599,ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F,0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+        }
+      ]
     },
     {
       "chain_name": "axelar",
       "base_denom": "uusdt",
       "path": "transfer/channel-208/uusdt",
       "osmosis_verified": true,
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0xdac17f958d2ee523a2206206994597c13d831ec7,ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4,0xdac17f958d2ee523a2206206994597c13d831ec7"
+        }
+      ],
       "_comment": "Tether USD (Ethereum via Axelar) $USDT.eth.axl",
       "categories": [
         "stablecoin"
@@ -76,6 +92,14 @@
       "base_denom": "dai-wei",
       "path": "transfer/channel-208/dai-wei",
       "osmosis_verified": true,
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x6b175474e89094c44da98b954eedeac495271d0f,ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7,0x6b175474e89094c44da98b954eedeac495271d0f"
+        }
+      ],
       "canonical": {
         "chain_name": "ethereum",
         "base_denom": "0x6b175474e89094c44da98b954eedeac495271d0f"
@@ -97,7 +121,15 @@
       "categories": [
         "stablecoin"
       ],
-      "_comment": "Binance USD $BUSD"
+      "_comment": "Binance USD $BUSD",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x4fabb145d64652a948d72533023f6e7a623c7c53,ibc/6329DD8CF31A334DD5BE3F68C846C9FE313281362B37686A62343BAC1EB1546D",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/6329DD8CF31A334DD5BE3F68C846C9FE313281362B37686A62343BAC1EB1546D,0x4fabb145d64652a948d72533023f6e7a623c7c53"
+        }
+      ]
     },
     {
       "chain_name": "cosmoshub",
@@ -121,7 +153,15 @@
       "override_properties": {
         "use_asset_name": true
       },
-      "_comment": "Binance Coin (Axelar) $BNB.axl"
+      "_comment": "Binance Coin (Axelar) $BNB.axl",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=56,osmosis-1&tokens=0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c,ibc/F4A070A6D78496D53127EA85C094A9EC87DFC1F36071B8CCDDBD020F933D213D",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,56&tokens=ibc/F4A070A6D78496D53127EA85C094A9EC87DFC1F36071B8CCDDBD020F933D213D,0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"
+        }
+      ]
     },
     {
       "chain_name": "axelar",
@@ -130,10 +170,10 @@
       "osmosis_verified": true,
       "transfer_methods": [
         {
-          "name": "Satellite",
+          "name": "Squid",
           "type": "external_interface",
-          "deposit_url": "https://satellite.money/?source=polygon&destination=osmosis&asset_denom=matic",
-          "withdraw_url": "https://satellite.money/?source=osmosis&destination=polygon&asset_denom=matic"
+          "deposit_url": "https://app.squidrouter.com/?chains=137,osmosis-1&tokens=0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270,ibc/AB589511ED0DD5FA56171A39978AFBF1371DB986EC1C3526CE138A16377E39BB",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,137&tokens=ibc/AB589511ED0DD5FA56171A39978AFBF1371DB986EC1C3526CE138A16377E39BB,0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270"
         }
       ],
       "_comment": "Polygon (ex-MATIC) (Axelar) $POL.axl"
@@ -147,7 +187,15 @@
         "chain_name": "avalanche",
         "base_denom": "wei"
       },
-      "_comment": "Avalanche $AVAX"
+      "_comment": "Avalanche $AVAX",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=43114,osmosis-1&tokens=0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7,ibc/6F62F01D913E3FFE472A38C78235B8F021B511BC6596ADFF02615C8F83D3B373",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,43114&tokens=ibc/6F62F01D913E3FFE472A38C78235B8F021B511BC6596ADFF02615C8F83D3B373,0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7"
+        }
+      ]
     },
     {
       "chain_name": "terra",
@@ -179,7 +227,15 @@
       "base_denom": "dot-planck",
       "path": "transfer/channel-208/dot-planck",
       "osmosis_verified": true,
-      "_comment": "Polkadot (Moonbeam via Axelar) $DOT.glmr.axl"
+      "_comment": "Polkadot (Moonbeam via Axelar) $DOT.glmr.axl",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1284,osmosis-1&tokens=0xffffffff1fcacbd218edc0eba20fc2308c778080,ibc/3FF92D26B407FD61AE95D975712A7C319CDE28DE4D80BDC9978D935932B991D7",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1284&tokens=ibc/3FF92D26B407FD61AE95D975712A7C319CDE28DE4D80BDC9978D935932B991D7,0xffffffff1fcacbd218edc0eba20fc2308c778080"
+        }
+      ]
     },
     {
       "chain_name": "evmos",
@@ -649,7 +705,15 @@
       "categories": [
         "stablecoin"
       ],
-      "_comment": "Frax $FRAX"
+      "_comment": "Frax $FRAX",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x853d955acef822db058eb8505911ed77f175b99e,ibc/0E43EDE2E2A3AFA36D0CD38BDDC0B49FECA64FA426A82E102F304E430ECF46EE",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/0E43EDE2E2A3AFA36D0CD38BDDC0B49FECA64FA426A82E102F304E430ECF46EE,0x853d955acef822db058eb8505911ed77f175b99e"
+        }
+      ]
     },
     {
       "chain_name": "gravitybridge",
@@ -842,7 +906,15 @@
       "categories": [
         "oracles"
       ],
-      "_comment": "Chainlink (Axelar) $LINK.axl"
+      "_comment": "Chainlink (Axelar) $LINK.axl",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x514910771af9ca656af840dff83e8264ecf986ca,ibc/D3327A763C23F01EC43D1F0DB3CEFEC390C362569B6FD191F40A5192F8960049",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/D3327A763C23F01EC43D1F0DB3CEFEC390C362569B6FD191F40A5192F8960049,0x514910771af9ca656af840dff83e8264ecf986ca"
+        }
+      ]
     },
     {
       "chain_name": "genesisl1",
@@ -865,7 +937,15 @@
       "categories": [
         "defi"
       ],
-      "_comment": "Aave $AAVE"
+      "_comment": "Aave $AAVE",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9,ibc/384E5DD50BDE042E1AAF51F312B55F08F95BC985C503880189258B4D9374CBBE",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/384E5DD50BDE042E1AAF51F312B55F08F95BC985C503880189258B4D9374CBBE,0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9"
+        }
+      ]
     },
     {
       "chain_name": "axelar",
@@ -880,7 +960,15 @@
       "categories": [
         "nft_protocol"
       ],
-      "_comment": "ApeCoin $APE"
+      "_comment": "ApeCoin $APE",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x4d224452801aced8b2f0aebe155379bb5d594381,ibc/F83CC6471DA4D4B508F437244F10B9E4C68975344E551A2DEB6B8617AB08F0D4",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/F83CC6471DA4D4B508F437244F10B9E4C68975344E551A2DEB6B8617AB08F0D4,0x4d224452801aced8b2f0aebe155379bb5d594381"
+        }
+      ]
     },
     {
       "chain_name": "axelar",
@@ -894,7 +982,15 @@
       "categories": [
         "defi"
       ],
-      "_comment": "Maker $MKR"
+      "_comment": "Maker $MKR",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2,ibc/D27DDDF34BB47E5D5A570742CC667DE53277867116CCCA341F27785E899A70F3",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/D27DDDF34BB47E5D5A570742CC667DE53277867116CCCA341F27785E899A70F3,0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2"
+        }
+      ]
     },
     {
       "chain_name": "axelar",
@@ -907,10 +1003,10 @@
       },
       "transfer_methods": [
         {
-          "name": "Satellite",
+          "name": "Squid",
           "type": "external_interface",
-          "deposit_url": "https://satellite.money/?source=ethereum&destination=osmosis&asset_denom=rai-we",
-          "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=rai-wei"
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x03ab458634910aad20ef5f1c8ee96f1d6ac54919,ibc/BD796662F8825327D41C96355DF62045A5BA225BAE31C0A86289B9D88ED3F44E",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/BD796662F8825327D41C96355DF62045A5BA225BAE31C0A86289B9D88ED3F44E,0x03ab458634910aad20ef5f1c8ee96f1d6ac54919"
         }
       ],
       "categories": [
@@ -927,7 +1023,15 @@
       "categories": [
         "meme"
       ],
-      "_comment": "Shiba Inu (Axelar) $SHIB.axl"
+      "_comment": "Shiba Inu (Axelar) $SHIB.axl",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce,ibc/19305E20681911F14D1FB275E538CDE524C3BF88CF9AE5D5F78F4D4DA05E85B2",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/19305E20681911F14D1FB275E538CDE524C3BF88CF9AE5D5F78F4D4DA05E85B2,0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce"
+        }
+      ]
     },
     {
       "chain_name": "kujira",
@@ -1013,7 +1117,15 @@
         "chain_name": "moonbeam",
         "base_denom": "Wei"
       },
-      "_comment": "Moonbeam $GLMR"
+      "_comment": "Moonbeam $GLMR",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1284,osmosis-1&tokens=0xacc15dc74880c9944775448304b263d191c6077f,ibc/1E26DB0E5122AED464D98462BD384FCCB595732A66B3970AE6CE0B58BAE0FC49",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1284&tokens=ibc/1E26DB0E5122AED464D98462BD384FCCB595732A66B3970AE6CE0B58BAE0FC49,0xacc15dc74880c9944775448304b263d191c6077f"
+        }
+      ]
     },
     {
       "chain_name": "juno",
@@ -1466,7 +1578,15 @@
         "chain_name": "fantom",
         "base_denom": "wei"
       },
-      "_comment": "Fantom $FTM"
+      "_comment": "Fantom $FTM",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=250,osmosis-1&tokens=0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83,ibc/5E2DFDF1734137302129EA1C1BA21A580F96F778D4F021815EA4F6DB378DA1A4",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,250&tokens=ibc/5E2DFDF1734137302129EA1C1BA21A580F96F778D4F021815EA4F6DB378DA1A4,0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83"
+        }
+      ]
     },
     {
       "chain_name": "canto",
@@ -1503,7 +1623,15 @@
       "categories": [
         "stablecoin"
       ],
-      "_comment": "USDC (Ethereum) (Polygon via Axelar) $USDC.e.matic.axl"
+      "_comment": "USDC (Ethereum) (Polygon via Axelar) $USDC.e.matic.axl",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=137,osmosis-1&tokens=0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174,ibc/231FD77ECCB2DB916D314019DA30FE013202833386B1908A191D16989AD80B5A",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,137&tokens=ibc/231FD77ECCB2DB916D314019DA30FE013202833386B1908A191D16989AD80B5A,0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+        }
+      ]
     },
     {
       "chain_name": "axelar",
@@ -1513,7 +1641,15 @@
       "categories": [
         "stablecoin"
       ],
-      "_comment": "USDC (Avalanche via Axelar) $USDC.avax.axl"
+      "_comment": "USDC (Avalanche via Axelar) $USDC.avax.axl",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=43114,osmosis-1&tokens=0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E,ibc/F17C9CA112815613C5B6771047A093054F837C3020CBA59DFFD9D780A8B2984C",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,43114&tokens=ibc/F17C9CA112815613C5B6771047A093054F837C3020CBA59DFFD9D780A8B2984C,0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E"
+        }
+      ]
     },
     {
       "chain_name": "mars",
@@ -1813,7 +1949,15 @@
         "dweb",
         "depin"
       ],
-      "_comment": "Filecoin (Axelar) $FIL.axl"
+      "_comment": "Filecoin (Axelar) $FIL.axl",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=314,osmosis-1&tokens=0x60E1773636CF5E4A227d9AC24F20fEca034ee25A,ibc/18FB5C09D9D2371F659D4846A956FA56225E377EE3C3652A2BF3542BF809159D",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,314&tokens=ibc/18FB5C09D9D2371F659D4846A956FA56225E377EE3C3652A2BF3542BF809159D,0x60E1773636CF5E4A227d9AC24F20fEca034ee25A"
+        }
+      ]
     },
     {
       "chain_name": "juno",
@@ -1851,7 +1995,15 @@
       "base_denom": "arb-wei",
       "path": "transfer/channel-208/arb-wei",
       "osmosis_verified": true,
-      "_comment": "Arbitrum (Axelar) $ARB.axl"
+      "_comment": "Arbitrum (Axelar) $ARB.axl",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=42161,osmosis-1&tokens=0x912CE59144191C1204E64559FE8253a0e49E6548,ibc/10E5E5B06D78FFBB61FD9F89209DEE5FD4446ED0550CBB8E3747DA79E10D9DC6",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,42161&tokens=ibc/10E5E5B06D78FFBB61FD9F89209DEE5FD4446ED0550CBB8E3747DA79E10D9DC6,0x912CE59144191C1204E64559FE8253a0e49E6548"
+        }
+      ]
     },
     {
       "chain_name": "juno",
@@ -1878,7 +2030,15 @@
       "categories": [
         "meme"
       ],
-      "_comment": "Pepe (Axelar) $PEPE.axl"
+      "_comment": "Pepe (Axelar) $PEPE.axl",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x6982508145454Ce325dDbE47a25d4ec3d2311933,ibc/E47F4E97C534C95B942729E1B25DBDE111EA791411CFF100515050BEA0AC0C6B",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/E47F4E97C534C95B942729E1B25DBDE111EA791411CFF100515050BEA0AC0C6B,0x6982508145454Ce325dDbE47a25d4ec3d2311933"
+        }
+      ]
     },
     {
       "chain_name": "osmosis",
@@ -1902,7 +2062,15 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Coinbase Wrapped Staked ETH $cbETH"
+      "_comment": "Coinbase Wrapped Staked ETH $cbETH",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0xbe9895146f7af43049ca1c1ae358b0541ea49704,ibc/4D7A6F2A7744B1534C984A21F9EDFFF8809FC71A9E9243FFB702073E7FCA513A",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/4D7A6F2A7744B1534C984A21F9EDFFF8809FC71A9E9243FFB702073E7FCA513A,0xbe9895146f7af43049ca1c1ae358b0541ea49704"
+        }
+      ]
     },
     {
       "chain_name": "axelar",
@@ -1916,7 +2084,15 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Rocket Pool Ether $rETH"
+      "_comment": "Rocket Pool Ether $rETH",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0xae78736cd615f374d3085123a210448e74fc6393,ibc/E610B83FD5544E00A8A1967A2EB3BEF25F1A8CFE8650FE247A8BD4ECA9DC9222",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/E610B83FD5544E00A8A1967A2EB3BEF25F1A8CFE8650FE247A8BD4ECA9DC9222,0xae78736cd615f374d3085123a210448e74fc6393"
+        }
+      ]
     },
     {
       "chain_name": "axelar",
@@ -1930,7 +2106,15 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Staked Frax Ether $sfrxETH"
+      "_comment": "Staked Frax Ether $sfrxETH",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0xac3e018457b222d93114458476f3e3416abbe38f,ibc/81F578C39006EB4B27FFFA9460954527910D73390991B379C03B18934D272F46",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/81F578C39006EB4B27FFFA9460954527910D73390991B379C03B18934D272F46,0xac3e018457b222d93114458476f3e3416abbe38f"
+        }
+      ]
     },
     {
       "chain_name": "axelar",
@@ -1944,7 +2128,15 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Wrapped Lido Staked Ether (Axelar) $wstETH.axl"
+      "_comment": "Wrapped Lido Staked Ether (Axelar) $wstETH.axl",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0,ibc/B2BD584CD2A0A9CE53D4449667E26160C7D44A9C41AF50F602C201E5B3CCA46C",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/B2BD584CD2A0A9CE53D4449667E26160C7D44A9C41AF50F602C201E5B3CCA46C,0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0"
+        }
+      ]
     },
     {
       "chain_name": "gitopia",
@@ -2454,7 +2646,15 @@
       "categories": [
         "defi"
       ],
-      "_comment": "Real Yield ETH $YieldETH"
+      "_comment": "Real Yield ETH $YieldETH",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0xb5b29320d2Dde5BA5BAFA1EbcD270052070483ec,ibc/FBB3FEF80ED2344D821D4F95C31DBFD33E4E31D5324CAD94EF756E67B749F668",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/FBB3FEF80ED2344D821D4F95C31DBFD33E4E31D5324CAD94EF756E67B749F668,0xb5b29320d2Dde5BA5BAFA1EbcD270052070483ec"
+        }
+      ]
     },
     {
       "chain_name": "xpla",
@@ -4263,10 +4463,10 @@
       "osmosis_verified": false,
       "transfer_methods": [
         {
-          "name": "Satellite",
+          "name": "Squid",
           "type": "external_interface",
-          "deposit_url": "https://satellite.money/?source=ethereum&destination=osmosis&asset_denom=arbitrum-weth-wei",
-          "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=arbitrum-weth-wei"
+          "deposit_url": "https://app.squidrouter.com/?chains=42161,osmosis-1&tokens=0x82aF49447D8a07e3bd95BD0d56f35241523fBab1,ibc/64E62451C9A5682FF3047429C6E4714A02CDC0C35DE35CAB01E18D1188004CEB",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,42161&tokens=ibc/64E62451C9A5682FF3047429C6E4714A02CDC0C35DE35CAB01E18D1188004CEB,0x82aF49447D8a07e3bd95BD0d56f35241523fBab1"
         }
       ],
       "_comment": "Ethereum (Arbitrum via Axelar) $ETH.arb.axl"
@@ -4278,10 +4478,10 @@
       "osmosis_verified": false,
       "transfer_methods": [
         {
-          "name": "Satellite",
+          "name": "Squid",
           "type": "external_interface",
-          "deposit_url": "https://satellite.money/?source=ethereum&destination=osmosis&asset_denom=base-weth-wei",
-          "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=base-weth-wei"
+          "deposit_url": "https://app.squidrouter.com/?chains=8453,osmosis-1&tokens=0x4200000000000000000000000000000000000006,ibc/D7D6DEF2A4F7ED0A6F5F0E266C1B2C9726E82F67EBBE49BBB47B3DEC289F8D7B",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,8453&tokens=ibc/D7D6DEF2A4F7ED0A6F5F0E266C1B2C9726E82F67EBBE49BBB47B3DEC289F8D7B,0x4200000000000000000000000000000000000006"
         }
       ],
       "_comment": "Ethereum (Base via Axelar) $ETH.base.axl"
@@ -4293,10 +4493,10 @@
       "osmosis_verified": false,
       "transfer_methods": [
         {
-          "name": "Satellite",
+          "name": "Squid",
           "type": "external_interface",
-          "deposit_url": "https://satellite.money/?source=ethereum&destination=osmosis&asset_denom=polygon-weth-wei",
-          "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=polygon-weth-wei"
+          "deposit_url": "https://app.squidrouter.com/?chains=137,osmosis-1&tokens=0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619,ibc/F9EB60AC212DBF05F4C5ED0FDE03BB9F08309B0EE9899A406AD4B904CF84968E",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,137&tokens=ibc/F9EB60AC212DBF05F4C5ED0FDE03BB9F08309B0EE9899A406AD4B904CF84968E,0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619"
         }
       ],
       "_comment": "Ethereum (Polygon via Axelar) $ETH.matic.axl"
@@ -4593,10 +4793,10 @@
       "osmosis_verified": true,
       "transfer_methods": [
         {
-          "name": "Satellite",
+          "name": "Squid",
           "type": "external_interface",
-          "deposit_url": "https://satellite.money/?source=optimism&destination=osmosis&asset_denom=op-wei",
-          "withdraw_url": "https://satellite.money/?source=osmosis&destination=optimism&asset_denom=op-wei"
+          "deposit_url": "https://app.squidrouter.com/?chains=10,osmosis-1&tokens=0x4200000000000000000000000000000000000042,ibc/14A291DD362798D6805B7ABCB8D09AEEE02176108F89FA09AA43EA2EE096A2A9",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,10&tokens=ibc/14A291DD362798D6805B7ABCB8D09AEEE02176108F89FA09AA43EA2EE096A2A9,0x4200000000000000000000000000000000000042"
         }
       ],
       "_comment": "Optimism (Axelar) $OP.axl"
@@ -4986,7 +5186,15 @@
       "categories": [
         "defi"
       ],
-      "_comment": "Uniswap (Axelar) $UNI.axl"
+      "_comment": "Uniswap (Axelar) $UNI.axl",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x1f9840a85d5af5bf1d1762f925bdaddc4201f984,ibc/AE2719773D6FCDD05AC17B1ED63F672F5F9D84144A61965F348C86C2A83AD161",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/AE2719773D6FCDD05AC17B1ED63F672F5F9D84144A61965F348C86C2A83AD161,0x1f9840a85d5af5bf1d1762f925bdaddc4201f984"
+        }
+      ]
     },
     {
       "chain_name": "osmosis",
@@ -5091,6 +5299,14 @@
       "_comment": "Tether USD (Ethereum) (Arbitrum via Axelar) $USDT.e.arb.axl",
       "categories": [
         "stablecoin"
+      ],
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=42161,osmosis-1&tokens=0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9,ibc/57B63A0795B6BC0AC4EFD0D4DEE9FE71FCC1D0FFA87F6280C9CDEF4F6727A173",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,42161&tokens=ibc/57B63A0795B6BC0AC4EFD0D4DEE9FE71FCC1D0FFA87F6280C9CDEF4F6727A173,0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9"
+        }
       ]
     },
     {
@@ -5101,6 +5317,14 @@
       "_comment": "Tether USD (Ethereum) (optimism via Axelar) $USDT.e.op.axl",
       "categories": [
         "stablecoin"
+      ],
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=10,osmosis-1&tokens=0x94b008aA00579c1307B0EF2c499aD98a8ce58e58,ibc/EEA21E12A250B7FBBCBBBD1F7AA78984F5C12D684B32EBEEFC585FF596A7BCDA",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,10&tokens=ibc/EEA21E12A250B7FBBCBBBD1F7AA78984F5C12D684B32EBEEFC585FF596A7BCDA,0x94b008aA00579c1307B0EF2c499aD98a8ce58e58"
+        }
       ]
     },
     {
@@ -5111,6 +5335,14 @@
       "_comment": "Tether USD (Ethereum) (Polygon via Axelar) $USDT.e.matic.axl",
       "categories": [
         "stablecoin"
+      ],
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=137,osmosis-1&tokens=0xc2132D05D31c914a87C6611C10748AEb04B58e8F,ibc/2F6003A92088B989A159C593C551DF7B04FA0A0419CA3ED087E45E0006ECFF6E",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,137&tokens=ibc/2F6003A92088B989A159C593C551DF7B04FA0A0419CA3ED087E45E0006ECFF6E,0xc2132D05D31c914a87C6611C10748AEb04B58e8F"
+        }
       ]
     },
     {
@@ -5118,21 +5350,45 @@
       "base_denom": "cbbtc-satoshi",
       "path": "transfer/channel-208/cbbtc-satoshi",
       "osmosis_verified": true,
-      "_comment": "Coinbase Wrapped BTC (Axelar) $cbBTC.axl"
+      "_comment": "Coinbase Wrapped BTC (Axelar) $cbBTC.axl",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=8453,osmosis-1&tokens=0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf,ibc/616C2EA69BC328F245CE449785CB0B526B462C48F19DCF9B3D30699579B4308A",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,8453&tokens=ibc/616C2EA69BC328F245CE449785CB0B526B462C48F19DCF9B3D30699579B4308A,0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf"
+        }
+      ]
     },
     {
       "chain_name": "axelar",
       "base_denom": "fbtc-satoshi",
       "path": "transfer/channel-208/fbtc-satoshi",
       "osmosis_verified": false,
-      "_comment": "Fire Bitcoin (Axelar) $FBTC.axl"
+      "_comment": "Fire Bitcoin (Axelar) $FBTC.axl",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=5000,osmosis-1&tokens=0xC96dE26018A54D51c097160568752c4E3BD6C364,ibc/22C342A34DD0189AC2B2697EE76C360A9FBA53748ABA76E12C3A9E9F5F1E130F",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,5000&tokens=ibc/22C342A34DD0189AC2B2697EE76C360A9FBA53748ABA76E12C3A9E9F5F1E130F,0xC96dE26018A54D51c097160568752c4E3BD6C364"
+        }
+      ]
     },
     {
       "chain_name": "axelar",
       "base_denom": "lbtc-satoshi",
       "path": "transfer/channel-208/lbtc-satoshi",
       "osmosis_verified": false,
-      "_comment": "Lombard Staked Bitcoin (Ethereum via Axelar) $LBTC.eth.axl"
+      "_comment": "Lombard Staked Bitcoin (Ethereum via Axelar) $LBTC.eth.axl",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x8236a87084f8B84306f72007F36F2618A5634494,ibc/4AC81C97BBB5482536F6401328E0E10BCCD98F0F471DCF64319A811E25E53CAB",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/4AC81C97BBB5482536F6401328E0E10BCCD98F0F471DCF64319A811E25E53CAB,0x8236a87084f8B84306f72007F36F2618A5634494"
+        }
+      ]
     },
     {
       "chain_name": "osmosis",
@@ -5251,7 +5507,15 @@
       "categories": [
         "defi"
       ],
-      "_comment": "Yum $YUM"
+      "_comment": "Yum $YUM",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0xcE682c89C63d2850Cb2ca898E44D6c7c30d897a6,ibc/21D8071EF5B02A86D945430D859A594CBF28287D38104A264BB9FD3B22BBF5DE",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/21D8071EF5B02A86D945430D859A594CBF28287D38104A264BB9FD3B22BBF5DE,0xcE682c89C63d2850Cb2ca898E44D6c7c30d897a6"
+        }
+      ]
     },
     {
       "chain_name": "omniflixhub",
@@ -5785,10 +6049,10 @@
       "osmosis_verified": true,
       "transfer_methods": [
         {
-          "name": "Satellite",
+          "name": "Squid",
           "type": "external_interface",
-          "deposit_url": "https://satellite.money/?source=ethereum&destination=osmosis&asset_denom=unit-move",
-          "withdraw_url": "https://satellite.money/?source=osmosis&destination=ethereum&asset_denom=unit-move"
+          "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x3073f7aaa4db83f95e9fff17424f71d4751a3073,ibc/D19DA6AE5B3CB19A035FCB51DEE5A36392E0D64D51C20D159A155D1581911A39",
+          "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/D19DA6AE5B3CB19A035FCB51DEE5A36392E0D64D51C20D159A155D1581911A39,0x3073f7aaa4db83f95e9fff17424f71d4751a3073"
         }
       ],
       "_comment": "Movement (Ethereum via Axelar) $MOVE.eth.axl"

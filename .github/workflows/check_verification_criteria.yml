@@ -2,11 +2,6 @@ name: Check Asset Verification Criteria
 
 on:
   workflow_dispatch:
-    inputs:
-      chain_name:
-        description: 'Chain name to check (e.g., osmosis-1)'
-        required: false
-        default: 'osmosis-1'
 
 permissions: read-all
 
@@ -38,9 +33,8 @@ jobs:
       - name: Run Verification Checks
         working-directory: ./.github/workflows/utility
         run: |
-          CHAIN_NAME="${{ github.event.inputs.chain_name || 'osmosis-1' }}"
-          echo "Running verification checks for $CHAIN_NAME..."
-          node checkVerificationCriteria.mjs "$CHAIN_NAME"
+          echo "Running verification checks for osmosis-1..."
+          node checkVerificationCriteria.mjs osmosis-1
 
       - name: Upload Verification Report
         uses: actions/upload-artifact@v4
@@ -51,8 +45,7 @@ jobs:
 
       - name: Display Report Summary
         run: |
-          CHAIN_NAME="${{ github.event.inputs.chain_name || 'osmosis-1' }}"
-          REPORT_PATH="$CHAIN_NAME/generated/verification_reports/verification_report_latest.json"
+          REPORT_PATH="osmosis-1/generated/verification_reports/verification_report_latest.json"
 
           if [ -f "$REPORT_PATH" ]; then
             echo "## 📊 Verification Report Summary" >> $GITHUB_STEP_SUMMARY

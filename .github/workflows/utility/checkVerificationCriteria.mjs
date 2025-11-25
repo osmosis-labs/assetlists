@@ -1551,40 +1551,21 @@ async function runVerificationReport(chainName = 'osmosis-1') {
     }
   }
 
-  // Generate markdown report only
-  const markdownReport = generateMarkdownReport(results);
+  // Generate JSON report
+  const jsonReport = generateJSONReport(results);
 
-  // Save report to /generated/ directory
-  const generatedDir = path.join(repoRoot, chainName, 'generated');
-  if (!fs.existsSync(generatedDir)) {
-    fs.mkdirSync(generatedDir, { recursive: true });
+  // Save report to /generated/verification_reports/ directory
+  const reportsDir = path.join(repoRoot, chainName, 'generated', 'verification_reports');
+  if (!fs.existsSync(reportsDir)) {
+    fs.mkdirSync(reportsDir, { recursive: true });
   }
 
-  // Delete old verification reports (keep only the current one)
-  const oldReports = fs.readdirSync(generatedDir)
-    .filter(f => f.startsWith('verification_report_') && f.endsWith('.md'));
+  // Save latest report (overwrites previous)
+  const latestJsonPath = path.join(reportsDir, 'verification_report_latest.json');
+  fs.writeFileSync(latestJsonPath, jsonReport);
 
-  oldReports.forEach(file => {
-    fs.unlinkSync(path.join(generatedDir, file));
-    console.log(`Deleted old report: ${file}`);
-  });
-
-  // Also delete any JSON reports if they exist
-  const oldJsonReports = fs.readdirSync(generatedDir)
-    .filter(f => f.startsWith('verification_report_') && f.endsWith('.json'));
-
-  oldJsonReports.forEach(file => {
-    fs.unlinkSync(path.join(generatedDir, file));
-    console.log(`Deleted old JSON report: ${file}`);
-  });
-
-  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-  const reportPath = path.join(generatedDir, `verification_report_${timestamp}.md`);
-
-  fs.writeFileSync(reportPath, markdownReport);
-
-  console.log(`\nReport saved to ${generatedDir}`);
-  console.log(`- verification_report_${timestamp}.md`);
+  console.log(`\nReport saved to ${reportsDir}`);
+  console.log(`- verification_report_latest.json`);
 
   // NOTE: Automatic verification flag updates are disabled
   // The script only generates reports. Manual verification flag updates should be done via PR review.

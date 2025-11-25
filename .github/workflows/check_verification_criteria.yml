@@ -2,11 +2,6 @@ name: Check Asset Verification Criteria
 
 on:
   workflow_dispatch:
-    inputs:
-      chain_name:
-        description: 'Chain name to check (e.g., osmosis-1)'
-        required: false
-        default: 'osmosis-1'
 
 permissions: read-all
 
@@ -38,49 +33,133 @@ jobs:
       - name: Run Verification Checks
         working-directory: ./.github/workflows/utility
         run: |
-          CHAIN_NAME="${{ github.event.inputs.chain_name || 'osmosis-1' }}"
-          echo "Running verification checks for $CHAIN_NAME..."
-          node checkVerificationCriteria.mjs "$CHAIN_NAME"
+          echo "Running verification checks for osmosis-1..."
+          node checkVerificationCriteria.mjs osmosis-1
 
-      - name: Upload Verification Reports
+      - name: Upload Verification Report
         uses: actions/upload-artifact@v4
         with:
-          name: verification-reports
-          path: |
-            osmosis-1/generated/verification_reports/verification_report_latest.md
-            osmosis-1/generated/verification_reports/verification_report_latest.json
-            osmosis-1/generated/verification_reports/verification_report_*.md
-            osmosis-1/generated/verification_reports/verification_report_*.json
+          name: verification-report
+          path: osmosis-1/generated/verification_reports/verification_report_latest.json
           retention-days: 90
 
       - name: Display Report Summary
         run: |
-          CHAIN_NAME="${{ github.event.inputs.chain_name || 'osmosis-1' }}"
-          REPORT_PATH="$CHAIN_NAME/generated/verification_reports/verification_report_latest.json"
+          REPORT_PATH="osmosis-1/generated/verification_reports/verification_report_latest.json"
 
           if [ -f "$REPORT_PATH" ]; then
-            echo "## Verification Report Summary" >> $GITHUB_STEP_SUMMARY
+            echo "## 📊 Verification Report Summary" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
 
             READY=$(jq -r '.summary.readyForVerification' "$REPORT_PATH")
-            ALREADY=$(jq -r '.summary.alreadyVerified' "$REPORT_PATH")
             FAILED=$(jq -r '.summary.failedChecks' "$REPORT_PATH")
             TOTAL=$(jq -r '.summary.totalChecked' "$REPORT_PATH")
 
             echo "- ✅ **Ready for Verification**: $READY" >> $GITHUB_STEP_SUMMARY
-            echo "- 🔒 **Already Verified**: $ALREADY" >> $GITHUB_STEP_SUMMARY
             echo "- ❌ **Failed Checks**: $FAILED" >> $GITHUB_STEP_SUMMARY
             echo "- 📊 **Total Checked**: $TOTAL" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
 
-            if [ "$READY" -gt 0 ]; then
-              echo "### Assets Ready for Verification" >> $GITHUB_STEP_SUMMARY
-              echo "" >> $GITHUB_STEP_SUMMARY
-              jq -r '.results[] | select(.readyForVerification == true) | "- **\(.chain_name)/\(.base_denom)** - \(.comment)"' "$REPORT_PATH" >> $GITHUB_STEP_SUMMARY
-            fi
-
+            # Assets Ready for Verification
+            echo "### ✅ Assets Ready for Verification" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
-            echo "📥 Download the full reports from the workflow artifacts." >> $GITHUB_STEP_SUMMARY
+            if [ "$READY" -gt 0 ]; then
+              jq -r '.results[] | select(.readyForVerification == true) | if .autoVerifiedByAlloy then "- **\(.comment // .base_denom)** (\(.chain_name)) ✨ _Auto-verified via \(.alloyInfo.alloySymbol) transmuter pool_" else "- **\(.comment // .base_denom)** (\(.chain_name))" end' "$REPORT_PATH" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "_No assets ready for verification at this time._" >> $GITHUB_STEP_SUMMARY
+            fi
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            # Check Failure Breakdown
+            echo "### ❌ Check Failure Breakdown" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            if [ "$FAILED" -gt 0 ]; then
+              echo "| Check | Failed Assets | Percentage |" >> $GITHUB_STEP_SUMMARY
+              echo "|-------|---------------|------------|" >> $GITHUB_STEP_SUMMARY
+              jq -r '.analysis.failureBreakdown[] | "| \(.check) | \(.count) | \(.percentage)% |"' "$REPORT_PATH" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "_All assets pass all checks!_" >> $GITHUB_STEP_SUMMARY
+            fi
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            # High Liquidity Assets Failing
+            echo "### 💰 High Liquidity Assets Failing Verification (Top 10)" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Assets with sufficient pool liquidity (\$1000+) but failing other checks:" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            HIGH_LIQ_COUNT=$(jq -r '.analysis.highLiquidityFailing | length' "$REPORT_PATH")
+            if [ "$HIGH_LIQ_COUNT" -gt 0 ]; then
+              echo "| Asset | Chain | Pool Liquidity | Bid Depth | Failure Reasons |" >> $GITHUB_STEP_SUMMARY
+              echo "|-------|-------|----------------|-----------|-----------------|" >> $GITHUB_STEP_SUMMARY
+              jq -r '.analysis.highLiquidityFailing[] | . as $item | [.chain_name, .base_denom] as $key | (.otherFailures | map(. as $check | $item | .checks[$check].details)) as $reasons | "| \($item.comment // $item.base_denom) | \($item.chain_name) | \($item.poolLiquidity) | \($item.bidDepth) | \($reasons | join("; ")) |"' "$REPORT_PATH" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "_No high liquidity assets are failing verification._" >> $GITHUB_STEP_SUMMARY
+            fi
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            # Assets Missing Only Socials
+            echo "### 🌐 Assets Failing Only on Missing Socials" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Assets where the **only** issue is missing website or twitter/x:" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            SOCIALS_ONLY=$(jq -r '[.results[] | select(.checks.socials.passed == false and (.checks.socials.skipped // false) == false) | select([.checks | to_entries[] | select(.value.passed == false and (.value.skipped // false) == false)] | length == 1)] | length' "$REPORT_PATH")
+            if [ "$SOCIALS_ONLY" -gt 0 ]; then
+              echo "| Asset | Chain | Missing |" >> $GITHUB_STEP_SUMMARY
+              echo "|-------|-------|---------|" >> $GITHUB_STEP_SUMMARY
+              jq -r '.results[] | select(.checks.socials.passed == false and (.checks.socials.skipped // false) == false) | select([.checks | to_entries[] | select(.value.passed == false and (.value.skipped // false) == false)] | length == 1) | "| \(.comment // .base_denom) | \(.chain_name) | \(.checks.socials.details) |"' "$REPORT_PATH" | head -20 >> $GITHUB_STEP_SUMMARY
+            else
+              echo "_No assets are failing solely due to missing socials._" >> $GITHUB_STEP_SUMMARY
+            fi
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            # Assets Failing Only on Description
+            echo "### 📝 Assets Failing Only on Description" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Assets where the **only** issue is missing or insufficient description:" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            DESC_ONLY=$(jq -r '[.results[] | select(.checks.description.passed == false) | select([.checks | to_entries[] | select(.value.passed == false and (.value.skipped // false) == false)] | length == 1)] | length' "$REPORT_PATH")
+            if [ "$DESC_ONLY" -gt 0 ]; then
+              echo "| Asset | Chain | Issue |" >> $GITHUB_STEP_SUMMARY
+              echo "|-------|-------|-------|" >> $GITHUB_STEP_SUMMARY
+              jq -r '.results[] | select(.checks.description.passed == false) | select([.checks | to_entries[] | select(.value.passed == false and (.value.skipped // false) == false)] | length == 1) | "| \(.comment // .base_denom) | \(.chain_name) | \(.checks.description.details) |"' "$REPORT_PATH" | head -20 >> $GITHUB_STEP_SUMMARY
+            else
+              echo "_No assets are failing solely due to description issues._" >> $GITHUB_STEP_SUMMARY
+            fi
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            # Assets Failing Only on Extended Description
+            echo "### 📄 Assets Failing Only on Extended Description" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Assets where the **only** issue is missing or insufficient extended description:" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            EXT_DESC_ONLY=$(jq -r '[.results[] | select(.checks.extendedDescription.passed == false and (.checks.extendedDescription.skipped // false) == false) | select([.checks | to_entries[] | select(.value.passed == false and (.value.skipped // false) == false)] | length == 1)] | length' "$REPORT_PATH")
+            if [ "$EXT_DESC_ONLY" -gt 0 ]; then
+              echo "| Asset | Chain | Issue |" >> $GITHUB_STEP_SUMMARY
+              echo "|-------|-------|-------|" >> $GITHUB_STEP_SUMMARY
+              jq -r '.results[] | select(.checks.extendedDescription.passed == false and (.checks.extendedDescription.skipped // false) == false) | select([.checks | to_entries[] | select(.value.passed == false and (.value.skipped // false) == false)] | length == 1) | "| \(.comment // .base_denom) | \(.chain_name) | \(.checks.extendedDescription.details) |"' "$REPORT_PATH" | head -20 >> $GITHUB_STEP_SUMMARY
+            else
+              echo "_No assets are failing solely due to extended description issues._" >> $GITHUB_STEP_SUMMARY
+            fi
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            # Assets Failing Only on Logo
+            echo "### 🖼️ Assets Failing Only on Logo" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Assets where the **only** issue is logo (not square, too large, or missing):" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            LOGO_ONLY=$(jq -r '[.results[] | select(.checks.logo.passed == false) | select([.checks | to_entries[] | select(.value.passed == false and (.value.skipped // false) == false)] | length == 1)] | length' "$REPORT_PATH")
+            if [ "$LOGO_ONLY" -gt 0 ]; then
+              echo "| Asset | Chain | Issue |" >> $GITHUB_STEP_SUMMARY
+              echo "|-------|-------|-------|" >> $GITHUB_STEP_SUMMARY
+              jq -r '.results[] | select(.checks.logo.passed == false) | select([.checks | to_entries[] | select(.value.passed == false and (.value.skipped // false) == false)] | length == 1) | "| \(.comment // .base_denom) | \(.chain_name) | \(.checks.logo.details) |"' "$REPORT_PATH" | head -20 >> $GITHUB_STEP_SUMMARY
+            else
+              echo "_No assets are failing solely due to logo issues._" >> $GITHUB_STEP_SUMMARY
+            fi
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            echo "---" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "📥 **Download the full JSON report** from the workflow artifacts for complete details on all checks." >> $GITHUB_STEP_SUMMARY
           else
             echo "⚠️ Report file not found at $REPORT_PATH" >> $GITHUB_STEP_SUMMARY
           fi

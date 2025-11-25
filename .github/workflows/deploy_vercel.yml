@@ -1,8 +1,20 @@
+# Description: Triggers Vercel deployment webhooks for preview, testnet, and production
+# Included in: NOT included in Generate All Files bundle (deployment only)
+# Trigger: Automatically runs on push to main branch
+# Output: Deploys to Vercel environments via webhooks
+
 name: Osmosis Front-End Deployment
 on:
   push:
     branches:
       - main
+    # Only run this workflow if one of the four frontend JSON files changed
+    paths:
+      - osmosis-1/generated/frontend/assetlist.json
+      - osmosis-1/generated/frontend/chainlist.json
+      - osmo-test-5/generated/frontend/assetlist.json
+      - osmo-test-5/generated/frontend/chainlist.json
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -29,9 +41,24 @@ jobs:
           done
           echo "Failed to fetch latest commit after $MAX_RETRIES attempts."
           exit 1
+
+      # Preview/Stage (only if osmosis-1 assetlist/chainlist changed)
       - name: Deploy preview
+        if: |
+          contains(join(github.event.commits.*.modified, ','), 'osmosis-1/generated/frontend/assetlist.json') ||
+          contains(join(github.event.commits.*.modified, ','), 'osmosis-1/generated/frontend/chainlist.json')
         run: curl -X POST ${{ secrets.VERCEL_WEBHOOK_DEPLOY_STAGE }}
+
+      # Testnet (only if osmo-test-5 assetlist/chainlist changed)
       - name: Deploy testnet
+        if: |
+          contains(join(github.event.commits.*.modified, ','), 'osmo-test-5/generated/frontend/assetlist.json') ||
+          contains(join(github.event.commits.*.modified, ','), 'osmo-test-5/generated/frontend/chainlist.json')
         run: curl -X POST ${{ secrets.VERCEL_WEBHOOK_DEPLOY_TESTNET }}
+
+      # Production (same condition as preview - only osmosis-1 changes)
       - name: Deploy production
+        if: |
+          contains(join(github.event.commits.*.modified, ','), 'osmosis-1/generated/frontend/assetlist.json') ||
+          contains(join(github.event.commits.*.modified, ','), 'osmosis-1/generated/frontend/chainlist.json')
         run: curl -X POST ${{ secrets.VERCEL_WEBHOOK_DEPLOY_PRODUCTION }}

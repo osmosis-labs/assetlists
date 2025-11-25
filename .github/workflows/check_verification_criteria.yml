@@ -1,0 +1,86 @@
+name: Check Asset Verification Criteria
+
+on:
+  workflow_dispatch:
+    inputs:
+      chain_name:
+        description: 'Chain name to check (e.g., osmosis-1)'
+        required: false
+        default: 'osmosis-1'
+
+permissions: read-all
+
+jobs:
+  check_verification:
+    name: Check Asset Verification Criteria
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19.6.0
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Verification Checks
+        working-directory: ./.github/workflows/utility
+        run: |
+          CHAIN_NAME="${{ github.event.inputs.chain_name || 'osmosis-1' }}"
+          echo "Running verification checks for $CHAIN_NAME..."
+          node checkVerificationCriteria.mjs "$CHAIN_NAME"
+
+      - name: Upload Verification Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: verification-reports
+          path: |
+            osmosis-1/generated/verification_reports/verification_report_latest.md
+            osmosis-1/generated/verification_reports/verification_report_latest.json
+            osmosis-1/generated/verification_reports/verification_report_*.md
+            osmosis-1/generated/verification_reports/verification_report_*.json
+          retention-days: 90
+
+      - name: Display Report Summary
+        run: |
+          CHAIN_NAME="${{ github.event.inputs.chain_name || 'osmosis-1' }}"
+          REPORT_PATH="$CHAIN_NAME/generated/verification_reports/verification_report_latest.json"
+
+          if [ -f "$REPORT_PATH" ]; then
+            echo "## Verification Report Summary" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            READY=$(jq -r '.summary.readyForVerification' "$REPORT_PATH")
+            ALREADY=$(jq -r '.summary.alreadyVerified' "$REPORT_PATH")
+            FAILED=$(jq -r '.summary.failedChecks' "$REPORT_PATH")
+            TOTAL=$(jq -r '.summary.totalChecked' "$REPORT_PATH")
+
+            echo "- ✅ **Ready for Verification**: $READY" >> $GITHUB_STEP_SUMMARY
+            echo "- 🔒 **Already Verified**: $ALREADY" >> $GITHUB_STEP_SUMMARY
+            echo "- ❌ **Failed Checks**: $FAILED" >> $GITHUB_STEP_SUMMARY
+            echo "- 📊 **Total Checked**: $TOTAL" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            if [ "$READY" -gt 0 ]; then
+              echo "### Assets Ready for Verification" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              jq -r '.results[] | select(.readyForVerification == true) | "- **\(.chain_name)/\(.base_denom)** - \(.comment)"' "$REPORT_PATH" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "📥 Download the full reports from the workflow artifacts." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ Report file not found at $REPORT_PATH" >> $GITHUB_STEP_SUMMARY
+          fi

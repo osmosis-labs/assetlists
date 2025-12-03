@@ -60,9 +60,7 @@ An example asset object in `osmosis.zone.json`:
 Note that there are apps, interfaces, and tools that look at this repository as a data dependency:
 - Osmosis Zone app (app.osmosis.zone):
   - .../generated/frontend/assetlist.json
-  - .../generated/frontend/chainlist.json (soon)
-  - .../osmosis-1.chainlist.json
-  - .../osmo-test-5.chainlist.json
+  - .../generated/frontend/chainlist.json
 - Osmosis Labs' Sidecar Query Service (SQS):
   - .../generated/frontend/assetlist.json
 - Numia Data Services (e.g., API):

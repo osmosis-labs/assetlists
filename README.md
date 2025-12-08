@@ -177,7 +177,8 @@ Individual generation workflows can be triggered manually via GitHub Actions:
 - `Generate CoinGecko` - Update CoinGecko integration (standalone)
 - `Generate Mintscan` - Update Mintscan integration (standalone)
 - `Localization` - Update translations
-- `Query Pools` - Update pool data (standalone, manual only)
+
+**Note on Pool Pricing:** Pool-based pricing functionality (`getPools.mjs`) exists in the codebase but is currently disabled via the `getPools = false` flag in `generate_assetlist.mjs`. This code includes pool querying, asset pricing calculations, and routing logic. It was previously used to add pricing information to generated assetlists but is not currently active. The code remains available for future re-implementation if needed.
 
 ### Pull Request Workflow
 

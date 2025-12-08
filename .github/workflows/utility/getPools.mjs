@@ -1,5 +1,11 @@
 //Purpose:
 // to identify the pools and liquidity of an asset. To price it and determine whether it goes on info site
+//
+// STATUS: Currently DISABLED (as of Dec 2024)
+// - The getPools flag in generate_assetlist.mjs is set to false
+// - Pool pricing functionality is not being used in assetlist generation
+// - This code is preserved for potential future re-implementation
+// - Previously required manual pool data updates via Query Pools workflow (now removed)
 
 
 

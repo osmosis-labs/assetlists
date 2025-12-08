@@ -1288,6 +1288,69 @@
         "ibc-go",
         "cosmwasm"
       ]
+    },
+    {
+      "chain_name": "qubetics",
+      "status": "live",
+      "network_type": "testnet",
+      "pretty_name": "Qubetics",
+      "chain_id": "qubetics_9029-1",
+      "bech32_prefix": "qubetics",
+      "bech32_config": {
+        "bech32PrefixAccAddr": "qubetics",
+        "bech32PrefixAccPub": "qubeticspub",
+        "bech32PrefixValAddr": "qubeticsvaloper",
+        "bech32PrefixValPub": "qubeticsvaloperpub",
+        "bech32PrefixConsAddr": "qubeticsvalcons",
+        "bech32PrefixConsPub": "qubeticsvalconspub"
+      },
+      "slip44": 60,
+      "fees": {
+        "fee_tokens": [
+          {
+            "denom": "tics",
+            "low_gas_price": 20000000000,
+            "average_gas_price": 25000000000,
+            "high_gas_price": 40000000000,
+            "fixed_min_gas_price": 0
+          }
+        ]
+      },
+      "staking": {
+        "staking_tokens": [
+          {
+            "denom": "tics"
+          }
+        ]
+      },
+      "description": "Developers use qubetics as the Ethereum and Wasm Chain to deploy applications of the future. Get all the functionalities of Ethereum and Wasm with the power of IBC and Interchain composability.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://tendermint-testnet.qubetics.work/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://swagger-testnet.qubetics.work/swagger/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "tx_page": "https://testnet.qubetics.work/tx/${txHash}"
+        }
+      ],
+      "logoURIs": {
+        "png": "https://testnet.qubetics.work/_next/static/media/reslogo.cf94902d.svg"
+      },
+      "features": [
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
     }
   ]
 }

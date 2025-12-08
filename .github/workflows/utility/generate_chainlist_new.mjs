@@ -155,7 +155,7 @@ async function getSuggestionCurrencyProperties(currency, chain_name) {
 
 function getChainSuggestionFeatures(chain, zoneChain) {
 
-  let features = zoneChain.keplr_features || [];
+  let features = zoneChain.override_properties?.keplr_features || zoneChain.keplr_features || [];
   let feature = "";
 
   const recommended_version = chain_reg.getFileProperty(chain.chain_name, "chain", "codebase")?.recommended_version;
@@ -192,7 +192,7 @@ function getChainSuggestionFeatures(chain, zoneChain) {
 }
 
 async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
-  
+
   const chain_name = minimalChain.chain_name;
   let chain = {
     chain_name: chain_name
@@ -202,49 +202,57 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   let chainType = chain_reg.getFileProperty(chain_name, "chain", "chain_type");
   if (chainType !== "cosmos") return false;
 
-  // -- Get Basic Metadata --
-  chain.status = chain_reg.getFileProperty(chain_name, "chain", "status");
+  // -- Get Basic Metadata with override support --
+  chain.status = zoneChain.override_properties?.status ||
+                 chain_reg.getFileProperty(chain_name, "chain", "status");
   if (!chain.status) return false;
-  chain.networkType = chain_reg.getFileProperty(chain_name, "chain", "network_type");
+  chain.networkType = zoneChain.override_properties?.network_type ||
+                      chain_reg.getFileProperty(chain_name, "chain", "network_type");
   if (!chain.networkType) return false;
-  chain.prettyName = minimalChain.prettyName;
-  
+  chain.prettyName = zoneChain.override_properties?.pretty_name ||
+                     minimalChain.prettyName;
+
   chain.chain_id = chain_reg.getFileProperty(chain_name, "chain", "chain_id");
   if (!chain.chain_id) return false;
 
-  // -- Get bech32_config --
-  chain.bech32Prefix = chain_reg.getFileProperty(chain_name, "chain", "bech32_prefix");
+  // -- Get bech32_config with override support --
+  chain.bech32Prefix = zoneChain.override_properties?.bech32_prefix ||
+                       chain_reg.getFileProperty(chain_name, "chain", "bech32_prefix");
   if (!chain.bech32Prefix) return false;
-  let bech32_config = chain_reg.getFileProperty(chain_name, "chain", "bech32_config") || {};
+  let bech32_config = zoneChain.override_properties?.bech32_config ||
+                      chain_reg.getFileProperty(chain_name, "chain", "bech32_config") || {};
   chain_reg.bech32ConfigSuffixMap.forEach((value, key) => {
     if (bech32_config[key]) return;
     bech32_config[key] = chain.bech32Prefix?.concat(value);
   });
   chain.bech32Config = bech32_config;
 
-  // -- Get SLIP44 --
-  chain.slip44 = chain_reg.getFileProperty(chain_name, "chain", "slip44");
+  // -- Get SLIP44 with override support --
+  chain.slip44 = zoneChain.override_properties?.slip44 ||
+                 chain_reg.getFileProperty(chain_name, "chain", "slip44");
   if (!chain.slip44) return false;
-  chain.alternativeSlip44s = chain_reg.getFileProperty(chain_name, "chain", "alternative_slip44s");
+  chain.alternativeSlip44s = zoneChain.override_properties?.alternative_slip44s ||
+                             chain_reg.getFileProperty(chain_name, "chain", "alternative_slip44s");
   if (!chain.alternativeSlip44s) delete chain.alternativeSlip44s;
 
   // -- Get Chain Logo --
   chain.logo_URIs = minimalChain.logo_URIs;
 
-  // -- Check that Chain Fees Exist --
-  let chainFees = chain_reg.getFileProperty(chain_name, "chain", "fees");
+  // -- Check that Chain Fees Exist with override support --
+  let chainFees = zoneChain.override_properties?.fees ||
+                  chain_reg.getFileProperty(chain_name, "chain", "fees");
   if (!chainFees) return false;
 
-  // -- Get APIs --
+  // -- Get APIs with override support --
   let apis = chain_reg.getFileProperty(chain_name, "chain", "apis");
-  let rest = zoneChain.rest || apis?.rest?.[0]?.address
+  let rest = zoneChain.override_properties?.rest || zoneChain.rest || apis?.rest?.[0]?.address
   if (!rest) return false;
-  let rpc = zoneChain.rpc || apis?.rpc?.[0]?.address
+  let rpc = zoneChain.override_properties?.rpc || zoneChain.rpc || apis?.rpc?.[0]?.address
   if (!rpc) return false;
 
-  // -- Get Explorer Tx URL --
+  // -- Get Explorer Tx URL with override support --
   let explorers = chain_reg.getFileProperty(chain.chain_name, "chain", "explorers");
-  let explorer = zoneChain.explorer_tx_url || explorers?.[0]?.txPage;
+  let explorer = zoneChain.override_properties?.explorer_tx_url || zoneChain.explorer_tx_url || explorers?.[0]?.txPage;
   if (!explorer) return false;
 
   // -- By this point, we have the minimum required data to be able to suggest the chain --
@@ -254,8 +262,9 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
 
   let requiredCurrencies = [];
 
-  // -- Get Staking --
-  let chain_staking = chain_reg.getFileProperty(chain_name, "chain", "staking");
+  // -- Get Staking with override support --
+  let chain_staking = zoneChain.override_properties?.staking ||
+                      chain_reg.getFileProperty(chain_name, "chain", "staking");
   if (chain_staking) {
 
     const base_denom = chain_staking?.staking_tokens[0]?.denom;
@@ -341,8 +350,9 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
 
   });
 
-  // -- Get Description --
-  chain.description = chain_reg.getFileProperty(chain_name, "chain", "description");
+  // -- Get Description with override support --
+  chain.description = zoneChain.override_properties?.description ||
+                      chain_reg.getFileProperty(chain_name, "chain", "description");
   if (!chain.description) delete chain.description;
 
   // -- Create APIs Property --
@@ -373,8 +383,10 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
 
 function getZoneChainOverrideProperties(chain, zoneChain) {
 
-  // -- Get Outage Alerts --
-  if (zoneChain.outage) chain.outage = zoneChain.outage;
+  // -- Get Outage Alerts with override support --
+  if (zoneChain.override_properties?.outage || zoneChain.outage) {
+    chain.outage = zoneChain.override_properties?.outage || zoneChain.outage;
+  }
 
   return true;
 

@@ -1,3 +1,8 @@
+# Description: Queries and saves pool data, then auto-merges the PR
+# Included in: NOT included in Generate All Files bundle (standalone only)
+# Trigger: Manual via workflow_dispatch only
+# Output: Creates and auto-merges PR with pool data to branch 'update/query_pools'
+
 name: Manually Update Saved Pools
 
 on:
@@ -17,15 +22,15 @@ jobs:
     steps:
     
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: true
       
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 19.6.0
+          node-version: 20.x
 
       - name: Install dependencies
         run: npm install

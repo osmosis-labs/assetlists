@@ -276,17 +276,17 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/juno.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/juno.svg"
       },
       "images": [
         {
           "image_sync": {
-            "chain_name": "junotestnet",
+            "chain_name": "junotestnet6",
             "base_denom": "ujunox"
           },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/junotestnet/images/juno.svg"
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/juno.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/juno.svg"
         }
       ],
       "coingecko_id": "juno-network"
@@ -411,14 +411,14 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/AD59D59CFB0E628E73C798415F823AB5B6257C2FE4BF67DBB5D6A677B2686E82",
-      "name": "Sandbox",
+      "name": "Akash Network",
       "display": "akt",
       "symbol": "AKT",
       "traces": [
         {
           "type": "ibc",
           "counterparty": {
-            "chain_name": "akashtestnet",
+            "chain_name": "akashtestnet1",
             "base_denom": "uakt",
             "channel_id": "channel-6"
           },
@@ -435,7 +435,7 @@
       "images": [
         {
           "image_sync": {
-            "chain_name": "akashtestnet",
+            "chain_name": "akashtestnet1",
             "base_denom": "uakt"
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.png",
@@ -539,8 +539,7 @@
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/quicksilver/images/qck.png"
         }
-      ],
-      "coingecko_id": "quicksilver"
+      ]
     },
     {
       "denom_units": [
@@ -837,7 +836,8 @@
             "path": "transfer/channel-9247/uKIMA"
           }
         }
-      ]
+      ],
+      "coingecko_id": "kima"
     },
     {
       "denom_units": [
@@ -960,6 +960,41 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/3E5037EFB506F3F007D1CA1B5A436DDB32983B191B9F5730BE2BE46E16AC83B5",
+          "exponent": 0,
+          "aliases": [
+            "tics"
+          ]
+        },
+        {
+          "denom": "TICS",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/3E5037EFB506F3F007D1CA1B5A436DDB32983B191B9F5730BE2BE46E16AC83B5",
+      "name": "Qubetics",
+      "display": "TICS",
+      "symbol": "TICS",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "qubetics",
+            "base_denom": "tics",
+            "channel_id": "channel-11229"
+          },
+          "chain": {
+            "channel_id": "channel-11229",
+            "path": "transfer/channel-11229/tics"
+          }
+        }
+      ],
+      "coingecko_id": "qubetics"
+    },
+    {
+      "denom_units": [
+        {
           "denom": "factory/osmo1zlkzu72774ynac53necz46u4ycqtp36wedrar0/willyz",
           "exponent": 0
         },
@@ -973,16 +1008,14 @@
       "display": "willyz",
       "symbol": "WILLYZ",
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/osmosistestnet/images/willyz.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/osmosistestnet/images/willyz.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/osmosistestnet/images/willyz.png"
       },
       "keywords": [
         "memecoin"
       ],
       "images": [
         {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/osmosistestnet/images/willyz.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/osmosistestnet/images/willyz.svg"
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/osmosistestnet/images/willyz.png"
         }
       ],
       "type_asset": "sdk.coin"
@@ -1766,12 +1799,10 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/doge.int3.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/doge.int3.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/doge.int3.png"
       },
       "images": [
         {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/doge.int3.svg",
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/doge.int3.png"
         },
         {
@@ -1779,8 +1810,7 @@
             "chain_name": "int3facetestnet",
             "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/dogecoin-doge"
           },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/doge.int3.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/doge.int3.svg"
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/doge.int3.png"
         }
       ]
     },
@@ -1968,6 +1998,64 @@
       ]
     },
     {
+      "description": "Testnet ZEC from Zcash bridged via Int3face bridge",
+      "denom_units": [
+        {
+          "denom": "ibc/49C1211CF9077E5D504D895A0C374D1D3E9B0EA3D0FFBA0CAB4EF3FEBEDA8DE2",
+          "exponent": 0,
+          "aliases": [
+            "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec"
+          ]
+        },
+        {
+          "denom": "zec",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/49C1211CF9077E5D504D895A0C374D1D3E9B0EA3D0FFBA0CAB4EF3FEBEDA8DE2",
+      "name": "Testnet Zcash (Int3)",
+      "display": "zec",
+      "symbol": "ZEC.int3",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": {
+            "chain_name": "zcashtestnet",
+            "base_denom": "zatoshi"
+          },
+          "provider": "Int3face"
+        },
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "int3facetestnet",
+            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-9755",
+            "path": "transfer/channel-9755/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/zec.int3.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/zec.int3.png"
+        },
+        {
+          "image_sync": {
+            "chain_name": "int3facetestnet",
+            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/zec.int3.png"
+        }
+      ]
+    },
+    {
       "description": "Testnet TON coin bridged via Int3face bridge",
       "denom_units": [
         {
@@ -2071,13 +2159,13 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sol.int3.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sol.int3.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/SOL.int3.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/SOL.int3.svg"
       },
       "images": [
         {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sol.int3.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/sol.int3.svg"
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/SOL.int3.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/SOL.int3.svg"
         },
         {
           "image_sync": {
@@ -2132,21 +2220,18 @@
         }
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/xrp.int3.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/xrp.int3.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/XRP.int3.png"
       },
       "images": [
         {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/xrp.int3.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/xrp.int3.svg"
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/XRP.int3.png"
         },
         {
           "image_sync": {
             "chain_name": "int3facetestnet",
             "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/xrpl-xrp"
           },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/xrp.int3.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/xrp.int3.svg"
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/xrp.int3.png"
         }
       ]
     }

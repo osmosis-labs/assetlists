@@ -207,6 +207,29 @@
         "ibc-go",
         "cosmwasm"
       ]
+    },
+    {
+      "chain_name": "safrochaintestnet",
+      "rpc": "https://rpc.testnet.safrochain.com",
+      "rest": "https://rest.testnet.safrochain.com",
+      "explorer_tx_url": "https://explorer.testnet.safrochain.com/tx/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "cosmwasm"
+      ]
+  },
+  {
+      "chain_name": "qubetics",
+      "rpc": "https://tendermint-testnet.qubetics.work/",
+      "rest": "https://swagger-testnet.qubetics.work/swagger/",
+      "explorer_tx_url": "https://testnet.qubetics.work/tx/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
     }
   ]
 }

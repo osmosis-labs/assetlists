@@ -1133,6 +1133,56 @@
       "unstable": false,
       "disabled": false,
       "preview": false
+    },
+    {
+      "chainName": "qubetics",
+      "sourceDenom": "tics",
+      "coinMinimalDenom": "ibc/3E5037EFB506F3F007D1CA1B5A436DDB32983B191B9F5730BE2BE46E16AC83B5",
+      "symbol": "TICS",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qubetics/images/qubetics.png"
+      },
+      "coingeckoId": "qubetics",
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "qubetics",
+            "chainId": "qubetics_9030-1",
+            "sourceDenom": "tics",
+            "port": "transfer",
+            "channelId": "channel-11229"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-11229",
+            "path": "transfer/channel-11229/tics"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "qubetics",
+          "sourceDenom": "tics",
+          "chainType": "cosmos",
+          "chainId": "qubetics_9030-1",
+          "symbol": "TICS",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qubetics/images/qubetics.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/3E5037EFB506F3F007D1CA1B5A436DDB32983B191B9F5730BE2BE46E16AC83B5",
+      "name": "Qubetics",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
     }
   ]
 }

@@ -8,11 +8,37 @@ chain_reg.setup();
 import * as zone from "./assetlist_functions.mjs";
 import { getAssetsPricing } from "./getPools.mjs";
 import { getAllRelatedAssets } from "./getRelatedAssets.mjs";
+import * as fs from 'fs';
+import * as path from 'path';
 
 //-- Global Constants --
 
 //This address corresponds to the native assset on all evm chains (e.g., wei on ethereum)
 const zero_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
+
+//-- Helper Functions --
+
+// Get IBC file property with zone-aware path selection
+// Determines _IBC directory based on the destination chain (osmosistestnet = testnet, osmosis = mainnet)
+function getIBCFilePropertyForZone(chainName1, chainName2, property) {
+  // chainName2 is the zone chain (osmosistestnet or osmosis) which tells us which _IBC to use
+  const isTestnetZone = chainName2 === "osmosistestnet";
+  const ibcDirectory = isTestnetZone
+    ? path.join(chain_reg.chainRegistryRoot, "testnets", "_IBC")
+    : path.join(chain_reg.chainRegistryRoot, "_IBC");
+
+  // Build the IBC file path
+  const sortedChains = [chainName1, chainName2].sort();
+  const fileName = `${sortedChains[0]}-${sortedChains[1]}.json`;
+  const filePath = path.join(ibcDirectory, fileName);
+
+  // Check if file exists and return the property
+  if (fs.existsSync(filePath)) {
+    return chain_reg.readJsonFile(filePath)[property];
+  }
+
+  return undefined;
+}
 
 //This defines with types of traces are considered essentially the same asset
 const originTraceTypes = [
@@ -180,7 +206,7 @@ export function getAssetTrace(asset_data) {
 
 
   //--Find IBC Connection--
-  const channels = chain_reg.getIBCFileProperty(
+  const channels = getIBCFilePropertyForZone(
     asset_data.source_asset.chain_name,
     asset_data.chainName,
     "channels"

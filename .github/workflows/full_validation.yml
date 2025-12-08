@@ -48,7 +48,7 @@ jobs:
       - name: Regenerate Chainlist with Validated Endpoints
         if: ${{ github.event.inputs.regenerate_chainlist == 'true' }}
         working-directory: ./.github/workflows/utility
-        run: node generate_chainlist_new.mjs
+        run: node generate_chainlist.mjs
 
       - name: Check for changes
         id: git-check

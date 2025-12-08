@@ -6,8 +6,6 @@
 import * as chain_reg from "../../../chain-registry/.github/workflows/utility/chain_registry.mjs";
 chain_reg.setup();
 import * as zone from "./assetlist_functions.mjs";
-import { getAssetsPricing } from "./getPools.mjs";
-import { getAllRelatedAssets } from "./getRelatedAssets.mjs";
 import * as assetlist from "./generate_assetlist_functions.mjs";
 import * as localization from "./localization.mjs";
 import * as state from "./update_assetlist_state.mjs";
@@ -205,12 +203,6 @@ async function generateAssetlist(chainName) {
   //frontend_assets.forEach(asset => console.log(asset.coinMinimalDenom));
   frontend_assets.forEach(asset => assetlist.reformatFrontendAsset(asset));
 
-  //zone_config_assets = await getAllRelatedAssets(
-  //  zone_config_assets,
-  //  zoneConfig
-  //);
-
-  
   zone.writeToFile(
     chainName,
     zone.zoneConfigAssetlist,

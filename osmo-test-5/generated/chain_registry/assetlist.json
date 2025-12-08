@@ -960,6 +960,40 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/3E5037EFB506F3F007D1CA1B5A436DDB32983B191B9F5730BE2BE46E16AC83B5",
+          "exponent": 0,
+          "aliases": [
+            "tics"
+          ]
+        },
+        {
+          "denom": "TICS",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/3E5037EFB506F3F007D1CA1B5A436DDB32983B191B9F5730BE2BE46E16AC83B5",
+      "name": "Qubetics Testnet",
+      "display": "TICS",
+      "symbol": "TICS",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "qubeticstestnet",
+            "base_denom": "tics",
+            "channel_id": "channel-8"
+          },
+          "chain": {
+            "channel_id": "channel-11229",
+            "path": "transfer/channel-11229/tics"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "factory/osmo1zlkzu72774ynac53necz46u4ycqtp36wedrar0/willyz",
           "exponent": 0
         },

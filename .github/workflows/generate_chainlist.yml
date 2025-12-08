@@ -1,4 +1,4 @@
-# Description: Generates the legacy chainlist.json file from chain registry data
+# Description: Generates the chainlist.json file from chain registry data
 # Included in: Generate All Files bundle workflow (runs every Monday at 12:00 UTC)
 # Trigger: Manual via workflow_dispatch only (standalone run)
 # Output: Creates PR with chainlist.json to branch 'update/chainlist'
@@ -6,7 +6,7 @@
 on: [workflow_dispatch]
 name: Generate Chainlist
 jobs:
-  generate_assetlist:
+  generate_chainlist:
     name: Generate Chainlist
     runs-on: ubuntu-latest
     

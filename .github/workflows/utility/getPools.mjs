@@ -1,5 +1,16 @@
 //Purpose:
 // to identify the pools and liquidity of an asset. To price it and determine whether it goes on info site
+//
+// STATUS: Currently DISABLED (as of Dec 2024)
+// - The getPools flag in generate_assetlist.mjs is set to false
+// - Pool pricing functionality is not being used in assetlist generation
+// - This code is preserved for potential future re-implementation
+// - Previously required manual pool data updates via Query Pools workflow (now removed)
+//
+// NOTE: queryApi.mjs was removed as part of cleanup (Dec 2024)
+// - If re-enabling this module, queryApi functionality will need to be restored
+// - queryApi provided: queryAPI() for fetching pool data, readQueryResponse() for reading cached responses
+// - Consider reimplementing these functions directly in this file or restoring queryApi.mjs
 
 
 
@@ -7,7 +18,7 @@
 
 import * as fs from 'fs';
 import fetch from 'node-fetch';
-import * as queryApi from './queryApi.mjs';
+// import * as queryApi from './queryApi.mjs'; // Removed - restore if re-enabling this module
 import * as zone from './assetlist_functions.mjs';
 
 
@@ -72,7 +83,7 @@ export async function queryPool(domain, pool_id) {
 
 
 async function queryPools(domain) {
-  
+
   //--QUERY API--
 
   console.log(domain);
@@ -81,20 +92,21 @@ async function queryPools(domain) {
   let params;
   const fileName = poolsFileName;
 
-  queryApi.queryAPI(baseUrl, params, domain, fileName);
+  // queryApi.queryAPI(baseUrl, params, domain, fileName); // Removed - restore queryApi.mjs if re-enabling
 
 }
 
 function getPools(domain) {
-  
-  let all_pools = queryApi.readQueryResponse(domain, poolsFileName);
-  if (!all_pools?.pools) { return; }
-  
-  pools.clear();
-  all_pools.pools.forEach((pool) => {
-    pools.set(pool.id,Pool(pool));
-  });
-  
+
+  // let all_pools = queryApi.readQueryResponse(domain, poolsFileName); // Removed - restore queryApi.mjs if re-enabling
+  // if (!all_pools?.pools) { return; }
+
+  // pools.clear();
+  // all_pools.pools.forEach((pool) => {
+  //   pools.set(pool.id,Pool(pool));
+  // });
+  return; // Disabled - queryApi.mjs removed
+
 }
 
 const classic_pool = "/osmosis.gamm.v1beta1.Pool";

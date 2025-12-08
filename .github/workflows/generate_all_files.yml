@@ -1,5 +1,5 @@
 # Description: Bundle workflow that runs the complete asset generation pipeline
-# Includes: Endpoint validation, assetlist generation, chainlist generation (new and legacy),
+# Includes: Endpoint validation, assetlist generation, chainlist generation,
 #           state updates, comment generation, and localization
 # Schedule: Runs every Monday at 12:00 UTC
 # Trigger: Manual via workflow_dispatch or scheduled cron
@@ -48,10 +48,6 @@ jobs:
       - name: Run code to Generate Assetlist
         working-directory: ./.github/workflows/utility
         run: node generate_assetlist.mjs
-
-      - name: Run code to Generate Chainlist New
-        working-directory: ./.github/workflows/utility
-        run: node generate_chainlist_new.mjs
 
       - name: Run code to Generate Chainlist
         working-directory: ./.github/workflows/utility

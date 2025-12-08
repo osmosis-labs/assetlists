@@ -54,7 +54,6 @@ const chainNames_decommissioned = [
 export function getFileLocation(chainName, directoryName, fileName) {
   const chainNameToChainIdMap = new Map([
     ["osmosis", "osmosis-1"],
-    ["osmosistestnet4", "osmo-test-4"],
     ["osmosistestnet", "osmo-test-5"]
   ]);
   return path.join(

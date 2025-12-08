@@ -2241,6 +2241,146 @@
       ]
     },
     {
+      "chain_name": "safrochaintestnet",
+      "status": "live",
+      "networkType": "testnet",
+      "prettyName": "Safrochain Testnet",
+      "chain_id": "safro-testnet-1",
+      "bech32Prefix": "addr_safro",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "addr_safro",
+        "bech32PrefixAccPub": "addr_safropub",
+        "bech32PrefixValAddr": "addr_safrovaloper",
+        "bech32PrefixValPub": "addr_safrovaloperpub",
+        "bech32PrefixConsAddr": "addr_safrovalcons",
+        "bech32PrefixConsPub": "addr_safrovalconspub"
+      },
+      "slip44": 118,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/safrochaintestnet/images/saf.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/safrochaintestnet/images/saf.svg"
+      },
+      "stakeCurrency": {
+        "coinDenom": "SAF",
+        "coinMinimalDenom": "usaf",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/safrochaintestnet/images/saf.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "SAF",
+          "coinMinimalDenom": "usaf",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/safrochaintestnet/images/saf.png",
+          "gasPriceStep": {
+            "low": 0.0025,
+            "average": 0.025,
+            "high": 0.04
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "SAF",
+          "coinMinimalDenom": "usaf",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/safrochaintestnet/images/saf.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.testnet.safrochain.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.testnet.safrochain.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://explorer.testnet.safrochain.com/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "qubeticstestnet",
+      "status": "live",
+      "networkType": "testnet",
+      "prettyName": "Qubetics Testnet",
+      "chain_id": "qubetics_9029-1",
+      "bech32Prefix": "qubetics",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "qubetics",
+        "bech32PrefixAccPub": "qubeticspub",
+        "bech32PrefixValAddr": "qubeticsvaloper",
+        "bech32PrefixValPub": "qubeticsvaloperpub",
+        "bech32PrefixConsAddr": "qubeticsvalcons",
+        "bech32PrefixConsPub": "qubeticsvalconspub"
+      },
+      "slip44": 60,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/qubeticstestnet/images/qubetics.png"
+      },
+      "stakeCurrency": {
+        "coinDenom": "TICS",
+        "coinMinimalDenom": "tics",
+        "coinDecimals": 18,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/qubeticstestnet/images/qubetics.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "TICS",
+          "coinMinimalDenom": "tics",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/qubeticstestnet/images/qubetics.png",
+          "gasPriceStep": {
+            "low": 20000000000,
+            "average": 25000000000,
+            "high": 40000000000
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "TICS",
+          "coinMinimalDenom": "tics",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/qubeticstestnet/images/qubetics.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://tendermint-testnet.qubetics.work/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://swagger-testnet.qubetics.work/swagger/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://testnet.qubetics.work/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
+    },
+    {
       "chain_name": "osmosis",
       "prettyName": "Osmosis",
       "logo_URIs": {

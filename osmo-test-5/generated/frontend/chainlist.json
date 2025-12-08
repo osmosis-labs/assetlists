@@ -2010,11 +2010,80 @@
       ]
     },
     {
-      "chain_name": "qubetics",
+      "chain_name": "safrochaintestnet",
       "status": "live",
-      "networkType": "mainnet",
-      "prettyName": "Qubetics",
-      "chain_id": "qubetics_9030-1",
+      "networkType": "testnet",
+      "prettyName": "Safrochain Testnet",
+      "chain_id": "safro-testnet-1",
+      "bech32Prefix": "addr_safro",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "addr_safro",
+        "bech32PrefixAccPub": "addr_safropub",
+        "bech32PrefixValAddr": "addr_safrovaloper",
+        "bech32PrefixValPub": "addr_safrovaloperpub",
+        "bech32PrefixConsAddr": "addr_safrovalcons",
+        "bech32PrefixConsPub": "addr_safrovalconspub"
+      },
+      "slip44": 118,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/safrochaintestnet/images/saf.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/safrochaintestnet/images/saf.svg"
+      },
+      "stakeCurrency": {
+        "coinDenom": "SAF",
+        "coinMinimalDenom": "usaf",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/safrochaintestnet/images/saf.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "SAF",
+          "coinMinimalDenom": "usaf",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/safrochaintestnet/images/saf.png",
+          "gasPriceStep": {
+            "low": 0.0025,
+            "average": 0.025,
+            "high": 0.04
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "SAF",
+          "coinMinimalDenom": "usaf",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/safrochaintestnet/images/saf.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.testnet.safrochain.com"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.testnet.safrochain.com"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://explorer.testnet.safrochain.com/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "qubeticstestnet",
+      "status": "live",
+      "networkType": "testnet",
+      "prettyName": "Qubetics Testnet",
+      "chain_id": "qubetics_9029-1",
       "bech32Prefix": "qubetics",
       "bech32Config": {
         "bech32PrefixAccAddr": "qubetics",
@@ -2026,22 +2095,20 @@
       },
       "slip44": 60,
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qubetics/images/qubetics.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/qubeticstestnet/images/qubetics.png"
       },
       "stakeCurrency": {
         "coinDenom": "TICS",
         "coinMinimalDenom": "tics",
         "coinDecimals": 18,
-        "coinGeckoId": "qubetics",
-        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qubetics/images/qubetics.png"
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/qubeticstestnet/images/qubetics.png"
       },
       "feeCurrencies": [
         {
           "coinDenom": "TICS",
           "coinMinimalDenom": "tics",
           "coinDecimals": 18,
-          "coinGeckoId": "qubetics",
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qubetics/images/qubetics.png",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/qubeticstestnet/images/qubetics.png",
           "gasPriceStep": {
             "low": 20000000000,
             "average": 25000000000,
@@ -2054,11 +2121,9 @@
           "coinDenom": "TICS",
           "coinMinimalDenom": "tics",
           "coinDecimals": 18,
-          "coinGeckoId": "qubetics",
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qubetics/images/qubetics.png"
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/qubeticstestnet/images/qubetics.png"
         }
       ],
-      "description": "Developers use qubetics as the Ethereum Chain to deploy applications of the future. Get all the functionalities of Ethereum with the power of IBC and Interchain composability.",
       "apis": {
         "rpc": [
           {

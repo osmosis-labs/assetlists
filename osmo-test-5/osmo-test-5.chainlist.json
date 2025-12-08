@@ -1292,9 +1292,9 @@
     {
       "chain_name": "qubetics",
       "status": "live",
-      "network_type": "testnet",
+      "network_type": "mainnet",
       "pretty_name": "Qubetics",
-      "chain_id": "qubetics_9029-1",
+      "chain_id": "qubetics_9030-1",
       "bech32_prefix": "qubetics",
       "bech32_config": {
         "bech32PrefixAccAddr": "qubetics",
@@ -1309,10 +1309,10 @@
         "fee_tokens": [
           {
             "denom": "tics",
+            "fixed_min_gas_price": 250000000,
             "low_gas_price": 20000000000,
             "average_gas_price": 25000000000,
-            "high_gas_price": 40000000000,
-            "fixed_min_gas_price": 0
+            "high_gas_price": 40000000000
           }
         ]
       },
@@ -1323,7 +1323,7 @@
           }
         ]
       },
-      "description": "Developers use qubetics as the Ethereum and Wasm Chain to deploy applications of the future. Get all the functionalities of Ethereum and Wasm with the power of IBC and Interchain composability.",
+      "description": "Developers use qubetics as the Ethereum Chain to deploy applications of the future. Get all the functionalities of Ethereum with the power of IBC and Interchain composability.",
       "apis": {
         "rpc": [
           {
@@ -1342,7 +1342,7 @@
         }
       ],
       "logoURIs": {
-        "png": "https://testnet.qubetics.work/_next/static/media/reslogo.cf94902d.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qubetics/images/qubetics.png"
       },
       "features": [
         "ibc-go",

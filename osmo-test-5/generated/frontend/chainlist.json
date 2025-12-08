@@ -2010,6 +2010,81 @@
       ]
     },
     {
+      "chain_name": "qubetics",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Qubetics",
+      "chain_id": "qubetics_9030-1",
+      "bech32Prefix": "qubetics",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "qubetics",
+        "bech32PrefixAccPub": "qubeticspub",
+        "bech32PrefixValAddr": "qubeticsvaloper",
+        "bech32PrefixValPub": "qubeticsvaloperpub",
+        "bech32PrefixConsAddr": "qubeticsvalcons",
+        "bech32PrefixConsPub": "qubeticsvalconspub"
+      },
+      "slip44": 60,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qubetics/images/qubetics.png"
+      },
+      "stakeCurrency": {
+        "coinDenom": "TICS",
+        "coinMinimalDenom": "tics",
+        "coinDecimals": 18,
+        "coinGeckoId": "qubetics",
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qubetics/images/qubetics.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "TICS",
+          "coinMinimalDenom": "tics",
+          "coinDecimals": 18,
+          "coinGeckoId": "qubetics",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qubetics/images/qubetics.png",
+          "gasPriceStep": {
+            "low": 20000000000,
+            "average": 25000000000,
+            "high": 40000000000
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "TICS",
+          "coinMinimalDenom": "tics",
+          "coinDecimals": 18,
+          "coinGeckoId": "qubetics",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qubetics/images/qubetics.png"
+        }
+      ],
+      "description": "Developers use qubetics as the Ethereum Chain to deploy applications of the future. Get all the functionalities of Ethereum with the power of IBC and Interchain composability.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://tendermint-testnet.qubetics.work/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://swagger-testnet.qubetics.work/swagger/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://testnet.qubetics.work/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
+    },
+    {
       "chain_name": "osmosis",
       "prettyName": "Osmosis",
       "logo_URIs": {

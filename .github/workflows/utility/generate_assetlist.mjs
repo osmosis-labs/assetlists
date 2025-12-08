@@ -16,7 +16,6 @@ import * as state from "./update_assetlist_state.mjs";
 // The code in getPools.mjs remains available for future re-implementation if needed.
 // When enabled, it would add pricing information to assetlists based on pool liquidity.
 const getPools = false;
-const getRelatedAssets = false; //not implemented
 
 
 //-- Functions --

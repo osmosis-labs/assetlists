@@ -355,11 +355,33 @@ export async function setLocalAsset(asset_data) {
     return;
   }
 
-  // Only add trace if it was successfully retrieved
+  // Add trace if it was successfully retrieved, or create minimal trace from fallback
   if (trace?.chain?.path) {
     traces.push(trace);
   } else {
     console.log(`Warning: Using path from zone_asset for ${asset_data.zone_asset.chain_name}:${asset_data.zone_asset.base_denom} (IBC connection not found in registry)`);
+
+    // Create minimal trace from zone_asset to prevent downstream errors
+    // Path format: "transfer/channel-123/denom"
+    const segments = pathToUse.split("/");
+    const type = (asset_data.source_asset.base_denom.slice(0, 5) === "cw20:") ? "ibc-cw20" : "ibc";
+
+    // Extract channel ID from path (e.g., "channel-123" from segments[1])
+    const channelId = segments[1];
+
+    const minimalTrace = {
+      type: type,
+      counterparty: {
+        chain_name: asset_data.source_asset.chain_name,
+        base_denom: asset_data.source_asset.base_denom,
+        channel_id: channelId  // Will be set in setTransferMethods if needed
+      },
+      chain: {
+        channel_id: channelId,
+        path: pathToUse
+      }
+    };
+    traces.push(minimalTrace);
   }
 
   try {
@@ -1554,27 +1576,31 @@ export function setTransferMethods(asset_data) {
   if (asset_data.source_asset.chain_name !== asset_data.chainName) {
     const traces = getAssetProperty(asset_data.local_asset, "traces");
     const trace = traces?.[traces.length - 1];
-    const ibcTransferMethod = {
-      name: "Osmosis IBC Transfer",
-      type: "ibc",
-      counterparty: {
-        chainName: trace.counterparty.chain_name,
-        chainId: chain_reg.getFileProperty(
-          trace.counterparty.chain_name,
-          "chain",
-          "chain_id"
-        ),
-        sourceDenom: trace.counterparty.base_denom,
-        port: trace.counterparty.port ?? "transfer",
-        channelId: trace.counterparty.channel_id
-      },
-      chain: {
-        port: trace.chain.port ?? "transfer",
-        channelId: trace.chain.channel_id,
-        path: trace.chain.path
+
+    // Only add IBC transfer method if we have a valid trace with required fields
+    if (trace?.counterparty?.chain_name && trace?.chain?.channel_id) {
+      const ibcTransferMethod = {
+        name: "Osmosis IBC Transfer",
+        type: "ibc",
+        counterparty: {
+          chainName: trace.counterparty.chain_name,
+          chainId: chain_reg.getFileProperty(
+            trace.counterparty.chain_name,
+            "chain",
+            "chain_id"
+          ),
+          sourceDenom: trace.counterparty.base_denom,
+          port: trace.counterparty.port ?? "transfer",
+          channelId: trace.counterparty.channel_id
+        },
+        chain: {
+          port: trace.chain.port ?? "transfer",
+          channelId: trace.chain.channel_id,
+          path: trace.chain.path
+        }
       }
+      transferMethods.push(ibcTransferMethod);
     }
-    transferMethods.push(ibcTransferMethod);
   }
 
   asset_data.frontend.transferMethods = transferMethods;

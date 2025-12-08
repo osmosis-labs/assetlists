@@ -17,7 +17,6 @@ const root = "../../..";
 
 const chainNameToChainIdMap = new Map([
   ["osmosis", "osmosis-1"],
-  //["osmosistestnet", "osmo-test-4"],
   ["osmosistestnet", "osmo-test-5"]
 ]);
 
@@ -147,11 +146,29 @@ function checkAssetIBCData(zoneAsset, chainName, IS_MAINNET) {
     throw new Error(`Path missing for ${zoneAsset.base_denom}. Please enter a Path.`);
   }
 
+  // Check if IBC connection exists
+  const chain1Data = chain_reg.getIBCFileProperty(chainName, zoneAsset.chain_name, "chain_1");
+  const ibcChannels = chain_reg.getIBCFileProperty(chainName, zoneAsset.chain_name, "channels");
+
+  if (!chain1Data || !ibcChannels) {
+    // Check if chain is killed/archived in chain registry
+    const chainStatus = chain_reg.getFileProperty(zoneAsset.chain_name, "chain", "status");
+    const isKilledChain = chainStatus === "killed";
+
+    // Allow archived/legacy assets or killed chains to skip IBC validation
+    if (zoneAsset.archived || zoneAsset.legacy || isKilledChain) {
+      const reason = isKilledChain ? "killed chain" : "archived/legacy asset";
+      console.log(`Info: ${reason} ${zoneAsset.chain_name}:${zoneAsset.base_denom} has no IBC connection (expected).`);
+      return;
+    }
+    // For non-archived assets with live chains, this is an error
+    throw new Error(`No IBC connection found for ${zoneAsset.chain_name} (${zoneAsset.base_denom}). Chain status: ${chainStatus || 'unknown'}`);
+  }
+
   let chain1 = false;
-  if (chain_reg.getIBCFileProperty(chainName, zoneAsset.chain_name, "chain_1").chain_name == chainName) {
+  if (chain1Data.chain_name == chainName) {
     chain1 = true;
   }
-  let ibcChannels = chain_reg.getIBCFileProperty(chainName, zoneAsset.chain_name, "channels");
   let thisChannel = "";
   let thisPort = "";
 

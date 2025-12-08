@@ -252,8 +252,8 @@
     },
     {
       "chain_name": "bandchain",
-      "rpc": "https://band-rpc.ibs.team",
-      "rest": "https://band-api.ibs.team",
+      "rpc": "https://band.ibs.team:443/rpc",
+      "rest": "https://band.ibs.team:443/api",
       "explorer_tx_url": "https://cosmoscan.io/tx/${txHash}"
     },
     {
@@ -379,7 +379,7 @@
     },
     {
       "chain_name": "terra2",
-      "rpc": "https://terra2-rpc.lavenderfive.com:443",
+      "rpc": "https://rpc.lavenderfive.com:443/terra2",
       "rest": "https://terra-rest.publicnode.com",
       "explorer_tx_url": "https://finder.terra.money/phoenix-1/tx/${txHash}",
       "keplr_features": [
@@ -1215,7 +1215,20 @@
       "chain_name": "atomone",
       "rpc": "https://atomone-rpc.allinbits.com",
       "rest": "https://atomone-api.allinbits.com",
-      "explorer_tx_url": "https://www.mintscan.io/atomone/tx/${txHash}"
+      "explorer_tx_url": "https://www.mintscan.io/atomone/tx/${txHash}",
+      "override_properties": {
+        "fees": {
+          "fee_tokens": [
+            {
+              "denom": "uphoton",
+              "fixed_min_gas_price": 0.225,
+              "low_gas_price": 0.225,
+              "average_gas_price": 0.3,
+              "high_gas_price": 0.5
+            }
+          ]
+        }
+      }
     },
     {
       "chain_name": "dungeon1",
@@ -1411,6 +1424,35 @@
       "rpc": "https://rpc.manifest.network",
       "rest": "https://api.manifest.network",
       "explorer_tx_url": "https://explorer.manifest.network/transaction/${txHash}"
+    },
+    {
+      "chain_name": "intento",
+      "rpc": "https://rpc-mainnet.intento.zone",
+      "rest": "https://lcd-mainnet.intento.zone",
+      "explorer_tx_url": "https://explorer.intento.zone/intento-mainnet/tx/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "sunrise",
+      "rpc": "https://a.consensus.sunrise-1.sunriselayer.io",
+      "rest": "https://a.consensus.sunrise-1.sunriselayer.io:1318",
+      "explorer_tx_url": "https://risescan.sunriselayer.io/txs/${txHash}",
+      "keplr_features": [
+        "ibc-go"      
+      ]
+    },
+    {
+      "chain_name": "lumera",
+      "rpc": "https://rpc.lumera.io",
+      "rest": "https://lcd.lumera.io",
+      "explorer_tx_url": "https://portal.lumera.io/lumera-mainnet-1/tx/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "cosmwasm"
+      ]
     }
   ]
 }

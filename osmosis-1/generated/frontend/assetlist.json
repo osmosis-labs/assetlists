@@ -30934,6 +30934,56 @@
       "disabled": false,
       "preview": false,
       "listingDate": "2025-11-18T17:00:00.000Z"
+    },
+    {
+      "chainName": "optio",
+      "sourceDenom": "uOPT",
+      "coinMinimalDenom": "ibc/6AA47B1A9F00CC9B127796717F4BE976C12EFC843387F22461152888E1365045",
+      "symbol": "OPT",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/optio/images/opt.png"
+      },
+      "coingeckoId": "optio",
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "optio",
+            "chainId": "optio",
+            "sourceDenom": "uOPT",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-108371",
+            "path": "transfer/channel-108371/uOPT"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "optio",
+          "sourceDenom": "uOPT",
+          "chainType": "cosmos",
+          "chainId": "optio",
+          "symbol": "OPT",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/optio/images/opt.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/6AA47B1A9F00CC9B127796717F4BE976C12EFC843387F22461152888E1365045",
+      "name": "Optio",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
     }
   ]
 }

@@ -1848,40 +1848,46 @@
     },
     {
       "chain_name": "impacthub",
-      "validationDate": "2025-11-03T10:22:02.565Z",
+      "validationDate": "2025-12-09T09:22:22.492Z",
       "validationSuccess": false,
       "validationResults": [
         {
           "test": "RPC CORS",
-          "url": "https://ixo-rpc.ibs.team/",
-          "success": false
+          "url": "https://ixo.ibs.team/rpc",
+          "success": true
         },
         {
           "test": "RPC WSS",
-          "url": "wss://ixo-rpc.ibs.team/websocket",
-          "success": false
+          "url": "wss://ixo.ibs.team/rpc/websocket",
+          "success": true
         },
         {
           "test": "RPC Endpoints",
-          "url": "https://ixo-rpc.ibs.team/status",
-          "success": false,
+          "url": "https://ixo.ibs.team/rpc/status",
+          "success": true,
           "stale": false
         },
         {
           "test": "REST CORS",
-          "url": "https://ixo-api.ibs.team/",
+          "url": "https://ixo-api.bluestake.net/",
           "success": false
         },
         {
           "test": "REST Endpoints",
-          "url": "https://ixo-api.ibs.team/cosmos/base/tendermint/v1beta1/node_info",
-          "success": false
+          "url": "https://ixo-api.bluestake.net/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
-      ]
+      ],
+      "backupUsed": {
+        "rpcEndpointIndex": 0,
+        "restEndpointIndex": 8,
+        "rpcAddress": "https://ixo.ibs.team/rpc",
+        "restAddress": "https://ixo-api.bluestake.net"
+      }
     },
     {
       "chain_name": "bitcanna",
-      "validationDate": "2025-11-24T12:26:44.738Z",
+      "validationDate": "2025-12-09T09:22:22.492Z",
       "validationSuccess": true,
       "validationResults": [
         {
@@ -1914,7 +1920,7 @@
     },
     {
       "chain_name": "bitsong",
-      "validationDate": "2025-11-24T12:26:44.738Z",
+      "validationDate": "2025-12-09T09:22:22.492Z",
       "validationSuccess": true,
       "validationResults": [
         {
@@ -1947,36 +1953,42 @@
     },
     {
       "chain_name": "kichain",
-      "validationDate": "2025-11-05T14:23:31.316Z",
+      "validationDate": "2025-12-09T09:22:22.492Z",
       "validationSuccess": false,
       "validationResults": [
         {
           "test": "RPC CORS",
-          "url": "https://rpc-mainnet.blockchain.ki/",
-          "success": true
+          "url": "https://ki-chain.statesync.nodersteam.com:14657/",
+          "success": false
         },
         {
           "test": "RPC WSS",
-          "url": "wss://rpc-mainnet.blockchain.ki/websocket",
-          "success": true
+          "url": "wss://ki-chain.statesync.nodersteam.com:14657/websocket",
+          "success": false
         },
         {
           "test": "RPC Endpoints",
-          "url": "https://rpc-mainnet.blockchain.ki/status",
-          "success": true,
+          "url": "https://ki-chain.statesync.nodersteam.com:14657/status",
+          "success": false,
           "stale": false
         },
         {
           "test": "REST CORS",
-          "url": "https://api-mainnet.blockchain.ki/",
+          "url": "https://rest.lavenderfive.com/kichain",
           "success": false
         },
         {
           "test": "REST Endpoints",
-          "url": "https://api-mainnet.blockchain.ki/cosmos/base/tendermint/v1beta1/node_info",
-          "success": true
+          "url": "https://rest.lavenderfive.com/kichain/cosmos/base/tendermint/v1beta1/node_info",
+          "success": false
         }
-      ]
+      ],
+      "backupUsed": {
+        "rpcEndpointIndex": 7,
+        "restEndpointIndex": 8,
+        "rpcAddress": "http://ki-chain.statesync.nodersteam.com:14657",
+        "restAddress": "https://rest.lavenderfive.com:443/kichain"
+      }
     },
     {
       "chain_name": "panacea",

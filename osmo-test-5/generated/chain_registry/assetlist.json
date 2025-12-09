@@ -922,6 +922,78 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/CCB7E815618185A792DA0A42E649270CB462A43E660885FB747CE57486A9F5F6",
+          "exponent": 0,
+          "aliases": [
+            "microlume",
+            "ulume"
+          ]
+        },
+        {
+          "denom": "LUME",
+          "exponent": 6,
+          "aliases": [
+            "lume"
+          ]
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/CCB7E815618185A792DA0A42E649270CB462A43E660885FB747CE57486A9F5F6",
+      "name": "Lumera",
+      "display": "LUME",
+      "symbol": "LUME",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "lumeratestnet",
+            "base_denom": "ulume",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-10884",
+            "path": "transfer/channel-10884/ulume"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/3E5037EFB506F3F007D1CA1B5A436DDB32983B191B9F5730BE2BE46E16AC83B5",
+          "exponent": 0,
+          "aliases": [
+            "tics"
+          ]
+        },
+        {
+          "denom": "TICS",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/3E5037EFB506F3F007D1CA1B5A436DDB32983B191B9F5730BE2BE46E16AC83B5",
+      "name": "Qubetics Testnet",
+      "display": "TICS",
+      "symbol": "TICS",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "qubeticstestnet",
+            "base_denom": "tics",
+            "channel_id": "channel-8"
+          },
+          "chain": {
+            "channel_id": "channel-11229",
+            "path": "transfer/channel-11229/tics"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/54E26860F62D7BE585736FEF187A62B897B4A567202E20E5320E2518EB5D1FAB",
           "exponent": 0,
           "aliases": [
@@ -1744,12 +1816,10 @@
         }
       ],
       "logo_URIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/doge.int3.svg",
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/doge.int3.png"
       },
       "images": [
         {
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/doge.int3.svg",
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/doge.int3.png"
         },
         {
@@ -1757,8 +1827,7 @@
             "chain_name": "int3facetestnet",
             "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/dogecoin-doge"
           },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/doge.int3.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/doge.int3.svg"
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/doge.int3.png"
         }
       ]
     },
@@ -1812,64 +1881,6 @@
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/ltc.int3.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/ltc.int3.svg"
-        }
-      ]
-    },
-    {
-      "description": "Testnet ZEC from Zcash bridged via Int3face bridge",
-      "denom_units": [
-        {
-          "denom": "ibc/49C1211CF9077E5D504D895A0C374D1D3E9B0EA3D0FFBA0CAB4EF3FEBEDA8DE2",
-          "exponent": 0,
-          "aliases": [
-            "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec"
-          ]
-        },
-        {
-          "denom": "zec",
-          "exponent": 8
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/49C1211CF9077E5D504D895A0C374D1D3E9B0EA3D0FFBA0CAB4EF3FEBEDA8DE2",
-      "name": "Testnet Zcash (Int3)",
-      "display": "zec",
-      "symbol": "ZEC.int3",
-      "traces": [
-        {
-          "type": "bridge",
-          "counterparty": {
-            "chain_name": "zcashtestnet",
-            "base_denom": "zatoshi"
-          },
-          "provider": "Int3face"
-        },
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "int3facetestnet",
-            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec",
-            "channel_id": "channel-1"
-          },
-          "chain": {
-            "channel_id": "channel-9755",
-            "path": "transfer/channel-9755/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec"
-          }
-        }
-      ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/zec.int3.png"
-      },
-      "images": [
-        {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/zec.int3.png"
-        },
-        {
-          "image_sync": {
-            "chain_name": "int3facetestnet",
-            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec"
-          },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/zec.int3.png"
         }
       ]
     },
@@ -2026,6 +2037,56 @@
             "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/xrpl-xrp"
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/xrp.int3.png"
+        }
+      ]
+    },
+    {
+      "description": "Testnet ZEC from Zcash bridged via Int3face bridge",
+      "denom_units": [
+        {
+          "denom": "ibc/49C1211CF9077E5D504D895A0C374D1D3E9B0EA3D0FFBA0CAB4EF3FEBEDA8DE2",
+          "exponent": 0,
+          "aliases": [
+            "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec"
+          ]
+        },
+        {
+          "denom": "zec",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/49C1211CF9077E5D504D895A0C374D1D3E9B0EA3D0FFBA0CAB4EF3FEBEDA8DE2",
+      "name": "Testnet Zcash",
+      "display": "zec",
+      "symbol": "ZEC",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "int3facetestnet",
+            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-9755",
+            "path": "transfer/channel-9755/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/zec.int3.png"
+      },
+      "images": [
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/zec.int3.png"
+        },
+        {
+          "image_sync": {
+            "chain_name": "int3facetestnet",
+            "base_denom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/zec.int3.png"
         }
       ]
     },
@@ -4435,33 +4496,33 @@
     {
       "denom_units": [
         {
-          "denom": "ibc/9FFAF10A8821A69C52CF66910A8F75BBC9454FB282167FA7F015BE2753B474C8",
+          "denom": "ibc/6C59388CEFA3A3DCF4B8011C78844E3665BC0021C125E5DA44DF4DACD1D677D0",
           "exponent": 0,
           "aliases": [
-            "uom"
+            "amantra"
           ]
         },
         {
-          "denom": "om",
-          "exponent": 6
+          "denom": "mantra",
+          "exponent": 18
         }
       ],
       "type_asset": "ics20",
-      "base": "ibc/9FFAF10A8821A69C52CF66910A8F75BBC9454FB282167FA7F015BE2753B474C8",
+      "base": "ibc/6C59388CEFA3A3DCF4B8011C78844E3665BC0021C125E5DA44DF4DACD1D677D0",
       "name": "MANTRA Dukong Testnet",
-      "display": "om",
-      "symbol": "OM",
+      "display": "mantra",
+      "symbol": "MANTRA",
       "traces": [
         {
           "type": "ibc",
           "counterparty": {
             "chain_name": "mantrachaintestnet2",
-            "base_denom": "uom",
+            "base_denom": "amantra",
             "channel_id": "channel-0"
           },
           "chain": {
             "channel_id": "channel-9126",
-            "path": "transfer/channel-9126/uom"
+            "path": "transfer/channel-9126/amantra"
           }
         }
       ]
@@ -4806,6 +4867,40 @@
           "chain": {
             "channel_id": "channel-4172",
             "path": "transfer/channel-4172/factory/neutron1aphhmsv5lglvvycldlveckjq8zcgwvg34cn0cs/test-token-6"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/2EEFC77CF82E3AAC46ED591F723CC0269E97399442C16F0A98701BFD34407834",
+          "exponent": 0,
+          "aliases": [
+            "factory/neutron1qex378awvwhsxealmrtuunn70f242u49dagqus6ug423paxyevyqvw9s3t/uTIA"
+          ]
+        },
+        {
+          "denom": "dTIA",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/2EEFC77CF82E3AAC46ED591F723CC0269E97399442C16F0A98701BFD34407834",
+      "name": "Drop dTIA testnet",
+      "display": "dTIA",
+      "symbol": "dTIA",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "neutrontestnet",
+            "base_denom": "factory/neutron1qex378awvwhsxealmrtuunn70f242u49dagqus6ug423paxyevyqvw9s3t/uTIA",
+            "channel_id": "channel-196"
+          },
+          "chain": {
+            "channel_id": "channel-4172",
+            "path": "transfer/channel-4172/factory/neutron1qex378awvwhsxealmrtuunn70f242u49dagqus6ug423paxyevyqvw9s3t/uTIA"
           }
         }
       ]
@@ -5756,16 +5851,14 @@
       "display": "willyz",
       "symbol": "WILLYZ",
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/osmosistestnet/images/willyz.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/osmosistestnet/images/willyz.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/osmosistestnet/images/willyz.png"
       },
       "keywords": [
         "memecoin"
       ],
       "images": [
         {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/osmosistestnet/images/willyz.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/osmosistestnet/images/willyz.svg"
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/osmosistestnet/images/willyz.png"
         }
       ],
       "type_asset": "sdk.coin"

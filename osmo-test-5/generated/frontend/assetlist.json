@@ -441,24 +441,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.svg"
       },
       "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "akashtestnet1",
-            "chainId": "sandbox-01",
-            "sourceDenom": "uakt",
-            "port": "transfer",
-            "channelId": "channel-6"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-4171",
-            "path": "transfer/channel-4171/uakt"
-          }
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "akashtestnet1",
@@ -1052,6 +1035,104 @@
       "preview": false
     },
     {
+      "chainName": "lumeratestnet",
+      "sourceDenom": "ulume",
+      "coinMinimalDenom": "ibc/CCB7E815618185A792DA0A42E649270CB462A43E660885FB747CE57486A9F5F6",
+      "symbol": "LUME",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lumera/images/lumera.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "lumeratestnet",
+            "chainId": "lumera-testnet-2",
+            "sourceDenom": "ulume",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-10884",
+            "path": "transfer/channel-10884/ulume"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "lumeratestnet",
+          "sourceDenom": "ulume",
+          "chainType": "cosmos",
+          "chainId": "lumera-testnet-2",
+          "symbol": "LUME",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lumera/images/lumera.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/CCB7E815618185A792DA0A42E649270CB462A43E660885FB747CE57486A9F5F6",
+      "name": "Lumera",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "qubeticstestnet",
+      "sourceDenom": "tics",
+      "coinMinimalDenom": "ibc/3E5037EFB506F3F007D1CA1B5A436DDB32983B191B9F5730BE2BE46E16AC83B5",
+      "symbol": "TICS",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/qubeticstestnet/images/qubetics.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "qubeticstestnet",
+            "chainId": "qubetics_9029-1",
+            "sourceDenom": "tics",
+            "port": "transfer",
+            "channelId": "channel-8"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-11229",
+            "path": "transfer/channel-11229/tics"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "qubeticstestnet",
+          "sourceDenom": "tics",
+          "chainType": "cosmos",
+          "chainId": "qubetics_9029-1",
+          "symbol": "TICS",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/qubeticstestnet/images/qubetics.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/3E5037EFB506F3F007D1CA1B5A436DDB32983B191B9F5730BE2BE46E16AC83B5",
+      "name": "Qubetics Testnet",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "agoricdevnet",
       "sourceDenom": "ubld",
       "coinMinimalDenom": "ibc/54E26860F62D7BE585736FEF187A62B897B4A567202E20E5320E2518EB5D1FAB",
@@ -1214,7 +1295,8 @@
       "symbol": "WDEV",
       "decimals": 18,
       "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/moonbeam/images/glmr.svg"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/moonbeam/images/glmr.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/moonbeam/images/glmr.png"
       },
       "categories": [],
       "transferMethods": [
@@ -1244,6 +1326,7 @@
           "symbol": "WDEV",
           "decimals": 18,
           "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/moonbeam/images/glmr.png",
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/moonbeam/images/glmr.svg"
           }
         }
@@ -1560,10 +1643,7 @@
       "coinMinimalDenom": "ibc/27689601842A99059DFD79EB0A34A089FC2F7337491B5555C176400A8FA7F2A4",
       "symbol": "PICA",
       "decimals": 12,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/composable.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/composable.svg"
-      },
+      "logoURIs": {},
       "categories": [],
       "transferMethods": [
         {
@@ -1591,10 +1671,7 @@
           "chainId": "banksy-testnet-3",
           "symbol": "PICA",
           "decimals": 12,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/composable.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/composable/images/composable.svg"
-          }
+          "logoURIs": {}
         }
       ],
       "variantGroupKey": "ibc/27689601842A99059DFD79EB0A34A089FC2F7337491B5555C176400A8FA7F2A4",
@@ -1941,6 +2018,7 @@
           "symbol": "aUSDC",
           "decimals": 6,
           "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png",
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
           }
         },
@@ -2173,8 +2251,7 @@
       "symbol": "DOGE",
       "decimals": 8,
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/doge.int3.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/doge.int3.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/doge.int3.png"
       },
       "categories": [],
       "transferMethods": [
@@ -2204,8 +2281,7 @@
           "symbol": "DOGE",
           "decimals": 8,
           "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/doge.int3.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/doge.int3.svg"
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/doge.int3.png"
           }
         }
       ],
@@ -2377,8 +2453,7 @@
       "symbol": "XRP",
       "decimals": 6,
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/xrp.int3.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/xrp.int3.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/xrp.int3.png"
       },
       "categories": [],
       "transferMethods": [
@@ -2408,13 +2483,61 @@
           "symbol": "XRP",
           "decimals": 6,
           "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/xrp.int3.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/xrp.int3.svg"
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/xrp.int3.png"
           }
         }
       ],
       "variantGroupKey": "ibc/9D44B9A113D449A16FAB9F639FF5B074CAB6D33D049056AB6B4DCE6E3891DD55",
       "name": "Testnet XRP",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "int3facetestnet",
+      "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec",
+      "coinMinimalDenom": "ibc/49C1211CF9077E5D504D895A0C374D1D3E9B0EA3D0FFBA0CAB4EF3FEBEDA8DE2",
+      "symbol": "ZEC",
+      "decimals": 8,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/zec.int3.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "int3facetestnet",
+            "chainId": "int3-test-2",
+            "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-9755",
+            "path": "transfer/channel-9755/factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "int3facetestnet",
+          "sourceDenom": "factory/int31zlefkpe3g0vvm9a4h0jf9000lmqutlh99h7fsd/zcash-zec",
+          "chainType": "cosmos",
+          "chainId": "int3-test-2",
+          "symbol": "ZEC",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/zec.int3.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/49C1211CF9077E5D504D895A0C374D1D3E9B0EA3D0FFBA0CAB4EF3FEBEDA8DE2",
+      "name": "Testnet Zcash",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,
@@ -2459,10 +2582,7 @@
       "coinMinimalDenom": "ibc/587F7C29FF31182B2508CC9BF63BB8807302CCBEDFFD9EB7144F17A358FBBB94",
       "symbol": "ARENA",
       "decimals": 6,
-      "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/arena.svg",
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/arena.png"
-      },
+      "logoURIs": {},
       "categories": [],
       "transferMethods": [],
       "counterparty": [
@@ -2473,10 +2593,7 @@
           "chainId": "uni-6",
           "symbol": "ARENA",
           "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/arena.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/arena.svg"
-          }
+          "logoURIs": {}
         }
       ],
       "variantGroupKey": "ibc/587F7C29FF31182B2508CC9BF63BB8807302CCBEDFFD9EB7144F17A358FBBB94",
@@ -5659,24 +5776,7 @@
       },
       "coingeckoId": "mantra-dao",
       "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "mantrachaintestnet",
-            "chainId": "mantra-hongbai-1",
-            "sourceDenom": "uom",
-            "port": "transfer",
-            "channelId": "channel-5"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-8734",
-            "path": "transfer/channel-8734/uom"
-          }
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "mantrachaintestnet",
@@ -5701,10 +5801,10 @@
     },
     {
       "chainName": "mantrachaintestnet2",
-      "sourceDenom": "uom",
-      "coinMinimalDenom": "ibc/9FFAF10A8821A69C52CF66910A8F75BBC9454FB282167FA7F015BE2753B474C8",
-      "symbol": "OM",
-      "decimals": 6,
+      "sourceDenom": "amantra",
+      "coinMinimalDenom": "ibc/6C59388CEFA3A3DCF4B8011C78844E3665BC0021C125E5DA44DF4DACD1D677D0",
+      "symbol": "MANTRA",
+      "decimals": 18,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Darkmatt.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Darkmatt.svg"
@@ -5717,32 +5817,32 @@
           "counterparty": {
             "chainName": "mantrachaintestnet2",
             "chainId": "mantra-dukong-1",
-            "sourceDenom": "uom",
+            "sourceDenom": "amantra",
             "port": "transfer",
             "channelId": "channel-0"
           },
           "chain": {
             "port": "transfer",
             "channelId": "channel-9126",
-            "path": "transfer/channel-9126/uom"
+            "path": "transfer/channel-9126/amantra"
           }
         }
       ],
       "counterparty": [
         {
           "chainName": "mantrachaintestnet2",
-          "sourceDenom": "uom",
+          "sourceDenom": "amantra",
           "chainType": "cosmos",
           "chainId": "mantra-dukong-1",
-          "symbol": "OM",
-          "decimals": 6,
+          "symbol": "MANTRA",
+          "decimals": 18,
           "logoURIs": {
             "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.png",
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.svg"
           }
         }
       ],
-      "variantGroupKey": "ibc/9FFAF10A8821A69C52CF66910A8F75BBC9454FB282167FA7F015BE2753B474C8",
+      "variantGroupKey": "ibc/6C59388CEFA3A3DCF4B8011C78844E3665BC0021C125E5DA44DF4DACD1D677D0",
       "name": "MANTRA Dukong Testnet",
       "isAlloyed": false,
       "verified": false,
@@ -5806,8 +5906,8 @@
       "symbol": "NTRN",
       "decimals": 6,
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/neutrontestnet/images/ntrn.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/neutrontestnet/images/ntrn.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/ntrn.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/ntrn.svg"
       },
       "categories": [],
       "transferMethods": [
@@ -5837,8 +5937,8 @@
           "symbol": "NTRN",
           "decimals": 6,
           "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/neutrontestnet/images/ntrn.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/neutrontestnet/images/ntrn.svg"
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/ntrn.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/ntrn.svg"
           }
         }
       ],
@@ -5857,8 +5957,7 @@
       "symbol": "amATOM",
       "decimals": 6,
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/neutrontestnet/images/amATOM.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/neutrontestnet/images/amATOM.svg"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/amATOM.svg"
       },
       "categories": [],
       "transferMethods": [
@@ -5888,8 +5987,7 @@
           "symbol": "amATOM",
           "decimals": 6,
           "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/neutrontestnet/images/amATOM.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/neutrontestnet/images/amATOM.svg"
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/amATOM.svg"
           }
         }
       ],
@@ -6247,6 +6345,55 @@
       "preview": false
     },
     {
+      "chainName": "neutrontestnet",
+      "sourceDenom": "factory/neutron1qex378awvwhsxealmrtuunn70f242u49dagqus6ug423paxyevyqvw9s3t/uTIA",
+      "coinMinimalDenom": "ibc/2EEFC77CF82E3AAC46ED591F723CC0269E97399442C16F0A98701BFD34407834",
+      "symbol": "dTIA",
+      "decimals": 6,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/dTIA.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "neutrontestnet",
+            "chainId": "pion-1",
+            "sourceDenom": "factory/neutron1qex378awvwhsxealmrtuunn70f242u49dagqus6ug423paxyevyqvw9s3t/uTIA",
+            "port": "transfer",
+            "channelId": "channel-196"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-4172",
+            "path": "transfer/channel-4172/factory/neutron1qex378awvwhsxealmrtuunn70f242u49dagqus6ug423paxyevyqvw9s3t/uTIA"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "neutrontestnet",
+          "sourceDenom": "factory/neutron1qex378awvwhsxealmrtuunn70f242u49dagqus6ug423paxyevyqvw9s3t/uTIA",
+          "chainType": "cosmos",
+          "chainId": "pion-1",
+          "symbol": "dTIA",
+          "decimals": 6,
+          "logoURIs": {
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/dTIA.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/2EEFC77CF82E3AAC46ED591F723CC0269E97399442C16F0A98701BFD34407834",
+      "name": "Drop dTIA testnet",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "nobletestnet",
       "sourceDenom": "ustake",
       "coinMinimalDenom": "ibc/5C6404C2D9BAE2BE397908F6503464EBC3EAEE448AE6B7ED218248FF7E7A3236",
@@ -6394,8 +6541,8 @@
       "symbol": "NLS",
       "decimals": 6,
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/nolustestnet/images/nolus.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/nolustestnet/images/nolus.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nolus/images/nolus.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nolus/images/nolus.svg"
       },
       "categories": [],
       "transferMethods": [
@@ -6425,8 +6572,8 @@
           "symbol": "NLS",
           "decimals": 6,
           "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/nolustestnet/images/nolus.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/nolustestnet/images/nolus.svg"
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nolus/images/nolus.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nolus/images/nolus.svg"
           }
         }
       ],
@@ -6445,8 +6592,8 @@
       "symbol": "NLS",
       "decimals": 6,
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/nolustestnet/images/nolus.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/nolustestnet/images/nolus.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nolus/images/nolus.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nolus/images/nolus.svg"
       },
       "categories": [],
       "transferMethods": [],
@@ -6459,8 +6606,8 @@
           "symbol": "NLS",
           "decimals": 6,
           "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/nolustestnet/images/nolus.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/nolustestnet/images/nolus.svg"
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nolus/images/nolus.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nolus/images/nolus.svg"
           }
         }
       ],
@@ -6631,9 +6778,7 @@
       "coinMinimalDenom": "ibc/8446486081A4086F4C6D5846FC5DC12E01D2DDD0C6A89B00B2F25EDD9986D026",
       "symbol": "SGE",
       "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sgetestnet/images/sge.png"
-      },
+      "logoURIs": {},
       "categories": [],
       "transferMethods": [
         {
@@ -6661,9 +6806,7 @@
           "chainId": "sge-network-3",
           "symbol": "SGE",
           "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sgetestnet/images/sge.png"
-          }
+          "logoURIs": {}
         }
       ],
       "variantGroupKey": "ibc/8446486081A4086F4C6D5846FC5DC12E01D2DDD0C6A89B00B2F25EDD9986D026",
@@ -6681,7 +6824,8 @@
       "symbol": "STARS",
       "decimals": 6,
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/stars.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/stars.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/stars.svg"
       },
       "coingeckoId": "stargaze",
       "categories": [],
@@ -6712,7 +6856,8 @@
           "symbol": "STARS",
           "decimals": 6,
           "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/stars.png"
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/stars.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/stars.svg"
           }
         }
       ],
@@ -7280,7 +7425,8 @@
       "symbol": "SOL",
       "decimals": 9,
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/sol_circle.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/sol_circle.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/sol_circle.svg"
       },
       "categories": [],
       "transferMethods": [
@@ -7310,7 +7456,8 @@
           "symbol": "SOL",
           "decimals": 9,
           "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/sol_circle.png"
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/sol_circle.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/solana/images/sol_circle.svg"
           }
         }
       ],

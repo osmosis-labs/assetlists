@@ -43215,6 +43215,41 @@
       ]
     },
     {
+      "denom_units": [
+        {
+          "denom": "ibc/6AA47B1A9F00CC9B127796717F4BE976C12EFC843387F22461152888E1365045",
+          "exponent": 0,
+          "aliases": [
+            "uOPT"
+          ]
+        },
+        {
+          "denom": "OPT",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/6AA47B1A9F00CC9B127796717F4BE976C12EFC843387F22461152888E1365045",
+      "name": "Optio",
+      "display": "OPT",
+      "symbol": "OPT",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "optio",
+            "base_denom": "uOPT",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-108371",
+            "path": "transfer/channel-108371/uOPT"
+          }
+        }
+      ],
+      "coingecko_id": "optio"
+    },
+    {
       "description": "PUNDIX token is the native token that functions within the Pundi X ecosystem, including PundiX Chain and XPOS.",
       "denom_units": [
         {

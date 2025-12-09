@@ -252,8 +252,8 @@
     },
     {
       "chain_name": "bandchain",
-      "rpc": "https://band.ibs.team:443/rpc",
-      "rest": "https://band.ibs.team:443/api",
+      "rpc": "https://band-rpc.ibs.team",
+      "rest": "https://band-api.ibs.team",
       "explorer_tx_url": "https://cosmoscan.io/tx/${txHash}"
     },
     {
@@ -1452,6 +1452,15 @@
       "keplr_features": [
         "ibc-go",
         "cosmwasm"
+      ]
+    },
+    {
+      "chain_name": "optio",
+      "rpc": "https://rpc.optio.zone",
+      "rest": "https://api.optio.zone",
+      "explorer_tx_url": "https://https://optioscan.io/optio/transactions/${txHash}",
+      "keplr_features": [
+        "ibc-go"      
       ]
     }
   ]

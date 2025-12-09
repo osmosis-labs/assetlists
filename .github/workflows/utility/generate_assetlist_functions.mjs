@@ -1600,8 +1600,9 @@ export function setTransferMethods(asset_data) {
           }
         }
         transferMethods.push(ibcTransferMethod);
-      }  
+      }
     }
+  }
 
   asset_data.frontend.transferMethods = transferMethods;
 

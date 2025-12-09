@@ -1712,7 +1712,7 @@ export function setSocials(asset_data) {
 
   let socials = getAssetProperty(asset_data.canonical_asset, "socials");
   asset_data.asset_detail.websiteURL = socials?.website;
-  asset_data.asset_detail.twitterURL = socials?.twitter;
+  asset_data.asset_detail.twitterURL = socials?.twitter || socials?.x;
   if (socials) { return; }
   
   if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
@@ -1723,7 +1723,7 @@ export function setSocials(asset_data) {
     )
   }
   asset_data.asset_detail.websiteURL = socials?.website;
-  asset_data.asset_detail.twitterURL = socials?.twitter;
+  asset_data.asset_detail.twitterURL = socials?.twitter || socials?.x;
   if (socials) { return; }
 
   socials = chain_reg.getAssetPropertyWithTraceCustom(
@@ -1733,7 +1733,7 @@ export function setSocials(asset_data) {
     originTraceTypes
   );
   asset_data.asset_detail.websiteURL = socials?.website;
-  asset_data.asset_detail.twitterURL = socials?.twitter;
+  asset_data.asset_detail.twitterURL = socials?.twitter || socials?.x;
 
 }
 

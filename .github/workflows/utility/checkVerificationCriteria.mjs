@@ -20,7 +20,7 @@
  *   - Uploads reports as artifacts
  *
  * ============================================================================
- * VERIFICATION CRITERIA (7 Checks)
+ * VERIFICATION CRITERIA (8 Checks)
  * ============================================================================
  *
  * 1. STANDARD LISTING
@@ -115,6 +115,15 @@
  *    - Fallback (if API unavailable): Uses pool liquidity >= $51
  *    - Pass: Either side has usd_amount >= $50 at 2% depth
  *    - Fail: Both sides < $50, or no pool found
+ *
+ * 8. CHAIN STATUS
+ *    - Verifies the asset's chain is not marked as "killed"
+ *    - Check: chain_reg.getFileProperty(chainName, 'chain', 'status') !== 'killed'
+ *    - Exemption: Meme tokens (category includes "meme") skip this check
+ *    - Pass: Chain status is "live" or "upcoming" OR asset is a meme token
+ *    - Fail: Chain status is "killed" (unless meme token)
+ *    - Purpose: Prevents verification of assets on killed/deprecated chains
+ *      while allowing historical meme tokens to remain verified
  *
  * ============================================================================
  * ALLOY AUTO-VERIFICATION
@@ -519,6 +528,22 @@ function hasCategories(zoneAsset, categories) {
 
 function isMemeToken(zoneAsset) {
   return hasCategories(zoneAsset, ['meme']);
+}
+
+/**
+ * Check if a chain is marked as killed in the chain registry
+ *
+ * @param {string} chainName - Chain name to check
+ * @returns {boolean} True if chain is killed, false otherwise
+ */
+function isChainKilled(chainName) {
+  try {
+    const chainStatus = chain_reg.getFileProperty(chainName, 'chain', 'status');
+    return chainStatus === 'killed';
+  } catch (error) {
+    // If we can't read the chain status, assume it's not killed
+    return false;
+  }
 }
 
 //-- Verification Check Functions --
@@ -1112,6 +1137,53 @@ async function checkBidDepth(chainName, baseDenom, numiaPairs) {
   }
 }
 
+/**
+ * Check 8: Killed Chain Status
+ * Verifies that the asset's chain is not marked as "killed" in the chain registry
+ *
+ * Assets on killed chains should not be verified, and already-verified assets apart from memes
+ * should be de-verified.
+ *
+ * Exemption: Meme tokens (category includes "meme") are allowed to remain verified
+ * even on killed chains, as they may have historical/cultural value.
+ *
+ * Per LISTING.md chain status requirement
+ *
+ * @param {string} chainName - Chain name to check
+ * @param {boolean} isMeme - Whether the asset is a meme token
+ */
+async function checkChainStatus(chainName, isMeme) {
+  try {
+    // Exemption: Meme tokens can remain verified on killed chains
+    if (isMeme) {
+      return {
+        passed: true,
+        details: 'Meme category: exempt from chain status check',
+        skipped: true
+      };
+    }
+
+    const chainIsKilled = isChainKilled(chainName);
+
+    if (chainIsKilled) {
+      return {
+        passed: false,
+        details: `Chain "${chainName}" is marked as killed in the chain registry`
+      };
+    }
+
+    return {
+      passed: true,
+      details: 'Chain is active'
+    };
+  } catch (error) {
+    return {
+      passed: true,  // Assume chain is active if we can't check
+      details: `Could not verify chain status: ${error.message}`
+    };
+  }
+}
+
 //-- Main Verification Function --
 
 /**
@@ -1134,6 +1206,7 @@ async function verifyAsset(zoneAsset, numiaTokens, numiaPairs, alloyMembersMap) 
     comment: zoneAsset._comment || '',
     currently_verified: zoneAsset.osmosis_verified || false,
     is_meme: isMeme,
+    chainIsKilled: isChainKilled(chain_name),
     checks: {},
     alloyInfo: null
   };
@@ -1153,6 +1226,7 @@ async function verifyAsset(zoneAsset, numiaTokens, numiaPairs, alloyMembersMap) 
   results.checks.logo = await checkLogo(chain_name, base_denom);
   results.checks.poolLiquidity = await checkPoolLiquidity(chain_name, base_denom, numiaTokens);
   results.checks.bidDepth = await checkBidDepth(chain_name, base_denom, numiaPairs);
+  results.checks.chainStatus = await checkChainStatus(chain_name, isMeme);
 
   // Determine overall pass/fail
   results.allChecksPassed = Object.values(results.checks).every(check => check.passed);
@@ -1179,9 +1253,13 @@ function generateMarkdownReport(verificationResults) {
   const alreadyVerified = verificationResults.filter(r => r.currently_verified);
   const failedChecks = verificationResults.filter(r => !r.allChecksPassed && !r.currently_verified);
 
+  // Filter killed chain assets (excluding meme tokens) - only verified assets that need de-verification
+  const killedChainAssetsVerified = verificationResults.filter(r => r.chainIsKilled && r.currently_verified && !r.is_meme);
+
   markdown += `## Summary\n\n`;
   markdown += `- **Ready for Verification**: ${readyForVerification.length}\n`;
   markdown += `- **Failed Checks**: ${failedChecks.length}\n`;
+  markdown += `- **Killed Chain Assets**: ${killedChainAssetsVerified.length} (potential de-verification)\n`;
   markdown += `- **Total Checked**: ${verificationResults.length}\n\n`;
 
   // Ready for Verification section with asset links
@@ -1283,8 +1361,8 @@ function generateMarkdownReport(verificationResults) {
 
     if (highLiquidityFailing.length > 0) {
       markdown += `These assets have sufficient pool liquidity ($1000+) but fail other checks:\n\n`;
-      markdown += `| Asset | Comment | Pool Liquidity | Bid Depth | Other Failures |\n`;
-      markdown += `|-------|---------|----------------|-----------|----------------|\n`;
+      markdown += `| Asset | Comment | Pool Liquidity | Failure Reasons |\n`;
+      markdown += `|-------|---------|----------------|----------------|\n`;
 
       highLiquidityFailing.forEach(r => {
         const symbol = r.comment || r.base_denom.substring(0, 30);
@@ -1292,26 +1370,30 @@ function generateMarkdownReport(verificationResults) {
         const liqMatch = r.checks.poolLiquidity?.details?.match(/\$[\d,]+/);
         const poolLiq = liqMatch ? liqMatch[0] : 'N/A';
 
-        // Format bid depth
-        let bidDepth = '';
-        if (r.checks.bidDepth?.passed) {
-          bidDepth = '✅ ' + r.checks.bidDepth.details;
-        } else {
-          const details = r.checks.bidDepth?.details || 'Failed';
+        // Collect all failure reasons
+        const failureReasons = [];
+
+        // Add bid depth if it failed
+        if (!r.checks.bidDepth?.passed) {
+          const details = r.checks.bidDepth?.details || 'Bid depth failed';
           const cleanDetails = details
             .replace(/❌/g, '')
             .replace(/✅/g, '')
             .replace(/\(need \$\d+\)/g, '')
             .trim();
-          bidDepth = '❌ ' + cleanDetails;
+          failureReasons.push(`Bid depth: ${cleanDetails}`);
         }
 
+        // Add other failures
         const otherFails = Object.entries(r.checks)
           .filter(([name, check]) => !check.passed && !check.skipped && name !== 'poolLiquidity' && name !== 'bidDepth')
-          .map(([name]) => name.replace(/([A-Z])/g, ' $1').trim())
-          .join(', ') || 'None';
+          .map(([name]) => name.replace(/([A-Z])/g, ' $1').trim());
 
-        markdown += `| ${symbol} | ${r.chain_name} | ${poolLiq} | ${bidDepth} | ${otherFails} |\n`;
+        failureReasons.push(...otherFails);
+
+        const failureReasonsText = failureReasons.length > 0 ? failureReasons.join(', ') : 'None';
+
+        markdown += `| ${symbol} | ${r.chain_name} | ${poolLiq} | ${failureReasonsText} |\n`;
       });
       markdown += '\n';
     } else {
@@ -1398,6 +1480,24 @@ function generateMarkdownReport(verificationResults) {
     } else {
       markdown += `No logo failures detected. All assets have valid logos that meet the requirements.\n\n`;
     }
+
+    // Killed Chain Assets subsection
+    markdown += `### Killed Chain Assets\n\n`;
+
+    if (killedChainAssetsVerified.length > 0) {
+      markdown += `These verified assets belong to killed chains and can be de-verified (excluding meme tokens):\n\n`;
+      markdown += `| Asset | Chain | Base Denom | Comment |\n`;
+      markdown += `|-------|-------|------------|----------|\n`;
+
+      killedChainAssetsVerified.forEach(r => {
+        const symbol = r.comment || r.base_denom.substring(0, 40);
+        markdown += `| ${symbol} | ${r.chain_name} | \`${r.base_denom}\` | ${r.comment || 'N/A'} |\n`;
+      });
+      markdown += '\n';
+      markdown += `**Note:** Meme tokens are exempt from this requirement and may remain verified on killed chains due to their historical/cultural value.\n\n`;
+    } else {
+      markdown += `No verified assets from killed chains detected. All verified assets belong to active chains.\n\n`;
+    }
   } else {
     markdown += `All assets pass verification checks!\n\n`;
   }
@@ -1429,6 +1529,9 @@ function generateMarkdownReport(verificationResults) {
 function generateJSONReport(verificationResults) {
   const failedChecks = verificationResults.filter(r => !r.allChecksPassed && !r.currently_verified);
 
+  // Filter killed chain assets (excluding meme tokens) - only verified assets that may need de-verification
+  const killedChainAssetsVerified = verificationResults.filter(r => r.chainIsKilled && r.currently_verified && !r.is_meme);
+
   // Calculate failure breakdown
   const failureCounts = {
     standardListing: 0,
@@ -1437,7 +1540,8 @@ function generateJSONReport(verificationResults) {
     socials: 0,
     logo: 0,
     poolLiquidity: 0,
-    bidDepth: 0
+    bidDepth: 0,
+    chainStatus: 0
   };
 
   const socialsFailureReasons = {};
@@ -1488,12 +1592,20 @@ function generateJSONReport(verificationResults) {
       readyForVerification: verificationResults.filter(r => r.readyForVerification).length,
       alreadyVerified: verificationResults.filter(r => r.currently_verified).length,
       failedChecks: failedChecks.length,
+      killedChainAssets: killedChainAssetsVerified.length,
       totalChecked: verificationResults.length
     },
     analysis: {
       failureBreakdown,
       socialsFailureReasons,
-      highLiquidityFailing
+      highLiquidityFailing,
+      killedChainAssets: killedChainAssetsVerified.map(r => ({
+        chain_name: r.chain_name,
+        base_denom: r.base_denom,
+        comment: r.comment,
+        is_meme: r.is_meme,
+        chainIsKilled: r.chainIsKilled
+      }))
     },
     results: verificationResults
   }, null, 2);

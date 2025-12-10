@@ -46,6 +46,11 @@ Accessible liquidity of the asset on Osmosis:
      - This must work for all asset pairs in the pool
      - This would be impossible for pools with a swap fee (or spread) >=2%, which would require special consideration
 
+Chain Status:
+ - The asset's origin chain must not be marked as "killed" in the Cosmos Chain Registry
+   - Chains may be marked as killed when they are no longer operational
+   - Exception: Meme tokens (categorized as "meme") are exempt from this requirement and may remain verified on killed chains due to their historical/cultural value
+
 Asset appearance and functionality must be validated by Osmosis Zone maintainers. This includes:
  - Verifying the asset's details (name, [ticker] symbol, logo, description, socials) can be seen on Osmosis Zone
  - Verifying that the asset has a price on Osmosis Zone

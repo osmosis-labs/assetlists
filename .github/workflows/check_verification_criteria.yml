@@ -53,10 +53,12 @@ jobs:
 
             READY=$(jq -r '.summary.readyForVerification' "$REPORT_PATH")
             FAILED=$(jq -r '.summary.failedChecks' "$REPORT_PATH")
+            KILLED=$(jq -r '.summary.killedChainAssets' "$REPORT_PATH")
             TOTAL=$(jq -r '.summary.totalChecked' "$REPORT_PATH")
 
             echo "- ✅ **Ready for Verification**: $READY" >> $GITHUB_STEP_SUMMARY
             echo "- ❌ **Failed Checks**: $FAILED" >> $GITHUB_STEP_SUMMARY
+            echo "- ⚠️ **Killed Chain Assets**: $KILLED" >> $GITHUB_STEP_SUMMARY
             echo "- 📊 **Total Checked**: $TOTAL" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
 
@@ -154,6 +156,23 @@ jobs:
               jq -r '.results[] | select(.checks.logo.passed == false) | select([.checks | to_entries[] | select(.value.passed == false and (.value.skipped // false) == false)] | length == 1) | "| \(.comment // .base_denom) | \(.chain_name) | \(.checks.logo.details) |"' "$REPORT_PATH" | head -20 >> $GITHUB_STEP_SUMMARY
             else
               echo "_No assets are failing solely due to logo issues._" >> $GITHUB_STEP_SUMMARY
+            fi
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            # Killed Chain Assets
+            echo "### ⚠️ Verified Assets on Killed Chains" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Verified assets belonging to chains marked as 'killed' in the chain registry (excluding meme tokens):" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            KILLED_CHAIN_COUNT=$(jq -r '.summary.killedChainAssets' "$REPORT_PATH")
+            if [ "$KILLED_CHAIN_COUNT" -gt 0 ]; then
+              echo "| Asset | Chain | Base Denom |" >> $GITHUB_STEP_SUMMARY
+              echo "|-------|-------|------------|" >> $GITHUB_STEP_SUMMARY
+              jq -r '.analysis.killedChainAssets[] | "| \(.comment // .base_denom) | \(.chain_name) | `\(.base_denom)` |"' "$REPORT_PATH" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "_**Note:** Meme tokens are exempt from this requirement and may remain verified on killed chains._" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "_No verified assets from killed chains detected. All verified assets belong to active chains._" >> $GITHUB_STEP_SUMMARY
             fi
             echo "" >> $GITHUB_STEP_SUMMARY
 

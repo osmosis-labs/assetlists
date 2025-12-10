@@ -1141,7 +1141,7 @@ async function checkBidDepth(chainName, baseDenom, numiaPairs) {
  * Check 8: Killed Chain Status
  * Verifies that the asset's chain is not marked as "killed" in the chain registry
  *
- * Assets on killed chains should not be verified, and already-verified assets
+ * Assets on killed chains should not be verified, and already-verified assets apart from memes
  * should be de-verified.
  *
  * Exemption: Meme tokens (category includes "meme") are allowed to remain verified
@@ -1253,15 +1253,13 @@ function generateMarkdownReport(verificationResults) {
   const alreadyVerified = verificationResults.filter(r => r.currently_verified);
   const failedChecks = verificationResults.filter(r => !r.allChecksPassed && !r.currently_verified);
 
-  // Filter killed chain assets (excluding meme tokens)
+  // Filter killed chain assets (excluding meme tokens) - only verified assets that need de-verification
   const killedChainAssetsVerified = verificationResults.filter(r => r.chainIsKilled && r.currently_verified && !r.is_meme);
-  const killedChainAssetsUnverified = verificationResults.filter(r => r.chainIsKilled && !r.currently_verified && !r.is_meme);
 
   markdown += `## Summary\n\n`;
   markdown += `- **Ready for Verification**: ${readyForVerification.length}\n`;
   markdown += `- **Failed Checks**: ${failedChecks.length}\n`;
-  markdown += `- **Killed Chain Assets (Verified)**: ${killedChainAssetsVerified.length} (require de-verification)\n`;
-  markdown += `- **Killed Chain Assets (Unverified)**: ${killedChainAssetsUnverified.length} (cannot be verified)\n`;
+  markdown += `- **Killed Chain Assets**: ${killedChainAssetsVerified.length} (potential de-verification)\n`;
   markdown += `- **Total Checked**: ${verificationResults.length}\n\n`;
 
   // Ready for Verification section with asset links
@@ -1363,8 +1361,8 @@ function generateMarkdownReport(verificationResults) {
 
     if (highLiquidityFailing.length > 0) {
       markdown += `These assets have sufficient pool liquidity ($1000+) but fail other checks:\n\n`;
-      markdown += `| Asset | Comment | Pool Liquidity | Bid Depth | Other Failures |\n`;
-      markdown += `|-------|---------|----------------|-----------|----------------|\n`;
+      markdown += `| Asset | Comment | Pool Liquidity | Failure Reasons |\n`;
+      markdown += `|-------|---------|----------------|----------------|\n`;
 
       highLiquidityFailing.forEach(r => {
         const symbol = r.comment || r.base_denom.substring(0, 30);
@@ -1372,26 +1370,30 @@ function generateMarkdownReport(verificationResults) {
         const liqMatch = r.checks.poolLiquidity?.details?.match(/\$[\d,]+/);
         const poolLiq = liqMatch ? liqMatch[0] : 'N/A';
 
-        // Format bid depth
-        let bidDepth = '';
-        if (r.checks.bidDepth?.passed) {
-          bidDepth = '✅ ' + r.checks.bidDepth.details;
-        } else {
-          const details = r.checks.bidDepth?.details || 'Failed';
+        // Collect all failure reasons
+        const failureReasons = [];
+
+        // Add bid depth if it failed
+        if (!r.checks.bidDepth?.passed) {
+          const details = r.checks.bidDepth?.details || 'Bid depth failed';
           const cleanDetails = details
             .replace(/❌/g, '')
             .replace(/✅/g, '')
             .replace(/\(need \$\d+\)/g, '')
             .trim();
-          bidDepth = '❌ ' + cleanDetails;
+          failureReasons.push(`Bid depth: ${cleanDetails}`);
         }
 
+        // Add other failures
         const otherFails = Object.entries(r.checks)
           .filter(([name, check]) => !check.passed && !check.skipped && name !== 'poolLiquidity' && name !== 'bidDepth')
-          .map(([name]) => name.replace(/([A-Z])/g, ' $1').trim())
-          .join(', ') || 'None';
+          .map(([name]) => name.replace(/([A-Z])/g, ' $1').trim());
 
-        markdown += `| ${symbol} | ${r.chain_name} | ${poolLiq} | ${bidDepth} | ${otherFails} |\n`;
+        failureReasons.push(...otherFails);
+
+        const failureReasonsText = failureReasons.length > 0 ? failureReasons.join(', ') : 'None';
+
+        markdown += `| ${symbol} | ${r.chain_name} | ${poolLiq} | ${failureReasonsText} |\n`;
       });
       markdown += '\n';
     } else {
@@ -1478,6 +1480,24 @@ function generateMarkdownReport(verificationResults) {
     } else {
       markdown += `No logo failures detected. All assets have valid logos that meet the requirements.\n\n`;
     }
+
+    // Killed Chain Assets subsection
+    markdown += `### Killed Chain Assets\n\n`;
+
+    if (killedChainAssetsVerified.length > 0) {
+      markdown += `These verified assets belong to killed chains and can be de-verified (excluding meme tokens):\n\n`;
+      markdown += `| Asset | Chain | Base Denom | Comment |\n`;
+      markdown += `|-------|-------|------------|----------|\n`;
+
+      killedChainAssetsVerified.forEach(r => {
+        const symbol = r.comment || r.base_denom.substring(0, 40);
+        markdown += `| ${symbol} | ${r.chain_name} | \`${r.base_denom}\` | ${r.comment || 'N/A'} |\n`;
+      });
+      markdown += '\n';
+      markdown += `**Note:** Meme tokens are exempt from this requirement and may remain verified on killed chains due to their historical/cultural value.\n\n`;
+    } else {
+      markdown += `No verified assets from killed chains detected. All verified assets belong to active chains.\n\n`;
+    }
   } else {
     markdown += `All assets pass verification checks!\n\n`;
   }
@@ -1503,51 +1523,14 @@ function generateMarkdownReport(verificationResults) {
     });
   }
 
-  // Killed Chain Assets Section
-  if (killedChainAssetsVerified.length > 0 || killedChainAssetsUnverified.length > 0) {
-    markdown += `## ⚠️ Killed Chain Assets Requiring De-verification\n\n`;
-    markdown += `Assets from chains marked as "killed" in the chain registry (excluding meme tokens):\n\n`;
-
-    // Currently Verified subsection
-    if (killedChainAssetsVerified.length > 0) {
-      markdown += `### Currently Verified (${killedChainAssetsVerified.length})\n\n`;
-      markdown += `These verified assets belong to killed chains and should be de-verified:\n\n`;
-      markdown += `| Asset | Chain | Base Denom | Comment |\n`;
-      markdown += `|-------|-------|------------|----------|\n`;
-
-      killedChainAssetsVerified.forEach(r => {
-        const symbol = r.comment || r.base_denom.substring(0, 40);
-        markdown += `| ${symbol} | ${r.chain_name} | \`${r.base_denom}\` | ${r.comment || 'N/A'} |\n`;
-      });
-      markdown += '\n';
-    }
-
-    // Unverified subsection
-    if (killedChainAssetsUnverified.length > 0) {
-      markdown += `### Unverified (${killedChainAssetsUnverified.length})\n\n`;
-      markdown += `These unverified assets belong to killed chains and cannot be verified:\n\n`;
-      markdown += `| Asset | Chain | Base Denom | Comment |\n`;
-      markdown += `|-------|-------|------------|----------|\n`;
-
-      killedChainAssetsUnverified.forEach(r => {
-        const symbol = r.comment || r.base_denom.substring(0, 40);
-        markdown += `| ${symbol} | ${r.chain_name} | \`${r.base_denom}\` | ${r.comment || 'N/A'} |\n`;
-      });
-      markdown += '\n';
-    }
-
-    markdown += `**Note:** Meme tokens are exempt from this requirement and may remain verified on killed chains due to their historical/cultural value.\n\n`;
-  }
-
   return markdown;
 }
 
 function generateJSONReport(verificationResults) {
   const failedChecks = verificationResults.filter(r => !r.allChecksPassed && !r.currently_verified);
 
-  // Filter killed chain assets (excluding meme tokens)
+  // Filter killed chain assets (excluding meme tokens) - only verified assets that may need de-verification
   const killedChainAssetsVerified = verificationResults.filter(r => r.chainIsKilled && r.currently_verified && !r.is_meme);
-  const killedChainAssetsUnverified = verificationResults.filter(r => r.chainIsKilled && !r.currently_verified && !r.is_meme);
 
   // Calculate failure breakdown
   const failureCounts = {
@@ -1609,30 +1592,20 @@ function generateJSONReport(verificationResults) {
       readyForVerification: verificationResults.filter(r => r.readyForVerification).length,
       alreadyVerified: verificationResults.filter(r => r.currently_verified).length,
       failedChecks: failedChecks.length,
-      killedChainAssetsVerified: killedChainAssetsVerified.length,
-      killedChainAssetsUnverified: killedChainAssetsUnverified.length,
+      killedChainAssets: killedChainAssetsVerified.length,
       totalChecked: verificationResults.length
     },
     analysis: {
       failureBreakdown,
       socialsFailureReasons,
       highLiquidityFailing,
-      killedChainAssets: {
-        verified: killedChainAssetsVerified.map(r => ({
-          chain_name: r.chain_name,
-          base_denom: r.base_denom,
-          comment: r.comment,
-          is_meme: r.is_meme,
-          chainIsKilled: r.chainIsKilled
-        })),
-        unverified: killedChainAssetsUnverified.map(r => ({
-          chain_name: r.chain_name,
-          base_denom: r.base_denom,
-          comment: r.comment,
-          is_meme: r.is_meme,
-          chainIsKilled: r.chainIsKilled
-        }))
-      }
+      killedChainAssets: killedChainAssetsVerified.map(r => ({
+        chain_name: r.chain_name,
+        base_denom: r.base_denom,
+        comment: r.comment,
+        is_meme: r.is_meme,
+        chainIsKilled: r.chainIsKilled
+      }))
     },
     results: verificationResults
   }, null, 2);

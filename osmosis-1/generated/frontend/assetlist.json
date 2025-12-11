@@ -5160,7 +5160,7 @@
         "chainName": "axelar",
         "sourceDenom": "uaxl"
       },
-      "listingDate": "2024-09-27T00:00:00.000Z"
+      "listingDate": "2024-12-09T10:37:21.540Z"
     },
     {
       "chainName": "kujira",
@@ -30986,6 +30986,57 @@
       ],
       "variantGroupKey": "ibc/6AA47B1A9F00CC9B127796717F4BE976C12EFC843387F22461152888E1365045",
       "name": "Optio",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "epix",
+      "sourceDenom": "aepix",
+      "coinMinimalDenom": "ibc/776917313EC3252954ED622945D4979651ACD909A18E528283F46D7B166F20BF",
+      "symbol": "EPIX",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "epix",
+            "chainId": "epix_1916-1",
+            "sourceDenom": "aepix",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-108456",
+            "path": "transfer/channel-108456/aepix"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "epix",
+          "sourceDenom": "aepix",
+          "chainType": "cosmos",
+          "chainId": "epix_1916-1",
+          "symbol": "EPIX",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/776917313EC3252954ED622945D4979651ACD909A18E528283F46D7B166F20BF",
+      "name": "Epix",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

@@ -3186,6 +3186,9 @@
           },
           {
             "address": "https://rpc.cosmoshub-4-archive.citizenweb3.com:443"
+          },
+          {
+            "address": "https://cosmoshub-mainnet.chain.whenmoonwhenlambo.money"
           }
         ],
         "rest": [
@@ -3293,6 +3296,9 @@
           },
           {
             "address": "https://api.cosmoshub-4.citizenweb3.com:443"
+          },
+          {
+            "address": "https://cosmoshub-mainnet.chain.whenmoonwhenlambo.money"
           }
         ]
       },
@@ -30136,6 +30142,76 @@
       ]
     },
     {
+      "chain_name": "epix",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Epix",
+      "chain_id": "epix_1916-1",
+      "bech32Prefix": "epix",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "epix",
+        "bech32PrefixAccPub": "epixpub",
+        "bech32PrefixValAddr": "epixvaloper",
+        "bech32PrefixValPub": "epixvaloperpub",
+        "bech32PrefixConsAddr": "epixvalcons",
+        "bech32PrefixConsPub": "epixvalconspub"
+      },
+      "slip44": 60,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.svg"
+      },
+      "stakeCurrency": {
+        "coinDenom": "EPIX",
+        "coinMinimalDenom": "aepix",
+        "coinDecimals": 18,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "EPIX",
+          "coinMinimalDenom": "aepix",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.png",
+          "gasPriceStep": {
+            "low": 1000000000000,
+            "average": 2000000000000,
+            "high": 3000000000000
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "EPIX",
+          "coinMinimalDenom": "aepix",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.png"
+        }
+      ],
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.epix.zone"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.epix.zone"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://explorer.epix.zone/epix/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "eth-address-gen",
+        "eth-key-sign"
+      ]
+    },
+    {
       "chain_name": "ethereum",
       "prettyName": "Ethereum Mainnet",
       "logo_URIs": {
@@ -30228,50 +30304,6 @@
       "prettyName": "Namada",
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/namada/images/namada.svg"
-      }
-    },
-    {
-      "chain_name": "aura",
-      "prettyName": "Aura Network",
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aura/images/Aura-logo-2.2.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aura/images/Aura-logo-2.2.svg"
-      }
-    },
-    {
-      "chain_name": "fandomchain",
-      "prettyName": "fandomChain",
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fandomchain/images/fandomchain.png"
-      }
-    },
-    {
-      "chain_name": "onex",
-      "prettyName": "ONEX",
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/onex/images/onex.png"
-      }
-    },
-    {
-      "chain_name": "paxi",
-      "prettyName": "Paxi",
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/paxi/images/paxi.png"
-      }
-    },
-    {
-      "chain_name": "self",
-      "prettyName": "Self Chain",
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/self/images/self.png"
-      }
-    },
-    {
-      "chain_name": "shareledger",
-      "prettyName": "Shareledger",
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/shareledger/images/token.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/shareledger/images/token.svg"
       }
     }
   ]

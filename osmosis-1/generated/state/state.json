@@ -7396,6 +7396,39 @@
       "validationDate": "2025-12-09T09:31:18.981Z",
       "validationSuccess": true,
       "validationResults": []
+    },
+    {
+      "chain_name": "epix",
+      "validationDate": "2025-12-12T23:13:28.683Z",
+      "validationSuccess": true,
+      "validationResults": [
+        {
+          "test": "RPC CORS",
+          "url": "https://rpc.epix.zone/",
+          "success": true
+        },
+        {
+          "test": "RPC WSS",
+          "url": "wss://rpc.epix.zone/websocket",
+          "success": true
+        },
+        {
+          "test": "RPC Endpoints",
+          "url": "https://rpc.epix.zone/status",
+          "success": true,
+          "stale": false
+        },
+        {
+          "test": "REST CORS",
+          "url": "https://api.epix.zone/",
+          "success": true
+        },
+        {
+          "test": "REST Endpoints",
+          "url": "https://api.epix.zone/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
+        }
+      ]
     }
   ]
 }

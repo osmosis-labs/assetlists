@@ -1814,6 +1814,13 @@ export function setDescription(asset_data) {
 
 export function reformatFrontendAssetFromAssetData(asset_data) {
 
+  // Store full trace chain temporarily on asset_data (not frontend) for origin tracking during deduplication
+  // This persists even after frontend is reformatted, but is not included in final output
+  if (!asset_data.traces_for_deduplication) {
+    const fullTraces = getAssetProperty(asset_data.local_asset, "traces");
+    asset_data.traces_for_deduplication = fullTraces ?? [];
+  }
+
   //--Setup Frontend Asset--
   let reformattedAsset = {
     chainName: asset_data.frontend.chainName,
@@ -1828,6 +1835,7 @@ export function reformatFrontendAssetFromAssetData(asset_data) {
     pegMechanism: asset_data.frontend.pegMechanism,
     transferMethods: asset_data.frontend.transferMethods ?? [],
     counterparty: asset_data.frontend.counterparty ?? [],
+    // traces: excluded from final output (only needed during generation for deduplication)
     //identity: asset_data.frontend.identityGroupKey,
     variantGroupKey: asset_data.frontend.originAsset,
     name: asset_data.frontend.name,

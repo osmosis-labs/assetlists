@@ -9,6 +9,7 @@ import * as zone from "./assetlist_functions.mjs";
 import * as assetlist from "./generate_assetlist_functions.mjs";
 import * as localization from "./localization.mjs";
 import * as state from "./update_assetlist_state.mjs";
+import * as symbolDedup from "./deduplicate_symbols.mjs";
 
 
 //-- Flags --
@@ -246,6 +247,12 @@ const generateAssets = async (
     asset_detail_assets.push(asset_data.asset_detail);
 
   });
+
+  //--Deduplicate Symbols--
+  // Post-processing: Suffix non-canonical assets that have duplicate symbols with .chain
+  // This ensures canonical assets (e.g., Noble USDC) keep "USDC" while non-canonical
+  // variants (e.g., Carbon USDC) get "USDC.carbon"
+  symbolDedup.deduplicateSymbols(asset_datas);
 
 };
 

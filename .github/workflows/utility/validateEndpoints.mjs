@@ -22,6 +22,7 @@ import * as api_mgmt from "./api_management.mjs";
 
 import WebSocket from 'ws';
 import https from 'https';
+import fs from 'fs';
 
 //-- Globals --
 
@@ -850,7 +851,6 @@ function generateValidationReport(chainName) {
   const summaryFile = process.env.GITHUB_STEP_SUMMARY;
   if (summaryFile) {
     try {
-      const fs = require('fs');
       fs.appendFileSync(summaryFile, report);
       console.log("\n✓ Report written to GitHub Actions summary");
     } catch (error) {

@@ -47,25 +47,15 @@ jobs:
           # Replace the following command with the command to trigger translation using InLang CLI or API
           # pnpm inlang machine translate --force
       
-      - name: Add Commit Push
-        uses: devops-infra/action-commit-push@master
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v8
         with:
-          github_token: "${{ secrets.GITHUB_TOKEN }}"
-          add_timestamp: false
-          commit_prefix: "[AUTO]"
-          commit_message: "assetlist.json Update"
-          force: false
-          target_branch: update/assetlist
-      
-      - name: Create A PR
-        uses: devops-infra/action-pull-request@v0.4.2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: update/assetlist
-          target_branch: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "[AUTO]assetlist.json Update"
+          branch: update/assetlist
           title: assetlist.json Update
-          body: "**Automated pull request**"
-          old_string: "**THIS IS AN AUTOMATED UPDATE OF ASSETLIST.JSON**"
-          new_string: "** Automatic pull request**"
-          get_diff: true
-          ignore_users: "dependabot"
+          body: |
+            **Automated pull request**
+
+            This PR contains automated updates to assetlist.json.
+          delete-branch: false

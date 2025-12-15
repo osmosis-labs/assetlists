@@ -27,25 +27,15 @@ jobs:
           git submodule update --init --recursive
           git submodule update --recursive --remote
       
-      - name: Add Commit Push
-        uses: devops-infra/action-commit-push@master
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v8
         with:
-          github_token: "${{ secrets.GITHUB_TOKEN }}"
-          add_timestamp: false
-          commit_prefix: "[AUTO]"
-          commit_message: "Chain Registry Submodule Update"
-          force: false
-          target_branch: update/chain_reg
-      
-      - name: Create A PR
-        uses: devops-infra/action-pull-request@v0.4.2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: update/chain_reg
-          target_branch: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "[AUTO]Chain Registry Submodule Update"
+          branch: update/chain_reg
           title: chain_reg Update
-          body: "**Automated pull request**"
-          old_string: "**THIS IS AN AUTOMATED UPDATE OF CHAIN REGISTRY SUBMODULE**"
-          new_string: "** Automatic pull request**"
-          get_diff: true
-          ignore_users: "dependabot"
+          body: |
+            **Automated pull request**
+
+            This PR contains automated updates to the Chain Registry submodule.
+          delete-branch: false

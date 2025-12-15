@@ -790,9 +790,19 @@ function generateValidationReport(chainName) {
     return;
   }
 
-  const failedChains = state.chains.filter(chain =>
-    chain.validationSuccess === false
-  ).sort((a, b) => {
+  const failedChains = state.chains.filter(chain => {
+    if (chain.validationSuccess !== false) return false;
+
+    // Only include chains where at least one endpoint type completely failed
+    const rpcTests = chain.validationResults?.filter(r => r.test.includes('RPC')) || [];
+    const restTests = chain.validationResults?.filter(r => r.test.includes('REST')) || [];
+
+    const rpcAllFailed = rpcTests.length > 0 && rpcTests.every(t => !t.success);
+    const restAllFailed = restTests.length > 0 && restTests.every(t => !t.success);
+
+    // Include if at least one endpoint type completely failed (exclude double partials)
+    return rpcAllFailed || restAllFailed;
+  }).sort((a, b) => {
     // Sort by newest validation first
     const dateA = new Date(a.validationDate);
     const dateB = new Date(b.validationDate);
@@ -801,13 +811,13 @@ function generateValidationReport(chainName) {
 
   let report = `**Chains Validated This Run:** ${process.env.CHAINS_VALIDATED || 'N/A'}\n`;
   report += `**Total Chains in State:** ${state.chains.length}\n`;
-  report += `**Failed Validations:** ${failedChains.length}\n`;
+  report += `**Failed Endpoints:** ${failedChains.length}\n`;
   report += `**Success Rate:** ${((state.chains.length - failedChains.length) / state.chains.length * 100).toFixed(1)}%\n\n`;
 
   if (failedChains.length === 0) {
     report += `### ✅ All Chains Validated Successfully\n\n`;
   } else {
-    report += `### ⚠️ Chains with Failed Validations\n\n`;
+    report += `### ⚠️ Failed Endpoints\n\n`;
     report += `| Chain Name | Last Validation | Days Ago | RPC Status | REST Status |\n`;
     report += `|------------|----------------|----------|------------|-------------|\n`;
 

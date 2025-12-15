@@ -51,7 +51,9 @@ jobs:
         run: |
           node validateEndpoints.mjs generateReport
           node validateEndpoints.mjs generateReport > ../../../validation-summary.md
+          if [ -f osmosis-1/generated/frontend/assetlist.json ]; then
           else
+            touch /tmp/assets-before.txt
           fi
 
       - name: Capture Current Chains
@@ -121,7 +123,57 @@ jobs:
 
           if [ "$NEW_CHAINS_COUNT" -gt 0 ]; then
             echo "### 🆕 New Chains" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            while IFS= read -r chain; do
+              PRETTY_NAME=$(jq -r ".chains[] | select(.chain_name==\"$chain\") | .pretty_name" osmosis-1/generated/frontend/chainlist.json)
+              echo "- **$chain** ($PRETTY_NAME)" >> workflow-summary.md
+            done < new-chains.txt
+            echo "" >> workflow-summary.md
+          fi
+
+          echo "**Optimizations:**" >> workflow-summary.md
+          echo "- Endpoint ordering optimized based on validation results" >> workflow-summary.md
+          echo "- Working backup endpoints promoted to primary positions" >> workflow-summary.md
+          echo "- Failed endpoints deprioritized" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+          echo "---" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+
+          # Assetlist Generation
+          echo "## Assetlist Generation" >> workflow-summary.md
+     
+          TOTAL_ASSETS=$(jq '.assets | length' osmosis-1/generated/frontend/assetlist.json)
+          echo "- **Total Assets:** $TOTAL_ASSETS" >> workflow-summary.md
+          echo "- **New Assets Added:** $NEW_ASSETS_COUNT" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+
+          if [ "$NEW_ASSETS_COUNT" -gt 0 ]; then
+            echo "### 🆕 New Assets" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            while IFS= read -r symbol; do
+              DENOM=$(jq -r ".assets[] | select(.symbol==\"$symbol\") | .base" osmosis-1/generated/frontend/assetlist.json)
+              NAME=$(jq -r ".assets[] | select(.symbol==\"$symbol\") | .name" osmosis-1/generated/frontend/assetlist.json)
               echo "- **$symbol** - $NAME (\`$DENOM\`)" >> workflow-summary.md
+            done < new-assets.txt
+            echo "" >> workflow-summary.md
+          fi
+
+          echo "**Updates Include:**" >> workflow-summary.md
+          echo "- Latest asset metadata from chain registry" >> workflow-summary.md
+          echo "- Updated denominations and display names" >> workflow-summary.md
+          echo "- Current asset logos and branding" >> workflow-summary.md
+          echo "- Trace information for IBC assets" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+          echo "---" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+
+          # Endpoint Validation
+          echo "## Endpoint Validation" >> workflow-summary.md
+
+          if [ -f validation-summary.md ]; then
+            cat validation-summary.md >> workflow-summary.md
+          fi
+
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v8

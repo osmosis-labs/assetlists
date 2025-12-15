@@ -83,7 +83,7 @@ function getNumChainsToQuery() {
 }
 
 const numChainsToQuery = getNumChainsToQuery();
-console.log(`Validation mode: ${process.env.GITHUB_EVENT_NAME || 'default'} - Will query up to ${numChainsToQuery} chains`);
+console.error(`Validation mode: ${process.env.GITHUB_EVENT_NAME || 'default'} - Will query up to ${numChainsToQuery} chains`);
 const currentDateUTC = new Date();
 const oneDayInMs = 24 * 60 * 60 * 1000;
 const successReQueryDelay = 7 * oneDayInMs;
@@ -803,21 +803,21 @@ function generateValidationReport(chainName) {
     // Only include if both RPC and REST completely failed
     return rpcAllFailed && restAllFailed;
   }).sort((a, b) => {
+    // Sort by newest validation first
     const dateA = new Date(a.validationDate);
     const dateB = new Date(b.validationDate);
     return dateB.getTime() - dateA.getTime();
   });
 
-  let report = `# Endpoint Validation Report\n\n`;
-  report += `**Generated:** ${new Date().toISOString()}\n\n`;
-  report += `**Total Chains:** ${state.chains.length}\n`;
+  let report = `**Chains Validated This Run:** ${process.env.CHAINS_VALIDATED || 'N/A'}\n`;
+  report += `**Total Chains in State:** ${state.chains.length}\n`;
   report += `**Failed Chains:** ${failedChains.length}\n`;
   report += `**Success Rate:** ${((state.chains.length - failedChains.length) / state.chains.length * 100).toFixed(1)}%\n\n`;
 
   if (failedChains.length === 0) {
-    report += `## ✅ All Chains Validated Successfully\n\n`;
+    report += `### ✅ All Chains Validated Successfully\n\n`;
   } else {
-    report += `## ⚠️ Failed Chains\n\n`;
+    report += `### ⚠️ Failed Chains\n\n`;
     report += `| Chain Name | Last Validation | Days Ago |\n`;
     report += `|------------|----------------|----------|\n`;
 
@@ -827,39 +827,21 @@ function generateValidationReport(chainName) {
 
       report += `| ${chain.chain_name} | ${validationDate.toISOString().split('T')[0]} | ${daysSince} |\n`;
     });
-
-    report += `\n### Top 10 Failed Chains (Details)\n\n`;
-    failedChains.slice(0, 10).forEach(chain => {
-      report += `#### ${chain.chain_name}\n`;
-      report += `- **Last Validation:** ${new Date(chain.validationDate).toISOString()}\n`;
-
-      if (chain.validationResults) {
-        const failedTests = chain.validationResults.filter(r => !r.success);
-        report += `- **Failed Tests:** ${failedTests.length}/${chain.validationResults.length}\n`;
-        failedTests.forEach(test => {
-          report += `  - ${test.test}: ${test.url || 'N/A'}\n`;
-        });
-      }
-      report += `\n`;
-    });
-
-    if (failedChains.length > 10) {
-      report += `*Showing top 10. Total failed: ${failedChains.length}*\n`;
-    }
+    report += `\n`;
   }
 
-  // Write to GitHub Actions summary
+  // Always output report to stdout (for capturing to file)
+  console.log(report);
+
+  // Also write to GitHub Actions summary if available
   const summaryFile = process.env.GITHUB_STEP_SUMMARY;
   if (summaryFile) {
     try {
       fs.appendFileSync(summaryFile, report);
-      console.log("\n✓ Report written to GitHub Actions summary");
+      console.error("✓ Report written to GitHub Actions summary");
     } catch (error) {
       console.error("Failed to write summary:", error);
-      console.log("\n" + report);
     }
-  } else {
-    console.log("\n" + report);
   }
 }
 
@@ -879,7 +861,7 @@ const functions = {
     validateSpecificChain(chainName, chain_name);
   },
   generateReport: (chainName = "osmosis") => {
-    console.log("Running generateReport...");
+    console.error("Running generateReport...");
     generateValidationReport(chainName);
   },
 };

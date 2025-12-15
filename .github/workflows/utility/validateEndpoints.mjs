@@ -68,11 +68,25 @@ const restEndpoints = [
 ];
 
 
-const numChainsToQuery = 4;
+// Determine number of chains to query based on workflow trigger type
+function getNumChainsToQuery() {
+  const eventName = process.env.GITHUB_EVENT_NAME || 'manual';
+
+  if (eventName === 'schedule') {
+    return 50;  // Scheduled Monday runs
+  } else if (eventName === 'workflow_dispatch') {
+    return 10;  // Manual workflow runs
+  } else {
+    return 4;   // Default for local testing
+  }
+}
+
+const numChainsToQuery = getNumChainsToQuery();
+console.log(`Validation mode: ${process.env.GITHUB_EVENT_NAME || 'default'} - Will query up to ${numChainsToQuery} chains`);
 const currentDateUTC = new Date();
 const oneDayInMs = 24 * 60 * 60 * 1000;
 const successReQueryDelay = 7 * oneDayInMs;
-const failureReQueryDelay = 30 * oneDayInMs;
+const failureReQueryDelay = 1 * oneDayInMs;  // Check failed endpoints daily
 const osmosisDomain = "https://osmosis.zone";
 
 //-- Functions --
@@ -605,35 +619,99 @@ function chainRecentlyQueried(state, chain_name) {
   return false;
 }
 
-async function validateEndpointsForAllCounterpartyChains(chainName) {
+function prioritizeChains(chainlist, state) {
+  const chainsWithPriority = chainlist.map(chain => {
+    const stateChain = state.chains?.find(c => c.chain_name === chain.chain_name);
 
-  if (chainName !== "osmosis") { return; } // temporary--just focusing on mainnet for now
+    let priority = 2; // Default: normal priority
+    let validationDate = null;
+    let validationSuccess = null;
+
+    if (stateChain) {
+      validationDate = new Date(stateChain.validationDate);
+      validationSuccess = stateChain.validationSuccess;
+
+      // Priority 1: Failed chains (most recent validation failed)
+      if (validationSuccess === false) {
+        priority = 1;
+      }
+    } else {
+      // Priority 1: Never validated chains
+      priority = 1;
+      validationDate = new Date(0); // Epoch time for never validated
+    }
+
+    return {
+      chain: chain,
+      priority: priority,
+      validationDate: validationDate,
+      validationSuccess: validationSuccess,
+      recentlyQueried: chainRecentlyQueried(state, chain.chain_name)
+    };
+  });
+
+  // Sort by priority first, then by validation date (oldest first)
+  chainsWithPriority.sort((a, b) => {
+    if (a.priority !== b.priority) {
+      return a.priority - b.priority;
+    }
+
+    if (a.validationDate && b.validationDate) {
+      return a.validationDate.getTime() - b.validationDate.getTime();
+    }
+
+    if (!a.validationDate) return -1;
+    if (!b.validationDate) return 1;
+    return 0;
+  });
+
+  return chainsWithPriority;
+}
+
+async function validateEndpointsForAllCounterpartyChains(chainName) {
+  if (chainName !== "osmosis") { return; }
   const chainlist = getChainlist(chainName)?.chains;
   if (!chainlist) { return; }
 
   let state = getState(chainName);
   let chainQueryQueue = [];
 
+  // Get prioritized chain list
+  const prioritizedChains = prioritizeChains(chainlist, state);
+
+  console.log(`\nChain Prioritization Summary:`);
+  console.log(`Total chains: ${chainlist.length}`);
+  const failedChains = prioritizedChains.filter(c => c.priority === 1 && c.validationSuccess === false);
+  const neverValidated = prioritizedChains.filter(c => c.priority === 1 && c.validationSuccess === null);
+  console.log(`Priority 1 - Failed: ${failedChains.length}, Never validated: ${neverValidated.length}`);
+  console.log(`Target: ${numChainsToQuery} chains\n`);
+
+  // Build queue respecting requery delays and priority
   let numChainsQueried = 0;
-  for (const counterpartyChain of chainlist) {
+  for (const prioritizedChain of prioritizedChains) {
     if (numChainsQueried >= numChainsToQuery) { break; }
-    if (chainRecentlyQueried(state, counterpartyChain.chain_name)) { continue; }  //Skip Recently Queried Chains
-    chainQueryQueue.push(counterpartyChain);
+    if (prioritizedChain.recentlyQueried) { continue; }
+
+    chainQueryQueue.push(prioritizedChain.chain);
     numChainsQueried++;
+    console.log(`[${numChainsQueried}/${numChainsToQuery}] ${prioritizedChain.chain.chain_name} (Priority ${prioritizedChain.priority}, Last: ${prioritizedChain.validationDate?.toISOString() || 'never'})`);
   }
 
-  // Generate validation promises and return records directly
+  if (chainQueryQueue.length === 0) {
+    console.log("\nNo chains need validation. All recently queried.");
+    return;
+  }
+
+  console.log(`\nValidating ${chainQueryQueue.length} chains...\n`);
+
+  // Generate validation promises
   const validationPromises = chainQueryQueue.map(async (counterpartyChain) => {
     const validationResults = await validateCounterpartyChain(counterpartyChain);
     return constructValidationRecord(counterpartyChain.chain_name, validationResults);
   });
 
-  // Wait for all validations and collect the records
   const validationRecords = await Promise.all(validationPromises);
-
-  // Add validation records to state
   addValidationRecordsToState(state, chainName, validationRecords);
-
 }
 
 async function fullValidation(chainName) {
@@ -703,6 +781,87 @@ async function validateSpecificChain(chainName, chain_name) {
 
 }
 
+function generateValidationReport(chainName) {
+  const state = getState(chainName);
+
+  if (!state.chains || state.chains.length === 0) {
+    console.log("\nNo validation data available.");
+    return;
+  }
+
+  const failedChains = state.chains.filter(chain =>
+    chain.validationSuccess === false
+  ).sort((a, b) => {
+    const dateA = new Date(a.validationDate);
+    const dateB = new Date(b.validationDate);
+    return dateB.getTime() - dateA.getTime();
+  });
+
+  let report = `# Endpoint Validation Report\n\n`;
+  report += `**Generated:** ${new Date().toISOString()}\n\n`;
+  report += `**Total Chains:** ${state.chains.length}\n`;
+  report += `**Failed Validations:** ${failedChains.length}\n`;
+  report += `**Success Rate:** ${((state.chains.length - failedChains.length) / state.chains.length * 100).toFixed(1)}%\n\n`;
+
+  if (failedChains.length === 0) {
+    report += `## ✅ All Chains Validated Successfully\n\n`;
+  } else {
+    report += `## ⚠️ Chains with Failed Validations\n\n`;
+    report += `| Chain Name | Last Validation | Days Ago | RPC Status | REST Status |\n`;
+    report += `|------------|----------------|----------|------------|-------------|\n`;
+
+    failedChains.forEach(chain => {
+      const validationDate = new Date(chain.validationDate);
+      const daysSince = Math.floor((new Date().getTime() - validationDate.getTime()) / oneDayInMs);
+
+      const rpcTests = chain.validationResults?.filter(r => r.test.includes('RPC')) || [];
+      const restTests = chain.validationResults?.filter(r => r.test.includes('REST')) || [];
+
+      const rpcAllFailed = rpcTests.every(t => !t.success);
+      const restAllFailed = restTests.every(t => !t.success);
+
+      const rpcStatus = rpcAllFailed ? '❌ All Failed' : '⚠️ Partial';
+      const restStatus = restAllFailed ? '❌ All Failed' : '⚠️ Partial';
+
+      report += `| ${chain.chain_name} | ${validationDate.toISOString().split('T')[0]} | ${daysSince} | ${rpcStatus} | ${restStatus} |\n`;
+    });
+
+    report += `\n### Top 10 Failed Chains (Details)\n\n`;
+    failedChains.slice(0, 10).forEach(chain => {
+      report += `#### ${chain.chain_name}\n`;
+      report += `- **Last Validation:** ${new Date(chain.validationDate).toISOString()}\n`;
+
+      if (chain.validationResults) {
+        const failedTests = chain.validationResults.filter(r => !r.success);
+        report += `- **Failed Tests:** ${failedTests.length}/${chain.validationResults.length}\n`;
+        failedTests.forEach(test => {
+          report += `  - ${test.test}: ${test.url || 'N/A'}\n`;
+        });
+      }
+      report += `\n`;
+    });
+
+    if (failedChains.length > 10) {
+      report += `*Showing top 10. Total failed: ${failedChains.length}*\n`;
+    }
+  }
+
+  // Write to GitHub Actions summary
+  const summaryFile = process.env.GITHUB_STEP_SUMMARY;
+  if (summaryFile) {
+    try {
+      const fs = require('fs');
+      fs.appendFileSync(summaryFile, report);
+      console.log("\n✓ Report written to GitHub Actions summary");
+    } catch (error) {
+      console.error("Failed to write summary:", error);
+      console.log("\n" + report);
+    }
+  } else {
+    console.log("\n" + report);
+  }
+}
+
 //routineBulkValidation();
 
 const functions = {
@@ -717,6 +876,10 @@ const functions = {
   validateSpecificChain: (chainName, chain_name) => {
     console.log("Running validateSpecificChain...");
     validateSpecificChain(chainName, chain_name);
+  },
+  generateReport: (chainName = "osmosis") => {
+    console.log("Running generateReport...");
+    generateValidationReport(chainName);
   },
 };
 

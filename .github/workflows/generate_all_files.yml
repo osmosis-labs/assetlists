@@ -242,6 +242,7 @@ jobs:
 
       - name: Create Pull Request
         id: cpr
+        continue-on-error: true
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

@@ -397,6 +397,7 @@ function getChainlist(chainName) {
   return zone.readFromFile(chainName, chainlistDir, chainlistFileName);
 }
 
+
 function getCounterpartyChainAddress(counterpartyChain, nodeType, endpointIndex = 0) {
   if (!counterpartyChain || !nodeType) { return; }
   if (nodeType === RPC_NODE) {
@@ -693,6 +694,12 @@ async function validateEndpointsForAllCounterpartyChains(chainName) {
     if (numChainsQueried >= numChainsToQuery) { break; }
     if (prioritizedChain.recentlyQueried) { continue; }
 
+    // Skip killed chains
+    if (prioritizedChain.chain.status === 'killed') {
+      console.log(`Skipping killed chain: ${prioritizedChain.chain.chain_name}`);
+      continue;
+    }
+
     chainQueryQueue.push(prioritizedChain.chain);
     numChainsQueried++;
     console.log(`[${numChainsQueried}/${numChainsToQuery}] ${prioritizedChain.chain.chain_name} (Priority ${prioritizedChain.priority}, Last: ${prioritizedChain.validationDate?.toISOString() || 'never'})`);
@@ -790,8 +797,17 @@ function generateValidationReport(chainName) {
     return;
   }
 
+  // Get chainlist to check for killed chains
+  const chainlist = getChainlist(chainName);
+  const killedChainNames = chainlist?.chains
+    ?.filter(c => c.status === 'killed')
+    ?.map(c => c.chain_name) || [];
+
   const failedChains = state.chains.filter(chain => {
     if (chain.validationSuccess !== false) return false;
+
+    // Skip killed chains
+    if (killedChainNames.includes(chain.chain_name)) return false;
 
     // Only include chains where at least one endpoint type completely failed
     const rpcTests = chain.validationResults?.filter(r => r.test.includes('RPC')) || [];

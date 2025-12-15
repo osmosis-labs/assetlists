@@ -790,9 +790,19 @@ function generateValidationReport(chainName) {
     return;
   }
 
-  const failedChains = state.chains.filter(chain =>
-    chain.validationSuccess === false
-  ).sort((a, b) => {
+  const failedChains = state.chains.filter(chain => {
+    if (chain.validationSuccess !== false) return false;
+
+    // Only include chains where ALL endpoints completely failed
+    const rpcTests = chain.validationResults?.filter(r => r.test.includes('RPC')) || [];
+    const restTests = chain.validationResults?.filter(r => r.test.includes('REST')) || [];
+
+    const rpcAllFailed = rpcTests.length > 0 && rpcTests.every(t => !t.success);
+    const restAllFailed = restTests.length > 0 && restTests.every(t => !t.success);
+
+    // Only include if both RPC and REST completely failed
+    return rpcAllFailed && restAllFailed;
+  }).sort((a, b) => {
     const dateA = new Date(a.validationDate);
     const dateB = new Date(b.validationDate);
     return dateB.getTime() - dateA.getTime();
@@ -801,30 +811,21 @@ function generateValidationReport(chainName) {
   let report = `# Endpoint Validation Report\n\n`;
   report += `**Generated:** ${new Date().toISOString()}\n\n`;
   report += `**Total Chains:** ${state.chains.length}\n`;
-  report += `**Failed Validations:** ${failedChains.length}\n`;
+  report += `**Failed Chains:** ${failedChains.length}\n`;
   report += `**Success Rate:** ${((state.chains.length - failedChains.length) / state.chains.length * 100).toFixed(1)}%\n\n`;
 
   if (failedChains.length === 0) {
     report += `## ✅ All Chains Validated Successfully\n\n`;
   } else {
-    report += `## ⚠️ Chains with Failed Validations\n\n`;
-    report += `| Chain Name | Last Validation | Days Ago | RPC Status | REST Status |\n`;
-    report += `|------------|----------------|----------|------------|-------------|\n`;
+    report += `## ⚠️ Failed Chains\n\n`;
+    report += `| Chain Name | Last Validation | Days Ago |\n`;
+    report += `|------------|----------------|----------|\n`;
 
     failedChains.forEach(chain => {
       const validationDate = new Date(chain.validationDate);
       const daysSince = Math.floor((new Date().getTime() - validationDate.getTime()) / oneDayInMs);
 
-      const rpcTests = chain.validationResults?.filter(r => r.test.includes('RPC')) || [];
-      const restTests = chain.validationResults?.filter(r => r.test.includes('REST')) || [];
-
-      const rpcAllFailed = rpcTests.every(t => !t.success);
-      const restAllFailed = restTests.every(t => !t.success);
-
-      const rpcStatus = rpcAllFailed ? '❌ All Failed' : '⚠️ Partial';
-      const restStatus = restAllFailed ? '❌ All Failed' : '⚠️ Partial';
-
-      report += `| ${chain.chain_name} | ${validationDate.toISOString().split('T')[0]} | ${daysSince} | ${rpcStatus} | ${restStatus} |\n`;
+      report += `| ${chain.chain_name} | ${validationDate.toISOString().split('T')[0]} | ${daysSince} |\n`;
     });
 
     report += `\n### Top 10 Failed Chains (Details)\n\n`;

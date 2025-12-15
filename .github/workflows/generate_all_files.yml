@@ -108,13 +108,6 @@ jobs:
         run: |
           cat > workflow-summary.md << 'HEADER'
           # Automated Update Summary
-
-          **Generated:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")
-          **Workflow:** Generate All Files
-          **Trigger:** ${{ github.event_name }}
-
-          ---
-
           HEADER
 
           # Chainlist Generation

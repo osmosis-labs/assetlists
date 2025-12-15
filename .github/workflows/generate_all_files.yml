@@ -51,6 +51,7 @@ jobs:
         run: |
           node validateEndpoints.mjs generateReport
           node validateEndpoints.mjs generateReport > ../../../validation-summary.md
+          else
           fi
 
       - name: Capture Current Chains
@@ -108,11 +109,19 @@ jobs:
 
           ---
 
+          HEADER
+
+          # Chainlist Generation
+          echo "## Chainlist Generation" >> workflow-summary.md
+
+          TOTAL_CHAINS=$(jq '.chains | length' osmosis-1/generated/frontend/chainlist.json)
+          echo "- **Total Chains:** $TOTAL_CHAINS" >> workflow-summary.md
           echo "- **New Chains Added:** $NEW_CHAINS_COUNT" >> workflow-summary.md
           echo "" >> workflow-summary.md
 
           if [ "$NEW_CHAINS_COUNT" -gt 0 ]; then
             echo "### 🆕 New Chains" >> workflow-summary.md
+              echo "- **$symbol** - $NAME (\`$DENOM\`)" >> workflow-summary.md
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v8
@@ -121,10 +130,7 @@ jobs:
           commit-message: "[AUTO]assetlist and chainlist Update"
           branch: update/assetlist_all
           title: assetlist and chainlist Update
-          body: |
-            **Automated pull request**
-
-            This PR contains automated updates to assetlist.json and chainlist.json.
+          body-path: workflow-summary.md
           delete-branch: true
 
       - name: Enable Auto-merge

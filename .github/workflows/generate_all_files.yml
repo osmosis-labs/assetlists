@@ -44,20 +44,24 @@ jobs:
 
       - name: Run code to Validate Endpoints
         working-directory: ./.github/workflows/utility
-        run: node validateEndpoints.mjs routineBulkValidation
+        run: |
+          node validateEndpoints.mjs routineBulkValidation 2>&1 | tee validation.log
+          CHAINS_VALIDATED=$(grep -oP 'Validating \K[0-9]+' validation.log | head -1 || echo "0")
+          echo "CHAINS_VALIDATED=$CHAINS_VALIDATED" >> $GITHUB_ENV
 
       - name: Generate Validation Report
         working-directory: ./.github/workflows/utility
-        run: |
-          node validateEndpoints.mjs generateReport
-          node validateEndpoints.mjs generateReport > ../../../validation-summary.md
+        run: node validateEndpoints.mjs generateReport > ../../../validation-summary.md
 
       - name: Capture Current Assets
         run: |
           if [ -f osmosis-1/generated/frontend/assetlist.json ]; then
             jq -r '.assets[].symbol' osmosis-1/generated/frontend/assetlist.json | sort > /tmp/assets-before.txt
+            # Capture verified status for each asset
+            jq -r '.assets[] | "\(.symbol)|\(.verified // false)"' osmosis-1/generated/frontend/assetlist.json > /tmp/verified-before.txt
           else
             touch /tmp/assets-before.txt
+            touch /tmp/verified-before.txt
           fi
 
       - name: Capture Current Chains
@@ -81,6 +85,25 @@ jobs:
           jq -r '.assets[].symbol' osmosis-1/generated/frontend/assetlist.json | sort > /tmp/assets-after.txt
           comm -13 /tmp/assets-before.txt /tmp/assets-after.txt > new-assets.txt
           echo "NEW_ASSETS_COUNT=$(wc -l < new-assets.txt)" >> $GITHUB_ENV
+
+      - name: Detect Newly Verified Assets
+        run: |
+          # Capture current verified status
+          jq -r '.assets[] | "\(.symbol)|\(.verified // false)"' osmosis-1/generated/frontend/assetlist.json > /tmp/verified-after.txt
+
+          # Find assets that changed from false to true
+          > newly-verified.txt
+          while IFS='|' read -r symbol verified_after; do
+            verified_before=$(grep "^${symbol}|" /tmp/verified-before.txt 2>/dev/null | cut -d'|' -f2)
+            if [ "$verified_before" = "false" ] && [ "$verified_after" = "true" ]; then
+              echo "$symbol" >> newly-verified.txt
+            elif [ -z "$verified_before" ] && [ "$verified_after" = "true" ]; then
+              # New asset that's already verified - don't count as newly verified
+              :
+            fi
+          done < /tmp/verified-after.txt
+
+          echo "NEWLY_VERIFIED_COUNT=$(wc -l < newly-verified.txt)" >> $GITHUB_ENV
 
       - name: Detect New Chains
         run: |
@@ -108,15 +131,6 @@ jobs:
         run: |
           cat > workflow-summary.md << 'HEADER'
           # Automated Update Summary
-
-          **Generated:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")
-          **Workflow:** Generate All Files
-          **Trigger:** ${{ github.event_name }}
-
-          ---
-
-          HEADER
-
           # Chainlist Generation
           echo "## Chainlist Generation" >> workflow-summary.md
 
@@ -145,21 +159,67 @@ jobs:
 
           # Assetlist Generation
           echo "## Assetlist Generation" >> workflow-summary.md
-     
+
           TOTAL_ASSETS=$(jq '.assets | length' osmosis-1/generated/frontend/assetlist.json)
           echo "- **Total Assets:** $TOTAL_ASSETS" >> workflow-summary.md
           echo "- **New Assets Added:** $NEW_ASSETS_COUNT" >> workflow-summary.md
+          echo "- **Assets Verified:** $NEWLY_VERIFIED_COUNT" >> workflow-summary.md
           echo "" >> workflow-summary.md
 
           if [ "$NEW_ASSETS_COUNT" -gt 0 ]; then
             echo "### 🆕 New Assets" >> workflow-summary.md
             echo "" >> workflow-summary.md
             while IFS= read -r symbol; do
-              DENOM=$(jq -r ".assets[] | select(.symbol==\"$symbol\") | .base" osmosis-1/generated/frontend/assetlist.json)
-              NAME=$(jq -r ".assets[] | select(.symbol==\"$symbol\") | .name" osmosis-1/generated/frontend/assetlist.json)
-              echo "- **$symbol** - $NAME (\`$DENOM\`)" >> workflow-summary.md
+              ASSET_DATA=$(jq -r ".assets[] | select(.symbol==\"$symbol\")" osmosis-1/generated/frontend/assetlist.json)
+              NAME=$(echo "$ASSET_DATA" | jq -r '.name')
+              DENOM=$(echo "$ASSET_DATA" | jq -r '.base')
+              DESCRIPTION=$(echo "$ASSET_DATA" | jq -r '.description // ""')
+
+              # Get chain of origin from IBC traces
+              CHAIN_ORIGIN=$(echo "$ASSET_DATA" | jq -r '
+                if .traces and (.traces | length > 0) then
+                  .traces[0].counterparty.chain_name
+                else
+                  "osmosis"
+                end
+              ')
+
+              echo "- **$symbol** - $NAME" >> workflow-summary.md
+              echo "  - **Chain:** $CHAIN_ORIGIN" >> workflow-summary.md
+              echo "  - **Denom:** \`$DENOM\`" >> workflow-summary.md
+              if [ -n "$DESCRIPTION" ] && [ "$DESCRIPTION" != "null" ]; then
+                echo "  - **Description:** $DESCRIPTION" >> workflow-summary.md
+              fi
+              echo "" >> workflow-summary.md
             done < new-assets.txt
+          fi
+
+          if [ "$NEWLY_VERIFIED_COUNT" -gt 0 ]; then
+            echo "### ✅ Verified Assets" >> workflow-summary.md
             echo "" >> workflow-summary.md
+            while IFS= read -r symbol; do
+              ASSET_DATA=$(jq -r ".assets[] | select(.symbol==\"$symbol\")" osmosis-1/generated/frontend/assetlist.json)
+              NAME=$(echo "$ASSET_DATA" | jq -r '.name')
+              DENOM=$(echo "$ASSET_DATA" | jq -r '.base')
+              DESCRIPTION=$(echo "$ASSET_DATA" | jq -r '.description // ""')
+
+              # Get chain of origin from IBC traces
+              CHAIN_ORIGIN=$(echo "$ASSET_DATA" | jq -r '
+                if .traces and (.traces | length > 0) then
+                  .traces[0].counterparty.chain_name
+                else
+                  "osmosis"
+                end
+              ')
+
+              echo "- **$symbol** - $NAME" >> workflow-summary.md
+              echo "  - **Chain:** $CHAIN_ORIGIN" >> workflow-summary.md
+              echo "  - **Denom:** \`$DENOM\`" >> workflow-summary.md
+              if [ -n "$DESCRIPTION" ] && [ "$DESCRIPTION" != "null" ]; then
+                echo "  - **Description:** $DESCRIPTION" >> workflow-summary.md
+              fi
+              echo "" >> workflow-summary.md
+            done < newly-verified.txt
           fi
 
           echo "**Updates Include:**" >> workflow-summary.md
@@ -183,14 +243,14 @@ jobs:
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "[AUTO]assetlist and chainlist Update"
+          commit-message: "[AUTO] Asset and Chain Update"
           branch: update/assetlist_all
-          title: assetlist and chainlist Update
+          title: "[AUTO] Asset and Chain Update"
           body-path: workflow-summary.md
           delete-branch: true
 
       - name: Enable Auto-merge
-        if: steps.cpr.outputs.pull-request-number
+        if: steps.cpr.outputs.pull-request-number && github.event_name == 'schedule'
         run: gh pr merge ${{ steps.cpr.outputs.pull-request-number }} --auto --squash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -55,25 +55,19 @@ jobs:
         run: |
           git diff --exit-code || echo "changes=true" >> $GITHUB_OUTPUT
 
-      - name: Add Commit Push
+      - name: Create Pull Request
         if: steps.git-check.outputs.changes == 'true'
-        uses: devops-infra/action-commit-push@master
+        uses: peter-evans/create-pull-request@v8
         with:
-          github_token: "${{ secrets.GITHUB_TOKEN }}"
-          add_timestamp: false
-          commit_prefix: "[AUTO]"
-          commit_message: "Full endpoint validation and chainlist update"
-          force: false
-          target_branch: update/full_validation
-
-      - name: Create A PR
-        if: steps.git-check.outputs.changes == 'true'
-        uses: devops-infra/action-pull-request@v0.4.2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: update/full_validation
-          target_branch: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "[AUTO]Full endpoint validation and chainlist update"
+          branch: update/full_validation
           title: Full Endpoint Validation Update
-          body: "**Automated full validation of all chain endpoints**\n\nThis PR includes:\n- Full validation results for all chains\n- Updated chainlist with working backup endpoints promoted to primary\n- Backup endpoint information stored in validation state"
-          get_diff: true
-          ignore_users: "dependabot"
+          body: |
+            **Automated full validation of all chain endpoints**
+
+            This PR includes:
+            - Full validation results for all chains
+            - Updated chainlist with working backup endpoints promoted to primary
+            - Backup endpoint information stored in validation state
+          delete-branch: false

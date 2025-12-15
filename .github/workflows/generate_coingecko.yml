@@ -39,25 +39,15 @@ jobs:
         working-directory: ./.github/workflows/utility
         run: node generateCoinGeckoUpdates.mjs
       
-      - name: Add Commit Push
-        uses: devops-infra/action-commit-push@master
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v8
         with:
-          github_token: "${{ secrets.GITHUB_TOKEN }}"
-          add_timestamp: false
-          commit_prefix: "[AUTO]"
-          commit_message: "coingecko.json Update"
-          force: false
-          target_branch: update/coingecko
-      
-      - name: Create A PR
-        uses: devops-infra/action-pull-request@v0.4.2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: update/coingecko
-          target_branch: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "[AUTO]coingecko.json Update"
+          branch: update/coingecko
           title: coingecko.json Update
-          body: "**Automated pull request**"
-          old_string: "**THIS IS AN AUTOMATED UPDATE OF COINGECKO.JSON**"
-          new_string: "** Automatic pull request**"
-          get_diff: true
-          ignore_users: "dependabot"
+          body: |
+            **Automated pull request**
+
+            This PR contains automated updates to coingecko.json.
+          delete-branch: false

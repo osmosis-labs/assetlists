@@ -72,26 +72,16 @@ jobs:
       - name: Run post-localization code
         working-directory: ./.github/workflows/utility
         run: node localization_post.mjs
-      
-      - name: Add Commit Push
-        uses: devops-infra/action-commit-push@master
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v8
         with:
-          github_token: "${{ secrets.GITHUB_TOKEN }}"
-          add_timestamp: false
-          commit_prefix: "[AUTO]"
-          commit_message: "assetlist and chainlist Update"
-          force: false
-          target_branch: update/assetlist_all
-      
-      - name: Create A PR
-        uses: devops-infra/action-pull-request@v0.4.2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: update/assetlist_all
-          target_branch: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "[AUTO]assetlist and chainlist Update"
+          branch: update/assetlist_all
           title: assetlist and chainlist Update
-          body: "**Automated pull request**"
-          old_string: "**THIS IS AN AUTOMATED UPDATE OF ASSETLIST.JSON AND CHAINLIST.JSON**"
-          new_string: "** Automatic pull request**"
-          get_diff: true
-          ignore_users: "dependabot"
+          body: |
+            **Automated pull request**
+
+            This PR contains automated updates to assetlist.json and chainlist.json.
+          delete-branch: false

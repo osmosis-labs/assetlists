@@ -44,7 +44,11 @@ jobs:
       - name: Run code to Validate Endpoints
         working-directory: ./.github/workflows/utility
         run: node validateEndpoints.mjs routineBulkValidation
-          
+
+      - name: Generate Validation Report
+        working-directory: ./.github/workflows/utility
+        run: node validateEndpoints.mjs generateReport
+
       - name: Run code to Generate Assetlist
         working-directory: ./.github/workflows/utility
         run: node generate_assetlist.mjs

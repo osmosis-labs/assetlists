@@ -377,64 +377,82 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   if (!chain.description) delete chain.description;
 
   // -- Create APIs Property --
-  // Priority: validated working endpoint first, then zone_chains, then all other chain registry entries
   chain.apis = {};
 
-  // Collect all unique endpoints
+  const forceRpc = zoneChain.override_properties?.force_rpc || false;
+  const forceRest = zoneChain.override_properties?.force_rest || false;
+
   const allRpcEndpoints = [];
   const allRestEndpoints = [];
 
-  // Add zone_chains endpoints
-  if (zoneChain.rpc) {
-    allRpcEndpoints.push(zoneChain.rpc);
-  }
-  if (zoneChain.rest) {
-    allRestEndpoints.push(zoneChain.rest);
-  }
-
-  // Add chain registry endpoints (excluding duplicates)
-  if (apis?.rpc?.length > 0) {
-    apis.rpc.forEach(endpoint => {
-      if (!allRpcEndpoints.includes(endpoint.address)) {
-        allRpcEndpoints.push(endpoint.address);
-      }
-    });
-  }
-  if (apis?.rest?.length > 0) {
-    apis.rest.forEach(endpoint => {
-      if (!allRestEndpoints.includes(endpoint.address)) {
-        allRestEndpoints.push(endpoint.address);
-      }
-    });
-  }
-
-  // Check validation state and reorder if a backup was used
-  const validationState = getValidationState('osmosis-1');
-  const validationRecord = getValidationRecord(validationState, chain_name);
-
-  if (validationRecord?.backupUsed) {
-    const { rpcAddress, restAddress, rpcEndpointIndex, restEndpointIndex } = validationRecord.backupUsed;
-
-    // Move validated working RPC endpoint to the front
-    if (rpcAddress && allRpcEndpoints.includes(rpcAddress)) {
-      allRpcEndpoints.splice(allRpcEndpoints.indexOf(rpcAddress), 1);
-      allRpcEndpoints.unshift(rpcAddress);
-      if (rpcEndpointIndex > 0) {
-        console.log(`Using validated RPC endpoint [${rpcEndpointIndex}] for ${chain_name}: ${rpcAddress}`);
-      }
+  // RPC endpoint collection
+  if (forceRpc) {
+    // Force: ONLY use zone endpoint
+    if (zoneChain.rpc) {
+      allRpcEndpoints.push(zoneChain.rpc);
+      console.log(`Force RPC enabled for ${chain_name}: ${zoneChain.rpc}`);
     }
-
-    // Move validated working REST endpoint to the front
-    if (restAddress && allRestEndpoints.includes(restAddress)) {
-      allRestEndpoints.splice(allRestEndpoints.indexOf(restAddress), 1);
-      allRestEndpoints.unshift(restAddress);
-      if (restEndpointIndex > 0) {
-        console.log(`Using validated REST endpoint [${restEndpointIndex}] for ${chain_name}: ${restAddress}`);
-      }
+  } else {
+    // Normal: zone first, then chain registry
+    if (zoneChain.rpc) {
+      allRpcEndpoints.push(zoneChain.rpc);
+    }
+    if (apis?.rpc?.length > 0) {
+      apis.rpc.forEach(endpoint => {
+        if (!allRpcEndpoints.includes(endpoint.address)) {
+          allRpcEndpoints.push(endpoint.address);
+        }
+      });
     }
   }
 
-  // Build final APIs arrays
+  // REST endpoint collection
+  if (forceRest) {
+    // Force: ONLY use zone endpoint
+    if (zoneChain.rest) {
+      allRestEndpoints.push(zoneChain.rest);
+      console.log(`Force REST enabled for ${chain_name}: ${zoneChain.rest}`);
+    }
+  } else {
+    // Normal: zone first, then chain registry
+    if (zoneChain.rest) {
+      allRestEndpoints.push(zoneChain.rest);
+    }
+    if (apis?.rest?.length > 0) {
+      apis.rest.forEach(endpoint => {
+        if (!allRestEndpoints.includes(endpoint.address)) {
+          allRestEndpoints.push(endpoint.address);
+        }
+      });
+    }
+  }
+
+  // Reorder based on validation (ONLY if not forced)
+  if (!forceRpc || !forceRest) {
+    const validationState = getValidationState('osmosis-1');
+    const validationRecord = getValidationRecord(validationState, chain_name);
+
+    if (validationRecord?.backupUsed) {
+      const { rpcAddress, restAddress, rpcEndpointIndex, restEndpointIndex } = validationRecord.backupUsed;
+
+      if (!forceRpc && rpcAddress && allRpcEndpoints.includes(rpcAddress)) {
+        allRpcEndpoints.splice(allRpcEndpoints.indexOf(rpcAddress), 1);
+        allRpcEndpoints.unshift(rpcAddress);
+        if (rpcEndpointIndex > 0) {
+          console.log(`Using validated RPC [${rpcEndpointIndex}] for ${chain_name}: ${rpcAddress}`);
+        }
+      }
+
+      if (!forceRest && restAddress && allRestEndpoints.includes(restAddress)) {
+        allRestEndpoints.splice(allRestEndpoints.indexOf(restAddress), 1);
+        allRestEndpoints.unshift(restAddress);
+        if (restEndpointIndex > 0) {
+          console.log(`Using validated REST [${restEndpointIndex}] for ${chain_name}: ${restAddress}`);
+        }
+      }
+    }
+  }
+
   chain.apis.rpc = allRpcEndpoints.map(address => ({ address }));
   chain.apis.rest = allRestEndpoints.map(address => ({ address }));
 

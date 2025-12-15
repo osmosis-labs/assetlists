@@ -74,6 +74,7 @@ jobs:
         run: node localization_post.mjs
 
       - name: Create Pull Request
+        id: cpr
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -84,4 +85,10 @@ jobs:
             **Automated pull request**
 
             This PR contains automated updates to assetlist.json and chainlist.json.
-          delete-branch: false
+          delete-branch: true
+
+      - name: Enable Auto-merge
+        if: steps.cpr.outputs.pull-request-number
+        run: gh pr merge ${{ steps.cpr.outputs.pull-request-number }} --auto --squash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

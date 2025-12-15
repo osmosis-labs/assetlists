@@ -48,7 +48,18 @@ jobs:
 
       - name: Generate Validation Report
         working-directory: ./.github/workflows/utility
-        run: node validateEndpoints.mjs generateReport
+        run: |
+          node validateEndpoints.mjs generateReport
+          node validateEndpoints.mjs generateReport > ../../../validation-summary.md
+          fi
+
+      - name: Capture Current Chains
+        run: |
+          if [ -f osmosis-1/generated/frontend/chainlist.json ]; then
+            jq -r '.chains[].chain_name' osmosis-1/generated/frontend/chainlist.json | sort > /tmp/chains-before.txt
+          else
+            touch /tmp/chains-before.txt
+          fi
 
       - name: Run code to Generate Assetlist
         working-directory: ./.github/workflows/utility
@@ -57,6 +68,18 @@ jobs:
       - name: Run code to Generate Chainlist
         working-directory: ./.github/workflows/utility
         run: node generate_chainlist.mjs
+
+      - name: Detect New Assets
+        run: |
+          jq -r '.assets[].symbol' osmosis-1/generated/frontend/assetlist.json | sort > /tmp/assets-after.txt
+          comm -13 /tmp/assets-before.txt /tmp/assets-after.txt > new-assets.txt
+          echo "NEW_ASSETS_COUNT=$(wc -l < new-assets.txt)" >> $GITHUB_ENV
+
+      - name: Detect New Chains
+        run: |
+          jq -r '.chains[].chain_name' osmosis-1/generated/frontend/chainlist.json | sort > /tmp/chains-after.txt
+          comm -13 /tmp/chains-before.txt /tmp/chains-after.txt > new-chains.txt
+          echo "NEW_CHAINS_COUNT=$(wc -l < new-chains.txt)" >> $GITHUB_ENV
 
       - name: Run code to Update State
         working-directory: ./.github/workflows/utility
@@ -74,6 +97,22 @@ jobs:
         working-directory: ./.github/workflows/utility
         run: node localization_post.mjs
 
+      - name: Generate Workflow Summary
+        run: |
+          cat > workflow-summary.md << 'HEADER'
+          # Automated Update Summary
+
+          **Generated:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          **Workflow:** Generate All Files
+          **Trigger:** ${{ github.event_name }}
+
+          ---
+
+          echo "- **New Chains Added:** $NEW_CHAINS_COUNT" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+
+          if [ "$NEW_CHAINS_COUNT" -gt 0 ]; then
+            echo "### 🆕 New Chains" >> workflow-summary.md
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v8

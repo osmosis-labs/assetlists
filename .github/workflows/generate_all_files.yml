@@ -51,7 +51,11 @@ jobs:
         run: |
           node validateEndpoints.mjs generateReport
           node validateEndpoints.mjs generateReport > ../../../validation-summary.md
+
+      - name: Capture Current Assets
+        run: |
           if [ -f osmosis-1/generated/frontend/assetlist.json ]; then
+            jq -r '.assets[].symbol' osmosis-1/generated/frontend/assetlist.json | sort > /tmp/assets-before.txt
           else
             touch /tmp/assets-before.txt
           fi

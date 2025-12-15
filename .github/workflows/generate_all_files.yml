@@ -1,13 +1,14 @@
 # Description: Bundle workflow that runs the complete asset generation pipeline
 # Includes: Endpoint validation, assetlist generation, chainlist generation,
 #           state updates, comment generation, and localization
-# Schedule: Runs every Monday at 12:00 UTC
+# Schedule: Runs every Monday and Thursday at 09:00 UTC
 # Trigger: Manual via workflow_dispatch or scheduled cron
 # Output: Creates PR with all generated files to branch 'update/assetlist_all'
 
 on:
   schedule:
-    - cron: "0 12 * * 1"   # Every Monday 12:00 UTC
+    - cron: "0 9 * * 1"    # Every Monday 09:00 UTC
+    - cron: "0 9 * * 4"    # Every Thursday 09:00 UTC
   workflow_dispatch:
 
 name: Generate All Files
@@ -47,7 +48,18 @@ jobs:
 
       - name: Generate Validation Report
         working-directory: ./.github/workflows/utility
-        run: node validateEndpoints.mjs generateReport
+        run: |
+          node validateEndpoints.mjs generateReport
+          node validateEndpoints.mjs generateReport > ../../../validation-summary.md
+          fi
+
+      - name: Capture Current Chains
+        run: |
+          if [ -f osmosis-1/generated/frontend/chainlist.json ]; then
+            jq -r '.chains[].chain_name' osmosis-1/generated/frontend/chainlist.json | sort > /tmp/chains-before.txt
+          else
+            touch /tmp/chains-before.txt
+          fi
 
       - name: Run code to Generate Assetlist
         working-directory: ./.github/workflows/utility
@@ -56,6 +68,18 @@ jobs:
       - name: Run code to Generate Chainlist
         working-directory: ./.github/workflows/utility
         run: node generate_chainlist.mjs
+
+      - name: Detect New Assets
+        run: |
+          jq -r '.assets[].symbol' osmosis-1/generated/frontend/assetlist.json | sort > /tmp/assets-after.txt
+          comm -13 /tmp/assets-before.txt /tmp/assets-after.txt > new-assets.txt
+          echo "NEW_ASSETS_COUNT=$(wc -l < new-assets.txt)" >> $GITHUB_ENV
+
+      - name: Detect New Chains
+        run: |
+          jq -r '.chains[].chain_name' osmosis-1/generated/frontend/chainlist.json | sort > /tmp/chains-after.txt
+          comm -13 /tmp/chains-before.txt /tmp/chains-after.txt > new-chains.txt
+          echo "NEW_CHAINS_COUNT=$(wc -l < new-chains.txt)" >> $GITHUB_ENV
 
       - name: Run code to Update State
         working-directory: ./.github/workflows/utility
@@ -73,7 +97,24 @@ jobs:
         working-directory: ./.github/workflows/utility
         run: node localization_post.mjs
 
+      - name: Generate Workflow Summary
+        run: |
+          cat > workflow-summary.md << 'HEADER'
+          # Automated Update Summary
+
+          **Generated:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          **Workflow:** Generate All Files
+          **Trigger:** ${{ github.event_name }}
+
+          ---
+
+          echo "- **New Chains Added:** $NEW_CHAINS_COUNT" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+
+          if [ "$NEW_CHAINS_COUNT" -gt 0 ]; then
+            echo "### 🆕 New Chains" >> workflow-summary.md
       - name: Create Pull Request
+        id: cpr
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -84,4 +125,10 @@ jobs:
             **Automated pull request**
 
             This PR contains automated updates to assetlist.json and chainlist.json.
-          delete-branch: false
+          delete-branch: true
+
+      - name: Enable Auto-merge
+        if: steps.cpr.outputs.pull-request-number
+        run: gh pr merge ${{ steps.cpr.outputs.pull-request-number }} --auto --squash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

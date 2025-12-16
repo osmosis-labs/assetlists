@@ -1,0 +1,46 @@
+# Description: Triggers Vercel deployment webhooks for mainnet (preview and production)
+# Included in: NOT included in Generate All Files bundle (deployment only)
+# Trigger: Automatically runs on push to main branch when osmosis-1 frontend files change
+# Output: Deploys to Vercel preview and production environments via webhooks
+
+name: Osmosis Front-End Deployment (Mainnet)
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - osmosis-1/generated/frontend/assetlist.json
+      - osmosis-1/generated/frontend/chainlist.json
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check latest commit matches API
+        id: check_commit
+        run: |
+          MAX_RETRIES=5
+          RETRY_COUNT=0
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+            LATEST_COMMIT=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${{ github.repository }}/commits/main | jq -r '.sha')
+            if [ "$LATEST_COMMIT" != "" ]; then
+              echo "Latest commit: $LATEST_COMMIT"
+              echo "Workflow commit: ${{ github.sha }}"
+              if [ "$LATEST_COMMIT" != "${{ github.sha }}" ]; then
+                echo "The workflow commit and the latest commit do not match."
+                exit 1
+              fi
+              exit 0
+            fi
+            RETRY_COUNT=$((RETRY_COUNT+1))
+            echo "Failed to fetch latest commit, retrying ($RETRY_COUNT/$MAX_RETRIES)..."
+            sleep 5
+          done
+          echo "Failed to fetch latest commit after $MAX_RETRIES attempts."
+          exit 1
+
+      - name: Deploy preview
+        run: curl -X POST ${{ secrets.VERCEL_WEBHOOK_DEPLOY_STAGE }}
+
+      - name: Deploy production
+        run: curl -X POST ${{ secrets.VERCEL_WEBHOOK_DEPLOY_PRODUCTION }}

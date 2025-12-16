@@ -54,7 +54,6 @@ const chainNames_decommissioned = [
 export function getFileLocation(chainName, directoryName, fileName) {
   const chainNameToChainIdMap = new Map([
     ["osmosis", "osmosis-1"],
-    ["osmosistestnet4", "osmo-test-4"],
     ["osmosistestnet", "osmo-test-5"]
   ]);
   return path.join(
@@ -131,4 +130,34 @@ export function objectsAreEqual(obj1, obj2) {
 
 export function removeElements(array1, array2) {
   return array1.filter(element => !array2?.includes(element));
+}
+
+export function deepEqual(obj1, obj2) {
+  if (obj1 === obj2) {
+    return true;
+  }
+
+  if (typeof obj1 !== 'object' || obj1 === null || typeof obj2 !== 'object' || obj2 === null) {
+    return false;
+  }
+
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  for (let key of keys1) {
+    if (!keys2.includes(key) || !deepEqual(obj1[key], obj2[key])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+export function addUniqueArrayItem(item, array) {
+  const exists = array.some(existingArrayItem => deepEqual(existingArrayItem, item));
+  if (!exists) array.push(item);
 }

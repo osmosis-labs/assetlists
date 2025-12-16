@@ -1,3 +1,8 @@
+# Description: Generates coingecko.json file with CoinGecko market data integration
+# Included in: NOT included in Generate All Files bundle (standalone only)
+# Trigger: Manual via workflow_dispatch only
+# Output: Creates PR with coingecko.json to branch 'update/coingecko'
+
 on: [workflow_dispatch]
 name: Generate CoinGecko
 jobs:
@@ -12,20 +17,20 @@ jobs:
     steps:
     
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: true
           
-      - name: Git Sumbodule Update
+      - name: Git Submodule Update
         run: |
           git submodule update --init --recursive
           git submodule update --recursive --remote
           
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 19.6.0
+          node-version: 20.x
 
       - name: Install dependencies
         run: npm install
@@ -34,25 +39,15 @@ jobs:
         working-directory: ./.github/workflows/utility
         run: node generateCoinGeckoUpdates.mjs
       
-      - name: Add Commit Push
-        uses: devops-infra/action-commit-push@master
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v8
         with:
-          github_token: "${{ secrets.GITHUB_TOKEN }}"
-          add_timestamp: false
-          commit_prefix: "[AUTO]"
-          commit_message: "coingecko.json Update"
-          force: false
-          target_branch: update/coingecko
-      
-      - name: Create A PR
-        uses: devops-infra/action-pull-request@v0.4.2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: update/coingecko
-          target_branch: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "[AUTO]coingecko.json Update"
+          branch: update/coingecko
           title: coingecko.json Update
-          body: "**Automated pull request**"
-          old_string: "**THIS IS AN AUTOMATED UPDATE OF COINGECKO.JSON**"
-          new_string: "** Automatic pull request**"
-          get_diff: true
-          ignore_users: "dependabot"
+          body: |
+            **Automated pull request**
+
+            This PR contains automated updates to coingecko.json.
+          delete-branch: false

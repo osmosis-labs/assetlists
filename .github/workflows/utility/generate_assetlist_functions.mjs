@@ -3,16 +3,40 @@
 
 //-- Imports --
 
+import * as fs from 'fs';
+import * as path from 'path';
 import * as chain_reg from "../../../chain-registry/.github/workflows/utility/chain_registry.mjs";
 chain_reg.setup();
 import * as zone from "./assetlist_functions.mjs";
-import { getAssetsPricing } from "./getPools.mjs";
-import { getAllRelatedAssets } from "./getRelatedAssets.mjs";
 
 //-- Global Constants --
 
 //This address corresponds to the native assset on all evm chains (e.g., wei on ethereum)
 const zero_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
+
+//-- Helper Functions --
+
+// Get IBC file property with zone-aware path selection
+// Determines _IBC directory based on the destination chain (osmosistestnet = testnet, osmosis = mainnet)
+function getIBCFilePropertyForZone(chainName1, chainName2, property) {
+  // chainName2 is the zone chain (osmosistestnet or osmosis) which tells us which _IBC to use
+  const isTestnetZone = chainName2 === "osmosistestnet";
+  const ibcDirectory = isTestnetZone
+    ? path.join(chain_reg.chainRegistryRoot, "testnets", "_IBC")
+    : path.join(chain_reg.chainRegistryRoot, "_IBC");
+
+  // Build the IBC file path
+  const sortedChains = [chainName1, chainName2].sort();
+  const fileName = `${sortedChains[0]}-${sortedChains[1]}.json`;
+  const filePath = path.join(ibcDirectory, fileName);
+
+  // Check if file exists and return the property
+  if (fs.existsSync(filePath)) {
+    return chain_reg.readJsonFile(filePath)[property];
+  }
+
+  return undefined;
+}
 
 //This defines with types of traces are considered essentially the same asset
 const originTraceTypes = [
@@ -180,7 +204,7 @@ export function getAssetTrace(asset_data) {
 
 
   //--Find IBC Connection--
-  const channels = chain_reg.getIBCFileProperty(
+  const channels = getIBCFilePropertyForZone(
     asset_data.source_asset.chain_name,
     asset_data.chainName,
     "channels"
@@ -318,25 +342,60 @@ export async function setLocalAsset(asset_data) {
     traces = [];
   }
   const trace = getAssetTrace(asset_data);
-  traces.push(trace);
 
-  if (!trace?.chain?.path) {
-    console.log("No IBC path.");
+  // If getAssetTrace failed but we have a path in zone_asset, use that path directly
+  let pathToUse = trace?.chain?.path || asset_data.zone_asset?.path;
+
+  if (!pathToUse) {
+    console.log("No IBC path available - cannot calculate local asset.");
     console.log(trace);
     console.log(asset_data.zone_asset);
     return;
   }
+
+  // Add trace if it was successfully retrieved, or create minimal trace from fallback
+  if (trace?.chain?.path) {
+    traces.push(trace);
+  } else {
+    console.log(`Warning: Using path from zone_asset for ${asset_data.zone_asset.chain_name}:${asset_data.zone_asset.base_denom} (IBC connection not found in registry)`);
+
+    // Create minimal trace from zone_asset to prevent downstream errors
+    // Path format: "transfer/channel-123/denom"
+    const segments = pathToUse.split("/");
+    const type = (asset_data.source_asset.base_denom.slice(0, 5) === "cw20:") ? "ibc-cw20" : "ibc";
+
+    // Extract channel ID from path (e.g., "channel-123" from segments[1])
+    const channelId = segments[1];
+
+    const minimalTrace = {
+      type: type,
+      counterparty: {
+        chain_name: asset_data.source_asset.chain_name,
+        base_denom: asset_data.source_asset.base_denom,
+        channel_id: channelId  // Will be set in setTransferMethods if needed
+      },
+      chain: {
+        channel_id: channelId,
+        path: pathToUse
+      }
+    };
+    traces.push(minimalTrace);
+  }
+
   try {
-    let ibcHash = await zone.calculateIbcHash(trace?.chain?.path);
+    let ibcHash = await zone.calculateIbcHash(pathToUse);
     asset_data.local_asset = {
       chain_name: asset_data.chainName,
       base_denom: ibcHash
     }
   } catch (error) {
     console.error(error);
+    return;
   }
 
-  assetProperty.set(createCombinedKey(asset_data.local_asset, "traces"), traces);
+  if (traces.length > 0) {
+    assetProperty.set(createCombinedKey(asset_data.local_asset, "traces"), traces);
+  }
 }
 
 
@@ -420,8 +479,8 @@ export function setIdentityAsset(asset_data) {
     ) { break; }
 
     let provider = null;
-    if ( traceTypesNeedingProvider.includes(traces[i].type) ) {
-      provider = asset_data.zone_config?.providers.find(
+    if (traceTypesNeedingProvider.includes(traces[i].type)) {
+      provider = asset_data.zone_config?.providers?.find(
         provider =>  //where...
           provider.provider === traces[i].provider
       )
@@ -561,6 +620,8 @@ function getNetworkName(chain_name, asset_data) {
 
 export function setSymbol(asset_data) {
 
+  asset_data.chain_reg.symbol = getAssetProperty(asset_data.source_asset, "symbol");
+
   let symbol = getAssetProperty(asset_data.identity_asset, "symbol");
 
   //asset_data.chain_reg.symbol =
@@ -572,18 +633,18 @@ export function setSymbol(asset_data) {
     symbol = asset_data.zone_asset?.override_properties?.symbol;
     asset_data.frontend.symbol = symbol;
     asset_data.asset_detail.symbol = symbol;
-    asset_data.chain_reg.symbol = symbol;
+    //asset_data.chain_reg.symbol = symbol;
     return;
   }
   
-  symbol = getAssetProperty(asset_data.identity_asset, "symbol");
+  //symbol = getAssetProperty(asset_data.identity_asset, "symbol");
   
 
   //If it's the canonical asset, then don't add suffixes
   if (asset_data.frontend.is_canonical) {
     asset_data.frontend.symbol = symbol;
     asset_data.asset_detail.symbol = symbol;
-    asset_data.chain_reg.symbol = symbol;
+    //asset_data.chain_reg.symbol = symbol;
     return;
   }
 
@@ -663,7 +724,7 @@ export function setSymbol(asset_data) {
 
   asset_data.frontend.symbol = symbol;
   asset_data.asset_detail.symbol = symbol;
-  asset_data.chain_reg.symbol = symbol;
+  //asset_data.chain_reg.symbol = symbol;
   return;
 
 
@@ -674,7 +735,7 @@ export function setName(asset_data) {
 
   let name;
 
-  //asset_data.chain_reg.name =
+  asset_data.chain_reg.name = getAssetProperty(asset_data.source_asset, "name");
     //getAssetProperty(asset_data.local_asset, "name") ??
     //getAssetProperty(asset_data.source_asset, "name");
 
@@ -807,7 +868,7 @@ export function setName(asset_data) {
 
   asset_data.frontend.name = name;
   asset_data.asset_detail.name = name;
-  asset_data.chain_reg.name = name;
+  //asset_data.chain_reg.name = name;
   
 
 }
@@ -973,10 +1034,7 @@ export function getAssetTraces(asset) {
 export function setTraces(asset_data) {
 
   let traces = getAssetProperty(asset_data.local_asset, "traces");
-  if(traces?.length === 0) {
-    traces = undefined;
-  }
-  asset_data.chain_reg.traces = traces;
+  asset_data.chain_reg.traces = traces?.length ? [ traces.at(-1) ] : undefined;
 
 }
 
@@ -1112,14 +1170,17 @@ export function setImages(asset_data) {
 
   const imagesObj = getImages(asset_data);
   let primaryImage = imagesObj.primaryImage;
-  let newImagesArray = imagesObj.newImagesArray;
+  //let newImagesArray = imagesObj.newImagesArray;
 
   asset_data.frontend.logoURIs = {...primaryImage};
   delete asset_data.frontend.logoURIs.theme;
   delete asset_data.frontend.logoURIs.image_sync;
-  asset_data.chain_reg.logo_URIs = asset_data.frontend.logoURIs;
+  //asset_data.chain_reg.logo_URIs = asset_data.frontend.logoURIs;
 
-  asset_data.chain_reg.images = newImagesArray;
+  //asset_data.chain_reg.images = newImagesArray;
+
+  asset_data.chain_reg.logo_URIs = getAssetProperty(asset_data.local_asset, "logo_URIs");
+  asset_data.chain_reg.images = getAssetProperty(asset_data.local_asset, "images");
 
 }
 
@@ -1128,7 +1189,9 @@ export function setCoinGeckoId(asset_data) {
 
   let coingecko_id;
 
-  if (asset_data.source_asset.chain_name === asset_data.chainName) {
+  asset_data.chain_reg.coingecko_id = getAssetProperty(asset_data.source_asset, "coingecko_id");
+
+  if (asset_data.source_asset.chain_name === asset_data.chainName) { // this is how I do bulk corrections
     asset_data.chain_reg.coingecko_id = getAssetProperty(
       asset_data.source_asset,
       "coingecko_id"
@@ -1151,9 +1214,9 @@ export function setCoinGeckoId(asset_data) {
 
 export function setKeywords(asset_data) {
 
-  asset_data.chain_reg.keywords =
-    getAssetProperty(asset_data.local_asset, "keywords")
-    getAssetProperty(asset_data.canonical_asset, "keywords");
+  asset_data.chain_reg.keywords = getAssetProperty(asset_data.local_asset, "keywords");
+    //getAssetProperty(asset_data.local_asset, "keywords")
+    //getAssetProperty(asset_data.canonical_asset, "keywords");
 
 }
 
@@ -1509,29 +1572,36 @@ export function setTransferMethods(asset_data) {
   });
 
   if (asset_data.source_asset.chain_name !== asset_data.chainName) {
-    const traces = getAssetProperty(asset_data.local_asset, "traces");
-    const trace = traces?.[traces.length - 1];
-    const ibcTransferMethod = {
-      name: "Osmosis IBC Transfer",
-      type: "ibc",
-      counterparty: {
-        chainName: trace.counterparty.chain_name,
-        chainId: chain_reg.getFileProperty(
-          trace.counterparty.chain_name,
-          "chain",
-          "chain_id"
-        ),
-        sourceDenom: trace.counterparty.base_denom,
-        port: trace.counterparty.port ?? "transfer",
-        channelId: trace.counterparty.channel_id
-      },
-      chain: {
-        port: trace.chain.port ?? "transfer",
-        channelId: trace.chain.channel_id,
-        path: trace.chain.path
+    const live = chain_reg.getFileProperty(asset_data.source_asset.chain_name, "chain", "status");
+    if (live === "live") {
+      const traces = getAssetProperty(asset_data.local_asset, "traces");
+      const trace = traces?.[traces.length - 1];
+
+      // Only add IBC transfer method if we have a valid trace with required fields
+      if (trace?.counterparty?.chain_name && trace?.chain?.channel_id) {
+        const ibcTransferMethod = {
+          name: "Osmosis IBC Transfer",
+          type: "ibc",
+          counterparty: {
+            chainName: trace.counterparty.chain_name,
+            chainId: chain_reg.getFileProperty(
+              trace.counterparty.chain_name,
+              "chain",
+              "chain_id"
+            ),
+            sourceDenom: trace.counterparty.base_denom,
+            port: trace.counterparty.port ?? "transfer",
+            channelId: trace.counterparty.channel_id
+          },
+          chain: {
+            port: trace.chain.port ?? "transfer",
+            channelId: trace.chain.channel_id,
+            path: trace.chain.path
+          }
+        }
+        transferMethods.push(ibcTransferMethod);
       }
     }
-    transferMethods.push(ibcTransferMethod);
   }
 
   asset_data.frontend.transferMethods = transferMethods;
@@ -1598,16 +1668,21 @@ export function setBase(asset_data) {
 
 export function setDisplay(asset_data) {
 
+  //asset_data.chain_reg.display = getAssetProperty(asset_data.source_asset, "display");
   asset_data.chain_reg.display =
-    getAssetProperty(asset_data.local_asset, "display") || getAssetProperty(asset_data.source_asset, "display");
+    getAssetProperty(asset_data.local_asset, "display") ||
+    getAssetProperty(asset_data.source_asset, "display");
 
 }
 
 export function setDenomUnits(asset_data) {
 
   let denom_units = getAssetProperty(asset_data.local_asset, "denom_units");
+  //let denom_units = getAssetProperty(asset_data.source_asset, "denom_units");
+  //if (asset_data.source_asset.chain_name === asset_data.chainName) {
   if (denom_units) {
     asset_data.chain_reg.denom_units = denom_units;
+    //console.log(asset_data.chain_reg.denom_units);
     return;
   }
 
@@ -1637,7 +1712,7 @@ export function setSocials(asset_data) {
 
   let socials = getAssetProperty(asset_data.canonical_asset, "socials");
   asset_data.asset_detail.websiteURL = socials?.website;
-  asset_data.asset_detail.twitterURL = socials?.twitter;
+  asset_data.asset_detail.twitterURL = socials?.twitter || socials?.x;
   if (socials) { return; }
   
   if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
@@ -1648,7 +1723,7 @@ export function setSocials(asset_data) {
     )
   }
   asset_data.asset_detail.websiteURL = socials?.website;
-  asset_data.asset_detail.twitterURL = socials?.twitter;
+  asset_data.asset_detail.twitterURL = socials?.twitter || socials?.x;
   if (socials) { return; }
 
   socials = chain_reg.getAssetPropertyWithTraceCustom(
@@ -1658,7 +1733,7 @@ export function setSocials(asset_data) {
     originTraceTypes
   );
   asset_data.asset_detail.websiteURL = socials?.website;
-  asset_data.asset_detail.twitterURL = socials?.twitter;
+  asset_data.asset_detail.twitterURL = socials?.twitter || socials?.x;
 
 }
 
@@ -1682,9 +1757,10 @@ export function setDescription(asset_data) {
   
   let description, extended_description;
 
-  asset_data.chain_reg.description =
-    getAssetProperty(asset_data.local_asset, "description") ??
-    getAssetProperty(asset_data.canonical_asset, "description");
+  //asset_data.chain_reg.description =
+    //getAssetProperty(asset_data.local_asset, "description") ??
+    //getAssetProperty(asset_data.canonical_asset, "description");
+  asset_data.chain_reg.description = getAssetProperty(asset_data.local_asset, "description");
   asset_data.chain_reg.extended_description = getAssetProperty(asset_data.local_asset, "extended_description");
 
 
@@ -1699,7 +1775,11 @@ export function setDescription(asset_data) {
       ? 
     getAssetProperty(asset_data.canonical_asset, "description")
       :
-    asset_data.chain_reg.description;
+    (
+      getAssetProperty(asset_data.local_asset, "description")
+      ||
+      getAssetProperty(asset_data.canonical_asset, "description")
+    )
 
   extended_description =
     asset_data.frontend.is_canonical
@@ -1734,6 +1814,13 @@ export function setDescription(asset_data) {
 
 export function reformatFrontendAssetFromAssetData(asset_data) {
 
+  // Store full trace chain temporarily on asset_data (not frontend) for origin tracking during deduplication
+  // This persists even after frontend is reformatted, but is not included in final output
+  if (!asset_data.traces_for_deduplication) {
+    const fullTraces = getAssetProperty(asset_data.local_asset, "traces");
+    asset_data.traces_for_deduplication = fullTraces ?? [];
+  }
+
   //--Setup Frontend Asset--
   let reformattedAsset = {
     chainName: asset_data.frontend.chainName,
@@ -1748,6 +1835,7 @@ export function reformatFrontendAssetFromAssetData(asset_data) {
     pegMechanism: asset_data.frontend.pegMechanism,
     transferMethods: asset_data.frontend.transferMethods ?? [],
     counterparty: asset_data.frontend.counterparty ?? [],
+    // traces: excluded from final output (only needed during generation for deduplication)
     //identity: asset_data.frontend.identityGroupKey,
     variantGroupKey: asset_data.frontend.originAsset,
     name: asset_data.frontend.name,
@@ -1820,21 +1908,21 @@ export function reformatChainRegAsset(asset_data) {
 
   //--Setup Chain Registry Asset--
   let reformattedAsset = {
-    description: asset_data.chain_reg.description,
-    extended_description: asset_data.chain_reg.extended_description,
-    denom_units: asset_data.chain_reg.denom_units,
-    type_asset: asset_data.chain_reg.type_asset,
-    address: asset_data.chain_reg.address,
-    base: asset_data.chain_reg.base,
-    name: asset_data.chain_reg.name,
-    display: asset_data.chain_reg.display,
-    symbol: asset_data.chain_reg.symbol,
-    traces: asset_data.chain_reg.traces,
-    logo_URIs: asset_data.chain_reg.logo_URIs,
-    images: asset_data.chain_reg.images,
-    coingecko_id: asset_data.chain_reg.coingecko_id,
-    keywords: asset_data.chain_reg.keywords,
-    socials: asset_data.chain_reg.socials
+    description: asset_data.chain_reg.description, //should be local
+    extended_description: asset_data.chain_reg.extended_description, //should be local
+    denom_units: asset_data.chain_reg.denom_units, //should be ibc-base, with source's base as alias, and then display
+    type_asset: asset_data.chain_reg.type_asset, //req logic
+    address: asset_data.chain_reg.address, //local
+    base: asset_data.chain_reg.base, //req logic
+    name: asset_data.chain_reg.name, //should be source
+    display: asset_data.chain_reg.display, // should be source
+    symbol: asset_data.chain_reg.symbol, //should be source
+    traces: asset_data.chain_reg.traces, //should only be the latest hop
+    logo_URIs: asset_data.chain_reg.logo_URIs, //should be local
+    images: asset_data.chain_reg.images, // should be local with image_sync
+    coingecko_id: asset_data.chain_reg.coingecko_id, // should be source
+    keywords: asset_data.chain_reg.keywords, // local, skip osmosis-zone specifc ones
+    socials: asset_data.chain_reg.socials // local
   };
 
   asset_data.chain_reg = reformattedAsset;

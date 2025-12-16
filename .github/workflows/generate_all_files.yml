@@ -1,4 +1,16 @@
-on: [workflow_dispatch]
+# Description: Bundle workflow that runs the complete asset generation pipeline
+# Includes: Endpoint validation, assetlist generation, chainlist generation,
+#           state updates, comment generation, and localization
+# Schedule: Runs every Monday and Thursday at 09:00 UTC
+# Trigger: Manual via workflow_dispatch or scheduled cron
+# Output: Creates PR with all generated files to branch 'update/assetlist_all'
+
+on:
+  schedule:
+    - cron: "0 9 * * 1"    # Every Monday 09:00 UTC
+    - cron: "0 9 * * 4"    # Every Thursday 09:00 UTC
+  workflow_dispatch:
+
 name: Generate All Files
 jobs:
   generate_zone_config:
@@ -12,43 +24,92 @@ jobs:
     steps:
     
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: true
           
-      - name: Git Sumbodule Update
+      - name: Git Submodule Update
         run: |
           git submodule update --init --recursive
           git submodule update --recursive --remote
           
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 19.6.0
+          node-version: 20.x
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run code to Query Pools
-        working-directory: ./.github/workflows/utility
-        run: node queryPools.mjs
-
       - name: Run code to Validate Endpoints
         working-directory: ./.github/workflows/utility
-        run: node validateEndpoints.mjs routineBulkValidation
-          
+        run: |
+          node validateEndpoints.mjs routineBulkValidation 2>&1 | tee validation.log
+          CHAINS_VALIDATED=$(grep -oP 'Validating \K[0-9]+' validation.log | head -1 || echo "0")
+          echo "CHAINS_VALIDATED=$CHAINS_VALIDATED" >> $GITHUB_ENV
+
+      - name: Generate Validation Report
+        working-directory: ./.github/workflows/utility
+        run: node validateEndpoints.mjs generateReport > ../../../validation-summary.md
+
+      - name: Capture Current Assets
+        run: |
+          if [ -f osmosis-1/generated/frontend/assetlist.json ]; then
+            jq -r '.assets[].symbol' osmosis-1/generated/frontend/assetlist.json | sort > /tmp/assets-before.txt
+            # Capture verified status for each asset
+            jq -r '.assets[] | "\(.symbol)|\(.verified // false)"' osmosis-1/generated/frontend/assetlist.json > /tmp/verified-before.txt
+          else
+            touch /tmp/assets-before.txt
+            touch /tmp/verified-before.txt
+          fi
+
+      - name: Capture Current Chains
+        run: |
+          if [ -f osmosis-1/generated/frontend/chainlist.json ]; then
+            jq -r '.chains[].chain_name' osmosis-1/generated/frontend/chainlist.json | sort > /tmp/chains-before.txt
+          else
+            touch /tmp/chains-before.txt
+          fi
+
       - name: Run code to Generate Assetlist
         working-directory: ./.github/workflows/utility
         run: node generate_assetlist.mjs
 
-      - name: Run code to Generate Chainlist New
-        working-directory: ./.github/workflows/utility
-        run: node generate_chainlist_new.mjs
-
       - name: Run code to Generate Chainlist
         working-directory: ./.github/workflows/utility
         run: node generate_chainlist.mjs
+
+      - name: Detect New Assets
+        run: |
+          jq -r '.assets[].symbol' osmosis-1/generated/frontend/assetlist.json | sort > /tmp/assets-after.txt
+          comm -13 /tmp/assets-before.txt /tmp/assets-after.txt > new-assets.txt
+          echo "NEW_ASSETS_COUNT=$(wc -l < new-assets.txt)" >> $GITHUB_ENV
+
+      - name: Detect Newly Verified Assets
+        run: |
+          # Capture current verified status
+          jq -r '.assets[] | "\(.symbol)|\(.verified // false)"' osmosis-1/generated/frontend/assetlist.json > /tmp/verified-after.txt
+
+          # Find assets that changed from false to true
+          > newly-verified.txt
+          while IFS='|' read -r symbol verified_after; do
+            verified_before=$(grep "^${symbol}|" /tmp/verified-before.txt 2>/dev/null | cut -d'|' -f2)
+            if [ "$verified_before" = "false" ] && [ "$verified_after" = "true" ]; then
+              echo "$symbol" >> newly-verified.txt
+            elif [ -z "$verified_before" ] && [ "$verified_after" = "true" ]; then
+              # New asset that's already verified - don't count as newly verified
+              :
+            fi
+          done < /tmp/verified-after.txt
+
+          echo "NEWLY_VERIFIED_COUNT=$(wc -l < newly-verified.txt)" >> $GITHUB_ENV
+
+      - name: Detect New Chains
+        run: |
+          jq -r '.chains[].chain_name' osmosis-1/generated/frontend/chainlist.json | sort > /tmp/chains-after.txt
+          comm -13 /tmp/chains-before.txt /tmp/chains-after.txt > new-chains.txt
+          echo "NEW_CHAINS_COUNT=$(wc -l < new-chains.txt)" >> $GITHUB_ENV
 
       - name: Run code to Update State
         working-directory: ./.github/workflows/utility
@@ -65,26 +126,134 @@ jobs:
       - name: Run post-localization code
         working-directory: ./.github/workflows/utility
         run: node localization_post.mjs
-      
-      - name: Add Commit Push
-        uses: devops-infra/action-commit-push@master
+
+      - name: Generate Workflow Summary
+        run: |
+          cat > workflow-summary.md << 'HEADER'
+          # Automated Update Summary
+          HEADER
+
+          # Chainlist Generation
+          echo "## Chainlist Generation" >> workflow-summary.md
+
+          TOTAL_CHAINS=$(jq '.chains | length' osmosis-1/generated/frontend/chainlist.json)
+          echo "- **Total Chains:** $TOTAL_CHAINS" >> workflow-summary.md
+          echo "- **New Chains Added:** $NEW_CHAINS_COUNT" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+
+          if [ "$NEW_CHAINS_COUNT" -gt 0 ]; then
+            echo "### 🆕 New Chains" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            while IFS= read -r chain; do
+              PRETTY_NAME=$(jq -r ".chains[] | select(.chain_name==\"$chain\") | .pretty_name" osmosis-1/generated/frontend/chainlist.json)
+              echo "- **$chain** ($PRETTY_NAME)" >> workflow-summary.md
+            done < new-chains.txt
+            echo "" >> workflow-summary.md
+          fi
+
+          echo "**Optimizations:**" >> workflow-summary.md
+          echo "- Endpoint ordering optimized based on validation results" >> workflow-summary.md
+          echo "- Working backup endpoints promoted to primary positions" >> workflow-summary.md
+          echo "- Failed endpoints deprioritized" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+          echo "---" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+
+          # Assetlist Generation
+          echo "## Assetlist Generation" >> workflow-summary.md
+
+          TOTAL_ASSETS=$(jq '.assets | length' osmosis-1/generated/frontend/assetlist.json)
+          echo "- **Total Assets:** $TOTAL_ASSETS" >> workflow-summary.md
+          echo "- **New Assets Added:** $NEW_ASSETS_COUNT" >> workflow-summary.md
+          echo "- **Assets Verified:** $NEWLY_VERIFIED_COUNT" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+
+          if [ "$NEW_ASSETS_COUNT" -gt 0 ]; then
+            echo "### 🆕 New Assets" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            while IFS= read -r symbol; do
+              ASSET_DATA=$(jq -r ".assets[] | select(.symbol==\"$symbol\")" osmosis-1/generated/frontend/assetlist.json)
+              NAME=$(echo "$ASSET_DATA" | jq -r '.name')
+              DENOM=$(echo "$ASSET_DATA" | jq -r '.base')
+              DESCRIPTION=$(echo "$ASSET_DATA" | jq -r '.description // ""')
+
+              # Get chain of origin from IBC traces
+              CHAIN_ORIGIN=$(echo "$ASSET_DATA" | jq -r '
+                if .traces and (.traces | length > 0) then
+                  .traces[0].counterparty.chain_name
+                else
+                  "osmosis"
+                end
+              ')
+
+              echo "- **$symbol** - $NAME" >> workflow-summary.md
+              echo "  - **Chain:** $CHAIN_ORIGIN" >> workflow-summary.md
+              echo "  - **Denom:** \`$DENOM\`" >> workflow-summary.md
+              if [ -n "$DESCRIPTION" ] && [ "$DESCRIPTION" != "null" ]; then
+                echo "  - **Description:** $DESCRIPTION" >> workflow-summary.md
+              fi
+              echo "" >> workflow-summary.md
+            done < new-assets.txt
+          fi
+
+          if [ "$NEWLY_VERIFIED_COUNT" -gt 0 ]; then
+            echo "### ✅ Verified Assets" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            while IFS= read -r symbol; do
+              ASSET_DATA=$(jq -r ".assets[] | select(.symbol==\"$symbol\")" osmosis-1/generated/frontend/assetlist.json)
+              NAME=$(echo "$ASSET_DATA" | jq -r '.name')
+              DENOM=$(echo "$ASSET_DATA" | jq -r '.base')
+              DESCRIPTION=$(echo "$ASSET_DATA" | jq -r '.description // ""')
+
+              # Get chain of origin from IBC traces
+              CHAIN_ORIGIN=$(echo "$ASSET_DATA" | jq -r '
+                if .traces and (.traces | length > 0) then
+                  .traces[0].counterparty.chain_name
+                else
+                  "osmosis"
+                end
+              ')
+
+              echo "- **$symbol** - $NAME" >> workflow-summary.md
+              echo "  - **Chain:** $CHAIN_ORIGIN" >> workflow-summary.md
+              echo "  - **Denom:** \`$DENOM\`" >> workflow-summary.md
+              if [ -n "$DESCRIPTION" ] && [ "$DESCRIPTION" != "null" ]; then
+                echo "  - **Description:** $DESCRIPTION" >> workflow-summary.md
+              fi
+              echo "" >> workflow-summary.md
+            done < newly-verified.txt
+          fi
+
+          echo "**Updates Include:**" >> workflow-summary.md
+          echo "- Latest asset metadata from chain registry" >> workflow-summary.md
+          echo "- Updated denominations and display names" >> workflow-summary.md
+          echo "- Current asset logos and branding" >> workflow-summary.md
+          echo "- Trace information for IBC assets" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+          echo "---" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+
+          # Endpoint Validation
+          echo "## Endpoint Validation" >> workflow-summary.md
+
+          if [ -f validation-summary.md ]; then
+            cat validation-summary.md >> workflow-summary.md
+          fi
+
+      - name: Create Pull Request
+        id: cpr
+        continue-on-error: true
+        uses: peter-evans/create-pull-request@v8
         with:
-          github_token: "${{ secrets.GITHUB_TOKEN }}"
-          add_timestamp: false
-          commit_prefix: "[AUTO]"
-          commit_message: "assetlist and chainlist Update"
-          force: false
-          target_branch: update/assetlist_all
-      
-      - name: Create A PR
-        uses: devops-infra/action-pull-request@v0.4.2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: update/assetlist_all
-          target_branch: main
-          title: assetlist and chainlist Update
-          body: "**Automated pull request**"
-          old_string: "**THIS IS AN AUTOMATED UPDATE OF ASSETLIST.JSON AND CHAINLIST.JSON**"
-          new_string: "** Automatic pull request**"
-          get_diff: true
-          ignore_users: "dependabot"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "[AUTO] Asset and Chain Update"
+          branch: update/assetlist_all
+          title: "[AUTO] Asset and Chain Update"
+          body-path: workflow-summary.md
+          delete-branch: true
+
+      - name: Enable Auto-merge
+        if: steps.cpr.outputs.pull-request-number && github.event_name == 'schedule'
+        run: gh pr merge ${{ steps.cpr.outputs.pull-request-number }} --auto --squash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

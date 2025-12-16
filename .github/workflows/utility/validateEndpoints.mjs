@@ -22,6 +22,7 @@ import * as api_mgmt from "./api_management.mjs";
 
 import WebSocket from 'ws';
 import https from 'https';
+import fs from 'fs';
 
 //-- Globals --
 
@@ -68,11 +69,25 @@ const restEndpoints = [
 ];
 
 
-const numChainsToQuery = 4;
+// Determine number of chains to query based on workflow trigger type
+function getNumChainsToQuery() {
+  const eventName = process.env.GITHUB_EVENT_NAME || 'manual';
+
+  if (eventName === 'schedule') {
+    return 50;  // Scheduled Monday runs
+  } else if (eventName === 'workflow_dispatch') {
+    return 10;  // Manual workflow runs
+  } else {
+    return 4;   // Default for local testing
+  }
+}
+
+const numChainsToQuery = getNumChainsToQuery();
+console.error(`Validation mode: ${process.env.GITHUB_EVENT_NAME || 'default'} - Will query up to ${numChainsToQuery} chains`);
 const currentDateUTC = new Date();
 const oneDayInMs = 24 * 60 * 60 * 1000;
 const successReQueryDelay = 7 * oneDayInMs;
-const failureReQueryDelay = 30 * oneDayInMs;
+const failureReQueryDelay = 1 * oneDayInMs;  // Check failed endpoints daily
 const osmosisDomain = "https://osmosis.zone";
 
 //-- Functions --
@@ -373,7 +388,8 @@ const queryHTTP = (url) => {
 const logResult = (url, result, success) => {
   const status = result.success ? "SUCCESS" : `ERROR: ${result.errorCode || "UNKNOWN"}`;
   const message = `${result.errorCode || ""}: ${result.message || "No additional information"}`;
-  console.log(`[${status}] ${url.toString()} - ${message}`);
+  const urlString = url ? url.toString() : "null";
+  console.log(`[${status}] ${urlString} - ${message}`);
   console.log(`Compatible?: ${success}`);
 };
 
@@ -381,29 +397,59 @@ function getChainlist(chainName) {
   return zone.readFromFile(chainName, chainlistDir, chainlistFileName);
 }
 
-function getCounterpartyChainAddress(counterpartyChain, nodeType) {
+
+function getCounterpartyChainAddress(counterpartyChain, nodeType, endpointIndex = 0) {
   if (!counterpartyChain || !nodeType) { return; }
   if (nodeType === RPC_NODE) {
-    return counterpartyChain?.apis?.rpc?.[0]?.address;
+    return counterpartyChain?.apis?.rpc?.[endpointIndex]?.address;
   } else if (nodeType === REST_NODE) {
-    return counterpartyChain?.apis?.rest?.[0]?.address;
+    return counterpartyChain?.apis?.rest?.[endpointIndex]?.address;
   }
   return;
+}
+
+function getEndpointCount(counterpartyChain, nodeType) {
+  if (!counterpartyChain || !nodeType) { return 0; }
+  if (nodeType === RPC_NODE) {
+    return counterpartyChain?.apis?.rpc?.length || 0;
+  } else if (nodeType === REST_NODE) {
+    return counterpartyChain?.apis?.rest?.length || 0;
+  }
+  return 0;
 }
 
 
 async function validateCounterpartyChain(counterpartyChain) {
 
-  // Helper function to perform validation for a given test type
-  const validate = async (test) => {
+  // Helper function to perform validation for a given test type with a specific endpoint index
+  const validate = async (test, endpointIndex) => {
     const nodeType = getNodeType(test);
-    const baseUrl = getCounterpartyChainAddress(counterpartyChain, nodeType);
+    const baseUrl = getCounterpartyChainAddress(counterpartyChain, nodeType, endpointIndex);
     const protocol = getQueryProtocol(test);
     const endpoints = getEndpointsArray(test);
+
+    // Skip validation if no baseUrl (chain has no endpoints defined)
+    if (!baseUrl) {
+      return endpoints.map((endpoint) => ({
+        test,
+        url: null,
+        success: false,
+      }));
+    }
 
     return Promise.all(
       endpoints.map(async (endpoint) => {
         const url = constructUrl(baseUrl, endpoint, protocol);
+
+        // Handle null URL from constructUrl
+        if (!url) {
+          return {
+            test,
+            url: null,
+            success: false,
+          };
+        }
+
         const result = await queryUrl(url, test);
         const success = evaluateResult(result, test);
         logResult(url, result, success);
@@ -425,14 +471,71 @@ async function validateCounterpartyChain(counterpartyChain) {
     );
   };
 
-  // List of test types to validate
-  const testTypes = [RPC_CORS, RPC_WSS, RPC_ENDPOINTS, REST_CORS, REST_ENDPOINTS];
+  // RPC and REST tests are independent
+  const rpcTestTypes = [RPC_CORS, RPC_WSS, RPC_ENDPOINTS];
+  const restTestTypes = [REST_CORS, REST_ENDPOINTS];
 
-  // Run all validations concurrently
-  const results = await Promise.all(testTypes.map(validate));
+  // Get endpoint counts
+  const rpcCount = getEndpointCount(counterpartyChain, RPC_NODE);
+  const restCount = getEndpointCount(counterpartyChain, REST_NODE);
 
-  // Flatten and return all results
-  return results.flat();
+  // Find working RPC endpoint
+  let rpcResults = null;
+  let rpcEndpointIndex = 0;
+  let rpcAddress = null;
+
+  for (let i = 0; i < rpcCount; i++) {
+    const results = await Promise.all(rpcTestTypes.map(test => validate(test, i)));
+    const flatResults = results.flat();
+
+    rpcResults = flatResults;
+    rpcEndpointIndex = i;
+    rpcAddress = getCounterpartyChainAddress(counterpartyChain, RPC_NODE, i);
+
+    // Check if all RPC tests passed
+    const allPassed = flatResults.every(r => r.success && !r.stale);
+    if (allPassed) {
+      if (i > 0) {
+        console.log(`RPC Backup Used [${i}]: ${rpcAddress}`);
+      }
+      break;
+    }
+  }
+
+  // Find working REST endpoint
+  let restResults = null;
+  let restEndpointIndex = 0;
+  let restAddress = null;
+
+  for (let i = 0; i < restCount; i++) {
+    const results = await Promise.all(restTestTypes.map(test => validate(test, i)));
+    const flatResults = results.flat();
+
+    restResults = flatResults;
+    restEndpointIndex = i;
+    restAddress = getCounterpartyChainAddress(counterpartyChain, REST_NODE, i);
+
+    // Check if all REST tests passed
+    const allPassed = flatResults.every(r => r.success);
+    if (allPassed) {
+      if (i > 0) {
+        console.log(`REST Backup Used [${i}]: ${restAddress}`);
+      }
+      break;
+    }
+  }
+
+  // Combine results
+  const allResults = [...(rpcResults || []), ...(restResults || [])];
+
+  // Return results with endpoint information
+  return {
+    results: allResults,
+    rpcEndpointIndex,
+    restEndpointIndex,
+    rpcAddress,
+    restAddress
+  };
 
 }
 
@@ -445,13 +548,25 @@ function determineValidationSuccess(validationResults) {
   return true;
 }
 
-function constructValidationRecord(counterpartyChainName, validationResults) {
-  return {
+function constructValidationRecord(counterpartyChainName, validationData) {
+  const record = {
     chain_name: counterpartyChainName,
     validationDate: currentDateUTC,
-    validationSuccess: determineValidationSuccess(validationResults),
-    validationResults: validationResults
+    validationSuccess: determineValidationSuccess(validationData.results),
+    validationResults: validationData.results
   };
+
+  // Add backup endpoint information if any backup was used
+  if (validationData.rpcEndpointIndex > 0 || validationData.restEndpointIndex > 0) {
+    record.backupUsed = {
+      rpcEndpointIndex: validationData.rpcEndpointIndex,
+      restEndpointIndex: validationData.restEndpointIndex,
+      rpcAddress: validationData.rpcAddress,
+      restAddress: validationData.restAddress
+    };
+  }
+
+  return record;
 }
 
 function addValidationRecordsToState(state, chainName, validationRecords) {
@@ -506,35 +621,140 @@ function chainRecentlyQueried(state, chain_name) {
   return false;
 }
 
-async function validateEndpointsForAllCounterpartyChains(chainName) {
+function prioritizeChains(chainlist, state) {
+  const chainsWithPriority = chainlist.map(chain => {
+    const stateChain = state.chains?.find(c => c.chain_name === chain.chain_name);
 
-  if (chainName !== "osmosis") { return; } // temporary--just focusing on mainnet for now
+    let priority = 2; // Default: normal priority
+    let validationDate = null;
+    let validationSuccess = null;
+
+    if (stateChain) {
+      validationDate = new Date(stateChain.validationDate);
+      validationSuccess = stateChain.validationSuccess;
+
+      // Priority 1: Failed chains (most recent validation failed)
+      if (validationSuccess === false) {
+        priority = 1;
+      }
+    } else {
+      // Priority 1: Never validated chains
+      priority = 1;
+      validationDate = new Date(0); // Epoch time for never validated
+    }
+
+    return {
+      chain: chain,
+      priority: priority,
+      validationDate: validationDate,
+      validationSuccess: validationSuccess,
+      recentlyQueried: chainRecentlyQueried(state, chain.chain_name)
+    };
+  });
+
+  // Sort by priority first, then by validation date (oldest first)
+  chainsWithPriority.sort((a, b) => {
+    if (a.priority !== b.priority) {
+      return a.priority - b.priority;
+    }
+
+    if (a.validationDate && b.validationDate) {
+      return a.validationDate.getTime() - b.validationDate.getTime();
+    }
+
+    if (!a.validationDate) return -1;
+    if (!b.validationDate) return 1;
+    return 0;
+  });
+
+  return chainsWithPriority;
+}
+
+async function validateEndpointsForAllCounterpartyChains(chainName) {
+  if (chainName !== "osmosis") { return; }
   const chainlist = getChainlist(chainName)?.chains;
   if (!chainlist) { return; }
 
   let state = getState(chainName);
   let chainQueryQueue = [];
 
+  // Get prioritized chain list
+  const prioritizedChains = prioritizeChains(chainlist, state);
+
+  console.log(`\nChain Prioritization Summary:`);
+  console.log(`Total chains: ${chainlist.length}`);
+  const failedChains = prioritizedChains.filter(c => c.priority === 1 && c.validationSuccess === false);
+  const neverValidated = prioritizedChains.filter(c => c.priority === 1 && c.validationSuccess === null);
+  console.log(`Priority 1 - Failed: ${failedChains.length}, Never validated: ${neverValidated.length}`);
+  console.log(`Target: ${numChainsToQuery} chains\n`);
+
+  // Build queue respecting requery delays and priority
   let numChainsQueried = 0;
-  for (const counterpartyChain of chainlist) {
+  for (const prioritizedChain of prioritizedChains) {
     if (numChainsQueried >= numChainsToQuery) { break; }
-    if (chainRecentlyQueried(state, counterpartyChain.chain_name)) { continue; }  //Skip Recently Queried Chains
-    chainQueryQueue.push(counterpartyChain);
+    if (prioritizedChain.recentlyQueried) { continue; }
+
+    // Skip killed chains
+    if (prioritizedChain.chain.status === 'killed') {
+      console.log(`Skipping killed chain: ${prioritizedChain.chain.chain_name}`);
+      continue;
+    }
+
+    chainQueryQueue.push(prioritizedChain.chain);
     numChainsQueried++;
+    console.log(`[${numChainsQueried}/${numChainsToQuery}] ${prioritizedChain.chain.chain_name} (Priority ${prioritizedChain.priority}, Last: ${prioritizedChain.validationDate?.toISOString() || 'never'})`);
   }
 
-  // Generate validation promises and return records directly
+  if (chainQueryQueue.length === 0) {
+    console.log("\nNo chains need validation. All recently queried.");
+    return;
+  }
+
+  console.log(`\nValidating ${chainQueryQueue.length} chains...\n`);
+
+  // Generate validation promises
   const validationPromises = chainQueryQueue.map(async (counterpartyChain) => {
     const validationResults = await validateCounterpartyChain(counterpartyChain);
     return constructValidationRecord(counterpartyChain.chain_name, validationResults);
   });
 
-  // Wait for all validations and collect the records
   const validationRecords = await Promise.all(validationPromises);
-
-  // Add validation records to state
   addValidationRecordsToState(state, chainName, validationRecords);
+}
 
+async function fullValidation(chainName) {
+
+  if (chainName !== "osmosis") { return; } // temporary--just focusing on mainnet for now
+  const chainlist = getChainlist(chainName)?.chains;
+  if (!chainlist) { return; }
+
+  let state = getState(chainName);
+
+  console.log(`Starting full validation of ${chainlist.length} chains...`);
+
+  // Validate chains in batches to avoid overwhelming the system
+  const batchSize = 10;
+  for (let i = 0; i < chainlist.length; i += batchSize) {
+    const batch = chainlist.slice(i, Math.min(i + batchSize, chainlist.length));
+
+    console.log(`Validating chains ${i + 1}-${Math.min(i + batchSize, chainlist.length)} of ${chainlist.length}...`);
+
+    // Generate validation promises for this batch
+    const validationPromises = batch.map(async (counterpartyChain) => {
+      const validationResults = await validateCounterpartyChain(counterpartyChain);
+      return constructValidationRecord(counterpartyChain.chain_name, validationResults);
+    });
+
+    // Wait for all validations in this batch and collect the records
+    const validationRecords = await Promise.all(validationPromises);
+
+    // Add validation records to state
+    addValidationRecordsToState(state, chainName, validationRecords);
+
+    console.log(`Batch completed. ${Math.min(i + batchSize, chainlist.length)}/${chainlist.length} chains validated.`);
+  }
+
+  console.log('Full validation complete!');
 }
 
 function routineBulkValidation() {
@@ -569,6 +789,87 @@ async function validateSpecificChain(chainName, chain_name) {
 
 }
 
+function generateValidationReport(chainName) {
+  const state = getState(chainName);
+
+  if (!state.chains || state.chains.length === 0) {
+    console.log("\nNo validation data available.");
+    return;
+  }
+
+  // Get chainlist to check for killed chains
+  const chainlist = getChainlist(chainName);
+  const killedChainNames = chainlist?.chains
+    ?.filter(c => c.status === 'killed')
+    ?.map(c => c.chain_name) || [];
+
+  const failedChains = state.chains.filter(chain => {
+    if (chain.validationSuccess !== false) return false;
+
+    // Skip killed chains
+    if (killedChainNames.includes(chain.chain_name)) return false;
+
+    // Only include chains where at least one endpoint type completely failed
+    const rpcTests = chain.validationResults?.filter(r => r.test.includes('RPC')) || [];
+    const restTests = chain.validationResults?.filter(r => r.test.includes('REST')) || [];
+
+    const rpcAllFailed = rpcTests.length > 0 && rpcTests.every(t => !t.success);
+    const restAllFailed = restTests.length > 0 && restTests.every(t => !t.success);
+
+    // Include if at least one endpoint type completely failed (exclude double partials)
+    return rpcAllFailed || restAllFailed;
+  }).sort((a, b) => {
+    // Sort by newest validation first
+    const dateA = new Date(a.validationDate);
+    const dateB = new Date(b.validationDate);
+    return dateB.getTime() - dateA.getTime();
+  });
+
+  let report = `**Chains Validated This Run:** ${process.env.CHAINS_VALIDATED || 'N/A'}\n`;
+  report += `**Total Chains in State:** ${state.chains.length}\n`;
+  report += `**Failed Endpoints:** ${failedChains.length}\n`;
+  report += `**Success Rate:** ${((state.chains.length - failedChains.length) / state.chains.length * 100).toFixed(1)}%\n\n`;
+
+  if (failedChains.length === 0) {
+    report += `### ✅ All Chains Validated Successfully\n\n`;
+  } else {
+    report += `### ⚠️ Failed Endpoints\n\n`;
+    report += `| Chain Name | Last Validation | Days Ago | RPC Status | REST Status |\n`;
+    report += `|------------|----------------|----------|------------|-------------|\n`;
+
+    failedChains.forEach(chain => {
+      const validationDate = new Date(chain.validationDate);
+      const daysSince = Math.floor((new Date().getTime() - validationDate.getTime()) / oneDayInMs);
+
+      const rpcTests = chain.validationResults?.filter(r => r.test.includes('RPC')) || [];
+      const restTests = chain.validationResults?.filter(r => r.test.includes('REST')) || [];
+
+      const rpcAllFailed = rpcTests.every(t => !t.success);
+      const restAllFailed = restTests.every(t => !t.success);
+
+      const rpcStatus = rpcAllFailed ? '❌ All Failed' : '⚠️ Partial';
+      const restStatus = restAllFailed ? '❌ All Failed' : '⚠️ Partial';
+
+      report += `| ${chain.chain_name} | ${validationDate.toISOString().split('T')[0]} | ${daysSince} | ${rpcStatus} | ${restStatus} |\n`;
+    });
+    report += `\n`;
+  }
+
+  // Always output report to stdout (for capturing to file)
+  console.log(report);
+
+  // Also write to GitHub Actions summary if available
+  const summaryFile = process.env.GITHUB_STEP_SUMMARY;
+  if (summaryFile) {
+    try {
+      fs.appendFileSync(summaryFile, report);
+      console.error("✓ Report written to GitHub Actions summary");
+    } catch (error) {
+      console.error("Failed to write summary:", error);
+    }
+  }
+}
+
 //routineBulkValidation();
 
 const functions = {
@@ -576,9 +877,17 @@ const functions = {
     console.log("Running routineBulkValidation...");
     routineBulkValidation();
   },
+  fullValidation: (chainName = "osmosis") => {
+    console.log("Running fullValidation...");
+    fullValidation(chainName);
+  },
   validateSpecificChain: (chainName, chain_name) => {
     console.log("Running validateSpecificChain...");
     validateSpecificChain(chainName, chain_name);
+  },
+  generateReport: (chainName = "osmosis") => {
+    console.error("Running generateReport...");
+    generateValidationReport(chainName);
   },
 };
 

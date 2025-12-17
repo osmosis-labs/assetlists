@@ -45,8 +45,8 @@ jobs:
       - name: Run code to Validate Endpoints
         working-directory: ./.github/workflows/utility
         run: |
-          node validateEndpoints.mjs routineBulkValidation 2>&1 | tee validation.log
-          CHAINS_VALIDATED=$(grep -oP 'Validating \K[0-9]+' validation.log | head -1 || echo "0")
+          node validateEndpoints.mjs routineBulkValidation 2>&1 | tee ../../../validation.log
+          CHAINS_VALIDATED=$(grep -oP 'Validating \K[0-9]+' ../../../validation.log | head -1 || echo "0")
           echo "CHAINS_VALIDATED=$CHAINS_VALIDATED" >> $GITHUB_ENV
 
       - name: Generate Validation Report

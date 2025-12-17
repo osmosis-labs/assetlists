@@ -174,17 +174,11 @@ jobs:
             while IFS= read -r symbol; do
               ASSET_DATA=$(jq -r ".assets[] | select(.symbol==\"$symbol\")" osmosis-1/generated/frontend/assetlist.json)
               NAME=$(echo "$ASSET_DATA" | jq -r '.name')
-              DENOM=$(echo "$ASSET_DATA" | jq -r '.base')
+              DENOM=$(echo "$ASSET_DATA" | jq -r '.coinMinimalDenom')
               DESCRIPTION=$(echo "$ASSET_DATA" | jq -r '.description // ""')
 
-              # Get chain of origin from IBC traces
-              CHAIN_ORIGIN=$(echo "$ASSET_DATA" | jq -r '
-                if .traces and (.traces | length > 0) then
-                  .traces[0].counterparty.chain_name
-                else
-                  "osmosis"
-                end
-              ')
+              # Get chain of origin
+              CHAIN_ORIGIN=$(echo "$ASSET_DATA" | jq -r '.chainName')
 
               echo "- **$symbol** - $NAME" >> workflow-summary.md
               echo "  - **Chain:** $CHAIN_ORIGIN" >> workflow-summary.md
@@ -202,17 +196,11 @@ jobs:
             while IFS= read -r symbol; do
               ASSET_DATA=$(jq -r ".assets[] | select(.symbol==\"$symbol\")" osmosis-1/generated/frontend/assetlist.json)
               NAME=$(echo "$ASSET_DATA" | jq -r '.name')
-              DENOM=$(echo "$ASSET_DATA" | jq -r '.base')
+              DENOM=$(echo "$ASSET_DATA" | jq -r '.coinMinimalDenom')
               DESCRIPTION=$(echo "$ASSET_DATA" | jq -r '.description // ""')
 
-              # Get chain of origin from IBC traces
-              CHAIN_ORIGIN=$(echo "$ASSET_DATA" | jq -r '
-                if .traces and (.traces | length > 0) then
-                  .traces[0].counterparty.chain_name
-                else
-                  "osmosis"
-                end
-              ')
+              # Get chain of origin
+              CHAIN_ORIGIN=$(echo "$ASSET_DATA" | jq -r '.chainName')
 
               echo "- **$symbol** - $NAME" >> workflow-summary.md
               echo "  - **Chain:** $CHAIN_ORIGIN" >> workflow-summary.md

@@ -54667,6 +54667,51 @@
       "unstable": false,
       "disabled": false,
       "preview": false
+    },
+    {
+      "chainName": "terra2",
+      "sourceDenom": "factory/terra1zly98gvcec54m3caxlqexce7rus6rzgplz7eketsdz7nh750h2rqvu8uzx/32/project/amplp",
+      "coinMinimalDenom": "ibc/CA856981A3BA81CB5D4D54B146DD1E6F50E0F6A11A0E381CE26C8EDBC8AD48AA",
+      "symbol": "LUNA-ampLUNA-ampLP",
+      "decimals": 6,
+      "logoURIs": {},
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "terra2",
+            "chainId": "phoenix-1",
+            "sourceDenom": "factory/terra1zly98gvcec54m3caxlqexce7rus6rzgplz7eketsdz7nh750h2rqvu8uzx/32/project/amplp",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-251",
+            "path": "transfer/channel-251/factory/terra1zly98gvcec54m3caxlqexce7rus6rzgplz7eketsdz7nh750h2rqvu8uzx/32/project/amplp"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "terra2",
+          "sourceDenom": "factory/terra1zly98gvcec54m3caxlqexce7rus6rzgplz7eketsdz7nh750h2rqvu8uzx/32/project/amplp",
+          "chainType": "cosmos",
+          "chainId": "phoenix-1",
+          "symbol": "LUNA-ampLUNA-ampLP",
+          "decimals": 6,
+          "logoURIs": {}
+        }
+      ],
+      "variantGroupKey": "ibc/CA856981A3BA81CB5D4D54B146DD1E6F50E0F6A11A0E381CE26C8EDBC8AD48AA",
+      "name": "Eris Protocol LUNA/ampLUNA ampLP",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
     }
   ]
 }

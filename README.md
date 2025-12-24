@@ -98,6 +98,8 @@ You only need to manually configure a chain in `osmosis.zone_chains.json` if you
   - `bech32_prefix` - Address prefix
   - `fees` - Custom fee configuration
   - `images` - Custom chain logo
+  - `force_rpc` - Boolean flag to force using ONLY the zone-specified RPC endpoint (ignores Chain Registry endpoints)
+  - `force_rest` - Boolean flag to force using ONLY the zone-specified REST endpoint (ignores Chain Registry endpoints)
 - `outage` - Boolean flag to indicate if chain is experiencing an outage
 
 **Example Chain Object:**
@@ -111,6 +113,37 @@ You only need to manually configure a chain in `osmosis.zone_chains.json` if you
   "_comment": "Cosmos Hub"
 }
 ```
+
+**Example Chain Object with Endpoint Override:**
+```json
+{
+  "chain_name": "stride",
+  "rpc": "https://stride-rpc.polkachu.com/",
+  "rest": "https://stride-api.polkachu.com/",
+  "explorer_tx_url": "https://explorer.stride.zone/stride/tx/${txHash}",
+  "keplr_features": ["ibc-go"],
+  "override_properties": {
+    "force_rest": true
+  },
+  "_comment": "Force using only the specified REST endpoint, ignoring Chain Registry backups"
+}
+```
+
+### Endpoint Override Behavior
+
+By default, when you specify `rpc` or `rest` endpoints in your chain configuration:
+1. Your zone-specified endpoint is placed **first** in the endpoint list
+2. Chain Registry endpoints are added as **backups**
+3. The validation algorithm may automatically reorder endpoints based on health checks
+
+To ensure **only** your specified endpoint is used (no Chain Registry backups):
+- Set `"force_rpc": true` in `override_properties` to use only your RPC endpoint
+- Set `"force_rest": true` in `override_properties` to use only your REST endpoint
+
+This is useful when:
+- You have a highly reliable endpoint that doesn't need backups
+- You want to prevent the validation algorithm from testing or using alternative endpoints
+- Chain Registry endpoints are experiencing issues
 
 ## Zone Example
 

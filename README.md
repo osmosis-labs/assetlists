@@ -1,12 +1,44 @@
-# Asset Lists
+# Osmosis Assetlists
 
 ## Description
 
-Inspired by Ethereum's [Token Lists](https://tokenlists.org/) project, Asset Lists aim to enhance the discoverability of Cosmos SDK denominations by associating them with metadata. While primarily used for assets transferred over IBC, this standard is still evolving. The `assets` format in the assetlist.json structure closely mirrors Cosmos SDK's [`banktypes.DenomMetadata`](https://docs.cosmos.network/v0.47/modules/bank#denommetadata), paving the way for potential migration into a Cosmos SDK module for on-chain maintenance in the future. Find the assetlist JSON Schema at the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry/blob/master/assetlist.schema.json).
+This repository generates asset and chain information for the [Osmosis Zone](https://app.osmosis.zone) frontend. It uses the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry) as the source of truth for asset metadata, then layers Osmosis-specific configurations on top:
 
-## Prerequisite
+- **Reliable Endpoints** - Curated RPC/REST endpoints with validation and health monitoring
+- **Transfer Methods** - Custom transfer configurations for assets requiring special handling
+- **Verification Status** - Asset verification flags based on [listing criteria](LISTING.md)
+- **Categories** - Asset categorization (DeFi, meme tokens, etc.) for frontend filtering
+- **Property Overrides** - Osmosis-specific display properties when needed
 
-The `.assetlist.json` files herein are generated, which will be triggered by additions to the corresponding `osmosis.zone_assets.json` file, fetching the metadata from the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry). The primary prerequisite to adding an asset here is complete registration of the asset and it's originating chain (and the IBC connection between the origin chain and Osmosis, if not native to Osmosis) to the Cosmos Chain Registry, so please make sure that's done first. We have [a guide](https://docs.osmosis.zone/overview/integrate/registration) on registering a Chain and Asset to the Cosmos Chain Registry.
+The generated files power the Osmosis Zone interface, providing wallet integration, asset discovery, and chain connectivity information. Asset metadata (logos, descriptions, social links) comes from Chain Registry and is automatically updated during scheduled runs.
+
+## Prerequisite: Chain Registry Registration
+
+**The Cosmos Chain Registry is the source of truth for all asset metadata.** Assets are automatically listed on Osmosis once properly registered in Chain Registry.
+
+### Submission Workflow
+
+1. **Submit PR to Chain Registry** - Register your chain and asset at the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry)
+   - Include complete asset metadata (name, symbol, logo, description, etc.)
+   - Register IBC connection information between your chain and Osmosis (if applicable)
+   - Follow the [Chain Registry contribution guide](https://docs.osmosis.zone/overview/integrate/registration)
+
+2. **Wait for Chain Registry PR to be merged** - Once your PR is approved and merged into Chain Registry
+
+3. **Automatic Generation** - Automated runs in this repo occur twice weekly (Mondays and Thursdays at 09:00 UTC) and will:
+   - Pull latest Chain Registry data
+   - Automatically detect new assets with IBC connections to Osmosis
+   - Generate assetlists with your complete metadata from Chain Registry
+   - Make your asset visible on Osmosis frontend
+   - Can also be triggered manually by maintainers
+
+4. **Optional: Add Zone Configuration** - Add an entry to `osmosis.zone_assets.json` in this repository:
+   - Set asset categories (`"defi"`, `"meme"`, etc.)
+   - Request verified status (`osmosis_verified: true` - requires meeting [verification criteria](LISTING.md))
+   - Configure custom transfer methods or property overrides
+   - **Note:** This step is NOT required for basic asset listing - assets are automatically included based on Chain Registry data
+
+**Important:** All asset metadata (images, descriptions, social links, etc.) comes from Chain Registry. To update asset information, submit PRs to Chain Registry, not this repository. Changes will be automatically picked up during the next automated run (twice weekly).
 
 ## Repository Structure
 
@@ -44,11 +76,13 @@ osmo-test-5/                  # Testnet configuration
   └── (same structure as mainnet)
 ```
 
-## How to Add Assets
+## Zone Asset Configuration (Optional)
 
-Please see the asset [listing requirements](https://github.com/osmosis-labs/assetlists/blob/main/LISTING.md) for information about displaying assets on Osmosis Zone.
+**Note:** Adding assets to `osmosis.zone_assets.json` is optional. Assets with IBC connections to Osmosis are automatically detected and listed from Chain Registry. Only add zone configuration if you need categories, verification status, or custom overrides.
 
-To add an asset, add a new asset object to the very bottom of the _osmosis.zone_assets.json_ file, containing some identifying and key details:
+Please see the asset [listing requirements](https://github.com/osmosis-labs/assetlists/blob/main/LISTING.md) for information about verification and display requirements on Osmosis Zone.
+
+To configure zone-specific properties, add an asset object to the very bottom of the _osmosis.zone_assets.json_ file with these identifying details:
 - `base_denom` is the minimal/indivisible (i.e., exponent: 0) denomination unit for the asset, corresponding to its `base` at the Chain Registry.
 - `chain_name` must be the exact value defined as `chain_name` in the chain's _chain.json_ file at the Chain Registry.
 - `path` is required for all ics20 assets (i.e., assets that are transferred to Osmosis from another chain via IBC); the only exception are asset deployed directly on Osmosis (e.g., factory tokens). It is comprised of: the destination IBC port and channel for each IBC hop, followed by the base denom on the IBC-originating chain. The is used as input into the SHA256 hash function.
@@ -98,6 +132,8 @@ You only need to manually configure a chain in `osmosis.zone_chains.json` if you
   - `bech32_prefix` - Address prefix
   - `fees` - Custom fee configuration
   - `images` - Custom chain logo
+  - `force_rpc` - Boolean flag to force using ONLY the zone-specified RPC endpoint (ignores Chain Registry endpoints)
+  - `force_rest` - Boolean flag to force using ONLY the zone-specified REST endpoint (ignores Chain Registry endpoints)
 - `outage` - Boolean flag to indicate if chain is experiencing an outage
 
 **Example Chain Object:**
@@ -111,6 +147,37 @@ You only need to manually configure a chain in `osmosis.zone_chains.json` if you
   "_comment": "Cosmos Hub"
 }
 ```
+
+**Example Chain Object with Endpoint Override:**
+```json
+{
+  "chain_name": "stride",
+  "rpc": "https://stride-rpc.polkachu.com/",
+  "rest": "https://stride-api.polkachu.com/",
+  "explorer_tx_url": "https://explorer.stride.zone/stride/tx/${txHash}",
+  "keplr_features": ["ibc-go"],
+  "override_properties": {
+    "force_rest": true
+  },
+  "_comment": "Force using only the specified REST endpoint, ignoring Chain Registry backups"
+}
+```
+
+### Endpoint Override Behavior
+
+By default, when you specify `rpc` or `rest` endpoints in your chain configuration:
+1. Your zone-specified endpoint is placed **first** in the endpoint list
+2. Chain Registry endpoints are added as **backups**
+3. The validation algorithm may automatically reorder endpoints based on health checks
+
+To ensure **only** your specified endpoint is used (no Chain Registry backups):
+- Set `"force_rpc": true` in `override_properties` to use only your RPC endpoint
+- Set `"force_rest": true` in `override_properties` to use only your REST endpoint
+
+This is useful when:
+- You have a highly reliable endpoint that doesn't need backups
+- You want to prevent the validation algorithm from testing or using alternative endpoints
+- Chain Registry endpoints are experiencing issues
 
 ## Zone Example
 
@@ -159,7 +226,7 @@ Note that there are apps, interfaces, and tools that look at this repository as 
 
 This repository uses GitHub Actions workflows to automatically generate and validate files:
 
-**Scheduled Generation** (Every Monday at 12:00 UTC):
+**Scheduled Generation** (Twice weekly: Mondays and Thursdays at 09:00 UTC):
 The `Generate All Files` bundle workflow runs automatically and includes:
 - Updates the chain-registry submodule to the latest version
 - Validates RPC/REST endpoints (7 endpoints per run for performance)

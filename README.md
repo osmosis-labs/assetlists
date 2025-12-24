@@ -1,8 +1,16 @@
-# Asset Lists
+# Osmosis Assetlists
 
 ## Description
 
-Inspired by Ethereum's [Token Lists](https://tokenlists.org/) project, Asset Lists aim to enhance the discoverability of Cosmos SDK denominations by associating them with metadata. While primarily used for assets transferred over IBC, this standard is still evolving. The `assets` format in the assetlist.json structure closely mirrors Cosmos SDK's [`banktypes.DenomMetadata`](https://docs.cosmos.network/v0.47/modules/bank#denommetadata), paving the way for potential migration into a Cosmos SDK module for on-chain maintenance in the future. Find the assetlist JSON Schema at the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry/blob/master/assetlist.schema.json).
+This repository generates asset and chain information for the [Osmosis Zone](https://app.osmosis.zone) frontend. It uses the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry) as the source of truth for asset metadata, then layers Osmosis-specific configurations on top:
+
+- **Reliable Endpoints** - Curated RPC/REST endpoints with validation and health monitoring
+- **Transfer Methods** - Custom transfer configurations for assets requiring special handling
+- **Verification Status** - Asset verification flags based on [listing criteria](LISTING.md)
+- **Categories** - Asset categorization (DeFi, meme tokens, etc.) for frontend filtering
+- **Property Overrides** - Osmosis-specific display properties when needed
+
+The generated files power the Osmosis Zone interface, providing wallet integration, asset discovery, and chain connectivity information. Asset metadata (logos, descriptions, social links) comes from Chain Registry and is automatically updated during scheduled runs.
 
 ## Prerequisite: Chain Registry Registration
 

@@ -256,6 +256,10 @@ This repository uses GitHub Actions workflows to automatically generate and vali
 **Scheduled Generation** (Twice weekly: Mondays and Thursdays at 09:00 UTC):
 The `Generate All Files` bundle workflow runs automatically and includes:
 - Updates the chain-registry submodule to the latest version
+- Adds chain stubs to `osmosis.zone_chains.json` for any newly detected chains
+  - Creates minimal entries (chain_name + comment) for chains in `zone_assets.json` not yet in `zone_chains.json`
+  - Makes it easy for maintainers to add custom RPC/REST endpoints later
+  - All fields default to Chain Registry values unless explicitly overridden
 - Validates RPC/REST endpoints (priority-based selection: 10 of ~180 chains per run)
   - Prioritizes: Failed chains (1 day requery delay) → Never-validated chains → Oldest-validated chains (7 day requery delay)
   - Tracks validation results in `state/state.json` for endpoint optimization

@@ -305,18 +305,25 @@ Individual generation workflows can be triggered manually via GitHub Actions:
 
 Changes to generated files are automatically deployed to the Osmosis Zone frontend via Vercel:
 
-**Trigger Conditions:**
-- Changes to `osmosis-1/generated/frontend/assetlist.json` on the `main` branch
-- Changes to `osmosis-1/generated/frontend/chainlist.json` on the `main` branch
+**Deployment Schedule:**
+- **Scheduled**: Every Monday and Thursday at 09:30 UTC (30 minutes after generation workflow completes)
+- **Manual**: Can be triggered manually via GitHub Actions workflow dispatch
+- **Fallback**: Push to main (won't trigger with auto-merge due to GITHUB_TOKEN limitation)
+
+**Monitored Files:**
+- `osmosis-1/generated/frontend/assetlist.json` and `chainlist.json` (mainnet)
+- `osmo-test-5/generated/frontend/assetlist.json` and `chainlist.json` (testnet)
 
 **Deployment Flow:**
-1. PR with generated files is merged to `main` branch
-2. Vercel webhook is automatically triggered
-3. Vercel builds and deploys to preview environment
-4. After validation, changes are promoted to production
-5. Osmosis Zone app reflects the updated asset and chain data
+1. Generation workflow completes at 09:00 UTC (Mon/Thu) and auto-merges to `main`
+2. 30 minutes later (09:30 UTC), deployment workflow runs on schedule
+3. Workflow checks if monitored files were modified in the last 2 hours
+4. **If files unchanged**: Deployment is skipped (no unnecessary Vercel builds)
+5. **If files changed**: Vercel webhooks are triggered (preview + production for mainnet, testnet separately)
+6. Vercel builds and deploys to environments
+7. Osmosis Zone app reflects updated data within ~30-45 minutes of generation
 
-This completes the full pipeline: **Chain Registry → Detection → Generation → PR → Merge → Deployment → Frontend**
+This completes the full pipeline: **Chain Registry → Detection → Generation → PR → Merge → Scheduled Deployment → Frontend**
 
 ### Validation Workflows
 

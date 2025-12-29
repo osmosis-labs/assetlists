@@ -39884,6 +39884,55 @@
       "preview": false
     },
     {
+      "chainName": "mirage",
+      "sourceDenom": "umirage",
+      "coinMinimalDenom": "ibc/FD0C5BF3009F3300961E52E4E0160D6901B1B3E7D0475766C5D960A9D3999B32",
+      "symbol": "MIRAGE",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mirage/images/mirage.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "mirage",
+            "chainId": "mirage-1",
+            "sourceDenom": "umirage",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-108600",
+            "path": "transfer/channel-108600/umirage"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "mirage",
+          "sourceDenom": "umirage",
+          "chainType": "cosmos",
+          "chainId": "mirage-1",
+          "symbol": "MIRAGE",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mirage/images/mirage.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/FD0C5BF3009F3300961E52E4E0160D6901B1B3E7D0475766C5D960A9D3999B32",
+      "name": "Mirage",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "neutron",
       "sourceDenom": "factory/neutron14henrqx9y328fjrdvz6l6d92r0t7g5hk86q5nd/uastropepe",
       "coinMinimalDenom": "ibc/0FC38457AF15A8BD1962BB97DDF1AB5EF4C74C5BFDAEF00289A9C405CBD609B0",
@@ -52909,6 +52958,55 @@
       ],
       "variantGroupKey": "ibc/84D406C9108CFE59DE3E186DE1D00606AC42DA5ACFBFE7DF903AD54CE5F64143",
       "name": "OLDbglUSDC",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "stargaze",
+      "sourceDenom": "factory/stars1khzuhuhv02vaturh9x9lz4jach824x9umcgghl/uclw",
+      "coinMinimalDenom": "ibc/0F06B3163AE2FDA784AD320734E22B4BD82FC4F034A07F502EF73CAE7E797C45",
+      "symbol": "CLW",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/clw.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "stargaze",
+            "chainId": "stargaze-1",
+            "sourceDenom": "factory/stars1khzuhuhv02vaturh9x9lz4jach824x9umcgghl/uclw",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-75",
+            "path": "transfer/channel-75/factory/stars1khzuhuhv02vaturh9x9lz4jach824x9umcgghl/uclw"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "stargaze",
+          "sourceDenom": "factory/stars1khzuhuhv02vaturh9x9lz4jach824x9umcgghl/uclw",
+          "chainType": "cosmos",
+          "chainId": "stargaze-1",
+          "symbol": "CLW",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/clw.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/0F06B3163AE2FDA784AD320734E22B4BD82FC4F034A07F502EF73CAE7E797C45",
+      "name": "Clown Society",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

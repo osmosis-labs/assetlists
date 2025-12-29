@@ -42,6 +42,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Add Chain Stubs
+        working-directory: ./.github/workflows/utility
+        run: node add_chain_stubs.mjs osmosis-1
+
       - name: Run code to Validate Endpoints
         working-directory: ./.github/workflows/utility
         run: |

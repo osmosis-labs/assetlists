@@ -14,7 +14,7 @@ The generated files power the Osmosis Zone interface, providing wallet integrati
 
 ## Prerequisite: Chain Registry Registration
 
-**The Cosmos Chain Registry is the source of truth for all asset metadata.** Assets are automatically listed on Osmosis once properly registered in Chain Registry.
+**The Cosmos Chain Registry is the source of truth for all asset metadata.** Assets registered in Chain Registry with IBC connections to Osmosis are automatically detected and added to `osmosis.zone_assets.json` during scheduled workflow runs (twice weekly), making them visible on Osmosis Zone.
 
 ### Submission Workflow
 
@@ -25,18 +25,19 @@ The generated files power the Osmosis Zone interface, providing wallet integrati
 
 2. **Wait for Chain Registry PR to be merged** - Once your PR is approved and merged into Chain Registry
 
-3. **Automatic Generation** - Automated runs in this repo occur twice weekly (Mondays and Thursdays at 09:00 UTC) and will:
+3. **Automatic Detection and Listing** - Automated runs in this repo occur twice weekly (Mondays and Thursdays at 09:00 UTC) and will:
    - Pull latest Chain Registry data
    - Automatically detect new assets with IBC connections to Osmosis
+   - Automatically add detected assets to `osmosis.zone_assets.json`
    - Generate assetlists with your complete metadata from Chain Registry
    - Make your asset visible on Osmosis frontend
    - Can also be triggered manually by maintainers
 
-4. **Optional: Add Zone Configuration** - Add an entry to `osmosis.zone_assets.json` in this repository:
+4. **Optional: Configure Additional Properties** - Manually edit your entry in `osmosis.zone_assets.json` if you need to:
    - Set asset categories (`"defi"`, `"meme"`, etc.)
    - Request verified status (`osmosis_verified: true` - requires meeting [verification criteria](LISTING.md))
    - Configure custom transfer methods or property overrides
-   - **Note:** This step is NOT required for basic asset listing - assets are automatically included based on Chain Registry data
+   - Override display properties from Chain Registry
 
 **Important:** All asset metadata (images, descriptions, social links, etc.) comes from Chain Registry. To update asset information, submit PRs to Chain Registry, not this repository. Changes will be automatically picked up during the next automated run (twice weekly).
 
@@ -45,9 +46,9 @@ The generated files power the Osmosis Zone interface, providing wallet integrati
 This repository contains several types of files organized by chain:
 
 ### Input Files (Zone Configuration)
-These files are manually maintained and serve as input for automated generation:
-- **`osmosis.zone_assets.json`** - Configuration for assets to be listed on Osmosis Zone. Add new assets here.
-- **`osmosis.zone_chains.json`** - Configuration for chains to be supported on Osmosis Zone. Includes RPC/REST endpoints, explorers, and chain-specific settings.
+These files serve as input for automated generation:
+- **`osmosis.zone_assets.json`** - Configuration for assets on Osmosis Zone. Auto-populated by workflow for detected assets; manually edit for categories, verification, and overrides.
+- **`osmosis.zone_chains.json`** - Manual configuration for chains with custom RPC/REST endpoints, explorers, and chain-specific settings.
 - **`osmosis.zone_config.json`** - General configuration and settings for the zone.
 
 ### Generated Files
@@ -76,13 +77,23 @@ osmo-test-5/                  # Testnet configuration
   └── (same structure as mainnet)
 ```
 
-## Zone Asset Configuration (Optional)
+## Zone Asset Configuration
 
-**Note:** Adding assets to `osmosis.zone_assets.json` is optional. Assets with IBC connections to Osmosis are automatically detected and listed from Chain Registry. Only add zone configuration if you need categories, verification status, or custom overrides.
+**How Assets Are Added to `osmosis.zone_assets.json`:**
+
+1. **Automatically by Workflow** - Assets with IBC connections to Osmosis are automatically detected from Chain Registry and added to `osmosis.zone_assets.json` during scheduled runs (twice weekly).
+
+2. **Manually for Additional Configuration** - You can manually add or edit entries in `osmosis.zone_assets.json` to configure:
+   - Asset categories (`"defi"`, `"meme"`, etc.)
+   - Verification status (`osmosis_verified: true` or `false`)
+   - Custom transfer methods
+   - Property overrides
 
 Please see the asset [listing requirements](https://github.com/osmosis-labs/assetlists/blob/main/LISTING.md) for information about verification and display requirements on Osmosis Zone.
 
-To configure zone-specific properties, add an asset object to the very bottom of the _osmosis.zone_assets.json_ file with these identifying details:
+### Asset Object Structure
+
+When the workflow adds an asset (or if you manually edit), each asset object in _osmosis.zone_assets.json_ includes these identifying details:
 - `base_denom` is the minimal/indivisible (i.e., exponent: 0) denomination unit for the asset, corresponding to its `base` at the Chain Registry.
 - `chain_name` must be the exact value defined as `chain_name` in the chain's _chain.json_ file at the Chain Registry.
 - `path` is required for all ics20 assets (i.e., assets that are transferred to Osmosis from another chain via IBC); the only exception are asset deployed directly on Osmosis (e.g., factory tokens). It is comprised of: the destination IBC port and channel for each IBC hop, followed by the base denom on the IBC-originating chain. The is used as input into the SHA256 hash function.
@@ -99,13 +110,16 @@ There are also some additional details that may be defined for an asset:
 
 ### Automatic Chain Inclusion
 
-**You typically don't need to manually add chains.** When you add an asset to `osmosis.zone_assets.json`, the automated generation process will:
-1. Detect the asset's origin chain from Chain Registry
-2. Automatically include that chain in the generated chainlist
-3. Fetch all necessary chain metadata from Chain Registry
-4. Generate wallet-compatible chain configuration
+**You typically don't need to manually add chains.** The generated chainlist includes chains from two sources:
 
-This means chains are automatically added as counterparty chains whenever their assets are listed.
+1. **Manually Configured Chains** (~47 chains) - Chains in `osmosis.zone_chains.json` with custom endpoints and settings (takes precedence)
+2. **Auto-Detected Counterparty Chains** (~133 chains) - Origin chains of assets listed in `osmosis.zone_assets.json`, automatically detected and included from Chain Registry
+
+The automated generation process merges these sources:
+- Manual chains from `osmosis.zone_chains.json` are used first (with your custom RPC/REST endpoints and overrides)
+- Auto-detected counterparty chains supplement the manual list
+- Chain metadata is fetched from Chain Registry for both
+- Wallet-compatible chain configuration is generated for all chains
 
 ### Manual Chain Configuration (Optional)
 
@@ -168,11 +182,18 @@ You only need to manually configure a chain in `osmosis.zone_chains.json` if you
 By default, when you specify `rpc` or `rest` endpoints in your chain configuration:
 1. Your zone-specified endpoint is placed **first** in the endpoint list
 2. Chain Registry endpoints are added as **backups**
-3. The validation algorithm may automatically reorder endpoints based on health checks
+3. **State-based optimization** automatically reorders endpoints based on validation results
+
+**How State-Based Optimization Works:**
+- Validation results are tracked in `state/state.json`
+- If a backup endpoint works better than the primary, it's automatically promoted to first position in the generated chainlist
+- This enables **intelligent failover without manual intervention**
+- Optimization happens during chainlist generation based on historical validation data
 
 To ensure **only** your specified endpoint is used (no Chain Registry backups):
 - Set `"force_rpc": true` in `override_properties` to use only your RPC endpoint
 - Set `"force_rest": true` in `override_properties` to use only your REST endpoint
+- When forced, state-based optimization is disabled for that endpoint type
 
 This is useful when:
 - You have a highly reliable endpoint that doesn't need backups
@@ -210,15 +231,21 @@ An example asset object in `osmosis.zone_assets.json`:
 
 ## Dependencies
 
-Note that there are apps, interfaces, and tools that look at this repository as a data dependency:
-- Osmosis Zone app (app.osmosis.zone):
-  - .../generated/frontend/assetlist.json
-  - .../generated/frontend/chainlist.json
-- Osmosis Labs' Sidecar Query Service (SQS):
-  - .../generated/frontend/assetlist.json
-- Numia Data Services (e.g., API):
-  - .../generated/frontend/assetlist.json
-  - .../generated/chain-registry/assetlist.json
+### Data Consumers
+Apps, interfaces, and tools that consume data from this repository:
+- **Osmosis Zone app** (app.osmosis.zone):
+  - `generated/frontend/assetlist.json`
+  - `generated/frontend/chainlist.json`
+- **Osmosis Labs' Sidecar Query Service (SQS)**:
+  - `generated/frontend/assetlist.json`
+- **Numia Data Services**:
+  - `generated/frontend/assetlist.json`
+  - `generated/chain-registry/assetlist.json`
+
+### Data Providers (Bidirectional Dependencies)
+External services that provide data TO this repository:
+- **Cosmos Chain Registry** - Source of truth for all asset metadata, chain information, and IBC connections
+- **Numia Data Services API** - Provides pool liquidity data and market depth measurements for asset verification checks (requirements #6 and #7)
 
 ## How It Works
 
@@ -229,13 +256,17 @@ This repository uses GitHub Actions workflows to automatically generate and vali
 **Scheduled Generation** (Twice weekly: Mondays and Thursdays at 09:00 UTC):
 The `Generate All Files` bundle workflow runs automatically and includes:
 - Updates the chain-registry submodule to the latest version
-- Validates RPC/REST endpoints (7 endpoints per run for performance)
+- Validates RPC/REST endpoints (priority-based selection: 10 of ~180 chains per run)
+  - Prioritizes: Failed chains (1 day requery delay) → Never-validated chains → Oldest-validated chains (7 day requery delay)
+  - Tracks validation results in `state/state.json` for endpoint optimization
+  - Full validation available via manual `Full Endpoint Validation` workflow
 - Generates assetlist files in multiple formats
 - Generates chainlist files with wallet integration metadata
 - Updates asset state
 - Generates comments for zone assets
 - Runs localization for multi-language support
 - Creates a pull request with all updates to the `update/assetlist_all` branch
+- Auto-merges the PR after validation passes (scheduled runs only)
 
 **Manual Workflows** (Not included in bundle):
 Individual generation workflows can be triggered manually via GitHub Actions:
@@ -249,6 +280,7 @@ Individual generation workflows can be triggered manually via GitHub Actions:
 
 ### Pull Request Workflow
 
+**For Manual Changes to Zone Configuration:**
 1. **Submit Changes**: Create a PR with additions/updates to `osmosis.zone_assets.json` or `osmosis.zone_chains.json`
 2. **Validation**: Automated checks run to validate your changes
    - Zone file validation
@@ -257,6 +289,30 @@ Individual generation workflows can be triggered manually via GitHub Actions:
 3. **Review**: Maintainers review the PR
 4. **Merge**: Once approved, changes are merged
 5. **Auto-Generation**: Generated files are automatically updated on the next scheduled run or manual trigger
+
+**For Automated Generation Runs:**
+1. **Scheduled Run**: Workflow executes twice weekly (Mondays and Thursdays at 09:00 UTC)
+2. **Generation**: Creates updated assetlist/chainlist files
+3. **PR Creation**: Automatically creates a PR to the `update/assetlist_all` branch with all generated changes
+4. **Validation**: All validation checks must pass
+5. **Auto-Merge**: PR is automatically merged (scheduled runs only; manual triggers require manual merge)
+
+### Deployment to Frontend
+
+Changes to generated files are automatically deployed to the Osmosis Zone frontend via Vercel:
+
+**Trigger Conditions:**
+- Changes to `osmosis-1/generated/frontend/assetlist.json` on the `main` branch
+- Changes to `osmosis-1/generated/frontend/chainlist.json` on the `main` branch
+
+**Deployment Flow:**
+1. PR with generated files is merged to `main` branch
+2. Vercel webhook is automatically triggered
+3. Vercel builds and deploys to preview environment
+4. After validation, changes are promoted to production
+5. Osmosis Zone app reflects the updated asset and chain data
+
+This completes the full pipeline: **Chain Registry → Detection → Generation → PR → Merge → Deployment → Frontend**
 
 ### Validation Workflows
 

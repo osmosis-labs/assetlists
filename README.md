@@ -179,10 +179,10 @@ You only need to manually configure a chain in `osmosis.zone_chains.json` if you
 
 ### Endpoint Override Behavior
 
-By default, when you specify `rpc` or `rest` endpoints in your chain configuration:
-1. Your zone-specified endpoint is placed **first** in the endpoint list
-2. Chain Registry endpoints are added as **backups**
-3. **State-based optimization** automatically reorders endpoints based on validation results
+When you specify `rpc` or `rest` endpoints in your chain configuration:
+1. Your zone-specified endpoint is placed first in the endpoint list
+2. Chain Registry endpoints are added as backups
+3. State-based optimization may reorder endpoints based on validation results (unless forced)
 
 **How State-Based Optimization Works:**
 - Validation results are tracked in `state/state.json`
@@ -190,15 +190,15 @@ By default, when you specify `rpc` or `rest` endpoints in your chain configurati
 - This enables **intelligent failover without manual intervention**
 - Optimization happens during chainlist generation based on historical validation data
 
-To ensure **only** your specified endpoint is used (no Chain Registry backups):
-- Set `"force_rpc": true` in `override_properties` to use only your RPC endpoint
-- Set `"force_rest": true` in `override_properties` to use only your REST endpoint
-- When forced, state-based optimization is disabled for that endpoint type
+**Forcing Override Endpoint Priority:**
+To lock your specified endpoint in first position (preventing state-based reordering):
+- Set `"force_rpc": true` in `override_properties` to lock your RPC endpoint in first position
+- Set `"force_rest": true` in `override_properties` to lock your REST endpoint in first position
+- Chain Registry endpoints are still included as backups, they just won't be promoted to first position.
 
 This is useful when:
-- You have a highly reliable endpoint that doesn't need backups
-- You want to prevent the validation algorithm from testing or using alternative endpoints
-- Chain Registry endpoints are experiencing issues
+- You have a highly reliable endpoint that should always be tried first
+- You want to prevent the validation algorithm from reordering your preferred endpoint
 
 ## Zone Example
 

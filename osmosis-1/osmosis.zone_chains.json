@@ -11,7 +11,11 @@
         "cosmwasm",
         "wasmd_0.24+",
         "osmosis-txfees"
-      ]
+      ],
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "cosmoshub",
@@ -20,7 +24,11 @@
       "explorer_tx_url": "https://www.mintscan.io/cosmos/txs/${txHash}",
       "keplr_features": [
         "ibc-go"
-      ]
+      ],
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "terra",
@@ -37,7 +45,11 @@
         "ibc-go",
         "cosmwasm",
         "wasmd_0.24+"
-      ]
+      ],
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "akash",
@@ -46,13 +58,21 @@
       "explorer_tx_url": "https://www.mintscan.io/akash/txs/${txHash}",
       "keplr_features": [
         "ibc-go"
-      ]
+      ],
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "regen",
       "rpc": "https://rpc-regen.keplr.app",
       "rest": "https://lcd-regen.keplr.app",
-      "explorer_tx_url": "https://regen.aneka.io/txs/${txHash}"
+      "explorer_tx_url": "https://regen.aneka.io/txs/${txHash}",
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "sentinel",
@@ -61,7 +81,11 @@
       "explorer_tx_url": "https://www.mintscan.io/sentinel/txs/${txHash}",
       "keplr_features": [
         "ibc-go"
-      ]
+      ],
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "persistence",
@@ -70,25 +94,41 @@
       "explorer_tx_url": "https://www.mintscan.io/persistence/txs/${txHash}",
       "keplr_features": [
         "ibc-go"
-      ]
+      ],
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "irisnet",
       "rpc": "https://rpc-iris.keplr.app",
       "rest": "https://lcd-iris.keplr.app",
-      "explorer_tx_url": "https://www.mintscan.io/iris/txs/${txHash}"
+      "explorer_tx_url": "https://www.mintscan.io/iris/txs/${txHash}",
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "cryptoorgchain",
       "rpc": "https://rpc-crypto-org.keplr.app/",
       "rest": "https://lcd-crypto-org.keplr.app/",
-      "explorer_tx_url": "https://www.mintscan.io/crypto-org/txs/${txHash}"
+      "explorer_tx_url": "https://www.mintscan.io/crypto-org/txs/${txHash}",
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "starname",
       "rpc": "https://rpc-iov.keplr.app",
       "rest": "https://lcd-iov.keplr.app",
-      "explorer_tx_url": "https://ping.pub/starname/tx/${txHash}"
+      "explorer_tx_url": "https://ping.pub/starname/tx/${txHash}",
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "emoney",
@@ -105,13 +145,21 @@
         "ibc-go",
         "cosmwasm",
         "wasmd_0.24+"
-      ]
+      ],
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "microtick",
       "rpc": "https://rpc-microtick.keplr.app",
       "rest": "https://lcd-microtick.keplr.app",
-      "explorer_tx_url": "https://explorer.microtick.zone/transactions/${txHash}"
+      "explorer_tx_url": "https://explorer.microtick.zone/transactions/${txHash}",
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "likecoin",
@@ -242,7 +290,11 @@
       "explorer_tx_url": "https://www.mintscan.io/sommelier/txs/${txHash}",
       "keplr_features": [
         "ibc-go"
-      ]
+      ],
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "sifchain",
@@ -266,7 +318,11 @@
       "chain_name": "umee",
       "rpc": "https://rpc-umee.keplr.app",
       "rest": "https://lcd-umee.keplr.app",
-      "explorer_tx_url": "https://www.mintscan.io/umee/txs/${txHash}"
+      "explorer_tx_url": "https://www.mintscan.io/umee/txs/${txHash}",
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "gravitybridge",
@@ -375,7 +431,11 @@
         "ibc-go",
         "eth-address-gen",
         "eth-key-sign"
-      ]
+      ],
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "terra2",
@@ -403,7 +463,11 @@
       "explorer_tx_url": "https://www.mintscan.io/kava/txs/${txHash}",
       "keplr_features": [
         "ibc-go"
-      ]
+      ],
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "genesisl1",
@@ -657,7 +721,11 @@
       "explorer_tx_url": "https://ezstaking.app/quicksilver/txs/${txHash}",
       "keplr_features": [
         "ibc-go"
-      ]
+      ],
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "8ball",
@@ -712,7 +780,11 @@
       "keplr_features": [
         "ibc-go",
         "axelar-evm-bridge"
-      ]
+      ],
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "bluzelle",
@@ -730,7 +802,11 @@
       "explorer_tx_url": "https://ping.pub/gitopia/tx/${txHash}",
       "keplr_features": [
         "ibc-go"
-      ]
+      ],
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "nolus",
@@ -748,7 +824,11 @@
       "explorer_tx_url": "https://www.mintscan.io/neutron/txs/${txHash}",
       "keplr_features": [
         "ibc-go"
-      ]
+      ],
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "composable",
@@ -1080,7 +1160,11 @@
       "explorer_tx_url": "https://www.mintscan.io/saga/transactions/${txHash}",
       "keplr_features": [
         "ibc-go"
-      ]
+      ],
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "shido",

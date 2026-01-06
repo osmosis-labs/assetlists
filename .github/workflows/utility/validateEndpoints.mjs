@@ -803,6 +803,25 @@ function generateValidationReport(chainName) {
     ?.filter(c => c.status === 'killed')
     ?.map(c => c.chain_name) || [];
 
+  // Get zone chains config to check for forced endpoints
+  const zoneChains = zone.readFromFile(
+    chainName,
+    zone.noDir,
+    zone.zoneChainlistFileName
+  )?.chains || [];
+
+  const forcedEndpointChains = {};
+  zoneChains.forEach(chain => {
+    if (chain.override_properties?.force_rpc || chain.override_properties?.force_rest) {
+      forcedEndpointChains[chain.chain_name] = {
+        force_rpc: chain.override_properties?.force_rpc || false,
+        force_rest: chain.override_properties?.force_rest || false,
+        rpc: chain.rpc,
+        rest: chain.rest
+      };
+    }
+  });
+
   const failedChains = state.chains.filter(chain => {
     if (chain.validationSuccess !== false) return false;
 
@@ -825,10 +844,45 @@ function generateValidationReport(chainName) {
     return dateB.getTime() - dateA.getTime();
   });
 
+  // Check for forced endpoint failures
+  const forcedEndpointFailures = failedChains.filter(chain =>
+    forcedEndpointChains[chain.chain_name]
+  );
+
+  // Count chains with backup endpoints used
+  const chainsWithBackupsUsed = state.chains.filter(chain => chain.backupUsed).length;
+
   let report = `**Chains Validated This Run:** ${process.env.CHAINS_VALIDATED || 'N/A'}\n`;
   report += `**Total Chains in State:** ${state.chains.length}\n`;
   report += `**Failed Endpoints:** ${failedChains.length}\n`;
+  report += `**Chains Using Backup Endpoints:** ${chainsWithBackupsUsed}\n`;
   report += `**Success Rate:** ${((state.chains.length - failedChains.length) / state.chains.length * 100).toFixed(1)}%\n\n`;
+
+  // Critical alert for forced endpoint failures
+  if (forcedEndpointFailures.length > 0) {
+    report += `### 🚨 CRITICAL: Forced Endpoint Failures\n\n`;
+    report += `The following chains have forced endpoints that failed validation. These endpoints are locked in first position and cannot fall back to backups:\n\n`;
+    report += `| Chain Name | Forced RPC | Forced REST | RPC Status | REST Status |\n`;
+    report += `|------------|-----------|------------|------------|-------------|\n`;
+
+    forcedEndpointFailures.forEach(chain => {
+      const config = forcedEndpointChains[chain.chain_name];
+      const rpcTests = chain.validationResults?.filter(r => r.test.includes('RPC')) || [];
+      const restTests = chain.validationResults?.filter(r => r.test.includes('REST')) || [];
+
+      const rpcAllFailed = rpcTests.every(t => !t.success);
+      const restAllFailed = restTests.every(t => !t.success);
+
+      const rpcStatus = rpcAllFailed ? '❌ All Failed' : '⚠️ Partial';
+      const restStatus = restAllFailed ? '❌ All Failed' : '⚠️ Partial';
+
+      const forcedRpc = config.force_rpc ? '🔒 ' + config.rpc : '—';
+      const forcedRest = config.force_rest ? '🔒 ' + config.rest : '—';
+
+      report += `| ${chain.chain_name} | ${forcedRpc} | ${forcedRest} | ${rpcStatus} | ${restStatus} |\n`;
+    });
+    report += `\n**Action Required:** Update the forced endpoints in \`osmosis.zone_chains.json\` or remove the force flags.\n\n`;
+  }
 
   if (failedChains.length === 0) {
     report += `### ✅ All Chains Validated Successfully\n\n`;
@@ -851,6 +905,26 @@ function generateValidationReport(chainName) {
       const restStatus = restAllFailed ? '❌ All Failed' : '⚠️ Partial';
 
       report += `| ${chain.chain_name} | ${validationDate.toISOString().split('T')[0]} | ${daysSince} | ${rpcStatus} | ${restStatus} |\n`;
+    });
+    report += `\n`;
+  }
+
+  // Show chains that switched to backup endpoints
+  if (chainsWithBackupsUsed > 0) {
+    const chainsWithBackups = state.chains.filter(chain => chain.backupUsed);
+    report += `### 🔄 Endpoint Reordering (Backup Endpoints Used)\n\n`;
+    report += `The following chains had their zone endpoint fail validation and were reordered to use a working backup:\n\n`;
+    report += `| Chain Name | RPC Backup Index | REST Backup Index | Last Validation |\n`;
+    report += `|------------|-----------------|------------------|----------------|\n`;
+
+    chainsWithBackups.forEach(chain => {
+      const validationDate = new Date(chain.validationDate).toISOString().split('T')[0];
+      const rpcIndex = chain.backupUsed.rpcEndpointIndex || 0;
+      const restIndex = chain.backupUsed.restEndpointIndex || 0;
+      const rpcIndicator = rpcIndex > 0 ? `Backup #${rpcIndex}` : 'Primary';
+      const restIndicator = restIndex > 0 ? `Backup #${restIndex}` : 'Primary';
+
+      report += `| ${chain.chain_name} | ${rpcIndicator} | ${restIndicator} | ${validationDate} |\n`;
     });
     report += `\n`;
   }

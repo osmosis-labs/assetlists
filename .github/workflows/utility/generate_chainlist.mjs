@@ -382,6 +382,93 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   const forceRpc = zoneChain.override_properties?.force_rpc || false;
   const forceRest = zoneChain.override_properties?.force_rest || false;
 
+  // Helper function to extract provider info from endpoint URL or metadata
+  // Extracts provider from URL patterns since all providers follow consistent naming
+  const getProviderFromEndpoint = (endpoint) => {
+    const address = endpoint.address || endpoint;
+    const addressLower = address.toLowerCase();
+
+    // Check URL patterns for known providers
+    if (addressLower.includes('polkachu.com')) return 'polkachu';
+    if (addressLower.includes('keplr.app')) return 'keplr';
+    if (addressLower.includes('lavenderfive.com')) return 'lavenderfive';
+    if (addressLower.includes('stakin-nodes.com') || addressLower.includes('stakin.com')) return 'stakin';
+    if (addressLower.includes('ecostake.com')) return 'ecostake';
+    if (addressLower.includes('kjnodes.com')) return 'kjnodes';
+    if (addressLower.includes('nodestake.org') || addressLower.includes('nodestake.top')) return 'nodestake';
+    if (addressLower.includes('notional.ventures')) return 'notional';
+    if (addressLower.includes('staketab.org')) return 'staketab';
+    if (addressLower.includes('stakeflow.io')) return 'stakeflow';
+    if (addressLower.includes('publicnode.com')) return 'publicnode';
+    if (addressLower.includes('goldenratiostaking.net')) return 'goldenratiostaking';
+    if (addressLower.includes('highstakes.ch')) return 'highstakes';
+    if (addressLower.includes('lava.build')) return 'lava';
+    if (addressLower.includes('whispernode.com')) return 'whispernode';
+    if (addressLower.includes('architectnodes.com')) return 'architectnodes';
+    if (addressLower.includes('dragonstake.io')) return 'dragonstake';
+    if (addressLower.includes('silknodes.io')) return 'silknodes';
+    if (addressLower.includes('w3coins.io')) return 'w3coins';
+    if (addressLower.includes('stake-town.com')) return 'staketown';
+    if (addressLower.includes('noders.services')) return 'noders';
+    if (addressLower.includes('cryptocrew.com') || addressLower.includes('ccvalidators.com')) return 'cryptocrew';
+    if (addressLower.includes('quickapi.com')) return 'chainlayer';
+    if (addressLower.includes('freshstaking.com')) return 'freshstaking';
+    if (addressLower.includes('easy2stake.com')) return 'easy2stake';
+    if (addressLower.includes('rockrpc.net')) return 'rockawayX';
+    if (addressLower.includes('citizenweb3.com')) return 'citizenweb3';
+
+    // Fallback to provider metadata if available
+    if (endpoint.provider) {
+      return endpoint.provider.toLowerCase();
+    }
+
+    // Extract from domain as last resort (e.g., "rpc.osmosis.zone" -> "osmosis")
+    try {
+      const url = new URL(address);
+      const hostParts = url.hostname.split('.');
+      // Get the primary domain (second-to-last part before TLD)
+      if (hostParts.length >= 2) {
+        return hostParts[hostParts.length - 2];
+      }
+    } catch (e) {
+      // Invalid URL, return empty string
+    }
+
+    return '';
+  };
+
+  // Helper function to check if provider is preferred
+  // Preferred providers: Keplr, Polkachu, and official team providers (matching chain name)
+  const isPreferredProvider = (endpoint, chainName) => {
+    const provider = getProviderFromEndpoint(endpoint);
+    const chainLower = chainName.toLowerCase();
+
+    // Check for explicit preferred providers (by URL pattern)
+    if (provider === 'keplr' || provider === 'polkachu') {
+      return true;
+    }
+
+    // Check if provider matches chain name (official team)
+    // e.g., "osmosis.zone" for "osmosis" chain
+    if (provider.includes(chainLower) || chainLower.includes(provider)) {
+      return true;
+    }
+
+    return false;
+  };
+
+  // Helper function to sort endpoints by provider preference
+  const sortEndpointsByProvider = (endpoints, chainName) => {
+    return endpoints.sort((a, b) => {
+      const aPreferred = isPreferredProvider(a, chainName);
+      const bPreferred = isPreferredProvider(b, chainName);
+
+      if (aPreferred && !bPreferred) return -1;
+      if (!aPreferred && bPreferred) return 1;
+      return 0; // Keep original order for endpoints with same preference level
+    });
+  };
+
   const allRpcEndpoints = [];
   const allRestEndpoints = [];
 
@@ -392,9 +479,11 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
       console.log(`Force RPC enabled for ${chain_name}: ${zoneChain.rpc} (locked in first position)`);
     }
   }
-  // Always add Chain Registry endpoints as backups
+
+  // Sort Chain Registry RPC endpoints by provider preference before adding
   if (apis?.rpc?.length > 0) {
-    apis.rpc.forEach(endpoint => {
+    const sortedRpcEndpoints = sortEndpointsByProvider([...apis.rpc], chain_name);
+    sortedRpcEndpoints.forEach(endpoint => {
       if (!allRpcEndpoints.includes(endpoint.address)) {
         allRpcEndpoints.push(endpoint.address);
       }
@@ -408,9 +497,11 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
       console.log(`Force REST enabled for ${chain_name}: ${zoneChain.rest} (locked in first position)`);
     }
   }
-  // Always add Chain Registry endpoints as backups
+
+  // Sort Chain Registry REST endpoints by provider preference before adding
   if (apis?.rest?.length > 0) {
-    apis.rest.forEach(endpoint => {
+    const sortedRestEndpoints = sortEndpointsByProvider([...apis.rest], chain_name);
+    sortedRestEndpoints.forEach(endpoint => {
       if (!allRestEndpoints.includes(endpoint.address)) {
         allRestEndpoints.push(endpoint.address);
       }

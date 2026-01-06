@@ -437,20 +437,47 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
     return '';
   };
 
+  // Helper function to check if endpoint is from the primary developer team
+  const isTeamEndpoint = (endpoint, chainName) => {
+    const address = endpoint.address || endpoint;
+    const chainLower = chainName.toLowerCase();
+
+    try {
+      const url = new URL(address);
+      const hostname = url.hostname.toLowerCase();
+
+      const hostParts = hostname.split('.');
+
+      // Get the primary domain (second-to-last part before TLD)
+      if (hostParts.length >= 2) {
+        const primaryDomain = hostParts[hostParts.length - 2];
+
+        // Check if primary domain matches chain name exactly or is chain-specific
+        if (primaryDomain === chainLower) {
+          return true;
+        }
+      }
+
+      // Check provider metadata for foundation/team indicators
+      if (endpoint.provider) {
+        const providerLower = endpoint.provider.toLowerCase();
+        if (providerLower.includes('foundation')) {
+          return true;
+        }
+      }
+    } catch (e) {
+      // Invalid URL
+    }
+
+    return false;
+  };
+
   // Helper function to check if provider is preferred
-  // Preferred providers: Keplr, Polkachu, and official team providers (matching chain name)
   const isPreferredProvider = (endpoint, chainName) => {
     const provider = getProviderFromEndpoint(endpoint);
-    const chainLower = chainName.toLowerCase();
 
     // Check for explicit preferred providers (by URL pattern)
     if (provider === 'keplr' || provider === 'polkachu') {
-      return true;
-    }
-
-    // Check if provider matches chain name (official team)
-    // e.g., "osmosis.zone" for "osmosis" chain
-    if (provider.includes(chainLower) || chainLower.includes(provider)) {
       return true;
     }
 
@@ -458,14 +485,24 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   };
 
   // Helper function to sort endpoints by provider preference
+  // Priority: 1. Developer team, 2. Preferred, 3. Others
   const sortEndpointsByProvider = (endpoints, chainName) => {
     return endpoints.sort((a, b) => {
-      const aPreferred = isPreferredProvider(a, chainName);
-      const bPreferred = isPreferredProvider(b, chainName);
+      const aIsTeam = isTeamEndpoint(a, chainName);
+      const bIsTeam = isTeamEndpoint(b, chainName);
+      const aIsPreferred = isPreferredProvider(a, chainName);
+      const bIsPreferred = isPreferredProvider(b, chainName);
 
-      if (aPreferred && !bPreferred) return -1;
-      if (!aPreferred && bPreferred) return 1;
-      return 0; // Keep original order for endpoints with same preference level
+      // Team endpoints come first
+      if (aIsTeam && !bIsTeam) return -1;
+      if (!aIsTeam && bIsTeam) return 1;
+
+      // Then Preferred
+      if (aIsPreferred && !bIsPreferred) return -1;
+      if (!aIsPreferred && bIsPreferred) return 1;
+
+      // Keep original order for same preference level
+      return 0;
     });
   };
 

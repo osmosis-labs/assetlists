@@ -507,17 +507,21 @@ async function validateCounterpartyChain(counterpartyChain) {
     // Restore original array
     counterpartyChain.apis.rpc = originalRpcArray;
 
-    rpcResults = flatResults;
-    rpcEndpointIndex = endpoint.originalIndex; // Use original Chain Registry index
-    rpcAddress = endpoint.address;
-
     // Check if all RPC tests passed
     const allPassed = flatResults.every(r => r.success && !r.stale);
     if (allPassed) {
+      // Only record endpoint info if validation succeeded
+      rpcResults = flatResults;
+      rpcEndpointIndex = endpoint.originalIndex; // Use original Chain Registry index
+      rpcAddress = endpoint.address;
+
       if (endpoint.originalIndex > 0) {
         console.log(`RPC Backup Used [${endpoint.originalIndex}]: ${rpcAddress}`);
       }
       break;
+    } else {
+      // Store last failed results for reporting
+      rpcResults = flatResults;
     }
   }
 
@@ -548,17 +552,21 @@ async function validateCounterpartyChain(counterpartyChain) {
     // Restore original array
     counterpartyChain.apis.rest = originalRestArray;
 
-    restResults = flatResults;
-    restEndpointIndex = endpoint.originalIndex; // Use original Chain Registry index
-    restAddress = endpoint.address;
-
     // Check if all REST tests passed
     const allPassed = flatResults.every(r => r.success);
     if (allPassed) {
+      // Only record endpoint info if validation succeeded
+      restResults = flatResults;
+      restEndpointIndex = endpoint.originalIndex; // Use original Chain Registry index
+      restAddress = endpoint.address;
+
       if (endpoint.originalIndex > 0) {
         console.log(`REST Backup Used [${endpoint.originalIndex}]: ${restAddress}`);
       }
       break;
+    } else {
+      // Store last failed results for reporting
+      restResults = flatResults;
     }
   }
 
@@ -895,9 +903,9 @@ function generateValidationReport(chainName) {
   report += `**Chains Using Backup Endpoints:** ${chainsWithBackupsUsed}\n`;
   report += `**Success Rate:** ${((state.chains.length - failedChains.length) / state.chains.length * 100).toFixed(1)}%\n\n`;
 
-  // Critical alert for forced endpoint failures
+  // Alert for forced endpoint failures
   if (forcedEndpointFailures.length > 0) {
-    report += `### 🚨 CRITICAL: Forced Endpoint Failures\n\n`;
+    report += `### 🔒 Forced Endpoint Failures\n\n`;
     report += `The following chains have forced endpoints that failed validation. These endpoints are locked in first position and cannot fall back to backups:\n\n`;
     report += `| Chain Name | Forced RPC | Forced REST | RPC Status | REST Status |\n`;
     report += `|------------|-----------|------------|------------|-------------|\n`;

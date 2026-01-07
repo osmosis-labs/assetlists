@@ -75,7 +75,6 @@ export function getProviderFromEndpoint(endpoint) {
 
 /**
  * Check if endpoint is from the chain's official team
- * Patterns: rpc.{chain}.zone, {chain}-apis.com, etc.
  */
 export function isTeamEndpoint(endpoint, chainName) {
   const address = endpoint.address || endpoint;
@@ -92,8 +91,12 @@ export function isTeamEndpoint(endpoint, chainName) {
       const primaryDomain = hostParts[hostParts.length - 2];
 
       // Check if primary domain matches chain name exactly or is chain-specific
-      if (primaryDomain === chainLower ||
-          primaryDomain === `${chainLower}-apis`) {
+      if (primaryDomain === chainLower) {
+        return true;
+      }
+
+      // Domain contains chain name: gopanacea contains panacea
+      if (primaryDomain.includes(chainLower)) {
         return true;
       }
     }
@@ -102,6 +105,11 @@ export function isTeamEndpoint(endpoint, chainName) {
     if (endpoint.provider) {
       const providerLower = endpoint.provider.toLowerCase();
       if (providerLower.includes('foundation')) {
+        return true;
+      }
+      // Check if provider name matches chain name (e.g., "medibloc" for panacea)
+      // This catches official team providers even if domain doesn't match
+      if (providerLower === chainLower) {
         return true;
       }
     }

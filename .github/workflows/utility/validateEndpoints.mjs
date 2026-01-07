@@ -19,6 +19,7 @@ import * as chain_reg from "../../../chain-registry/.github/workflows/utility/ch
 chain_reg.setup();
 import * as path from 'path';
 import * as api_mgmt from "./api_management.mjs";
+import { sortEndpointsByProvider } from './endpoint_preference.mjs';
 
 import WebSocket from 'ws';
 import https from 'https';
@@ -475,51 +476,87 @@ async function validateCounterpartyChain(counterpartyChain) {
   const rpcTestTypes = [RPC_CORS, RPC_WSS, RPC_ENDPOINTS];
   const restTestTypes = [REST_CORS, REST_ENDPOINTS];
 
+  // Get all RPC endpoints with original indices
+  const rpcEndpoints = (counterpartyChain?.apis?.rpc || []).map((ep, idx) => ({
+    ...ep,
+    originalIndex: idx
+  }));
+
+  // Sort by provider preference (Team > Keplr/Polkachu > Others)
+  const sortedRpcEndpoints = sortEndpointsByProvider(rpcEndpoints, counterpartyChain.chain_name);
+
   // Get endpoint counts
-  const rpcCount = getEndpointCount(counterpartyChain, RPC_NODE);
+  const rpcCount = sortedRpcEndpoints.length;
   const restCount = getEndpointCount(counterpartyChain, REST_NODE);
 
-  // Find working RPC endpoint
+  // Find working RPC endpoint (test in preferred order)
   let rpcResults = null;
   let rpcEndpointIndex = 0;
   let rpcAddress = null;
 
   for (let i = 0; i < rpcCount; i++) {
-    const results = await Promise.all(rpcTestTypes.map(test => validate(test, i)));
+    const endpoint = sortedRpcEndpoints[i];
+
+    // Temporarily modify counterpartyChain to test this endpoint
+    const originalRpcArray = counterpartyChain.apis.rpc;
+    counterpartyChain.apis.rpc = [endpoint];
+
+    const results = await Promise.all(rpcTestTypes.map(test => validate(test, 0)));
     const flatResults = results.flat();
 
+    // Restore original array
+    counterpartyChain.apis.rpc = originalRpcArray;
+
     rpcResults = flatResults;
-    rpcEndpointIndex = i;
-    rpcAddress = getCounterpartyChainAddress(counterpartyChain, RPC_NODE, i);
+    rpcEndpointIndex = endpoint.originalIndex; // Use original Chain Registry index
+    rpcAddress = endpoint.address;
 
     // Check if all RPC tests passed
     const allPassed = flatResults.every(r => r.success && !r.stale);
     if (allPassed) {
-      if (i > 0) {
-        console.log(`RPC Backup Used [${i}]: ${rpcAddress}`);
+      if (endpoint.originalIndex > 0) {
+        console.log(`RPC Backup Used [${endpoint.originalIndex}]: ${rpcAddress}`);
       }
       break;
     }
   }
 
-  // Find working REST endpoint
+  // Get all REST endpoints with original indices
+  const restEndpoints = (counterpartyChain?.apis?.rest || []).map((ep, idx) => ({
+    ...ep,
+    originalIndex: idx
+  }));
+
+  // Sort by provider preference (Team > Keplr/Polkachu > Others)
+  const sortedRestEndpoints = sortEndpointsByProvider(restEndpoints, counterpartyChain.chain_name);
+
+  // Find working REST endpoint (test in preferred order)
   let restResults = null;
   let restEndpointIndex = 0;
   let restAddress = null;
 
-  for (let i = 0; i < restCount; i++) {
-    const results = await Promise.all(restTestTypes.map(test => validate(test, i)));
+  for (let i = 0; i < sortedRestEndpoints.length; i++) {
+    const endpoint = sortedRestEndpoints[i];
+
+    // Temporarily modify counterpartyChain to test this endpoint
+    const originalRestArray = counterpartyChain.apis.rest;
+    counterpartyChain.apis.rest = [endpoint];
+
+    const results = await Promise.all(restTestTypes.map(test => validate(test, 0)));
     const flatResults = results.flat();
 
+    // Restore original array
+    counterpartyChain.apis.rest = originalRestArray;
+
     restResults = flatResults;
-    restEndpointIndex = i;
-    restAddress = getCounterpartyChainAddress(counterpartyChain, REST_NODE, i);
+    restEndpointIndex = endpoint.originalIndex; // Use original Chain Registry index
+    restAddress = endpoint.address;
 
     // Check if all REST tests passed
     const allPassed = flatResults.every(r => r.success);
     if (allPassed) {
-      if (i > 0) {
-        console.log(`REST Backup Used [${i}]: ${restAddress}`);
+      if (endpoint.originalIndex > 0) {
+        console.log(`REST Backup Used [${endpoint.originalIndex}]: ${restAddress}`);
       }
       break;
     }

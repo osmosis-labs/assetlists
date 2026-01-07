@@ -163,7 +163,11 @@
       "chain_name": "panacea",
       "rpc": "https://rpc.gopanacea.org",
       "rest": "https://api.gopanacea.org",
-      "explorer_tx_url": "https://www.mintscan.io/medibloc/txs/${txHash}"
+      "explorer_tx_url": "https://www.mintscan.io/medibloc/txs/${txHash}",
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "bostrom",

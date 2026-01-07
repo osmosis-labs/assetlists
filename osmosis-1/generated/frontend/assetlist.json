@@ -30850,13 +30850,16 @@
       "chainName": "epix",
       "sourceDenom": "aepix",
       "coinMinimalDenom": "ibc/776917313EC3252954ED622945D4979651ACD909A18E528283F46D7B166F20BF",
-      "symbol": "EPIX",
+      "symbol": "EPIX.epix",
       "decimals": 18,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.svg"
       },
-      "categories": [],
+      "categories": [
+        "defi",
+        "dweb"
+      ],
       "transferMethods": [
         {
           "name": "Osmosis IBC Transfer",
@@ -30889,9 +30892,99 @@
           }
         }
       ],
-      "variantGroupKey": "ibc/776917313EC3252954ED622945D4979651ACD909A18E528283F46D7B166F20BF",
-      "name": "Epix",
+      "variantGroupKey": "factory/osmo130tfawc7katf7jwzt2rjdranhqju929rjra3xwsrfsd85hedh3tsssy9j7/alloyed/allEPIX",
+      "name": "Epix (Epix)",
       "isAlloyed": false,
+      "verified": true,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "listingDate": "2026-01-07T10:08:50.448Z"
+    },
+    {
+      "chainName": "mirage",
+      "sourceDenom": "umirage",
+      "coinMinimalDenom": "ibc/FD0C5BF3009F3300961E52E4E0160D6901B1B3E7D0475766C5D960A9D3999B32",
+      "symbol": "MIRAGE",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mirage/images/mirage.png"
+      },
+      "categories": [
+        "social"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "mirage",
+            "chainId": "mirage-1",
+            "sourceDenom": "umirage",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-108600",
+            "path": "transfer/channel-108600/umirage"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "mirage",
+          "sourceDenom": "umirage",
+          "chainType": "cosmos",
+          "chainId": "mirage-1",
+          "symbol": "MIRAGE",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mirage/images/mirage.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/FD0C5BF3009F3300961E52E4E0160D6901B1B3E7D0475766C5D960A9D3999B32",
+      "name": "Mirage",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "osmosis",
+      "sourceDenom": "factory/osmo130tfawc7katf7jwzt2rjdranhqju929rjra3xwsrfsd85hedh3tsssy9j7/alloyed/allEPIX",
+      "coinMinimalDenom": "factory/osmo130tfawc7katf7jwzt2rjdranhqju929rjra3xwsrfsd85hedh3tsssy9j7/alloyed/allEPIX",
+      "symbol": "EPIX",
+      "decimals": 12,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.svg"
+      },
+      "categories": [
+        "defi",
+        "dweb"
+      ],
+      "transferMethods": [],
+      "counterparty": [
+        {
+          "chainName": "epix",
+          "sourceDenom": "aepix",
+          "chainType": "cosmos",
+          "chainId": "epix_1916-1",
+          "symbol": "EPIX",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo130tfawc7katf7jwzt2rjdranhqju929rjra3xwsrfsd85hedh3tsssy9j7/alloyed/allEPIX",
+      "name": "Epix",
+      "isAlloyed": true,
+      "contract": "osmo130tfawc7katf7jwzt2rjdranhqju929rjra3xwsrfsd85hedh3tsssy9j7",
       "verified": false,
       "unstable": false,
       "disabled": false,
@@ -39877,55 +39970,6 @@
       ],
       "variantGroupKey": "ibc/04DB563BCDD7DCBFAA277838BD141BA262DA8E7C2FEF825A4A324B7D588B351F",
       "name": "WHALEX",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "mirage",
-      "sourceDenom": "umirage",
-      "coinMinimalDenom": "ibc/FD0C5BF3009F3300961E52E4E0160D6901B1B3E7D0475766C5D960A9D3999B32",
-      "symbol": "MIRAGE",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mirage/images/mirage.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "mirage",
-            "chainId": "mirage-1",
-            "sourceDenom": "umirage",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-108600",
-            "path": "transfer/channel-108600/umirage"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "mirage",
-          "sourceDenom": "umirage",
-          "chainType": "cosmos",
-          "chainId": "mirage-1",
-          "symbol": "MIRAGE",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mirage/images/mirage.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/FD0C5BF3009F3300961E52E4E0160D6901B1B3E7D0475766C5D960A9D3999B32",
-      "name": "Mirage",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

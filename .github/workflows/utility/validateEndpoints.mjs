@@ -19,7 +19,7 @@ import * as chain_reg from "../../../chain-registry/.github/workflows/utility/ch
 chain_reg.setup();
 import * as path from 'path';
 import * as api_mgmt from "./api_management.mjs";
-import { sortEndpointsByProvider } from './endpoint_preference.mjs';
+import { sortEndpointsByProvider, isPreferredProvider, getProviderFromEndpoint } from './endpoint_preference.mjs';
 
 import WebSocket from 'ws';
 import https from 'https';
@@ -620,6 +620,14 @@ function addValidationRecordsToState(state, chainName, validationRecords) {
   getState(chainName);
 
   if (!state.chains) { state.chains = []; }
+
+  // Track chains validated in this run
+  const validatedInThisRun = validationRecords.map(r => r.chain_name);
+  state.lastValidationRun = {
+    timestamp: currentDateUTC.toISOString(),
+    chainsValidated: validatedInThisRun
+  };
+
   validationRecords.forEach((validationRecord) => {
     const index = state.chains.findIndex(chain => chain.chain_name === validationRecord.chain_name);
     if (index !== -1) {
@@ -954,24 +962,61 @@ function generateValidationReport(chainName) {
     report += `\n`;
   }
 
-  // Show chains that switched to backup endpoints
+  // Show chains that switched to backup endpoints (only those validated this run)
   if (chainsWithBackupsUsed > 0) {
-    const chainsWithBackups = state.chains.filter(chain => chain.backupUsed);
-    report += `### 🔄 Endpoint Reordering (Backup Endpoints Used)\n\n`;
-    report += `The following chains had their zone endpoint fail validation and were reordered to use a working backup:\n\n`;
-    report += `| Chain Name | RPC Backup Index | REST Backup Index | Last Validation |\n`;
-    report += `|------------|-----------------|------------------|----------------|\n`;
-
-    chainsWithBackups.forEach(chain => {
-      const validationDate = new Date(chain.validationDate).toISOString().split('T')[0];
-      const rpcIndex = chain.backupUsed.rpcEndpointIndex || 0;
-      const restIndex = chain.backupUsed.restEndpointIndex || 0;
-      const rpcIndicator = rpcIndex > 0 ? `Backup #${rpcIndex}` : 'Primary';
-      const restIndicator = restIndex > 0 ? `Backup #${restIndex}` : 'Primary';
-
-      report += `| ${chain.chain_name} | ${rpcIndicator} | ${restIndicator} | ${validationDate} |\n`;
+    const chainsWithBackups = state.chains.filter(chain => {
+      if (!chain.backupUsed) return false;
+      // Only include chains validated in this run
+      if (state.lastValidationRun?.chainsValidated) {
+        return state.lastValidationRun.chainsValidated.includes(chain.chain_name);
+      }
+      // Fallback: include all if lastValidationRun not available
+      return true;
     });
-    report += `\n`;
+
+    if (chainsWithBackups.length > 0) {
+      report += `### 🔄 Endpoint Reordering (Backup Endpoints Used)\n\n`;
+      report += `The following chains had their zone endpoint fail validation and were reordered to use a working backup:\n\n`;
+      report += `| Chain Name | RPC Endpoint Type | REST Endpoint Type | Last Validation |\n`;
+      report += `|------------|-------------------|-------------------|----------------|\n`;
+
+      chainsWithBackups.forEach(chain => {
+        const validationDate = new Date(chain.validationDate).toISOString().split('T')[0];
+
+        // Determine RPC endpoint type
+        let rpcType = '—';
+        if (chain.backupUsed.rpcAddress) {
+          const zoneChain = zoneChains.find(z => z.chain_name === chain.chain_name);
+          if (zoneChain?.rpc && chain.backupUsed.rpcAddress === zoneChain.rpc) {
+            rpcType = 'Chainlist';
+          } else if (isPreferredProvider({ address: chain.backupUsed.rpcAddress }, chain.chain_name)) {
+            const provider = getProviderFromEndpoint({ address: chain.backupUsed.rpcAddress });
+            rpcType = `Preferred (${provider})`;
+          } else {
+            const index = chain.backupUsed.rpcEndpointIndex || 0;
+            rpcType = `Backup #${index}`;
+          }
+        }
+
+        // Determine REST endpoint type
+        let restType = '—';
+        if (chain.backupUsed.restAddress) {
+          const zoneChain = zoneChains.find(z => z.chain_name === chain.chain_name);
+          if (zoneChain?.rest && chain.backupUsed.restAddress === zoneChain.rest) {
+            restType = 'Chainlist';
+          } else if (isPreferredProvider({ address: chain.backupUsed.restAddress }, chain.chain_name)) {
+            const provider = getProviderFromEndpoint({ address: chain.backupUsed.restAddress });
+            restType = `Preferred (${provider})`;
+          } else {
+            const index = chain.backupUsed.restEndpointIndex || 0;
+            restType = `Backup #${index}`;
+          }
+        }
+
+        report += `| ${chain.chain_name} | ${rpcType} | ${restType} | ${validationDate} |\n`;
+      });
+      report += `\n`;
+    }
   }
 
   // Always output report to stdout (for capturing to file)

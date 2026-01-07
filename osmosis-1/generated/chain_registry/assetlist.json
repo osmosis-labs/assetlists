@@ -27369,6 +27369,89 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/FD0C5BF3009F3300961E52E4E0160D6901B1B3E7D0475766C5D960A9D3999B32",
+          "exponent": 0,
+          "aliases": [
+            "umirage"
+          ]
+        },
+        {
+          "denom": "mirage",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/FD0C5BF3009F3300961E52E4E0160D6901B1B3E7D0475766C5D960A9D3999B32",
+      "name": "Mirage",
+      "display": "mirage",
+      "symbol": "MIRAGE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "mirage",
+            "base_denom": "umirage",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-108600",
+            "path": "transfer/channel-108600/umirage"
+          }
+        }
+      ]
+    },
+    {
+      "description": "An alloy of EPIX asset variants on Osmosis.",
+      "extended_description": "Multiple EPIX variants on Osmosis comprise the liquidity backing of a tokenized transmuter pool to create an alloy of EPIX.",
+      "denom_units": [
+        {
+          "denom": "factory/osmo130tfawc7katf7jwzt2rjdranhqju929rjra3xwsrfsd85hedh3tsssy9j7/alloyed/allEPIX",
+          "exponent": 0
+        },
+        {
+          "denom": "allEPIX",
+          "exponent": 12
+        }
+      ],
+      "type_asset": "sdk.coin",
+      "address": "osmo130tfawc7katf7jwzt2rjdranhqju929rjra3xwsrfsd85hedh3tsssy9j7",
+      "base": "factory/osmo130tfawc7katf7jwzt2rjdranhqju929rjra3xwsrfsd85hedh3tsssy9j7/alloyed/allEPIX",
+      "name": "Epix",
+      "display": "allEPIX",
+      "symbol": "EPIX",
+      "traces": [
+        {
+          "type": "synthetic",
+          "counterparty": {
+            "chain_name": "epix",
+            "base_denom": "aepix"
+          },
+          "provider": "Osmosis"
+        }
+      ],
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.svg"
+      },
+      "images": [
+        {
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.svg",
+          "theme": {
+            "circle": true
+          }
+        },
+        {
+          "image_sync": {
+            "chain_name": "epix",
+            "base_denom": "aepix"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.svg"
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/E4673C5CDB56B4225AB1625F3B478740AE9F11E1A6BEBC1B30F8A5080D6AFBD6",
           "exponent": 0,
           "aliases": [
@@ -33725,40 +33808,6 @@
           "chain": {
             "channel_id": "channel-642",
             "path": "transfer/channel-642/factory/migaloo1zsptvkg5aeg4tjksgv7vp4x5s9p5euqrh9jl3sfdv48wtnrhftlszsvmu5/uwhalex"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/FD0C5BF3009F3300961E52E4E0160D6901B1B3E7D0475766C5D960A9D3999B32",
-          "exponent": 0,
-          "aliases": [
-            "umirage"
-          ]
-        },
-        {
-          "denom": "mirage",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/FD0C5BF3009F3300961E52E4E0160D6901B1B3E7D0475766C5D960A9D3999B32",
-      "name": "Mirage",
-      "display": "mirage",
-      "symbol": "MIRAGE",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "mirage",
-            "base_denom": "umirage",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-108600",
-            "path": "transfer/channel-108600/umirage"
           }
         }
       ]

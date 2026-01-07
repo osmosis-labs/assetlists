@@ -2786,6 +2786,12 @@
           "coinMinimalDenom": "factory/osmo1q77cw0mmlluxu0wr29fcdd0tdnh78gzhkvhe4n6ulal9qvrtu43qtd0nh8/slayer",
           "coinDecimals": 6,
           "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/SLAYER.png"
+        },
+        {
+          "coinDenom": "EPIX",
+          "coinMinimalDenom": "factory/osmo130tfawc7katf7jwzt2rjdranhqju929rjra3xwsrfsd85hedh3tsssy9j7/alloyed/allEPIX",
+          "coinDecimals": 12,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.svg"
         }
       ],
       "description": "Osmosis (OSMO) is the premier DEX and cross-chain DeFi hub within the Cosmos ecosystem, a network of over 50 sovereign, interoperable blockchains seamlessly connected through the Inter-Blockchain Communication Protocol (IBC). Pioneering in its approach, Osmosis offers a dynamic trading and liquidity provision experience, integrating non-IBC assets from other ecosystems, including Ethereum, Solana, Avalanche, and Polkadot. Initially adopting Balancer-style pools, Osmosis now also features a concentrated liquidity model that is orders of magnitude more capital efficient, meaning that significantly less liquidity is required to handle the same amount of trading volume with minimal slippage.\n\nAs a true appchain, Osmosis has greater control over the full blockchain stack than traditional smart contract DEXs, which must follow the code of the parent chain that it is built on. This fine-grained control has enabled, for example, the development of Superfluid Staking, an extension of Proof of Stake that allows assets at the application layer to be staked to secure the chain. The customizability of appchains also allows implementing features like the Protocol Revenue module, which enables Osmosis to conduct on-chain arbitrage on behalf of OSMO stakers, balancing prices across pools while generating real yield revenue from this volume. Additionally, as a sovereign appchain, Osmosis governance can vote on upgrades to the protocol. One example of this was the introduction of a Taker Fee, which switched on the collection of exchange fees to generate diverse yield from Osmosis volume and distribute it to OSMO stakers.\n\nOsmosis is bringing the full centralized exchange experience to the decentralized world by building a cross-chain native DEX and trading suite that connects all chains over IBC, including Ethereum and Bitcoin. To reach this goal, Osmosis hosts an ever-expanding suite of DeFi applications aimed at providing a one-stop experience that includes lending, credit, margin, DeFi strategy vaults, power perps, fiat on-ramps, NFTs, stablecoins, and more — all of the functionalities that centralized exchange offer and more, in the trust-minimized environment of decentralized finance.",
@@ -3068,6 +3074,9 @@
       "apis": {
         "rpc": [
           {
+            "address": "https://cosmoshub.tendermintrpc.lava.build:443"
+          },
+          {
             "address": "https://rpc-cosmoshub.keplr.app"
           },
           {
@@ -3195,6 +3204,9 @@
           }
         ],
         "rest": [
+          {
+            "address": "https://rest.lavenderfive.com:443/cosmoshub"
+          },
           {
             "address": "https://lcd-cosmoshub.keplr.app"
           },
@@ -7809,10 +7821,10 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://panacea-rpc.staketab.org:443"
+            "address": "https://rpc.gopanacea.org"
           },
           {
-            "address": "https://rpc.gopanacea.org"
+            "address": "https://panacea-rpc.staketab.org:443"
           },
           {
             "address": "https://panacea_mainnet_rpc.chain.whenmoonwhenlambo.money"
@@ -7820,10 +7832,10 @@
         ],
         "rest": [
           {
-            "address": "https://panacea-rest.staketab.org"
+            "address": "https://api.gopanacea.org"
           },
           {
-            "address": "https://api.gopanacea.org"
+            "address": "https://panacea-rest.staketab.org"
           },
           {
             "address": "https://panacea_mainnet_api.chain.whenmoonwhenlambo.money"
@@ -11837,10 +11849,10 @@
             "address": "https://rpc-evmos.keplr.app/"
           },
           {
-            "address": "https://rpc.lavenderfive.com:443/evmos"
+            "address": "https://tendermint.bd.evmos.org:26657"
           },
           {
-            "address": "https://tendermint.bd.evmos.org:26657"
+            "address": "https://rpc.lavenderfive.com:443/evmos"
           },
           {
             "address": "https://rpc-evmos-ia.cosmosia.notional.ventures:443"
@@ -19936,7 +19948,7 @@
         ],
         "rest": [
           {
-            "address": "https://empower-api.bluestake.net"
+            "address": "https://empower-api.moonbridge.org"
           },
           {
             "address": "https://empower-api.polkachu.com"
@@ -19972,7 +19984,7 @@
             "address": "https://empower-api.noders.services"
           },
           {
-            "address": "https://empower-api.moonbridge.org"
+            "address": "https://empower-api.bluestake.net"
           }
         ]
       },
@@ -20767,7 +20779,7 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://sge-rpc.genznodes.dev"
+            "address": "https://sge_mainnet_rpc.chain.whenmoonwhenlambo.money"
           },
           {
             "address": "https://sge-priv-rpc.kingnodes.com"
@@ -20806,12 +20818,12 @@
             "address": "https://mainnet-sge-rpc.konsortech.xyz"
           },
           {
-            "address": "https://sge_mainnet_rpc.chain.whenmoonwhenlambo.money"
+            "address": "https://sge-rpc.genznodes.dev"
           }
         ],
         "rest": [
           {
-            "address": "https://api.sge.roomit.xyz/"
+            "address": "https://sge_mainnet_api.chain.whenmoonwhenlambo.money"
           },
           {
             "address": "https://sge-priv-rest.kingnodes.com"
@@ -20850,7 +20862,7 @@
             "address": "https://sge-api.genznodes.dev"
           },
           {
-            "address": "https://sge_mainnet_api.chain.whenmoonwhenlambo.money"
+            "address": "https://api.sge.roomit.xyz/"
           }
         ]
       },
@@ -20934,7 +20946,7 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://public-rpc2.stafihub.io:443"
+            "address": "https://rpc.stafihub.nodestake.org:443"
           },
           {
             "address": "https://public-rpc1.stafihub.io"
@@ -20943,18 +20955,18 @@
             "address": "https://public-rpc1.stafihub.io:443"
           },
           {
-            "address": "https://rpc.stafihub.nodestake.org:443"
+            "address": "https://public-rpc2.stafihub.io:443"
           }
         ],
         "rest": [
           {
-            "address": "https://public-rest-rpc2.stafihub.io"
+            "address": "https://api.stafihub.nodestake.org"
           },
           {
             "address": "https://public-rest-rpc1.stafihub.io"
           },
           {
-            "address": "https://api.stafihub.nodestake.org"
+            "address": "https://public-rest-rpc2.stafihub.io"
           }
         ]
       },
@@ -21776,7 +21788,7 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://rpc.nomic.basementnodes.ca:443"
+            "address": "https://rpc.nomic.bronbro.io:443"
           },
           {
             "address": "https://stakenet-rpc.nomic.io:2096"
@@ -21788,7 +21800,7 @@
             "address": "https://rpc-nomic.whispernode.com:443"
           },
           {
-            "address": "https://rpc.nomic.bronbro.io:443"
+            "address": "https://rpc.nomic.basementnodes.ca:443"
           }
         ],
         "rest": [
@@ -24616,10 +24628,10 @@
             "address": "https://lava-rpc.w3coins.io"
           },
           {
-            "address": "https://rpc-lava.onenov.xyz"
+            "address": "https://lava.tendermintrpc.lava.build"
           },
           {
-            "address": "https://lava.tendermintrpc.lava.build"
+            "address": "https://rpc-lava.onenov.xyz"
           },
           {
             "address": "https://lava-rpc.w3coins.io:443"
@@ -24671,6 +24683,9 @@
           },
           {
             "address": "https://rpc-lava.vinjan.xyz"
+          },
+          {
+            "address": "https://lava-mainnet-rpc.shazoes.xyz"
           }
         ],
         "rest": [
@@ -24678,13 +24693,13 @@
             "address": "https://lava-api.w3coins.io"
           },
           {
+            "address": "https://lava.rest.lava.build"
+          },
+          {
             "address": "https://api-lava.onenov.xyz"
           },
           {
             "address": "https://lava-api.finteh.org:443"
-          },
-          {
-            "address": "https://lava.rest.lava.build"
           },
           {
             "address": "https://lava-api.w3coins.io:443"
@@ -24730,6 +24745,9 @@
           },
           {
             "address": "https://api-lava.vinjan.xyz"
+          },
+          {
+            "address": "https://lava-mainnet-api.shazoes.xyz"
           }
         ]
       },
@@ -28362,6 +28380,9 @@
           },
           {
             "address": "https://nillion-mainnet-rpc.autostake.com:443"
+          },
+          {
+            "address": "https://nillion-mainnet-rpc.shazoes.xyz"
           }
         ],
         "rest": [
@@ -28373,6 +28394,9 @@
           },
           {
             "address": "https://nillion-mainnet-lcd.autostake.com:443"
+          },
+          {
+            "address": "https://nillion-mainnet-api.shazoes.xyz"
           }
         ]
       },
@@ -28963,9 +28987,6 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://arkeo_mainnet_rpc.chain.whenmoonwhenlambo.money"
-          },
-          {
             "address": "https://rpc-seed.arkeo.network/"
           },
           {
@@ -28982,9 +29003,6 @@
           }
         ],
         "rest": [
-          {
-            "address": "https://arkeo_mainnet_api.chain.whenmoonwhenlambo.money"
-          },
           {
             "address": "https://rest-seed.arkeo.network/"
           },
@@ -29437,9 +29455,6 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://rpc.symphony.citizenweb3.com"
-          },
-          {
             "address": "https://rpc-main-symphony.vinjan.xyz"
           },
           {
@@ -29450,11 +29465,14 @@
           },
           {
             "address": "https://rpc-symphony.sr20de.xyz"
+          },
+          {
+            "address": "https://rpc.symphony.citizenweb3.com"
           }
         ],
         "rest": [
           {
-            "address": "https://api.symphony.citizenweb3.com"
+            "address": "https://api-symphony.sr20de.xyz"
           },
           {
             "address": "https://api-main-symphony.vinjan.xyz"
@@ -29466,7 +29484,7 @@
             "address": "https://symphony-api.cogwheel.zone/"
           },
           {
-            "address": "https://api-symphony.sr20de.xyz"
+            "address": "https://api.symphony.citizenweb3.com"
           }
         ]
       },
@@ -30065,10 +30083,10 @@
         ],
         "rest": [
           {
-            "address": "https://api.optio.zone:443"
+            "address": "https://api.optio.zone"
           },
           {
-            "address": "https://api.optio.zone"
+            "address": "https://api.optio.zone:443"
           }
         ]
       },
@@ -30149,6 +30167,86 @@
         "ibc-go",
         "eth-address-gen",
         "eth-key-sign"
+      ]
+    },
+    {
+      "chain_name": "mirage",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Mirage",
+      "chain_id": "mirage-1",
+      "bech32Prefix": "mirage",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "mirage",
+        "bech32PrefixAccPub": "miragepub",
+        "bech32PrefixValAddr": "miragevaloper",
+        "bech32PrefixValPub": "miragevaloperpub",
+        "bech32PrefixConsAddr": "miragevalcons",
+        "bech32PrefixConsPub": "miragevalconspub"
+      },
+      "slip44": 118,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mirage/images/mirage.png"
+      },
+      "stakeCurrency": {
+        "coinDenom": "MIRAGE",
+        "coinMinimalDenom": "umirage",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mirage/images/mirage.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "MIRAGE",
+          "coinMinimalDenom": "umirage",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mirage/images/mirage.png",
+          "gasPriceStep": {
+            "low": 0.025,
+            "average": 0.05,
+            "high": 0.1
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "MIRAGE",
+          "coinMinimalDenom": "umirage",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mirage/images/mirage.png"
+        }
+      ],
+      "description": "Mirage is what Reddit could have been if it never sold out. Free speech lives on-chain. True discourse. Decentralized. Unstoppable.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.cosmos.directory/mirage"
+          },
+          {
+            "address": "http://mirage.talk:26657"
+          },
+          {
+            "address": "http://mirage.vote:26657"
+          },
+          {
+            "address": "http://146.190.108.140:26657"
+          },
+          {
+            "address": "http://139.59.9.96:26657"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest.cosmos.directory/mirage"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://www.mintscan.io/mirage/txs/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go"
       ]
     },
     {
@@ -30259,13 +30357,6 @@
       "prettyName": "fandomChain",
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fandomchain/images/fandomchain.png"
-      }
-    },
-    {
-      "chain_name": "mirage",
-      "prettyName": "Mirage",
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mirage/images/mirage.png"
       }
     },
     {

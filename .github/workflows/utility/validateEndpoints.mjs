@@ -19,7 +19,7 @@ import * as chain_reg from "../../../chain-registry/.github/workflows/utility/ch
 chain_reg.setup();
 import * as path from 'path';
 import * as api_mgmt from "./api_management.mjs";
-import { sortEndpointsByProvider } from './endpoint_preference.mjs';
+import { sortEndpointsByProvider, isPreferredProvider, getProviderFromEndpoint, isTeamEndpoint } from './endpoint_preference.mjs';
 
 import WebSocket from 'ws';
 import https from 'https';
@@ -420,7 +420,33 @@ function getEndpointCount(counterpartyChain, nodeType) {
 }
 
 
-async function validateCounterpartyChain(counterpartyChain) {
+async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis-1") {
+
+  // Load zone chains config to check for zone endpoints
+  const zoneChains = zone.readFromFile(
+    chainName,
+    zone.noDir,
+    zone.zoneChainlistFileName
+  )?.chains || [];
+  const zoneChain = zoneChains.find(z => z.chain_name === counterpartyChain.chain_name);
+
+  // Helper to determine if an endpoint is "primary" (zone, team, or preferred provider)
+  // Primary endpoints skip CORS validation
+  const isPrimaryEndpoint = (endpoint, nodeType) => {
+    const address = endpoint.address || endpoint;
+
+    // Check if it's the zone endpoint
+    if (nodeType === RPC_NODE && zoneChain?.rpc === address) return true;
+    if (nodeType === REST_NODE && zoneChain?.rest === address) return true;
+
+    // Check if it's a team endpoint
+    if (isTeamEndpoint(endpoint, counterpartyChain.chain_name)) return true;
+
+    // Check if it's a preferred provider
+    if (isPreferredProvider(endpoint, counterpartyChain.chain_name)) return true;
+
+    return false;
+  };
 
   // Helper function to perform validation for a given test type with a specific endpoint index
   const validate = async (test, endpointIndex) => {
@@ -508,8 +534,17 @@ async function validateCounterpartyChain(counterpartyChain) {
     counterpartyChain.apis.rpc = originalRpcArray;
 
     // Check if all RPC tests passed
-    const allPassed = flatResults.every(r => r.success && !r.stale);
+    // For primary endpoints (zone/team/preferred), skip CORS validation
+    const isPrimary = isPrimaryEndpoint(endpoint, RPC_NODE);
+    const resultsToCheck = isPrimary
+      ? flatResults.filter(r => r.test !== RPC_CORS)  // Skip CORS for primary endpoints
+      : flatResults;  // Require CORS for backup endpoints
+
+    const allPassed = resultsToCheck.every(r => r.success && !r.stale);
     if (allPassed) {
+      if (isPrimary && flatResults.some(r => r.test === RPC_CORS && !r.success)) {
+        console.log(`RPC Primary Endpoint (CORS skipped): ${endpoint.address}`);
+      }
       // Only record endpoint info if validation succeeded
       rpcResults = flatResults;
       rpcEndpointIndex = endpoint.originalIndex; // Use original Chain Registry index
@@ -553,8 +588,17 @@ async function validateCounterpartyChain(counterpartyChain) {
     counterpartyChain.apis.rest = originalRestArray;
 
     // Check if all REST tests passed
-    const allPassed = flatResults.every(r => r.success);
+    // For primary endpoints (zone/team/preferred), skip CORS validation
+    const isPrimary = isPrimaryEndpoint(endpoint, REST_NODE);
+    const resultsToCheck = isPrimary
+      ? flatResults.filter(r => r.test !== REST_CORS)  // Skip CORS for primary endpoints
+      : flatResults;  // Require CORS for backup endpoints
+
+    const allPassed = resultsToCheck.every(r => r.success);
     if (allPassed) {
+      if (isPrimary && flatResults.some(r => r.test === REST_CORS && !r.success)) {
+        console.log(`REST Primary Endpoint (CORS skipped): ${endpoint.address}`);
+      }
       // Only record endpoint info if validation succeeded
       restResults = flatResults;
       restEndpointIndex = endpoint.originalIndex; // Use original Chain Registry index
@@ -573,22 +617,32 @@ async function validateCounterpartyChain(counterpartyChain) {
   // Combine results
   const allResults = [...(rpcResults || []), ...(restResults || [])];
 
+  // Determine if primary endpoints were used (for CORS skipping in validation success check)
+  const rpcIsPrimary = rpcAddress ? isPrimaryEndpoint({ address: rpcAddress }, RPC_NODE) : false;
+  const restIsPrimary = restAddress ? isPrimaryEndpoint({ address: restAddress }, REST_NODE) : false;
+
   // Return results with endpoint information
   return {
     results: allResults,
     rpcEndpointIndex,
     restEndpointIndex,
     rpcAddress,
-    restAddress
+    restAddress,
+    rpcIsPrimary,
+    restIsPrimary
   };
 
 }
 
 
-function determineValidationSuccess(validationResults) {
+function determineValidationSuccess(validationResults, rpcIsPrimary = false, restIsPrimary = false) {
   for (const validationResult of validationResults) {
+    // Skip CORS tests for primary endpoints
+    if (rpcIsPrimary && validationResult.test === RPC_CORS) continue;
+    if (restIsPrimary && validationResult.test === REST_CORS) continue;
+
     if (!validationResult.success) { return false; }
-    if (validationResults.stale) { return false; }
+    if (validationResult.stale) { return false; }
   }
   return true;
 }
@@ -597,7 +651,11 @@ function constructValidationRecord(counterpartyChainName, validationData) {
   const record = {
     chain_name: counterpartyChainName,
     validationDate: currentDateUTC,
-    validationSuccess: determineValidationSuccess(validationData.results),
+    validationSuccess: determineValidationSuccess(
+      validationData.results,
+      validationData.rpcIsPrimary,
+      validationData.restIsPrimary
+    ),
     validationResults: validationData.results
   };
 
@@ -620,6 +678,14 @@ function addValidationRecordsToState(state, chainName, validationRecords) {
   getState(chainName);
 
   if (!state.chains) { state.chains = []; }
+
+  // Track chains validated in this run
+  const validatedInThisRun = validationRecords.map(r => r.chain_name);
+  state.lastValidationRun = {
+    timestamp: currentDateUTC.toISOString(),
+    chainsValidated: validatedInThisRun
+  };
+
   validationRecords.forEach((validationRecord) => {
     const index = state.chains.findIndex(chain => chain.chain_name === validationRecord.chain_name);
     if (index !== -1) {
@@ -731,12 +797,13 @@ async function validateEndpointsForAllCounterpartyChains(chainName) {
   const failedChains = prioritizedChains.filter(c => c.priority === 1 && c.validationSuccess === false);
   const neverValidated = prioritizedChains.filter(c => c.priority === 1 && c.validationSuccess === null);
   console.log(`Priority 1 - Failed: ${failedChains.length}, Never validated: ${neverValidated.length}`);
-  console.log(`Target: ${numChainsToQuery} chains\n`);
+  console.log(`Limit for successful chains: ${numChainsToQuery}\n`);
 
-  // Build queue respecting requery delays and priority
-  let numChainsQueried = 0;
+  // Build queue - ALL priority 1 (failed/never validated) + up to limit of priority 2 (successful)
+  let numPriority1Added = 0;
+  let numPriority2Added = 0;
+
   for (const prioritizedChain of prioritizedChains) {
-    if (numChainsQueried >= numChainsToQuery) { break; }
     if (prioritizedChain.recentlyQueried) { continue; }
 
     // Skip killed chains
@@ -745,10 +812,23 @@ async function validateEndpointsForAllCounterpartyChains(chainName) {
       continue;
     }
 
-    chainQueryQueue.push(prioritizedChain.chain);
-    numChainsQueried++;
-    console.log(`[${numChainsQueried}/${numChainsToQuery}] ${prioritizedChain.chain.chain_name} (Priority ${prioritizedChain.priority}, Last: ${prioritizedChain.validationDate?.toISOString() || 'never'})`);
+    // Add all Priority 1 chains (failed + never validated)
+    if (prioritizedChain.priority === 1) {
+      chainQueryQueue.push(prioritizedChain.chain);
+      numPriority1Added++;
+      const type = prioritizedChain.validationSuccess === false ? 'Failed' : 'Never Validated';
+      console.log(`[P1-${numPriority1Added}] ${prioritizedChain.chain.chain_name} (${type}, Last: ${prioritizedChain.validationDate?.toISOString() || 'never'})`);
+    }
+    // Add Priority 2 chains (successful) up to the limit
+    else if (prioritizedChain.priority === 2) {
+      if (numPriority2Added >= numChainsToQuery) { break; }
+      chainQueryQueue.push(prioritizedChain.chain);
+      numPriority2Added++;
+      console.log(`[P2-${numPriority2Added}/${numChainsToQuery}] ${prioritizedChain.chain.chain_name} (Last: ${prioritizedChain.validationDate?.toISOString() || 'never'})`);
+    }
   }
+
+  console.log(`\nQueue Summary: ${numPriority1Added} failed/never validated + ${numPriority2Added} successful = ${chainQueryQueue.length} total`);
 
   if (chainQueryQueue.length === 0) {
     console.log("\nNo chains need validation. All recently queried.");
@@ -759,7 +839,7 @@ async function validateEndpointsForAllCounterpartyChains(chainName) {
 
   // Generate validation promises
   const validationPromises = chainQueryQueue.map(async (counterpartyChain) => {
-    const validationResults = await validateCounterpartyChain(counterpartyChain);
+    const validationResults = await validateCounterpartyChain(counterpartyChain, chainName);
     return constructValidationRecord(counterpartyChain.chain_name, validationResults);
   });
 
@@ -786,7 +866,7 @@ async function fullValidation(chainName) {
 
     // Generate validation promises for this batch
     const validationPromises = batch.map(async (counterpartyChain) => {
-      const validationResults = await validateCounterpartyChain(counterpartyChain);
+      const validationResults = await validateCounterpartyChain(counterpartyChain, chainName);
       return constructValidationRecord(counterpartyChain.chain_name, validationResults);
     });
 
@@ -822,7 +902,7 @@ async function validateSpecificChain(chainName, chain_name) {
 
   // Generate validation promises and return records directly
   const validationPromises = chainQueryQueue.map(async (counterpartyChain) => {
-    const validationResults = await validateCounterpartyChain(counterpartyChain);
+    const validationResults = await validateCounterpartyChain(counterpartyChain, chainName);
     return constructValidationRecord(counterpartyChain.chain_name, validationResults);
   });
 
@@ -867,8 +947,14 @@ function generateValidationReport(chainName) {
     }
   });
 
+  // Get chains validated in this run
+  const chainsValidatedThisRun = state.lastValidationRun?.chainsValidated || [];
+
   const failedChains = state.chains.filter(chain => {
     if (chain.validationSuccess !== false) return false;
+
+    // Only include chains validated in this run
+    if (!chainsValidatedThisRun.includes(chain.chain_name)) return false;
 
     // Skip killed chains
     if (killedChainNames.includes(chain.chain_name)) return false;
@@ -894,14 +980,17 @@ function generateValidationReport(chainName) {
     forcedEndpointChains[chain.chain_name]
   );
 
-  // Count chains with backup endpoints used
-  const chainsWithBackupsUsed = state.chains.filter(chain => chain.backupUsed).length;
+  // Count chains with backup endpoints used (only from this run)
+  const chainsWithBackupsUsed = state.chains.filter(chain =>
+    chain.backupUsed && chainsValidatedThisRun.includes(chain.chain_name)
+  ).length;
 
-  let report = `**Chains Validated This Run:** ${process.env.CHAINS_VALIDATED || 'N/A'}\n`;
-  report += `**Total Chains in State:** ${state.chains.length}\n`;
-  report += `**Failed Endpoints:** ${failedChains.length}\n`;
-  report += `**Chains Using Backup Endpoints:** ${chainsWithBackupsUsed}\n`;
-  report += `**Success Rate:** ${((state.chains.length - failedChains.length) / state.chains.length * 100).toFixed(1)}%\n\n`;
+  const successfulThisRun = chainsValidatedThisRun.length - failedChains.length;
+
+  let report = `**Chains Validated This Run:** ${chainsValidatedThisRun.length}\n`;
+  report += `**Successful:** ${successfulThisRun}\n`;
+  report += `**Failed:** ${failedChains.length}\n`;
+  report += `**Using Backup Endpoints:** ${chainsWithBackupsUsed}\n\n`;
 
   // Alert for forced endpoint failures
   if (forcedEndpointFailures.length > 0) {
@@ -954,24 +1043,61 @@ function generateValidationReport(chainName) {
     report += `\n`;
   }
 
-  // Show chains that switched to backup endpoints
+  // Show chains that switched to backup endpoints (only those validated this run)
   if (chainsWithBackupsUsed > 0) {
-    const chainsWithBackups = state.chains.filter(chain => chain.backupUsed);
-    report += `### 🔄 Endpoint Reordering (Backup Endpoints Used)\n\n`;
-    report += `The following chains had their zone endpoint fail validation and were reordered to use a working backup:\n\n`;
-    report += `| Chain Name | RPC Backup Index | REST Backup Index | Last Validation |\n`;
-    report += `|------------|-----------------|------------------|----------------|\n`;
-
-    chainsWithBackups.forEach(chain => {
-      const validationDate = new Date(chain.validationDate).toISOString().split('T')[0];
-      const rpcIndex = chain.backupUsed.rpcEndpointIndex || 0;
-      const restIndex = chain.backupUsed.restEndpointIndex || 0;
-      const rpcIndicator = rpcIndex > 0 ? `Backup #${rpcIndex}` : 'Primary';
-      const restIndicator = restIndex > 0 ? `Backup #${restIndex}` : 'Primary';
-
-      report += `| ${chain.chain_name} | ${rpcIndicator} | ${restIndicator} | ${validationDate} |\n`;
+    const chainsWithBackups = state.chains.filter(chain => {
+      if (!chain.backupUsed) return false;
+      // Only include chains validated in this run
+      if (state.lastValidationRun?.chainsValidated) {
+        return state.lastValidationRun.chainsValidated.includes(chain.chain_name);
+      }
+      // Fallback: include all if lastValidationRun not available
+      return true;
     });
-    report += `\n`;
+
+    if (chainsWithBackups.length > 0) {
+      report += `### 🔄 Endpoint Reordering (Backup Endpoints Used)\n\n`;
+      report += `The following chains had their zone endpoint fail validation and were reordered to use a working backup:\n\n`;
+      report += `| Chain Name | RPC Endpoint Type | REST Endpoint Type | Last Validation |\n`;
+      report += `|------------|-------------------|-------------------|----------------|\n`;
+
+      chainsWithBackups.forEach(chain => {
+        const validationDate = new Date(chain.validationDate).toISOString().split('T')[0];
+
+        // Determine RPC endpoint type
+        let rpcType = '—';
+        if (chain.backupUsed.rpcAddress) {
+          const zoneChain = zoneChains.find(z => z.chain_name === chain.chain_name);
+          if (zoneChain?.rpc && chain.backupUsed.rpcAddress === zoneChain.rpc) {
+            rpcType = 'Chainlist';
+          } else if (isPreferredProvider({ address: chain.backupUsed.rpcAddress }, chain.chain_name)) {
+            const provider = getProviderFromEndpoint({ address: chain.backupUsed.rpcAddress });
+            rpcType = `Preferred (${provider})`;
+          } else {
+            const index = chain.backupUsed.rpcEndpointIndex || 0;
+            rpcType = `Backup #${index}`;
+          }
+        }
+
+        // Determine REST endpoint type
+        let restType = '—';
+        if (chain.backupUsed.restAddress) {
+          const zoneChain = zoneChains.find(z => z.chain_name === chain.chain_name);
+          if (zoneChain?.rest && chain.backupUsed.restAddress === zoneChain.rest) {
+            restType = 'Chainlist';
+          } else if (isPreferredProvider({ address: chain.backupUsed.restAddress }, chain.chain_name)) {
+            const provider = getProviderFromEndpoint({ address: chain.backupUsed.restAddress });
+            restType = `Preferred (${provider})`;
+          } else {
+            const index = chain.backupUsed.restEndpointIndex || 0;
+            restType = `Backup #${index}`;
+          }
+        }
+
+        report += `| ${chain.chain_name} | ${rpcType} | ${restType} | ${validationDate} |\n`;
+      });
+      report += `\n`;
+    }
   }
 
   // Always output report to stdout (for capturing to file)

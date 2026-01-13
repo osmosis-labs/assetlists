@@ -49,12 +49,13 @@
  *    - Fail: Missing/short and not exempt
  *
  * 4. SOCIALS
- *    - Has both `website` and `twitter/x` in socials
- *    - Check: !!asset.socials.website && !!asset.socials.twitter
+ *    - Has at least one social/contact field provided
+ *    - Accepted fields: website, x, twitter, telegram, discord, github, medium, reddit
+ *    - Check: At least one field in asset.socials exists
  *    - Fallback: For staking tokens, checks chain-level socials
  *    - Exemption: Meme tokens (skipped)
- *    - Pass: Both website AND twitter present
- *    - Fail: Either missing
+ *    - Pass: At least one social field present
+ *    - Fail: No social/contact information provided
  *
  * 5. LOGO
  *    - Logo has square aspect ratio and file size <250KB
@@ -694,9 +695,10 @@ async function checkExtendedDescription(chainName, baseDenom, isMeme) {
 }
 
 /**
- * Check 4: Socials (Website & Twitter)
- * Verifies asset has both website and twitter/x URLs
+ * Check 4: Socials (Any Contact Method)
+ * Verifies asset has at least one social/contact URL
  *
+ * Accepted fields: website, x, twitter, telegram, discord, github, medium, reddit
  * Exemption: Meme tokens (skipped)
  * Fallback: For staking tokens, checks chain-level socials
  *
@@ -737,35 +739,27 @@ async function checkSocials(chainName, baseDenom, isMeme) {
       }
     }
 
-    const hasWebsite = !!socials?.website;
-    // Handle both "twitter" and "x" fields (chain registry now uses "x")
-    const hasTwitter = !!(socials?.twitter || socials?.x);
+    // Check for any social field
+    const availableSocials = [];
+    if (socials?.website) availableSocials.push(`website: ${socials.website}`);
+    if (socials?.x) availableSocials.push(`x: ${socials.x}`);
+    if (socials?.twitter) availableSocials.push(`twitter: ${socials.twitter}`);
+    if (socials?.telegram) availableSocials.push(`telegram: ${socials.telegram}`);
+    if (socials?.discord) availableSocials.push(`discord: ${socials.discord}`);
+    if (socials?.github) availableSocials.push(`github: ${socials.github}`);
+    if (socials?.medium) availableSocials.push(`medium: ${socials.medium}`);
+    if (socials?.reddit) availableSocials.push(`reddit: ${socials.reddit}`);
 
-    if (!hasWebsite && !hasTwitter) {
+    if (availableSocials.length === 0) {
       return {
         passed: false,
-        details: 'Missing both website and twitter/x'
+        details: 'No social/contact information provided'
       };
     }
 
-    if (!hasWebsite) {
-      return {
-        passed: false,
-        details: 'Missing website'
-      };
-    }
-
-    if (!hasTwitter) {
-      return {
-        passed: false,
-        details: 'Missing twitter/x'
-      };
-    }
-
-    const twitterUrl = socials.twitter || socials.x;
     return {
       passed: true,
-      details: `Website: ${socials.website}, Twitter/X: ${twitterUrl}`
+      details: availableSocials.join(', ')
     };
 
   } catch (error) {

@@ -1706,15 +1706,27 @@ export function setAddress(asset_data) {
 
 }
 
+function applySocialsToAssetDetail(asset_data, socials) {
+  if (!socials) { return; }
+
+  // Extract all available social fields
+  asset_data.asset_detail.websiteURL = socials?.website;
+  asset_data.asset_detail.twitterURL = socials?.twitter || socials?.x;
+  asset_data.asset_detail.telegramURL = socials?.telegram;
+  asset_data.asset_detail.discordURL = socials?.discord;
+  asset_data.asset_detail.githubURL = socials?.github;
+  asset_data.asset_detail.mediumURL = socials?.medium;
+  asset_data.asset_detail.redditURL = socials?.reddit;
+}
+
 export function setSocials(asset_data) {
 
   asset_data.chain_reg.socials = getAssetProperty(asset_data.local_asset, "socials");
 
   let socials = getAssetProperty(asset_data.canonical_asset, "socials");
-  asset_data.asset_detail.websiteURL = socials?.website;
-  asset_data.asset_detail.twitterURL = socials?.twitter || socials?.x;
+  applySocialsToAssetDetail(asset_data, socials);
   if (socials) { return; }
-  
+
   if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
     socials = chain_reg.getFileProperty(
       asset_data.canonical_asset.chain_name,
@@ -1722,8 +1734,7 @@ export function setSocials(asset_data) {
       "socials"
     )
   }
-  asset_data.asset_detail.websiteURL = socials?.website;
-  asset_data.asset_detail.twitterURL = socials?.twitter || socials?.x;
+  applySocialsToAssetDetail(asset_data, socials);
   if (socials) { return; }
 
   socials = chain_reg.getAssetPropertyWithTraceCustom(
@@ -1732,8 +1743,7 @@ export function setSocials(asset_data) {
     "socials",
     originTraceTypes
   );
-  asset_data.asset_detail.websiteURL = socials?.website;
-  asset_data.asset_detail.twitterURL = socials?.twitter || socials?.x;
+  applySocialsToAssetDetail(asset_data, socials);
 
 }
 
@@ -1940,7 +1950,12 @@ export function reformatAssetDetailAsset(asset_data) {
     description: asset_data.asset_detail.description,
     coingeckoID: asset_data.asset_detail.coingeckoId,
     websiteURL: asset_data.asset_detail.websiteURL,
-    twitterURL: asset_data.asset_detail.twitterURL
+    twitterURL: asset_data.asset_detail.twitterURL,
+    telegramURL: asset_data.asset_detail.telegramURL,
+    discordURL: asset_data.asset_detail.discordURL,
+    githubURL: asset_data.asset_detail.githubURL,
+    mediumURL: asset_data.asset_detail.mediumURL,
+    redditURL: asset_data.asset_detail.redditURL
   };
 
   asset_data.asset_detail = reformattedAsset;

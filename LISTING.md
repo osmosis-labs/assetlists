@@ -32,7 +32,7 @@
 Registered Asset Metadata at the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry):
  - All standard required values: Name, Symbol, Base, Display, Type_asset (sdk.coin vs cw20 vs erc20 vs ...), etc.
  - A meaningful `description`.
- - A detailed `extended_description` further explaining the function of the asset and/or describing the project it represents, and `socials`, including `website` and `twitter`.
+ - A detailed `extended_description` further explaining the function of the asset and/or describing the project it represents, and `socials` with at least one contact method (e.g., `website`, `x`, `telegram`, `discord`, `github`, `medium`, or `reddit`).
    - Not required for 'Memecoins'--must be categorized as "meme"
    - Not required for variant or derivative assets, but the origin asset must have this defined
      - e.g., not required for USDT.eth.axl, but is required for the original USDT

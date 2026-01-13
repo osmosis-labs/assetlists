@@ -1755,7 +1755,7 @@
     },
     {
       "chain_name": "starname",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -1788,7 +1788,7 @@
     },
     {
       "chain_name": "emoney",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -1920,7 +1920,7 @@
     },
     {
       "chain_name": "impacthub",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -1931,12 +1931,12 @@
         {
           "test": "RPC WSS",
           "url": "wss://impacthub_mainnet_rpc.chain.whenmoonwhenlambo.money/websocket",
-          "success": true
+          "success": false
         },
         {
           "test": "RPC Endpoints",
           "url": "https://impacthub_mainnet_rpc.chain.whenmoonwhenlambo.money/status",
-          "success": true,
+          "success": false,
           "stale": false
         },
         {
@@ -2019,7 +2019,7 @@
     },
     {
       "chain_name": "kichain",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -2085,7 +2085,7 @@
     },
     {
       "chain_name": "bostrom",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -2107,7 +2107,7 @@
         {
           "test": "REST CORS",
           "url": "https://lcd.cyber.bronbro.io/",
-          "success": true
+          "success": false
         },
         {
           "test": "REST Endpoints",
@@ -2118,36 +2118,42 @@
     },
     {
       "chain_name": "comdex",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
           "test": "RPC CORS",
-          "url": "https://comdex-rpc.publicnode.com/",
-          "success": true
+          "url": "https://comdex-rpc.chainroot.io/",
+          "success": false
         },
         {
           "test": "RPC WSS",
-          "url": "wss://comdex-rpc.publicnode.com/websocket",
-          "success": true
+          "url": "wss://comdex-rpc.chainroot.io/websocket",
+          "success": false
         },
         {
           "test": "RPC Endpoints",
-          "url": "https://comdex-rpc.publicnode.com/status",
-          "success": true,
+          "url": "https://comdex-rpc.chainroot.io/status",
+          "success": false,
           "stale": false
         },
         {
           "test": "REST CORS",
-          "url": "https://comdex-api.chainroot.io/",
-          "success": false
+          "url": "https://comdex-rest.publicnode.com/",
+          "success": true
         },
         {
           "test": "REST Endpoints",
-          "url": "https://comdex-api.chainroot.io/cosmos/base/tendermint/v1beta1/node_info",
-          "success": false
+          "url": "https://comdex-rest.publicnode.com/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
-      ]
+      ],
+      "backupUsed": {
+        "rpcEndpointIndex": 0,
+        "restEndpointIndex": 8,
+        "rpcAddress": null,
+        "restAddress": "https://comdex-rest.publicnode.com"
+      }
     },
     {
       "chain_name": "cheqd",
@@ -2268,7 +2274,7 @@
     },
     {
       "chain_name": "lumnetwork",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -2279,12 +2285,12 @@
         {
           "test": "RPC WSS",
           "url": "wss://lumnetwork_mainnet_rpc.chain.whenmoonwhenlambo.money/websocket",
-          "success": true
+          "success": false
         },
         {
           "test": "RPC Endpoints",
           "url": "https://lumnetwork_mainnet_rpc.chain.whenmoonwhenlambo.money/status",
-          "success": true,
+          "success": false,
           "stale": false
         },
         {
@@ -2295,7 +2301,7 @@
         {
           "test": "REST Endpoints",
           "url": "https://lumnetwork_mainnet_api.chain.whenmoonwhenlambo.money/cosmos/base/tendermint/v1beta1/node_info",
-          "success": true
+          "success": false
         }
       ]
     },
@@ -2334,23 +2340,23 @@
     },
     {
       "chain_name": "desmos",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
           "test": "RPC CORS",
-          "url": "https://desmos-rpc.staketab.org/",
-          "success": true
+          "url": "https://desmos-rpc.noders.services/",
+          "success": false
         },
         {
           "test": "RPC WSS",
-          "url": "wss://desmos-rpc.staketab.org/websocket",
-          "success": true
+          "url": "wss://desmos-rpc.noders.services/websocket",
+          "success": false
         },
         {
           "test": "RPC Endpoints",
-          "url": "https://desmos-rpc.staketab.org/status",
-          "success": true,
+          "url": "https://desmos-rpc.noders.services/status",
+          "success": false,
           "stale": false
         },
         {
@@ -2400,23 +2406,23 @@
     },
     {
       "chain_name": "sommelier",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
           "test": "RPC CORS",
-          "url": "https://sommelier-rpc.polkachu.com/",
-          "success": true
+          "url": "https://sommelier-rpc.w3coins.io/",
+          "success": false
         },
         {
           "test": "RPC WSS",
-          "url": "wss://sommelier-rpc.polkachu.com/websocket",
-          "success": true
+          "url": "wss://sommelier-rpc.w3coins.io/websocket",
+          "success": false
         },
         {
           "test": "RPC Endpoints",
-          "url": "https://sommelier-rpc.polkachu.com/status",
-          "success": true,
+          "url": "https://sommelier-rpc.w3coins.io/status",
+          "success": false,
           "stale": false
         },
         {
@@ -2429,13 +2435,7 @@
           "url": "https://somm-api.kleomedes.network/cosmos/base/tendermint/v1beta1/node_info",
           "success": false
         }
-      ],
-      "backupUsed": {
-        "rpcEndpointIndex": 1,
-        "restEndpointIndex": 0,
-        "rpcAddress": "https://sommelier-rpc.polkachu.com",
-        "restAddress": null
-      }
+      ]
     },
     {
       "chain_name": "sifchain",
@@ -2511,7 +2511,7 @@
     },
     {
       "chain_name": "konstellation",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -3042,7 +3042,7 @@
     },
     {
       "chain_name": "galaxy",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -3174,7 +3174,7 @@
     },
     {
       "chain_name": "tgrade",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -3207,7 +3207,7 @@
     },
     {
       "chain_name": "echelon",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -3240,7 +3240,7 @@
     },
     {
       "chain_name": "odin",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -3273,7 +3273,7 @@
     },
     {
       "chain_name": "crescent",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -3582,7 +3582,7 @@
     },
     {
       "chain_name": "lambda",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -3615,7 +3615,7 @@
     },
     {
       "chain_name": "unification",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -3636,21 +3636,15 @@
         },
         {
           "test": "REST CORS",
-          "url": "https://rest.unification.io/",
-          "success": true
+          "url": "https://rest.unification.chainmasters.ninja/",
+          "success": false
         },
         {
           "test": "REST Endpoints",
-          "url": "https://rest.unification.io/cosmos/base/tendermint/v1beta1/node_info",
-          "success": true
+          "url": "https://rest.unification.chainmasters.ninja/cosmos/base/tendermint/v1beta1/node_info",
+          "success": false
         }
-      ],
-      "backupUsed": {
-        "rpcEndpointIndex": 0,
-        "restEndpointIndex": 1,
-        "rpcAddress": null,
-        "restAddress": "https://rest.unification.io"
-      }
+      ]
     },
     {
       "chain_name": "passage",
@@ -3726,7 +3720,7 @@
     },
     {
       "chain_name": "beezee",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -3737,29 +3731,29 @@
         {
           "test": "RPC WSS",
           "url": "wss://beezee_mainnet_rpc.chain.whenmoonwhenlambo.money/websocket",
-          "success": true
+          "success": false
         },
         {
           "test": "RPC Endpoints",
           "url": "https://beezee_mainnet_rpc.chain.whenmoonwhenlambo.money/status",
-          "success": true,
+          "success": false,
           "stale": false
         },
         {
           "test": "REST CORS",
-          "url": "https://rest.getbze.com/",
-          "success": true
+          "url": "https://beezee_mainnet_api.chain.whenmoonwhenlambo.money/",
+          "success": false
         },
         {
           "test": "REST Endpoints",
-          "url": "https://rest.getbze.com/cosmos/base/tendermint/v1beta1/node_info",
-          "success": true
+          "url": "https://beezee_mainnet_api.chain.whenmoonwhenlambo.money/cosmos/base/tendermint/v1beta1/node_info",
+          "success": false
         }
       ]
     },
     {
       "chain_name": "acrechain",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -3792,7 +3786,7 @@
     },
     {
       "chain_name": "imversed",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -3825,7 +3819,7 @@
     },
     {
       "chain_name": "medasdigital",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -3846,19 +3840,19 @@
         },
         {
           "test": "REST CORS",
-          "url": "https://lcd.medas-digital.io:1317/",
-          "success": true
+          "url": "https://medasdigital_mainnet_api.chain.whenmoonwhenlambo.money/",
+          "success": false
         },
         {
           "test": "REST Endpoints",
-          "url": "https://lcd.medas-digital.io:1317/cosmos/base/tendermint/v1beta1/node_info",
-          "success": true
+          "url": "https://medasdigital_mainnet_api.chain.whenmoonwhenlambo.money/cosmos/base/tendermint/v1beta1/node_info",
+          "success": false
         }
       ]
     },
     {
       "chain_name": "onomy",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -3990,7 +3984,7 @@
     },
     {
       "chain_name": "canto",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -4095,7 +4089,7 @@
     },
     {
       "chain_name": "arkh",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -4116,31 +4110,25 @@
         },
         {
           "test": "REST CORS",
-          "url": "https://arkhadian-mainnet-api.bonynode.online/",
-          "success": true
+          "url": "https://arkh-api.kynraze.com/",
+          "success": false
         },
         {
           "test": "REST Endpoints",
-          "url": "https://arkhadian-mainnet-api.bonynode.online/cosmos/base/tendermint/v1beta1/node_info",
-          "success": true
+          "url": "https://arkh-api.kynraze.com/cosmos/base/tendermint/v1beta1/node_info",
+          "success": false
         }
-      ],
-      "backupUsed": {
-        "rpcEndpointIndex": 0,
-        "restEndpointIndex": 1,
-        "rpcAddress": null,
-        "restAddress": "https://arkhadian-mainnet-api.bonynode.online/"
-      }
+      ]
     },
     {
       "chain_name": "migaloo",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
           "test": "RPC CORS",
           "url": "https://migaloo-rpc.publicnode.com/",
-          "success": true
+          "success": false
         },
         {
           "test": "RPC WSS",
@@ -4156,7 +4144,7 @@
         {
           "test": "REST CORS",
           "url": "https://migaloo-rest.publicnode.com/",
-          "success": true
+          "success": false
         },
         {
           "test": "REST Endpoints",
@@ -4272,22 +4260,22 @@
     },
     {
       "chain_name": "gitopia",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
           "test": "RPC CORS",
-          "url": "https://gitopia.nodejumper.io/",
+          "url": "https://gitopia.rpc.stakevillage.net/",
           "success": true
         },
         {
           "test": "RPC WSS",
-          "url": "wss://gitopia.nodejumper.io/websocket",
+          "url": "wss://gitopia.rpc.stakevillage.net/websocket",
           "success": true
         },
         {
           "test": "RPC Endpoints",
-          "url": "https://gitopia.nodejumper.io/status",
+          "url": "https://gitopia.rpc.stakevillage.net/status",
           "success": true,
           "stale": false
         },
@@ -4301,7 +4289,13 @@
           "url": "https://api-gitopia.blockval.io/cosmos/base/tendermint/v1beta1/node_info",
           "success": true
         }
-      ]
+      ],
+      "backupUsed": {
+        "rpcEndpointIndex": 19,
+        "restEndpointIndex": 0,
+        "rpcAddress": "https://gitopia.rpc.stakevillage.net",
+        "restAddress": null
+      }
     },
     {
       "chain_name": "nolus",
@@ -4377,7 +4371,7 @@
     },
     {
       "chain_name": "composable",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -4443,7 +4437,7 @@
     },
     {
       "chain_name": "quasar",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -4680,7 +4674,7 @@
     },
     {
       "chain_name": "sge",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -4713,7 +4707,7 @@
     },
     {
       "chain_name": "stafihub",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -4878,13 +4872,13 @@
     },
     {
       "chain_name": "nomic",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
           "test": "RPC CORS",
           "url": "https://rpc.nomic.bronbro.io/",
-          "success": true
+          "success": false
         },
         {
           "test": "RPC WSS",
@@ -4900,7 +4894,7 @@
         {
           "test": "REST CORS",
           "url": "https://app.nomic.io:8443/",
-          "success": true
+          "success": false
         },
         {
           "test": "REST Endpoints",
@@ -4944,7 +4938,7 @@
     },
     {
       "chain_name": "qwoyn",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -5187,7 +5181,7 @@
     },
     {
       "chain_name": "scorum",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -5253,13 +5247,13 @@
     },
     {
       "chain_name": "pylons",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
           "test": "RPC CORS",
           "url": "https://pylons-rpc.noders.services/",
-          "success": true
+          "success": false
         },
         {
           "test": "RPC WSS",
@@ -5275,7 +5269,7 @@
         {
           "test": "REST CORS",
           "url": "https://pylons-api.noders.services/",
-          "success": true
+          "success": false
         },
         {
           "test": "REST Endpoints",
@@ -5418,7 +5412,7 @@
     },
     {
       "chain_name": "furya",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -5718,7 +5712,7 @@
     },
     {
       "chain_name": "routerchain",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -5751,7 +5745,7 @@
     },
     {
       "chain_name": "lorenzo",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -5916,13 +5910,13 @@
     },
     {
       "chain_name": "int3face",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
           "test": "RPC CORS",
           "url": "https://rpc.mainnet.int3face.zone/",
-          "success": true
+          "success": false
         },
         {
           "test": "RPC WSS",
@@ -5932,18 +5926,18 @@
         {
           "test": "RPC Endpoints",
           "url": "https://rpc.mainnet.int3face.zone/status",
-          "success": true,
+          "success": false,
           "stale": false
         },
         {
           "test": "REST CORS",
           "url": "https://api.mainnet.int3face.zone/",
-          "success": true
+          "success": false
         },
         {
           "test": "REST Endpoints",
           "url": "https://api.mainnet.int3face.zone/cosmos/base/tendermint/v1beta1/node_info",
-          "success": true
+          "success": false
         }
       ]
     },
@@ -6186,7 +6180,7 @@
     },
     {
       "chain_name": "aaronetwork",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -6258,7 +6252,7 @@
     },
     {
       "chain_name": "sidechain",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -6627,23 +6621,23 @@
     },
     {
       "chain_name": "symphony",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
           "test": "RPC CORS",
-          "url": "https://symphony.rpc.nodeshub.online/",
-          "success": true
+          "url": "https://rpc.symphony.citizenweb3.com/",
+          "success": false
         },
         {
           "test": "RPC WSS",
-          "url": "wss://symphony.rpc.nodeshub.online/websocket",
-          "success": true
+          "url": "wss://rpc.symphony.citizenweb3.com/websocket",
+          "success": false
         },
         {
           "test": "RPC Endpoints",
-          "url": "https://symphony.rpc.nodeshub.online/status",
-          "success": true,
+          "url": "https://rpc.symphony.citizenweb3.com/status",
+          "success": false,
           "stale": false
         },
         {
@@ -6654,15 +6648,9 @@
         {
           "test": "REST Endpoints",
           "url": "https://api.symphony.citizenweb3.com/cosmos/base/tendermint/v1beta1/node_info",
-          "success": true
+          "success": false
         }
-      ],
-      "backupUsed": {
-        "rpcEndpointIndex": 1,
-        "restEndpointIndex": 0,
-        "rpcAddress": "https://symphony.rpc.nodeshub.online/",
-        "restAddress": null
-      }
+      ]
     },
     {
       "chain_name": "manifest",
@@ -6984,7 +6972,7 @@
     },
     {
       "chain_name": "mirage",
-      "validationDate": "2026-01-12T09:14:44.085Z",
+      "validationDate": "2026-01-13T11:26:30.955Z",
       "validationSuccess": false,
       "validationResults": [
         {
@@ -7023,10 +7011,50 @@
     }
   ],
   "lastValidationRun": {
-    "timestamp": "2026-01-12T09:14:44.085Z",
+    "timestamp": "2026-01-13T11:26:30.955Z",
     "chainsValidated": [
-      "self",
-      "shareledger"
+      "starname",
+      "emoney",
+      "impacthub",
+      "kichain",
+      "bostrom",
+      "comdex",
+      "lumnetwork",
+      "desmos",
+      "sommelier",
+      "konstellation",
+      "galaxy",
+      "tgrade",
+      "echelon",
+      "odin",
+      "crescent",
+      "lambda",
+      "unification",
+      "beezee",
+      "acrechain",
+      "imversed",
+      "medasdigital",
+      "onomy",
+      "canto",
+      "arkh",
+      "migaloo",
+      "gitopia",
+      "composable",
+      "quasar",
+      "sge",
+      "stafihub",
+      "nomic",
+      "qwoyn",
+      "scorum",
+      "pylons",
+      "furya",
+      "routerchain",
+      "lorenzo",
+      "int3face",
+      "aaronetwork",
+      "sidechain",
+      "symphony",
+      "mirage"
     ]
   }
 }

@@ -24682,7 +24682,7 @@
             "address": "https://rpc-lava.winnode.xyz"
           },
           {
-            "address": "https://rpc-lava.vinjan.xyz"
+            "address": "https://rpc-lava.vinjan-inc.com"
           },
           {
             "address": "https://lava-mainnet-rpc.shazoes.xyz"
@@ -24744,7 +24744,7 @@
             "address": "https://api-lava.winnode.xyz"
           },
           {
-            "address": "https://api-lava.vinjan.xyz"
+            "address": "https://api-lava.vinjan-inc.com"
           },
           {
             "address": "https://lava-mainnet-api.shazoes.xyz"
@@ -29464,6 +29464,9 @@
             "address": "https://symphony-rpc.cogwheel.zone/"
           },
           {
+            "address": "https://rpc-m.symphony.vinjan-inc.com"
+          },
+          {
             "address": "https://rpc-symphony.sr20de.xyz"
           },
           {
@@ -29479,6 +29482,9 @@
           },
           {
             "address": "https://symphony-api.cogwheel.zone/"
+          },
+          {
+            "address": "https://api-m.symphony.vinjan-inc.com"
           },
           {
             "address": "https://api-symphony.sr20de.xyz"
@@ -30250,6 +30256,87 @@
       ]
     },
     {
+      "chain_name": "divine",
+      "status": "live",
+      "networkType": "mainnet",
+      "prettyName": "Divine",
+      "chain_id": "divine-1",
+      "bech32Prefix": "divine",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "divine",
+        "bech32PrefixAccPub": "divinepub",
+        "bech32PrefixValAddr": "divinevaloper",
+        "bech32PrefixValPub": "divinevaloperpub",
+        "bech32PrefixConsAddr": "divinevalcons",
+        "bech32PrefixConsPub": "divinevalconspub"
+      },
+      "slip44": 118,
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/divine/images/udrc.png"
+      },
+      "stakeCurrency": {
+        "coinDenom": "DRC",
+        "coinMinimalDenom": "uDRC",
+        "coinDecimals": 6,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/divine/images/udrc.png"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "DRC",
+          "coinMinimalDenom": "uDRC",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/divine/images/udrc.png",
+          "gasPriceStep": {
+            "low": 0.0025,
+            "average": 0.005,
+            "high": 0.05
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "DRC",
+          "coinMinimalDenom": "uDRC",
+          "coinDecimals": 6,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/divine/images/udrc.png"
+        }
+      ],
+      "description": "Divine Ray Chain (DRC) powers a public-permissioned blockchain designed for conscious creators and community networks. DRC is the native asset used to secure the chain, enable transactions, reward participation, and support the emerging divine digital economy.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc-mainnet.divineray.ca:443"
+          },
+          {
+            "address": "https://rpc-mainnet-node2.divineray.ca:443"
+          },
+          {
+            "address": "https://rpc-mainnet-node3.divineray.ca:443"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://rest-mainnet.divineray.ca:443"
+          },
+          {
+            "address": "https://rest-mainnet-node2.divineray.ca:443"
+          },
+          {
+            "address": "https://rest-mainnet-node3.divineray.ca:443"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://ping.pub/divine/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go",
+        "cosmwasm"
+      ]
+    },
+    {
       "chain_name": "ethereum",
       "prettyName": "Ethereum Mainnet",
       "logo_URIs": {
@@ -30350,13 +30437,6 @@
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aura/images/Aura-logo-2.2.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/aura/images/Aura-logo-2.2.svg"
-      }
-    },
-    {
-      "chain_name": "divine",
-      "prettyName": "Divine",
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/divine/images/udrc.png"
       }
     },
     {

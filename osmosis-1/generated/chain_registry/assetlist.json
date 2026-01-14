@@ -27452,6 +27452,41 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/33AA30DB77B9580083EBDCF8B94A6ACE2258E00148B98EE744F990562E4D0325",
+          "exponent": 0,
+          "aliases": [
+            "microDRC",
+            "uDRC"
+          ]
+        },
+        {
+          "denom": "DRC",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/33AA30DB77B9580083EBDCF8B94A6ACE2258E00148B98EE744F990562E4D0325",
+      "name": "Divine",
+      "display": "DRC",
+      "symbol": "DRC",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "divine",
+            "base_denom": "uDRC",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-108620",
+            "path": "transfer/channel-108620/uDRC"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/E4673C5CDB56B4225AB1625F3B478740AE9F11E1A6BEBC1B30F8A5080D6AFBD6",
           "exponent": 0,
           "aliases": [
@@ -29015,41 +29050,6 @@
           "chain": {
             "channel_id": "channel-5",
             "path": "transfer/channel-5/baseXLM"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/33AA30DB77B9580083EBDCF8B94A6ACE2258E00148B98EE744F990562E4D0325",
-          "exponent": 0,
-          "aliases": [
-            "microDRC",
-            "uDRC"
-          ]
-        },
-        {
-          "denom": "DRC",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/33AA30DB77B9580083EBDCF8B94A6ACE2258E00148B98EE744F990562E4D0325",
-      "name": "Divine",
-      "display": "DRC",
-      "symbol": "DRC",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "divine",
-            "base_denom": "uDRC",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-108620",
-            "path": "transfer/channel-108620/uDRC"
           }
         }
       ]

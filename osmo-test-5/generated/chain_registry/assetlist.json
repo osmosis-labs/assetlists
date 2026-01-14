@@ -994,6 +994,41 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/460EFEE1E9DE40007096CA3EBDC2C149A5EF03D22967901EB99687ACC6B376C7",
+          "exponent": 0,
+          "aliases": [
+            "microDRC",
+            "uDRC"
+          ]
+        },
+        {
+          "denom": "DRC",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/460EFEE1E9DE40007096CA3EBDC2C149A5EF03D22967901EB99687ACC6B376C7",
+      "name": "Divine Testnet",
+      "display": "DRC",
+      "symbol": "DRC",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "divinetestnet",
+            "base_denom": "uDRC",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-11231",
+            "path": "transfer/channel-11231/uDRC"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/54E26860F62D7BE585736FEF187A62B897B4A567202E20E5320E2518EB5D1FAB",
           "exponent": 0,
           "aliases": [
@@ -1402,41 +1437,6 @@
         }
       ],
       "coingecko_id": "coreum"
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/460EFEE1E9DE40007096CA3EBDC2C149A5EF03D22967901EB99687ACC6B376C7",
-          "exponent": 0,
-          "aliases": [
-            "microDRC",
-            "uDRC"
-          ]
-        },
-        {
-          "denom": "DRC",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/460EFEE1E9DE40007096CA3EBDC2C149A5EF03D22967901EB99687ACC6B376C7",
-      "name": "Divine Testnet",
-      "display": "DRC",
-      "symbol": "DRC",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "divinetestnet",
-            "base_denom": "uDRC",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-11231",
-            "path": "transfer/channel-11231/uDRC"
-          }
-        }
-      ]
     },
     {
       "denom_units": [

@@ -71,15 +71,17 @@ const restEndpoints = [
 
 
 // Determine number of chains to query based on workflow trigger type
+// NOTE: This is only used by routineBulkValidation (deprecated).
+// fullValidation() validates ALL chains regardless of this limit.
 function getNumChainsToQuery() {
   const eventName = process.env.GITHUB_EVENT_NAME || 'manual';
 
   if (eventName === 'schedule') {
-    return 50;  // Scheduled Monday runs
+    return 50;  // Scheduled Monday runs (deprecated mode only)
   } else if (eventName === 'workflow_dispatch') {
-    return 10;  // Manual workflow runs
+    return 10;  // Manual workflow runs (deprecated mode only)
   } else {
-    return 4;   // Default for local testing
+    return 4;   // Default for local testing (deprecated mode only)
   }
 }
 
@@ -87,6 +89,7 @@ const numChainsToQuery = getNumChainsToQuery();
 console.error(`Validation mode: ${process.env.GITHUB_EVENT_NAME || 'default'} - Will query up to ${numChainsToQuery} chains`);
 const currentDateUTC = new Date();
 const oneDayInMs = 24 * 60 * 60 * 1000;
+// NOTE: These delays are only used by routineBulkValidation (deprecated)
 const successReQueryDelay = 7 * oneDayInMs;
 const failureReQueryDelay = 1 * oneDayInMs;  // Check failed endpoints daily
 const osmosisDomain = "https://osmosis.zone";
@@ -331,7 +334,7 @@ const queryREST = (url) => {
       clearTimeout(timeout); // Clear timeout on error
       resolve({
         success: false,
-        errorCode: null,
+        errorCode: err.code || null,  // Include error code (ECONNREFUSED, ETIMEDOUT, etc.)
         headers: null,
         message: err.message,
         body: null,
@@ -375,7 +378,7 @@ const queryHTTP = (url) => {
       clearTimeout(timeout); // Clear timeout on error
       resolve({
         success: false,
-        errorCode: null,
+        errorCode: err.code || null,  // Include error code (ECONNREFUSED, ETIMEDOUT, etc.)
         headers: null,
         message: err.message,
         body: null,
@@ -393,6 +396,74 @@ const logResult = (url, result, success) => {
   console.log(`[${status}] ${urlString} - ${message}`);
   console.log(`Compatible?: ${success}`);
 };
+
+/**
+ * Classify error types for better reporting
+ * Returns standardized error type string based on the result and test type
+ */
+function classifyError(result, test) {
+  // If success, no error
+  if (result.success) {
+    return null;
+  }
+
+  // CORS-specific failures
+  if (test === RPC_CORS || test === REST_CORS) {
+    if (result.errorCode === 'TIMEOUT') {
+      return 'TIMEOUT';
+    }
+    if (result.errorCode && typeof result.errorCode === 'string') {
+      // Network errors like ECONNREFUSED, ENOTFOUND, etc.
+      if (result.errorCode.startsWith('E')) {
+        return 'NETWORK_ERROR';
+      }
+    }
+    // CORS header missing or invalid (success=false but got response)
+    if (result.errorCode >= 200 && result.errorCode < 600) {
+      return 'CORS_FAILED';
+    }
+    return 'CORS_FAILED';
+  }
+
+  // WebSocket-specific failures
+  if (test === RPC_WSS) {
+    if (result.errorCode === 'TIMEOUT') {
+      return 'TIMEOUT';
+    }
+    return 'WEBSOCKET_ERROR';
+  }
+
+  // HTTP endpoint failures (RPC or REST)
+  if (test === RPC_ENDPOINTS || test === REST_ENDPOINTS) {
+    // Timeout
+    if (result.errorCode === null && result.message && result.message.includes('timed out')) {
+      return 'TIMEOUT';
+    }
+
+    // HTTP error codes
+    if (result.errorCode >= 400) {
+      return 'HTTP_ERROR';
+    }
+
+    // Network errors (ECONNREFUSED, ENOTFOUND, etc.)
+    if (result.message) {
+      const msg = result.message.toLowerCase();
+      if (msg.includes('econnrefused') || msg.includes('refused')) {
+        return 'NETWORK_ERROR';
+      }
+      if (msg.includes('enotfound') || msg.includes('getaddrinfo')) {
+        return 'NETWORK_ERROR';
+      }
+      if (msg.includes('etimedout') || msg.includes('esockettimedout') || msg.includes('timed out')) {
+        return 'TIMEOUT';
+      }
+    }
+
+    return 'NETWORK_ERROR';
+  }
+
+  return 'UNKNOWN_ERROR';
+}
 
 function getChainlist(chainName) {
   return zone.readFromFile(chainName, chainlistDir, chainlistFileName);
@@ -487,6 +558,17 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
           success,
         };
 
+        // Add error classification for failed tests
+        if (!success) {
+          const errorType = classifyError(result, test);
+          if (errorType) {
+            validationResult.errorType = errorType;
+          }
+          if (result.message) {
+            validationResult.errorMessage = result.message;
+          }
+        }
+
         if (endpoint === "status") {
           const latestBlockTime = new Date(result?.sync_info?.latest_block_time);
           const lenientDateUTC = new Date(currentDateUTC - 60 * 60 * 1000);
@@ -515,10 +597,14 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
   const rpcCount = sortedRpcEndpoints.length;
   const restCount = getEndpointCount(counterpartyChain, REST_NODE);
 
+  // Store all tested endpoints for detailed reporting
+  const allTestedEndpoints = [];
+
   // Find working RPC endpoint (test in preferred order)
   let rpcResults = null;
   let rpcEndpointIndex = 0;
   let rpcAddress = null;
+  let rpcCorsPassed = false;
 
   for (let i = 0; i < rpcCount; i++) {
     const endpoint = sortedRpcEndpoints[i];
@@ -540,6 +626,24 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
       ? flatResults.filter(r => r.test !== RPC_CORS)  // Skip CORS for primary endpoints
       : flatResults;  // Require CORS for backup endpoints
 
+    // Separate CORS from connectivity tests
+    const corsTests = flatResults.filter(r => r.test === RPC_CORS);
+    const connectivityTests = flatResults.filter(r => r.test !== RPC_CORS);
+
+    const connectivityPassed = connectivityTests.every(r => r.success && !r.stale);
+    const corsPassed = isPrimary || corsTests.every(r => r.success);
+
+    // Store this endpoint's test results
+    allTestedEndpoints.push({
+      type: 'rpc',
+      address: endpoint.address,
+      isPrimary: isPrimary,
+      orderTested: i,
+      connectivityPassed: connectivityPassed,
+      corsPassed: corsPassed,
+      testResults: flatResults
+    });
+
     const allPassed = resultsToCheck.every(r => r.success && !r.stale);
     if (allPassed) {
       if (isPrimary && flatResults.some(r => r.test === RPC_CORS && !r.success)) {
@@ -549,6 +653,7 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
       rpcResults = flatResults;
       rpcEndpointIndex = endpoint.originalIndex; // Use original Chain Registry index
       rpcAddress = endpoint.address;
+      rpcCorsPassed = corsPassed;
 
       if (endpoint.originalIndex > 0) {
         console.log(`RPC Backup Used [${endpoint.originalIndex}]: ${rpcAddress}`);
@@ -573,6 +678,7 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
   let restResults = null;
   let restEndpointIndex = 0;
   let restAddress = null;
+  let restCorsPassed = false;
 
   for (let i = 0; i < sortedRestEndpoints.length; i++) {
     const endpoint = sortedRestEndpoints[i];
@@ -594,6 +700,24 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
       ? flatResults.filter(r => r.test !== REST_CORS)  // Skip CORS for primary endpoints
       : flatResults;  // Require CORS for backup endpoints
 
+    // Separate CORS from connectivity tests
+    const corsTests = flatResults.filter(r => r.test === REST_CORS);
+    const connectivityTests = flatResults.filter(r => r.test !== REST_CORS);
+
+    const connectivityPassed = connectivityTests.every(r => r.success);
+    const corsPassed = isPrimary || corsTests.every(r => r.success);
+
+    // Store this endpoint's test results
+    allTestedEndpoints.push({
+      type: 'rest',
+      address: endpoint.address,
+      isPrimary: isPrimary,
+      orderTested: i,
+      connectivityPassed: connectivityPassed,
+      corsPassed: corsPassed,
+      testResults: flatResults
+    });
+
     const allPassed = resultsToCheck.every(r => r.success);
     if (allPassed) {
       if (isPrimary && flatResults.some(r => r.test === REST_CORS && !r.success)) {
@@ -603,6 +727,7 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
       restResults = flatResults;
       restEndpointIndex = endpoint.originalIndex; // Use original Chain Registry index
       restAddress = endpoint.address;
+      restCorsPassed = corsPassed;
 
       if (endpoint.originalIndex > 0) {
         console.log(`REST Backup Used [${endpoint.originalIndex}]: ${restAddress}`);
@@ -624,39 +749,73 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
   // Return results with endpoint information
   return {
     results: allResults,
+    allTestedEndpoints,  // NEW: Detailed test results for all endpoints
     rpcEndpointIndex,
     restEndpointIndex,
     rpcAddress,
     restAddress,
     rpcIsPrimary,
-    restIsPrimary
+    restIsPrimary,
+    rpcCorsPassed,  // NEW: Whether RPC CORS passed
+    restCorsPassed  // NEW: Whether REST CORS passed
   };
 
 }
 
 
-function determineValidationSuccess(validationResults, rpcIsPrimary = false, restIsPrimary = false) {
-  for (const validationResult of validationResults) {
-    // Skip CORS tests for primary endpoints
-    if (rpcIsPrimary && validationResult.test === RPC_CORS) continue;
-    if (restIsPrimary && validationResult.test === REST_CORS) continue;
+function determineValidationSuccess(validationResults, rpcIsPrimary = false, restIsPrimary = false, rpcCorsPassed = false, restCorsPassed = false) {
+  // Separate RPC and REST results
+  const rpcResults = validationResults.filter(r =>
+    r.test === RPC_CORS || r.test === RPC_WSS || r.test === RPC_ENDPOINTS
+  );
+  const restResults = validationResults.filter(r =>
+    r.test === REST_CORS || r.test === REST_ENDPOINTS
+  );
 
-    if (!validationResult.success) { return false; }
-    if (validationResult.stale) { return false; }
-  }
-  return true;
+  // Check RPC connectivity (non-CORS tests)
+  const rpcConnectivityTests = rpcResults.filter(r => r.test !== RPC_CORS);
+  const rpcConnectivitySuccess = rpcConnectivityTests.length > 0 &&
+    rpcConnectivityTests.every(r => r.success && !r.stale);
+
+  // Check REST connectivity (non-CORS tests)
+  const restConnectivityTests = restResults.filter(r => r.test !== REST_CORS);
+  const restConnectivitySuccess = restConnectivityTests.length > 0 &&
+    restConnectivityTests.every(r => r.success);
+
+  // Overall validation succeeds if EITHER RPC OR REST works
+  const validationSuccess = rpcConnectivitySuccess || restConnectivitySuccess;
+
+  return {
+    validationSuccess: validationSuccess,
+    rpcStatus: {
+      connectivitySuccess: rpcConnectivitySuccess,
+      corsSuccess: rpcCorsPassed
+    },
+    restStatus: {
+      connectivitySuccess: restConnectivitySuccess,
+      corsSuccess: restCorsPassed
+    }
+  };
 }
 
 function constructValidationRecord(counterpartyChainName, validationData) {
+  // Determine validation status (separate RPC/REST and connectivity/CORS)
+  const status = determineValidationSuccess(
+    validationData.results,
+    validationData.rpcIsPrimary,
+    validationData.restIsPrimary,
+    validationData.rpcCorsPassed,
+    validationData.restCorsPassed
+  );
+
   const record = {
     chain_name: counterpartyChainName,
     validationDate: currentDateUTC,
-    validationSuccess: determineValidationSuccess(
-      validationData.results,
-      validationData.rpcIsPrimary,
-      validationData.restIsPrimary
-    ),
-    validationResults: validationData.results
+    validationSuccess: status.validationSuccess,  // false only if BOTH RPC and REST fail
+    rpcStatus: status.rpcStatus,  // NEW: separate RPC status
+    restStatus: status.restStatus,  // NEW: separate REST status
+    allTestedEndpoints: validationData.allTestedEndpoints || [],  // NEW: Detailed test results
+    validationResults: validationData.results  // Keep for backward compatibility
   };
 
   // Add backup endpoint information if any backup was used
@@ -847,6 +1006,17 @@ async function validateEndpointsForAllCounterpartyChains(chainName) {
   addValidationRecordsToState(state, chainName, validationRecords);
 }
 
+/**
+ * Full Validation - Validates ALL chains without prioritization or limits
+ *
+ * This is the RECOMMENDED validation mode for scheduled runs.
+ * - Validates every chain on every run
+ * - No prioritization or skipping based on previous results
+ * - Ensures deprecated endpoints are caught quickly
+ * - Processes chains in batches of 10 to avoid overwhelming the system
+ *
+ * Used by: .github/workflows/generate_all_files.yml (scheduled Monday & Thursday)
+ */
 async function fullValidation(chainName) {
 
   if (chainName !== "osmosis") { return; } // temporary--just focusing on mainnet for now
@@ -882,6 +1052,16 @@ async function fullValidation(chainName) {
   console.log('Full validation complete!');
 }
 
+/**
+ * Routine Bulk Validation - DEPRECATED
+ *
+ * Uses prioritization system with limits (validates failed chains + limited successful chains).
+ * This mode can miss deprecated endpoints for weeks if they're in the "successful" category
+ * and not selected during rotation.
+ *
+ * RECOMMENDED: Use fullValidation() instead for scheduled runs.
+ * This function is kept for backward compatibility and manual testing only.
+ */
 function routineBulkValidation() {
   zone.chainNames.forEach(chainName => validateEndpointsForAllCounterpartyChains(chainName));
 }
@@ -950,6 +1130,7 @@ function generateValidationReport(chainName) {
   // Get chains validated in this run
   const chainsValidatedThisRun = state.lastValidationRun?.chainsValidated || [];
 
+  // Categorize chains by connectivity and CORS status
   const failedChains = state.chains.filter(chain => {
     if (chain.validationSuccess !== false) return false;
 
@@ -975,6 +1156,22 @@ function generateValidationReport(chainName) {
     return dateB.getTime() - dateA.getTime();
   });
 
+  // Find chains with CORS partial failures (connectivity OK but CORS failed)
+  const corsPartialFail = state.chains.filter(chain => {
+    if (!chain.validationSuccess) return false;  // Skip full failures
+    if (!chainsValidatedThisRun.includes(chain.chain_name)) return false;
+    if (killedChainNames.includes(chain.chain_name)) return false;
+
+    // Check if there's a CORS issue (connectivity OK but CORS failed)
+    const rpcCorsIssue = chain.rpcStatus?.connectivitySuccess && !chain.rpcStatus?.corsSuccess;
+    const restCorsIssue = chain.restStatus?.connectivitySuccess && !chain.restStatus?.corsSuccess;
+    return rpcCorsIssue || restCorsIssue;
+  }).sort((a, b) => {
+    const dateA = new Date(a.validationDate);
+    const dateB = new Date(b.validationDate);
+    return dateB.getTime() - dateA.getTime();
+  });
+
   // Check for forced endpoint failures
   const forcedEndpointFailures = failedChains.filter(chain =>
     forcedEndpointChains[chain.chain_name]
@@ -985,11 +1182,13 @@ function generateValidationReport(chainName) {
     chain.backupUsed && chainsValidatedThisRun.includes(chain.chain_name)
   ).length;
 
-  const successfulThisRun = chainsValidatedThisRun.length - failedChains.length;
+  const successfulThisRun = chainsValidatedThisRun.length - failedChains.length - corsPartialFail.length;
+  const fullySuccessful = successfulThisRun;
 
   let report = `**Chains Validated This Run:** ${chainsValidatedThisRun.length}\n`;
-  report += `**Successful:** ${successfulThisRun}\n`;
-  report += `**Failed:** ${failedChains.length}\n`;
+  report += `**Fully Successful:** ${fullySuccessful}\n`;
+  report += `**CORS Partial Failures:** ${corsPartialFail.length}\n`;
+  report += `**Connectivity Failed:** ${failedChains.length}\n`;
   report += `**Using Backup Endpoints:** ${chainsWithBackupsUsed}\n\n`;
 
   // Alert for forced endpoint failures
@@ -1018,10 +1217,50 @@ function generateValidationReport(chainName) {
     report += `\n**Action Required:** Update the forced endpoints in \`osmosis.zone_chains.json\` or remove the force flags.\n\n`;
   }
 
-  if (failedChains.length === 0) {
+  // Report CORS partial failures (connectivity OK, CORS failed)
+  if (corsPartialFail.length > 0) {
+    report += `### 📡 CORS Partial Failures (Connectivity OK)\n\n`;
+    report += `The following chains have working endpoints but failed CORS validation. This may not affect browser-based frontend functionality.\n\n`;
+    report += `| Chain Name | RPC Status | REST Status | Last Validation |\n`;
+    report += `|------------|------------|-------------|----------------|\n`;
+
+    corsPartialFail.forEach(chain => {
+      const validationDate = new Date(chain.validationDate).toISOString().split('T')[0];
+
+      // RPC status
+      let rpcStatus = '—';
+      if (chain.rpcStatus) {
+        if (chain.rpcStatus.connectivitySuccess && chain.rpcStatus.corsSuccess) {
+          rpcStatus = '✅ Full Pass';
+        } else if (chain.rpcStatus.connectivitySuccess && !chain.rpcStatus.corsSuccess) {
+          rpcStatus = '⚠️ CORS Failed';
+        } else if (!chain.rpcStatus.connectivitySuccess) {
+          rpcStatus = '❌ Connectivity Failed';
+        }
+      }
+
+      // REST status
+      let restStatus = '—';
+      if (chain.restStatus) {
+        if (chain.restStatus.connectivitySuccess && chain.restStatus.corsSuccess) {
+          restStatus = '✅ Full Pass';
+        } else if (chain.restStatus.connectivitySuccess && !chain.restStatus.corsSuccess) {
+          restStatus = '⚠️ CORS Failed';
+        } else if (!chain.restStatus.connectivitySuccess) {
+          restStatus = '❌ Connectivity Failed';
+        }
+      }
+
+      report += `| ${chain.chain_name} | ${rpcStatus} | ${restStatus} | ${validationDate} |\n`;
+    });
+    report += `\n`;
+  }
+
+  if (failedChains.length === 0 && corsPartialFail.length === 0) {
     report += `### ✅ All Chains Validated Successfully\n\n`;
-  } else {
-    report += `### ⚠️ Failed Endpoints\n\n`;
+  } else if (failedChains.length > 0) {
+    report += `### ❌ Connectivity Failures\n\n`;
+    report += `The following chains have endpoints that failed connectivity tests (not just CORS):\n\n`;
     report += `| Chain Name | Last Validation | Days Ago | RPC Status | REST Status |\n`;
     report += `|------------|----------------|----------|------------|-------------|\n`;
 

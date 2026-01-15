@@ -833,17 +833,35 @@ function constructValidationRecord(counterpartyChainName, validationData) {
 
 function addValidationRecordsToState(state, chainName, validationRecords) {
 
-  
-  getState(chainName);
+  // Note: state is passed by reference and maintains updates across batch calls
+  // We don't need to reload from disk here as the caller manages the state object
 
   if (!state.chains) { state.chains = []; }
 
   // Track chains validated in this run
   const validatedInThisRun = validationRecords.map(r => r.chain_name);
-  state.lastValidationRun = {
-    timestamp: currentDateUTC.toISOString(),
-    chainsValidated: validatedInThisRun
-  };
+
+  // Check if this is a continuation of an existing run (within 30 minutes)
+  // This is important for batch processing in fullValidation() where we process
+  // chains in batches of 10 and call this function after each batch.
+  // Without this, only the last batch would be tracked in chainsValidated.
+  const isExistingRun = state.lastValidationRun?.timestamp &&
+    (new Date().getTime() - new Date(state.lastValidationRun.timestamp).getTime()) < (30 * 60 * 1000);
+
+  if (isExistingRun && state.lastValidationRun.chainsValidated) {
+    // Append to existing run (batch processing)
+    const previousCount = state.lastValidationRun.chainsValidated.length;
+    state.lastValidationRun.chainsValidated.push(...validatedInThisRun);
+    console.log(`Accumulated validation: ${previousCount} + ${validatedInThisRun.length} = ${state.lastValidationRun.chainsValidated.length} chains`);
+    // Keep the original timestamp from when the run started
+  } else {
+    // Start a new run
+    state.lastValidationRun = {
+      timestamp: currentDateUTC.toISOString(),
+      chainsValidated: validatedInThisRun
+    };
+    console.log(`Starting new validation run with ${validatedInThisRun.length} chains`);
+  }
 
   validationRecords.forEach((validationRecord) => {
     const index = state.chains.findIndex(chain => chain.chain_name === validationRecord.chain_name);

@@ -71,15 +71,17 @@ const restEndpoints = [
 
 
 // Determine number of chains to query based on workflow trigger type
+// NOTE: This is only used by routineBulkValidation (deprecated).
+// fullValidation() validates ALL chains regardless of this limit.
 function getNumChainsToQuery() {
   const eventName = process.env.GITHUB_EVENT_NAME || 'manual';
 
   if (eventName === 'schedule') {
-    return 50;  // Scheduled Monday runs
+    return 50;  // Scheduled Monday runs (deprecated mode only)
   } else if (eventName === 'workflow_dispatch') {
-    return 10;  // Manual workflow runs
+    return 10;  // Manual workflow runs (deprecated mode only)
   } else {
-    return 4;   // Default for local testing
+    return 4;   // Default for local testing (deprecated mode only)
   }
 }
 
@@ -87,6 +89,7 @@ const numChainsToQuery = getNumChainsToQuery();
 console.error(`Validation mode: ${process.env.GITHUB_EVENT_NAME || 'default'} - Will query up to ${numChainsToQuery} chains`);
 const currentDateUTC = new Date();
 const oneDayInMs = 24 * 60 * 60 * 1000;
+// NOTE: These delays are only used by routineBulkValidation (deprecated)
 const successReQueryDelay = 7 * oneDayInMs;
 const failureReQueryDelay = 1 * oneDayInMs;  // Check failed endpoints daily
 const osmosisDomain = "https://osmosis.zone";
@@ -1003,6 +1006,17 @@ async function validateEndpointsForAllCounterpartyChains(chainName) {
   addValidationRecordsToState(state, chainName, validationRecords);
 }
 
+/**
+ * Full Validation - Validates ALL chains without prioritization or limits
+ *
+ * This is the RECOMMENDED validation mode for scheduled runs.
+ * - Validates every chain on every run
+ * - No prioritization or skipping based on previous results
+ * - Ensures deprecated endpoints are caught quickly
+ * - Processes chains in batches of 10 to avoid overwhelming the system
+ *
+ * Used by: .github/workflows/generate_all_files.yml (scheduled Monday & Thursday)
+ */
 async function fullValidation(chainName) {
 
   if (chainName !== "osmosis") { return; } // temporary--just focusing on mainnet for now
@@ -1038,6 +1052,16 @@ async function fullValidation(chainName) {
   console.log('Full validation complete!');
 }
 
+/**
+ * Routine Bulk Validation - DEPRECATED
+ *
+ * Uses prioritization system with limits (validates failed chains + limited successful chains).
+ * This mode can miss deprecated endpoints for weeks if they're in the "successful" category
+ * and not selected during rotation.
+ *
+ * RECOMMENDED: Use fullValidation() instead for scheduled runs.
+ * This function is kept for backward compatibility and manual testing only.
+ */
 function routineBulkValidation() {
   zone.chainNames.forEach(chainName => validateEndpointsForAllCounterpartyChains(chainName));
 }

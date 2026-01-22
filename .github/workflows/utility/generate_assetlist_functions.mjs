@@ -1732,7 +1732,19 @@ export function setSocials(asset_data) {
       asset_data.canonical_asset.chain_name,
       "chain",
       "socials"
-    )
+    );
+
+    // Fallback to top-level website field (standard in chain.json schema)
+    if (!socials) {
+      const website = chain_reg.getFileProperty(
+        asset_data.canonical_asset.chain_name,
+        "chain",
+        "website"
+      );
+      if (website) {
+        socials = { website: website };
+      }
+    }
   }
   applySocialsToAssetDetail(asset_data, socials);
   if (socials) { return; }

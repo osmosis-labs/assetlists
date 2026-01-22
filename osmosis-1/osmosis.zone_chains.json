@@ -189,7 +189,11 @@
       "chain_name": "cheqd",
       "rpc": "https://rpc.cheqd.net",
       "rest": "https://api.cheqd.net",
-      "explorer_tx_url": "https://explorer.cheqd.io/transactions/${txHash}"
+      "explorer_tx_url": "https://explorer.cheqd.io/transactions/${txHash}",
+      "override_properties": {
+        "force_rest": true,
+        "force_rpc": true
+      }
     },
     {
       "chain_name": "stargaze",

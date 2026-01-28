@@ -1,0 +1,76 @@
+{
+  "rpc": "https://rpc-osmosis.keplr.app",
+  "rest": "https://lcd-osmosis.keplr.app",
+  "chainId": "osmosis-1",
+  "chainName": "Osmosis",
+  "chainSymbolImageUrl": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/osmosis/chain.png",
+  "stakeCurrency": {
+    "coinDenom": "OSMO",
+    "coinMinimalDenom": "uosmo",
+    "coinDecimals": 6,
+    "coinGeckoId": "osmosis",
+    "coinImageUrl": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/osmosis/uosmo.png"
+  },
+  "walletUrl": "https://app.osmosis.zone",
+  "walletUrlForStaking": "https://wallet.keplr.app/chains/osmosis?modal=staking&chain=osmosis-1&step_id=2",
+  "bip44": {
+    "coinType": 118
+  },
+  "bech32Config": {
+    "bech32PrefixAccAddr": "osmo",
+    "bech32PrefixAccPub": "osmopub",
+    "bech32PrefixValAddr": "osmovaloper",
+    "bech32PrefixValPub": "osmovaloperpub",
+    "bech32PrefixConsAddr": "osmovalcons",
+    "bech32PrefixConsPub": "osmovalconspub"
+  },
+  "currencies": [
+    {
+      "coinDenom": "OSMO",
+      "coinMinimalDenom": "uosmo",
+      "coinDecimals": 6,
+      "coinGeckoId": "osmosis",
+      "coinImageUrl": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/osmosis/uosmo.png"
+    },
+    {
+      "coinDenom": "ION",
+      "coinMinimalDenom": "uion",
+      "coinDecimals": 6,
+      "coinGeckoId": "ion",
+      "coinImageUrl": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/osmosis/uion.png"
+    },
+    {
+      "coinDenom": "UM",
+      "coinMinimalDenom": "ibc/0FA9232B262B89E77D1335D54FB1E1F506A92A7E4B51524B400DC69C68D28372",
+      "coinDecimals": 6,
+      "coinGeckoId": "penumbra",
+      "coinImageUrl": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/osmosis/ibc/0FA9232B262B89E77D1335D54FB1E1F506A92A7E4B51524B400DC69C68D28372.png"
+    },
+    {
+      "coinDenom": "NAM",
+      "coinMinimalDenom": "ibc/C7110DEC66869DAE9BE9C3C60F4B5313B16A2204AE020C3B0527DD6B322386A3",
+      "coinDecimals": 6,
+      "coinGeckoId": "namada",
+      "coinImageUrl": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/osmosis/ibc/C7110DEC66869DAE9BE9C3C60F4B5313B16A2204AE020C3B0527DD6B322386A3.png"
+    }
+  ],
+  "feeCurrencies": [
+    {
+      "coinDenom": "OSMO",
+      "coinMinimalDenom": "uosmo",
+      "coinDecimals": 6,
+      "coinGeckoId": "osmosis",
+      "coinImageUrl": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/osmosis/uosmo.png",
+      "gasPriceStep": {
+        "low": 0.03,
+        "average": 0.1,
+        "high": 0.16
+      }
+    }
+  ],
+  "features": [
+    "cosmwasm",
+    "osmosis-txfees",
+    "osmosis-base-fee-beta"
+  ]
+}

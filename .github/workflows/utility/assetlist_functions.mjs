@@ -36,6 +36,7 @@ export const frontendAssetlistDir = path.join(generatedDirectoryName, "frontend"
 export const zoneConfigChainlist = path.join(generatedDirectoryName, "frontend");
 export const externalDir = path.join(generatedDirectoryName, "external");
 export const zoneAssetDetail = path.join(generatedDirectoryName, "asset_detail");
+export const keplrDir = path.join(generatedDirectoryName, "keplr");
 
 //- Chain Names --
 export const chainNames = [

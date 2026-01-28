@@ -84,6 +84,10 @@ jobs:
         working-directory: ./.github/workflows/utility
         run: node generate_chainlist.mjs
 
+      - name: Run code to Sync Keplr Factory Tokens
+        working-directory: ./.github/workflows/utility
+        run: node sync_keplr_factory_tokens.mjs
+
       - name: Detect New Assets
         run: |
           jq -r '.assets[].symbol' osmosis-1/generated/frontend/assetlist.json | sort > /tmp/assets-after.txt

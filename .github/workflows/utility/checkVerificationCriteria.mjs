@@ -230,6 +230,14 @@ let alloyPoolsCache = null;
 
 /**
  * Safely get a property from an asset object
+ *
+ * @param {Object} asset - Asset object from Chain Registry
+ * @param {string} propertyName - Property name to retrieve
+ * @returns {*} Property value or undefined if asset is null/undefined
+ *
+ * @example
+ * const description = getAssetProperty(asset, 'description');
+ * const logo = getAssetProperty(asset, 'logo_URIs');
  */
 function getAssetProperty(asset, propertyName) {
   if (!asset) { return; }
@@ -242,8 +250,20 @@ function getAssetProperty(asset, propertyName) {
  * IBC denoms are computed as: ibc/HASH where HASH is the uppercase hex
  * representation of SHA256(path)
  *
+ * This is the STANDARD IBC denom calculation used across all Cosmos chains.
+ * The path format is: "{port}/{channel}/{denom}" (can be nested for multi-hop transfers)
+ *
  * @param {string} path - IBC path (e.g., "transfer/channel-208/wbtc-satoshi")
- * @returns {string} IBC denom (e.g., "ibc/...")
+ * @returns {string} IBC denom (e.g., "ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F")
+ *
+ * @example
+ * // Single-hop transfer
+ * computeIbcDenom("transfer/channel-208/wbtc-satoshi")
+ * // Returns: "ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F"
+ *
+ * // Multi-hop transfer (transferred through multiple chains)
+ * computeIbcDenom("transfer/channel-0/transfer/channel-1/uatom")
+ * // Returns: "ibc/..." (different hash)
  */
 function computeIbcDenom(path) {
   const hash = crypto.createHash('sha256').update(path).digest('hex').toUpperCase();
@@ -253,11 +273,35 @@ function computeIbcDenom(path) {
 /**
  * Get the full denomination for an asset
  *
- * For Osmosis native assets (factory tokens), returns the base_denom directly.
- * For IBC assets, computes the IBC hash from the path.
+ * OSMOSIS NATIVE ASSETS (factory tokens, uosmo, etc.):
+ * - base_denom IS the full denom (no transformation needed)
+ * - Example: "uosmo", "factory/osmo1.../alloyed/allBTC"
+ *
+ * IBC ASSETS (from other chains):
+ * - Full denom = ibc/{SHA256_HASH_OF_PATH}
+ * - base_denom = original denom on source chain (e.g., "uatom")
+ * - path = IBC transfer path (e.g., "transfer/channel-0/uatom")
+ * - Compute: SHA256(path) → uppercase hex → prepend "ibc/"
+ * - Example: "transfer/channel-0/uatom" → "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
  *
  * @param {Object} asset - Asset object from zone_assets.json
- * @returns {string} Full denomination
+ * @param {string} asset.chain_name - Origin chain name
+ * @param {string} asset.base_denom - Base denomination on origin chain
+ * @param {string} [asset.path] - IBC path (only for cross-chain assets)
+ * @returns {string} Full denomination as it appears on Osmosis
+ *
+ * @example
+ * // Osmosis native
+ * getFullDenom({ chain_name: 'osmosis', base_denom: 'uosmo' })
+ * // Returns: "uosmo"
+ *
+ * // Factory token
+ * getFullDenom({ chain_name: 'osmosis', base_denom: 'factory/osmo1.../alloyed/allBTC' })
+ * // Returns: "factory/osmo1.../alloyed/allBTC"
+ *
+ * // IBC asset
+ * getFullDenom({ chain_name: 'cosmoshub', base_denom: 'uatom', path: 'transfer/channel-0/uatom' })
+ * // Returns: "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
  */
 function getFullDenom(asset) {
   // For Osmosis native assets (factory tokens, etc.), the base_denom IS the full denom

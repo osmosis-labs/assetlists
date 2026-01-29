@@ -70,9 +70,20 @@ const restEndpoints = [
 ];
 
 
-// Determine number of chains to query based on workflow trigger type
-// NOTE: This is only used by routineBulkValidation (deprecated).
-// fullValidation() validates ALL chains regardless of this limit.
+/**
+ * Determine number of chains to query based on workflow trigger type
+ *
+ * NOTE: This is only used by routineBulkValidation (deprecated).
+ * fullValidation() validates ALL chains regardless of this limit.
+ *
+ * @returns {number} Maximum number of chains to validate per run
+ *   - 50 for scheduled runs (deprecated)
+ *   - 10 for manual workflow_dispatch (deprecated)
+ *   - 4 for local testing (deprecated)
+ *
+ * @deprecated This function is only used by the deprecated routineBulkValidation.
+ *   The current fullValidation() function validates ALL chains every run.
+ */
 function getNumChainsToQuery() {
   const eventName = process.env.GITHUB_EVENT_NAME || 'manual';
 
@@ -96,7 +107,17 @@ const osmosisDomain = "https://osmosis.zone";
 
 //-- Functions --
 
-// Function to get the node type based on the test type
+/**
+ * Get the node type (RPC or REST) based on the test type
+ *
+ * @param {string} test - Test type constant (RPC_CORS, RPC_WSS, RPC_ENDPOINTS, REST_CORS, REST_ENDPOINTS)
+ * @returns {string} Node type constant (RPC_NODE or REST_NODE)
+ * @throws {Error} If test type is not supported
+ *
+ * @example
+ * getNodeType(RPC_CORS) // Returns: "rpc"
+ * getNodeType(REST_ENDPOINTS) // Returns: "rest"
+ */
 function getNodeType(test) {
   switch (test) {
     case RPC_CORS:
@@ -143,6 +164,30 @@ function getEndpointsArray(test) {
   }
 }
 
+/**
+ * Route to the appropriate query function based on test type
+ *
+ * This is the main entry point for all endpoint validation tests.
+ * It delegates to specialized query functions (WSS, CORS, HTTP) based on test type.
+ *
+ * @param {string} url - Full URL to query (e.g., "https://rpc.cosmos.directory/cosmoshub/status")
+ * @param {string} test - Test type constant (RPC_WSS, RPC_CORS, REST_CORS, RPC_ENDPOINTS, REST_ENDPOINTS)
+ * @returns {Promise<Object>} Result object with { success, errorCode, headers, message, ... }
+ * @throws {Error} If test type is unknown
+ *
+ * @example
+ * // WebSocket test
+ * await queryUrl("wss://rpc.example.com/websocket", RPC_WSS)
+ * // Returns: { success: true, message: "Connection successful", ... }
+ *
+ * // CORS test
+ * await queryUrl("https://rpc.example.com/", RPC_CORS)
+ * // Returns: { success: true, corsPolicy: "*", ... }
+ *
+ * // HTTP endpoint test
+ * await queryUrl("https://rpc.example.com/status", RPC_ENDPOINTS)
+ * // Returns: { success: true, body: "{...}", ... }
+ */
 const queryUrl = (url, test) => {
   switch (test) {
     case RPC_WSS:
@@ -208,6 +253,37 @@ function constructUrl(baseUrl, endpoint, protocol = HTTPS_PROTOCOL) {
   }
 }
 
+/**
+ * Test WebSocket connectivity to an RPC endpoint
+ *
+ * WebSocket (WSS) support is used by frontends for real-time transfer status updates.
+ * This test verifies the WebSocket endpoint is accessible and accepts connections.
+ *
+ * Success Criteria:
+ * - WebSocket connection opens successfully
+ * - No timeout or connection errors
+ *
+ * Common Failures:
+ * - TIMEOUT: Endpoint doesn't respond within 10 seconds
+ * - WS_ERROR: WebSocket protocol errors (upgrade failed, invalid handshake)
+ * - UNEXPECTED_ERROR: Network errors (ECONNREFUSED, ENOTFOUND)
+ *
+ * @param {string} url - WebSocket URL (e.g., "wss://rpc.cosmos.directory/cosmoshub/websocket")
+ * @param {number} [timeoutMs=10000] - Timeout in milliseconds (default: 10 seconds)
+ * @returns {Promise<Object>} Result object
+ * @returns {boolean} result.success - True if connection opened successfully
+ * @returns {string|null} result.errorCode - Error code if failed (TIMEOUT, WS_ERROR, etc.)
+ * @returns {string|null} result.message - Human-readable message
+ * @returns {Object} result.headers - Response headers (empty for WSS)
+ *
+ * @example
+ * const result = await queryWSS("wss://rpc.cosmos.directory/cosmoshub/websocket");
+ * if (result.success) {
+ *   console.log("WebSocket supported");
+ * } else {
+ *   console.error(`WSS failed: ${result.errorCode} - ${result.message}`);
+ * }
+ */
 const queryWSS = (url, timeoutMs = 10000) => {
   return new Promise((resolve) => {
     let timeout;
@@ -260,6 +336,37 @@ const queryWSS = (url, timeoutMs = 10000) => {
 };
       
 
+/**
+ * Test CORS (Cross-Origin Resource Sharing) headers for an endpoint
+ *
+ * CORS is required for frontends to make direct API calls from the browser.
+ * This test sends an OPTIONS request with Origin header and checks the response.
+ *
+ * Success Criteria:
+ * - Endpoint returns Access-Control-Allow-Origin header with one of:
+ *   - "*" (wildcard, allows all origins)
+ *   - "https://osmosis.zone" (explicitly allows Osmosis Zone)
+ *
+ * Note: CORS failures are not critical for backend usage (only affects browser-based direct calls).
+ * RPC calls from backend (GitHub Actions) don't require CORS.
+ * REST calls from frontend DO require CORS for balance queries.
+ *
+ * @param {string} url - Endpoint URL to test (e.g., "https://rpc.cosmos.directory/cosmoshub/")
+ * @returns {Promise<Object>} Result object
+ * @returns {boolean} result.success - True if response received (regardless of CORS policy)
+ * @returns {string|number} result.errorCode - HTTP status code or error code (TIMEOUT, ECONNREFUSED, etc.)
+ * @returns {Object} result.headers - Response headers
+ * @returns {string} result.message - Human-readable message
+ * @returns {string|null} result.corsPolicy - Value of Access-Control-Allow-Origin header (* or specific origin)
+ *
+ * @example
+ * const result = await queryCORS("https://rpc.cosmos.directory/cosmoshub/");
+ * if (result.corsPolicy === "*" || result.corsPolicy === "https://osmosis.zone") {
+ *   console.log("CORS enabled for Osmosis Zone");
+ * } else {
+ *   console.warn("CORS not enabled, frontend direct calls won't work");
+ * }
+ */
 const queryCORS = (url) => {
   const options = {
     method: 'OPTIONS',
@@ -491,6 +598,74 @@ function getEndpointCount(counterpartyChain, nodeType) {
 }
 
 
+/**
+ * Validate all endpoints for a counterparty chain
+ *
+ * This is the CORE validation function. It tests RPC and REST endpoints for:
+ * - Connectivity (can we reach the endpoint?)
+ * - CORS headers (can browsers make direct calls?)
+ * - WebSocket support (can frontends get real-time transfer updates?)
+ * - Response validity (do endpoints return expected data?)
+ *
+ * PRIORITY-BASED TESTING ALGORITHM:
+ * Endpoints are tested in preferred order (not Chain Registry order):
+ * 1. Zone-specified endpoints (from osmosis.zone_chains.json)
+ * 2. Team endpoints (based on the "provider" label in Chain Registry)
+ * 3. Preferred providers (defined in endpoint_preference.mjs)
+ * 4. Other Chain Registry endpoints (in order listed)
+ *
+ * FIRST WORKING ENDPOINT WINS:
+ * - Tests endpoints in priority order until one passes ALL tests
+ * - Records which backup endpoint succeeded (if not primary)
+ * - Stops testing once a working endpoint is found
+ * - This "backup endpoint index" is stored in state.json for chainlist generation
+ *
+ * CORS SKIP FOR PRIMARY ENDPOINTS:
+ * Primary endpoints (zone/team/preferred) skip CORS validation because:
+ * - They're trusted, reliable endpoints
+ * - CORS failures don't affect backend usage (only browser direct calls)
+ * - We don't want CORS to block use of high-quality endpoints
+ *
+ * @param {Object} counterpartyChain - Chain object from generated chainlist
+ * @param {string} counterpartyChain.chain_name - Chain name (must match Chain Registry)
+ * @param {Object} counterpartyChain.apis - API endpoints
+ * @param {Array} counterpartyChain.apis.rpc - Array of RPC endpoints with { address, provider }
+ * @param {Array} counterpartyChain.apis.rest - Array of REST endpoints with { address, provider }
+ * @param {string} [chainName="osmosis-1"] - Zone name for loading zone_chains config
+ *
+ * @returns {Promise<Object>} Validation data object
+ * @returns {string} result.chain_name - Chain name
+ * @returns {boolean} result.rpcConnectivitySuccess - True if any RPC endpoint passed connectivity
+ * @returns {boolean} result.rpcCorsSuccess - True if RPC CORS passed (or skipped for primary)
+ * @returns {boolean} result.restConnectivitySuccess - True if any REST endpoint passed connectivity
+ * @returns {boolean} result.restCorsSuccess - True if REST CORS passed (or skipped for primary)
+ * @returns {number} result.rpcEndpointIndex - Chain Registry index of working RPC endpoint
+ * @returns {number} result.restEndpointIndex - Chain Registry index of working REST endpoint
+ * @returns {string} result.rpcAddress - Full URL of working RPC endpoint
+ * @returns {string} result.restAddress - Full URL of working REST endpoint
+ * @returns {Array} result.allTestedEndpoints - Detailed results for all tested endpoints (for reporting)
+ * @returns {Array} result.rpcResults - Detailed RPC test results
+ * @returns {Array} result.restResults - Detailed REST test results
+ *
+ * @example
+ * const chain = {
+ *   chain_name: "cosmoshub",
+ *   apis: {
+ *     rpc: [
+ *       { address: "https://rpc.cosmos.directory/cosmoshub", provider: "Cosmos Directory" },
+ *       { address: "https://rpc.polkachu.com/cosmos", provider: "Polkachu" }
+ *     ],
+ *     rest: [...]
+ *   }
+ * };
+ *
+ * const result = await validateCounterpartyChain(chain);
+ * // Result:
+ * // - If primary (rpc[0]) works: rpcEndpointIndex = 0
+ * // - If primary fails but backup (rpc[1]) works: rpcEndpointIndex = 1 (logged as "RPC Backup Used [1]")
+ * // - State file stores this backup index
+ * // - Chainlist generation reads state and promotes backup to first position
+ */
 async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis-1") {
 
   // Load zone chains config to check for zone endpoints

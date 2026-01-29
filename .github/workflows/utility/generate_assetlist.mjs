@@ -13,9 +13,23 @@ import * as symbolDedup from "./deduplicate_symbols.mjs";
 
 
 //-- Flags --
-// getPools: Disabled - Pool pricing functionality exists but is not currently used.
-// The code in getPools.mjs remains available for future re-implementation if needed.
-// When enabled, it would add pricing information to assetlists based on pool liquidity.
+/**
+ * getPools: Disabled - Pool pricing functionality exists but is not currently used.
+ *
+ * HISTORICAL CONTEXT:
+ * This flag controlled whether to fetch pool pricing data and add it to generated assetlists.
+ * The feature was disabled because:
+ * - Pricing data changes frequently (every block) → generated files would change constantly
+ * - Frontend fetches live prices from APIs anyway → static pricing not useful
+ * - Generating with pricing caused large PR diffs → hard to review actual changes
+ *
+ * The code in getPools.mjs remains available for future re-implementation if needed.
+ * When enabled, it would add pricing information to assetlists based on pool liquidity.
+ *
+ * @type {boolean}
+ * @default false
+ * @deprecated Pricing generation disabled since 2023 - use live API pricing instead
+ */
 const getPools = false;
 
 
@@ -27,6 +41,49 @@ async function asyncForEach(array, callback) {
   }
 }
 
+/**
+ * AUTOMATIC ASSET DETECTION: Discover new cross-chain assets from Chain Registry
+ *
+ * This function is THE ENGINE for automatic asset listing. It scans all chains in the
+ * Chain Registry for assets that have IBC connections to Osmosis and adds them to zone_assets.json.
+ *
+ * DETECTION CRITERIA (all must be met):
+ * 1. Chain has same network_type as local (mainnet → mainnet, testnet → testnet)
+ * 2. Chain is a Cosmos chain (chain_type === "cosmos")
+ * 3. IBC connection exists between chains (transfer/transfer channel)
+ * 4. Asset is sdk.coin or cw20 type
+ * 5. Asset not already in zone_assets.json
+ *
+ * IBC PATH CONSTRUCTION:
+ * - For sdk.coin assets: "transfer/{channel_id}/{base_denom}"
+ * - For cw20 assets: Uses dedicated cw20 channel (e.g., "cw20:wasm.../transfer/{channel_id}/{base_denom}")
+ * - Channel ID determined by which chain is "chain_1" vs "chain_2" in IBC file (alphabetical order)
+ *
+ * AUTOMATIC POPULATION:
+ * Newly detected assets are added to asset_datas array with:
+ * - chain_name: Origin chain
+ * - base_denom: Original denomination on source chain
+ * - path: IBC transfer path
+ * - osmosis_verified: false (default, requires manual verification)
+ *
+ * This allows users to trade new assets immediately, even before manual listing.
+ *
+ * @param {string} localChainName - Zone chain name (e.g., "osmosis-1", "osmo-test-5")
+ * @param {Array<Object>} asset_datas - Array to populate with asset data objects (mutated in place)
+ *
+ * @returns {Promise<void>} No return value (mutates asset_datas array)
+ *
+ * @example
+ * // After Chain Registry adds new chain "neutron" with IBC to osmosis:
+ * // 1. This function detects neutron has transfer channel to osmosis
+ * // 2. Finds all assets in neutron/assetlist.json
+ * // 3. For each asset (e.g., NTRN):
+ * //    - Constructs path: "transfer/channel-874/untrn"
+ * //    - Adds to asset_datas: { chain_name: "neutron", base_denom: "untrn", path: "...", osmosis_verified: false }
+ * // 4. Next workflow run, asset appears in generated frontend assetlist (unverified)
+ * // 5. Users can trade NTRN on Osmosis immediately
+ * // 6. Maintainer manually verifies asset when criteria met
+ */
 async function getAssetsFromChainRegistry(localChainName, asset_datas) {
 
   //get network_type (mainnet vs testnet)

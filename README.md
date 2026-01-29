@@ -93,18 +93,205 @@ Please see the asset [listing requirements](https://github.com/osmosis-labs/asse
 
 ### Asset Object Structure
 
-When the workflow adds an asset (or if you manually edit), each asset object in _osmosis.zone_assets.json_ includes these identifying details:
-- `base_denom` is the minimal/indivisible (i.e., exponent: 0) denomination unit for the asset, corresponding to its `base` at the Chain Registry.
-- `chain_name` must be the exact value defined as `chain_name` in the chain's _chain.json_ file at the Chain Registry.
-- `path` is required for all ics20 assets (i.e., assets that are transferred to Osmosis from another chain via IBC); the only exception are asset deployed directly on Osmosis (e.g., factory tokens). It is comprised of: the destination IBC port and channel for each IBC hop, followed by the base denom on the IBC-originating chain. The is used as input into the SHA256 hash function.
-  - e.g., `"path": "transfer/channel-0/uatom"`
-- `osmosis_verified` should always be set to `false` upon initial listing; this indicates whether the 'Unverified Assets' setting must be toggled to reveal the asset on Osmosis Zone. After meeting the requirements described in the listing requirements page, an additional PR may created to set it to `true`.
+#### Required Fields
 
-There are also some additional details that may be defined for an asset:
-- `transfer_methods` should be included whenever a basic IBC transfer initiated via Osmosis Zone Deposit and Withdraw buttons is unable to carry-out an interchain transfer.
-- `override_properties` may be defined for cases where Osmosis Zone shall display the asset differently than how registered on its source chain.
-- `canonical` shall be defined for assets that are Osmosis' canonical representation of an asset different than its source (e.g., Axelar's WETH(.axl) is Osmosis' canonical representation of Ether $ETH on Osmosis)
-- `categories` are best manually defined for an asset, including: "defi" and "meme".
+Each asset object in _osmosis.zone_assets.json_ must include these identifying details:
+
+- **`chain_name`** - Must match exactly the `chain_name` in the chain's _chain.json_ file at the Chain Registry.
+- **`base_denom`** - The minimal/indivisible (i.e., exponent: 0) denomination unit for the asset, corresponding to its `base` at the Chain Registry.
+- **`path`** - Required for all ICS20 assets (transferred to Osmosis from another chain via IBC). Comprised of the destination IBC port and channel for each IBC hop, followed by the base denom on the IBC-originating chain. Used as input into the SHA256 hash function.
+  - Exception: Not required for assets deployed directly on Osmosis (e.g., factory tokens)
+  - Example: `"path": "transfer/channel-0/uatom"`
+
+#### Verification & Visibility Flags
+
+- **`osmosis_verified`** (boolean, default: `false`) - Controls whether the asset appears by default or requires "Show Unverified Assets" toggle.
+  - Should always be set to `false` upon initial listing
+  - After meeting requirements in [LISTING.md](LISTING.md), can be upgraded to `true` via PR
+  - Frontend output: `verified: true/false`
+
+- **`osmosis_unlisted`** (boolean, default: `false`) - Temporarily hides the asset from the Osmosis Zone app, even if verified.
+  - Use for deprecating assets or temporary removal
+  - Frontend output: `preview: true/false`
+
+#### Transfer & Reliability Flags
+
+- **`osmosis_unstable`** (boolean, default: `false`) - **Critical flag** indicating the asset **cannot reliably** be transferred to or from Osmosis.
+  - **Frontend Behavior**: Sets both `unstable: true` AND `disabled: true` in generated assetlist
+  - **User Impact**: Disables native IBC Deposit/Withdraw buttons; frontend may redirect to external interfaces (e.g., TFM)
+  - **Common Causes**: Unreliable IBC relayers, frequent chain downtime, channel connectivity issues
+  - **When to Remove**: After confirming IBC channels work reliably and consistently
+
+- **`osmosis_disabled`** (boolean, default: `false`) - Explicitly disables Deposit and Withdraw functions, independent of reliability status.
+  - **Frontend Behavior**: Disables native IBC Deposit/Withdraw buttons
+  - **Difference from `unstable`**: This is an intentional decision to disable transfers, not a reliability issue
+  - **Common Reasons**: Forcing the external or custom transfer methods, security or reliabiliy concerns - Asset remains visible and tradeable
+
+- **`transfer_methods`** (array) - Custom transfer configurations for assets requiring special handling.
+  - Should be included whenever basic IBC transfer cannot carry out an interchain transfer
+  - **Types**: `external_interface` (e.g., Squid Router, TFM, chain bridges), `integrated_bridge`, `fiat_onramp`
+  - Provides alternative deposit/withdraw interfaces when native IBC is disabled or unavailable
+  - Example:
+    ```json
+    "transfer_methods": [
+      {
+        "name": "Squid Router",
+        "type": "external_interface",
+        "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=...",
+        "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=..."
+      }
+    ]
+    ```
+
+**Important**: The frontend maps `osmosis_unstable: true` to BOTH `unstable: true` AND `disabled: true`. This means setting the unstable flag will automatically disable native IBC transfers.
+
+#### Asset Relationship Flags
+
+- **`canonical`** (object: `{chain_name, base_denom}`) - Defines assets that are Osmosis' canonical representation of an asset different than its source.
+  - Example: Axelar's WETH is Osmosis' canonical representation of Ethereum's ETH
+  - Used when multiple bridge paths exist but one is preferred
+
+- **`origin`** (object: `{chain_name, base_denom}`) - Defines the original/source asset for derivative or wrapped assets.
+  - Traces an asset back to its ultimate origin chain and denomination
+  - Used for liquid staking derivatives and multi-hop wrapped assets
+
+#### Special Asset Types
+
+- **`is_alloyed`** (boolean, default: `false`) - Indicates the asset is an Alloyed Asset on Osmosis.
+  - Alloyed Assets are transmuter pools that combine multiple variants of the same underlying asset into a single fungible token
+  - Example: allUSDT combines USDT from different bridges
+  - Frontend output: `isAlloyed: true/false`
+
+- **`peg_mechanism`** (enum: `"collateralized"`, `"algorithmic"`, `"hybrid"`) - The peg mechanism for synthetically created assets, most important for stablecoins.
+
+#### Categorization & Metadata
+
+- **`categories`** (array of strings) - Categorizes assets for filtering and organization.
+  - Standard categories: `"defi"`, `"meme"`, `"liquid_staking"`, `"stablecoin"`, `"built_on_osmosis"`, `"dweb"`, `"oracles"`
+  - Best practice: Manually define categories for better asset discovery
+
+- **`tooltip_message`** (string) - Custom on-hover tooltip message displayed for the asset.
+  - Use for warnings, clarifications, or important notices to users
+  - Example: "This asset is NOT affiliated with the Bad Kids NFT collection."
+
+- **`listing_date_time_utc`** (string, ISO 8601 format) - UTC timestamp when asset was listed on Osmosis Zone.
+  - Format: `"YYYY-MM-DDTHH:MM:SSZ"`
+  - Used for "New" badges, sorting, and tracking
+  - Frontend output: `listingDate: Date`
+
+#### Advanced Configuration
+
+- **`override_properties`** (object) - Properties that should not follow the Chain Registry and behave or appear differently on Osmosis Zone.
+  - Available overrides: `symbol`, `name`, `logo_URIs`, `coingecko_id`, `use_asset_name`, `counterparty`
+  - Use when Chain Registry data doesn't match desired Osmosis display
+
+For complete schema definitions, see `zone_assets.schema.json`.
+
+### Common Configuration Scenarios
+
+#### Scenario 1: Standard Asset with Working IBC (Most Common)
+```json
+{
+  "chain_name": "cosmoshub",
+  "base_denom": "uatom",
+  "path": "transfer/channel-0/uatom",
+  "osmosis_verified": true,
+  "categories": ["defi"],
+  "_comment": "Cosmos Hub $ATOM"
+}
+```
+**Result**: Verified asset with native IBC deposit/withdraw buttons enabled.
+
+#### Scenario 2: New Unverified Asset
+```json
+{
+  "chain_name": "newchain",
+  "base_denom": "unew",
+  "path": "transfer/channel-999/unew",
+  "osmosis_verified": false,
+  "_comment": "NewChain $NEW"
+}
+```
+**Result**: Visible only with "Show Unverified Assets" toggle, native IBC works.
+
+#### Scenario 3: Unreliable IBC - Needs External Interface
+```json
+{
+  "chain_name": "genesisl1",
+  "base_denom": "el1",
+  "path": "transfer/channel-253/el1",
+  "osmosis_verified": false,
+  "osmosis_unstable": true,
+  "_comment": "GenesisL1 $L1"
+}
+```
+**Result**: Native IBC buttons disabled, frontend redirects to TFM or other external interface.
+
+**To enable native IBC**: Remove `osmosis_unstable` after confirming channels work reliably.
+
+#### Scenario 4: Asset with Custom Transfer Method
+```json
+{
+  "chain_name": "ethereum",
+  "base_denom": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+  "path": "transfer/channel-208/uusdc",
+  "osmosis_verified": true,
+  "transfer_methods": [
+    {
+      "name": "Squid Router",
+      "type": "external_interface",
+      "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=...",
+      "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=..."
+    }
+  ],
+  "_comment": "USDC via Axelar"
+}
+```
+**Result**: Shows both native IBC and Squid Router options.
+
+#### Scenario 5: Intentionally Disabled Transfers
+```json
+{
+  "chain_name": "composable",
+  "base_denom": "ppica",
+  "path": "transfer/channel-1279/ppica",
+  "osmosis_disabled": true,
+  "transfer_methods": [
+    {
+      "name": "Picasso App",
+      "type": "external_interface",
+      "depositUrl": "https://app.picasso.network/?from=PicassoKusama&to=OSMOSIS",
+      "withdrawUrl": "https://app.picasso.network/?from=OSMOSIS&to=PicassoKusama"
+    }
+  ],
+  "_comment": "Picasso $PICA - use custom interface only"
+}
+```
+**Result**: Native IBC disabled, shows only Picasso App transfer method.
+
+### Decision Guide: Enabling Native IBC Transfers
+
+**Question: Why isn't my asset showing native deposit/withdraw buttons?**
+
+Check your asset configuration for these flags:
+
+1. **`osmosis_unstable: true`** → This disables native IBC
+   - **Solution**: Remove this flag after testing IBC channels work reliably
+   - Test: Verify deposits and withdrawals work without errors or delays
+
+2. **`osmosis_disabled: true`** → This intentionally disables native IBC
+   - **Solution**: Remove this flag if you want to enable native transfers
+   - Consider: Was this set for security/liquidity management? Verify it's safe to remove
+
+3. **No `transfer_methods` but IBC is disabled** → Likely `osmosis_unstable` is set
+   - **Solution**: Add custom `transfer_methods` OR remove unstable flag
+
+**Question: When should I use `osmosis_unstable` vs `osmosis_disabled`?**
+
+- **Use `osmosis_unstable`**: When IBC technically works but has reliability problems (downtime, slow relayers, failed transactions)
+- **Use `osmosis_disabled`**: When you intentionally want to disable transfers for business/security reasons, regardless of technical reliability
+
+**Both flags disable the frontend IBC buttons**, but they signal different reasons.
 
 ## Chains
 

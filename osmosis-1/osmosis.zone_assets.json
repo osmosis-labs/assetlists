@@ -6774,6 +6774,30 @@
       "path": "transfer/channel-108757/uDRC",
       "osmosis_verified": false,
       "_comment": "Divine $DRC"
+    },
+    {
+      "chain_name": "initia",
+      "base_denom": "ibc/39B55F22F15FB09189045A993817CDF0D388D3FF8773B2E22B6DE7B222636EEA",
+      "path": "transfer/channel-102122/transfer/channel-29/factory/init17p9rzwnnfxcjp32un9ug7yhhzgtkhvl9jfksztgw5uh69wac2pgsj6uxxj/umilkINIT",
+      "osmosis_verified": false,
+      "osmosis_disabled": true,
+      "override_properties": {
+        "symbol": "milkINIT.init",
+        "name": "milkINIT (from moo-1)"
+      },
+      "transfer_methods": [
+        {
+          "name": "Skip",
+          "type": "external_interface",
+          "deposit_url": "https://go.skip.build/?src_chain=moo-1&dest_chain=osmosis-1&src_asset=umilkINIT&dest_asset=ibc%2F8D609DCDE4B2987508EEFF332D0033905E9AFA993F61AB881320414B8634C852",
+          "withdraw_url": "https://go.skip.build/?src_chain=osmosis-1&src_asset=ibc%2F8D609DCDE4B2987508EEFF332D0033905E9AFA993F61AB881320414B8634C852&dest_chain=moo-1&dest_asset=umilkINIT"
+        }
+      ],
+      "categories": [
+        "liquid_staking",
+        "defi"
+      ],
+      "_comment": "MilkyWay liquid staked INIT from moo-1 L2 $milkINIT"
     }
   ]
 }

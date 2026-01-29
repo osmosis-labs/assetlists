@@ -23,7 +23,45 @@ import { sortEndpointsByProvider } from './endpoint_preference.mjs';
 
 let zoneAssetlist;
 
-// Load validation state
+/**
+ * Load validation state from state.json file
+ *
+ * STATE-BASED ENDPOINT OPTIMIZATION:
+ * The state file stores validation results from endpoint testing, including:
+ * - Which endpoints passed/failed connectivity tests
+ * - Which backup endpoints were used (if primary failed)
+ * - Timestamp of last validation
+ * - CORS status for each endpoint
+ *
+ * This state is used during chainlist generation to REORDER endpoints:
+ * - Working backup endpoints are promoted to first position
+ * - Failed primary endpoints are deprioritized
+ * - System "learns" which endpoints are reliable and uses them first
+ *
+ * @param {string} chainName - Zone name (e.g., "osmosis-1")
+ * @returns {Object|null} State object with validation results, or null if file doesn't exist
+ * @returns {Object} state.lastValidationRun - Metadata about last validation run
+ * @returns {string} state.lastValidationRun.timestamp - ISO timestamp of validation
+ * @returns {Array<string>} state.lastValidationRun.chainsValidated - Chains validated in this run
+ * @returns {Array<Object>} state.chains - Validation records per chain
+ *
+ * @example
+ * const state = getValidationState('osmosis-1');
+ * // Returns:
+ * // {
+ * //   "lastValidationRun": { "timestamp": "2024-01-22T09:15:00.000Z", "chainsValidated": [...] },
+ * //   "chains": [
+ * //     {
+ * //       "chain_name": "cosmoshub",
+ * //       "validationDate": "2024-01-22T09:05:00.000Z",
+ * //       "backupUsed": {
+ * //         "rpcEndpointIndex": 2,        // Chain Registry index of working endpoint
+ * //         "rpcAddress": "https://rpc.polkachu.com/cosmos"  // Full URL
+ * //       }
+ * //     }
+ * //   ]
+ * // }
+ */
 function getValidationState(chainName) {
   try {
     const stateFilePath = path.join('..', '..', '..', chainName, 'generated', 'state', 'state.json');
@@ -35,6 +73,29 @@ function getValidationState(chainName) {
   }
 }
 
+/**
+ * Get validation record for a specific chain from state
+ *
+ * @param {Object} state - State object from getValidationState()
+ * @param {string} chain_name - Chain name to look up
+ * @returns {Object|null} Validation record for the chain, or null if not found
+ * @returns {string} record.chain_name - Chain name
+ * @returns {string} record.validationDate - ISO timestamp of last validation
+ * @returns {boolean} record.validationSuccess - True if validation passed
+ * @returns {Object} record.rpcStatus - RPC test results
+ * @returns {Object} record.restStatus - REST test results
+ * @returns {Object} [record.backupUsed] - Backup endpoint info (only if backup was used)
+ * @returns {number} record.backupUsed.rpcEndpointIndex - Chain Registry index (0 = primary, 1+ = backup)
+ * @returns {string} record.backupUsed.rpcAddress - Full URL of working endpoint
+ *
+ * @example
+ * const state = getValidationState('osmosis-1');
+ * const record = getValidationRecord(state, 'cosmoshub');
+ * if (record?.backupUsed) {
+ *   console.log(`Cosmoshub using backup RPC [${record.backupUsed.rpcEndpointIndex}]`);
+ *   // System will promote this backup to first position in chainlist
+ * }
+ */
 function getValidationRecord(state, chain_name) {
   if (!state || !state.chains) return null;
   return state.chains.find(c => c.chain_name === chain_name);
@@ -380,6 +441,19 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   // -- Create APIs Property --
   chain.apis = {};
 
+  // FORCE OVERRIDE FLAGS: Lock endpoints in first position (ignore validation-based reordering)
+  //
+  // When force_rpc or force_rest is true:
+  // - Zone-specified endpoint is LOCKED in first position
+  // - State-based optimization is IGNORED for this endpoint
+  // - Backup endpoints still included but never promoted above forced endpoint
+  // - Used for highly reliable endpoints that should always be tried first
+  //
+  // Use cases:
+  // ✅ Dedicated endpoint from chain operator (known to be very reliable)
+  // ✅ Premium endpoint with guaranteed uptime
+  // ✅ Endpoint that validation incorrectly deprioritized
+  // ❌ Don't use for endpoints of unknown reliability (let state-based optimization work)
   const forceRpc = zoneChain.override_properties?.force_rpc || false;
   const forceRest = zoneChain.override_properties?.force_rest || false;
 
@@ -389,6 +463,7 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   const allRestEndpoints = [];
 
   // RPC endpoint collection - always add zone endpoint first if it exists
+  // If force_rpc=true, this endpoint stays in first position even if validation found better backup
   if (zoneChain.rpc) {
     allRpcEndpoints.push(zoneChain.rpc);
     if (forceRpc) {

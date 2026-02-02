@@ -209,7 +209,7 @@ Duration: 60 minutes
 
 **Purpose**: Verify automated asset and chain updates before they go live
 
-**When to Use**: Every Monday and Thursday after 09:15 UTC
+**When to Use**: Every Tuesday and Friday after 15:15 UTC
 
 **Prerequisites**:
 - GitHub access to repository
@@ -423,7 +423,7 @@ gh pr create --title "Add Neutron $NTRN" --body "Adds Neutron native token to zo
 
 **Step 5: Trigger Generation**
 ```
-# Option A: Wait for next scheduled run (Mon/Thu 09:00 UTC)
+# Option A: Wait for next scheduled run (Tue/Fri 15:00 UTC)
 # Option B: Manually trigger workflow
 
 Navigate to: https://github.com/osmosis-labs/assetlists/actions/workflows/generate_all_files.yml
@@ -608,7 +608,7 @@ If all tests passed:
    - ✅ Price displayed
    - ✅ Tradeable on DEX
 
-   Merging now. Verified badge will appear on next deployment (Mon/Thu 09:40 UTC)."
+   Merging now. Verified badge will appear on next deployment (Tue/Fri 15:40 UTC)."
 7. Click: "Submit review"
 8. Click: "Squash and merge"
 9. Confirm merge
@@ -835,7 +835,7 @@ After merge and deployment:
    - Verify balance queries work
 
 3. Monitor validation reports:
-   - Check next scheduled run (Mon/Thu)
+   - Check next scheduled run (Tue/Fri)
    - Verify example chain passes validation
    - Confirm custom endpoints used
 ```

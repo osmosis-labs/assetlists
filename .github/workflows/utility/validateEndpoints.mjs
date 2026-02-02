@@ -88,7 +88,7 @@ function getNumChainsToQuery() {
   const eventName = process.env.GITHUB_EVENT_NAME || 'manual';
 
   if (eventName === 'schedule') {
-    return 50;  // Scheduled Monday runs (deprecated mode only)
+    return 50;  // Scheduled Tuesday/Friday runs (deprecated mode only)
   } else if (eventName === 'workflow_dispatch') {
     return 10;  // Manual workflow runs (deprecated mode only)
   } else {
@@ -1208,7 +1208,7 @@ async function validateEndpointsForAllCounterpartyChains(chainName) {
  * - Ensures deprecated endpoints are caught quickly
  * - Processes chains in batches of 10 to avoid overwhelming the system
  *
- * Used by: .github/workflows/generate_all_files.yml (scheduled Monday & Thursday)
+ * Used by: .github/workflows/generate_all_files.yml (scheduled Tuesday & Friday)
  */
 async function fullValidation(chainName) {
 

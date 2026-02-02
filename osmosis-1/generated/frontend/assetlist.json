@@ -31043,6 +31043,75 @@
       "preview": false
     },
     {
+      "chainName": "initia",
+      "sourceDenom": "ibc/39B55F22F15FB09189045A993817CDF0D388D3FF8773B2E22B6DE7B222636EEA",
+      "coinMinimalDenom": "ibc/8D609DCDE4B2987508EEFF332D0033905E9AFA993F61AB881320414B8634C852",
+      "symbol": "milkINIT",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/moo/images/milkINIT.png"
+      },
+      "categories": [
+        "liquid_staking",
+        "defi"
+      ],
+      "transferMethods": [
+        {
+          "name": "Skip",
+          "type": "external_interface",
+          "depositUrl": "https://go.skip.build/?src_chain=moo-1&dest_chain=osmosis-1&src_asset=umilkINIT&dest_asset=ibc%2F8D609DCDE4B2987508EEFF332D0033905E9AFA993F61AB881320414B8634C852",
+          "withdrawUrl": "https://go.skip.build/?src_chain=osmosis-1&src_asset=ibc%2F8D609DCDE4B2987508EEFF332D0033905E9AFA993F61AB881320414B8634C852&dest_chain=moo-1&dest_asset=umilkINIT"
+        },
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "initia",
+            "chainId": "interwoven-1",
+            "sourceDenom": "ibc/39B55F22F15FB09189045A993817CDF0D388D3FF8773B2E22B6DE7B222636EEA",
+            "port": "transfer",
+            "channelId": "channel-68"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-102122",
+            "path": "transfer/channel-102122/transfer/channel-29/factory/init17p9rzwnnfxcjp32un9ug7yhhzgtkhvl9jfksztgw5uh69wac2pgsj6uxxj/umilkINIT"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "initia",
+          "sourceDenom": "ibc/39B55F22F15FB09189045A993817CDF0D388D3FF8773B2E22B6DE7B222636EEA",
+          "chainType": "cosmos",
+          "chainId": "interwoven-1",
+          "symbol": "milkINIT",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/moo/images/milkINIT.png"
+          }
+        },
+        {
+          "chainName": "moo",
+          "sourceDenom": "factory/init17p9rzwnnfxcjp32un9ug7yhhzgtkhvl9jfksztgw5uh69wac2pgsj6uxxj/umilkINIT",
+          "chainType": "cosmos",
+          "chainId": "moo-1",
+          "symbol": "milkINIT",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/moo/images/milkINIT.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/8D609DCDE4B2987508EEFF332D0033905E9AFA993F61AB881320414B8634C852",
+      "name": "milkINIT",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": true,
+      "preview": false
+    },
+    {
       "chainName": "aura",
       "sourceDenom": "uaura",
       "coinMinimalDenom": "ibc/E4673C5CDB56B4225AB1625F3B478740AE9F11E1A6BEBC1B30F8A5080D6AFBD6",

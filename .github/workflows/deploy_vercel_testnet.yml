@@ -1,14 +1,14 @@
 # Description: Triggers Vercel deployment webhook for testnet
 # Included in: NOT included in Generate All Files bundle (deployment only)
-# Trigger: Scheduled 30 min after generation workflow (Mon/Thu 09:30 UTC) + manual trigger + push to main
+# Trigger: Scheduled 30 min after generation workflow (Tue/Fri 15:30 UTC) + manual trigger + push to main
 # Note: Push trigger kept as fallback, but won't work with auto-merge due to GITHUB_TOKEN limitation
 # Output: Deploys to Vercel testnet environment via webhook
 
 name: Osmosis Front-End Deployment (Testnet)
 on:
   schedule:
-    - cron: "30 9 * * 1"    # Every Monday at 09:30 UTC (30 min after generation)
-    - cron: "30 9 * * 4"    # Every Thursday at 09:30 UTC (30 min after generation)
+    - cron: "30 15 * * 2"    # Every Tuesday at 15:30 UTC (30 min after generation)
+    - cron: "30 15 * * 5"    # Every Friday at 15:30 UTC (30 min after generation)
   workflow_dispatch:  # Allow manual trigger
   push:
     branches:
@@ -35,7 +35,7 @@ jobs:
           TIME_DIFF=$((CURRENT_TIME - LAST_CHANGE))
 
           # If files were modified in the last 2 hours (7200 seconds), deploy
-          # This covers the generation workflow (09:00) + 30 min delay (09:30) + buffer
+          # This covers the generation workflow (15:00) + 30 min delay (15:30) + buffer
           if [ $TIME_DIFF -lt 7200 ]; then
             echo "Files modified $TIME_DIFF seconds ago - deploying"
             echo "should_deploy=true" >> $GITHUB_OUTPUT

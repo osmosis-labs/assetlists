@@ -29643,6 +29643,40 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/9005151AB92A888293B05E8D0C679032F86639EC2251430565FA38CF3BB6226B",
+          "exponent": 0,
+          "aliases": [
+            "uGNOD"
+          ]
+        },
+        {
+          "denom": "GNOD",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/9005151AB92A888293B05E8D0C679032F86639EC2251430565FA38CF3BB6226B",
+      "name": "Gnodi",
+      "display": "GNOD",
+      "symbol": "GNOD",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gnodi",
+            "base_denom": "uGNOD",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-108866",
+            "path": "transfer/channel-108866/uGNOD"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/CBC60FC96BD21708D3B60B2E4AD949E0DA07C67EFE6A8D463298806CD507A9CF",
           "exponent": 0,
           "aliases": [
@@ -34511,7 +34545,24 @@
           }
         }
       ],
-      "coingecko_id": "maxbtc"
+      "logo_URIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/maxBTC.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "neutron",
+            "base_denom": "factory/neutron17sp75wng9vl2hu3sf4ky86d7smmk3wle9gkts2gmedn9x4ut3xcqa5xp34/maxbtc"
+          },
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/maxBTC.svg"
+        }
+      ],
+      "coingecko_id": "maxbtc",
+      "socials": {
+        "website": "https://www.structured.money/",
+        "telegram": "https://t.me/StructuredFi",
+        "x": "https://x.com/StructuredFi"
+      }
     },
     {
       "denom_units": [

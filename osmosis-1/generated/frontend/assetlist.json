@@ -1997,7 +1997,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitcanna/images/bcna.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitcanna/images/bcna.svg"
       },
-      "coingeckoId": "bitcanna",
       "categories": [],
       "transferMethods": [
         {
@@ -2662,7 +2661,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/konstellation/images/darc.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/konstellation/images/darc.svg"
       },
-      "coingeckoId": "darcmatter-coin",
       "categories": [],
       "transferMethods": [
         {
@@ -2985,7 +2983,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cerberus/images/crbrus.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cerberus/images/crbrus.svg"
       },
-      "coingeckoId": "cerberus-2",
       "categories": [
         "meme"
       ],
@@ -3076,7 +3073,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.svg"
       },
-      "coingeckoId": "assetmantle",
       "categories": [
         "nft_protocol"
       ],
@@ -3331,7 +3327,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sifchain/images/rowan.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sifchain/images/rowan.svg"
       },
-      "coingeckoId": "sifchain",
       "categories": [
         "defi"
       ],
@@ -4259,7 +4254,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/meme/images/meme.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/meme/images/meme.svg"
       },
-      "coingeckoId": "meme-network",
       "categories": [
         "meme"
       ],
@@ -11955,7 +11949,8 @@
       "verified": true,
       "unstable": false,
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "tooltipMessage": "SEI Transfers will be disabled with the upcoming SIP Upgrade, estimated at the end of Q1 2026. For more information see: https://blog.sei.io/announcements/the-sip-3-upgrade-making-way-for-sei-giga/"
     },
     {
       "chainName": "quicksilver",
@@ -14613,7 +14608,6 @@
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/newt.png"
       },
-      "coingeckoId": "newt",
       "categories": [
         "meme"
       ],
@@ -14912,7 +14906,6 @@
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/autism.png"
       },
-      "coingeckoId": "autism",
       "categories": [
         "meme"
       ],
@@ -17734,7 +17727,6 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dhealth/images/dhp-circle.svg",
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dhealth/images/dhp-circle.png"
       },
-      "coingeckoId": "dhealth",
       "categories": [
         "dweb"
       ],
@@ -18047,7 +18039,6 @@
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/hava.png"
       },
-      "coingeckoId": "hava-coin",
       "categories": [
         "meme"
       ],
@@ -25115,7 +25106,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/omniflixhub/images/ygata.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/omniflixhub/images/ygata.svg"
       },
-      "coingeckoId": "yield-gata",
       "categories": [],
       "transferMethods": [
         {
@@ -26942,7 +26932,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/sam.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/sam.svg"
       },
-      "coingeckoId": "sam-2",
       "categories": [
         "meme"
       ],
@@ -27097,7 +27086,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pryzm.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pryzm.svg"
       },
-      "coingeckoId": "pryzm",
       "categories": [
         "defi"
       ],
@@ -31115,6 +31103,55 @@
       "preview": false
     },
     {
+      "chainName": "gnodi",
+      "sourceDenom": "uGNOD",
+      "coinMinimalDenom": "ibc/9005151AB92A888293B05E8D0C679032F86639EC2251430565FA38CF3BB6226B",
+      "symbol": "GNOD",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gnodi/images/gnod.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "gnodi",
+            "chainId": "gnodi",
+            "sourceDenom": "uGNOD",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-108866",
+            "path": "transfer/channel-108866/uGNOD"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "gnodi",
+          "sourceDenom": "uGNOD",
+          "chainType": "cosmos",
+          "chainId": "gnodi",
+          "symbol": "GNOD",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gnodi/images/gnod.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/9005151AB92A888293B05E8D0C679032F86639EC2251430565FA38CF3BB6226B",
+      "name": "Gnodi",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "aura",
       "sourceDenom": "uaura",
       "coinMinimalDenom": "ibc/E4673C5CDB56B4225AB1625F3B478740AE9F11E1A6BEBC1B30F8A5080D6AFBD6",
@@ -34080,55 +34117,6 @@
       ],
       "variantGroupKey": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4",
       "name": "Avalanche USD Coin (Wormhole)",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "gnodi",
-      "sourceDenom": "uGNOD",
-      "coinMinimalDenom": "ibc/9005151AB92A888293B05E8D0C679032F86639EC2251430565FA38CF3BB6226B",
-      "symbol": "GNOD",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gnodi/images/gnod.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "gnodi",
-            "chainId": "gnodi",
-            "sourceDenom": "uGNOD",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-108866",
-            "path": "transfer/channel-108866/uGNOD"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "gnodi",
-          "sourceDenom": "uGNOD",
-          "chainType": "cosmos",
-          "chainId": "gnodi",
-          "symbol": "GNOD",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gnodi/images/gnod.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/9005151AB92A888293B05E8D0C679032F86639EC2251430565FA38CF3BB6226B",
-      "name": "Gnodi",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,
@@ -38672,7 +38660,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/nami.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/nami.svg"
       },
-      "coingeckoId": "nami-protocol",
       "categories": [],
       "transferMethods": [
         {

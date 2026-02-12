@@ -1737,8 +1737,7 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitcanna/images/bcna.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitcanna/images/bcna.svg"
         }
-      ],
-      "coingecko_id": "bitcanna"
+      ]
     },
     {
       "description": "BitSong Native Token",
@@ -2399,7 +2398,6 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/konstellation/images/darc.svg"
         }
       ],
-      "coingecko_id": "darcmatter-coin",
       "keywords": [
         "osmosis_unstable"
       ]
@@ -2704,7 +2702,6 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cerberus/images/crbrus.svg"
         }
       ],
-      "coingecko_id": "cerberus-2",
       "keywords": [
         "osmosis_unstable"
       ]
@@ -2806,8 +2803,7 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.svg"
         }
-      ],
-      "coingecko_id": "assetmantle"
+      ]
     },
     {
       "description": "The native token cw20 for Neta on Juno Chain",
@@ -3070,8 +3066,7 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sifchain/images/rowan.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sifchain/images/rowan.svg"
         }
-      ],
-      "coingecko_id": "sifchain"
+      ]
     },
     {
       "description": "The native token of Shentu",
@@ -3810,8 +3805,7 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/meme/images/meme.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/meme/images/meme.svg"
         }
-      ],
-      "coingecko_id": "meme-network"
+      ]
     },
     {
       "description": "Profit sharing token for Another.Software validator. Hold and receive dividends from Another.Software validator commissions!",
@@ -12917,8 +12911,7 @@
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/newt.png"
         }
-      ],
-      "coingecko_id": "newt"
+      ]
     },
     {
       "description": "MilkyWay's liquid staked TIA",
@@ -13199,7 +13192,6 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/autism.png"
         }
       ],
-      "coingecko_id": "autism",
       "keywords": [
         "osmosis_unlisted"
       ]
@@ -15697,8 +15689,7 @@
             "circle": true
           }
         }
-      ],
-      "coingecko_id": "dhealth"
+      ]
     },
     {
       "description": "The native token of Furya",
@@ -16009,8 +16000,7 @@
           },
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/hava.png"
         }
-      ],
-      "coingecko_id": "hava-coin"
+      ]
     },
     {
       "description": "OnE mEmEcOiN tO cOnNeCt oL ImBeCiles - aNd in Da Cosmos BiNd DeM",
@@ -22058,7 +22048,6 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/omniflixhub/images/ygata.svg"
         }
       ],
-      "coingecko_id": "yield-gata",
       "socials": {
         "website": "https://gatahub.zone",
         "x": "https://x.com/GataHubZone"
@@ -23873,8 +23862,7 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/sam.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/sam.svg"
         }
-      ],
-      "coingecko_id": "sam-2"
+      ]
     },
     {
       "description": "Staking coin of Emporion",
@@ -24022,8 +24010,7 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pryzm.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/pryzm.svg"
         }
-      ],
-      "coingecko_id": "pryzm"
+      ]
     },
     {
       "description": "The community token for The Fortunate Few, a multi chain NFT community platform.",
@@ -27527,6 +27514,40 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/9005151AB92A888293B05E8D0C679032F86639EC2251430565FA38CF3BB6226B",
+          "exponent": 0,
+          "aliases": [
+            "uGNOD"
+          ]
+        },
+        {
+          "denom": "GNOD",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/9005151AB92A888293B05E8D0C679032F86639EC2251430565FA38CF3BB6226B",
+      "name": "Gnodi",
+      "display": "GNOD",
+      "symbol": "GNOD",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gnodi",
+            "base_denom": "uGNOD",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-108866",
+            "path": "transfer/channel-108866/uGNOD"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/E4673C5CDB56B4225AB1625F3B478740AE9F11E1A6BEBC1B30F8A5080D6AFBD6",
           "exponent": 0,
           "aliases": [
@@ -29636,40 +29657,6 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png",
           "theme": {
             "circle": true
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/9005151AB92A888293B05E8D0C679032F86639EC2251430565FA38CF3BB6226B",
-          "exponent": 0,
-          "aliases": [
-            "uGNOD"
-          ]
-        },
-        {
-          "denom": "GNOD",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/9005151AB92A888293B05E8D0C679032F86639EC2251430565FA38CF3BB6226B",
-      "name": "Gnodi",
-      "display": "GNOD",
-      "symbol": "GNOD",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "gnodi",
-            "base_denom": "uGNOD",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-108866",
-            "path": "transfer/channel-108866/uGNOD"
           }
         }
       ]
@@ -32919,8 +32906,7 @@
             "path": "transfer/channel-259/factory/kujira13x2l25mpkhwnwcwdzzd34cr8fyht9jlj7xu9g4uffe36g3fmln8qkvm3qn/unami"
           }
         }
-      ],
-      "coingecko_id": "nami-protocol"
+      ]
     },
     {
       "denom_units": [

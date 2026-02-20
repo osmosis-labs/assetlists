@@ -31003,7 +31003,7 @@
             "chainId": "divine-1",
             "sourceDenom": "uDRC",
             "port": "transfer",
-            "channelId": "channel-3"
+            "channelId": "channel-108909"
           },
           "chain": {
             "port": "transfer",
@@ -31196,10 +31196,11 @@
       "variantGroupKey": "ibc/59A4A5CC7201CDDD3E9A6033E0345959B025577C10C224563B720F720895DB72",
       "name": "maxBTC",
       "isAlloyed": false,
-      "verified": false,
+      "verified": true,
       "unstable": false,
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "listingDate": "2026-02-20T15:23:32.288Z"
     },
     {
       "chainName": "aura",
@@ -33431,6 +33432,55 @@
       ],
       "variantGroupKey": "ibc/04DDB3C027A5C06F499684FF02E80744CABC705ECF015460F52AE6E280006180",
       "name": "Lumen (XLM) pegged token",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "divine",
+      "sourceDenom": "uDRC",
+      "coinMinimalDenom": "ibc/31B7E66F7236A52FE7ED2E5418CEF92C71A72DA711B373309C69C21BE8032DF7",
+      "symbol": "DRC.divine",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/divine/images/udrc.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "divine",
+            "chainId": "divine-1",
+            "sourceDenom": "uDRC",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-109096",
+            "path": "transfer/channel-109096/uDRC"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "divine",
+          "sourceDenom": "uDRC",
+          "chainType": "cosmos",
+          "chainId": "divine-1",
+          "symbol": "DRC",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/divine/images/udrc.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/E7D5845607642A90E1E6285DB54BCD0EE68ECD24545F3449BFBA40C2628FBCAF",
+      "name": "Divine",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

@@ -440,6 +440,12 @@ The `Generate All Files` bundle workflow runs automatically and includes:
   - Creates minimal entries (chain_name + comment) for chains in `zone_assets.json` not yet in `zone_chains.json`
   - Makes it easy for maintainers to add custom RPC/REST endpoints later
   - All fields default to Chain Registry values unless explicitly overridden
+- Checks IBC client health for all IBC assets and automatically updates `osmosis_unstable` in `osmosis.zone_assets.json`
+  - Sources assets from the generated frontend assetlist (catches auto-detected assets with no zone_assets entry)
+  - Sets `osmosis_unstable: true` for assets whose Osmosis-side IBC client is Expired or Frozen; adds a minimal entry if none exists
+  - Clears `osmosis_unstable` only when **both** the Osmosis-side and counterparty-side clients are confirmed Active
+  - Removes auto-added minimal entries entirely when they recover (entries with no other meaningful fields)
+  - Runs before assetlist generation so the generated frontend output reflects correct flags in the same run
 - Validates RPC/REST endpoints (priority-based selection: 10 of ~180 chains per run)
   - Prioritizes: Failed chains (1 day requery delay) → Never-validated chains → Oldest-validated chains (7 day requery delay)
   - Tracks validation results in `state/state.json` for endpoint optimization

@@ -114,6 +114,7 @@ async function getClientStatusForChannel(channelId) {
 //   1. zone_chains.json  — single manually curated endpoint (highest quality)
 //   2. chainlist.json    — validated and ordered endpoints from endpoint validation
 //   3. chain registry    — raw unvalidated fallback
+// Returns null if the chain is marked "killed" in the chain registry (skip queries).
 function getCounterpartyRestEndpoints(chainName, zoneChainsByName, chainlistByName) {
   const seen = new Set();
   const endpoints = [];
@@ -135,10 +136,11 @@ function getCounterpartyRestEndpoints(chainName, zoneChainsByName, chainlistByNa
   const chainlistChain = chainlistByName.get(chainName);
   for (const e of chainlistChain?.apis?.rest ?? []) add(e.address);
 
-  // 3. Chain registry — raw fallback
+  // 3. Chain registry — raw fallback; also check for killed status
   try {
     const chainFile = path.join(CHAIN_REGISTRY_PATH, chainName, 'chain.json');
     const chainData = JSON.parse(fs.readFileSync(chainFile, 'utf8'));
+    if (chainData.status === 'killed') return null; // chain is permanently dead
     for (const e of chainData.apis?.rest ?? []) add(e.address);
   } catch { /* chain not in registry */ }
 
@@ -147,13 +149,18 @@ function getCounterpartyRestEndpoints(chainName, zoneChainsByName, chainlistByNa
 
 // Returns 'Active', 'Expired', 'Frozen', or 'unknown' (if unreachable/missing).
 // 'unknown' is treated as a reason NOT to clear — preserves the flag.
-async function getCounterpartyClientStatus(chainName, channelId, zoneChainsByName, chainlistByName) {
+// deadEndpoints: Set<string> shared across calls — endpoints that have already
+// failed are skipped immediately, preventing repeated timeouts for dead chains.
+async function getCounterpartyClientStatus(chainName, channelId, zoneChainsByName, chainlistByName, deadEndpoints) {
   if (!chainName || !channelId) return 'unknown';
 
   const endpoints = getCounterpartyRestEndpoints(chainName, zoneChainsByName, chainlistByName);
+  if (endpoints === null) return 'killed'; // chain registry marks this chain as dead
   if (endpoints.length === 0) return 'unknown';
 
   for (const endpoint of endpoints.slice(0, COUNTERPARTY_MAX_ENDPOINTS)) {
+    if (deadEndpoints.has(endpoint)) continue; // skip known-dead endpoints immediately
+
     try {
       const channelData = await fetchJSONWithTimeout(
         `${endpoint}/ibc/core/channel/v1/channels/${channelId}/ports/transfer`
@@ -172,7 +179,8 @@ async function getCounterpartyClientStatus(chainName, channelId, zoneChainsByNam
       );
       return statusData.status; // 'Active', 'Expired', 'Frozen'
     } catch {
-      continue; // try next endpoint
+      deadEndpoints.add(endpoint); // mark endpoint dead for all subsequent channels
+      continue;
     }
   }
 
@@ -272,6 +280,43 @@ async function main() {
   const counterpartySkipped  = [];
   const errorChannels        = [];
 
+  // ── Phase 1: identify channels needing a counterparty check ─────────────────
+  // Only Osmosis-Active channels with currently unstable-flagged assets need it.
+  const cpCheckNeeded = new Map(); // osmosisChannelId -> { counterpartyChainName, counterpartyChannelId }
+  for (const result of results) {
+    if (result.error || result.status !== 'Active') continue;
+    const { assets: channelAssets, counterpartyChainName, counterpartyChannelId } = channelMap.get(result.channelId);
+    const hasUnstableAssets = channelAssets.some(fa => zoneByPath.get(fa.ibcPath)?.osmosis_unstable === true);
+    if (hasUnstableAssets && counterpartyChainName && counterpartyChannelId) {
+      cpCheckNeeded.set(result.channelId, { counterpartyChainName, counterpartyChannelId });
+    }
+  }
+
+  // ── Phase 2: run counterparty checks in concurrent batches ──────────────────
+  // deadEndpoints is shared across all calls so a failed endpoint is never
+  // retried for a different channel on the same dead chain.
+  const cpStatuses = new Map(); // osmosisChannelId -> status string
+  if (cpCheckNeeded.size > 0) {
+    console.log(`Checking counterparty client status for ${cpCheckNeeded.size} channel(s)...\n`);
+    const deadEndpoints = new Set();
+    const cpEntries = [...cpCheckNeeded.entries()];
+    const cpBatchResults = await processInBatches(
+      cpEntries,
+      CONCURRENCY,
+      async ([channelId, { counterpartyChainName, counterpartyChannelId }]) => {
+        const status = await getCounterpartyClientStatus(
+          counterpartyChainName, counterpartyChannelId,
+          zoneChainsByName, chainlistByName, deadEndpoints
+        );
+        return [channelId, status];
+      }
+    );
+    for (const [channelId, status] of cpBatchResults) {
+      cpStatuses.set(channelId, status);
+    }
+  }
+
+  // ── Phase 3: apply flags using pre-computed results ──────────────────────────
   for (const result of results) {
     const { assets: channelAssets, counterpartyChainName, counterpartyChannelId } = channelMap.get(result.channelId);
 
@@ -284,25 +329,18 @@ async function main() {
     const isProblematic = result.status !== 'Active';
 
     if (!isProblematic) {
-      // Osmosis-side client is Active. Before clearing any flags on this channel,
-      // verify the counterparty's client of Osmosis is also Active (covers the
-      // withdrawal direction). Check once per channel, only if there are actually
-      // unstable-flagged assets to consider clearing.
-      const hasUnstableAssets = channelAssets.some(fa => zoneByPath.get(fa.ibcPath)?.osmosis_unstable === true);
-
-      if (hasUnstableAssets) {
-        const cpStatus = await getCounterpartyClientStatus(counterpartyChainName, counterpartyChannelId, zoneChainsByName, chainlistByName);
-
-        if (cpStatus !== 'Active') {
-          // Counterparty side unconfirmed or broken — skip clearing for all assets on this channel
-          for (const fa of channelAssets) {
-            if (zoneByPath.get(fa.ibcPath)?.osmosis_unstable === true) {
-              stats.counterpartySkipped++;
-              counterpartySkipped.push({ ...fa, cpStatus, counterpartyChainName, counterpartyChannelId });
-            }
+      // Osmosis-side client is Active. Check pre-computed counterparty status
+      // before clearing any flags (covers the withdrawal direction).
+      const cpStatus = cpStatuses.get(result.channelId); // undefined = no unstable assets, skip check
+      if (cpStatus !== undefined && cpStatus !== 'Active') {
+        // Counterparty side unconfirmed or broken — skip clearing for all assets on this channel
+        for (const fa of channelAssets) {
+          if (zoneByPath.get(fa.ibcPath)?.osmosis_unstable === true) {
+            stats.counterpartySkipped++;
+            counterpartySkipped.push({ ...fa, cpStatus, counterpartyChainName, counterpartyChannelId });
           }
-          continue;
         }
+        continue;
       }
     }
 

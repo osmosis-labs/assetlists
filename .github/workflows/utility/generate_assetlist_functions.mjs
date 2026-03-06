@@ -1234,7 +1234,7 @@ export function setUnstableStatus(asset_data) {
 
 export function setDisabledStatus(asset_data) {
 
-  asset_data.frontend.disabled = asset_data.zone_asset?.osmosis_disabled || asset_data.zone_asset?.osmosis_unstable;
+  asset_data.frontend.disabled = asset_data.zone_asset?.osmosis_disabled;
 
 }
 

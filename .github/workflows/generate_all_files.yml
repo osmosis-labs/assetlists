@@ -42,6 +42,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Check IBC Client Status
+        working-directory: ./.github/workflows/utility
+        run: |
+          node check_ibc_clients.mjs osmosis-1 2>&1 | tee ../../../ibc-check.log
+          echo "IBC_NEWLY_FLAGGED=$(grep -oP 'IBC_NEWLY_FLAGGED=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
+          echo "IBC_NEWLY_CLEARED=$(grep -oP 'IBC_NEWLY_CLEARED=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
+          echo "IBC_ERRORS=$(grep -oP 'IBC_ERRORS=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
+
       - name: Add Chain Stubs
         working-directory: ./.github/workflows/utility
         run: node add_chain_stubs.mjs osmosis-1
@@ -227,6 +235,28 @@ jobs:
           echo "- Updated denominations and display names" >> workflow-summary.md
           echo "- Current asset logos and branding" >> workflow-summary.md
           echo "- Trace information for IBC assets" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+          echo "---" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+
+          # IBC Client Health
+          echo "## IBC Client Health" >> workflow-summary.md
+          echo "- **Newly flagged unstable:** $IBC_NEWLY_FLAGGED" >> workflow-summary.md
+          echo "- **Auto-cleared (client active again):** $IBC_NEWLY_CLEARED" >> workflow-summary.md
+          if [ "$IBC_ERRORS" -gt 0 ]; then
+            echo "- **Errors (flags unchanged):** $IBC_ERRORS" >> workflow-summary.md
+          fi
+
+          if [ "$IBC_NEWLY_FLAGGED" -gt 0 ] || [ "$IBC_NEWLY_CLEARED" -gt 0 ]; then
+            echo "" >> workflow-summary.md
+            echo "<details><summary>IBC check details</summary>" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            echo '```' >> workflow-summary.md
+            grep -A 100 'IBC CLIENT HEALTH SUMMARY' ibc-check.log | head -60 >> workflow-summary.md || true
+            echo '```' >> workflow-summary.md
+            echo "</details>" >> workflow-summary.md
+          fi
+
           echo "" >> workflow-summary.md
           echo "---" >> workflow-summary.md
           echo "" >> workflow-summary.md

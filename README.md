@@ -116,16 +116,14 @@ Each asset object in _osmosis.zone_assets.json_ must include these identifying d
 
 #### Transfer & Reliability Flags
 
-- **`osmosis_unstable`** (boolean, default: `false`) - **Critical flag** indicating the asset **cannot reliably** be transferred to or from Osmosis.
-  - **Frontend Behavior**: Sets both `unstable: true` AND `disabled: true` in generated assetlist
-  - **User Impact**: Disables native IBC Deposit/Withdraw buttons; frontend may redirect to external interfaces (e.g., TFM)
-  - **Common Causes**: Unreliable IBC relayers, frequent chain downtime, channel connectivity issues
-  - **When to Remove**: After confirming IBC channels work reliably and consistently
+- **`osmosis_unstable`** (boolean, default: `false`) - Indicates the asset **cannot reliably** be transferred to or from Osmosis.
+  - **Frontend Behavior**: Sets `unstable: true` in generated assetlist — displays a warning indicator on the asset
+  - **Common Causes**: Expired or frozen IBC client, unreliable relayers, frequent chain downtime
+  - **When to Remove**: After confirming the IBC channel is active and transfers work reliably
 
-- **`osmosis_disabled`** (boolean, default: `false`) - Explicitly disables Deposit and Withdraw functions, independent of reliability status.
-  - **Frontend Behavior**: Disables native IBC Deposit/Withdraw buttons
-  - **Difference from `unstable`**: This is an intentional decision to disable transfers, not a reliability issue
-  - **Common Reasons**: Forcing the external or custom transfer methods, security or reliabiliy concerns - Asset remains visible and tradeable
+- **`osmosis_disabled`** (boolean, default: `false`) - Explicitly disables the native IBC Deposit and Withdraw buttons.
+  - **Frontend Behavior**: Sets `disabled: true` in generated assetlist — disables native IBC Deposit/Withdraw buttons
+  - **Common Reasons**: Forcing use of an external or custom transfer method, security or liquidity concerns
 
 - **`transfer_methods`** (array) - Custom transfer configurations for assets requiring special handling.
   - Should be included whenever basic IBC transfer cannot carry out an interchain transfer
@@ -143,7 +141,6 @@ Each asset object in _osmosis.zone_assets.json_ must include these identifying d
     ]
     ```
 
-**Important**: The frontend maps `osmosis_unstable: true` to BOTH `unstable: true` AND `disabled: true`. This means setting the unstable flag will automatically disable native IBC transfers.
 
 #### Asset Relationship Flags
 
@@ -225,7 +222,7 @@ For complete schema definitions, see `zone_assets.schema.json`.
   "_comment": "GenesisL1 $L1"
 }
 ```
-**Result**: Native IBC buttons disabled, frontend redirects to TFM or other external interface.
+**Result**: Warning indicator shown on asset. Add `osmosis_disabled: true` to also disable native IBC buttons.
 
 **To enable native IBC**: Remove `osmosis_unstable` after confirming channels work reliably.
 
@@ -275,23 +272,19 @@ For complete schema definitions, see `zone_assets.schema.json`.
 
 Check your asset configuration for these flags:
 
-1. **`osmosis_unstable: true`** → This disables native IBC
-   - **Solution**: Remove this flag after testing IBC channels work reliably
-   - Test: Verify deposits and withdrawals work without errors or delays
-
-2. **`osmosis_disabled: true`** → This intentionally disables native IBC
+1. **`osmosis_disabled: true`** → This disables native IBC buttons
    - **Solution**: Remove this flag if you want to enable native transfers
    - Consider: Was this set for security/liquidity management? Verify it's safe to remove
 
-3. **No `transfer_methods` but IBC is disabled** → Likely `osmosis_unstable` is set
-   - **Solution**: Add custom `transfer_methods` OR remove unstable flag
+2. **`osmosis_unstable: true`** → This shows a warning indicator on the asset
+   - The asset may still have IBC buttons enabled unless `osmosis_disabled` is also set
+   - **Solution**: Remove this flag after confirming the IBC channel is active and reliable
 
 **Question: When should I use `osmosis_unstable` vs `osmosis_disabled`?**
 
-- **Use `osmosis_unstable`**: When IBC technically works but has reliability problems (downtime, slow relayers, failed transactions)
-- **Use `osmosis_disabled`**: When you intentionally want to disable transfers for business/security reasons, regardless of technical reliability
-
-**Both flags disable the frontend IBC buttons**, but they signal different reasons.
+- **Use `osmosis_unstable`**: When the IBC channel has reliability problems (expired client, downtime, slow relayers) — shows a warning flag to users
+- **Use `osmosis_disabled`**: When you want to disable native IBC deposit/withdraw buttons, regardless of reliability
+- **Use both**: When you want to show a warning and disable the buttons
 
 ## Chains
 
@@ -447,6 +440,12 @@ The `Generate All Files` bundle workflow runs automatically and includes:
   - Creates minimal entries (chain_name + comment) for chains in `zone_assets.json` not yet in `zone_chains.json`
   - Makes it easy for maintainers to add custom RPC/REST endpoints later
   - All fields default to Chain Registry values unless explicitly overridden
+- Checks IBC client health for all IBC assets and automatically updates `osmosis_unstable` in `osmosis.zone_assets.json`
+  - Sources assets from the generated frontend assetlist (catches auto-detected assets with no zone_assets entry)
+  - Sets `osmosis_unstable: true` for assets whose Osmosis-side IBC client is Expired or Frozen; adds a minimal entry if none exists
+  - Clears `osmosis_unstable` only when **both** the Osmosis-side and counterparty-side clients are confirmed Active
+  - Removes auto-added minimal entries entirely when they recover (entries with no other meaningful fields)
+  - Runs before assetlist generation so the generated frontend output reflects correct flags in the same run
 - Validates RPC/REST endpoints (priority-based selection: 10 of ~180 chains per run)
   - Prioritizes: Failed chains (1 day requery delay) → Never-validated chains → Oldest-validated chains (7 day requery delay)
   - Tracks validation results in `state/state.json` for endpoint optimization

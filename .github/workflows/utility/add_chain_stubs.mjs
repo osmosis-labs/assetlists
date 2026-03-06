@@ -76,13 +76,28 @@ if (chainsNeedingStubs.length === 0) {
 console.log(`\n📝 Adding stubs for ${chainsNeedingStubs.length} chains:`);
 chainsNeedingStubs.sort().forEach(name => console.log(`   - ${name}`));
 
-// Create minimal stub entries for missing chains
-// Only includes chain_name - all fields will be pulled from Chain Registry by default
-// Maintainers can add rpc/rest/explorer_tx_url/keplr_features/override_properties as needed
-const stubEntries = chainsNeedingStubs.sort().map(chainName => ({
-  "chain_name": chainName,
-  "_comment": "Auto-detected chain - add rpc/rest/explorer_tx_url/override_properties to customize"
-}));
+// Create stub entries for missing chains, populated from the chain registry.
+// The zone_chains.json schema requires rpc, rest, and explorer_tx_url.
+const CHAIN_REGISTRY_PATH = path.join('..', '..', '..', 'chain-registry');
+
+function buildStubFromRegistry(chainName) {
+  let registryData = null;
+  try {
+    const chainFile = path.join(CHAIN_REGISTRY_PATH, chainName, 'chain.json');
+    registryData = JSON.parse(fs.readFileSync(chainFile, 'utf8'));
+  } catch { /* not in registry */ }
+
+  const rpc  = registryData?.apis?.rpc?.[0]?.address  ?? '';
+  const rest = registryData?.apis?.rest?.[0]?.address ?? '';
+
+  // Find an explorer with a tx_page containing {txHash} (schema pattern requirement)
+  const explorerEntry = registryData?.explorers?.find(e => e.tx_page?.includes('{txHash}'));
+  const explorer_tx_url = explorerEntry?.tx_page ?? `https://www.mintscan.io/${chainName}/txs/\${txHash}`;
+
+  return { chain_name: chainName, rpc, rest, explorer_tx_url };
+}
+
+const stubEntries = chainsNeedingStubs.sort().map(buildStubFromRegistry);
 
 // Add stub entries to the end of the chains array
 zoneChains.chains.push(...stubEntries);
@@ -98,5 +113,4 @@ try {
   process.exit(1);
 }
 
-console.log('\n✅ Done! Chain stubs added. Add rpc/rest fields to customize endpoints.');
-console.log('   All other fields will be pulled from Chain Registry by default.');
+console.log('\n✅ Done! Chain stubs added with endpoints from Chain Registry.');

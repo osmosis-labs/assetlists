@@ -24900,7 +24900,7 @@
       "chainName": "mantrachain",
       "sourceDenom": "uom",
       "coinMinimalDenom": "ibc/164807F6226F91990F358C6467EEE8B162E437BDCD3DADEC3F0CE20693720795",
-      "symbol": "OM",
+      "symbol": "MANTRA.mantra",
       "decimals": 6,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Darkmatt.png",
@@ -24940,10 +24940,22 @@
             "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.png",
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.svg"
           }
+        },
+        {
+          "chainName": "mantrachain",
+          "sourceDenom": "amantra",
+          "chainType": "cosmos",
+          "chainId": "mantra-1",
+          "symbol": "MANTRA",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.svg"
+          }
         }
       ],
-      "variantGroupKey": "ibc/164807F6226F91990F358C6467EEE8B162E437BDCD3DADEC3F0CE20693720795",
-      "name": "MANTRA",
+      "variantGroupKey": "ibc/4EDB04DED162ED1D45F86F8C7F92E011E8CF3AE9E5214BD3EA06F9D05B38F18D",
+      "name": "MANTRA (MANTRA)",
       "isAlloyed": false,
       "verified": true,
       "unstable": false,
@@ -27330,6 +27342,7 @@
       "unstable": false,
       "disabled": false,
       "preview": false,
+      "tooltipMessage": "NilChain is halting 23rd March 2026. Transfers will no longer be possible after the halt. See Nillion socials for more information.",
       "listingDate": "2025-03-28T19:58:31.709Z"
     },
     {
@@ -31029,10 +31042,11 @@
       "variantGroupKey": "ibc/31B7E66F7236A52FE7ED2E5418CEF92C71A72DA711B373309C69C21BE8032DF7",
       "name": "Divine",
       "isAlloyed": false,
-      "verified": false,
+      "verified": true,
       "unstable": false,
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "listingDate": "2026-03-06T15:21:19.532Z"
     },
     {
       "chainName": "initia",
@@ -39737,6 +39751,58 @@
       ],
       "variantGroupKey": "ibc/B1DA72A9BF8F97F0575AB93681D476AFE640A0CD1FB44DD016BE156EEA8B8C7A",
       "name": "Manifest",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "mantrachain",
+      "sourceDenom": "amantra",
+      "coinMinimalDenom": "ibc/4EDB04DED162ED1D45F86F8C7F92E011E8CF3AE9E5214BD3EA06F9D05B38F18D",
+      "symbol": "MANTRA",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Darkmatt.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Darkmatt.svg"
+      },
+      "coingeckoId": "mantra",
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "mantrachain",
+            "chainId": "mantra-1",
+            "sourceDenom": "amantra",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-85077",
+            "path": "transfer/channel-85077/amantra"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "mantrachain",
+          "sourceDenom": "amantra",
+          "chainType": "cosmos",
+          "chainId": "mantra-1",
+          "symbol": "MANTRA",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/4EDB04DED162ED1D45F86F8C7F92E011E8CF3AE9E5214BD3EA06F9D05B38F18D",
+      "name": "MANTRA",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

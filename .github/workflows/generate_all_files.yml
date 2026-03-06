@@ -42,10 +42,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Add Chain Stubs
-        working-directory: ./.github/workflows/utility
-        run: node add_chain_stubs.mjs osmosis-1
-
       - name: Check IBC Client Status
         working-directory: ./.github/workflows/utility
         run: |
@@ -53,6 +49,10 @@ jobs:
           echo "IBC_NEWLY_FLAGGED=$(grep -oP 'IBC_NEWLY_FLAGGED=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
           echo "IBC_NEWLY_CLEARED=$(grep -oP 'IBC_NEWLY_CLEARED=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
           echo "IBC_ERRORS=$(grep -oP 'IBC_ERRORS=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
+
+      - name: Add Chain Stubs
+        working-directory: ./.github/workflows/utility
+        run: node add_chain_stubs.mjs osmosis-1
 
       - name: Run code to Validate Endpoints
         working-directory: ./.github/workflows/utility

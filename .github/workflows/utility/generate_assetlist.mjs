@@ -186,6 +186,51 @@ async function getAssetsFromChainRegistry(localChainName, asset_datas) {
 
 }
 
+
+//--Get Native Local Chain Assets from Chain Registry--
+// Complements getAssetsFromChainRegistry() which skips the local chain.
+// Adds any sdk.coin assets found in the local chain's chain-registry assetlist
+// that aren't already present in asset_datas (from osmosis.zone_assets.json).
+async function getLocalChainAssetsFromChainRegistry(localChainName, asset_datas) {
+
+  const assets = chain_reg.getFileProperty(localChainName, "assetlist", "assets") || [];
+
+  await asyncForEach(assets, async (asset) => {
+
+    const typeAsset = asset.type_asset;
+    if (typeAsset !== "sdk.coin") return;
+
+    const baseDenom = asset.base;
+
+    //--Establish Asset Data--
+    let asset_data = {
+      chainName: localChainName,
+      zone_config: {},
+      zone_asset: {},
+      frontend: {},
+      chain_reg: {},
+      asset_detail: {},
+    };
+
+    asset_data.zone_asset.chain_name = localChainName;
+    asset_data.zone_asset.base_denom = baseDenom;
+
+    assetlist.setSourceAsset(asset_data);
+    await assetlist.setLocalAsset(asset_data);
+
+    // Skip if already present (from zone_assets.json or a prior auto-detection pass)
+    const existingAsset = asset_datas.find((existingAssetData) => (
+      existingAssetData.local_asset?.base_denom === asset_data.local_asset?.base_denom
+    ));
+    if (existingAsset) return;
+
+    asset_datas.push(asset_data);
+
+  });
+
+}
+
+
 const generateAssets = async (
   chainName,
   zoneConfig,
@@ -248,6 +293,7 @@ const generateAssets = async (
 
   //get assets from chain registry
   await getAssetsFromChainRegistry(chainName, asset_datas);
+  await getLocalChainAssetsFromChainRegistry(chainName, asset_datas);
 
   assetlist.setCanonicalAssets(asset_datas);
   assetlist.setIdentityAssets(asset_datas);

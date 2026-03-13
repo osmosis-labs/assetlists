@@ -9129,7 +9129,7 @@
       "name": "Migaloo",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
       "disabled": false,
       "preview": false
     },
@@ -14730,7 +14730,7 @@
       "name": "ASH",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
       "disabled": false,
       "preview": false
     },
@@ -14784,7 +14784,7 @@
       "name": "Racoon",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
       "disabled": false,
       "preview": false
     },
@@ -14835,7 +14835,7 @@
       "name": "GUPPY",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
       "disabled": false,
       "preview": false
     },
@@ -17049,7 +17049,7 @@
       "name": "SHARK",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
       "disabled": false,
       "preview": false,
       "listingDate": "2024-03-15T19:51:00.000Z"
@@ -18388,7 +18388,7 @@
       "name": "RESTAKE",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
       "disabled": false,
       "preview": false
     },
@@ -28875,7 +28875,7 @@
       "name": "OPHIR",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
       "disabled": false,
       "preview": true
     },
@@ -42598,6 +42598,451 @@
       "preview": false
     },
     {
+      "chainName": "migaloo",
+      "sourceDenom": "factory/migaloo1436kxs0w2es6xlqpp9rd35e3d0cjnw4sv8j3a7483sgks29jqwgshqdky4/ampWHALE",
+      "coinMinimalDenom": "ibc/834D0AEF380E2A490E4209DFF2785B8DBB7703118C144AC373699525C65B4223",
+      "symbol": "ampWHALE",
+      "decimals": 6,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/ampwhale.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "migaloo",
+            "chainId": "migaloo-1",
+            "sourceDenom": "factory/migaloo1436kxs0w2es6xlqpp9rd35e3d0cjnw4sv8j3a7483sgks29jqwgshqdky4/ampWHALE",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-642",
+            "path": "transfer/channel-642/factory/migaloo1436kxs0w2es6xlqpp9rd35e3d0cjnw4sv8j3a7483sgks29jqwgshqdky4/ampWHALE"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "migaloo",
+          "sourceDenom": "factory/migaloo1436kxs0w2es6xlqpp9rd35e3d0cjnw4sv8j3a7483sgks29jqwgshqdky4/ampWHALE",
+          "chainType": "cosmos",
+          "chainId": "migaloo-1",
+          "symbol": "ampWHALE",
+          "decimals": 6,
+          "logoURIs": {
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/ampwhale.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/834D0AEF380E2A490E4209DFF2785B8DBB7703118C144AC373699525C65B4223",
+      "name": "ampWHALE",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "migaloo",
+      "sourceDenom": "factory/migaloo1mf6ptkssddfmxvhdx0ech0k03ktp6kf9yk59renau2gvht3nq2gqdhts4u/boneWhale",
+      "coinMinimalDenom": "ibc/917C4B1E92EE2F959FC11ECFC435C4048F97E8B00F9444592706F4604F24BF25",
+      "symbol": "bWHALE",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/bWHALE.png"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "migaloo",
+            "chainId": "migaloo-1",
+            "sourceDenom": "factory/migaloo1mf6ptkssddfmxvhdx0ech0k03ktp6kf9yk59renau2gvht3nq2gqdhts4u/boneWhale",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-642",
+            "path": "transfer/channel-642/factory/migaloo1mf6ptkssddfmxvhdx0ech0k03ktp6kf9yk59renau2gvht3nq2gqdhts4u/boneWhale"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "migaloo",
+          "sourceDenom": "factory/migaloo1mf6ptkssddfmxvhdx0ech0k03ktp6kf9yk59renau2gvht3nq2gqdhts4u/boneWhale",
+          "chainType": "cosmos",
+          "chainId": "migaloo-1",
+          "symbol": "bWHALE",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/bWHALE.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/917C4B1E92EE2F959FC11ECFC435C4048F97E8B00F9444592706F4604F24BF25",
+      "name": "BackBone Labs Liquid Staked WHALE",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "migaloo",
+      "sourceDenom": "factory/migaloo18a9m9stu3dyvewwcq9qmp85euxqcvln5mefync/fable",
+      "coinMinimalDenom": "ibc/A37859A04007157B7FE3DC60BA32B7AC9CE7921988D32C087A52DFC98DF74C21",
+      "symbol": "FABLE",
+      "decimals": 6,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/fable.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "migaloo",
+            "chainId": "migaloo-1",
+            "sourceDenom": "factory/migaloo18a9m9stu3dyvewwcq9qmp85euxqcvln5mefync/fable",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-642",
+            "path": "transfer/channel-642/factory/migaloo18a9m9stu3dyvewwcq9qmp85euxqcvln5mefync/fable"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "migaloo",
+          "sourceDenom": "factory/migaloo18a9m9stu3dyvewwcq9qmp85euxqcvln5mefync/fable",
+          "chainType": "cosmos",
+          "chainId": "migaloo-1",
+          "symbol": "FABLE",
+          "decimals": 6,
+          "logoURIs": {
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/fable.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/A37859A04007157B7FE3DC60BA32B7AC9CE7921988D32C087A52DFC98DF74C21",
+      "name": "FABLE",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "migaloo",
+      "sourceDenom": "factory/migaloo1p3aj9f09d7c4jxhgue0hpdpw370j6gzc59nxxx6l8d0gc9f9rfwsdwetus/lsdSHARK",
+      "coinMinimalDenom": "ibc/698A7B8E3CFC0E7831B3DA4BF2525907AF1277FC2D1ABBC21F1114CE9751C04A",
+      "symbol": "lsdSHARK",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/lsdshark.png"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "migaloo",
+            "chainId": "migaloo-1",
+            "sourceDenom": "factory/migaloo1p3aj9f09d7c4jxhgue0hpdpw370j6gzc59nxxx6l8d0gc9f9rfwsdwetus/lsdSHARK",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-642",
+            "path": "transfer/channel-642/factory/migaloo1p3aj9f09d7c4jxhgue0hpdpw370j6gzc59nxxx6l8d0gc9f9rfwsdwetus/lsdSHARK"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "migaloo",
+          "sourceDenom": "factory/migaloo1p3aj9f09d7c4jxhgue0hpdpw370j6gzc59nxxx6l8d0gc9f9rfwsdwetus/lsdSHARK",
+          "chainType": "cosmos",
+          "chainId": "migaloo-1",
+          "symbol": "lsdSHARK",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/lsdshark.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/698A7B8E3CFC0E7831B3DA4BF2525907AF1277FC2D1ABBC21F1114CE9751C04A",
+      "name": "lsdSHARK",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "migaloo",
+      "sourceDenom": "factory/migaloo1r9x8fz4alekzr78k42rpmr9unpa7egsldpqeynmwl2nfvzexue9sn8l5rg/gash",
+      "coinMinimalDenom": "ibc/ADBDAED6F14E5BE1392CE79F29A59F362E53261A87D3ACF8244A88DA428A100E",
+      "symbol": "GASH",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/gash.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "migaloo",
+            "chainId": "migaloo-1",
+            "sourceDenom": "factory/migaloo1r9x8fz4alekzr78k42rpmr9unpa7egsldpqeynmwl2nfvzexue9sn8l5rg/gash",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-642",
+            "path": "transfer/channel-642/factory/migaloo1r9x8fz4alekzr78k42rpmr9unpa7egsldpqeynmwl2nfvzexue9sn8l5rg/gash"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "migaloo",
+          "sourceDenom": "factory/migaloo1r9x8fz4alekzr78k42rpmr9unpa7egsldpqeynmwl2nfvzexue9sn8l5rg/gash",
+          "chainType": "cosmos",
+          "chainId": "migaloo-1",
+          "symbol": "GASH",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/gash.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/ADBDAED6F14E5BE1392CE79F29A59F362E53261A87D3ACF8244A88DA428A100E",
+      "name": "GASH",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "migaloo",
+      "sourceDenom": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/ugrac",
+      "coinMinimalDenom": "ibc/58E4261D2E21FE3A459C290A9F97F3DCD257B28F48AAE828298B38E048804829",
+      "symbol": "GRAC",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/grac.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "migaloo",
+            "chainId": "migaloo-1",
+            "sourceDenom": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/ugrac",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-642",
+            "path": "transfer/channel-642/factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/ugrac"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "migaloo",
+          "sourceDenom": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/ugrac",
+          "chainType": "cosmos",
+          "chainId": "migaloo-1",
+          "symbol": "GRAC",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/grac.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/58E4261D2E21FE3A459C290A9F97F3DCD257B28F48AAE828298B38E048804829",
+      "name": "Gaming RAC Token",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "migaloo",
+      "sourceDenom": "factory/migaloo1nsskhvvh0msm7d5ke2kfg24a8d4jecsnxd28s27h0uz5kf9ap60shlqmcl/ampGASH",
+      "coinMinimalDenom": "ibc/3561B86D3E5B4D574B47BCD4AFDB84FC5B4DCD2E6E3F1FEF39AABE85137A365A",
+      "symbol": "ampGASH",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/ampgash.png"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "migaloo",
+            "chainId": "migaloo-1",
+            "sourceDenom": "factory/migaloo1nsskhvvh0msm7d5ke2kfg24a8d4jecsnxd28s27h0uz5kf9ap60shlqmcl/ampGASH",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-642",
+            "path": "transfer/channel-642/factory/migaloo1nsskhvvh0msm7d5ke2kfg24a8d4jecsnxd28s27h0uz5kf9ap60shlqmcl/ampGASH"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "migaloo",
+          "sourceDenom": "factory/migaloo1nsskhvvh0msm7d5ke2kfg24a8d4jecsnxd28s27h0uz5kf9ap60shlqmcl/ampGASH",
+          "chainType": "cosmos",
+          "chainId": "migaloo-1",
+          "symbol": "ampGASH",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/ampgash.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/3561B86D3E5B4D574B47BCD4AFDB84FC5B4DCD2E6E3F1FEF39AABE85137A365A",
+      "name": "ampGASH",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "migaloo",
+      "sourceDenom": "factory/migaloo1axtz4y7jyvdkkrflknv9dcut94xr5k8m6wete4rdrw4fuptk896su44x2z/uLP",
+      "coinMinimalDenom": "ibc/CB430302A78522199562A80B9408F91264C89F659C123BF0BFDE1397D340C667",
+      "symbol": "WHALE-wBTC-WW-LP",
+      "decimals": 6,
+      "logoURIs": {},
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "migaloo",
+            "chainId": "migaloo-1",
+            "sourceDenom": "factory/migaloo1axtz4y7jyvdkkrflknv9dcut94xr5k8m6wete4rdrw4fuptk896su44x2z/uLP",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-642",
+            "path": "transfer/channel-642/factory/migaloo1axtz4y7jyvdkkrflknv9dcut94xr5k8m6wete4rdrw4fuptk896su44x2z/uLP"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "migaloo",
+          "sourceDenom": "factory/migaloo1axtz4y7jyvdkkrflknv9dcut94xr5k8m6wete4rdrw4fuptk896su44x2z/uLP",
+          "chainType": "cosmos",
+          "chainId": "migaloo-1",
+          "symbol": "WHALE-wBTC-WW-LP",
+          "decimals": 6,
+          "logoURIs": {}
+        }
+      ],
+      "variantGroupKey": "ibc/CB430302A78522199562A80B9408F91264C89F659C123BF0BFDE1397D340C667",
+      "name": "WHALE-wBTC WW LP",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "migaloo",
+      "sourceDenom": "factory/migaloo1zsptvkg5aeg4tjksgv7vp4x5s9p5euqrh9jl3sfdv48wtnrhftlszsvmu5/uwhalex",
+      "coinMinimalDenom": "ibc/04DB563BCDD7DCBFAA277838BD141BA262DA8E7C2FEF825A4A324B7D588B351F",
+      "symbol": "WHALEX",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/whaleX.png"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "migaloo",
+            "chainId": "migaloo-1",
+            "sourceDenom": "factory/migaloo1zsptvkg5aeg4tjksgv7vp4x5s9p5euqrh9jl3sfdv48wtnrhftlszsvmu5/uwhalex",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-642",
+            "path": "transfer/channel-642/factory/migaloo1zsptvkg5aeg4tjksgv7vp4x5s9p5euqrh9jl3sfdv48wtnrhftlszsvmu5/uwhalex"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "migaloo",
+          "sourceDenom": "factory/migaloo1zsptvkg5aeg4tjksgv7vp4x5s9p5euqrh9jl3sfdv48wtnrhftlszsvmu5/uwhalex",
+          "chainType": "cosmos",
+          "chainId": "migaloo-1",
+          "symbol": "WHALEX",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/whaleX.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/04DB563BCDD7DCBFAA277838BD141BA262DA8E7C2FEF825A4A324B7D588B351F",
+      "name": "WHALEX",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "axelar",
       "sourceDenom": "axs-wei",
       "coinMinimalDenom": "ibc/6C0CB8653012DC2BC1820FD0B6B3AFF8A07D18630BDAEE066FEFB2D92F477C24",
@@ -50539,451 +50984,6 @@
       ],
       "variantGroupKey": "ibc/4EDB04DED162ED1D45F86F8C7F92E011E8CF3AE9E5214BD3EA06F9D05B38F18D",
       "name": "MANTRA",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "migaloo",
-      "sourceDenom": "factory/migaloo1436kxs0w2es6xlqpp9rd35e3d0cjnw4sv8j3a7483sgks29jqwgshqdky4/ampWHALE",
-      "coinMinimalDenom": "ibc/834D0AEF380E2A490E4209DFF2785B8DBB7703118C144AC373699525C65B4223",
-      "symbol": "ampWHALE",
-      "decimals": 6,
-      "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/ampwhale.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "migaloo",
-            "chainId": "migaloo-1",
-            "sourceDenom": "factory/migaloo1436kxs0w2es6xlqpp9rd35e3d0cjnw4sv8j3a7483sgks29jqwgshqdky4/ampWHALE",
-            "port": "transfer",
-            "channelId": "channel-5"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-642",
-            "path": "transfer/channel-642/factory/migaloo1436kxs0w2es6xlqpp9rd35e3d0cjnw4sv8j3a7483sgks29jqwgshqdky4/ampWHALE"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "migaloo",
-          "sourceDenom": "factory/migaloo1436kxs0w2es6xlqpp9rd35e3d0cjnw4sv8j3a7483sgks29jqwgshqdky4/ampWHALE",
-          "chainType": "cosmos",
-          "chainId": "migaloo-1",
-          "symbol": "ampWHALE",
-          "decimals": 6,
-          "logoURIs": {
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/ampwhale.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/834D0AEF380E2A490E4209DFF2785B8DBB7703118C144AC373699525C65B4223",
-      "name": "ampWHALE",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "migaloo",
-      "sourceDenom": "factory/migaloo1mf6ptkssddfmxvhdx0ech0k03ktp6kf9yk59renau2gvht3nq2gqdhts4u/boneWhale",
-      "coinMinimalDenom": "ibc/917C4B1E92EE2F959FC11ECFC435C4048F97E8B00F9444592706F4604F24BF25",
-      "symbol": "bWHALE",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/bWHALE.png"
-      },
-      "categories": [
-        "liquid_staking"
-      ],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "migaloo",
-            "chainId": "migaloo-1",
-            "sourceDenom": "factory/migaloo1mf6ptkssddfmxvhdx0ech0k03ktp6kf9yk59renau2gvht3nq2gqdhts4u/boneWhale",
-            "port": "transfer",
-            "channelId": "channel-5"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-642",
-            "path": "transfer/channel-642/factory/migaloo1mf6ptkssddfmxvhdx0ech0k03ktp6kf9yk59renau2gvht3nq2gqdhts4u/boneWhale"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "migaloo",
-          "sourceDenom": "factory/migaloo1mf6ptkssddfmxvhdx0ech0k03ktp6kf9yk59renau2gvht3nq2gqdhts4u/boneWhale",
-          "chainType": "cosmos",
-          "chainId": "migaloo-1",
-          "symbol": "bWHALE",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/bWHALE.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/917C4B1E92EE2F959FC11ECFC435C4048F97E8B00F9444592706F4604F24BF25",
-      "name": "BackBone Labs Liquid Staked WHALE",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "migaloo",
-      "sourceDenom": "factory/migaloo18a9m9stu3dyvewwcq9qmp85euxqcvln5mefync/fable",
-      "coinMinimalDenom": "ibc/A37859A04007157B7FE3DC60BA32B7AC9CE7921988D32C087A52DFC98DF74C21",
-      "symbol": "FABLE",
-      "decimals": 6,
-      "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/fable.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "migaloo",
-            "chainId": "migaloo-1",
-            "sourceDenom": "factory/migaloo18a9m9stu3dyvewwcq9qmp85euxqcvln5mefync/fable",
-            "port": "transfer",
-            "channelId": "channel-5"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-642",
-            "path": "transfer/channel-642/factory/migaloo18a9m9stu3dyvewwcq9qmp85euxqcvln5mefync/fable"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "migaloo",
-          "sourceDenom": "factory/migaloo18a9m9stu3dyvewwcq9qmp85euxqcvln5mefync/fable",
-          "chainType": "cosmos",
-          "chainId": "migaloo-1",
-          "symbol": "FABLE",
-          "decimals": 6,
-          "logoURIs": {
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/fable.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/A37859A04007157B7FE3DC60BA32B7AC9CE7921988D32C087A52DFC98DF74C21",
-      "name": "FABLE",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "migaloo",
-      "sourceDenom": "factory/migaloo1p3aj9f09d7c4jxhgue0hpdpw370j6gzc59nxxx6l8d0gc9f9rfwsdwetus/lsdSHARK",
-      "coinMinimalDenom": "ibc/698A7B8E3CFC0E7831B3DA4BF2525907AF1277FC2D1ABBC21F1114CE9751C04A",
-      "symbol": "lsdSHARK",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/lsdshark.png"
-      },
-      "categories": [
-        "liquid_staking"
-      ],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "migaloo",
-            "chainId": "migaloo-1",
-            "sourceDenom": "factory/migaloo1p3aj9f09d7c4jxhgue0hpdpw370j6gzc59nxxx6l8d0gc9f9rfwsdwetus/lsdSHARK",
-            "port": "transfer",
-            "channelId": "channel-5"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-642",
-            "path": "transfer/channel-642/factory/migaloo1p3aj9f09d7c4jxhgue0hpdpw370j6gzc59nxxx6l8d0gc9f9rfwsdwetus/lsdSHARK"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "migaloo",
-          "sourceDenom": "factory/migaloo1p3aj9f09d7c4jxhgue0hpdpw370j6gzc59nxxx6l8d0gc9f9rfwsdwetus/lsdSHARK",
-          "chainType": "cosmos",
-          "chainId": "migaloo-1",
-          "symbol": "lsdSHARK",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/lsdshark.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/698A7B8E3CFC0E7831B3DA4BF2525907AF1277FC2D1ABBC21F1114CE9751C04A",
-      "name": "lsdSHARK",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "migaloo",
-      "sourceDenom": "factory/migaloo1r9x8fz4alekzr78k42rpmr9unpa7egsldpqeynmwl2nfvzexue9sn8l5rg/gash",
-      "coinMinimalDenom": "ibc/ADBDAED6F14E5BE1392CE79F29A59F362E53261A87D3ACF8244A88DA428A100E",
-      "symbol": "GASH",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/gash.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "migaloo",
-            "chainId": "migaloo-1",
-            "sourceDenom": "factory/migaloo1r9x8fz4alekzr78k42rpmr9unpa7egsldpqeynmwl2nfvzexue9sn8l5rg/gash",
-            "port": "transfer",
-            "channelId": "channel-5"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-642",
-            "path": "transfer/channel-642/factory/migaloo1r9x8fz4alekzr78k42rpmr9unpa7egsldpqeynmwl2nfvzexue9sn8l5rg/gash"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "migaloo",
-          "sourceDenom": "factory/migaloo1r9x8fz4alekzr78k42rpmr9unpa7egsldpqeynmwl2nfvzexue9sn8l5rg/gash",
-          "chainType": "cosmos",
-          "chainId": "migaloo-1",
-          "symbol": "GASH",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/gash.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/ADBDAED6F14E5BE1392CE79F29A59F362E53261A87D3ACF8244A88DA428A100E",
-      "name": "GASH",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "migaloo",
-      "sourceDenom": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/ugrac",
-      "coinMinimalDenom": "ibc/58E4261D2E21FE3A459C290A9F97F3DCD257B28F48AAE828298B38E048804829",
-      "symbol": "GRAC",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/grac.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "migaloo",
-            "chainId": "migaloo-1",
-            "sourceDenom": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/ugrac",
-            "port": "transfer",
-            "channelId": "channel-5"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-642",
-            "path": "transfer/channel-642/factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/ugrac"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "migaloo",
-          "sourceDenom": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/ugrac",
-          "chainType": "cosmos",
-          "chainId": "migaloo-1",
-          "symbol": "GRAC",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/grac.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/58E4261D2E21FE3A459C290A9F97F3DCD257B28F48AAE828298B38E048804829",
-      "name": "Gaming RAC Token",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "migaloo",
-      "sourceDenom": "factory/migaloo1nsskhvvh0msm7d5ke2kfg24a8d4jecsnxd28s27h0uz5kf9ap60shlqmcl/ampGASH",
-      "coinMinimalDenom": "ibc/3561B86D3E5B4D574B47BCD4AFDB84FC5B4DCD2E6E3F1FEF39AABE85137A365A",
-      "symbol": "ampGASH",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/ampgash.png"
-      },
-      "categories": [
-        "liquid_staking"
-      ],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "migaloo",
-            "chainId": "migaloo-1",
-            "sourceDenom": "factory/migaloo1nsskhvvh0msm7d5ke2kfg24a8d4jecsnxd28s27h0uz5kf9ap60shlqmcl/ampGASH",
-            "port": "transfer",
-            "channelId": "channel-5"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-642",
-            "path": "transfer/channel-642/factory/migaloo1nsskhvvh0msm7d5ke2kfg24a8d4jecsnxd28s27h0uz5kf9ap60shlqmcl/ampGASH"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "migaloo",
-          "sourceDenom": "factory/migaloo1nsskhvvh0msm7d5ke2kfg24a8d4jecsnxd28s27h0uz5kf9ap60shlqmcl/ampGASH",
-          "chainType": "cosmos",
-          "chainId": "migaloo-1",
-          "symbol": "ampGASH",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/ampgash.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/3561B86D3E5B4D574B47BCD4AFDB84FC5B4DCD2E6E3F1FEF39AABE85137A365A",
-      "name": "ampGASH",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "migaloo",
-      "sourceDenom": "factory/migaloo1axtz4y7jyvdkkrflknv9dcut94xr5k8m6wete4rdrw4fuptk896su44x2z/uLP",
-      "coinMinimalDenom": "ibc/CB430302A78522199562A80B9408F91264C89F659C123BF0BFDE1397D340C667",
-      "symbol": "WHALE-wBTC-WW-LP",
-      "decimals": 6,
-      "logoURIs": {},
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "migaloo",
-            "chainId": "migaloo-1",
-            "sourceDenom": "factory/migaloo1axtz4y7jyvdkkrflknv9dcut94xr5k8m6wete4rdrw4fuptk896su44x2z/uLP",
-            "port": "transfer",
-            "channelId": "channel-5"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-642",
-            "path": "transfer/channel-642/factory/migaloo1axtz4y7jyvdkkrflknv9dcut94xr5k8m6wete4rdrw4fuptk896su44x2z/uLP"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "migaloo",
-          "sourceDenom": "factory/migaloo1axtz4y7jyvdkkrflknv9dcut94xr5k8m6wete4rdrw4fuptk896su44x2z/uLP",
-          "chainType": "cosmos",
-          "chainId": "migaloo-1",
-          "symbol": "WHALE-wBTC-WW-LP",
-          "decimals": 6,
-          "logoURIs": {}
-        }
-      ],
-      "variantGroupKey": "ibc/CB430302A78522199562A80B9408F91264C89F659C123BF0BFDE1397D340C667",
-      "name": "WHALE-wBTC WW LP",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "migaloo",
-      "sourceDenom": "factory/migaloo1zsptvkg5aeg4tjksgv7vp4x5s9p5euqrh9jl3sfdv48wtnrhftlszsvmu5/uwhalex",
-      "coinMinimalDenom": "ibc/04DB563BCDD7DCBFAA277838BD141BA262DA8E7C2FEF825A4A324B7D588B351F",
-      "symbol": "WHALEX",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/whaleX.png"
-      },
-      "categories": [
-        "liquid_staking"
-      ],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "migaloo",
-            "chainId": "migaloo-1",
-            "sourceDenom": "factory/migaloo1zsptvkg5aeg4tjksgv7vp4x5s9p5euqrh9jl3sfdv48wtnrhftlszsvmu5/uwhalex",
-            "port": "transfer",
-            "channelId": "channel-5"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-642",
-            "path": "transfer/channel-642/factory/migaloo1zsptvkg5aeg4tjksgv7vp4x5s9p5euqrh9jl3sfdv48wtnrhftlszsvmu5/uwhalex"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "migaloo",
-          "sourceDenom": "factory/migaloo1zsptvkg5aeg4tjksgv7vp4x5s9p5euqrh9jl3sfdv48wtnrhftlszsvmu5/uwhalex",
-          "chainType": "cosmos",
-          "chainId": "migaloo-1",
-          "symbol": "WHALEX",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/whaleX.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/04DB563BCDD7DCBFAA277838BD141BA262DA8E7C2FEF825A4A324B7D588B351F",
-      "name": "WHALEX",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

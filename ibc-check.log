@@ -2,20 +2,38 @@ Checking IBC client status for 166 unique channels (940 IBC assets in frontend).
 
 Checking counterparty client status for 3 channel(s)...
 
-No changes needed.
+✓ Updated ../../../osmosis-1/osmosis.zone_assets.json
 
 ======================================================================
   IBC CLIENT HEALTH SUMMARY
 ======================================================================
   Channels checked      : 166
-  Active assets         : 609
+  Active assets         : 593
   Already flagged       : 295
-  Newly flagged         : 0
+  Newly flagged         : 16
   Flag cleared          : 0
   Entry removed         : 0
   Counterparty skipped  : 36
   Errors                : 0
 ======================================================================
+
+🔴 NEWLY FLAGGED unstable (expired/frozen client):
+  WHALE                transfer/channel-642/uwhale                   status=Expired  client=07-tendermint-2669
+  ASH                  transfer/channel-642/factory/migaloo1erul6xyq0gk6ws98ncj7lnq9l4jn4gnnu9we73gdz78yyl2lr7qqrvcgup/ash status=Expired  client=07-tendermint-2669
+  RAC                  transfer/channel-642/factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/urac status=Expired  client=07-tendermint-2669
+  GUPPY                transfer/channel-642/factory/migaloo1etlu2h30tjvv8rfa4fwdc43c92f6ul5w9acxzk/uguppy status=Expired  client=07-tendermint-2669
+  SHARK                transfer/channel-642/factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/shark status=Expired  client=07-tendermint-2669
+  RSTK                 transfer/channel-642/factory/migaloo1d0uma9qzcts4fzt7ml39xp44aut5k6qyjfzz4asalnecppppr3rsl52vvv/rstk status=Expired  client=07-tendermint-2669
+  OPHIR                transfer/channel-642/factory/migaloo1t862qdu9mj5hr3j727247acypym3ej47axu22rrapm4tqlcpuseqltxwq5/ophir status=Expired  client=07-tendermint-2669
+  ampWHALE             transfer/channel-642/factory/migaloo1436kxs0w2es6xlqpp9rd35e3d0cjnw4sv8j3a7483sgks29jqwgshqdky4/ampWHALE status=Expired  client=07-tendermint-2669 [new entry]
+  bWHALE               transfer/channel-642/factory/migaloo1mf6ptkssddfmxvhdx0ech0k03ktp6kf9yk59renau2gvht3nq2gqdhts4u/boneWhale status=Expired  client=07-tendermint-2669 [new entry]
+  FABLE                transfer/channel-642/factory/migaloo18a9m9stu3dyvewwcq9qmp85euxqcvln5mefync/fable status=Expired  client=07-tendermint-2669 [new entry]
+  lsdSHARK             transfer/channel-642/factory/migaloo1p3aj9f09d7c4jxhgue0hpdpw370j6gzc59nxxx6l8d0gc9f9rfwsdwetus/lsdSHARK status=Expired  client=07-tendermint-2669 [new entry]
+  GASH                 transfer/channel-642/factory/migaloo1r9x8fz4alekzr78k42rpmr9unpa7egsldpqeynmwl2nfvzexue9sn8l5rg/gash status=Expired  client=07-tendermint-2669 [new entry]
+  GRAC                 transfer/channel-642/factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/ugrac status=Expired  client=07-tendermint-2669 [new entry]
+  ampGASH              transfer/channel-642/factory/migaloo1nsskhvvh0msm7d5ke2kfg24a8d4jecsnxd28s27h0uz5kf9ap60shlqmcl/ampGASH status=Expired  client=07-tendermint-2669 [new entry]
+  WHALE-wBTC-WW-LP     transfer/channel-642/factory/migaloo1axtz4y7jyvdkkrflknv9dcut94xr5k8m6wete4rdrw4fuptk896su44x2z/uLP status=Expired  client=07-tendermint-2669 [new entry]
+  WHALEX               transfer/channel-642/factory/migaloo1zsptvkg5aeg4tjksgv7vp4x5s9p5euqrh9jl3sfdv48wtnrhftlszsvmu5/uwhalex status=Expired  client=07-tendermint-2669 [new entry]
 
 🟡 SKIPPED CLEAR (Osmosis active but counterparty unconfirmed):
   ALTER                transfer/channel-476/cw20:secret12rcvz0umvk875kd6a803txhtlu7y0pnd73kcej counterparty=secretnetwork/channel-44 status=unknown
@@ -55,6 +73,6 @@ No changes needed.
   UWU.sol.pica         transfer/channel-1279/transfer/channel-71/UwU8RVXB69Y6Dcju6cN2Qef6fykkq6UUNpB15rZku6Z counterparty=composable/channel-3 status=unknown
   PUPPY                transfer/channel-11348/cw20:chihuahua1yl8z39ugle8s02fpwkhh293509q5xcpalmdzc4amvchz8nkexrmsy95gef counterparty=chihuahua/channel-73 status=unknown
 
-IBC_NEWLY_FLAGGED=0
+IBC_NEWLY_FLAGGED=16
 IBC_NEWLY_CLEARED=0
 IBC_ERRORS=0

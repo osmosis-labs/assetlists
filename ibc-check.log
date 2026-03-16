@@ -8,32 +8,43 @@ Checking counterparty client status for 3 channel(s)...
   IBC CLIENT HEALTH SUMMARY
 ======================================================================
   Channels checked      : 166
-  Active assets         : 593
-  Already flagged       : 295
-  Newly flagged         : 16
-  Flag cleared          : 0
+  Active assets         : 620
+  Already flagged       : 311
+  Newly flagged         : 0
+  Flag cleared          : 27
   Entry removed         : 0
-  Counterparty skipped  : 36
+  Counterparty skipped  : 9
   Errors                : 0
 ======================================================================
 
-🔴 NEWLY FLAGGED unstable (expired/frozen client):
-  WHALE                transfer/channel-642/uwhale                   status=Expired  client=07-tendermint-2669
-  ASH                  transfer/channel-642/factory/migaloo1erul6xyq0gk6ws98ncj7lnq9l4jn4gnnu9we73gdz78yyl2lr7qqrvcgup/ash status=Expired  client=07-tendermint-2669
-  RAC                  transfer/channel-642/factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/urac status=Expired  client=07-tendermint-2669
-  GUPPY                transfer/channel-642/factory/migaloo1etlu2h30tjvv8rfa4fwdc43c92f6ul5w9acxzk/uguppy status=Expired  client=07-tendermint-2669
-  SHARK                transfer/channel-642/factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/shark status=Expired  client=07-tendermint-2669
-  RSTK                 transfer/channel-642/factory/migaloo1d0uma9qzcts4fzt7ml39xp44aut5k6qyjfzz4asalnecppppr3rsl52vvv/rstk status=Expired  client=07-tendermint-2669
-  OPHIR                transfer/channel-642/factory/migaloo1t862qdu9mj5hr3j727247acypym3ej47axu22rrapm4tqlcpuseqltxwq5/ophir status=Expired  client=07-tendermint-2669
-  ampWHALE             transfer/channel-642/factory/migaloo1436kxs0w2es6xlqpp9rd35e3d0cjnw4sv8j3a7483sgks29jqwgshqdky4/ampWHALE status=Expired  client=07-tendermint-2669 [new entry]
-  bWHALE               transfer/channel-642/factory/migaloo1mf6ptkssddfmxvhdx0ech0k03ktp6kf9yk59renau2gvht3nq2gqdhts4u/boneWhale status=Expired  client=07-tendermint-2669 [new entry]
-  FABLE                transfer/channel-642/factory/migaloo18a9m9stu3dyvewwcq9qmp85euxqcvln5mefync/fable status=Expired  client=07-tendermint-2669 [new entry]
-  lsdSHARK             transfer/channel-642/factory/migaloo1p3aj9f09d7c4jxhgue0hpdpw370j6gzc59nxxx6l8d0gc9f9rfwsdwetus/lsdSHARK status=Expired  client=07-tendermint-2669 [new entry]
-  GASH                 transfer/channel-642/factory/migaloo1r9x8fz4alekzr78k42rpmr9unpa7egsldpqeynmwl2nfvzexue9sn8l5rg/gash status=Expired  client=07-tendermint-2669 [new entry]
-  GRAC                 transfer/channel-642/factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/ugrac status=Expired  client=07-tendermint-2669 [new entry]
-  ampGASH              transfer/channel-642/factory/migaloo1nsskhvvh0msm7d5ke2kfg24a8d4jecsnxd28s27h0uz5kf9ap60shlqmcl/ampGASH status=Expired  client=07-tendermint-2669 [new entry]
-  WHALE-wBTC-WW-LP     transfer/channel-642/factory/migaloo1axtz4y7jyvdkkrflknv9dcut94xr5k8m6wete4rdrw4fuptk896su44x2z/uLP status=Expired  client=07-tendermint-2669 [new entry]
-  WHALEX               transfer/channel-642/factory/migaloo1zsptvkg5aeg4tjksgv7vp4x5s9p5euqrh9jl3sfdv48wtnrhftlszsvmu5/uwhalex status=Expired  client=07-tendermint-2669 [new entry]
+🟢 FLAG CLEARED (both sides active, entry kept):
+  PICA                 transfer/channel-1279/ppica                   client=07-tendermint-2846
+  KSM                  transfer/channel-1279/transfer/channel-2/4    client=07-tendermint-2846
+  DOT.pica             transfer/channel-1279/transfer/channel-2/transfer/channel-15/79228162514264337593543950342 client=07-tendermint-2846
+  TNKR                 transfer/channel-1279/transfer/channel-2/2125 client=07-tendermint-2846
+  ETH.pica             transfer/channel-1279/transfer/channel-52/wei client=07-tendermint-2846
+  DAI.pica             transfer/channel-1279/transfer/channel-52/0x6b175474e89094c44da98b954eedeac495271d0f client=07-tendermint-2846
+  FXS.pica             transfer/channel-1279/transfer/channel-52/0x3432b6a60d23ca0dfca7761b7ab56459d9c964d0 client=07-tendermint-2846
+  FRAX.pica            transfer/channel-1279/transfer/channel-52/0x853d955acef822db058eb8505911ed77f175b99e client=07-tendermint-2846
+  USDT.eth.pica        transfer/channel-1279/transfer/channel-52/0xdac17f958d2ee523a2206206994597c13d831ec7 client=07-tendermint-2846
+  sFRAX.pica           transfer/channel-1279/transfer/channel-52/0xa663b02cf0a4b149d2ad41910cb81e23e1c41c32 client=07-tendermint-2846
+  frxETH.pica          transfer/channel-1279/transfer/channel-52/0x5e8422345238f34275888049021821e8e08caa1f client=07-tendermint-2846
+  sfrxETH.pica         transfer/channel-1279/transfer/channel-52/0xac3e018457b222d93114458476f3e3416abbe38f client=07-tendermint-2846
+  PEPE.pica            transfer/channel-1279/transfer/channel-52/0x6982508145454ce325ddbe47a25d4ec3d2311933 client=07-tendermint-2846
+  CRV.pica             transfer/channel-1279/transfer/channel-52/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599 client=07-tendermint-2846
+  ezETH.pica           transfer/channel-1279/transfer/channel-52/0xbf5495efe5db9ce00f80364c8b423567e58d2110 client=07-tendermint-2846
+  USDe.pica            transfer/channel-1279/transfer/channel-52/0x4c9edd5852cd905f086c759e8383e09bff1e68b3 client=07-tendermint-2846
+  ENA.pica             transfer/channel-1279/transfer/channel-52/0x57e114b691db790c35207b2e685d4a43181e6061 client=07-tendermint-2846
+  eETH.pica            transfer/channel-1279/transfer/channel-52/0x35fa164735182de50811e8e2e824cfb9b6118ac2 client=07-tendermint-2846
+  pxETH.pica           transfer/channel-1279/transfer/channel-52/0x04c154b66cb340f3ae24111cc767e0184ed00cc6 client=07-tendermint-2846
+  crvUSD.pica          transfer/channel-1279/transfer/channel-52/0xf939e0a03fb07f59a73314e73794be0e57ac1b4e client=07-tendermint-2846
+  USDT.sol.pica        transfer/channel-1279/transfer/channel-71/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB client=07-tendermint-2846
+  edgeSOL.pica         transfer/channel-1279/transfer/channel-71/edge86g9cVz87xcpKpy3J77vbp4wYd9idEV562CCntt client=07-tendermint-2846
+  LST.pica             transfer/channel-1279/transfer/channel-71/LSTxxxnJzKDFSLr4dUkPcmCf5VyryEqzPLz5j4bpxFp client=07-tendermint-2846
+  jitoSOL.pica         transfer/channel-1279/transfer/channel-71/J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn client=07-tendermint-2846
+  SOL.pica             transfer/channel-1279/transfer/channel-71/So11111111111111111111111111111111111111112 client=07-tendermint-2846
+  WHINE                transfer/channel-1279/transfer/channel-71/ATeTQcUkWGs7AZ15mCiFUWCW9EUL7KpDZEHCN1Y8pump client=07-tendermint-2846
+  UWU.sol.pica         transfer/channel-1279/transfer/channel-71/UwU8RVXB69Y6Dcju6cN2Qef6fykkq6UUNpB15rZku6Z client=07-tendermint-2846
 
 🟡 SKIPPED CLEAR (Osmosis active but counterparty unconfirmed):
   ALTER                transfer/channel-476/cw20:secret12rcvz0umvk875kd6a803txhtlu7y0pnd73kcej counterparty=secretnetwork/channel-44 status=unknown
@@ -44,35 +55,8 @@ Checking counterparty client status for 3 channel(s)...
   AMBER                transfer/channel-476/cw20:secret1s09x2xvfd2lp2skgzm29w2xtena7s8fq98v852 counterparty=secretnetwork/channel-44 status=unknown
   SILK                 transfer/channel-476/cw20:secret1fl449muk5yq8dlad7a22nje4p5d2pnsgymhjfd counterparty=secretnetwork/channel-44 status=unknown
   SHD                  transfer/channel-476/cw20:secret153wu605vvp934xhd4k9dtd640zsep5jkesstdm counterparty=secretnetwork/channel-44 status=unknown
-  PICA                 transfer/channel-1279/ppica                   counterparty=composable/channel-3 status=unknown
-  KSM                  transfer/channel-1279/transfer/channel-2/4    counterparty=composable/channel-3 status=unknown
-  DOT.pica             transfer/channel-1279/transfer/channel-2/transfer/channel-15/79228162514264337593543950342 counterparty=composable/channel-3 status=unknown
-  TNKR                 transfer/channel-1279/transfer/channel-2/2125 counterparty=composable/channel-3 status=unknown
-  ETH.pica             transfer/channel-1279/transfer/channel-52/wei counterparty=composable/channel-3 status=unknown
-  DAI.pica             transfer/channel-1279/transfer/channel-52/0x6b175474e89094c44da98b954eedeac495271d0f counterparty=composable/channel-3 status=unknown
-  FXS.pica             transfer/channel-1279/transfer/channel-52/0x3432b6a60d23ca0dfca7761b7ab56459d9c964d0 counterparty=composable/channel-3 status=unknown
-  FRAX.pica            transfer/channel-1279/transfer/channel-52/0x853d955acef822db058eb8505911ed77f175b99e counterparty=composable/channel-3 status=unknown
-  USDT.eth.pica        transfer/channel-1279/transfer/channel-52/0xdac17f958d2ee523a2206206994597c13d831ec7 counterparty=composable/channel-3 status=unknown
-  sFRAX.pica           transfer/channel-1279/transfer/channel-52/0xa663b02cf0a4b149d2ad41910cb81e23e1c41c32 counterparty=composable/channel-3 status=unknown
-  frxETH.pica          transfer/channel-1279/transfer/channel-52/0x5e8422345238f34275888049021821e8e08caa1f counterparty=composable/channel-3 status=unknown
-  sfrxETH.pica         transfer/channel-1279/transfer/channel-52/0xac3e018457b222d93114458476f3e3416abbe38f counterparty=composable/channel-3 status=unknown
-  PEPE.pica            transfer/channel-1279/transfer/channel-52/0x6982508145454ce325ddbe47a25d4ec3d2311933 counterparty=composable/channel-3 status=unknown
-  CRV.pica             transfer/channel-1279/transfer/channel-52/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599 counterparty=composable/channel-3 status=unknown
-  ezETH.pica           transfer/channel-1279/transfer/channel-52/0xbf5495efe5db9ce00f80364c8b423567e58d2110 counterparty=composable/channel-3 status=unknown
-  USDe.pica            transfer/channel-1279/transfer/channel-52/0x4c9edd5852cd905f086c759e8383e09bff1e68b3 counterparty=composable/channel-3 status=unknown
-  ENA.pica             transfer/channel-1279/transfer/channel-52/0x57e114b691db790c35207b2e685d4a43181e6061 counterparty=composable/channel-3 status=unknown
-  eETH.pica            transfer/channel-1279/transfer/channel-52/0x35fa164735182de50811e8e2e824cfb9b6118ac2 counterparty=composable/channel-3 status=unknown
-  pxETH.pica           transfer/channel-1279/transfer/channel-52/0x04c154b66cb340f3ae24111cc767e0184ed00cc6 counterparty=composable/channel-3 status=unknown
-  crvUSD.pica          transfer/channel-1279/transfer/channel-52/0xf939e0a03fb07f59a73314e73794be0e57ac1b4e counterparty=composable/channel-3 status=unknown
-  USDT.sol.pica        transfer/channel-1279/transfer/channel-71/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB counterparty=composable/channel-3 status=unknown
-  edgeSOL.pica         transfer/channel-1279/transfer/channel-71/edge86g9cVz87xcpKpy3J77vbp4wYd9idEV562CCntt counterparty=composable/channel-3 status=unknown
-  LST.pica             transfer/channel-1279/transfer/channel-71/LSTxxxnJzKDFSLr4dUkPcmCf5VyryEqzPLz5j4bpxFp counterparty=composable/channel-3 status=unknown
-  jitoSOL.pica         transfer/channel-1279/transfer/channel-71/J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn counterparty=composable/channel-3 status=unknown
-  SOL.pica             transfer/channel-1279/transfer/channel-71/So11111111111111111111111111111111111111112 counterparty=composable/channel-3 status=unknown
-  WHINE                transfer/channel-1279/transfer/channel-71/ATeTQcUkWGs7AZ15mCiFUWCW9EUL7KpDZEHCN1Y8pump counterparty=composable/channel-3 status=unknown
-  UWU.sol.pica         transfer/channel-1279/transfer/channel-71/UwU8RVXB69Y6Dcju6cN2Qef6fykkq6UUNpB15rZku6Z counterparty=composable/channel-3 status=unknown
   PUPPY                transfer/channel-11348/cw20:chihuahua1yl8z39ugle8s02fpwkhh293509q5xcpalmdzc4amvchz8nkexrmsy95gef counterparty=chihuahua/channel-73 status=unknown
 
-IBC_NEWLY_FLAGGED=16
-IBC_NEWLY_CLEARED=0
+IBC_NEWLY_FLAGGED=0
+IBC_NEWLY_CLEARED=27
 IBC_ERRORS=0

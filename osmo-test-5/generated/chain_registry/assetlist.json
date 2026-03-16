@@ -1338,6 +1338,42 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/7C7668A6015508285CA5725BB500F34D0C019E953C01E9767823D3877F3FC241",
+          "exponent": 0,
+          "aliases": [
+            "cw20:bbn1cnx34p82zngq0uuaendsne0x4s5gsm7gpwk2es8zk8rz8tnj938qqyq8f9"
+          ]
+        },
+        {
+          "denom": "eBABY",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/7C7668A6015508285CA5725BB500F34D0C019E953C01E9767823D3877F3FC241",
+      "name": "Babylon Testnet Escher LST",
+      "display": "eBABY",
+      "symbol": "eBABY",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "babylontestnet",
+            "base_denom": "cw20:bbn1cnx34p82zngq0uuaendsne0x4s5gsm7gpwk2es8zk8rz8tnj938qqyq8f9",
+            "port": "wasm.bbn17tu5q57xdf3u4m0u8j4mnjlcwe9kt4n87fmc4cdnrkf9zungn7wsjfhts0",
+            "channel_id": "channel-22"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-10367",
+            "path": "transfer/channel-10367/cw20:bbn1cnx34p82zngq0uuaendsne0x4s5gsm7gpwk2es8zk8rz8tnj938qqyq8f9"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/0E22FFB61DB307FE01D3D0DFF4A8EBEB6CC4997DCF9E901AE0751A2FFF4B90DD",
           "exponent": 0,
           "aliases": [

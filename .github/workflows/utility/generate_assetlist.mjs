@@ -114,11 +114,15 @@ async function getAssetsFromChainRegistry(localChainName, asset_datas) {
       channel.chain_1.port_id === "transfer" && channel.chain_2.port_id === "transfer"
     ));
 
-    //find the only cw20 channel (cw20: prefix is legacy; wasm. prefix is used by e.g. Terra Classic)
-    const cw20Channels = channels.filter(channel => (
-      channel.chain_1.port_id.startsWith("cw20:") || channel.chain_2.port_id.startsWith("cw20:") ||
-      channel.chain_1.port_id.startsWith("wasm.") || channel.chain_2.port_id.startsWith("wasm.")
-    ));
+    //find the only cw20 channel
+    // CW20 transfer channels always have "transfer" on one side and "cw20:" or "wasm." on the other.
+    // "wasm." channels where neither side is "transfer" are ICA/ICQ, not CW20 transfers.
+    const cw20Channels = channels.filter(channel => {
+      const p1 = channel.chain_1.port_id;
+      const p2 = channel.chain_2.port_id;
+      return (p1 === "transfer" || p2 === "transfer") &&
+        (p1.startsWith("cw20:") || p2.startsWith("cw20:") || p1.startsWith("wasm.") || p2.startsWith("wasm."));
+    });
     let cw20Channel;
     if (cw20Channels.length === 1) cw20Channel = cw20Channels[0];
 

@@ -1636,6 +1636,57 @@
       "preview": false
     },
     {
+      "chainName": "babylontestnet",
+      "sourceDenom": "cw20:bbn1cnx34p82zngq0uuaendsne0x4s5gsm7gpwk2es8zk8rz8tnj938qqyq8f9",
+      "coinMinimalDenom": "ibc/7C7668A6015508285CA5725BB500F34D0C019E953C01E9767823D3877F3FC241",
+      "symbol": "eBABY",
+      "decimals": 6,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/babylontestnet/images/eBABY.svg"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "babylontestnet",
+            "chainId": "bbn-test-5",
+            "sourceDenom": "cw20:bbn1cnx34p82zngq0uuaendsne0x4s5gsm7gpwk2es8zk8rz8tnj938qqyq8f9",
+            "port": "wasm.bbn17tu5q57xdf3u4m0u8j4mnjlcwe9kt4n87fmc4cdnrkf9zungn7wsjfhts0",
+            "channelId": "channel-22"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-10367",
+            "path": "transfer/channel-10367/cw20:bbn1cnx34p82zngq0uuaendsne0x4s5gsm7gpwk2es8zk8rz8tnj938qqyq8f9"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "babylontestnet",
+          "sourceDenom": "cw20:bbn1cnx34p82zngq0uuaendsne0x4s5gsm7gpwk2es8zk8rz8tnj938qqyq8f9",
+          "chainType": "cosmos",
+          "chainId": "bbn-test-5",
+          "symbol": "eBABY",
+          "decimals": 6,
+          "logoURIs": {
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/babylontestnet/images/eBABY.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/7C7668A6015508285CA5725BB500F34D0C019E953C01E9767823D3877F3FC241",
+      "name": "Babylon Testnet Escher LST",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "celestiatestnet3",
       "sourceDenom": "utia",
       "coinMinimalDenom": "ibc/0E22FFB61DB307FE01D3D0DFF4A8EBEB6CC4997DCF9E901AE0751A2FFF4B90DD",

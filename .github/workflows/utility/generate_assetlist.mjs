@@ -334,6 +334,7 @@ const generateAssets = async (
     assetlist.setImages(asset_data);
 
     assetlist.setTooltipMessage(asset_data);
+    assetlist.setLogoUsesFullBounds(asset_data);
     assetlist.setKeywords(asset_data);
     assetlist.setTypeAsset(asset_data);
 

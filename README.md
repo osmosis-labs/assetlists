@@ -171,10 +171,6 @@ Each asset object in _osmosis.zone_assets.json_ must include these identifying d
   - Use for warnings, clarifications, or important notices to users
   - Example: "This asset is NOT affiliated with the Bad Kids NFT collection."
 
-- **`logoUsesFullBounds`** (boolean, default: `false`) - Prevents the frontend from applying a circular (50% border-radius) clipping mask to the asset logo.
-  - Use when a logo's design extends to the full square canvas and would be incorrectly clipped by the default circular mask (e.g. OSMO, USTC)
-  - Contrast with `theme.circle: true` in Chain Registry, which opts a logo *in* to a circular frame; this flag opts it *out*
-
 - **`listing_date_time_utc`** (string, ISO 8601 format) - UTC timestamp when asset was listed on Osmosis Zone.
   - Format: `"YYYY-MM-DDTHH:MM:SSZ"`
   - Used for "New" badges, sorting, and tracking

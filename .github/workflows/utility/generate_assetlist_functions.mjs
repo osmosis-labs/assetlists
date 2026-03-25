@@ -1618,12 +1618,6 @@ export function setTooltipMessage(asset_data) {
 
 }
 
-export function setLogoUsesFullBounds(asset_data) {
-
-  asset_data.frontend.logoUsesFullBounds = asset_data.zone_asset?.logoUsesFullBounds;
-
-}
-
 export function setSortWith(asset_data) {
 
   if (getAssetProperty(asset_data.canonical_asset, "coingecko_id")) { return; } 
@@ -1875,7 +1869,6 @@ export function reformatFrontendAssetFromAssetData(asset_data) {
     disabled: asset_data.frontend.disabled ?? false,
     preview: asset_data.frontend.preview ?? false,
     tooltipMessage: asset_data.frontend.tooltipMessage,
-    logoUsesFullBounds: asset_data.frontend.logoUsesFullBounds,
     sortWith: asset_data.frontend.sortWith,
     listingDate: asset_data.frontend.listingDate,
     //relatedAssets: asset_data.frontend.relatedAssets,
@@ -1917,7 +1910,6 @@ export function reformatFrontendAsset(asset) {
     disabled: asset.disabled ?? false,
     preview: asset.preview ?? false,
     tooltipMessage: asset.tooltipMessage,
-    logoUsesFullBounds: asset.logoUsesFullBounds,
     sortWith: asset.sortWith,
     listingDate: asset.listingDate,
     //relatedAssets: asset.relatedAssets,

@@ -2856,6 +2856,57 @@
     },
     {
       "chainName": "manifesttestnet",
+      "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwr",
+      "coinMinimalDenom": "ibc/319F1EB0531381627E4ED3CC07C05B13F9014286A4573B8D8E07239C0A49E8D2",
+      "symbol": "PWR",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "manifesttestnet",
+            "chainId": "manifest-ledger-testnet",
+            "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwr",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-10183",
+            "path": "transfer/channel-10183/factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwr"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "manifesttestnet",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwr",
+          "chainType": "cosmos",
+          "chainId": "manifest-ledger-testnet",
+          "symbol": "PWR",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/319F1EB0531381627E4ED3CC07C05B13F9014286A4573B8D8E07239C0A49E8D2",
+      "name": "Manifest Power Token",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "manifesttestnet",
       "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/uaaa",
       "coinMinimalDenom": "ibc/216699D6D81376D5966FC2225DA431C2079344913B2D746FE88DFB16950C4D7E",
       "symbol": "AAA",

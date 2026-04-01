@@ -7467,8 +7467,7 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token-ibc.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token-ibc.svg"
         }
-      ],
-      "coingecko_id": "mars-protocol-a7fcbcfb-fd61-4017-92f0-7ee9f9cc6da3"
+      ]
     },
     {
       "description": "Ciento Exchange Token",
@@ -21288,8 +21287,7 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.svg"
         }
-      ],
-      "coingecko_id": "mars-protocol-a7fcbcfb-fd61-4017-92f0-7ee9f9cc6da3"
+      ]
     },
     {
       "description": "The native token of TON",
@@ -27955,8 +27953,7 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.svg"
         }
-      ],
-      "coingecko_id": "manifest-2"
+      ]
     },
     {
       "description": "Community-secured Meme token on Osmosis",
@@ -36675,6 +36672,112 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/FDFCC8A906432FA7EFBA430062DA860883F5DDC77B8D64AFA2EE6CD5DC54B6A2",
+          "exponent": 0,
+          "aliases": [
+            "uelt"
+          ]
+        },
+        {
+          "denom": "elt",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/FDFCC8A906432FA7EFBA430062DA860883F5DDC77B8D64AFA2EE6CD5DC54B6A2",
+      "name": "ELT",
+      "display": "elt",
+      "symbol": "ELT",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bluzelle",
+            "base_denom": "uelt",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-763",
+            "path": "transfer/channel-763/uelt"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/6A71FD886C62ECADA07ECFD24542C5E87C316A590737F5CE6FC37E3D258CD106",
+          "exponent": 0,
+          "aliases": [
+            "ug4"
+          ]
+        },
+        {
+          "denom": "g4",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/6A71FD886C62ECADA07ECFD24542C5E87C316A590737F5CE6FC37E3D258CD106",
+      "name": "G4",
+      "display": "g4",
+      "symbol": "G4",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "bluzelle",
+            "base_denom": "ug4",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-763",
+            "path": "transfer/channel-763/ug4"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
+          "exponent": 0,
+          "aliases": [
+            "uact"
+          ]
+        },
+        {
+          "denom": "mact",
+          "exponent": 3
+        },
+        {
+          "denom": "act",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
+      "name": "Akash Compute Token",
+      "display": "act",
+      "symbol": "ACT",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "akash",
+            "base_denom": "uact",
+            "channel_id": "channel-9"
+          },
+          "chain": {
+            "channel_id": "channel-1",
+            "path": "transfer/channel-1/uact"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/6C0CB8653012DC2BC1820FD0B6B3AFF8A07D18630BDAEE066FEFB2D92F477C24",
           "exponent": 0,
           "aliases": [
@@ -37971,74 +38074,6 @@
     {
       "denom_units": [
         {
-          "denom": "ibc/FDFCC8A906432FA7EFBA430062DA860883F5DDC77B8D64AFA2EE6CD5DC54B6A2",
-          "exponent": 0,
-          "aliases": [
-            "uelt"
-          ]
-        },
-        {
-          "denom": "elt",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/FDFCC8A906432FA7EFBA430062DA860883F5DDC77B8D64AFA2EE6CD5DC54B6A2",
-      "name": "ELT",
-      "display": "elt",
-      "symbol": "ELT",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "bluzelle",
-            "base_denom": "uelt",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-763",
-            "path": "transfer/channel-763/uelt"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/6A71FD886C62ECADA07ECFD24542C5E87C316A590737F5CE6FC37E3D258CD106",
-          "exponent": 0,
-          "aliases": [
-            "ug4"
-          ]
-        },
-        {
-          "denom": "g4",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/6A71FD886C62ECADA07ECFD24542C5E87C316A590737F5CE6FC37E3D258CD106",
-      "name": "G4",
-      "display": "g4",
-      "symbol": "G4",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "bluzelle",
-            "base_denom": "ug4",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-763",
-            "path": "transfer/channel-763/ug4"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
           "denom": "ibc/F64D67581D50AE3F641A344F31FE7CF9DC5A2C8C8C455A6967E36DEA09D563E6",
           "exponent": 0,
           "aliases": [
@@ -38822,6 +38857,40 @@
         }
       ],
       "coingecko_id": "licore"
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/B7D7AA538008E2A35328820B7B56F014F1AB38205D51BB13D1F84B11D362B9ED",
+          "exponent": 0,
+          "aliases": [
+            "ucorez-core1astd8pqhs7mslk9rnygy9kzc5s2cqnwftcvmquxr7z9z78szzvzqljlc23"
+          ]
+        },
+        {
+          "denom": "COREZ",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/B7D7AA538008E2A35328820B7B56F014F1AB38205D51BB13D1F84B11D362B9ED",
+      "name": "COREZ",
+      "display": "COREZ",
+      "symbol": "COREZ",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "coreum",
+            "base_denom": "ucorez-core1astd8pqhs7mslk9rnygy9kzc5s2cqnwftcvmquxr7z9z78szzvzqljlc23",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-2188",
+            "path": "transfer/channel-2188/ucorez-core1astd8pqhs7mslk9rnygy9kzc5s2cqnwftcvmquxr7z9z78szzvzqljlc23"
+          }
+        }
+      ]
     },
     {
       "denom_units": [
@@ -39946,7 +40015,8 @@
             "path": "transfer/channel-122/factory/inj1v3a4zznudwpukpr8y987pu5gnh4xuf7v36jhva/nept"
           }
         }
-      ]
+      ],
+      "coingecko_id": "neptune-2"
     },
     {
       "description": "Cosmos Bitcoin",
@@ -43818,6 +43888,40 @@
           "chain": {
             "channel_id": "channel-259",
             "path": "transfer/channel-259/factory/kujira1gewwffxhaygxe8tacd3z9h4uyvpd2h7v9qtfmaw8jjhwalxxpd7qlqld4m/boon"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/78C9FC2412DA11C71FFDDBC3DE03584AF72A50EB5C572EEB31083ACC31AD706A",
+          "exponent": 0,
+          "aliases": [
+            "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwr"
+          ]
+        },
+        {
+          "denom": "pwr",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/78C9FC2412DA11C71FFDDBC3DE03584AF72A50EB5C572EEB31083ACC31AD706A",
+      "name": "Manifest Power Token",
+      "display": "pwr",
+      "symbol": "PWR",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "manifest",
+            "base_denom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwr",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-100418",
+            "path": "transfer/channel-100418/factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwr"
           }
         }
       ]

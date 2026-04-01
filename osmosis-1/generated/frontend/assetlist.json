@@ -8356,7 +8356,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token-ibc.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mars/images/mars-token-ibc.svg"
       },
-      "coingeckoId": "mars-protocol-a7fcbcfb-fd61-4017-92f0-7ee9f9cc6da3",
       "categories": [
         "defi",
         "built_on_osmosis"
@@ -10282,7 +10281,7 @@
       "name": "Bluzelle",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
       "disabled": false,
       "preview": false
     },
@@ -14054,7 +14053,8 @@
       "verified": true,
       "unstable": false,
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "tooltipMessage": "The canonical interchain wstETH contracts currently hosted on Neutron are only guaranteed to be supported through June 30 2026 due to Neutron transitioning to long-term support. To withdraw to Ethereum follow this guide: https://x.com/neutron_org/status/2034971022236004762"
     },
     {
       "chainName": "osmosis",
@@ -14951,7 +14951,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/page.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/page.svg"
       },
-      "coingeckoId": "page",
       "categories": [],
       "transferMethods": [
         {
@@ -24510,7 +24509,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/mars-token.svg"
       },
-      "coingeckoId": "mars-protocol-a7fcbcfb-fd61-4017-92f0-7ee9f9cc6da3",
       "categories": [
         "defi",
         "built_on_osmosis"
@@ -28895,7 +28893,7 @@
       "name": "Nillion",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
       "disabled": false,
       "preview": false,
       "tooltipMessage": "NilChain is halting 23rd March 2026. Transfers will no longer be possible after the halt. See Nillion socials for more information.",
@@ -31825,7 +31823,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.svg"
       },
-      "coingeckoId": "manifest-2",
       "categories": [],
       "transferMethods": [
         {
@@ -44607,6 +44604,155 @@
       "preview": false
     },
     {
+      "chainName": "bluzelle",
+      "sourceDenom": "uelt",
+      "coinMinimalDenom": "ibc/FDFCC8A906432FA7EFBA430062DA860883F5DDC77B8D64AFA2EE6CD5DC54B6A2",
+      "symbol": "ELT",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bluzelle/images/elt.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "bluzelle",
+            "chainId": "bluzelle-9",
+            "sourceDenom": "uelt",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-763",
+            "path": "transfer/channel-763/uelt"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "bluzelle",
+          "sourceDenom": "uelt",
+          "chainType": "cosmos",
+          "chainId": "bluzelle-9",
+          "symbol": "ELT",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bluzelle/images/elt.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/FDFCC8A906432FA7EFBA430062DA860883F5DDC77B8D64AFA2EE6CD5DC54B6A2",
+      "name": "ELT",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "bluzelle",
+      "sourceDenom": "ug4",
+      "coinMinimalDenom": "ibc/6A71FD886C62ECADA07ECFD24542C5E87C316A590737F5CE6FC37E3D258CD106",
+      "symbol": "G4",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bluzelle/images/g4.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "bluzelle",
+            "chainId": "bluzelle-9",
+            "sourceDenom": "ug4",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-763",
+            "path": "transfer/channel-763/ug4"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "bluzelle",
+          "sourceDenom": "ug4",
+          "chainType": "cosmos",
+          "chainId": "bluzelle-9",
+          "symbol": "G4",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bluzelle/images/g4.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/6A71FD886C62ECADA07ECFD24542C5E87C316A590737F5CE6FC37E3D258CD106",
+      "name": "G4",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "akash",
+      "sourceDenom": "uact",
+      "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
+      "symbol": "ACT",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "akash",
+            "chainId": "akashnet-2",
+            "sourceDenom": "uact",
+            "port": "transfer",
+            "channelId": "channel-9"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-1",
+            "path": "transfer/channel-1/uact"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "akash",
+          "sourceDenom": "uact",
+          "chainType": "cosmos",
+          "chainId": "akashnet-2",
+          "symbol": "ACT",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
+      "name": "Akash Compute Token",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "axelar",
       "sourceDenom": "axs-wei",
       "coinMinimalDenom": "ibc/6C0CB8653012DC2BC1820FD0B6B3AFF8A07D18630BDAEE066FEFB2D92F477C24",
@@ -46457,104 +46603,6 @@
       "preview": false
     },
     {
-      "chainName": "bluzelle",
-      "sourceDenom": "uelt",
-      "coinMinimalDenom": "ibc/FDFCC8A906432FA7EFBA430062DA860883F5DDC77B8D64AFA2EE6CD5DC54B6A2",
-      "symbol": "ELT",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bluzelle/images/elt.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "bluzelle",
-            "chainId": "bluzelle-9",
-            "sourceDenom": "uelt",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-763",
-            "path": "transfer/channel-763/uelt"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "bluzelle",
-          "sourceDenom": "uelt",
-          "chainType": "cosmos",
-          "chainId": "bluzelle-9",
-          "symbol": "ELT",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bluzelle/images/elt.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/FDFCC8A906432FA7EFBA430062DA860883F5DDC77B8D64AFA2EE6CD5DC54B6A2",
-      "name": "ELT",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "bluzelle",
-      "sourceDenom": "ug4",
-      "coinMinimalDenom": "ibc/6A71FD886C62ECADA07ECFD24542C5E87C316A590737F5CE6FC37E3D258CD106",
-      "symbol": "G4",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bluzelle/images/g4.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "bluzelle",
-            "chainId": "bluzelle-9",
-            "sourceDenom": "ug4",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-763",
-            "path": "transfer/channel-763/ug4"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "bluzelle",
-          "sourceDenom": "ug4",
-          "chainType": "cosmos",
-          "chainId": "bluzelle-9",
-          "symbol": "G4",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bluzelle/images/g4.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/6A71FD886C62ECADA07ECFD24542C5E87C316A590737F5CE6FC37E3D258CD106",
-      "name": "G4",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
       "chainName": "carbon",
       "sourceDenom": "usc",
       "coinMinimalDenom": "ibc/F64D67581D50AE3F641A344F31FE7CF9DC5A2C8C8C455A6967E36DEA09D563E6",
@@ -47652,6 +47700,57 @@
       ],
       "variantGroupKey": "ibc/3EDD165DA38E407DBDFC693CB57D3F012EB787FF8902A665D2122CDEE3F505AA",
       "name": "liCORE",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "coreum",
+      "sourceDenom": "ucorez-core1astd8pqhs7mslk9rnygy9kzc5s2cqnwftcvmquxr7z9z78szzvzqljlc23",
+      "coinMinimalDenom": "ibc/B7D7AA538008E2A35328820B7B56F014F1AB38205D51BB13D1F84B11D362B9ED",
+      "symbol": "COREZ",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/corez.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/corez.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "coreum",
+            "chainId": "coreum-mainnet-1",
+            "sourceDenom": "ucorez-core1astd8pqhs7mslk9rnygy9kzc5s2cqnwftcvmquxr7z9z78szzvzqljlc23",
+            "port": "transfer",
+            "channelId": "channel-2"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-2188",
+            "path": "transfer/channel-2188/ucorez-core1astd8pqhs7mslk9rnygy9kzc5s2cqnwftcvmquxr7z9z78szzvzqljlc23"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "coreum",
+          "sourceDenom": "ucorez-core1astd8pqhs7mslk9rnygy9kzc5s2cqnwftcvmquxr7z9z78szzvzqljlc23",
+          "chainType": "cosmos",
+          "chainId": "coreum-mainnet-1",
+          "symbol": "COREZ",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/corez.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/corez.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/B7D7AA538008E2A35328820B7B56F014F1AB38205D51BB13D1F84B11D362B9ED",
+      "name": "COREZ",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,
@@ -49199,6 +49298,7 @@
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/nept.png"
       },
+      "coingeckoId": "neptune-2",
       "categories": [],
       "transferMethods": [
         {
@@ -54647,6 +54747,57 @@
       ],
       "variantGroupKey": "ibc/A925B1E3F56700112103152E9E71FF6797D6F472149EE55412578474FDB48778",
       "name": "Boon",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "manifest",
+      "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwr",
+      "coinMinimalDenom": "ibc/78C9FC2412DA11C71FFDDBC3DE03584AF72A50EB5C572EEB31083ACC31AD706A",
+      "symbol": "PWR",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "manifest",
+            "chainId": "manifest-ledger-mainnet",
+            "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwr",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-100418",
+            "path": "transfer/channel-100418/factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwr"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "manifest",
+          "sourceDenom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwr",
+          "chainType": "cosmos",
+          "chainId": "manifest-ledger-mainnet",
+          "symbol": "PWR",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/manifest/images/manifest.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/78C9FC2412DA11C71FFDDBC3DE03584AF72A50EB5C572EEB31083ACC31AD706A",
+      "name": "Manifest Power Token",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

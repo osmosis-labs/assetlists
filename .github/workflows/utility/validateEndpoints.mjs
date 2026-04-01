@@ -375,7 +375,7 @@ const queryCORS = (url) => {
 
   return new Promise((resolve, reject) => {
     const timeout = setTimeout(() => {
-      console.error(`Request to ${url} timed out.`);
+      req.destroy();
       resolve({ success: false, errorCode: 'TIMEOUT', corsPolicy: null });
     }, 5000);
 
@@ -411,7 +411,7 @@ const queryCORS = (url) => {
 const queryREST = (url) => {
   return new Promise((resolve) => {
     const timeout = setTimeout(() => {
-      console.error(`Request to ${url} timed out.`);
+      req.destroy();
       resolve({ success: false, errorCode: null, message: "Request timed out" });
     }, 5000);
 
@@ -455,7 +455,7 @@ const queryREST = (url) => {
 const queryHTTP = (url) => {
   return new Promise((resolve) => {
     const timeout = setTimeout(() => {
-      console.error(`Request to ${url} timed out.`);
+      req.destroy();
       resolve({ success: false, errorCode: null, message: "Request timed out" });
     }, 5000);
 

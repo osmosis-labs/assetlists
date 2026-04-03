@@ -36740,6 +36740,40 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/78C9FC2412DA11C71FFDDBC3DE03584AF72A50EB5C572EEB31083ACC31AD706A",
+          "exponent": 0,
+          "aliases": [
+            "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwr"
+          ]
+        },
+        {
+          "denom": "pwr",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/78C9FC2412DA11C71FFDDBC3DE03584AF72A50EB5C572EEB31083ACC31AD706A",
+      "name": "Manifest Power Token",
+      "display": "pwr",
+      "symbol": "PWR",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "manifest",
+            "base_denom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwr",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-100418",
+            "path": "transfer/channel-100418/factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwr"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
           "exponent": 0,
           "aliases": [
@@ -43888,40 +43922,6 @@
           "chain": {
             "channel_id": "channel-259",
             "path": "transfer/channel-259/factory/kujira1gewwffxhaygxe8tacd3z9h4uyvpd2h7v9qtfmaw8jjhwalxxpd7qlqld4m/boon"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/78C9FC2412DA11C71FFDDBC3DE03584AF72A50EB5C572EEB31083ACC31AD706A",
-          "exponent": 0,
-          "aliases": [
-            "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwr"
-          ]
-        },
-        {
-          "denom": "pwr",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/78C9FC2412DA11C71FFDDBC3DE03584AF72A50EB5C572EEB31083ACC31AD706A",
-      "name": "Manifest Power Token",
-      "display": "pwr",
-      "symbol": "PWR",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "manifest",
-            "base_denom": "factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwr",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-100418",
-            "path": "transfer/channel-100418/factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwr"
           }
         }
       ]

@@ -1,4 +1,4 @@
-Checking IBC client status for 167 unique channels (1179 IBC assets in frontend)...
+Checking IBC client status for 167 unique channels (1182 IBC assets in frontend)...
 
 Checking counterparty client status for 2 channel(s)...
 
@@ -8,9 +8,9 @@ Checking counterparty client status for 2 channel(s)...
   IBC CLIENT HEALTH SUMMARY
 ======================================================================
   Channels checked      : 167
-  Active assets         : 854
-  Already flagged       : 311
-  Newly flagged         : 4
+  Active assets         : 856
+  Already flagged       : 315
+  Newly flagged         : 1
   Flag cleared          : 0
   Entry removed         : 0
   Counterparty skipped  : 9
@@ -18,10 +18,7 @@ Checking counterparty client status for 2 channel(s)...
 ======================================================================
 
 🔴 NEWLY FLAGGED unstable (expired/frozen client):
-  BLZ                  transfer/channel-763/ubnt                     status=Expired  client=07-tendermint-2754
-  ELT                  transfer/channel-763/uelt                     status=Expired  client=07-tendermint-2754 [new entry]
-  G4                   transfer/channel-763/ug4                      status=Expired  client=07-tendermint-2754 [new entry]
-  NIL                  transfer/channel-98416/unil                   status=Expired  client=07-tendermint-3431
+  PWR                  transfer/channel-100418/factory/manifest1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsfmy9qj/upwr status=Expired  client=07-tendermint-3448 [new entry]
 
 🟡 SKIPPED CLEAR (Osmosis active but counterparty unconfirmed):
   ALTER                transfer/channel-476/cw20:secret12rcvz0umvk875kd6a803txhtlu7y0pnd73kcej counterparty=secretnetwork/channel-44 status=unknown
@@ -34,6 +31,6 @@ Checking counterparty client status for 2 channel(s)...
   SHD                  transfer/channel-476/cw20:secret153wu605vvp934xhd4k9dtd640zsep5jkesstdm counterparty=secretnetwork/channel-44 status=unknown
   PUPPY                transfer/channel-11348/cw20:chihuahua1yl8z39ugle8s02fpwkhh293509q5xcpalmdzc4amvchz8nkexrmsy95gef counterparty=chihuahua/channel-73 status=unknown
 
-IBC_NEWLY_FLAGGED=4
+IBC_NEWLY_FLAGGED=1
 IBC_NEWLY_CLEARED=0
 IBC_ERRORS=0

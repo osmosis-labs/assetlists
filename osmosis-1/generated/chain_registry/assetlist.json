@@ -36774,6 +36774,40 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/88DBE57372690630D2DD9779C247479CE124E777C5D695FA90699F3140CEC59F",
+          "exponent": 0,
+          "aliases": [
+            "ulmn"
+          ]
+        },
+        {
+          "denom": "lmn",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/88DBE57372690630D2DD9779C247479CE124E777C5D695FA90699F3140CEC59F",
+      "name": "Lumen",
+      "display": "lmn",
+      "symbol": "LMN",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "lumen",
+            "base_denom": "ulmn",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-109674",
+            "path": "transfer/channel-109674/ulmn"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
           "exponent": 0,
           "aliases": [

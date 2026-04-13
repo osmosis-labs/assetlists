@@ -44753,6 +44753,55 @@
       "preview": false
     },
     {
+      "chainName": "lumen",
+      "sourceDenom": "ulmn",
+      "coinMinimalDenom": "ibc/88DBE57372690630D2DD9779C247479CE124E777C5D695FA90699F3140CEC59F",
+      "symbol": "LMN",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lumen/images/lmn.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "lumen",
+            "chainId": "lumen",
+            "sourceDenom": "ulmn",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-109674",
+            "path": "transfer/channel-109674/ulmn"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "lumen",
+          "sourceDenom": "ulmn",
+          "chainType": "cosmos",
+          "chainId": "lumen",
+          "symbol": "LMN",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lumen/images/lmn.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/88DBE57372690630D2DD9779C247479CE124E777C5D695FA90699F3140CEC59F",
+      "name": "Lumen",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",

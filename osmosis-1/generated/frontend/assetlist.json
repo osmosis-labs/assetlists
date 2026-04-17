@@ -5796,7 +5796,7 @@
       "name": "Oraichain",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
       "disabled": false,
       "preview": false
     },
@@ -24619,7 +24619,7 @@
       "name": "Toncoin (Oraichain Labs TON Bridge)",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
       "disabled": false,
       "preview": false,
       "listingDate": "2024-08-30T00:33:00.000Z"
@@ -28537,7 +28537,7 @@
       "name": "SAM",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
       "disabled": false,
       "preview": false
     },
@@ -44801,6 +44801,106 @@
       "preview": false
     },
     {
+      "chainName": "oraichain",
+      "sourceDenom": "factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/extPEPE",
+      "coinMinimalDenom": "ibc/9253F17BA4C45BBCAC44A9DF23476C7011729A6944A9541B372575204A7C6886",
+      "symbol": "PEPE.orai",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/pepe.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/pepe.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "oraichain",
+            "chainId": "Oraichain",
+            "sourceDenom": "factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/extPEPE",
+            "port": "transfer",
+            "channelId": "channel-13"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-216",
+            "path": "transfer/channel-216/factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/extPEPE"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "oraichain",
+          "sourceDenom": "factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/extPEPE",
+          "chainType": "cosmos",
+          "chainId": "Oraichain",
+          "symbol": "PEPE",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/pepe.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/pepe.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo1nnlxegt0scm9qkzys9c874t0ntapv4epfjy2w49c0xdrp3dr0v4ssmelzx/alloyed/allPEPE",
+      "name": "Pepe",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "oraichain",
+      "sourceDenom": "factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/HMSTR",
+      "coinMinimalDenom": "ibc/615422D3409021B2DE968EA1D75B204D4B46F6ED794362D5727F889CE2BFCE17",
+      "symbol": "HMSTR",
+      "decimals": 9,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ton/images/hmstr.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "oraichain",
+            "chainId": "Oraichain",
+            "sourceDenom": "factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/HMSTR",
+            "port": "transfer",
+            "channelId": "channel-13"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-216",
+            "path": "transfer/channel-216/factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/HMSTR"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "oraichain",
+          "sourceDenom": "factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/HMSTR",
+          "chainType": "cosmos",
+          "chainId": "Oraichain",
+          "symbol": "HMSTR",
+          "decimals": 9,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ton/images/hmstr.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/615422D3409021B2DE968EA1D75B204D4B46F6ED794362D5727F889CE2BFCE17",
+      "name": "HMSTR",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -56088,106 +56188,6 @@
       ],
       "variantGroupKey": "ibc/F49DFB3BC8105C57EE7F17EC2402438825B31212CFDD81681EB87911E934F32C",
       "name": "Nomic",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "oraichain",
-      "sourceDenom": "factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/extPEPE",
-      "coinMinimalDenom": "ibc/9253F17BA4C45BBCAC44A9DF23476C7011729A6944A9541B372575204A7C6886",
-      "symbol": "PEPE.orai",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/pepe.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/pepe.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "oraichain",
-            "chainId": "Oraichain",
-            "sourceDenom": "factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/extPEPE",
-            "port": "transfer",
-            "channelId": "channel-13"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-216",
-            "path": "transfer/channel-216/factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/extPEPE"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "oraichain",
-          "sourceDenom": "factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/extPEPE",
-          "chainType": "cosmos",
-          "chainId": "Oraichain",
-          "symbol": "PEPE",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/pepe.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/pepe.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "factory/osmo1nnlxegt0scm9qkzys9c874t0ntapv4epfjy2w49c0xdrp3dr0v4ssmelzx/alloyed/allPEPE",
-      "name": "Pepe",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "oraichain",
-      "sourceDenom": "factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/HMSTR",
-      "coinMinimalDenom": "ibc/615422D3409021B2DE968EA1D75B204D4B46F6ED794362D5727F889CE2BFCE17",
-      "symbol": "HMSTR",
-      "decimals": 9,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ton/images/hmstr.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "oraichain",
-            "chainId": "Oraichain",
-            "sourceDenom": "factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/HMSTR",
-            "port": "transfer",
-            "channelId": "channel-13"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-216",
-            "path": "transfer/channel-216/factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/HMSTR"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "oraichain",
-          "sourceDenom": "factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/HMSTR",
-          "chainType": "cosmos",
-          "chainId": "Oraichain",
-          "symbol": "HMSTR",
-          "decimals": 9,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ton/images/hmstr.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/615422D3409021B2DE968EA1D75B204D4B46F6ED794362D5727F889CE2BFCE17",
-      "name": "HMSTR",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

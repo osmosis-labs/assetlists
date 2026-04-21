@@ -8,9 +8,9 @@ Checking counterparty client status for 2 channel(s)...
   IBC CLIENT HEALTH SUMMARY
 ======================================================================
   Channels checked      : 168
-  Active assets         : 851
-  Already flagged       : 317
-  Newly flagged         : 5
+  Active assets         : 849
+  Already flagged       : 322
+  Newly flagged         : 2
   Flag cleared          : 0
   Entry removed         : 0
   Counterparty skipped  : 9
@@ -18,11 +18,8 @@ Checking counterparty client status for 2 channel(s)...
 ======================================================================
 
 🔴 NEWLY FLAGGED unstable (expired/frozen client):
-  ORAI                 transfer/channel-216/orai                     status=Expired  client=07-tendermint-1882
-  TON.orai             transfer/channel-216/factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/ton status=Expired  client=07-tendermint-1882
-  SAM                  transfer/channel-216/factory/orai15rmny3cxv33rnzdr2lfdhjtslyzmrr0vdd28kp/SAM status=Expired  client=07-tendermint-1882
-  PEPE.orai            transfer/channel-216/factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/extPEPE status=Expired  client=07-tendermint-1882 [new entry]
-  HMSTR                transfer/channel-216/factory/orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9/HMSTR status=Expired  client=07-tendermint-1882 [new entry]
+  MILK                 transfer/channel-89298/umilk                  status=Expired  client=07-tendermint-3364
+  milkBABY             transfer/channel-89298/factory/milk1qg5ega6dykkxc307y25pecuufrjkxkaggkkxh7nad0vhyhtuhw3ssgcye4/umilkBBN status=Expired  client=07-tendermint-3364
 
 🟡 SKIPPED CLEAR (Osmosis active but counterparty unconfirmed):
   ALTER                transfer/channel-476/cw20:secret12rcvz0umvk875kd6a803txhtlu7y0pnd73kcej counterparty=secretnetwork/channel-44 status=unknown
@@ -35,6 +32,6 @@ Checking counterparty client status for 2 channel(s)...
   SHD                  transfer/channel-476/cw20:secret153wu605vvp934xhd4k9dtd640zsep5jkesstdm counterparty=secretnetwork/channel-44 status=unknown
   PUPPY                transfer/channel-11348/cw20:chihuahua1yl8z39ugle8s02fpwkhh293509q5xcpalmdzc4amvchz8nkexrmsy95gef counterparty=chihuahua/channel-73 status=unknown
 
-IBC_NEWLY_FLAGGED=5
+IBC_NEWLY_FLAGGED=2
 IBC_NEWLY_CLEARED=0
 IBC_ERRORS=0

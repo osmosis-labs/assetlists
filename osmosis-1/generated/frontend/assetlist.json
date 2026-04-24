@@ -5708,7 +5708,7 @@
       "name": "Crescent",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
       "disabled": false,
       "preview": false
     },
@@ -44901,6 +44901,57 @@
       "preview": false
     },
     {
+      "chainName": "crescent",
+      "sourceDenom": "ubcre",
+      "coinMinimalDenom": "ibc/61365041DAC5A57B92D60A3EBEB5143E209F86CECDBDD7326A6E7F8351352119",
+      "symbol": "bCRE",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/crescent/images/bcre.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/crescent/images/bcre.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "crescent",
+            "chainId": "crescent-1",
+            "sourceDenom": "ubcre",
+            "port": "transfer",
+            "channelId": "channel-9"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-297",
+            "path": "transfer/channel-297/ubcre"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "crescent",
+          "sourceDenom": "ubcre",
+          "chainType": "cosmos",
+          "chainId": "crescent-1",
+          "symbol": "bCRE",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/crescent/images/bcre.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/crescent/images/bcre.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/61365041DAC5A57B92D60A3EBEB5143E209F86CECDBDD7326A6E7F8351352119",
+      "name": "Bonded Crescent",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -47950,57 +48001,6 @@
       ],
       "variantGroupKey": "ibc/B7D7AA538008E2A35328820B7B56F014F1AB38205D51BB13D1F84B11D362B9ED",
       "name": "COREZ",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "crescent",
-      "sourceDenom": "ubcre",
-      "coinMinimalDenom": "ibc/61365041DAC5A57B92D60A3EBEB5143E209F86CECDBDD7326A6E7F8351352119",
-      "symbol": "bCRE",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/crescent/images/bcre.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/crescent/images/bcre.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "crescent",
-            "chainId": "crescent-1",
-            "sourceDenom": "ubcre",
-            "port": "transfer",
-            "channelId": "channel-9"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-297",
-            "path": "transfer/channel-297/ubcre"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "crescent",
-          "sourceDenom": "ubcre",
-          "chainType": "cosmos",
-          "chainId": "crescent-1",
-          "symbol": "bCRE",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/crescent/images/bcre.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/crescent/images/bcre.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/61365041DAC5A57B92D60A3EBEB5143E209F86CECDBDD7326A6E7F8351352119",
-      "name": "Bonded Crescent",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

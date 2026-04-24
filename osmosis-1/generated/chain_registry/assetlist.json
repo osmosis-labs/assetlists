@@ -36876,6 +36876,40 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/61365041DAC5A57B92D60A3EBEB5143E209F86CECDBDD7326A6E7F8351352119",
+          "exponent": 0,
+          "aliases": [
+            "ubcre"
+          ]
+        },
+        {
+          "denom": "bcre",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/61365041DAC5A57B92D60A3EBEB5143E209F86CECDBDD7326A6E7F8351352119",
+      "name": "Bonded Crescent",
+      "display": "bcre",
+      "symbol": "bCRE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "crescent",
+            "base_denom": "ubcre",
+            "channel_id": "channel-9"
+          },
+          "chain": {
+            "channel_id": "channel-297",
+            "path": "transfer/channel-297/ubcre"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
           "exponent": 0,
           "aliases": [
@@ -39024,40 +39058,6 @@
           "chain": {
             "channel_id": "channel-2188",
             "path": "transfer/channel-2188/ucorez-core1astd8pqhs7mslk9rnygy9kzc5s2cqnwftcvmquxr7z9z78szzvzqljlc23"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/61365041DAC5A57B92D60A3EBEB5143E209F86CECDBDD7326A6E7F8351352119",
-          "exponent": 0,
-          "aliases": [
-            "ubcre"
-          ]
-        },
-        {
-          "denom": "bcre",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/61365041DAC5A57B92D60A3EBEB5143E209F86CECDBDD7326A6E7F8351352119",
-      "name": "Bonded Crescent",
-      "display": "bcre",
-      "symbol": "bCRE",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "crescent",
-            "base_denom": "ubcre",
-            "channel_id": "channel-9"
-          },
-          "chain": {
-            "channel_id": "channel-297",
-            "path": "transfer/channel-297/ubcre"
           }
         }
       ]

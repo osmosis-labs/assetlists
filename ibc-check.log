@@ -1,6 +1,6 @@
 Checking IBC client status for 168 unique channels (1183 IBC assets in frontend)...
 
-Checking counterparty client status for 2 channel(s)...
+Checking counterparty client status for 4 channel(s)...
 
 ✓ Updated ../../../osmosis-1/osmosis.zone_assets.json
 
@@ -8,18 +8,18 @@ Checking counterparty client status for 2 channel(s)...
   IBC CLIENT HEALTH SUMMARY
 ======================================================================
   Channels checked      : 168
-  Active assets         : 847
+  Active assets         : 849
   Already flagged       : 324
-  Newly flagged         : 2
-  Flag cleared          : 0
+  Newly flagged         : 0
+  Flag cleared          : 2
   Entry removed         : 0
   Counterparty skipped  : 9
   Errors                : 0
 ======================================================================
 
-🔴 NEWLY FLAGGED unstable (expired/frozen client):
-  CRE                  transfer/channel-297/ucre                     status=Expired  client=07-tendermint-2083
-  bCRE                 transfer/channel-297/ubcre                    status=Expired  client=07-tendermint-2083 [new entry]
+🟢 FLAG CLEARED (both sides active, entry kept):
+  MNTL                 transfer/channel-232/umntl                    client=07-tendermint-1923
+  XRP.xrplevm          transfer/channel-104325/axrp                  client=07-tendermint-3499
 
 🟡 SKIPPED CLEAR (Osmosis active but counterparty unconfirmed):
   ALTER                transfer/channel-476/cw20:secret12rcvz0umvk875kd6a803txhtlu7y0pnd73kcej counterparty=secretnetwork/channel-44 status=unknown
@@ -32,6 +32,6 @@ Checking counterparty client status for 2 channel(s)...
   SHD                  transfer/channel-476/cw20:secret153wu605vvp934xhd4k9dtd640zsep5jkesstdm counterparty=secretnetwork/channel-44 status=unknown
   PUPPY                transfer/channel-11348/cw20:chihuahua1yl8z39ugle8s02fpwkhh293509q5xcpalmdzc4amvchz8nkexrmsy95gef counterparty=chihuahua/channel-73 status=unknown
 
-IBC_NEWLY_FLAGGED=2
-IBC_NEWLY_CLEARED=0
+IBC_NEWLY_FLAGGED=0
+IBC_NEWLY_CLEARED=2
 IBC_ERRORS=0

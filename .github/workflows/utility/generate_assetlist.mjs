@@ -139,8 +139,25 @@ async function getAssetsFromChainRegistry(localChainName, asset_datas) {
     //assets.forEach((asset) => {
 
       //get asset type
-      const typeAsset = asset.type_asset;
-      if (typeAsset !== "sdk.coin" && typeAsset !== "cw20") return;
+      //Accept all type_asset values defined in the chain-registry assetlist guide
+      //(https://github.com/cosmos/chain-registry/blob/master/_guides/assetlist.md)
+      //that can be IBC-transferred from a Cosmos chain. cw20 uses a dedicated
+      //channel; ics20 is already an IBC-wrapped token and is skipped here to
+      //avoid double-wrapping.
+      const typeAsset = asset.type_asset ?? "sdk.coin";
+      const supportedTypeAssets = new Set([
+        "sdk.coin",
+        "cw20",
+        "evm-base",
+        "erc20",
+        "snip20",
+        "snip25",
+        "bitcoin-like",
+        "svm-base",
+        "substrate",
+        "unknown",
+      ]);
+      if (!supportedTypeAssets.has(typeAsset)) return;
 
       //set base_denom
       const baseDenom = asset.base;
@@ -202,8 +219,21 @@ async function getLocalChainAssetsFromChainRegistry(localChainName, asset_datas)
 
   await asyncForEach(assets, async (asset) => {
 
-    const typeAsset = asset.type_asset;
-    if (typeAsset !== "sdk.coin") return;
+    //Accept all native chain-asset types from the chain-registry guide.
+    //Skip ics20 (already-IBC'd) and cw20 (handled via the dedicated cw20 path).
+    const typeAsset = asset.type_asset ?? "sdk.coin";
+    const supportedLocalTypeAssets = new Set([
+      "sdk.coin",
+      "evm-base",
+      "erc20",
+      "snip20",
+      "snip25",
+      "bitcoin-like",
+      "svm-base",
+      "substrate",
+      "unknown",
+    ]);
+    if (!supportedLocalTypeAssets.has(typeAsset)) return;
 
     const baseDenom = asset.base;
 

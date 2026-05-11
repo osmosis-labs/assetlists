@@ -39061,6 +39061,40 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/EFAAE3AD05AA79647A1587E363A11B6126CC83C8C0593171BB1892A39EB550DF",
+          "exponent": 0,
+          "aliases": [
+            "factory/cosmos1wdja2gcsesyl07raq9jm3rcvu0sse5zkev0h8m/Nether"
+          ]
+        },
+        {
+          "denom": "nthr",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/EFAAE3AD05AA79647A1587E363A11B6126CC83C8C0593171BB1892A39EB550DF",
+      "name": "Nether",
+      "display": "nthr",
+      "symbol": "NTHR",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "cosmoshub",
+            "base_denom": "factory/cosmos1wdja2gcsesyl07raq9jm3rcvu0sse5zkev0h8m/Nether",
+            "channel_id": "channel-141"
+          },
+          "chain": {
+            "channel_id": "channel-0",
+            "path": "transfer/channel-0/factory/cosmos1wdja2gcsesyl07raq9jm3rcvu0sse5zkev0h8m/Nether"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/04DDB3C027A5C06F499684FF02E80744CABC705ECF015460F52AE6E280006180",
           "exponent": 0,
           "aliases": [
@@ -45112,6 +45146,42 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/29651CA364AA857248A912B1DEC17EF8AC320728C616FB635338CFE965E18BE3",
+          "exponent": 0,
+          "aliases": [
+            "attoqie",
+            "aqie"
+          ]
+        },
+        {
+          "denom": "qie",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/29651CA364AA857248A912B1DEC17EF8AC320728C616FB635338CFE965E18BE3",
+      "name": "QIE",
+      "display": "qie",
+      "symbol": "QIE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "qie",
+            "base_denom": "aqie",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-109956",
+            "path": "transfer/channel-109956/aqie"
+          }
+        }
+      ],
+      "coingecko_id": "qie"
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/F82E97B58F45D32AE2199AE8AD9979FFD35CDC823BB3EB34C36349E374A8EFE3",
           "exponent": 0,
           "aliases": [
@@ -45139,6 +45209,405 @@
           "chain": {
             "channel_id": "channel-1424",
             "path": "transfer/channel-1424/arst"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/AD9E794272640D387E6C3F7FC61580EF4F8CB4A5CDBEE6CEC7C2B8B90590E07D",
+          "exponent": 0,
+          "aliases": [
+            "cw20:secret1rgm2m5t530tdzyd99775n6vzumxa5luxcllml4"
+          ]
+        },
+        {
+          "denom": "sienna",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/AD9E794272640D387E6C3F7FC61580EF4F8CB4A5CDBEE6CEC7C2B8B90590E07D",
+      "name": "SIENNA",
+      "display": "sienna",
+      "symbol": "SIENNA",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret1rgm2m5t530tdzyd99775n6vzumxa5luxcllml4",
+            "port": "transfer",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-88",
+            "path": "transfer/channel-88/cw20:secret1rgm2m5t530tdzyd99775n6vzumxa5luxcllml4"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/FDBA3732918159C746C95154BDB1367A24DD7A8BD88A39DC443104981302D666",
+          "exponent": 0,
+          "aliases": [
+            "cw20:secret1qfql357amn448duf5gvp9gr48sxx9tsnhupu3d"
+          ]
+        },
+        {
+          "denom": "shd",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/FDBA3732918159C746C95154BDB1367A24DD7A8BD88A39DC443104981302D666",
+      "name": "Shade (old)",
+      "display": "shd",
+      "symbol": "SHD.old",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret1qfql357amn448duf5gvp9gr48sxx9tsnhupu3d",
+            "port": "transfer",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-88",
+            "path": "transfer/channel-88/cw20:secret1qfql357amn448duf5gvp9gr48sxx9tsnhupu3d"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/DC09FD47934DCFBAF3FA3C5993055E69D487E13CAB972151945FC2761E2D812B",
+          "exponent": 0,
+          "aliases": [
+            "cw20:secret153wu605vvp934xhd4k9dtd640zsep5jkesstdm"
+          ]
+        },
+        {
+          "denom": "shd",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/DC09FD47934DCFBAF3FA3C5993055E69D487E13CAB972151945FC2761E2D812B",
+      "name": "Shade",
+      "display": "shd",
+      "symbol": "SHD",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret153wu605vvp934xhd4k9dtd640zsep5jkesstdm",
+            "port": "transfer",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-88",
+            "path": "transfer/channel-88/cw20:secret153wu605vvp934xhd4k9dtd640zsep5jkesstdm"
+          }
+        }
+      ],
+      "coingecko_id": "shade-protocol"
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/031438C3ACCF2B7A25170863C48D549EA3F5B9AD9515C1D4BD01431BBCA1694A",
+          "exponent": 0,
+          "aliases": [
+            "cw20:secret1fl449muk5yq8dlad7a22nje4p5d2pnsgymhjfd"
+          ]
+        },
+        {
+          "denom": "silk",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/031438C3ACCF2B7A25170863C48D549EA3F5B9AD9515C1D4BD01431BBCA1694A",
+      "name": "Silk",
+      "display": "silk",
+      "symbol": "SILK",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret1fl449muk5yq8dlad7a22nje4p5d2pnsgymhjfd",
+            "port": "transfer",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-88",
+            "path": "transfer/channel-88/cw20:secret1fl449muk5yq8dlad7a22nje4p5d2pnsgymhjfd"
+          }
+        }
+      ],
+      "coingecko_id": "silk-bcec1136-561c-4706-a42c-8b67d0d7f7d2"
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/2588D627A415828F8A0D7712C75E9E723DB10FC83A4D3BD29AB48E06E2EB2A25",
+          "exponent": 0,
+          "aliases": [
+            "cw20:secret1apxywjp2h8vet54xzyfc96htlt9qqgrh7gawhw"
+          ]
+        },
+        {
+          "denom": "dsilk",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/2588D627A415828F8A0D7712C75E9E723DB10FC83A4D3BD29AB48E06E2EB2A25",
+      "name": "dSilk",
+      "display": "dsilk",
+      "symbol": "dSILK",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret1apxywjp2h8vet54xzyfc96htlt9qqgrh7gawhw",
+            "port": "transfer",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-88",
+            "path": "transfer/channel-88/cw20:secret1apxywjp2h8vet54xzyfc96htlt9qqgrh7gawhw"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/D4F0AB35A9EDF3D91BCCECE4CBB9FD8CE40764AE47512107F9615EE52A3D81E7",
+          "exponent": 0,
+          "aliases": [
+            "cw20:secret1lqt2u3ntzrkjev8z5m6ennu4n3zl3trx67ck82"
+          ]
+        },
+        {
+          "denom": "xsilk",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/D4F0AB35A9EDF3D91BCCECE4CBB9FD8CE40764AE47512107F9615EE52A3D81E7",
+      "name": "xSilk",
+      "display": "xsilk",
+      "symbol": "xSILK",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret1lqt2u3ntzrkjev8z5m6ennu4n3zl3trx67ck82",
+            "port": "transfer",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-88",
+            "path": "transfer/channel-88/cw20:secret1lqt2u3ntzrkjev8z5m6ennu4n3zl3trx67ck82"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/8217C0F5620D3474ADAD3B9A1990A6FD37B496DCD73C31E61FBF543DE533E092",
+          "exponent": 0,
+          "aliases": [
+            "cw20:secret1k6u0cy4feepm6pehnz804zmwakuwdapm69tuc4"
+          ]
+        },
+        {
+          "denom": "stkd-scrt",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/8217C0F5620D3474ADAD3B9A1990A6FD37B496DCD73C31E61FBF543DE533E092",
+      "name": "SCRT Staking Derivatives",
+      "display": "stkd-scrt",
+      "symbol": "stkd-SCRT",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret1k6u0cy4feepm6pehnz804zmwakuwdapm69tuc4",
+            "port": "transfer",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-88",
+            "path": "transfer/channel-88/cw20:secret1k6u0cy4feepm6pehnz804zmwakuwdapm69tuc4"
+          }
+        }
+      ],
+      "coingecko_id": "stkd-scrt"
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/498962FFC2E6AB140346FE00D7E0DFDDCD2F8CFC961F9E7D47D0AFA8D17CF3A6",
+          "exponent": 0,
+          "aliases": [
+            "cw20:secret1yxcexylwyxlq58umhgsjgstgcg2a0ytfy4d9lt"
+          ]
+        },
+        {
+          "denom": "butt",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/498962FFC2E6AB140346FE00D7E0DFDDCD2F8CFC961F9E7D47D0AFA8D17CF3A6",
+      "name": "Button",
+      "display": "butt",
+      "symbol": "BUTT",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret1yxcexylwyxlq58umhgsjgstgcg2a0ytfy4d9lt",
+            "port": "transfer",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-88",
+            "path": "transfer/channel-88/cw20:secret1yxcexylwyxlq58umhgsjgstgcg2a0ytfy4d9lt"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/4EF01BEF4AF708BD04A80370D0DCEAAB84DD5E3578AB358FA5658B8A1DF001CC",
+          "exponent": 0,
+          "aliases": [
+            "cw20:secret12rcvz0umvk875kd6a803txhtlu7y0pnd73kcej"
+          ]
+        },
+        {
+          "denom": "alter",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/4EF01BEF4AF708BD04A80370D0DCEAAB84DD5E3578AB358FA5658B8A1DF001CC",
+      "name": "Alter",
+      "display": "alter",
+      "symbol": "ALTER",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret12rcvz0umvk875kd6a803txhtlu7y0pnd73kcej",
+            "port": "transfer",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-88",
+            "path": "transfer/channel-88/cw20:secret12rcvz0umvk875kd6a803txhtlu7y0pnd73kcej"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/6749D6C59A1D7C8E017D88C60D0A9EA5AE48F75CA7171875B77F2B5208AB6968",
+          "exponent": 0,
+          "aliases": [
+            "cw20:secret1s09x2xvfd2lp2skgzm29w2xtena7s8fq98v852"
+          ]
+        },
+        {
+          "denom": "amber",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/6749D6C59A1D7C8E017D88C60D0A9EA5AE48F75CA7171875B77F2B5208AB6968",
+      "name": "Amber",
+      "display": "amber",
+      "symbol": "AMBER",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret1s09x2xvfd2lp2skgzm29w2xtena7s8fq98v852",
+            "port": "transfer",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-88",
+            "path": "transfer/channel-88/cw20:secret1s09x2xvfd2lp2skgzm29w2xtena7s8fq98v852"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/DD01AD4DF51C85D5255DC61A70B42482E21A1E91A6B2D5365E16D9738875D4C1",
+          "exponent": 0,
+          "aliases": [
+            "cw20:secret197dvnt9yjxwn8sjdlx05f7zuk27lsdxtfnwxse"
+          ]
+        },
+        {
+          "denom": "shill",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/DD01AD4DF51C85D5255DC61A70B42482E21A1E91A6B2D5365E16D9738875D4C1",
+      "name": "Shill",
+      "display": "shill",
+      "symbol": "SHILL",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "secretnetwork",
+            "base_denom": "cw20:secret197dvnt9yjxwn8sjdlx05f7zuk27lsdxtfnwxse",
+            "port": "transfer",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-88",
+            "path": "transfer/channel-88/cw20:secret197dvnt9yjxwn8sjdlx05f7zuk27lsdxtfnwxse"
           }
         }
       ]

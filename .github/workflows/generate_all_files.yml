@@ -1,14 +1,13 @@
 # Description: Bundle workflow that runs the complete asset generation pipeline
 # Includes: Endpoint validation, assetlist generation, chainlist generation,
 #           state updates, comment generation, and localization
-# Schedule: Runs every Tuesday and Friday at 15:00 UTC
+# Schedule: Runs daily at 15:00 UTC
 # Trigger: Manual via workflow_dispatch or scheduled cron
 # Output: Creates PR with all generated files to branch 'update/assetlist_all'
 
 on:
   schedule:
-    - cron: "0 15 * * 2"    # Every Tuesday 15:00 UTC
-    - cron: "0 15 * * 5"    # Every Friday 15:00 UTC
+    - cron: "0 15 * * *"    # Every day at 15:00 UTC
   workflow_dispatch:
 
 name: Generate All Files
@@ -282,6 +281,8 @@ jobs:
 
       - name: Enable Auto-merge
         if: steps.cpr.outputs.pull-request-number && github.event_name == 'schedule'
-        run: gh pr merge ${{ steps.cpr.outputs.pull-request-number }} --auto --squash
+        run: |
+          PR=${{ steps.cpr.outputs.pull-request-number }}
+          gh pr merge "$PR" --auto --squash || gh pr merge "$PR" --squash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

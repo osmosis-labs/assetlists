@@ -14,7 +14,7 @@ The generated files power the Osmosis Zone interface, providing wallet integrati
 
 ## Prerequisite: Chain Registry Registration
 
-**The Cosmos Chain Registry is the source of truth for all asset metadata.** Assets registered in Chain Registry with IBC connections to Osmosis are automatically detected and added to `osmosis.zone_assets.json` during scheduled workflow runs (twice weekly), making them visible on Osmosis Zone.
+**The Cosmos Chain Registry is the source of truth for all asset metadata.** Assets registered in Chain Registry with IBC connections to Osmosis are automatically detected and added to `osmosis.zone_assets.json` during scheduled workflow runs (daily), making them visible on Osmosis Zone.
 
 ### Submission Workflow
 
@@ -25,7 +25,7 @@ The generated files power the Osmosis Zone interface, providing wallet integrati
 
 2. **Wait for Chain Registry PR to be merged** - Once your PR is approved and merged into Chain Registry
 
-3. **Automatic Detection and Listing** - Automated runs in this repo occur twice weekly (Tuesdays and Fridays at 15:00 UTC) and will:
+3. **Automatic Detection and Listing** - Automated runs in this repo occur daily (15:00 UTC) and will:
    - Pull latest Chain Registry data
    - Automatically detect new assets with IBC connections to Osmosis
    - Automatically add detected assets to `osmosis.zone_assets.json`
@@ -39,7 +39,7 @@ The generated files power the Osmosis Zone interface, providing wallet integrati
    - Configure custom transfer methods or property overrides
    - Override display properties from Chain Registry
 
-**Important:** All asset metadata (images, descriptions, social links, etc.) comes from Chain Registry. To update asset information, submit PRs to Chain Registry, not this repository. Changes will be automatically picked up during the next automated run (twice weekly).
+**Important:** All asset metadata (images, descriptions, social links, etc.) comes from Chain Registry. To update asset information, submit PRs to Chain Registry, not this repository. Changes will be automatically picked up during the next automated run (daily).
 
 ## Repository Structure
 
@@ -81,7 +81,7 @@ osmo-test-5/                  # Testnet configuration
 
 **How Assets Are Added to `osmosis.zone_assets.json`:**
 
-1. **Automatically by Workflow** - Assets with IBC connections to Osmosis are automatically detected from Chain Registry and added to `osmosis.zone_assets.json` during scheduled runs (twice weekly).
+1. **Automatically by Workflow** - Assets with IBC connections to Osmosis are automatically detected from Chain Registry and added to `osmosis.zone_assets.json` during scheduled runs (daily).
 
 2. **Manually for Additional Configuration** - You can manually add or edit entries in `osmosis.zone_assets.json` to configure:
    - Asset categories (`"defi"`, `"meme"`, etc.)
@@ -433,7 +433,7 @@ External services that provide data TO this repository:
 
 This repository uses GitHub Actions workflows to automatically generate and validate files:
 
-**Scheduled Generation** (Twice weekly: Tuesdays and Fridays at 15:00 UTC):
+**Scheduled Generation** (Daily at 15:00 UTC):
 The `Generate All Files` bundle workflow runs automatically and includes:
 - Updates the chain-registry submodule to the latest version
 - Adds chain stubs to `osmosis.zone_chains.json` for any newly detected chains
@@ -446,10 +446,9 @@ The `Generate All Files` bundle workflow runs automatically and includes:
   - Clears `osmosis_unstable` only when **both** the Osmosis-side and counterparty-side clients are confirmed Active
   - Removes auto-added minimal entries entirely when they recover (entries with no other meaningful fields)
   - Runs before assetlist generation so the generated frontend output reflects correct flags in the same run
-- Validates RPC/REST endpoints (priority-based selection: 10 of ~180 chains per run)
-  - Prioritizes: Failed chains (1 day requery delay) → Never-validated chains → Oldest-validated chains (7 day requery delay)
+- Validates RPC/REST endpoints for all chains (full validation, batched 10 at a time)
   - Tracks validation results in `state/state.json` for endpoint optimization
-  - Full validation available via manual `Full Endpoint Validation` workflow
+  - Reorders endpoints based on health (working backups promoted, failed endpoints deprioritized)
 - Generates assetlist files in multiple formats
 - Generates chainlist files with wallet integration metadata
 - Updates asset state
@@ -481,7 +480,7 @@ Individual generation workflows can be triggered manually via GitHub Actions:
 5. **Auto-Generation**: Generated files are automatically updated on the next scheduled run or manual trigger
 
 **For Automated Generation Runs:**
-1. **Scheduled Run**: Workflow executes twice weekly (Tuesdays and Fridays at 15:00 UTC)
+1. **Scheduled Run**: Workflow executes daily at 15:00 UTC
 2. **Generation**: Creates updated assetlist/chainlist files
 3. **PR Creation**: Automatically creates a PR to the `update/assetlist_all` branch with all generated changes
 4. **Validation**: All validation checks must pass
@@ -492,7 +491,7 @@ Individual generation workflows can be triggered manually via GitHub Actions:
 Changes to generated files are automatically deployed to the Osmosis Zone frontend via Vercel:
 
 **Deployment Schedule:**
-- **Scheduled**: Every Tuesday and Friday at 15:30 UTC (30 minutes after generation workflow completes)
+- **Scheduled**: Every day at 15:30 UTC (30 minutes after generation workflow completes)
 - **Manual**: Can be triggered manually via GitHub Actions workflow dispatch
 - **Fallback**: Push to main (won't trigger with auto-merge due to GITHUB_TOKEN limitation)
 
@@ -501,7 +500,7 @@ Changes to generated files are automatically deployed to the Osmosis Zone fronte
 - `osmo-test-5/generated/frontend/assetlist.json` and `chainlist.json` (testnet)
 
 **Deployment Flow:**
-1. Generation workflow completes at 15:00 UTC (Tue/Fri) and auto-merges to `main`
+1. Generation workflow completes at 15:00 UTC (daily) and auto-merges to `main`
 2. 30 minutes later (15:30 UTC), deployment workflow runs on schedule
 3. Workflow checks if monitored files were modified in the last 2 hours
 4. **If files unchanged**: Deployment is skipped (no unnecessary Vercel builds)

@@ -282,6 +282,8 @@ jobs:
 
       - name: Enable Auto-merge
         if: steps.cpr.outputs.pull-request-number && github.event_name == 'schedule'
-        run: gh pr merge ${{ steps.cpr.outputs.pull-request-number }} --auto --squash
+        run: |
+          PR=${{ steps.cpr.outputs.pull-request-number }}
+          gh pr merge "$PR" --auto --squash || gh pr merge "$PR" --squash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

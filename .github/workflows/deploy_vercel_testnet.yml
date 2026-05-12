@@ -1,14 +1,13 @@
 # Description: Triggers Vercel deployment webhook for testnet
 # Included in: NOT included in Generate All Files bundle (deployment only)
-# Trigger: Scheduled 30 min after generation workflow (Tue/Fri 15:30 UTC) + manual trigger + push to main
+# Trigger: Scheduled 30 min after generation workflow (daily 15:30 UTC) + manual trigger + push to main
 # Note: Push trigger kept as fallback, but won't work with auto-merge due to GITHUB_TOKEN limitation
 # Output: Deploys to Vercel testnet environment via webhook
 
 name: Osmosis Front-End Deployment (Testnet)
 on:
   schedule:
-    - cron: "30 15 * * 2"    # Every Tuesday at 15:30 UTC (30 min after generation)
-    - cron: "30 15 * * 5"    # Every Friday at 15:30 UTC (30 min after generation)
+    - cron: "30 15 * * *"    # Every day at 15:30 UTC (30 min after generation)
   workflow_dispatch:  # Allow manual trigger
   push:
     branches:

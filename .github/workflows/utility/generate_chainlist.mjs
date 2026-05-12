@@ -334,8 +334,14 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   if (!rpc) return false;
 
   // -- Get Explorer Tx URL with override support --
+  // Chain Registry uses tx_page (snake_case). Prefer an explorer whose tx_page
+  // contains the {txHash} template (matches the zone schema's required pattern);
+  // fall back to the first explorer that has any tx_page at all.
   let explorers = chain_reg.getFileProperty(chain.chain_name, "chain", "explorers");
-  let explorer = zoneChain.override_properties?.explorer_tx_url || zoneChain.explorer_tx_url || explorers?.[0]?.txPage;
+  let registryExplorerTxPage =
+    explorers?.find((e) => e?.tx_page?.includes("{txHash}"))?.tx_page ||
+    explorers?.find((e) => e?.tx_page)?.tx_page;
+  let explorer = zoneChain.override_properties?.explorer_tx_url || zoneChain.explorer_tx_url || registryExplorerTxPage;
   if (!explorer) return false;
 
   // -- By this point, we have the minimum required data to be able to suggest the chain --

@@ -36944,6 +36944,40 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/7E577151E593349028AAC4A9FCC33258D70749FDF3CBB48F7744262DD18FC89D",
+          "exponent": 0,
+          "aliases": [
+            "uamts"
+          ]
+        },
+        {
+          "denom": "amts",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/7E577151E593349028AAC4A9FCC33258D70749FDF3CBB48F7744262DD18FC89D",
+      "name": "Amitis Network",
+      "display": "amts",
+      "symbol": "AMTS",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "amitis",
+            "base_denom": "uamts",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-110089",
+            "path": "transfer/channel-110089/uamts"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/6C0CB8653012DC2BC1820FD0B6B3AFF8A07D18630BDAEE066FEFB2D92F477C24",
           "exponent": 0,
           "aliases": [
@@ -38986,8 +39020,7 @@
             "path": "transfer/channel-2188/usara-core1r9gc0rnxnzpq33u82f44aufgdwvyxv4wyepyck98m9v2pxua6naqr8h03z"
           }
         }
-      ],
-      "coingecko_id": "pulsara"
+      ]
     },
     {
       "denom_units": [

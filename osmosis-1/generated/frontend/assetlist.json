@@ -1104,7 +1104,7 @@
       "name": "Evmos",
       "isAlloyed": false,
       "verified": true,
-      "unstable": true,
+      "unstable": false,
       "disabled": false,
       "preview": false
     },
@@ -13162,7 +13162,7 @@
       "name": "Neokingdom DAO",
       "isAlloyed": false,
       "verified": false,
-      "unstable": true,
+      "unstable": false,
       "disabled": false,
       "preview": false
     },
@@ -16392,7 +16392,7 @@
       "name": "Teledisko DAO - Legacy",
       "isAlloyed": false,
       "verified": false,
-      "unstable": true,
+      "unstable": false,
       "disabled": false,
       "preview": false
     },
@@ -18054,7 +18054,7 @@
       "name": "Crowdpunk DAO",
       "isAlloyed": false,
       "verified": false,
-      "unstable": true,
+      "unstable": false,
       "disabled": false,
       "preview": false
     },
@@ -41462,6 +41462,55 @@
       "preview": false
     },
     {
+      "chainName": "amitis",
+      "sourceDenom": "uamts",
+      "coinMinimalDenom": "ibc/7E577151E593349028AAC4A9FCC33258D70749FDF3CBB48F7744262DD18FC89D",
+      "symbol": "AMTS",
+      "decimals": 6,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/amitis/images/amts.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "amitis",
+            "chainId": "amitis-network",
+            "sourceDenom": "uamts",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-110089",
+            "path": "transfer/channel-110089/uamts"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "amitis",
+          "sourceDenom": "uamts",
+          "chainType": "cosmos",
+          "chainId": "amitis-network",
+          "symbol": "AMTS",
+          "decimals": 6,
+          "logoURIs": {
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/amitis/images/amts.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/7E577151E593349028AAC4A9FCC33258D70749FDF3CBB48F7744262DD18FC89D",
+      "name": "Amitis Network",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "axelar",
       "sourceDenom": "axs-wei",
       "coinMinimalDenom": "ibc/6C0CB8653012DC2BC1820FD0B6B3AFF8A07D18630BDAEE066FEFB2D92F477C24",
@@ -44321,7 +44370,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/sara.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/sara.svg"
       },
-      "coingeckoId": "pulsara",
       "categories": [],
       "transferMethods": [
         {

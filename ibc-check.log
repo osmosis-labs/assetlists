@@ -1,27 +1,29 @@
-Checking IBC client status for 169 unique channels (1196 IBC assets in frontend)...
+Checking IBC client status for 169 unique channels (994 IBC assets in frontend)...
 
 Checking counterparty client status for 3 channel(s)...
 
-No changes needed.
+✓ Updated ../../../osmosis-1/osmosis.zone_assets.json
 
 ======================================================================
   IBC CLIENT HEALTH SUMMARY
 ======================================================================
   Channels checked      : 169
-  Active assets         : 833
-  Already flagged       : 349
+  Active assets         : 838
+  Already flagged       : 146
   Newly flagged         : 0
-  Flag cleared          : 0
+  Flag cleared          : 4
   Entry removed         : 0
-  Counterparty skipped  : 13
+  Counterparty skipped  : 9
   Errors                : 0
 ======================================================================
 
+🟢 FLAG CLEARED (both sides active, entry kept):
+  EVMOS                transfer/channel-204/aevmos                   client=07-tendermint-1840
+  NEOK                 transfer/channel-204/erc20/0x655ecB57432CC1370f65e5dc2309588b71b473A9 client=07-tendermint-1840
+  BERLIN-legacy        transfer/channel-204/erc20/0x1cFc8f1FE8D5668BAFF2724547EcDbd6f013a280 client=07-tendermint-1840
+  CROWDP               transfer/channel-204/erc20/0xfbF4318d24a93753F11d365A6dcF8b830e98Ab0F client=07-tendermint-1840
+
 🟡 SKIPPED CLEAR (Osmosis active but counterparty unconfirmed):
-  EVMOS                transfer/channel-204/aevmos                   counterparty=evmos/channel-0 status=unknown
-  NEOK                 transfer/channel-204/erc20/0x655ecB57432CC1370f65e5dc2309588b71b473A9 counterparty=evmos/channel-0 status=unknown
-  BERLIN-legacy        transfer/channel-204/erc20/0x1cFc8f1FE8D5668BAFF2724547EcDbd6f013a280 counterparty=evmos/channel-0 status=unknown
-  CROWDP               transfer/channel-204/erc20/0xfbF4318d24a93753F11d365A6dcF8b830e98Ab0F counterparty=evmos/channel-0 status=unknown
   ALTER                transfer/channel-476/cw20:secret12rcvz0umvk875kd6a803txhtlu7y0pnd73kcej counterparty=secretnetwork/channel-44 status=unknown
   BUTT                 transfer/channel-476/cw20:secret1yxcexylwyxlq58umhgsjgstgcg2a0ytfy4d9lt counterparty=secretnetwork/channel-44 status=unknown
   SHD.old              transfer/channel-476/cw20:secret1qfql357amn448duf5gvp9gr48sxx9tsnhupu3d counterparty=secretnetwork/channel-44 status=unknown
@@ -33,5 +35,5 @@ No changes needed.
   PUPPY                transfer/channel-11348/cw20:chihuahua1yl8z39ugle8s02fpwkhh293509q5xcpalmdzc4amvchz8nkexrmsy95gef counterparty=chihuahua/channel-73 status=unknown
 
 IBC_NEWLY_FLAGGED=0
-IBC_NEWLY_CLEARED=0
+IBC_NEWLY_CLEARED=4
 IBC_ERRORS=0

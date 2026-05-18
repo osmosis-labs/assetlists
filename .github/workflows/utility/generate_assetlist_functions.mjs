@@ -1229,12 +1229,23 @@ export function setVerifiedStatus(asset_data) {
 export function setUnstableStatus(asset_data) {
 
   asset_data.frontend.unstable = asset_data.zone_asset?.osmosis_unstable;
+  asset_data.frontend.unstableReason = asset_data.zone_asset?.osmosis_unstable_reason;
 
 }
 
 export function setDisabledStatus(asset_data) {
 
   asset_data.frontend.disabled = asset_data.zone_asset?.osmosis_disabled;
+
+}
+
+export function setHaltStatus(asset_data) {
+
+  asset_data.frontend.haltDeposits = asset_data.zone_asset?.osmosis_halt_deposits;
+  asset_data.frontend.depositHaltReason = asset_data.zone_asset?.osmosis_deposit_halt_reason;
+  asset_data.frontend.haltWithdrawals = asset_data.zone_asset?.osmosis_halt_withdrawals;
+  asset_data.frontend.withdrawalHaltReason = asset_data.zone_asset?.osmosis_withdrawal_halt_reason;
+  asset_data.frontend.plannedShutdownDate = asset_data.zone_asset?.planned_shutdown_date;
 
 }
 
@@ -1866,13 +1877,37 @@ export function reformatFrontendAssetFromAssetData(asset_data) {
     contract: asset_data.frontend.contract,
     verified: asset_data.frontend.verified ?? false,
     unstable: asset_data.frontend.unstable ?? false,
+    unstableReason: asset_data.frontend.unstableReason,
     disabled: asset_data.frontend.disabled ?? false,
+    haltDeposits: asset_data.frontend.haltDeposits,
+    depositHaltReason: asset_data.frontend.depositHaltReason,
+    haltWithdrawals: asset_data.frontend.haltWithdrawals,
+    withdrawalHaltReason: asset_data.frontend.withdrawalHaltReason,
+    plannedShutdownDate: asset_data.frontend.plannedShutdownDate,
+    lastDowntimeDate: asset_data.frontend.lastDowntimeDate,
+    lastRecoveryDate: asset_data.frontend.lastRecoveryDate,
     preview: asset_data.frontend.preview ?? false,
     tooltipMessage: asset_data.frontend.tooltipMessage,
     sortWith: asset_data.frontend.sortWith,
     listingDate: asset_data.frontend.listingDate,
     //relatedAssets: asset_data.frontend.relatedAssets,
   };
+
+  // Drop optional fields that are undefined or falsy so they don't appear
+  // as null/false placeholders in the output JSON. The frontend defaults
+  // each of these to false/undefined when absent.
+  for (const k of [
+    "unstableReason",
+    "haltDeposits",
+    "depositHaltReason",
+    "haltWithdrawals",
+    "withdrawalHaltReason",
+    "plannedShutdownDate",
+    "lastDowntimeDate",
+    "lastRecoveryDate",
+  ]) {
+    if (!reformattedAsset[k]) delete reformattedAsset[k];
+  }
 
   if (isNaN(asset_data.frontend.listingDate?.getTime())) {
     // Remove listing_date if it's null
@@ -1907,7 +1942,15 @@ export function reformatFrontendAsset(asset) {
     contract: asset.contract,
     verified: asset.verified ?? false,
     unstable: asset.unstable ?? false,
+    unstableReason: asset.unstableReason,
     disabled: asset.disabled ?? false,
+    haltDeposits: asset.haltDeposits,
+    depositHaltReason: asset.depositHaltReason,
+    haltWithdrawals: asset.haltWithdrawals,
+    withdrawalHaltReason: asset.withdrawalHaltReason,
+    plannedShutdownDate: asset.plannedShutdownDate,
+    lastDowntimeDate: asset.lastDowntimeDate,
+    lastRecoveryDate: asset.lastRecoveryDate,
     preview: asset.preview ?? false,
     tooltipMessage: asset.tooltipMessage,
     sortWith: asset.sortWith,

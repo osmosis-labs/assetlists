@@ -46,8 +46,29 @@ const stateLocations = [
 ];
 const stateAssetProperties = [
   "listingDate",
-  "legacyAsset"
+  "legacyAsset",
+  // New lifecycle fields (see "Graceful Shutdown of Asset Listings" plan).
+  // All ISO UTC strings unless noted.
+  "lastDowntimeDate",       // anchors the 60/90-day lifecycle clock
+  "lastRecoveryDate",       // when the bridge/market last recovered
+  "marketHealthStreak",     // consecutive failing market-check runs (numeric)
+  "marketHealthRecoveryStreak", // consecutive passing runs while currently unstable
+  "lastUnverifyProposedAt"  // last time check_unverify_candidates opened a PR
 ];
+
+/**
+ * Bidirectional-sync helper: copy a set of state-managed dates onto the
+ * generated assetlist asset so the frontend can read them.
+ * Mirrors the existing setAssetListingDate pattern.
+ */
+function syncStateFieldsToAssetlist(stateAsset, assetlistAsset) {
+  if (stateAsset.lastDowntimeDate) {
+    assetlistAsset.lastDowntimeDate = stateAsset.lastDowntimeDate;
+  }
+  if (stateAsset.lastRecoveryDate) {
+    assetlistAsset.lastRecoveryDate = stateAsset.lastRecoveryDate;
+  }
+}
 
 const currentDateUTC = new Date().toISOString();
 
@@ -143,7 +164,7 @@ function setAssetListingDate(stateAsset, assetlistAsset) {
  * getStateAsset("ibc/NEW...", state)
  * // Returns: { base_denom: "ibc/NEW..." } (newly created, added to state.assets)
  */
-function getStateAsset(base_denom, state) {
+export function getStateAsset(base_denom, state) {
   let stateAsset = state.assets?.find(stateAsset => stateAsset.base_denom === base_denom);
   if (!stateAsset) {
     stateAsset = {
@@ -227,19 +248,21 @@ const generateState = (chainName, assetlist) => {
 
     let stateAsset;
 
-    //see if it's verified, and skip if not
+    //see if it's verified, and skip listing-date logic if not
     if (assetlistAsset.verified) {
-
-      //get the state asset
       stateAsset = getStateAsset(assetlistAsset.coinMinimalDenom, state);
-
-      // Property 1: Get the listing Date
       setAssetListingDate(stateAsset, assetlistAsset);
+    }
 
-
-      // Property 2: anything else...
-
-
+    // Sync lifecycle fields (downtime/recovery dates) onto the assetlist for
+    // both verified and unverified assets, since the frontend banner needs them
+    // even on unverified entries that crossed the 90-day threshold and got
+    // unverified but still carry historical context.
+    const existingState = state.assets?.find(
+      s => s.base_denom === assetlistAsset.coinMinimalDenom
+    );
+    if (existingState) {
+      syncStateFieldsToAssetlist(existingState, assetlistAsset);
     }
 
   }

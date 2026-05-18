@@ -49,6 +49,16 @@ jobs:
           echo "IBC_NEWLY_CLEARED=$(grep -oP 'IBC_NEWLY_CLEARED=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
           echo "IBC_ERRORS=$(grep -oP 'IBC_ERRORS=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
 
+      - name: Check Market Health (independent unstable track)
+        working-directory: ./.github/workflows/utility
+        run: |
+          node check_market_health.mjs osmosis-1 2>&1 | tee ../../../market-health.log || true
+
+      - name: Check Extended Halts (60d + planned shutdown)
+        working-directory: ./.github/workflows/utility
+        run: |
+          node check_extended_halts.mjs osmosis-1 2>&1 | tee ../../../extended-halts.log || true
+
       - name: Add Chain Stubs
         working-directory: ./.github/workflows/utility
         run: node add_chain_stubs.mjs osmosis-1
@@ -254,6 +264,40 @@ jobs:
             grep -A 100 'IBC CLIENT HEALTH SUMMARY' ibc-check.log | head -60 >> workflow-summary.md || true
             echo '```' >> workflow-summary.md
             echo "</details>" >> workflow-summary.md
+          fi
+
+          echo "" >> workflow-summary.md
+          echo "---" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+
+          # Manual halts currently in effect (visibility for drift detection)
+          echo "## Manual halts currently in effect" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+
+          MANUAL_HALTS=$(jq -r '
+            .assets
+            | map(select(
+                (.osmosis_deposit_halt_reason == "manual")
+                or (.osmosis_withdrawal_halt_reason == "manual")
+              ))
+          ' osmosis-1/osmosis.zone_assets.json)
+          MANUAL_HALT_COUNT=$(echo "$MANUAL_HALTS" | jq 'length')
+
+          if [ "$MANUAL_HALT_COUNT" -eq 0 ]; then
+            echo "_None._" >> workflow-summary.md
+          else
+            echo "| Chain | Base denom | Direction | Tooltip |" >> workflow-summary.md
+            echo "|-------|-----------|-----------|---------|" >> workflow-summary.md
+            echo "$MANUAL_HALTS" | jq -r '
+              .[] | (
+                (if .osmosis_deposit_halt_reason == "manual" then
+                   "| \(.chain_name) | \(.base_denom) | deposit | \(.tooltip_message // "") |"
+                 else "" end),
+                (if .osmosis_withdrawal_halt_reason == "manual" then
+                   "| \(.chain_name) | \(.base_denom) | withdrawal | \(.tooltip_message // "") |"
+                 else "" end)
+              ) | select(. != "")
+            ' >> workflow-summary.md
           fi
 
           echo "" >> workflow-summary.md

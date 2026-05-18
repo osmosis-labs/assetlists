@@ -102,16 +102,16 @@ async function main() {
   // compute its coinMinimalDenom via the same IBC hash the generator uses.
   // This lets us iterate the canonical key even when an asset is missing
   // from the frontend (killed-chain case).
-  const frontendBySymbol = new Map();
+  const frontendByDenom = new Map();
   for (const asset of frontendData.assets ?? []) {
-    frontendBySymbol.set(asset.coinMinimalDenom, asset);
+    frontendByDenom.set(asset.coinMinimalDenom, asset);
   }
 
   const evaluations = [];
   for (const za of zoneData.assets) {
     if (!za.path) continue; // skip non-IBC entries; they aren't bridged
     const coinMinimalDenom = await calculateIbcHash(za.path);
-    const feAsset = frontendBySymbol.get(coinMinimalDenom);
+    const feAsset = frontendByDenom.get(coinMinimalDenom);
     evaluations.push({
       coinMinimalDenom,
       chainName: za.chain_name,

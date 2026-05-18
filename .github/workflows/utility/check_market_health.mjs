@@ -113,12 +113,6 @@ async function main() {
   const frontendData = loadJSON(frontendPath);
   const state = loadJSON(statePath, { assets: [] });
 
-  // Index frontend by coinMinimalDenom; that's our join key.
-  const frontendByDenom = new Map();
-  for (const asset of frontendData.assets ?? []) {
-    frontendByDenom.set(asset.coinMinimalDenom, asset);
-  }
-
   // Index zone by (chain_name, base_denom), the canonical join into zone_assets.
   // Each zone_asset's coinMinimalDenom is computed during generate; we'll match
   // via the frontend's existing coinMinimalDenom -> zone_asset chain_name+base_denom join.

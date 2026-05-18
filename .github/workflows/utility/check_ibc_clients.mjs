@@ -253,7 +253,16 @@ function loadState() {
   }
 }
 
-function getOrCreateStateAsset(state, baseDenom) {
+// Read-only state lookup. Returns undefined if no entry exists; callers that
+// only need to read date/streak fields should use this so we don't pollute
+// state.assets with empty {base_denom} placeholders on every iteration.
+function findStateAsset(state, baseDenom) {
+  return state.assets?.find((a) => a.base_denom === baseDenom);
+}
+
+// Create-if-missing variant. Only callers about to write a real value
+// (lastDowntimeDate, lastRecoveryDate, etc.) should use this.
+function materialiseStateAsset(state, baseDenom) {
   if (!state.assets) state.assets = [];
   let s = state.assets.find((a) => a.base_denom === baseDenom);
   if (!s) {
@@ -331,9 +340,9 @@ async function main() {
   const state = loadState();
 
   // Snapshot the pre-run shape so we only write files that actually changed.
-  // getOrCreateStateAsset's create-on-miss behaviour can otherwise grow
-  // state.json with empty {base_denom} records every run, producing a dirty
-  // working tree even when no real lifecycle decision happened.
+  // Combined with the findStateAsset / materialiseStateAsset split below,
+  // this guarantees state.json is only rewritten when a real lifecycle
+  // decision happened (not just an iteration).
   const zoneBefore = JSON.stringify(zoneData);
   const stateBefore = JSON.stringify(state);
 
@@ -458,7 +467,9 @@ async function main() {
       const haltReasonOnDown = chainKilled ? 'source_chain_killed' : 'bridge_down';
 
       let zoneAsset = zoneByPath.get(fa.ibcPath);
-      const stateAsset = getOrCreateStateAsset(state, fa.coinMinimalDenom);
+      // Read-only lookup: never creates an empty placeholder. Calls that
+      // need to write to state must materialise the entry explicitly.
+      const stateAsset = findStateAsset(state, fa.coinMinimalDenom);
 
       if (bridgeDown) {
         // ── Bridge-down ────────────────────────────────────────────────────
@@ -501,7 +512,10 @@ async function main() {
 
         // state.lastDowntimeDate via flap-vs-fresh rule
         if (zoneAsset.osmosis_unstable === true) {
-          applyDowntimeDateRule(stateAsset, nowIso);
+          applyDowntimeDateRule(
+            stateAsset ?? materialiseStateAsset(state, fa.coinMinimalDenom),
+            nowIso
+          );
         }
 
         if (JSON.stringify(before) !== JSON.stringify(zoneAsset)) {
@@ -531,7 +545,7 @@ async function main() {
         if (cleared) {
           // Record recovery. Keep osmosis_unstable populated so the 90-day
           // window stays armed via the persistent lastDowntimeDate.
-          stateAsset.lastRecoveryDate = nowIso;
+          materialiseStateAsset(state, fa.coinMinimalDenom).lastRecoveryDate = nowIso;
 
           // If the resulting entry is a thin auto-added one, remove it entirely.
           if (isThinEntry(zoneAsset)) {
@@ -545,8 +559,8 @@ async function main() {
       } else {
         // Unconfirmed (e.g. counterparty status unknown, source chain status unknown).
         // Manual-flip safety net: if marked unstable without a downtime date, populate one.
-        if (zoneAsset?.osmosis_unstable === true && !stateAsset.lastDowntimeDate) {
-          stateAsset.lastDowntimeDate = nowIso;
+        if (zoneAsset?.osmosis_unstable === true && !stateAsset?.lastDowntimeDate) {
+          materialiseStateAsset(state, fa.coinMinimalDenom).lastDowntimeDate = nowIso;
           mutations.push({ kind: 'safety_net', fa });
         }
       }
@@ -572,9 +586,9 @@ async function main() {
     if (visitedPaths.has(za.path)) continue;
 
     const coinMinimalDenom = await calculateIbcHash(za.path);
-    const stateAsset = getOrCreateStateAsset(state, coinMinimalDenom);
-    if (!stateAsset.lastDowntimeDate) {
-      stateAsset.lastDowntimeDate = nowIso;
+    const stateAsset = findStateAsset(state, coinMinimalDenom);
+    if (!stateAsset?.lastDowntimeDate) {
+      materialiseStateAsset(state, coinMinimalDenom).lastDowntimeDate = nowIso;
       mutations.push({
         kind: 'safety_net',
         fa: {

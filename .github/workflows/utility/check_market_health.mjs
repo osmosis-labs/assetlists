@@ -85,7 +85,16 @@ function loadJSON(p, fallback) {
   }
 }
 
-function getStateAsset(state, baseDenom) {
+// Read-only state lookup. Returns undefined if no entry exists; callers that
+// only need to read date/streak fields should use this so we don't pollute
+// state.assets with empty {base_denom} placeholders on every iteration.
+function findStateAsset(state, baseDenom) {
+  return state.assets?.find((a) => a.base_denom === baseDenom);
+}
+
+// Create-if-missing variant. Only callers about to write a real value should
+// use this.
+function materialiseStateAsset(state, baseDenom) {
   if (!state.assets) state.assets = [];
   let s = state.assets.find((a) => a.base_denom === baseDenom);
   if (!s) {
@@ -103,8 +112,10 @@ function isAlloyed(asset) {
 }
 
 function isPostGrace(stateAsset, nowMs) {
-  const listingDate = stateAsset.listingDate ?? (stateAsset.legacyAsset ? LEGACY_LISTING_DATE : null);
-  if (!listingDate) return true; // unknown → behave post-grace (conservative)
+  // stateAsset may be undefined for assets that have never been tracked yet.
+  // No listing date known → behave post-grace (conservative).
+  const listingDate = stateAsset?.listingDate ?? (stateAsset?.legacyAsset ? LEGACY_LISTING_DATE : null);
+  if (!listingDate) return true;
   return nowMs - new Date(listingDate).getTime() >= GRACE_MS;
 }
 
@@ -114,9 +125,9 @@ async function main() {
   const state = loadJSON(statePath, { assets: [] });
 
   // Snapshot the pre-run shape so we only write files that actually changed.
-  // getStateAsset's create-on-miss behaviour can otherwise grow state.json
-  // with empty {base_denom} records every run, producing a dirty working tree
-  // even when no real lifecycle decision happened.
+  // Combined with the findStateAsset / materialiseStateAsset split below,
+  // this guarantees state.json is only rewritten when a real lifecycle
+  // decision happened (not just an iteration).
   const zoneBefore = JSON.stringify(zoneData);
   const stateBefore = JSON.stringify(state);
 
@@ -144,7 +155,15 @@ async function main() {
     const zoneAsset = zoneByOrigin.get(zoneKey);
     if (!zoneAsset) continue;
 
-    const stateAsset = getStateAsset(state, asset.coinMinimalDenom);
+    // Read-only lookup; never creates a placeholder. We only materialise the
+    // entry on the exact lines that write to it, so state.json doesn't drift
+    // every run.
+    let stateAsset = findStateAsset(state, asset.coinMinimalDenom);
+    const writeState = () => {
+      if (!stateAsset) stateAsset = materialiseStateAsset(state, asset.coinMinimalDenom);
+      return stateAsset;
+    };
+
     const market = numia.get(asset.coinMinimalDenom);
     const marketMissing = !market;
     const failing =
@@ -166,8 +185,8 @@ async function main() {
       // check_ibc_clients's canModifyUnstable().
       if (zoneAsset.tooltip_message) continue;
       if (failing) {
-        const streak = (stateAsset.marketHealthStreak ?? 0) + 1;
-        stateAsset.marketHealthStreak = streak;
+        const streak = (stateAsset?.marketHealthStreak ?? 0) + 1;
+        writeState().marketHealthStreak = streak;
         if (streak >= REQUIRED_CONSECUTIVE_RUNS) {
           zoneAsset.osmosis_unstable = true;
           zoneAsset.osmosis_unstable_reason = 'market';
@@ -179,7 +198,7 @@ async function main() {
           mutations.push({ kind: 'streak_increment', asset: asset.symbol, streak });
         }
       } else if (passing) {
-        if (stateAsset.marketHealthStreak) {
+        if (stateAsset?.marketHealthStreak) {
           stateAsset.marketHealthStreak = 0;
           mutations.push({ kind: 'streak_reset', asset: asset.symbol });
         }
@@ -187,8 +206,8 @@ async function main() {
     } else if (zoneAsset.osmosis_unstable_reason === 'market') {
       // ── Currently market-unstable: track recovery ──
       if (passing) {
-        const rstreak = (stateAsset.marketHealthRecoveryStreak ?? 0) + 1;
-        stateAsset.marketHealthRecoveryStreak = rstreak;
+        const rstreak = (stateAsset?.marketHealthRecoveryStreak ?? 0) + 1;
+        writeState().marketHealthRecoveryStreak = rstreak;
 
         // 1-day clear of extended-market-driven halt
         if (
@@ -206,8 +225,8 @@ async function main() {
         }
 
         // Full recovery clears osmosis_unstable. Guarded by reason==='market'
-        // (above, line 186) AND tooltip_message empty here, mirroring the
-        // setting-path curator-lock contract.
+        // (above) AND tooltip_message empty here, mirroring the setting-path
+        // curator-lock contract.
         if (
           rstreak >= RECOVERY_RUNS_TO_CLEAR_UNSTABLE &&
           !zoneAsset.tooltip_message
@@ -221,7 +240,7 @@ async function main() {
           mutations.push({ kind: 'market_recovered', asset: asset.symbol, chain: asset.chainName });
         }
       } else if (failing) {
-        if (stateAsset.marketHealthRecoveryStreak) {
+        if (stateAsset?.marketHealthRecoveryStreak) {
           stateAsset.marketHealthRecoveryStreak = 0;
           mutations.push({ kind: 'recovery_reset', asset: asset.symbol });
         }

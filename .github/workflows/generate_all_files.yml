@@ -44,7 +44,16 @@ jobs:
       - name: Check IBC Client Status
         working-directory: ./.github/workflows/utility
         run: |
+          set +e
           node check_ibc_clients.mjs osmosis-1 2>&1 | tee ../../../ibc-check.log
+          rc=${PIPESTATUS[0]}
+          if [ "$rc" -eq 2 ]; then
+            # Mutation cap hit: not a failure, but flag it so the workflow
+            # summary surfaces the event for human follow-up.
+            echo "IBC_CAP_HIT=true" >> $GITHUB_ENV
+          elif [ "$rc" -ne 0 ]; then
+            exit $rc
+          fi
           echo "IBC_NEWLY_FLAGGED=$(grep -oP 'IBC_NEWLY_FLAGGED=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
           echo "IBC_NEWLY_CLEARED=$(grep -oP 'IBC_NEWLY_CLEARED=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
           echo "IBC_ERRORS=$(grep -oP 'IBC_ERRORS=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
@@ -52,12 +61,26 @@ jobs:
       - name: Check Market Health (independent unstable track)
         working-directory: ./.github/workflows/utility
         run: |
+          set +e
           node check_market_health.mjs osmosis-1 2>&1 | tee ../../../market-health.log
+          rc=${PIPESTATUS[0]}
+          if [ "$rc" -eq 2 ]; then
+            echo "MARKET_HEALTH_CAP_HIT=true" >> $GITHUB_ENV
+          elif [ "$rc" -ne 0 ]; then
+            exit $rc
+          fi
 
       - name: Check Extended Halts (60d + planned shutdown)
         working-directory: ./.github/workflows/utility
         run: |
+          set +e
           node check_extended_halts.mjs osmosis-1 2>&1 | tee ../../../extended-halts.log
+          rc=${PIPESTATUS[0]}
+          if [ "$rc" -eq 2 ]; then
+            echo "EXTENDED_HALTS_CAP_HIT=true" >> $GITHUB_ENV
+          elif [ "$rc" -ne 0 ]; then
+            exit $rc
+          fi
 
       - name: Add Chain Stubs
         working-directory: ./.github/workflows/utility
@@ -247,6 +270,41 @@ jobs:
           echo "" >> workflow-summary.md
           echo "---" >> workflow-summary.md
           echo "" >> workflow-summary.md
+
+          # Mutation cap hits: surface loudly if any lifecycle script exited
+          # with code 2 (cap exceeded). The script's intended mutations were
+          # not applied; an operator needs to inspect and decide whether to
+          # re-run locally with --force.
+          if [ "$IBC_CAP_HIT" = "true" ] || [ "$MARKET_HEALTH_CAP_HIT" = "true" ] || [ "$EXTENDED_HALTS_CAP_HIT" = "true" ]; then
+            echo "## ⚠️ Mutation cap hit" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            echo "One or more lifecycle scripts exited with code 2 because their" >> workflow-summary.md
+            echo "intended diff would touch more than 10 distinct source chains" >> workflow-summary.md
+            echo "in a single run. No mutations from the affected script(s) were" >> workflow-summary.md
+            echo "applied this run. Inspect the logs and re-run locally with" >> workflow-summary.md
+            echo "\`--force\` if the diff is legitimate." >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            if [ "$IBC_CAP_HIT" = "true" ]; then
+              echo "- 🛑 \`check_ibc_clients\` cap exceeded" >> workflow-summary.md
+            fi
+            if [ "$MARKET_HEALTH_CAP_HIT" = "true" ]; then
+              echo "- 🛑 \`check_market_health\` cap exceeded" >> workflow-summary.md
+            fi
+            if [ "$EXTENDED_HALTS_CAP_HIT" = "true" ]; then
+              echo "- 🛑 \`check_extended_halts\` cap exceeded" >> workflow-summary.md
+            fi
+            echo "" >> workflow-summary.md
+            echo "To inspect and apply the diff locally:" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            echo '```bash' >> workflow-summary.md
+            echo "cd .github/workflows/utility" >> workflow-summary.md
+            echo "node <script-name>.mjs osmosis-1 --dry-run    # review" >> workflow-summary.md
+            echo "node <script-name>.mjs osmosis-1 --force      # apply" >> workflow-summary.md
+            echo '```' >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            echo "---" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+          fi
 
           # IBC Client Health
           echo "## IBC Client Health" >> workflow-summary.md

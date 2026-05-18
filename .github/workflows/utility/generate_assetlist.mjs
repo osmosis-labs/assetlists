@@ -343,6 +343,7 @@ const generateAssets = async (
     assetlist.setVerifiedStatus(asset_data);
     assetlist.setUnstableStatus(asset_data);
     assetlist.setDisabledStatus(asset_data);
+    assetlist.setHaltStatus(asset_data);
     assetlist.setPreviewStatus(asset_data);
     assetlist.setPrice(asset_data, pool_data);
     assetlist.setListingDate(asset_data);

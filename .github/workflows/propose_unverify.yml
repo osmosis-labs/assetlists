@@ -53,7 +53,7 @@ jobs:
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore(unverify): weekly unverify candidate sweep"
+          commit-message: "chore(unverify): unverify candidate sweep"
           branch: auto-unverify/weekly-candidates
           title: "chore(unverify): assets exceeded 90-day unstable threshold"
           body-path: osmosis-1/generated/reports/unverify_candidates_pr_body.md

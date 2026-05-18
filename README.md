@@ -135,7 +135,7 @@ Four orthogonal states describe an asset's transfer health. Each has a distinct 
   - **Companion field**: `osmosis_deposit_halt_reason` drives the localised banner.
 
 - **`osmosis_deposit_halt_reason`** (enum: `"bridge_down" | "extended_unstable_market" | "planned_shutdown" | "source_chain_killed" | "manual"`).
-  - **Owners**: `bridge_down` and `source_chain_killed` are owned by `check_ibc_clients.mjs`. `extended_unstable_market` is owned by `check_market_health.mjs` and `check_extended_halts.mjs`. `planned_shutdown` is owned by `check_extended_halts.mjs`. `manual` is curator-only.
+  - **Owners**: `bridge_down` and `source_chain_killed` are owned by `check_ibc_clients.mjs`. `extended_unstable_market` is owned by `check_extended_halts.mjs` (which sets the flag and clears it on the 1-day recovery branch). `check_market_health.mjs` may also clear an `extended_unstable_market` halt as part of its market-recovery flow, but never sets it. `planned_shutdown` is owned by `check_extended_halts.mjs`. `manual` is curator-only.
 
 - **`osmosis_halt_withdrawals`** (boolean, default: `false`). Kill switch for the **withdraw** direction.
   - **Frontend output**: `haltWithdrawals: true`

@@ -2,7 +2,7 @@
 //   Bi-weekly check (1st & 15th of each month, 16:00 UTC) for assets continuously
 //   unstable for 90+ days. For each such asset, propose flipping
 //   osmosis_verified=false via a single PR. 30-day cooldown via
-//   state.lastUnverifyProposedAt prevents weekly re-proposal.
+//   state.lastUnverifyProposedAt prevents re-proposal within 30 days.
 //
 //   The script:
 //     1. Computes candidates.
@@ -164,7 +164,7 @@ async function main() {
 
   if (candidates.length === 0) {
     console.log('No candidates; nothing to propose.');
-    // Intentionally skip writing the PR body file. The weekly workflow gates
+    // Intentionally skip writing the PR body file. The bi-weekly workflow gates
     // PR creation on the file's existence, so suppressing it here keeps the
     // workflow silent on quiet weeks (no empty "0 candidates" PR noise).
     return;

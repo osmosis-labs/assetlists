@@ -44,17 +44,21 @@ const stateDir = path.join(zone.generatedDirectoryName, stateDirName);
 const stateLocations = [
   "assets"
 ];
-const stateAssetProperties = [
-  "listingDate",
-  "legacyAsset",
-  // New lifecycle fields (see "Graceful Shutdown of Asset Listings" plan).
-  // All ISO UTC strings unless noted.
-  "lastDowntimeDate",       // anchors the 60/90-day lifecycle clock
-  "lastRecoveryDate",       // when the bridge/market last recovered
-  "marketHealthStreak",     // consecutive failing market-check runs (numeric)
-  "marketHealthRecoveryStreak", // consecutive passing runs while currently unstable
-  "lastUnverifyProposedAt"  // last time check_unverify_candidates opened a PR
-];
+/**
+ * Documentation only. Fields tracked on each state.assets[] entry:
+ *
+ *   listingDate                   ISO UTC; existing, date asset was first verified
+ *   legacyAsset                   existing, true if verified before state tracking
+ *
+ *   lastDowntimeDate              ISO UTC; anchors the 60/90-day lifecycle clock
+ *   lastRecoveryDate              ISO UTC; when the bridge/market last recovered
+ *   marketHealthStreak            numeric; consecutive failing market-check runs
+ *   marketHealthRecoveryStreak    numeric; consecutive passing runs while unstable
+ *   lastUnverifyProposedAt        ISO UTC; last time check_unverify_candidates opened a PR
+ *
+ * Indexed by base_denom (which is coinMinimalDenom on Osmosis, e.g. uosmo or ibc/...).
+ * See "Graceful Shutdown of Asset Listings" plan for the lifecycle contract.
+ */
 
 /**
  * Bidirectional-sync helper: copy a set of state-managed dates onto the

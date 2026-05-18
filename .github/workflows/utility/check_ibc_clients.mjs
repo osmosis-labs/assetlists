@@ -27,6 +27,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
+import { calculateIbcHash } from './assetlist_functions.mjs';
 
 const LCD = "https://lcd.osmosis.zone";
 const CONCURRENCY = 5;
@@ -550,29 +551,32 @@ async function main() {
   // their transferMethods during generation, never appear in the channel walk.
   // For these, apply the manual-flip safety net so curators get a populated
   // lastDowntimeDate (anchoring the 90-day clock) even without channel data.
-  const visitedDenoms = new Set();
+  //
+  // State entries are keyed by coinMinimalDenom (matching update_assetlist_state.mjs
+  // and every other lifecycle script). For IBC assets we compute that hash from
+  // the path, since the frontend assetlist has no entry for these.
+  const visitedPaths = new Set();
   for (const cm of channelMap.values()) {
-    for (const fa of cm.assets) visitedDenoms.add(fa.coinMinimalDenom);
+    for (const fa of cm.assets) visitedPaths.add(fa.ibcPath);
   }
   for (const za of zoneData.assets) {
     if (za.osmosis_unstable !== true) continue;
-    // Build the same coinMinimalDenom the frontend uses. For IBC assets the
-    // path encodes it via an IBC hash, but we'd need the generator's
-    // computation. As a pragmatic shortcut, skip if the frontend already
-    // produced an entry for this zone_asset (visited above).
-    const fePath = za.path;
-    const fa = fePath ? [...channelMap.values()]
-      .flatMap((cm) => cm.assets)
-      .find((a) => a.ibcPath === fePath) : null;
-    if (fa) continue; // already visited
-    // No frontend match. Populate state.lastDowntimeDate by base_denom, which
-    // matches the state-indexing convention.
-    const stateAsset = getOrCreateStateAsset(state, za.base_denom);
+    if (!za.path) continue; // non-IBC entries are not handled here
+    if (visitedPaths.has(za.path)) continue;
+
+    const coinMinimalDenom = await calculateIbcHash(za.path);
+    const stateAsset = getOrCreateStateAsset(state, coinMinimalDenom);
     if (!stateAsset.lastDowntimeDate) {
       stateAsset.lastDowntimeDate = nowIso;
       mutations.push({
         kind: 'safety_net',
-        fa: { chainName: za.chain_name, symbol: za._comment ?? za.base_denom, ibcPath: za.path ?? '?', sourceDenom: za.base_denom },
+        fa: {
+          chainName: za.chain_name,
+          symbol: za._comment ?? za.base_denom,
+          ibcPath: za.path,
+          sourceDenom: za.base_denom,
+          coinMinimalDenom,
+        },
       });
     }
   }

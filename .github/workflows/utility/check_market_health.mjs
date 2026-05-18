@@ -146,6 +146,10 @@ async function main() {
     if (!zoneAsset.osmosis_unstable) {
       // ── Not currently unstable: count failing-streak toward flagging ──
       if (!isPostGrace(stateAsset, nowMs)) continue;
+      // Curator lock: any non-empty tooltip_message blocks the flagging path,
+      // matching the contract used by the recovery path below and by
+      // check_ibc_clients's canModifyUnstable().
+      if (zoneAsset.tooltip_message) continue;
       if (failing) {
         const streak = (stateAsset.marketHealthStreak ?? 0) + 1;
         stateAsset.marketHealthStreak = streak;

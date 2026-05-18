@@ -97,10 +97,14 @@ async function main() {
     );
 
     // ── Trigger A: extended unstable + failing market ───────────────────────
+    // Curator lock: any non-empty tooltip_message blocks automation. Same
+    // contract as the clearing path below and check_ibc_clients's
+    // canModifyHalt().
     if (
       zoneAsset.osmosis_unstable === true &&
       stateAsset?.lastDowntimeDate &&
-      zoneAsset.osmosis_halt_deposits !== true
+      zoneAsset.osmosis_halt_deposits !== true &&
+      !zoneAsset.tooltip_message
     ) {
       const downtimeMs = nowMs - new Date(stateAsset.lastDowntimeDate).getTime();
       if (downtimeMs >= SIXTY_DAYS_MS) {
@@ -145,10 +149,13 @@ async function main() {
     }
 
     // ── Trigger B: planned shutdown approaching ─────────────────────────────
+    // Curator lock honoured: non-empty tooltip_message blocks the set path,
+    // matching the contract used elsewhere.
     const plannedDate = zoneAsset.planned_shutdown_date;
     if (
       plannedDate &&
-      zoneAsset.osmosis_halt_deposits !== true
+      zoneAsset.osmosis_halt_deposits !== true &&
+      !zoneAsset.tooltip_message
     ) {
       const untilMs = new Date(plannedDate).getTime() - nowMs;
       if (untilMs >= 0 && untilMs <= SHUTDOWN_WINDOW_MS) {

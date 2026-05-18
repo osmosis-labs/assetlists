@@ -147,6 +147,14 @@ async function main() {
     );
   }
 
+  if (candidates.length === 0) {
+    console.log('No candidates; nothing to propose.');
+    // Intentionally skip writing the PR body file. The weekly workflow gates
+    // PR creation on the file's existence, so suppressing it here keeps the
+    // workflow silent on quiet weeks (no empty "0 candidates" PR noise).
+    return;
+  }
+
   fs.mkdirSync(reportsDir, { recursive: true });
   const reportPath = path.join(reportsDir, 'unverify_candidates_pr_body.md');
   fs.writeFileSync(reportPath, prBodyLines.join('\n') + '\n', 'utf8');
@@ -154,11 +162,6 @@ async function main() {
   console.log(`\n📝 PR body: ${reportPath} (${candidates.length} candidates)`);
 
   if (dryRun || !propose) {
-    return;
-  }
-
-  if (candidates.length === 0) {
-    console.log('No candidates; nothing to propose.');
     return;
   }
 

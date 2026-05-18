@@ -330,6 +330,13 @@ async function main() {
 
   const state = loadState();
 
+  // Snapshot the pre-run shape so we only write files that actually changed.
+  // getOrCreateStateAsset's create-on-miss behaviour can otherwise grow
+  // state.json with empty {base_denom} records every run, producing a dirty
+  // working tree even when no real lifecycle decision happened.
+  const zoneBefore = JSON.stringify(zoneData);
+  const stateBefore = JSON.stringify(state);
+
   const zoneChainsByName = new Map();
   try {
     const zc = JSON.parse(fs.readFileSync(zoneChainsPath, 'utf8'));
@@ -626,13 +633,18 @@ async function main() {
   }
 
   // ── Write ───────────────────────────────────────────────────────────────────
-  if (mutations.some((m) => m.kind !== 'ibc_error')) {
+  const zoneChanged = JSON.stringify(zoneData) !== zoneBefore;
+  const stateChanged = JSON.stringify(state) !== stateBefore;
+  if (zoneChanged) {
     fs.writeFileSync(zoneAssetsPath, JSON.stringify(zoneData, null, 2) + '\n', 'utf8');
+    console.log(`✓ Updated ${zoneAssetsPath}`);
+  }
+  if (stateChanged) {
     fs.mkdirSync(path.dirname(statePath), { recursive: true });
     fs.writeFileSync(statePath, JSON.stringify(state, null, 2) + '\n', 'utf8');
-    console.log(`✓ Updated ${zoneAssetsPath}`);
     console.log(`✓ Updated ${statePath}`);
-  } else {
+  }
+  if (!zoneChanged && !stateChanged) {
     console.log('No changes needed.');
   }
 

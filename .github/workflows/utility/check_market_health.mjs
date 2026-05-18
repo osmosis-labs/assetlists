@@ -45,21 +45,35 @@ const reportsDir = path.join(zonePath, 'generated', 'reports');
 const NUMIA_TOKENS_URL = 'https://public-osmosis-api.numia.xyz/tokens/v2/all';
 
 async function fetchNumia() {
-  const res = await fetch(NUMIA_TOKENS_URL);
-  if (!res.ok) {
-    throw new Error(`Numia returned HTTP ${res.status}; aborting (hard-fail policy)`);
+  const controller = new AbortController();
+  const timeoutMs = 10000; // 10 second timeout
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+  
+  try {
+    const res = await fetch(NUMIA_TOKENS_URL, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    
+    if (!res.ok) {
+      throw new Error(`Numia returned HTTP ${res.status}; aborting (hard-fail policy)`);
+    }
+    const data = await res.json();
+    const byDenom = new Map();
+    for (const t of data) {
+      if (!t.denom) continue;
+      byDenom.set(t.denom, {
+        liquidity: Number(t.liquidity ?? 0),
+        // Try several plausible field names; default to 0 if absent.
+        volume24h: Number(t.volume_24h ?? t.volume_24h_usd ?? t.volume24h ?? 0),
+      });
+    }
+    return byDenom;
+  } catch (err) {
+    clearTimeout(timeoutId);
+    if (err.name === 'AbortError') {
+      throw new Error(`Request to ${NUMIA_TOKENS_URL} timed out after 10s (hard-fail policy)`);
+    }
+    throw new Error(`Failed to fetch from ${NUMIA_TOKENS_URL}: ${err.message}`);
   }
-  const data = await res.json();
-  const byDenom = new Map();
-  for (const t of data) {
-    if (!t.denom) continue;
-    byDenom.set(t.denom, {
-      liquidity: Number(t.liquidity ?? 0),
-      // Try several plausible field names; default to 0 if absent.
-      volume24h: Number(t.volume_24h ?? t.volume_24h_usd ?? t.volume24h ?? 0),
-    });
-  }
-  return byDenom;
 }
 
 function loadJSON(p, fallback) {
@@ -184,11 +198,19 @@ async function main() {
         ) {
           delete zoneAsset.osmosis_halt_deposits;
           delete zoneAsset.osmosis_deposit_halt_reason;
-          mutations.push({ kind: 'extended_halt_cleared', asset: asset.symbol });
+          // Includes `chain` so this counts toward the mutation cap. A Numia
+          // glitch that resolves and bulk-passes many failing assets in one
+          // run would otherwise silently clear all their halts.
+          mutations.push({ kind: 'extended_halt_cleared', asset: asset.symbol, chain: asset.chainName });
         }
 
-        if (rstreak >= RECOVERY_RUNS_TO_CLEAR_UNSTABLE) {
-          // Full recovery, only safe to do here because reason is "market"
+        // Full recovery clears osmosis_unstable. Guarded by reason==='market'
+        // (above, line 186) AND tooltip_message empty here, mirroring the
+        // setting-path curator-lock contract.
+        if (
+          rstreak >= RECOVERY_RUNS_TO_CLEAR_UNSTABLE &&
+          !zoneAsset.tooltip_message
+        ) {
           delete zoneAsset.osmosis_unstable;
           delete zoneAsset.osmosis_unstable_reason;
           delete stateAsset.lastDowntimeDate;

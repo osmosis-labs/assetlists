@@ -1,5 +1,5 @@
 // Purpose:
-//   Weekly check (Monday 16:00 UTC) for assets that have been continuously
+//   Bi-weekly check (1st & 15th of each month, 16:00 UTC) for assets continuously
 //   unstable for 90+ days. For each such asset, propose flipping
 //   osmosis_verified=false via a single PR. 30-day cooldown via
 //   state.lastUnverifyProposedAt prevents weekly re-proposal.
@@ -20,6 +20,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
+import { calculateIbcHash } from './assetlist_functions.mjs';
 
 const NINETY_DAYS_MS = 90 * 24 * 60 * 60 * 1000;
 const COOLDOWN_MS = 30 * 24 * 60 * 60 * 1000;
@@ -40,8 +41,11 @@ const reportsDir = path.join(zonePath, 'generated', 'reports');
 const NUMIA_TOKENS_URL = 'https://public-osmosis-api.numia.xyz/tokens/v2/all';
 
 async function fetchNumia() {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
   try {
-    const res = await fetch(NUMIA_TOKENS_URL);
+    const res = await fetch(NUMIA_TOKENS_URL, { signal: controller.signal });
+    clearTimeout(timeoutId);
     if (!res.ok) return new Map();
     const data = await res.json();
     const byDenom = new Map();
@@ -54,6 +58,7 @@ async function fetchNumia() {
     }
     return byDenom;
   } catch {
+    clearTimeout(timeoutId);
     // Numia is non-critical here; we only use it for PR body enrichment.
     return new Map();
   }
@@ -73,14 +78,17 @@ async function main() {
   const frontendData = loadJSON(frontendPath);
   const state = loadJSON(statePath, { assets: [] });
 
-  const zoneByOrigin = new Map();
-  for (const a of zoneData.assets) {
-    zoneByOrigin.set(`${a.chain_name}:${a.base_denom}`, a);
-  }
-
   const stateByDenom = new Map();
   for (const a of state.assets ?? []) {
     stateByDenom.set(a.base_denom, a);
+  }
+
+  // Frontend index by coinMinimalDenom for cheap metadata lookup (symbol etc).
+  // Killed-chain assets won't appear here but will still be evaluated via
+  // zone_assets iteration below.
+  const frontendByDenom = new Map();
+  for (const asset of frontendData.assets ?? []) {
+    frontendByDenom.set(asset.coinMinimalDenom, asset);
   }
 
   const numia = await fetchNumia();
@@ -89,14 +97,20 @@ async function main() {
   const nowMs = new Date(nowIso).getTime();
   const candidates = [];
 
-  for (const asset of frontendData.assets ?? []) {
-    const zoneKey = `${asset.chainName}:${asset.sourceDenom}`;
-    const zoneAsset = zoneByOrigin.get(zoneKey);
-    if (!zoneAsset) continue;
+  // Iterate zone_assets directly so we cover killed-chain assets whose
+  // generator output disappeared. Compute coinMinimalDenom via the same IBC
+  // hash the generator uses.
+  for (const zoneAsset of zoneData.assets) {
+    if (!zoneAsset.path) continue; // non-IBC entries not handled here
     if (zoneAsset.osmosis_verified !== true) continue;
     if (zoneAsset.osmosis_unstable !== true) continue;
+    // Curator lock: a non-empty tooltip_message means the curator owns this
+    // asset; don't propose unverification. Unverify is a heavier action than
+    // a halt flip, and the lock contract should apply just as much here.
+    if (zoneAsset.tooltip_message) continue;
 
-    const stateAsset = stateByDenom.get(asset.coinMinimalDenom);
+    const coinMinimalDenom = await calculateIbcHash(zoneAsset.path);
+    const stateAsset = stateByDenom.get(coinMinimalDenom);
     if (!stateAsset?.lastDowntimeDate) continue;
 
     const downtimeMs = nowMs - new Date(stateAsset.lastDowntimeDate).getTime();
@@ -108,11 +122,12 @@ async function main() {
       if (elapsed < COOLDOWN_MS) continue;
     }
 
-    const market = numia.get(asset.coinMinimalDenom);
+    const feAsset = frontendByDenom.get(coinMinimalDenom);
+    const market = numia.get(coinMinimalDenom);
     candidates.push({
-      chain: asset.chainName,
-      symbol: asset.symbol,
-      baseDenom: asset.coinMinimalDenom,
+      chain: zoneAsset.chain_name,
+      symbol: feAsset?.symbol ?? zoneAsset._comment ?? zoneAsset.base_denom,
+      baseDenom: coinMinimalDenom,
       daysUnstable: Math.floor(downtimeMs / (24 * 60 * 60 * 1000)),
       reason: zoneAsset.osmosis_unstable_reason ?? '?',
       lastDowntimeDate: stateAsset.lastDowntimeDate,

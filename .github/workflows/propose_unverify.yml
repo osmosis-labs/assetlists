@@ -1,12 +1,13 @@
-# Weekly: open/update a PR proposing osmosis_verified=false for assets that
+# Bi-weekly: open/update a PR proposing osmosis_verified=false for assets that
 # have been continuously unstable for 90+ days, subject to a 30-day per-asset
 # cooldown via state.lastUnverifyProposedAt.
 #
-# Runs every Monday at 16:00 UTC, after the daily generate_all_files cron.
+# Runs on the 1st and 15th of each month at 16:00 UTC, after the daily
+# generate_all_files cron. This gives ~14-day cadence without weekly noise.
 
 on:
   schedule:
-    - cron: "0 16 * * 1" # Mondays at 16:00 UTC
+    - cron: "0 16 1,15 * *" # 1st and 15th of each month at 16:00 UTC
   workflow_dispatch:
 
 name: Propose Unverify Candidates

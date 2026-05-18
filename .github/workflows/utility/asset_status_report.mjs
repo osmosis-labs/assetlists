@@ -14,6 +14,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
+import { calculateIbcHash } from './assetlist_functions.mjs';
 
 const LOW_LIQUIDITY_USD = 1000;
 const LOW_VOLUME_24H_USD = 100;
@@ -35,8 +36,11 @@ const reportsDir = path.join(zonePath, 'generated', 'reports');
 const NUMIA_TOKENS_URL = 'https://public-osmosis-api.numia.xyz/tokens/v2/all';
 
 async function fetchNumia() {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
   try {
-    const res = await fetch(NUMIA_TOKENS_URL);
+    const res = await fetch(NUMIA_TOKENS_URL, { signal: controller.signal });
+    clearTimeout(timeoutId);
     if (!res.ok) return new Map();
     const data = await res.json();
     const byDenom = new Map();
@@ -50,6 +54,7 @@ async function fetchNumia() {
     }
     return byDenom;
   } catch {
+    clearTimeout(timeoutId);
     return new Map();
   }
 }
@@ -73,12 +78,13 @@ async function main() {
   const state = loadJSON(statePath, { assets: [] });
   const numia = await fetchNumia();
 
-  const zoneByOrigin = new Map();
-  for (const a of zoneData.assets) {
-    zoneByOrigin.set(`${a.chain_name}:${a.base_denom}`, a);
-  }
   const stateByDenom = new Map();
   for (const a of state.assets ?? []) stateByDenom.set(a.base_denom, a);
+
+  const frontendByDenom = new Map();
+  for (const asset of frontendData.assets ?? []) {
+    frontendByDenom.set(asset.coinMinimalDenom, asset);
+  }
 
   const nowIso = new Date().toISOString();
   const nowMs = new Date(nowIso).getTime();
@@ -90,18 +96,22 @@ async function main() {
   const pending = [];
   const inconsistencies = [];
 
-  for (const asset of frontendData.assets ?? []) {
-    const zoneKey = `${asset.chainName}:${asset.sourceDenom}`;
-    const za = zoneByOrigin.get(zoneKey);
-    if (!za) continue;
-    const sa = stateByDenom.get(asset.coinMinimalDenom);
-    const m = numia.get(asset.coinMinimalDenom);
+  // Iterate zone_assets directly so we cover killed-chain assets whose
+  // generator output disappeared. Compute coinMinimalDenom via the same IBC
+  // hash the generator uses.
+  for (const za of zoneData.assets) {
+    if (!za.path) continue; // non-IBC entries skipped
+    const coinMinimalDenom = await calculateIbcHash(za.path);
+    const sa = stateByDenom.get(coinMinimalDenom);
+    const m = numia.get(coinMinimalDenom);
+    const feAsset = frontendByDenom.get(coinMinimalDenom);
+    const symbol = feAsset?.symbol ?? za._comment ?? za.base_denom;
 
     if (za.osmosis_unstable === true) {
       if (!sa?.lastDowntimeDate) {
         inconsistencies.push({
           chain: za.chain_name,
-          symbol: asset.symbol,
+          symbol,
           issue: 'osmosis_unstable=true but no state.lastDowntimeDate',
         });
       }
@@ -110,8 +120,8 @@ async function main() {
       const daysUntilUnverify = days != null ? Math.max(0, 90 - days) : null;
       unstable.push({
         chain: za.chain_name,
-        symbol: asset.symbol,
-        baseDenom: asset.coinMinimalDenom,
+        symbol,
+        baseDenom: coinMinimalDenom,
         verified: za.osmosis_verified === true,
         reason: za.osmosis_unstable_reason ?? '?',
         lastDowntime: sa?.lastDowntimeDate ?? '-',
@@ -129,13 +139,13 @@ async function main() {
       if (!za.osmosis_deposit_halt_reason) {
         inconsistencies.push({
           chain: za.chain_name,
-          symbol: asset.symbol,
+          symbol,
           issue: 'osmosis_halt_deposits=true with no reason',
         });
       }
       halts.push({
         chain: za.chain_name,
-        symbol: asset.symbol,
+        symbol,
         direction: 'deposit',
         reason: za.osmosis_deposit_halt_reason ?? '?',
         tooltip: za.tooltip_message ?? '',
@@ -145,7 +155,7 @@ async function main() {
     if (za.osmosis_halt_withdrawals === true) {
       halts.push({
         chain: za.chain_name,
-        symbol: asset.symbol,
+        symbol,
         direction: 'withdrawal',
         reason: za.osmosis_withdrawal_halt_reason ?? '?',
         tooltip: za.tooltip_message ?? '',
@@ -156,8 +166,8 @@ async function main() {
     if (za.osmosis_disabled === true) {
       disabled.push({
         chain: za.chain_name,
-        symbol: asset.symbol,
-        baseDenom: asset.coinMinimalDenom,
+        symbol,
+        baseDenom: coinMinimalDenom,
         verified: za.osmosis_verified === true,
         liquidity: m?.liquidity ?? '?',
         volume24h: m?.volume24h ?? '?',
@@ -176,7 +186,7 @@ async function main() {
     ) {
       borderline.push({
         chain: za.chain_name,
-        symbol: asset.symbol,
+        symbol,
         liquidity: m.liquidity,
         volume24h: m.volume24h,
       });
@@ -195,7 +205,7 @@ async function main() {
       if (days >= 90 && cooldownLeft > 0) {
         pending.push({
           chain: za.chain_name,
-          symbol: asset.symbol,
+          symbol,
           daysUnstable: days,
           lastProposed: sa.lastUnverifyProposedAt,
           daysUntilRepropose: Math.ceil(cooldownLeft / (24 * 60 * 60 * 1000)),

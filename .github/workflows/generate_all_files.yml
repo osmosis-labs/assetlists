@@ -52,12 +52,12 @@ jobs:
       - name: Check Market Health (independent unstable track)
         working-directory: ./.github/workflows/utility
         run: |
-          node check_market_health.mjs osmosis-1 2>&1 | tee ../../../market-health.log || true
+          node check_market_health.mjs osmosis-1 2>&1 | tee ../../../market-health.log
 
       - name: Check Extended Halts (60d + planned shutdown)
         working-directory: ./.github/workflows/utility
         run: |
-          node check_extended_halts.mjs osmosis-1 2>&1 | tee ../../../extended-halts.log || true
+          node check_extended_halts.mjs osmosis-1 2>&1 | tee ../../../extended-halts.log
 
       - name: Add Chain Stubs
         working-directory: ./.github/workflows/utility
@@ -261,7 +261,7 @@ jobs:
             echo "<details><summary>IBC check details</summary>" >> workflow-summary.md
             echo "" >> workflow-summary.md
             echo '```' >> workflow-summary.md
-            grep -A 100 'IBC CLIENT HEALTH SUMMARY' ibc-check.log | head -60 >> workflow-summary.md || true
+            grep -A 100 'BRIDGE-STATE CHECK SUMMARY' ibc-check.log | head -60 >> workflow-summary.md || true
             echo '```' >> workflow-summary.md
             echo "</details>" >> workflow-summary.md
           fi

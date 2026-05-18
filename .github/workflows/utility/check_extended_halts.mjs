@@ -24,6 +24,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
+import { calculateIbcHash } from './assetlist_functions.mjs';
 
 const SIXTY_DAYS_MS = 60 * 24 * 60 * 60 * 1000;
 const SHUTDOWN_WINDOW_MS = 14 * 24 * 60 * 60 * 1000;
@@ -47,20 +48,34 @@ const reportsDir = path.join(zonePath, 'generated', 'reports');
 const NUMIA_TOKENS_URL = 'https://public-osmosis-api.numia.xyz/tokens/v2/all';
 
 async function fetchNumia() {
-  const res = await fetch(NUMIA_TOKENS_URL);
-  if (!res.ok) {
-    throw new Error(`Numia returned HTTP ${res.status}; aborting (hard-fail policy)`);
+  const controller = new AbortController();
+  const timeoutMs = 10000; // 10 second timeout
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+  
+  try {
+    const res = await fetch(NUMIA_TOKENS_URL, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    
+    if (!res.ok) {
+      throw new Error(`Numia returned HTTP ${res.status}; aborting (hard-fail policy)`);
+    }
+    const data = await res.json();
+    const byDenom = new Map();
+    for (const t of data) {
+      if (!t.denom) continue;
+      byDenom.set(t.denom, {
+        liquidity: Number(t.liquidity ?? 0),
+        volume24h: Number(t.volume_24h ?? t.volume_24h_usd ?? t.volume24h ?? 0),
+      });
+    }
+    return byDenom;
+  } catch (err) {
+    clearTimeout(timeoutId);
+    if (err.name === 'AbortError') {
+      throw new Error(`Request to ${NUMIA_TOKENS_URL} timed out after 10s (hard-fail policy)`);
+    }
+    throw new Error(`Failed to fetch from ${NUMIA_TOKENS_URL}: ${err.message}`);
   }
-  const data = await res.json();
-  const byDenom = new Map();
-  for (const t of data) {
-    if (!t.denom) continue;
-    byDenom.set(t.denom, {
-      liquidity: Number(t.liquidity ?? 0),
-      volume24h: Number(t.volume_24h ?? t.volume_24h_usd ?? t.volume24h ?? 0),
-    });
-  }
-  return byDenom;
 }
 
 function loadJSON(p, fallback) {
@@ -83,17 +98,37 @@ async function main() {
     zoneByOrigin.set(`${a.chain_name}:${a.base_denom}`, a);
   }
 
+  // Build the evaluation list. For every zone_asset that's IBC (has a path),
+  // compute its coinMinimalDenom via the same IBC hash the generator uses.
+  // This lets us iterate the canonical key even when an asset is missing
+  // from the frontend (killed-chain case).
+  const frontendBySymbol = new Map();
+  for (const asset of frontendData.assets ?? []) {
+    frontendBySymbol.set(asset.coinMinimalDenom, asset);
+  }
+
+  const evaluations = [];
+  for (const za of zoneData.assets) {
+    if (!za.path) continue; // skip non-IBC entries; they aren't bridged
+    const coinMinimalDenom = await calculateIbcHash(za.path);
+    const feAsset = frontendBySymbol.get(coinMinimalDenom);
+    evaluations.push({
+      coinMinimalDenom,
+      chainName: za.chain_name,
+      symbol: feAsset?.symbol ?? za._comment ?? za.base_denom,
+      zoneAsset: za,
+    });
+  }
+
   const nowIso = new Date().toISOString();
   const nowMs = new Date(nowIso).getTime();
   const mutations = [];
 
-  for (const asset of frontendData.assets ?? []) {
-    const zoneKey = `${asset.chainName}:${asset.sourceDenom}`;
-    const zoneAsset = zoneByOrigin.get(zoneKey);
-    if (!zoneAsset) continue;
+  for (const ev of evaluations) {
+    const { coinMinimalDenom, chainName, symbol, zoneAsset } = ev;
 
     const stateAsset = state.assets?.find(
-      (a) => a.base_denom === asset.coinMinimalDenom
+      (a) => a.base_denom === coinMinimalDenom
     );
 
     // ── Trigger A: extended unstable + failing market ───────────────────────
@@ -108,7 +143,7 @@ async function main() {
     ) {
       const downtimeMs = nowMs - new Date(stateAsset.lastDowntimeDate).getTime();
       if (downtimeMs >= SIXTY_DAYS_MS) {
-        const market = numia.get(asset.coinMinimalDenom);
+        const market = numia.get(coinMinimalDenom);
         const failing =
           !!market &&
           market.liquidity < LOW_LIQUIDITY_USD &&
@@ -118,8 +153,8 @@ async function main() {
           zoneAsset.osmosis_deposit_halt_reason = 'extended_unstable_market';
           mutations.push({
             kind: 'extended_halt_set',
-            asset: asset.symbol,
-            chain: asset.chainName,
+            asset: symbol,
+            chain: chainName,
             days: Math.floor(downtimeMs / (24 * 60 * 60 * 1000)),
           });
         }
@@ -132,7 +167,7 @@ async function main() {
       zoneAsset.osmosis_deposit_halt_reason === 'extended_unstable_market' &&
       !zoneAsset.tooltip_message
     ) {
-      const market = numia.get(asset.coinMinimalDenom);
+      const market = numia.get(coinMinimalDenom);
       const passing =
         !!market &&
         (market.liquidity >= LOW_LIQUIDITY_USD ||
@@ -142,8 +177,8 @@ async function main() {
         delete zoneAsset.osmosis_deposit_halt_reason;
         mutations.push({
           kind: 'extended_halt_cleared',
-          asset: asset.symbol,
-          chain: asset.chainName,
+          asset: symbol,
+          chain: chainName,
         });
       }
     }
@@ -163,8 +198,8 @@ async function main() {
         zoneAsset.osmosis_deposit_halt_reason = 'planned_shutdown';
         mutations.push({
           kind: 'planned_shutdown_set',
-          asset: asset.symbol,
-          chain: asset.chainName,
+          asset: symbol,
+          chain: chainName,
           shutdown: plannedDate,
         });
       }
@@ -184,8 +219,8 @@ async function main() {
         delete zoneAsset.osmosis_deposit_halt_reason;
         mutations.push({
           kind: 'planned_shutdown_cleared',
-          asset: asset.symbol,
-          chain: asset.chainName,
+          asset: symbol,
+          chain: chainName,
         });
       }
     }

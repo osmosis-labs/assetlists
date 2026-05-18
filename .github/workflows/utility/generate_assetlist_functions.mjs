@@ -1964,6 +1964,22 @@ export function reformatFrontendAsset(asset) {
     delete reformattedAsset.listingDate;
   }
 
+  // Drop optional lifecycle fields that are undefined or falsy. Matches the
+  // behaviour of reformatFrontendAssetFromAssetData; kept in sync so future
+  // edits to either copy stay consistent.
+  for (const k of [
+    "unstableReason",
+    "haltDeposits",
+    "depositHaltReason",
+    "haltWithdrawals",
+    "withdrawalHaltReason",
+    "plannedShutdownDate",
+    "lastDowntimeDate",
+    "lastRecoveryDate",
+  ]) {
+    if (!reformattedAsset[k]) delete reformattedAsset[k];
+  }
+
   asset = reformattedAsset;
   return;
 

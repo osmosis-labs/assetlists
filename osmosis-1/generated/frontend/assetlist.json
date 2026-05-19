@@ -41411,6 +41411,57 @@
       "preview": false
     },
     {
+      "chainName": "cosmoshub",
+      "sourceDenom": "factory/cosmos1wdja2gcsesyl07raq9jm3rcvu0sse5zkev0h8m/Nether",
+      "coinMinimalDenom": "ibc/EFAAE3AD05AA79647A1587E363A11B6126CC83C8C0593171BB1892A39EB550DF",
+      "symbol": "NTHR",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/nthr.png"
+      },
+      "categories": [
+        "nft_protocol"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "cosmoshub",
+            "chainId": "cosmoshub-4",
+            "sourceDenom": "factory/cosmos1wdja2gcsesyl07raq9jm3rcvu0sse5zkev0h8m/Nether",
+            "port": "transfer",
+            "channelId": "channel-141"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-0",
+            "path": "transfer/channel-0/factory/cosmos1wdja2gcsesyl07raq9jm3rcvu0sse5zkev0h8m/Nether"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "cosmoshub",
+          "sourceDenom": "factory/cosmos1wdja2gcsesyl07raq9jm3rcvu0sse5zkev0h8m/Nether",
+          "chainType": "cosmos",
+          "chainId": "cosmoshub-4",
+          "symbol": "NTHR",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/nthr.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/EFAAE3AD05AA79647A1587E363A11B6126CC83C8C0593171BB1892A39EB550DF",
+      "name": "Nether",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -44508,55 +44559,6 @@
       ],
       "variantGroupKey": "ibc/B7D7AA538008E2A35328820B7B56F014F1AB38205D51BB13D1F84B11D362B9ED",
       "name": "COREZ",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "cosmoshub",
-      "sourceDenom": "factory/cosmos1wdja2gcsesyl07raq9jm3rcvu0sse5zkev0h8m/Nether",
-      "coinMinimalDenom": "ibc/EFAAE3AD05AA79647A1587E363A11B6126CC83C8C0593171BB1892A39EB550DF",
-      "symbol": "NTHR",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/nthr.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "cosmoshub",
-            "chainId": "cosmoshub-4",
-            "sourceDenom": "factory/cosmos1wdja2gcsesyl07raq9jm3rcvu0sse5zkev0h8m/Nether",
-            "port": "transfer",
-            "channelId": "channel-141"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-0",
-            "path": "transfer/channel-0/factory/cosmos1wdja2gcsesyl07raq9jm3rcvu0sse5zkev0h8m/Nether"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "cosmoshub",
-          "sourceDenom": "factory/cosmos1wdja2gcsesyl07raq9jm3rcvu0sse5zkev0h8m/Nether",
-          "chainType": "cosmos",
-          "chainId": "cosmoshub-4",
-          "symbol": "NTHR",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/nthr.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/EFAAE3AD05AA79647A1587E363A11B6126CC83C8C0593171BB1892A39EB550DF",
-      "name": "Nether",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

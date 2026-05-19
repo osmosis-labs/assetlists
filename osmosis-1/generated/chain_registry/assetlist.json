@@ -36906,6 +36906,40 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/EFAAE3AD05AA79647A1587E363A11B6126CC83C8C0593171BB1892A39EB550DF",
+          "exponent": 0,
+          "aliases": [
+            "factory/cosmos1wdja2gcsesyl07raq9jm3rcvu0sse5zkev0h8m/Nether"
+          ]
+        },
+        {
+          "denom": "nthr",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/EFAAE3AD05AA79647A1587E363A11B6126CC83C8C0593171BB1892A39EB550DF",
+      "name": "Nether",
+      "display": "nthr",
+      "symbol": "NTHR",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "cosmoshub",
+            "base_denom": "factory/cosmos1wdja2gcsesyl07raq9jm3rcvu0sse5zkev0h8m/Nether",
+            "channel_id": "channel-141"
+          },
+          "chain": {
+            "channel_id": "channel-0",
+            "path": "transfer/channel-0/factory/cosmos1wdja2gcsesyl07raq9jm3rcvu0sse5zkev0h8m/Nether"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
           "exponent": 0,
           "aliases": [
@@ -39087,40 +39121,6 @@
           "chain": {
             "channel_id": "channel-2188",
             "path": "transfer/channel-2188/ucorez-core1astd8pqhs7mslk9rnygy9kzc5s2cqnwftcvmquxr7z9z78szzvzqljlc23"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/EFAAE3AD05AA79647A1587E363A11B6126CC83C8C0593171BB1892A39EB550DF",
-          "exponent": 0,
-          "aliases": [
-            "factory/cosmos1wdja2gcsesyl07raq9jm3rcvu0sse5zkev0h8m/Nether"
-          ]
-        },
-        {
-          "denom": "nthr",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/EFAAE3AD05AA79647A1587E363A11B6126CC83C8C0593171BB1892A39EB550DF",
-      "name": "Nether",
-      "display": "nthr",
-      "symbol": "NTHR",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "cosmoshub",
-            "base_denom": "factory/cosmos1wdja2gcsesyl07raq9jm3rcvu0sse5zkev0h8m/Nether",
-            "channel_id": "channel-141"
-          },
-          "chain": {
-            "channel_id": "channel-0",
-            "path": "transfer/channel-0/factory/cosmos1wdja2gcsesyl07raq9jm3rcvu0sse5zkev0h8m/Nether"
           }
         }
       ]

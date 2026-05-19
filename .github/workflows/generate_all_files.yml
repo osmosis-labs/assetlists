@@ -41,13 +41,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Snapshot zone_assets before lifecycle scripts
-        run: |
-          # Per-mutation symbol extraction depends on a clean before/after
-          # diff of zone_assets. The three lifecycle scripts mutate it in
-          # sequence, so we snapshot once here and diff once at the end.
-          cp osmosis-1/osmosis.zone_assets.json /tmp/zone-before.json
-
       - name: Check IBC Client Status
         working-directory: ./.github/workflows/utility
         run: |
@@ -168,70 +161,6 @@ jobs:
           comm -13 /tmp/chains-before.txt /tmp/chains-after.txt > new-chains.txt
           echo "NEW_CHAINS_COUNT=$(wc -l < new-chains.txt)" >> $GITHUB_ENV
 
-      - name: Extract per-mutation symbol lists
-        run: |
-          # Diff /tmp/zone-before.json (snapshot pre-lifecycle) against the
-          # current zone_assets.json to produce one symbol list per mutation
-          # category. Each file is "chain_name|SYMBOL" per line. Symbol is
-          # resolved against the freshly-generated frontend assetlist.
-          jq -r --slurpfile fe osmosis-1/generated/frontend/assetlist.json --slurpfile before /tmp/zone-before.json '
-            ($fe[0].assets | map({key: (.chainName + "|" + .sourceDenom), value: .symbol}) | from_entries) as $symByOrigin
-            | ($before[0].assets | map({key: (.chain_name + "|" + .base_denom), value: .}) | from_entries) as $beforeByOrigin
-            | .assets as $now
-            | $now | map(
-                . as $a
-                | $beforeByOrigin[$a.chain_name + "|" + $a.base_denom] as $b
-                | ($symByOrigin[$a.chain_name + "|" + $a.base_denom] // $a._comment // $a.base_denom) as $sym
-                | {
-                    chain: $a.chain_name,
-                    symbol: $sym,
-                    ibcFlagged:
-                      ((($a.osmosis_unstable // false) == true) and (($b.osmosis_unstable // false) != true)),
-                    ibcCleared:
-                      ((($a.osmosis_unstable // false) != true) and (($b.osmosis_unstable // false) == true)),
-                    marketFlagged:
-                      ((($a.osmosis_unstable // false) == true)
-                        and (($a.osmosis_unstable_reason // "") == "market")
-                        and (($b.osmosis_unstable_reason // "") != "market")),
-                    marketRecovered:
-                      ((($a.osmosis_unstable // false) != true)
-                        and (($b.osmosis_unstable_reason // "") == "market")),
-                    extendedHaltSet:
-                      ((($a.osmosis_halt_deposits // false) == true)
-                        and (($a.osmosis_deposit_halt_reason // "") == "extended_unstable_market")
-                        and (($b.osmosis_deposit_halt_reason // "") != "extended_unstable_market")),
-                    extendedHaltCleared:
-                      ((($a.osmosis_halt_deposits // false) != true)
-                        and (($b.osmosis_deposit_halt_reason // "") == "extended_unstable_market")),
-                    plannedShutdownSet:
-                      ((($a.osmosis_halt_deposits // false) == true)
-                        and (($a.osmosis_deposit_halt_reason // "") == "planned_shutdown")
-                        and (($b.osmosis_deposit_halt_reason // "") != "planned_shutdown")),
-                    plannedShutdownCleared:
-                      ((($a.osmosis_halt_deposits // false) != true)
-                        and (($b.osmosis_deposit_halt_reason // "") == "planned_shutdown")),
-                  }
-              ) as $rows
-            | $rows
-          ' osmosis-1/osmosis.zone_assets.json > /tmp/lifecycle-diff.json
-
-          # Write one file per category, "chain|symbol" per line.
-          for kind in ibcFlagged ibcCleared marketFlagged marketRecovered extendedHaltSet extendedHaltCleared plannedShutdownSet plannedShutdownCleared; do
-            jq -r --arg k "$kind" '.[] | select(.[$k] == true) | "\(.chain)|\(.symbol)"' /tmp/lifecycle-diff.json > /tmp/lc-${kind}.txt
-          done
-
-          # Capture summary counts from the lifecycle script logs.
-          if [ -f market-health.log ]; then
-            echo "MARKET_FLAGGED=$(grep -oP 'market_flagged\s+:\s+\K[0-9]+' market-health.log || echo 0)" >> $GITHUB_ENV
-            echo "MARKET_RECOVERED=$(grep -oP 'market_recovered\s+:\s+\K[0-9]+' market-health.log || echo 0)" >> $GITHUB_ENV
-          fi
-          if [ -f extended-halts.log ]; then
-            echo "EXTENDED_HALT_SET=$(grep -oP 'extended_halt_set\s+:\s+\K[0-9]+' extended-halts.log || echo 0)" >> $GITHUB_ENV
-            echo "EXTENDED_HALT_CLEARED=$(grep -oP 'extended_halt_cleared\s+:\s+\K[0-9]+' extended-halts.log || echo 0)" >> $GITHUB_ENV
-            echo "PLANNED_SHUTDOWN_SET=$(grep -oP 'planned_shutdown_set\s+:\s+\K[0-9]+' extended-halts.log || echo 0)" >> $GITHUB_ENV
-            echo "PLANNED_SHUTDOWN_CLEARED=$(grep -oP 'planned_shutdown_cleared\s+:\s+\K[0-9]+' extended-halts.log || echo 0)" >> $GITHUB_ENV
-          fi
-
       - name: Run code to Update State
         working-directory: ./.github/workflows/utility
         run: node update_assetlist_state.mjs
@@ -253,99 +182,6 @@ jobs:
           cat > workflow-summary.md << 'HEADER'
           # Automated Update Summary
           HEADER
-
-          # ── Quick summary (top-of-PR glance) ──────────────────────────────
-          # One row per category. Lists chain names or asset symbols inline;
-          # empty categories render with a dim "none" so the reader can see
-          # what's currently quiet vs busy.
-          echo "## 📋 Quick summary" >> workflow-summary.md
-          echo "" >> workflow-summary.md
-
-          # Helper: emit "- {emoji} {label} ({count}): {comma-joined items}".
-          # Items are read from the supplied file (one per line). If the file
-          # is empty/missing, prints "— none" instead. For lifecycle-script
-          # files keyed by "chain|symbol", takes only the symbol column.
-          emit_row() {
-            local emoji="$1" label="$2" file="$3" mode="$4"
-            local count=0 items=""
-            if [ -f "$file" ] && [ -s "$file" ]; then
-              if [ "$mode" = "symbol" ]; then
-                items=$(awk -F'|' 'NF>0{print $2}' "$file" | paste -sd', ' -)
-                count=$(awk 'NF>0' "$file" | wc -l | tr -d ' ')
-              else
-                items=$(awk 'NF>0' "$file" | paste -sd', ' -)
-                count=$(awk 'NF>0' "$file" | wc -l | tr -d ' ')
-              fi
-            fi
-            if [ "$count" = "0" ]; then
-              echo "- ${emoji} **${label}** — none" >> workflow-summary.md
-            else
-              echo "- ${emoji} **${label} (${count}):** ${items}" >> workflow-summary.md
-            fi
-          }
-
-          emit_row "🆕" "New Chains" new-chains.txt name
-          emit_row "🆕" "New Assets" new-assets.txt name
-          emit_row "🔴" "IBC flagged unstable" /tmp/lc-ibcFlagged.txt symbol
-          emit_row "🟢" "IBC cleared" /tmp/lc-ibcCleared.txt symbol
-
-          # Manual halts: list chain names of assets whose halt reason is
-          # "manual" on either direction. Distinct chains, sorted.
-          MANUAL_HALT_CHAINS=$(jq -r '
-            .assets
-            | map(select(
-                (.osmosis_deposit_halt_reason == "manual")
-                or (.osmosis_withdrawal_halt_reason == "manual")
-              ))
-            | map(.chain_name) | unique | .[]
-          ' osmosis-1/osmosis.zone_assets.json 2>/dev/null > /tmp/lc-manualHalts.txt && echo ok || echo err)
-          emit_row "⚠️" "Manual halts in effect" /tmp/lc-manualHalts.txt name
-
-          emit_row "⏸️" "Extended halt set" /tmp/lc-extendedHaltSet.txt symbol
-          emit_row "▶️" "Extended halt cleared" /tmp/lc-extendedHaltCleared.txt symbol
-          emit_row "⏰" "Planned shutdown set" /tmp/lc-plannedShutdownSet.txt symbol
-          emit_row "▶️" "Planned shutdown cleared" /tmp/lc-plannedShutdownCleared.txt symbol
-          emit_row "📉" "Market flagged" /tmp/lc-marketFlagged.txt symbol
-          emit_row "📈" "Market recovered" /tmp/lc-marketRecovered.txt symbol
-
-          echo "" >> workflow-summary.md
-          echo "---" >> workflow-summary.md
-          echo "" >> workflow-summary.md
-
-          # Mutation cap hits: surface loudly if any lifecycle script exited
-          # with code 2 (cap exceeded). The script's intended mutations were
-          # not applied; an operator needs to inspect and decide whether to
-          # re-run locally with --force.
-          if [ "$IBC_CAP_HIT" = "true" ] || [ "$MARKET_HEALTH_CAP_HIT" = "true" ] || [ "$EXTENDED_HALTS_CAP_HIT" = "true" ]; then
-            echo "## ⚠️ Mutation cap hit" >> workflow-summary.md
-            echo "" >> workflow-summary.md
-            echo "One or more lifecycle scripts exited with code 2 because their" >> workflow-summary.md
-            echo "intended diff would touch more than 10 distinct source chains" >> workflow-summary.md
-            echo "in a single run. No mutations from the affected script(s) were" >> workflow-summary.md
-            echo "applied this run. Inspect the logs and re-run locally with" >> workflow-summary.md
-            echo "\`--force\` if the diff is legitimate." >> workflow-summary.md
-            echo "" >> workflow-summary.md
-            if [ "$IBC_CAP_HIT" = "true" ]; then
-              echo "- 🛑 \`check_ibc_clients\` cap exceeded" >> workflow-summary.md
-            fi
-            if [ "$MARKET_HEALTH_CAP_HIT" = "true" ]; then
-              echo "- 🛑 \`check_market_health\` cap exceeded" >> workflow-summary.md
-            fi
-            if [ "$EXTENDED_HALTS_CAP_HIT" = "true" ]; then
-              echo "- 🛑 \`check_extended_halts\` cap exceeded" >> workflow-summary.md
-            fi
-            echo "" >> workflow-summary.md
-            echo "To inspect and apply the diff locally:" >> workflow-summary.md
-            echo "" >> workflow-summary.md
-            echo '```bash' >> workflow-summary.md
-            echo "cd .github/workflows/utility" >> workflow-summary.md
-            echo "node <script-name>.mjs osmosis-1 --dry-run    # review" >> workflow-summary.md
-            echo "node <script-name>.mjs osmosis-1 --force      # apply" >> workflow-summary.md
-            echo '```' >> workflow-summary.md
-            echo "" >> workflow-summary.md
-            echo "---" >> workflow-summary.md
-            echo "" >> workflow-summary.md
-          fi
 
           # Chainlist Generation
           echo "## Chainlist Generation" >> workflow-summary.md
@@ -435,6 +271,41 @@ jobs:
           echo "---" >> workflow-summary.md
           echo "" >> workflow-summary.md
 
+          # Mutation cap hits: surface loudly if any lifecycle script exited
+          # with code 2 (cap exceeded). The script's intended mutations were
+          # not applied; an operator needs to inspect and decide whether to
+          # re-run locally with --force.
+          if [ "$IBC_CAP_HIT" = "true" ] || [ "$MARKET_HEALTH_CAP_HIT" = "true" ] || [ "$EXTENDED_HALTS_CAP_HIT" = "true" ]; then
+            echo "## ⚠️ Mutation cap hit" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            echo "One or more lifecycle scripts exited with code 2 because their" >> workflow-summary.md
+            echo "intended diff would touch more than 10 distinct source chains" >> workflow-summary.md
+            echo "in a single run. No mutations from the affected script(s) were" >> workflow-summary.md
+            echo "applied this run. Inspect the logs and re-run locally with" >> workflow-summary.md
+            echo "\`--force\` if the diff is legitimate." >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            if [ "$IBC_CAP_HIT" = "true" ]; then
+              echo "- 🛑 \`check_ibc_clients\` cap exceeded" >> workflow-summary.md
+            fi
+            if [ "$MARKET_HEALTH_CAP_HIT" = "true" ]; then
+              echo "- 🛑 \`check_market_health\` cap exceeded" >> workflow-summary.md
+            fi
+            if [ "$EXTENDED_HALTS_CAP_HIT" = "true" ]; then
+              echo "- 🛑 \`check_extended_halts\` cap exceeded" >> workflow-summary.md
+            fi
+            echo "" >> workflow-summary.md
+            echo "To inspect and apply the diff locally:" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            echo '```bash' >> workflow-summary.md
+            echo "cd .github/workflows/utility" >> workflow-summary.md
+            echo "node <script-name>.mjs osmosis-1 --dry-run    # review" >> workflow-summary.md
+            echo "node <script-name>.mjs osmosis-1 --force      # apply" >> workflow-summary.md
+            echo '```' >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            echo "---" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+          fi
+
           # IBC Client Health
           echo "## IBC Client Health" >> workflow-summary.md
           echo "- **Newly flagged unstable:** $IBC_NEWLY_FLAGGED" >> workflow-summary.md
@@ -456,30 +327,6 @@ jobs:
           echo "" >> workflow-summary.md
           echo "---" >> workflow-summary.md
           echo "" >> workflow-summary.md
-
-          # Market Health Summary (the full summary block from the script's log)
-          if [ -f market-health.log ]; then
-            echo "## Market Health Summary" >> workflow-summary.md
-            echo "" >> workflow-summary.md
-            echo '```' >> workflow-summary.md
-            grep -A 30 'MARKET-HEALTH SUMMARY' market-health.log | head -30 >> workflow-summary.md || true
-            echo '```' >> workflow-summary.md
-            echo "" >> workflow-summary.md
-            echo "---" >> workflow-summary.md
-            echo "" >> workflow-summary.md
-          fi
-
-          # Extended Halts Summary
-          if [ -f extended-halts.log ]; then
-            echo "## Extended Halts Summary" >> workflow-summary.md
-            echo "" >> workflow-summary.md
-            echo '```' >> workflow-summary.md
-            grep -A 30 'EXTENDED HALTS SUMMARY' extended-halts.log | head -30 >> workflow-summary.md || true
-            echo '```' >> workflow-summary.md
-            echo "" >> workflow-summary.md
-            echo "---" >> workflow-summary.md
-            echo "" >> workflow-summary.md
-          fi
 
           # Manual halts currently in effect (visibility for drift detection)
           echo "## Manual halts currently in effect" >> workflow-summary.md

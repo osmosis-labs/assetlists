@@ -50,45 +50,11 @@
         },
         "osmosis_unstable": {
           "type": "boolean",
-          "description": "Whether the asset has experienced or is experiencing instability. Warning-only flag; does not gate transfers."
-        },
-        "osmosis_unstable_reason": {
-          "type": "string",
-          "enum": ["ibc_client", "source_chain_killed", "market", "manual"],
-          "description": "Closed-set reason for the unstable flag. Each has a localization key in the frontend. Curator-written context for any halt/unstable state lives in the existing `tooltip_message` field."
+          "description": "Whether the asset can reliably be transferred to or from Osmosis."
         },
         "osmosis_disabled": {
           "type": "boolean",
-          "description": "Whether the native Deposit/Withdraw flow should be skipped, routing the user to an external provider instead. UX router, not a kill switch."
-        },
-        "osmosis_halt_deposits": {
-          "type": "boolean",
-          "description": "Kill switch: deposits are halted. Asset-page Deposit button is greyed and the bridge flow blocks the deposit direction."
-        },
-        "osmosis_deposit_halt_reason": {
-          "type": "string",
-          "enum": [
-            "bridge_down",
-            "extended_unstable_market",
-            "planned_shutdown",
-            "source_chain_killed",
-            "manual"
-          ],
-          "description": "Closed-set reason for the deposit halt. Drives the localized banner. Curator-written context lives in the existing `tooltip_message` field."
-        },
-        "osmosis_halt_withdrawals": {
-          "type": "boolean",
-          "description": "Kill switch: withdrawals are halted."
-        },
-        "osmosis_withdrawal_halt_reason": {
-          "type": "string",
-          "enum": ["bridge_down", "source_chain_killed", "manual"],
-          "description": "Closed-set reason for the withdrawal halt. Curator-written context lives in the existing `tooltip_message` field."
-        },
-        "planned_shutdown_date": {
-          "type": "string",
-          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$",
-          "description": "ISO UTC date when this asset is scheduled to be shut down. Used by check_extended_halts.mjs to pre-emptively halt deposits 14 days before the shutdown date."
+          "description": "Whether the asset Deposit and Withdraw functions are disabled on Osmosis."
         },
         "is_alloyed": {
           "type": "boolean",

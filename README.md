@@ -116,14 +116,36 @@ Each asset object in _osmosis.zone_assets.json_ must include these identifying d
 
 #### Transfer & Reliability Flags
 
-- **`osmosis_unstable`** (boolean, default: `false`) - Indicates the asset **cannot reliably** be transferred to or from Osmosis.
-  - **Frontend Behavior**: Sets `unstable: true` in generated assetlist — displays a warning indicator on the asset
-  - **Common Causes**: Expired or frozen IBC client, unreliable relayers, frequent chain downtime
-  - **When to Remove**: After confirming the IBC channel is active and transfers work reliably
+Four orthogonal states describe an asset's transfer health. Each has a distinct UX and is owned by a specific automated script (or the curator).
 
-- **`osmosis_disabled`** (boolean, default: `false`) - Explicitly disables the native IBC Deposit and Withdraw buttons.
-  - **Frontend Behavior**: Sets `disabled: true` in generated assetlist — disables native IBC Deposit/Withdraw buttons
-  - **Common Reasons**: Forcing use of an external or custom transfer method, security or liquidity concerns
+- **`osmosis_unstable`** (boolean, default: `false`). Warning-only indicator. Does not gate the deposit or withdraw flow; surfaces an alert-circle icon on the asset cell and a localised banner on the asset info page.
+  - **Frontend output**: `unstable: true`
+  - **Common causes**: IBC client unstable, source chain killed, sustained low liquidity/volume, manual flag set during an incident
+  - **Companion field**: `osmosis_unstable_reason` (enum, see below) drives the localised banner. The existing `tooltip_message` field is reused for curator free-text.
+
+- **`osmosis_unstable_reason`** (enum: `"ibc_client" | "source_chain_killed" | "market" | "manual"`). Closed-set reason for `osmosis_unstable`. Each value maps to a localised string in the frontend.
+  - **Owners**: `ibc_client` and `source_chain_killed` are owned by `check_ibc_clients.mjs`. `market` is owned by `check_market_health.mjs`. `manual` is the curator's escape hatch; automation never overwrites or clears it.
+
+- **`osmosis_disabled`** (boolean, default: `false`). Internal-deposit UX override. The native flow is skipped in favour of routing the user to an external provider (Skip, Squid, Composable, etc.). **Not** a kill switch; for that, use the halt flags below.
+  - **Frontend output**: `disabled: true`
+  - **Common reasons**: an asset that is only safely transferable through a partner UI (Composable PICA, Wormhole BTC, alloyed asset originators).
+
+- **`osmosis_halt_deposits`** (boolean, default: `false`). Kill switch for the **deposit** direction. The asset-page Deposit button is greyed; the bridge flow renders a "deposits halted" screen with no external-provider fallback. Withdrawals remain available unless `osmosis_halt_withdrawals` is also set.
+  - **Frontend output**: `haltDeposits: true`
+  - **Companion field**: `osmosis_deposit_halt_reason` drives the localised banner.
+
+- **`osmosis_deposit_halt_reason`** (enum: `"bridge_down" | "extended_unstable_market" | "planned_shutdown" | "source_chain_killed" | "manual"`).
+  - **Owners**: `bridge_down` and `source_chain_killed` are owned by `check_ibc_clients.mjs`. `extended_unstable_market` is owned by `check_extended_halts.mjs` (which sets the flag and clears it on the 1-day recovery branch). `check_market_health.mjs` may also clear an `extended_unstable_market` halt as part of its market-recovery flow, but never sets it. `planned_shutdown` is owned by `check_extended_halts.mjs`. `manual` is curator-only.
+
+- **`osmosis_halt_withdrawals`** (boolean, default: `false`). Kill switch for the **withdraw** direction.
+  - **Frontend output**: `haltWithdrawals: true`
+  - **Companion field**: `osmosis_withdrawal_halt_reason` (enum: `"bridge_down" | "source_chain_killed" | "manual"`).
+
+- **`planned_shutdown_date`** (string, ISO 8601 UTC, optional). Date when the asset is scheduled to be shut down. When the date is within 14 days, `check_extended_halts.mjs` pre-emptively sets `osmosis_halt_deposits=true` with reason `planned_shutdown`.
+
+**Tooltip override / curator lock.** The existing `tooltip_message` field doubles as the override signal for automation. If any asset has a non-empty `tooltip_message`, **no automated script will modify its halt or unstable flags** (the curator has taken ownership). Use this when you want to set a halt manually with bespoke context, or when you want to prevent the automated lifecycle from clearing a flag during recovery.
+
+**Reason-vocabulary contract.** Each automated script only modifies flags whose current reason value it owns (see "Owners" above). This means `check_ibc_clients` will never overwrite a `manual` halt or an `extended_unstable_market` halt that another script set. To release a manual override, clear `tooltip_message` and either set the reason back to one the relevant script owns, or remove the flag and let the script re-derive it on the next run.
 
 - **`transfer_methods`** (array) - Custom transfer configurations for assets requiring special handling.
   - Should be included whenever basic IBC transfer cannot carry out an interchain transfer
@@ -211,7 +233,7 @@ For complete schema definitions, see `zone_assets.schema.json`.
 ```
 **Result**: Visible only with "Show Unverified Assets" toggle, native IBC works.
 
-#### Scenario 3: Unreliable IBC - Needs External Interface
+#### Scenario 3: Asset with an unstable IBC channel (warning only)
 ```json
 {
   "chain_name": "genesisl1",
@@ -219,12 +241,13 @@ For complete schema definitions, see `zone_assets.schema.json`.
   "path": "transfer/channel-253/el1",
   "osmosis_verified": false,
   "osmosis_unstable": true,
+  "osmosis_unstable_reason": "ibc_client",
   "_comment": "GenesisL1 $L1"
 }
 ```
-**Result**: Warning indicator shown on asset. Add `osmosis_disabled: true` to also disable native IBC buttons.
+**Result**: Warning indicator (alert-circle icon) shown next to the asset symbol. Both deposit and withdraw flows still work; the frontend renders a localised banner explaining the cause. Typically auto-set by `check_ibc_clients.mjs`.
 
-**To enable native IBC**: Remove `osmosis_unstable` after confirming channels work reliably.
+**To enable native IBC fully**: `check_ibc_clients.mjs` clears `osmosis_unstable` automatically once both IBC clients are Active again. To force-clear, remove the flag manually.
 
 #### Scenario 4: Asset with Custom Transfer Method
 ```json
@@ -246,7 +269,7 @@ For complete schema definitions, see `zone_assets.schema.json`.
 ```
 **Result**: Shows both native IBC and Squid Router options.
 
-#### Scenario 5: Intentionally Disabled Transfers
+#### Scenario 5: Asset routed via external provider only (`osmosis_disabled`)
 ```json
 {
   "chain_name": "composable",
@@ -264,27 +287,73 @@ For complete schema definitions, see `zone_assets.schema.json`.
   "_comment": "Picasso $PICA - use custom interface only"
 }
 ```
-**Result**: Native IBC disabled, shows only Picasso App transfer method.
+**Result**: Native flow is skipped; user is routed straight to the Picasso App. **Both** deposit and withdraw still work, just via the external provider.
 
-### Decision Guide: Enabling Native IBC Transfers
+#### Scenario 6: Deposits halted, withdrawals still open
+```json
+{
+  "chain_name": "namada",
+  "base_denom": "unam",
+  "path": "transfer/channel-XXXX/unam",
+  "osmosis_verified": true,
+  "osmosis_halt_deposits": true,
+  "osmosis_deposit_halt_reason": "manual",
+  "tooltip_message": "Deposits paused pending Namada IBC v0.x release.",
+  "_comment": "Namada $NAM"
+}
+```
+**Result**: Deposit button greyed on every surface (asset page, portfolio, bridge). Bridge flow shows "Deposits halted" with the tooltip text. Withdrawals work normally. The `manual` reason + non-empty `tooltip_message` together lock the halt against any automation.
 
-**Question: Why isn't my asset showing native deposit/withdraw buttons?**
+#### Scenario 7: Asset halted in both directions (incident response)
+```json
+{
+  "chain_name": "examplehub",
+  "base_denom": "uex",
+  "path": "transfer/channel-XXXX/uex",
+  "osmosis_unstable": true,
+  "osmosis_unstable_reason": "manual",
+  "osmosis_halt_deposits": true,
+  "osmosis_deposit_halt_reason": "manual",
+  "osmosis_halt_withdrawals": true,
+  "osmosis_withdrawal_halt_reason": "manual",
+  "tooltip_message": "Exploit response, working with the team. Status: https://status.example.com",
+  "_comment": "Example $EX - halted"
+}
+```
+**Result**: All transfer flows blocked, banner explains the cause, automation leaves the asset alone until the curator clears the tooltip and reasons.
 
-Check your asset configuration for these flags:
+### Decision Guide: Choosing the right flag
 
-1. **`osmosis_disabled: true`** → This disables native IBC buttons
-   - **Solution**: Remove this flag if you want to enable native transfers
-   - Consider: Was this set for security/liquidity management? Verify it's safe to remove
+**Question: My asset's deposit/withdraw buttons are greyed (or missing). Why?**
 
-2. **`osmosis_unstable: true`** → This shows a warning indicator on the asset
-   - The asset may still have IBC buttons enabled unless `osmosis_disabled` is also set
-   - **Solution**: Remove this flag after confirming the IBC channel is active and reliable
+Check the asset entry in order:
 
-**Question: When should I use `osmosis_unstable` vs `osmosis_disabled`?**
+1. **`osmosis_halt_deposits: true`** or **`osmosis_halt_withdrawals: true`** → that direction is halted (kill switch).
+   - **Solution**: clear the flag and its `*_halt_reason`. If `tooltip_message` is set, clearing the reason isn't enough; also clear the tooltip, otherwise automation won't pick the asset back up.
+   - **Consider**: was this auto-set by `check_ibc_clients` / `check_extended_halts`? If so, the underlying cause needs to resolve first (bridge back up, market recovers) or `check_market_health` clears it on the next passing run.
 
-- **Use `osmosis_unstable`**: When the IBC channel has reliability problems (expired client, downtime, slow relayers) — shows a warning flag to users
-- **Use `osmosis_disabled`**: When you want to disable native IBC deposit/withdraw buttons, regardless of reliability
-- **Use both**: When you want to show a warning and disable the buttons
+2. **`osmosis_disabled: true`** → native flow is skipped; the user is sent to an external provider. The button is **not** greyed in this case; it still opens the bridge flow, but the flow renders the external-provider list rather than a native quote.
+   - **Solution**: remove the flag if a native path is now available.
+
+3. **`osmosis_unstable: true`** → warning indicator only. Buttons stay enabled. If they look greyed, check 1 first.
+
+**Question: Which flag should I use?**
+
+| Symptom | Flag(s) to set |
+|---|---|
+| Warn the user but allow transfers | `osmosis_unstable` + `osmosis_unstable_reason` |
+| Force the user to a partner UI for this asset | `osmosis_disabled` |
+| Block deposits, keep withdraws (e.g. broken inbound IBC, planned migration) | `osmosis_halt_deposits` + `osmosis_deposit_halt_reason` |
+| Block withdraws, keep deposits (rare) | `osmosis_halt_withdrawals` + `osmosis_withdrawal_halt_reason` |
+| Block both directions (incident response) | both halt flags + reasons |
+
+**Question: Will automation overwrite my manual changes?**
+
+No, as long as one of the following is true:
+- The reason is set to `"manual"`, or
+- `tooltip_message` is non-empty.
+
+Both serve as curator-lock signals. To hand the asset back to automation, clear the tooltip and either change the reason to one of the script-owned values or remove the flag entirely.
 
 ## Chains
 
@@ -440,12 +509,9 @@ The `Generate All Files` bundle workflow runs automatically and includes:
   - Creates minimal entries (chain_name + comment) for chains in `zone_assets.json` not yet in `zone_chains.json`
   - Makes it easy for maintainers to add custom RPC/REST endpoints later
   - All fields default to Chain Registry values unless explicitly overridden
-- Checks IBC client health for all IBC assets and automatically updates `osmosis_unstable` in `osmosis.zone_assets.json`
-  - Sources assets from the generated frontend assetlist (catches auto-detected assets with no zone_assets entry)
-  - Sets `osmosis_unstable: true` for assets whose Osmosis-side IBC client is Expired or Frozen; adds a minimal entry if none exists
-  - Clears `osmosis_unstable` only when **both** the Osmosis-side and counterparty-side clients are confirmed Active
-  - Removes auto-added minimal entries entirely when they recover (entries with no other meaningful fields)
-  - Runs before assetlist generation so the generated frontend output reflects correct flags in the same run
+- Runs the **bridge-state check** (`check_ibc_clients.mjs`): unified detection that drives both the IBC and killed-chain branches of the lifecycle (see "Asset lifecycle automation" below).
+- Runs the **market-health check** (`check_market_health.mjs`): independent unstable track driven by Numia liquidity/volume.
+- Runs the **extended-halts check** (`check_extended_halts.mjs`): 60-day deposit halt and planned-shutdown halt.
 - Validates RPC/REST endpoints for all chains (full validation, batched 10 at a time)
   - Tracks validation results in `state/state.json` for endpoint optimization
   - Reorders endpoints based on health (working backups promoted, failed endpoints deprioritized)
@@ -466,6 +532,76 @@ Individual generation workflows can be triggered manually via GitHub Actions:
 - `Localization` - Update translations
 
 **Note on Pool Pricing:** Pool-based pricing functionality (`getPools.mjs`) exists in the codebase but is currently disabled via the `getPools = false` flag in `generate_assetlist.mjs`. This code includes pool querying, asset pricing calculations, and routing logic. It was previously used to add pricing information to generated assetlists but is not currently active. The code remains available for future re-implementation if needed.
+
+### Asset lifecycle automation
+
+When an asset stops working, it moves through a single observable timeline anchored on `state.lastDowntimeDate`. Five automated scripts cooperate to drive that timeline, each with a well-defined scope and a non-overlapping set of "reason" enum values it owns.
+
+#### The four-state model
+
+| State | Frontend effect | Set by |
+|---|---|---|
+| `osmosis_unstable` (warning only) | Alert-circle icon + localised banner; both directions still work | `check_ibc_clients`, `check_market_health`, or curator |
+| `osmosis_disabled` (external-router) | Native flow skipped; user is routed to an external provider | Curator only |
+| `osmosis_halt_deposits` (kill switch) | Deposit button greyed everywhere; bridge flow blocked, no external fallback | `check_ibc_clients`, `check_extended_halts`, or curator |
+| `osmosis_halt_withdrawals` (kill switch) | Withdraw button greyed everywhere; bridge flow blocked, no external fallback | `check_ibc_clients` or curator |
+
+Each flag has a paired `*_reason` enum field. The frontend uses the reason to pick a localised banner string. The existing `tooltip_message` field is reused for curator free-text, and a non-empty `tooltip_message` locks the asset against all automation.
+
+#### Daily timeline
+
+```
+   no flag
+      │
+      │  bridge_down detected
+      │  (IBC Expired/Frozen on either side, OR source chain status="killed")
+      ▼
+   osmosis_unstable=true, halt_deposits=true, halt_withdrawals=true
+   reasons: ibc_client | source_chain_killed
+   state.lastDowntimeDate = <now>
+      │
+      ├──── bridge_up detected (both clients Active AND chain status="live")
+      │     ▼
+      │     halt_deposits=false, halt_withdrawals=false
+      │     osmosis_unstable stays
+      │     state.lastRecoveryDate = <now>
+      │        │
+      │        │   60 days since state.lastDowntimeDate AND market still failing
+      │        ▼
+      │        halt_deposits=true (reason: extended_unstable_market)
+      │        withdrawals stay open
+      │
+      │  90 days since state.lastDowntimeDate (regardless of intervening recovery)
+      ▼
+   PR opened proposing osmosis_verified=false
+   state.lastUnverifyProposedAt = <now> (30-day cooldown)
+   On merge: only osmosis_verified flips; unstable + state history kept as record.
+```
+
+A second, independent track exists for market-driven unstable. When a verified, non-disabled asset is post-grace (23+ days past listing) and fails the market check (`liquidity < $1k && volume_24h < $100`) for 7 consecutive daily runs, it is flagged with reason `market`. The same 60/90-day timeline applies. Recovery is single-day for the halt and 7-day for the full unstable clear; on full recovery, state history is wiped.
+
+#### Scripts in the daily cron (in order)
+
+1. **`check_ibc_clients.mjs`**, the unified bridge-state check. Detects IBC client status and source chain `status="killed"`. Owns reasons `ibc_client`, `source_chain_killed` (unstable) and `bridge_down`, `source_chain_killed` (halts). Implements the flap-vs-fresh-incident rule (within 30 days of recovery = continuation; beyond = fresh incident). Includes a "manual-flip safety net" that populates `state.lastDowntimeDate` if a curator manually sets `osmosis_unstable` without one.
+
+2. **`check_market_health.mjs`**, the market track. Owns reason `market` for unstable and is the **only** writer that fully recovers an asset from market-driven instability. Skipped for unverified, disabled, and preview assets, and for assets within the 23-day post-listing grace window. Alloyed assets are evaluated normally; constituents of an alloy inherit the alloy's volume and liquidity via `max(self, alloy)` so they are not falsely flagged when their standalone Numia row reads zero but the alloy carries real activity. Constituent membership is determined from SQS pool composition (positive balance in the alloyed transmuter pool).
+
+3. **`check_extended_halts.mjs`**, the 60-day rule and planned-shutdown rule. Owns reasons `extended_unstable_market` and `planned_shutdown` for deposit halts. Pre-emptively halts deposits 14 days before a `planned_shutdown_date`.
+
+#### Weekly cron
+
+**`check_unverify_candidates.mjs`** (Mondays at 16:00 UTC, via `propose_unverify.yml`). Collects every verified asset that has been continuously unstable for 90+ days and hasn't had an unverify PR opened in the last 30 days. Flips `osmosis_verified=false` for each, writes a markdown PR body, stamps `state.lastUnverifyProposedAt` for cooldown, and the workflow opens or updates a PR on a fixed branch (`auto-unverify/weekly-candidates`). The PR requires human approval.
+
+#### On-demand utility
+
+**`asset_status_report.mjs`** (read-only, `workflow_dispatch`-triggered). Produces a six-section markdown report covering unstable assets, halt status, disabled assets, verification-borderline assets, pending unverifies in cooldown, and detected invariant violations.
+
+#### Safety mechanisms
+
+- **`--dry-run` flag.** Every writer script accepts `--dry-run`, which emits a markdown report of intended mutations without writing any file. Always use this before enabling a fresh script in CI or after a chain-registry submodule bump that might flip many chains at once.
+- **Mutation cap.** No script will write changes touching more than **10 distinct source chains** in a single run. If exceeded, the script exits with code 2 and demands a `--force` flag. This catches mass-flips from upstream regressions.
+- **Reason-vocabulary contract.** Each reason enum value has exactly one owner script (or `manual` = the curator). No two scripts ever race on the same flag.
+- **Curator lock.** Any non-empty `tooltip_message` on a halted or unstable asset is treated as curator-owned and never overwritten by automation. To release the lock, clear the tooltip.
 
 ### Pull Request Workflow
 

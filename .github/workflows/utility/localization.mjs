@@ -38,6 +38,18 @@ export const inlangInputOutput = "language_files";
 
 //-- Functions --
 
+// The inlang JSON plugin uses "." as a fixed nesting delimiter (the
+// `delimiter` config option is not exposed in v4's settings schema). For
+// asset bases that contain dots (e.g. `factory/<addr>/lab.ash`), the plugin
+// would split the key on read+write and emit a nested structure, producing
+// orphan output files like `factory%2F<addr>%2Flab.json` with a wrapping
+// `"ash"` key. To avoid that, we escape dots in keys before writing to
+// `language_files/en.json` and unescape on read in `getLocalizationOutput`.
+// `__DOT__` is unlikely to collide with any real denom segment.
+const DOT_ESCAPE = "__DOT__";
+const encodeKeyForInlang = (k) => k.replace(/\./g, DOT_ESCAPE);
+const decodeKeyFromInlang = (k) => k.replaceAll(DOT_ESCAPE, ".");
+
 export function setAssetDetailLocalizationInput(chainName, assets) {
 
   let inlangInput;
@@ -72,7 +84,7 @@ export function setAssetDetailLocalizationInput(chainName, assets) {
       const currentValue = getAssetDetail(chainName, asset.base)?.[propertyName]?.[default_localization_code];
       if (currentValue === asset[propertyName]) { return; }
 
-      inlangInput[chainName][asset.base] = {
+      inlangInput[chainName][encodeKeyForInlang(asset.base)] = {
         [propertyName]: asset[propertyName]
       };
 
@@ -151,8 +163,10 @@ export function getLocalizationOutput() {
   for (const chainName in savedTranslations) {
     const chain = savedTranslations[chainName];
 
-    for (const asset_base in chain) {
-      const localized_asset_detail_properties = chain[asset_base];
+    for (const encoded_asset_base in chain) {
+      // Reverse the dot-escape applied in setAssetDetailLocalizationInput.
+      const asset_base = decodeKeyFromInlang(encoded_asset_base);
+      const localized_asset_detail_properties = chain[encoded_asset_base];
 
       let asset_detail = getAssetDetail(chainName, asset_base) || {};
 

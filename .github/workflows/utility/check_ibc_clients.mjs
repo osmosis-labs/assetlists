@@ -364,6 +364,48 @@ function canModifyUnstable(zoneAsset) {
   return true;
 }
 
+/**
+ * Best-effort classification of *why* an asset is unstable, used by the
+ * safety-net paths when we don't have channel-walk evidence in hand.
+ * Returns the most specific script-owned reason that can be proved from
+ * static state (chain-registry status), and falls back to 'manual' for
+ * curator-flipped entries we can't classify any other way.
+ *
+ * Note: 'ibc_client' is intentionally not returned here. That reason
+ * requires positive evidence from the channel walk and should only be
+ * set on the bridge-down code path above.
+ */
+function classifyUnstableReasonForBackfill(chainName) {
+  if (getSourceChainStatus(chainName) === 'killed') return 'source_chain_killed';
+  return 'manual';
+}
+
+/**
+ * Backfill osmosis_unstable_reason on an already-unstable asset, and the
+ * matching halt reasons when the reason is `source_chain_killed`. Only
+ * writes empty fields, and only when the existing reason is empty or is
+ * one this script owns (gated by canModify*). 'manual' is treated as a
+ * fallback label for curator-flipped entries: it does NOT populate halt
+ * reasons, because we have no evidence the curator wanted deposits or
+ * withdrawals halted.
+ */
+function backfillReasons(zoneAsset, reason) {
+  if (!zoneAsset.osmosis_unstable_reason && canModifyUnstable(zoneAsset)) {
+    zoneAsset.osmosis_unstable_reason = reason;
+  }
+  if (reason !== 'source_chain_killed') return;
+  if (zoneAsset.osmosis_halt_deposits !== true &&
+      canModifyHalt(zoneAsset, 'osmosis_deposit_halt_reason')) {
+    zoneAsset.osmosis_halt_deposits = true;
+    zoneAsset.osmosis_deposit_halt_reason = reason;
+  }
+  if (zoneAsset.osmosis_halt_withdrawals !== true &&
+      canModifyHalt(zoneAsset, 'osmosis_withdrawal_halt_reason')) {
+    zoneAsset.osmosis_halt_withdrawals = true;
+    zoneAsset.osmosis_withdrawal_halt_reason = reason;
+  }
+}
+
 // ── Main ────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -645,10 +687,22 @@ async function main() {
         }
       } else {
         // Unconfirmed (e.g. counterparty status unknown, source chain status unknown).
-        // Manual-flip safety net: if marked unstable without a downtime date, populate one.
-        if (zoneAsset?.osmosis_unstable === true && !stateAsset?.lastDowntimeDate) {
-          materialiseStateAsset(state, fa.coinMinimalDenom).lastDowntimeDate = nowIso;
-          mutations.push({ kind: 'safety_net', fa });
+        // Safety net for already-unstable assets that the channel walk could not
+        // confirm: populate lastDowntimeDate (so the 90-day clock has an anchor)
+        // and best-effort backfill the unstable reason. Halt fields are backfilled
+        // on the same basis when source chain is killed.
+        if (zoneAsset?.osmosis_unstable === true) {
+          if (!stateAsset?.lastDowntimeDate) {
+            materialiseStateAsset(state, fa.coinMinimalDenom).lastDowntimeDate = nowIso;
+          }
+          const backfillReason = classifyUnstableReasonForBackfill(fa.chainName);
+          backfillReasons(zoneAsset, backfillReason);
+          mutations.push({
+            kind: 'safety_net',
+            fa,
+            reason: backfillReason,
+            haltReason: backfillReason === 'source_chain_killed' ? backfillReason : undefined,
+          });
         }
       }
     }
@@ -674,19 +728,29 @@ async function main() {
 
     const coinMinimalDenom = await calculateIbcHash(za.path);
     const stateAsset = findStateAsset(state, coinMinimalDenom);
-    if (!stateAsset?.lastDowntimeDate) {
+    const needsDowntimeDate = !stateAsset?.lastDowntimeDate;
+    const needsReasonBackfill = !za.osmosis_unstable_reason;
+
+    if (!needsDowntimeDate && !needsReasonBackfill) continue;
+
+    if (needsDowntimeDate) {
       materialiseStateAsset(state, coinMinimalDenom).lastDowntimeDate = nowIso;
-      mutations.push({
-        kind: 'safety_net',
-        fa: {
-          chainName: za.chain_name,
-          symbol: za._comment ?? za.base_denom,
-          ibcPath: za.path,
-          sourceDenom: za.base_denom,
-          coinMinimalDenom,
-        },
-      });
     }
+    const backfillReason = classifyUnstableReasonForBackfill(za.chain_name);
+    backfillReasons(za, backfillReason);
+
+    mutations.push({
+      kind: 'safety_net',
+      reason: backfillReason,
+      haltReason: backfillReason === 'source_chain_killed' ? backfillReason : undefined,
+      fa: {
+        chainName: za.chain_name,
+        symbol: za._comment ?? za.base_denom,
+        ibcPath: za.path,
+        sourceDenom: za.base_denom,
+        coinMinimalDenom,
+      },
+    });
   }
 
   // ── Mutation cap ────────────────────────────────────────────────────────────

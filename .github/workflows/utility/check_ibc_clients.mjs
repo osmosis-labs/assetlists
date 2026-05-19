@@ -18,10 +18,9 @@
 //   (curator has taken ownership).
 //
 // Usage:
-//   node check_ibc_clients.mjs [<zone_name>] [--dry-run] [--force] [--lcd <url>]
+//   node check_ibc_clients.mjs [<zone_name>] [--dry-run] [--force]
 //   Example: node check_ibc_clients.mjs osmosis-1
 //   Example: node check_ibc_clients.mjs osmosis-1 --dry-run
-//   Example: node check_ibc_clients.mjs osmosis-1 --lcd https://osmosis-lcd.publicnode.com
 //
 //   --dry-run : no writes; emits markdown report; exit 0.
 //   --force   : bypass the mutation cap (>10 distinct source chains touched).
@@ -30,7 +29,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { calculateIbcHash } from './assetlist_functions.mjs';
 
-const DEFAULT_LCD = "https://lcd.osmosis.zone";
+const LCD = "https://lcd.osmosis.zone";
 const CONCURRENCY = 5;
 const RETRY_DELAY_MS = 1500;
 const MAX_RETRIES = 3;
@@ -55,31 +54,7 @@ const FLAP_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
 const args = process.argv.slice(2);
 const dryRun = args.includes('--dry-run');
 const force = args.includes('--force');
-
-/** Pull the value of a --flag <value> pair out of argv, returning undefined
- *  if absent. Leaves the surrounding code free to default sensibly. */
-function getFlagValue(name) {
-  const i = args.indexOf(name);
-  if (i === -1 || i === args.length - 1) return undefined;
-  const v = args[i + 1];
-  return v.startsWith('--') ? undefined : v;
-}
-
-const LCD = getFlagValue('--lcd') ?? DEFAULT_LCD;
-
-// Strip recognised --flag <value> pairs and standalone --flags before
-// reading positional args, so `--lcd https://x osmosis-1` works in any order.
-const FLAG_PAIRS = new Set(['--lcd']);
-const positional = (() => {
-  const out = [];
-  for (let i = 0; i < args.length; i++) {
-    const a = args[i];
-    if (FLAG_PAIRS.has(a)) { i++; continue; }
-    if (a.startsWith('--')) continue;
-    out.push(a);
-  }
-  return out;
-})();
+const positional = args.filter((a) => !a.startsWith('--'));
 const zoneBasePath = positional[0] || 'osmosis-1';
 
 const zonePath = path.join('..', '..', '..', zoneBasePath);
@@ -125,20 +100,6 @@ function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-/** Categorise a fetch failure so the run summary can show what's actually
- *  going wrong (rate-limit vs. server error vs. network/timeout). */
-function categoriseFetchError(err, status) {
-  if (status === 429) return 'rate_limit';
-  if (typeof status === 'number' && status >= 500) return 'server_error';
-  if (typeof status === 'number' && status >= 400) return 'client_error';
-  const msg = err?.message ?? '';
-  if (/HTTP 429/.test(msg)) return 'rate_limit';
-  if (/HTTP 5\d\d/.test(msg)) return 'server_error';
-  if (/HTTP 4\d\d/.test(msg)) return 'client_error';
-  if (err?.name === 'AbortError' || /timeout|timed out/i.test(msg)) return 'timeout';
-  return 'network';
-}
-
 async function fetchJSON(url, retries = MAX_RETRIES) {
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
@@ -147,18 +108,10 @@ async function fetchJSON(url, retries = MAX_RETRIES) {
         await sleep(RETRY_DELAY_MS * attempt);
         continue;
       }
-      if (!res.ok) {
-        const e = new Error(`HTTP ${res.status} for ${url}`);
-        e.status = res.status;
-        e.errorKind = categoriseFetchError(e, res.status);
-        throw e;
-      }
+      if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
       return await res.json();
     } catch (err) {
-      if (attempt === retries) {
-        if (!err.errorKind) err.errorKind = categoriseFetchError(err);
-        throw err;
-      }
+      if (attempt === retries) throw err;
       await sleep(RETRY_DELAY_MS * attempt);
     }
   }
@@ -447,38 +400,10 @@ async function main() {
         const result = await getClientStatusForChannel(channelId);
         return { channelId, ...result, error: null };
       } catch (err) {
-        return {
-          channelId,
-          status: 'error',
-          error: err.message,
-          errorKind: err.errorKind ?? categoriseFetchError(err),
-        };
+        return { channelId, status: 'error', error: err.message };
       }
     }
   );
-
-  // Hard-fail when the LCD is essentially unusable. If ≥ 90% of channel
-  // lookups errored, we can't tell anything from this run and writing a
-  // partial state is worse than not running. Emit a per-category breakdown
-  // so the operator can tell rate-limit from server-down from timeout.
-  const errorBreakdown = {};
-  for (const r of ibcResults) {
-    if (r.status === 'error') {
-      const k = r.errorKind ?? 'unknown';
-      errorBreakdown[k] = (errorBreakdown[k] || 0) + 1;
-    }
-  }
-  const totalErrored = Object.values(errorBreakdown).reduce((a, b) => a + b, 0);
-  if (totalErrored / ibcResults.length >= 0.9) {
-    console.error(
-      `\n⛔ Aborting: ${totalErrored}/${ibcResults.length} channel lookups failed; ` +
-      `LCD appears unusable. No files written.`
-    );
-    for (const [k, v] of Object.entries(errorBreakdown)) {
-      console.error(`   ${k.padEnd(14)}: ${v}`);
-    }
-    process.exit(3);
-  }
 
   // Phase 2: counterparty checks for channels we might clear
   const cpCheckNeeded = new Map();
@@ -522,12 +447,7 @@ async function main() {
     const cm = channelMap.get(r.channelId);
 
     if (r.error) {
-      mutations.push({
-        kind: 'ibc_error',
-        channelId: r.channelId,
-        error: r.error,
-        errorKind: r.errorKind ?? 'unknown',
-      });
+      mutations.push({ kind: 'ibc_error', channelId: r.channelId, error: r.error });
       continue;
     }
 
@@ -566,17 +486,10 @@ async function main() {
 
         const before = { ...zoneAsset };
 
-        // osmosis_unstable: set the flag, and (back)fill the reason whenever
-        // it's missing. The reason can be absent on assets that were manually
-        // flagged unstable before this script started writing it, so we
-        // populate on transitions AND on already-unstable assets whose
-        // reason field is empty. canModifyUnstable still gates against
-        // curator-locked entries via tooltip_message.
-        if (canModifyUnstable(zoneAsset)) {
-          if (zoneAsset.osmosis_unstable !== true) {
+        // osmosis_unstable
+        if (zoneAsset.osmosis_unstable !== true) {
+          if (canModifyUnstable(zoneAsset)) {
             zoneAsset.osmosis_unstable = true;
-          }
-          if (!zoneAsset.osmosis_unstable_reason) {
             zoneAsset.osmosis_unstable_reason = reasonOnDown;
           }
         }
@@ -751,24 +664,14 @@ async function main() {
 
   // ── Summary ─────────────────────────────────────────────────────────────────
   const byKind = {};
-  const byErrorKind = {};
   for (const m of mutations) {
     byKind[m.kind] = (byKind[m.kind] || 0) + 1;
-    if (m.kind === 'ibc_error' && m.errorKind) {
-      byErrorKind[m.errorKind] = (byErrorKind[m.errorKind] || 0) + 1;
-    }
   }
   console.log('\n' + '='.repeat(70));
   console.log('  BRIDGE-STATE CHECK SUMMARY');
   console.log('='.repeat(70));
   for (const [kind, count] of Object.entries(byKind)) {
     console.log(`  ${kind.padEnd(20)}: ${count}`);
-  }
-  if (Object.keys(byErrorKind).length > 0) {
-    console.log('  error breakdown:');
-    for (const [k, v] of Object.entries(byErrorKind)) {
-      console.log(`    ${k.padEnd(18)}: ${v}`);
-    }
   }
   console.log(`  distinct source chains touched: ${affectedChains.size}`);
   console.log('='.repeat(70));

@@ -45261,6 +45261,57 @@
       "preview": false
     },
     {
+      "chainName": "haqq",
+      "sourceDenom": "aHAQQ",
+      "coinMinimalDenom": "ibc/FEDB33BCBD8F18D341B4683A6CF5B0BDAB1A6FAE4574C82995DFBB36344D6A45",
+      "symbol": "HAQQ",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/haqq/images/haqq.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/haqq/images/haqq.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "haqq",
+            "chainId": "haqq_11235-1",
+            "sourceDenom": "aHAQQ",
+            "port": "transfer",
+            "channelId": "channel-2"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-1575",
+            "path": "transfer/channel-1575/aHAQQ"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "haqq",
+          "sourceDenom": "aHAQQ",
+          "chainType": "cosmos",
+          "chainId": "haqq_11235-1",
+          "symbol": "HAQQ",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/haqq/images/haqq.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/haqq/images/haqq.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/FEDB33BCBD8F18D341B4683A6CF5B0BDAB1A6FAE4574C82995DFBB36344D6A45",
+      "name": "HAQQ Token",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "hazinachain",
       "sourceDenom": "uhzn",
       "coinMinimalDenom": "ibc/34D327C2D4CEECF0F3FCAE68E2DA630C1218D91C365372918A8310BF79491615",

@@ -39641,6 +39641,40 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/FEDB33BCBD8F18D341B4683A6CF5B0BDAB1A6FAE4574C82995DFBB36344D6A45",
+          "exponent": 0,
+          "aliases": [
+            "aHAQQ"
+          ]
+        },
+        {
+          "denom": "HAQQ",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/FEDB33BCBD8F18D341B4683A6CF5B0BDAB1A6FAE4574C82995DFBB36344D6A45",
+      "name": "HAQQ Token",
+      "display": "HAQQ",
+      "symbol": "HAQQ",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "haqq",
+            "base_denom": "aHAQQ",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-1575",
+            "path": "transfer/channel-1575/aHAQQ"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/34D327C2D4CEECF0F3FCAE68E2DA630C1218D91C365372918A8310BF79491615",
           "exponent": 0,
           "aliases": [

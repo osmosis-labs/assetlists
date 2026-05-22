@@ -107,7 +107,7 @@ async function main() {
     // (to keep the 90-day clock armed in case of re-flap), so a short outage
     // followed by sustained recovery would otherwise look "continuously
     // unstable for 90 days" by lastDowntimeDate alone. A recovery older than
-    // FLAP_WINDOW_MS means the asset isn't in a current incident, it would
+    // FLAP_WINDOW_MS means the asset isn't in a current incident — it would
     // have been treated as a fresh incident if it went down again.
     if (stateAsset.lastRecoveryDate) {
       const recoveredMs = nowMs - new Date(stateAsset.lastRecoveryDate).getTime();

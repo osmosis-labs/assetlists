@@ -986,3 +986,54 @@ After emergency resolved:
    # Post in Discord if user-facing
    # Update status if posted outage notice
 ```
+
+---
+
+### RB006: Manually override an auto-set halt
+
+**Use when**: an automated halt (e.g. reason `bridge_down`) is in effect but you want to keep the asset halted with bespoke context, or override the cause description even though automation would otherwise clear the flag on recovery.
+
+#### Procedure
+
+Edit the zone_assets entry directly:
+
+```json
+{
+  "chain_name": "examplehub",
+  "base_denom": "uex",
+  "osmosis_halt_deposits": true,
+  "osmosis_deposit_halt_reason": "manual",
+  "tooltip_message": "Deposits paused pending the v0.5 chain upgrade scheduled 2026-06-10. Status: https://status.example.com"
+}
+```
+
+Two changes from an auto-set halt:
+
+1. The `*_halt_reason` is set to `manual`. Script-owned reasons get auto-cleared on recovery; `manual` does not.
+2. `tooltip_message` is non-empty. Any tooltip locks the asset against all automation.
+
+Commit and let the daily cron run. Verify the asset is now ignored by automation by checking the next workflow summary's "Manual halts currently in effect" section.
+
+#### Release the override
+
+Clear `tooltip_message` and set the reason back to a script-owned value (or just remove both flags entirely). The next daily run will re-derive the state.
+
+---
+
+### RB007: Weekly unverify PR, close vs merge
+
+**Use when**: the weekly `auto-unverify/weekly-candidates` PR is open and you need to decide what to do.
+
+#### Procedure
+
+The PR body lists each candidate with days unstable, reason, last downtime / recovery, halt status, liquidity, and volume. For each candidate:
+
+- **Merge if** the asset has been broken for 90+ days, the underlying issue isn't expected to resolve, and the market data confirms no real activity. Merge flips `osmosis_verified=false`; all history fields stay as record.
+- **Close (don't merge) if** the asset is recovering, has an active community working on the fix, or there's a strategic reason to keep it verified. Closing triggers a 30-day cooldown, so the asset won't be re-proposed until then.
+- **Edit the PR (remove rows) if** you want to unverify some but not all candidates. Use `git rebase` or commit a follow-up to the same branch, then merge.
+
+#### Notes
+
+- `osmosis_unstable` and the state history fields are preserved on unverify. This is intentional, so a later re-verification carries the prior incident record.
+- A re-verified asset that's still carrying stale dates should have them manually cleared at re-verify time.
+- The cooldown is per-asset, not per-PR. Closing the PR stamps `state.lastUnverifyProposedAt` for every candidate that was in the PR.

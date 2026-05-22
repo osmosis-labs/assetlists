@@ -263,7 +263,7 @@ jobs:
 
           # Helper: emit "- {emoji} {label} ({count}): {comma-joined items}".
           # Items are read from the supplied file (one per line). If the file
-          # is empty/missing, prints ", none" instead. For lifecycle-script
+          # is empty/missing, prints "— none" instead. For lifecycle-script
           # files keyed by "chain|symbol", takes only the symbol column.
           emit_row() {
             local emoji="$1" label="$2" file="$3" mode="$4"
@@ -278,7 +278,7 @@ jobs:
               fi
             fi
             if [ "$count" = "0" ]; then
-              echo "- ${emoji} **${label}**: none" >> workflow-summary.md
+              echo "- ${emoji} **${label}** — none" >> workflow-summary.md
             else
               echo "- ${emoji} **${label} (${count}):** ${items}" >> workflow-summary.md
             fi

@@ -253,8 +253,13 @@ function getCounterpartyRestEndpoints(chainName, zoneChainsByName, chainlistByNa
   return endpoints;
 }
 
-async function getCounterpartyClientStatus(chainName, channelId, zoneChainsByName, chainlistByName, deadEndpoints) {
+async function getCounterpartyClientStatus(chainName, channelId, port, zoneChainsByName, chainlistByName, deadEndpoints) {
   if (!chainName || !channelId) return 'unknown';
+  // Default to 'transfer' for plain bank-denom IBC. cw20 wrappers on Secret
+  // Network (and similar wasm-bound IBC variants) bind the counterparty
+  // channel to a contract-specific port like `wasm.secret1...`; the lookup
+  // must target that exact port or it will return nothing.
+  const counterpartyPort = port || 'transfer';
 
   const endpoints = getCounterpartyRestEndpoints(chainName, zoneChainsByName, chainlistByName);
   if (endpoints === null) return 'killed';
@@ -265,7 +270,7 @@ async function getCounterpartyClientStatus(chainName, channelId, zoneChainsByNam
 
     try {
       const channelData = await fetchJSONWithTimeout(
-        `${endpoint}/ibc/core/channel/v1/channels/${channelId}/ports/transfer`
+        `${endpoint}/ibc/core/channel/v1/channels/${channelId}/ports/${counterpartyPort}`
       );
       const connectionId = channelData.channel?.connection_hops?.[0];
       if (!connectionId) continue;
@@ -452,7 +457,13 @@ async function main() {
     if (asset.path) zoneByPath.set(asset.path, asset);
   }
 
-  // Group frontend IBC assets by channel.
+  // Group frontend IBC assets by Osmosis-side channel id, but record
+  // the counterparty (chainName, channelId, port) on each asset entry
+  // rather than once per channel. A single Osmosis channel can be shared
+  // by multiple asset variants whose counterparty side uses different
+  // ports (e.g. plain `transfer` for native denoms vs. `wasm.<contract>`
+  // for cw20 wrappers on Secret Network); collapsing them per-channel
+  // drops one variant on the floor.
   const channelMap = new Map();
   for (const asset of frontendData.assets ?? []) {
     const ibcMethod = asset.transferMethods?.find((m) => m.type === 'ibc');
@@ -460,11 +471,7 @@ async function main() {
 
     const channelId = ibcMethod.chain.channelId;
     if (!channelMap.has(channelId)) {
-      channelMap.set(channelId, {
-        assets: [],
-        counterpartyChainName: ibcMethod.counterparty?.chainName,
-        counterpartyChannelId: ibcMethod.counterparty?.channelId,
-      });
+      channelMap.set(channelId, { assets: [] });
     }
     channelMap.get(channelId).assets.push({
       chainName: asset.chainName,
@@ -473,6 +480,9 @@ async function main() {
       symbol: asset.symbol,
       channelId,
       ibcPath: ibcMethod.chain.path,
+      counterpartyChainName: ibcMethod.counterparty?.chainName,
+      counterpartyChannelId: ibcMethod.counterparty?.channelId,
+      counterpartyPort: ibcMethod.counterparty?.port,
     });
   }
 
@@ -522,38 +532,51 @@ async function main() {
     process.exit(3);
   }
 
-  // Phase 2: counterparty checks for channels we might clear
+  // Phase 2: counterparty checks for assets we might clear.
+  // Key by (counterpartyChainName, counterpartyChannelId, counterpartyPort)
+  // since one Osmosis channel can host multiple counterparty triples
+  // (e.g. plain transfer vs. wasm-port cw20 wrappers). The status of a
+  // given triple is shared across every asset that uses it.
+  const cpKey = (chainName, channelId, port) =>
+    `${chainName}|${channelId}|${port || 'transfer'}`;
+
   const cpCheckNeeded = new Map();
   for (const r of ibcResults) {
     if (r.error || r.status !== 'Active') continue;
     const cm = channelMap.get(r.channelId);
-    const hasUnstableAssets = cm.assets.some(
-      (fa) => zoneByPath.get(fa.ibcPath)?.osmosis_unstable === true
-    );
-    if (hasUnstableAssets && cm.counterpartyChainName && cm.counterpartyChannelId) {
-      cpCheckNeeded.set(r.channelId, cm);
+    for (const fa of cm.assets) {
+      if (zoneByPath.get(fa.ibcPath)?.osmosis_unstable !== true) continue;
+      if (!fa.counterpartyChainName || !fa.counterpartyChannelId) continue;
+      const key = cpKey(fa.counterpartyChainName, fa.counterpartyChannelId, fa.counterpartyPort);
+      if (cpCheckNeeded.has(key)) continue;
+      cpCheckNeeded.set(key, {
+        chainName: fa.counterpartyChainName,
+        channelId: fa.counterpartyChannelId,
+        port: fa.counterpartyPort,
+      });
     }
   }
 
   const cpStatuses = new Map();
   if (cpCheckNeeded.size > 0) {
-    console.log(`Checking counterparty IBC client for ${cpCheckNeeded.size} channel(s)...\n`);
+    console.log(`Checking counterparty IBC client for ${cpCheckNeeded.size} counterparty path(s)...\n`);
     const deadEndpoints = new Set();
     const cpResults = await processInBatches(
       [...cpCheckNeeded.entries()],
       CONCURRENCY,
-      async ([channelId, cm]) => {
+      async ([key, cp]) => {
         const status = await getCounterpartyClientStatus(
-          cm.counterpartyChainName,
-          cm.counterpartyChannelId,
+          cp.chainName,
+          cp.channelId,
+          cp.port,
           zoneChainsByName,
           chainlistByName,
           deadEndpoints
         );
-        return [channelId, status];
+        return [key, status];
       }
     );
-    for (const [channelId, status] of cpResults) cpStatuses.set(channelId, status);
+    for (const [key, status] of cpResults) cpStatuses.set(key, status);
   }
 
   // Phase 3: apply mutations (collected first, written later so dry-run can short-circuit)
@@ -574,10 +597,16 @@ async function main() {
     }
 
     const osmosisDown = r.status !== 'Active';
-    const cpStatus = cpStatuses.get(r.channelId); // undefined if no unstable assets
 
     for (const fa of cm.assets) {
-      // Per-asset evaluation, since source chain status is per-chain.
+      // Per-asset evaluation, since source chain status is per-chain
+      // and counterparty status is per-triple (chain, channel, port).
+      // Assets sharing the same Osmosis channel can resolve to different
+      // counterparty paths (e.g. cw20 wrappers vs. plain bank denoms).
+      const cpStatus = (fa.counterpartyChainName && fa.counterpartyChannelId)
+        ? cpStatuses.get(cpKey(fa.counterpartyChainName, fa.counterpartyChannelId, fa.counterpartyPort))
+        : undefined; // undefined when no counterparty check was needed for this asset
+
       const sourceStatus = getSourceChainStatus(fa.chainName);
       const chainKilled = sourceStatus === 'killed';
       const chainLive = sourceStatus === 'live';

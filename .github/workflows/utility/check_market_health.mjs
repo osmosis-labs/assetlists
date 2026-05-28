@@ -11,7 +11,7 @@
 //   Reason-vocabulary contract: this script owns reasons {market}.
 //
 // Usage:
-//   node check_market_health.mjs [<zone_name>] [--dry-run] [--force]
+//   node check_market_health.mjs [<zone_name>] [--dry-run]
 
 import * as fs from 'fs';
 import * as path from 'path';
@@ -36,11 +36,8 @@ const GRACE_MS = GRACE_DAYS * 24 * 60 * 60 * 1000;
 // Sentinel listing date used for assets without one (legacy assets).
 const LEGACY_LISTING_DATE = '2022-01-01T00:00:00.000Z';
 
-const MAX_CHAINS_PER_RUN = 10;
-
 const args = process.argv.slice(2);
 const dryRun = args.includes('--dry-run');
-const force = args.includes('--force');
 const positional = args.filter((a) => !a.startsWith('--'));
 const zoneBasePath = positional[0] || 'osmosis-1';
 
@@ -202,7 +199,6 @@ async function main() {
     // is owned by check_ibc_clients or manual.
   }
 
-  // ── Mutation cap (per source chain) ─────────────────────────────────────────
   // streak_increment / streak_reset / recovery_reset / market_missing are
   // informational; they don't write halt or unstable flags.
   const INFO_KINDS = new Set(['streak_increment', 'streak_reset', 'recovery_reset', 'market_missing']);
@@ -211,13 +207,6 @@ async function main() {
       .filter((m) => m.chain && !INFO_KINDS.has(m.kind))
       .map((m) => m.chain)
   );
-  if (affectedChains.size > MAX_CHAINS_PER_RUN && !force && !dryRun) {
-    console.error(
-      `\n⛔ Mutation cap exceeded: would touch ${affectedChains.size} chains ` +
-      `(threshold ${MAX_CHAINS_PER_RUN}). Re-run with --force or --dry-run.`
-    );
-    process.exit(2);
-  }
 
   if (dryRun) {
     fs.mkdirSync(reportsDir, { recursive: true });

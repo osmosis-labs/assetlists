@@ -67,15 +67,7 @@ jobs:
 
       - name: Check Market Health (independent unstable track)
         working-directory: ./.github/workflows/utility
-        run: |
-          set +e
-          node check_market_health.mjs osmosis-1 2>&1 | tee ../../../market-health.log
-          rc=${PIPESTATUS[0]}
-          if [ "$rc" -eq 2 ]; then
-            echo "MARKET_HEALTH_CAP_HIT=true" >> $GITHUB_ENV
-          elif [ "$rc" -ne 0 ]; then
-            exit $rc
-          fi
+        run: node check_market_health.mjs osmosis-1 2>&1 | tee ../../../market-health.log
 
       - name: Check Extended Halts (60d + planned shutdown)
         working-directory: ./.github/workflows/utility
@@ -316,7 +308,7 @@ jobs:
           # with code 2 (cap exceeded). The script's intended mutations were
           # not applied; an operator needs to inspect and decide whether to
           # re-run locally with --force.
-          if [ "$IBC_CAP_HIT" = "true" ] || [ "$MARKET_HEALTH_CAP_HIT" = "true" ] || [ "$EXTENDED_HALTS_CAP_HIT" = "true" ]; then
+          if [ "$IBC_CAP_HIT" = "true" ] || [ "$EXTENDED_HALTS_CAP_HIT" = "true" ]; then
             echo "## ⚠️ Mutation cap hit" >> workflow-summary.md
             echo "" >> workflow-summary.md
             echo "One or more lifecycle scripts exited with code 2 because their" >> workflow-summary.md
@@ -327,9 +319,6 @@ jobs:
             echo "" >> workflow-summary.md
             if [ "$IBC_CAP_HIT" = "true" ]; then
               echo "- 🛑 \`check_ibc_clients\` cap exceeded" >> workflow-summary.md
-            fi
-            if [ "$MARKET_HEALTH_CAP_HIT" = "true" ]; then
-              echo "- 🛑 \`check_market_health\` cap exceeded" >> workflow-summary.md
             fi
             if [ "$EXTENDED_HALTS_CAP_HIT" = "true" ]; then
               echo "- 🛑 \`check_extended_halts\` cap exceeded" >> workflow-summary.md

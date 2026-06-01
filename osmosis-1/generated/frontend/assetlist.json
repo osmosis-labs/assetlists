@@ -1513,9 +1513,12 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": true,
-      "unstableReason": "market",
+      "unstableReason": "manual",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
       "preview": false,
+      "tooltipMessage": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed.",
       "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
     },
     {
@@ -3762,13 +3765,18 @@
       "name": "Wrapped Bitcoin (Ethereum via Gravity Bridge)",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "manual",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
       "preview": false,
+      "tooltipMessage": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed.",
       "sortWith": {
         "chainName": "gravitybridge",
         "sourceDenom": "ugrav"
-      }
+      },
+      "lastDowntimeDate": "2026-06-01T10:51:59.802Z"
     },
     {
       "chainName": "gravitybridge",
@@ -3847,9 +3855,12 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": true,
-      "unstableReason": "market",
+      "unstableReason": "manual",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
       "preview": false,
+      "tooltipMessage": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed.",
       "sortWith": {
         "chainName": "gravitybridge",
         "sourceDenom": "ugrav"
@@ -3924,13 +3935,18 @@
       "name": "USDC (Ethereum via Gravity Bridge)",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "manual",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
       "preview": false,
+      "tooltipMessage": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed.",
       "sortWith": {
         "chainName": "gravitybridge",
         "sourceDenom": "ugrav"
-      }
+      },
+      "lastDowntimeDate": "2026-06-01T10:51:59.802Z"
     },
     {
       "chainName": "gravitybridge",
@@ -3997,13 +4013,18 @@
       "name": "Dai Stablecoin (Gravity Bridge)",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "manual",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
       "preview": false,
+      "tooltipMessage": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed.",
       "sortWith": {
         "chainName": "gravitybridge",
         "sourceDenom": "ugrav"
-      }
+      },
+      "lastDowntimeDate": "2026-06-01T10:51:59.802Z"
     },
     {
       "chainName": "gravitybridge",
@@ -4074,9 +4095,12 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": true,
-      "unstableReason": "market",
+      "unstableReason": "manual",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
       "preview": false,
+      "tooltipMessage": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed.",
       "sortWith": {
         "chainName": "gravitybridge",
         "sourceDenom": "ugrav"
@@ -18818,13 +18842,18 @@
       "name": "Paxos Gold (Gravity Bridge)",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "manual",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
       "preview": false,
+      "tooltipMessage": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed.",
       "sortWith": {
         "chainName": "gravitybridge",
         "sourceDenom": "ugrav"
-      }
+      },
+      "lastDowntimeDate": "2026-06-01T10:51:59.802Z"
     },
     {
       "chainName": "migaloo",
@@ -66754,6 +66783,55 @@
       ],
       "variantGroupKey": "ibc/CA856981A3BA81CB5D4D54B146DD1E6F50E0F6A11A0E381CE26C8EDBC8AD48AA",
       "name": "Eris Protocol LUNA/ampLUNA ampLP",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "wolochain",
+      "sourceDenom": "uwolo",
+      "coinMinimalDenom": "ibc/D09120C7085DFA412DF77608DAD3A4797F5F097A038DA0C2E1D1426FC9CD836D",
+      "symbol": "WOLO",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/wolochain/images/wolo.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "wolochain",
+            "chainId": "wolo-1",
+            "sourceDenom": "uwolo",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-110224",
+            "path": "transfer/channel-110224/uwolo"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "wolochain",
+          "sourceDenom": "uwolo",
+          "chainType": "cosmos",
+          "chainId": "wolo-1",
+          "symbol": "WOLO",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/wolochain/images/wolo.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/D09120C7085DFA412DF77608DAD3A4797F5F097A038DA0C2E1D1426FC9CD836D",
+      "name": "WoloChain",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

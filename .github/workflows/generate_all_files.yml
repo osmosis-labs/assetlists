@@ -289,14 +289,15 @@ jobs:
           emit_row "🔴" "IBC flagged unstable" /tmp/lc-ibcFlagged.txt symbol
           emit_row "🟢" "IBC cleared" /tmp/lc-ibcCleared.txt symbol
 
-          # Manual halts: list chain names of assets whose halt reason is
-          # "manual" on either direction. Distinct chains, sorted.
+          # Manual halts: list chain names of assets that were manually flagged
+          # unstable (operator-driven, e.g. a bridge compromise) as distinct
+          # from automatic halts (ibc_client, market, source_chain_killed).
+          # The "manual" marker lives on osmosis_unstable_reason; the
+          # *_halt_reason fields carry the cause (e.g. bridge_down), never
+          # the literal "manual". Distinct chains, sorted.
           MANUAL_HALT_CHAINS=$(jq -r '
             .assets
-            | map(select(
-                (.osmosis_deposit_halt_reason == "manual")
-                or (.osmosis_withdrawal_halt_reason == "manual")
-              ))
+            | map(select(.osmosis_unstable_reason == "manual"))
             | map(.chain_name) | unique | .[]
           ' osmosis-1/osmosis.zone_assets.json 2>/dev/null > /tmp/lc-manualHalts.txt && echo ok || echo err)
           emit_row "⚠️" "Manual halts in effect" /tmp/lc-manualHalts.txt name
@@ -485,27 +486,27 @@ jobs:
           echo "## Manual halts currently in effect" >> workflow-summary.md
           echo "" >> workflow-summary.md
 
+          # Select manually-flagged assets via osmosis_unstable_reason, then
+          # report which direction(s) are actually halted and the cause from
+          # the *_halt_reason fields (e.g. bridge_down).
           MANUAL_HALTS=$(jq -r '
             .assets
-            | map(select(
-                (.osmosis_deposit_halt_reason == "manual")
-                or (.osmosis_withdrawal_halt_reason == "manual")
-              ))
+            | map(select(.osmosis_unstable_reason == "manual"))
           ' osmosis-1/osmosis.zone_assets.json)
           MANUAL_HALT_COUNT=$(echo "$MANUAL_HALTS" | jq 'length')
 
           if [ "$MANUAL_HALT_COUNT" -eq 0 ]; then
             echo "_None._" >> workflow-summary.md
           else
-            echo "| Chain | Base denom | Direction | Tooltip |" >> workflow-summary.md
-            echo "|-------|-----------|-----------|---------|" >> workflow-summary.md
+            echo "| Chain | Base denom | Direction | Reason | Tooltip |" >> workflow-summary.md
+            echo "|-------|-----------|-----------|--------|---------|" >> workflow-summary.md
             echo "$MANUAL_HALTS" | jq -r '
               .[] | (
-                (if .osmosis_deposit_halt_reason == "manual" then
-                   "| \(.chain_name) | \(.base_denom) | deposit | \(.tooltip_message // "") |"
+                (if .osmosis_halt_deposits == true then
+                   "| \(.chain_name) | \(.base_denom) | deposit | \(.osmosis_deposit_halt_reason // "") | \(.tooltip_message // "") |"
                  else "" end),
-                (if .osmosis_withdrawal_halt_reason == "manual" then
-                   "| \(.chain_name) | \(.base_denom) | withdrawal | \(.tooltip_message // "") |"
+                (if .osmosis_halt_withdrawals == true then
+                   "| \(.chain_name) | \(.base_denom) | withdrawal | \(.osmosis_withdrawal_halt_reason // "") | \(.tooltip_message // "") |"
                  else "" end)
               ) | select(. != "")
             ' >> workflow-summary.md

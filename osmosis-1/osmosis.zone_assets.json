@@ -129,7 +129,9 @@
           "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x4fabb145d64652a948d72533023f6e7a623c7c53,ibc/6329DD8CF31A334DD5BE3F68C846C9FE313281362B37686A62343BAC1EB1546D",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/6329DD8CF31A334DD5BE3F68C846C9FE313281362B37686A62343BAC1EB1546D,0x4fabb145d64652a948d72533023f6e7a623c7c53"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "cosmoshub",
@@ -250,7 +252,13 @@
           "withdraw_url": "https://app.evmos.org/assets"
         }
       ],
-      "_comment": "Evmos $EVMOS"
+      "_comment": "Evmos $EVMOS",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "kava",
@@ -322,7 +330,12 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "pSTAKE Finance $PSTAKE"
+      "_comment": "pSTAKE Finance $PSTAKE",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "tooltip_message": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed."
     },
     {
       "chain_name": "akash",
@@ -437,7 +450,9 @@
       "base_denom": "ubcna",
       "path": "transfer/channel-51/ubcna",
       "osmosis_verified": true,
-      "_comment": "BitCanna $BCNA"
+      "_comment": "BitCanna $BCNA",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "bitsong",
@@ -595,7 +610,9 @@
       "categories": [
         "defi"
       ],
-      "_comment": "UX Chain $UMEE"
+      "_comment": "UX Chain $UMEE",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "gravitybridge",
@@ -809,7 +826,12 @@
           "withdraw_url": "https://bridge.blockscape.network/?from=osmosis&to=gravitybridge"
         }
       ],
-      "_comment": "Wrapped Bitcoin (Ethereum via Gravity Bridge) $WBTC.eth.grv"
+      "_comment": "Wrapped Bitcoin (Ethereum via Gravity Bridge) $WBTC.eth.grv",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "tooltip_message": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed."
     },
     {
       "chain_name": "gravitybridge",
@@ -824,7 +846,12 @@
           "withdraw_url": "https://bridge.blockscape.network/?from=osmosis&to=gravitybridge"
         }
       ],
-      "_comment": "Ethereum (Gravity Bridge) $ETH.grv"
+      "_comment": "Ethereum (Gravity Bridge) $ETH.grv",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "tooltip_message": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed."
     },
     {
       "chain_name": "gravitybridge",
@@ -842,7 +869,12 @@
       "categories": [
         "stablecoin"
       ],
-      "_comment": "USDC (Ethereum via Gravity Bridge) $USDC.eth.grv"
+      "_comment": "USDC (Ethereum via Gravity Bridge) $USDC.eth.grv",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "tooltip_message": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed."
     },
     {
       "chain_name": "gravitybridge",
@@ -860,7 +892,12 @@
       "categories": [
         "stablecoin"
       ],
-      "_comment": "Dai Stablecoin (Gravity Bridge) $DAI.grv"
+      "_comment": "Dai Stablecoin (Gravity Bridge) $DAI.grv",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "tooltip_message": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed."
     },
     {
       "chain_name": "gravitybridge",
@@ -878,7 +915,12 @@
       "categories": [
         "stablecoin"
       ],
-      "_comment": "Tether USD (Ethereum via Gravity Bridge) $USDT.eth.grv"
+      "_comment": "Tether USD (Ethereum via Gravity Bridge) $USDT.eth.grv",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "tooltip_message": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed."
     },
     {
       "chain_name": "juno",
@@ -925,7 +967,9 @@
       "categories": [
         "defi"
       ],
-      "_comment": "JunoSwap $RAW"
+      "_comment": "JunoSwap $RAW",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "meme",
@@ -962,7 +1006,9 @@
       "base_denom": "uluna",
       "path": "transfer/channel-251/uluna",
       "osmosis_verified": true,
-      "_comment": "Terra $LUNA"
+      "_comment": "Terra $LUNA",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "rizon",
@@ -1092,7 +1138,9 @@
           "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2,ibc/D27DDDF34BB47E5D5A570742CC667DE53277867116CCCA341F27785E899A70F3",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/D27DDDF34BB47E5D5A570742CC667DE53277867116CCCA341F27785E899A70F3,0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "axelar",
@@ -1133,7 +1181,9 @@
           "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce,ibc/19305E20681911F14D1FB275E538CDE524C3BF88CF9AE5D5F78F4D4DA05E85B2",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/19305E20681911F14D1FB275E538CDE524C3BF88CF9AE5D5F78F4D4DA05E85B2,0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "kujira",
@@ -1261,7 +1311,9 @@
           "deposit_url": "https://app.squidrouter.com/?chains=1284,osmosis-1&tokens=0xacc15dc74880c9944775448304b263d191c6077f,ibc/1E26DB0E5122AED464D98462BD384FCCB595732A66B3970AE6CE0B58BAE0FC49",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1284&tokens=ibc/1E26DB0E5122AED464D98462BD384FCCB595732A66B3970AE6CE0B58BAE0FC49,0xacc15dc74880c9944775448304b263d191c6077f"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "juno",
@@ -1281,7 +1333,9 @@
       "categories": [
         "gaming"
       ],
-      "_comment": "GKey $GKEY"
+      "_comment": "GKey $GKEY",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "crescent",
@@ -1410,7 +1464,9 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Stride Staked STARS $stSTARS"
+      "_comment": "Stride Staked STARS $stSTARS",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "juno",
@@ -1454,7 +1510,9 @@
       "base_denom": "utori",
       "path": "transfer/channel-362/utori",
       "osmosis_verified": true,
-      "_comment": "Teritori $TORI"
+      "_comment": "Teritori $TORI",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "stride",
@@ -1512,7 +1570,9 @@
         "stablecoin",
         "defi"
       ],
-      "_comment": "USK $USK"
+      "_comment": "USK $USK",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "unification",
@@ -1645,7 +1705,9 @@
         "stablecoin",
         "defi"
       ],
-      "_comment": "CMST $CMST"
+      "_comment": "CMST $CMST",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "imversed",
@@ -1791,14 +1853,18 @@
           "deposit_url": "https://app.squidrouter.com/?chains=250,osmosis-1&tokens=0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83,ibc/5E2DFDF1734137302129EA1C1BA21A580F96F778D4F021815EA4F6DB378DA1A4",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,250&tokens=ibc/5E2DFDF1734137302129EA1C1BA21A580F96F778D4F021815EA4F6DB378DA1A4,0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "canto",
       "base_denom": "acanto",
       "path": "transfer/channel-550/acanto",
       "osmosis_verified": true,
-      "_comment": "Canto $CANTO"
+      "_comment": "Canto $CANTO",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "quicksilver",
@@ -1808,7 +1874,9 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Quicksilver Liquid Staked STARS $qSTARS"
+      "_comment": "Quicksilver Liquid Staked STARS $qSTARS",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "juno",
@@ -1818,7 +1886,9 @@
       "categories": [
         "defi"
       ],
-      "_comment": "Wynd DAO Governance Token $WYND"
+      "_comment": "Wynd DAO Governance Token $WYND",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "axelar",
@@ -1836,7 +1906,9 @@
           "deposit_url": "https://app.squidrouter.com/?chains=137,osmosis-1&tokens=0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174,ibc/231FD77ECCB2DB916D314019DA30FE013202833386B1908A191D16989AD80B5A",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,137&tokens=ibc/231FD77ECCB2DB916D314019DA30FE013202833386B1908A191D16989AD80B5A,0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "axelar",
@@ -1854,7 +1926,9 @@
           "deposit_url": "https://app.squidrouter.com/?chains=43114,osmosis-1&tokens=0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E,ibc/F17C9CA112815613C5B6771047A093054F837C3020CBA59DFFD9D780A8B2984C",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,43114&tokens=ibc/F17C9CA112815613C5B6771047A093054F837C3020CBA59DFFD9D780A8B2984C,0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "mars",
@@ -1903,7 +1977,9 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Stride Staked LUNA $stLUNA"
+      "_comment": "Stride Staked LUNA $stLUNA",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "stride",
@@ -1913,7 +1989,9 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Stride Staked EVMOS $stEVMOS"
+      "_comment": "Stride Staked EVMOS $stEVMOS",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "juno",
@@ -1963,7 +2041,9 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Quicksilver Liquid Staked Regen $qREGEN"
+      "_comment": "Quicksilver Liquid Staked Regen $qREGEN",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "juno",
@@ -1980,7 +2060,9 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Quicksilver $QCK"
+      "_comment": "Quicksilver $QCK",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "arkh",
@@ -2003,7 +2085,9 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Quicksilver Liquid Staked OSMO $qOSMO"
+      "_comment": "Quicksilver Liquid Staked OSMO $qOSMO",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "noble",
@@ -2013,7 +2097,9 @@
       "categories": [
         "rwa"
       ],
-      "_comment": "Frienzies $FRNZ"
+      "_comment": "Frienzies $FRNZ",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "migaloo",
@@ -2068,7 +2154,9 @@
       "categories": [
         "rwa"
       ],
-      "_comment": "Nature Carbon Ton $NCT"
+      "_comment": "Nature Carbon Ton $NCT",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "juno",
@@ -2164,7 +2252,9 @@
       "categories": [
         "defi"
       ],
-      "_comment": "Silk $SILK"
+      "_comment": "Silk $SILK",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "juno",
@@ -2197,7 +2287,9 @@
           "deposit_url": "https://app.squidrouter.com/?chains=314,osmosis-1&tokens=0x60E1773636CF5E4A227d9AC24F20fEca034ee25A,ibc/18FB5C09D9D2371F659D4846A956FA56225E377EE3C3652A2BF3542BF809159D",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,314&tokens=ibc/18FB5C09D9D2371F659D4846A956FA56225E377EE3C3652A2BF3542BF809159D,0x60E1773636CF5E4A227d9AC24F20fEca034ee25A"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "juno",
@@ -2221,7 +2313,9 @@
       "categories": [
         "defi"
       ],
-      "_comment": "Shade $SHD"
+      "_comment": "Shade $SHD",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "bluzelle",
@@ -2249,7 +2343,9 @@
           "deposit_url": "https://app.squidrouter.com/?chains=42161,osmosis-1&tokens=0x912CE59144191C1204E64559FE8253a0e49E6548,ibc/10E5E5B06D78FFBB61FD9F89209DEE5FD4446ED0550CBB8E3747DA79E10D9DC6",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,42161&tokens=ibc/10E5E5B06D78FFBB61FD9F89209DEE5FD4446ED0550CBB8E3747DA79E10D9DC6,0x912CE59144191C1204E64559FE8253a0e49E6548"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "juno",
@@ -2284,7 +2380,9 @@
           "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x6982508145454Ce325dDbE47a25d4ec3d2311933,ibc/E47F4E97C534C95B942729E1B25DBDE111EA791411CFF100515050BEA0AC0C6B",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/E47F4E97C534C95B942729E1B25DBDE111EA791411CFF100515050BEA0AC0C6B,0x6982508145454Ce325dDbE47a25d4ec3d2311933"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -2294,7 +2392,9 @@
         "defi",
         "built_on_osmosis"
       ],
-      "_comment": "IBC Index $IBCX"
+      "_comment": "IBC Index $IBCX",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "axelar",
@@ -2316,7 +2416,9 @@
           "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0xbe9895146f7af43049ca1c1ae358b0541ea49704,ibc/4D7A6F2A7744B1534C984A21F9EDFFF8809FC71A9E9243FFB702073E7FCA513A",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/4D7A6F2A7744B1534C984A21F9EDFFF8809FC71A9E9243FFB702073E7FCA513A,0xbe9895146f7af43049ca1c1ae358b0541ea49704"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "axelar",
@@ -2338,7 +2440,9 @@
           "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0xae78736cd615f374d3085123a210448e74fc6393,ibc/E610B83FD5544E00A8A1967A2EB3BEF25F1A8CFE8650FE247A8BD4ECA9DC9222",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/E610B83FD5544E00A8A1967A2EB3BEF25F1A8CFE8650FE247A8BD4ECA9DC9222,0xae78736cd615f374d3085123a210448e74fc6393"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "axelar",
@@ -2360,7 +2464,9 @@
           "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0xac3e018457b222d93114458476f3e3416abbe38f,ibc/81F578C39006EB4B27FFFA9460954527910D73390991B379C03B18934D272F46",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/81F578C39006EB4B27FFFA9460954527910D73390991B379C03B18934D272F46,0xac3e018457b222d93114458476f3e3416abbe38f"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "axelar",
@@ -2382,7 +2488,9 @@
           "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0,ibc/B2BD584CD2A0A9CE53D4449667E26160C7D44A9C41AF50F602C201E5B3CCA46C",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/B2BD584CD2A0A9CE53D4449667E26160C7D44A9C41AF50F602C201E5B3CCA46C,0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "gitopia",
@@ -2399,7 +2507,9 @@
       "base_denom": "cw20:terra1lxx40s29qvkrcj8fsa3yzyehy7w50umdvvnls2r830rys6lu2zns63eelv",
       "path": "transfer/channel-341/cw20:terra1lxx40s29qvkrcj8fsa3yzyehy7w50umdvvnls2r830rys6lu2zns63eelv",
       "osmosis_verified": true,
-      "_comment": "Lion DAO $ROAR"
+      "_comment": "Lion DAO $ROAR",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "stride",
@@ -2409,7 +2519,9 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Stride Staked UMEE $stUMEE"
+      "_comment": "Stride Staked UMEE $stUMEE",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -2418,7 +2530,9 @@
       "categories": [
         "defi"
       ],
-      "_comment": "Staked IBCX $stIBCX"
+      "_comment": "Staked IBCX $stIBCX",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "nolus",
@@ -2450,7 +2564,9 @@
       "base_denom": "untrn",
       "path": "transfer/channel-874/untrn",
       "osmosis_verified": true,
-      "_comment": "Neutron $NTRN"
+      "_comment": "Neutron $NTRN",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "juno",
@@ -2567,7 +2683,9 @@
       "base_denom": "umpwr",
       "path": "transfer/channel-1411/umpwr",
       "osmosis_verified": true,
-      "_comment": "EmpowerChain $MPWR"
+      "_comment": "EmpowerChain $MPWR",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "juno",
@@ -2604,7 +2722,9 @@
         "liquid_staking",
         "sail_initiative"
       ],
-      "_comment": "ERIS Amplified OSMO $ampOSMO"
+      "_comment": "ERIS Amplified OSMO $ampOSMO",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "sei",
@@ -2622,7 +2742,9 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Quicksilver Liquid Staked SOMM $qSOMM"
+      "_comment": "Quicksilver Liquid Staked SOMM $qSOMM",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "passage",
@@ -2642,7 +2764,9 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Stride Staked SOMM $stSOMM"
+      "_comment": "Stride Staked SOMM $stSOMM",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "gateway",
@@ -2679,7 +2803,9 @@
           "withdraw_url": "/wormhole?from=osmosis&to=solana&token=BONK"
         }
       ],
-      "_comment": "Bonk $BONK"
+      "_comment": "Bonk $BONK",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "gateway",
@@ -2697,7 +2823,9 @@
       "categories": [
         "stablecoin"
       ],
-      "_comment": "Tether USD (Ethereum via Wormhole) $USDT.eth.wh"
+      "_comment": "Tether USD (Ethereum via Wormhole) $USDT.eth.wh",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "gateway",
@@ -2728,7 +2856,9 @@
           "withdraw_url": "/wormhole?from=osmosis&to=aptos&token=APT"
         }
       ],
-      "_comment": "Aptos Coin (Wormhole) $APT.wh"
+      "_comment": "Aptos Coin (Wormhole) $APT.wh",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "kujira",
@@ -2745,7 +2875,9 @@
       "categories": [
         "defi"
       ],
-      "_comment": "MantaDAO $MNTA"
+      "_comment": "MantaDAO $MNTA",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "juno",
@@ -2770,7 +2902,9 @@
       "categories": [
         "stablecoin"
       ],
-      "_comment": "USDC (Ethereum via Wormhole) $USDC.eth.wh"
+      "_comment": "USDC (Ethereum via Wormhole) $USDC.eth.wh",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "gateway",
@@ -2785,7 +2919,9 @@
           "withdraw_url": "/wormhole?from=osmosis&to=solana"
         }
       ],
-      "_comment": "Ethereum (Wormhole) $ETH.wh"
+      "_comment": "Ethereum (Wormhole) $ETH.wh",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "noble",
@@ -2883,7 +3019,9 @@
           "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0xb5b29320d2Dde5BA5BAFA1EbcD270052070483ec,ibc/FBB3FEF80ED2344D821D4F95C31DBFD33E4E31D5324CAD94EF756E67B749F668",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/FBB3FEF80ED2344D821D4F95C31DBFD33E4E31D5324CAD94EF756E67B749F668,0xb5b29320d2Dde5BA5BAFA1EbcD270052070483ec"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "xpla",
@@ -2921,7 +3059,13 @@
           "deposit_url": "https://app.evmos.org/assets"
         }
       ],
-      "_comment": "Neokingdom DAO $NEOK"
+      "_comment": "Neokingdom DAO $NEOK",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "realio",
@@ -3014,7 +3158,9 @@
       "base_denom": "factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/dust",
       "path": "transfer/channel-75/factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/dust",
       "osmosis_verified": true,
-      "_comment": "Stardust STRDST $STRDST"
+      "_comment": "Stardust STRDST $STRDST",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "doravota",
@@ -3063,7 +3209,9 @@
           "deposit_url": "https://starscan.io/fxbridge?from=fxcore&to=osmosis&token=FX"
         }
       ],
-      "_comment": "Function X $FX"
+      "_comment": "Function X $FX",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "nomic",
@@ -3101,7 +3249,9 @@
       "chain_name": "osmosis",
       "base_denom": "factory/osmo1g8qypve6l95xmhgc0fddaecerffymsl7kn9muw/squosmo",
       "osmosis_verified": true,
-      "_comment": "OSMO Squared $sqOSMO"
+      "_comment": "OSMO Squared $sqOSMO",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "kujira",
@@ -3140,7 +3290,9 @@
       "chain_name": "osmosis",
       "base_denom": "factory/osmo1g8qypve6l95xmhgc0fddaecerffymsl7kn9muw/sqatom",
       "osmosis_verified": true,
-      "_comment": "ATOM Squared $sqATOM"
+      "_comment": "ATOM Squared $sqATOM",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -3167,7 +3319,9 @@
       "base_denom": "hydrogen",
       "path": "transfer/channel-95/hydrogen",
       "osmosis_verified": true,
-      "_comment": "Bostrom Hydrogen $HYDROGEN"
+      "_comment": "Bostrom Hydrogen $HYDROGEN",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "bostrom",
@@ -3224,7 +3378,9 @@
       "categories": [
         "oracles"
       ],
-      "_comment": "Pyth Network $PYTH"
+      "_comment": "Pyth Network $PYTH",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "persistence",
@@ -3234,7 +3390,9 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "PSTAKE staked OSMO $stkOSMO"
+      "_comment": "PSTAKE staked OSMO $stkOSMO",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -3264,7 +3422,9 @@
       "categories": [
         "meme"
       ],
-      "_comment": "Newt $NEWT"
+      "_comment": "Newt $NEWT",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -3360,7 +3520,9 @@
           "withdraw_url": "https://bridge.blockscape.network/?from=osmosis&to=gravitybridge"
         }
       ],
-      "_comment": "Page $PAGE"
+      "_comment": "Page $PAGE",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "pundix",
@@ -3422,7 +3584,9 @@
       "categories": [
         "meme"
       ],
-      "_comment": "Chihuahuawifhat $BADDOG"
+      "_comment": "Chihuahuawifhat $BADDOG",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "neutron",
@@ -3498,7 +3662,9 @@
       "chain_name": "osmosis",
       "base_denom": "factory/osmo1g8qypve6l95xmhgc0fddaecerffymsl7kn9muw/sqtia",
       "osmosis_verified": true,
-      "_comment": "TIA Squared $sqTIA"
+      "_comment": "TIA Squared $sqTIA",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "neutron",
@@ -3508,7 +3674,9 @@
       "categories": [
         "defi"
       ],
-      "_comment": "Apollo DAO $APOLLO"
+      "_comment": "Apollo DAO $APOLLO",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "stride",
@@ -3518,7 +3686,9 @@
         "liquid_staking"
       ],
       "osmosis_verified": true,
-      "_comment": "Stride Staked DYDX $stDYDX"
+      "_comment": "Stride Staked DYDX $stDYDX",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "stride",
@@ -3538,7 +3708,9 @@
         "liquid_staking"
       ],
       "osmosis_verified": true,
-      "_comment": "Stride Staked SAGA $stSAGA"
+      "_comment": "Stride Staked SAGA $stSAGA",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "stride",
@@ -3548,7 +3720,9 @@
         "liquid_staking"
       ],
       "osmosis_verified": true,
-      "_comment": "Stride Staked INJ $stINJ"
+      "_comment": "Stride Staked INJ $stINJ",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "injective",
@@ -3576,7 +3750,9 @@
           "deposit_url": "https://portal.dymension.xyz/ibc/transfer?sourceId=dymension_1100-1&destinationId=osmosis-1"
         }
       ],
-      "_comment": "Dymension Hub (Dymension Hub) $DYM.dym"
+      "_comment": "Dymension Hub (Dymension Hub) $DYM.dym",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -3596,7 +3772,9 @@
       "categories": [
         "defi"
       ],
-      "_comment": "Astroport token (Terra) $ASTRO.terra"
+      "_comment": "Astroport token (Terra) $ASTRO.terra",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -3624,7 +3802,9 @@
       "categories": [
         "stablecoin"
       ],
-      "_comment": "USDC (Solana via Wormhole) $USDC.sol.wh"
+      "_comment": "USDC (Solana via Wormhole) $USDC.sol.wh",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "humans",
@@ -3648,7 +3828,13 @@
           "deposit_url": "https://app.evmos.org/assets"
         }
       ],
-      "_comment": "Teledisko DAO - Legacy $BERLIN-legacy"
+      "_comment": "Teledisko DAO - Legacy $BERLIN-legacy",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "scorum",
@@ -3741,7 +3927,9 @@
         "ai",
         "dweb"
       ],
-      "_comment": "AIOZ Network (AIOZ Network) $AIOZ.aioz"
+      "_comment": "AIOZ Network (AIOZ Network) $AIOZ.aioz",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "stride",
@@ -3751,7 +3939,9 @@
         "liquid_staking"
       ],
       "osmosis_verified": true,
-      "_comment": "Stride Staked DYM $stDYM"
+      "_comment": "Stride Staked DYM $stDYM",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "odin",
@@ -3776,7 +3966,9 @@
       "categories": [
         "sail_initiative"
       ],
-      "_comment": "Sail $SAIL"
+      "_comment": "Sail $SAIL",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "migaloo",
@@ -3960,7 +4152,9 @@
         "bridges"
       ],
       "osmosis_verified": true,
-      "_comment": "Wormhole Token $W"
+      "_comment": "Wormhole Token $W",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "dhealth",
@@ -4054,7 +4248,9 @@
         "meme"
       ],
       "osmosis_verified": true,
-      "_comment": "Hava Coin $HAVA"
+      "_comment": "Hava Coin $HAVA",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -4078,7 +4274,13 @@
           "deposit_url": "https://app.evmos.org/assets"
         }
       ],
-      "_comment": "Crowdpunk DAO $CROWDP"
+      "_comment": "Crowdpunk DAO $CROWDP",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "neutron",
@@ -4088,7 +4290,9 @@
         "defi"
       ],
       "osmosis_verified": true,
-      "_comment": "Astroport token $ASTRO"
+      "_comment": "Astroport token $ASTRO",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "neutron",
@@ -4117,7 +4321,12 @@
       "categories": [
         "rwa"
       ],
-      "_comment": "Paxos Gold (Gravity Bridge) $PAXG.grv"
+      "_comment": "Paxos Gold (Gravity Bridge) $PAXG.grv",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "tooltip_message": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed."
     },
     {
       "chain_name": "migaloo",
@@ -4333,7 +4542,9 @@
       "chain_name": "osmosis",
       "base_denom": "factory/osmo19hdqma2mj0vnmgcxag6ytswjnr8a3y07q7e70p/wLIBRA",
       "osmosis_verified": true,
-      "_comment": "Wrapped Libra Coin (LibraBridge) $wLIBRA"
+      "_comment": "Wrapped Libra Coin (LibraBridge) $wLIBRA",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "dymension",
@@ -4359,7 +4570,9 @@
       "base_denom": "aseda",
       "path": "transfer/channel-75016/aseda",
       "osmosis_verified": true,
-      "_comment": "SEDA $SEDA"
+      "_comment": "SEDA $SEDA",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -5205,7 +5418,9 @@
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,42161&tokens=ibc/64E62451C9A5682FF3047429C6E4714A02CDC0C35DE35CAB01E18D1188004CEB,0x82aF49447D8a07e3bd95BD0d56f35241523fBab1"
         }
       ],
-      "_comment": "Ethereum (Arbitrum via Axelar) $ETH.arb.axl"
+      "_comment": "Ethereum (Arbitrum via Axelar) $ETH.arb.axl",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "axelar",
@@ -5220,7 +5435,9 @@
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,8453&tokens=ibc/D7D6DEF2A4F7ED0A6F5F0E266C1B2C9726E82F67EBBE49BBB47B3DEC289F8D7B,0x4200000000000000000000000000000000000006"
         }
       ],
-      "_comment": "Ethereum (Base via Axelar) $ETH.base.axl"
+      "_comment": "Ethereum (Base via Axelar) $ETH.base.axl",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "axelar",
@@ -5235,7 +5452,9 @@
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,137&tokens=ibc/F9EB60AC212DBF05F4C5ED0FDE03BB9F08309B0EE9899A406AD4B904CF84968E,0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619"
         }
       ],
-      "_comment": "Ethereum (Polygon via Axelar) $ETH.matic.axl"
+      "_comment": "Ethereum (Polygon via Axelar) $ETH.matic.axl",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "stride",
@@ -5264,7 +5483,9 @@
           "withdraw_url": "https://portal.dymension.xyz/ibc/transfer?sourceId=osmosis-1&destinationId=dymension_1100-1"
         }
       ],
-      "_comment": "Mande Network $MAND"
+      "_comment": "Mande Network $MAND",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "neutaro",
@@ -5451,7 +5672,9 @@
           }
         ]
       },
-      "_comment": "Tether USD (Ethereum via Router) $USDT.eth.rt"
+      "_comment": "Tether USD (Ethereum via Router) $USDT.eth.rt",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "injective",
@@ -5461,7 +5684,9 @@
         "rwa"
       ],
       "osmosis_verified": true,
-      "_comment": "Cosmo $COSMO"
+      "_comment": "Cosmo $COSMO",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "stride",
@@ -5518,7 +5743,9 @@
       "canonical": {
         "chain_name": "optimism",
         "base_denom": "0x4200000000000000000000000000000000000042"
-      }
+      },
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "axelar",
@@ -5533,7 +5760,9 @@
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,10&tokens=ibc/14A291DD362798D6805B7ABCB8D09AEEE02176108F89FA09AA43EA2EE096A2A9,0x4200000000000000000000000000000000000042"
         }
       ],
-      "_comment": "Optimism (Axelar) $OP.axl"
+      "_comment": "Optimism (Axelar) $OP.axl",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -5547,7 +5776,9 @@
       },
       "categories": [
         "meme"
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -5558,7 +5789,9 @@
       "canonical": {
         "chain_name": "arbitrum",
         "base_denom": "0x912CE59144191C1204E64559FE8253a0e49E6548"
-      }
+      },
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -5586,7 +5819,9 @@
       },
       "categories": [
         "meme"
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -5597,7 +5832,9 @@
       "canonical": {
         "chain_name": "polkadot",
         "base_denom": "Planck"
-      }
+      },
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "composable",
@@ -5632,7 +5869,9 @@
         "stablecoin",
         "rwa"
       ],
-      "_comment": "Deenar $DEEN"
+      "_comment": "Deenar $DEEN",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -5670,7 +5909,9 @@
       "categories": [
         "nft_protocol",
         "built_on_osmosis"
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -5680,7 +5921,9 @@
       "categories": [
         "nft_protocol",
         "built_on_osmosis"
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -5690,7 +5933,9 @@
       "categories": [
         "nft_protocol",
         "built_on_osmosis"
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -5711,7 +5956,9 @@
       "categories": [
         "defi",
         "built_on_osmosis"
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "oraichain",
@@ -5748,7 +5995,9 @@
       },
       "override_properties": {
         "use_asset_name": true
-      }
+      },
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "lorenzo",
@@ -5812,7 +6061,9 @@
         "chain_name": "ethereum",
         "base_denom": "0x3231Cb76718CDeF2155FC47b5286d82e6eDA273f"
       },
-      "_comment": "Monerium EUR emoney $EURe"
+      "_comment": "Monerium EUR emoney $EURe",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "andromeda",
@@ -5954,7 +6205,9 @@
           "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x1f9840a85d5af5bf1d1762f925bdaddc4201f984,ibc/AE2719773D6FCDD05AC17B1ED63F672F5F9D84144A61965F348C86C2A83AD161",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/AE2719773D6FCDD05AC17B1ED63F672F5F9D84144A61965F348C86C2A83AD161,0x1f9840a85d5af5bf1d1762f925bdaddc4201f984"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -5968,7 +6221,9 @@
       "canonical": {
         "chain_name": "ethereum",
         "base_denom": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984"
-      }
+      },
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "pryzm",
@@ -6040,7 +6295,9 @@
           "withdraw_url": "https://app.int3face.zone/bridge"
         }
       ],
-      "_comment": "Bitcoin Cash (Int3) $BCH.int3"
+      "_comment": "Bitcoin Cash (Int3) $BCH.int3",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "int3face",
@@ -6055,7 +6312,9 @@
           "withdraw_url": "https://app.int3face.zone/bridge"
         }
       ],
-      "_comment": "Litecoin (Int3) $LTC.int3"
+      "_comment": "Litecoin (Int3) $LTC.int3",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "axelar",
@@ -6073,7 +6332,9 @@
           "deposit_url": "https://app.squidrouter.com/?chains=42161,osmosis-1&tokens=0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9,ibc/57B63A0795B6BC0AC4EFD0D4DEE9FE71FCC1D0FFA87F6280C9CDEF4F6727A173",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,42161&tokens=ibc/57B63A0795B6BC0AC4EFD0D4DEE9FE71FCC1D0FFA87F6280C9CDEF4F6727A173,0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "axelar",
@@ -6091,7 +6352,9 @@
           "deposit_url": "https://app.squidrouter.com/?chains=10,osmosis-1&tokens=0x94b008aA00579c1307B0EF2c499aD98a8ce58e58,ibc/EEA21E12A250B7FBBCBBBD1F7AA78984F5C12D684B32EBEEFC585FF596A7BCDA",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,10&tokens=ibc/EEA21E12A250B7FBBCBBBD1F7AA78984F5C12D684B32EBEEFC585FF596A7BCDA,0x94b008aA00579c1307B0EF2c499aD98a8ce58e58"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "axelar",
@@ -6208,7 +6471,9 @@
         "chain_name": "litecoin",
         "base_denom": "litoshi"
       },
-      "_comment": "Litecoin $LTC"
+      "_comment": "Litecoin $LTC",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -6219,7 +6484,9 @@
         "chain_name": "bitcoincash",
         "base_denom": "sat"
       },
-      "_comment": "Bitcoin Cash $BCH"
+      "_comment": "Bitcoin Cash $BCH",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "mantrachain",
@@ -6229,7 +6496,9 @@
       "categories": [
         "rwa"
       ],
-      "_comment": "MANTRA (MANTRA) $MANTRA.mantra"
+      "_comment": "MANTRA (MANTRA) $MANTRA.mantra",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "atomone",
@@ -6356,7 +6625,9 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "dATOM $dATOM"
+      "_comment": "dATOM $dATOM",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -6365,7 +6636,9 @@
       "categories": [
         "meme"
       ],
-      "_comment": "Sherpa $SHERPA"
+      "_comment": "Sherpa $SHERPA",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "neutron",
@@ -6422,7 +6695,9 @@
         "dweb",
         "depin"
       ],
-      "_comment": "Filecoin $FIL"
+      "_comment": "Filecoin $FIL",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "int3face",
@@ -6440,7 +6715,9 @@
       "override_properties": {
         "use_asset_name": true
       },
-      "_comment": "Toncoin (Int3) $TON.int3"
+      "_comment": "Toncoin (Int3) $TON.int3",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "fetchhub",
@@ -6476,7 +6753,9 @@
       "base_denom": "uelys",
       "path": "transfer/channel-91017/uelys",
       "osmosis_verified": true,
-      "_comment": "Elys Network $ELYS"
+      "_comment": "Elys Network $ELYS",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "aaronetwork",
@@ -6543,7 +6822,9 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "dTIA $dTIA"
+      "_comment": "dTIA $dTIA",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "injective",
@@ -6677,7 +6958,9 @@
         "chain_name": "aptos",
         "base_denom": "0x1::aptos_coin::AptosCoin"
       },
-      "_comment": "Aptos Coin $APT"
+      "_comment": "Aptos Coin $APT",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -6752,7 +7035,9 @@
       "canonical": {
         "chain_name": "aioz",
         "base_denom": "attoaioz"
-      }
+      },
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "oraichain",
@@ -6781,7 +7066,9 @@
       "categories": [
         "meme"
       ],
-      "_comment": "Ali-Rev-Gator $BIKE"
+      "_comment": "Ali-Rev-Gator $BIKE",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "pryzm",
@@ -6825,7 +7112,9 @@
         "chain_name": "dymension",
         "base_denom": "adym"
       },
-      "_comment": "Dymension Hub $DYM"
+      "_comment": "Dymension Hub $DYM",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -6836,7 +7125,9 @@
         "chain_name": "polygon",
         "base_denom": "0x0000000000000000000000000000000000001010"
       },
-      "_comment": "Polygon (ex-MATIC) $POL"
+      "_comment": "Polygon (ex-MATIC) $POL",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "nillion",
@@ -6878,7 +7169,9 @@
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/D19DA6AE5B3CB19A035FCB51DEE5A36392E0D64D51C20D159A155D1581911A39,0x3073f7aaa4db83f95e9fff17424f71d4751a3073"
         }
       ],
-      "_comment": "Movement (Ethereum via Axelar) $MOVE.eth.axl"
+      "_comment": "Movement (Ethereum via Axelar) $MOVE.eth.axl",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -6889,7 +7182,9 @@
         "chain_name": "movement",
         "base_denom": "0xa"
       },
-      "_comment": "Movement $MOVE"
+      "_comment": "Movement $MOVE",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -6899,7 +7194,9 @@
         "nft_protocol",
         "built_on_osmosis"
       ],
-      "_comment": "CULT $CULT"
+      "_comment": "CULT $CULT",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "babylon",
@@ -6926,7 +7223,9 @@
         "chain_name": "ethereum",
         "base_denom": "0x8236a87084f8B84306f72007F36F2618A5634494"
       },
-      "_comment": "Lombard Staked Bitcoin $LBTC"
+      "_comment": "Lombard Staked Bitcoin $LBTC",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "cosmoshub",
@@ -6980,7 +7279,9 @@
       "categories": [
         "defi"
       ],
-      "_comment": "Initia $INIT"
+      "_comment": "Initia $INIT",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "milkyway",
@@ -7096,7 +7397,9 @@
       "base_denom": "factory/bze13gzq40che93tgfm9kzmkpjamah5nj0j73pyhqk/uvdl",
       "path": "transfer/channel-340/factory/bze13gzq40che93tgfm9kzmkpjamah5nj0j73pyhqk/uvdl",
       "osmosis_verified": true,
-      "_comment": "Vidulum $VDL"
+      "_comment": "Vidulum $VDL",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -7106,7 +7409,9 @@
       "_comment": "Stealth $STLTH",
       "categories": [
         "meme"
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "milkyway",
@@ -7132,7 +7437,9 @@
       "_comment": "Matcha Club $MTC",
       "categories": [
         "meme"
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "arkeo",
@@ -7288,7 +7595,9 @@
       "base_denom": "ubadge",
       "path": "transfer/channel-104311/ubadge",
       "osmosis_verified": true,
-      "_comment": "BitBadges $BADGE"
+      "_comment": "BitBadges $BADGE",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "xrplevm",
@@ -7327,7 +7636,9 @@
       "categories": [
         "stablecoin"
       ],
-      "_comment": "Noble Dollar $USDN"
+      "_comment": "Noble Dollar $USDN",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -7368,7 +7679,9 @@
       "categories": [
         "meme"
       ],
-      "_comment": "Pudgy Penguins (Int3) $PENGU.int3"
+      "_comment": "Pudgy Penguins (Int3) $PENGU.int3",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "int3face",
@@ -7386,7 +7699,9 @@
       "categories": [
         "meme"
       ],
-      "_comment": "Official Trump (Int3) $TRUMP.int3"
+      "_comment": "Official Trump (Int3) $TRUMP.int3",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "qfs",
@@ -7407,7 +7722,9 @@
       "base_denom": "note",
       "path": "transfer/channel-104867/note",
       "osmosis_verified": true,
-      "_comment": "Symphony $MLD"
+      "_comment": "Symphony $MLD",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -7428,7 +7745,9 @@
           "withdraw_url": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=solana&fromToken=iTRUMP"
         }
       ],
-      "_comment": "Official Trump $TRUMP"
+      "_comment": "Official Trump $TRUMP",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -7449,7 +7768,9 @@
         "chain_name": "solana",
         "base_denom": "2zMMhcVQEXDtdE6vsFS7S7D5oUodfJHE8vd1gnBouauv"
       },
-      "_comment": "Pudgy Penguins $PENGU"
+      "_comment": "Pudgy Penguins $PENGU",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "neutron",
@@ -7558,7 +7879,9 @@
           "withdraw_url": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=zcash&fromToken=bZEC"
         }
       ],
-      "_comment": "Zcash (Int3) $ZEC.int3"
+      "_comment": "Zcash (Int3) $ZEC.int3",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -7579,7 +7902,9 @@
         "chain_name": "zcash",
         "base_denom": "zatoshi"
       },
-      "_comment": "Zcash $ZEC"
+      "_comment": "Zcash $ZEC",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -7722,7 +8047,9 @@
       "base_denom": "factory/neutron17sp75wng9vl2hu3sf4ky86d7smmk3wle9gkts2gmedn9x4ut3xcqa5xp34/maxbtc",
       "path": "transfer/channel-874/factory/neutron17sp75wng9vl2hu3sf4ky86d7smmk3wle9gkts2gmedn9x4ut3xcqa5xp34/maxbtc",
       "osmosis_verified": true,
-      "_comment": "maxBTC $maxBTC"
+      "_comment": "maxBTC $maxBTC",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "emoney",

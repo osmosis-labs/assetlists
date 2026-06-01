@@ -599,7 +599,7 @@ A second, independent track exists for market-driven unstable. When a verified, 
 #### Safety mechanisms
 
 - **`--dry-run` flag.** Every writer script accepts `--dry-run`, which emits a markdown report of intended mutations without writing any file. Always use this before enabling a fresh script in CI or after a chain-registry submodule bump that might flip many chains at once.
-- **Mutation cap.** No script will write changes touching more than **10 distinct source chains** in a single run. If exceeded, the script exits with code 2 and demands a `--force` flag. This catches mass-flips from upstream regressions.
+- **Mutation cap.** `check_ibc_clients.mjs` and `check_extended_halts.mjs` will not write changes touching more than **10 distinct source chains** in a single run. If exceeded, the script exits with code 2 and demands a `--force` flag. This catches mass-flips from upstream regressions. `check_market_health.mjs` is exempt: market-wide liquidity/volume swings legitimately move many chains at once, so it always applies its full diff.
 - **Reason-vocabulary contract.** Each reason enum value has exactly one owner script (or `manual` = the curator). No two scripts ever race on the same flag.
 - **Curator lock.** Any non-empty `tooltip_message` on a halted or unstable asset is treated as curator-owned and never overwritten by automation. To release the lock, clear the tooltip.
 

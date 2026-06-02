@@ -759,14 +759,34 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
   const rpcTestTypes = [RPC_CORS, RPC_WSS, RPC_ENDPOINTS];
   const restTestTypes = [REST_CORS, REST_ENDPOINTS];
 
+  // Move the zone-pinned endpoint to the front of an already provider-sorted
+  // list, so the validator tests it first. This mirrors the generator, which
+  // places the zone pin in slot 0 BEFORE applying provider sorting to the rest.
+  // Without this, sortEndpointsByProvider re-sorts the pin like any other
+  // endpoint and floats a team endpoint above it, so the validator would select
+  // (and the generator would then promote) the team endpoint over the pin,
+  // contradicting pin-takes-precedence. Pin order: pin > team > preferred > rest.
+  // Mutates `sorted` in place (the only caller passes a fresh sort result).
+  const pinZoneEndpointFirst = (sorted, pinnedAddress) => {
+    if (!pinnedAddress) return sorted;
+    const idx = sorted.findIndex(ep => ep.address === pinnedAddress);
+    if (idx <= 0) return sorted; // not present, or already first
+    const [pinned] = sorted.splice(idx, 1);
+    sorted.unshift(pinned);
+    return sorted;
+  };
+
   // Get all RPC endpoints with original indices
   const rpcEndpoints = (counterpartyChain?.apis?.rpc || []).map((ep, idx) => ({
     ...ep,
     originalIndex: idx
   }));
 
-  // Sort by provider preference (Team > Keplr/Polkachu > Others)
-  const sortedRpcEndpoints = sortEndpointsByProvider(rpcEndpoints, counterpartyChain.chain_name);
+  // Sort by provider preference (Team > Keplr/Polkachu > Others), then pin first.
+  const sortedRpcEndpoints = pinZoneEndpointFirst(
+    sortEndpointsByProvider(rpcEndpoints, counterpartyChain.chain_name),
+    zoneChain?.rpc
+  );
 
   // Get endpoint counts
   const rpcCount = sortedRpcEndpoints.length;
@@ -846,8 +866,11 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
     originalIndex: idx
   }));
 
-  // Sort by provider preference (Team > Keplr/Polkachu > Others)
-  const sortedRestEndpoints = sortEndpointsByProvider(restEndpoints, counterpartyChain.chain_name);
+  // Sort by provider preference (Team > Keplr/Polkachu > Others), then pin first.
+  const sortedRestEndpoints = pinZoneEndpointFirst(
+    sortEndpointsByProvider(restEndpoints, counterpartyChain.chain_name),
+    zoneChain?.rest
+  );
 
   // Find working REST endpoint (test in preferred order)
   let restResults = null;

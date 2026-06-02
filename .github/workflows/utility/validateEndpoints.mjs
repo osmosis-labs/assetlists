@@ -1343,6 +1343,79 @@ function generateValidationReport(chainName) {
     zone.zoneChainlistFileName
   )?.chains || [];
 
+  // Get zone assets so we can report whether a connectivity-failed chain's
+  // assets are already covered (flagged unstable / deposits halted) by another
+  // mechanism (manual, ibc_client, market, etc.). A chain that fails all
+  // endpoints but is NOT yet covered is the actionable case: deposits may still
+  // be open against an unreachable chain. This is surfaced for human follow-up;
+  // it does not auto-mutate zone_assets.
+  const zoneAssets = zone.readFromFile(
+    chainName,
+    zone.noDir,
+    zone.zoneAssetsFileName
+  )?.assets || [];
+
+  // Summarize halt coverage per chain: how many of its assets are unstable and
+  // how many have deposits halted. An asset is attributed to a chain if either
+  // its listed chain_name OR its canonical.chain_name matches, so a token routed
+  // via the failed chain but listed under an intermediary (e.g. milkINIT listed
+  // under initia with canonical.chain_name "moo") still counts toward that
+  // chain's coverage. Counted once per chain even if both keys point at it.
+  const haltCoverageByChain = {};
+  const bumpCoverage = (c, asset) => {
+    if (!haltCoverageByChain[c]) {
+      haltCoverageByChain[c] = {
+        total: 0, unstable: 0, depositsHalted: 0, disabled: 0, haltedBothDirections: 0
+      };
+    }
+    haltCoverageByChain[c].total += 1;
+    if (asset.osmosis_unstable) { haltCoverageByChain[c].unstable += 1; }
+    if (asset.osmosis_halt_deposits) { haltCoverageByChain[c].depositsHalted += 1; }
+    // A disabled asset is hidden from the frontend entirely, so it is not a live
+    // deposit risk even without an unstable/halt flag. Counts as covered.
+    if (asset.osmosis_disabled) { haltCoverageByChain[c].disabled += 1; }
+    if (asset.osmosis_halt_deposits && asset.osmosis_halt_withdrawals) {
+      haltCoverageByChain[c].haltedBothDirections += 1;
+    }
+  };
+  zoneAssets.forEach(asset => {
+    const chains = new Set();
+    if (asset.chain_name) { chains.add(asset.chain_name); }
+    if (asset.canonical?.chain_name) { chains.add(asset.canonical.chain_name); }
+    chains.forEach(c => bumpCoverage(c, asset));
+  });
+
+  // Render a short coverage label for a chain's assets. An asset counts as
+  // "covered" only if it is deposit-halted or flagged unstable. osmosis_disabled
+  // is NOT coverage: per the schema it skips the native flow and routes the user
+  // to an external provider (a UX router, not a kill switch), and disabled assets
+  // are still emitted to the frontend with transfer methods, so deposits remain
+  // possible. We surface a disabled sub-count for context but it never marks a
+  // chain covered. The actionable case is a connectivity-failing chain with one
+  // or more assets that are neither deposit-halted nor unstable.
+  const getHaltCoverageLabel = (chain_name) => {
+    const cov = haltCoverageByChain[chain_name];
+    if (!cov || cov.total === 0) { return '— no listed assets'; }
+    const disabledNote = cov.disabled > 0 ? `, ${cov.disabled}/${cov.total} disabled` : '';
+    if (cov.depositsHalted >= cov.total) { return `🛑 deposits halted (${cov.depositsHalted}/${cov.total})`; }
+    if (cov.unstable >= cov.total) { return `⚠️ unstable (${cov.unstable}/${cov.total})`; }
+    if (cov.depositsHalted > 0 || cov.unstable > 0) {
+      return `🟠 partial (${cov.unstable}/${cov.total} unstable, ${cov.depositsHalted}/${cov.total} dep-halted${disabledNote})`;
+    }
+    return `❗ not covered (0/${cov.total}${disabledNote})`;
+  };
+
+  // A chain whose every listed asset has BOTH deposits and withdrawals halted is
+  // already at end of life from the user's perspective: there is nothing to do
+  // with it in either direction, so endpoint health is moot. Such chains are
+  // dropped from the connectivity-failures table to keep it focused on chains
+  // where reachability still matters. (This only affects the report; it does
+  // not delete anything from zone_assets.)
+  const isFullyHaltedBothDirections = (chain_name) => {
+    const cov = haltCoverageByChain[chain_name];
+    return !!cov && cov.total > 0 && cov.haltedBothDirections >= cov.total;
+  };
+
   const forcedEndpointChains = {};
   zoneChains.forEach(chain => {
     if (chain.override_properties?.force_rpc || chain.override_properties?.force_rest) {
@@ -1367,6 +1440,10 @@ function generateValidationReport(chainName) {
 
     // Skip killed chains
     if (killedChainNames.includes(chain.chain_name)) return false;
+
+    // Skip chains already fully halted both directions (end of life): endpoint
+    // reachability is irrelevant when nothing can be deposited or withdrawn.
+    if (isFullyHaltedBothDirections(chain.chain_name)) return false;
 
     // Only include chains where at least one endpoint type completely failed
     const rpcTests = chain.validationResults?.filter(r => r.test.includes('RPC')) || [];
@@ -1488,9 +1565,12 @@ function generateValidationReport(chainName) {
     report += `### ✅ All Chains Validated Successfully\n\n`;
   } else if (failedChains.length > 0) {
     report += `### ❌ Connectivity Failures\n\n`;
-    report += `The following chains have endpoints that failed connectivity tests (not just CORS):\n\n`;
-    report += `| Chain Name | Last Validation | Days Ago | RPC Status | REST Status |\n`;
-    report += `|------------|----------------|----------|------------|-------------|\n`;
+    report += `The following chains have endpoints that failed connectivity tests (not just CORS). `;
+    report += `The Halt Coverage column shows whether the chain's listed assets are already flagged `;
+    report += `unstable / deposit-halted by another mechanism; a chain that is "not covered" but failing `;
+    report += `connectivity is a candidate for halting deposits.\n\n`;
+    report += `| Chain Name | Last Validation | Days Ago | RPC Status | REST Status | Halt Coverage |\n`;
+    report += `|------------|----------------|----------|------------|-------------|---------------|\n`;
 
     failedChains.forEach(chain => {
       const validationDate = new Date(chain.validationDate);
@@ -1504,8 +1584,9 @@ function generateValidationReport(chainName) {
 
       const rpcStatus = rpcAllFailed ? '❌ All Failed' : '⚠️ Partial';
       const restStatus = restAllFailed ? '❌ All Failed' : '⚠️ Partial';
+      const haltCoverage = getHaltCoverageLabel(chain.chain_name);
 
-      report += `| ${chain.chain_name} | ${validationDate.toISOString().split('T')[0]} | ${daysSince} | ${rpcStatus} | ${restStatus} |\n`;
+      report += `| ${chain.chain_name} | ${validationDate.toISOString().split('T')[0]} | ${daysSince} | ${rpcStatus} | ${restStatus} | ${haltCoverage} |\n`;
     });
     report += `\n`;
   }

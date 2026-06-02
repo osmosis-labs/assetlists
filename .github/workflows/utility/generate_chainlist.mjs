@@ -18,6 +18,7 @@ import * as zone from "./assetlist_functions.mjs";
 import * as path from 'path';
 import * as fs from 'fs';
 import { sortEndpointsByProvider } from './endpoint_preference.mjs';
+import { applyValidationOrdering } from './endpoint_ordering.mjs';
 
 //-- Globals --
 
@@ -465,8 +466,8 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
 
   // Provider preference logic moved to endpoint_preference.mjs (shared with validation)
 
-  const allRpcEndpoints = [];
-  const allRestEndpoints = [];
+  let allRpcEndpoints = [];
+  let allRestEndpoints = [];
 
   // RPC endpoint collection - always add zone endpoint first if it exists
   // If force_rpc=true, this endpoint stays in first position even if validation found better backup
@@ -505,27 +506,45 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
     });
   }
 
-  // Reorder based on validation (ONLY if not forced)
-  // When forced, zone endpoint stays in first position regardless of validation
+  // Reorder based on validation (ONLY if not forced).
+  // When forced, the zone endpoint stays locked in first position regardless of
+  // validation. Otherwise we apply two validation-driven steps per node type:
+  //   1. Deprioritize: sink endpoints recorded dead in the last run to the bottom.
+  //   2. Promote: lift the validated working endpoint to first position.
+  // Both steps key on the endpoint ADDRESS, not on a Chain Registry index, so
+  // they are immune to the order mismatch between the validator's tested order
+  // and the generator's published order (see MTN-101). Promotion runs after
+  // deprioritization so the validated winner ends up at slot 0.
   const validationState = getValidationState('osmosis-1');
   const validationRecord = getValidationRecord(validationState, chain_name);
 
-  if (validationRecord?.backupUsed) {
-    const { rpcAddress, restAddress, rpcEndpointIndex, restEndpointIndex } = validationRecord.backupUsed;
+  if (validationRecord) {
+    // Prefer the always-written validatedEndpoints; fall back to backupUsed for
+    // state files written before validatedEndpoints existed.
+    const validated = validationRecord.validatedEndpoints || validationRecord.backupUsed || {};
+    const { rpcAddress, restAddress } = validated;
 
-    if (!forceRpc && rpcAddress && allRpcEndpoints.includes(rpcAddress)) {
-      allRpcEndpoints.splice(allRpcEndpoints.indexOf(rpcAddress), 1);
-      allRpcEndpoints.unshift(rpcAddress);
-      if (rpcEndpointIndex > 0) {
-        console.log(`Using validated RPC [${rpcEndpointIndex}] for ${chain_name}: ${rpcAddress}`);
+    // -- RPC --
+    if (!forceRpc) {
+      const r = applyValidationOrdering(allRpcEndpoints, validationRecord, 'rpc', rpcAddress);
+      allRpcEndpoints = r.ordered;
+      if (r.deprioritizedCount > 0) {
+        console.log(`Deprioritized ${r.deprioritizedCount} dead RPC endpoint(s) for ${chain_name}`);
+      }
+      if (r.promoted) {
+        console.log(`Promoted validated RPC for ${chain_name}: ${rpcAddress}`);
       }
     }
 
-    if (!forceRest && restAddress && allRestEndpoints.includes(restAddress)) {
-      allRestEndpoints.splice(allRestEndpoints.indexOf(restAddress), 1);
-      allRestEndpoints.unshift(restAddress);
-      if (restEndpointIndex > 0) {
-        console.log(`Using validated REST [${restEndpointIndex}] for ${chain_name}: ${restAddress}`);
+    // -- REST --
+    if (!forceRest) {
+      const r = applyValidationOrdering(allRestEndpoints, validationRecord, 'rest', restAddress);
+      allRestEndpoints = r.ordered;
+      if (r.deprioritizedCount > 0) {
+        console.log(`Deprioritized ${r.deprioritizedCount} dead REST endpoint(s) for ${chain_name}`);
+      }
+      if (r.promoted) {
+        console.log(`Promoted validated REST for ${chain_name}: ${restAddress}`);
       }
     }
   }

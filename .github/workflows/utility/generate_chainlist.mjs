@@ -513,8 +513,8 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   //   2. Promote: lift the validated working endpoint to first position.
   // Both steps key on the endpoint ADDRESS, not on a Chain Registry index, so
   // they are immune to the order mismatch between the validator's tested order
-  // and the generator's published order (see MTN-101). Promotion runs after
-  // deprioritization so the validated winner ends up at slot 0.
+  // and the generator's published order. Promotion runs after deprioritization
+  // so the validated winner ends up at slot 0.
   const validationState = getValidationState('osmosis-1');
   const validationRecord = getValidationRecord(validationState, chain_name);
 

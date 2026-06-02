@@ -34,6 +34,26 @@
 export const DEAD_ENDPOINT_ERROR_TYPES = new Set(['NETWORK_ERROR', 'TIMEOUT', 'HTTP_ERROR']);
 
 /**
+ * Whether an endpoint address is a usable absolute http(s) URL. A client cannot
+ * call a scheme-less address (e.g. "lcd.nolus.network") or a non-http(s) scheme,
+ * so such an address must never lead the published list even if it sorts first
+ * by Chain Registry order or provider preference. These come from malformed
+ * upstream Chain Registry entries.
+ *
+ * @param {string} address
+ * @returns {boolean} true if the address parses as an http(s) URL
+ */
+export function isUsableEndpointUrl(address) {
+  if (!address) { return false; }
+  try {
+    const url = new URL(address);
+    return url.protocol === 'https:' || url.protocol === 'http:';
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Build the set of endpoint addresses (of a given type) that the validator
  * recorded as failing connectivity in this chain's last validation run.
  *
@@ -98,9 +118,14 @@ export function deprioritizeDeadEndpoints(addresses, deadAddresses) {
 
 /**
  * Apply validation-driven reordering to a single node type's endpoint list:
- * first deprioritize recorded-dead endpoints, then promote the validated
- * working address to first position. This is the single entry point used by
- * generate_chainlist.mjs.
+ * first deprioritize recorded-dead and malformed endpoints, then promote the
+ * validated working address to first position. This is the single entry point
+ * used by generate_chainlist.mjs.
+ *
+ * Malformed addresses (scheme-less / non-http(s), from bad upstream Chain
+ * Registry entries) are sunk alongside recorded-dead endpoints: a client cannot
+ * call them, so they must never lead the list. They are demoted, not removed,
+ * matching the dead-endpoint behavior, in case the upstream entry is fixed.
  *
  * @param {string[]} addresses - ordered endpoint addresses (zone pin first, then sorted registry)
  * @param {Object} validationRecord - per-chain record from state.json
@@ -110,13 +135,43 @@ export function deprioritizeDeadEndpoints(addresses, deadAddresses) {
  */
 export function applyValidationOrdering(addresses, validationRecord, nodeType, validatedAddress) {
   const dead = getDeadEndpointAddresses(validationRecord, nodeType);
-  const { ordered, deprioritizedCount } = deprioritizeDeadEndpoints(addresses, dead);
+  const { ordered } = deprioritizeDeadEndpoints(addresses, dead);
   let result = ordered;
   let promoted = false;
-  if (validatedAddress && result.includes(validatedAddress) && result[0] !== validatedAddress) {
+  if (
+    validatedAddress &&
+    isUsableEndpointUrl(validatedAddress) &&
+    result.includes(validatedAddress) &&
+    result[0] !== validatedAddress
+  ) {
     result = result.filter(a => a !== validatedAddress);
     result.unshift(validatedAddress);
     promoted = true;
   }
-  return { ordered: result, deprioritizedCount, promoted };
+  // Finally, push malformed addresses (scheme-less / non-http(s)) strictly to
+  // the very bottom, below even dead-but-valid endpoints. A client cannot call
+  // them at all, whereas a dead-but-valid endpoint may recover, so malformed is
+  // the worst tier. Demoted, never removed. Stable within the malformed group.
+  const malformed = result.filter(a => !isUsableEndpointUrl(a));
+  const malformedSunk = malformed.length > 0 && malformed.length < result.length;
+  if (malformedSunk) {
+    const usable = result.filter(a => isUsableEndpointUrl(a));
+    result = [...usable, ...malformed];
+  }
+  // Report distinct addresses that were sunk below a healthy endpoint, counting
+  // an address that is both dead and malformed only once. When no healthy
+  // endpoint exists (all-dead or all-malformed), the guards leave order
+  // unchanged and nothing was sunk, so report 0.
+  const sunk = new Set();
+  const healthyExists = result.some(a => !dead.has(a) && isUsableEndpointUrl(a));
+  if (healthyExists) {
+    for (const a of addresses) {
+      if (dead.has(a) || !isUsableEndpointUrl(a)) { sunk.add(a); }
+    }
+  }
+  return {
+    ordered: result,
+    deprioritizedCount: sunk.size,
+    promoted
+  };
 }

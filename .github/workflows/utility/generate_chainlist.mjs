@@ -529,7 +529,7 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
       const r = applyValidationOrdering(allRpcEndpoints, validationRecord, 'rpc', rpcAddress);
       allRpcEndpoints = r.ordered;
       if (r.deprioritizedCount > 0) {
-        console.log(`Deprioritized ${r.deprioritizedCount} dead RPC endpoint(s) for ${chain_name}`);
+        console.log(`Deprioritized ${r.deprioritizedCount} dead or malformed RPC endpoint(s) for ${chain_name}`);
       }
       if (r.promoted) {
         console.log(`Promoted validated RPC for ${chain_name}: ${rpcAddress}`);
@@ -541,7 +541,7 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
       const r = applyValidationOrdering(allRestEndpoints, validationRecord, 'rest', restAddress);
       allRestEndpoints = r.ordered;
       if (r.deprioritizedCount > 0) {
-        console.log(`Deprioritized ${r.deprioritizedCount} dead REST endpoint(s) for ${chain_name}`);
+        console.log(`Deprioritized ${r.deprioritizedCount} dead or malformed REST endpoint(s) for ${chain_name}`);
       }
       if (r.promoted) {
         console.log(`Promoted validated REST for ${chain_name}: ${restAddress}`);

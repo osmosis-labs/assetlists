@@ -993,7 +993,19 @@ function constructValidationRecord(counterpartyChainName, validationData) {
     validationResults: validationData.results  // Keep for backward compatibility
   };
 
-  // Add backup endpoint information if any backup was used
+  // Always record the validated working endpoint addresses, regardless of which
+  // index they were found at. The generator promotes the published list to these
+  // addresses. This is keyed on address (not index) so it is immune to the order
+  // mismatch between the validator's tested order and the generator's published
+  // order. rpcAddress/restAddress are null if no endpoint of that type passed.
+  record.validatedEndpoints = {
+    rpcAddress: validationData.rpcAddress || null,
+    restAddress: validationData.restAddress || null
+  };
+
+  // Add backup endpoint information if any backup was used.
+  // Kept for backward compatibility with the validation report (generateValidationReport),
+  // which distinguishes "zone endpoint failed, fell back to a backup" cases.
   if (validationData.rpcEndpointIndex > 0 || validationData.restEndpointIndex > 0) {
     record.backupUsed = {
       rpcEndpointIndex: validationData.rpcEndpointIndex,

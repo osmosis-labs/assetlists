@@ -496,24 +496,44 @@ jobs:
           if [ "$MANUAL_HALT_COUNT" -eq 0 ]; then
             echo "_None._" >> workflow-summary.md
           else
-            echo "| Chain | Base denom | Direction | Reason | Tooltip |" >> workflow-summary.md
-            echo "|-------|-----------|-----------|--------|---------|" >> workflow-summary.md
-            echo "$MANUAL_HALTS" | jq -r '
-              .[]
+            # Resolve Symbol and Route from the generated frontend assetlist,
+            # joined on chainName|sourceDenom. Route is the asset's listed origin
+            # chain, plus "via <hop>" when the asset reaches Osmosis through an
+            # intermediary cosmos chain (the first counterparty cosmos chain that
+            # is not the origin itself). So a native Gravity asset reads
+            # "gravitybridge", while a Persistence asset bridged in via Gravity
+            # reads "persistence via gravitybridge".
+            echo "| Symbol | Route | Base denom | Direction | Reason | Tooltip |" >> workflow-summary.md
+            echo "|--------|-------|-----------|-----------|--------|---------|" >> workflow-summary.md
+            echo "$MANUAL_HALTS" | jq -r --slurpfile fe osmosis-1/generated/frontend/assetlist.json '
+              ($fe[0].assets
+                | map({ key: (.chainName + "|" + .sourceDenom), value: . })
+                | from_entries) as $byOrigin
+              | .[]
               | . as $a
+              | ($byOrigin[$a.chain_name + "|" + $a.base_denom]) as $f
+              | ($f.symbol // $a._comment // $a.base_denom) as $sym
+              | (
+                  [ ($f.counterparty // [])[]
+                    | select(.chainType == "cosmos" and .chainName != $a.chain_name)
+                    | .chainName ] as $hops
+                  | if ($hops | length) > 0
+                    then $a.chain_name + " via " + $hops[0]
+                    else $a.chain_name end
+                ) as $route
               | [
                   (if .osmosis_halt_deposits == true then
-                     "| \(.chain_name) | \(.base_denom) | deposit | \(.osmosis_deposit_halt_reason // "") | \(.tooltip_message // "") |"
+                     "| \($sym) | \($route) | \(.base_denom) | deposit | \(.osmosis_deposit_halt_reason // "") | \(.tooltip_message // "") |"
                    else empty end),
                   (if .osmosis_halt_withdrawals == true then
-                     "| \(.chain_name) | \(.base_denom) | withdrawal | \(.osmosis_withdrawal_halt_reason // "") | \(.tooltip_message // "") |"
+                     "| \($sym) | \($route) | \(.base_denom) | withdrawal | \(.osmosis_withdrawal_halt_reason // "") | \(.tooltip_message // "") |"
                    else empty end)
                 ]
               # Fallback: an asset can be manually flagged unstable without
               # either direction halted. Emit one row so the asset is still
               # listed and the table never shows bare headers.
               | (if length == 0 then
-                   ["| \($a.chain_name) | \($a.base_denom) | none | \($a.osmosis_unstable_reason // "") | \($a.tooltip_message // "") |"]
+                   ["| \($sym) | \($route) | \($a.base_denom) | none | \($a.osmosis_unstable_reason // "") | \($a.tooltip_message // "") |"]
                  else . end)
               | .[]
             ' >> workflow-summary.md

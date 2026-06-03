@@ -1168,6 +1168,43 @@ function prioritizeChains(chainlist, state) {
   return chainsWithPriority;
 }
 
+// Build the set of chains that are terminally dead and should never be probed
+// again: a chain whose EVERY attributed zone_asset is source_chain_killed (on
+// any reason field). Chainlist status === "killed" is handled separately in the
+// skip below. A killed source chain is not coming back, so probing it forever
+// just produces recurring "connectivity failed" noise and wastes CI budget. A
+// chain with a MIX of killed and live assets is intentionally NOT included
+// here, since a live asset still routes through it.
+function getFullyKilledChains(chainName) {
+  const KILLED = 'source_chain_killed';
+  const zoneAssets = zone.readFromFile(
+    chainName,
+    zone.noDir,
+    zone.zoneAssetsFileName
+  )?.assets || [];
+  const totals = {};
+  const killed = {};
+  const bump = (c, isKilled) => {
+    totals[c] = (totals[c] || 0) + 1;
+    if (isKilled) { killed[c] = (killed[c] || 0) + 1; }
+  };
+  for (const a of zoneAssets) {
+    const isKilled =
+      a.osmosis_unstable_reason === KILLED ||
+      a.osmosis_deposit_halt_reason === KILLED ||
+      a.osmosis_withdrawal_halt_reason === KILLED;
+    const chains = new Set();
+    if (a.chain_name) { chains.add(a.chain_name); }
+    if (a.canonical?.chain_name) { chains.add(a.canonical.chain_name); }
+    chains.forEach(c => bump(c, isKilled));
+  }
+  const fullyKilled = new Set();
+  for (const c of Object.keys(totals)) {
+    if (totals[c] > 0 && killed[c] === totals[c]) { fullyKilled.add(c); }
+  }
+  return fullyKilled;
+}
+
 async function validateEndpointsForAllCounterpartyChains(chainName) {
   if (chainName !== "osmosis") { return; }
   const chainlist = getChainlist(chainName)?.chains;
@@ -1175,6 +1212,10 @@ async function validateEndpointsForAllCounterpartyChains(chainName) {
 
   let state = getState(chainName);
   let chainQueryQueue = [];
+
+  // Chains whose every listed asset is source_chain_killed; skipped from
+  // probing alongside chainlist status === "killed".
+  const fullyKilledChains = getFullyKilledChains(chainName);
 
   // Get prioritized chain list
   const prioritizedChains = prioritizeChains(chainlist, state);
@@ -1193,9 +1234,15 @@ async function validateEndpointsForAllCounterpartyChains(chainName) {
   for (const prioritizedChain of prioritizedChains) {
     if (prioritizedChain.recentlyQueried) { continue; }
 
-    // Skip killed chains
+    // Skip terminally dead chains: registry status killed, or every listed
+    // asset flagged source_chain_killed. A killed source chain is not coming
+    // back, so there is nothing to probe.
     if (prioritizedChain.chain.status === 'killed') {
       console.log(`Skipping killed chain: ${prioritizedChain.chain.chain_name}`);
+      continue;
+    }
+    if (fullyKilledChains.has(prioritizedChain.chain.chain_name)) {
+      console.log(`Skipping source_chain_killed chain: ${prioritizedChain.chain.chain_name}`);
       continue;
     }
 
@@ -1365,15 +1412,12 @@ function generateValidationReport(chainName) {
   const bumpCoverage = (c, asset) => {
     if (!haltCoverageByChain[c]) {
       haltCoverageByChain[c] = {
-        total: 0, unstable: 0, depositsHalted: 0, disabled: 0, haltedBothDirections: 0
+        total: 0, unstable: 0, depositsHalted: 0, haltedBothDirections: 0
       };
     }
     haltCoverageByChain[c].total += 1;
     if (asset.osmosis_unstable) { haltCoverageByChain[c].unstable += 1; }
     if (asset.osmosis_halt_deposits) { haltCoverageByChain[c].depositsHalted += 1; }
-    // A disabled asset is hidden from the frontend entirely, so it is not a live
-    // deposit risk even without an unstable/halt flag. Counts as covered.
-    if (asset.osmosis_disabled) { haltCoverageByChain[c].disabled += 1; }
     if (asset.osmosis_halt_deposits && asset.osmosis_halt_withdrawals) {
       haltCoverageByChain[c].haltedBothDirections += 1;
     }
@@ -1387,22 +1431,20 @@ function generateValidationReport(chainName) {
 
   // Render a short coverage label for a chain's assets. An asset counts as
   // "covered" only if it is deposit-halted or flagged unstable. osmosis_disabled
-  // is NOT coverage: per the schema it skips the native flow and routes the user
-  // to an external provider (a UX router, not a kill switch), and disabled assets
-  // are still emitted to the frontend with transfer methods, so deposits remain
-  // possible. We surface a disabled sub-count for context but it never marks a
-  // chain covered. The actionable case is a connectivity-failing chain with one
-  // or more assets that are neither deposit-halted nor unstable.
+  // is intentionally ignored here: it only marks a non-native deposit/withdrawal
+  // flow (a UX router flag), not a kill switch, so it says nothing about whether
+  // deposits/withdrawals are actually halted. The actionable case is a
+  // connectivity-failing chain with one or more assets that are neither
+  // deposit-halted nor unstable.
   const getHaltCoverageLabel = (chain_name) => {
     const cov = haltCoverageByChain[chain_name];
     if (!cov || cov.total === 0) { return '— no listed assets'; }
-    const disabledNote = cov.disabled > 0 ? `, ${cov.disabled}/${cov.total} disabled` : '';
     if (cov.depositsHalted >= cov.total) { return `🛑 deposits halted (${cov.depositsHalted}/${cov.total})`; }
     if (cov.unstable >= cov.total) { return `⚠️ unstable (${cov.unstable}/${cov.total})`; }
     if (cov.depositsHalted > 0 || cov.unstable > 0) {
-      return `🟠 partial (${cov.unstable}/${cov.total} unstable, ${cov.depositsHalted}/${cov.total} dep-halted${disabledNote})`;
+      return `🟠 partial (${cov.unstable}/${cov.total} unstable, ${cov.depositsHalted}/${cov.total} dep-halted)`;
     }
-    return `❗ not covered (0/${cov.total}${disabledNote})`;
+    return `❗ not covered (0/${cov.total})`;
   };
 
   // A chain whose every listed asset has BOTH deposits and withdrawals halted is

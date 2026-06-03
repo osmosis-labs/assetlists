@@ -342,7 +342,25 @@ async function runPart1(state, chainlist, zoneAssets, streaks) {
     const { verdict } = classifyChainFromState(stateChain);
 
     if (verdict === 'unverifiable') {
-      unverifiable.push({ chainName, registryStatus: registryStatus ?? 'unknown' });
+      // No testable endpoints this run. Don't advance the streak (no new
+      // evidence) and don't reset it (a missing probe isn't a passing one) —
+      // freeze it. But if a PRIOR streak is already mature, the chain still
+      // carries solid accumulated evidence, so carry it into streakReached at
+      // its existing (frozen) streak so weekly corroboration still runs and the
+      // daily count still includes it. Only chains without a mature streak fall
+      // through to the "unverifiable" bucket.
+      const existing = streaks[chainName];
+      if (existing && existing.streak >= DEAD_STREAK_THRESHOLD) {
+        streakReached.push({
+          chainName,
+          registryStatus: registryStatus ?? 'unknown',
+          streak: existing.streak,
+          firstSeen: existing.firstSeen ?? nowIso,
+          verdict: 'unverifiable',
+        });
+      } else {
+        unverifiable.push({ chainName, registryStatus: registryStatus ?? 'unknown' });
+      }
       continue;
     }
 
@@ -463,7 +481,12 @@ async function scanGovProposals(chainName, restAddress) {
         });
       }
     }
-    return matches; // first endpoint that answered wins
+    // Return as soon as an endpoint yields matches. If an endpoint returned
+    // proposals but NONE matched, fall through to the next (v1beta1): legacy
+    // proposals can carry shutdown wording in content.description that the v1
+    // view exposes as an empty `summary`, so a zero-match v1 response must not
+    // suppress the v1beta1 scan.
+    if (matches.length > 0) return matches;
   }
   return [];
 }

@@ -228,6 +228,21 @@ jobs:
         working-directory: ./.github/workflows/utility
         run: node update_assetlist_state.mjs
 
+      - name: Report Dead Chains and Planned Shutdowns
+        working-directory: ./.github/workflows/utility
+        run: |
+          # Report-only. Reads the state.json just produced by validateEndpoints
+          # + update_assetlist_state, plus the chain-registry submodule. The
+          # heavy half (gov-proposal scan + cosmos.directory corroboration) runs
+          # only on Mondays via --weekly to bound CI cost and external load; the
+          # cheap dead-streak counter updates daily either way. Output is
+          # captured and appended to the PR body. Never fails the pipeline.
+          set +e
+          if [ "$(date -u +%u)" = "1" ]; then WEEKLY="--weekly"; else WEEKLY=""; fi
+          node report_dead_chains.mjs osmosis-1 $WEEKLY > ../../../dead-chains.md 2> ../../../dead-chains.log
+          echo "DEAD_CHAINS_WEEKLY=$([ -n "$WEEKLY" ] && echo true || echo false)" >> $GITHUB_ENV
+          cat ../../../dead-chains.log || true
+
       - name: Run code to Generate Zone Assets Comments
         working-directory: ./.github/workflows/utility
         run: node generateComments.mjs
@@ -548,6 +563,16 @@ jobs:
 
           if [ -f validation-summary.md ]; then
             cat validation-summary.md >> workflow-summary.md
+          fi
+
+          # Dead-chain candidates + possible planned shutdowns (report-only).
+          # report_dead_chains.mjs already emits its own ## headers, so append
+          # the captured output verbatim under a divider.
+          if [ -f dead-chains.md ]; then
+            echo "" >> workflow-summary.md
+            echo "---" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            cat dead-chains.md >> workflow-summary.md
           fi
 
       - name: Create Pull Request

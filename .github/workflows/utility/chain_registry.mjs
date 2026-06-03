@@ -169,8 +169,13 @@ export function populateChainDirectories() {
 
 export function getFileProperty(chainName, file, property) {
   const chainDirectory = chainNameToDirectoryMap.get(chainName);
-  if(chainDirectory) {
-    const filePath = path.join(chainDirectory,fileToFileNameMap.get(file));
+  const fileName = fileToFileNameMap.get(file);
+  // fileToFileNameMap only knows "chain" and "assetlist". An unknown file type
+  // (e.g. a caller asking for "versions") would otherwise reach
+  // path.join(dir, undefined), which throws on Node >=22 and is fragile on 20.
+  // Return undefined cleanly so callers get the same "absent" result.
+  if(chainDirectory && fileName) {
+    const filePath = path.join(chainDirectory, fileName);
     const FILE_EXISTS = fs.existsSync(filePath);
     if(FILE_EXISTS) {
       return readJsonFile(filePath)[property];

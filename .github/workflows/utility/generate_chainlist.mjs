@@ -242,8 +242,13 @@ function getChainSuggestionFeatures(chain, zoneChain) {
 
   const recommended_version = chain_reg.getFileProperty(chain.chain_name, "chain", "codebase")?.recommended_version;
   if (recommended_version) {
+    // getFileProperty only resolves the "chain"/"assetlist" files, so a
+    // "versions" lookup returns undefined; some chains also simply have no
+    // versions.json or no top-level versions array. Guard against a non-array
+    // here so a chain with codebase.recommended_version set doesn't crash the
+    // whole chainlist generation with "versions is not iterable".
     const versions = chain_reg.getFileProperty(chain.chain_name, "versions", "versions");
-    for (const version of versions) {
+    for (const version of (Array.isArray(versions) ? versions : [])) {
       if (version.recommended_version === recommended_version) {
 
         //ibc-go

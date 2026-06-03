@@ -6,9 +6,9 @@ _Chains Osmosis lists an asset from, registered as live, whose every RPC + REST 
 
 _Candidate list publishes on the weekly corroborated run. 0 chain(s) currently at or past the 7-run streak, pending corroboration._
 
-<details><summary>Unverifiable chains (zero testable endpoints, 2) — cannot confirm dead or alive</summary>
+<details><summary>Unverifiable chains (zero testable endpoints, 1) — cannot confirm dead or alive</summary>
 
-hippoprotocol (live), wolochain (live)
+hippoprotocol (live)
 
 </details>
 

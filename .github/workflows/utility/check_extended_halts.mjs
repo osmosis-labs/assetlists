@@ -8,7 +8,9 @@
 //       "extended_unstable_market".
 //
 //     • planned_shutdown_date within 14 days → halt_deposits with reason
-//       "planned_shutdown".
+//       "planned_shutdown". This set path does NOT honour the tooltip_message
+//       curator lock: a planned shutdown is a hard external deadline, so the
+//       halt fires even when a curator has written an explanatory tooltip.
 //
 //   Reason-vocabulary contract: this script owns reasons
 //   {extended_unstable_market, planned_shutdown}. Clearing rules:
@@ -17,7 +19,13 @@
 //       the market-recovery flow; both are safe because they're guarded by
 //       the same reason check.)
 //     • planned_shutdown: cleared when planned_shutdown_date is absent or
-//       > 14 days in the future.
+//       > 14 days in the future, AND no curator tooltip_message is present.
+//       (Once a curator documents the shutdown with a tooltip, the halt is
+//       theirs to clear; the cron will not auto-clear it.)
+//
+//   Notify-only: withdrawals are never auto-halted. The summary and dry-run
+//   report list upcoming planned shutdowns and any past-date shutdowns whose
+//   withdrawals are still open, so a curator can act.
 //
 // Usage:
 //   node check_extended_halts.mjs [<zone_name>] [--dry-run] [--force]
@@ -98,6 +106,10 @@ async function main() {
   const nowIso = new Date().toISOString();
   const nowMs = new Date(nowIso).getTime();
   const mutations = [];
+  // Notify-only signals (no mutation): planned shutdowns a curator may need to
+  // act on. "upcoming" = date within the halt window; "past_due" = date has
+  // passed but withdrawals are still open (chain likely down, funds may strand).
+  const notifications = [];
 
   for (const ev of evaluations) {
     const { coinMinimalDenom, chainName, symbol, zoneAsset } = ev;
@@ -159,13 +171,14 @@ async function main() {
     }
 
     // ── Trigger B: planned shutdown approaching ─────────────────────────────
-    // Curator lock honoured: non-empty tooltip_message blocks the set path,
-    // matching the contract used elsewhere.
+    // Curator lock is intentionally NOT honoured on this set path: a planned
+    // shutdown is a hard external deadline, so the deposit halt must fire even
+    // when a curator has written a tooltip_message explaining the shutdown.
+    // The lock is still honoured on Trigger A and on the clearing path below.
     const plannedDate = zoneAsset.planned_shutdown_date;
     if (
       plannedDate &&
-      zoneAsset.osmosis_halt_deposits !== true &&
-      !zoneAsset.tooltip_message
+      zoneAsset.osmosis_halt_deposits !== true
     ) {
       const untilMs = new Date(plannedDate).getTime() - nowMs;
       if (untilMs >= 0 && untilMs <= SHUTDOWN_WINDOW_MS) {
@@ -196,6 +209,27 @@ async function main() {
           kind: 'planned_shutdown_cleared',
           asset: symbol,
           chain: chainName,
+        });
+      }
+    }
+
+    // ── Notify-only: planned-shutdown awareness ─────────────────────────────
+    // Surface shutdowns for curator attention without mutating withdrawals.
+    if (plannedDate) {
+      const untilMs = new Date(plannedDate).getTime() - nowMs;
+      if (untilMs < 0 && zoneAsset.osmosis_halt_withdrawals !== true) {
+        notifications.push({
+          kind: 'past_due_withdrawals_open',
+          asset: symbol,
+          chain: chainName,
+          shutdown: plannedDate,
+        });
+      } else if (untilMs >= 0 && untilMs <= SHUTDOWN_WINDOW_MS) {
+        notifications.push({
+          kind: 'upcoming_planned_shutdown',
+          asset: symbol,
+          chain: chainName,
+          shutdown: plannedDate,
         });
       }
     }
@@ -230,6 +264,20 @@ async function main() {
         `| ${m.kind} | ${m.asset ?? '-'} | ${m.chain ?? '-'} | ${m.days ?? m.shutdown ?? '-'} |`
       );
     }
+    if (notifications.length > 0) {
+      lines.push(
+        ``,
+        `## Planned-shutdown notifications (no withdrawal action taken)`,
+        ``,
+        `| Kind | Asset | Chain | Shutdown |`,
+        `|------|-------|-------|----------|`
+      );
+      for (const n of notifications) {
+        lines.push(
+          `| ${n.kind} | ${n.asset ?? '-'} | ${n.chain ?? '-'} | ${n.shutdown ?? '-'} |`
+        );
+      }
+    }
     fs.writeFileSync(reportPath, lines.join('\n') + '\n', 'utf8');
     console.log(`\n📝 Dry-run report: ${reportPath}`);
     return;
@@ -249,6 +297,18 @@ async function main() {
   console.log('='.repeat(70));
   for (const [k, v] of Object.entries(byKind)) {
     console.log(`  ${k.padEnd(28)}: ${v}`);
+  }
+
+  if (notifications.length > 0) {
+    console.log('\n' + '-'.repeat(70));
+    console.log('  PLANNED-SHUTDOWN NOTIFICATIONS (no withdrawal action taken)');
+    console.log('-'.repeat(70));
+    for (const n of notifications) {
+      const flag = n.kind === 'past_due_withdrawals_open' ? '⚠️ ' : '   ';
+      console.log(
+        `  ${flag}${n.kind.padEnd(26)} ${(n.asset ?? '-').padEnd(16)} ${n.chain ?? '-'} (${n.shutdown})`
+      );
+    }
   }
 }
 

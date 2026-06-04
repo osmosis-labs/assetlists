@@ -205,7 +205,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
-import fetch from 'node-fetch';
+// fetch is a Node.js global (Node 18+); no import needed.
 import * as crypto from 'crypto';
 import * as zone from './assetlist_functions.mjs';
 import * as chain_reg from '../../../chain-registry/.github/workflows/utility/chain_registry.mjs';

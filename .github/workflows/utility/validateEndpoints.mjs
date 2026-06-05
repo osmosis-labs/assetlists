@@ -1427,7 +1427,8 @@ function generateValidationReport(chainName) {
   const bumpCoverage = (c, asset) => {
     if (!haltCoverageByChain[c]) {
       haltCoverageByChain[c] = {
-        total: 0, unstable: 0, depositsHalted: 0, haltedBothDirections: 0
+        total: 0, unstable: 0, depositsHalted: 0, haltedBothDirections: 0,
+        assets: []
       };
     }
     haltCoverageByChain[c].total += 1;
@@ -1436,6 +1437,7 @@ function generateValidationReport(chainName) {
     if (asset.osmosis_halt_deposits && asset.osmosis_halt_withdrawals) {
       haltCoverageByChain[c].haltedBothDirections += 1;
     }
+    haltCoverageByChain[c].assets.push(asset);
   };
   zoneAssets.forEach(asset => {
     const chains = new Set();
@@ -1443,6 +1445,40 @@ function generateValidationReport(chainName) {
     if (asset.canonical?.chain_name) { chains.add(asset.canonical.chain_name); }
     chains.forEach(c => bumpCoverage(c, asset));
   });
+
+  // Render the per-asset status breakdown for a chain as one Markdown cell, one
+  // asset per line (joined with <br> since a literal newline would break the
+  // table row). Each line is "<symbol> — <status>", where status reflects the
+  // strongest halt flag set on that asset and its reason. This replaces the old
+  // aggregate-count cell so a reviewer can see exactly which assets are still
+  // exposed on an unreachable chain without the table ballooning into one row
+  // per asset. Asset identity prefers the human label parsed from _comment
+  // (e.g. "Evmos $EVMOS" -> "EVMOS"), falling back to base_denom.
+  const getAssetSymbol = (asset) => {
+    const ticker = asset._comment?.match(/\$([A-Za-z0-9.\-]+)/)?.[1];
+    return ticker || asset.base_denom || '(unknown)';
+  };
+  const getAssetStatusLine = (asset) => {
+    const reason = (r) => (r ? ` (${r})` : '');
+    let status;
+    if (asset.osmosis_halt_deposits && asset.osmosis_halt_withdrawals) {
+      status = `🛑 deposits + withdrawals halted${reason(asset.osmosis_deposit_halt_reason || asset.osmosis_withdrawal_halt_reason)}`;
+    } else if (asset.osmosis_halt_deposits) {
+      status = `🛑 deposits halted${reason(asset.osmosis_deposit_halt_reason)}`;
+    } else if (asset.osmosis_halt_withdrawals) {
+      status = `🛑 withdrawals halted${reason(asset.osmosis_withdrawal_halt_reason)}`;
+    } else if (asset.osmosis_unstable) {
+      status = `⚠️ unstable${reason(asset.osmosis_unstable_reason)}`;
+    } else {
+      status = '❗ not covered';
+    }
+    return `${getAssetSymbol(asset)} — ${status}`;
+  };
+  const getAssetBreakdownCell = (chain_name) => {
+    const cov = haltCoverageByChain[chain_name];
+    if (!cov || cov.assets.length === 0) { return '— no listed assets'; }
+    return cov.assets.map(getAssetStatusLine).join('<br>');
+  };
 
   // Render a short coverage label for a chain's assets. An asset counts as
   // "covered" only if it is deposit-halted or flagged unstable. osmosis_disabled
@@ -1659,10 +1695,11 @@ function generateValidationReport(chainName) {
     report += `### ❌ Connectivity Failures\n\n`;
     report += `The following chains have endpoints that failed connectivity tests (not just CORS). `;
     report += `The Halt Coverage column shows whether the chain's listed assets are already flagged `;
-    report += `unstable / deposit-halted by another mechanism. The Action column gives the suggested `;
+    report += `unstable / deposit-halted by another mechanism. The Assets column lists every asset on `;
+    report += `the chain with its individual status (one per line). The Action column gives the suggested `;
     report += `next step derived from that coverage and the chain's dead-chain streak.\n\n`;
-    report += `| Chain Name | Last Validation | Days Ago | RPC Status | REST Status | Halt Coverage | Action |\n`;
-    report += `|------------|----------------|----------|------------|-------------|---------------|--------|\n`;
+    report += `| Chain Name | Last Validation | Days Ago | RPC Status | REST Status | Halt Coverage | Assets | Action |\n`;
+    report += `|------------|----------------|----------|------------|-------------|---------------|--------|--------|\n`;
 
     failedChains.forEach(chain => {
       const validationDate = new Date(chain.validationDate);
@@ -1677,9 +1714,10 @@ function generateValidationReport(chainName) {
       const rpcStatus = rpcAllFailed ? '❌ All Failed' : '⚠️ Partial';
       const restStatus = restAllFailed ? '❌ All Failed' : '⚠️ Partial';
       const haltCoverage = getHaltCoverageLabel(chain.chain_name);
+      const assetBreakdown = getAssetBreakdownCell(chain.chain_name);
       const action = getActionLabel(chain.chain_name);
 
-      report += `| ${chain.chain_name} | ${validationDate.toISOString().split('T')[0]} | ${daysSince} | ${rpcStatus} | ${restStatus} | ${haltCoverage} | ${action} |\n`;
+      report += `| ${chain.chain_name} | ${validationDate.toISOString().split('T')[0]} | ${daysSince} | ${rpcStatus} | ${restStatus} | ${haltCoverage} | ${assetBreakdown} | ${action} |\n`;
     });
     report += `\n`;
   }

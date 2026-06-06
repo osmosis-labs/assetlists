@@ -252,14 +252,23 @@
           "withdraw_url": "https://app.evmos.org/assets"
         }
       ],
-      "_comment": "Evmos $EVMOS"
+      "_comment": "Evmos $EVMOS",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Evmos chain has been permanently shut down by governance and is no longer producing blocks. Deposits and withdrawals are disabled. Source: https://x.com/Disperze_/status/2054625049429127192"
     },
     {
       "chain_name": "kava",
       "base_denom": "ukava",
       "path": "transfer/channel-143/ukava",
       "osmosis_verified": true,
-      "_comment": "Kava $KAVA"
+      "_comment": "Kava $KAVA",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "secretnetwork",
@@ -290,7 +299,11 @@
       "categories": [
         "nft_protocol"
       ],
-      "_comment": "Stargaze $STARS"
+      "_comment": "Stargaze $STARS",
+      "planned_shutdown_date": "2026-06-15T00:00:00Z",
+      "tooltip_message": "The Stargaze chain is shutting down on 15 June 2026 as the project migrates to the Cosmos Hub. Deposits are being disabled ahead of the shutdown. Migrate your assets via https://automigration.stargaze.zone/",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "planned_shutdown"
     },
     {
       "chain_name": "chihuahua",
@@ -326,7 +339,10 @@
       ],
       "_comment": "pSTAKE Finance $PSTAKE",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "tooltip_message": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed."
     },
     {
       "chain_name": "akash",
@@ -391,11 +407,12 @@
       ],
       "_comment": "e-Money $NGM",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The e-Money project has been discontinued and its chain is no longer maintained; the e-Money stablecoins were cancelled and the GitHub organisation archived. Deposits and withdrawals are disabled. Source: https://github.com/e-money"
     },
     {
       "chain_name": "emoney",
@@ -407,11 +424,12 @@
       ],
       "_comment": "e-Money EUR $EEUR",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The e-Money project has been discontinued and its chain is no longer maintained; the e-Money stablecoins were cancelled and the GitHub organisation archived. Deposits and withdrawals are disabled. Source: https://github.com/e-money"
     },
     {
       "chain_name": "likecoin",
@@ -443,7 +461,9 @@
       "osmosis_verified": true,
       "_comment": "BitCanna $BCNA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "extended_unstable_market"
     },
     {
       "chain_name": "bitsong",
@@ -493,7 +513,12 @@
       "categories": [
         "rwa"
       ],
-      "_comment": "Comdex $CMDX"
+      "_comment": "Comdex $CMDX",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "planned_shutdown",
+      "tooltip_message": "The Comdex team ended support for the Comdex chain on 31 October 2025, deposits are disabled. Withdrawals remain open. Source: https://x.com/ComdexOfficial/status/1968366352537682220"
     },
     {
       "chain_name": "cheqd",
@@ -601,7 +626,9 @@
       "categories": [
         "defi"
       ],
-      "_comment": "UX Chain $UMEE"
+      "_comment": "UX Chain $UMEE",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "gravitybridge",
@@ -815,7 +842,12 @@
           "withdraw_url": "https://bridge.blockscape.network/?from=osmosis&to=gravitybridge"
         }
       ],
-      "_comment": "Wrapped Bitcoin (Ethereum via Gravity Bridge) $WBTC.eth.grv"
+      "_comment": "Wrapped Bitcoin (Ethereum via Gravity Bridge) $WBTC.eth.grv",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "tooltip_message": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed."
     },
     {
       "chain_name": "gravitybridge",
@@ -832,7 +864,10 @@
       ],
       "_comment": "Ethereum (Gravity Bridge) $ETH.grv",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "tooltip_message": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed."
     },
     {
       "chain_name": "gravitybridge",
@@ -850,7 +885,12 @@
       "categories": [
         "stablecoin"
       ],
-      "_comment": "USDC (Ethereum via Gravity Bridge) $USDC.eth.grv"
+      "_comment": "USDC (Ethereum via Gravity Bridge) $USDC.eth.grv",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "tooltip_message": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed."
     },
     {
       "chain_name": "gravitybridge",
@@ -868,7 +908,12 @@
       "categories": [
         "stablecoin"
       ],
-      "_comment": "Dai Stablecoin (Gravity Bridge) $DAI.grv"
+      "_comment": "Dai Stablecoin (Gravity Bridge) $DAI.grv",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "tooltip_message": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed."
     },
     {
       "chain_name": "gravitybridge",
@@ -886,7 +931,12 @@
       "categories": [
         "stablecoin"
       ],
-      "_comment": "Tether USD (Ethereum via Gravity Bridge) $USDT.eth.grv"
+      "_comment": "Tether USD (Ethereum via Gravity Bridge) $USDT.eth.grv",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "tooltip_message": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed."
     },
     {
       "chain_name": "juno",
@@ -1430,7 +1480,9 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Stride Staked STARS $stSTARS"
+      "_comment": "Stride Staked STARS $stSTARS",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "juno",
@@ -1474,7 +1526,9 @@
       "base_denom": "utori",
       "path": "transfer/channel-362/utori",
       "osmosis_verified": true,
-      "_comment": "Teritori $TORI"
+      "_comment": "Teritori $TORI",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "stride",
@@ -1667,7 +1721,12 @@
         "stablecoin",
         "defi"
       ],
-      "_comment": "CMST $CMST"
+      "_comment": "CMST $CMST",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "planned_shutdown",
+      "tooltip_message": "The Comdex team ended support for the Comdex chain on 31 October 2025, deposits are disabled. Withdrawals remain open. Source: https://x.com/ComdexOfficial/status/1968366352537682220"
     },
     {
       "chain_name": "imversed",
@@ -1726,11 +1785,12 @@
       ],
       "_comment": "Onomy $NOM",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Onomy chain has been permanently shut down. The team announced an indefinite sunset of operations and validators were instructed to stop producing blocks. Deposits and withdrawals are disabled. Source: https://x.com/OnomyProtocol/status/1921962201138483461"
     },
     {
       "chain_name": "persistence",
@@ -1824,7 +1884,9 @@
       "osmosis_verified": true,
       "_comment": "Canto $CANTO",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "extended_unstable_market"
     },
     {
       "chain_name": "quicksilver",
@@ -1991,7 +2053,12 @@
       "categories": [
         "defi"
       ],
-      "_comment": "Harbor $HARBOR"
+      "_comment": "Harbor $HARBOR",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "planned_shutdown",
+      "tooltip_message": "The Comdex team ended support for the Comdex chain on 31 October 2025, deposits are disabled. Withdrawals remain open. Source: https://x.com/ComdexOfficial/status/1968366352537682220"
     },
     {
       "chain_name": "quicksilver",
@@ -2020,7 +2087,9 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Quicksilver $QCK"
+      "_comment": "Quicksilver $QCK",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "arkh",
@@ -2055,7 +2124,9 @@
       "categories": [
         "rwa"
       ],
-      "_comment": "Frienzies $FRNZ"
+      "_comment": "Frienzies $FRNZ",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "migaloo",
@@ -2336,7 +2407,9 @@
           "deposit_url": "https://app.squidrouter.com/?chains=1,osmosis-1&tokens=0x6982508145454Ce325dDbE47a25d4ec3d2311933,ibc/E47F4E97C534C95B942729E1B25DBDE111EA791411CFF100515050BEA0AC0C6B",
           "withdraw_url": "https://app.squidrouter.com/?chains=osmosis-1,1&tokens=ibc/E47F4E97C534C95B942729E1B25DBDE111EA791411CFF100515050BEA0AC0C6B,0x6982508145454Ce325dDbE47a25d4ec3d2311933"
         }
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -2518,7 +2591,9 @@
       "base_denom": "untrn",
       "path": "transfer/channel-874/untrn",
       "osmosis_verified": true,
-      "_comment": "Neutron $NTRN"
+      "_comment": "Neutron $NTRN",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "juno",
@@ -2757,7 +2832,9 @@
       ],
       "_comment": "Bonk $BONK",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "extended_unstable_market"
     },
     {
       "chain_name": "gateway",
@@ -2775,7 +2852,11 @@
       "categories": [
         "stablecoin"
       ],
-      "_comment": "Tether USD (Ethereum via Wormhole) $USDT.eth.wh"
+      "_comment": "Tether USD (Ethereum via Wormhole) $USDT.eth.wh",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "extended_unstable_market"
     },
     {
       "chain_name": "gateway",
@@ -2808,7 +2889,9 @@
       ],
       "_comment": "Aptos Coin (Wormhole) $APT.wh",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "extended_unstable_market"
     },
     {
       "chain_name": "kujira",
@@ -2854,7 +2937,9 @@
       ],
       "_comment": "USDC (Ethereum via Wormhole) $USDC.eth.wh",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "extended_unstable_market"
     },
     {
       "chain_name": "gateway",
@@ -2871,7 +2956,9 @@
       ],
       "_comment": "Ethereum (Wormhole) $ETH.wh",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "extended_unstable_market"
     },
     {
       "chain_name": "noble",
@@ -3009,7 +3096,14 @@
           "deposit_url": "https://app.evmos.org/assets"
         }
       ],
-      "_comment": "Neokingdom DAO $NEOK"
+      "_comment": "Neokingdom DAO $NEOK",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Evmos chain has been permanently shut down by governance and is no longer producing blocks. Deposits and withdrawals are disabled. Source: https://x.com/Disperze_/status/2054625049429127192"
     },
     {
       "chain_name": "realio",
@@ -3104,7 +3198,11 @@
       "osmosis_verified": true,
       "_comment": "Stardust STRDST $STRDST",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "planned_shutdown_date": "2026-06-15T00:00:00Z",
+      "tooltip_message": "The Stargaze chain is shutting down on 15 June 2026 as the project migrates to the Cosmos Hub. Deposits are being disabled ahead of the shutdown. Migrate your assets via https://automigration.stargaze.zone/",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "planned_shutdown"
     },
     {
       "chain_name": "doravota",
@@ -3209,7 +3307,11 @@
       "base_denom": "factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/uBRNCH",
       "path": "transfer/channel-75/factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/uBRNCH",
       "osmosis_verified": false,
-      "_comment": "Branch $BRNCH"
+      "_comment": "Branch $BRNCH",
+      "planned_shutdown_date": "2026-06-15T00:00:00Z",
+      "tooltip_message": "The Stargaze chain is shutting down on 15 June 2026 as the project migrates to the Cosmos Hub. Deposits are being disabled ahead of the shutdown. Migrate your assets via https://automigration.stargaze.zone/",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "planned_shutdown"
     },
     {
       "chain_name": "neutron",
@@ -3324,7 +3426,9 @@
       ],
       "_comment": "Pyth Network $PYTH",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "extended_unstable_market"
     },
     {
       "chain_name": "persistence",
@@ -3564,7 +3668,11 @@
       "base_denom": "factory/stars1xx5976njvxpl9n4v8huvff6cudhx7yuu8e7rt4/usneaky",
       "path": "transfer/channel-75/factory/stars1xx5976njvxpl9n4v8huvff6cudhx7yuu8e7rt4/usneaky",
       "osmosis_verified": false,
-      "_comment": "Sneaky Productions $SNEAKY"
+      "_comment": "Sneaky Productions $SNEAKY",
+      "planned_shutdown_date": "2026-06-15T00:00:00Z",
+      "tooltip_message": "The Stargaze chain is shutting down on 15 June 2026 as the project migrates to the Cosmos Hub. Deposits are being disabled ahead of the shutdown. Migrate your assets via https://automigration.stargaze.zone/",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "planned_shutdown"
     },
     {
       "chain_name": "osmosis",
@@ -3694,7 +3802,9 @@
           "deposit_url": "https://portal.dymension.xyz/ibc/transfer?sourceId=dymension_1100-1&destinationId=osmosis-1"
         }
       ],
-      "_comment": "Dymension Hub (Dymension Hub) $DYM.dym"
+      "_comment": "Dymension Hub (Dymension Hub) $DYM.dym",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -3746,7 +3856,9 @@
       ],
       "_comment": "USDC (Solana via Wormhole) $USDC.sol.wh",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "extended_unstable_market"
     },
     {
       "chain_name": "humans",
@@ -3770,7 +3882,14 @@
           "deposit_url": "https://app.evmos.org/assets"
         }
       ],
-      "_comment": "Teledisko DAO - Legacy $BERLIN-legacy"
+      "_comment": "Teledisko DAO - Legacy $BERLIN-legacy",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Evmos chain has been permanently shut down by governance and is no longer producing blocks. Deposits and withdrawals are disabled. Source: https://x.com/Disperze_/status/2054625049429127192"
     },
     {
       "chain_name": "scorum",
@@ -3852,7 +3971,11 @@
           "withdraw_url": "https://www.bskt.fi/wormhole"
         }
       ],
-      "_comment": "Basket $BSKT"
+      "_comment": "Basket $BSKT",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "extended_unstable_market"
     },
     {
       "chain_name": "aioz",
@@ -3865,7 +3988,9 @@
       ],
       "_comment": "AIOZ Network (AIOZ Network) $AIOZ.aioz",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "extended_unstable_market"
     },
     {
       "chain_name": "stride",
@@ -4090,7 +4215,9 @@
       "osmosis_verified": true,
       "_comment": "Wormhole Token $W",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "extended_unstable_market"
     },
     {
       "chain_name": "dhealth",
@@ -4102,11 +4229,12 @@
       ],
       "_comment": "dHealth $DHP",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The dHealth Cosmos chain has been sunset by governance and the project has migrated fully to Solana. The migration bridge closed on 2026-04-11. Deposits and withdrawals are disabled. Source: https://www.dhealth.com/post/bridge-open-migrate-to-solana-native-dhp"
     },
     {
       "chain_name": "furya",
@@ -4135,7 +4263,9 @@
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/saga/images/saga_white.svg"
         }
       },
-      "_comment": "Saga $SAGA"
+      "_comment": "Saga $SAGA",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "neutron",
@@ -4210,7 +4340,14 @@
           "deposit_url": "https://app.evmos.org/assets"
         }
       ],
-      "_comment": "Crowdpunk DAO $CROWDP"
+      "_comment": "Crowdpunk DAO $CROWDP",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Evmos chain has been permanently shut down by governance and is no longer producing blocks. Deposits and withdrawals are disabled. Source: https://x.com/Disperze_/status/2054625049429127192"
     },
     {
       "chain_name": "neutron",
@@ -4251,7 +4388,12 @@
       "categories": [
         "rwa"
       ],
-      "_comment": "Paxos Gold (Gravity Bridge) $PAXG.grv"
+      "_comment": "Paxos Gold (Gravity Bridge) $PAXG.grv",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "tooltip_message": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed."
     },
     {
       "chain_name": "migaloo",
@@ -4488,7 +4630,11 @@
           "withdraw_url": "https://portal.dymension.xyz/ibc/transfer?sourceId=osmosis-1&destinationId=dymension_1100-1"
         }
       ],
-      "_comment": "Nim Network $NIM"
+      "_comment": "Nim Network $NIM",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "extended_unstable_market"
     },
     {
       "chain_name": "seda",
@@ -5410,7 +5556,9 @@
       ],
       "_comment": "Mande Network $MAND",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "extended_unstable_market"
     },
     {
       "chain_name": "neutaro",
@@ -5439,7 +5587,11 @@
           "withdraw_url": "http://wormhole.bridge.sandwichswap.io/pumpfunosmo/pbj/withdraw"
         }
       ],
-      "_comment": "Pepe Bruce Jenner $PBJ"
+      "_comment": "Pepe Bruce Jenner $PBJ",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "extended_unstable_market"
     },
     {
       "chain_name": "noble",
@@ -5744,7 +5896,9 @@
       },
       "categories": [
         "meme"
-      ]
+      ],
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -5755,7 +5909,9 @@
       "canonical": {
         "chain_name": "polkadot",
         "base_denom": "Planck"
-      }
+      },
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "composable",
@@ -5982,7 +6138,9 @@
         "chain_name": "ethereum",
         "base_denom": "0x3231Cb76718CDeF2155FC47b5286d82e6eDA273f"
       },
-      "_comment": "Monerium EUR emoney $EURe"
+      "_comment": "Monerium EUR emoney $EURe",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "andromeda",
@@ -6544,7 +6702,9 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "dATOM $dATOM"
+      "_comment": "dATOM $dATOM",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -6954,7 +7114,9 @@
         "base_denom": "attoaioz"
       },
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "extended_unstable_market"
     },
     {
       "chain_name": "oraichain",
@@ -7008,7 +7170,11 @@
       "base_denom": "factory/stars1rru5m2wh3fylpheqh8h5g968jwhe7rctkfm7u0gwk7ka4vx3q5tqukjl4z/hood",
       "path": "transfer/channel-75/factory/stars1rru5m2wh3fylpheqh8h5g968jwhe7rctkfm7u0gwk7ka4vx3q5tqukjl4z/hood",
       "osmosis_verified": false,
-      "_comment": "HOOD $HOOD"
+      "_comment": "HOOD $HOOD",
+      "planned_shutdown_date": "2026-06-15T00:00:00Z",
+      "tooltip_message": "The Stargaze chain is shutting down on 15 June 2026 as the project migrates to the Cosmos Hub. Deposits are being disabled ahead of the shutdown. Migrate your assets via https://automigration.stargaze.zone/",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "planned_shutdown"
     },
     {
       "chain_name": "osmosis",
@@ -7029,7 +7195,9 @@
         "chain_name": "dymension",
         "base_denom": "adym"
       },
-      "_comment": "Dymension Hub $DYM"
+      "_comment": "Dymension Hub $DYM",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -7138,7 +7306,9 @@
         "chain_name": "ethereum",
         "base_denom": "0x8236a87084f8B84306f72007F36F2618A5634494"
       },
-      "_comment": "Lombard Staked Bitcoin $LBTC"
+      "_comment": "Lombard Staked Bitcoin $LBTC",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "cosmoshub",
@@ -7206,11 +7376,12 @@
       ],
       "_comment": "MilkyWay $MILK",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The MilkyWay chain has been permanently wound down and shut down by the team. A final upgrade returned assets to their origin chains. Deposits and withdrawals are disabled. Source: https://x.com/milky_way_zone/status/2011770175566332325"
     },
     {
       "chain_name": "planq",
@@ -7336,11 +7507,12 @@
       ],
       "_comment": "milkBABY $milkBABY",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The MilkyWay chain has been permanently wound down and shut down by the team. A final upgrade returned assets to their origin chains. Deposits and withdrawals are disabled. Source: https://x.com/milky_way_zone/status/2011770175566332325"
     },
     {
       "chain_name": "osmosis",
@@ -7508,7 +7680,9 @@
       "base_denom": "ubadge",
       "path": "transfer/channel-104311/ubadge",
       "osmosis_verified": true,
-      "_comment": "BitBadges $BADGE"
+      "_comment": "BitBadges $BADGE",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "xrplevm",
@@ -7633,7 +7807,9 @@
       "base_denom": "note",
       "path": "transfer/channel-104867/note",
       "osmosis_verified": true,
-      "_comment": "Symphony $MLD"
+      "_comment": "Symphony $MLD",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -7788,7 +7964,9 @@
           "withdraw_url": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=zcash&fromToken=bZEC"
         }
       ],
-      "_comment": "Zcash (Int3) $ZEC.int3"
+      "_comment": "Zcash (Int3) $ZEC.int3",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -7809,7 +7987,9 @@
         "chain_name": "zcash",
         "base_denom": "zatoshi"
       },
-      "_comment": "Zcash $ZEC"
+      "_comment": "Zcash $ZEC",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -7938,7 +8118,14 @@
         "liquid_staking",
         "defi"
       ],
-      "_comment": "milkINIT $milkINIT"
+      "_comment": "milkINIT $milkINIT",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "milkINIT is a MilkyWay liquid-staking token, and the MilkyWay chain has been permanently wound down and shut down by the team. A final upgrade returned assets to their origin chains. Deposits and withdrawals are disabled. Source: https://x.com/milky_way_zone/status/2011770175566332325"
     },
     {
       "chain_name": "gnodi",
@@ -7962,11 +8149,12 @@
       "path": "transfer/channel-37/echf",
       "osmosis_unstable": true,
       "_comment": "e-Money CHF $ECHF",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The e-Money project has been discontinued and its chain is no longer maintained; the e-Money stablecoins were cancelled and the GitHub organisation archived. Deposits and withdrawals are disabled. Source: https://github.com/e-money"
     },
     {
       "chain_name": "emoney",
@@ -7974,11 +8162,12 @@
       "path": "transfer/channel-37/enok",
       "osmosis_unstable": true,
       "_comment": "e-Money NOK $ENOK",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The e-Money project has been discontinued and its chain is no longer maintained; the e-Money stablecoins were cancelled and the GitHub organisation archived. Deposits and withdrawals are disabled. Source: https://github.com/e-money"
     },
     {
       "chain_name": "emoney",
@@ -7986,11 +8175,12 @@
       "path": "transfer/channel-37/edkk",
       "osmosis_unstable": true,
       "_comment": "e-Money DKK $EDKK",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The e-Money project has been discontinued and its chain is no longer maintained; the e-Money stablecoins were cancelled and the GitHub organisation archived. Deposits and withdrawals are disabled. Source: https://github.com/e-money"
     },
     {
       "chain_name": "emoney",
@@ -7998,11 +8188,12 @@
       "path": "transfer/channel-37/esek",
       "osmosis_unstable": true,
       "_comment": "e-Money SEK $ESEK",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The e-Money project has been discontinued and its chain is no longer maintained; the e-Money stablecoins were cancelled and the GitHub organisation archived. Deposits and withdrawals are disabled. Source: https://github.com/e-money"
     },
     {
       "chain_name": "odin",
@@ -10614,11 +10805,12 @@
       "path": "transfer/channel-74628/aonex",
       "osmosis_unstable": true,
       "_comment": "ONEX $ONEX",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "ONEX ran as an Onomy consumer chain and shut down together with Onomy, whose operations were permanently sunset. Deposits and withdrawals are disabled. Source: https://x.com/OnomyProtocol/status/1921962201138483461"
     },
     {
       "chain_name": "self",
@@ -10840,6 +11032,18 @@
         "nft_protocol"
       ],
       "_comment": "Nether $NTHR"
+    },
+    {
+      "chain_name": "wolochain",
+      "base_denom": "uwolo",
+      "path": "transfer/channel-110224/uwolo",
+      "_comment": "WoloChain $WOLO",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     }
   ]
 }

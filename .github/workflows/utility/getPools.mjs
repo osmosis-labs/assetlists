@@ -17,7 +17,7 @@
 //-- Imports --
 
 import * as fs from 'fs';
-import fetch from 'node-fetch';
+// fetch is a Node.js global (Node 18+); no import needed.
 // import * as queryApi from './queryApi.mjs'; // Removed - restore if re-enabling this module
 import * as zone from './assetlist_functions.mjs';
 

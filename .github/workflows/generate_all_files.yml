@@ -228,6 +228,21 @@ jobs:
         working-directory: ./.github/workflows/utility
         run: node update_assetlist_state.mjs
 
+      - name: Report Dead Chains and Planned Shutdowns
+        working-directory: ./.github/workflows/utility
+        run: |
+          # Report-only. Reads the state.json just produced by validateEndpoints
+          # + update_assetlist_state, plus the chain-registry submodule. The
+          # heavy half (gov-proposal scan + cosmos.directory corroboration) runs
+          # only on Mondays via --weekly to bound CI cost and external load; the
+          # cheap dead-streak counter updates daily either way. Output is
+          # captured and appended to the PR body. Never fails the pipeline.
+          set +e
+          if [ "$(date -u +%u)" = "1" ]; then WEEKLY="--weekly"; else WEEKLY=""; fi
+          node report_dead_chains.mjs osmosis-1 $WEEKLY > ../../../dead-chains.md 2> ../../../dead-chains.log
+          echo "DEAD_CHAINS_WEEKLY=$([ -n "$WEEKLY" ] && echo true || echo false)" >> $GITHUB_ENV
+          cat ../../../dead-chains.log || true
+
       - name: Run code to Generate Zone Assets Comments
         working-directory: ./.github/workflows/utility
         run: node generateComments.mjs
@@ -281,12 +296,18 @@ jobs:
           emit_row "🔴" "IBC flagged unstable" /tmp/lc-ibcFlagged.txt symbol
           emit_row "🟢" "IBC cleared" /tmp/lc-ibcCleared.txt symbol
 
-          # Manual halts: list chain names of assets whose halt reason is
-          # "manual" on either direction. Distinct chains, sorted.
+          # Manual halts: list chain names of assets that were manually flagged
+          # (operator-driven, e.g. a bridge compromise) as distinct from
+          # automatic halts (ibc_client, market, source_chain_killed). An asset
+          # counts as manual if ANY of its three reason fields is "manual":
+          # the overall unstable reason, or the per-direction deposit/withdrawal
+          # halt reason (a curator may halt one direction without flagging the
+          # asset unstable). Distinct chains, sorted.
           MANUAL_HALT_CHAINS=$(jq -r '
             .assets
             | map(select(
-                (.osmosis_deposit_halt_reason == "manual")
+                (.osmosis_unstable_reason == "manual")
+                or (.osmosis_deposit_halt_reason == "manual")
                 or (.osmosis_withdrawal_halt_reason == "manual")
               ))
             | map(.chain_name) | unique | .[]
@@ -474,10 +495,14 @@ jobs:
           echo "## Manual halts currently in effect" >> workflow-summary.md
           echo "" >> workflow-summary.md
 
+          # Select assets manually flagged on ANY of the three reason fields
+          # (unstable / deposit-halt / withdrawal-halt), then report each
+          # halted direction with its cause from the *_halt_reason fields.
           MANUAL_HALTS=$(jq -r '
             .assets
             | map(select(
-                (.osmosis_deposit_halt_reason == "manual")
+                (.osmosis_unstable_reason == "manual")
+                or (.osmosis_deposit_halt_reason == "manual")
                 or (.osmosis_withdrawal_halt_reason == "manual")
               ))
           ' osmosis-1/osmosis.zone_assets.json)
@@ -486,17 +511,46 @@ jobs:
           if [ "$MANUAL_HALT_COUNT" -eq 0 ]; then
             echo "_None._" >> workflow-summary.md
           else
-            echo "| Chain | Base denom | Direction | Tooltip |" >> workflow-summary.md
-            echo "|-------|-----------|-----------|---------|" >> workflow-summary.md
-            echo "$MANUAL_HALTS" | jq -r '
-              .[] | (
-                (if .osmosis_deposit_halt_reason == "manual" then
-                   "| \(.chain_name) | \(.base_denom) | deposit | \(.tooltip_message // "") |"
-                 else "" end),
-                (if .osmosis_withdrawal_halt_reason == "manual" then
-                   "| \(.chain_name) | \(.base_denom) | withdrawal | \(.tooltip_message // "") |"
-                 else "" end)
-              ) | select(. != "")
+            # Resolve Symbol and Route from the generated frontend assetlist,
+            # joined on chainName|sourceDenom. Route is the asset's listed origin
+            # chain, plus "via <hop>" when the asset reaches Osmosis through an
+            # intermediary cosmos chain (the first counterparty cosmos chain that
+            # is not the origin itself). So a native Gravity asset reads
+            # "gravitybridge", while a Persistence asset bridged in via Gravity
+            # reads "persistence via gravitybridge".
+            echo "| Symbol | Route | Base denom | Direction | Reason | Tooltip |" >> workflow-summary.md
+            echo "|--------|-------|-----------|-----------|--------|---------|" >> workflow-summary.md
+            echo "$MANUAL_HALTS" | jq -r --slurpfile fe osmosis-1/generated/frontend/assetlist.json '
+              ($fe[0].assets
+                | map({ key: (.chainName + "|" + .sourceDenom), value: . })
+                | from_entries) as $byOrigin
+              | .[]
+              | . as $a
+              | ($byOrigin[$a.chain_name + "|" + $a.base_denom]) as $f
+              | ($f.symbol // $a._comment // $a.base_denom) as $sym
+              | (
+                  [ ($f.counterparty // [])[]
+                    | select(.chainType == "cosmos" and .chainName != $a.chain_name)
+                    | .chainName ] as $hops
+                  | if ($hops | length) > 0
+                    then $a.chain_name + " via " + $hops[0]
+                    else $a.chain_name end
+                ) as $route
+              | [
+                  (if .osmosis_halt_deposits == true then
+                     "| \($sym) | \($route) | \(.base_denom) | deposit | \(.osmosis_deposit_halt_reason // "") | \(.tooltip_message // "") |"
+                   else empty end),
+                  (if .osmosis_halt_withdrawals == true then
+                     "| \($sym) | \($route) | \(.base_denom) | withdrawal | \(.osmosis_withdrawal_halt_reason // "") | \(.tooltip_message // "") |"
+                   else empty end)
+                ]
+              # Fallback: an asset can be manually flagged unstable without
+              # either direction halted. Emit one row so the asset is still
+              # listed and the table never shows bare headers.
+              | (if length == 0 then
+                   ["| \($sym) | \($route) | \($a.base_denom) | none | \($a.osmosis_unstable_reason // "") | \($a.tooltip_message // "") |"]
+                 else . end)
+              | .[]
             ' >> workflow-summary.md
           fi
 
@@ -509,6 +563,16 @@ jobs:
 
           if [ -f validation-summary.md ]; then
             cat validation-summary.md >> workflow-summary.md
+          fi
+
+          # Dead-chain candidates + possible planned shutdowns (report-only).
+          # report_dead_chains.mjs already emits its own ## headers, so append
+          # the captured output verbatim under a divider.
+          if [ -f dead-chains.md ]; then
+            echo "" >> workflow-summary.md
+            echo "---" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            cat dead-chains.md >> workflow-summary.md
           fi
 
       - name: Create Pull Request

@@ -759,14 +759,34 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
   const rpcTestTypes = [RPC_CORS, RPC_WSS, RPC_ENDPOINTS];
   const restTestTypes = [REST_CORS, REST_ENDPOINTS];
 
+  // Move the zone-pinned endpoint to the front of an already provider-sorted
+  // list, so the validator tests it first. This mirrors the generator, which
+  // places the zone pin in slot 0 BEFORE applying provider sorting to the rest.
+  // Without this, sortEndpointsByProvider re-sorts the pin like any other
+  // endpoint and floats a team endpoint above it, so the validator would select
+  // (and the generator would then promote) the team endpoint over the pin,
+  // contradicting pin-takes-precedence. Pin order: pin > team > preferred > rest.
+  // Mutates `sorted` in place (the only caller passes a fresh sort result).
+  const pinZoneEndpointFirst = (sorted, pinnedAddress) => {
+    if (!pinnedAddress) return sorted;
+    const idx = sorted.findIndex(ep => ep.address === pinnedAddress);
+    if (idx <= 0) return sorted; // not present, or already first
+    const [pinned] = sorted.splice(idx, 1);
+    sorted.unshift(pinned);
+    return sorted;
+  };
+
   // Get all RPC endpoints with original indices
   const rpcEndpoints = (counterpartyChain?.apis?.rpc || []).map((ep, idx) => ({
     ...ep,
     originalIndex: idx
   }));
 
-  // Sort by provider preference (Team > Keplr/Polkachu > Others)
-  const sortedRpcEndpoints = sortEndpointsByProvider(rpcEndpoints, counterpartyChain.chain_name);
+  // Sort by provider preference (Team > Keplr/Polkachu > Others), then pin first.
+  const sortedRpcEndpoints = pinZoneEndpointFirst(
+    sortEndpointsByProvider(rpcEndpoints, counterpartyChain.chain_name),
+    zoneChain?.rpc
+  );
 
   // Get endpoint counts
   const rpcCount = sortedRpcEndpoints.length;
@@ -846,8 +866,11 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
     originalIndex: idx
   }));
 
-  // Sort by provider preference (Team > Keplr/Polkachu > Others)
-  const sortedRestEndpoints = sortEndpointsByProvider(restEndpoints, counterpartyChain.chain_name);
+  // Sort by provider preference (Team > Keplr/Polkachu > Others), then pin first.
+  const sortedRestEndpoints = pinZoneEndpointFirst(
+    sortEndpointsByProvider(restEndpoints, counterpartyChain.chain_name),
+    zoneChain?.rest
+  );
 
   // Find working REST endpoint (test in preferred order)
   let restResults = null;
@@ -993,7 +1016,19 @@ function constructValidationRecord(counterpartyChainName, validationData) {
     validationResults: validationData.results  // Keep for backward compatibility
   };
 
-  // Add backup endpoint information if any backup was used
+  // Always record the validated working endpoint addresses, regardless of which
+  // index they were found at. The generator promotes the published list to these
+  // addresses. This is keyed on address (not index) so it is immune to the order
+  // mismatch between the validator's tested order and the generator's published
+  // order. rpcAddress/restAddress are null if no endpoint of that type passed.
+  record.validatedEndpoints = {
+    rpcAddress: validationData.rpcAddress || null,
+    restAddress: validationData.restAddress || null
+  };
+
+  // Add backup endpoint information if any backup was used.
+  // Kept for backward compatibility with the validation report (generateValidationReport),
+  // which distinguishes "zone endpoint failed, fell back to a backup" cases.
   if (validationData.rpcEndpointIndex > 0 || validationData.restEndpointIndex > 0) {
     record.backupUsed = {
       rpcEndpointIndex: validationData.rpcEndpointIndex,
@@ -1133,6 +1168,43 @@ function prioritizeChains(chainlist, state) {
   return chainsWithPriority;
 }
 
+// Build the set of chains that are terminally dead and should never be probed
+// again: a chain whose EVERY attributed zone_asset is source_chain_killed (on
+// any reason field). Chainlist status === "killed" is handled separately in the
+// skip below. A killed source chain is not coming back, so probing it forever
+// just produces recurring "connectivity failed" noise and wastes CI budget. A
+// chain with a MIX of killed and live assets is intentionally NOT included
+// here, since a live asset still routes through it.
+function getFullyKilledChains(chainName) {
+  const KILLED = 'source_chain_killed';
+  const zoneAssets = zone.readFromFile(
+    chainName,
+    zone.noDir,
+    zone.zoneAssetsFileName
+  )?.assets || [];
+  const totals = {};
+  const killed = {};
+  const bump = (c, isKilled) => {
+    totals[c] = (totals[c] || 0) + 1;
+    if (isKilled) { killed[c] = (killed[c] || 0) + 1; }
+  };
+  for (const a of zoneAssets) {
+    const isKilled =
+      a.osmosis_unstable_reason === KILLED ||
+      a.osmosis_deposit_halt_reason === KILLED ||
+      a.osmosis_withdrawal_halt_reason === KILLED;
+    const chains = new Set();
+    if (a.chain_name) { chains.add(a.chain_name); }
+    if (a.canonical?.chain_name) { chains.add(a.canonical.chain_name); }
+    chains.forEach(c => bump(c, isKilled));
+  }
+  const fullyKilled = new Set();
+  for (const c of Object.keys(totals)) {
+    if (totals[c] > 0 && killed[c] === totals[c]) { fullyKilled.add(c); }
+  }
+  return fullyKilled;
+}
+
 async function validateEndpointsForAllCounterpartyChains(chainName) {
   if (chainName !== "osmosis") { return; }
   const chainlist = getChainlist(chainName)?.chains;
@@ -1140,6 +1212,10 @@ async function validateEndpointsForAllCounterpartyChains(chainName) {
 
   let state = getState(chainName);
   let chainQueryQueue = [];
+
+  // Chains whose every listed asset is source_chain_killed; skipped from
+  // probing alongside chainlist status === "killed".
+  const fullyKilledChains = getFullyKilledChains(chainName);
 
   // Get prioritized chain list
   const prioritizedChains = prioritizeChains(chainlist, state);
@@ -1158,9 +1234,15 @@ async function validateEndpointsForAllCounterpartyChains(chainName) {
   for (const prioritizedChain of prioritizedChains) {
     if (prioritizedChain.recentlyQueried) { continue; }
 
-    // Skip killed chains
+    // Skip terminally dead chains: registry status killed, or every listed
+    // asset flagged source_chain_killed. A killed source chain is not coming
+    // back, so there is nothing to probe.
     if (prioritizedChain.chain.status === 'killed') {
       console.log(`Skipping killed chain: ${prioritizedChain.chain.chain_name}`);
+      continue;
+    }
+    if (fullyKilledChains.has(prioritizedChain.chain.chain_name)) {
+      console.log(`Skipping source_chain_killed chain: ${prioritizedChain.chain.chain_name}`);
       continue;
     }
 
@@ -1308,6 +1390,160 @@ function generateValidationReport(chainName) {
     zone.zoneChainlistFileName
   )?.chains || [];
 
+  // Get zone assets so we can report whether a connectivity-failed chain's
+  // assets are already covered (flagged unstable / deposits halted) by another
+  // mechanism (manual, ibc_client, market, etc.). A chain that fails all
+  // endpoints but is NOT yet covered is the actionable case: deposits may still
+  // be open against an unreachable chain. This is surfaced for human follow-up;
+  // it does not auto-mutate zone_assets.
+  const zoneAssets = zone.readFromFile(
+    chainName,
+    zone.noDir,
+    zone.zoneAssetsFileName
+  )?.assets || [];
+
+  // Read the dead-chain consecutive-failure streaks (written by
+  // report_dead_chains.mjs) so the action column can distinguish a transient
+  // outage from a chain that has been all-endpoints-dead long enough to be a
+  // kill candidate. Degrade to an empty map if the file is absent.
+  let deadStreaks = {};
+  try {
+    deadStreaks = JSON.parse(
+      fs.readFileSync(
+        path.join('..', '..', '..', chainName === 'osmosis' ? 'osmosis-1' : chainName, 'generated', 'state', 'dead_chain_streaks.json'),
+        'utf8'
+      )
+    );
+  } catch { deadStreaks = {}; }
+  const DEAD_STREAK_THRESHOLD = 7; // mirror report_dead_chains.mjs
+
+  // Summarize halt coverage per chain: how many of its assets are unstable and
+  // how many have deposits halted. An asset is attributed to a chain if either
+  // its listed chain_name OR its canonical.chain_name matches, so a token routed
+  // via the failed chain but listed under an intermediary (e.g. milkINIT listed
+  // under initia with canonical.chain_name "moo") still counts toward that
+  // chain's coverage. Counted once per chain even if both keys point at it.
+  const haltCoverageByChain = {};
+  const bumpCoverage = (c, asset) => {
+    if (!haltCoverageByChain[c]) {
+      haltCoverageByChain[c] = {
+        total: 0, unstable: 0, depositsHalted: 0, haltedBothDirections: 0,
+        assets: []
+      };
+    }
+    haltCoverageByChain[c].total += 1;
+    if (asset.osmosis_unstable) { haltCoverageByChain[c].unstable += 1; }
+    if (asset.osmosis_halt_deposits) { haltCoverageByChain[c].depositsHalted += 1; }
+    if (asset.osmosis_halt_deposits && asset.osmosis_halt_withdrawals) {
+      haltCoverageByChain[c].haltedBothDirections += 1;
+    }
+    haltCoverageByChain[c].assets.push(asset);
+  };
+  zoneAssets.forEach(asset => {
+    const chains = new Set();
+    if (asset.chain_name) { chains.add(asset.chain_name); }
+    if (asset.canonical?.chain_name) { chains.add(asset.canonical.chain_name); }
+    chains.forEach(c => bumpCoverage(c, asset));
+  });
+
+  // Render the per-asset status breakdown for a chain as one Markdown cell, one
+  // asset per line (joined with <br> since a literal newline would break the
+  // table row). Each line is "<symbol> — <status>", where status reflects the
+  // strongest halt flag set on that asset and its reason. This replaces the old
+  // aggregate-count cell so a reviewer can see exactly which assets are still
+  // exposed on an unreachable chain without the table ballooning into one row
+  // per asset. Asset identity prefers the human label parsed from _comment
+  // (e.g. "Evmos $EVMOS" -> "EVMOS"), falling back to base_denom.
+  const getAssetSymbol = (asset) => {
+    const ticker = asset._comment?.match(/\$([A-Za-z0-9.\-]+)/)?.[1];
+    return ticker || asset.base_denom || '(unknown)';
+  };
+  const getAssetStatusLine = (asset) => {
+    const reason = (r) => (r ? ` (${r})` : '');
+    let status;
+    if (asset.osmosis_halt_deposits && asset.osmosis_halt_withdrawals) {
+      status = `🛑 deposits + withdrawals halted${reason(asset.osmosis_deposit_halt_reason || asset.osmosis_withdrawal_halt_reason)}`;
+    } else if (asset.osmosis_halt_deposits) {
+      status = `🛑 deposits halted${reason(asset.osmosis_deposit_halt_reason)}`;
+    } else if (asset.osmosis_halt_withdrawals) {
+      status = `🛑 withdrawals halted${reason(asset.osmosis_withdrawal_halt_reason)}`;
+    } else if (asset.osmosis_unstable) {
+      status = `⚠️ unstable${reason(asset.osmosis_unstable_reason)}`;
+    } else {
+      status = '❗ not covered';
+    }
+    return `${getAssetSymbol(asset)} — ${status}`;
+  };
+  const getAssetBreakdownCell = (chain_name) => {
+    const cov = haltCoverageByChain[chain_name];
+    if (!cov || cov.assets.length === 0) { return '— no listed assets'; }
+    return cov.assets.map(getAssetStatusLine).join('<br>');
+  };
+
+  // Render a short coverage label for a chain's assets. An asset counts as
+  // "covered" only if it is deposit-halted or flagged unstable. osmosis_disabled
+  // is intentionally ignored here: it only marks a non-native deposit/withdrawal
+  // flow (a UX router flag), not a kill switch, so it says nothing about whether
+  // deposits/withdrawals are actually halted. The actionable case is a
+  // connectivity-failing chain with one or more assets that are neither
+  // deposit-halted nor unstable.
+  const getHaltCoverageLabel = (chain_name) => {
+    const cov = haltCoverageByChain[chain_name];
+    if (!cov || cov.total === 0) { return '— no listed assets'; }
+    if (cov.depositsHalted >= cov.total) { return `🛑 deposits halted (${cov.depositsHalted}/${cov.total})`; }
+    if (cov.unstable >= cov.total) { return `⚠️ unstable (${cov.unstable}/${cov.total})`; }
+    if (cov.depositsHalted > 0 || cov.unstable > 0) {
+      return `🟠 partial (${cov.unstable}/${cov.total} unstable, ${cov.depositsHalted}/${cov.total} dep-halted)`;
+    }
+    return `❗ not covered (0/${cov.total})`;
+  };
+
+  // Derive a concrete next step for a connectivity-failing chain from its halt
+  // coverage and its dead-chain streak. The point is to turn the report from
+  // "here's what's broken" into "here's what to do", so recurring rows carry an
+  // explicit action instead of needing re-triage each run.
+  //
+  //   • All deposits halted                  → nothing to do (already covered).
+  //   • Deposits still open + 7+ run streak    → check the dead-chain candidates
+  //                                             report (it has cosmos.directory
+  //                                             corroboration this report lacks).
+  //   • Deposits still open, shorter streak    → halt deposits / investigate.
+  //   • All unstable but deposits still open   → consider a deposit halt.
+  const getActionLabel = (chain_name) => {
+    const cov = haltCoverageByChain[chain_name];
+    if (!cov || cov.total === 0) { return '— no listed assets'; }
+    if (cov.depositsHalted >= cov.total) { return '✅ already covered (deposits halted)'; }
+
+    const streak = deadStreaks[chain_name]?.streak ?? 0;
+    const streakNote = streak >= DEAD_STREAK_THRESHOLD ? ` (${streak}-run streak)` : '';
+
+    // At least one asset still has deposits open while the chain is unreachable.
+    const depositsStillOpen = cov.depositsHalted < cov.total;
+    if (depositsStillOpen && streak >= DEAD_STREAK_THRESHOLD) {
+      // A long streak suggests death, but this report has no cosmos.directory
+      // corroboration (some long-failing chains are alive on private endpoints,
+      // e.g. gravitybridge), so defer to the dead-chain candidates report.
+      return `🔍 check dead-chain candidates${streakNote}`;
+    }
+    if (cov.unstable >= cov.total) {
+      // Everything flagged unstable but deposits still open.
+      return '⚠️ consider halting deposits';
+    }
+    // Some assets neither deposit-halted nor unstable, and no long streak yet.
+    return '🛑 halt deposits / investigate';
+  };
+
+  // A chain whose every listed asset has BOTH deposits and withdrawals halted is
+  // already at end of life from the user's perspective: there is nothing to do
+  // with it in either direction, so endpoint health is moot. Such chains are
+  // dropped from the connectivity-failures table to keep it focused on chains
+  // where reachability still matters. (This only affects the report; it does
+  // not delete anything from zone_assets.)
+  const isFullyHaltedBothDirections = (chain_name) => {
+    const cov = haltCoverageByChain[chain_name];
+    return !!cov && cov.total > 0 && cov.haltedBothDirections >= cov.total;
+  };
+
   const forcedEndpointChains = {};
   zoneChains.forEach(chain => {
     if (chain.override_properties?.force_rpc || chain.override_properties?.force_rest) {
@@ -1332,6 +1568,10 @@ function generateValidationReport(chainName) {
 
     // Skip killed chains
     if (killedChainNames.includes(chain.chain_name)) return false;
+
+    // Skip chains already fully halted both directions (end of life): endpoint
+    // reachability is irrelevant when nothing can be deposited or withdrawn.
+    if (isFullyHaltedBothDirections(chain.chain_name)) return false;
 
     // Only include chains where at least one endpoint type completely failed
     const rpcTests = chain.validationResults?.filter(r => r.test.includes('RPC')) || [];
@@ -1453,9 +1693,13 @@ function generateValidationReport(chainName) {
     report += `### ✅ All Chains Validated Successfully\n\n`;
   } else if (failedChains.length > 0) {
     report += `### ❌ Connectivity Failures\n\n`;
-    report += `The following chains have endpoints that failed connectivity tests (not just CORS):\n\n`;
-    report += `| Chain Name | Last Validation | Days Ago | RPC Status | REST Status |\n`;
-    report += `|------------|----------------|----------|------------|-------------|\n`;
+    report += `The following chains have endpoints that failed connectivity tests (not just CORS). `;
+    report += `The Halt Coverage column shows whether the chain's listed assets are already flagged `;
+    report += `unstable / deposit-halted by another mechanism. The Assets column lists every asset on `;
+    report += `the chain with its individual status (one per line). The Action column gives the suggested `;
+    report += `next step derived from that coverage and the chain's dead-chain streak.\n\n`;
+    report += `| Chain Name | Last Validation | Days Ago | RPC Status | REST Status | Halt Coverage | Assets | Action |\n`;
+    report += `|------------|----------------|----------|------------|-------------|---------------|--------|--------|\n`;
 
     failedChains.forEach(chain => {
       const validationDate = new Date(chain.validationDate);
@@ -1469,8 +1713,11 @@ function generateValidationReport(chainName) {
 
       const rpcStatus = rpcAllFailed ? '❌ All Failed' : '⚠️ Partial';
       const restStatus = restAllFailed ? '❌ All Failed' : '⚠️ Partial';
+      const haltCoverage = getHaltCoverageLabel(chain.chain_name);
+      const assetBreakdown = getAssetBreakdownCell(chain.chain_name);
+      const action = getActionLabel(chain.chain_name);
 
-      report += `| ${chain.chain_name} | ${validationDate.toISOString().split('T')[0]} | ${daysSince} | ${rpcStatus} | ${restStatus} |\n`;
+      report += `| ${chain.chain_name} | ${validationDate.toISOString().split('T')[0]} | ${daysSince} | ${rpcStatus} | ${restStatus} | ${haltCoverage} | ${assetBreakdown} | ${action} |\n`;
     });
     report += `\n`;
   }

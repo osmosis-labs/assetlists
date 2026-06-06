@@ -20,11 +20,7 @@
       "explorer_tx_url": "https://www.mintscan.io/cosmos/txs/${txHash}",
       "keplr_features": [
         "ibc-go"
-      ],
-      "override_properties": {
-        "force_rest": true,
-        "force_rpc": true
-      }
+      ]
     },
     {
       "chain_name": "terra",
@@ -167,11 +163,7 @@
       "chain_name": "panacea",
       "rpc": "https://rpc.gopanacea.org",
       "rest": "https://api.gopanacea.org",
-      "explorer_tx_url": "https://www.mintscan.io/medibloc/txs/${txHash}",
-      "override_properties": {
-        "force_rest": true,
-        "force_rpc": true
-      }
+      "explorer_tx_url": "https://www.mintscan.io/medibloc/txs/${txHash}"
     },
     {
       "chain_name": "bostrom",
@@ -189,11 +181,7 @@
       "chain_name": "cheqd",
       "rpc": "https://rpc.cheqd.net",
       "rest": "https://api.cheqd.net",
-      "explorer_tx_url": "https://explorer.cheqd.io/transactions/${txHash}",
-      "override_properties": {
-        "force_rest": true,
-        "force_rpc": true
-      }
+      "explorer_tx_url": "https://explorer.cheqd.io/transactions/${txHash}"
     },
     {
       "chain_name": "stargaze",
@@ -518,11 +506,7 @@
       "explorer_tx_url": "https://explorer.stride.zone/stride/tx/${txHash}",
       "keplr_features": [
         "ibc-go"
-      ],
-      "override_properties": {
-        "force_rest": true,
-        "force_rpc": true
-      }
+      ]
     },
     {
       "chain_name": "rebus",
@@ -829,8 +813,8 @@
     },
     {
       "chain_name": "passage",
-      "rpc": "https://rpc-passage.ecostake.com",
-      "rest": "https://rest-passage.ecostake.com",
+      "rpc": "https://passage-rpc.polkachu.com",
+      "rest": "https://passage-api.polkachu.com",
       "explorer_tx_url": "https://www.mintscan.io/passage/transactions/${txHash}",
       "keplr_features": [
         "ibc-go"
@@ -1555,6 +1539,12 @@
       "keplr_features": [
         "ibc-go"
       ]
+    },
+    {
+      "chain_name": "wolochain",
+      "rpc": "https://aoe2war.com/rpc-mainnet",
+      "rest": "https://aoe2war.com/rest-mainnet",
+      "explorer_tx_url": "https://www.mintscan.io/wolochain/txs/${txHash}"
     }
   ]
 }

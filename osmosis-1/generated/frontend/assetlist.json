@@ -1070,22 +1070,6 @@
           "type": "external_interface",
           "depositUrl": "https://app.evmos.org/assets",
           "withdrawUrl": "https://app.evmos.org/assets"
-        },
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "evmos",
-            "chainId": "evmos_9001-2",
-            "sourceDenom": "aevmos",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-204",
-            "path": "transfer/channel-204/aevmos"
-          }
         }
       ],
       "counterparty": [
@@ -1106,9 +1090,16 @@
       "name": "Evmos",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "source_chain_killed",
       "disabled": false,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "source_chain_killed",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "source_chain_killed",
+      "preview": false,
+      "tooltipMessage": "The Evmos chain has been permanently shut down by governance and is no longer producing blocks. Deposits and withdrawals are disabled. Source: https://x.com/Disperze_/status/2054625049429127192",
+      "lastDowntimeDate": "2026-05-31T15:34:53.092Z"
     },
     {
       "chainName": "kava",
@@ -1158,9 +1149,11 @@
       "name": "Kava",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "lastDowntimeDate": "2026-06-06T15:34:05.213Z"
     },
     {
       "chainName": "secretnetwork",
@@ -1321,7 +1314,11 @@
       "verified": true,
       "unstable": false,
       "disabled": false,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "planned_shutdown",
+      "plannedShutdownDate": "2026-06-15T00:00:00Z",
+      "preview": false,
+      "tooltipMessage": "The Stargaze chain is shutting down on 15 June 2026 as the project migrates to the Cosmos Hub. Deposits are being disabled ahead of the shutdown. Migrate your assets via https://automigration.stargaze.zone/"
     },
     {
       "chainName": "chihuahua",
@@ -1507,9 +1504,12 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": true,
-      "unstableReason": "market",
+      "unstableReason": "manual",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
       "preview": false,
+      "tooltipMessage": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed.",
       "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
     },
     {
@@ -1837,13 +1837,14 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": true,
-      "unstableReason": "ibc_client",
+      "unstableReason": "source_chain_killed",
       "disabled": false,
       "haltDeposits": true,
-      "depositHaltReason": "bridge_down",
+      "depositHaltReason": "source_chain_killed",
       "haltWithdrawals": true,
-      "withdrawalHaltReason": "bridge_down",
+      "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
+      "tooltipMessage": "The e-Money project has been discontinued and its chain is no longer maintained; the e-Money stablecoins were cancelled and the GitHub organisation archived. Deposits and withdrawals are disabled. Source: https://github.com/e-money",
       "lastDowntimeDate": "2026-05-22T09:57:52.115Z"
     },
     {
@@ -1894,13 +1895,14 @@
       "isAlloyed": false,
       "verified": false,
       "unstable": true,
-      "unstableReason": "ibc_client",
+      "unstableReason": "source_chain_killed",
       "disabled": false,
       "haltDeposits": true,
-      "depositHaltReason": "bridge_down",
+      "depositHaltReason": "source_chain_killed",
       "haltWithdrawals": true,
-      "withdrawalHaltReason": "bridge_down",
+      "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
+      "tooltipMessage": "The e-Money project has been discontinued and its chain is no longer maintained; the e-Money stablecoins were cancelled and the GitHub organisation archived. Deposits and withdrawals are disabled. Source: https://github.com/e-money",
       "lastDowntimeDate": "2026-05-22T09:57:52.115Z"
     },
     {
@@ -2064,6 +2066,8 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
       "preview": false,
       "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
     },
@@ -2334,9 +2338,14 @@
       "name": "Comdex",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "planned_shutdown",
+      "preview": false,
+      "tooltipMessage": "The Comdex team ended support for the Comdex chain on 31 October 2025, deposits are disabled. Withdrawals remain open. Source: https://x.com/ComdexOfficial/status/1968366352537682220",
+      "lastDowntimeDate": "2026-06-01T16:57:57.868Z"
     },
     {
       "chainName": "cheqd",
@@ -2814,9 +2823,11 @@
       "name": "UX Chain",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "gravitybridge",
@@ -3754,13 +3765,18 @@
       "name": "Wrapped Bitcoin (Ethereum via Gravity Bridge)",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "manual",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
       "preview": false,
+      "tooltipMessage": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed.",
       "sortWith": {
         "chainName": "gravitybridge",
         "sourceDenom": "ugrav"
-      }
+      },
+      "lastDowntimeDate": "2026-06-01T10:51:59.802Z"
     },
     {
       "chainName": "gravitybridge",
@@ -3839,9 +3855,12 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": true,
-      "unstableReason": "market",
+      "unstableReason": "manual",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
       "preview": false,
+      "tooltipMessage": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed.",
       "sortWith": {
         "chainName": "gravitybridge",
         "sourceDenom": "ugrav"
@@ -3916,13 +3935,18 @@
       "name": "USDC (Ethereum via Gravity Bridge)",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "manual",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
       "preview": false,
+      "tooltipMessage": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed.",
       "sortWith": {
         "chainName": "gravitybridge",
         "sourceDenom": "ugrav"
-      }
+      },
+      "lastDowntimeDate": "2026-06-01T10:51:59.802Z"
     },
     {
       "chainName": "gravitybridge",
@@ -3989,13 +4013,18 @@
       "name": "Dai Stablecoin (Gravity Bridge)",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "manual",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
       "preview": false,
+      "tooltipMessage": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed.",
       "sortWith": {
         "chainName": "gravitybridge",
         "sourceDenom": "ugrav"
-      }
+      },
+      "lastDowntimeDate": "2026-06-01T10:51:59.802Z"
     },
     {
       "chainName": "gravitybridge",
@@ -4065,13 +4094,18 @@
       "name": "Tether USD (Ethereum via Gravity Bridge)",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "manual",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
       "preview": false,
+      "tooltipMessage": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed.",
       "sortWith": {
         "chainName": "gravitybridge",
         "sourceDenom": "ugrav"
-      }
+      },
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "juno",
@@ -6436,9 +6470,11 @@
       "name": "Stride Staked STARS",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "juno",
@@ -6698,9 +6734,11 @@
       "name": "Teritori",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "stride",
@@ -7596,9 +7634,14 @@
       "name": "CMST",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "planned_shutdown",
+      "preview": false,
+      "tooltipMessage": "The Comdex team ended support for the Comdex chain on 31 October 2025, deposits are disabled. Withdrawals remain open. Source: https://x.com/ComdexOfficial/status/1968366352537682220",
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "imversed",
@@ -7870,13 +7913,14 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": true,
-      "unstableReason": "ibc_client",
+      "unstableReason": "source_chain_killed",
       "disabled": false,
       "haltDeposits": true,
-      "depositHaltReason": "bridge_down",
+      "depositHaltReason": "source_chain_killed",
       "haltWithdrawals": true,
-      "withdrawalHaltReason": "bridge_down",
+      "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
+      "tooltipMessage": "The Onomy chain has been permanently shut down. The team announced an indefinite sunset of operations and validators were instructed to stop producing blocks. Deposits and withdrawals are disabled. Source: https://x.com/OnomyProtocol/status/1921962201138483461",
       "lastDowntimeDate": "2026-05-22T09:57:52.115Z"
     },
     {
@@ -8299,6 +8343,8 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
       "preview": false,
       "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
     },
@@ -9032,9 +9078,14 @@
       "name": "Harbor",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "planned_shutdown",
+      "preview": false,
+      "tooltipMessage": "The Comdex team ended support for the Comdex chain on 31 October 2025, deposits are disabled. Withdrawals remain open. Source: https://x.com/ComdexOfficial/status/1968366352537682220",
+      "lastDowntimeDate": "2026-06-05T16:04:18.429Z"
     },
     {
       "chainName": "quicksilver",
@@ -9191,9 +9242,11 @@
       "name": "Quicksilver",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "arkh",
@@ -9356,9 +9409,11 @@
       "name": "Frienzies",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "migaloo",
@@ -10839,13 +10894,15 @@
       "name": "Pepe (Axelar)",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
       "sortWith": {
         "chainName": "axelar",
         "sourceDenom": "uaxl"
-      }
+      },
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "osmosis",
@@ -11555,9 +11612,11 @@
       "name": "Neutron",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "juno",
@@ -12592,6 +12651,8 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
       "preview": false,
       "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
     },
@@ -12663,13 +12724,17 @@
       "name": "Tether USD (Ethereum via Wormhole)",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
       "preview": false,
       "sortWith": {
         "chainName": "solana",
         "sourceDenom": "85VBFQZC9TZkfaptBWjvUw7YbZjy52A6mjtPGjstQAmQ"
-      }
+      },
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "gateway",
@@ -12804,6 +12869,8 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
       "preview": false,
       "sortWith": {
         "chainName": "solana",
@@ -12991,6 +13058,8 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
       "preview": false,
       "sortWith": {
         "chainName": "solana",
@@ -13079,6 +13148,8 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
       "preview": false,
       "sortWith": {
         "chainName": "solana",
@@ -13505,22 +13576,6 @@
           "name": "Evmos App",
           "type": "external_interface",
           "depositUrl": "https://app.evmos.org/assets"
-        },
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "evmos",
-            "chainId": "evmos_9001-2",
-            "sourceDenom": "erc20/0x655ecB57432CC1370f65e5dc2309588b71b473A9",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-204",
-            "path": "transfer/channel-204/erc20/0x655ecB57432CC1370f65e5dc2309588b71b473A9"
-          }
         }
       ],
       "counterparty": [
@@ -13541,9 +13596,16 @@
       "name": "Neokingdom DAO",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "source_chain_killed",
       "disabled": false,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "source_chain_killed",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "source_chain_killed",
+      "preview": false,
+      "tooltipMessage": "The Evmos chain has been permanently shut down by governance and is no longer producing blocks. Deposits and withdrawals are disabled. Source: https://x.com/Disperze_/status/2054625049429127192",
+      "lastDowntimeDate": "2026-05-31T15:34:53.092Z"
     },
     {
       "chainName": "realio",
@@ -13875,7 +13937,11 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "planned_shutdown",
+      "plannedShutdownDate": "2026-06-15T00:00:00Z",
       "preview": false,
+      "tooltipMessage": "The Stargaze chain is shutting down on 15 June 2026 as the project migrates to the Cosmos Hub. Deposits are being disabled ahead of the shutdown. Migrate your assets via https://automigration.stargaze.zone/",
       "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
     },
     {
@@ -14362,7 +14428,11 @@
       "verified": false,
       "unstable": false,
       "disabled": false,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "planned_shutdown",
+      "plannedShutdownDate": "2026-06-15T00:00:00Z",
+      "preview": false,
+      "tooltipMessage": "The Stargaze chain is shutting down on 15 June 2026 as the project migrates to the Cosmos Hub. Deposits are being disabled ahead of the shutdown. Migrate your assets via https://automigration.stargaze.zone/"
     },
     {
       "chainName": "neutron",
@@ -14852,6 +14922,8 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
       "preview": false,
       "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
     },
@@ -15954,7 +16026,11 @@
       "verified": false,
       "unstable": false,
       "disabled": false,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "planned_shutdown",
+      "plannedShutdownDate": "2026-06-15T00:00:00Z",
+      "preview": false,
+      "tooltipMessage": "The Stargaze chain is shutting down on 15 June 2026 as the project migrates to the Cosmos Hub. Deposits are being disabled ahead of the shutdown. Migrate your assets via https://automigration.stargaze.zone/"
     },
     {
       "chainName": "osmosis",
@@ -16549,10 +16625,12 @@
       "name": "Dymension Hub (Dymension Hub)",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "listingDate": "2024-02-06T08:36:00.000Z"
+      "listingDate": "2024-02-06T08:36:00.000Z",
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "osmosis",
@@ -16747,6 +16825,8 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
       "preview": false,
       "sortWith": {
         "chainName": "solana",
@@ -16824,22 +16904,6 @@
           "name": "Evmos App",
           "type": "external_interface",
           "depositUrl": "https://app.evmos.org/assets"
-        },
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "evmos",
-            "chainId": "evmos_9001-2",
-            "sourceDenom": "erc20/0x1cFc8f1FE8D5668BAFF2724547EcDbd6f013a280",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-204",
-            "path": "transfer/channel-204/erc20/0x1cFc8f1FE8D5668BAFF2724547EcDbd6f013a280"
-          }
         }
       ],
       "counterparty": [
@@ -16860,9 +16924,16 @@
       "name": "Teledisko DAO - Legacy",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "source_chain_killed",
       "disabled": false,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "source_chain_killed",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "source_chain_killed",
+      "preview": false,
+      "tooltipMessage": "The Evmos chain has been permanently shut down by governance and is no longer producing blocks. Deposits and withdrawals are disabled. Source: https://x.com/Disperze_/status/2054625049429127192",
+      "lastDowntimeDate": "2026-05-31T15:34:53.092Z"
     },
     {
       "chainName": "scorum",
@@ -17222,9 +17293,13 @@
       "name": "Basket",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
+      "preview": false,
+      "lastDowntimeDate": "2026-06-05T16:04:18.429Z"
     },
     {
       "chainName": "aioz",
@@ -17280,6 +17355,8 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
       "preview": false,
       "listingDate": "2024-03-12T23:14:00.000Z",
       "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
@@ -18123,6 +18200,8 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
       "preview": false,
       "listingDate": "2024-04-03T17:37:00.000Z",
       "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
@@ -18177,13 +18256,14 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": true,
-      "unstableReason": "ibc_client",
+      "unstableReason": "source_chain_killed",
       "disabled": false,
       "haltDeposits": true,
-      "depositHaltReason": "bridge_down",
+      "depositHaltReason": "source_chain_killed",
       "haltWithdrawals": true,
-      "withdrawalHaltReason": "bridge_down",
+      "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
+      "tooltipMessage": "The dHealth Cosmos chain has been sunset by governance and the project has migrated fully to Solana. The migration bridge closed on 2026-04-11. Deposits and withdrawals are disabled. Source: https://www.dhealth.com/post/bridge-open-migrate-to-solana-native-dhp",
       "listingDate": "2024-05-16T17:00:00.000Z",
       "lastDowntimeDate": "2026-05-22T09:57:52.115Z"
     },
@@ -18294,10 +18374,12 @@
       "name": "Saga",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "listingDate": "2024-04-09T10:30:00.000Z"
+      "listingDate": "2024-04-09T10:30:00.000Z",
+      "lastDowntimeDate": "2026-06-03T14:55:41.021Z"
     },
     {
       "chainName": "neutron",
@@ -18556,22 +18638,6 @@
           "name": "Evmos App",
           "type": "external_interface",
           "depositUrl": "https://app.evmos.org/assets"
-        },
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "evmos",
-            "chainId": "evmos_9001-2",
-            "sourceDenom": "erc20/0xfbF4318d24a93753F11d365A6dcF8b830e98Ab0F",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-204",
-            "path": "transfer/channel-204/erc20/0xfbF4318d24a93753F11d365A6dcF8b830e98Ab0F"
-          }
         }
       ],
       "counterparty": [
@@ -18592,9 +18658,16 @@
       "name": "Crowdpunk DAO",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "source_chain_killed",
       "disabled": false,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "source_chain_killed",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "source_chain_killed",
+      "preview": false,
+      "tooltipMessage": "The Evmos chain has been permanently shut down by governance and is no longer producing blocks. Deposits and withdrawals are disabled. Source: https://x.com/Disperze_/status/2054625049429127192",
+      "lastDowntimeDate": "2026-05-31T15:34:53.092Z"
     },
     {
       "chainName": "neutron",
@@ -18772,13 +18845,18 @@
       "name": "Paxos Gold (Gravity Bridge)",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "manual",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
       "preview": false,
+      "tooltipMessage": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed.",
       "sortWith": {
         "chainName": "gravitybridge",
         "sourceDenom": "ugrav"
-      }
+      },
+      "lastDowntimeDate": "2026-06-01T10:51:59.802Z"
     },
     {
       "chainName": "migaloo",
@@ -19702,8 +19780,11 @@
       "name": "Nim Network",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
       "preview": false
     },
     {
@@ -23627,6 +23708,8 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
       "preview": false,
       "listingDate": "2024-07-09T17:30:00.000Z",
       "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
@@ -23745,9 +23828,13 @@
       "name": "Pepe Bruce Jenner",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
+      "preview": false,
+      "lastDowntimeDate": "2026-06-05T16:04:18.429Z"
     },
     {
       "chainName": "noble",
@@ -24730,10 +24817,12 @@
       "isAlloyed": true,
       "contract": "osmo1nnlxegt0scm9qkzys9c874t0ntapv4epfjy2w49c0xdrp3dr0v4ssmelzx",
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "listingDate": "2024-09-27T00:00:00.000Z"
+      "listingDate": "2024-09-27T00:00:00.000Z",
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "osmosis",
@@ -24766,9 +24855,11 @@
       "isAlloyed": true,
       "contract": "osmo1r53fx9fvcdzncrs7zkn4gw5vfelx5gk8k5wc6wqha2jpkh992rusr5tk02",
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "composable",
@@ -25526,10 +25617,12 @@
       "name": "Monerium EUR emoney",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "listingDate": "2024-09-19T20:00:00.000Z"
+      "listingDate": "2024-09-19T20:00:00.000Z",
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "andromeda",
@@ -27618,10 +27711,12 @@
       "name": "dATOM",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "listingDate": "2024-11-27T10:38:08.547Z"
+      "listingDate": "2024-11-27T10:38:08.547Z",
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "osmosis",
@@ -29206,6 +29301,8 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
       "preview": false,
       "listingDate": "2025-07-08T09:08:38.621Z",
       "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
@@ -29459,7 +29556,11 @@
       "verified": false,
       "unstable": false,
       "disabled": false,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "planned_shutdown",
+      "plannedShutdownDate": "2026-06-15T00:00:00Z",
+      "preview": false,
+      "tooltipMessage": "The Stargaze chain is shutting down on 15 June 2026 as the project migrates to the Cosmos Hub. Deposits are being disabled ahead of the shutdown. Migrate your assets via https://automigration.stargaze.zone/"
     },
     {
       "chainName": "osmosis",
@@ -29516,10 +29617,12 @@
       "isAlloyed": true,
       "contract": "osmo12cf6l99qrchfppmjp80gvkpnle2tuxpck2cf6fz030w74mq49u4qm3dh4d",
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "listingDate": "2024-02-06T08:36:00.000Z"
+      "listingDate": "2024-02-06T08:36:00.000Z",
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "osmosis",
@@ -29925,10 +30028,12 @@
       "name": "Lombard Staked Bitcoin",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "listingDate": "2025-07-08T09:08:38.621Z"
+      "listingDate": "2025-07-08T09:08:38.621Z",
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "cosmoshub",
@@ -30203,13 +30308,14 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": true,
-      "unstableReason": "ibc_client",
+      "unstableReason": "source_chain_killed",
       "disabled": false,
       "haltDeposits": true,
-      "depositHaltReason": "bridge_down",
+      "depositHaltReason": "source_chain_killed",
       "haltWithdrawals": true,
-      "withdrawalHaltReason": "bridge_down",
+      "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
+      "tooltipMessage": "The MilkyWay chain has been permanently wound down and shut down by the team. A final upgrade returned assets to their origin chains. Deposits and withdrawals are disabled. Source: https://x.com/milky_way_zone/status/2011770175566332325",
       "listingDate": "2025-04-29T10:47:24.166Z",
       "lastDowntimeDate": "2026-05-22T09:57:52.115Z"
     },
@@ -30884,13 +30990,14 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": true,
-      "unstableReason": "ibc_client",
+      "unstableReason": "source_chain_killed",
       "disabled": false,
       "haltDeposits": true,
-      "depositHaltReason": "bridge_down",
+      "depositHaltReason": "source_chain_killed",
       "haltWithdrawals": true,
-      "withdrawalHaltReason": "bridge_down",
+      "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
+      "tooltipMessage": "The MilkyWay chain has been permanently wound down and shut down by the team. A final upgrade returned assets to their origin chains. Deposits and withdrawals are disabled. Source: https://x.com/milky_way_zone/status/2011770175566332325",
       "listingDate": "2025-05-20T15:33:05.874Z",
       "lastDowntimeDate": "2026-05-22T09:57:52.115Z"
     },
@@ -31898,10 +32005,12 @@
       "name": "BitBadges",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "listingDate": "2025-07-07T21:59:55.641Z"
+      "listingDate": "2025-07-07T21:59:55.641Z",
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "xrplevm",
@@ -32475,10 +32584,12 @@
       "name": "Symphony",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "listingDate": "2025-12-17T11:15:53.803Z"
+      "listingDate": "2025-12-17T11:15:53.803Z",
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "osmosis",
@@ -33004,14 +33115,16 @@
       "name": "Zcash (Int3)",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
       "sortWith": {
         "chainName": "int3face",
         "sourceDenom": "uint3"
       },
-      "listingDate": "2025-11-03T09:38:27.413Z"
+      "listingDate": "2025-11-03T09:38:27.413Z",
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "osmosis",
@@ -33050,10 +33163,12 @@
       "name": "Zcash",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "listingDate": "2025-11-03T09:38:27.413Z"
+      "listingDate": "2025-11-03T09:38:27.413Z",
+      "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
       "chainName": "osmosis",
@@ -33496,9 +33611,15 @@
       "name": "milkINIT",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "source_chain_killed",
       "disabled": true,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "source_chain_killed",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "source_chain_killed",
+      "preview": false,
+      "tooltipMessage": "milkINIT is a MilkyWay liquid-staking token, and the MilkyWay chain has been permanently wound down and shut down by the team. A final upgrade returned assets to their origin chains. Deposits and withdrawals are disabled. Source: https://x.com/milky_way_zone/status/2011770175566332325"
     },
     {
       "chainName": "gnodi",
@@ -33647,13 +33768,14 @@
       "isAlloyed": false,
       "verified": false,
       "unstable": true,
-      "unstableReason": "ibc_client",
+      "unstableReason": "source_chain_killed",
       "disabled": false,
       "haltDeposits": true,
-      "depositHaltReason": "bridge_down",
+      "depositHaltReason": "source_chain_killed",
       "haltWithdrawals": true,
-      "withdrawalHaltReason": "bridge_down",
+      "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
+      "tooltipMessage": "The e-Money project has been discontinued and its chain is no longer maintained; the e-Money stablecoins were cancelled and the GitHub organisation archived. Deposits and withdrawals are disabled. Source: https://github.com/e-money",
       "lastDowntimeDate": "2026-05-22T09:57:52.115Z"
     },
     {
@@ -33702,13 +33824,14 @@
       "isAlloyed": false,
       "verified": false,
       "unstable": true,
-      "unstableReason": "ibc_client",
+      "unstableReason": "source_chain_killed",
       "disabled": false,
       "haltDeposits": true,
-      "depositHaltReason": "bridge_down",
+      "depositHaltReason": "source_chain_killed",
       "haltWithdrawals": true,
-      "withdrawalHaltReason": "bridge_down",
+      "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
+      "tooltipMessage": "The e-Money project has been discontinued and its chain is no longer maintained; the e-Money stablecoins were cancelled and the GitHub organisation archived. Deposits and withdrawals are disabled. Source: https://github.com/e-money",
       "lastDowntimeDate": "2026-05-22T09:57:52.115Z"
     },
     {
@@ -33757,13 +33880,14 @@
       "isAlloyed": false,
       "verified": false,
       "unstable": true,
-      "unstableReason": "ibc_client",
+      "unstableReason": "source_chain_killed",
       "disabled": false,
       "haltDeposits": true,
-      "depositHaltReason": "bridge_down",
+      "depositHaltReason": "source_chain_killed",
       "haltWithdrawals": true,
-      "withdrawalHaltReason": "bridge_down",
+      "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
+      "tooltipMessage": "The e-Money project has been discontinued and its chain is no longer maintained; the e-Money stablecoins were cancelled and the GitHub organisation archived. Deposits and withdrawals are disabled. Source: https://github.com/e-money",
       "lastDowntimeDate": "2026-05-22T09:57:52.115Z"
     },
     {
@@ -33812,13 +33936,14 @@
       "isAlloyed": false,
       "verified": false,
       "unstable": true,
-      "unstableReason": "ibc_client",
+      "unstableReason": "source_chain_killed",
       "disabled": false,
       "haltDeposits": true,
-      "depositHaltReason": "bridge_down",
+      "depositHaltReason": "source_chain_killed",
       "haltWithdrawals": true,
-      "withdrawalHaltReason": "bridge_down",
+      "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
+      "tooltipMessage": "The e-Money project has been discontinued and its chain is no longer maintained; the e-Money stablecoins were cancelled and the GitHub organisation archived. Deposits and withdrawals are disabled. Source: https://github.com/e-money",
       "lastDowntimeDate": "2026-05-22T09:57:52.115Z"
     },
     {
@@ -42794,13 +42919,14 @@
       "isAlloyed": false,
       "verified": false,
       "unstable": true,
-      "unstableReason": "ibc_client",
+      "unstableReason": "source_chain_killed",
       "disabled": false,
       "haltDeposits": true,
-      "depositHaltReason": "bridge_down",
+      "depositHaltReason": "source_chain_killed",
       "haltWithdrawals": true,
-      "withdrawalHaltReason": "bridge_down",
+      "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
+      "tooltipMessage": "ONEX ran as an Onomy consumer chain and shut down together with Onomy, whose operations were permanently sunset. Deposits and withdrawals are disabled. Source: https://x.com/OnomyProtocol/status/1921962201138483461",
       "lastDowntimeDate": "2026-05-22T09:57:52.115Z"
     },
     {
@@ -43844,6 +43970,61 @@
       "unstable": false,
       "disabled": false,
       "preview": false
+    },
+    {
+      "chainName": "wolochain",
+      "sourceDenom": "uwolo",
+      "coinMinimalDenom": "ibc/D09120C7085DFA412DF77608DAD3A4797F5F097A038DA0C2E1D1426FC9CD836D",
+      "symbol": "WOLO",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/wolochain/images/wolo.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "wolochain",
+            "chainId": "wolo-1",
+            "sourceDenom": "uwolo",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-110224",
+            "path": "transfer/channel-110224/uwolo"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "wolochain",
+          "sourceDenom": "uwolo",
+          "chainType": "cosmos",
+          "chainId": "wolo-1",
+          "symbol": "WOLO",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/wolochain/images/wolo.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/D09120C7085DFA412DF77608DAD3A4797F5F097A038DA0C2E1D1426FC9CD836D",
+      "name": "WoloChain",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "lastDowntimeDate": "2026-06-03T14:55:15.194Z"
     },
     {
       "chainName": "akash",
@@ -56153,6 +56334,55 @@
       ],
       "variantGroupKey": "ibc/DD01AD4DF51C85D5255DC61A70B42482E21A1E91A6B2D5365E16D9738875D4C1",
       "name": "Shill",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "secretnetwork",
+      "sourceDenom": "cw20:secret1d6qvapy96q94etwlnc7j33dlzmenz4j70w3ew7",
+      "coinMinimalDenom": "ibc/F4B09984A0B7F52D8D0F52B9ED1752880EB3030CF6D3F489E4BDE45B0F8A4BD0",
+      "symbol": "SNVR",
+      "decimals": 9,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/snvr.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "secretnetwork",
+            "chainId": "secret-4",
+            "sourceDenom": "cw20:secret1d6qvapy96q94etwlnc7j33dlzmenz4j70w3ew7",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-88",
+            "path": "transfer/channel-88/cw20:secret1d6qvapy96q94etwlnc7j33dlzmenz4j70w3ew7"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "secretnetwork",
+          "sourceDenom": "cw20:secret1d6qvapy96q94etwlnc7j33dlzmenz4j70w3ew7",
+          "chainType": "cosmos",
+          "chainId": "secret-4",
+          "symbol": "SNVR",
+          "decimals": 9,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/snvr.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/F4B09984A0B7F52D8D0F52B9ED1752880EB3030CF6D3F489E4BDE45B0F8A4BD0",
+      "name": "SNVR",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

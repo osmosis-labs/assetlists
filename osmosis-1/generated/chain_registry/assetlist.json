@@ -248,8 +248,7 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wbtc.svg"
         }
-      ],
-      "coingecko_id": "axlwbtc"
+      ]
     },
     {
       "description": "Tether's USD stablecoin on Axelar",
@@ -53686,6 +53685,40 @@
           "chain": {
             "channel_id": "channel-251",
             "path": "transfer/channel-251/factory/terra1zly98gvcec54m3caxlqexce7rus6rzgplz7eketsdz7nh750h2rqvu8uzx/32/project/amplp"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/897E03F5F866333ED0CD1F732E6A7E86D9B79D59970BC2F8BC4A77A47737F16C",
+          "exponent": 0,
+          "aliases": [
+            "lira"
+          ]
+        },
+        {
+          "denom": "TURK",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/897E03F5F866333ED0CD1F732E6A7E86D9B79D59970BC2F8BC4A77A47737F16C",
+      "name": "Turkchain",
+      "display": "TURK",
+      "symbol": "TURK",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "turkchain",
+            "base_denom": "lira",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-110319",
+            "path": "transfer/channel-110319/lira"
           }
         }
       ]

@@ -15563,9 +15563,16 @@
       "name": "PURSE Token",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "source_chain_killed",
       "disabled": false,
-      "preview": true
+      "haltDeposits": true,
+      "depositHaltReason": "source_chain_killed",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "source_chain_killed",
+      "preview": true,
+      "tooltipMessage": "PURSE reached Osmosis through PundiXChain, which has been permanently sunset by passed governance (estimated chain closure 1 March 2026) as the network migrates to Ethereum. The PundiXChain transfer path is no longer available, so deposits and withdrawals are disabled. Source: https://px-rest.pundix.com/cosmos/gov/v1beta1/proposals/8",
+      "lastDowntimeDate": "2026-06-09T16:05:28.294Z"
     },
     {
       "chainName": "injective",
@@ -44029,6 +44036,63 @@
       "lastDowntimeDate": "2026-06-03T14:55:15.194Z"
     },
     {
+      "chainName": "hazinachain",
+      "sourceDenom": "uhzn",
+      "coinMinimalDenom": "ibc/34D327C2D4CEECF0F3FCAE68E2DA630C1218D91C365372918A8310BF79491615",
+      "symbol": "HZN",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hazinachain/images/hazinachain.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hazinachain/images/hazinachain.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "hazinachain",
+            "chainId": "hazinachain-1",
+            "sourceDenom": "uhzn",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-110100",
+            "path": "transfer/channel-110100/uhzn"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "hazinachain",
+          "sourceDenom": "uhzn",
+          "chainType": "cosmos",
+          "chainId": "hazinachain-1",
+          "symbol": "HZN",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hazinachain/images/hazinachain.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hazinachain/images/hazinachain.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/34D327C2D4CEECF0F3FCAE68E2DA630C1218D91C365372918A8310BF79491615",
+      "name": "HazinaChain",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "lastDowntimeDate": "2026-06-09T16:05:28.294Z"
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -47872,57 +47936,6 @@
       ],
       "variantGroupKey": "ibc/FEDB33BCBD8F18D341B4683A6CF5B0BDAB1A6FAE4574C82995DFBB36344D6A45",
       "name": "HAQQ Token",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "hazinachain",
-      "sourceDenom": "uhzn",
-      "coinMinimalDenom": "ibc/34D327C2D4CEECF0F3FCAE68E2DA630C1218D91C365372918A8310BF79491615",
-      "symbol": "HZN",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hazinachain/images/hazinachain.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hazinachain/images/hazinachain.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "hazinachain",
-            "chainId": "hazinachain-1",
-            "sourceDenom": "uhzn",
-            "port": "transfer",
-            "channelId": "channel-1"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-110100",
-            "path": "transfer/channel-110100/uhzn"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "hazinachain",
-          "sourceDenom": "uhzn",
-          "chainType": "cosmos",
-          "chainId": "hazinachain-1",
-          "symbol": "HZN",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hazinachain/images/hazinachain.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hazinachain/images/hazinachain.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/34D327C2D4CEECF0F3FCAE68E2DA630C1218D91C365372918A8310BF79491615",
-      "name": "HazinaChain",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

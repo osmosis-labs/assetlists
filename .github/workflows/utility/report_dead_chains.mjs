@@ -62,6 +62,17 @@ const COSMOS_DIRECTORY_STALE_DAYS = 14;
 // Per-chain HTTP timeout for the weekly external lookups.
 const HTTP_TIMEOUT_MS = 8000;
 
+// Proposal-recency cutoff for the planned-shutdown scan. After the first live
+// run, the dominant noise was old, already-resolved governance (upgrade halts,
+// token merges, inflation tweaks) from months/years back that merely contained
+// the word "sunset"/"shutdown". A genuine planned shutdown a curator can still
+// act on is, by definition, recent. So we skip proposals submitted longer ago
+// than this — UNLESS the proposal yields an extracted target date/height, since
+// a shutdown can be FILED months before it takes effect (pundix: filed
+// 2025-12, closure 2026-03), and that future-dated case is exactly the one we
+// must not discard. submit_time is top-level on both gov v1 and v1beta1.
+const SHUTDOWN_PROPOSAL_MAX_AGE_DAYS = 62;
+
 // Gov-proposal scan keywords, in two precision tiers.
 //
 // Lesson from the first live run: bare lifecycle verbs ("wind down", "sunset",
@@ -109,6 +120,33 @@ const WEAK_SHUTDOWN_VERBS = [
 // same text. "market", "token", "pool", "module" are deliberately NOT here —
 // those are the feature-level actions we want to exclude.
 const CHAIN_SCOPE_NOUNS = ['chain', 'network', 'mainnet', 'blockchain', 'validator set'];
+
+// Target-date / target-height extraction. A shutdown proposal usually names the
+// date or block height the chain actually stops, which is the single most useful
+// thing for a curator to lift into a `planned_shutdown_date`. We don't parse it
+// into a canonical date (proposal prose is too varied to trust an auto-parse on
+// a financially-sensitive field) — we just surface the candidate strings, in
+// context, for the human to confirm. Recall-favouring on purpose.
+const MONTHS =
+  'jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|' +
+  'aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?';
+const DATE_PATTERNS = [
+  // ISO 8601: 2026-03-01 (optionally with time).
+  /\b\d{4}-\d{2}-\d{2}(?:[ tT]\d{2}:\d{2}(?::\d{2})?z?)?\b/gi,
+  // "1 March 2026" / "1st March 2026".
+  new RegExp(`\\b\\d{1,2}(?:st|nd|rd|th)?\\s+(?:${MONTHS})\\.?\\s+\\d{4}\\b`, 'gi'),
+  // "March 1, 2026" / "March 2026".
+  new RegExp(`\\b(?:${MONTHS})\\.?\\s+\\d{1,2}(?:st|nd|rd|th)?,?\\s+\\d{4}\\b`, 'gi'),
+  new RegExp(`\\b(?:${MONTHS})\\.?\\s+\\d{4}\\b`, 'gi'),
+  // Numeric: 01/03/2026 or 2026/03/01 (ambiguous order — surfaced verbatim).
+  /\b\d{1,4}[/.]\d{1,2}[/.]\d{1,4}\b/g,
+];
+// "block height 12345678", "at height 12,345,678", "halt height: 12345678".
+const HEIGHT_PATTERN = /\b(?:block\s+)?height[:\s]+#?([\d,]{5,})\b/gi;
+
+// Cap how much extracted context the report carries per proposal, so a single
+// noisy description can't blow up the PR body.
+const MAX_TARGETS_PER_PROPOSAL = 4;
 
 // ── Args ─────────────────────────────────────────────────────────────────────
 
@@ -426,6 +464,36 @@ async function runPart1(state, chainlist, zoneAssets, streaks) {
 // ── Part 2: planned-shutdown discovery via governance proposals ─────────────
 
 /**
+ * Pull candidate shutdown dates and block heights out of proposal prose. We do
+ * NOT canonicalise — the strings are surfaced verbatim for a human to lift into
+ * `planned_shutdown_date`. Returns up to MAX_TARGETS_PER_PROPOSAL unique, short
+ * snippets across all date/height patterns. `text` should be the ORIGINAL-case
+ * title+body (case matters for readability, the regexes are case-insensitive).
+ */
+function extractTargets(text) {
+  if (!text) return [];
+  const found = [];
+  const seen = new Set();
+  const push = (s) => {
+    const v = s.trim();
+    const key = v.toLowerCase();
+    if (v && !seen.has(key)) {
+      seen.add(key);
+      found.push(v);
+    }
+  };
+  for (const re of DATE_PATTERNS) {
+    for (const m of text.matchAll(re)) push(m[0]);
+  }
+  for (const m of text.matchAll(HEIGHT_PATTERN)) {
+    // Keep the matched substring (e.g. "height 12,345,678"), trimmed, so the
+    // reader sees it's a height not a date.
+    push(m[0].replace(/\s+/g, ' '));
+  }
+  return found.slice(0, MAX_TARGETS_PER_PROPOSAL);
+}
+
+/**
  * Pull recent governance proposals from a chain's first working REST endpoint
  * (recorded in state.json validatedEndpoints) and keyword-match for shutdown
  * language. Tries gov v1 first, falls back to v1beta1. Returns matched
@@ -468,18 +536,49 @@ async function scanGovProposals(chainName, restAddress) {
         }
       }
 
-      if (hit) {
-        matches.push({
-          chainName,
-          proposalId: id,
-          title: title.slice(0, 120),
-          matchedKeyword: hit,
-          // Title hits are far higher-signal than body-only hits; flag so the
-          // report can sort them to the top.
-          inTitle: title.toLowerCase().includes(hit),
-          status: p.status ?? p.status,
-        });
+      if (!hit) continue;
+
+      const targets = extractTargets(`${title}\n${body}`);
+
+      // Recency gate. Drop proposals filed longer ago than the cutoff, since an
+      // actionable planned shutdown is recent by nature and the old hits are
+      // resolved-governance noise. The exception is a proposal that names a
+      // concrete target date/height: a shutdown is often filed well before it
+      // takes effect (pundix filed 2025-12, closure 2026-03), so a target-
+      // bearing proposal is kept regardless of filing age. submit_time absent
+      // (unparseable) → keep, so a missing timestamp never silently hides a hit.
+      const submitMs = p.submit_time ? new Date(p.submit_time).getTime() : NaN;
+      const ageDays = Number.isNaN(submitMs)
+        ? null
+        : (nowMs - submitMs) / (24 * 60 * 60 * 1000);
+      if (
+        targets.length === 0 &&
+        ageDays !== null &&
+        ageDays > SHUTDOWN_PROPOSAL_MAX_AGE_DAYS
+      ) {
+        continue;
       }
+
+      matches.push({
+        chainName,
+        proposalId: id,
+        title: title.slice(0, 120),
+        matchedKeyword: hit,
+        // Title hits are far higher-signal than body-only hits; flag so the
+        // report can sort them to the top.
+        inTitle: title.toLowerCase().includes(hit),
+        status: p.status ?? p.status,
+        // Proposal recency: submit_time is top-level on both v1 and v1beta1,
+        // voting_end_time too. We show submit_time (when it was filed) as the
+        // "how new is this result" signal; a curator reading the weekly report
+        // wants to know whether this is a fresh proposal or one from a year ago
+        // that already resolved. Sliced to the date (YYYY-MM-DD).
+        submitTime: (p.submit_time ?? '').slice(0, 10),
+        votingEndTime: (p.voting_end_time ?? '').slice(0, 10),
+        // Candidate shutdown date(s) / block height(s) lifted from the prose,
+        // verbatim, for the curator to confirm into planned_shutdown_date.
+        targets,
+      });
     }
     // Return as soon as an endpoint yields matches. If an endpoint returned
     // proposals but NONE matched, fall through to the next (v1beta1): legacy
@@ -638,22 +737,49 @@ function renderReport({ part1, part2 }) {
     lines.push('_No shutdown-language governance proposals detected._');
   } else {
     lines.push(
-      '_Governance proposals on listed chains matching shutdown language. ' +
-        'False positives are expected (a proposal may reject or merely discuss ' +
-        'a shutdown). Verify, then a curator may set `planned_shutdown_date` on ' +
-        'the zone_asset to drive the existing halt automation._'
+      `_Governance proposals on listed chains matching shutdown language, ` +
+        `filed within the last ${SHUTDOWN_PROPOSAL_MAX_AGE_DAYS} days (older ` +
+        `ones are skipped unless they name a concrete target date/height, so a ` +
+        `shutdown filed early still shows). False positives are expected (a ` +
+        `proposal may reject or merely discuss a shutdown). **Submitted** is the ` +
+        `proposal filing date (how new this result is); **Target date / height** ` +
+        `lists date/height strings lifted verbatim from the proposal text ` +
+        `(unparsed — confirm before trusting). Verify, then a curator may set ` +
+        `\`planned_shutdown_date\` on the zone_asset to drive the existing halt ` +
+        `automation._`
     );
     lines.push('');
-    lines.push('| Chain | Proposal | Matched phrase | In title | Status | Title |');
-    lines.push('|-------|----------|----------------|----------|--------|-------|');
-    // Title hits first (highest signal), then by chain for readability.
+    lines.push(
+      '| Chain | Proposal | Submitted | Target date / height | Matched phrase | In title | Status | Title |'
+    );
+    lines.push(
+      '|-------|----------|-----------|----------------------|----------------|----------|--------|-------|'
+    );
+    // Sort: title hits first (highest signal), then proposals that yielded an
+    // extracted target date/height (the actionable ones), then most-recently
+    // submitted, then chain name. So the row a curator most likely wants to act
+    // on — a freshly-submitted, title-level shutdown with a concrete date — is
+    // at the top.
     const sorted = [...part2].sort((a, b) => {
       if (a.inTitle !== b.inTitle) return a.inTitle ? -1 : 1;
+      const aHasTarget = (a.targets?.length ?? 0) > 0;
+      const bHasTarget = (b.targets?.length ?? 0) > 0;
+      if (aHasTarget !== bHasTarget) return aHasTarget ? -1 : 1;
+      if (a.submitTime !== b.submitTime) {
+        return (b.submitTime || '').localeCompare(a.submitTime || '');
+      }
       return a.chainName.localeCompare(b.chainName);
     });
     for (const m of sorted) {
+      // Strip the verbose PROPOSAL_STATUS_ prefix for readability.
+      const status = (m.status ?? '-').replace(/^PROPOSAL_STATUS_/, '');
+      const targets = (m.targets ?? []).length
+        ? m.targets.map((t) => `\`${t.replace(/\|/g, '\\|')}\``).join('<br>')
+        : '-';
       lines.push(
-        `| ${m.chainName} | #${m.proposalId} | \`${m.matchedKeyword}\` | ${m.inTitle ? 'yes' : 'no'} | ${m.status ?? '-'} | ${m.title.replace(/\|/g, '\\|')} |`
+        `| ${m.chainName} | #${m.proposalId} | ${m.submitTime || '-'} | ${targets} | ` +
+          `\`${m.matchedKeyword}\` | ${m.inTitle ? 'yes' : 'no'} | ${status} | ` +
+          `${m.title.replace(/\|/g, '\\|')} |`
       );
     }
   }

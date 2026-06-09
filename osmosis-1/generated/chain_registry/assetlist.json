@@ -37011,6 +37011,40 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/34D327C2D4CEECF0F3FCAE68E2DA630C1218D91C365372918A8310BF79491615",
+          "exponent": 0,
+          "aliases": [
+            "uhzn"
+          ]
+        },
+        {
+          "denom": "HZN",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/34D327C2D4CEECF0F3FCAE68E2DA630C1218D91C365372918A8310BF79491615",
+      "name": "HazinaChain",
+      "display": "HZN",
+      "symbol": "HZN",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "hazinachain",
+            "base_denom": "uhzn",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-110100",
+            "path": "transfer/channel-110100/uhzn"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
           "exponent": 0,
           "aliases": [
@@ -39739,40 +39773,6 @@
           "chain": {
             "channel_id": "channel-1575",
             "path": "transfer/channel-1575/aHAQQ"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/34D327C2D4CEECF0F3FCAE68E2DA630C1218D91C365372918A8310BF79491615",
-          "exponent": 0,
-          "aliases": [
-            "uhzn"
-          ]
-        },
-        {
-          "denom": "HZN",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/34D327C2D4CEECF0F3FCAE68E2DA630C1218D91C365372918A8310BF79491615",
-      "name": "HazinaChain",
-      "display": "HZN",
-      "symbol": "HZN",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "hazinachain",
-            "base_denom": "uhzn",
-            "channel_id": "channel-1"
-          },
-          "chain": {
-            "channel_id": "channel-110100",
-            "path": "transfer/channel-110100/uhzn"
           }
         }
       ]

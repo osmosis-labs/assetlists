@@ -12329,10 +12329,15 @@
       "name": "Sei",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
       "preview": false,
-      "tooltipMessage": "SEI Transfers will be disabled with the upcoming SIP Upgrade, estimated at the end of Q1 2026. For more information see: https://blog.sei.io/announcements/the-sip-3-upgrade-making-way-for-sei-giga/"
+      "tooltipMessage": "Sei disabled IBC transfers with the SIP-3 / Sei Giga upgrade (governance proposal 116, passed 12 May 2026). The channel is closed, so SEI deposits and withdrawals are disabled. Sei is now an EVM-only chain. For more information see: https://blog.sei.io/announcements/the-sip-3-upgrade-making-way-for-sei-giga/"
     },
     {
       "chainName": "quicksilver",
@@ -13559,9 +13564,15 @@
       "name": "OIN STORE OF VALUE",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
       "disabled": false,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "tooltipMessage": "Sei disabled IBC transfers with the SIP-3 / Sei Giga upgrade (governance proposal 116, passed 12 May 2026). The channel is closed, so deposits and withdrawals are disabled. Sei is now an EVM-only chain. For more information see: https://blog.sei.io/announcements/the-sip-3-upgrade-making-way-for-sei-giga/"
     },
     {
       "chainName": "evmos",
@@ -17677,9 +17688,15 @@
       "name": "SEIYAN",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
       "disabled": false,
-      "preview": true
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": true,
+      "tooltipMessage": "Sei disabled IBC transfers with the SIP-3 / Sei Giga upgrade (governance proposal 116, passed 12 May 2026). The channel is closed, so deposits and withdrawals are disabled. Sei is now an EVM-only chain. For more information see: https://blog.sei.io/announcements/the-sip-3-upgrade-making-way-for-sei-giga/"
     },
     {
       "chainName": "nibiru",
@@ -19846,6 +19863,10 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
       "preview": false,
       "listingDate": "2024-05-03T13:00:00.000Z",
       "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
@@ -32247,7 +32268,7 @@
       "sourceDenom": "ahp",
       "coinMinimalDenom": "ibc/955E5E0BED298F85956121C3BD627CEB12B858A9EB7C1ED24B1515A658318CE4",
       "symbol": "HP",
-      "decimals": 0,
+      "decimals": 18,
       "logoURIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hippoprotocol/images/logo.svg"
       },
@@ -32262,7 +32283,7 @@
             "chainId": "hippo-protocol-1",
             "sourceDenom": "ahp",
             "port": "transfer",
-            "channelId": "channel-0"
+            "channelId": "channel-104931"
           },
           "chain": {
             "port": "transfer",
@@ -32278,7 +32299,7 @@
           "chainType": "cosmos",
           "chainId": "hippo-protocol-1",
           "symbol": "HP",
-          "decimals": 0,
+          "decimals": 18,
           "logoURIs": {
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hippoprotocol/images/logo.svg"
           }
@@ -47936,6 +47957,56 @@
       ],
       "variantGroupKey": "ibc/FEDB33BCBD8F18D341B4683A6CF5B0BDAB1A6FAE4574C82995DFBB36344D6A45",
       "name": "HAQQ Token",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "hippoprotocol",
+      "sourceDenom": "ahp",
+      "coinMinimalDenom": "ibc/24C3429B835A84801EFEFC28C8CBDF787C4067D971CB6E510BB525FA462CCE1C",
+      "symbol": "HP.hippoprotocol",
+      "decimals": 18,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hippoprotocol/images/logo.svg"
+      },
+      "coingeckoId": "hippo-protocol",
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "hippoprotocol",
+            "chainId": "hippo-protocol-1",
+            "sourceDenom": "ahp",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-110277",
+            "path": "transfer/channel-110277/ahp"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "hippoprotocol",
+          "sourceDenom": "ahp",
+          "chainType": "cosmos",
+          "chainId": "hippo-protocol-1",
+          "symbol": "HP",
+          "decimals": 18,
+          "logoURIs": {
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hippoprotocol/images/logo.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/955E5E0BED298F85956121C3BD627CEB12B858A9EB7C1ED24B1515A658318CE4",
+      "name": "Hippo Protocol",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

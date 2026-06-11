@@ -48,6 +48,16 @@ jobs:
           # sequence, so we snapshot once here and diff once at the end.
           cp osmosis-1/osmosis.zone_assets.json /tmp/zone-before.json
 
+          # Manual halts are applied by human PRs, not lifecycle scripts, so
+          # they never appear in the in-run before/after diff. To surface
+          # "newly halted this run", capture the previous run's manual-halt
+          # chain set, which is persisted as state.json's top-level
+          # manualHaltChains key (committed by the prior run). Missing on the
+          # first run after this lands, in which case the delta is empty.
+          jq -r '(.manualHaltChains // []) | sort | .[]' \
+            osmosis-1/generated/state/state.json 2>/dev/null \
+            > /tmp/manual-halts-prev.txt || touch /tmp/manual-halts-prev.txt
+
       - name: Check IBC Client Status
         working-directory: ./.github/workflows/utility
         run: |
@@ -228,6 +238,28 @@ jobs:
         working-directory: ./.github/workflows/utility
         run: node update_assetlist_state.mjs
 
+      - name: Persist manual-halt chain set to state
+        run: |
+          # Record the current set of chains with any manual halt as a
+          # top-level state.json key so the next run can diff against it to
+          # surface "newly halted this run" (see the Snapshot step). A chain
+          # counts as manual if its overall unstable reason or either
+          # per-direction halt reason is "manual". Distinct chains, sorted.
+          jq -r '
+            [ .assets[]
+              | select(
+                  (.osmosis_unstable_reason == "manual")
+                  or (.osmosis_deposit_halt_reason == "manual")
+                  or (.osmosis_withdrawal_halt_reason == "manual")
+                )
+              | .chain_name
+            ] | sort | unique
+          ' osmosis-1/osmosis.zone_assets.json > /tmp/manual-halts-now.json
+          jq --slurpfile mh /tmp/manual-halts-now.json \
+            '.manualHaltChains = $mh[0]' \
+            osmosis-1/generated/state/state.json > /tmp/state-with-mh.json
+          mv /tmp/state-with-mh.json osmosis-1/generated/state/state.json
+
       - name: Report Dead Chains and Planned Shutdowns
         working-directory: ./.github/workflows/utility
         run: |
@@ -311,7 +343,15 @@ jobs:
                 or (.osmosis_withdrawal_halt_reason == "manual")
               ))
             | map(.chain_name) | unique | .[]
-          ' osmosis-1/osmosis.zone_assets.json 2>/dev/null > /tmp/lc-manualHalts.txt && echo ok || echo err)
+          ' osmosis-1/osmosis.zone_assets.json 2>/dev/null | sort > /tmp/lc-manualHalts.txt && echo ok || echo err)
+
+          # Newly halted this run: chains in the current manual-halt set that
+          # were not in the previous run's persisted set. This is the delta a
+          # human PR (e.g. pausing Quicksilver) produces; the standing row
+          # below shows everything currently halted.
+          comm -13 /tmp/manual-halts-prev.txt /tmp/lc-manualHalts.txt \
+            > /tmp/lc-manualHaltsNew.txt 2>/dev/null || touch /tmp/lc-manualHaltsNew.txt
+          emit_row "🆕" "Manual halts added this run" /tmp/lc-manualHaltsNew.txt name
           emit_row "⚠️" "Manual halts in effect" /tmp/lc-manualHalts.txt name
 
           emit_row "⏸️" "Extended halt set" /tmp/lc-extendedHaltSet.txt symbol

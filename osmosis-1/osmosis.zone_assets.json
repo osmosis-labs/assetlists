@@ -638,7 +638,13 @@
       "categories": [
         "bridges"
       ],
-      "_comment": "Gravity Bridge $GRAV"
+      "_comment": "Gravity Bridge $GRAV",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "decentr",
@@ -3620,7 +3626,11 @@
       ],
       "_comment": "Page $PAGE",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "pundix",
@@ -11193,6 +11203,42 @@
       "base_denom": "ahp",
       "path": "transfer/channel-104931/ahp",
       "_comment": "Hippo Protocol $HP",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
+    },
+    {
+      "chain_name": "gravitybridge",
+      "base_denom": "gravity0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006",
+      "path": "transfer/channel-144/gravity0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006",
+      "_comment": "pSTAKE Finance (Gravity Bridge) $PSTAKE.grv",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
+    },
+    {
+      "chain_name": "gravitybridge",
+      "base_denom": "gravity0x83F20F44975D03b1b09e64809B757c47f942BEeA",
+      "path": "transfer/channel-144/gravity0x83F20F44975D03b1b09e64809B757c47f942BEeA",
+      "_comment": "Savings Dai (Gravity Bridge) $sDAI.grv",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
+    },
+    {
+      "chain_name": "gravitybridge",
+      "base_denom": "gravity0x2F109021aFe75B949429fe30523Ee7C0D5B27207",
+      "path": "transfer/channel-144/gravity0x2F109021aFe75B949429fe30523Ee7C0D5B27207",
+      "_comment": "OccamFi (Gravity Bridge) $OCC.grv",
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "ibc_client",
       "osmosis_halt_deposits": true,

@@ -2880,9 +2880,15 @@
       "name": "Gravity Bridge",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
       "disabled": false,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "lastDowntimeDate": "2026-06-13T15:39:23.763Z"
     },
     {
       "chainName": "decentr",
@@ -15546,6 +15552,10 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
       "preview": false,
       "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
     },
@@ -44267,6 +44277,227 @@
       "lastDowntimeDate": "2026-05-22T09:57:52.115Z"
     },
     {
+      "chainName": "gravitybridge",
+      "sourceDenom": "gravity0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006",
+      "coinMinimalDenom": "ibc/CBC60FC96BD21708D3B60B2E4AD949E0DA07C67EFE6A8D463298806CD507A9CF",
+      "symbol": "PSTAKE.grv",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/pstake.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/pstake.svg"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "gravitybridge",
+            "chainId": "gravity-bridge-3",
+            "sourceDenom": "gravity0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006",
+            "port": "transfer",
+            "channelId": "channel-10"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-144",
+            "path": "transfer/channel-144/gravity0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "gravitybridge",
+          "sourceDenom": "gravity0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006",
+          "chainType": "cosmos",
+          "chainId": "gravity-bridge-3",
+          "symbol": "PSTAKE",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/pstake.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/pstake.svg"
+          }
+        },
+        {
+          "chainName": "ethereum",
+          "sourceDenom": "0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006",
+          "chainType": "evm",
+          "chainId": 1,
+          "address": "0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006",
+          "symbol": "PSTAKE",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/pstake.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/pstake.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/8061A06D3BD4D52C4A28FFECF7150D370393AF0BA661C3776C54FF32836C3961",
+      "name": "pSTAKE Finance (Gravity Bridge)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "sortWith": {
+        "chainName": "gravitybridge",
+        "sourceDenom": "ugrav"
+      },
+      "lastDowntimeDate": "2026-06-13T15:39:23.763Z"
+    },
+    {
+      "chainName": "gravitybridge",
+      "sourceDenom": "gravity0x83F20F44975D03b1b09e64809B757c47f942BEeA",
+      "coinMinimalDenom": "ibc/723134C962D78FC0E35610DB6D6A19B5B791D04FE8F4154E4AAB7BDAB28DBB45",
+      "symbol": "sDAI.grv",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/sdai.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/sdai.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "gravitybridge",
+            "chainId": "gravity-bridge-3",
+            "sourceDenom": "gravity0x83F20F44975D03b1b09e64809B757c47f942BEeA",
+            "port": "transfer",
+            "channelId": "channel-10"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-144",
+            "path": "transfer/channel-144/gravity0x83F20F44975D03b1b09e64809B757c47f942BEeA"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "gravitybridge",
+          "sourceDenom": "gravity0x83F20F44975D03b1b09e64809B757c47f942BEeA",
+          "chainType": "cosmos",
+          "chainId": "gravity-bridge-3",
+          "symbol": "sDAI",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/sdai.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/sdai.svg"
+          }
+        },
+        {
+          "chainName": "ethereum",
+          "sourceDenom": "0x83F20F44975D03b1b09e64809B757c47f942BEeA",
+          "chainType": "evm",
+          "chainId": 1,
+          "address": "0x83F20F44975D03b1b09e64809B757c47f942BEeA",
+          "symbol": "sDAI",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/sdai.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/sdai.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7",
+      "name": "Savings Dai (Gravity Bridge)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "sortWith": {
+        "chainName": "gravitybridge",
+        "sourceDenom": "ugrav"
+      },
+      "lastDowntimeDate": "2026-06-13T15:39:23.763Z"
+    },
+    {
+      "chainName": "gravitybridge",
+      "sourceDenom": "gravity0x2F109021aFe75B949429fe30523Ee7C0D5B27207",
+      "coinMinimalDenom": "ibc/0362302C7F45A97E304A087F05553DCECF0EAED24A17BC3D5B1BCC5E5B787E4C",
+      "symbol": "OCC.grv",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/occamfi.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "gravitybridge",
+            "chainId": "gravity-bridge-3",
+            "sourceDenom": "gravity0x2F109021aFe75B949429fe30523Ee7C0D5B27207",
+            "port": "transfer",
+            "channelId": "channel-10"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-144",
+            "path": "transfer/channel-144/gravity0x2F109021aFe75B949429fe30523Ee7C0D5B27207"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "gravitybridge",
+          "sourceDenom": "gravity0x2F109021aFe75B949429fe30523Ee7C0D5B27207",
+          "chainType": "cosmos",
+          "chainId": "gravity-bridge-3",
+          "symbol": "OCC",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/occamfi.png"
+          }
+        },
+        {
+          "chainName": "ethereum",
+          "sourceDenom": "0x2F109021aFe75B949429fe30523Ee7C0D5B27207",
+          "chainType": "evm",
+          "chainId": 1,
+          "address": "0x2F109021aFe75B949429fe30523Ee7C0D5B27207",
+          "symbol": "OCC",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/occamfi.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/0362302C7F45A97E304A087F05553DCECF0EAED24A17BC3D5B1BCC5E5B787E4C",
+      "name": "OccamFi (Gravity Bridge)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "sortWith": {
+        "chainName": "gravitybridge",
+        "sourceDenom": "ugrav"
+      },
+      "lastDowntimeDate": "2026-06-13T15:39:23.763Z"
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -47906,159 +48137,6 @@
       ],
       "variantGroupKey": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4",
       "name": "Avalanche USD Coin (Wormhole)",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "gravitybridge",
-      "sourceDenom": "gravity0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006",
-      "coinMinimalDenom": "ibc/CBC60FC96BD21708D3B60B2E4AD949E0DA07C67EFE6A8D463298806CD507A9CF",
-      "symbol": "PSTAKE.grv",
-      "decimals": 18,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/pstake.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/pstake.svg"
-      },
-      "categories": [
-        "liquid_staking"
-      ],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "gravitybridge",
-            "chainId": "gravity-bridge-3",
-            "sourceDenom": "gravity0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006",
-            "port": "transfer",
-            "channelId": "channel-10"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-144",
-            "path": "transfer/channel-144/gravity0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "gravitybridge",
-          "sourceDenom": "gravity0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006",
-          "chainType": "cosmos",
-          "chainId": "gravity-bridge-3",
-          "symbol": "PSTAKE",
-          "decimals": 18,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/pstake.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/pstake.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/8061A06D3BD4D52C4A28FFECF7150D370393AF0BA661C3776C54FF32836C3961",
-      "name": "pSTAKE Finance",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "gravitybridge",
-      "sourceDenom": "gravity0x83F20F44975D03b1b09e64809B757c47f942BEeA",
-      "coinMinimalDenom": "ibc/723134C962D78FC0E35610DB6D6A19B5B791D04FE8F4154E4AAB7BDAB28DBB45",
-      "symbol": "sDAI",
-      "decimals": 18,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/sdai.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/sdai.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "gravitybridge",
-            "chainId": "gravity-bridge-3",
-            "sourceDenom": "gravity0x83F20F44975D03b1b09e64809B757c47f942BEeA",
-            "port": "transfer",
-            "channelId": "channel-10"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-144",
-            "path": "transfer/channel-144/gravity0x83F20F44975D03b1b09e64809B757c47f942BEeA"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "gravitybridge",
-          "sourceDenom": "gravity0x83F20F44975D03b1b09e64809B757c47f942BEeA",
-          "chainType": "cosmos",
-          "chainId": "gravity-bridge-3",
-          "symbol": "sDAI",
-          "decimals": 18,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/sdai.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/sdai.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7",
-      "name": "Savings Dai",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "gravitybridge",
-      "sourceDenom": "gravity0x2F109021aFe75B949429fe30523Ee7C0D5B27207",
-      "coinMinimalDenom": "ibc/0362302C7F45A97E304A087F05553DCECF0EAED24A17BC3D5B1BCC5E5B787E4C",
-      "symbol": "OCC",
-      "decimals": 18,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/occamfi.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "gravitybridge",
-            "chainId": "gravity-bridge-3",
-            "sourceDenom": "gravity0x2F109021aFe75B949429fe30523Ee7C0D5B27207",
-            "port": "transfer",
-            "channelId": "channel-10"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-144",
-            "path": "transfer/channel-144/gravity0x2F109021aFe75B949429fe30523Ee7C0D5B27207"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "gravitybridge",
-          "sourceDenom": "gravity0x2F109021aFe75B949429fe30523Ee7C0D5B27207",
-          "chainType": "cosmos",
-          "chainId": "gravity-bridge-3",
-          "symbol": "OCC",
-          "decimals": 18,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/occamfi.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/0362302C7F45A97E304A087F05553DCECF0EAED24A17BC3D5B1BCC5E5B787E4C",
-      "name": "OccamFi",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

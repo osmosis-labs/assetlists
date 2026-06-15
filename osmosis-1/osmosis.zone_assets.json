@@ -6484,7 +6484,9 @@
           "withdraw_url": "https://app.int3face.zone/bridge"
         }
       ],
-      "_comment": "Bitcoin (Int3) $BTC.int3"
+      "_comment": "Bitcoin (Int3) $BTC.int3",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "int3face",
@@ -7718,7 +7720,9 @@
           "withdraw_url": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=solana&fromToken=SOL.int3"
         }
       ],
-      "_comment": "Solana (Int3) $SOL.int3"
+      "_comment": "Solana (Int3) $SOL.int3",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "atomone",
@@ -11250,6 +11254,18 @@
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "bridge_down",
       "tooltip_message": "Gravity Bridge has been compromised. Deposits and withdrawals are halted while the situation is assessed."
+    },
+    {
+      "chain_name": "turkchain",
+      "base_denom": "lira",
+      "path": "transfer/channel-110319/lira",
+      "_comment": "Turkchain $TURK",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     }
   ]
 }

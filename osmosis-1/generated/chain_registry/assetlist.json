@@ -25729,8 +25729,7 @@
           },
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/dNTRN.svg"
         }
-      ],
-      "coingecko_id": "drop-staked-ntrn"
+      ]
     },
     {
       "description": "Fractionalized Crypto Hamsters",
@@ -27455,8 +27454,7 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/USDN.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/USDN.svg"
         }
-      ],
-      "coingecko_id": "noble-dollar-usdn"
+      ]
     },
     {
       "description": "Formation Of $hit Tokens",
@@ -37144,6 +37142,40 @@
           "chain": {
             "channel_id": "channel-144",
             "path": "transfer/channel-144/gravity0x2F109021aFe75B949429fe30523Ee7C0D5B27207"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/897E03F5F866333ED0CD1F732E6A7E86D9B79D59970BC2F8BC4A77A47737F16C",
+          "exponent": 0,
+          "aliases": [
+            "lira"
+          ]
+        },
+        {
+          "denom": "TURK",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/897E03F5F866333ED0CD1F732E6A7E86D9B79D59970BC2F8BC4A77A47737F16C",
+      "name": "Turkchain",
+      "display": "TURK",
+      "symbol": "TURK",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "turkchain",
+            "base_denom": "lira",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-110319",
+            "path": "transfer/channel-110319/lira"
           }
         }
       ]
@@ -53689,40 +53721,6 @@
           "chain": {
             "channel_id": "channel-251",
             "path": "transfer/channel-251/factory/terra1zly98gvcec54m3caxlqexce7rus6rzgplz7eketsdz7nh750h2rqvu8uzx/32/project/amplp"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/897E03F5F866333ED0CD1F732E6A7E86D9B79D59970BC2F8BC4A77A47737F16C",
-          "exponent": 0,
-          "aliases": [
-            "lira"
-          ]
-        },
-        {
-          "denom": "TURK",
-          "exponent": 18
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/897E03F5F866333ED0CD1F732E6A7E86D9B79D59970BC2F8BC4A77A47737F16C",
-      "name": "Turkchain",
-      "display": "TURK",
-      "symbol": "TURK",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "turkchain",
-            "base_denom": "lira",
-            "channel_id": "channel-1"
-          },
-          "chain": {
-            "channel_id": "channel-110319",
-            "path": "transfer/channel-110319/lira"
           }
         }
       ]

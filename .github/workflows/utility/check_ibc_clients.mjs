@@ -119,6 +119,14 @@ function isThinEntry(asset) {
 const OWNED_HALT_REASONS = new Set(['bridge_down', 'source_chain_killed']);
 const OWNED_UNSTABLE_REASONS = new Set(['ibc_client', 'source_chain_killed']);
 
+// Tooltip stamped on assets auto-created as manual because their source
+// chain is already fully manually halted (see buildManualHaltChains). The
+// tooltip both informs users and, via canModify*, locks the entry so the
+// same automation cannot later auto-clear it on a transient Active reading.
+const MANUAL_CHAIN_INHERIT_TOOLTIP =
+  'This asset appeared on a source chain whose transfers are manually halted. ' +
+  'Deposits and withdrawals are halted pending manual review.';
+
 // ── HTTP helpers ──────────────────────────────────────────────────────────────
 
 function sleep(ms) {
@@ -370,6 +378,54 @@ function canModifyUnstable(zoneAsset) {
 }
 
 /**
+ * Is this asset curator-locked under a manual halt? True when a curator has
+ * taken explicit ownership: the unstable reason is 'manual', either halt
+ * reason is 'manual', or a tooltip_message is set (which locks all
+ * automation via canModify*). Used to detect chains the curator has fully
+ * taken over so new assets that appear on them inherit the same treatment.
+ */
+function isManuallyLocked(zoneAsset) {
+  return (
+    zoneAsset.osmosis_unstable_reason === 'manual' ||
+    zoneAsset.osmosis_deposit_halt_reason === 'manual' ||
+    zoneAsset.osmosis_withdrawal_halt_reason === 'manual' ||
+    Boolean(zoneAsset.tooltip_message)
+  );
+}
+
+/**
+ * Build the set of source chains the curator has fully taken over with
+ * manual halts, from the PRE-RUN zone state. A chain qualifies when it has
+ * at least one listed asset AND every one of its listed assets is
+ * manually locked (isManuallyLocked).
+ *
+ * Why this matters (attack-vector guard): when a bridge or source chain is
+ * compromised, a curator halts every known asset manually. But a
+ * compromised chain can begin advertising NEW assets in the chain registry.
+ * Those flow into the generated assetlist and this script would otherwise
+ * auto-create them with the script-owned 'ibc_client'/'bridge_down' reasons,
+ * which the same automation will happily auto-CLEAR the moment the client
+ * reports Active again, silently relisting an attacker-introduced asset on a
+ * still-compromised bridge. Treating new assets on a fully-manual chain as
+ * manual too keeps them locked until a human clears them.
+ */
+function buildManualHaltChains(assets) {
+  const byChain = new Map(); // chain_name -> { total, locked }
+  for (const a of assets) {
+    if (!a.chain_name) continue;
+    const c = byChain.get(a.chain_name) ?? { total: 0, locked: 0 };
+    c.total += 1;
+    if (isManuallyLocked(a)) c.locked += 1;
+    byChain.set(a.chain_name, c);
+  }
+  const fullyManual = new Set();
+  for (const [chain, c] of byChain) {
+    if (c.total > 0 && c.locked === c.total) fullyManual.add(chain);
+  }
+  return fullyManual;
+}
+
+/**
  * Best-effort classification of *why* an asset is unstable, used by the
  * safety-net paths when we don't have channel-walk evidence in hand.
  * Returns the most specific script-owned reason that can be proved from
@@ -456,6 +512,13 @@ async function main() {
   for (const asset of zoneData.assets) {
     if (asset.path) zoneByPath.set(asset.path, asset);
   }
+
+  // Snapshot, from PRE-RUN state, the chains the curator has fully taken
+  // over with manual halts. New assets the channel walk discovers on these
+  // chains will be created as manual (curator-locked) rather than with the
+  // auto-clearable ibc_client/bridge_down reasons. Computed once here, before
+  // any mutation, so assets this run appends don't perturb the membership.
+  const manualHaltChains = buildManualHaltChains(zoneData.assets);
 
   // Group frontend IBC assets by Osmosis-side channel id, but record
   // the counterparty (chainName, channelId, port) on each asset entry
@@ -624,6 +687,7 @@ async function main() {
 
       if (bridgeDown) {
         // ── Bridge-down ────────────────────────────────────────────────────
+        const isNewEntry = !zoneAsset;
         if (!zoneAsset) {
           zoneAsset = {
             chain_name: fa.chainName,
@@ -633,6 +697,37 @@ async function main() {
           };
           zoneData.assets.push(zoneAsset);
           zoneByPath.set(fa.ibcPath, zoneAsset);
+        }
+
+        // Attack-vector guard: a brand-new asset that first appears on a
+        // source chain the curator has already fully manually halted is
+        // created manual (curator-locked) rather than with the script-owned
+        // ibc_client/bridge_down reasons. Stamping the manual reasons plus a
+        // tooltip makes every canModify* gate below short-circuit, so this
+        // run leaves it as written AND no future run can auto-clear it on a
+        // transient Active reading. A human must clear it deliberately.
+        // Pre-existing entries are never converted here — only newly created
+        // ones — so this can't silently rewrite a curator's existing choice.
+        if (isNewEntry && manualHaltChains.has(fa.chainName)) {
+          zoneAsset.osmosis_unstable = true;
+          zoneAsset.osmosis_unstable_reason = 'manual';
+          zoneAsset.osmosis_halt_deposits = true;
+          zoneAsset.osmosis_deposit_halt_reason = 'manual';
+          zoneAsset.osmosis_halt_withdrawals = true;
+          zoneAsset.osmosis_withdrawal_halt_reason = 'manual';
+          zoneAsset.tooltip_message = MANUAL_CHAIN_INHERIT_TOOLTIP;
+          applyDowntimeDateRule(
+            stateAsset ?? materialiseStateAsset(state, fa.coinMinimalDenom),
+            nowIso
+          );
+          mutations.push({
+            kind: 'manual_inherited',
+            fa,
+            reason: 'manual',
+            haltReason: 'manual',
+            zoneAsset,
+          });
+          continue;
         }
 
         const before = { ...zoneAsset };
@@ -866,9 +961,12 @@ async function main() {
   console.log(`  distinct source chains touched: ${affectedChains.size}`);
   console.log('='.repeat(70));
 
-  // Machine-readable summary
-  console.log(`\nIBC_NEWLY_FLAGGED=${byKind.bridge_down ?? 0}`);
+  // Machine-readable summary. manual_inherited assets are a flag event
+  // (a new asset locked down), so they roll into NEWLY_FLAGGED and also get
+  // their own counter for visibility in the PR summary.
+  console.log(`\nIBC_NEWLY_FLAGGED=${(byKind.bridge_down ?? 0) + (byKind.manual_inherited ?? 0)}`);
   console.log(`IBC_NEWLY_CLEARED=${(byKind.bridge_up ?? 0) + (byKind.thin_removed ?? 0)}`);
+  console.log(`IBC_MANUAL_INHERITED=${byKind.manual_inherited ?? 0}`);
   console.log(`IBC_ERRORS=${byKind.ibc_error ?? 0}`);
   console.log(`AFFECTED_CHAINS=${affectedChains.size}`);
 }

@@ -176,14 +176,25 @@ jobs:
           # current zone_assets.json to produce one symbol list per mutation
           # category. Each file is "chain_name|SYMBOL" per line. Symbol is
           # resolved against the freshly-generated frontend assetlist.
+          #
+          # Keying: a single (chain_name, base_denom) pair can be listed on
+          # more than one IBC channel (e.g. a re-pathed asset whose old, dead
+          # channel still lingers in zone_assets). Those entries are distinct
+          # rows that differ only by `path`, so keying on chain_name|base_denom
+          # alone collapses them — the before/after compare and symbol lookup
+          # bleed across channels and produce phantom flagged/cleared lines for
+          # the wrong variant. Key on `path` (unique per IBC entry), falling
+          # back to chain_name|base_denom for non-IBC entries that have no path.
           jq -r --slurpfile fe osmosis-1/generated/frontend/assetlist.json --slurpfile before /tmp/zone-before.json '
-            ($fe[0].assets | map({key: (.chainName + "|" + .sourceDenom), value: .symbol}) | from_entries) as $symByOrigin
-            | ($before[0].assets | map({key: (.chain_name + "|" + .base_denom), value: .}) | from_entries) as $beforeByOrigin
+            def feKey: (([.transferMethods[]? | select(.type == "ibc") | .chain.path] | first) // (.chainName + "|" + .sourceDenom));
+            def zoneKey: (.path // (.chain_name + "|" + .base_denom));
+            ($fe[0].assets | map({key: feKey, value: .symbol}) | from_entries) as $symByOrigin
+            | ($before[0].assets | map({key: zoneKey, value: .}) | from_entries) as $beforeByOrigin
             | .assets as $now
             | $now | map(
                 . as $a
-                | $beforeByOrigin[$a.chain_name + "|" + $a.base_denom] as $b
-                | ($symByOrigin[$a.chain_name + "|" + $a.base_denom] // $a._comment // $a.base_denom) as $sym
+                | $beforeByOrigin[$a | zoneKey] as $b
+                | ($symByOrigin[$a | zoneKey] // $a._comment // $a.base_denom) as $sym
                 | {
                     chain: $a.chain_name,
                     symbol: $sym,

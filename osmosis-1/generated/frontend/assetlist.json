@@ -1269,7 +1269,7 @@
       "chainName": "stargaze",
       "sourceDenom": "ustars",
       "coinMinimalDenom": "ibc/987C17B11ABC2B20019178ACE62929FE9840202CE79498E29FE8E5CB02B7C0A4",
-      "symbol": "STARS",
+      "symbol": "STARS.old",
       "decimals": 6,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/stars.png",
@@ -1312,16 +1312,19 @@
         }
       ],
       "variantGroupKey": "ibc/987C17B11ABC2B20019178ACE62929FE9840202CE79498E29FE8E5CB02B7C0A4",
-      "name": "Stargaze",
+      "name": "Stargaze (old)",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "source_chain_killed",
       "disabled": false,
       "haltDeposits": true,
-      "depositHaltReason": "planned_shutdown",
-      "plannedShutdownDate": "2026-06-15T00:00:00Z",
+      "depositHaltReason": "source_chain_killed",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
-      "tooltipMessage": "The Stargaze chain is shutting down on 15 June 2026 as the project migrates to the Cosmos Hub. Deposits are being disabled ahead of the shutdown. Migrate your assets via https://automigration.stargaze.zone/"
+      "tooltipMessage": "The Stargaze chain has shut down as the project migrated to the Cosmos Hub. This is the old STARS; deposits and withdrawals are closed. Migrate your assets via https://automigration.stargaze.zone/",
+      "lastDowntimeDate": "2026-06-16T09:15:53.085Z"
     },
     {
       "chainName": "chihuahua",
@@ -7824,9 +7827,11 @@
       "name": "POSTHUMAN",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "lastDowntimeDate": "2026-06-16T09:15:55.541Z"
     },
     {
       "chainName": "secretnetwork",
@@ -13997,13 +14002,14 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": true,
-      "unstableReason": "market",
+      "unstableReason": "source_chain_killed",
       "disabled": false,
       "haltDeposits": true,
-      "depositHaltReason": "planned_shutdown",
-      "plannedShutdownDate": "2026-06-15T00:00:00Z",
+      "depositHaltReason": "source_chain_killed",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
-      "tooltipMessage": "The Stargaze chain is shutting down on 15 June 2026 as the project migrates to the Cosmos Hub. Deposits are being disabled ahead of the shutdown. Migrate your assets via https://automigration.stargaze.zone/",
+      "tooltipMessage": "The Stargaze chain has shut down as the project migrated to the Cosmos Hub. Deposits and withdrawals are closed. Migrate your assets via https://automigration.stargaze.zone/",
       "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
     },
     {
@@ -14493,13 +14499,16 @@
       "name": "Branch",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "source_chain_killed",
       "disabled": false,
       "haltDeposits": true,
-      "depositHaltReason": "planned_shutdown",
-      "plannedShutdownDate": "2026-06-15T00:00:00Z",
+      "depositHaltReason": "source_chain_killed",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
-      "tooltipMessage": "The Stargaze chain is shutting down on 15 June 2026 as the project migrates to the Cosmos Hub. Deposits are being disabled ahead of the shutdown. Migrate your assets via https://automigration.stargaze.zone/"
+      "tooltipMessage": "The Stargaze chain has shut down as the project migrated to the Cosmos Hub. Deposits and withdrawals are closed. Migrate your assets via https://automigration.stargaze.zone/",
+      "lastDowntimeDate": "2026-06-16T09:15:53.085Z"
     },
     {
       "chainName": "neutron",
@@ -16103,13 +16112,16 @@
       "name": "Sneaky Productions",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "source_chain_killed",
       "disabled": false,
       "haltDeposits": true,
-      "depositHaltReason": "planned_shutdown",
-      "plannedShutdownDate": "2026-06-15T00:00:00Z",
+      "depositHaltReason": "source_chain_killed",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
-      "tooltipMessage": "The Stargaze chain is shutting down on 15 June 2026 as the project migrates to the Cosmos Hub. Deposits are being disabled ahead of the shutdown. Migrate your assets via https://automigration.stargaze.zone/"
+      "tooltipMessage": "The Stargaze chain has shut down as the project migrated to the Cosmos Hub. Deposits and withdrawals are closed. Migrate your assets via https://automigration.stargaze.zone/",
+      "lastDowntimeDate": "2026-06-16T09:15:53.085Z"
     },
     {
       "chainName": "osmosis",
@@ -18466,12 +18478,10 @@
       "name": "Saga",
       "isAlloyed": false,
       "verified": true,
-      "unstable": true,
-      "unstableReason": "market",
+      "unstable": false,
       "disabled": false,
       "preview": false,
-      "listingDate": "2024-04-09T10:30:00.000Z",
-      "lastDowntimeDate": "2026-06-03T14:55:41.021Z"
+      "listingDate": "2024-04-09T10:30:00.000Z"
     },
     {
       "chainName": "neutron",
@@ -29714,13 +29724,16 @@
       "name": "HOOD",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "source_chain_killed",
       "disabled": false,
       "haltDeposits": true,
-      "depositHaltReason": "planned_shutdown",
-      "plannedShutdownDate": "2026-06-15T00:00:00Z",
+      "depositHaltReason": "source_chain_killed",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
-      "tooltipMessage": "The Stargaze chain is shutting down on 15 June 2026 as the project migrates to the Cosmos Hub. Deposits are being disabled ahead of the shutdown. Migrate your assets via https://automigration.stargaze.zone/"
+      "tooltipMessage": "The Stargaze chain has shut down as the project migrated to the Cosmos Hub. Deposits and withdrawals are closed. Migrate your assets via https://automigration.stargaze.zone/",
+      "lastDowntimeDate": "2026-06-16T09:15:53.085Z"
     },
     {
       "chainName": "osmosis",

@@ -11,14 +11,14 @@
 
 ### Adding Assets
 
-<!-- If NOT adding a new asset, please remove this 'Adding Chains' section. -->
+<!-- If NOT adding a new asset, please remove this 'Adding Assets' section. -->
 If adding a new asset, please ensure the following:
 - [ ] Asset is registered to the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry).
-- [ ] Add asset to bottom of `zone_assets.json`.
+- [ ] Add asset to bottom of `osmosis-1/osmosis.zone_assets.json`.
    - [ ] `chain_name` and `base_denom` are provided and use values exactly as defined at the Chain Registry.
    - [ ] `path` is provided, and the IBC channel referenced is registered at the Chain Registry (skip if native to Osmosis).
    - [ ] `osmosis_verified` is set to `false`
-   - [ ] Optional: `transfer_methods`, `override_properties`, `canonical`, `categories`, where necessary (see [README](https://github.com/osmosis-labs/assetlists/tree/main?tab=readme-ov-file#how-to-add-assets) for details).
+   - [ ] Optional: `transfer_methods`, `override_properties`, `canonical`, `categories`, where necessary (see [README](https://github.com/osmosis-labs/assetlists/tree/main?tab=readme-ov-file#asset-object-structure) for details).
 - [ ] I am aware that upgrading an asset to 'Verified' status requires an additional PR to this repo (checklist below).  
 
 ### Adding Chains
@@ -29,7 +29,7 @@ If adding a new chain, please ensure the following:
    - Chain's registration must have `staking` defined, with at least one `staking_token` denom specified.
    - Chain's registration must have `fees` defined; at least one fee token has low, average, and high gas prices defined.
 - [ ] IBC Connection between chain and Osmosis is registered.
-- [ ] Add chain to bottom of `zone_chains.json`
+- [ ] Add chain to bottom of `osmosis-1/osmosis.zone_chains.json`
    - [ ] `rpc` and `rest` does not have any CORS blocking of the Osmosis domain, and RPC node has have WSS enabled.
    - [ ] `explorer_tx_url` correctly directs to the transaction when the hash is inserted into the URL.
 

@@ -403,7 +403,7 @@
       "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "source_chain_killed",
-      "tooltip_message": "The Starname (IOV) chain has been abandoned and is no longer producing blocks. Deposits and withdrawals are disabled. For more information see: https://www.mintscan.io/starname"
+      "tooltip_message": "The Starname (IOV) chain is no longer producing blocks. Deposits and withdrawals are disabled."
     },
     {
       "chain_name": "emoney",
@@ -1255,7 +1255,7 @@
       "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "source_chain_killed",
-      "tooltip_message": "The Tgrade chain has been discontinued and is no longer producing blocks; its developer Confio is in liquidation. Deposits and withdrawals are disabled. For more information see: https://confio.gmbh/"
+      "tooltip_message": "The Tgrade chain has stopped producing blocks and is no longer maintained. Deposits and withdrawals are disabled."
     },
     {
       "chain_name": "echelon",
@@ -3249,7 +3249,7 @@
       "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "source_chain_killed",
-      "tooltip_message": "The StaFiHub chain has been retired and migrated to Neutron. Deposits and withdrawals are disabled. For more information see: https://docs.stafihub.io/welcome-to-stafihub"
+      "tooltip_message": "The StaFiHub chain has been retired and migrated to Neutron. Deposits and withdrawals are disabled. For more information see: https://medium.com/stafi/2024q4-roadmap-deflation-adoption-and-lsaas-open-as-a-sustainable-platform-11974d71d979"
     },
     {
       "chain_name": "stafihub",
@@ -3266,7 +3266,7 @@
       "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "source_chain_killed",
-      "tooltip_message": "The StaFiHub chain has been retired and rATOM migrated to Neutron. Deposits and withdrawals are disabled. For more information see: https://docs.stafihub.io/welcome-to-stafihub"
+      "tooltip_message": "The StaFiHub chain has been retired and rATOM migrated to Neutron. Deposits and withdrawals are disabled. For more information see: https://medium.com/stafi/2024q4-roadmap-deflation-adoption-and-lsaas-open-as-a-sustainable-platform-11974d71d979"
     },
     {
       "chain_name": "stargaze",
@@ -5854,7 +5854,14 @@
           "withdraw_url": "https://beta-mainnet.routernitro.com/swap?fromChain=osmosis-1&toChain=728126428&fromToken=factory%2Fosmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9%2FTRX.rt&toToken=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
         }
       ],
-      "_comment": "Tron (Router) $TRX.rt"
+      "_comment": "Tron (Router) $TRX.rt",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "This asset reached Osmosis through the Router bridge, which has been permanently sunset following a passed governance proposal. The bridge path is no longer available, so deposits and withdrawals are disabled. For more information see: https://routerprotocol.medium.com/proposal-to-sunset-router-chain-55ea9fd0e799"
     },
     {
       "chain_name": "osmosis",
@@ -5898,7 +5905,12 @@
       },
       "_comment": "Tether USD (Ethereum via Router) $USDT.eth.rt",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "This asset reached Osmosis through the Router bridge, which has been permanently sunset following a passed governance proposal. The bridge path is no longer available, so deposits and withdrawals are disabled. For more information see: https://routerprotocol.medium.com/proposal-to-sunset-router-chain-55ea9fd0e799"
     },
     {
       "chain_name": "injective",
@@ -5957,7 +5969,7 @@
       "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "source_chain_killed",
-      "tooltip_message": "The Router Chain has been permanently sunset following a passed governance proposal, and ROUTE migrated to Ethereum. Deposits and withdrawals are disabled. For more information see: https://routerprotocol.medium.com/proposal-to-sunset-router-chain-55ea9fd0e799"
+      "tooltip_message": "The Router Chain has been permanently sunset following a passed governance proposal, and ROUTE migrated to Ethereum. Assets bridged to Osmosis via Router are affected as well. Deposits and withdrawals are disabled. For more information see: https://routerprotocol.medium.com/proposal-to-sunset-router-chain-55ea9fd0e799"
     },
     {
       "chain_name": "osmosis",
@@ -6239,7 +6251,7 @@
       "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "source_chain_killed",
-      "tooltip_message": "The Lorenzo Cosmos appchain has been discontinued and the protocol relaunched on BNB Chain. Deposits and withdrawals are disabled. For more information see: https://lorenzo-protocol.gitbook.io/docs"
+      "tooltip_message": "The Lorenzo Cosmos appchain has been discontinued and the protocol moved to BNB Chain. Deposits and withdrawals are disabled. For more information see: https://medium.com/@lorenzoprotocol/lorenzo-protocol-adds-btcb-support-details-future-bnb-chain-integrations-4595a55ea2e9"
     },
     {
       "chain_name": "osmosis",
@@ -6273,7 +6285,14 @@
           "withdraw_url": "https://beta-mainnet.routernitro.com/swap?toChain=1&fromChain=osmosis-1&fromToken=factory%2Fosmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9%2FAVAIL.rt&toToken=0xEeB4d8400AEefafC1B2953e0094134A887C76Bd8"
         }
       ],
-      "_comment": "Avail (Ethereum via Router) $AVAIL.eth.rt"
+      "_comment": "Avail (Ethereum via Router) $AVAIL.eth.rt",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "This asset reached Osmosis through the Router bridge, which has been permanently sunset following a passed governance proposal. The bridge path is no longer available, so deposits and withdrawals are disabled. For more information see: https://routerprotocol.medium.com/proposal-to-sunset-router-chain-55ea9fd0e799"
     },
     {
       "chain_name": "noble",
@@ -6659,7 +6678,14 @@
           "withdraw_url": "https://app.routernitro.com/swap?fromChain=osmosis-1&fromToken=factory%2Fosmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9%2FBTC.rt&toChain=30&toToken=0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
         }
       ],
-      "_comment": "Rootstock (Router) $RBTC.rt"
+      "_comment": "Rootstock (Router) $RBTC.rt",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "This asset reached Osmosis through the Router bridge, which has been permanently sunset following a passed governance proposal. The bridge path is no longer available, so deposits and withdrawals are disabled. For more information see: https://routerprotocol.medium.com/proposal-to-sunset-router-chain-55ea9fd0e799"
     },
     {
       "chain_name": "osmosis",
@@ -8423,7 +8449,7 @@
       "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "source_chain_killed",
-      "tooltip_message": "The StaFiHub chain has been retired and migrated to Neutron. Deposits and withdrawals are disabled. For more information see: https://docs.stafihub.io/welcome-to-stafihub"
+      "tooltip_message": "The StaFiHub chain has been retired and migrated to Neutron. Deposits and withdrawals are disabled. For more information see: https://medium.com/stafi/2024q4-roadmap-deflation-adoption-and-lsaas-open-as-a-sustainable-platform-11974d71d979"
     },
     {
       "chain_name": "stafihub",
@@ -8436,7 +8462,7 @@
       "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "source_chain_killed",
-      "tooltip_message": "The StaFiHub chain has been retired and migrated to Neutron. Deposits and withdrawals are disabled. For more information see: https://docs.stafihub.io/welcome-to-stafihub"
+      "tooltip_message": "The StaFiHub chain has been retired and migrated to Neutron. Deposits and withdrawals are disabled. For more information see: https://medium.com/stafi/2024q4-roadmap-deflation-adoption-and-lsaas-open-as-a-sustainable-platform-11974d71d979"
     },
     {
       "chain_name": "stafihub",
@@ -8449,7 +8475,7 @@
       "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "source_chain_killed",
-      "tooltip_message": "The StaFiHub chain has been retired and migrated to Neutron. Deposits and withdrawals are disabled. For more information see: https://docs.stafihub.io/welcome-to-stafihub"
+      "tooltip_message": "The StaFiHub chain has been retired and migrated to Neutron. Deposits and withdrawals are disabled. For more information see: https://medium.com/stafi/2024q4-roadmap-deflation-adoption-and-lsaas-open-as-a-sustainable-platform-11974d71d979"
     },
     {
       "chain_name": "scorum",
@@ -8474,7 +8500,7 @@
       "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "source_chain_killed",
-      "tooltip_message": "The Lorenzo Cosmos appchain has been discontinued and the protocol relaunched on BNB Chain. Deposits and withdrawals are disabled. For more information see: https://lorenzo-protocol.gitbook.io/docs"
+      "tooltip_message": "The Lorenzo Cosmos appchain has been discontinued and the protocol moved to BNB Chain. Deposits and withdrawals are disabled. For more information see: https://medium.com/@lorenzoprotocol/lorenzo-protocol-adds-btcb-support-details-future-bnb-chain-integrations-4595a55ea2e9"
     },
     {
       "chain_name": "pryzm",

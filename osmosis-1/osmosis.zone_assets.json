@@ -398,11 +398,12 @@
       ],
       "_comment": "Starname $IOV",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Starname (IOV) chain is no longer producing blocks. Deposits and withdrawals are disabled."
     },
     {
       "chain_name": "emoney",
@@ -1249,11 +1250,12 @@
       "osmosis_verified": true,
       "_comment": "Tgrade $TGD",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Tgrade chain has stopped producing blocks and is no longer maintained. Deposits and withdrawals are disabled."
     },
     {
       "chain_name": "echelon",
@@ -1588,11 +1590,12 @@
       "osmosis_verified": false,
       "_comment": "Lambda $LAMB",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Lambda chain has been discontinued; the project migrated from Cosmos to an Ethereum Layer 2 and LAMB converts to the new LAMBDA token. Deposits and withdrawals are disabled. For more information see: https://docs.lambda.im/token-distribution/migrate-lamb-lambda"
     },
     {
       "chain_name": "kujira",
@@ -2297,11 +2300,12 @@
       ],
       "_comment": "OmniFlix $FLIX",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The OmniFlix Hub chain has shut down as the project migrated from Cosmos to Base, with FLIX transitioning to FUN. Deposits and withdrawals are disabled. For more information see: https://paragraph.com/@flix/flix-to-fun-transformation-window-extended-to-jan-20th"
     },
     {
       "chain_name": "juno",
@@ -5848,7 +5852,14 @@
           "withdraw_url": "https://beta-mainnet.routernitro.com/swap?fromChain=osmosis-1&toChain=728126428&fromToken=factory%2Fosmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9%2FTRX.rt&toToken=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
         }
       ],
-      "_comment": "Tron (Router) $TRX.rt"
+      "_comment": "Tron (Router) $TRX.rt",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "This asset reached Osmosis through the Router bridge, which has been permanently sunset following a passed governance proposal. The bridge path is no longer available, so deposits and withdrawals are disabled. For more information see: https://routerprotocol.medium.com/proposal-to-sunset-router-chain-55ea9fd0e799"
     },
     {
       "chain_name": "osmosis",
@@ -5892,7 +5903,12 @@
       },
       "_comment": "Tether USD (Ethereum via Router) $USDT.eth.rt",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "This asset reached Osmosis through the Router bridge, which has been permanently sunset following a passed governance proposal. The bridge path is no longer available, so deposits and withdrawals are disabled. For more information see: https://routerprotocol.medium.com/proposal-to-sunset-router-chain-55ea9fd0e799"
     },
     {
       "chain_name": "injective",
@@ -5946,11 +5962,12 @@
       ],
       "_comment": "Router Protocol $ROUTE",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Router Chain has been permanently sunset following a passed governance proposal, and ROUTE migrated to Ethereum. Assets bridged to Osmosis via Router are affected as well. Deposits and withdrawals are disabled. For more information see: https://routerprotocol.medium.com/proposal-to-sunset-router-chain-55ea9fd0e799"
     },
     {
       "chain_name": "osmosis",
@@ -6265,7 +6282,14 @@
           "withdraw_url": "https://beta-mainnet.routernitro.com/swap?toChain=1&fromChain=osmosis-1&fromToken=factory%2Fosmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9%2FAVAIL.rt&toToken=0xEeB4d8400AEefafC1B2953e0094134A887C76Bd8"
         }
       ],
-      "_comment": "Avail (Ethereum via Router) $AVAIL.eth.rt"
+      "_comment": "Avail (Ethereum via Router) $AVAIL.eth.rt",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "This asset reached Osmosis through the Router bridge, which has been permanently sunset following a passed governance proposal. The bridge path is no longer available, so deposits and withdrawals are disabled. For more information see: https://routerprotocol.medium.com/proposal-to-sunset-router-chain-55ea9fd0e799"
     },
     {
       "chain_name": "noble",
@@ -6651,7 +6675,14 @@
           "withdraw_url": "https://app.routernitro.com/swap?fromChain=osmosis-1&fromToken=factory%2Fosmo1myv2g72h8dan7n4hx7stt3mmust6ws03zh6gxc7vz4hpmgp5z3lq9aunm9%2FBTC.rt&toChain=30&toToken=0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
         }
       ],
-      "_comment": "Rootstock (Router) $RBTC.rt"
+      "_comment": "Rootstock (Router) $RBTC.rt",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "This asset reached Osmosis through the Router bridge, which has been permanently sunset following a passed governance proposal. The bridge path is no longer available, so deposits and withdrawals are disabled. For more information see: https://routerprotocol.medium.com/proposal-to-sunset-router-chain-55ea9fd0e799"
     },
     {
       "chain_name": "osmosis",
@@ -6779,11 +6810,12 @@
       "osmosis_verified": true,
       "_comment": "Yield GATA $YGATA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The OmniFlix Hub chain has shut down as the project migrated from Cosmos to Base. Deposits and withdrawals are disabled. For more information see: https://paragraph.com/@flix/flix-to-fun-transformation-window-extended-to-jan-20th"
     },
     {
       "chain_name": "dungeon1",

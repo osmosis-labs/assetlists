@@ -1290,7 +1290,7 @@ async function validateEndpointsForAllCounterpartyChains(chainName) {
  * - Ensures deprecated endpoints are caught quickly
  * - Processes chains in batches of 10 to avoid overwhelming the system
  *
- * Used by: .github/workflows/generate_all_files.yml (scheduled Tuesday & Friday)
+ * Used by: .github/workflows/generate_all_files.yml (scheduled daily at 15:00 UTC)
  */
 async function fullValidation(chainName) {
 

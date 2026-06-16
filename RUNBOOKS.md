@@ -186,7 +186,7 @@ Duration: 60 minutes
 
 2. Test Locally:
    cd .github/workflows/utility
-   node validateEndpoints.mjs osmosis-1
+   node validateEndpoints.mjs fullValidation osmosis
    # Should complete in ~15 minutes
    # Identify specific failure point
 
@@ -608,7 +608,7 @@ If all tests passed:
    - ✅ Price displayed
    - ✅ Tradeable on DEX
 
-   Merging now. Verified badge will appear on next deployment (daily 15:40 UTC)."
+   Merging now. Verified badge will appear on next deployment (daily 15:30 UTC)."
 7. Click: "Submit review"
 8. Click: "Squash and merge"
 9. Confirm merge
@@ -1020,9 +1020,9 @@ Clear `tooltip_message` and set the reason back to a script-owned value (or just
 
 ---
 
-### RB007: Weekly unverify PR, close vs merge
+### RB007: Bi-weekly unverify PR, close vs merge
 
-**Use when**: the weekly `auto-unverify/weekly-candidates` PR is open and you need to decide what to do.
+**Use when**: the bi-weekly `auto-unverify/weekly-candidates` PR is open and you need to decide what to do.
 
 #### Procedure
 

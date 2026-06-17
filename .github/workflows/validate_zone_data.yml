@@ -8,10 +8,10 @@ on:
   pull_request:
     branches:
       - main
-name: Pull request workflow
+name: Validate against Chain Registry
 jobs:
   validate_zone_data:
-    name: Validate Zone Data
+    name: zone data
     runs-on: ubuntu-latest
     
     defaults:

@@ -8,10 +8,10 @@ on:
   pull_request:
     branches:
       - main
-name: Pull request workflow
+name: Validate against Schema
 jobs:
   validate_zone_files:
-    name: Validate zone ${{ matrix.kind }}
+    name: ${{ matrix.kind }} files
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false

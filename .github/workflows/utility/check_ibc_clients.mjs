@@ -29,6 +29,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { calculateIbcHash } from './assetlist_functions.mjs';
+import { loadJSON, findStateAsset, materialiseStateAsset } from './lifecycle_helpers.mjs';
 
 const DEFAULT_LCD = "https://lcd.osmosis.zone";
 const CONCURRENCY = 5;
@@ -304,32 +305,12 @@ async function getCounterpartyClientStatus(chainName, channelId, port, zoneChain
 
 // ── State helpers ───────────────────────────────────────────────────────────
 
+// findStateAsset (read-only) and materialiseStateAsset (create-if-missing) are
+// shared with the other lifecycle scripts via lifecycle_helpers.mjs. Imported
+// above. loadState wraps the shared loadJSON with this script's state path and
+// the empty-state fallback used on the first run.
 function loadState() {
-  try {
-    return JSON.parse(fs.readFileSync(statePath, 'utf8'));
-  } catch (err) {
-    if (err.code === 'ENOENT') return { assets: [] };
-    throw err;
-  }
-}
-
-// Read-only state lookup. Returns undefined if no entry exists; callers that
-// only need to read date/streak fields should use this so we don't pollute
-// state.assets with empty {base_denom} placeholders on every iteration.
-function findStateAsset(state, baseDenom) {
-  return state.assets?.find((a) => a.base_denom === baseDenom);
-}
-
-// Create-if-missing variant. Only callers about to write a real value
-// (lastDowntimeDate, lastRecoveryDate, etc.) should use this.
-function materialiseStateAsset(state, baseDenom) {
-  if (!state.assets) state.assets = [];
-  let s = state.assets.find((a) => a.base_denom === baseDenom);
-  if (!s) {
-    s = { base_denom: baseDenom };
-    state.assets.push(s);
-  }
-  return s;
+  return loadJSON(statePath, { assets: [] });
 }
 
 /**

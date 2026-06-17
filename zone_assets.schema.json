@@ -22,7 +22,7 @@
       }
     }
   },
-  "additionalPropserties": false,
+  "additionalProperties": false,
   "$defs": {
     "asset": {
       "type": "object",
@@ -162,7 +162,6 @@
                 "type": "string",
                 "enum": [
                   "external_interface",
-                  "integrated_bridge",
                   "fiat_onramp"
                 ]
               },
@@ -194,6 +193,10 @@
             "symbol": {
               "type": "string",
               "description": "The symbol of an asset. For example BTC."
+            },
+            "use_asset_name": {
+              "type": "boolean",
+              "description": "When true, the Zone displays the asset's name in place of the symbol where a symbol would normally be shown."
             },
             "logo_URIs": {
               "type": "object",

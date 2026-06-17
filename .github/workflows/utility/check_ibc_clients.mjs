@@ -961,14 +961,12 @@ async function main() {
   console.log(`  distinct source chains touched: ${affectedChains.size}`);
   console.log('='.repeat(70));
 
-  // Machine-readable summary. manual_inherited assets are a flag event
-  // (a new asset locked down), so they roll into NEWLY_FLAGGED and also get
-  // their own counter for visibility in the PR summary.
+  // Machine-readable summary grepped by generate_all_files.yml.
+  // manual_inherited assets are a flag event (a new asset locked down), so
+  // they roll into NEWLY_FLAGGED.
   console.log(`\nIBC_NEWLY_FLAGGED=${(byKind.bridge_down ?? 0) + (byKind.manual_inherited ?? 0)}`);
   console.log(`IBC_NEWLY_CLEARED=${(byKind.bridge_up ?? 0) + (byKind.thin_removed ?? 0)}`);
-  console.log(`IBC_MANUAL_INHERITED=${byKind.manual_inherited ?? 0}`);
   console.log(`IBC_ERRORS=${byKind.ibc_error ?? 0}`);
-  console.log(`AFFECTED_CHAINS=${affectedChains.size}`);
 }
 
 main().catch((err) => {

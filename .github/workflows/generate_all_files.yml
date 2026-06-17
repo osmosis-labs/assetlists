@@ -99,8 +99,6 @@ jobs:
         working-directory: ./.github/workflows/utility
         run: |
           node validateEndpoints.mjs fullValidation osmosis 2>&1 | tee ../../../validation.log
-          CHAINS_VALIDATED=$(grep -oP 'Validating chains [0-9]+-[0-9]+ of \K[0-9]+' ../../../validation.log | tail -1 || echo "0")
-          echo "CHAINS_VALIDATED=$CHAINS_VALIDATED" >> $GITHUB_ENV
 
       - name: Generate Validation Report
         working-directory: ./.github/workflows/utility
@@ -233,9 +231,6 @@ jobs:
 
           # Capture summary counts from the lifecycle script logs.
           if [ -f extended-halts.log ]; then
-            echo "EXTENDED_HALT_SET=$(grep -oP 'extended_halt_set\s+:\s+\K[0-9]+' extended-halts.log || echo 0)" >> $GITHUB_ENV
-            echo "EXTENDED_HALT_CLEARED=$(grep -oP 'extended_halt_cleared\s+:\s+\K[0-9]+' extended-halts.log || echo 0)" >> $GITHUB_ENV
-            echo "PLANNED_SHUTDOWN_SET=$(grep -oP 'planned_shutdown_set\s+:\s+\K[0-9]+' extended-halts.log || echo 0)" >> $GITHUB_ENV
             # Assets whose planned_shutdown_date has passed while their
             # withdrawal direction is still open: funds may strand if the source
             # chain stops. The script prints one "past_due_withdrawals_open" line
@@ -244,10 +239,6 @@ jobs:
             # signal these checks emit.
             echo "PAST_DUE_WITHDRAWALS=$(grep -oP 'past_due_withdrawals_open' extended-halts.log 2>/dev/null | wc -l | tr -d ' ')" >> $GITHUB_ENV
           fi
-
-      - name: Run code to Update State
-        working-directory: ./.github/workflows/utility
-        run: node update_assetlist_state.mjs
 
       - name: Persist manual-halt chain set to state
         run: |
@@ -274,8 +265,9 @@ jobs:
       - name: Report Dead Chains and Planned Shutdowns
         working-directory: ./.github/workflows/utility
         run: |
-          # Report-only. Reads the state.json just produced by validateEndpoints
-          # + update_assetlist_state, plus the chain-registry submodule. The
+          # Report-only. Reads the state.json produced by validateEndpoints and
+          # the Generate Assetlist step (which calls updateState), plus the
+          # chain-registry submodule. The
           # heavy half (gov-proposal scan + cosmos.directory corroboration) runs
           # only on Mondays via --weekly to bound CI cost and external load; the
           # cheap dead-streak counter updates daily either way. Output is

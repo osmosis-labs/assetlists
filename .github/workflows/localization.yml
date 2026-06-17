@@ -22,17 +22,21 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: true
           
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
           node-version: 20.x
+          cache: pnpm
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install --frozen-lockfile
 
       - name: Run localization
         working-directory: ./.github/workflows/utility
-        run: npx pnpm inlang machine translate --force
+        run: pnpm inlang machine translate --force
 
       - name: Run post-localization code
         working-directory: ./.github/workflows/utility

@@ -359,17 +359,20 @@ jobs:
           echo "" >> workflow-summary.md
 
           # ── Quick summary (top-of-PR glance) ──────────────────────────────
-          # One row per category. Lists chain names or asset symbols inline;
-          # empty categories render with a dim "none" so the reader can see
-          # what's currently quiet vs busy.
+          # One row per non-empty category. Empty categories are omitted
+          # entirely so the summary only lists what actually happened this run;
+          # if nothing did, a single "nothing notable" line stands in.
           echo "## 📋 Quick summary" >> workflow-summary.md
           echo "" >> workflow-summary.md
 
-          # Helper: emit a labelled row. When the category is empty it renders
-          # inline ("- {emoji} **{label}**: none") so quiet categories stay on
-          # one line and the reader can skim them. When there are entries the
-          # header line carries the count and each item is its own indented
-          # sub-bullet, so a populated list reads top-to-bottom.
+          # Tracks how many rows emit_row actually printed, so we can fall back
+          # to a "nothing notable" line when every category is empty.
+          QS_ROWS=0
+
+          # Helper: emit a labelled row only when the category has entries.
+          # Empty categories print nothing. A populated category renders a
+          # header line carrying the count, then one indented sub-bullet per
+          # item so it reads top-to-bottom.
           #
           # mode selects how each line of {file} is rendered:
           #   name           whole line is the display value (chain names)
@@ -388,14 +391,13 @@ jobs:
               esac
               count=${#items[@]}
             fi
-            if [ "$count" = "0" ]; then
-              echo "- ${emoji} **${label}**: none" >> workflow-summary.md
-            else
-              echo "- ${emoji} **${label} (${count}):**" >> workflow-summary.md
-              for item in "${items[@]}"; do
-                echo "  - ${item}" >> workflow-summary.md
-              done
-            fi
+            # Skip empty categories entirely.
+            [ "$count" = "0" ] && return 0
+            QS_ROWS=$((QS_ROWS + 1))
+            echo "- ${emoji} **${label} (${count}):**" >> workflow-summary.md
+            for item in "${items[@]}"; do
+              echo "  - ${item}" >> workflow-summary.md
+            done
           }
 
           emit_row "🆕" "New Chains" new-chains.txt name
@@ -432,6 +434,12 @@ jobs:
           emit_row "⏸️" "Extended halt set" /tmp/lc-extendedHaltSet.txt symbol
           emit_row "▶️" "Extended halt cleared" /tmp/lc-extendedHaltCleared.txt symbol
           emit_row "⏰" "Planned shutdown set" /tmp/lc-plannedShutdownSet.txt symbol
+
+          # If every category was empty, leave a single line so the section is
+          # never just a bare header.
+          if [ "$QS_ROWS" = "0" ]; then
+            echo "- _Nothing notable this run (metadata/endpoint refresh only)._" >> workflow-summary.md
+          fi
 
           echo "" >> workflow-summary.md
           echo "---" >> workflow-summary.md

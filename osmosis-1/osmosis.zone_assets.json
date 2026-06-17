@@ -6235,6 +6235,14 @@
       "override_properties": {
         "use_asset_name": true
       },
+      "transfer_methods": [
+        {
+          "name": "Int3face Bridge",
+          "type": "external_interface",
+          "deposit_url": "https://app.int3face.zone/bridge",
+          "withdraw_url": "https://app.int3face.zone/bridge"
+        }
+      ],
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "market"
     },
@@ -6726,6 +6734,14 @@
         "chain_name": "litecoin",
         "base_denom": "litoshi"
       },
+      "transfer_methods": [
+        {
+          "name": "Int3face Bridge",
+          "type": "external_interface",
+          "deposit_url": "https://app.int3face.zone/bridge",
+          "withdraw_url": "https://app.int3face.zone/bridge"
+        }
+      ],
       "_comment": "Litecoin $LTC",
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "market"
@@ -6739,6 +6755,14 @@
         "chain_name": "bitcoincash",
         "base_denom": "sat"
       },
+      "transfer_methods": [
+        {
+          "name": "Int3face Bridge",
+          "type": "external_interface",
+          "deposit_url": "https://app.int3face.zone/bridge",
+          "withdraw_url": "https://app.int3face.zone/bridge"
+        }
+      ],
       "_comment": "Bitcoin Cash $BCH",
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "market"
@@ -7245,6 +7269,14 @@
         "chain_name": "sui",
         "base_denom": "0x2::sui::SUI"
       },
+      "transfer_methods": [
+        {
+          "name": "Osmosis Wormhole Connect",
+          "type": "external_interface",
+          "deposit_url": "/wormhole?from=sui&to=osmosis&token=SUI",
+          "withdraw_url": "/wormhole?from=osmosis&to=sui&token=SUI"
+        }
+      ],
       "_comment": "Sui $SUI"
     },
     {
@@ -7256,6 +7288,14 @@
         "chain_name": "aptos",
         "base_denom": "0x1::aptos_coin::AptosCoin"
       },
+      "transfer_methods": [
+        {
+          "name": "Osmosis Wormhole Connect",
+          "type": "external_interface",
+          "deposit_url": "/wormhole?from=aptos&to=osmosis&token=APT",
+          "withdraw_url": "/wormhole?from=osmosis&to=aptos&token=APT"
+        }
+      ],
       "_comment": "Aptos Coin $APT",
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "market"

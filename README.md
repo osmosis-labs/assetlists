@@ -143,7 +143,7 @@ Four orthogonal states describe an asset's transfer health. Each has a distinct 
 
 - **`planned_shutdown_date`** (string, ISO 8601 UTC, optional). Date when the asset is scheduled to be shut down. When the date is within 14 days, `check_extended_halts.mjs` pre-emptively sets `osmosis_halt_deposits=true` with reason `planned_shutdown`.
 
-**Tooltip override / curator lock.** The existing `tooltip_message` field doubles as the override signal for automation. If any asset has a non-empty `tooltip_message`, **no automated script will modify its halt or unstable flags** (the curator has taken ownership). Use this when you want to set a halt manually with bespoke context, or when you want to prevent the automated lifecycle from clearing a flag during recovery.
+**Tooltip override / curator lock.** The existing `tooltip_message` field doubles as the override signal for automation. If any asset has a non-empty `tooltip_message`, **no automated script will modify its halt or unstable flags** (the curator has taken ownership). Use this when you want to set a halt manually with bespoke context, or when you want to prevent the automated lifecycle from clearing a flag during recovery. The one sanctioned exception is a curator-set expiry: pairing `tooltip_message` with `tooltip_expiry_date` lets `check_tooltip_expiry.mjs` clear or decay the tooltip on that date (it runs first, before the lock-respecting scripts). See RB009.
 
 **Reason-vocabulary contract.** Each automated script only modifies flags whose current reason value it owns (see "Owners" above). This means `check_ibc_clients` will never overwrite a `manual` halt or an `extended_unstable_market` halt that another script set. To release a manual override, clear `tooltip_message` and either set the reason back to one the relevant script owns, or remove the flag and let the script re-derive it on the next run.
 
@@ -192,6 +192,10 @@ Four orthogonal states describe an asset's transfer health. Each has a distinct 
 - **`tooltip_message`** (string) - Custom on-hover tooltip message displayed for the asset.
   - Use for warnings, clarifications, or important notices to users
   - Example: "This asset is NOT affiliated with the Bad Kids NFT collection."
+
+- **`tooltip_expiry_date`** (string, ISO `YYYY-MM-DD`, optional) - Date on which `check_tooltip_expiry.mjs` acts on the tooltip at the daily PR: it removes `tooltip_message`, or, if `tooltip_decay_message` is set, replaces it. The tooltip stays live through the whole expiry day (UTC) and changes on the first run dated the next day. Use for time-bound notices (rebrands, "supported until `<date>`"); leave unset for permanent ones. See RB009.
+
+- **`tooltip_decay_message`** (string, optional) - Replacement applied on `tooltip_expiry_date` instead of removing the tooltip, for a notice that should change rather than vanish (e.g. "supported until `<date>`" → "support has ended"). Requires `tooltip_expiry_date`. The decayed message has no expiry of its own.
 
 - **`listing_date_time_utc`** (string, ISO 8601 format) - UTC timestamp when asset was listed on Osmosis Zone.
   - Format: `"YYYY-MM-DDTHH:MM:SSZ"`
@@ -509,6 +513,7 @@ The `Generate All Files` bundle workflow runs automatically and includes:
   - Creates minimal entries (chain_name + comment) for chains in `zone_assets.json` not yet in `zone_chains.json`
   - Makes it easy for maintainers to add custom RPC/REST endpoints later
   - All fields default to Chain Registry values unless explicitly overridden
+- Runs the **tooltip-expiry check** (`check_tooltip_expiry.mjs`): first lifecycle step; clears or decays any curator tooltip whose `tooltip_expiry_date` has passed (see "Asset lifecycle automation" below).
 - Runs the **bridge-state check** (`check_ibc_clients.mjs`): unified detection that drives both the IBC and killed-chain branches of the lifecycle (see "Asset lifecycle automation" below).
 - Runs the **market-health check** (`check_market_health.mjs`): independent unstable track driven by Numia liquidity/volume.
 - Runs the **extended-halts check** (`check_extended_halts.mjs`): 60-day deposit halt and planned-shutdown halt.
@@ -535,7 +540,7 @@ Individual generation workflows can be triggered manually via GitHub Actions:
 
 ### Asset lifecycle automation
 
-When an asset stops working, it moves through a single observable timeline anchored on `state.lastDowntimeDate`. Five automated scripts cooperate to drive that timeline, each with a well-defined scope and a non-overlapping set of "reason" enum values it owns.
+When an asset stops working, it moves through a single observable timeline anchored on `state.lastDowntimeDate`. Five automated scripts cooperate to drive that timeline, each with a well-defined scope and a non-overlapping set of "reason" enum values it owns. A sixth daily script, `check_tooltip_expiry.mjs`, owns no reason enum; it runs first to resolve any expired curator tooltip before the lock-respecting scripts evaluate.
 
 #### The four-state model
 
@@ -582,13 +587,15 @@ A second, independent track exists for market-driven unstable. When a verified, 
 
 #### Scripts in the daily cron (in order)
 
-1. **`check_ibc_clients.mjs`**, the unified bridge-state check. Detects IBC client status and source chain `status="killed"`. Owns reasons `ibc_client`, `source_chain_killed` (unstable) and `bridge_down`, `source_chain_killed` (halts). Implements the flap-vs-fresh-incident rule (within 30 days of recovery = continuation; beyond = fresh incident). Includes a "manual-flip safety net" that populates `state.lastDowntimeDate` if a curator manually sets `osmosis_unstable` without one.
+1. **`check_tooltip_expiry.mjs`**, the curator-driven tooltip expiry/decay. Runs first so an expired tooltip is cleared (or decayed via `tooltip_decay_message`) before the lock-respecting scripts below see it. Acts only on a curator-set `tooltip_expiry_date` that has passed; never touches a tooltip without one. Owns no halt/unstable reason enum.
 
-2. **`check_market_health.mjs`**, the market track. Owns reason `market` for unstable and is the **only** writer that fully recovers an asset from market-driven instability. Skipped for unverified, disabled, and preview assets, and for assets within the 23-day post-listing grace window. Alloyed assets are evaluated normally; constituents of an alloy inherit the alloy's volume and liquidity via `max(self, alloy)` so they are not falsely flagged when their standalone Numia row reads zero but the alloy carries real activity. Constituent membership is determined from SQS pool composition (positive balance in the alloyed transmuter pool).
+2. **`check_ibc_clients.mjs`**, the unified bridge-state check. Detects IBC client status and source chain `status="killed"`. Owns reasons `ibc_client`, `source_chain_killed` (unstable) and `bridge_down`, `source_chain_killed` (halts). Implements the flap-vs-fresh-incident rule (within 30 days of recovery = continuation; beyond = fresh incident). Includes a "manual-flip safety net" that populates `state.lastDowntimeDate` if a curator manually sets `osmosis_unstable` without one.
 
-3. **`check_extended_halts.mjs`**, the 60-day rule and planned-shutdown rule. Owns reasons `extended_unstable_market` and `planned_shutdown` for deposit halts. Pre-emptively halts deposits 14 days before a `planned_shutdown_date`.
+3. **`check_market_health.mjs`**, the market track. Owns reason `market` for unstable and is the **only** writer that fully recovers an asset from market-driven instability. Skipped for unverified, disabled, and preview assets, and for assets within the 23-day post-listing grace window. Alloyed assets are evaluated normally; constituents of an alloy inherit the alloy's volume and liquidity via `max(self, alloy)` so they are not falsely flagged when their standalone Numia row reads zero but the alloy carries real activity. Constituent membership is determined from SQS pool composition (positive balance in the alloyed transmuter pool).
 
-4. **`report_dead_chains.mjs`** (report-only, owns no reason enum and writes no lifecycle flags). Maintains the per-chain dead-endpoint streak in `generated/state/dead_chain_streaks.json` and renders the "Dead chain candidates" and "Possible planned shutdowns" sections of the PR body. The cheap streak counter runs every day; the heavier half (governance-proposal scan plus cosmos.directory corroboration, and the published candidate list) runs only on the Monday `--weekly` invocation to bound CI cost and external load. A chain reaching the 7-run all-endpoints-failed streak and corroborated as dead is a candidate for a `source_chain_killed` flag plus an upstream chain-registry `status: killed` PR.
+4. **`check_extended_halts.mjs`**, the 60-day rule and planned-shutdown rule. Owns reasons `extended_unstable_market` and `planned_shutdown` for deposit halts. Pre-emptively halts deposits 14 days before a `planned_shutdown_date`.
+
+5. **`report_dead_chains.mjs`** (report-only, owns no reason enum and writes no lifecycle flags). Maintains the per-chain dead-endpoint streak in `generated/state/dead_chain_streaks.json` and renders the "Dead chain candidates" and "Possible planned shutdowns" sections of the PR body. The cheap streak counter runs every day; the heavier half (governance-proposal scan plus cosmos.directory corroboration, and the published candidate list) runs only on the Monday `--weekly` invocation to bound CI cost and external load. A chain reaching the 7-run all-endpoints-failed streak and corroborated as dead is a candidate for a `source_chain_killed` flag plus an upstream chain-registry `status: killed` PR.
 
 #### Bi-weekly cron
 
@@ -603,7 +610,7 @@ A second, independent track exists for market-driven unstable. When a verified, 
 - **`--dry-run` flag.** Every writer script accepts `--dry-run`, which emits a markdown report of intended mutations without writing any file. Always use this before enabling a fresh script in CI or after a chain-registry submodule bump that might flip many chains at once.
 - **Mutation cap.** `check_ibc_clients.mjs` and `check_extended_halts.mjs` will not write changes touching more than **10 distinct source chains** in a single run. If exceeded, the script exits with code 2 and demands a `--force` flag. This catches mass-flips from upstream regressions. `check_market_health.mjs` is exempt: market-wide liquidity/volume swings legitimately move many chains at once, so it always applies its full diff.
 - **Reason-vocabulary contract.** Each reason enum value has exactly one owner script (or `manual` = the curator). No two scripts ever race on the same flag.
-- **Curator lock.** Any non-empty `tooltip_message` on a halted or unstable asset is treated as curator-owned and never overwritten by automation. To release the lock, clear the tooltip.
+- **Curator lock.** Any non-empty `tooltip_message` on a halted or unstable asset is treated as curator-owned and never overwritten by automation. To release the lock, clear the tooltip, or set a `tooltip_expiry_date` and let `check_tooltip_expiry.mjs` clear/decay it on that date (the one sanctioned auto-clear path; it runs first so the lock is released before the other scripts evaluate).
 
 ### Pull Request Workflow
 

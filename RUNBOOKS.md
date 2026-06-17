@@ -1023,7 +1023,7 @@ Edit the zone_assets entry directly:
 Two changes from an auto-set halt:
 
 1. The `*_halt_reason` is set to `manual`. Script-owned reasons get auto-cleared on recovery; `manual` does not.
-2. `tooltip_message` is non-empty. Any tooltip locks the asset against all automation.
+2. `tooltip_message` is non-empty. Any tooltip locks the asset against all automation. The one sanctioned exception is a curator-set expiry: if you also set `tooltip_expiry_date`, `check_tooltip_expiry.mjs` will clear or decay the tooltip on that date (see RB009).
 
 Commit and let the daily cron run. Verify the asset is now ignored by automation by checking the next workflow summary's "Manual halts currently in effect" section.
 
@@ -1091,3 +1091,47 @@ A cap hit usually means one of: a chain-registry submodule bump flipped many cha
 - `--force` only bypasses the chain-count cap; all the script's other guards (owned-reason checks, tooltip locks) still apply.
 - The cap value lives in `MAX_CHAINS_PER_RUN` in each script. Raise it only with a clear reason; the point is to catch mass-flips before they ship onchain.
 - If both scripts capped in the same run, triage them independently; they own different reason vocabularies.
+
+---
+
+### RB009: Set a tooltip that expires or decays on a date
+
+**Use when**: a `tooltip_message` only makes sense for a known period: a rebrand notice, a "supported until `<date>`" window, or any "until `<date>`" warning. Instead of relying on someone to delete it later, flag the change at write time and let the daily cron apply it.
+
+**Purpose**: `check_tooltip_expiry.mjs` runs first among the lifecycle scripts each day. On the expiry date it either removes the tooltip or replaces it with a decay message, writes the source `osmosis.zone_assets.json`, and the generator ships the result in the same `[AUTO]` PR.
+
+#### Procedure
+
+Add `tooltip_expiry_date` (ISO `YYYY-MM-DD`) next to the `tooltip_message`. Optionally add `tooltip_decay_message` to change the text instead of removing it.
+
+Remove on the date (rebrand, one-off notice):
+
+```json
+{
+  "chain_name": "examplehub",
+  "base_denom": "uex",
+  "tooltip_message": "EXAMPLE has rebranded to NEW on 2026-06-17. Source: https://...",
+  "tooltip_expiry_date": "2026-09-15"
+}
+```
+
+Decay on the date (notice should change, not vanish):
+
+```json
+{
+  "chain_name": "examplehub",
+  "base_denom": "uex",
+  "tooltip_message": "Bridged via Example Bridge, supported through 2026-06-30. Withdraw before then.",
+  "tooltip_expiry_date": "2026-06-30",
+  "tooltip_decay_message": "Example Bridge support ended on 2026-06-30. Withdrawals are no longer available."
+}
+```
+
+Commit and let the daily cron run. On the first run dated after the expiry day (the tooltip stays live through the whole expiry day, UTC), the expiry fields are cleared and the tooltip is removed or replaced.
+
+#### Notes
+
+- A tooltip with no `tooltip_expiry_date` is never auto-touched. Leave permanent notices (dead chains, compromised bridges) without an expiry.
+- A decayed tooltip is a normal `tooltip_message` with no expiry of its own, so it persists and still acts as a curator lock against the other lifecycle scripts until someone removes it by hand.
+- Fail-safe: an unparseable `tooltip_expiry_date`, or a `tooltip_decay_message` with no expiry date, does not change the tooltip; it is surfaced in the run summary and the `--dry-run` report (`generated/reports/tooltip_expiry_dry_run_<date>.md`) for a curator to fix.
+- Preview what a run would do without writing: `cd .github/workflows/utility && node check_tooltip_expiry.mjs osmosis-1 --dry-run`.

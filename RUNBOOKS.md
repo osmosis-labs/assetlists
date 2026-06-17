@@ -230,19 +230,32 @@ Duration: 60 minutes
 
 **Step 2: Review PR Summary**
 ```
-1. Read PR body (generated summary)
-2. Check metrics:
-   - New assets added: Typically 0-5 per run
-   - Verified assets: Typically 0-2 per run
-   - New chains: Typically 0-3 per run
-   - Endpoint failures: Should be <10
-   - Backup endpoints used: Normal if 5-15
+The PR body is generated top-to-bottom by generate_all_files.yml. Read it in
+this order:
 
-3. Red flags:
-   ⚠️ >10 new assets at once (unusual spike)
-   ⚠️ Unexpected verified assets (should be manual process)
-   ⚠️ >15 endpoint failures (widespread issue)
+1. Action required banner (very first heading):
+   - "✅ No action required: safe to auto-merge" → nothing needs a human.
+   - "🚨 Action required (N)" → each bullet points at a section below. Work
+     through them before approving. Highest-consequence first: past-due
+     withdrawals still open, mutation-cap hits, down chains with deposits open.
+
+2. Quick summary: one row per category (new chains/assets, IBC flagged/cleared,
+   manual halts added this run, manual halts in effect, extended/planned halts).
+   Empty categories read "none". Anything non-empty is the run's actual delta.
+
+3. Mutation cap hit (only present if a lifecycle script hit the cap): the diff
+   was NOT applied. See RB008.
+
+4. Endpoint Validation: the Connectivity Failures table's Action column already
+   states the suggested step per chain ("already covered", "consider halting
+   deposits", "halt deposits / investigate"). Dead chain candidates publish on
+   the weekly (Monday) corroborated run.
+
+Red flags:
+   ⚠️ Unexpected verified assets (verification is a manual process)
+   ⚠️ A spike of new assets from a single unfamiliar chain
    ⚠️ Testnet chains in mainnet (wrong network_type)
+   ⚠️ A down chain with deposits still open and no halt coverage
 ```
 
 **Step 3: Spot Check New Assets**
@@ -1037,3 +1050,44 @@ The PR body lists each candidate with days unstable, reason, last downtime / rec
 - `osmosis_unstable` and the state history fields are preserved on unverify. This is intentional, so a later re-verification carries the prior incident record.
 - A re-verified asset that's still carrying stale dates should have them manually cleared at re-verify time.
 - The cooldown is per-asset, not per-PR. Closing the PR stamps `state.lastUnverifyProposedAt` for every candidate that was in the PR.
+
+---
+
+### RB008: Mutation cap hit
+
+**Use when**: the daily `[AUTO]` PR body shows a "⚠️ Mutation cap hit" section, or a lifecycle step in the run log exited with code 2.
+
+**Purpose**: safely apply (or reject) a lifecycle diff that touched more source chains than the per-run safeguard allows.
+
+#### Background
+
+`check_ibc_clients.mjs` and `check_extended_halts.mjs` refuse to write when a single run's diff would touch more than `MAX_CHAINS_PER_RUN` (currently 10) distinct source chains. The threshold is per source chain, not per asset, so one large chain producing many asset rows passes through normally. When the cap is exceeded the script exits with code 2 and applies none of its intended mutations. The workflow treats code 2 as non-fatal and surfaces the event in the PR body. `check_market_health.mjs` is exempt (no cap) by design, so it never produces this section.
+
+A cap hit usually means one of: a chain-registry submodule bump flipped many chains at once, an upstream regression, or a genuine mass event (for example several bridges going down together).
+
+#### Procedure
+
+```
+1. Identify which script capped (the PR section and run log name it:
+   check_ibc_clients or check_extended_halts).
+
+2. Inspect the intended diff locally without writing:
+   cd .github/workflows/utility
+   node <script>.mjs osmosis-1 --dry-run
+   # Prints the markdown report of what it WOULD change. No writes, exit 0.
+
+3. Decide:
+   - Legitimate (the chains really did change state) → apply it:
+       node <script>.mjs osmosis-1 --force
+       # --force bypasses the cap. Commit the resulting zone_assets.json /
+       # state.json change in a normal PR for review.
+   - Not legitimate (bad submodule bump, upstream regression) → do not force.
+     Fix the root cause (for example pin/repair the chain-registry submodule),
+     then let the next daily run apply a clean diff.
+```
+
+#### Notes
+
+- `--force` only bypasses the chain-count cap; all the script's other guards (owned-reason checks, tooltip locks) still apply.
+- The cap value lives in `MAX_CHAINS_PER_RUN` in each script. Raise it only with a clear reason; the point is to catch mass-flips before they ship onchain.
+- If both scripts capped in the same run, triage them independently; they own different reason vocabularies.

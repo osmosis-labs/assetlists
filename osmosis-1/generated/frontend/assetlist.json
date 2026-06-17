@@ -14117,8 +14117,7 @@
       "verified": true,
       "unstable": false,
       "disabled": false,
-      "preview": false,
-      "tooltipMessage": "Coreum has rebranded to TX - https://www.mintscan.io/coreum/proposals/29"
+      "preview": false
     },
     {
       "chainName": "celestia",
@@ -25518,7 +25517,14 @@
       },
       "coingeckoId": "the-open-network",
       "categories": [],
-      "transferMethods": [],
+      "transferMethods": [
+        {
+          "name": "Int3face Bridge",
+          "type": "external_interface",
+          "depositUrl": "https://app.int3face.zone/bridge",
+          "withdrawUrl": "https://app.int3face.zone/bridge"
+        }
+      ],
       "counterparty": [
         {
           "chainName": "ton",
@@ -27308,7 +27314,14 @@
       },
       "coingeckoId": "litecoin",
       "categories": [],
-      "transferMethods": [],
+      "transferMethods": [
+        {
+          "name": "Int3face Bridge",
+          "type": "external_interface",
+          "depositUrl": "https://app.int3face.zone/bridge",
+          "withdrawUrl": "https://app.int3face.zone/bridge"
+        }
+      ],
       "counterparty": [
         {
           "chainName": "litecoin",
@@ -27346,7 +27359,14 @@
       },
       "coingeckoId": "bitcoin-cash",
       "categories": [],
-      "transferMethods": [],
+      "transferMethods": [
+        {
+          "name": "Int3face Bridge",
+          "type": "external_interface",
+          "depositUrl": "https://app.int3face.zone/bridge",
+          "withdrawUrl": "https://app.int3face.zone/bridge"
+        }
+      ],
       "counterparty": [
         {
           "chainName": "bitcoincash",
@@ -28021,7 +28041,9 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xion/images/verona-main.svg"
       },
       "coingeckoId": "xion-2",
-      "categories": [],
+      "categories": [
+        "ai"
+      ],
       "transferMethods": [
         {
           "name": "Osmosis IBC Transfer",
@@ -28061,6 +28083,7 @@
       "unstable": false,
       "disabled": false,
       "preview": false,
+      "tooltipMessage": "XION has rebranded to Verona on 17th June 2026. Source: https://verona.dev/blog/welcome-to-verona-the-intelligence-layer-for-ai",
       "listingDate": "2024-12-05T10:50:32.804Z"
     },
     {
@@ -29240,7 +29263,14 @@
       },
       "coingeckoId": "sui",
       "categories": [],
-      "transferMethods": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis Wormhole Connect",
+          "type": "external_interface",
+          "depositUrl": "/wormhole?from=sui&to=osmosis&token=SUI",
+          "withdrawUrl": "/wormhole?from=osmosis&to=sui&token=SUI"
+        }
+      ],
       "counterparty": [
         {
           "chainName": "sui",
@@ -29273,7 +29303,14 @@
       },
       "coingeckoId": "aptos",
       "categories": [],
-      "transferMethods": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis Wormhole Connect",
+          "type": "external_interface",
+          "depositUrl": "/wormhole?from=aptos&to=osmosis&token=APT",
+          "withdrawUrl": "/wormhole?from=osmosis&to=aptos&token=APT"
+        }
+      ],
       "counterparty": [
         {
           "chainName": "aptos",
@@ -29331,10 +29368,12 @@
       "isAlloyed": true,
       "contract": "osmo1zetxzc5nka4jm203ljjtjf933jwjh45ge6spfeef447rnnhqxc4qrazrcz",
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "listingDate": "2025-07-08T09:08:38.621Z"
+      "listingDate": "2025-07-08T09:08:38.621Z",
+      "lastDowntimeDate": "2026-06-17T16:21:48.767Z"
     },
     {
       "chainName": "sidechain",
@@ -29929,7 +29968,7 @@
       "haltWithdrawals": true,
       "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
-      "tooltipMessage": "NilChain is halting 23rd March 2026. Transfers will no longer be possible after the halt. See Nillion socials for more information.",
+      "tooltipMessage": "NilChain halted on 23 March 2026 and is no longer producing blocks. Deposits and withdrawals are disabled. See Nillion socials for more information.",
       "listingDate": "2025-03-28T19:58:31.709Z",
       "lastDowntimeDate": "2026-05-22T09:57:52.115Z"
     },

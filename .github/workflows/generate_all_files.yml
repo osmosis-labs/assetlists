@@ -236,6 +236,13 @@ jobs:
             echo "EXTENDED_HALT_SET=$(grep -oP 'extended_halt_set\s+:\s+\K[0-9]+' extended-halts.log || echo 0)" >> $GITHUB_ENV
             echo "EXTENDED_HALT_CLEARED=$(grep -oP 'extended_halt_cleared\s+:\s+\K[0-9]+' extended-halts.log || echo 0)" >> $GITHUB_ENV
             echo "PLANNED_SHUTDOWN_SET=$(grep -oP 'planned_shutdown_set\s+:\s+\K[0-9]+' extended-halts.log || echo 0)" >> $GITHUB_ENV
+            # Assets whose planned_shutdown_date has passed while their
+            # withdrawal direction is still open: funds may strand if the source
+            # chain stops. The script prints one "past_due_withdrawals_open" line
+            # per such asset under PLANNED-SHUTDOWN NOTIFICATIONS; count them so
+            # the action banner can surface this loudly. Highest-consequence
+            # signal these checks emit.
+            echo "PAST_DUE_WITHDRAWALS=$(grep -oP 'past_due_withdrawals_open' extended-halts.log 2>/dev/null | wc -l | tr -d ' ')" >> $GITHUB_ENV
           fi
 
       - name: Run code to Update State
@@ -296,6 +303,65 @@ jobs:
           cat > workflow-summary.md << 'HEADER'
           # Automated Update Summary
           HEADER
+
+          # ── Action-required banner (very top) ─────────────────────────────
+          # Single triage line so a reviewer can decide "safe to auto-merge"
+          # vs "stop and act" without scrolling. Each bullet is a signal that
+          # already exists elsewhere in this body; the banner just hoists the
+          # ones that need a human. Empty → an explicit all-clear line.
+          declare -a ACTIONS=()
+
+          # Funds-at-risk first: a planned-shutdown date has passed while the
+          # asset's withdrawal direction is still open (count captured from
+          # extended-halts.log above). Highest consequence.
+          if [ "${PAST_DUE_WITHDRAWALS:-0}" -gt 0 ]; then
+            ACTIONS+=("🟥 **${PAST_DUE_WITHDRAWALS}** asset(s) past planned-shutdown with withdrawals still open (see Extended Halts below)")
+          fi
+          # Mutation caps: the script's intended diff was NOT applied this run.
+          if [ "$IBC_CAP_HIT" = "true" ]; then
+            ACTIONS+=("🛑 IBC client check hit the mutation cap, diff not applied (see Mutation cap section)")
+          fi
+          if [ "$EXTENDED_HALTS_CAP_HIT" = "true" ]; then
+            ACTIONS+=("🛑 Extended-halts check hit the mutation cap, diff not applied (see Mutation cap section)")
+          fi
+          # Connectivity-failed chains whose assets are NOT already covered by a
+          # halt: the endpoint report tags these "halt deposits / investigate".
+          # Match the text only, not the leading emoji (grep can mis-handle the
+          # multibyte emoji in the pattern depending on the runner locale).
+          UNCOVERED_DOWN=$(grep -c 'halt deposits / investigate' validation-summary.md 2>/dev/null || true)
+          UNCOVERED_DOWN=${UNCOVERED_DOWN:-0}
+          if [ "$UNCOVERED_DOWN" -gt 0 ]; then
+            ACTIONS+=("🛑 **${UNCOVERED_DOWN}** down chain(s) with deposits still open (see Endpoint Validation)")
+          fi
+          # IBC client errors left flags unchanged (LCD trouble), so today's
+          # flag state may be stale.
+          if [ "${IBC_ERRORS:-0}" -gt 0 ]; then
+            ACTIONS+=("⚠️ **${IBC_ERRORS}** IBC client check error(s), flag state may be stale (see IBC Client Health)")
+          fi
+          # A human PR halted something this run (e.g. pausing a chain).
+          if [ -s /tmp/lc-manualHaltsNew.txt ]; then
+            NEW_MANUAL=$(awk 'NF>0' /tmp/lc-manualHaltsNew.txt | wc -l | tr -d ' ')
+            ACTIONS+=("⚠️ **${NEW_MANUAL}** new manual halt(s) this run, confirm intended (see Quick summary)")
+          fi
+          # Dead-chain candidates only resolve on the weekly corroborated run.
+          if [ "$DEAD_CHAINS_WEEKLY" = "true" ]; then
+            DEAD_CANDIDATES=$(grep -oP 'candidates=\K[0-9]+' dead-chains.log 2>/dev/null | head -1 || true)
+            DEAD_CANDIDATES=${DEAD_CANDIDATES:-0}
+            if [ "$DEAD_CANDIDATES" -gt 0 ]; then
+              ACTIONS+=("⚰️ **${DEAD_CANDIDATES}** dead-chain candidate(s) (see Dead chain candidates)")
+            fi
+          fi
+
+          if [ "${#ACTIONS[@]}" -eq 0 ]; then
+            echo "## ✅ No action required: safe to auto-merge" >> workflow-summary.md
+          else
+            echo "## 🚨 Action required (${#ACTIONS[@]})" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            for a in "${ACTIONS[@]}"; do
+              echo "- ${a}" >> workflow-summary.md
+            done
+          fi
+          echo "" >> workflow-summary.md
 
           # ── Quick summary (top-of-PR glance) ──────────────────────────────
           # One row per category. Lists chain names or asset symbols inline;
@@ -408,12 +474,39 @@ jobs:
             echo "" >> workflow-summary.md
           fi
 
+          # Endpoint Validation (actionable: down chains, halt-deposit prompts)
+          # is placed ahead of the standing generation/health sections so the
+          # rows a human may need to act on sit near the top of the body.
+          echo "## Endpoint Validation" >> workflow-summary.md
+
+          if [ -f validation-summary.md ]; then
+            cat validation-summary.md >> workflow-summary.md
+          fi
+
+          # Dead-chain candidates + possible planned shutdowns (report-only).
+          # report_dead_chains.mjs already emits its own ## headers, so append
+          # the captured output verbatim under a divider.
+          if [ -f dead-chains.md ]; then
+            echo "" >> workflow-summary.md
+            echo "---" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            cat dead-chains.md >> workflow-summary.md
+          fi
+
+          echo "" >> workflow-summary.md
+          echo "---" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+
           # Chainlist Generation
           echo "## Chainlist Generation" >> workflow-summary.md
 
           TOTAL_CHAINS=$(jq '.chains | length' osmosis-1/generated/frontend/chainlist.json)
           echo "- **Total Chains:** $TOTAL_CHAINS" >> workflow-summary.md
-          echo "- **New Chains Added:** $NEW_CHAINS_COUNT" >> workflow-summary.md
+          # Only surface the delta line when something actually changed, so quiet
+          # days don't print a "New Chains Added: 0" row.
+          if [ "$NEW_CHAINS_COUNT" -gt 0 ]; then
+            echo "- **New Chains Added:** $NEW_CHAINS_COUNT" >> workflow-summary.md
+          fi
           echo "" >> workflow-summary.md
 
           if [ "$NEW_CHAINS_COUNT" -gt 0 ]; then
@@ -426,11 +519,6 @@ jobs:
             echo "" >> workflow-summary.md
           fi
 
-          echo "**Optimizations:**" >> workflow-summary.md
-          echo "- Endpoint ordering optimized based on validation results" >> workflow-summary.md
-          echo "- Working backup endpoints promoted to primary positions" >> workflow-summary.md
-          echo "- Failed endpoints deprioritized" >> workflow-summary.md
-          echo "" >> workflow-summary.md
           echo "---" >> workflow-summary.md
           echo "" >> workflow-summary.md
 
@@ -439,8 +527,14 @@ jobs:
 
           TOTAL_ASSETS=$(jq '.assets | length' osmosis-1/generated/frontend/assetlist.json)
           echo "- **Total Assets:** $TOTAL_ASSETS" >> workflow-summary.md
-          echo "- **New Assets Added:** $NEW_ASSETS_COUNT" >> workflow-summary.md
-          echo "- **Assets Verified:** $NEWLY_VERIFIED_COUNT" >> workflow-summary.md
+          # Only surface the delta lines when non-zero, so quiet days don't print
+          # "New Assets Added: 0" / "Assets Verified: 0".
+          if [ "$NEW_ASSETS_COUNT" -gt 0 ]; then
+            echo "- **New Assets Added:** $NEW_ASSETS_COUNT" >> workflow-summary.md
+          fi
+          if [ "$NEWLY_VERIFIED_COUNT" -gt 0 ]; then
+            echo "- **Assets Verified:** $NEWLY_VERIFIED_COUNT" >> workflow-summary.md
+          fi
           echo "" >> workflow-summary.md
 
           if [ "$NEW_ASSETS_COUNT" -gt 0 ]; then
@@ -487,12 +581,6 @@ jobs:
             done < newly-verified.txt
           fi
 
-          echo "**Updates Include:**" >> workflow-summary.md
-          echo "- Latest asset metadata from chain registry" >> workflow-summary.md
-          echo "- Updated denominations and display names" >> workflow-summary.md
-          echo "- Current asset logos and branding" >> workflow-summary.md
-          echo "- Trace information for IBC assets" >> workflow-summary.md
-          echo "" >> workflow-summary.md
           echo "---" >> workflow-summary.md
           echo "" >> workflow-summary.md
 
@@ -504,7 +592,11 @@ jobs:
             echo "- **Errors (flags unchanged):** $IBC_ERRORS" >> workflow-summary.md
           fi
 
-          if [ "$IBC_NEWLY_FLAGGED" -gt 0 ] || [ "$IBC_NEWLY_CLEARED" -gt 0 ]; then
+          # Also expand the details on an all-error day (LCD rate-limiting /
+          # outage): the operator sees a bare error count otherwise and never the
+          # rate_limit / server_error / timeout breakdown, which is exactly when
+          # it's needed. (>=90% LCD outages already hard-fail upstream via exit 3.)
+          if [ "$IBC_NEWLY_FLAGGED" -gt 0 ] || [ "$IBC_NEWLY_CLEARED" -gt 0 ] || [ "${IBC_ERRORS:-0}" -gt 0 ]; then
             echo "" >> workflow-summary.md
             echo "<details><summary>IBC check details</summary>" >> workflow-summary.md
             echo "" >> workflow-summary.md
@@ -562,6 +654,42 @@ jobs:
           if [ "$MANUAL_HALT_COUNT" -eq 0 ]; then
             echo "_None._" >> workflow-summary.md
           else
+            # This is standing state (it repeats every run while the halts are
+            # in effect), so the default view is one compact row per chain and
+            # the full per-asset/per-direction breakdown lives inside a
+            # <details>. The per-chain row collapses assets, halted directions,
+            # and reasons into sets so the reader sees "which chains, why, how
+            # many" at a glance instead of scrolling 50+ near-identical rows.
+            echo "| Chain | Assets halted | Directions | Reason(s) |" >> workflow-summary.md
+            echo "|-------|--------------:|------------|-----------|" >> workflow-summary.md
+            echo "$MANUAL_HALTS" | jq -r '
+              group_by(.chain_name)
+              | map({
+                  chain: .[0].chain_name,
+                  count: length,
+                  directions: (
+                    [ .[]
+                      | ( if .osmosis_halt_deposits == true then "deposit" else empty end ),
+                        ( if .osmosis_halt_withdrawals == true then "withdrawal" else empty end )
+                    ] | unique
+                    | (if length == 0 then ["unstable only"] else . end)
+                    | join(", ")
+                  ),
+                  reasons: (
+                    [ .[]
+                      | ( .osmosis_deposit_halt_reason // empty ),
+                        ( .osmosis_withdrawal_halt_reason // empty ),
+                        ( .osmosis_unstable_reason // empty )
+                    ] | unique | join(", ")
+                  )
+                })
+              | .[]
+              | "| \(.chain) | \(.count) | \(.directions) | \(.reasons) |"
+            ' >> workflow-summary.md
+
+            echo "" >> workflow-summary.md
+            echo "<details><summary>Full manual-halt breakdown (${MANUAL_HALT_COUNT} asset(s), per direction)</summary>" >> workflow-summary.md
+            echo "" >> workflow-summary.md
             # Resolve Symbol and Route from the generated frontend assetlist,
             # joined on chainName|sourceDenom. Route is the asset's listed origin
             # chain, plus "via <hop>" when the asset reaches Osmosis through an
@@ -603,28 +731,13 @@ jobs:
                  else . end)
               | .[]
             ' >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            echo "</details>" >> workflow-summary.md
           fi
 
           echo "" >> workflow-summary.md
           echo "---" >> workflow-summary.md
           echo "" >> workflow-summary.md
-
-          # Endpoint Validation
-          echo "## Endpoint Validation" >> workflow-summary.md
-
-          if [ -f validation-summary.md ]; then
-            cat validation-summary.md >> workflow-summary.md
-          fi
-
-          # Dead-chain candidates + possible planned shutdowns (report-only).
-          # report_dead_chains.mjs already emits its own ## headers, so append
-          # the captured output verbatim under a divider.
-          if [ -f dead-chains.md ]; then
-            echo "" >> workflow-summary.md
-            echo "---" >> workflow-summary.md
-            echo "" >> workflow-summary.md
-            cat dead-chains.md >> workflow-summary.md
-          fi
 
       - name: Create Pull Request
         id: cpr

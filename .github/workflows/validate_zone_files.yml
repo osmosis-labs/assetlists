@@ -1,0 +1,42 @@
+# Description: Validates osmosis.zone_assets.json and osmosis.zone_chains.json
+#              against their schemas on pull requests.
+# Included in: NOT included in Generate All Files bundle (PR validation only)
+# Trigger: Automatically runs on pull requests to main branch
+# Output: Pass/fail validation status for PR checks (one leg per file kind)
+
+on:
+  pull_request:
+    branches:
+      - main
+name: Pull request workflow
+jobs:
+  validate_zone_files:
+    name: Validate zone ${{ matrix.kind }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - kind: assets
+            file: osmosis.zone_assets.json
+            schema: zone_assets.schema.json
+          - kind: chains
+            file: osmosis.zone_chains.json
+            schema: zone_chains.schema.json
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install JSON-Schema-Validator
+        run: npm install -g jsonschema
+
+      - name: Validate zone ${{ matrix.kind }} schema
+        run: |
+          for file in $(find . -name '${{ matrix.file }}'); do
+            if ! jsonschema -i "$file" ./${{ matrix.schema }}; then
+              exit 1
+            fi
+          done

@@ -61,6 +61,15 @@ jobs:
             osmosis-1/generated/state/state.json 2>/dev/null \
             > /tmp/manual-halts-prev.txt || touch /tmp/manual-halts-prev.txt
 
+      - name: Check Tooltip Expiry (curator-flagged removals/decays)
+        working-directory: ./.github/workflows/utility
+        # Runs first among the lifecycle scripts: an expired tooltip must be
+        # cleared (or decayed) before the lock-respecting scripts
+        # (check_ibc_clients, check_market_health, check_extended_halts)
+        # evaluate, so they don't treat an already-expired tooltip as a live
+        # curator lock for one extra run.
+        run: node check_tooltip_expiry.mjs osmosis-1 2>&1 | tee ../../../tooltip-expiry.log
+
       - name: Check IBC Client Status
         working-directory: ./.github/workflows/utility
         run: |
@@ -93,10 +102,6 @@ jobs:
           elif [ "$rc" -ne 0 ]; then
             exit $rc
           fi
-
-      - name: Check Tooltip Expiry (curator-flagged removals)
-        working-directory: ./.github/workflows/utility
-        run: node check_tooltip_expiry.mjs osmosis-1 2>&1 | tee ../../../tooltip-expiry.log
 
       - name: Add Chain Stubs
         working-directory: ./.github/workflows/utility

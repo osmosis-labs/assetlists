@@ -105,7 +105,11 @@
         "tooltip_expiry_date": {
           "type": "string",
           "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
-          "description": "Optional ISO date (YYYY-MM-DD) on which check_tooltip_expiry.mjs automatically removes this asset's tooltip_message (and this field) at the daily PR. The tooltip stays live through the whole expiry day (UTC) and is removed on the first run dated the following day. Only set this for tooltips whose value lapses on a known date (rebrands, time-boxed warnings); leave it unset for permanent notices."
+          "description": "Optional ISO date (YYYY-MM-DD) on which check_tooltip_expiry.mjs acts on this asset's tooltip at the daily PR: if tooltip_decay_message is set it replaces tooltip_message with it, otherwise it removes tooltip_message. Either way this field (and tooltip_decay_message) is cleared. The tooltip stays live through the whole expiry day (UTC) and changes on the first run dated the following day. Only set this for tooltips whose value lapses on a known date (rebrands, time-boxed warnings); leave it unset for permanent notices."
+        },
+        "tooltip_decay_message": {
+          "type": "string",
+          "description": "Optional replacement tooltip applied on tooltip_expiry_date instead of removing the tooltip outright. Use when a notice should change rather than vanish (e.g. a 'supported until <date>' message decaying to 'support has ended'). Requires tooltip_expiry_date to be set. The decayed message has no expiry of its own and persists until a curator removes it."
         },
         "listing_date_time_utc": {
           "type": "string",

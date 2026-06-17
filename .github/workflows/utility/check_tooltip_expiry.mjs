@@ -1,27 +1,42 @@
 // Purpose:
-//   Curator-driven tooltip expiry. Daily cron, runs alongside the other
-//   lifecycle scripts (after check_extended_halts). A curator can flag a
-//   tooltip for automatic removal on a future date by adding an optional
-//   `tooltip_expiry_date` (ISO `YYYY-MM-DD`) next to `tooltip_message` on a
-//   zone_asset. Once that date has arrived (today >= expiry, UTC), this
-//   script deletes BOTH `tooltip_message` and `tooltip_expiry_date` from the
-//   source zone_assets.json, and the generator then propagates the absence
-//   into the generated outputs on the same daily PR.
+//   Curator-driven tooltip expiry and decay. Daily cron, runs FIRST among the
+//   lifecycle scripts (before check_ibc_clients / check_market_health /
+//   check_extended_halts) so an expired tooltip is resolved before those
+//   lock-respecting scripts evaluate, rather than being honoured as a live
+//   curator lock for one extra run.
 //
-//   Use this for tooltips whose informational value lapses on a known date:
-//   rebrand notices, time-boxed support windows, "until <date>" warnings.
+//   A curator flags a tooltip for a dated change by adding an optional
+//   `tooltip_expiry_date` (ISO `YYYY-MM-DD`) next to `tooltip_message`. Once
+//   that date has arrived (today >= expiry, UTC, end-of-day inclusive), this
+//   script does one of two things on the source zone_assets.json, and the
+//   generator propagates the result on the same daily PR:
+//
+//     • Decay (preferred when the message should change rather than vanish):
+//       if `tooltip_decay_message` is also set, the tooltip_message is
+//       REPLACED by it and the expiry fields are cleared. Use this for a
+//       "supported until <date>" notice that should become "support has
+//       ended" rather than disappear. The decayed message has no expiry of
+//       its own, so it persists until a curator removes it by hand.
+//
+//     • Removal (no decay message set): both `tooltip_message` and
+//       `tooltip_expiry_date` are deleted. Use this for notices whose value
+//       fully lapses on the date: rebrands, time-boxed warnings.
+//
 //   Do NOT set an expiry on a tooltip that documents a permanent condition
 //   (dead chain, compromised bridge): leave those without an expiry so they
 //   persist until a curator removes them by hand.
 //
 //   Interaction with the curator lock: other lifecycle scripts treat a
 //   non-empty `tooltip_message` as a lock that pauses their automation. This
-//   script is the one sanctioned path that clears a curator tooltip, and it
-//   only does so when the curator themselves set an expiry date that has
-//   passed. A tooltip with no `tooltip_expiry_date` is never touched here.
+//   script is the one sanctioned path that clears or rewrites a curator
+//   tooltip, and it only does so when the curator themselves set an expiry
+//   date that has passed. A tooltip with no `tooltip_expiry_date` is never
+//   touched here. (A decayed tooltip is still a non-empty tooltip_message, so
+//   it continues to act as a curator lock for the other scripts.)
 //
-//   `tooltip_expiry_date` without a `tooltip_message` is a no-op orphan; it
-//   is cleaned up (deleted) so the source does not accumulate dangling keys.
+//   Orphan cleanup: `tooltip_expiry_date` (or `tooltip_decay_message`)
+//   without a `tooltip_message` is a no-op; the dangling key(s) are deleted
+//   so the source does not accumulate cruft.
 //
 // Usage:
 //   node check_tooltip_expiry.mjs [<zone_name>] [--dry-run]
@@ -56,7 +71,7 @@ function main() {
   const nowIso = new Date().toISOString();
   const nowMs = new Date(nowIso).getTime();
 
-  const removals = [];
+  const mutations = [];
   // Expiry dates that could not be parsed: surfaced so a curator can fix the
   // typo. Never expires the tooltip (fail-safe: keep showing it).
   const invalid = [];
@@ -67,13 +82,25 @@ function main() {
       asset,
       'tooltip_expiry_date'
     );
-    if (!hasExpiry) continue;
+    const hasDecay = Object.prototype.hasOwnProperty.call(
+      asset,
+      'tooltip_decay_message'
+    );
+    if (!hasExpiry && !hasDecay) continue;
 
-    // Orphan: an expiry date with no message. Nothing to expire; drop the
-    // dangling key so the source stays clean.
+    // Orphan: expiry/decay metadata with no message to act on. Nothing to
+    // expire; drop the dangling key(s) so the source stays clean.
     if (!asset.tooltip_message) {
       delete asset.tooltip_expiry_date;
-      removals.push({ kind: 'orphan_expiry_cleared', asset: label });
+      delete asset.tooltip_decay_message;
+      mutations.push({ kind: 'orphan_cleared', asset: label });
+      continue;
+    }
+
+    // A decay message with no expiry date can never fire: surface as invalid
+    // so the curator adds the date (don't silently drop a deliberate message).
+    if (!hasExpiry) {
+      invalid.push({ asset: label, value: '(decay set, no expiry date)' });
       continue;
     }
 
@@ -85,9 +112,20 @@ function main() {
 
     if (nowMs >= expiryMs) {
       const expiry = asset.tooltip_expiry_date;
-      delete asset.tooltip_message;
-      delete asset.tooltip_expiry_date;
-      removals.push({ kind: 'tooltip_expired', asset: label, expiry });
+      if (hasDecay && asset.tooltip_decay_message) {
+        // Decay: replace the message, drop the expiry metadata. The decayed
+        // message persists (no expiry of its own) until a curator clears it.
+        asset.tooltip_message = asset.tooltip_decay_message;
+        delete asset.tooltip_decay_message;
+        delete asset.tooltip_expiry_date;
+        mutations.push({ kind: 'tooltip_decayed', asset: label, expiry });
+      } else {
+        // Removal: no decay message, so the tooltip fully lapses.
+        delete asset.tooltip_message;
+        delete asset.tooltip_decay_message;
+        delete asset.tooltip_expiry_date;
+        mutations.push({ kind: 'tooltip_expired', asset: label, expiry });
+      }
     }
   }
 
@@ -100,18 +138,18 @@ function main() {
     const lines = [
       `# Tooltip expiry dry-run, ${nowIso}`,
       ``,
-      `Removals: ${removals.length}`,
+      `Mutations: ${mutations.length}`,
       ``,
       `| Kind | Asset |`,
       `|------|-------|`,
     ];
-    for (const r of removals) {
-      lines.push(`| ${r.kind} | ${r.asset} |`);
+    for (const m of mutations) {
+      lines.push(`| ${m.kind} | ${m.asset} |`);
     }
     if (invalid.length > 0) {
       lines.push(
         ``,
-        `## Unparseable tooltip_expiry_date (tooltip kept, please fix)`,
+        `## Invalid expiry/decay config (tooltip kept, please fix)`,
         ``,
         `| Asset | Value |`,
         `|-------|-------|`
@@ -125,7 +163,7 @@ function main() {
     return;
   }
 
-  if (removals.length > 0) {
+  if (mutations.length > 0) {
     fs.writeFileSync(
       zoneAssetsPath,
       JSON.stringify(zoneData, null, 2) + '\n',
@@ -137,24 +175,24 @@ function main() {
   }
 
   const byKind = {};
-  for (const r of removals) byKind[r.kind] = (byKind[r.kind] || 0) + 1;
+  for (const m of mutations) byKind[m.kind] = (byKind[m.kind] || 0) + 1;
   console.log('\n' + '='.repeat(70));
   console.log('  TOOLTIP EXPIRY SUMMARY');
   console.log('='.repeat(70));
-  if (removals.length === 0) {
-    console.log('  (nothing expired)');
+  if (mutations.length === 0) {
+    console.log('  (nothing expired or decayed)');
   } else {
     for (const [k, v] of Object.entries(byKind)) {
       console.log(`  ${k.padEnd(28)}: ${v}`);
     }
-    for (const r of removals) {
-      console.log(`   - ${r.kind.padEnd(26)} ${r.asset}`);
+    for (const m of mutations) {
+      console.log(`   - ${m.kind.padEnd(26)} ${m.asset}`);
     }
   }
 
   if (invalid.length > 0) {
     console.log('\n' + '-'.repeat(70));
-    console.log('  UNPARSEABLE tooltip_expiry_date (tooltip kept, please fix)');
+    console.log('  INVALID expiry/decay config (tooltip kept, please fix)');
     console.log('-'.repeat(70));
     for (const i of invalid) {
       console.log(`  ⚠️  ${(i.asset ?? '-').padEnd(28)} "${i.value}"`);

@@ -94,6 +94,10 @@ jobs:
             exit $rc
           fi
 
+      - name: Check Tooltip Expiry (curator-flagged removals)
+        working-directory: ./.github/workflows/utility
+        run: node check_tooltip_expiry.mjs osmosis-1 2>&1 | tee ../../../tooltip-expiry.log
+
       - name: Add Chain Stubs
         working-directory: ./.github/workflows/utility
         run: node add_chain_stubs.mjs osmosis-1

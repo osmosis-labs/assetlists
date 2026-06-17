@@ -28,8 +28,7 @@ jobs:
           
       - name: Git Submodule Update
         run: |
-          git submodule update --init --recursive
-          git submodule update --recursive --remote
+          git submodule update --init --remote --recursive
           
       - name: Setup Node
         uses: actions/setup-node@v6

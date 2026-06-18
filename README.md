@@ -493,7 +493,6 @@ Apps, interfaces, and tools that consume data from this repository:
   - `generated/frontend/assetlist.json`
 - **Numia Data Services**:
   - `generated/frontend/assetlist.json`
-  - `generated/chain-registry/assetlist.json`
 
 ### Data Providers (Bidirectional Dependencies)
 External services that provide data TO this repository:

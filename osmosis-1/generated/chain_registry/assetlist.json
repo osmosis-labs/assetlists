@@ -1040,7 +1040,7 @@
       "coingecko_id": "terrausd"
     },
     {
-      "description": "The native token of Stargaze",
+      "description": "(Deprecated) STARS bridged from legacy Stargaze. STARS has migrated to the Cosmos Hub.",
       "denom_units": [
         {
           "denom": "ibc/987C17B11ABC2B20019178ACE62929FE9840202CE79498E29FE8E5CB02B7C0A4",
@@ -1056,9 +1056,9 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/987C17B11ABC2B20019178ACE62929FE9840202CE79498E29FE8E5CB02B7C0A4",
-      "name": "Stargaze (old)",
+      "name": "Stargaze",
       "display": "stars",
-      "symbol": "STARS",
+      "symbol": "STARS.legacy",
       "traces": [
         {
           "type": "ibc",
@@ -1086,8 +1086,7 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/stars.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/stars.svg"
         }
-      ],
-      "coingecko_id": "stargaze"
+      ]
     },
     {
       "description": "The native token of Chihuahua Chain",
@@ -37187,6 +37186,401 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/53B651EDCF2C113AAE9E4CFDA6C440D6A97C6CCDB9C0AC22C52DCDC88B4984FD",
+          "exponent": 0,
+          "aliases": [
+            "factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/mGAZE"
+          ]
+        },
+        {
+          "denom": "GAZE",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/53B651EDCF2C113AAE9E4CFDA6C440D6A97C6CCDB9C0AC22C52DCDC88B4984FD",
+      "name": "Gaze GAZE",
+      "display": "GAZE",
+      "symbol": "GAZE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stargaze",
+            "base_denom": "factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/mGAZE",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-75",
+            "path": "transfer/channel-75/factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/mGAZE"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/890DEC838146A50D89B98787483E6417118AF1F86E04CF36030DCB478EBBB16D",
+          "exponent": 0,
+          "aliases": [
+            "factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/uOHH"
+          ]
+        },
+        {
+          "denom": "OHH",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/890DEC838146A50D89B98787483E6417118AF1F86E04CF36030DCB478EBBB16D",
+      "name": "ohhVAULT ohh",
+      "display": "OHH",
+      "symbol": "OHH",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stargaze",
+            "base_denom": "factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/uOHH",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-75",
+            "path": "transfer/channel-75/factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/uOHH"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Tek ovah!",
+      "extended_description": "Free yourself from your self. Embrace your status as a $PLEB.",
+      "denom_units": [
+        {
+          "denom": "ibc/EA0C8F1121425943740B2D1B1DC5BDD717D49A9D5A639DC7074C10E9212CC794",
+          "exponent": 0,
+          "aliases": [
+            "factory/stars1k7qsxdxh8calmt4txk75e6hdntefslegwddqnlwjjqgjkmcfqy0qa97sn8/pleb"
+          ]
+        },
+        {
+          "denom": "PLEB",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/EA0C8F1121425943740B2D1B1DC5BDD717D49A9D5A639DC7074C10E9212CC794",
+      "name": "PLEB",
+      "display": "PLEB",
+      "symbol": "PLEB",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stargaze",
+            "base_denom": "factory/stars1k7qsxdxh8calmt4txk75e6hdntefslegwddqnlwjjqgjkmcfqy0qa97sn8/pleb",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-75",
+            "path": "transfer/channel-75/factory/stars1k7qsxdxh8calmt4txk75e6hdntefslegwddqnlwjjqgjkmcfqy0qa97sn8/pleb"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/pleb.png"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "stargaze",
+            "base_denom": "factory/stars1k7qsxdxh8calmt4txk75e6hdntefslegwddqnlwjjqgjkmcfqy0qa97sn8/pleb"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/pleb.png"
+        }
+      ],
+      "keywords": [
+        "meme"
+      ],
+      "socials": {
+        "website": "https://www.stargaze.zone/m/stargazepleb/tokens",
+        "x": "https://x.com/Pixl_Plebs"
+      }
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/78E3219692862E88A1B87E90B3C8B4204EA1FE960CC9AF3C2166DBA0017B80CA",
+          "exponent": 0,
+          "aliases": [
+            "factory/stars133a6mnkp9d3pkt48y699hy0tvq5xngpz7cwak0qr4suq0cj9zpfslvt0em/kingshit"
+          ]
+        },
+        {
+          "denom": "KINGSHIT",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/78E3219692862E88A1B87E90B3C8B4204EA1FE960CC9AF3C2166DBA0017B80CA",
+      "name": "KINGSHIT",
+      "display": "KINGSHIT",
+      "symbol": "KINGSHIT",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stargaze",
+            "base_denom": "factory/stars133a6mnkp9d3pkt48y699hy0tvq5xngpz7cwak0qr4suq0cj9zpfslvt0em/kingshit",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-75",
+            "path": "transfer/channel-75/factory/stars133a6mnkp9d3pkt48y699hy0tvq5xngpz7cwak0qr4suq0cj9zpfslvt0em/kingshit"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/A02F0787C8A44FDB50E9913710646776DD1C4AA0763255EBF4628AD9B8CA8B85",
+          "exponent": 0,
+          "aliases": [
+            "factory/stars132jrwxjps93usq3ejy7cq6qqc7j3gtx3mu8jhaj5nnk3p0ste2ssqsndvj/botz"
+          ]
+        },
+        {
+          "denom": "BOTZ",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/A02F0787C8A44FDB50E9913710646776DD1C4AA0763255EBF4628AD9B8CA8B85",
+      "name": "BOTZ",
+      "display": "BOTZ",
+      "symbol": "BOTZ",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stargaze",
+            "base_denom": "factory/stars132jrwxjps93usq3ejy7cq6qqc7j3gtx3mu8jhaj5nnk3p0ste2ssqsndvj/botz",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-75",
+            "path": "transfer/channel-75/factory/stars132jrwxjps93usq3ejy7cq6qqc7j3gtx3mu8jhaj5nnk3p0ste2ssqsndvj/botz"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/0416C3B0EA171B8090608AFFE5A298F64E2ECBAD22121A9D6F12A9A1B9F1E1B4",
+          "exponent": 0,
+          "aliases": [
+            "factory/stars14mfk0sd6rlajkvgpgrvfk9lfhjwmkrzvednekvcn32jzy3drjy5sfem9p7/cocks"
+          ]
+        },
+        {
+          "denom": "COCKS",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/0416C3B0EA171B8090608AFFE5A298F64E2ECBAD22121A9D6F12A9A1B9F1E1B4",
+      "name": "COCKS",
+      "display": "COCKS",
+      "symbol": "COCKS",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stargaze",
+            "base_denom": "factory/stars14mfk0sd6rlajkvgpgrvfk9lfhjwmkrzvednekvcn32jzy3drjy5sfem9p7/cocks",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-75",
+            "path": "transfer/channel-75/factory/stars14mfk0sd6rlajkvgpgrvfk9lfhjwmkrzvednekvcn32jzy3drjy5sfem9p7/cocks"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/898EC7A8ECE18E3763712584C113A4797055625EADCF33CDB136E16E68387573",
+          "exponent": 0,
+          "aliases": [
+            "factory/stars167y92c2fe690l0lrqyk9tahpqvu97au0cmpayh3j9455r2f6f06s78emw4/wolfshit"
+          ]
+        },
+        {
+          "denom": "WOLFSHIT",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/898EC7A8ECE18E3763712584C113A4797055625EADCF33CDB136E16E68387573",
+      "name": "WOLFSHIT",
+      "display": "WOLFSHIT",
+      "symbol": "WOLFSHIT",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stargaze",
+            "base_denom": "factory/stars167y92c2fe690l0lrqyk9tahpqvu97au0cmpayh3j9455r2f6f06s78emw4/wolfshit",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-75",
+            "path": "transfer/channel-75/factory/stars167y92c2fe690l0lrqyk9tahpqvu97au0cmpayh3j9455r2f6f06s78emw4/wolfshit"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/E283EC26D115548C2664FDADC55E0BBA50CD0C8C3065A95C8FA5DDD70CBF373E",
+          "exponent": 0,
+          "aliases": [
+            "factory/stars1t6fyr84hn6lyjdvk3e3c697cptfn5cwat2jxqyzuvuesaypznslshy6x9v/vlt"
+          ]
+        },
+        {
+          "denom": "VLT",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/E283EC26D115548C2664FDADC55E0BBA50CD0C8C3065A95C8FA5DDD70CBF373E",
+      "name": "VLT",
+      "display": "VLT",
+      "symbol": "VAULT",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stargaze",
+            "base_denom": "factory/stars1t6fyr84hn6lyjdvk3e3c697cptfn5cwat2jxqyzuvuesaypznslshy6x9v/vlt",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-75",
+            "path": "transfer/channel-75/factory/stars1t6fyr84hn6lyjdvk3e3c697cptfn5cwat2jxqyzuvuesaypznslshy6x9v/vlt"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/108DE2555A0E438D06AD4BBD4E068484FA07DD9349A651DCF3A88A1F9DD2F5F7",
+          "exponent": 0,
+          "aliases": [
+            "factory/stars1ur79p98rmpn456esgzjernaxy7v25mlwqsv8uhymzxahfw77427syk2h9j/bglSTARS"
+          ]
+        },
+        {
+          "denom": "OLDbglSTARS",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/108DE2555A0E438D06AD4BBD4E068484FA07DD9349A651DCF3A88A1F9DD2F5F7",
+      "name": "OLDbglSTARS",
+      "display": "OLDbglSTARS",
+      "symbol": "OLDbglSTARS",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stargaze",
+            "base_denom": "factory/stars1ur79p98rmpn456esgzjernaxy7v25mlwqsv8uhymzxahfw77427syk2h9j/bglSTARS",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-75",
+            "path": "transfer/channel-75/factory/stars1ur79p98rmpn456esgzjernaxy7v25mlwqsv8uhymzxahfw77427syk2h9j/bglSTARS"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/84D406C9108CFE59DE3E186DE1D00606AC42DA5ACFBFE7DF903AD54CE5F64143",
+          "exponent": 0,
+          "aliases": [
+            "factory/stars1ur79p98rmpn456esgzjernaxy7v25mlwqsv8uhymzxahfw77427syk2h9j/bglUSDC"
+          ]
+        },
+        {
+          "denom": "OLDbglUSDC",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/84D406C9108CFE59DE3E186DE1D00606AC42DA5ACFBFE7DF903AD54CE5F64143",
+      "name": "OLDbglUSDC",
+      "display": "OLDbglUSDC",
+      "symbol": "OLDbglUSDC",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stargaze",
+            "base_denom": "factory/stars1ur79p98rmpn456esgzjernaxy7v25mlwqsv8uhymzxahfw77427syk2h9j/bglUSDC",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-75",
+            "path": "transfer/channel-75/factory/stars1ur79p98rmpn456esgzjernaxy7v25mlwqsv8uhymzxahfw77427syk2h9j/bglUSDC"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/CC2CB717F04C8BD028C34CC18AC878E4F6134E3178E38BCE9454468AC0577776",
+          "exponent": 0,
+          "aliases": [
+            "factory/stars1khzuhuhv02vaturh9x9lz4jach824x9umcgghl/uCLW"
+          ]
+        },
+        {
+          "denom": "CLW",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/CC2CB717F04C8BD028C34CC18AC878E4F6134E3178E38BCE9454468AC0577776",
+      "name": "Clown Society",
+      "display": "CLW",
+      "symbol": "CLW",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stargaze",
+            "base_denom": "factory/stars1khzuhuhv02vaturh9x9lz4jach824x9umcgghl/uCLW",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-75",
+            "path": "transfer/channel-75/factory/stars1khzuhuhv02vaturh9x9lz4jach824x9umcgghl/uCLW"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
           "exponent": 0,
           "aliases": [
@@ -39371,6 +39765,56 @@
           }
         }
       ]
+    },
+    {
+      "description": "The native STARS token, migrated from Stargaze to the Cosmos Hub.",
+      "denom_units": [
+        {
+          "denom": "ibc/68BAF19F76BAC04C4CEA06325EF91D43E8637AE43EAC7887CE6211B4B99E1EC0",
+          "exponent": 0,
+          "aliases": [
+            "factory/cosmos1s8qx0zvz8yd6e4x0mqmqf7fr9vvfn6226hkvrq/ustars"
+          ]
+        },
+        {
+          "denom": "stars",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/68BAF19F76BAC04C4CEA06325EF91D43E8637AE43EAC7887CE6211B4B99E1EC0",
+      "name": "Stargaze",
+      "display": "stars",
+      "symbol": "STARS",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "cosmoshub",
+            "base_denom": "factory/cosmos1s8qx0zvz8yd6e4x0mqmqf7fr9vvfn6226hkvrq/ustars",
+            "channel_id": "channel-141"
+          },
+          "chain": {
+            "channel_id": "channel-0",
+            "path": "transfer/channel-0/factory/cosmos1s8qx0zvz8yd6e4x0mqmqf7fr9vvfn6226hkvrq/ustars"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/stars.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/stars.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "cosmoshub",
+            "base_denom": "factory/cosmos1s8qx0zvz8yd6e4x0mqmqf7fr9vvfn6226hkvrq/ustars"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/stars.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/stars.svg"
+        }
+      ],
+      "coingecko_id": "stargaze"
     },
     {
       "denom_units": [
@@ -45958,401 +46402,6 @@
           "chain": {
             "channel_id": "channel-782",
             "path": "transfer/channel-782/factory/sei1ta5rkr6y2qlkj7px8w2cvear7m2822q4f4ea0m/sensei"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/53B651EDCF2C113AAE9E4CFDA6C440D6A97C6CCDB9C0AC22C52DCDC88B4984FD",
-          "exponent": 0,
-          "aliases": [
-            "factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/mGAZE"
-          ]
-        },
-        {
-          "denom": "GAZE",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/53B651EDCF2C113AAE9E4CFDA6C440D6A97C6CCDB9C0AC22C52DCDC88B4984FD",
-      "name": "Gaze GAZE",
-      "display": "GAZE",
-      "symbol": "GAZE",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "stargaze",
-            "base_denom": "factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/mGAZE",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-75",
-            "path": "transfer/channel-75/factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/mGAZE"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/890DEC838146A50D89B98787483E6417118AF1F86E04CF36030DCB478EBBB16D",
-          "exponent": 0,
-          "aliases": [
-            "factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/uOHH"
-          ]
-        },
-        {
-          "denom": "OHH",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/890DEC838146A50D89B98787483E6417118AF1F86E04CF36030DCB478EBBB16D",
-      "name": "ohhVAULT ohh",
-      "display": "OHH",
-      "symbol": "OHH",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "stargaze",
-            "base_denom": "factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/uOHH",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-75",
-            "path": "transfer/channel-75/factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/uOHH"
-          }
-        }
-      ]
-    },
-    {
-      "description": "Tek ovah!",
-      "extended_description": "Free yourself from your self. Embrace your status as a $PLEB.",
-      "denom_units": [
-        {
-          "denom": "ibc/EA0C8F1121425943740B2D1B1DC5BDD717D49A9D5A639DC7074C10E9212CC794",
-          "exponent": 0,
-          "aliases": [
-            "factory/stars1k7qsxdxh8calmt4txk75e6hdntefslegwddqnlwjjqgjkmcfqy0qa97sn8/pleb"
-          ]
-        },
-        {
-          "denom": "PLEB",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/EA0C8F1121425943740B2D1B1DC5BDD717D49A9D5A639DC7074C10E9212CC794",
-      "name": "PLEB",
-      "display": "PLEB",
-      "symbol": "PLEB",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "stargaze",
-            "base_denom": "factory/stars1k7qsxdxh8calmt4txk75e6hdntefslegwddqnlwjjqgjkmcfqy0qa97sn8/pleb",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-75",
-            "path": "transfer/channel-75/factory/stars1k7qsxdxh8calmt4txk75e6hdntefslegwddqnlwjjqgjkmcfqy0qa97sn8/pleb"
-          }
-        }
-      ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/pleb.png"
-      },
-      "images": [
-        {
-          "image_sync": {
-            "chain_name": "stargaze",
-            "base_denom": "factory/stars1k7qsxdxh8calmt4txk75e6hdntefslegwddqnlwjjqgjkmcfqy0qa97sn8/pleb"
-          },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/pleb.png"
-        }
-      ],
-      "keywords": [
-        "meme"
-      ],
-      "socials": {
-        "website": "https://www.stargaze.zone/m/stargazepleb/tokens",
-        "x": "https://x.com/Pixl_Plebs"
-      }
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/78E3219692862E88A1B87E90B3C8B4204EA1FE960CC9AF3C2166DBA0017B80CA",
-          "exponent": 0,
-          "aliases": [
-            "factory/stars133a6mnkp9d3pkt48y699hy0tvq5xngpz7cwak0qr4suq0cj9zpfslvt0em/kingshit"
-          ]
-        },
-        {
-          "denom": "KINGSHIT",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/78E3219692862E88A1B87E90B3C8B4204EA1FE960CC9AF3C2166DBA0017B80CA",
-      "name": "KINGSHIT",
-      "display": "KINGSHIT",
-      "symbol": "KINGSHIT",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "stargaze",
-            "base_denom": "factory/stars133a6mnkp9d3pkt48y699hy0tvq5xngpz7cwak0qr4suq0cj9zpfslvt0em/kingshit",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-75",
-            "path": "transfer/channel-75/factory/stars133a6mnkp9d3pkt48y699hy0tvq5xngpz7cwak0qr4suq0cj9zpfslvt0em/kingshit"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/A02F0787C8A44FDB50E9913710646776DD1C4AA0763255EBF4628AD9B8CA8B85",
-          "exponent": 0,
-          "aliases": [
-            "factory/stars132jrwxjps93usq3ejy7cq6qqc7j3gtx3mu8jhaj5nnk3p0ste2ssqsndvj/botz"
-          ]
-        },
-        {
-          "denom": "BOTZ",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/A02F0787C8A44FDB50E9913710646776DD1C4AA0763255EBF4628AD9B8CA8B85",
-      "name": "BOTZ",
-      "display": "BOTZ",
-      "symbol": "BOTZ",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "stargaze",
-            "base_denom": "factory/stars132jrwxjps93usq3ejy7cq6qqc7j3gtx3mu8jhaj5nnk3p0ste2ssqsndvj/botz",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-75",
-            "path": "transfer/channel-75/factory/stars132jrwxjps93usq3ejy7cq6qqc7j3gtx3mu8jhaj5nnk3p0ste2ssqsndvj/botz"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/0416C3B0EA171B8090608AFFE5A298F64E2ECBAD22121A9D6F12A9A1B9F1E1B4",
-          "exponent": 0,
-          "aliases": [
-            "factory/stars14mfk0sd6rlajkvgpgrvfk9lfhjwmkrzvednekvcn32jzy3drjy5sfem9p7/cocks"
-          ]
-        },
-        {
-          "denom": "COCKS",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/0416C3B0EA171B8090608AFFE5A298F64E2ECBAD22121A9D6F12A9A1B9F1E1B4",
-      "name": "COCKS",
-      "display": "COCKS",
-      "symbol": "COCKS",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "stargaze",
-            "base_denom": "factory/stars14mfk0sd6rlajkvgpgrvfk9lfhjwmkrzvednekvcn32jzy3drjy5sfem9p7/cocks",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-75",
-            "path": "transfer/channel-75/factory/stars14mfk0sd6rlajkvgpgrvfk9lfhjwmkrzvednekvcn32jzy3drjy5sfem9p7/cocks"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/898EC7A8ECE18E3763712584C113A4797055625EADCF33CDB136E16E68387573",
-          "exponent": 0,
-          "aliases": [
-            "factory/stars167y92c2fe690l0lrqyk9tahpqvu97au0cmpayh3j9455r2f6f06s78emw4/wolfshit"
-          ]
-        },
-        {
-          "denom": "WOLFSHIT",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/898EC7A8ECE18E3763712584C113A4797055625EADCF33CDB136E16E68387573",
-      "name": "WOLFSHIT",
-      "display": "WOLFSHIT",
-      "symbol": "WOLFSHIT",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "stargaze",
-            "base_denom": "factory/stars167y92c2fe690l0lrqyk9tahpqvu97au0cmpayh3j9455r2f6f06s78emw4/wolfshit",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-75",
-            "path": "transfer/channel-75/factory/stars167y92c2fe690l0lrqyk9tahpqvu97au0cmpayh3j9455r2f6f06s78emw4/wolfshit"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/E283EC26D115548C2664FDADC55E0BBA50CD0C8C3065A95C8FA5DDD70CBF373E",
-          "exponent": 0,
-          "aliases": [
-            "factory/stars1t6fyr84hn6lyjdvk3e3c697cptfn5cwat2jxqyzuvuesaypznslshy6x9v/vlt"
-          ]
-        },
-        {
-          "denom": "VLT",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/E283EC26D115548C2664FDADC55E0BBA50CD0C8C3065A95C8FA5DDD70CBF373E",
-      "name": "VLT",
-      "display": "VLT",
-      "symbol": "VAULT",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "stargaze",
-            "base_denom": "factory/stars1t6fyr84hn6lyjdvk3e3c697cptfn5cwat2jxqyzuvuesaypznslshy6x9v/vlt",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-75",
-            "path": "transfer/channel-75/factory/stars1t6fyr84hn6lyjdvk3e3c697cptfn5cwat2jxqyzuvuesaypznslshy6x9v/vlt"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/108DE2555A0E438D06AD4BBD4E068484FA07DD9349A651DCF3A88A1F9DD2F5F7",
-          "exponent": 0,
-          "aliases": [
-            "factory/stars1ur79p98rmpn456esgzjernaxy7v25mlwqsv8uhymzxahfw77427syk2h9j/bglSTARS"
-          ]
-        },
-        {
-          "denom": "OLDbglSTARS",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/108DE2555A0E438D06AD4BBD4E068484FA07DD9349A651DCF3A88A1F9DD2F5F7",
-      "name": "OLDbglSTARS",
-      "display": "OLDbglSTARS",
-      "symbol": "OLDbglSTARS",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "stargaze",
-            "base_denom": "factory/stars1ur79p98rmpn456esgzjernaxy7v25mlwqsv8uhymzxahfw77427syk2h9j/bglSTARS",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-75",
-            "path": "transfer/channel-75/factory/stars1ur79p98rmpn456esgzjernaxy7v25mlwqsv8uhymzxahfw77427syk2h9j/bglSTARS"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/84D406C9108CFE59DE3E186DE1D00606AC42DA5ACFBFE7DF903AD54CE5F64143",
-          "exponent": 0,
-          "aliases": [
-            "factory/stars1ur79p98rmpn456esgzjernaxy7v25mlwqsv8uhymzxahfw77427syk2h9j/bglUSDC"
-          ]
-        },
-        {
-          "denom": "OLDbglUSDC",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/84D406C9108CFE59DE3E186DE1D00606AC42DA5ACFBFE7DF903AD54CE5F64143",
-      "name": "OLDbglUSDC",
-      "display": "OLDbglUSDC",
-      "symbol": "OLDbglUSDC",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "stargaze",
-            "base_denom": "factory/stars1ur79p98rmpn456esgzjernaxy7v25mlwqsv8uhymzxahfw77427syk2h9j/bglUSDC",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-75",
-            "path": "transfer/channel-75/factory/stars1ur79p98rmpn456esgzjernaxy7v25mlwqsv8uhymzxahfw77427syk2h9j/bglUSDC"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/CC2CB717F04C8BD028C34CC18AC878E4F6134E3178E38BCE9454468AC0577776",
-          "exponent": 0,
-          "aliases": [
-            "factory/stars1khzuhuhv02vaturh9x9lz4jach824x9umcgghl/uCLW"
-          ]
-        },
-        {
-          "denom": "CLW",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/CC2CB717F04C8BD028C34CC18AC878E4F6134E3178E38BCE9454468AC0577776",
-      "name": "Clown Society",
-      "display": "CLW",
-      "symbol": "CLW",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "stargaze",
-            "base_denom": "factory/stars1khzuhuhv02vaturh9x9lz4jach824x9umcgghl/uCLW",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-75",
-            "path": "transfer/channel-75/factory/stars1khzuhuhv02vaturh9x9lz4jach824x9umcgghl/uCLW"
           }
         }
       ]

@@ -299,7 +299,7 @@
       "categories": [
         "nft_protocol"
       ],
-      "_comment": "Stargaze (old) $STARS.old",
+      "_comment": "Stargaze (Stargaze) $STARS.stars",
       "tooltip_message": "The Stargaze chain has shut down as the project migrated to the Cosmos Hub. This is the old STARS; deposits and withdrawals are closed. Migrate your assets via https://automigration.stargaze.zone/",
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "source_chain_killed",
@@ -507,7 +507,13 @@
       "categories": [
         "ai"
       ],
-      "_comment": "bostrom $BOOT"
+      "_comment": "bostrom $BOOT",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "comdex",
@@ -3448,28 +3454,50 @@
       "osmosis_verified": true,
       "_comment": "Bostrom Hydrogen $HYDROGEN",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "bostrom",
       "base_denom": "tocyb",
       "path": "transfer/channel-95/tocyb",
       "osmosis_verified": false,
-      "_comment": "Bostrom Tocyb $TOCYB"
+      "_comment": "Bostrom Tocyb $TOCYB",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "bostrom",
       "base_denom": "millivolt",
       "path": "transfer/channel-95/millivolt",
       "osmosis_verified": false,
-      "_comment": "Bostrom Volt $V"
+      "_comment": "Bostrom Volt $V",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "bostrom",
       "base_denom": "milliampere",
       "path": "transfer/channel-95/milliampere",
       "osmosis_verified": false,
-      "_comment": "Bostrom Ampere $A"
+      "_comment": "Bostrom Ampere $A",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "source",
@@ -11363,6 +11391,149 @@
       "osmosis_deposit_halt_reason": "bridge_down",
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "bridge_down"
+    },
+    {
+      "chain_name": "stargaze",
+      "base_denom": "factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/mGAZE",
+      "path": "transfer/channel-75/factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/mGAZE",
+      "_comment": "Gaze GAZE $GAZE",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "manual",
+      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+    },
+    {
+      "chain_name": "stargaze",
+      "base_denom": "factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/uOHH",
+      "path": "transfer/channel-75/factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/uOHH",
+      "_comment": "ohhVAULT ohh $OHH",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "manual",
+      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+    },
+    {
+      "chain_name": "stargaze",
+      "base_denom": "factory/stars1k7qsxdxh8calmt4txk75e6hdntefslegwddqnlwjjqgjkmcfqy0qa97sn8/pleb",
+      "path": "transfer/channel-75/factory/stars1k7qsxdxh8calmt4txk75e6hdntefslegwddqnlwjjqgjkmcfqy0qa97sn8/pleb",
+      "_comment": "PLEB $PLEB",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "manual",
+      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+    },
+    {
+      "chain_name": "stargaze",
+      "base_denom": "factory/stars133a6mnkp9d3pkt48y699hy0tvq5xngpz7cwak0qr4suq0cj9zpfslvt0em/kingshit",
+      "path": "transfer/channel-75/factory/stars133a6mnkp9d3pkt48y699hy0tvq5xngpz7cwak0qr4suq0cj9zpfslvt0em/kingshit",
+      "_comment": "KINGSHIT $KINGSHIT",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "manual",
+      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+    },
+    {
+      "chain_name": "stargaze",
+      "base_denom": "factory/stars132jrwxjps93usq3ejy7cq6qqc7j3gtx3mu8jhaj5nnk3p0ste2ssqsndvj/botz",
+      "path": "transfer/channel-75/factory/stars132jrwxjps93usq3ejy7cq6qqc7j3gtx3mu8jhaj5nnk3p0ste2ssqsndvj/botz",
+      "_comment": "BOTZ $BOTZ",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "manual",
+      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+    },
+    {
+      "chain_name": "stargaze",
+      "base_denom": "factory/stars14mfk0sd6rlajkvgpgrvfk9lfhjwmkrzvednekvcn32jzy3drjy5sfem9p7/cocks",
+      "path": "transfer/channel-75/factory/stars14mfk0sd6rlajkvgpgrvfk9lfhjwmkrzvednekvcn32jzy3drjy5sfem9p7/cocks",
+      "_comment": "COCKS $COCKS",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "manual",
+      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+    },
+    {
+      "chain_name": "stargaze",
+      "base_denom": "factory/stars167y92c2fe690l0lrqyk9tahpqvu97au0cmpayh3j9455r2f6f06s78emw4/wolfshit",
+      "path": "transfer/channel-75/factory/stars167y92c2fe690l0lrqyk9tahpqvu97au0cmpayh3j9455r2f6f06s78emw4/wolfshit",
+      "_comment": "WOLFSHIT $WOLFSHIT",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "manual",
+      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+    },
+    {
+      "chain_name": "stargaze",
+      "base_denom": "factory/stars1t6fyr84hn6lyjdvk3e3c697cptfn5cwat2jxqyzuvuesaypznslshy6x9v/vlt",
+      "path": "transfer/channel-75/factory/stars1t6fyr84hn6lyjdvk3e3c697cptfn5cwat2jxqyzuvuesaypznslshy6x9v/vlt",
+      "_comment": "VLT $VAULT",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "manual",
+      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+    },
+    {
+      "chain_name": "stargaze",
+      "base_denom": "factory/stars1ur79p98rmpn456esgzjernaxy7v25mlwqsv8uhymzxahfw77427syk2h9j/bglSTARS",
+      "path": "transfer/channel-75/factory/stars1ur79p98rmpn456esgzjernaxy7v25mlwqsv8uhymzxahfw77427syk2h9j/bglSTARS",
+      "_comment": "OLDbglSTARS $OLDbglSTARS",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "manual",
+      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+    },
+    {
+      "chain_name": "stargaze",
+      "base_denom": "factory/stars1ur79p98rmpn456esgzjernaxy7v25mlwqsv8uhymzxahfw77427syk2h9j/bglUSDC",
+      "path": "transfer/channel-75/factory/stars1ur79p98rmpn456esgzjernaxy7v25mlwqsv8uhymzxahfw77427syk2h9j/bglUSDC",
+      "_comment": "OLDbglUSDC $OLDbglUSDC",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "manual",
+      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+    },
+    {
+      "chain_name": "stargaze",
+      "base_denom": "factory/stars1khzuhuhv02vaturh9x9lz4jach824x9umcgghl/uCLW",
+      "path": "transfer/channel-75/factory/stars1khzuhuhv02vaturh9x9lz4jach824x9umcgghl/uCLW",
+      "_comment": "Clown Society $CLW",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "manual",
+      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
     }
   ]
 }

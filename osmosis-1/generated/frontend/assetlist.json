@@ -1269,7 +1269,7 @@
       "chainName": "stargaze",
       "sourceDenom": "ustars",
       "coinMinimalDenom": "ibc/987C17B11ABC2B20019178ACE62929FE9840202CE79498E29FE8E5CB02B7C0A4",
-      "symbol": "STARS.legacy",
+      "symbol": "STARS.og",
       "decimals": 6,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/stars.png",
@@ -1306,7 +1306,7 @@
         }
       ],
       "variantGroupKey": "ibc/68BAF19F76BAC04C4CEA06325EF91D43E8637AE43EAC7887CE6211B4B99E1EC0",
-      "name": "Stargaze (Stargaze)",
+      "name": "Stargaze (Original)",
       "isAlloyed": false,
       "verified": true,
       "unstable": true,
@@ -44935,6 +44935,60 @@
       "lastDowntimeDate": "2026-06-18T16:15:19.538Z"
     },
     {
+      "chainName": "cosmoshub",
+      "sourceDenom": "factory/cosmos1s8qx0zvz8yd6e4x0mqmqf7fr9vvfn6226hkvrq/ustars",
+      "coinMinimalDenom": "ibc/68BAF19F76BAC04C4CEA06325EF91D43E8637AE43EAC7887CE6211B4B99E1EC0",
+      "symbol": "STARS",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/stars.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/stars.svg"
+      },
+      "coingeckoId": "stargaze",
+      "categories": [
+        "nft_protocol"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "cosmoshub",
+            "chainId": "cosmoshub-4",
+            "sourceDenom": "factory/cosmos1s8qx0zvz8yd6e4x0mqmqf7fr9vvfn6226hkvrq/ustars",
+            "port": "transfer",
+            "channelId": "channel-141"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-0",
+            "path": "transfer/channel-0/factory/cosmos1s8qx0zvz8yd6e4x0mqmqf7fr9vvfn6226hkvrq/ustars"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "cosmoshub",
+          "sourceDenom": "factory/cosmos1s8qx0zvz8yd6e4x0mqmqf7fr9vvfn6226hkvrq/ustars",
+          "chainType": "cosmos",
+          "chainId": "cosmoshub-4",
+          "symbol": "STARS",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/stars.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/stars.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/68BAF19F76BAC04C4CEA06325EF91D43E8637AE43EAC7887CE6211B4B99E1EC0",
+      "name": "Stargaze",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -48032,58 +48086,6 @@
       ],
       "variantGroupKey": "ibc/B7D7AA538008E2A35328820B7B56F014F1AB38205D51BB13D1F84B11D362B9ED",
       "name": "COREZ",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "cosmoshub",
-      "sourceDenom": "factory/cosmos1s8qx0zvz8yd6e4x0mqmqf7fr9vvfn6226hkvrq/ustars",
-      "coinMinimalDenom": "ibc/68BAF19F76BAC04C4CEA06325EF91D43E8637AE43EAC7887CE6211B4B99E1EC0",
-      "symbol": "STARS",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/stars.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/stars.svg"
-      },
-      "coingeckoId": "stargaze",
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "cosmoshub",
-            "chainId": "cosmoshub-4",
-            "sourceDenom": "factory/cosmos1s8qx0zvz8yd6e4x0mqmqf7fr9vvfn6226hkvrq/ustars",
-            "port": "transfer",
-            "channelId": "channel-141"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-0",
-            "path": "transfer/channel-0/factory/cosmos1s8qx0zvz8yd6e4x0mqmqf7fr9vvfn6226hkvrq/ustars"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "cosmoshub",
-          "sourceDenom": "factory/cosmos1s8qx0zvz8yd6e4x0mqmqf7fr9vvfn6226hkvrq/ustars",
-          "chainType": "cosmos",
-          "chainId": "cosmoshub-4",
-          "symbol": "STARS",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/stars.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/stars.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/68BAF19F76BAC04C4CEA06325EF91D43E8637AE43EAC7887CE6211B4B99E1EC0",
-      "name": "Stargaze",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

@@ -299,7 +299,10 @@
       "categories": [
         "nft_protocol"
       ],
-      "_comment": "Stargaze (Stargaze) $STARS.stars",
+      "override_properties": {
+        "symbol": "STARS.legacy"
+      },
+      "_comment": "Stargaze (legacy) $STARS.legacy",
       "tooltip_message": "The Stargaze chain has shut down as the project migrated to the Cosmos Hub. This is the old STARS; deposits and withdrawals are closed. Migrate your assets via https://automigration.stargaze.zone/",
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "source_chain_killed",
@@ -1678,6 +1681,9 @@
       "categories": [
         "defi"
       ],
+      "override_properties": {
+        "symbol": "SHD.old"
+      },
       "_comment": "Shade (old) $SHD.old"
     },
     {
@@ -1726,7 +1732,10 @@
       "base_denom": "cw20:juno1cltgm8v842gu54srmejewghnd6uqa26lzkpa635wzra9m9xuudkqa2gtcz",
       "path": "transfer/channel-169/cw20:juno1cltgm8v842gu54srmejewghnd6uqa26lzkpa635wzra9m9xuudkqa2gtcz",
       "osmosis_verified": false,
-      "_comment": "furya (Juno) $FURY.juno"
+      "override_properties": {
+        "symbol": "FURY.legacy"
+      },
+      "_comment": "furya (Juno, legacy) $FURY.legacy"
     },
     {
       "chain_name": "acrechain",
@@ -1998,7 +2007,10 @@
         "built_on_osmosis"
       ],
       "osmosis_disabled": true,
-      "_comment": "Mars Protocol (Mars Hub) $MARS.mars",
+      "override_properties": {
+        "symbol": "MARS.old"
+      },
+      "_comment": "Mars Protocol (Mars Hub) $MARS.old",
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
@@ -11398,12 +11410,12 @@
       "path": "transfer/channel-75/factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/mGAZE",
       "_comment": "Gaze GAZE $GAZE",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
-      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stargaze chain has shut down as the project migrated to the Cosmos Hub. Deposits and withdrawals are closed. Migrate your assets via https://automigration.stargaze.zone/"
     },
     {
       "chain_name": "stargaze",
@@ -11411,12 +11423,12 @@
       "path": "transfer/channel-75/factory/stars16da2uus9zrsy83h23ur42v3lglg5rmyrpqnju4/uOHH",
       "_comment": "ohhVAULT ohh $OHH",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
-      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stargaze chain has shut down as the project migrated to the Cosmos Hub. Deposits and withdrawals are closed. Migrate your assets via https://automigration.stargaze.zone/"
     },
     {
       "chain_name": "stargaze",
@@ -11424,12 +11436,12 @@
       "path": "transfer/channel-75/factory/stars1k7qsxdxh8calmt4txk75e6hdntefslegwddqnlwjjqgjkmcfqy0qa97sn8/pleb",
       "_comment": "PLEB $PLEB",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
-      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stargaze chain has shut down as the project migrated to the Cosmos Hub. Deposits and withdrawals are closed. Migrate your assets via https://automigration.stargaze.zone/"
     },
     {
       "chain_name": "stargaze",
@@ -11437,12 +11449,12 @@
       "path": "transfer/channel-75/factory/stars133a6mnkp9d3pkt48y699hy0tvq5xngpz7cwak0qr4suq0cj9zpfslvt0em/kingshit",
       "_comment": "KINGSHIT $KINGSHIT",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
-      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stargaze chain has shut down as the project migrated to the Cosmos Hub. Deposits and withdrawals are closed. Migrate your assets via https://automigration.stargaze.zone/"
     },
     {
       "chain_name": "stargaze",
@@ -11450,12 +11462,12 @@
       "path": "transfer/channel-75/factory/stars132jrwxjps93usq3ejy7cq6qqc7j3gtx3mu8jhaj5nnk3p0ste2ssqsndvj/botz",
       "_comment": "BOTZ $BOTZ",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
-      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stargaze chain has shut down as the project migrated to the Cosmos Hub. Deposits and withdrawals are closed. Migrate your assets via https://automigration.stargaze.zone/"
     },
     {
       "chain_name": "stargaze",
@@ -11463,12 +11475,12 @@
       "path": "transfer/channel-75/factory/stars14mfk0sd6rlajkvgpgrvfk9lfhjwmkrzvednekvcn32jzy3drjy5sfem9p7/cocks",
       "_comment": "COCKS $COCKS",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
-      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stargaze chain has shut down as the project migrated to the Cosmos Hub. Deposits and withdrawals are closed. Migrate your assets via https://automigration.stargaze.zone/"
     },
     {
       "chain_name": "stargaze",
@@ -11476,12 +11488,12 @@
       "path": "transfer/channel-75/factory/stars167y92c2fe690l0lrqyk9tahpqvu97au0cmpayh3j9455r2f6f06s78emw4/wolfshit",
       "_comment": "WOLFSHIT $WOLFSHIT",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
-      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stargaze chain has shut down as the project migrated to the Cosmos Hub. Deposits and withdrawals are closed. Migrate your assets via https://automigration.stargaze.zone/"
     },
     {
       "chain_name": "stargaze",
@@ -11489,12 +11501,12 @@
       "path": "transfer/channel-75/factory/stars1t6fyr84hn6lyjdvk3e3c697cptfn5cwat2jxqyzuvuesaypznslshy6x9v/vlt",
       "_comment": "VLT $VAULT",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
-      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stargaze chain has shut down as the project migrated to the Cosmos Hub. Deposits and withdrawals are closed. Migrate your assets via https://automigration.stargaze.zone/"
     },
     {
       "chain_name": "stargaze",
@@ -11502,12 +11514,12 @@
       "path": "transfer/channel-75/factory/stars1ur79p98rmpn456esgzjernaxy7v25mlwqsv8uhymzxahfw77427syk2h9j/bglSTARS",
       "_comment": "OLDbglSTARS $OLDbglSTARS",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
-      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stargaze chain has shut down as the project migrated to the Cosmos Hub. Deposits and withdrawals are closed. Migrate your assets via https://automigration.stargaze.zone/"
     },
     {
       "chain_name": "stargaze",
@@ -11515,12 +11527,12 @@
       "path": "transfer/channel-75/factory/stars1ur79p98rmpn456esgzjernaxy7v25mlwqsv8uhymzxahfw77427syk2h9j/bglUSDC",
       "_comment": "OLDbglUSDC $OLDbglUSDC",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
-      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stargaze chain has shut down as the project migrated to the Cosmos Hub. Deposits and withdrawals are closed. Migrate your assets via https://automigration.stargaze.zone/"
     },
     {
       "chain_name": "stargaze",
@@ -11528,12 +11540,12 @@
       "path": "transfer/channel-75/factory/stars1khzuhuhv02vaturh9x9lz4jach824x9umcgghl/uCLW",
       "_comment": "Clown Society $CLW",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
-      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stargaze chain has shut down as the project migrated to the Cosmos Hub. Deposits and withdrawals are closed. Migrate your assets via https://automigration.stargaze.zone/"
     }
   ]
 }

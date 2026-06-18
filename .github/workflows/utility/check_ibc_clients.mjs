@@ -689,7 +689,15 @@ async function main() {
         // transient Active reading. A human must clear it deliberately.
         // Pre-existing entries are never converted here — only newly created
         // ones — so this can't silently rewrite a curator's existing choice.
-        if (isNewEntry && manualHaltChains.has(fa.chainName)) {
+        //
+        // Killed takes precedence over manual: when the source chain is
+        // status="killed" in the registry, a new asset is a dead-chain asset,
+        // so it must get the script-owned `source_chain_killed` reason (set on
+        // the normal path below), not `manual`. Otherwise a killed chain that
+        // also happens to be in the manual-halt set (e.g. a chain we flagged
+        // manually before the registry caught up) would mislabel its backfilled
+        // assets as a curator decision and lock them against auto-clear.
+        if (isNewEntry && manualHaltChains.has(fa.chainName) && !chainKilled) {
           zoneAsset.osmosis_unstable = true;
           zoneAsset.osmosis_unstable_reason = 'manual';
           zoneAsset.osmosis_halt_deposits = true;

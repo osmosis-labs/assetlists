@@ -20,9 +20,11 @@
 //       of Part 1: chains we have ALREADY flagged source_chain_killed on, but
 //       whose chain-registry status is still not "killed". The upstreaming
 //       worklist — each is a candidate for a `status: killed` PR to
-//       cosmos/chain-registry. Pure local data (no network), so runs daily.
-//       Host chains that are themselves still live (the killed asset is a
-//       bridged/LST derivative of some other dead chain) are excluded.
+//       cosmos/chain-registry. Pure local data (no network), but rendered on
+//       the weekly run only: it's a slow-changing static list, so repeating it
+//       on every daily PR is reviewer noise. Host chains that are themselves
+//       still live (the killed asset is a bridged/LST derivative of some other
+//       dead chain) are excluded.
 //
 //   Output is REPORT-ONLY. The script mutates nothing in zone_assets.json or
 //   chain.json. It writes:
@@ -882,37 +884,46 @@ function renderReport({ part1, part2, part3 }) {
   lines.push('');
   lines.push('## 📤 Marked killed by Osmosis, not yet killed upstream');
   lines.push('');
-  lines.push(
-    `_Chains Osmosis has flagged \`source_chain_killed\` on at least one asset, ` +
-      `but whose chain-registry status is not yet \`killed\`. Each is a candidate ` +
-      `for an upstream \`status: killed\` PR to cosmos/chain-registry — the ` +
-      `curation is already done on our side. "First seen down" is the earliest ` +
-      `\`state.lastDowntimeDate\` across the chain's killed assets (an approximate ` +
-      `first-observed-dead date, not a precise flag timestamp; chains sharing one ` +
-      `date were backfilled when this tracking began)._`
-  );
-  lines.push('');
-  const part3Candidates = part3?.candidates ?? [];
-  const part3Excluded = part3?.excludedHostChains ?? [];
-  if (!part3Candidates.length) {
-    lines.push('_None — our killed set matches upstream._');
+  if (!weekly) {
+    // Static worklist that only changes when we mark a new chain killed or an
+    // upstream PR merges — daily repetition is reviewer noise, so show it on
+    // the weekly run only (same cadence as Part 2).
+    lines.push(
+      '_Skipped this run (upstreaming worklist is shown on the weekly run to keep daily PRs concise)._'
+    );
   } else {
-    lines.push('| Chain | Registry status | Killed assets | First seen down |');
-    lines.push('|-------|-----------------|---------------|-----------------|');
-    for (const r of part3Candidates) {
+    lines.push(
+      `_Chains Osmosis has flagged \`source_chain_killed\` on at least one asset, ` +
+        `but whose chain-registry status is not yet \`killed\`. Each is a candidate ` +
+        `for an upstream \`status: killed\` PR to cosmos/chain-registry — the ` +
+        `curation is already done on our side. "First seen down" is the earliest ` +
+        `\`state.lastDowntimeDate\` across the chain's killed assets (an approximate ` +
+        `first-observed-dead date, not a precise flag timestamp; chains sharing one ` +
+        `date were backfilled when this tracking began)._`
+    );
+    lines.push('');
+    const part3Candidates = part3?.candidates ?? [];
+    const part3Excluded = part3?.excludedHostChains ?? [];
+    if (!part3Candidates.length) {
+      lines.push('_None — our killed set matches upstream._');
+    } else {
+      lines.push('| Chain | Registry status | Killed assets | First seen down |');
+      lines.push('|-------|-----------------|---------------|-----------------|');
+      for (const r of part3Candidates) {
+        lines.push(
+          `| ${r.chainName} | ${r.registryStatus} | ${r.assetCount} | ` +
+            `${r.firstSeenDown ? r.firstSeenDown.slice(0, 10) : '-'} |`
+        );
+      }
+    }
+    if (part3Excluded.length) {
+      lines.push('');
       lines.push(
-        `| ${r.chainName} | ${r.registryStatus} | ${r.assetCount} | ` +
-          `${r.firstSeenDown ? r.firstSeenDown.slice(0, 10) : '-'} |`
+        `_Excluded (host chain still live — the killed asset is a bridged / ` +
+          `liquid-staking derivative of another dead chain, so the host itself ` +
+          `should not be killed upstream): ${part3Excluded.join(', ')}._`
       );
     }
-  }
-  if (part3Excluded.length) {
-    lines.push('');
-    lines.push(
-      `_Excluded (host chain still live — the killed asset is a bridged / ` +
-        `liquid-staking derivative of another dead chain, so the host itself ` +
-        `should not be killed upstream): ${part3Excluded.join(', ')}._`
-    );
   }
 
   lines.push('');
@@ -930,13 +941,16 @@ async function main() {
 
   const part1 = await runPart1(state, chainlist, zoneAssets, streaks);
   const part2 = weekly ? await runPart2(state, chainlist, zoneAssets) : [];
-  // Part 3 is pure local data (no network), so it runs every time.
-  const part3 = buildKilledNotUpstream(
-    zoneAssets,
-    frontendAssetlist.assets,
-    state.assets,
-    state.chains
-  );
+  // Part 3 is a static upstreaming worklist; rendered weekly only (daily
+  // repetition is reviewer noise), so only compute it on weekly runs.
+  const part3 = weekly
+    ? buildKilledNotUpstream(
+        zoneAssets,
+        frontendAssetlist.assets,
+        state.assets,
+        state.chains
+      )
+    : { candidates: [], excludedHostChains: [] };
 
   if (!dryRun) {
     fs.writeFileSync(streaksPath, JSON.stringify(streaks, null, 2) + '\n', 'utf8');

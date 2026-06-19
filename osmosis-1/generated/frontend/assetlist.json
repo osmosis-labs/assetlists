@@ -2288,7 +2288,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/comdex/images/cmdx.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/comdex/images/cmdx.svg"
       },
-      "coingeckoId": "comdex",
       "categories": [
         "rwa"
       ],
@@ -6462,9 +6461,10 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": true,
-      "unstableReason": "market",
+      "unstableReason": "source_chain_killed",
       "disabled": false,
       "preview": false,
+      "tooltipMessage": "The Stargaze chain has shut down and migrated to the Cosmos Hub. This is a liquid-staked derivative of the old STARS; the underlying stake can no longer be unbonded on Stargaze. Redeem or unwind via Stride and migrate STARS via https://automigration.stargaze.zone/",
       "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },
     {
@@ -6899,24 +6899,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lambda/images/lambda.svg"
       },
       "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "lambda",
-            "chainId": "lambda_92000-1",
-            "sourceDenom": "ulamb",
-            "port": "transfer",
-            "channelId": "channel-2"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-378",
-            "path": "transfer/channel-378/ulamb"
-          }
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "lambda",
@@ -7870,24 +7853,7 @@
       "categories": [
         "defi"
       ],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "onomy",
-            "chainId": "onomy-mainnet-1",
-            "sourceDenom": "anom",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-525",
-            "path": "transfer/channel-525/anom"
-          }
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "onomy",
@@ -8392,14 +8358,14 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": true,
-      "unstableReason": "manual",
+      "unstableReason": "source_chain_killed",
       "disabled": false,
       "haltDeposits": true,
       "depositHaltReason": "manual",
       "haltWithdrawals": true,
       "withdrawalHaltReason": "manual",
       "preview": false,
-      "tooltipMessage": "The Quicksilver chain is currently halted and not producing blocks. Deposits and withdrawals are temporarily disabled until the chain resumes.",
+      "tooltipMessage": "This is a liquid-staked derivative of the old STARS. The Stargaze chain has shut down and migrated to the Cosmos Hub, so the underlying stake can no longer be unbonded on Stargaze. The Quicksilver chain is also currently halted; deposits and withdrawals are disabled. Migrate STARS via https://automigration.stargaze.zone/",
       "sortWith": {
         "chainName": "quicksilver",
         "sourceDenom": "uqck"
@@ -10107,24 +10073,7 @@
       "categories": [
         "nft_protocol"
       ],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "omniflixhub",
-            "chainId": "omniflixhub-1",
-            "sourceDenom": "uflix",
-            "port": "transfer",
-            "channelId": "channel-1"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-199",
-            "path": "transfer/channel-199/uflix"
-          }
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "omniflixhub",
@@ -14189,22 +14138,6 @@
           "name": "Starscan",
           "type": "external_interface",
           "depositUrl": "https://starscan.io/fxbridge?from=fxcore&to=osmosis&token=FX"
-        },
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "fxcore",
-            "chainId": "fxcore",
-            "sourceDenom": "FX",
-            "port": "transfer",
-            "channelId": "channel-19"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-2716",
-            "path": "transfer/channel-2716/FX"
-          }
         }
       ],
       "counterparty": [
@@ -18037,22 +17970,6 @@
           "name": "Starscan",
           "type": "external_interface",
           "depositUrl": "https://starscan.io/fxbridge?from=fxcore&to=osmosis&token=PUNDIX"
-        },
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "fxcore",
-            "chainId": "fxcore",
-            "sourceDenom": "eth0x0FD10b9899882a6f2fcb5c371E17e70FdEe00C38",
-            "port": "transfer",
-            "channelId": "channel-19"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-2716",
-            "path": "transfer/channel-2716/eth0x0FD10b9899882a6f2fcb5c371E17e70FdEe00C38"
-          }
         }
       ],
       "counterparty": [
@@ -18265,24 +18182,7 @@
       "categories": [
         "dweb"
       ],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "dhealth",
-            "chainId": "dhealth",
-            "sourceDenom": "udhp",
-            "port": "transfer",
-            "channelId": "channel-4"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-75030",
-            "path": "transfer/channel-75030/udhp"
-          }
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "dhealth",
@@ -24585,24 +24485,7 @@
       "categories": [
         "bridges"
       ],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "routerchain",
-            "chainId": "router_9600-1",
-            "sourceDenom": "route",
-            "port": "transfer",
-            "channelId": "channel-7"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-79180",
-            "path": "transfer/channel-79180/route"
-          }
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "routerchain",
@@ -27339,7 +27222,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Darkmatt.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Darkmatt.svg"
       },
-      "coingeckoId": "mantra-dao",
       "categories": [
         "rwa"
       ],
@@ -27555,24 +27437,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/omniflixhub/images/ygata.svg"
       },
       "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "omniflixhub",
-            "chainId": "omniflixhub-1",
-            "sourceDenom": "factory/omniflix1fwphj5p6qd8gtkehkzfgac38eur4uqzgz97uwvf6hsc0vjl004gqfj0xnv/ygata",
-            "port": "transfer",
-            "channelId": "channel-1"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-199",
-            "path": "transfer/channel-199/factory/omniflix1fwphj5p6qd8gtkehkzfgac38eur4uqzgz97uwvf6hsc0vjl004gqfj0xnv/ygata"
-          }
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "omniflixhub",
@@ -30422,24 +30287,7 @@
       "categories": [
         "liquid_staking"
       ],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "milkyway",
-            "chainId": "milkyway",
-            "sourceDenom": "umilk",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-89298",
-            "path": "transfer/channel-89298/umilk"
-          }
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "milkyway",
@@ -31104,24 +30952,7 @@
       "categories": [
         "liquid_staking"
       ],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "milkyway",
-            "chainId": "milkyway",
-            "sourceDenom": "factory/milk1qg5ega6dykkxc307y25pecuufrjkxkaggkkxh7nad0vhyhtuhw3ssgcye4/umilkBBN",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-89298",
-            "path": "transfer/channel-89298/factory/milk1qg5ega6dykkxc307y25pecuufrjkxkaggkkxh7nad0vhyhtuhw3ssgcye4/umilkBBN"
-          }
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "milkyway",
@@ -31421,14 +31252,16 @@
       "name": "Ripple (xrpl via Int3)",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
       "sortWith": {
         "chainName": "int3face",
         "sourceDenom": "uint3"
       },
-      "listingDate": "2025-01-01T00:00:00.000Z"
+      "listingDate": "2025-01-01T00:00:00.000Z",
+      "lastDowntimeDate": "2026-06-19T16:06:57.104Z"
     },
     {
       "chainName": "migaloo",
@@ -43027,24 +42860,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/onex/images/onex.svg"
       },
       "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "onex",
-            "chainId": "onex-mainnet-1",
-            "sourceDenom": "aonex",
-            "port": "transfer",
-            "channelId": "channel-6"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-74628",
-            "path": "transfer/channel-74628/aonex"
-          }
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "onex",
@@ -44989,6 +44805,47 @@
       "unstable": false,
       "disabled": false,
       "preview": false
+    },
+    {
+      "chainName": "fxcore",
+      "sourceDenom": "apundiai",
+      "coinMinimalDenom": "ibc/19F9C5CE416BAB6DA4D807CBF3C70D8860CEDD93F5FDE57CCD5C3930F4BA7FD2",
+      "symbol": "PUNDIAI",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/PUNDIAI.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/PUNDIAI.svg"
+      },
+      "coingeckoId": "pundi-aifx",
+      "categories": [],
+      "transferMethods": [],
+      "counterparty": [
+        {
+          "chainName": "fxcore",
+          "sourceDenom": "apundiai",
+          "chainType": "cosmos",
+          "chainId": "fxcore",
+          "symbol": "PUNDIAI",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/PUNDIAI.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/PUNDIAI.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/19F9C5CE416BAB6DA4D807CBF3C70D8860CEDD93F5FDE57CCD5C3930F4BA7FD2",
+      "name": "Pundi AIFX",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "source_chain_killed",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "source_chain_killed",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "source_chain_killed",
+      "preview": false,
+      "lastDowntimeDate": "2026-06-19T16:06:54.125Z"
     },
     {
       "chainName": "akash",
@@ -48237,58 +48094,6 @@
       ],
       "variantGroupKey": "ibc/F1CCCA9D4369F4DBAD7456232C1EE7A0D287D1D8AEF02D7290C69B26AF3EE136",
       "name": "Eden BOOST",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "fxcore",
-      "sourceDenom": "apundiai",
-      "coinMinimalDenom": "ibc/19F9C5CE416BAB6DA4D807CBF3C70D8860CEDD93F5FDE57CCD5C3930F4BA7FD2",
-      "symbol": "PUNDIAI",
-      "decimals": 18,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/PUNDIAI.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/PUNDIAI.svg"
-      },
-      "coingeckoId": "pundi-aifx",
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "fxcore",
-            "chainId": "fxcore",
-            "sourceDenom": "apundiai",
-            "port": "transfer",
-            "channelId": "channel-19"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-2716",
-            "path": "transfer/channel-2716/apundiai"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "fxcore",
-          "sourceDenom": "apundiai",
-          "chainType": "cosmos",
-          "chainId": "fxcore",
-          "symbol": "PUNDIAI",
-          "decimals": 18,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/PUNDIAI.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fxcore/images/PUNDIAI.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/19F9C5CE416BAB6DA4D807CBF3C70D8860CEDD93F5FDE57CCD5C3930F4BA7FD2",
-      "name": "Pundi AIFX",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

@@ -7885,7 +7885,9 @@
           "withdraw_url": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=xrpl&fromToken=XRP.int3"
         }
       ],
-      "_comment": "Ripple (xrpl via Int3) $XRP.xrpl.int3"
+      "_comment": "Ripple (xrpl via Int3) $XRP.xrpl.int3",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "migaloo",
@@ -11559,6 +11561,18 @@
         "nft_protocol"
       ],
       "_comment": "Stargaze $STARS"
+    },
+    {
+      "chain_name": "fxcore",
+      "base_denom": "apundiai",
+      "path": "transfer/channel-2716/apundiai",
+      "_comment": "Pundi AIFX $PUNDIAI",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     }
   ]
 }

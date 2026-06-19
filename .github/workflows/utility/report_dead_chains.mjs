@@ -368,15 +368,20 @@ function isAssetKilled(a) {
  * each { chainName, registryStatus, assetCount, firstSeenDown }.
  */
 function buildKilledNotUpstream(zoneAssets, frontendAssets, stateAssets, stateChains) {
-  // earliest lastDowntimeDate per Osmosis coinMinimalDenom
+  // state record by Osmosis coinMinimalDenom (state is keyed that way).
   const stateByDenom = new Map(
     (stateAssets ?? []).map((a) => [a.base_denom, a])
   );
-  // (chainName, sourceDenom) → coinMinimalDenom, to bridge a zone_asset to its
-  // state record (state is keyed by the Osmosis-side coinMinimalDenom).
-  const denomByChainSrc = new Map(
-    (frontendAssets ?? []).map((a) => [`${a.chainName}|${a.sourceDenom}`, a.coinMinimalDenom])
-  );
+  // (chainName, sourceDenom) → ALL matching coinMinimalDenoms. A single origin
+  // pair can be listed on more than one IBC path (re-pathed assets whose old,
+  // dead channel still lingers), each with a distinct coinMinimalDenom, so this
+  // is a multimap — collapsing to one denom would drop the others' state dates.
+  const denomsByChainSrc = new Map();
+  for (const a of frontendAssets ?? []) {
+    if (!a.chainName || !a.sourceDenom) continue;
+    const k = `${a.chainName}|${a.sourceDenom}`;
+    (denomsByChainSrc.get(k) ?? denomsByChainSrc.set(k, []).get(k)).push(a.coinMinimalDenom);
+  }
   // chain_name → is the chain's own endpoint validation currently passing?
   const chainAlive = new Map(
     (stateChains ?? []).map((c) => [c.chain_name, c.validationSuccess === true])
@@ -401,10 +406,13 @@ function buildKilledNotUpstream(zoneAssets, frontendAssets, stateAssets, stateCh
     }
     row.assetCount++;
 
-    const cmd = denomByChainSrc.get(`${a.chain_name}|${a.base_denom}`);
-    const downAt = cmd ? stateByDenom.get(cmd)?.lastDowntimeDate : undefined;
-    if (downAt && (!row.firstSeenDown || downAt < row.firstSeenDown)) {
-      row.firstSeenDown = downAt;
+    // Earliest downtime across EVERY coinMinimalDenom this (chain, base_denom)
+    // resolves to, so multi-path variants all contribute their date.
+    for (const cmd of denomsByChainSrc.get(`${a.chain_name}|${a.base_denom}`) ?? []) {
+      const downAt = stateByDenom.get(cmd)?.lastDowntimeDate;
+      if (downAt && (!row.firstSeenDown || downAt < row.firstSeenDown)) {
+        row.firstSeenDown = downAt;
+      }
     }
   }
 

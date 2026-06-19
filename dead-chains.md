@@ -18,3 +18,9 @@ hippoprotocol (live)
 
 _Skipped this run (governance-proposal scan runs weekly to bound CI cost and external load)._
 
+---
+
+## 📤 Marked killed by Osmosis, not yet killed upstream
+
+_Skipped this run (upstreaming worklist is shown on the weekly run to keep daily PRs concise)._
+

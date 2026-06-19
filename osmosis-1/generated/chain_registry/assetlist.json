@@ -1978,8 +1978,7 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/comdex/images/cmdx.png",
           "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/comdex/images/cmdx.svg"
         }
-      ],
-      "coingecko_id": "comdex"
+      ]
     },
     {
       "description": "Native token for the cheqd network",
@@ -22988,8 +22987,7 @@
             "circle": true
           }
         }
-      ],
-      "coingecko_id": "mantra-dao"
+      ]
     },
     {
       "description": "The native staking and governance token of AtomOne",
@@ -37631,6 +37629,41 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/19F9C5CE416BAB6DA4D807CBF3C70D8860CEDD93F5FDE57CCD5C3930F4BA7FD2",
+          "exponent": 0,
+          "aliases": [
+            "apundiai"
+          ]
+        },
+        {
+          "denom": "pundiai",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/19F9C5CE416BAB6DA4D807CBF3C70D8860CEDD93F5FDE57CCD5C3930F4BA7FD2",
+      "name": "Pundi AIFX",
+      "display": "pundiai",
+      "symbol": "PUNDIAI",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "fxcore",
+            "base_denom": "apundiai",
+            "channel_id": "channel-19"
+          },
+          "chain": {
+            "channel_id": "channel-2716",
+            "path": "transfer/channel-2716/apundiai"
+          }
+        }
+      ],
+      "coingecko_id": "pundi-aifx"
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
           "exponent": 0,
           "aliases": [
@@ -39936,41 +39969,6 @@
           }
         }
       ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/19F9C5CE416BAB6DA4D807CBF3C70D8860CEDD93F5FDE57CCD5C3930F4BA7FD2",
-          "exponent": 0,
-          "aliases": [
-            "apundiai"
-          ]
-        },
-        {
-          "denom": "pundiai",
-          "exponent": 18
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/19F9C5CE416BAB6DA4D807CBF3C70D8860CEDD93F5FDE57CCD5C3930F4BA7FD2",
-      "name": "Pundi AIFX",
-      "display": "pundiai",
-      "symbol": "PUNDIAI",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "fxcore",
-            "base_denom": "apundiai",
-            "channel_id": "channel-19"
-          },
-          "chain": {
-            "channel_id": "channel-2716",
-            "path": "transfer/channel-2716/apundiai"
-          }
-        }
-      ],
-      "coingecko_id": "pundi-aifx"
     },
     {
       "denom_units": [

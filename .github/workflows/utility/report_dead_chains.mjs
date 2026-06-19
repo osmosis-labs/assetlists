@@ -16,6 +16,16 @@
 //       feeds the existing check_extended_halts automation. Never auto-sets
 //       the field; keyword matching has false positives by nature.
 //
+//     Part 3 — Marked killed by Osmosis, not yet killed upstream. The inverse
+//       of Part 1: chains we have ALREADY flagged source_chain_killed on, but
+//       whose chain-registry status is still not "killed". The upstreaming
+//       worklist — each is a candidate for a `status: killed` PR to
+//       cosmos/chain-registry. Pure local data (no network), but rendered on
+//       the weekly run only: it's a slow-changing static list, so repeating it
+//       on every daily PR is reviewer noise. Host chains that are themselves
+//       still live (the killed asset is a bridged/LST derivative of some other
+//       dead chain) are excluded.
+//
 //   Output is REPORT-ONLY. The script mutates nothing in zone_assets.json or
 //   chain.json. It writes:
 //     • generated/state/dead_chain_streaks.json — persistent per-chain
@@ -160,6 +170,7 @@ const zonePath = path.join('..', '..', '..', zoneBasePath);
 const statePath = path.join(zonePath, 'generated', 'state', 'state.json');
 const streaksPath = path.join(zonePath, 'generated', 'state', 'dead_chain_streaks.json');
 const chainlistPath = path.join(zonePath, 'generated', 'frontend', 'chainlist.json');
+const frontendAssetlistPath = path.join(zonePath, 'generated', 'frontend', 'assetlist.json');
 const zoneAssetsPath = (() => {
   const filePrefix = zoneBasePath.split('-')[0];
   return path.join(zonePath, `${filePrefix}.zone_assets.json`);
@@ -319,6 +330,97 @@ function knownTerminalChains(zoneAssets) {
     }
   }
   return terminal;
+}
+
+/** True when any of an asset's reason fields is source_chain_killed. */
+function isAssetKilled(a) {
+  return (
+    a.osmosis_unstable_reason === KILLED_REASON ||
+    a.osmosis_deposit_halt_reason === KILLED_REASON ||
+    a.osmosis_withdrawal_halt_reason === KILLED_REASON
+  );
+}
+
+// ── Part 3: marked-killed-by-Osmosis-but-still-live-upstream ────────────────
+
+/**
+ * Upstreaming worklist. Chains Osmosis has flagged source_chain_killed on at
+ * least one asset, but whose chain-registry status is NOT yet "killed". Each is
+ * a candidate for an upstream `status: killed` PR (we've already done the
+ * curation; the registry just hasn't caught up). Pure local data — no network —
+ * so this runs on every run, daily and weekly.
+ *
+ * For "when did we mark it dead", we don't record a dedicated flag timestamp,
+ * so we surface state.lastDowntimeDate as the closest proxy: the earliest
+ * downtime first observed across the chain's killed assets. Labelled "first
+ * seen down" rather than "marked killed" because that's what it actually is —
+ * an approximate first-observed-dead date (and several chains share a single
+ * backfill timestamp from when this tracking began).
+ *
+ * Host-chain exclusion: a chain whose own endpoints are still healthy
+ * (state validationSuccess === true) is alive — the killed asset on it is a
+ * wrapped/bridged/liquid-staking derivative of some OTHER dead chain (e.g. the
+ * Router `.rt` assets on `osmosis`, milkINIT on `initia`, LSTs of dead chains
+ * on `stride`/`quicksilver`). Killing the host chain upstream would be wrong,
+ * so these are excluded from the worklist and surfaced separately for context.
+ *
+ * Returns { candidates, excludedHostChains } — candidates sorted by chain name,
+ * each { chainName, registryStatus, assetCount, firstSeenDown }.
+ */
+function buildKilledNotUpstream(zoneAssets, frontendAssets, stateAssets, stateChains) {
+  // state record by Osmosis coinMinimalDenom (state is keyed that way).
+  const stateByDenom = new Map(
+    (stateAssets ?? []).map((a) => [a.base_denom, a])
+  );
+  // (chainName, sourceDenom) → ALL matching coinMinimalDenoms. A single origin
+  // pair can be listed on more than one IBC path (re-pathed assets whose old,
+  // dead channel still lingers), each with a distinct coinMinimalDenom, so this
+  // is a multimap — collapsing to one denom would drop the others' state dates.
+  const denomsByChainSrc = new Map();
+  for (const a of frontendAssets ?? []) {
+    if (!a.chainName || !a.sourceDenom) continue;
+    const k = `${a.chainName}|${a.sourceDenom}`;
+    (denomsByChainSrc.get(k) ?? denomsByChainSrc.set(k, []).get(k)).push(a.coinMinimalDenom);
+  }
+  // chain_name → is the chain's own endpoint validation currently passing?
+  const chainAlive = new Map(
+    (stateChains ?? []).map((c) => [c.chain_name, c.validationSuccess === true])
+  );
+
+  const byChain = new Map();
+  for (const a of zoneAssets?.assets ?? []) {
+    if (!isAssetKilled(a)) continue;
+    const registryStatus = getFileProperty(a.chain_name, 'chain', 'status') ?? 'unknown';
+    if (registryStatus === 'killed') continue; // already upstreamed — nothing to do
+
+    let row = byChain.get(a.chain_name);
+    if (!row) {
+      row = {
+        chainName: a.chain_name,
+        registryStatus,
+        assetCount: 0,
+        firstSeenDown: null,
+        hostAlive: chainAlive.get(a.chain_name) === true,
+      };
+      byChain.set(a.chain_name, row);
+    }
+    row.assetCount++;
+
+    // Earliest downtime across EVERY coinMinimalDenom this (chain, base_denom)
+    // resolves to, so multi-path variants all contribute their date.
+    for (const cmd of denomsByChainSrc.get(`${a.chain_name}|${a.base_denom}`) ?? []) {
+      const downAt = stateByDenom.get(cmd)?.lastDowntimeDate;
+      if (downAt && (!row.firstSeenDown || downAt < row.firstSeenDown)) {
+        row.firstSeenDown = downAt;
+      }
+    }
+  }
+
+  const all = [...byChain.values()].sort((a, b) => a.chainName.localeCompare(b.chainName));
+  return {
+    candidates: all.filter((r) => !r.hostAlive),
+    excludedHostChains: all.filter((r) => r.hostAlive).map((r) => r.chainName),
+  };
 }
 
 // ── Part 1: dead-chain candidates ──────────────────────────────────────────
@@ -641,7 +743,7 @@ async function runPart2(state, chainlist, zoneAssets) {
 
 // ── Report rendering ─────────────────────────────────────────────────────────
 
-function renderReport({ part1, part2 }) {
+function renderReport({ part1, part2, part3 }) {
   const lines = [];
   lines.push('## ⚰️ Dead chain candidates');
   lines.push('');
@@ -783,6 +885,55 @@ function renderReport({ part1, part2 }) {
       );
     }
   }
+
+  // ── Part 3: marked killed by Osmosis, still live upstream ──────────────────
+  lines.push('');
+  lines.push('---');
+  lines.push('');
+  lines.push('## 📤 Marked killed by Osmosis, not yet killed upstream');
+  lines.push('');
+  if (!weekly) {
+    // Static worklist that only changes when we mark a new chain killed or an
+    // upstream PR merges — daily repetition is reviewer noise, so show it on
+    // the weekly run only (same cadence as Part 2).
+    lines.push(
+      '_Skipped this run (upstreaming worklist is shown on the weekly run to keep daily PRs concise)._'
+    );
+  } else {
+    lines.push(
+      `_Chains Osmosis has flagged \`source_chain_killed\` on at least one asset, ` +
+        `but whose chain-registry status is not yet \`killed\`. Each is a candidate ` +
+        `for an upstream \`status: killed\` PR to cosmos/chain-registry — the ` +
+        `curation is already done on our side. "First seen down" is the earliest ` +
+        `\`state.lastDowntimeDate\` across the chain's killed assets (an approximate ` +
+        `first-observed-dead date, not a precise flag timestamp; chains sharing one ` +
+        `date were backfilled when this tracking began)._`
+    );
+    lines.push('');
+    const part3Candidates = part3?.candidates ?? [];
+    const part3Excluded = part3?.excludedHostChains ?? [];
+    if (!part3Candidates.length) {
+      lines.push('_None — our killed set matches upstream._');
+    } else {
+      lines.push('| Chain | Registry status | Killed assets | First seen down |');
+      lines.push('|-------|-----------------|---------------|-----------------|');
+      for (const r of part3Candidates) {
+        lines.push(
+          `| ${r.chainName} | ${r.registryStatus} | ${r.assetCount} | ` +
+            `${r.firstSeenDown ? r.firstSeenDown.slice(0, 10) : '-'} |`
+        );
+      }
+    }
+    if (part3Excluded.length) {
+      lines.push('');
+      lines.push(
+        `_Excluded (host chain still live — the killed asset is a bridged / ` +
+          `liquid-staking derivative of another dead chain, so the host itself ` +
+          `should not be killed upstream): ${part3Excluded.join(', ')}._`
+      );
+    }
+  }
+
   lines.push('');
   return lines.join('\n');
 }
@@ -792,11 +943,22 @@ function renderReport({ part1, part2 }) {
 async function main() {
   const state = loadJSON(statePath, { chains: [], assets: [] });
   const chainlist = loadJSON(chainlistPath, { chains: [] });
+  const frontendAssetlist = loadJSON(frontendAssetlistPath, { assets: [] });
   const zoneAssets = loadJSON(zoneAssetsPath, { assets: [] });
   const streaks = loadJSON(streaksPath, {});
 
   const part1 = await runPart1(state, chainlist, zoneAssets, streaks);
   const part2 = weekly ? await runPart2(state, chainlist, zoneAssets) : [];
+  // Part 3 is a static upstreaming worklist; rendered weekly only (daily
+  // repetition is reviewer noise), so only compute it on weekly runs.
+  const part3 = weekly
+    ? buildKilledNotUpstream(
+        zoneAssets,
+        frontendAssetlist.assets,
+        state.assets,
+        state.chains
+      )
+    : { candidates: [], excludedHostChains: [] };
 
   if (!dryRun) {
     fs.writeFileSync(streaksPath, JSON.stringify(streaks, null, 2) + '\n', 'utf8');
@@ -804,7 +966,7 @@ async function main() {
 
   // The report goes to stdout so the workflow can capture and append it to the
   // PR body, matching how validateEndpoints generateReport is consumed.
-  const report = renderReport({ part1, part2 });
+  const report = renderReport({ part1, part2, part3 });
   process.stdout.write(report + '\n');
 
   // Diagnostic counts to stderr (kept out of the captured report).
@@ -813,7 +975,9 @@ async function main() {
       `candidates=${part1.candidates.length} ` +
       `probe_mismatches=${part1.probeMismatches.length} ` +
       `unverifiable=${part1.unverifiable.length} ` +
-      `planned_shutdown_hits=${part2.length} weekly=${weekly}`
+      `planned_shutdown_hits=${part2.length} ` +
+      `killed_not_upstream=${part3.candidates.length} ` +
+      `killed_excluded_host=${part3.excludedHostChains.length} weekly=${weekly}`
   );
 }
 

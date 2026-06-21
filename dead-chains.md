@@ -4,7 +4,7 @@ _Chains Osmosis lists an asset from, registered as live, whose every RPC + REST 
 
 > **On the cosmos.directory signal:** it sources its chain and endpoint list from the cosmos chain-registry, then probes those endpoints. So a stale `lastSuccessAt` age IS an independent measurement (real probes against live endpoints), but a 404 / "not tracked" only means the chain isn't in the registry's monitored set (partly circular with the very registry change we're proposing), so treat 404-only corroboration as weak. The local 7-run streak is the independent half of the gate._
 
-_Candidate list publishes on the weekly corroborated run. 28 chain(s) currently at or past the 7-run streak, pending corroboration._
+_Candidate list publishes on the weekly corroborated run. 30 chain(s) currently at or past the 7-run streak, pending corroboration._
 
 <details><summary>Unverifiable chains (zero testable endpoints, 1) — cannot confirm dead or alive</summary>
 

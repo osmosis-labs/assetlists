@@ -626,10 +626,19 @@ async function runPart1(state, chainlist, zoneAssets, streaks, heights) {
         // not producing blocks regardless of whether endpoints answer.
         verdict = 'frozen';
       }
+    } else if ((heights[chainName]?.stallRuns ?? 0) >= FROZEN_HEIGHT_RUNS) {
+      // No fresh height this run (RPC didn't answer /status), but a PRIOR run
+      // already established a mature frozen stall. A missing probe is not
+      // evidence the chain recovered — to recover it would have to answer
+      // /status with an ADVANCED height, which it didn't. So carry the frozen
+      // verdict forward rather than letting the run resolve to 'alive' (which
+      // would reset the kill streak and leave it diverged from the persisted
+      // stall evidence). Mirrors the unverifiable-with-mature-streak handling.
+      // The height record is left untouched (no new reading to record).
+      verdict = 'frozen';
     }
-    // No height this run (RPC didn't answer /status): leave the height record
-    // untouched (carry the prior height/stall forward), same spirit as the
-    // unverifiable freeze — a missing probe is not evidence the chain recovered.
+    // No height this run AND no mature prior stall: leave the height record
+    // untouched and let the verdict stand — there is no frozen evidence to carry.
 
     // Daily staleness snapshot. Any chain with a stale block reading this run
     // (an endpoint answered but its block is >1h old) is recorded for the daily

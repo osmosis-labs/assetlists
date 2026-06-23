@@ -2,12 +2,19 @@
 //   Report-only detection of two lifecycle signals that nothing else surfaces:
 //
 //     Part 1 — Dead chain candidates. A chain whose chain-registry status is
-//       still "live"/"upcoming" but whose every RPC and REST endpoint has
-//       failed validation (or returned only stale blocks) for N consecutive
-//       daily runs, corroborated by status.cosmos.directory showing no
-//       recent endpoint success. These are candidates for a chain-registry
-//       `status: killed` PR — a human decides; this script never asserts a
-//       chain is dead and never mutates chain.json.
+//       still "live"/"upcoming" but which has shown a death signal on the
+//       Osmosis endpoint probe for N consecutive daily runs, corroborated by
+//       status.cosmos.directory showing no recent endpoint success. The endpoint
+//       death signal is one of: every RPC and REST endpoint failing connectivity
+//       (all_dead), an endpoint answering with a >1h-old block (stale), or the
+//       block height not advancing across runs while endpoints still answer
+//       (frozen — a halted chain whose node still serves status). These are
+//       candidates for a chain-registry `status: killed` PR — a human decides;
+//       this script never asserts a chain is dead and never mutates chain.json.
+//       Part 1 also emits a DAILY staleness watch-list (independent of the
+//       streak gate): every chain answering with a >1h-old block, split into
+//       "recently stale — possibly halted" (under a month, shown visibly so a
+//       fresh halt is caught early) and a collapsed long-stale block.
 //
 //     Part 2 — Possible planned shutdowns. Scans on-chain governance proposals
 //       (Cosmos SDK gov v1/v1beta1) for shutdown/sunset language on chains
@@ -31,6 +38,11 @@
 //     • generated/state/dead_chain_streaks.json — persistent per-chain
 //       consecutive-failure counters (owned solely by this script, so the
 //       wholesale record replacement in validateEndpoints.mjs can't wipe it).
+//     • generated/state/dead_chain_heights.json — persistent per-chain last
+//       block height + consecutive-stall run count, for the frozen-height
+//       signal. Separate from the streaks file because it must survive a healthy
+//       run (the streak is deleted on health, but the last height must persist so
+//       a later freeze is detectable). Also owned solely by this script.
 //     • A markdown block on stdout, captured by the workflow and appended to
 //       the daily [AUTO] PR body.
 //
@@ -45,7 +57,8 @@
 //   --weekly   Also run Part 2 (gov-proposal scan) and the cosmos.directory
 //              corroboration for Part 1. Without it, Part 1 reports purely on
 //              local state.json signals (no external calls).
-//   --dry-run  Do not write dead_chain_streaks.json; print the report only.
+//   --dry-run  Do not write the state files (dead_chain_streaks.json,
+//              dead_chain_heights.json); print the report only.
 
 import * as fs from 'fs';
 import * as path from 'path';
@@ -69,6 +82,30 @@ const DEAD_STREAK_THRESHOLD = 7;
 // this. Mirrors the spirit of remove-stale-endpoints.py's 30-day default.
 const COSMOS_DIRECTORY_STALE_DAYS = 14;
 
+// Consecutive runs of UNCHANGED block height before a chain whose endpoints
+// still answer /status is judged "frozen" (consensus halted, node serving a
+// stale-but-live-looking status). At the daily cadence each run is ~1 day apart,
+// so a live chain advances its height every run; 2 identical heights in a row is
+// already a strong halt signal while tolerating a single odd run (a cached
+// response, or our probe hitting one lagging node). The frozen verdict then
+// still has to clear the same DEAD_STREAK_THRESHOLD + cosmos.directory gate as
+// any other death signal before it is published as a candidate.
+const FROZEN_HEIGHT_RUNS = 2;
+
+// Daily staleness watch-list split. Every chain whose endpoints answer but whose
+// latest block is over an hour old (the `stale` verdict) is surfaced daily for
+// visibility, independent of the 7-run kill streak. Within that, a chain stale
+// for LESS than this many days is the higher-priority case: it may be a chain
+// that has *just* halted (a live incident worth catching early), so it goes in
+// the visible summary rather than a collapsed block. A chain stale longer than
+// this is most likely long-abandoned — still listed, but folded away. Purely a
+// presentation split; both tiers feed the kill streak identically.
+//
+// 28 days = four daily runs short of a full month, so a chain that halts is shown
+// visibly for at least its first ~3 weeks of staleness (well past the point a
+// real halt is actionable) before folding into the collapsed long-stale block.
+const RECENT_STALE_DAYS = 28;
+
 // Per-chain HTTP timeout for the weekly external lookups.
 const HTTP_TIMEOUT_MS = 8000;
 
@@ -76,11 +113,10 @@ const HTTP_TIMEOUT_MS = 8000;
 // run, the dominant noise was old, already-resolved governance (upgrade halts,
 // token merges, inflation tweaks) from months/years back that merely contained
 // the word "sunset"/"shutdown". A genuine planned shutdown a curator can still
-// act on is, by definition, recent. So we skip proposals submitted longer ago
-// than this — UNLESS the proposal yields an extracted target date/height, since
-// a shutdown can be FILED months before it takes effect (pundix: filed
-// 2025-12, closure 2026-03), and that future-dated case is exactly the one we
-// must not discard. submit_time is top-level on both gov v1 and v1beta1.
+// act on is, by definition, recent. So we skip any proposal submitted longer ago
+// than this — a hard cutoff with no exceptions (a proposal this old is dropped
+// even if it names a concrete future date/height). submit_time is top-level on
+// both gov v1 and v1beta1.
 const SHUTDOWN_PROPOSAL_MAX_AGE_DAYS = 62;
 
 // Gov-proposal scan keywords, in two precision tiers.
@@ -169,6 +205,12 @@ const zoneBasePath = positional[0] || 'osmosis-1';
 const zonePath = path.join('..', '..', '..', zoneBasePath);
 const statePath = path.join(zonePath, 'generated', 'state', 'state.json');
 const streaksPath = path.join(zonePath, 'generated', 'state', 'dead_chain_streaks.json');
+// Per-chain block-height history for run-over-run progression. Kept SEPARATE
+// from the failure-streak file because it must survive a healthy run: when a
+// chain's endpoints pass, its streak is deleted, but we still need the last
+// height to detect a chain that goes from healthy to frozen. Owned solely by
+// this script (like dead_chain_streaks.json).
+const heightsPath = path.join(zonePath, 'generated', 'state', 'dead_chain_heights.json');
 const chainlistPath = path.join(zonePath, 'generated', 'frontend', 'chainlist.json');
 const frontendAssetlistPath = path.join(zonePath, 'generated', 'frontend', 'assetlist.json');
 const zoneAssetsPath = (() => {
@@ -196,11 +238,63 @@ async function fetchJsonWithTimeout(url) {
 }
 
 /**
+ * Highest block height reported by any tested RPC endpoint this run, or null if
+ * no endpoint answered /status. validateEndpoints attaches latestBlockHeight to
+ * the RPC_ENDPOINTS ("status") test result. Used for run-over-run progression:
+ * a height that does not advance across runs means the chain has halted, even if
+ * its RPC still answers.
+ */
+function currentHeightFromState(stateChain) {
+  let best = null;
+  for (const e of stateChain?.allTestedEndpoints ?? []) {
+    for (const t of e.testResults ?? []) {
+      if (typeof t.latestBlockHeight === 'number' && Number.isFinite(t.latestBlockHeight)) {
+        if (best === null || t.latestBlockHeight > best) best = t.latestBlockHeight;
+      }
+    }
+  }
+  return best;
+}
+
+/**
+ * The freshest stale-block reading across a chain's tested endpoints this run:
+ * the most recent latestBlockTime among status results flagged stale, plus the
+ * height seen alongside it. "Freshest" (newest block time) deliberately — if any
+ * endpoint reports a stale-but-newer block we show that, so the displayed age is
+ * the least-alarming true reading, never overstated. Returns null when no stale
+ * status result carries a usable block time.
+ */
+function staleBlockInfo(stateChain) {
+  let newestMs = null;
+  let info = null;
+  for (const e of stateChain?.allTestedEndpoints ?? []) {
+    for (const t of e.testResults ?? []) {
+      if (t.stale !== true || !t.latestBlockTime) continue;
+      const ms = new Date(t.latestBlockTime).getTime();
+      if (Number.isNaN(ms)) continue;
+      if (newestMs === null || ms > newestMs) {
+        newestMs = ms;
+        info = {
+          blockTime: t.latestBlockTime,
+          ageHours: (nowMs - ms) / (60 * 60 * 1000),
+          height:
+            typeof t.latestBlockHeight === 'number' ? t.latestBlockHeight : null,
+        };
+      }
+    }
+  }
+  return info;
+}
+
+/**
  * Per-chain liveness verdict from this run's state.json record. A chain counts
- * as "all-dead" only when BOTH RPC and REST connectivity failed (matching the
- * report logic already in validateEndpoints), OR every endpoint that did
- * answer reported a stale block. A chain with zero tested endpoints is
- * "unverifiable" (can't be probed), reported separately and never auto-flagged.
+ * as "all_dead" only when NO tested endpoint — RPC or REST — passed connectivity
+ * (not just CORS; connectivity excludes CORS). "stale" means some endpoint
+ * answered but reported a block older than the wall-clock staleness window. A
+ * chain with zero tested endpoints is "unverifiable" (can't be probed), reported
+ * separately and never auto-flagged. The "frozen" verdict (height not advancing
+ * across runs) is NOT decided here — it needs the prior run's height, which lives
+ * in the streak state, so runPart1 layers it on top of this single-run verdict.
  */
 function classifyChainFromState(stateChain) {
   if (!stateChain) return { verdict: 'unknown' };
@@ -208,7 +302,7 @@ function classifyChainFromState(stateChain) {
   const tested = stateChain.allTestedEndpoints ?? [];
   if (tested.length === 0) return { verdict: 'unverifiable' };
 
-  // validationSuccess is true when a working RPC AND REST were both found.
+  // validationSuccess is true when a working RPC OR REST connectivity was found.
   if (stateChain.validationSuccess === true) return { verdict: 'alive' };
 
   // validationSuccess false → at least one direction has no working endpoint.
@@ -425,7 +519,7 @@ function buildKilledNotUpstream(zoneAssets, frontendAssets, stateAssets, stateCh
 
 // ── Part 1: dead-chain candidates ──────────────────────────────────────────
 
-async function runPart1(state, chainlist, zoneAssets, streaks) {
+async function runPart1(state, chainlist, zoneAssets, streaks, heights) {
   const knownTerminal = knownTerminalChains(zoneAssets);
 
   populateChainDirectories();
@@ -443,6 +537,11 @@ async function runPart1(state, chainlist, zoneAssets, streaks) {
   // actual candidates by cosmos.directory corroboration below (weekly only).
   const streakReached = [];
   const unverifiable = [];
+  // Daily snapshot of every chain whose endpoints answer but report a block over
+  // an hour old (verdict 'stale'), regardless of streak maturity. Informational;
+  // it does not change candidate gating. Split into recent vs long-stale at
+  // render time. Each row: { chainName, registryStatus, ageHours, height, streak }.
+  const currentlyStale = [];
 
   for (const stateChain of state.chains ?? []) {
     const chainName = stateChain.chain_name;
@@ -450,6 +549,7 @@ async function runPart1(state, chainlist, zoneAssets, streaks) {
 
     if (!chainsWithAssets.has(chainName)) {
       delete streaks[chainName];
+      delete heights[chainName];
       continue;
     }
 
@@ -460,6 +560,7 @@ async function runPart1(state, chainlist, zoneAssets, streaks) {
     const chainType = getFileProperty(chainName, 'chain', 'chain_type');
     if (chainType !== 'cosmos') {
       delete streaks[chainName];
+      delete heights[chainName];
       continue;
     }
 
@@ -467,6 +568,7 @@ async function runPart1(state, chainlist, zoneAssets, streaks) {
     // Already killed upstream → nothing to surface.
     if (registryStatus === 'killed') {
       delete streaks[chainName];
+      delete heights[chainName];
       continue;
     }
 
@@ -476,10 +578,11 @@ async function runPart1(state, chainlist, zoneAssets, streaks) {
     // same exemption in Part 2.
     if (knownTerminal.has(chainName)) {
       delete streaks[chainName];
+      delete heights[chainName];
       continue;
     }
 
-    const { verdict } = classifyChainFromState(stateChain);
+    let { verdict } = classifyChainFromState(stateChain);
 
     if (verdict === 'unverifiable') {
       // No testable endpoints this run. Don't advance the streak (no new
@@ -504,29 +607,88 @@ async function runPart1(state, chainlist, zoneAssets, streaks) {
       continue;
     }
 
-    const isDeadSignal = verdict === 'all_dead' || verdict === 'stale';
+    // Block-height progression. A chain whose endpoints still answer /status but
+    // whose height does not advance run-over-run has halted consensus — a death
+    // signal that connectivity (endpoints respond) and wall-clock staleness (the
+    // node may serve a recent-looking cached time) can both miss. Tracked in its
+    // own persisted map so the last height survives a healthy run (when the
+    // streak is deleted). stallRuns counts consecutive runs at the SAME height,
+    // the run that first set a height counting as 1; FROZEN_HEIGHT_RUNS in a row
+    // → frozen.
+    const currentHeight = currentHeightFromState(stateChain);
+    if (currentHeight !== null) {
+      const prevH = heights[chainName];
+      const stallRuns =
+        prevH && prevH.height === currentHeight ? (prevH.stallRuns ?? 1) + 1 : 1;
+      heights[chainName] = { height: currentHeight, stallRuns, lastSeen: nowIso };
+      if (stallRuns >= FROZEN_HEIGHT_RUNS) {
+        // Frozen overrides a benign verdict (alive/partial/stale): the chain is
+        // not producing blocks regardless of whether endpoints answer.
+        verdict = 'frozen';
+      }
+    } else if ((heights[chainName]?.stallRuns ?? 0) >= FROZEN_HEIGHT_RUNS) {
+      // No fresh height this run (RPC didn't answer /status), but a PRIOR run
+      // already established a mature frozen stall. A missing probe is not
+      // evidence the chain recovered — to recover it would have to answer
+      // /status with an ADVANCED height, which it didn't. So carry the frozen
+      // verdict forward rather than letting the run resolve to 'alive' (which
+      // would reset the kill streak and leave it diverged from the persisted
+      // stall evidence). Mirrors the unverifiable-with-mature-streak handling.
+      // The height record is left untouched (no new reading to record).
+      verdict = 'frozen';
+    }
+    // No height this run AND no mature prior stall: leave the height record
+    // untouched and let the verdict stand — there is no frozen evidence to carry.
+
+    // Daily staleness snapshot. Any chain with a stale block reading this run
+    // (an endpoint answered but its block is >1h old) is recorded for the daily
+    // watch-list, independent of streak maturity. Captured here, but the row is
+    // pushed AFTER the streak is resolved below so the displayed streak reflects
+    // what actually happened this run — a stale RPC reading does NOT always
+    // advance the streak: if REST connectivity passes the run verdict is 'alive'
+    // and the streak resets to 0, even though one /status read was stale.
+    const staleInfo = staleBlockInfo(stateChain);
+
+    const isDeadSignal =
+      verdict === 'all_dead' || verdict === 'stale' || verdict === 'frozen';
+    let resolvedStreak = 0;
     if (!isDeadSignal) {
-      // Any health on this run resets the streak.
+      // Any health on this run resets the streak. (Height history is preserved in
+      // the separate heights map, so a later freeze is still detectable.) A stale
+      // RPC reading on an otherwise-healthy chain still lands on the watch-list
+      // below, but with a streak of 0 — it did not advance the kill streak.
       delete streaks[chainName];
-      continue;
+    } else {
+      // Increment the persistent consecutive-failure streak.
+      const prev = streaks[chainName] ?? { streak: 0, firstSeen: nowIso };
+      const next = {
+        streak: prev.streak + 1,
+        firstSeen: prev.firstSeen ?? nowIso,
+        lastSeen: nowIso,
+        lastVerdict: verdict,
+      };
+      streaks[chainName] = next;
+      resolvedStreak = next.streak;
     }
 
-    // Increment the persistent consecutive-failure streak.
-    const prev = streaks[chainName] ?? { streak: 0, firstSeen: nowIso };
-    const next = {
-      streak: prev.streak + 1,
-      firstSeen: prev.firstSeen ?? nowIso,
-      lastSeen: nowIso,
-      lastVerdict: verdict,
-    };
-    streaks[chainName] = next;
+    if (staleInfo) {
+      currentlyStale.push({
+        chainName,
+        registryStatus: registryStatus ?? 'unknown',
+        ageHours: staleInfo.ageHours,
+        height: staleInfo.height,
+        streak: resolvedStreak,
+      });
+    }
 
-    if (next.streak >= DEAD_STREAK_THRESHOLD) {
+    if (!isDeadSignal) continue;
+
+    if (resolvedStreak >= DEAD_STREAK_THRESHOLD) {
       streakReached.push({
         chainName,
         registryStatus: registryStatus ?? 'unknown',
-        streak: next.streak,
-        firstSeen: next.firstSeen,
+        streak: resolvedStreak,
+        firstSeen: streaks[chainName].firstSeen,
         verdict,
       });
     }
@@ -560,7 +722,14 @@ async function runPart1(state, chainlist, zoneAssets, streaks) {
     }
   }
 
-  return { streakReached, candidates, probeMismatches, unverifiable, weeklyGated: weekly };
+  return {
+    streakReached,
+    candidates,
+    probeMismatches,
+    unverifiable,
+    currentlyStale,
+    weeklyGated: weekly,
+  };
 }
 
 // ── Part 2: planned-shutdown discovery via governance proposals ─────────────
@@ -642,22 +811,17 @@ async function scanGovProposals(chainName, restAddress) {
 
       const targets = extractTargets(`${title}\n${body}`);
 
-      // Recency gate. Drop proposals filed longer ago than the cutoff, since an
-      // actionable planned shutdown is recent by nature and the old hits are
-      // resolved-governance noise. The exception is a proposal that names a
-      // concrete target date/height: a shutdown is often filed well before it
-      // takes effect (pundix filed 2025-12, closure 2026-03), so a target-
-      // bearing proposal is kept regardless of filing age. submit_time absent
-      // (unparseable) → keep, so a missing timestamp never silently hides a hit.
+      // Recency gate (hard cutoff). Drop proposals filed longer ago than the
+      // cutoff, since an actionable planned shutdown is recent by nature and the
+      // old hits are resolved-governance noise. There is no future-target
+      // exception: a proposal filed more than the cutoff ago is dropped even if
+      // it names a concrete date/height. submit_time absent (unparseable) → keep,
+      // so a missing timestamp never silently hides a hit.
       const submitMs = p.submit_time ? new Date(p.submit_time).getTime() : NaN;
       const ageDays = Number.isNaN(submitMs)
         ? null
         : (nowMs - submitMs) / (24 * 60 * 60 * 1000);
-      if (
-        targets.length === 0 &&
-        ageDays !== null &&
-        ageDays > SHUTDOWN_PROPOSAL_MAX_AGE_DAYS
-      ) {
+      if (ageDays !== null && ageDays > SHUTDOWN_PROPOSAL_MAX_AGE_DAYS) {
         continue;
       }
 
@@ -748,11 +912,19 @@ function renderReport({ part1, part2, part3 }) {
   lines.push('## ⚰️ Dead chain candidates');
   lines.push('');
   lines.push(
-    `_Chains Osmosis lists an asset from, registered as live, whose every ` +
-      `RPC + REST endpoint has failed for ${DEAD_STREAK_THRESHOLD}+ ` +
+    `_Chains Osmosis lists an asset from, registered as live, that have shown a ` +
+      `death signal on the Osmosis endpoint probe for ${DEAD_STREAK_THRESHOLD}+ ` +
       `consecutive runs AND which status.cosmos.directory corroborates as ` +
       `dead. Candidates for a \`source_chain_killed\` flag and an upstream ` +
       `chain-registry \`status: killed\` PR. Verify before acting._`
+  );
+  lines.push('');
+  lines.push(
+    `_**Endpoint probe** verdicts: \`all_dead\` = no RPC or REST endpoint passed ` +
+      `connectivity (CORS excluded); \`stale\` = an endpoint answered but its ` +
+      `latest block is over an hour old; \`frozen\` = endpoints answer but the ` +
+      `block height has not advanced across ${FROZEN_HEIGHT_RUNS} consecutive ` +
+      `runs (consensus halted)._`
   );
   lines.push('');
   lines.push(
@@ -777,16 +949,21 @@ function renderReport({ part1, part2, part3 }) {
   } else if (!part1.candidates.length) {
     lines.push('_None corroborated._');
   } else {
+    // Signal columns are grouped: the two independent death signals (the local
+    // Osmosis endpoint probe and the cosmos.directory corroboration) sit
+    // adjacent, so a reader sees at a glance what each one read. "Streak (days)"
+    // is the consecutive-failure run count (one per daily run); "First reported"
+    // is the date the streak began.
     lines.push(
-      '| Chain | Registry status | Signal | Consecutive runs | First seen | cosmos.directory |'
+      '| Chain | Registry status | Endpoint probe | cosmos.directory | Streak (days) | First reported |'
     );
     lines.push(
-      '|-------|-----------------|--------|------------------|-----------|------------------|'
+      '|-------|-----------------|----------------|------------------|---------------|----------------|'
     );
     for (const c of part1.candidates) {
       lines.push(
-        `| ${c.chainName} | ${c.registryStatus} | ${c.verdict} | ${c.streak} | ` +
-          `${c.firstSeen.slice(0, 10)} | ${c.cosmosDirectory} |`
+        `| ${c.chainName} | ${c.registryStatus} | ${c.verdict} | ${c.cosmosDirectory} | ` +
+          `${c.streak} | ${c.firstSeen.slice(0, 10)} |`
       );
     }
   }
@@ -803,14 +980,76 @@ function renderReport({ part1, part2, part3 }) {
     );
     lines.push('');
     lines.push(
-      '| Chain | Consecutive runs | cosmos.directory |'
+      '| Chain | Streak (days) | cosmos.directory |'
     );
-    lines.push('|-------|------------------|------------------|');
+    lines.push('|-------|---------------|------------------|');
     for (const c of part1.probeMismatches) {
       lines.push(`| ${c.chainName} | ${c.streak} | ${c.cosmosDirectory} |`);
     }
     lines.push('');
     lines.push('</details>');
+  }
+
+  // Daily staleness watch-list. Every chain whose endpoints answer but report a
+  // block over an hour old, this run — independent of streak maturity, so it
+  // shows on daily runs too. Split by age: recently-stale chains (under
+  // RECENT_STALE_DAYS) may have JUST halted and are surfaced VISIBLY so a live
+  // incident is caught early; longer-stale chains are most likely long-abandoned
+  // and fold into a collapsed block. The streak/cosmos.directory kill pipeline is
+  // unaffected — this is a view, not a new escalation path.
+  if (part1.currentlyStale?.length) {
+    const recent = part1.currentlyStale
+      .filter((c) => c.ageHours < RECENT_STALE_DAYS * 24)
+      .sort((a, b) => a.ageHours - b.ageHours);
+    const longStale = part1.currentlyStale
+      .filter((c) => c.ageHours >= RECENT_STALE_DAYS * 24)
+      .sort((a, b) => a.ageHours - b.ageHours);
+
+    const fmtAge = (h) =>
+      h < 48 ? `${Math.floor(h)}h` : `${Math.floor(h / 24)}d`;
+
+    if (recent.length) {
+      lines.push('');
+      lines.push(
+        `### ⏱️ Recently stale — possibly halted (${recent.length})`
+      );
+      lines.push('');
+      lines.push(
+        `_Endpoints answer but the latest block is over an hour old and under ` +
+          `${RECENT_STALE_DAYS} days — recent enough that the chain may have just ` +
+          `halted. Worth a look now; not yet a kill candidate (still subject to ` +
+          `the ${DEAD_STREAK_THRESHOLD}-run streak + corroboration). Streak is the ` +
+          `consecutive death-signal run count so far._`
+      );
+      lines.push('');
+      lines.push('| Chain | Registry status | Block age | Height | Streak (days) |');
+      lines.push('|-------|-----------------|-----------|--------|---------------|');
+      for (const c of recent) {
+        lines.push(
+          `| ${c.chainName} | ${c.registryStatus} | ${fmtAge(c.ageHours)} | ` +
+            `${c.height ?? '-'} | ${c.streak} |`
+        );
+      }
+    }
+
+    if (longStale.length) {
+      lines.push('');
+      lines.push(
+        `<details><summary>Long-stale chains (block ≥ ${RECENT_STALE_DAYS}d old, ` +
+          `${longStale.length}) — endpoints answer but likely long-abandoned</summary>`
+      );
+      lines.push('');
+      lines.push('| Chain | Registry status | Block age | Height | Streak (days) |');
+      lines.push('|-------|-----------------|-----------|--------|---------------|');
+      for (const c of longStale) {
+        lines.push(
+          `| ${c.chainName} | ${c.registryStatus} | ${fmtAge(c.ageHours)} | ` +
+            `${c.height ?? '-'} | ${c.streak} |`
+        );
+      }
+      lines.push('');
+      lines.push('</details>');
+    }
   }
 
   if (part1.unverifiable.length) {
@@ -840,9 +1079,9 @@ function renderReport({ part1, part2, part3 }) {
   } else {
     lines.push(
       `_Governance proposals on listed chains matching shutdown language, ` +
-        `filed within the last ${SHUTDOWN_PROPOSAL_MAX_AGE_DAYS} days (older ` +
-        `ones are skipped unless they name a concrete target date/height, so a ` +
-        `shutdown filed early still shows). False positives are expected (a ` +
+        `filed within the last ${SHUTDOWN_PROPOSAL_MAX_AGE_DAYS} days (older ones ` +
+        `are skipped). Sorted newest-submitted first for a quick priority check. ` +
+        `False positives are expected (a ` +
         `proposal may reject or merely discuss a shutdown). **Submitted** is the ` +
         `proposal filing date (how new this result is); **Target date / height** ` +
         `lists date/height strings lifted verbatim from the proposal text ` +
@@ -857,19 +1096,15 @@ function renderReport({ part1, part2, part3 }) {
     lines.push(
       '|-------|----------|-----------|----------------------|----------------|----------|--------|-------|'
     );
-    // Sort: title hits first (highest signal), then proposals that yielded an
-    // extracted target date/height (the actionable ones), then most-recently
-    // submitted, then chain name. So the row a curator most likely wants to act
-    // on — a freshly-submitted, title-level shutdown with a concrete date — is
-    // at the top.
+    // Sort newest-submitted first: Submitted date is the primary key (a quick
+    // priority check — the freshest proposals are the ones a curator most likely
+    // still needs to act on). Within the same submit date, break ties by title
+    // hit (higher signal than a body-only match), then chain name.
     const sorted = [...part2].sort((a, b) => {
-      if (a.inTitle !== b.inTitle) return a.inTitle ? -1 : 1;
-      const aHasTarget = (a.targets?.length ?? 0) > 0;
-      const bHasTarget = (b.targets?.length ?? 0) > 0;
-      if (aHasTarget !== bHasTarget) return aHasTarget ? -1 : 1;
       if (a.submitTime !== b.submitTime) {
         return (b.submitTime || '').localeCompare(a.submitTime || '');
       }
+      if (a.inTitle !== b.inTitle) return a.inTitle ? -1 : 1;
       return a.chainName.localeCompare(b.chainName);
     });
     for (const m of sorted) {
@@ -946,8 +1181,9 @@ async function main() {
   const frontendAssetlist = loadJSON(frontendAssetlistPath, { assets: [] });
   const zoneAssets = loadJSON(zoneAssetsPath, { assets: [] });
   const streaks = loadJSON(streaksPath, {});
+  const heights = loadJSON(heightsPath, {});
 
-  const part1 = await runPart1(state, chainlist, zoneAssets, streaks);
+  const part1 = await runPart1(state, chainlist, zoneAssets, streaks, heights);
   const part2 = weekly ? await runPart2(state, chainlist, zoneAssets) : [];
   // Part 3 is a static upstreaming worklist; rendered weekly only (daily
   // repetition is reviewer noise), so only compute it on weekly runs.
@@ -962,6 +1198,7 @@ async function main() {
 
   if (!dryRun) {
     fs.writeFileSync(streaksPath, JSON.stringify(streaks, null, 2) + '\n', 'utf8');
+    fs.writeFileSync(heightsPath, JSON.stringify(heights, null, 2) + '\n', 'utf8');
   }
 
   // The report goes to stdout so the workflow can capture and append it to the
@@ -970,8 +1207,15 @@ async function main() {
   process.stdout.write(report + '\n');
 
   // Diagnostic counts to stderr (kept out of the captured report).
+  const frozenReached = part1.streakReached.filter((c) => c.verdict === 'frozen').length;
+  const recentStale = (part1.currentlyStale ?? []).filter(
+    (c) => c.ageHours < RECENT_STALE_DAYS * 24
+  ).length;
   console.error(
     `dead_chain streak_reached=${part1.streakReached.length} ` +
+      `frozen=${frozenReached} ` +
+      `stale_total=${(part1.currentlyStale ?? []).length} ` +
+      `stale_recent=${recentStale} ` +
       `candidates=${part1.candidates.length} ` +
       `probe_mismatches=${part1.probeMismatches.length} ` +
       `unverifiable=${part1.unverifiable.length} ` +

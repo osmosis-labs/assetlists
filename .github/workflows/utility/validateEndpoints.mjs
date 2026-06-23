@@ -745,9 +745,44 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
         }
 
         if (endpoint === "status") {
-          const latestBlockTime = new Date(result?.sync_info?.latest_block_time);
+          // The tendermint /status body is a JSON STRING (queryHTTP attaches the
+          // raw body, it does not parse), and the real shape nests everything
+          // under `result.sync_info` — NOT a top-level `sync_info`. The previous
+          // code read `result.sync_info` on the unparsed string, so block_time
+          // was always undefined, `new Date(undefined)` was Invalid Date, and the
+          // `stale` comparison was always false: the staleness signal never
+          // actually fired. Parse the body and read the correct nested path so
+          // both staleness and height tracking work.
+          let syncInfo;
+          try {
+            syncInfo = JSON.parse(result?.body ?? "")?.result?.sync_info;
+          } catch {
+            syncInfo = undefined; // non-JSON body → leave height/time unknown
+          }
+
+          // Wall-clock staleness: latest block older than ~1h means the chain is
+          // not producing (or this node is badly lagging). Invalid/absent time
+          // leaves stale undefined (treated as not-stale), same as a missing probe.
+          const latestBlockTime = syncInfo?.latest_block_time
+            ? new Date(syncInfo.latest_block_time)
+            : null;
           const lenientDateUTC = new Date(currentDateUTC - 60 * 60 * 1000);
-          validationResult.stale = latestBlockTime < lenientDateUTC;
+          if (latestBlockTime && !Number.isNaN(latestBlockTime.getTime())) {
+            validationResult.stale = latestBlockTime < lenientDateUTC;
+            // Persist the raw block time so report_dead_chains can show how stale
+            // ("block N hours old"), not just the boolean.
+            validationResult.latestBlockTime = syncInfo.latest_block_time;
+          }
+
+          // Block height for run-over-run progression tracking in
+          // report_dead_chains (a frozen height across runs = halted chain, even
+          // if /status still answers). latest_block_height is a STRING in the
+          // payload; coerce to Number — block heights are far below
+          // Number.MAX_SAFE_INTEGER, so no BigInt is needed. NaN → omit.
+          const height = Number(syncInfo?.latest_block_height);
+          if (Number.isFinite(height)) {
+            validationResult.latestBlockHeight = height;
+          }
         }
 
         return validationResult;

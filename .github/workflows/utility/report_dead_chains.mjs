@@ -632,48 +632,54 @@ async function runPart1(state, chainlist, zoneAssets, streaks, heights) {
     // unverifiable freeze — a missing probe is not evidence the chain recovered.
 
     // Daily staleness snapshot. Any chain with a stale block reading this run
-    // (endpoint answered but block >1h old) is recorded for the daily watch-list,
-    // independent of streak maturity. This fires for the 'stale' verdict and for
-    // a 'frozen' chain whose block is also old; 'all_dead' has no block reading
-    // so it never lands here. The streak shown is what it will be AFTER this run's
-    // increment below (a stale reading is a death signal, so the streak advances).
+    // (an endpoint answered but its block is >1h old) is recorded for the daily
+    // watch-list, independent of streak maturity. Captured here, but the row is
+    // pushed AFTER the streak is resolved below so the displayed streak reflects
+    // what actually happened this run — a stale RPC reading does NOT always
+    // advance the streak: if REST connectivity passes the run verdict is 'alive'
+    // and the streak resets to 0, even though one /status read was stale.
     const staleInfo = staleBlockInfo(stateChain);
+
+    const isDeadSignal =
+      verdict === 'all_dead' || verdict === 'stale' || verdict === 'frozen';
+    let resolvedStreak = 0;
+    if (!isDeadSignal) {
+      // Any health on this run resets the streak. (Height history is preserved in
+      // the separate heights map, so a later freeze is still detectable.) A stale
+      // RPC reading on an otherwise-healthy chain still lands on the watch-list
+      // below, but with a streak of 0 — it did not advance the kill streak.
+      delete streaks[chainName];
+    } else {
+      // Increment the persistent consecutive-failure streak.
+      const prev = streaks[chainName] ?? { streak: 0, firstSeen: nowIso };
+      const next = {
+        streak: prev.streak + 1,
+        firstSeen: prev.firstSeen ?? nowIso,
+        lastSeen: nowIso,
+        lastVerdict: verdict,
+      };
+      streaks[chainName] = next;
+      resolvedStreak = next.streak;
+    }
+
     if (staleInfo) {
-      const priorStreak = streaks[chainName]?.streak ?? 0;
       currentlyStale.push({
         chainName,
         registryStatus: registryStatus ?? 'unknown',
         ageHours: staleInfo.ageHours,
         height: staleInfo.height,
-        streak: priorStreak + 1,
+        streak: resolvedStreak,
       });
     }
 
-    const isDeadSignal =
-      verdict === 'all_dead' || verdict === 'stale' || verdict === 'frozen';
-    if (!isDeadSignal) {
-      // Any health on this run resets the streak. (Height history is preserved in
-      // the separate heights map, so a later freeze is still detectable.)
-      delete streaks[chainName];
-      continue;
-    }
+    if (!isDeadSignal) continue;
 
-    // Increment the persistent consecutive-failure streak.
-    const prev = streaks[chainName] ?? { streak: 0, firstSeen: nowIso };
-    const next = {
-      streak: prev.streak + 1,
-      firstSeen: prev.firstSeen ?? nowIso,
-      lastSeen: nowIso,
-      lastVerdict: verdict,
-    };
-    streaks[chainName] = next;
-
-    if (next.streak >= DEAD_STREAK_THRESHOLD) {
+    if (resolvedStreak >= DEAD_STREAK_THRESHOLD) {
       streakReached.push({
         chainName,
         registryStatus: registryStatus ?? 'unknown',
-        streak: next.streak,
-        firstSeen: next.firstSeen,
+        streak: resolvedStreak,
+        firstSeen: streaks[chainName].firstSeen,
         verdict,
       });
     }

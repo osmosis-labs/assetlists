@@ -5838,10 +5838,71 @@
     },
     {
       "chain_name": "hippoprotocoltestnet",
+      "status": "live",
+      "networkType": "testnet",
       "prettyName": "Hippo Protocol Testnet",
+      "chain_id": "hippo-protocol-testnet-1",
+      "bech32Prefix": "hippo",
+      "bech32Config": {
+        "bech32PrefixAccAddr": "hippo",
+        "bech32PrefixAccPub": "hippopub",
+        "bech32PrefixValAddr": "hippovaloper",
+        "bech32PrefixValPub": "hippovaloperpub",
+        "bech32PrefixConsAddr": "hippovalcons",
+        "bech32PrefixConsPub": "hippovalconspub"
+      },
+      "slip44": 0,
       "logo_URIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hippoprotocol/images/logo.svg"
-      }
+      },
+      "stakeCurrency": {
+        "coinDenom": "HP",
+        "coinMinimalDenom": "ahp",
+        "coinDecimals": 18,
+        "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hippoprotocol/images/logo.svg"
+      },
+      "feeCurrencies": [
+        {
+          "coinDenom": "HP",
+          "coinMinimalDenom": "ahp",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hippoprotocol/images/logo.svg",
+          "gasPriceStep": {
+            "low": 4000000000000,
+            "average": 5000000000000,
+            "high": 10000000000000
+          }
+        }
+      ],
+      "currencies": [
+        {
+          "coinDenom": "HP",
+          "coinMinimalDenom": "ahp",
+          "coinDecimals": 18,
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hippoprotocol/images/logo.svg"
+        }
+      ],
+      "description": "One Protocol. Every Patient. Infinite Possibility.",
+      "apis": {
+        "rpc": [
+          {
+            "address": "https://rpc.testnet.hippo-protocol.com/"
+          }
+        ],
+        "rest": [
+          {
+            "address": "https://api.testnet.hippo-protocol.com/"
+          }
+        ]
+      },
+      "explorers": [
+        {
+          "txPage": "https://river-testnet.hippoprotocol.ai/hippo-protocol/tx/${txHash}"
+        }
+      ],
+      "features": [
+        "ibc-go"
+      ]
     },
     {
       "chain_name": "injectivetestnet",

@@ -7735,13 +7735,12 @@
       "chainName": "juno",
       "sourceDenom": "cw20:juno1rws84uz7969aaa7pej303udhlkt3j9ca0l3egpcae98jwak9quzq8szn2l",
       "coinMinimalDenom": "ibc/D3B574938631B0A1BA704879020C696E514CFADAA7643CDE4BD5EB010BDE327B",
-      "symbol": "PHMN",
+      "symbol": "PHMN.juno",
       "decimals": 6,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/phmn.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/phmn.svg"
       },
-      "coingeckoId": "posthuman",
       "categories": [],
       "transferMethods": [
         {
@@ -7767,16 +7766,27 @@
           "sourceDenom": "cw20:juno1rws84uz7969aaa7pej303udhlkt3j9ca0l3egpcae98jwak9quzq8szn2l",
           "chainType": "cosmos",
           "chainId": "juno-1",
-          "symbol": "PHMN",
+          "symbol": "PHMN.legacy",
           "decimals": 6,
           "logoURIs": {
             "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/phmn.png",
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/phmn.svg"
           }
+        },
+        {
+          "chainName": "cosmoshub",
+          "sourceDenom": "factory/cosmos146s5j3t7gh2g37ywm47dp8avhesu2htvjjaxq7z55e7xj0rq0k8q5qnjjy/PHMN",
+          "chainType": "cosmos",
+          "chainId": "cosmoshub-4",
+          "symbol": "PHMN",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/phmn.png"
+          }
         }
       ],
-      "variantGroupKey": "ibc/D3B574938631B0A1BA704879020C696E514CFADAA7643CDE4BD5EB010BDE327B",
-      "name": "POSTHUMAN",
+      "variantGroupKey": "ibc/243B3934C4462EE254C84AA31AF42E34F1869418194D3E4161E4A659A01AC6E6",
+      "name": "POSTHUMAN (Juno)",
       "isAlloyed": false,
       "verified": true,
       "unstable": true,
@@ -18372,10 +18382,12 @@
       "name": "ATOM1KLFG",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "listingDate": "2024-04-09T16:00:00.000Z"
+      "listingDate": "2024-04-09T16:00:00.000Z",
+      "lastDowntimeDate": "2026-06-24T15:50:56.438Z"
     },
     {
       "chainName": "shido",
@@ -47949,6 +47961,55 @@
       ],
       "variantGroupKey": "ibc/B7D7AA538008E2A35328820B7B56F014F1AB38205D51BB13D1F84B11D362B9ED",
       "name": "COREZ",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "cosmoshub",
+      "sourceDenom": "factory/cosmos146s5j3t7gh2g37ywm47dp8avhesu2htvjjaxq7z55e7xj0rq0k8q5qnjjy/PHMN",
+      "coinMinimalDenom": "ibc/243B3934C4462EE254C84AA31AF42E34F1869418194D3E4161E4A659A01AC6E6",
+      "symbol": "PHMN",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/phmn.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "cosmoshub",
+            "chainId": "cosmoshub-4",
+            "sourceDenom": "factory/cosmos146s5j3t7gh2g37ywm47dp8avhesu2htvjjaxq7z55e7xj0rq0k8q5qnjjy/PHMN",
+            "port": "transfer",
+            "channelId": "channel-141"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-0",
+            "path": "transfer/channel-0/factory/cosmos146s5j3t7gh2g37ywm47dp8avhesu2htvjjaxq7z55e7xj0rq0k8q5qnjjy/PHMN"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "cosmoshub",
+          "sourceDenom": "factory/cosmos146s5j3t7gh2g37ywm47dp8avhesu2htvjjaxq7z55e7xj0rq0k8q5qnjjy/PHMN",
+          "chainType": "cosmos",
+          "chainId": "cosmoshub-4",
+          "symbol": "PHMN",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/phmn.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/243B3934C4462EE254C84AA31AF42E34F1869418194D3E4161E4A659A01AC6E6",
+      "name": "POSTHUMAN",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

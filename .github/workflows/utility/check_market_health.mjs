@@ -3,8 +3,9 @@
 //   asset that isn't already unstable, run a market-health check; on 7 consecutive
 //   failing daily runs, flag it unstable with reason="market" and stamp
 //   state.lastDowntimeDate. Owns recovery for market-unstable assets too:
-//     • 1 consecutive passing run → clear osmosis_halt_deposits if reason
-//       is extended_unstable_market (and no tooltip).
+//     • clear osmosis_halt_deposits (reason extended_unstable_market, no
+//       tooltip) on the first passing run where SQS on-chain liquidity ALSO
+//       confirms recovery (cross-source guard; see canClearExtendedHalt).
 //     • 7 consecutive passing runs → clear osmosis_unstable AND wipe state
 //       history fields, only if osmosis_unstable_reason === "market".
 //
@@ -17,8 +18,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import {
+  canClearExtendedHalt,
   fetchAlloyConstituentMap,
   fetchNumia,
+  fetchSqsLiquidityMap,
   findStateAsset,
   loadJSON,
   materialiseStateAsset,
@@ -89,6 +92,11 @@ async function main() {
   );
   const constituentToAlloy = await fetchAlloyConstituentMap(alloyedDenomSet);
 
+  // On-chain liquidity per denom, the independent second source the extended-
+  // halt clearing path cross-checks against Numia. Empty on SQS error → clears
+  // fail closed (halt stays).
+  const sqsLiquidityByDenom = await fetchSqsLiquidityMap();
+
   const nowIso = new Date().toISOString();
   const nowMs = new Date(nowIso).getTime();
   const mutations = [];
@@ -158,12 +166,29 @@ async function main() {
         const rstreak = (stateAsset?.marketHealthRecoveryStreak ?? 0) + 1;
         writeState().marketHealthRecoveryStreak = rstreak;
 
-        // 1-day clear of extended-market-driven halt
+        // Clear the extended-market-driven halt on the first run where BOTH
+        // sources confirm recovery. Cross-source guarded: Numia "passing"
+        // (this branch) is not enough on its own — SQS must independently
+        // confirm on-chain liquidity >= the floor. This blocks a clear driven
+        // by a phantom Numia liquidity reading for an asset whose real pool is
+        // near-empty. Fail-closed when SQS is missing.
+        //
+        // `rstreak >= 1` (rather than `=== 1`) so that if SQS withheld
+        // confirmation on the first passing run, a later run where SQS agrees
+        // can still clear the deposit halt early, instead of waiting for the
+        // full 7-run recovery to clear it as a side effect. The
+        // `osmosis_halt_deposits === true` guard keeps this idempotent.
         if (
-          rstreak === 1 &&
+          rstreak >= 1 &&
           zoneAsset.osmosis_halt_deposits === true &&
           zoneAsset.osmosis_deposit_halt_reason === 'extended_unstable_market' &&
-          !zoneAsset.tooltip_message
+          !zoneAsset.tooltip_message &&
+          canClearExtendedHalt({
+            market,
+            sqsLiquidity: sqsLiquidityByDenom.get(asset.coinMinimalDenom),
+            lowLiquidityUsd: LOW_LIQUIDITY_USD,
+            lowVolumeUsd: LOW_VOLUME_24H_USD,
+          })
         ) {
           delete zoneAsset.osmosis_halt_deposits;
           delete zoneAsset.osmosis_deposit_halt_reason;

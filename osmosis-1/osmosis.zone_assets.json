@@ -4103,19 +4103,15 @@
         "chain_name": "solana",
         "base_denom": "6gnCPhXtLnUD76HjQuSYPENLSZdG8RvDB1pTLM5aLSJA"
       },
-      "transfer_methods": [
-        {
-          "name": "Bskt.fi Wormhole Bridge",
-          "type": "external_interface",
-          "deposit_url": "https://www.bskt.fi/wormhole",
-          "withdraw_url": "https://www.bskt.fi/wormhole"
-        }
-      ],
+      "transfer_methods": [],
       "_comment": "Basket $BSKT",
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "market",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "extended_unstable_market"
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down",
+      "tooltip_message": "The Bskt.fi bridge for this asset is no longer available and the Osmosis Wormhole page does not support it, so there is no working route to deposit or withdraw BSKT. Deposits and withdrawals are halted."
     },
     {
       "chain_name": "aioz",
@@ -5771,19 +5767,15 @@
         "chain_name": "solana",
         "base_denom": "ANu4Wuq86WzRU8tykszQUJ66eQzFNfkwap2HcQ5UaFaU"
       },
-      "transfer_methods": [
-        {
-          "name": "Sandwichswap Wormhole Portal Bridge",
-          "type": "external_interface",
-          "deposit_url": "http://wormhole.bridge.sandwichswap.io/pumpfunosmo/pbj/deposit",
-          "withdraw_url": "http://wormhole.bridge.sandwichswap.io/pumpfunosmo/pbj/withdraw"
-        }
-      ],
+      "transfer_methods": [],
       "_comment": "Pepe Bruce Jenner $PBJ",
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "market",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "extended_unstable_market"
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down",
+      "tooltip_message": "The Sandwichswap bridge for this asset is no longer available and the Osmosis Wormhole page does not support it, so there is no working route to deposit or withdraw PBJ. Deposits and withdrawals are halted."
     },
     {
       "chain_name": "noble",

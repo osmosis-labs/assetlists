@@ -1577,6 +1577,8 @@ export function setTransferMethods(asset_data) {
       delete transferMethod.deposit_url;
       transferMethod.withdrawUrl = transferMethod.withdrawUrl ?? transferMethod.withdraw_url;
       delete transferMethod.withdraw_url;
+      transferMethod.logoUri = transferMethod.logoUri ?? transferMethod.logo_uri;
+      delete transferMethod.logo_uri;
 
     }
 

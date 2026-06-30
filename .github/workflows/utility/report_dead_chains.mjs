@@ -194,6 +194,27 @@ const HEIGHT_PATTERN = /\b(?:block\s+)?height[:\s]+#?([\d,]{5,})\b/gi;
 // noisy description can't blow up the PR body.
 const MAX_TARGETS_PER_PROPOSAL = 4;
 
+// Per-proposal deep-link builders, matched on the explorer's HOST (not its
+// chain-registry `kind`: the `kind` field is unreliable — several non-ping.pub
+// explorers in the registry are tagged kind "ping.pub"). Each entry takes the
+// chain path lifted from the explorer `url` and the proposal id and returns the
+// proposal detail URL. Order is preference order: the first matching explorer a
+// chain lists wins. Without one of these, the report falls back to the chain's
+// generic explorer landing page (it never emits a bare `#id`, which GitHub
+// would auto-link to an issue/PR in THIS repo).
+const PROPOSAL_LINK_BUILDERS = [
+  {
+    host: 'mintscan.io',
+    // https://www.mintscan.io/<path>  ->  https://www.mintscan.io/<path>/proposals/<id>
+    build: (chainPath, id) => `https://www.mintscan.io/${chainPath}/proposals/${id}`,
+  },
+  {
+    host: 'ping.pub',
+    // https://ping.pub/<path>  ->  https://ping.pub/<path>/gov/<id>
+    build: (chainPath, id) => `https://ping.pub/${chainPath}/gov/${id}`,
+  },
+];
+
 // ── Args ─────────────────────────────────────────────────────────────────────
 
 const args = process.argv.slice(2);
@@ -907,6 +928,63 @@ async function runPart2(state, chainlist, zoneAssets) {
 
 // ── Report rendering ─────────────────────────────────────────────────────────
 
+/**
+ * Markdown link to a chain's governance proposal, built from the chain-registry
+ * `explorers` list. The Proposal column previously rendered a bare `#<id>`,
+ * which GitHub auto-links to issue/PR #<id> in THIS repo — a wrong, confusing
+ * link. Instead:
+ *   • Prefer a known per-proposal deep link (mintscan, then ping.pub), matched
+ *     on the explorer host and built from the chain path in its `url`.
+ *   • Else fall back to the chain's first explorer landing page, with the id as
+ *     link text, so the reader still gets a real explorer to open.
+ *   • Else (no explorers at all) render the id as plain text `#<id>` wrapped in a
+ *     backtick code span, so GitHub does NOT auto-link it.
+ * Returns a markdown string for the Proposal cell.
+ */
+function proposalLink(chainName, proposalId) {
+  const idLabel = `#${proposalId}`;
+  const explorers = getFileProperty(chainName, 'chain', 'explorers');
+  if (!Array.isArray(explorers) || explorers.length === 0) {
+    // No explorer to link to — render as a code span so GitHub leaves the `#id`
+    // alone instead of auto-linking it to a repo issue/PR.
+    return `\`${idLabel}\``;
+  }
+
+  // Lift the chain path from an explorer URL of the form
+  // https://[www.]host/<path>[/] — the first path segment, URL-decoded for the
+  // label only (the link itself keeps the original encoding so it resolves).
+  const pathFromUrl = (url) => {
+    try {
+      const u = new URL(url);
+      const seg = u.pathname.replace(/^\/+/, '').split('/')[0];
+      return seg || null;
+    } catch {
+      return null;
+    }
+  };
+
+  // Preferred per-proposal deep link, matched on host.
+  for (const builder of PROPOSAL_LINK_BUILDERS) {
+    const match = explorers.find(
+      (e) => typeof e?.url === 'string' && e.url.includes(builder.host)
+    );
+    if (match) {
+      const chainPath = pathFromUrl(match.url);
+      if (chainPath) {
+        return `[${idLabel}](${builder.build(chainPath, proposalId)})`;
+      }
+    }
+  }
+
+  // No known deep-link explorer — link the id to the first explorer landing
+  // page that has a url, so the reader still gets somewhere real to click.
+  const fallback = explorers.find((e) => typeof e?.url === 'string' && e.url);
+  if (fallback) {
+    return `[${idLabel}](${fallback.url})`;
+  }
+  return `\`${idLabel}\``;
+}
+
 function renderReport({ part1, part2, part3 }) {
   const lines = [];
   lines.push('## ⚰️ Dead chain candidates');
@@ -1114,7 +1192,7 @@ function renderReport({ part1, part2, part3 }) {
         ? m.targets.map((t) => `\`${t.replace(/\|/g, '\\|')}\``).join('<br>')
         : '-';
       lines.push(
-        `| ${m.chainName} | #${m.proposalId} | ${m.submitTime || '-'} | ${targets} | ` +
+        `| ${m.chainName} | ${proposalLink(m.chainName, m.proposalId)} | ${m.submitTime || '-'} | ${targets} | ` +
           `\`${m.matchedKeyword}\` | ${m.inTitle ? 'yes' : 'no'} | ${status} | ` +
           `${m.title.replace(/\|/g, '\\|')} |`
       );

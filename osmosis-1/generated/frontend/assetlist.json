@@ -56468,6 +56468,57 @@
       "preview": false
     },
     {
+      "chainName": "safrochain",
+      "sourceDenom": "usaf",
+      "coinMinimalDenom": "ibc/DBAA4846F611A7603EFCE6F9F46F4F561D48B1F492A576022F000614A17089CE",
+      "symbol": "SAF",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/safrochain/images/saf.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/safrochain/images/saf.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "safrochain",
+            "chainId": "safrochain-1",
+            "sourceDenom": "usaf",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-110497",
+            "path": "transfer/channel-110497/usaf"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "safrochain",
+          "sourceDenom": "usaf",
+          "chainType": "cosmos",
+          "chainId": "safrochain-1",
+          "symbol": "SAF",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/safrochain/images/saf.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/safrochain/images/saf.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/DBAA4846F611A7603EFCE6F9F46F4F561D48B1F492A576022F000614A17089CE",
+      "name": "Safrochain",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "secretnetwork",
       "sourceDenom": "cw20:secret1rgm2m5t530tdzyd99775n6vzumxa5luxcllml4",
       "coinMinimalDenom": "ibc/AD9E794272640D387E6C3F7FC61580EF4F8CB4A5CDBEE6CEC7C2B8B90590E07D",

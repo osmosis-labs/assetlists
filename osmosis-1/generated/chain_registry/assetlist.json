@@ -45937,6 +45937,41 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/DBAA4846F611A7603EFCE6F9F46F4F561D48B1F492A576022F000614A17089CE",
+          "exponent": 0,
+          "aliases": [
+            "microsaf",
+            "usaf"
+          ]
+        },
+        {
+          "denom": "saf",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/DBAA4846F611A7603EFCE6F9F46F4F561D48B1F492A576022F000614A17089CE",
+      "name": "Safrochain",
+      "display": "saf",
+      "symbol": "SAF",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "safrochain",
+            "base_denom": "usaf",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-110497",
+            "path": "transfer/channel-110497/usaf"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/AD9E794272640D387E6C3F7FC61580EF4F8CB4A5CDBEE6CEC7C2B8B90590E07D",
           "exponent": 0,
           "aliases": [

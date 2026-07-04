@@ -44912,11 +44912,67 @@
       "variantGroupKey": "ibc/243B3934C4462EE254C84AA31AF42E34F1869418194D3E4161E4A659A01AC6E6",
       "name": "POSTHUMAN",
       "isAlloyed": false,
-      "verified": false,
+      "verified": true,
       "unstable": false,
       "disabled": false,
       "preview": false,
-      "listingDate": "2026-06-30T00:00:00.000Z"
+      "listingDate": "2026-07-04T15:44:27.519Z"
+    },
+    {
+      "chainName": "qie",
+      "sourceDenom": "aqie",
+      "coinMinimalDenom": "ibc/29651CA364AA857248A912B1DEC17EF8AC320728C616FB635338CFE965E18BE3",
+      "symbol": "QIE",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qie/images/qie.png"
+      },
+      "coingeckoId": "qie",
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "qie",
+            "chainId": "qie_1990-1",
+            "sourceDenom": "aqie",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-109956",
+            "path": "transfer/channel-109956/aqie"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "qie",
+          "sourceDenom": "aqie",
+          "chainType": "cosmos",
+          "chainId": "qie_1990-1",
+          "symbol": "QIE",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qie/images/qie.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/29651CA364AA857248A912B1DEC17EF8AC320728C616FB635338CFE965E18BE3",
+      "name": "QIE",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "lastDowntimeDate": "2026-07-04T15:29:33.304Z"
     },
     {
       "chainName": "akash",
@@ -56360,56 +56416,6 @@
       ],
       "variantGroupKey": "ibc/24DB48F51D035B58072C5237354740B578B6648BAC78959921163AC98EAC2377",
       "name": "PSTAKE staked XPRT",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "qie",
-      "sourceDenom": "aqie",
-      "coinMinimalDenom": "ibc/29651CA364AA857248A912B1DEC17EF8AC320728C616FB635338CFE965E18BE3",
-      "symbol": "QIE",
-      "decimals": 18,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qie/images/qie.png"
-      },
-      "coingeckoId": "qie",
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "qie",
-            "chainId": "qie_1990-1",
-            "sourceDenom": "aqie",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-109956",
-            "path": "transfer/channel-109956/aqie"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "qie",
-          "sourceDenom": "aqie",
-          "chainType": "cosmos",
-          "chainId": "qie_1990-1",
-          "symbol": "QIE",
-          "decimals": 18,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qie/images/qie.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/29651CA364AA857248A912B1DEC17EF8AC320728C616FB635338CFE965E18BE3",
-      "name": "QIE",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

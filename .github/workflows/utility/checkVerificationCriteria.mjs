@@ -984,10 +984,10 @@ async function checkLogo(chainName, baseDenom) {
  * Per LISTING.md line 43
  *
  * @param {string} chainName - Chain name
- * @param {string} baseDenom - Base denomination
+ * @param {string} fullDenom - Full denom as it appears on Osmosis (Numia's key: ibc/HASH for IBC assets, base_denom for Osmosis-native)
  * @param {Map} numiaTokens - Token liquidity data from Numia API
  */
-async function checkPoolLiquidity(chainName, baseDenom, numiaTokens) {
+async function checkPoolLiquidity(chainName, fullDenom, numiaTokens) {
   try {
     if (!numiaTokens) {
       return {
@@ -996,7 +996,7 @@ async function checkPoolLiquidity(chainName, baseDenom, numiaTokens) {
       };
     }
 
-    const tokenData = numiaTokens.get(baseDenom);
+    const tokenData = numiaTokens.get(fullDenom);
 
     if (!tokenData) {
       return {
@@ -1059,10 +1059,10 @@ async function checkPoolLiquidity(chainName, baseDenom, numiaTokens) {
  * Per LISTING.md lines 44-47
  *
  * @param {string} chainName - Chain name
- * @param {string} baseDenom - Base denomination
+ * @param {string} fullDenom - Full denom as it appears on Osmosis (Numia's pair key: ibc/HASH for IBC assets, base_denom for Osmosis-native)
  * @param {Array} numiaPairs - Pool/pair data from Numia API
  */
-async function checkBidDepth(chainName, baseDenom, numiaPairs) {
+async function checkBidDepth(chainName, fullDenom, numiaPairs) {
   try {
     if (!numiaPairs) {
       return {
@@ -1072,7 +1072,7 @@ async function checkBidDepth(chainName, baseDenom, numiaPairs) {
     }
 
     // Find the largest pool containing this asset
-    const largestPool = findLargestPoolForAsset(baseDenom, numiaPairs);
+    const largestPool = findLargestPoolForAsset(fullDenom, numiaPairs);
 
     if (!largestPool) {
       return {
@@ -1262,8 +1262,8 @@ async function verifyAsset(zoneAsset, numiaTokens, numiaPairs, alloyMembersMap) 
   results.checks.extendedDescription = await checkExtendedDescription(chain_name, base_denom, isMeme);
   results.checks.socials = await checkSocials(chain_name, base_denom, isMeme);
   results.checks.logo = await checkLogo(chain_name, base_denom);
-  results.checks.poolLiquidity = await checkPoolLiquidity(chain_name, base_denom, numiaTokens);
-  results.checks.bidDepth = await checkBidDepth(chain_name, base_denom, numiaPairs);
+  results.checks.poolLiquidity = await checkPoolLiquidity(chain_name, fullDenom, numiaTokens);
+  results.checks.bidDepth = await checkBidDepth(chain_name, fullDenom, numiaPairs);
   results.checks.chainStatus = await checkChainStatus(chain_name, isMeme);
 
   // Determine overall pass/fail

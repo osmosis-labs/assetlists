@@ -7061,10 +7061,12 @@
       "osmosis_verified": true,
       "_comment": "Elys Network $ELYS",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "planned_shutdown",
-      "tooltip_message": "Elys Network governance has approved sunsetting the chain (proposal 103, passed). Deposits are halted; withdraw any ELYS to your Elys wallet while the chain is still operating."
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Elys Network chain has been permanently shut down by governance (proposal 103) and is no longer producing blocks, having halted at block 13381279 on 2026-07-07. Deposits and withdrawals are disabled."
     },
     {
       "chain_name": "aaronetwork",

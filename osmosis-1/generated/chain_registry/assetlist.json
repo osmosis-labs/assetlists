@@ -37721,6 +37721,92 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/759C2B22DFA2D39A9B30BDC053AB59D2376746828B876FD18887F366D3819B11",
+          "exponent": 0,
+          "aliases": [
+            "microeden",
+            "ueden"
+          ]
+        },
+        {
+          "denom": "meden",
+          "exponent": 3,
+          "aliases": [
+            "millieden"
+          ]
+        },
+        {
+          "denom": "eden",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/759C2B22DFA2D39A9B30BDC053AB59D2376746828B876FD18887F366D3819B11",
+      "name": "Eden",
+      "display": "eden",
+      "symbol": "EDEN",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "elys",
+            "base_denom": "ueden",
+            "channel_id": "channel-6"
+          },
+          "chain": {
+            "channel_id": "channel-91017",
+            "path": "transfer/channel-91017/ueden"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/F1CCCA9D4369F4DBAD7456232C1EE7A0D287D1D8AEF02D7290C69B26AF3EE136",
+          "exponent": 0,
+          "aliases": [
+            "microedenb",
+            "uedenb"
+          ]
+        },
+        {
+          "denom": "medenb",
+          "exponent": 3,
+          "aliases": [
+            "milliedenb"
+          ]
+        },
+        {
+          "denom": "edenb",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/F1CCCA9D4369F4DBAD7456232C1EE7A0D287D1D8AEF02D7290C69B26AF3EE136",
+      "name": "Eden BOOST",
+      "display": "edenb",
+      "symbol": "EDENBOOST",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "elys",
+            "base_denom": "uedenb",
+            "channel_id": "channel-6"
+          },
+          "chain": {
+            "channel_id": "channel-91017",
+            "path": "transfer/channel-91017/uedenb"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
           "exponent": 0,
           "aliases": [
@@ -39971,92 +40057,6 @@
           "chain": {
             "channel_id": "channel-5",
             "path": "transfer/channel-5/baseXLM"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/759C2B22DFA2D39A9B30BDC053AB59D2376746828B876FD18887F366D3819B11",
-          "exponent": 0,
-          "aliases": [
-            "microeden",
-            "ueden"
-          ]
-        },
-        {
-          "denom": "meden",
-          "exponent": 3,
-          "aliases": [
-            "millieden"
-          ]
-        },
-        {
-          "denom": "eden",
-          "exponent": 6,
-          "aliases": []
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/759C2B22DFA2D39A9B30BDC053AB59D2376746828B876FD18887F366D3819B11",
-      "name": "Eden",
-      "display": "eden",
-      "symbol": "EDEN",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "elys",
-            "base_denom": "ueden",
-            "channel_id": "channel-6"
-          },
-          "chain": {
-            "channel_id": "channel-91017",
-            "path": "transfer/channel-91017/ueden"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/F1CCCA9D4369F4DBAD7456232C1EE7A0D287D1D8AEF02D7290C69B26AF3EE136",
-          "exponent": 0,
-          "aliases": [
-            "microedenb",
-            "uedenb"
-          ]
-        },
-        {
-          "denom": "medenb",
-          "exponent": 3,
-          "aliases": [
-            "milliedenb"
-          ]
-        },
-        {
-          "denom": "edenb",
-          "exponent": 6,
-          "aliases": []
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/F1CCCA9D4369F4DBAD7456232C1EE7A0D287D1D8AEF02D7290C69B26AF3EE136",
-      "name": "Eden BOOST",
-      "display": "edenb",
-      "symbol": "EDENBOOST",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "elys",
-            "base_denom": "uedenb",
-            "channel_id": "channel-6"
-          },
-          "chain": {
-            "channel_id": "channel-91017",
-            "path": "transfer/channel-91017/uedenb"
           }
         }
       ]

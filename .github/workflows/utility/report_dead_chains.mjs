@@ -29,9 +29,10 @@
 //       worklist — each is a candidate for a `status: killed` PR to
 //       cosmos/chain-registry. Pure local data (no network), but rendered on
 //       the weekly run only: it's a slow-changing static list, so repeating it
-//       on every daily PR is reviewer noise. Host chains that are themselves
-//       still live (the killed asset is a bridged/LST derivative of some other
-//       dead chain) are excluded.
+//       on every daily PR is reviewer noise. Host chains judged alive (still
+//       carrying unkilled listings, or still passing endpoint validation) are
+//       excluded: the killed asset is a bridged/LST derivative of some other
+//       dead chain, or a sunset transfer path on a running chain.
 //
 //   Output is REPORT-ONLY. The script mutates nothing in zone_assets.json or
 //   chain.json. It writes:
@@ -418,31 +419,41 @@ async function cosmosDirectoryVerdict(chainName) {
 }
 
 /**
- * Set of chain_names already in a curator-recorded TERMINAL state on any of
- * their zone_assets — either:
+ * Set of chain_names already in a curator-recorded TERMINAL state on EVERY one
+ * of their zone_assets. An asset is terminal when either:
  *   • a planned_shutdown_date is set (knowingly dying; check_extended_halts
  *     owns the halt), or
  *   • any reason field reads source_chain_killed (the curator has already
  *     declared the source chain dead and halted the asset; the EVMOS case).
  *
  * Both reports exempt these: the chain is known and handled, so re-surfacing it
- * adds no information. Note this intentionally does NOT exempt softer reasons
- * like ibc_client / bridge_down / market — those describe a recoverable outage,
- * not a dead chain, and a chain stuck on one for 7+ days is exactly what the
- * dead-candidate report should escalate.
+ * adds no information. The bar is every-asset, not any-asset: a terminal flag
+ * on a single asset usually marks a derivative of some OTHER dead chain
+ * (milkINIT on initia, qSTARS on quicksilver), and a host chain the curators
+ * still list live assets from must stay inside dead-chain detection. Note this
+ * intentionally does NOT exempt softer reasons like ibc_client / bridge_down /
+ * market — those describe a recoverable outage, not a dead chain, and a chain
+ * stuck on one for 7+ days is exactly what the dead-candidate report should
+ * escalate.
  */
 const KILLED_REASON = 'source_chain_killed';
 function knownTerminalChains(zoneAssets) {
-  const terminal = new Set();
+  // chain_name → { terminal, total } listed-asset counts.
+  const counts = new Map();
   for (const a of zoneAssets?.assets ?? []) {
-    if (
+    const isTerminal =
       a.planned_shutdown_date ||
       a.osmosis_unstable_reason === KILLED_REASON ||
       a.osmosis_deposit_halt_reason === KILLED_REASON ||
-      a.osmosis_withdrawal_halt_reason === KILLED_REASON
-    ) {
-      terminal.add(a.chain_name);
-    }
+      a.osmosis_withdrawal_halt_reason === KILLED_REASON;
+    const c = counts.get(a.chain_name) ?? { terminal: 0, total: 0 };
+    if (isTerminal) c.terminal++;
+    c.total++;
+    counts.set(a.chain_name, c);
+  }
+  const terminal = new Set();
+  for (const [chainName, c] of counts) {
+    if (c.total > 0 && c.terminal === c.total) terminal.add(chainName);
   }
   return terminal;
 }
@@ -472,12 +483,19 @@ function isAssetKilled(a) {
  * an approximate first-observed-dead date (and several chains share a single
  * backfill timestamp from when this tracking began).
  *
- * Host-chain exclusion: a chain whose own endpoints are still healthy
- * (state validationSuccess === true) is alive — the killed asset on it is a
- * wrapped/bridged/liquid-staking derivative of some OTHER dead chain (e.g. the
- * Router `.rt` assets on `osmosis`, milkINIT on `initia`, LSTs of dead chains
- * on `stride`/`quicksilver`). Killing the host chain upstream would be wrong,
- * so these are excluded from the worklist and surfaced separately for context.
+ * Host-chain exclusion: a chain goes on the worklist only when EVERY asset
+ * Osmosis lists from it is flagged source_chain_killed AND its own endpoint
+ * validation is failing. Either signal alone excludes the host, because each
+ * covers the other's failure mode:
+ *   • an unkilled listing means the killed asset is a wrapped/bridged/
+ *     liquid-staking derivative of some OTHER dead chain (the Router `.rt`
+ *     assets on `osmosis`, milkINIT on `initia`, LSTs of dead chains on
+ *     `stride`/`quicksilver`) — and a single run's probe failure against such
+ *     a live host must not promote it into the worklist;
+ *   • passing endpoint validation means the chain is still making blocks even
+ *     though everything listed from it is killed (`pundix`: the transfer
+ *     path was sunset by governance while validators keep the chain running)
+ *     — killing it upstream would be premature.
  *
  * Returns { candidates, excludedHostChains } — candidates sorted by chain name,
  * each { chainName, registryStatus, assetCount, firstSeenDown }.
@@ -497,6 +515,14 @@ function buildKilledNotUpstream(zoneAssets, frontendAssets, stateAssets, stateCh
     const k = `${a.chainName}|${a.sourceDenom}`;
     (denomsByChainSrc.get(k) ?? denomsByChainSrc.set(k, []).get(k)).push(a.coinMinimalDenom);
   }
+  // chain_name → count of listed assets NOT flagged killed. Any unkilled
+  // listing means the curators still treat the host chain as alive.
+  const unkilledCount = new Map();
+  for (const a of zoneAssets?.assets ?? []) {
+    if (!isAssetKilled(a)) {
+      unkilledCount.set(a.chain_name, (unkilledCount.get(a.chain_name) ?? 0) + 1);
+    }
+  }
   // chain_name → is the chain's own endpoint validation currently passing?
   const chainAlive = new Map(
     (stateChains ?? []).map((c) => [c.chain_name, c.validationSuccess === true])
@@ -515,7 +541,9 @@ function buildKilledNotUpstream(zoneAssets, frontendAssets, stateAssets, stateCh
         registryStatus,
         assetCount: 0,
         firstSeenDown: null,
-        hostAlive: chainAlive.get(a.chain_name) === true,
+        hostAlive:
+          (unkilledCount.get(a.chain_name) ?? 0) > 0 ||
+          chainAlive.get(a.chain_name) === true,
       };
       byChain.set(a.chain_name, row);
     }
@@ -1240,9 +1268,10 @@ function renderReport({ part1, part2, part3 }) {
     if (part3Excluded.length) {
       lines.push('');
       lines.push(
-        `_Excluded (host chain still live — the killed asset is a bridged / ` +
-          `liquid-staking derivative of another dead chain, so the host itself ` +
-          `should not be killed upstream): ${part3Excluded.join(', ')}._`
+        `_Excluded (host chain judged alive: it still has unkilled listings ` +
+          `or currently passes endpoint validation, so the killed asset is a ` +
+          `derivative of another dead chain or a sunset transfer path and the ` +
+          `host itself should not be killed upstream): ${part3Excluded.join(', ')}._`
       );
     }
   }

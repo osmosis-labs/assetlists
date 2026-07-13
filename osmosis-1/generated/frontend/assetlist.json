@@ -45174,6 +45174,77 @@
       "lastDowntimeDate": "2026-07-10T15:51:51.721Z"
     },
     {
+      "chainName": "axelar",
+      "sourceDenom": "cbdoge-satoshi",
+      "coinMinimalDenom": "ibc/D6ED8CCF01DE2F86D0D8A9605A8535A66C930697E986616227506EBDE8B8AC91",
+      "symbol": "cbDOGE.axl",
+      "decimals": 8,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/base/images/cbdoge.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "depositUrl": "https://app.squidrouter.com/?fromChain=base&toChain=osmosis&fromToken=cbdoge&toToken=cbdoge.axl",
+          "withdrawUrl": "https://app.squidrouter.com/?fromChain=osmosis&toChain=base&fromToken=cbdoge.axl&toToken=cbdoge"
+        },
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "axelar",
+            "chainId": "axelar-dojo-1",
+            "sourceDenom": "cbdoge-satoshi",
+            "port": "transfer",
+            "channelId": "channel-3"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-208",
+            "path": "transfer/channel-208/cbdoge-satoshi"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "axelar",
+          "sourceDenom": "cbdoge-satoshi",
+          "chainType": "cosmos",
+          "chainId": "axelar-dojo-1",
+          "symbol": "axl-cbDOGE",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/base/images/cbdoge.png"
+          }
+        },
+        {
+          "chainName": "base",
+          "sourceDenom": "0xcbD06E5A2B0C65597161de254AA074E489dEb510",
+          "chainType": "evm",
+          "chainId": 8453,
+          "address": "0xcbD06E5A2B0C65597161de254AA074E489dEb510",
+          "symbol": "cbDOGE",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/base/images/cbdoge.png"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo10pk4crey8fpdyqd62rsau0y02e3rk055w5u005ah6ly7k849k5tsf72x40/alloyed/allDOGE",
+      "name": "Coinbase Wrapped DOGE (Axelar)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "axelar",
+        "sourceDenom": "uaxl"
+      }
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",

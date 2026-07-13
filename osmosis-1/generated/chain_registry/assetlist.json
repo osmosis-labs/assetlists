@@ -37807,6 +37807,40 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/D6ED8CCF01DE2F86D0D8A9605A8535A66C930697E986616227506EBDE8B8AC91",
+          "exponent": 0,
+          "aliases": [
+            "cbdoge-satoshi"
+          ]
+        },
+        {
+          "denom": "cbdoge",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/D6ED8CCF01DE2F86D0D8A9605A8535A66C930697E986616227506EBDE8B8AC91",
+      "name": "Coinbase Wrapped DOGE",
+      "display": "cbdoge",
+      "symbol": "axl-cbDOGE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "axelar",
+            "base_denom": "cbdoge-satoshi",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-208",
+            "path": "transfer/channel-208/cbdoge-satoshi"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
           "exponent": 0,
           "aliases": [

@@ -59,14 +59,16 @@ const tests = [
 ];
 
 //ENDPOINTS
+const RPC_STATUS_PATH = "status";
+const REST_NODE_INFO_PATH = "/cosmos/base/tendermint/v1beta1/node_info";
 const rpcEndpoints = [
-  "status"
+  RPC_STATUS_PATH
 ];
 const wssEndpoints = [
   "websocket"
 ];
 const restEndpoints = [
-  "/cosmos/base/tendermint/v1beta1/node_info"
+  REST_NODE_INFO_PATH
 ];
 
 
@@ -496,6 +498,66 @@ const queryHTTP = (url) => {
   });
 };
 
+/**
+ * Second-vantage liveness probe via the cosmos.directory proxy.
+ *
+ * The validator only sees the GitHub runner's vantage point, and several
+ * providers block or rate-limit runner egress, so "every endpoint failed" can
+ * mean a dead chain OR a blind runner. cosmos.directory probes the registry
+ * endpoints from its own infrastructure and proxies to whichever node is
+ * healthy, so a fresh block through the proxy proves the chain is alive and
+ * the failure is on our side (endpoint set or egress).
+ *
+ * Never rejects: resolves { alive, blockAgeMinutes } when a block was read,
+ * or null when the proxy had no healthy upstream / did not answer. A null is
+ * NOT proof of death — the chain may simply not be tracked there.
+ */
+const PROXY_FRESH_MINUTES = 60; // same bar as the endpoint staleness check
+const queryCosmosDirectory = async (chainName) => {
+  const get = (url) =>
+    new Promise((resolve) => {
+      const req = https.request(
+        url,
+        { method: 'GET', headers: { 'User-Agent': 'osmosis-assetlists-endpoint-validation' } },
+        (res) => {
+          let body = '';
+          res.on('data', (c) => { body += c; });
+          res.on('end', () => resolve(res.statusCode === 200 ? body : null));
+        }
+      );
+      req.setTimeout(8000, () => { req.destroy(); resolve(null); });
+      req.on('error', () => resolve(null));
+      req.end();
+    });
+
+  const parseTime = (t) => {
+    const d = t ? new Date(t) : null;
+    return d && !Number.isNaN(d.getTime()) ? d : null;
+  };
+
+  // RPC proxy first; REST proxy as fallback (either alone is sufficient).
+  let blockTime = null;
+  const rpcBody = await get(`https://rpc.cosmos.directory/${chainName}/status`);
+  if (rpcBody) {
+    try {
+      blockTime = parseTime(JSON.parse(rpcBody)?.result?.sync_info?.latest_block_time);
+    } catch { /* non-JSON → try REST */ }
+  }
+  if (!blockTime) {
+    const restBody = await get(
+      `https://rest.cosmos.directory/${chainName}/cosmos/base/tendermint/v1beta1/blocks/latest`
+    );
+    if (restBody) {
+      try {
+        blockTime = parseTime(JSON.parse(restBody)?.block?.header?.time);
+      } catch { /* non-JSON → inconclusive */ }
+    }
+  }
+  if (!blockTime) return null;
+  const blockAgeMinutes = (Date.now() - blockTime.getTime()) / 60000;
+  return { alive: blockAgeMinutes <= PROXY_FRESH_MINUTES, blockAgeMinutes };
+};
+
 const logResult = (url, result, success) => {
   const status = result.success ? "SUCCESS" : `ERROR: ${result.errorCode || "UNKNOWN"}`;
   const message = `${result.errorCode || ""}: ${result.message || "No additional information"}`;
@@ -676,6 +738,14 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
   )?.chains || [];
   const zoneChain = zoneChains.find(z => z.chain_name === counterpartyChain.chain_name);
 
+  // Registry chain_id for chain-id verification of endpoint responses. Absent
+  // (undefined) disables the check for that chain rather than failing it.
+  const expectedChainId = chain_reg.getFileProperty(
+    counterpartyChain.chain_name,
+    "chain",
+    "chain_id"
+  );
+
   // Helper to determine if an endpoint is "primary" (zone, team, or preferred provider)
   // Primary endpoints skip CORS validation
   const isPrimaryEndpoint = (endpoint, nodeType) => {
@@ -744,21 +814,48 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
           }
         }
 
-        if (endpoint === "status") {
-          // The tendermint /status body is a JSON STRING (queryHTTP attaches the
-          // raw body, it does not parse), and the real shape nests everything
-          // under `result.sync_info` — NOT a top-level `sync_info`. The previous
-          // code read `result.sync_info` on the unparsed string, so block_time
-          // was always undefined, `new Date(undefined)` was Invalid Date, and the
-          // `stale` comparison was always false: the staleness signal never
-          // actually fired. Parse the body and read the correct nested path so
-          // both staleness and height tracking work.
-          let syncInfo;
+        // The data-bearing endpoints (RPC /status, REST node_info) return a
+        // JSON STRING body (queryHTTP attaches the raw body, it does not
+        // parse). Parse it once here for both the chain-id verification and
+        // the staleness/height tracking below.
+        let parsedBody;
+        if (endpoint === RPC_STATUS_PATH || endpoint === REST_NODE_INFO_PATH) {
           try {
-            syncInfo = JSON.parse(result?.body ?? "")?.result?.sync_info;
+            parsedBody = JSON.parse(result?.body ?? "");
           } catch {
-            syncInfo = undefined; // non-JSON body → leave height/time unknown
+            parsedBody = undefined; // non-JSON body → leave everything unknown
           }
+        }
+
+        // Chain-id verification: an endpoint answering for a DIFFERENT network
+        // than the registry chain_id is a repurposed or misconfigured provider
+        // domain (observed in the wild: a comdex REST slot serving akashnet-2,
+        // a pylons slot serving althea). Letting it pass would ship a
+        // wrong-chain endpoint to the frontend chainlist AND feed the wrong
+        // chain's block height/time into the dead-chain freeze/staleness
+        // detection, masking a real halt. Treat it as a failed endpoint so the
+        // sweep moves on to the next candidate.
+        if (validationResult.success && expectedChainId && parsedBody) {
+          const network =
+            endpoint === RPC_STATUS_PATH
+              ? parsedBody?.result?.node_info?.network
+              : parsedBody?.default_node_info?.network;
+          if (network && network !== expectedChainId) {
+            validationResult.success = false;
+            validationResult.errorType = 'WRONG_CHAIN';
+            validationResult.errorMessage =
+              `endpoint serves ${network}, expected ${expectedChainId}`;
+            console.log(`[WRONG_CHAIN] ${url} - serves ${network}, expected ${expectedChainId}`);
+          }
+        }
+
+        // Only record block data from an endpoint that passed (including the
+        // chain-id check): height/time from a wrong-chain endpoint would poison
+        // the run-over-run freeze detection with another chain's progression.
+        if (endpoint === RPC_STATUS_PATH && validationResult.success) {
+          // The real /status shape nests everything under `result.sync_info` —
+          // NOT a top-level `sync_info`.
+          const syncInfo = parsedBody?.result?.sync_info;
 
           // Wall-clock staleness: latest block older than ~1h means the chain is
           // not producing (or this node is badly lagging). Invalid/absent time
@@ -1404,7 +1501,7 @@ async function validateSpecificChain(chainName, chain_name) {
 
 }
 
-function generateValidationReport(chainName) {
+async function generateValidationReport(chainName) {
   const state = getState(chainName);
 
   if (!state.chains || state.chains.length === 0) {
@@ -1534,20 +1631,34 @@ function generateValidationReport(chainName) {
   };
 
   // Derive a concrete next step for a connectivity-failing chain from its halt
-  // coverage and its dead-chain streak. The point is to turn the report from
-  // "here's what's broken" into "here's what to do", so recurring rows carry an
-  // explicit action instead of needing re-triage each run.
+  // coverage, the cosmos.directory second-vantage probe, and its dead-chain
+  // streak. The point is to turn the report from "here's what's broken" into
+  // "here's what to do", so recurring rows carry an explicit action instead of
+  // needing re-triage each run.
   //
   //   • All deposits halted                  → nothing to do (already covered).
+  //   • Fresh block via cosmos.directory       → the chain is alive; our
+  //                                             endpoint set (or runner egress)
+  //                                             is the problem. Fix endpoints,
+  //                                             do not halt.
   //   • Deposits still open + 7+ run streak    → check the dead-chain candidates
-  //                                             report (it has cosmos.directory
-  //                                             corroboration this report lacks).
+  //                                             report (it corroborates against
+  //                                             cosmos.directory success history,
+  //                                             not just this run).
   //   • Deposits still open, shorter streak    → halt deposits / investigate.
   //   • All unstable but deposits still open   → consider a deposit halt.
-  const getActionLabel = (chain_name) => {
+  const getActionLabel = (chain_name, proxy) => {
     const cov = haltCoverageByChain[chain_name];
     if (!cov || cov.total === 0) { return '— no listed assets'; }
     if (cov.depositsHalted >= cov.total) { return '✅ already covered (deposits halted)'; }
+
+    // A fresh block through the cosmos.directory proxy means the chain is
+    // alive and the failure is on our side; halting deposits would be the
+    // wrong reaction. A stale or absent proxy answer falls through to the
+    // deposit-risk branches below.
+    if (proxy?.alive) {
+      return '🔧 fix endpoints (chain alive via cosmos.directory)';
+    }
 
     const streak = deadStreaks[chain_name]?.streak ?? 0;
     const streakNote = streak >= DEAD_STREAK_THRESHOLD ? ` (${streak}-run streak)` : '';
@@ -1555,9 +1666,10 @@ function generateValidationReport(chainName) {
     // At least one asset still has deposits open while the chain is unreachable.
     const depositsStillOpen = cov.depositsHalted < cov.total;
     if (depositsStillOpen && streak >= DEAD_STREAK_THRESHOLD) {
-      // A long streak suggests death, but this report has no cosmos.directory
-      // corroboration (some long-failing chains are alive on private endpoints,
-      // e.g. gravitybridge), so defer to the dead-chain candidates report.
+      // A long streak suggests death, but the single-run proxy probe above is
+      // inconclusive here, so defer to the dead-chain candidates report, which
+      // corroborates against cosmos.directory's success HISTORY (some
+      // long-failing chains are alive on private endpoints, e.g. gravitybridge).
       return `🔍 check dead-chain candidates${streakNote}`;
     }
     if (cov.unstable >= cov.total) {
@@ -1639,6 +1751,16 @@ function generateValidationReport(chainName) {
     const dateB = new Date(b.validationDate);
     return dateB.getTime() - dateA.getTime();
   });
+
+  // Second-vantage corroboration for the connectivity-failed chains: ask the
+  // cosmos.directory proxy whether each chain is reachable from outside the
+  // runner. Keyed by chain_name; null = proxy had no answer (inconclusive).
+  const proxyChecks = new Map();
+  await Promise.all(
+    failedChains.map(async (chain) => {
+      proxyChecks.set(chain.chain_name, await queryCosmosDirectory(chain.chain_name));
+    })
+  );
 
   // Check for forced endpoint failures
   const forcedEndpointFailures = failedChains.filter(chain =>
@@ -1729,12 +1851,29 @@ function generateValidationReport(chainName) {
   } else if (failedChains.length > 0) {
     report += `### ❌ Connectivity Failures\n\n`;
     report += `The following chains have endpoints that failed connectivity tests (not just CORS). `;
-    report += `The Halt Coverage column shows whether the chain's listed assets are already flagged `;
-    report += `unstable / deposit-halted by another mechanism. The Assets column lists every asset on `;
-    report += `the chain with its individual status (one per line). The Action column gives the suggested `;
-    report += `next step derived from that coverage and the chain's dead-chain streak.\n\n`;
-    report += `| Chain Name | Last Validation | Days Ago | RPC Status | REST Status | Halt Coverage | Assets | Action |\n`;
-    report += `|------------|----------------|----------|------------|-------------|---------------|--------|--------|\n`;
+    report += `The cosmos.directory column is a second-vantage probe through that proxy: a fresh block `;
+    report += `there means the chain is alive and our endpoint set (or the runner's egress) is the `;
+    report += `problem, not the chain. The Halt Coverage column shows whether the chain's listed assets `;
+    report += `are already flagged unstable / deposit-halted by another mechanism. The Assets column `;
+    report += `lists every asset on the chain with its individual status (one per line). The Action `;
+    report += `column gives the suggested next step derived from that coverage, the proxy probe, and `;
+    report += `the chain's dead-chain streak.\n\n`;
+    report += `| Chain Name | Last Validation | Days Ago | RPC Status | REST Status | cosmos.directory | Halt Coverage | Assets | Action |\n`;
+    report += `|------------|----------------|----------|------------|-------------|------------------|---------------|--------|--------|\n`;
+
+    // Render the proxy probe result as a table cell. Block age is shown in the
+    // most readable unit; "no healthy node" covers both a dead chain and a
+    // chain cosmos.directory does not track (inconclusive by itself).
+    const formatBlockAge = (minutes) => {
+      if (minutes < 120) { return `${Math.round(minutes)}m`; }
+      if (minutes < 48 * 60) { return `${(minutes / 60).toFixed(1)}h`; }
+      return `${(minutes / (24 * 60)).toFixed(1)}d`;
+    };
+    const getProxyCell = (proxy) => {
+      if (!proxy) { return '❌ no healthy node'; }
+      const age = formatBlockAge(proxy.blockAgeMinutes);
+      return proxy.alive ? `✅ alive (block ${age} old)` : `⚠️ stale (block ${age} old)`;
+    };
 
     failedChains.forEach(chain => {
       const validationDate = new Date(chain.validationDate);
@@ -1748,11 +1887,13 @@ function generateValidationReport(chainName) {
 
       const rpcStatus = rpcAllFailed ? '❌ All Failed' : '⚠️ Partial';
       const restStatus = restAllFailed ? '❌ All Failed' : '⚠️ Partial';
+      const proxy = proxyChecks.get(chain.chain_name);
+      const proxyCell = getProxyCell(proxy);
       const haltCoverage = getHaltCoverageLabel(chain.chain_name);
       const assetBreakdown = getAssetBreakdownCell(chain.chain_name);
-      const action = getActionLabel(chain.chain_name);
+      const action = getActionLabel(chain.chain_name, proxy);
 
-      report += `| ${chain.chain_name} | ${validationDate.toISOString().split('T')[0]} | ${daysSince} | ${rpcStatus} | ${restStatus} | ${haltCoverage} | ${assetBreakdown} | ${action} |\n`;
+      report += `| ${chain.chain_name} | ${validationDate.toISOString().split('T')[0]} | ${daysSince} | ${rpcStatus} | ${restStatus} | ${proxyCell} | ${haltCoverage} | ${assetBreakdown} | ${action} |\n`;
     });
     report += `\n`;
   }
@@ -1844,9 +1985,9 @@ const functions = {
     console.log("Running validateSpecificChain...");
     validateSpecificChain(chainName, chain_name);
   },
-  generateReport: (chainName = "osmosis") => {
+  generateReport: async (chainName = "osmosis") => {
     console.error("Running generateReport...");
-    generateValidationReport(chainName);
+    await generateValidationReport(chainName);
   },
 };
 

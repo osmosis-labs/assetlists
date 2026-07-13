@@ -11710,6 +11710,21 @@
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "manual",
       "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+    },
+    {
+      "chain_name": "axelar",
+      "base_denom": "cbdoge-satoshi",
+      "path": "transfer/channel-208/cbdoge-satoshi",
+      "osmosis_verified": false,
+      "_comment": "Coinbase Wrapped DOGE (Base via Axelar) $cbDOGE.axl",
+      "transfer_methods": [
+        {
+          "name": "Squid",
+          "type": "external_interface",
+          "deposit_url": "https://app.squidrouter.com/?fromChain=base&toChain=osmosis&fromToken=cbdoge&toToken=cbdoge.axl",
+          "withdraw_url": "https://app.squidrouter.com/?fromChain=osmosis&toChain=base&fromToken=cbdoge.axl&toToken=cbdoge"
+        }
+      ]
     }
   ]
 }

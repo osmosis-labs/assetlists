@@ -2783,24 +2783,7 @@
       "categories": [
         "defi"
       ],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "umee",
-            "chainId": "umee-1",
-            "sourceDenom": "uumee",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-184",
-            "path": "transfer/channel-184/uumee"
-          }
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "umee",
@@ -2822,6 +2805,10 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "source_chain_killed",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
       "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
     },

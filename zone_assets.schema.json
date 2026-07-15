@@ -54,8 +54,14 @@
         },
         "osmosis_unstable_reason": {
           "type": "string",
-          "enum": ["ibc_client", "source_chain_killed", "market", "manual"],
-          "description": "Closed-set reason for the unstable flag. Each has a localization key in the frontend. Curator-written context for any halt/unstable state lives in the existing `tooltip_message` field."
+          "enum": [
+            "ibc_client",
+            "source_chain_killed",
+            "market",
+            "planned_shutdown",
+            "manual"
+          ],
+          "description": "Closed-set reason for the unstable flag. Drives the localized banner in the frontend; values without a dedicated localization key fall back to a generic unstable string. Curator-written context for any halt/unstable state lives in the existing `tooltip_message` field."
         },
         "osmosis_disabled": {
           "type": "boolean",

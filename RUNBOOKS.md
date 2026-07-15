@@ -1025,7 +1025,7 @@ Two changes from an auto-set halt:
 1. The `*_halt_reason` is set to `manual`. Script-owned reasons get auto-cleared on recovery; `manual` does not.
 2. `tooltip_message` is non-empty. Any tooltip locks the asset against all automation. The one sanctioned exception is a curator-set expiry: if you also set `tooltip_expiry_date`, `check_tooltip_expiry.mjs` will clear or decay the tooltip on that date (see RB009).
 
-Commit and let the daily cron run. Verify the asset is now ignored by automation by checking the next workflow summary's "Manual halts currently in effect" section.
+Commit and let the daily cron run. Verify the asset is now ignored by automation by checking the next workflow summary's "Manual & planned-shutdown halts currently in effect" section.
 
 #### Release the override
 

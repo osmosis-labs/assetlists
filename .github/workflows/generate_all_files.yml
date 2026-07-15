@@ -524,7 +524,9 @@ jobs:
           # counts as manual if ANY of its three reason fields is "manual":
           # the overall unstable reason, or the per-direction deposit/withdrawal
           # halt reason (a curator may halt one direction without flagging the
-          # asset unstable). Distinct chains, sorted.
+          # asset unstable). Distinct chains, sorted. This bare chain-name set
+          # feeds the added-this-run delta and the persisted manualHaltChains
+          # state; the display variant below carries the per-chain detail.
           MANUAL_HALT_CHAINS=$(jq -r '
             .assets
             | map(select(
@@ -542,7 +544,43 @@ jobs:
           comm -13 /tmp/manual-halts-prev.txt /tmp/lc-manualHalts.txt \
             > /tmp/lc-manualHaltsNew.txt 2>/dev/null || touch /tmp/lc-manualHaltsNew.txt
           emit_row "🆕" "Manual halts added this run" /tmp/lc-manualHaltsNew.txt name
-          emit_row "⚠️" "Manual halts in effect" /tmp/lc-manualHalts.txt name
+
+          # Standing row, display variant: say how much of each chain's
+          # listing is halted and name the impacted symbols (with the bridge
+          # hop when the halt is really the hop's problem), so a single-asset
+          # halt (e.g. PSTAKE routed via a compromised Gravity Bridge) cannot
+          # read as a whole-chain halt of its origin chain.
+          jq -r --slurpfile fe osmosis-1/generated/frontend/assetlist.json '
+            ($fe[0].assets
+              | map({ key: (.chainName + "|" + .sourceDenom), value: . })
+              | from_entries) as $byOrigin
+            | (.assets | group_by(.chain_name)
+              | map({ key: .[0].chain_name, value: length })
+              | from_entries) as $totals
+            | [ .assets[]
+                | select(
+                    (.osmosis_unstable_reason == "manual")
+                    or (.osmosis_deposit_halt_reason == "manual")
+                    or (.osmosis_withdrawal_halt_reason == "manual")
+                  ) ]
+            | group_by(.chain_name)
+            | .[]
+            | ([ .[]
+                 | . as $a
+                 | ($byOrigin[$a.chain_name + "|" + $a.base_denom]) as $f
+                 | ([ ($f.counterparty // [])[]
+                      | select(.chainType == "cosmos" and .chainName != $a.chain_name)
+                      | .chainName ] | first) as $hop
+                 | ($f.symbol // $a.base_denom)
+                   + (if $hop then " (via \($hop))" else "" end)
+               ]
+               | if length > 6 then .[0:6] + ["+\(length - 6) more"] else . end
+               | join(", ")) as $names
+            | "\(.[0].chain_name) — \(length) of \($totals[.[0].chain_name] // 0) listed: \($names)"
+          ' osmosis-1/osmosis.zone_assets.json 2>/dev/null \
+            > /tmp/lc-manualHaltsDisplay.txt \
+            || cp /tmp/lc-manualHalts.txt /tmp/lc-manualHaltsDisplay.txt 2>/dev/null || true
+          emit_row "⚠️" "Manual halts in effect" /tmp/lc-manualHaltsDisplay.txt name
 
           emit_row "⏸️" "Extended halt set" /tmp/lc-extendedHaltSet.txt symbol
           emit_row "▶️" "Extended halt cleared" /tmp/lc-extendedHaltCleared.txt symbol
@@ -757,39 +795,75 @@ jobs:
             echo "" >> workflow-summary.md
           fi
 
-          # Manual halts currently in effect (visibility for drift detection)
-          echo "## Manual halts currently in effect" >> workflow-summary.md
+          # Manual and planned-shutdown halts currently in effect (visibility
+          # for drift detection). Both are standing state the daily scripts
+          # will not clear on their own: "manual" is the curator lock, and
+          # planned-shutdown halts are normally tooltip-locked until the
+          # curator releases them. Surfacing both every run keeps forgotten
+          # halts visible.
+          echo "## Manual & planned-shutdown halts currently in effect" >> workflow-summary.md
           echo "" >> workflow-summary.md
 
-          # Select assets manually flagged on ANY of the three reason fields
-          # (unstable / deposit-halt / withdrawal-halt), then report each
-          # halted direction with its cause from the *_halt_reason fields.
-          MANUAL_HALTS=$(jq -r '
-            .assets
+          # Select assets flagged manual or planned_shutdown on ANY of the
+          # three reason fields (unstable / deposit-halt / withdrawal-halt),
+          # enriched with the display symbol and bridge hop from the generated
+          # frontend assetlist (joined on chainName|sourceDenom), plus the
+          # chain's total listed-asset count. The hop is the first counterparty
+          # cosmos chain that is not the origin itself, so a halt caused by the
+          # hop (e.g. PSTAKE routed via a compromised Gravity Bridge) is
+          # attributable at a glance instead of reading as an origin-chain
+          # problem.
+          STANDING_HALTS=$(jq --slurpfile fe osmosis-1/generated/frontend/assetlist.json '
+            ($fe[0].assets
+              | map({ key: (.chainName + "|" + .sourceDenom), value: . })
+              | from_entries) as $byOrigin
+            | (.assets | group_by(.chain_name)
+              | map({ key: .[0].chain_name, value: length })
+              | from_entries) as $totals
+            | .assets
             | map(select(
                 (.osmosis_unstable_reason == "manual")
+                or (.osmosis_unstable_reason == "planned_shutdown")
                 or (.osmosis_deposit_halt_reason == "manual")
+                or (.osmosis_deposit_halt_reason == "planned_shutdown")
                 or (.osmosis_withdrawal_halt_reason == "manual")
+                or (.osmosis_withdrawal_halt_reason == "planned_shutdown")
               ))
+            | map(. as $a
+                | ($byOrigin[$a.chain_name + "|" + $a.base_denom]) as $f
+                | . + {
+                    symbol: ($f.symbol // $a._comment // $a.base_denom),
+                    hop: ([ ($f.counterparty // [])[]
+                            | select(.chainType == "cosmos" and .chainName != $a.chain_name)
+                            | .chainName ] | first),
+                    chain_total: ($totals[$a.chain_name] // 0)
+                  })
           ' osmosis-1/osmosis.zone_assets.json)
-          MANUAL_HALT_COUNT=$(echo "$MANUAL_HALTS" | jq 'length')
+          STANDING_HALT_COUNT=$(echo "$STANDING_HALTS" | jq 'length')
 
-          if [ "$MANUAL_HALT_COUNT" -eq 0 ]; then
+          if [ "$STANDING_HALT_COUNT" -eq 0 ]; then
             echo "_None._" >> workflow-summary.md
           else
             # This is standing state (it repeats every run while the halts are
             # in effect), so the default view is one compact row per chain and
             # the full per-asset/per-direction breakdown lives inside a
-            # <details>. The per-chain row collapses assets, halted directions,
-            # and reasons into sets so the reader sees "which chains, why, how
-            # many" at a glance instead of scrolling 50+ near-identical rows.
-            echo "| Chain | Assets halted | Directions | Reason(s) |" >> workflow-summary.md
-            echo "|-------|--------------:|------------|-----------|" >> workflow-summary.md
-            echo "$MANUAL_HALTS" | jq -r '
+            # <details>. "Assets halted" reads "X of Y" against the chain's
+            # full listing so a single-asset halt (e.g. USDN on noble) cannot
+            # read as a whole-chain halt, and the impacted symbols are named
+            # right in the row.
+            echo "| Chain | Assets halted | Impacted assets | Directions | Reason(s) |" >> workflow-summary.md
+            echo "|-------|---------------|-----------------|------------|-----------|" >> workflow-summary.md
+            echo "$STANDING_HALTS" | jq -r '
               group_by(.chain_name)
               | map({
                   chain: .[0].chain_name,
-                  count: length,
+                  halted: length,
+                  total: .[0].chain_total,
+                  assets: (
+                    [ .[] | .symbol + (if .hop then " (via \(.hop))" else "" end) ]
+                    | if length > 8 then .[0:8] + ["+\(length - 8) more"] else . end
+                    | join(", ")
+                  ),
                   directions: (
                     [ .[]
                       | ( if .osmosis_halt_deposits == true then "deposit" else empty end ),
@@ -807,37 +881,24 @@ jobs:
                   )
                 })
               | .[]
-              | "| \(.chain) | \(.count) | \(.directions) | \(.reasons) |"
+              | "| \(.chain) | \(.halted) of \(.total) | \(.assets) | \(.directions) | \(.reasons) |"
             ' >> workflow-summary.md
 
             echo "" >> workflow-summary.md
-            echo "<details><summary>Full manual-halt breakdown (${MANUAL_HALT_COUNT} asset(s), per direction)</summary>" >> workflow-summary.md
+            echo "<details><summary>Full standing-halt breakdown (${STANDING_HALT_COUNT} asset(s), per direction)</summary>" >> workflow-summary.md
             echo "" >> workflow-summary.md
-            # Resolve Symbol and Route from the generated frontend assetlist,
-            # joined on chainName|sourceDenom. Route is the asset's listed origin
-            # chain, plus "via <hop>" when the asset reaches Osmosis through an
-            # intermediary cosmos chain (the first counterparty cosmos chain that
-            # is not the origin itself). So a native Gravity asset reads
-            # "gravitybridge", while a Persistence asset bridged in via Gravity
-            # reads "persistence via gravitybridge".
+            # Symbol and hop were resolved in the enrichment pass above; Route
+            # renders as the origin chain plus "via <hop>" when present, so a
+            # native Gravity asset reads "gravitybridge" while a Persistence
+            # asset bridged in via Gravity reads "persistence via
+            # gravitybridge".
             echo "| Symbol | Route | Base denom | Direction | Reason | Tooltip |" >> workflow-summary.md
             echo "|--------|-------|-----------|-----------|--------|---------|" >> workflow-summary.md
-            echo "$MANUAL_HALTS" | jq -r --slurpfile fe osmosis-1/generated/frontend/assetlist.json '
-              ($fe[0].assets
-                | map({ key: (.chainName + "|" + .sourceDenom), value: . })
-                | from_entries) as $byOrigin
-              | .[]
+            echo "$STANDING_HALTS" | jq -r '
+              .[]
               | . as $a
-              | ($byOrigin[$a.chain_name + "|" + $a.base_denom]) as $f
-              | ($f.symbol // $a._comment // $a.base_denom) as $sym
-              | (
-                  [ ($f.counterparty // [])[]
-                    | select(.chainType == "cosmos" and .chainName != $a.chain_name)
-                    | .chainName ] as $hops
-                  | if ($hops | length) > 0
-                    then $a.chain_name + " via " + $hops[0]
-                    else $a.chain_name end
-                ) as $route
+              | ($a.symbol) as $sym
+              | (if $a.hop then $a.chain_name + " via " + $a.hop else $a.chain_name end) as $route
               | [
                   (if .osmosis_halt_deposits == true then
                      "| \($sym) | \($route) | \(.base_denom) | deposit | \(.osmosis_deposit_halt_reason // "") | \(.tooltip_message // "") |"
@@ -846,9 +907,9 @@ jobs:
                      "| \($sym) | \($route) | \(.base_denom) | withdrawal | \(.osmosis_withdrawal_halt_reason // "") | \(.tooltip_message // "") |"
                    else empty end)
                 ]
-              # Fallback: an asset can be manually flagged unstable without
-              # either direction halted. Emit one row so the asset is still
-              # listed and the table never shows bare headers.
+              # Fallback: an asset can be flagged unstable without either
+              # direction halted. Emit one row so the asset is still listed
+              # and the table never shows bare headers.
               | (if length == 0 then
                    ["| \($sym) | \($route) | \($a.base_denom) | none | \($a.osmosis_unstable_reason // "") | \($a.tooltip_message // "") |"]
                  else . end)

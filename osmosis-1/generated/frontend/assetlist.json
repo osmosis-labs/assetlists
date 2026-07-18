@@ -45184,6 +45184,63 @@
       }
     },
     {
+      "chainName": "gonka",
+      "sourceDenom": "ngonka",
+      "coinMinimalDenom": "ibc/C9FADE15CBFACDF6A5B762100EDD999835CDBACD16D4BD2127ACC4EA40D0B276",
+      "symbol": "GNK",
+      "decimals": 9,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gonka/images/gonka_logo.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gonka/images/gonka_logo.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "gonka",
+            "chainId": "gonka-mainnet",
+            "sourceDenom": "ngonka",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-108157",
+            "path": "transfer/channel-108157/ngonka"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "gonka",
+          "sourceDenom": "ngonka",
+          "chainType": "cosmos",
+          "chainId": "gonka-mainnet",
+          "symbol": "GNK",
+          "decimals": 9,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gonka/images/gonka_logo.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gonka/images/gonka_logo.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/C9FADE15CBFACDF6A5B762100EDD999835CDBACD16D4BD2127ACC4EA40D0B276",
+      "name": "Gonka",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "lastDowntimeDate": "2026-07-18T15:24:40.817Z"
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -48722,57 +48779,6 @@
       ],
       "variantGroupKey": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4",
       "name": "Avalanche USD Coin (Wormhole)",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "gonka",
-      "sourceDenom": "ngonka",
-      "coinMinimalDenom": "ibc/C9FADE15CBFACDF6A5B762100EDD999835CDBACD16D4BD2127ACC4EA40D0B276",
-      "symbol": "GNK",
-      "decimals": 9,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gonka/images/gonka_logo.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gonka/images/gonka_logo.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "gonka",
-            "chainId": "gonka-mainnet",
-            "sourceDenom": "ngonka",
-            "port": "transfer",
-            "channelId": "channel-1"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-108157",
-            "path": "transfer/channel-108157/ngonka"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "gonka",
-          "sourceDenom": "ngonka",
-          "chainType": "cosmos",
-          "chainId": "gonka-mainnet",
-          "symbol": "GNK",
-          "decimals": 9,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gonka/images/gonka_logo.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gonka/images/gonka_logo.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/C9FADE15CBFACDF6A5B762100EDD999835CDBACD16D4BD2127ACC4EA40D0B276",
-      "name": "Gonka",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

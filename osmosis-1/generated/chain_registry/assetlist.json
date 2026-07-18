@@ -37841,6 +37841,55 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/C9FADE15CBFACDF6A5B762100EDD999835CDBACD16D4BD2127ACC4EA40D0B276",
+          "exponent": 0,
+          "aliases": [
+            "nanogonka",
+            "ngonka"
+          ]
+        },
+        {
+          "denom": "ugonka",
+          "exponent": 3,
+          "aliases": [
+            "microgonka"
+          ]
+        },
+        {
+          "denom": "mgonka",
+          "exponent": 6,
+          "aliases": [
+            "milligonka"
+          ]
+        },
+        {
+          "denom": "gonka",
+          "exponent": 9
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/C9FADE15CBFACDF6A5B762100EDD999835CDBACD16D4BD2127ACC4EA40D0B276",
+      "name": "Gonka",
+      "display": "gonka",
+      "symbol": "GNK",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "gonka",
+            "base_denom": "ngonka",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-108157",
+            "path": "transfer/channel-108157/ngonka"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
           "exponent": 0,
           "aliases": [
@@ -40346,55 +40395,6 @@
           "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png",
           "theme": {
             "circle": true
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/C9FADE15CBFACDF6A5B762100EDD999835CDBACD16D4BD2127ACC4EA40D0B276",
-          "exponent": 0,
-          "aliases": [
-            "nanogonka",
-            "ngonka"
-          ]
-        },
-        {
-          "denom": "ugonka",
-          "exponent": 3,
-          "aliases": [
-            "microgonka"
-          ]
-        },
-        {
-          "denom": "mgonka",
-          "exponent": 6,
-          "aliases": [
-            "milligonka"
-          ]
-        },
-        {
-          "denom": "gonka",
-          "exponent": 9
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/C9FADE15CBFACDF6A5B762100EDD999835CDBACD16D4BD2127ACC4EA40D0B276",
-      "name": "Gonka",
-      "display": "gonka",
-      "symbol": "GNK",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "gonka",
-            "base_denom": "ngonka",
-            "channel_id": "channel-1"
-          },
-          "chain": {
-            "channel_id": "channel-108157",
-            "path": "transfer/channel-108157/ngonka"
           }
         }
       ]

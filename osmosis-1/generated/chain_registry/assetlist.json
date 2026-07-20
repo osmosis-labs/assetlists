@@ -44991,6 +44991,40 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/8B84D6340B0340917D3E2E3A17B4BE962F5593637AD7E42F6AE61D6A00ACE713",
+          "exponent": 0,
+          "aliases": [
+            "umuc"
+          ]
+        },
+        {
+          "denom": "MUC",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/8B84D6340B0340917D3E2E3A17B4BE962F5593637AD7E42F6AE61D6A00ACE713",
+      "name": "MuCoin",
+      "display": "MUC",
+      "symbol": "MUC",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "mucoin",
+            "base_denom": "umuc",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-110556",
+            "path": "transfer/channel-110556/umuc"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/0FC38457AF15A8BD1962BB97DDF1AB5EF4C74C5BFDAEF00289A9C405CBD609B0",
           "exponent": 0,
           "aliases": [

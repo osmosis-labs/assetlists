@@ -44,6 +44,22 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Determine weekly (Monday) run
+        run: |
+          # Monday (UTC) enables the corroborated weekly extras: the
+          # counterparty client sweep in check_ibc_clients.mjs and the
+          # gov-proposal scan + cosmos.directory corroboration in
+          # report_dead_chains.mjs. Computed once here so every step that
+          # gates on it uses the same reading (a run straddling midnight
+          # must not flip cadence mid-pipeline).
+          if [ "$(date -u +%u)" = "1" ]; then
+            echo "WEEKLY_FLAG=--weekly" >> $GITHUB_ENV
+            echo "DEAD_CHAINS_WEEKLY=true" >> $GITHUB_ENV
+          else
+            echo "WEEKLY_FLAG=" >> $GITHUB_ENV
+            echo "DEAD_CHAINS_WEEKLY=false" >> $GITHUB_ENV
+          fi
+
       - name: Snapshot zone_assets before lifecycle scripts
         run: |
           # Per-mutation symbol extraction depends on a clean before/after
@@ -74,7 +90,9 @@ jobs:
         working-directory: ./.github/workflows/utility
         run: |
           set +e
-          node check_ibc_clients.mjs osmosis-1 2>&1 | tee ../../../ibc-check.log
+          # $WEEKLY_FLAG (Mondays) adds the counterparty client sweep:
+          # remote-side clients tracking Osmosis, 2-run corroborated streaks.
+          node check_ibc_clients.mjs osmosis-1 $WEEKLY_FLAG 2>&1 | tee ../../../ibc-check.log
           rc=${PIPESTATUS[0]}
           if [ "$rc" -eq 2 ]; then
             # Mutation cap hit: not a failure, but flag it so the workflow
@@ -86,6 +104,10 @@ jobs:
           echo "IBC_NEWLY_FLAGGED=$(grep -oP 'IBC_NEWLY_FLAGGED=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
           echo "IBC_NEWLY_CLEARED=$(grep -oP 'IBC_NEWLY_CLEARED=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
           echo "IBC_ERRORS=$(grep -oP 'IBC_ERRORS=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
+          # Counterparty-sweep counters (emitted on weekly runs only; default 0).
+          echo "IBC_CP_CANDIDATES=$(grep -oP 'IBC_CP_CANDIDATES=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
+          echo "IBC_CP_HALTED=$(grep -oP 'IBC_CP_HALTED=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
+          echo "IBC_CP_SWEEP_INVALID=$(grep -oP 'IBC_CP_SWEEP_INVALID=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
 
       - name: Check Market Health (independent unstable track)
         working-directory: ./.github/workflows/utility
@@ -371,9 +393,9 @@ jobs:
           # cheap dead-streak counter updates daily either way. Output is
           # captured and appended to the PR body. Never fails the pipeline.
           set +e
-          if [ "$(date -u +%u)" = "1" ]; then WEEKLY="--weekly"; else WEEKLY=""; fi
-          node report_dead_chains.mjs osmosis-1 $WEEKLY > ../../../dead-chains.md 2> ../../../dead-chains.log
-          echo "DEAD_CHAINS_WEEKLY=$([ -n "$WEEKLY" ] && echo true || echo false)" >> $GITHUB_ENV
+          # $WEEKLY_FLAG / $DEAD_CHAINS_WEEKLY come from the early
+          # "Determine weekly (Monday) run" step.
+          node report_dead_chains.mjs osmosis-1 $WEEKLY_FLAG > ../../../dead-chains.md 2> ../../../dead-chains.log
           cat ../../../dead-chains.log || true
 
       - name: Run code to Generate Zone Assets Comments
@@ -439,6 +461,18 @@ jobs:
             DEAD_CANDIDATES=${DEAD_CANDIDATES:-0}
             if [ "$DEAD_CANDIDATES" -gt 0 ]; then
               ACTIONS+=("⚰️ **${DEAD_CANDIDATES}** dead-chain candidate(s) (see Dead chain candidates)")
+            fi
+          fi
+          # Counterparty client sweep (weekly only): week-1 candidates get a
+          # heads-up row so a curator can fix the relayer or halt manually
+          # before next Monday's run auto-halts. An invalid sweep means the
+          # counterparty signal is missing this week entirely.
+          if [ "$DEAD_CHAINS_WEEKLY" = "true" ]; then
+            if [ "${IBC_CP_CANDIDATES:-0}" -gt 0 ]; then
+              ACTIONS+=("⚠️ **${IBC_CP_CANDIDATES}** counterparty client(s) non-Active (week 1 of 2), auto-halts next Monday if unresolved (see IBC Client Health)")
+            fi
+            if [ "${IBC_CP_SWEEP_INVALID:-0}" -gt 0 ]; then
+              ACTIONS+=("⚠️ Counterparty client sweep invalid this week, streaks not advanced (see IBC Client Health)")
             fi
           fi
 
@@ -752,17 +786,34 @@ jobs:
           if [ "$IBC_ERRORS" -gt 0 ]; then
             echo "- **Errors (flags unchanged):** $IBC_ERRORS" >> workflow-summary.md
           fi
+          # Counterparty client sweep lines (weekly runs only). Candidates are
+          # a heads-up: one more non-Active Monday reading auto-halts them.
+          if [ "$DEAD_CHAINS_WEEKLY" = "true" ]; then
+            if [ "${IBC_CP_SWEEP_INVALID:-0}" -gt 0 ]; then
+              echo "- **Counterparty sweep:** invalid this week (too many non-Active readings at once); streaks not advanced" >> workflow-summary.md
+            else
+              echo "- **Counterparty clients newly halted (2-week streak):** ${IBC_CP_HALTED:-0}" >> workflow-summary.md
+              echo "- **Counterparty client candidates (week 1 of 2, auto-halts next Monday if unresolved):** ${IBC_CP_CANDIDATES:-0}" >> workflow-summary.md
+            fi
+          fi
 
           # Also expand the details on an all-error day (LCD rate-limiting /
           # outage): the operator sees a bare error count otherwise and never the
           # rate_limit / server_error / timeout breakdown, which is exactly when
           # it's needed. (>=90% LCD outages already hard-fail upstream via exit 3.)
-          if [ "$IBC_NEWLY_FLAGGED" -gt 0 ] || [ "$IBC_NEWLY_CLEARED" -gt 0 ] || [ "${IBC_ERRORS:-0}" -gt 0 ]; then
+          if [ "$IBC_NEWLY_FLAGGED" -gt 0 ] || [ "$IBC_NEWLY_CLEARED" -gt 0 ] || [ "${IBC_ERRORS:-0}" -gt 0 ] || [ "${IBC_CP_CANDIDATES:-0}" -gt 0 ] || [ "${IBC_CP_SWEEP_INVALID:-0}" -gt 0 ]; then
             echo "" >> workflow-summary.md
             echo "<details><summary>IBC check details</summary>" >> workflow-summary.md
             echo "" >> workflow-summary.md
             echo '```' >> workflow-summary.md
-            grep -A 100 'BRIDGE-STATE CHECK SUMMARY' ibc-check.log | head -60 >> workflow-summary.md || true
+            # Print from the summary marker to EOF: the summary block is the
+            # last thing the script emits (followed only by the counter
+            # lines), so this captures every weekly HALT/WARN/SKIP line with
+            # no arbitrary length cap. A fixed `head -N` here silently
+            # truncated candidate lists on busy weeks. Growth stays bounded
+            # because the >50% invalid-sweep guard caps how many per-triple
+            # lines a single run can produce.
+            sed -n '/BRIDGE-STATE CHECK SUMMARY/,$p' ibc-check.log >> workflow-summary.md || true
             echo '```' >> workflow-summary.md
             echo "</details>" >> workflow-summary.md
           fi

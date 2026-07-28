@@ -806,9 +806,14 @@ jobs:
             echo "<details><summary>IBC check details</summary>" >> workflow-summary.md
             echo "" >> workflow-summary.md
             echo '```' >> workflow-summary.md
-            # head widened from 60 to 80: the summary block now carries the
-            # weekly counterparty-sweep HALT/WARN lines as well.
-            grep -A 100 'BRIDGE-STATE CHECK SUMMARY' ibc-check.log | head -80 >> workflow-summary.md || true
+            # Print from the summary marker to EOF: the summary block is the
+            # last thing the script emits (followed only by the counter
+            # lines), so this captures every weekly HALT/WARN/SKIP line with
+            # no arbitrary length cap. A fixed `head -N` here silently
+            # truncated candidate lists on busy weeks. Growth stays bounded
+            # because the >50% invalid-sweep guard caps how many per-triple
+            # lines a single run can produce.
+            sed -n '/BRIDGE-STATE CHECK SUMMARY/,$p' ibc-check.log >> workflow-summary.md || true
             echo '```' >> workflow-summary.md
             echo "</details>" >> workflow-summary.md
           fi

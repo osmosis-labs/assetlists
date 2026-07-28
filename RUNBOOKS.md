@@ -251,6 +251,26 @@ this order:
    deposits", "halt deposits / investigate"). Dead chain candidates publish on
    the weekly (Monday) corroborated run.
 
+5. IBC Client Health, counterparty lines (Monday runs only):
+   - "Counterparty client candidates (week 1 of 2)": the remote chain's client
+     tracking Osmosis read non-Active (Expired/Frozen/unreachable) this Monday.
+     Nothing was halted yet. You have until next Monday's run to act: verify
+     manually (query the counterparty chain's LCD:
+     /ibc/core/client/v1/client_status/<client_id>), then either get the
+     relayer restarted / client recovered, or halt manually with a tooltip if
+     you want bespoke messaging. If the next weekly reading is still
+     non-Active, automation halts both directions with reasons
+     ibc_client/bridge_down. The exact triples are in the "IBC check details"
+     collapsible (WARN lines).
+   - "Counterparty clients newly halted (2-week streak)": the halt landed this
+     run (HALT lines in the details block). Recovery is automatic and daily
+     once the client is Active again (e.g. after a client-substitution gov
+     proposal on the counterparty chain).
+   - "Counterparty sweep: invalid this week": most triples read non-Active at
+     once, which means runner-side network trouble, not mass bridge death.
+     Streaks were not advanced; the counterparty signal is simply missing this
+     week. Investigate only if it repeats.
+
 Red flags:
    ⚠️ Unexpected verified assets (verification is a manual process)
    ⚠️ A spike of new assets from a single unfamiliar chain

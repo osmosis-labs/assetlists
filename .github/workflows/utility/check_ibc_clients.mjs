@@ -9,6 +9,17 @@
 //       osmosis_halt_withdrawals in zone_assets.json, with reasons.
 //     • Maintain state.json's lastDowntimeDate / lastRecoveryDate fields
 //       (flap-vs-fresh-incident rule).
+//     • Weekly (--weekly): sweep the COUNTERPARTY-side client (the client on
+//       the remote chain that tracks Osmosis) for every triple whose
+//       Osmosis-side client is Active. A triple that reads non-Active
+//       (Expired, Frozen, or unreachable) on CP_STREAK_THRESHOLD consecutive
+//       weekly runs is treated as bridge-down and halted through the normal
+//       machinery. Detection is weekly, but recovery is daily: once an asset
+//       is unstable, the existing counterparty clearing check runs every run,
+//       so a governance-recovered client un-halts on the next daily run.
+//       Streaks persist in generated/state/counterparty_client_streaks.json
+//       (kept out of state.json because validateEndpoints.mjs wholesale-
+//       replaces records there).
 //
 //   Reason-vocabulary contract: this script owns reasons {ibc_client,
 //   source_chain_killed} for both unstable and halts, and {bridge_down,
@@ -18,13 +29,16 @@
 //   (curator has taken ownership).
 //
 // Usage:
-//   node check_ibc_clients.mjs [<zone_name>] [--dry-run] [--force] [--lcd <url>]
+//   node check_ibc_clients.mjs [<zone_name>] [--dry-run] [--force] [--weekly] [--lcd <url>]
 //   Example: node check_ibc_clients.mjs osmosis-1
 //   Example: node check_ibc_clients.mjs osmosis-1 --dry-run
+//   Example: node check_ibc_clients.mjs osmosis-1 --weekly --dry-run
 //   Example: node check_ibc_clients.mjs osmosis-1 --lcd https://osmosis-lcd.publicnode.com
 //
 //   --dry-run : no writes; emits markdown report; exit 0.
 //   --force   : bypass the mutation cap (>10 distinct source chains touched).
+//   --weekly  : run the counterparty-client sweep (the workflow passes this
+//               on Mondays, matching report_dead_chains.mjs).
 
 import * as fs from 'fs';
 import * as path from 'path';
@@ -52,10 +66,29 @@ const MAX_CHAINS_PER_RUN = 10;
 // (preserve lastDowntimeDate). Beyond 30d → fresh incident.
 const FLAP_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
 
+// Counterparty-sweep tuning (weekly runs only). A triple must read
+// non-Active on CP_STREAK_THRESHOLD consecutive weekly runs before it is
+// halted; the first non-Active reading only reports it as a candidate.
+// Unreachable endpoints count toward the same streak as Expired/Frozen: a
+// counterparty whose REST endpoints have all been dead for multiple
+// consecutive weeks is not verifiable and deserves halting too.
+const CP_STREAK_THRESHOLD = 2;
+// Fail-closed guard: if more than this fraction of swept triples read
+// non-Active in a single run, the sweep is treated as invalid (runner-side
+// network trouble, not 76+ simultaneously dead bridges) and no streaks are
+// advanced. Same philosophy as the >=90% Phase-1 abort, but softer: the
+// Osmosis-side phases still run.
+const CP_SWEEP_INVALID_FRACTION = 0.5;
+// The weekly sweep fans out to ~150 counterparty chains; batch it a bit
+// wider than the daily CONCURRENCY since it is Monday-only (mirrors
+// report_dead_chains.mjs POOL=12).
+const CP_SWEEP_CONCURRENCY = 10;
+
 // CLI args
 const args = process.argv.slice(2);
 const dryRun = args.includes('--dry-run');
 const force = args.includes('--force');
+const weekly = args.includes('--weekly');
 
 /** Pull the value of a --flag <value> pair out of argv, returning undefined
  *  if absent. Leaves the surrounding code free to default sensibly. */
@@ -90,6 +123,7 @@ const frontendPath = path.join(zonePath, 'generated', 'frontend', 'assetlist.jso
 const chainlistPath = path.join(zonePath, 'generated', 'frontend', 'chainlist.json');
 const zoneChainsPath = path.join(zonePath, `${filePrefix}.zone_chains.json`);
 const statePath = path.join(zonePath, 'generated', 'state', 'state.json');
+const cpStreaksPath = path.join(zonePath, 'generated', 'state', 'counterparty_client_streaks.json');
 const reportsDir = path.join(zonePath, 'generated', 'reports');
 
 // Auto-managed fields. A "thin entry" is one where everything was auto-set
@@ -601,13 +635,39 @@ async function main() {
     }
   }
 
+  // Phase 2b (weekly only): widen the counterparty check from
+  // "already-unstable assets we might clear" to EVERY triple whose
+  // Osmosis-side client is Active, so the streak file tracks remote-side
+  // client health for detection, not just clearing. Triples whose
+  // Osmosis-side client is non-Active are excluded: the Phase-1 path
+  // already halts those, and a remote reading proves nothing extra.
+  const weeklySweepKeys = new Set();
+  if (weekly) {
+    for (const r of ibcResults) {
+      if (r.error || r.status !== 'Active') continue;
+      const cm = channelMap.get(r.channelId);
+      for (const fa of cm.assets) {
+        if (!fa.counterpartyChainName || !fa.counterpartyChannelId) continue;
+        const key = cpKey(fa.counterpartyChainName, fa.counterpartyChannelId, fa.counterpartyPort);
+        weeklySweepKeys.add(key);
+        if (!cpCheckNeeded.has(key)) {
+          cpCheckNeeded.set(key, {
+            chainName: fa.counterpartyChainName,
+            channelId: fa.counterpartyChannelId,
+            port: fa.counterpartyPort,
+          });
+        }
+      }
+    }
+  }
+
   const cpStatuses = new Map();
   if (cpCheckNeeded.size > 0) {
-    console.log(`Checking counterparty IBC client for ${cpCheckNeeded.size} counterparty path(s)...\n`);
+    console.log(`Checking counterparty IBC client for ${cpCheckNeeded.size} counterparty path(s)${weekly ? ' (weekly sweep)' : ''}...\n`);
     const deadEndpoints = new Set();
     const cpResults = await processInBatches(
       [...cpCheckNeeded.entries()],
-      CONCURRENCY,
+      weekly ? CP_SWEEP_CONCURRENCY : CONCURRENCY,
       async ([key, cp]) => {
         const status = await getCounterpartyClientStatus(
           cp.chainName,
@@ -623,9 +683,74 @@ async function main() {
     for (const [key, status] of cpResults) cpStatuses.set(key, status);
   }
 
+  const nowIso = new Date().toISOString();
+
+  // Phase 2c (weekly only): advance counterparty-client streaks from the
+  // sweep readings, then derive which triples are matured (halt now) and
+  // which are candidates (warn now, halt next week if unresolved).
+  const cpStreaks = loadJSON(cpStreaksPath, {});
+  const cpStreaksBefore = JSON.stringify(cpStreaks);
+  const maturedCounterparty = new Set();
+  const cpCandidates = [];
+  let cpSweepInvalid = false;
+  if (weekly) {
+    // Prune streak entries whose triple no longer appears in the assetlist
+    // (asset delisted, channel replaced). Membership, not health, so this
+    // runs even when the sweep below is declared invalid.
+    const allTriples = new Set();
+    for (const cm of channelMap.values()) {
+      for (const fa of cm.assets) {
+        if (!fa.counterpartyChainName || !fa.counterpartyChannelId) continue;
+        allTriples.add(cpKey(fa.counterpartyChainName, fa.counterpartyChannelId, fa.counterpartyPort));
+      }
+    }
+    for (const key of Object.keys(cpStreaks)) {
+      if (!allTriples.has(key)) delete cpStreaks[key];
+    }
+
+    // Fail-closed sweep validity: 'killed' is a registry fact, not a
+    // reading, so it counts as neither Active nor non-Active here.
+    const readings = [...weeklySweepKeys].map((key) => ({ key, status: cpStatuses.get(key) }));
+    const judged = readings.filter((r) => r.status !== 'killed');
+    const nonActive = judged.filter((r) => r.status !== 'Active');
+    if (judged.length > 0 && nonActive.length / judged.length > CP_SWEEP_INVALID_FRACTION) {
+      cpSweepInvalid = true;
+      console.log(
+        `\n⚠️ Counterparty sweep invalid: ${nonActive.length}/${judged.length} triples read ` +
+        `non-Active (> ${CP_SWEEP_INVALID_FRACTION * 100}%). Streaks NOT advanced; ` +
+        `no counterparty halts applied this run.`
+      );
+    } else {
+      for (const { key, status } of readings) {
+        if (status === 'Active' || status === 'killed') {
+          // Active clears the streak; killed is owned by the
+          // source_chain_killed path, which needs no streak.
+          delete cpStreaks[key];
+          continue;
+        }
+        const prev = cpStreaks[key];
+        cpStreaks[key] = {
+          streak: (prev?.streak ?? 0) + 1,
+          firstSeen: prev?.firstSeen ?? nowIso,
+          lastSeen: nowIso,
+          lastStatus: status ?? 'unknown',
+        };
+      }
+      for (const [key, entry] of Object.entries(cpStreaks)) {
+        // Matured requires fresh evidence from THIS sweep on top of history,
+        // so a stale entry can never halt on its own.
+        if (!weeklySweepKeys.has(key)) continue;
+        if (entry.streak >= CP_STREAK_THRESHOLD) {
+          maturedCounterparty.add(key);
+        } else {
+          cpCandidates.push({ key, ...entry });
+        }
+      }
+    }
+  }
+
   // Phase 3: apply mutations (collected first, written later so dry-run can short-circuit)
   const mutations = [];
-  const nowIso = new Date().toISOString();
 
   for (const r of ibcResults) {
     const cm = channelMap.get(r.channelId);
@@ -655,7 +780,17 @@ async function main() {
       const chainKilled = sourceStatus === 'killed';
       const chainLive = sourceStatus === 'live';
 
-      const bridgeDown = osmosisDown || chainKilled;
+      // Weekly-corroborated counterparty expiry: the remote chain's client
+      // tracking Osmosis has read non-Active on CP_STREAK_THRESHOLD
+      // consecutive weekly sweeps (Osmosis-side Active all along). Same
+      // reasons as an Osmosis-side expiry (ibc_client / bridge_down), so the
+      // existing gates and the daily clearing path apply unchanged.
+      const cpDown = Boolean(
+        fa.counterpartyChainName && fa.counterpartyChannelId &&
+        maturedCounterparty.has(cpKey(fa.counterpartyChainName, fa.counterpartyChannelId, fa.counterpartyPort))
+      );
+
+      const bridgeDown = osmosisDown || chainKilled || cpDown;
       const bridgeUp = !osmosisDown && chainLive && (cpStatus === undefined || cpStatus === 'Active');
 
       const reasonOnDown = chainKilled ? 'source_chain_killed' : 'ibc_client';
@@ -761,10 +896,22 @@ async function main() {
         }
 
         if (JSON.stringify(before) !== JSON.stringify(zoneAsset)) {
-          mutations.push({ kind: 'bridge_down', fa, reason: reasonOnDown, haltReason: haltReasonOnDown, zoneAsset });
+          // Distinct kind for counterparty-triggered halts, purely for
+          // attribution in the summary/report; the flags and reasons written
+          // to the asset are identical to bridge_down.
+          const kind = (cpDown && !osmosisDown && !chainKilled) ? 'counterparty_down' : 'bridge_down';
+          mutations.push({ kind, fa, reason: reasonOnDown, haltReason: haltReasonOnDown, zoneAsset });
         }
       } else if (bridgeUp) {
         // ── Bridge-up ──────────────────────────────────────────────────────
+        // Any confirmed-Active counterparty reading resets that triple's
+        // weekly streak (daily runs included). Without this, a halt cleared
+        // by the daily recovery path would leave a stale matured streak
+        // behind, letting a later fresh incident (or one flaky reading)
+        // bypass the 2-week corroboration.
+        if (cpStatus === 'Active' && fa.counterpartyChainName && fa.counterpartyChannelId) {
+          delete cpStreaks[cpKey(fa.counterpartyChainName, fa.counterpartyChannelId, fa.counterpartyPort)];
+        }
         if (!zoneAsset) continue;
 
         const before = { ...zoneAsset };
@@ -904,6 +1051,26 @@ async function main() {
         `| ${m.kind} | ${m.fa.chainName} | ${m.fa.symbol} | ${m.reason ?? '-'} | ${m.haltReason ?? '-'} |`
       );
     }
+    if (weekly) {
+      lines.push(``, `## Counterparty client sweep`, ``);
+      if (cpSweepInvalid) {
+        lines.push(`⚠️ Sweep invalid (> ${CP_SWEEP_INVALID_FRACTION * 100}% non-Active); streaks not advanced.`);
+      } else {
+        lines.push(
+          `Triples swept: ${weeklySweepKeys.size}; matured (halted): ${maturedCounterparty.size}; candidates (week < ${CP_STREAK_THRESHOLD}): ${cpCandidates.length}`,
+          ``,
+          `| Triple | Last status | Streak | First seen |`,
+          `|--------|-------------|--------|------------|`
+        );
+        for (const key of maturedCounterparty) {
+          const e = cpStreaks[key];
+          lines.push(`| ${key} | ${e.lastStatus} | ${e.streak} (matured) | ${e.firstSeen} |`);
+        }
+        for (const c of cpCandidates) {
+          lines.push(`| ${c.key} | ${c.lastStatus} | ${c.streak} | ${c.firstSeen} |`);
+        }
+      }
+    }
     fs.writeFileSync(reportPath, lines.join('\n') + '\n', 'utf8');
     console.log(`\n📝 Dry-run report: ${reportPath}`);
     console.log(`(no files were modified)`);
@@ -913,6 +1080,9 @@ async function main() {
   // ── Write ───────────────────────────────────────────────────────────────────
   const zoneChanged = JSON.stringify(zoneData) !== zoneBefore;
   const stateChanged = JSON.stringify(state) !== stateBefore;
+  // Not gated on --weekly: daily runs can also change the streak file, via
+  // the Active-reading reset in the bridge-up path.
+  const cpStreaksChanged = JSON.stringify(cpStreaks) !== cpStreaksBefore;
   if (zoneChanged) {
     fs.writeFileSync(zoneAssetsPath, JSON.stringify(zoneData, null, 2) + '\n', 'utf8');
     console.log(`✓ Updated ${zoneAssetsPath}`);
@@ -922,7 +1092,12 @@ async function main() {
     fs.writeFileSync(statePath, JSON.stringify(state, null, 2) + '\n', 'utf8');
     console.log(`✓ Updated ${statePath}`);
   }
-  if (!zoneChanged && !stateChanged) {
+  if (cpStreaksChanged) {
+    fs.mkdirSync(path.dirname(cpStreaksPath), { recursive: true });
+    fs.writeFileSync(cpStreaksPath, JSON.stringify(cpStreaks, null, 2) + '\n', 'utf8');
+    console.log(`✓ Updated ${cpStreaksPath}`);
+  }
+  if (!zoneChanged && !stateChanged && !cpStreaksChanged) {
     console.log('No changes needed.');
   }
 
@@ -948,14 +1123,38 @@ async function main() {
     }
   }
   console.log(`  distinct source chains touched: ${affectedChains.size}`);
+  if (weekly) {
+    // Counterparty sweep detail, so candidates land in ibc-check.log (the
+    // PR body embeds the summary block from that log).
+    console.log('  counterparty sweep:');
+    if (cpSweepInvalid) {
+      console.log('    INVALID (streaks not advanced)');
+    } else {
+      console.log(`    triples swept      : ${weeklySweepKeys.size}`);
+      console.log(`    matured (halted)   : ${maturedCounterparty.size}`);
+      console.log(`    candidates (week 1): ${cpCandidates.length}`);
+      for (const key of maturedCounterparty) {
+        const e = cpStreaks[key];
+        console.log(`      HALT ${key} — ${e.lastStatus}, streak ${e.streak}, first seen ${e.firstSeen}`);
+      }
+      for (const c of cpCandidates) {
+        console.log(`      WARN ${c.key} — ${c.lastStatus}, streak ${c.streak}; auto-halts next weekly run if unresolved`);
+      }
+    }
+  }
   console.log('='.repeat(70));
 
   // Machine-readable summary grepped by generate_all_files.yml.
   // manual_inherited assets are a flag event (a new asset locked down), so
-  // they roll into NEWLY_FLAGGED.
-  console.log(`\nIBC_NEWLY_FLAGGED=${(byKind.bridge_down ?? 0) + (byKind.manual_inherited ?? 0)}`);
+  // they roll into NEWLY_FLAGGED, as do counterparty_down halts.
+  console.log(`\nIBC_NEWLY_FLAGGED=${(byKind.bridge_down ?? 0) + (byKind.manual_inherited ?? 0) + (byKind.counterparty_down ?? 0)}`);
   console.log(`IBC_NEWLY_CLEARED=${(byKind.bridge_up ?? 0) + (byKind.thin_removed ?? 0)}`);
   console.log(`IBC_ERRORS=${byKind.ibc_error ?? 0}`);
+  if (weekly) {
+    console.log(`IBC_CP_CANDIDATES=${cpCandidates.length}`);
+    console.log(`IBC_CP_HALTED=${byKind.counterparty_down ?? 0}`);
+    console.log(`IBC_CP_SWEEP_INVALID=${cpSweepInvalid ? 1 : 0}`);
+  }
 }
 
 main().catch((err) => {

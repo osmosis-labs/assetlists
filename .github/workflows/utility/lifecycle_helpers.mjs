@@ -237,6 +237,62 @@ export function canClearExtendedHalt({
   return numiaPassing && sqsConfirms;
 }
 
+/**
+ * Decide whether a market signal is a trustworthy "this asset is illiquid"
+ * reading, or merely an absence of Numia price coverage.
+ *
+ * Numia prices only a small subset of the denoms it lists (151 of 2891 as of
+ * 2026-07-28). For every other token it returns `price: null`, and a null
+ * price forces `liquidity: 0` and `volume_24h: 0`. Those zeroes are
+ * indistinguishable from a genuinely dead market by value alone, so the
+ * failing condition (`liquidity < floor && volume < floor`) is satisfied by
+ * missing data. NTRN is the canonical example: `price: null`, liquidity 0,
+ * yet 20 live Osmosis pools.
+ *
+ * SQS is therefore consulted as the second source before any *negative*
+ * conclusion is drawn, mirroring canClearExtendedHalt's cross-source contract
+ * on the positive side. SQS liquidity is the whole-pool `liquidity_cap` sum
+ * from buildSqsLiquidityMap: a deliberate upper bound, which is the correct
+ * bias here — overstating depth makes this guard more willing to spare an
+ * asset, never more willing to halt one.
+ *
+ * Returns true only when BOTH sources agree the asset is illiquid, so a halt
+ * or unstable flag rests on measurement rather than on absent coverage.
+ *
+ * Absent vs unavailable — the two cases must not be conflated:
+ *
+ *   • Denom missing from a POPULATED map: a real observation. The denom is in
+ *     no pool with a usable liquidity cap, which is the strongest evidence of
+ *     illiquidity there is, so it counts as agreement. Treating it as "no
+ *     opinion" would make the most obviously dead assets (listed, but in zero
+ *     pools) permanently un-haltable.
+ *   • Map EMPTY because the SQS fetch failed: no opinion at all. Callers must
+ *     detect this and skip the check entirely — see `sqsAvailable` at the call
+ *     sites. This function cannot distinguish it from a per-denom miss, which
+ *     is exactly why that caller-side gate exists.
+ *
+ * A non-finite value (NaN from a malformed payload) is never agreement: bad
+ * data must not drive a mutation.
+ *
+ * Pure function (no I/O) so it is unit-testable with fixture inputs.
+ */
+export function isMarketGenuinelyFailing({
+  market,
+  sqsLiquidity,
+  lowLiquidityUsd,
+  lowVolumeUsd,
+}) {
+  const numiaFailing =
+    !!market &&
+    market.liquidity < lowLiquidityUsd &&
+    market.volume24h < lowVolumeUsd;
+  // undefined/null → 0: "in no pool" is a measurement, not missing data.
+  // A non-finite reading is discarded rather than coerced.
+  const sqsReading = Number(sqsLiquidity ?? 0);
+  const sqsAgrees = Number.isFinite(sqsReading) && sqsReading < lowLiquidityUsd;
+  return numiaFailing && sqsAgrees;
+}
+
 // ── Misc ─────────────────────────────────────────────────────────────────────
 
 export function loadJSON(p, fallback) {

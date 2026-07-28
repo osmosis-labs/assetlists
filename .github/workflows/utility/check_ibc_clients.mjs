@@ -19,7 +19,11 @@
 //       so a governance-recovered client un-halts on the next daily run.
 //       Streaks persist in generated/state/counterparty_client_streaks.json
 //       (kept out of state.json because validateEndpoints.mjs wholesale-
-//       replaces records there).
+//       replaces records there). Structurally unverifiable chains (no REST
+//       endpoints listed anywhere, or a custom node without IBC query
+//       routes, see CP_SWEEP_UNVERIFIABLE_CHAINS) are skipped and reported,
+//       never streaked: they could otherwise auto-halt a working bridge
+//       with no auto-recovery path.
 //
 //   Reason-vocabulary contract: this script owns reasons {ibc_client,
 //   source_chain_killed} for both unstable and halts, and {bridge_down,
@@ -83,6 +87,19 @@ const CP_SWEEP_INVALID_FRACTION = 0.5;
 // wider than the daily CONCURRENCY since it is Monday-only (mirrors
 // report_dead_chains.mjs POOL=12).
 const CP_SWEEP_CONCURRENCY = 10;
+// Chains whose counterparty client can NEVER be verified via standard REST,
+// so 'unknown' readings are structural, not transient: streaking them would
+// auto-halt a possibly-working bridge with no auto-recovery path (the daily
+// clearing check needs an Active reading that can never come). These are
+// skipped by the sweep and reported as unverifiable instead; their health
+// coverage stays with the Osmosis-side client and the dead-chain machinery.
+// Chains with an EMPTY endpoint list are detected generically (see
+// 'unverifiable' in getCounterpartyClientStatus); this set is only for
+// chains that list endpoints but whose custom node lacks the IBC query
+// routes entirely.
+//   - nomic: custom (Orga) node; /ibc/core/* returns 404 on its only
+//     listed REST endpoint while the chain itself is live.
+const CP_SWEEP_UNVERIFIABLE_CHAINS = new Set(['nomic']);
 
 // CLI args
 const args = process.argv.slice(2);
@@ -306,7 +323,11 @@ async function getCounterpartyClientStatus(chainName, channelId, port, zoneChain
 
   const endpoints = getCounterpartyRestEndpoints(chainName, zoneChainsByName, chainlistByName);
   if (endpoints === null) return 'killed';
-  if (endpoints.length === 0) return 'unknown';
+  // No REST endpoints listed in any source: structurally unverifiable, not
+  // transiently unreachable. The weekly sweep must not streak this (it can
+  // never read Active again), and the daily clearing path treats it like
+  // 'unknown' (blocks clearing, which is the safe direction).
+  if (endpoints.length === 0) return 'unverifiable';
 
   for (const endpoint of endpoints.slice(0, COUNTERPARTY_MAX_ENDPOINTS)) {
     if (deadEndpoints.has(endpoint)) continue;
@@ -642,6 +663,7 @@ async function main() {
   // Osmosis-side client is non-Active are excluded: the Phase-1 path
   // already halts those, and a remote reading proves nothing extra.
   const weeklySweepKeys = new Set();
+  const cpUnverifiable = new Map(); // key -> reason (for reporting only)
   if (weekly) {
     for (const r of ibcResults) {
       if (r.error || r.status !== 'Active') continue;
@@ -649,6 +671,12 @@ async function main() {
       for (const fa of cm.assets) {
         if (!fa.counterpartyChainName || !fa.counterpartyChannelId) continue;
         const key = cpKey(fa.counterpartyChainName, fa.counterpartyChannelId, fa.counterpartyPort);
+        // Custom-node chains can never answer the IBC queries; don't sweep
+        // (and don't streak) them, just report them as unverifiable.
+        if (CP_SWEEP_UNVERIFIABLE_CHAINS.has(fa.counterpartyChainName)) {
+          cpUnverifiable.set(key, 'custom node without IBC query routes (skip-list)');
+          continue;
+        }
         weeklySweepKeys.add(key);
         if (!cpCheckNeeded.has(key)) {
           cpCheckNeeded.set(key, {
@@ -707,6 +735,18 @@ async function main() {
     for (const key of Object.keys(cpStreaks)) {
       if (!allTriples.has(key)) delete cpStreaks[key];
     }
+
+    // Structurally unverifiable triples (empty endpoint list, detected by
+    // the lookup itself) join the skip-listed ones: reported, never
+    // streaked. Any stale streak entry for them is removed so they can't
+    // linger toward maturity if their endpoint data later degrades.
+    for (const key of [...weeklySweepKeys]) {
+      if (cpStatuses.get(key) === 'unverifiable') {
+        cpUnverifiable.set(key, 'no REST endpoints listed in any source');
+        weeklySweepKeys.delete(key);
+      }
+    }
+    for (const key of cpUnverifiable.keys()) delete cpStreaks[key];
 
     // Fail-closed sweep validity: 'killed' is a registry fact, not a
     // reading, so it counts as neither Active nor non-Active here.
@@ -1057,7 +1097,7 @@ async function main() {
         lines.push(`⚠️ Sweep invalid (> ${CP_SWEEP_INVALID_FRACTION * 100}% non-Active); streaks not advanced.`);
       } else {
         lines.push(
-          `Triples swept: ${weeklySweepKeys.size}; matured (halted): ${maturedCounterparty.size}; candidates (week < ${CP_STREAK_THRESHOLD}): ${cpCandidates.length}`,
+          `Triples swept: ${weeklySweepKeys.size}; matured (halted): ${maturedCounterparty.size}; candidates (week < ${CP_STREAK_THRESHOLD}): ${cpCandidates.length}; unverifiable (skipped): ${cpUnverifiable.size}`,
           ``,
           `| Triple | Last status | Streak | First seen |`,
           `|--------|-------------|--------|------------|`
@@ -1068,6 +1108,9 @@ async function main() {
         }
         for (const c of cpCandidates) {
           lines.push(`| ${c.key} | ${c.lastStatus} | ${c.streak} | ${c.firstSeen} |`);
+        }
+        for (const [key, reason] of cpUnverifiable) {
+          lines.push(`| ${key} | unverifiable (${reason}) | - | - |`);
         }
       }
     }
@@ -1133,12 +1176,16 @@ async function main() {
       console.log(`    triples swept      : ${weeklySweepKeys.size}`);
       console.log(`    matured (halted)   : ${maturedCounterparty.size}`);
       console.log(`    candidates (week 1): ${cpCandidates.length}`);
+      console.log(`    unverifiable       : ${cpUnverifiable.size}`);
       for (const key of maturedCounterparty) {
         const e = cpStreaks[key];
         console.log(`      HALT ${key} — ${e.lastStatus}, streak ${e.streak}, first seen ${e.firstSeen}`);
       }
       for (const c of cpCandidates) {
         console.log(`      WARN ${c.key} — ${c.lastStatus}, streak ${c.streak}; auto-halts next weekly run if unresolved`);
+      }
+      for (const [key, reason] of cpUnverifiable) {
+        console.log(`      SKIP ${key} — unverifiable: ${reason}`);
       }
     }
   }

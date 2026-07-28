@@ -2,12 +2,21 @@
 //   Independent market-health track. Daily cron. For each verified non-disabled
 //   asset that isn't already unstable, run a market-health check; on 7 consecutive
 //   failing daily runs, flag it unstable with reason="market" and stamp
-//   state.lastDowntimeDate. Owns recovery for market-unstable assets too:
+//   state.lastDowntimeDate. A run only counts as failing when Numia AND SQS
+//   agree the asset is illiquid (see isMarketGenuinelyFailing): Numia reports
+//   liquidity 0 for every denom it does not price, so on its own it cannot
+//   distinguish a dead market from an unpriced one. Owns recovery for
+//   market-unstable assets too, where advancing the streak and both clearing
+//   mutations require the same cross-source agreement (SQS available AND
+//   canClearExtendedHalt), so nothing reopens or unflags on Numia alone:
 //     • clear osmosis_halt_deposits (reason extended_unstable_market, no
-//       tooltip) on the first passing run where SQS on-chain liquidity ALSO
-//       confirms recovery (cross-source guard; see canClearExtendedHalt).
-//     • 7 consecutive passing runs → clear osmosis_unstable AND wipe state
-//       history fields, only if osmosis_unstable_reason === "market".
+//       tooltip) on the first confirmed-passing run.
+//     • 7 consecutive confirmed-passing runs → clear osmosis_unstable AND wipe
+//       state history fields, only if osmosis_unstable_reason === "market".
+//   Resetting is the exception: a Numia-only failing run may zero
+//   marketHealthRecoveryStreak unaided, since discarding unconfirmed progress
+//   is the safe direction. So a passing-but-unconfirmed run neither advances
+//   nor resets the streak (it holds), while a failing run resets it outright.
 //
 //   Reason-vocabulary contract: this script owns reasons {market}.
 //
@@ -23,6 +32,7 @@ import {
   fetchNumia,
   fetchSqsLiquidityMap,
   findStateAsset,
+  isMarketGenuinelyFailing,
   loadJSON,
   materialiseStateAsset,
   resolveMarket,
@@ -96,6 +106,15 @@ async function main() {
   // halt clearing path cross-checks against Numia. Empty on SQS error → clears
   // fail closed (halt stays).
   const sqsLiquidityByDenom = await fetchSqsLiquidityMap();
+  // Also required before the flagging path may conclude "illiquid": an empty
+  // map would otherwise agree with every Numia zero. See the note on
+  // isMarketGenuinelyFailing.
+  const sqsAvailable = sqsLiquidityByDenom.size > 0;
+  if (!sqsAvailable) {
+    console.error(
+      'SQS liquidity unavailable; no new unstable flags will be set this run.'
+    );
+  }
 
   const nowIso = new Date().toISOString();
   const nowMs = new Date(nowIso).getTime();
@@ -127,7 +146,38 @@ async function main() {
       !marketMissing &&
       market.liquidity < LOW_LIQUIDITY_USD &&
       market.volume24h < LOW_VOLUME_24H_USD;
+    // Numia-only recovery signal. Kept as-is for the streak_reset / recovery
+    // _reset branches, where it only ever makes recovery harder.
     const passing = !marketMissing && !failing;
+    // Recovery that MUTATES (advancing the streak, clearing the halt, clearing
+    // osmosis_unstable) requires the same cross-source agreement as the
+    // deposit-halt clear. Numia can report liquidity for a denom with no real
+    // pool (axlUSDT: $162k reported, $0 pooled), and without this an asset
+    // could accumulate 7 passing runs and lose osmosis_unstable while
+    // canClearExtendedHalt still correctly refuses to reopen its deposits —
+    // inconsistent state from a single unverified source. Fail-closed: no SQS
+    // this run means no recovery progress.
+    const passingConfirmed =
+      passing &&
+      sqsAvailable &&
+      canClearExtendedHalt({
+        market,
+        sqsLiquidity: sqsLiquidityByDenom.get(asset.coinMinimalDenom),
+        lowLiquidityUsd: LOW_LIQUIDITY_USD,
+        lowVolumeUsd: LOW_VOLUME_24H_USD,
+      });
+    // The flagging path needs the stricter reading: Numia failing AND SQS
+    // agreeing, so an unpriced-but-liquid asset (Numia liquidity 0 because
+    // price is null) is not flagged unstable on absent data. Skipped entirely
+    // when SQS is unavailable, so no new flag is set on a single source.
+    const failingConfirmed =
+      sqsAvailable &&
+      isMarketGenuinelyFailing({
+        market,
+        sqsLiquidity: sqsLiquidityByDenom.get(asset.coinMinimalDenom),
+        lowLiquidityUsd: LOW_LIQUIDITY_USD,
+        lowVolumeUsd: LOW_VOLUME_24H_USD,
+      });
 
     if (marketMissing) {
       mutations.push({ kind: 'market_missing', asset: asset.symbol, denom: asset.coinMinimalDenom });
@@ -141,7 +191,7 @@ async function main() {
       // matching the contract used by the recovery path below and by
       // check_ibc_clients's canModifyUnstable().
       if (zoneAsset.tooltip_message) continue;
-      if (failing) {
+      if (failingConfirmed) {
         const streak = (stateAsset?.marketHealthStreak ?? 0) + 1;
         writeState().marketHealthStreak = streak;
         if (streak >= REQUIRED_CONSECUTIVE_RUNS) {
@@ -162,7 +212,10 @@ async function main() {
       }
     } else if (zoneAsset.osmosis_unstable_reason === 'market') {
       // ── Currently market-unstable: track recovery ──
-      if (passing) {
+      // Cross-source gated: the streak only advances on a run where SQS also
+      // confirms real on-chain liquidity, so neither the deposit-halt clear
+      // below nor the osmosis_unstable clear can be reached on Numia alone.
+      if (passingConfirmed) {
         const rstreak = (stateAsset?.marketHealthRecoveryStreak ?? 0) + 1;
         writeState().marketHealthRecoveryStreak = rstreak;
 
@@ -214,11 +267,17 @@ async function main() {
           mutations.push({ kind: 'market_recovered', asset: asset.symbol, chain: asset.chainName });
         }
       } else if (failing) {
+        // Numia-only on purpose: this only RESETS progress, so the stricter
+        // reading would be the unsafe direction (it would let a phantom
+        // recovery survive a genuinely failing run).
         if (stateAsset?.marketHealthRecoveryStreak) {
           stateAsset.marketHealthRecoveryStreak = 0;
           mutations.push({ kind: 'recovery_reset', asset: asset.symbol });
         }
       }
+      // Middle state — Numia passing but SQS unconfirmed — intentionally hits
+      // neither branch: the streak holds rather than advancing or resetting, so
+      // a later run where SQS agrees resumes from where it left off.
     }
     // If unstable but reason !== "market", this script does nothing; the flag
     // is owned by check_ibc_clients or manual.

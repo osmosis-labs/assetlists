@@ -1028,6 +1028,40 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/63FA8DC3426FEDEA61E47FB273E0D68FCC5201B9E3A99EBD42BE120E105583D9",
+          "exponent": 0,
+          "aliases": [
+            "aLIMO"
+          ]
+        },
+        {
+          "denom": "LIMO",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/63FA8DC3426FEDEA61E47FB273E0D68FCC5201B9E3A99EBD42BE120E105583D9",
+      "name": "Limonata Testnet",
+      "display": "LIMO",
+      "symbol": "LIMO",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "limonatatestnet",
+            "base_denom": "aLIMO",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-11808",
+            "path": "transfer/channel-11808/aLIMO"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/54E26860F62D7BE585736FEF187A62B897B4A567202E20E5320E2518EB5D1FAB",
           "exponent": 0,
           "aliases": [

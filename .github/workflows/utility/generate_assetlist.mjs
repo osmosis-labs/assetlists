@@ -12,27 +12,6 @@ import * as state from "./update_assetlist_state.mjs";
 import * as symbolDedup from "./deduplicate_symbols.mjs";
 
 
-//-- Flags --
-/**
- * getPools: Disabled - Pool pricing functionality exists but is not currently used.
- *
- * HISTORICAL CONTEXT:
- * This flag controlled whether to fetch pool pricing data and add it to generated assetlists.
- * The feature was disabled because:
- * - Pricing data changes frequently (every block) → generated files would change constantly
- * - Frontend fetches live prices from APIs anyway → static pricing not useful
- * - Generating with pricing caused large PR diffs → hard to review actual changes
- *
- * The code in getPools.mjs remains available for future re-implementation if needed.
- * When enabled, it would add pricing information to assetlists based on pool liquidity.
- *
- * @type {boolean}
- * @default false
- * @deprecated Pricing generation disabled since 2023 - use live API pricing instead
- */
-const getPools = false;
-
-
 //-- Functions --
 
 async function asyncForEach(array, callback) {
@@ -276,14 +255,11 @@ const generateAssets = async (
 ) => {
 
   //--Get Pool Data--
-  let pool_assets;
-  if (getPools) {
-    pool_assets = await getAssetsPricing(chainName);
-    if (!pool_assets) {
-      return;
-    }
-  }
-  const pool_data = pool_assets;
+  // Static pool pricing is intentionally not generated (it churns every block
+  // and the frontend fetches live prices). pool_data is left undefined;
+  // setPrice() no-ops on it. See getPools.mjs to re-enable, which would also
+  // need a getAssetsPricing import here.
+  const pool_data = undefined;
 
   let asset_datas = [];
 

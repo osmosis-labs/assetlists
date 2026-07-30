@@ -2,9 +2,10 @@
 // to identify the pools and liquidity of an asset. To price it and determine whether it goes on info site
 //
 // STATUS: Currently DISABLED (as of Dec 2024)
-// - The getPools flag in generate_assetlist.mjs is set to false
+// - generate_assetlist.mjs leaves pool_data undefined and setPrice() no-ops
 // - Pool pricing functionality is not being used in assetlist generation
-// - This code is preserved for potential future re-implementation
+// - This code is preserved for potential future re-implementation, which would
+//   need a getAssetsPricing import wired back into generate_assetlist.mjs
 // - Previously required manual pool data updates via Query Pools workflow (now removed)
 //
 // NOTE: queryApi.mjs was removed as part of cleanup (Dec 2024)

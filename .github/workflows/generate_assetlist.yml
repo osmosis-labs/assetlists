@@ -17,36 +17,27 @@ jobs:
     steps:
     
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: true
           
       - name: Git Submodule Update
         run: |
-          git submodule update --init --recursive
-          git submodule update --recursive --remote
+          git submodule update --init --remote --recursive
           
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 20.x
 
       - name: Install dependencies
         run: npm install
 
-      - name: Install pnpm
-        run: npm install -g pnpm
-          
       - name: Run code to Generate Assetlist
         working-directory: ./.github/workflows/utility
         run: node generate_assetlist.mjs
 
-      - name: Trigger Translation
-        run: |
-          # Replace the following command with the command to trigger translation using InLang CLI or API
-          # pnpm inlang machine translate --force
-      
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
         with:

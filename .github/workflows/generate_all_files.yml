@@ -23,23 +23,42 @@ jobs:
     steps:
     
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: true
           
       - name: Git Submodule Update
         run: |
-          git submodule update --init --recursive
-          git submodule update --recursive --remote
+          git submodule update --init --remote --recursive
           
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 20.x
+          cache: pnpm
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install --frozen-lockfile
+
+      - name: Determine weekly (Monday) run
+        run: |
+          # Monday (UTC) enables the corroborated weekly extras: the
+          # counterparty client sweep in check_ibc_clients.mjs and the
+          # gov-proposal scan + cosmos.directory corroboration in
+          # report_dead_chains.mjs. Computed once here so every step that
+          # gates on it uses the same reading (a run straddling midnight
+          # must not flip cadence mid-pipeline).
+          if [ "$(date -u +%u)" = "1" ]; then
+            echo "WEEKLY_FLAG=--weekly" >> $GITHUB_ENV
+            echo "DEAD_CHAINS_WEEKLY=true" >> $GITHUB_ENV
+          else
+            echo "WEEKLY_FLAG=" >> $GITHUB_ENV
+            echo "DEAD_CHAINS_WEEKLY=false" >> $GITHUB_ENV
+          fi
 
       - name: Snapshot zone_assets before lifecycle scripts
         run: |
@@ -48,11 +67,32 @@ jobs:
           # sequence, so we snapshot once here and diff once at the end.
           cp osmosis-1/osmosis.zone_assets.json /tmp/zone-before.json
 
+          # Manual halts are applied by human PRs, not lifecycle scripts, so
+          # they never appear in the in-run before/after diff. To surface
+          # "newly halted this run", capture the previous run's manual-halt
+          # chain set, which is persisted as state.json's top-level
+          # manualHaltChains key (committed by the prior run). Missing on the
+          # first run after this lands, in which case the delta is empty.
+          jq -r '(.manualHaltChains // []) | sort | .[]' \
+            osmosis-1/generated/state/state.json 2>/dev/null \
+            > /tmp/manual-halts-prev.txt || touch /tmp/manual-halts-prev.txt
+
+      - name: Check Tooltip Expiry (curator-flagged removals/decays)
+        working-directory: ./.github/workflows/utility
+        # Runs first among the lifecycle scripts: an expired tooltip must be
+        # cleared (or decayed) before the lock-respecting scripts
+        # (check_ibc_clients, check_market_health, check_extended_halts)
+        # evaluate, so they don't treat an already-expired tooltip as a live
+        # curator lock for one extra run.
+        run: node check_tooltip_expiry.mjs osmosis-1 2>&1 | tee ../../../tooltip-expiry.log
+
       - name: Check IBC Client Status
         working-directory: ./.github/workflows/utility
         run: |
           set +e
-          node check_ibc_clients.mjs osmosis-1 2>&1 | tee ../../../ibc-check.log
+          # $WEEKLY_FLAG (Mondays) adds the counterparty client sweep:
+          # remote-side clients tracking Osmosis, 2-run corroborated streaks.
+          node check_ibc_clients.mjs osmosis-1 $WEEKLY_FLAG 2>&1 | tee ../../../ibc-check.log
           rc=${PIPESTATUS[0]}
           if [ "$rc" -eq 2 ]; then
             # Mutation cap hit: not a failure, but flag it so the workflow
@@ -64,6 +104,10 @@ jobs:
           echo "IBC_NEWLY_FLAGGED=$(grep -oP 'IBC_NEWLY_FLAGGED=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
           echo "IBC_NEWLY_CLEARED=$(grep -oP 'IBC_NEWLY_CLEARED=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
           echo "IBC_ERRORS=$(grep -oP 'IBC_ERRORS=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
+          # Counterparty-sweep counters (emitted on weekly runs only; default 0).
+          echo "IBC_CP_CANDIDATES=$(grep -oP 'IBC_CP_CANDIDATES=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
+          echo "IBC_CP_HALTED=$(grep -oP 'IBC_CP_HALTED=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
+          echo "IBC_CP_SWEEP_INVALID=$(grep -oP 'IBC_CP_SWEEP_INVALID=\K[0-9]+' ../../../ibc-check.log || echo 0)" >> $GITHUB_ENV
 
       - name: Check Market Health (independent unstable track)
         working-directory: ./.github/workflows/utility
@@ -89,8 +133,6 @@ jobs:
         working-directory: ./.github/workflows/utility
         run: |
           node validateEndpoints.mjs fullValidation osmosis 2>&1 | tee ../../../validation.log
-          CHAINS_VALIDATED=$(grep -oP 'Validating chains [0-9]+-[0-9]+ of \K[0-9]+' ../../../validation.log | tail -1 || echo "0")
-          echo "CHAINS_VALIDATED=$CHAINS_VALIDATED" >> $GITHUB_ENV
 
       - name: Generate Validation Report
         working-directory: ./.github/workflows/utility
@@ -132,6 +174,11 @@ jobs:
           jq -r '.assets[].symbol' osmosis-1/generated/frontend/assetlist.json | sort > /tmp/assets-after.txt
           comm -13 /tmp/assets-before.txt /tmp/assets-after.txt > new-assets.txt
           echo "NEW_ASSETS_COUNT=$(wc -l < new-assets.txt)" >> $GITHUB_ENV
+          # Removed/delisted assets: symbols present before but gone after. A
+          # rename also lands here (old symbol on this side, new symbol in
+          # new-assets.txt), so this doubles as the rename's removal half.
+          comm -23 /tmp/assets-before.txt /tmp/assets-after.txt > removed-assets.txt
+          echo "REMOVED_ASSETS_COUNT=$(wc -l < removed-assets.txt)" >> $GITHUB_ENV
 
       - name: Detect Newly Verified Assets
         run: |
@@ -159,6 +206,9 @@ jobs:
           jq -r '.chains[].chain_name' osmosis-1/generated/frontend/chainlist.json | sort > /tmp/chains-after.txt
           comm -13 /tmp/chains-before.txt /tmp/chains-after.txt > new-chains.txt
           echo "NEW_CHAINS_COUNT=$(wc -l < new-chains.txt)" >> $GITHUB_ENV
+          # Removed chains: present before but gone after (delisted/pruned).
+          comm -23 /tmp/chains-before.txt /tmp/chains-after.txt > removed-chains.txt
+          echo "REMOVED_CHAINS_COUNT=$(wc -l < removed-chains.txt)" >> $GITHUB_ENV
 
       - name: Extract per-mutation symbol lists
         run: |
@@ -166,28 +216,37 @@ jobs:
           # current zone_assets.json to produce one symbol list per mutation
           # category. Each file is "chain_name|SYMBOL" per line. Symbol is
           # resolved against the freshly-generated frontend assetlist.
+          #
+          # Keying: a single (chain_name, base_denom) pair can be listed on
+          # more than one IBC channel (e.g. a re-pathed asset whose old, dead
+          # channel still lingers in zone_assets). Those entries are distinct
+          # rows that differ only by `path`, so keying on chain_name|base_denom
+          # alone collapses them — the before/after compare and symbol lookup
+          # bleed across channels and produce phantom flagged/cleared lines for
+          # the wrong variant. Key on `path` (unique per IBC entry), falling
+          # back to chain_name|base_denom for non-IBC entries that have no path.
           jq -r --slurpfile fe osmosis-1/generated/frontend/assetlist.json --slurpfile before /tmp/zone-before.json '
-            ($fe[0].assets | map({key: (.chainName + "|" + .sourceDenom), value: .symbol}) | from_entries) as $symByOrigin
-            | ($before[0].assets | map({key: (.chain_name + "|" + .base_denom), value: .}) | from_entries) as $beforeByOrigin
+            def feKey: (([.transferMethods[]? | select(.type == "ibc") | .chain.path] | first) // (.chainName + "|" + .sourceDenom));
+            def zoneKey: (.path // (.chain_name + "|" + .base_denom));
+            ($fe[0].assets | map({key: feKey, value: .symbol}) | from_entries) as $symByOrigin
+            | ($before[0].assets | map({key: zoneKey, value: .}) | from_entries) as $beforeByOrigin
             | .assets as $now
             | $now | map(
                 . as $a
-                | $beforeByOrigin[$a.chain_name + "|" + $a.base_denom] as $b
-                | ($symByOrigin[$a.chain_name + "|" + $a.base_denom] // $a._comment // $a.base_denom) as $sym
+                | $beforeByOrigin[$a | zoneKey] as $b
+                | ($symByOrigin[$a | zoneKey] // $a._comment // $a.base_denom) as $sym
                 | {
                     chain: $a.chain_name,
                     symbol: $sym,
+                    # Reason the asset is currently flagged unstable. Surfaced
+                    # in the "IBC flagged unstable" row so the reader can tell
+                    # *why* an asset was flagged (ibc_client, market, manual,
+                    # source_chain_killed, ...) rather than just that it was.
+                    reason: ($a.osmosis_unstable_reason // "?"),
                     ibcFlagged:
                       ((($a.osmosis_unstable // false) == true) and (($b.osmosis_unstable // false) != true)),
                     ibcCleared:
                       ((($a.osmosis_unstable // false) != true) and (($b.osmosis_unstable // false) == true)),
-                    marketFlagged:
-                      ((($a.osmosis_unstable // false) == true)
-                        and (($a.osmosis_unstable_reason // "") == "market")
-                        and (($b.osmosis_unstable_reason // "") != "market")),
-                    marketRecovered:
-                      ((($a.osmosis_unstable // false) != true)
-                        and (($b.osmosis_unstable_reason // "") == "market")),
                     extendedHaltSet:
                       ((($a.osmosis_halt_deposits // false) == true)
                         and (($a.osmosis_deposit_halt_reason // "") == "extended_unstable_market")
@@ -199,48 +258,144 @@ jobs:
                       ((($a.osmosis_halt_deposits // false) == true)
                         and (($a.osmosis_deposit_halt_reason // "") == "planned_shutdown")
                         and (($b.osmosis_deposit_halt_reason // "") != "planned_shutdown")),
-                    plannedShutdownCleared:
+                    # Script-owned halts not already covered by the extended /
+                    # planned-shutdown rows above: check_ibc_clients sets these
+                    # with reason `bridge_down` or `source_chain_killed` when a
+                    # bridge goes down or a source chain is killed. Both
+                    # directions are tracked independently because a chain death
+                    # closes withdrawals (funds-out), which is higher
+                    # consequence than deposits and was previously unsurfaced.
+                    # Set = newly halted this run; cleared = was halted with one
+                    # of these reasons, now no longer. The reason fields below
+                    # let the summary report which.
+                    depositHaltReason: ($a.osmosis_deposit_halt_reason // ""),
+                    withdrawalHaltReason: ($a.osmosis_withdrawal_halt_reason // ""),
+                    bridgeOrKillDepositSet:
+                      ((($a.osmosis_halt_deposits // false) == true)
+                        and (["bridge_down", "source_chain_killed"] | index($a.osmosis_deposit_halt_reason // "") != null)
+                        and ((($b.osmosis_halt_deposits // false) != true)
+                          or (["bridge_down", "source_chain_killed"] | index($b.osmosis_deposit_halt_reason // "") == null))),
+                    bridgeOrKillDepositCleared:
                       ((($a.osmosis_halt_deposits // false) != true)
-                        and (($b.osmosis_deposit_halt_reason // "") == "planned_shutdown")),
+                        and (($b.osmosis_halt_deposits // false) == true)
+                        and (["bridge_down", "source_chain_killed"] | index($b.osmosis_deposit_halt_reason // "") != null)),
+                    bridgeOrKillWithdrawalSet:
+                      ((($a.osmosis_halt_withdrawals // false) == true)
+                        and (["bridge_down", "source_chain_killed"] | index($a.osmosis_withdrawal_halt_reason // "") != null)
+                        and ((($b.osmosis_halt_withdrawals // false) != true)
+                          or (["bridge_down", "source_chain_killed"] | index($b.osmosis_withdrawal_halt_reason // "") == null))),
+                    bridgeOrKillWithdrawalCleared:
+                      ((($a.osmosis_halt_withdrawals // false) != true)
+                        and (($b.osmosis_halt_withdrawals // false) == true)
+                        and (["bridge_down", "source_chain_killed"] | index($b.osmosis_withdrawal_halt_reason // "") != null)),
+                    # Unstable reason changed while the asset stayed unstable
+                    # (e.g. market → bridge_down, or manual → source_chain_killed
+                    # on a chain death). The ibcFlagged/ibcCleared rows only fire
+                    # on the boolean flipping, so a reason shift underneath an
+                    # already-flagged asset was previously silent. Old→new is
+                    # carried so the summary can show the transition.
+                    unstableReasonChanged:
+                      ((($a.osmosis_unstable // false) == true)
+                        and (($b.osmosis_unstable // false) == true)
+                        and (($a.osmosis_unstable_reason // "") != ($b.osmosis_unstable_reason // ""))),
+                    unstableReasonOld: ($b.osmosis_unstable_reason // ""),
+                    # Symbol / display-name change. zone_assets carries the human
+                    # label in `_comment` ("Pretty (Chain) $SYMBOL"); a rebrand
+                    # (XION→VERONA) or a .legacy/.old re-suffix shows up here as a
+                    # comment edit, which the symbol-list comm diff can miss.
+                    nameChanged:
+                      (($b._comment != null)
+                        and ($a._comment != null)
+                        and ($a._comment != $b._comment)),
+                    nameOld: ($b._comment // ""),
+                    nameNew: ($a._comment // ""),
+                    # Tooltip text changed this run. Covers curator edits in a
+                    # human PR and the script-driven decay/expiry from
+                    # check_tooltip_expiry. Classified into added (empty→text),
+                    # removed (text→empty, e.g. an expired notice), and changed
+                    # (text→different text, e.g. a decayed message). A missing
+                    # field reads as empty so add/remove are symmetric.
+                    tooltipAdded:
+                      ((($b.tooltip_message // "") == "") and (($a.tooltip_message // "") != "")),
+                    tooltipRemoved:
+                      ((($b.tooltip_message // "") != "") and (($a.tooltip_message // "") == "")),
+                    tooltipChanged:
+                      ((($b.tooltip_message // "") != "")
+                        and (($a.tooltip_message // "") != "")
+                        and (($a.tooltip_message // "") != ($b.tooltip_message // ""))),
                   }
               ) as $rows
             | $rows
           ' osmosis-1/osmosis.zone_assets.json > /tmp/lifecycle-diff.json
 
-          # Write one file per category, "chain|symbol" per line.
-          for kind in ibcFlagged ibcCleared marketFlagged marketRecovered extendedHaltSet extendedHaltCleared plannedShutdownSet plannedShutdownCleared; do
+          # Write one file per category, "chain|symbol" per line. ibcFlagged
+          # carries a third column with the unstable reason so the summary can
+          # report what each asset was flagged for.
+          jq -r '.[] | select(.ibcFlagged == true) | "\(.chain)|\(.symbol)|\(.reason)"' /tmp/lifecycle-diff.json > /tmp/lc-ibcFlagged.txt
+          for kind in ibcCleared extendedHaltSet extendedHaltCleared plannedShutdownSet tooltipAdded tooltipRemoved tooltipChanged; do
             jq -r --arg k "$kind" '.[] | select(.[$k] == true) | "\(.chain)|\(.symbol)"' /tmp/lifecycle-diff.json > /tmp/lc-${kind}.txt
           done
 
+          # Bridge-down / source-chain-killed halts carry the responsible reason
+          # in a third column (symbol_reason render), so the glance shows whether
+          # it was a bridge outage or a chain death.
+          jq -r '.[] | select(.bridgeOrKillDepositSet == true) | "\(.chain)|\(.symbol)|\(.depositHaltReason)"' /tmp/lifecycle-diff.json > /tmp/lc-bridgeOrKillDepositSet.txt
+          jq -r '.[] | select(.bridgeOrKillWithdrawalSet == true) | "\(.chain)|\(.symbol)|\(.withdrawalHaltReason)"' /tmp/lifecycle-diff.json > /tmp/lc-bridgeOrKillWithdrawalSet.txt
+          jq -r '.[] | select(.bridgeOrKillDepositCleared == true) | "\(.chain)|\(.symbol)"' /tmp/lifecycle-diff.json > /tmp/lc-bridgeOrKillDepositCleared.txt
+          jq -r '.[] | select(.bridgeOrKillWithdrawalCleared == true) | "\(.chain)|\(.symbol)"' /tmp/lifecycle-diff.json > /tmp/lc-bridgeOrKillWithdrawalCleared.txt
+
+          # Reason-shift and rename rows carry "old → new" in the third column so
+          # the transition is legible (rendered via the symbol_reason mode).
+          jq -r '.[] | select(.unstableReasonChanged == true) | "\(.chain)|\(.symbol)|\(.unstableReasonOld) → \(.reason)"' /tmp/lifecycle-diff.json > /tmp/lc-unstableReasonChanged.txt
+          jq -r '.[] | select(.nameChanged == true) | "\(.chain)|\(.symbol)|\(.nameOld) → \(.nameNew)"' /tmp/lifecycle-diff.json > /tmp/lc-nameChanged.txt
+
           # Capture summary counts from the lifecycle script logs.
-          if [ -f market-health.log ]; then
-            echo "MARKET_FLAGGED=$(grep -oP 'market_flagged\s+:\s+\K[0-9]+' market-health.log || echo 0)" >> $GITHUB_ENV
-            echo "MARKET_RECOVERED=$(grep -oP 'market_recovered\s+:\s+\K[0-9]+' market-health.log || echo 0)" >> $GITHUB_ENV
-          fi
           if [ -f extended-halts.log ]; then
-            echo "EXTENDED_HALT_SET=$(grep -oP 'extended_halt_set\s+:\s+\K[0-9]+' extended-halts.log || echo 0)" >> $GITHUB_ENV
-            echo "EXTENDED_HALT_CLEARED=$(grep -oP 'extended_halt_cleared\s+:\s+\K[0-9]+' extended-halts.log || echo 0)" >> $GITHUB_ENV
-            echo "PLANNED_SHUTDOWN_SET=$(grep -oP 'planned_shutdown_set\s+:\s+\K[0-9]+' extended-halts.log || echo 0)" >> $GITHUB_ENV
-            echo "PLANNED_SHUTDOWN_CLEARED=$(grep -oP 'planned_shutdown_cleared\s+:\s+\K[0-9]+' extended-halts.log || echo 0)" >> $GITHUB_ENV
+            # Assets whose planned_shutdown_date has passed while their
+            # withdrawal direction is still open: funds may strand if the source
+            # chain stops. The script prints one "past_due_withdrawals_open" line
+            # per such asset under PLANNED-SHUTDOWN NOTIFICATIONS; count them so
+            # the action banner can surface this loudly. Highest-consequence
+            # signal these checks emit.
+            echo "PAST_DUE_WITHDRAWALS=$(grep -oP 'past_due_withdrawals_open' extended-halts.log 2>/dev/null | wc -l | tr -d ' ')" >> $GITHUB_ENV
           fi
 
-      - name: Run code to Update State
-        working-directory: ./.github/workflows/utility
-        run: node update_assetlist_state.mjs
+      - name: Persist manual-halt chain set to state
+        run: |
+          # Record the current set of chains with any manual halt as a
+          # top-level state.json key so the next run can diff against it to
+          # surface "newly halted this run" (see the Snapshot step). A chain
+          # counts as manual if its overall unstable reason or either
+          # per-direction halt reason is "manual". Distinct chains, sorted.
+          jq -r '
+            [ .assets[]
+              | select(
+                  (.osmosis_unstable_reason == "manual")
+                  or (.osmosis_deposit_halt_reason == "manual")
+                  or (.osmosis_withdrawal_halt_reason == "manual")
+                )
+              | .chain_name
+            ] | sort | unique
+          ' osmosis-1/osmosis.zone_assets.json > /tmp/manual-halts-now.json
+          jq --slurpfile mh /tmp/manual-halts-now.json \
+            '.manualHaltChains = $mh[0]' \
+            osmosis-1/generated/state/state.json > /tmp/state-with-mh.json
+          mv /tmp/state-with-mh.json osmosis-1/generated/state/state.json
 
       - name: Report Dead Chains and Planned Shutdowns
         working-directory: ./.github/workflows/utility
         run: |
-          # Report-only. Reads the state.json just produced by validateEndpoints
-          # + update_assetlist_state, plus the chain-registry submodule. The
+          # Report-only. Reads the state.json produced by validateEndpoints and
+          # the Generate Assetlist step (which calls updateState), plus the
+          # chain-registry submodule. The
           # heavy half (gov-proposal scan + cosmos.directory corroboration) runs
           # only on Mondays via --weekly to bound CI cost and external load; the
           # cheap dead-streak counter updates daily either way. Output is
           # captured and appended to the PR body. Never fails the pipeline.
           set +e
-          if [ "$(date -u +%u)" = "1" ]; then WEEKLY="--weekly"; else WEEKLY=""; fi
-          node report_dead_chains.mjs osmosis-1 $WEEKLY > ../../../dead-chains.md 2> ../../../dead-chains.log
-          echo "DEAD_CHAINS_WEEKLY=$([ -n "$WEEKLY" ] && echo true || echo false)" >> $GITHUB_ENV
+          # $WEEKLY_FLAG / $DEAD_CHAINS_WEEKLY come from the early
+          # "Determine weekly (Monday) run" step.
+          node report_dead_chains.mjs osmosis-1 $WEEKLY_FLAG > ../../../dead-chains.md 2> ../../../dead-chains.log
           cat ../../../dead-chains.log || true
 
       - name: Run code to Generate Zone Assets Comments
@@ -249,7 +404,7 @@ jobs:
 
       - name: Run localization
         working-directory: ./.github/workflows/utility
-        run: npx pnpm inlang machine translate --force
+        run: pnpm inlang machine translate --force
 
       - name: Run post-localization code
         working-directory: ./.github/workflows/utility
@@ -261,40 +416,141 @@ jobs:
           # Automated Update Summary
           HEADER
 
+          # ── Action-required banner (very top) ─────────────────────────────
+          # Single triage line so a reviewer can decide "safe to auto-merge"
+          # vs "stop and act" without scrolling. Each bullet is a signal that
+          # already exists elsewhere in this body; the banner just hoists the
+          # ones that need a human. Empty → an explicit all-clear line.
+          declare -a ACTIONS=()
+
+          # Funds-at-risk first: a planned-shutdown date has passed while the
+          # asset's withdrawal direction is still open (count captured from
+          # extended-halts.log above). Highest consequence.
+          if [ "${PAST_DUE_WITHDRAWALS:-0}" -gt 0 ]; then
+            ACTIONS+=("🟥 **${PAST_DUE_WITHDRAWALS}** asset(s) past planned-shutdown with withdrawals still open (see Extended Halts below)")
+          fi
+          # Mutation caps: the script's intended diff was NOT applied this run.
+          if [ "$IBC_CAP_HIT" = "true" ]; then
+            ACTIONS+=("🛑 IBC client check hit the mutation cap, diff not applied (see Mutation cap section)")
+          fi
+          if [ "$EXTENDED_HALTS_CAP_HIT" = "true" ]; then
+            ACTIONS+=("🛑 Extended-halts check hit the mutation cap, diff not applied (see Mutation cap section)")
+          fi
+          # Connectivity-failed chains whose assets are NOT already covered by a
+          # halt: the endpoint report tags these "halt deposits / investigate".
+          # Match the text only, not the leading emoji (grep can mis-handle the
+          # multibyte emoji in the pattern depending on the runner locale).
+          UNCOVERED_DOWN=$(grep -c 'halt deposits / investigate' validation-summary.md 2>/dev/null || true)
+          UNCOVERED_DOWN=${UNCOVERED_DOWN:-0}
+          if [ "$UNCOVERED_DOWN" -gt 0 ]; then
+            ACTIONS+=("🛑 **${UNCOVERED_DOWN}** down chain(s) with deposits still open (see Endpoint Validation)")
+          fi
+          # IBC client errors left flags unchanged (LCD trouble), so today's
+          # flag state may be stale.
+          if [ "${IBC_ERRORS:-0}" -gt 0 ]; then
+            ACTIONS+=("⚠️ **${IBC_ERRORS}** IBC client check error(s), flag state may be stale (see IBC Client Health)")
+          fi
+          # A human PR halted something this run (e.g. pausing a chain).
+          if [ -s /tmp/lc-manualHaltsNew.txt ]; then
+            NEW_MANUAL=$(awk 'NF>0' /tmp/lc-manualHaltsNew.txt | wc -l | tr -d ' ')
+            ACTIONS+=("⚠️ **${NEW_MANUAL}** new manual halt(s) this run, confirm intended (see Quick summary)")
+          fi
+          # Dead-chain candidates only resolve on the weekly corroborated run.
+          if [ "$DEAD_CHAINS_WEEKLY" = "true" ]; then
+            DEAD_CANDIDATES=$(grep -oP 'candidates=\K[0-9]+' dead-chains.log 2>/dev/null | head -1 || true)
+            DEAD_CANDIDATES=${DEAD_CANDIDATES:-0}
+            if [ "$DEAD_CANDIDATES" -gt 0 ]; then
+              ACTIONS+=("⚰️ **${DEAD_CANDIDATES}** dead-chain candidate(s) (see Dead chain candidates)")
+            fi
+          fi
+          # Counterparty client sweep (weekly only): week-1 candidates get a
+          # heads-up row so a curator can fix the relayer or halt manually
+          # before next Monday's run auto-halts. An invalid sweep means the
+          # counterparty signal is missing this week entirely.
+          if [ "$DEAD_CHAINS_WEEKLY" = "true" ]; then
+            if [ "${IBC_CP_CANDIDATES:-0}" -gt 0 ]; then
+              ACTIONS+=("⚠️ **${IBC_CP_CANDIDATES}** counterparty client(s) non-Active (week 1 of 2), auto-halts next Monday if unresolved (see IBC Client Health)")
+            fi
+            if [ "${IBC_CP_SWEEP_INVALID:-0}" -gt 0 ]; then
+              ACTIONS+=("⚠️ Counterparty client sweep invalid this week, streaks not advanced (see IBC Client Health)")
+            fi
+          fi
+
+          if [ "${#ACTIONS[@]}" -eq 0 ]; then
+            echo "## ✅ No action required: safe to auto-merge" >> workflow-summary.md
+          else
+            echo "## 🚨 Action required (${#ACTIONS[@]})" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            for a in "${ACTIONS[@]}"; do
+              echo "- ${a}" >> workflow-summary.md
+            done
+          fi
+          echo "" >> workflow-summary.md
+
           # ── Quick summary (top-of-PR glance) ──────────────────────────────
-          # One row per category. Lists chain names or asset symbols inline;
-          # empty categories render with a dim "none" so the reader can see
-          # what's currently quiet vs busy.
+          # One row per non-empty category. Empty categories are omitted
+          # entirely so the summary only lists what actually happened this run;
+          # if nothing did, a single "nothing notable" line stands in.
           echo "## 📋 Quick summary" >> workflow-summary.md
           echo "" >> workflow-summary.md
 
-          # Helper: emit "- {emoji} {label} ({count}): {comma-joined items}".
-          # Items are read from the supplied file (one per line). If the file
-          # is empty/missing, prints ", none" instead. For lifecycle-script
-          # files keyed by "chain|symbol", takes only the symbol column.
+          # Tracks how many rows emit_row actually printed, so we can fall back
+          # to a "nothing notable" line when every category is empty.
+          QS_ROWS=0
+
+          # Helper: emit a labelled row only when the category has entries.
+          # Empty categories print nothing. A populated category renders a
+          # header line carrying the count, then one indented sub-bullet per
+          # item so it reads top-to-bottom.
+          #
+          # mode selects how each line of {file} is rendered:
+          #   name           whole line is the display value (chain names)
+          #   symbol         "chain|symbol", display the symbol column
+          #   symbol_reason  "chain|symbol|reason", display "symbol (reason)"
+          #                  so the reader sees what each asset was flagged for
           emit_row() {
             local emoji="$1" label="$2" file="$3" mode="$4"
-            local count=0 items=""
+            local count=0
+            local -a items=()
             if [ -f "$file" ] && [ -s "$file" ]; then
-              if [ "$mode" = "symbol" ]; then
-                items=$(awk -F'|' 'NF>0{print $2}' "$file" | paste -sd', ' -)
-                count=$(awk 'NF>0' "$file" | wc -l | tr -d ' ')
-              else
-                items=$(awk 'NF>0' "$file" | paste -sd', ' -)
-                count=$(awk 'NF>0' "$file" | wc -l | tr -d ' ')
-              fi
+              case "$mode" in
+                symbol)        mapfile -t items < <(awk -F'|' 'NF>0{print $2}' "$file") ;;
+                symbol_reason) mapfile -t items < <(awk -F'|' 'NF>0{print $2" ("$3")"}' "$file") ;;
+                *)             mapfile -t items < <(awk 'NF>0' "$file") ;;
+              esac
+              count=${#items[@]}
             fi
-            if [ "$count" = "0" ]; then
-              echo "- ${emoji} **${label}**: none" >> workflow-summary.md
-            else
-              echo "- ${emoji} **${label} (${count}):** ${items}" >> workflow-summary.md
-            fi
+            # Skip empty categories entirely.
+            [ "$count" = "0" ] && return 0
+            QS_ROWS=$((QS_ROWS + 1))
+            echo "- ${emoji} **${label} (${count}):**" >> workflow-summary.md
+            for item in "${items[@]}"; do
+              echo "  - ${item}" >> workflow-summary.md
+            done
           }
 
           emit_row "🆕" "New Chains" new-chains.txt name
           emit_row "🆕" "New Assets" new-assets.txt name
-          emit_row "🔴" "IBC flagged unstable" /tmp/lc-ibcFlagged.txt symbol
+          # Removed/delisted entries. A rename surfaces as a removed old symbol
+          # plus a new symbol above; the rename row below names the pairing.
+          emit_row "🗑️" "Removed Chains" removed-chains.txt name
+          emit_row "🗑️" "Removed Assets" removed-assets.txt name
+          # Symbol / display-name changes (rebrands, .legacy/.old re-suffix).
+          emit_row "🏷️" "Renamed assets" /tmp/lc-nameChanged.txt symbol_reason
+          # Newly verified assets (verified flipped false→true this run). The
+          # detail list lives in Assetlist Generation below; hoist the glance
+          # here so a verification change is visible without scrolling.
+          emit_row "✅" "Assets verified" newly-verified.txt name
+          emit_row "🔴" "IBC flagged unstable" /tmp/lc-ibcFlagged.txt symbol_reason
           emit_row "🟢" "IBC cleared" /tmp/lc-ibcCleared.txt symbol
+          # Unstable reason changed underneath an already-flagged asset.
+          emit_row "🔁" "Unstable reason changed" /tmp/lc-unstableReasonChanged.txt symbol_reason
+          # Bridge-down / source-chain-killed halts, per direction. Set rows
+          # carry the reason; cleared rows just name the asset.
+          emit_row "⛔" "Deposit halt set (bridge/chain)" /tmp/lc-bridgeOrKillDepositSet.txt symbol_reason
+          emit_row "⛔" "Withdrawal halt set (bridge/chain)" /tmp/lc-bridgeOrKillWithdrawalSet.txt symbol_reason
+          emit_row "🔓" "Deposit halt cleared (bridge/chain)" /tmp/lc-bridgeOrKillDepositCleared.txt symbol
+          emit_row "🔓" "Withdrawal halt cleared (bridge/chain)" /tmp/lc-bridgeOrKillWithdrawalCleared.txt symbol
 
           # Manual halts: list chain names of assets that were manually flagged
           # (operator-driven, e.g. a bridge compromise) as distinct from
@@ -302,7 +558,9 @@ jobs:
           # counts as manual if ANY of its three reason fields is "manual":
           # the overall unstable reason, or the per-direction deposit/withdrawal
           # halt reason (a curator may halt one direction without flagging the
-          # asset unstable). Distinct chains, sorted.
+          # asset unstable). Distinct chains, sorted. This bare chain-name set
+          # feeds the added-this-run delta and the persisted manualHaltChains
+          # state; the display variant below carries the per-chain detail.
           MANUAL_HALT_CHAINS=$(jq -r '
             .assets
             | map(select(
@@ -311,15 +569,69 @@ jobs:
                 or (.osmosis_withdrawal_halt_reason == "manual")
               ))
             | map(.chain_name) | unique | .[]
-          ' osmosis-1/osmosis.zone_assets.json 2>/dev/null > /tmp/lc-manualHalts.txt && echo ok || echo err)
-          emit_row "⚠️" "Manual halts in effect" /tmp/lc-manualHalts.txt name
+          ' osmosis-1/osmosis.zone_assets.json 2>/dev/null | sort > /tmp/lc-manualHalts.txt && echo ok || echo err)
+
+          # Newly halted this run: chains in the current manual-halt set that
+          # were not in the previous run's persisted set. This is the delta a
+          # human PR (e.g. pausing Quicksilver) produces; the standing row
+          # below shows everything currently halted.
+          comm -13 /tmp/manual-halts-prev.txt /tmp/lc-manualHalts.txt \
+            > /tmp/lc-manualHaltsNew.txt 2>/dev/null || touch /tmp/lc-manualHaltsNew.txt
+          emit_row "🆕" "Manual halts added this run" /tmp/lc-manualHaltsNew.txt name
+
+          # Standing row, display variant: say how much of each chain's
+          # listing is halted and name the impacted symbols (with the bridge
+          # hop when the halt is really the hop's problem), so a single-asset
+          # halt (e.g. PSTAKE routed via a compromised Gravity Bridge) cannot
+          # read as a whole-chain halt of its origin chain.
+          jq -r --slurpfile fe osmosis-1/generated/frontend/assetlist.json '
+            ($fe[0].assets
+              | map({ key: (.chainName + "|" + .sourceDenom), value: . })
+              | from_entries) as $byOrigin
+            | (.assets | group_by(.chain_name)
+              | map({ key: .[0].chain_name, value: length })
+              | from_entries) as $totals
+            | [ .assets[]
+                | select(
+                    (.osmosis_unstable_reason == "manual")
+                    or (.osmosis_deposit_halt_reason == "manual")
+                    or (.osmosis_withdrawal_halt_reason == "manual")
+                  ) ]
+            | group_by(.chain_name)
+            | .[]
+            | ([ .[]
+                 | . as $a
+                 | ($byOrigin[$a.chain_name + "|" + $a.base_denom]) as $f
+                 | ([ ($f.counterparty // [])[]
+                      | select(.chainType == "cosmos" and .chainName != $a.chain_name)
+                      | .chainName ] | first) as $hop
+                 | ($f.symbol // $a.base_denom)
+                   + (if $hop then " (via \($hop))" else "" end)
+               ]
+               | if length > 6 then .[0:6] + ["+\(length - 6) more"] else . end
+               | join(", ")) as $names
+            | "\(.[0].chain_name) — \(length) of \($totals[.[0].chain_name] // 0) listed: \($names)"
+          ' osmosis-1/osmosis.zone_assets.json 2>/dev/null \
+            > /tmp/lc-manualHaltsDisplay.txt \
+            || cp /tmp/lc-manualHalts.txt /tmp/lc-manualHaltsDisplay.txt 2>/dev/null || true
+          emit_row "⚠️" "Manual halts in effect" /tmp/lc-manualHaltsDisplay.txt name
 
           emit_row "⏸️" "Extended halt set" /tmp/lc-extendedHaltSet.txt symbol
           emit_row "▶️" "Extended halt cleared" /tmp/lc-extendedHaltCleared.txt symbol
           emit_row "⏰" "Planned shutdown set" /tmp/lc-plannedShutdownSet.txt symbol
-          emit_row "▶️" "Planned shutdown cleared" /tmp/lc-plannedShutdownCleared.txt symbol
-          emit_row "📉" "Market flagged" /tmp/lc-marketFlagged.txt symbol
-          emit_row "📈" "Market recovered" /tmp/lc-marketRecovered.txt symbol
+
+          # Tooltip text changes (curator PR edits + script-driven decay/expiry).
+          # Each is a quiet zone_assets edit that otherwise produces no summary
+          # line, so surface add/remove/change distinctly.
+          emit_row "💬" "Tooltips added" /tmp/lc-tooltipAdded.txt symbol
+          emit_row "💬" "Tooltips changed" /tmp/lc-tooltipChanged.txt symbol
+          emit_row "🚫" "Tooltips removed" /tmp/lc-tooltipRemoved.txt symbol
+
+          # If every category was empty, leave a single line so the section is
+          # never just a bare header.
+          if [ "$QS_ROWS" = "0" ]; then
+            echo "- _Nothing notable this run (metadata/endpoint refresh only)._" >> workflow-summary.md
+          fi
 
           echo "" >> workflow-summary.md
           echo "---" >> workflow-summary.md
@@ -357,12 +669,39 @@ jobs:
             echo "" >> workflow-summary.md
           fi
 
+          # Endpoint Validation (actionable: down chains, halt-deposit prompts)
+          # is placed ahead of the standing generation/health sections so the
+          # rows a human may need to act on sit near the top of the body.
+          echo "## Endpoint Validation" >> workflow-summary.md
+
+          if [ -f validation-summary.md ]; then
+            cat validation-summary.md >> workflow-summary.md
+          fi
+
+          # Dead-chain candidates + possible planned shutdowns (report-only).
+          # report_dead_chains.mjs already emits its own ## headers, so append
+          # the captured output verbatim under a divider.
+          if [ -f dead-chains.md ]; then
+            echo "" >> workflow-summary.md
+            echo "---" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            cat dead-chains.md >> workflow-summary.md
+          fi
+
+          echo "" >> workflow-summary.md
+          echo "---" >> workflow-summary.md
+          echo "" >> workflow-summary.md
+
           # Chainlist Generation
           echo "## Chainlist Generation" >> workflow-summary.md
 
           TOTAL_CHAINS=$(jq '.chains | length' osmosis-1/generated/frontend/chainlist.json)
           echo "- **Total Chains:** $TOTAL_CHAINS" >> workflow-summary.md
-          echo "- **New Chains Added:** $NEW_CHAINS_COUNT" >> workflow-summary.md
+          # Only surface the delta line when something actually changed, so quiet
+          # days don't print a "New Chains Added: 0" row.
+          if [ "$NEW_CHAINS_COUNT" -gt 0 ]; then
+            echo "- **New Chains Added:** $NEW_CHAINS_COUNT" >> workflow-summary.md
+          fi
           echo "" >> workflow-summary.md
 
           if [ "$NEW_CHAINS_COUNT" -gt 0 ]; then
@@ -375,11 +714,6 @@ jobs:
             echo "" >> workflow-summary.md
           fi
 
-          echo "**Optimizations:**" >> workflow-summary.md
-          echo "- Endpoint ordering optimized based on validation results" >> workflow-summary.md
-          echo "- Working backup endpoints promoted to primary positions" >> workflow-summary.md
-          echo "- Failed endpoints deprioritized" >> workflow-summary.md
-          echo "" >> workflow-summary.md
           echo "---" >> workflow-summary.md
           echo "" >> workflow-summary.md
 
@@ -388,8 +722,14 @@ jobs:
 
           TOTAL_ASSETS=$(jq '.assets | length' osmosis-1/generated/frontend/assetlist.json)
           echo "- **Total Assets:** $TOTAL_ASSETS" >> workflow-summary.md
-          echo "- **New Assets Added:** $NEW_ASSETS_COUNT" >> workflow-summary.md
-          echo "- **Assets Verified:** $NEWLY_VERIFIED_COUNT" >> workflow-summary.md
+          # Only surface the delta lines when non-zero, so quiet days don't print
+          # "New Assets Added: 0" / "Assets Verified: 0".
+          if [ "$NEW_ASSETS_COUNT" -gt 0 ]; then
+            echo "- **New Assets Added:** $NEW_ASSETS_COUNT" >> workflow-summary.md
+          fi
+          if [ "$NEWLY_VERIFIED_COUNT" -gt 0 ]; then
+            echo "- **Assets Verified:** $NEWLY_VERIFIED_COUNT" >> workflow-summary.md
+          fi
           echo "" >> workflow-summary.md
 
           if [ "$NEW_ASSETS_COUNT" -gt 0 ]; then
@@ -436,12 +776,6 @@ jobs:
             done < newly-verified.txt
           fi
 
-          echo "**Updates Include:**" >> workflow-summary.md
-          echo "- Latest asset metadata from chain registry" >> workflow-summary.md
-          echo "- Updated denominations and display names" >> workflow-summary.md
-          echo "- Current asset logos and branding" >> workflow-summary.md
-          echo "- Trace information for IBC assets" >> workflow-summary.md
-          echo "" >> workflow-summary.md
           echo "---" >> workflow-summary.md
           echo "" >> workflow-summary.md
 
@@ -452,13 +786,34 @@ jobs:
           if [ "$IBC_ERRORS" -gt 0 ]; then
             echo "- **Errors (flags unchanged):** $IBC_ERRORS" >> workflow-summary.md
           fi
+          # Counterparty client sweep lines (weekly runs only). Candidates are
+          # a heads-up: one more non-Active Monday reading auto-halts them.
+          if [ "$DEAD_CHAINS_WEEKLY" = "true" ]; then
+            if [ "${IBC_CP_SWEEP_INVALID:-0}" -gt 0 ]; then
+              echo "- **Counterparty sweep:** invalid this week (too many non-Active readings at once); streaks not advanced" >> workflow-summary.md
+            else
+              echo "- **Counterparty clients newly halted (2-week streak):** ${IBC_CP_HALTED:-0}" >> workflow-summary.md
+              echo "- **Counterparty client candidates (week 1 of 2, auto-halts next Monday if unresolved):** ${IBC_CP_CANDIDATES:-0}" >> workflow-summary.md
+            fi
+          fi
 
-          if [ "$IBC_NEWLY_FLAGGED" -gt 0 ] || [ "$IBC_NEWLY_CLEARED" -gt 0 ]; then
+          # Also expand the details on an all-error day (LCD rate-limiting /
+          # outage): the operator sees a bare error count otherwise and never the
+          # rate_limit / server_error / timeout breakdown, which is exactly when
+          # it's needed. (>=90% LCD outages already hard-fail upstream via exit 3.)
+          if [ "$IBC_NEWLY_FLAGGED" -gt 0 ] || [ "$IBC_NEWLY_CLEARED" -gt 0 ] || [ "${IBC_ERRORS:-0}" -gt 0 ] || [ "${IBC_CP_CANDIDATES:-0}" -gt 0 ] || [ "${IBC_CP_SWEEP_INVALID:-0}" -gt 0 ]; then
             echo "" >> workflow-summary.md
             echo "<details><summary>IBC check details</summary>" >> workflow-summary.md
             echo "" >> workflow-summary.md
             echo '```' >> workflow-summary.md
-            grep -A 100 'BRIDGE-STATE CHECK SUMMARY' ibc-check.log | head -60 >> workflow-summary.md || true
+            # Print from the summary marker to EOF: the summary block is the
+            # last thing the script emits (followed only by the counter
+            # lines), so this captures every weekly HALT/WARN/SKIP line with
+            # no arbitrary length cap. A fixed `head -N` here silently
+            # truncated candidate lists on busy weeks. Growth stays bounded
+            # because the >50% invalid-sweep guard caps how many per-triple
+            # lines a single run can produce.
+            sed -n '/BRIDGE-STATE CHECK SUMMARY/,$p' ibc-check.log >> workflow-summary.md || true
             echo '```' >> workflow-summary.md
             echo "</details>" >> workflow-summary.md
           fi
@@ -491,51 +846,110 @@ jobs:
             echo "" >> workflow-summary.md
           fi
 
-          # Manual halts currently in effect (visibility for drift detection)
-          echo "## Manual halts currently in effect" >> workflow-summary.md
+          # Manual and planned-shutdown halts currently in effect (visibility
+          # for drift detection). Both are standing state the daily scripts
+          # will not clear on their own: "manual" is the curator lock, and
+          # planned-shutdown halts are normally tooltip-locked until the
+          # curator releases them. Surfacing both every run keeps forgotten
+          # halts visible.
+          echo "## Manual & planned-shutdown halts currently in effect" >> workflow-summary.md
           echo "" >> workflow-summary.md
 
-          # Select assets manually flagged on ANY of the three reason fields
-          # (unstable / deposit-halt / withdrawal-halt), then report each
-          # halted direction with its cause from the *_halt_reason fields.
-          MANUAL_HALTS=$(jq -r '
-            .assets
+          # Select assets flagged manual or planned_shutdown on ANY of the
+          # three reason fields (unstable / deposit-halt / withdrawal-halt),
+          # enriched with the display symbol and bridge hop from the generated
+          # frontend assetlist (joined on chainName|sourceDenom), plus the
+          # chain's total listed-asset count. The hop is the first counterparty
+          # cosmos chain that is not the origin itself, so a halt caused by the
+          # hop (e.g. PSTAKE routed via a compromised Gravity Bridge) is
+          # attributable at a glance instead of reading as an origin-chain
+          # problem.
+          STANDING_HALTS=$(jq --slurpfile fe osmosis-1/generated/frontend/assetlist.json '
+            ($fe[0].assets
+              | map({ key: (.chainName + "|" + .sourceDenom), value: . })
+              | from_entries) as $byOrigin
+            | (.assets | group_by(.chain_name)
+              | map({ key: .[0].chain_name, value: length })
+              | from_entries) as $totals
+            | .assets
             | map(select(
                 (.osmosis_unstable_reason == "manual")
+                or (.osmosis_unstable_reason == "planned_shutdown")
                 or (.osmosis_deposit_halt_reason == "manual")
+                or (.osmosis_deposit_halt_reason == "planned_shutdown")
                 or (.osmosis_withdrawal_halt_reason == "manual")
+                or (.osmosis_withdrawal_halt_reason == "planned_shutdown")
               ))
+            | map(. as $a
+                | ($byOrigin[$a.chain_name + "|" + $a.base_denom]) as $f
+                | . + {
+                    symbol: ($f.symbol // $a._comment // $a.base_denom),
+                    hop: ([ ($f.counterparty // [])[]
+                            | select(.chainType == "cosmos" and .chainName != $a.chain_name)
+                            | .chainName ] | first),
+                    chain_total: ($totals[$a.chain_name] // 0)
+                  })
           ' osmosis-1/osmosis.zone_assets.json)
-          MANUAL_HALT_COUNT=$(echo "$MANUAL_HALTS" | jq 'length')
+          STANDING_HALT_COUNT=$(echo "$STANDING_HALTS" | jq 'length')
 
-          if [ "$MANUAL_HALT_COUNT" -eq 0 ]; then
+          if [ "$STANDING_HALT_COUNT" -eq 0 ]; then
             echo "_None._" >> workflow-summary.md
           else
-            # Resolve Symbol and Route from the generated frontend assetlist,
-            # joined on chainName|sourceDenom. Route is the asset's listed origin
-            # chain, plus "via <hop>" when the asset reaches Osmosis through an
-            # intermediary cosmos chain (the first counterparty cosmos chain that
-            # is not the origin itself). So a native Gravity asset reads
-            # "gravitybridge", while a Persistence asset bridged in via Gravity
-            # reads "persistence via gravitybridge".
+            # This is standing state (it repeats every run while the halts are
+            # in effect), so the default view is one compact row per chain and
+            # the full per-asset/per-direction breakdown lives inside a
+            # <details>. "Assets halted" reads "X of Y" against the chain's
+            # full listing so a single-asset halt (e.g. USDN on noble) cannot
+            # read as a whole-chain halt, and the impacted symbols are named
+            # right in the row.
+            echo "| Chain | Assets halted | Impacted assets | Directions | Reason(s) |" >> workflow-summary.md
+            echo "|-------|---------------|-----------------|------------|-----------|" >> workflow-summary.md
+            echo "$STANDING_HALTS" | jq -r '
+              group_by(.chain_name)
+              | map({
+                  chain: .[0].chain_name,
+                  halted: length,
+                  total: .[0].chain_total,
+                  assets: (
+                    [ .[] | .symbol + (if .hop then " (via \(.hop))" else "" end) ]
+                    | if length > 8 then .[0:8] + ["+\(length - 8) more"] else . end
+                    | join(", ")
+                  ),
+                  directions: (
+                    [ .[]
+                      | ( if .osmosis_halt_deposits == true then "deposit" else empty end ),
+                        ( if .osmosis_halt_withdrawals == true then "withdrawal" else empty end )
+                    ] | unique
+                    | (if length == 0 then ["unstable only"] else . end)
+                    | join(", ")
+                  ),
+                  reasons: (
+                    [ .[]
+                      | ( .osmosis_deposit_halt_reason // empty ),
+                        ( .osmosis_withdrawal_halt_reason // empty ),
+                        ( .osmosis_unstable_reason // empty )
+                    ] | unique | join(", ")
+                  )
+                })
+              | .[]
+              | "| \(.chain) | \(.halted) of \(.total) | \(.assets) | \(.directions) | \(.reasons) |"
+            ' >> workflow-summary.md
+
+            echo "" >> workflow-summary.md
+            echo "<details><summary>Full standing-halt breakdown (${STANDING_HALT_COUNT} asset(s), per direction)</summary>" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            # Symbol and hop were resolved in the enrichment pass above; Route
+            # renders as the origin chain plus "via <hop>" when present, so a
+            # native Gravity asset reads "gravitybridge" while a Persistence
+            # asset bridged in via Gravity reads "persistence via
+            # gravitybridge".
             echo "| Symbol | Route | Base denom | Direction | Reason | Tooltip |" >> workflow-summary.md
             echo "|--------|-------|-----------|-----------|--------|---------|" >> workflow-summary.md
-            echo "$MANUAL_HALTS" | jq -r --slurpfile fe osmosis-1/generated/frontend/assetlist.json '
-              ($fe[0].assets
-                | map({ key: (.chainName + "|" + .sourceDenom), value: . })
-                | from_entries) as $byOrigin
-              | .[]
+            echo "$STANDING_HALTS" | jq -r '
+              .[]
               | . as $a
-              | ($byOrigin[$a.chain_name + "|" + $a.base_denom]) as $f
-              | ($f.symbol // $a._comment // $a.base_denom) as $sym
-              | (
-                  [ ($f.counterparty // [])[]
-                    | select(.chainType == "cosmos" and .chainName != $a.chain_name)
-                    | .chainName ] as $hops
-                  | if ($hops | length) > 0
-                    then $a.chain_name + " via " + $hops[0]
-                    else $a.chain_name end
-                ) as $route
+              | ($a.symbol) as $sym
+              | (if $a.hop then $a.chain_name + " via " + $a.hop else $a.chain_name end) as $route
               | [
                   (if .osmosis_halt_deposits == true then
                      "| \($sym) | \($route) | \(.base_denom) | deposit | \(.osmosis_deposit_halt_reason // "") | \(.tooltip_message // "") |"
@@ -544,36 +958,21 @@ jobs:
                      "| \($sym) | \($route) | \(.base_denom) | withdrawal | \(.osmosis_withdrawal_halt_reason // "") | \(.tooltip_message // "") |"
                    else empty end)
                 ]
-              # Fallback: an asset can be manually flagged unstable without
-              # either direction halted. Emit one row so the asset is still
-              # listed and the table never shows bare headers.
+              # Fallback: an asset can be flagged unstable without either
+              # direction halted. Emit one row so the asset is still listed
+              # and the table never shows bare headers.
               | (if length == 0 then
                    ["| \($sym) | \($route) | \($a.base_denom) | none | \($a.osmosis_unstable_reason // "") | \($a.tooltip_message // "") |"]
                  else . end)
               | .[]
             ' >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            echo "</details>" >> workflow-summary.md
           fi
 
           echo "" >> workflow-summary.md
           echo "---" >> workflow-summary.md
           echo "" >> workflow-summary.md
-
-          # Endpoint Validation
-          echo "## Endpoint Validation" >> workflow-summary.md
-
-          if [ -f validation-summary.md ]; then
-            cat validation-summary.md >> workflow-summary.md
-          fi
-
-          # Dead-chain candidates + possible planned shutdowns (report-only).
-          # report_dead_chains.mjs already emits its own ## headers, so append
-          # the captured output verbatim under a divider.
-          if [ -f dead-chains.md ]; then
-            echo "" >> workflow-summary.md
-            echo "---" >> workflow-summary.md
-            echo "" >> workflow-summary.md
-            cat dead-chains.md >> workflow-summary.md
-          fi
 
       - name: Create Pull Request
         id: cpr

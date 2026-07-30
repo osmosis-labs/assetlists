@@ -64,6 +64,12 @@ export async function fetchNumia({ hardFail = true } = {}) {
 
 export const SQS_POOLS_URL = 'https://sqs.osmosis.zone/pools?filter%5Btype%5D=3';
 
+// Unfiltered pools endpoint. Used to cross-check Numia's liquidity reading
+// against on-chain pool value before clearing an extended deposit halt. The
+// type=3 filter above is alloy-only and would miss the balancer/CL pools most
+// thin assets actually sit in, so the liquidity cross-check needs every pool.
+export const SQS_ALL_POOLS_URL = 'https://sqs.osmosis.zone/pools';
+
 // Mainnet alloyed-transmuter contract code ids. Mirrors the frontend's
 // getAlloyedPoolCodeIds(false) constant in packages/pools/src/pool-constants.ts.
 // Update this set when a new alloyed-transmuter code id is instantiated on
@@ -141,6 +147,150 @@ export function resolveMarket(numia, constituentToAlloy, coinMinimalDenom) {
     volume24h: Math.max(self?.volume24h ?? 0, alloy?.volume24h ?? 0),
     mcap: self?.mcap ?? alloy?.mcap ?? 0,
   };
+}
+
+// ── SQS on-chain liquidity cross-check ───────────────────────────────────────
+
+/**
+ * Build a Map of coinMinimalDenom -> on-chain liquidity (USD), summed from the
+ * whole-pool `liquidity_cap` of every pool the denom appears in. Pools whose
+ * cap could not be computed (`liquidity_cap_error` set) are skipped, as are
+ * non-positive caps.
+ *
+ * This is a deliberately coarse UPPER bound on a denom's real depth: it sums
+ * whole-pool caps rather than the denom's share, so it can only overstate
+ * liquidity. That bias is safe for its sole purpose — a floor cross-check on
+ * the extended-halt clearing path (see canClearExtendedHalt). Overstating
+ * makes the guard more willing to clear, never less, so a pass here is a
+ * genuine "there is at least this much pooled value" signal.
+ *
+ * Pass the parsed SQS /pools body ({ data: [...] }). Returns an empty Map when
+ * the body is missing or malformed; callers treat an absent denom as 0 and
+ * fail closed.
+ */
+export function buildSqsLiquidityMap(sqsPoolsBody) {
+  const byDenom = new Map();
+  for (const pool of sqsPoolsBody?.data ?? []) {
+    if (pool?.liquidity_cap_error) continue; // unreliable cap, skip
+    const cap = Number(pool?.liquidity_cap ?? 0);
+    if (!Number.isFinite(cap) || cap <= 0) continue;
+    for (const b of pool?.balances ?? []) {
+      if (!b?.denom) continue;
+      byDenom.set(b.denom, (byDenom.get(b.denom) ?? 0) + cap);
+    }
+  }
+  return byDenom;
+}
+
+/**
+ * Fetch the unfiltered SQS pools list and reduce it to a per-denom liquidity
+ * map via buildSqsLiquidityMap. Returns an empty Map on any error so callers
+ * degrade to "no SQS confirmation" — which, on the clearing path, means the
+ * halt stays (fail-closed). This matches the curator-funds-safety bias: a
+ * flaky SQS run keeps deposits halted rather than reopening them on Numia
+ * alone.
+ */
+export async function fetchSqsLiquidityMap() {
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
+    const res = await fetch(SQS_ALL_POOLS_URL, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    if (!res.ok) {
+      console.error(`SQS returned HTTP ${res.status}; liquidity cross-check disabled (halts stay)`);
+      return new Map();
+    }
+    const body = await res.json();
+    return buildSqsLiquidityMap(body);
+  } catch (err) {
+    console.error(`SQS liquidity fetch failed (${err.message}); cross-check disabled (halts stay)`);
+    return new Map();
+  }
+}
+
+/**
+ * Decide whether an extended-market deposit halt may be cleared this run.
+ *
+ * Two independent sources must BOTH agree the asset has recovered:
+ *   1. Numia market signal "passing" (liquidity >= floor OR volume >= floor),
+ *      the same condition the original single-source clear used.
+ *   2. SQS on-chain liquidity >= the liquidity floor.
+ *
+ * Fail-closed: a missing Numia market (undefined) or a missing/zero SQS
+ * liquidity reading both block the clear. This is the guard against the
+ * failure mode where one source reports phantom liquidity for a denom that
+ * has no real pool (e.g. Numia reporting stale ~$300k for an asset whose only
+ * pool holds ~$22). Setting the halt is unaffected; this gates clearing only.
+ *
+ * Pure function (no I/O) so it is unit-testable with fixture inputs.
+ */
+export function canClearExtendedHalt({
+  market,
+  sqsLiquidity,
+  lowLiquidityUsd,
+  lowVolumeUsd,
+}) {
+  const numiaPassing =
+    !!market &&
+    (market.liquidity >= lowLiquidityUsd || market.volume24h >= lowVolumeUsd);
+  const sqsConfirms = Number(sqsLiquidity ?? 0) >= lowLiquidityUsd;
+  return numiaPassing && sqsConfirms;
+}
+
+/**
+ * Decide whether a market signal is a trustworthy "this asset is illiquid"
+ * reading, or merely an absence of Numia price coverage.
+ *
+ * Numia prices only a small subset of the denoms it lists (151 of 2891 as of
+ * 2026-07-28). For every other token it returns `price: null`, and a null
+ * price forces `liquidity: 0` and `volume_24h: 0`. Those zeroes are
+ * indistinguishable from a genuinely dead market by value alone, so the
+ * failing condition (`liquidity < floor && volume < floor`) is satisfied by
+ * missing data. NTRN is the canonical example: `price: null`, liquidity 0,
+ * yet 20 live Osmosis pools.
+ *
+ * SQS is therefore consulted as the second source before any *negative*
+ * conclusion is drawn, mirroring canClearExtendedHalt's cross-source contract
+ * on the positive side. SQS liquidity is the whole-pool `liquidity_cap` sum
+ * from buildSqsLiquidityMap: a deliberate upper bound, which is the correct
+ * bias here — overstating depth makes this guard more willing to spare an
+ * asset, never more willing to halt one.
+ *
+ * Returns true only when BOTH sources agree the asset is illiquid, so a halt
+ * or unstable flag rests on measurement rather than on absent coverage.
+ *
+ * Absent vs unavailable — the two cases must not be conflated:
+ *
+ *   • Denom missing from a POPULATED map: a real observation. The denom is in
+ *     no pool with a usable liquidity cap, which is the strongest evidence of
+ *     illiquidity there is, so it counts as agreement. Treating it as "no
+ *     opinion" would make the most obviously dead assets (listed, but in zero
+ *     pools) permanently un-haltable.
+ *   • Map EMPTY because the SQS fetch failed: no opinion at all. Callers must
+ *     detect this and skip the check entirely — see `sqsAvailable` at the call
+ *     sites. This function cannot distinguish it from a per-denom miss, which
+ *     is exactly why that caller-side gate exists.
+ *
+ * A non-finite value (NaN from a malformed payload) is never agreement: bad
+ * data must not drive a mutation.
+ *
+ * Pure function (no I/O) so it is unit-testable with fixture inputs.
+ */
+export function isMarketGenuinelyFailing({
+  market,
+  sqsLiquidity,
+  lowLiquidityUsd,
+  lowVolumeUsd,
+}) {
+  const numiaFailing =
+    !!market &&
+    market.liquidity < lowLiquidityUsd &&
+    market.volume24h < lowVolumeUsd;
+  // undefined/null → 0: "in no pool" is a measurement, not missing data.
+  // A non-finite reading is discarded rather than coerced.
+  const sqsReading = Number(sqsLiquidity ?? 0);
+  const sqsAgrees = Number.isFinite(sqsReading) && sqsReading < lowLiquidityUsd;
+  return numiaFailing && sqsAgrees;
 }
 
 // ── Misc ─────────────────────────────────────────────────────────────────────

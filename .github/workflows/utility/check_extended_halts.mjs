@@ -5,7 +5,11 @@
 //
 //     • 60 days since state.lastDowntimeDate AND osmosis_unstable=true AND
 //       market check still failing → halt_deposits with reason
-//       "extended_unstable_market".
+//       "extended_unstable_market". "Still failing" is cross-source: Numia
+//       below both floors AND SQS on-chain liquidity below the liquidity
+//       floor (see isMarketGenuinelyFailing). Numia alone cannot tell a dead
+//       market from a denom it does not price, and it prices only a minority
+//       of listed denoms. If SQS is unavailable, no new halt is set this run.
 //
 //     • planned_shutdown_date within 14 days → halt_deposits with reason
 //       "planned_shutdown". This set path does NOT honour the tooltip_message
@@ -14,10 +18,12 @@
 //
 //   Reason-vocabulary contract: this script owns reasons
 //   {extended_unstable_market, planned_shutdown}. Clearing rules:
-//     • extended_unstable_market: cleared on a single passing market run.
-//       (Note: check_market_health also implements this clearing path for
-//       the market-recovery flow; both are safe because they're guarded by
-//       the same reason check.)
+//     • extended_unstable_market: cleared on a single run where BOTH the Numia
+//       market signal passes AND SQS independently confirms on-chain liquidity
+//       >= the floor (see canClearExtendedHalt). Fail-closed: if SQS is
+//       unavailable or the asset has no real pool, the halt stays. (Note:
+//       check_market_health also implements this clearing path for the
+//       market-recovery flow; both share the same cross-source guard.)
 //     • planned_shutdown: cleared when planned_shutdown_date is absent or
 //       > 14 days in the future, AND no curator tooltip_message is present.
 //       (Once a curator documents the shutdown with a tooltip, the halt is
@@ -35,8 +41,11 @@ import * as path from 'path';
 
 import { calculateIbcHash } from './assetlist_functions.mjs';
 import {
+  canClearExtendedHalt,
   fetchAlloyConstituentMap,
   fetchNumia,
+  fetchSqsLiquidityMap,
+  isMarketGenuinelyFailing,
   loadJSON,
   resolveMarket,
 } from './lifecycle_helpers.mjs';
@@ -75,6 +84,22 @@ async function main() {
       .map((a) => a.coinMinimalDenom)
   );
   const constituentToAlloy = await fetchAlloyConstituentMap(alloyedDenomSet);
+
+  // On-chain liquidity per denom, the independent second source both the
+  // setting and the clearing path cross-check against Numia. Empty on SQS
+  // error → clears fail closed.
+  const sqsLiquidityByDenom = await fetchSqsLiquidityMap();
+  // An empty map is indistinguishable from "every denom has zero liquidity",
+  // which on the SETTING path would rubber-stamp every Numia zero instead of
+  // challenging it. So treat an empty map as "no second source this run" and
+  // set no new halts, rather than reading it as agreement.
+  const sqsAvailable = sqsLiquidityByDenom.size > 0;
+  if (!sqsAvailable) {
+    console.error(
+      'SQS liquidity unavailable; no new extended halts will be set this run ' +
+        '(clearing remains fail-closed).'
+    );
+  }
 
   const zoneByOrigin = new Map();
   for (const a of zoneData.assets) {
@@ -131,10 +156,20 @@ async function main() {
       const downtimeMs = nowMs - new Date(stateAsset.lastDowntimeDate).getTime();
       if (downtimeMs >= SIXTY_DAYS_MS) {
         const market = resolveMarket(numia, constituentToAlloy, coinMinimalDenom);
-        const failing =
-          !!market &&
-          market.liquidity < LOW_LIQUIDITY_USD &&
-          market.volume24h < LOW_VOLUME_24H_USD;
+        // Cross-source guard, same contract as the clearing path below: a
+        // Numia zero is only trusted as "illiquid" when SQS independently
+        // agrees. Numia prices a minority of denoms and reports liquidity 0
+        // for the rest, so Numia alone cannot distinguish a dead market from
+        // an unpriced one. When SQS is unavailable the check is skipped and
+        // no new halt is set this run (fail-closed on mutation).
+        const failing = sqsAvailable
+          ? isMarketGenuinelyFailing({
+              market,
+              sqsLiquidity: sqsLiquidityByDenom.get(coinMinimalDenom),
+              lowLiquidityUsd: LOW_LIQUIDITY_USD,
+              lowVolumeUsd: LOW_VOLUME_24H_USD,
+            })
+          : false;
         if (failing) {
           zoneAsset.osmosis_halt_deposits = true;
           zoneAsset.osmosis_deposit_halt_reason = 'extended_unstable_market';
@@ -148,18 +183,26 @@ async function main() {
       }
     }
 
-    // ── Trigger A clearing: market recovered (single passing run) ──────────
+    // ── Trigger A clearing: market recovered, cross-source confirmed ───────
+    // Numia "passing" alone is not enough: SQS must independently confirm
+    // on-chain liquidity >= the floor before the deposit halt clears. Guards
+    // against a phantom Numia liquidity reading reopening deposits on an asset
+    // whose real pool is near-empty. Fail-closed when SQS is missing (halt
+    // stays). Mirrors the same guard on check_market_health.mjs's recovery
+    // path; both share the canClearExtendedHalt contract.
     if (
       zoneAsset.osmosis_halt_deposits === true &&
       zoneAsset.osmosis_deposit_halt_reason === 'extended_unstable_market' &&
       !zoneAsset.tooltip_message
     ) {
       const market = resolveMarket(numia, constituentToAlloy, coinMinimalDenom);
-      const passing =
-        !!market &&
-        (market.liquidity >= LOW_LIQUIDITY_USD ||
-          market.volume24h >= LOW_VOLUME_24H_USD);
-      if (passing) {
+      const canClear = canClearExtendedHalt({
+        market,
+        sqsLiquidity: sqsLiquidityByDenom.get(coinMinimalDenom),
+        lowLiquidityUsd: LOW_LIQUIDITY_USD,
+        lowVolumeUsd: LOW_VOLUME_24H_USD,
+      });
+      if (canClear) {
         delete zoneAsset.osmosis_halt_deposits;
         delete zoneAsset.osmosis_deposit_halt_reason;
         mutations.push({

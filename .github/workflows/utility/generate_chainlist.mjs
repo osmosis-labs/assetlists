@@ -315,9 +315,15 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   chain.bech32Config = bech32_config;
 
   // -- Get SLIP44 with override support --
-  chain.slip44 = zoneChain.override_properties?.slip44 ||
+  // Use ?? not ||: slip44 of 0 is a legitimate coin type (Bitcoin's, used by
+  // e.g. hippoprotocol). `0 || x` and `if (!chain.slip44)` would treat that
+  // valid 0 as missing, drop the chain to a level-1 stub with no apis, and the
+  // chain would then never be endpoint-validated (showing up as "unverifiable"
+  // in report_dead_chains). Only a genuinely absent value (null/undefined)
+  // should fail the guard.
+  chain.slip44 = zoneChain.override_properties?.slip44 ??
                  chain_reg.getFileProperty(chain_name, "chain", "slip44");
-  if (!chain.slip44) return false;
+  if (chain.slip44 === undefined || chain.slip44 === null) return false;
   chain.alternativeSlip44s = zoneChain.override_properties?.alternative_slip44s ||
                              chain_reg.getFileProperty(chain_name, "chain", "alternative_slip44s");
   if (!chain.alternativeSlip44s) delete chain.alternativeSlip44s;

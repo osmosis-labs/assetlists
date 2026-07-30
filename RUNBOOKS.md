@@ -186,7 +186,7 @@ Duration: 60 minutes
 
 2. Test Locally:
    cd .github/workflows/utility
-   node validateEndpoints.mjs osmosis-1
+   node validateEndpoints.mjs fullValidation osmosis
    # Should complete in ~15 minutes
    # Identify specific failure point
 
@@ -230,19 +230,58 @@ Duration: 60 minutes
 
 **Step 2: Review PR Summary**
 ```
-1. Read PR body (generated summary)
-2. Check metrics:
-   - New assets added: Typically 0-5 per run
-   - Verified assets: Typically 0-2 per run
-   - New chains: Typically 0-3 per run
-   - Endpoint failures: Should be <10
-   - Backup endpoints used: Normal if 5-15
+The PR body is generated top-to-bottom by generate_all_files.yml. Read it in
+this order:
 
-3. Red flags:
-   ⚠️ >10 new assets at once (unusual spike)
-   ⚠️ Unexpected verified assets (should be manual process)
-   ⚠️ >15 endpoint failures (widespread issue)
+1. Action required banner (very first heading):
+   - "✅ No action required: safe to auto-merge" → nothing needs a human.
+   - "🚨 Action required (N)" → each bullet points at a section below. Work
+     through them before approving. Highest-consequence first: past-due
+     withdrawals still open, mutation-cap hits, down chains with deposits open.
+
+2. Quick summary: one row per category (new chains/assets, IBC flagged/cleared,
+   manual halts added this run, manual halts in effect, extended/planned halts).
+   Empty categories read "none". Anything non-empty is the run's actual delta.
+
+3. Mutation cap hit (only present if a lifecycle script hit the cap): the diff
+   was NOT applied. See RB008.
+
+4. Endpoint Validation: the Connectivity Failures table's Action column already
+   states the suggested step per chain ("already covered", "consider halting
+   deposits", "halt deposits / investigate"). Dead chain candidates publish on
+   the weekly (Monday) corroborated run.
+
+5. IBC Client Health, counterparty lines (Monday runs only):
+   - "Counterparty client candidates (week 1 of 2)": the remote chain's client
+     tracking Osmosis read non-Active (Expired/Frozen/unreachable) this Monday.
+     Nothing was halted yet. You have until next Monday's run to act: verify
+     manually (query the counterparty chain's LCD:
+     /ibc/core/client/v1/client_status/<client_id>), then either get the
+     relayer restarted / client recovered, or halt manually with a tooltip if
+     you want bespoke messaging. If the next weekly reading is still
+     non-Active, automation halts both directions with reasons
+     ibc_client/bridge_down. The exact triples are in the "IBC check details"
+     collapsible (WARN lines).
+   - "Counterparty clients newly halted (2-week streak)": the halt landed this
+     run (HALT lines in the details block). Recovery is automatic and daily
+     once the client is Active again (e.g. after a client-substitution gov
+     proposal on the counterparty chain).
+   - "Counterparty sweep: invalid this week": most triples read non-Active at
+     once, which means runner-side network trouble, not mass bridge death.
+     Streaks were not advanced; the counterparty signal is simply missing this
+     week. Investigate only if it repeats.
+   - SKIP lines in the details block are structurally unverifiable chains
+     (no REST endpoints listed in any source, or a custom node without IBC
+     query routes, e.g. nomic). They are never streaked or auto-halted by
+     this sweep; their coverage stays with the Osmosis-side client check and
+     the dead-chain machinery. If a chain appears here unexpectedly, fix its
+     endpoint listings rather than halting.
+
+Red flags:
+   ⚠️ Unexpected verified assets (verification is a manual process)
+   ⚠️ A spike of new assets from a single unfamiliar chain
    ⚠️ Testnet chains in mainnet (wrong network_type)
+   ⚠️ A down chain with deposits still open and no halt coverage
 ```
 
 **Step 3: Spot Check New Assets**
@@ -608,7 +647,7 @@ If all tests passed:
    - ✅ Price displayed
    - ✅ Tradeable on DEX
 
-   Merging now. Verified badge will appear on next deployment (daily 15:40 UTC)."
+   Merging now. Verified badge will appear on next deployment (daily 15:30 UTC)."
 7. Click: "Submit review"
 8. Click: "Squash and merge"
 9. Confirm merge
@@ -1010,9 +1049,9 @@ Edit the zone_assets entry directly:
 Two changes from an auto-set halt:
 
 1. The `*_halt_reason` is set to `manual`. Script-owned reasons get auto-cleared on recovery; `manual` does not.
-2. `tooltip_message` is non-empty. Any tooltip locks the asset against all automation.
+2. `tooltip_message` is non-empty. Any tooltip locks the asset against all automation. The one sanctioned exception is a curator-set expiry: if you also set `tooltip_expiry_date`, `check_tooltip_expiry.mjs` will clear or decay the tooltip on that date (see RB009).
 
-Commit and let the daily cron run. Verify the asset is now ignored by automation by checking the next workflow summary's "Manual halts currently in effect" section.
+Commit and let the daily cron run. Verify the asset is now ignored by automation by checking the next workflow summary's "Manual & planned-shutdown halts currently in effect" section.
 
 #### Release the override
 
@@ -1020,9 +1059,9 @@ Clear `tooltip_message` and set the reason back to a script-owned value (or just
 
 ---
 
-### RB007: Weekly unverify PR, close vs merge
+### RB007: Bi-weekly unverify PR, close vs merge
 
-**Use when**: the weekly `auto-unverify/weekly-candidates` PR is open and you need to decide what to do.
+**Use when**: the bi-weekly `auto-unverify/weekly-candidates` PR is open and you need to decide what to do.
 
 #### Procedure
 
@@ -1037,3 +1076,88 @@ The PR body lists each candidate with days unstable, reason, last downtime / rec
 - `osmosis_unstable` and the state history fields are preserved on unverify. This is intentional, so a later re-verification carries the prior incident record.
 - A re-verified asset that's still carrying stale dates should have them manually cleared at re-verify time.
 - The cooldown is per-asset, not per-PR. Closing the PR stamps `state.lastUnverifyProposedAt` for every candidate that was in the PR.
+
+---
+
+### RB008: Mutation cap hit
+
+**Use when**: the daily `[AUTO]` PR body shows a "⚠️ Mutation cap hit" section, or a lifecycle step in the run log exited with code 2.
+
+**Purpose**: safely apply (or reject) a lifecycle diff that touched more source chains than the per-run safeguard allows.
+
+#### Background
+
+`check_ibc_clients.mjs` and `check_extended_halts.mjs` refuse to write when a single run's diff would touch more than `MAX_CHAINS_PER_RUN` (currently 10) distinct source chains. The threshold is per source chain, not per asset, so one large chain producing many asset rows passes through normally. When the cap is exceeded the script exits with code 2 and applies none of its intended mutations. The workflow treats code 2 as non-fatal and surfaces the event in the PR body. `check_market_health.mjs` is exempt (no cap) by design, so it never produces this section.
+
+A cap hit usually means one of: a chain-registry submodule bump flipped many chains at once, an upstream regression, or a genuine mass event (for example several bridges going down together).
+
+#### Procedure
+
+```
+1. Identify which script capped (the PR section and run log name it:
+   check_ibc_clients or check_extended_halts).
+
+2. Inspect the intended diff locally without writing:
+   cd .github/workflows/utility
+   node <script>.mjs osmosis-1 --dry-run
+   # Prints the markdown report of what it WOULD change. No writes, exit 0.
+
+3. Decide:
+   - Legitimate (the chains really did change state) → apply it:
+       node <script>.mjs osmosis-1 --force
+       # --force bypasses the cap. Commit the resulting zone_assets.json /
+       # state.json change in a normal PR for review.
+   - Not legitimate (bad submodule bump, upstream regression) → do not force.
+     Fix the root cause (for example pin/repair the chain-registry submodule),
+     then let the next daily run apply a clean diff.
+```
+
+#### Notes
+
+- `--force` only bypasses the chain-count cap; all the script's other guards (owned-reason checks, tooltip locks) still apply.
+- The cap value lives in `MAX_CHAINS_PER_RUN` in each script. Raise it only with a clear reason; the point is to catch mass-flips before they ship onchain.
+- If both scripts capped in the same run, triage them independently; they own different reason vocabularies.
+
+---
+
+### RB009: Set a tooltip that expires or decays on a date
+
+**Use when**: a `tooltip_message` only makes sense for a known period: a rebrand notice, a "supported until `<date>`" window, or any "until `<date>`" warning. Instead of relying on someone to delete it later, flag the change at write time and let the daily cron apply it.
+
+**Purpose**: `check_tooltip_expiry.mjs` runs first among the lifecycle scripts each day. On the expiry date it either removes the tooltip or replaces it with a decay message, writes the source `osmosis.zone_assets.json`, and the generator ships the result in the same `[AUTO]` PR.
+
+#### Procedure
+
+Add `tooltip_expiry_date` (ISO `YYYY-MM-DD`) next to the `tooltip_message`. Optionally add `tooltip_decay_message` to change the text instead of removing it.
+
+Remove on the date (rebrand, one-off notice):
+
+```json
+{
+  "chain_name": "examplehub",
+  "base_denom": "uex",
+  "tooltip_message": "EXAMPLE has rebranded to NEW on 2026-06-17. Source: https://...",
+  "tooltip_expiry_date": "2026-09-15"
+}
+```
+
+Decay on the date (notice should change, not vanish):
+
+```json
+{
+  "chain_name": "examplehub",
+  "base_denom": "uex",
+  "tooltip_message": "Bridged via Example Bridge, supported through 2026-06-30. Withdraw before then.",
+  "tooltip_expiry_date": "2026-06-30",
+  "tooltip_decay_message": "Example Bridge support ended on 2026-06-30. Withdrawals are no longer available."
+}
+```
+
+Commit and let the daily cron run. On the first run dated after the expiry day (the tooltip stays live through the whole expiry day, UTC), the expiry fields are cleared and the tooltip is removed or replaced.
+
+#### Notes
+
+- A tooltip with no `tooltip_expiry_date` is never auto-touched. Leave permanent notices (dead chains, compromised bridges) without an expiry.
+- A decayed tooltip is a normal `tooltip_message` with no expiry of its own, so it persists and still acts as a curator lock against the other lifecycle scripts until someone removes it by hand.
+- Fail-safe: an unparseable `tooltip_expiry_date`, or a `tooltip_decay_message` with no expiry date, does not change the tooltip; it is surfaced in the run summary and the `--dry-run` report (`generated/reports/tooltip_expiry_dry_run_<date>.md`) for a curator to fix.
+- Preview what a run would do without writing: `cd .github/workflows/utility && node check_tooltip_expiry.mjs osmosis-1 --dry-run`.

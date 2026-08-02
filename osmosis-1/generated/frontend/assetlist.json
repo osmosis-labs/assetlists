@@ -19924,12 +19924,11 @@
       "unstableReason": "market",
       "disabled": false,
       "haltDeposits": true,
-      "depositHaltReason": "bridge_down",
-      "haltWithdrawals": true,
-      "withdrawalHaltReason": "bridge_down",
+      "depositHaltReason": "extended_unstable_market",
       "preview": false,
       "listingDate": "2024-05-03T13:00:00.000Z",
-      "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
+      "lastDowntimeDate": "2026-05-28T09:17:16.684Z",
+      "lastRecoveryDate": "2026-08-02T15:27:32.463Z"
     },
     {
       "chainName": "osmosis",
@@ -45184,62 +45183,6 @@
       "listingDate": "2026-07-04T15:44:27.519Z"
     },
     {
-      "chainName": "qie",
-      "sourceDenom": "aqie",
-      "coinMinimalDenom": "ibc/29651CA364AA857248A912B1DEC17EF8AC320728C616FB635338CFE965E18BE3",
-      "symbol": "QIE",
-      "decimals": 18,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qie/images/qie.png"
-      },
-      "coingeckoId": "qie",
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "qie",
-            "chainId": "qie_1990-1",
-            "sourceDenom": "aqie",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-109956",
-            "path": "transfer/channel-109956/aqie"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "qie",
-          "sourceDenom": "aqie",
-          "chainType": "cosmos",
-          "chainId": "qie_1990-1",
-          "symbol": "QIE",
-          "decimals": 18,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qie/images/qie.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/29651CA364AA857248A912B1DEC17EF8AC320728C616FB635338CFE965E18BE3",
-      "name": "QIE",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": true,
-      "unstableReason": "ibc_client",
-      "disabled": false,
-      "haltDeposits": true,
-      "depositHaltReason": "bridge_down",
-      "haltWithdrawals": true,
-      "withdrawalHaltReason": "bridge_down",
-      "preview": false,
-      "lastDowntimeDate": "2026-07-04T15:29:33.304Z"
-    },
-    {
       "chainName": "elys",
       "sourceDenom": "ueden",
       "coinMinimalDenom": "ibc/759C2B22DFA2D39A9B30BDC053AB59D2376746828B876FD18887F366D3819B11",
@@ -56983,6 +56926,58 @@
       "unstable": false,
       "disabled": false,
       "preview": false
+    },
+    {
+      "chainName": "qie",
+      "sourceDenom": "aqie",
+      "coinMinimalDenom": "ibc/29651CA364AA857248A912B1DEC17EF8AC320728C616FB635338CFE965E18BE3",
+      "symbol": "QIE",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qie/images/qie.png"
+      },
+      "coingeckoId": "qie",
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "qie",
+            "chainId": "qie_1990-1",
+            "sourceDenom": "aqie",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-109956",
+            "path": "transfer/channel-109956/aqie"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "qie",
+          "sourceDenom": "aqie",
+          "chainType": "cosmos",
+          "chainId": "qie_1990-1",
+          "symbol": "QIE",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/qie/images/qie.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/29651CA364AA857248A912B1DEC17EF8AC320728C616FB635338CFE965E18BE3",
+      "name": "QIE",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "lastDowntimeDate": "2026-07-04T15:29:33.304Z",
+      "lastRecoveryDate": "2026-08-02T15:27:32.463Z"
     },
     {
       "chainName": "realio",

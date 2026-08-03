@@ -1980,7 +1980,9 @@
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "market",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "extended_unstable_market"
+      "osmosis_deposit_halt_reason": "extended_unstable_market",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "quicksilver",
@@ -12010,6 +12012,18 @@
       "base_denom": "cw20:chihuahua1jz5n4aynhpxx7clf2m8hrv9dp5nz83k67fgaxhy4p9dfwl6zssrq3ymr6w",
       "path": "transfer/channel-11348/cw20:chihuahua1jz5n4aynhpxx7clf2m8hrv9dp5nz83k67fgaxhy4p9dfwl6zssrq3ymr6w",
       "_comment": "BackBone Labs Liquid Staked HUAHUA $bHUAHUA",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
+    },
+    {
+      "chain_name": "amitis",
+      "base_denom": "uamts",
+      "path": "transfer/channel-110089/uamts",
+      "_comment": "Amitis Network $AMTS",
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "ibc_client",
       "osmosis_halt_deposits": true,

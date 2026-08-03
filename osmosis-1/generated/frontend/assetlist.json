@@ -2873,12 +2873,8 @@
       "unstable": true,
       "unstableReason": "manual",
       "disabled": false,
-      "haltDeposits": true,
-      "depositHaltReason": "bridge_down",
-      "haltWithdrawals": true,
-      "withdrawalHaltReason": "bridge_down",
       "preview": false,
-      "tooltipMessage": "Gravity Bridge has been compromised. Deposits and withdrawals are halted while the situation is assessed.",
+      "tooltipMessage": "Gravity Bridge suffered an exploit in May 2026 and its Ethereum bridge remains out of service. GRAV transfers over IBC are working again, but assets bridged from Ethereum through Gravity cannot currently be redeemed.",
       "lastDowntimeDate": "2026-06-13T15:39:23.763Z"
     },
     {
@@ -8351,6 +8347,8 @@
       "disabled": false,
       "haltDeposits": true,
       "depositHaltReason": "extended_unstable_market",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
       "preview": false,
       "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
     },
@@ -45777,6 +45775,61 @@
       "lastDowntimeDate": "2026-07-28T09:58:08.503Z"
     },
     {
+      "chainName": "amitis",
+      "sourceDenom": "uamts",
+      "coinMinimalDenom": "ibc/7E577151E593349028AAC4A9FCC33258D70749FDF3CBB48F7744262DD18FC89D",
+      "symbol": "AMTS",
+      "decimals": 6,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/amitis/images/amts.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "amitis",
+            "chainId": "amitis-network",
+            "sourceDenom": "uamts",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-110089",
+            "path": "transfer/channel-110089/uamts"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "amitis",
+          "sourceDenom": "uamts",
+          "chainType": "cosmos",
+          "chainId": "amitis-network",
+          "symbol": "AMTS",
+          "decimals": 6,
+          "logoURIs": {
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/amitis/images/amts.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/7E577151E593349028AAC4A9FCC33258D70749FDF3CBB48F7744262DD18FC89D",
+      "name": "Amitis Network",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "lastDowntimeDate": "2026-08-03T15:56:48.609Z"
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -45821,55 +45874,6 @@
       ],
       "variantGroupKey": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
       "name": "Akash Compute Token",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "amitis",
-      "sourceDenom": "uamts",
-      "coinMinimalDenom": "ibc/7E577151E593349028AAC4A9FCC33258D70749FDF3CBB48F7744262DD18FC89D",
-      "symbol": "AMTS",
-      "decimals": 6,
-      "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/amitis/images/amts.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "amitis",
-            "chainId": "amitis-network",
-            "sourceDenom": "uamts",
-            "port": "transfer",
-            "channelId": "channel-1"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-110089",
-            "path": "transfer/channel-110089/uamts"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "amitis",
-          "sourceDenom": "uamts",
-          "chainType": "cosmos",
-          "chainId": "amitis-network",
-          "symbol": "AMTS",
-          "decimals": 6,
-          "logoURIs": {
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/amitis/images/amts.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/7E577151E593349028AAC4A9FCC33258D70749FDF3CBB48F7744262DD18FC89D",
-      "name": "Amitis Network",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

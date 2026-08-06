@@ -58088,6 +58088,55 @@
       "preview": false
     },
     {
+      "chainName": "tail",
+      "sourceDenom": "utail",
+      "coinMinimalDenom": "ibc/6CF86ACC0BC170B45A41FFAA138B062CFA454D919490B79CCAA8491B3B4B420D",
+      "symbol": "TAIL",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/tail/images/logo-mark.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "tail",
+            "chainId": "tail-1",
+            "sourceDenom": "utail",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-110566",
+            "path": "transfer/channel-110566/utail"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "tail",
+          "sourceDenom": "utail",
+          "chainType": "cosmos",
+          "chainId": "tail-1",
+          "symbol": "TAIL",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/tail/images/logo-mark.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/6CF86ACC0BC170B45A41FFAA138B062CFA454D919490B79CCAA8491B3B4B420D",
+      "name": "TAIL Network",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "terra",
       "sourceDenom": "cw20:terra1php5m8a6qd68z02t3zpw4jv2pj4vgw4wz0t8mz",
       "coinMinimalDenom": "ibc/82AD9817B08DCB07821D243D702AF1B0D3D0EAFF66D65DBB41AD2BF1FF5A9AFF",

@@ -7,7 +7,7 @@
 
 ### Prerequisites
  - Asset, origin chain, and required IBC connection are registered to the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry)
-   - For instructions on how to registrer and enlist, please see our [Registration Guide](https://docs.osmosis.zone/overview/integrate/registration)
+   - For instructions on how to register and enlist, please see our [Registration Guide](https://docs.osmosis.zone/integrate/list-asset/registration)
  - At least one integrated wallet supports the origin chain, asset
    - (Note: native wallet support is not required as long as some chain suggestion or addChain method works)
  - A transfer/bridge interface exists for non-standard asset transfers
@@ -106,8 +106,8 @@ Liquidity on Osmosis:
  - At least $10k USD-worth of liquidity on Osmosis DEX
  - At least one pool of type: Supercharged Liquidity(CL), Stableswap, Transmuter/Alloyed Asset, or Astroport PCL.
    - Note that this requirement is NOT met by an instance of the Weighted ('xyk') pool type, which are less strategic for traders and liquidity providers than other pool types.
-   - Note that although Supercharged Liquidity is the recommended pool type for most assets, this type of pool cannot be created via the Osmosis Zone frontend interface.
-   - See the [Pool Setup Guide](https://docs.osmosis.zone/overview/integrate/pool-setup) for instructions on setting up a Liquidity Pool on Osmosis.
+   - Supercharged Liquidity pools can be created via the Osmosis Zone frontend interface or via CLI.
+   - See the [Pool Setup Guide](https://docs.osmosis.zone/integrate/list-asset/pool-setup) for instructions on setting up a Liquidity Pool on Osmosis.
 
     
 

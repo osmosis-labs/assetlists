@@ -21,7 +21,7 @@ The generated files power the Osmosis Zone interface, providing wallet integrati
 1. **Submit PR to Chain Registry** - Register your chain and asset at the [Cosmos Chain Registry](https://github.com/cosmos/chain-registry)
    - Include complete asset metadata (name, symbol, logo, description, etc.)
    - Register IBC connection information between your chain and Osmosis (if applicable)
-   - Follow the [Chain Registry contribution guide](https://docs.osmosis.zone/overview/integrate/registration)
+   - Follow the [Chain Registry contribution guide](https://docs.osmosis.zone/integrate/list-asset/registration)
 
 2. **Wait for Chain Registry PR to be merged** - Once your PR is approved and merged into Chain Registry
 

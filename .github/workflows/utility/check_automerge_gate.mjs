@@ -197,8 +197,12 @@ const HOMOGLYPHS = new Map(Object.entries({
   // Greek -> Latin
   'α': 'a', 'β': 'b', 'ε': 'e', 'ι': 'i', 'κ': 'k', 'ν': 'v', 'ο': 'o',
   'ρ': 'p', 'τ': 't', 'υ': 'u', 'χ': 'x', 'ζ': 'z', 'η': 'n',
-  // Fullwidth / lookalike digits and letters
-  'ｏ': 'o', '０': '0', 'ⅰ': 'i', 'l': 'l',
+  // Lookalikes that survive NFKC. Fullwidth forms, script/roman-numeral letters
+  // (ｌ, ⅼ, ℓ) and fullwidth digits already fold to ASCII via NFKC below, so they
+  // need no entry here; the ones listed are the residue that does not.
+  // U+04CF Cyrillic palochka renders as l/I and NFKC leaves it unchanged.
+  // (This slot previously held a no-op 'l' -> 'l'.)
+  'ӏ': 'l',
 }));
 
 function normaliseSymbol(symbol) {
@@ -479,7 +483,10 @@ async function main() {
   // Absent file is NOT the same as "no new assets". The workflow always writes
   // new-assets.txt (possibly empty), so a missing file means the step ordering
   // changed or the path is wrong, and the squat check silently examined nothing.
-  // Track it so the report cannot present check 2 as clean when it never ran.
+  // That is a missing decision input, exactly like an unreadable lifecycle diff
+  // or assetlist, so it blocks rather than merely warning: a squatted symbol
+  // could have slipped through unseen. Warning-only here would have let the run
+  // auto-merge while reporting a clean collision check that never ran.
   const newAssetsMissing = !fs.existsSync(newAssetsPath);
   if (!newAssetsMissing) {
     newSymbols = fs.readFileSync(newAssetsPath, 'utf8')
@@ -502,9 +509,11 @@ async function main() {
     // its first run.
     if (fe?.verified) continue;
 
-    // Exact self-match on an unverified asset: the asset holding the bare
-    // symbol is the one being compared against itself. Only reachable if the
-    // canonical owner is unverified, in which case there is no verified victim.
+    // Defensive: an exact self-match should already be impossible here.
+    // verifiedNormSymbols is built only from verified, unsuffixed symbols, so
+    // collidesWith === sym implies sym belongs to a verified asset, which the
+    // fe?.verified check above has already skipped. Kept as a cheap guard in
+    // case that indexing or the dedupe upstream changes.
     if (collidesWith === sym) continue;
 
     const market = fe?.coinMinimalDenom
@@ -516,11 +525,11 @@ async function main() {
       normalised: norm,
       collidesWith,
       // Case-only collision (usdc vs USDC) versus a wider normalised match
-      // (USD-C, homoglyph ATOM). A byte-exact match cannot reach here: the
-      // `collidesWith === sym` skip above already returned. Case-insensitive
-      // equality is the strongest comparison still meaningful at this point,
-      // and it tells the reviewer whether the squat is a pure case flip or
-      // something that needed separator/homoglyph folding to catch.
+      // (USD-C, homoglyph ATOM). A byte-exact match cannot reach here: such a
+      // symbol would belong to the verified owner and be skipped above.
+      // Case-insensitive equality is the strongest comparison still meaningful
+      // at this point, and it tells the reviewer whether the squat is a pure
+      // case flip or something that needed separator/homoglyph folding.
       matchKind: collidesWith.toLowerCase() === sym.toLowerCase() ? 'case' : 'normalised',
       chain: fe?.chainName ?? '?',
       denom: fe?.coinMinimalDenom ?? '?',
@@ -541,6 +550,13 @@ async function main() {
     );
   }
 
+  if (newAssetsMissing) {
+    reasons.push(
+      `the new-asset list (${newAssetsPath}) was missing, so the symbol-collision `
+      + 'check could not run'
+    );
+  }
+
   // ── Build report ─────────────────────────────────────────────────────────
   const blocked = reasons.length > 0;
 
@@ -555,9 +571,9 @@ async function main() {
     if (LIQUIDITY_THRESHOLD_USD !== null) {
       report += ` (or to unverified assets above ${fmtUsd(LIQUIDITY_THRESHOLD_USD)} liquidity)`;
     }
-    report += newAssetsMissing
-      ? '. The new-asset symbol collision check did not run (see warning below).\n\n'
-      : ', and no new-asset symbol collisions with verified assets.\n\n';
+    // newAssetsMissing always pushes a reason, so this branch only runs when the
+    // collision check actually examined the list.
+    report += ', and no new-asset symbol collisions with verified assets.\n\n';
   }
 
   /** Shared table renderer for the two hit tables. */
@@ -624,9 +640,13 @@ async function main() {
   }
 
   if (newAssetsMissing) {
-    report += `> ⚠️ The new-asset list (\`${newAssetsPath}\`) was not found, so the `
-      + 'symbol-collision check examined nothing this run. A squatted symbol would '
-      + 'not have been caught. Verified-status gating is unaffected.\n\n';
+    report += '### New-asset list missing\n\n';
+    report += `The new-asset list (\`${newAssetsPath}\`) was not found, so the `
+      + 'symbol-collision check examined nothing this run and a squatted symbol '
+      + 'would not have been caught. The workflow always writes this file (possibly '
+      + 'empty), so its absence points at a step-ordering or path problem rather '
+      + 'than an empty run. Auto-merge was withheld for that reason; verified-status '
+      + 'gating still ran normally.\n\n';
   }
 
   if (unknownCategories.size > 0) {

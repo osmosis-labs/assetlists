@@ -1005,13 +1005,29 @@ jobs:
             # an exit before that (e.g. arg parse) would leave it unset. Force it.
             echo "GATE_BLOCKED=true" >> $GITHUB_ENV
           fi
+          # A crash before finish() writes its report leaves the file empty, which
+          # would prepend a blank block and a stray separator to the PR body with
+          # no verdict at all. Substitute a real explanation instead.
+          if [ ! -s ../../../gate-report.md ]; then
+            {
+              echo "## 🛑 Auto-merge withheld (gate produced no report)"
+              echo ""
+              echo "\`check_automerge_gate.mjs\` exited with code $rc without writing a"
+              echo "verdict, so the gate could not be evaluated. Auto-merge was withheld."
+              echo "See the \"Auto-merge Safety Gate\" step log for the failure."
+            } > ../../../gate-report.md
+            echo "GATE_BLOCKED=true" >> $GITHUB_ENV
+          fi
           exit 0
 
       - name: Prepend Gate Report to PR Body
         run: |
           # Gate verdict goes at the very top of the PR body so a withheld
-          # merge is the first thing a reviewer sees.
-          if [ -f gate-report.md ]; then
+          # merge is the first thing a reviewer sees. `-s` (non-empty) rather than
+          # `-f`: an empty file would contribute a blank block and a stray `---`
+          # with no verdict. The gate step substitutes a fallback report when it
+          # produces nothing, so an empty file here means the step never ran.
+          if [ -s gate-report.md ]; then
             cat gate-report.md > pr-body.md
             echo "" >> pr-body.md
             echo "---" >> pr-body.md
@@ -1032,8 +1048,13 @@ jobs:
           body-path: workflow-summary.md
           delete-branch: true
 
+      # Requires the POSITIVE pass value. `!= 'true'` would have merged whenever
+      # GATE_BLOCKED was unset (an unset variable is the empty string), so a
+      # skipped or crashed gate step read as permission to merge. Only an
+      # explicit GATE_BLOCKED=false, which finish() writes solely after a
+      # completed evaluation, allows auto-merge.
       - name: Enable Auto-merge
-        if: steps.cpr.outputs.pull-request-number && github.event_name == 'schedule' && env.GATE_BLOCKED != 'true'
+        if: steps.cpr.outputs.pull-request-number && github.event_name == 'schedule' && env.GATE_BLOCKED == 'false'
         run: |
           PR=${{ steps.cpr.outputs.pull-request-number }}
           # No `|| gh pr merge --squash` fallback. That fallback merged
@@ -1045,13 +1066,22 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Mirror of the condition above: anything that is not an explicit pass
+      # routes here, so a blocked verdict AND an unset one (skipped or crashed
+      # gate step) both get labelled. Without the unset case this step would not
+      # run, leaving an unmerged PR with no label and no explanation.
       - name: Flag PR for Manual Review
-        if: steps.cpr.outputs.pull-request-number && github.event_name == 'schedule' && env.GATE_BLOCKED == 'true'
+        if: steps.cpr.outputs.pull-request-number && github.event_name == 'schedule' && env.GATE_BLOCKED != 'false'
         run: |
           # A skipped auto-merge must be visible, not a silent no-op. Label the
           # PR so it can be filtered, and log why.
           PR=${{ steps.cpr.outputs.pull-request-number }}
-          echo "Auto-merge withheld by the safety gate; PR #$PR left open for review."
+          if [ "$GATE_BLOCKED" = "true" ]; then
+            echo "Auto-merge withheld by the safety gate; PR #$PR left open for review."
+          else
+            echo "GATE_BLOCKED was not set, so the gate verdict is unknown (the gate step"
+            echo "may have been skipped or died early). Treating as blocked; PR #$PR left open."
+          fi
           # The label may not exist yet (it did not when this was written), so
           # create it idempotently before applying. Labelling is best-effort:
           # the PR is already unmerged, which is the actual safety property.

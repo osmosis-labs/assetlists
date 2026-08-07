@@ -32,8 +32,9 @@
 //        where a squat lands on a symbol whose canonical owner is unverified.
 //
 //   Report-only with respect to the pipeline: never mutates repo files, and
-//   exits 0 even when it blocks. The decision is communicated via the
-//   GATE_BLOCKED / GATE_REASON_COUNT variables written to $GITHUB_ENV (when
+//   exits 0 even when it blocks (via process.exitCode, so the report on stdout
+//   is allowed to flush before the process ends). The decision is communicated
+//   via the GATE_BLOCKED / GATE_REASON_COUNT variables written to $GITHUB_ENV (when
 //   set) and a markdown block on stdout for the PR body. Exit code 1 is
 //   reserved for the gate itself failing (bad input, unreadable list), which
 //   is also treated as blocking by the caller. See "fail closed" below.
@@ -58,8 +59,10 @@
 //   --json <path>                lifecycle diff produced by the workflow's
 //                                "Extract per-mutation symbol lists" step;
 //                                default /tmp/lifecycle-diff.json
-//   --new-assets <path>          newline-delimited new symbols;
-//                                default ./new-assets.txt
+//   --new-assets <path>          newline-delimited new symbols; default
+//                                ../../../new-assets.txt, i.e. the repo root,
+//                                where the workflow's "Detect New Assets" step
+//                                writes it (this script runs from utility/)
 //
 // Exit codes:
 //   0  ran to completion (check GATE_BLOCKED for the verdict)
@@ -79,12 +82,18 @@ import {
 
 const argv = process.argv.slice(2);
 
+// Parse errors are collected rather than thrown, because parsing happens at
+// module scope where a throw escapes main()'s catch and finish(), leaving the
+// PR body empty. validateArgs() raises them from inside main() instead.
+const argErrors = [];
+
 function flagValue(name, fallback) {
   const i = argv.indexOf(name);
   if (i === -1) return fallback;
   const v = argv[i + 1];
   if (v === undefined || v.startsWith('--')) {
-    throw new Error(`${name} requires a value`);
+    argErrors.push(`${name} requires a value`);
+    return fallback;
   }
   return v;
 }
@@ -107,10 +116,24 @@ const LIQUIDITY_THRESHOLD_USD = rawLiquidityThreshold === null
   ? null
   : Number(rawLiquidityThreshold);
 
-if (LIQUIDITY_THRESHOLD_USD !== null
-    && (!Number.isFinite(LIQUIDITY_THRESHOLD_USD) || LIQUIDITY_THRESHOLD_USD <= 0)) {
-  console.error(`Invalid --liquidity-threshold: ${rawLiquidityThreshold}`);
-  process.exit(1);
+/**
+ * Validated from inside main() rather than at module scope so a bad flag goes
+ * through finish(), which writes GATE_BLOCKED and emits a markdown verdict. A
+ * bare process.exit(1) here left the PR body empty: the workflow still forced
+ * GATE_BLOCKED=true on a non-zero exit, so it failed closed, but the reviewer
+ * got no explanation of why.
+ */
+function validateArgs() {
+  if (argErrors.length > 0) {
+    throw new Error(`bad arguments: ${argErrors.join('; ')}`);
+  }
+  if (LIQUIDITY_THRESHOLD_USD !== null
+      && (!Number.isFinite(LIQUIDITY_THRESHOLD_USD) || LIQUIDITY_THRESHOLD_USD <= 0)) {
+    throw new Error(
+      `Invalid --liquidity-threshold: ${JSON.stringify(rawLiquidityThreshold)} `
+      + '(expected a positive number)'
+    );
+  }
 }
 
 const zonePath = path.join('..', '..', '..', zoneBasePath);
@@ -234,12 +257,21 @@ function finish({ blocked, reasons, report, evaluationFailed = false }) {
   console.error(`evaluation_failed  : ${evaluationFailed}`);
   for (const r of reasons) console.error(`  - ${r}`);
 
-  process.exit(evaluationFailed ? 1 : 0);
+  // Set the code rather than calling process.exit(): stdout writes are async
+  // when stdout is a pipe, and process.exit() can tear the process down before
+  // the report has flushed, truncating the PR body. Assigning exitCode lets
+  // Node exit naturally once the stream has drained. Same status semantics as
+  // before: 1 when the gate could not evaluate, 0 otherwise.
+  process.exitCode = evaluationFailed ? 1 : 0;
 }
 
 // ── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
+  // First statement, so an argument error reaches the top-level catch and is
+  // reported through finish() like any other gate failure.
+  validateArgs();
+
   const reasons = [];
   let report = '';
 
@@ -408,10 +440,20 @@ async function main() {
 
     if (hit.verified) {
       verifiedHits.push(hit);
-    } else if (LIQUIDITY_THRESHOLD_USD !== null
-               && market
-               && market.liquidity >= LIQUIDITY_THRESHOLD_USD) {
-      deepUnverifiedHits.push(hit);
+    } else if (LIQUIDITY_THRESHOLD_USD !== null) {
+      // A threshold is armed, so liquidity is decision-critical for unverified
+      // assets. If it is unusable (no market row, or a non-finite value), we
+      // cannot rule the asset below the threshold, and silently dropping it
+      // would let "no data" read as "shallow". Route it to unresolvedHits so it
+      // blocks, matching the fail-closed rule stated in the header.
+      if (Number.isFinite(market?.liquidity)) {
+        if (market.liquidity >= LIQUIDITY_THRESHOLD_USD) deepUnverifiedHits.push(hit);
+      } else {
+        unresolvedHits.push({
+          ...hit,
+          why: 'unverified, and liquidity unavailable while a threshold is armed',
+        });
+      }
     }
   }
 
@@ -434,7 +476,12 @@ async function main() {
   // ── Check 2: new-asset symbol squats ─────────────────────────────────────
   const squatHits = [];
   let newSymbols = [];
-  if (fs.existsSync(newAssetsPath)) {
+  // Absent file is NOT the same as "no new assets". The workflow always writes
+  // new-assets.txt (possibly empty), so a missing file means the step ordering
+  // changed or the path is wrong, and the squat check silently examined nothing.
+  // Track it so the report cannot present check 2 as clean when it never ran.
+  const newAssetsMissing = !fs.existsSync(newAssetsPath);
+  if (!newAssetsMissing) {
     newSymbols = fs.readFileSync(newAssetsPath, 'utf8')
       .split('\n').map((s) => s.trim()).filter(Boolean);
   }
@@ -468,7 +515,13 @@ async function main() {
       symbol: sym,
       normalised: norm,
       collidesWith,
-      exact: collidesWith === sym,
+      // Case-only collision (usdc vs USDC) versus a wider normalised match
+      // (USD-C, homoglyph ATOM). A byte-exact match cannot reach here: the
+      // `collidesWith === sym` skip above already returned. Case-insensitive
+      // equality is the strongest comparison still meaningful at this point,
+      // and it tells the reviewer whether the squat is a pure case flip or
+      // something that needed separator/homoglyph folding to catch.
+      matchKind: collidesWith.toLowerCase() === sym.toLowerCase() ? 'case' : 'normalised',
       chain: fe?.chainName ?? '?',
       denom: fe?.coinMinimalDenom ?? '?',
       verified: fe?.verified === true,
@@ -502,7 +555,9 @@ async function main() {
     if (LIQUIDITY_THRESHOLD_USD !== null) {
       report += ` (or to unverified assets above ${fmtUsd(LIQUIDITY_THRESHOLD_USD)} liquidity)`;
     }
-    report += ', and no new-asset symbol collisions with verified assets.\n\n';
+    report += newAssetsMissing
+      ? '. The new-asset symbol collision check did not run (see warning below).\n\n'
+      : ', and no new-asset symbol collisions with verified assets.\n\n';
   }
 
   /** Shared table renderer for the two hit tables. */
@@ -536,7 +591,7 @@ async function main() {
     report += '| New symbol | Collides with | Match | Chain | Liquidity | Denom |\n';
     report += '|------------|---------------|-------|-------|-----------|-------|\n';
     for (const s of squatHits) {
-      report += `| \`${s.symbol}\` | \`${s.collidesWith}\` | ${s.exact ? 'exact' : 'normalised'} `
+      report += `| \`${s.symbol}\` | \`${s.collidesWith}\` | ${s.matchKind} `
         + `| ${s.chain} | ${s.liquidity === undefined ? 'unknown' : fmtUsd(s.liquidity)} `
         + `| \`${s.denom}\` |\n`;
     }
@@ -568,6 +623,12 @@ async function main() {
       + 'threshold is armed.\n\n';
   }
 
+  if (newAssetsMissing) {
+    report += `> ⚠️ The new-asset list (\`${newAssetsPath}\`) was not found, so the `
+      + 'symbol-collision check examined nothing this run. A squatted symbol would '
+      + 'not have been caught. Verified-status gating is unaffected.\n\n';
+  }
+
   if (unknownCategories.size > 0) {
     report += `> ⚠️ Unclassified lifecycle-diff fields: \`${[...unknownCategories].join('`, `')}\`. `
       + 'These did not participate in the gate decision. Classify them in '
@@ -583,13 +644,16 @@ function blockReport(lines) {
 }
 
 main().catch((err) => {
-  // Any unexpected throw is a gate failure -> fail closed.
+  // Any throw is a gate failure -> fail closed. Covers argument validation
+  // (raised by validateArgs as the first statement of main) as well as genuinely
+  // unexpected errors, so both produce a GATE_BLOCKED write and a real report
+  // rather than an empty PR body.
   finish({
     blocked: true,
     evaluationFailed: true,
-    reasons: [`unexpected gate error: ${err.message}`],
+    reasons: [`gate error: ${err.message}`],
     report: blockReport([
-      `The auto-merge gate threw an unexpected error: ${err.message}`,
+      `The auto-merge gate could not run: ${err.message}`,
       '',
       'Auto-merge was withheld. Review this PR manually.',
     ]),

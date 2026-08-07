@@ -974,6 +974,68 @@ jobs:
           echo "---" >> workflow-summary.md
           echo "" >> workflow-summary.md
 
+      - name: Auto-merge Safety Gate
+        working-directory: ./.github/workflows/utility
+        run: |
+          # Decides whether this run is safe to auto-merge. Blocks when a
+          # VERIFIED asset had a status change (unstable flip, halt set/cleared,
+          # reason shift), or when a newly listed asset's symbol collides with a
+          # verified asset's symbol. Informational metadata changes (display
+          # name, tooltip text) do not block.
+          #
+          # Verified is the trigger rather than a liquidity threshold because
+          # verification is a deliberate human act that the pipeline cannot
+          # perform on its own, and it is what the frontend shows by default. A
+          # thin verified asset is still a curated listing. Liquidity is fetched
+          # and reported as severity context; pass --liquidity-threshold <usd> to
+          # ALSO gate deep-but-unverified assets.
+          #
+          # Fails closed: exit 1 means the gate could not evaluate (missing or
+          # unreadable inputs), and the merge step below treats that the same as
+          # a block. A Numia outage is NOT fatal here, since liquidity is only an
+          # annotation in this configuration. `set +e` keeps the pipeline itself
+          # green either way so the PR is still created and reviewable. The gate
+          # never decides whether the PR exists, only whether it merges itself.
+          set +e
+          node check_automerge_gate.mjs osmosis-1 > ../../../gate-report.md
+          rc=$?
+          echo "Gate exit code: $rc"
+          if [ "$rc" -ne 0 ]; then
+            # finish() already wrote GATE_BLOCKED=true for handled failures, but
+            # an exit before that (e.g. arg parse) would leave it unset. Force it.
+            echo "GATE_BLOCKED=true" >> $GITHUB_ENV
+          fi
+          # A crash before finish() writes its report leaves the file empty, which
+          # would prepend a blank block and a stray separator to the PR body with
+          # no verdict at all. Substitute a real explanation instead.
+          if [ ! -s ../../../gate-report.md ]; then
+            {
+              echo "## 🛑 Auto-merge withheld (gate produced no report)"
+              echo ""
+              echo "\`check_automerge_gate.mjs\` exited with code $rc without writing a"
+              echo "verdict, so the gate could not be evaluated. Auto-merge was withheld."
+              echo "See the \"Auto-merge Safety Gate\" step log for the failure."
+            } > ../../../gate-report.md
+            echo "GATE_BLOCKED=true" >> $GITHUB_ENV
+          fi
+          exit 0
+
+      - name: Prepend Gate Report to PR Body
+        run: |
+          # Gate verdict goes at the very top of the PR body so a withheld
+          # merge is the first thing a reviewer sees. `-s` (non-empty) rather than
+          # `-f`: an empty file would contribute a blank block and a stray `---`
+          # with no verdict. The gate step substitutes a fallback report when it
+          # produces nothing, so an empty file here means the step never ran.
+          if [ -s gate-report.md ]; then
+            cat gate-report.md > pr-body.md
+            echo "" >> pr-body.md
+            echo "---" >> pr-body.md
+            echo "" >> pr-body.md
+            cat workflow-summary.md >> pr-body.md
+            mv pr-body.md workflow-summary.md
+          fi
+
       - name: Create Pull Request
         id: cpr
         continue-on-error: true
@@ -986,10 +1048,48 @@ jobs:
           body-path: workflow-summary.md
           delete-branch: true
 
+      # Requires the POSITIVE pass value. `!= 'true'` would have merged whenever
+      # GATE_BLOCKED was unset (an unset variable is the empty string), so a
+      # skipped or crashed gate step read as permission to merge. Only an
+      # explicit GATE_BLOCKED=false, which finish() writes solely after a
+      # completed evaluation, allows auto-merge.
       - name: Enable Auto-merge
-        if: steps.cpr.outputs.pull-request-number && github.event_name == 'schedule'
+        if: steps.cpr.outputs.pull-request-number && github.event_name == 'schedule' && env.GATE_BLOCKED == 'false'
         run: |
           PR=${{ steps.cpr.outputs.pull-request-number }}
-          gh pr merge "$PR" --auto --squash || gh pr merge "$PR" --squash
+          # No `|| gh pr merge --squash` fallback. That fallback merged
+          # immediately whenever --auto was rejected, which defeated the point
+          # of --auto: a failing or pending required check would have been
+          # bypassed rather than waited on. If --auto cannot be enabled, the PR
+          # stays open for a human.
+          gh pr merge "$PR" --auto --squash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Mirror of the condition above: anything that is not an explicit pass
+      # routes here, so a blocked verdict AND an unset one (skipped or crashed
+      # gate step) both get labelled. Without the unset case this step would not
+      # run, leaving an unmerged PR with no label and no explanation.
+      - name: Flag PR for Manual Review
+        if: steps.cpr.outputs.pull-request-number && github.event_name == 'schedule' && env.GATE_BLOCKED != 'false'
+        run: |
+          # A skipped auto-merge must be visible, not a silent no-op. Label the
+          # PR so it can be filtered, and log why.
+          PR=${{ steps.cpr.outputs.pull-request-number }}
+          if [ "$GATE_BLOCKED" = "true" ]; then
+            echo "Auto-merge withheld by the safety gate; PR #$PR left open for review."
+          else
+            echo "GATE_BLOCKED was not set, so the gate verdict is unknown (the gate step"
+            echo "may have been skipped or died early). Treating as blocked; PR #$PR left open."
+          fi
+          # The label may not exist yet (it did not when this was written), so
+          # create it idempotently before applying. Labelling is best-effort:
+          # the PR is already unmerged, which is the actual safety property.
+          gh label create "needs-review" \
+            --color "d93f0b" \
+            --description "Auto-merge withheld by the safety gate; needs human review" \
+            2>/dev/null || true
+          gh pr edit "$PR" --add-label "needs-review" \
+            || echo "Could not apply label; PR still left unmerged for review."
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

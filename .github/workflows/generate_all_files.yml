@@ -974,6 +974,43 @@ jobs:
           echo "---" >> workflow-summary.md
           echo "" >> workflow-summary.md
 
+      - name: Auto-merge Safety Gate
+        working-directory: ./.github/workflows/utility
+        run: |
+          # Decides whether this run is safe to auto-merge. Blocks when a
+          # high-liquidity asset was modified (liquidity read live from Numia,
+          # alloy-aware) or when a newly listed asset's symbol collides with a
+          # verified asset's symbol.
+          #
+          # Fails closed: exit 1 means the gate could not evaluate (missing
+          # input, Numia unreachable), and the merge step below treats that the
+          # same as a block. `set +e` keeps the pipeline itself green either way
+          # so the PR is still created and reviewable. The gate never decides
+          # whether the PR exists, only whether it merges itself.
+          set +e
+          node check_automerge_gate.mjs osmosis-1 > ../../../gate-report.md
+          rc=$?
+          echo "Gate exit code: $rc"
+          if [ "$rc" -ne 0 ]; then
+            # finish() already wrote GATE_BLOCKED=true for handled failures, but
+            # an exit before that (e.g. arg parse) would leave it unset. Force it.
+            echo "GATE_BLOCKED=true" >> $GITHUB_ENV
+          fi
+          exit 0
+
+      - name: Prepend Gate Report to PR Body
+        run: |
+          # Gate verdict goes at the very top of the PR body so a withheld
+          # merge is the first thing a reviewer sees.
+          if [ -f gate-report.md ]; then
+            cat gate-report.md > pr-body.md
+            echo "" >> pr-body.md
+            echo "---" >> pr-body.md
+            echo "" >> pr-body.md
+            cat workflow-summary.md >> pr-body.md
+            mv pr-body.md workflow-summary.md
+          fi
+
       - name: Create Pull Request
         id: cpr
         continue-on-error: true
@@ -987,9 +1024,33 @@ jobs:
           delete-branch: true
 
       - name: Enable Auto-merge
-        if: steps.cpr.outputs.pull-request-number && github.event_name == 'schedule'
+        if: steps.cpr.outputs.pull-request-number && github.event_name == 'schedule' && env.GATE_BLOCKED != 'true'
         run: |
           PR=${{ steps.cpr.outputs.pull-request-number }}
-          gh pr merge "$PR" --auto --squash || gh pr merge "$PR" --squash
+          # No `|| gh pr merge --squash` fallback. That fallback merged
+          # immediately whenever --auto was rejected, which defeated the point
+          # of --auto: a failing or pending required check would have been
+          # bypassed rather than waited on. If --auto cannot be enabled, the PR
+          # stays open for a human.
+          gh pr merge "$PR" --auto --squash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Flag PR for Manual Review
+        if: steps.cpr.outputs.pull-request-number && github.event_name == 'schedule' && env.GATE_BLOCKED == 'true'
+        run: |
+          # A skipped auto-merge must be visible, not a silent no-op. Label the
+          # PR so it can be filtered, and log why.
+          PR=${{ steps.cpr.outputs.pull-request-number }}
+          echo "Auto-merge withheld by the safety gate; PR #$PR left open for review."
+          # The label may not exist yet (it did not when this was written), so
+          # create it idempotently before applying. Labelling is best-effort:
+          # the PR is already unmerged, which is the actual safety property.
+          gh label create "needs-review" \
+            --color "d93f0b" \
+            --description "Auto-merge withheld by the safety gate; needs human review" \
+            2>/dev/null || true
+          gh pr edit "$PR" --add-label "needs-review" \
+            || echo "Could not apply label; PR still left unmerged for review."
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

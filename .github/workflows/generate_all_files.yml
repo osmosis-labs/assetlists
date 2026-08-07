@@ -978,15 +978,24 @@ jobs:
         working-directory: ./.github/workflows/utility
         run: |
           # Decides whether this run is safe to auto-merge. Blocks when a
-          # high-liquidity asset was modified (liquidity read live from Numia,
-          # alloy-aware) or when a newly listed asset's symbol collides with a
-          # verified asset's symbol.
+          # VERIFIED asset had a status change (unstable flip, halt set/cleared,
+          # reason shift), or when a newly listed asset's symbol collides with a
+          # verified asset's symbol. Informational metadata changes (display
+          # name, tooltip text) do not block.
           #
-          # Fails closed: exit 1 means the gate could not evaluate (missing
-          # input, Numia unreachable), and the merge step below treats that the
-          # same as a block. `set +e` keeps the pipeline itself green either way
-          # so the PR is still created and reviewable. The gate never decides
-          # whether the PR exists, only whether it merges itself.
+          # Verified is the trigger rather than a liquidity threshold because
+          # verification is a deliberate human act that the pipeline cannot
+          # perform on its own, and it is what the frontend shows by default. A
+          # thin verified asset is still a curated listing. Liquidity is fetched
+          # and reported as severity context; pass --liquidity-threshold <usd> to
+          # ALSO gate deep-but-unverified assets.
+          #
+          # Fails closed: exit 1 means the gate could not evaluate (missing or
+          # unreadable inputs), and the merge step below treats that the same as
+          # a block. A Numia outage is NOT fatal here, since liquidity is only an
+          # annotation in this configuration. `set +e` keeps the pipeline itself
+          # green either way so the PR is still created and reviewable. The gate
+          # never decides whether the PR exists, only whether it merges itself.
           set +e
           node check_automerge_gate.mjs osmosis-1 > ../../../gate-report.md
           rc=$?

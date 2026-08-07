@@ -4,14 +4,27 @@
 //   The daily run opens a PR and immediately auto-merges it. Two classes of
 //   change are too consequential to land unreviewed:
 //
-//     1. High-liquidity modification. A lifecycle script flagging a deep asset
-//        (OSMO, ATOM, USDC, wBTC, ...) unstable or halting a transfer direction
-//        is user-visible and money-adjacent. Liquidity is read live from Numia
-//        (alloy-aware, via resolveMarket) rather than from a hardcoded asset
-//        list, so the gate tracks the market instead of drifting against it.
+//     1. Status change to a VERIFIED asset. Verified is the curated set the
+//        frontend shows by default, so any change to an asset's tradability or
+//        transfer status there is user-visible. Verification is a deliberate
+//        human act (nothing in the daily pipeline writes osmosis_verified), so
+//        the flag is exactly the "we vouch for this" signal a gate should key
+//        on. Informational metadata (display name, tooltip text) does NOT gate;
+//        see BLOCKING_CATEGORIES.
+//
+//        Why verified rather than a liquidity threshold: measured against the
+//        live list, zero unverified assets sit above $100k liquidity, so a
+//        liquidity threshold catches nothing that verified does not, while
+//        letting through ~319 verified assets that fall under it. A thin
+//        verified asset is still a curated, user-visible listing (SEDA, halted
+//        in a recent run at near-zero liquidity, is the worked example), and
+//        the flag cannot be moved by the pipeline itself. Liquidity is still
+//        fetched and reported alongside each hit as severity context, and can
+//        be re-enabled as an ADDITIONAL independent trigger via
+//        --liquidity-threshold for unverified-but-deep assets.
 //
 //     2. Symbol squat by a newly listed asset. A new asset whose symbol
-//        collides with an existing *verified* asset's symbol is a listing that
+//        collides with an existing verified asset's symbol is a listing that
 //        wants a human to look at it. deduplicate_symbols.mjs already suffixes
 //        the non-preferred variant, so this is defence in depth: it also
 //        catches case-only and separator-only near-matches that dedupe treats
@@ -22,29 +35,35 @@
 //   exits 0 even when it blocks. The decision is communicated via the
 //   GATE_BLOCKED / GATE_REASON_COUNT variables written to $GITHUB_ENV (when
 //   set) and a markdown block on stdout for the PR body. Exit code 1 is
-//   reserved for the gate itself failing (bad input, Numia unreachable), which
+//   reserved for the gate itself failing (bad input, unreadable list), which
 //   is also treated as blocking by the caller. See "fail closed" below.
 //
-//   Fail closed: if Numia can't be reached, liquidity is unknown for every
-//   asset, so a mutation to the deepest asset on the chain would look
-//   identical to one on a dust asset. The gate blocks in that case rather than
-//   waving the run through. This is the reason a liquidity threshold is safe
-//   to use without an allowlist backstop: absence of data blocks, it does not
-//   permit.
+//   Fail closed: the verified flag is read from the generated frontend
+//   assetlist, so an unreadable or empty list means the gate cannot tell a
+//   curated asset from an unlisted one, and it blocks rather than waving the
+//   run through. Numia is a reporting input only now, so a Numia outage
+//   degrades liquidity annotations to "unknown" WITHOUT blocking. If a
+//   liquidity threshold is armed via --liquidity-threshold, Numia becomes
+//   decision-critical again and an outage blocks, since absence of data must
+//   not read as "shallow".
 //
 // Usage:
-//   node check_automerge_gate.mjs [<zone_name>] [--threshold <usd>] [--json <path>]
+//   node check_automerge_gate.mjs [<zone_name>] [options]
 //
-//   <zone_name>        default osmosis-1
-//   --threshold <usd>  liquidity above which a mutation blocks; default 250000
-//   --json <path>      lifecycle diff produced by the workflow's
-//                      "Extract per-mutation symbol lists" step;
-//                      default /tmp/lifecycle-diff.json
-//   --new-assets <path>  newline-delimited new symbols; default ./new-assets.txt
+//   <zone_name>                  default osmosis-1
+//   --liquidity-threshold <usd>  ALSO block on any mutated asset at or above
+//                                this liquidity, verified or not. Off by
+//                                default (verified status is the trigger).
+//                                Arming this makes Numia decision-critical.
+//   --json <path>                lifecycle diff produced by the workflow's
+//                                "Extract per-mutation symbol lists" step;
+//                                default /tmp/lifecycle-diff.json
+//   --new-assets <path>          newline-delimited new symbols;
+//                                default ./new-assets.txt
 //
 // Exit codes:
 //   0  ran to completion (check GATE_BLOCKED for the verdict)
-//   1  the gate could not evaluate (missing inputs, Numia down) -> caller blocks
+//   1  the gate could not evaluate (missing inputs) -> caller blocks
 
 import * as fs from 'fs';
 import * as path from 'path';
@@ -77,12 +96,20 @@ const positional = argv.filter((a, i) => {
 });
 
 const zoneBasePath = positional[0] || 'osmosis-1';
-const LIQUIDITY_THRESHOLD_USD = Number(flagValue('--threshold', '250000'));
 const diffPath = flagValue('--json', '/tmp/lifecycle-diff.json');
 const newAssetsPath = flagValue('--new-assets', path.join('..', '..', '..', 'new-assets.txt'));
 
-if (!Number.isFinite(LIQUIDITY_THRESHOLD_USD) || LIQUIDITY_THRESHOLD_USD <= 0) {
-  console.error(`Invalid --threshold: ${flagValue('--threshold', '')}`);
+// Optional secondary trigger. Unset means verified status is the only gate and
+// Numia is reporting-only; set means a deep unverified asset also blocks and
+// Numia becomes decision-critical (so an outage must fail closed).
+const rawLiquidityThreshold = flagValue('--liquidity-threshold', null);
+const LIQUIDITY_THRESHOLD_USD = rawLiquidityThreshold === null
+  ? null
+  : Number(rawLiquidityThreshold);
+
+if (LIQUIDITY_THRESHOLD_USD !== null
+    && (!Number.isFinite(LIQUIDITY_THRESHOLD_USD) || LIQUIDITY_THRESHOLD_USD <= 0)) {
+  console.error(`Invalid --liquidity-threshold: ${rawLiquidityThreshold}`);
   process.exit(1);
 }
 
@@ -266,37 +293,40 @@ async function main() {
   }
 
   // ── Liquidity lookup (live, alloy-aware) ──────────────────────────────────
-  // hardFail:true, because a Numia outage must not silently downgrade the gate to
-  // "everything looks like dust". The throw is caught here and converted into
-  // a blocking verdict.
-  let numia;
+  // Numia is REPORTING-ONLY unless --liquidity-threshold armed it. The gate
+  // decision keys on the verified flag, which comes from the assetlist, so an
+  // outage must not block the daily run: it just degrades the liquidity column
+  // to "unknown". When a threshold IS armed, liquidity becomes decision-critical
+  // and the outage has to fail closed, because "no data" would otherwise read
+  // as "shallow" and silently disarm that trigger.
+  const liquidityIsDecisionCritical = LIQUIDITY_THRESHOLD_USD !== null;
+  let numia = new Map();
+  let numiaError = null;
   try {
-    numia = await fetchNumia({ hardFail: true });
+    numia = await fetchNumia({ hardFail: liquidityIsDecisionCritical });
   } catch (err) {
+    numiaError = err.message;
+  }
+
+  if (liquidityIsDecisionCritical && (numiaError || numia.size === 0)) {
     return finish({
       blocked: true,
       evaluationFailed: true,
-      reasons: [`Numia unavailable: ${err.message}`],
+      reasons: [`Numia unavailable while a liquidity threshold is armed: ${numiaError ?? 'empty token list'}`],
       report: blockReport([
-        `Liquidity data could not be fetched: ${err.message}`,
+        `Liquidity data could not be fetched: ${numiaError ?? 'Numia returned an empty token list'}.`,
         '',
-        'The gate cannot tell a deep asset from a dust asset without it, so',
-        'auto-merge was withheld. Re-run the workflow once Numia is reachable,',
-        'or review and merge this PR by hand.',
+        'A liquidity threshold is armed, so the gate cannot tell a deep asset',
+        'from a dust asset without this data. Auto-merge was withheld rather',
+        'than letting that trigger silently disarm.',
       ]),
     });
   }
-
-  if (numia.size === 0) {
-    return finish({
-      blocked: true,
-      evaluationFailed: true,
-      reasons: ['Numia returned zero tokens'],
-      report: blockReport([
-        'Numia returned an empty token list, so every asset would evaluate as',
-        'zero liquidity. Auto-merge was withheld rather than trusting that.',
-      ]),
-    });
+  if (numiaError || numia.size === 0) {
+    // Non-fatal: liquidity is annotation only in this configuration.
+    numia = new Map();
+    console.error(`Numia unavailable (${numiaError ?? 'empty token list'}); `
+      + 'liquidity shown as unknown. Verified-status gating is unaffected.');
   }
 
   const alloyedDenomSet = new Set(
@@ -335,9 +365,13 @@ async function main() {
   // post-dedupe frontend symbol, which is unique by construction).
   const feBySymbol = new Map(frontendData.assets.map((a) => [a.symbol, a]));
 
-  // ── Check 1: high-liquidity modifications ────────────────────────────────
-  const highValueHits = [];
-  const unpricedHits = [];
+  // ── Check 1: status changes to curated assets ────────────────────────────
+  // Trigger is the verified flag. Liquidity is carried alongside purely as
+  // severity context for the reviewer, except when --liquidity-threshold arms
+  // it as a second, independent trigger for deep-but-unverified assets.
+  const verifiedHits = [];
+  const deepUnverifiedHits = [];
+  const unresolvedHits = [];
 
   for (const row of diffRows) {
     const fired = BLOCKING_CATEGORIES.filter((c) => row?.[c] === true);
@@ -349,46 +383,51 @@ async function main() {
     const fe = feBySymbol.get(row.symbol)
       ?? frontendData.assets.find((a) => a.chainName === row.chain && a.symbol === row.symbol);
 
-    if (!fe?.coinMinimalDenom) {
-      // Can't price it. An unresolvable mutated asset is suspicious in its own
-      // right (it means the diff and the generated list disagree), so treat it
-      // as blocking rather than skipping.
-      unpricedHits.push({ ...row, categories: fired, why: 'not found in generated assetlist' });
+    if (!fe) {
+      // The diff and the generated list disagree about what exists. That is
+      // suspicious in its own right, and it also means verified status is
+      // unknown, so block rather than skip.
+      unresolvedHits.push({ ...row, categories: fired, why: 'not found in generated assetlist' });
       continue;
     }
 
-    const market = resolveMarket(numia, constituentToAlloy, fe.coinMinimalDenom);
-    if (!market) {
-      // Present in the assetlist but absent from Numia: usually a genuinely
-      // unlisted/dust asset. Not blocking on its own, but recorded.
-      unpricedHits.push({
-        ...row,
-        categories: fired,
-        denom: fe.coinMinimalDenom,
-        why: 'no Numia market row',
-      });
-      continue;
-    }
+    const market = fe.coinMinimalDenom
+      ? resolveMarket(numia, constituentToAlloy, fe.coinMinimalDenom)
+      : undefined;
 
-    if (market.liquidity >= LIQUIDITY_THRESHOLD_USD) {
-      highValueHits.push({
-        chain: row.chain,
-        symbol: row.symbol,
-        denom: fe.coinMinimalDenom,
-        liquidity: market.liquidity,
-        volume24h: market.volume24h,
-        verified: fe.verified === true,
-        categories: fired,
-        reason: row.reason ?? '',
-      });
+    const hit = {
+      chain: row.chain,
+      symbol: row.symbol,
+      denom: fe.coinMinimalDenom ?? '?',
+      liquidity: market?.liquidity,
+      volume24h: market?.volume24h,
+      verified: fe.verified === true,
+      categories: fired,
+      reason: row.reason ?? '',
+    };
+
+    if (hit.verified) {
+      verifiedHits.push(hit);
+    } else if (LIQUIDITY_THRESHOLD_USD !== null
+               && market
+               && market.liquidity >= LIQUIDITY_THRESHOLD_USD) {
+      deepUnverifiedHits.push(hit);
     }
   }
 
-  highValueHits.sort((a, b) => b.liquidity - a.liquidity);
+  // Sort by liquidity where known, unpriced last, so the reviewer sees the
+  // most consequential rows first.
+  const byLiquidityDesc = (a, b) => (b.liquidity ?? -1) - (a.liquidity ?? -1);
+  verifiedHits.sort(byLiquidityDesc);
+  deepUnverifiedHits.sort(byLiquidityDesc);
 
-  if (highValueHits.length > 0) {
+  if (verifiedHits.length > 0) {
+    reasons.push(`${verifiedHits.length} verified asset(s) had a status change`);
+  }
+  if (deepUnverifiedHits.length > 0) {
     reasons.push(
-      `${highValueHits.length} asset(s) above ${fmtUsd(LIQUIDITY_THRESHOLD_USD)} liquidity were modified`
+      `${deepUnverifiedHits.length} unverified asset(s) above `
+      + `${fmtUsd(LIQUIDITY_THRESHOLD_USD)} liquidity had a status change`
     );
   }
 
@@ -443,9 +482,10 @@ async function main() {
     );
   }
 
-  if (unpricedHits.some((h) => h.why === 'not found in generated assetlist')) {
-    const n = unpricedHits.filter((h) => h.why === 'not found in generated assetlist').length;
-    reasons.push(`${n} mutated asset(s) could not be resolved in the generated assetlist`);
+  if (unresolvedHits.length > 0) {
+    reasons.push(
+      `${unresolvedHits.length} mutated asset(s) could not be resolved in the generated assetlist`
+    );
   }
 
   // ── Build report ─────────────────────────────────────────────────────────
@@ -458,19 +498,37 @@ async function main() {
     report += '\n';
   } else {
     report += '## ✅ Auto-merge gate passed\n\n';
-    report += `No modifications to assets above ${fmtUsd(LIQUIDITY_THRESHOLD_USD)} liquidity, `;
-    report += 'and no new-asset symbol collisions with verified assets.\n\n';
+    report += 'No status changes to verified assets';
+    if (LIQUIDITY_THRESHOLD_USD !== null) {
+      report += ` (or to unverified assets above ${fmtUsd(LIQUIDITY_THRESHOLD_USD)} liquidity)`;
+    }
+    report += ', and no new-asset symbol collisions with verified assets.\n\n';
   }
 
-  if (highValueHits.length > 0) {
-    report += `### High-liquidity assets modified (threshold ${fmtUsd(LIQUIDITY_THRESHOLD_USD)})\n\n`;
-    report += '| Symbol | Chain | Liquidity | 24h vol | Verified | Change | Reason |\n';
-    report += '|--------|-------|-----------|---------|----------|--------|--------|\n';
-    for (const h of highValueHits) {
-      report += `| \`${h.symbol}\` | ${h.chain} | ${fmtUsd(h.liquidity)} | ${fmtUsd(h.volume24h)} `
-        + `| ${h.verified ? 'yes' : 'no'} | ${h.categories.join(', ')} | ${h.reason || '-'} |\n`;
+  /** Shared table renderer for the two hit tables. */
+  const renderHitTable = (hits) => {
+    let out = '| Symbol | Chain | Liquidity | 24h vol | Change | Reason |\n';
+    out += '|--------|-------|-----------|---------|--------|--------|\n';
+    for (const h of hits) {
+      const liq = h.liquidity === undefined ? 'unknown' : fmtUsd(h.liquidity);
+      const vol = h.volume24h === undefined ? 'unknown' : fmtUsd(h.volume24h);
+      out += `| \`${h.symbol}\` | ${h.chain} | ${liq} | ${vol} `
+        + `| ${h.categories.join(', ')} | ${h.reason || '-'} |\n`;
     }
-    report += '\n';
+    return out + '\n';
+  };
+
+  if (verifiedHits.length > 0) {
+    report += '### Verified assets with a status change\n\n';
+    report += 'These are in the curated, default-visible set, so the change is '
+      + 'user-facing regardless of liquidity.\n\n';
+    report += renderHitTable(verifiedHits);
+  }
+
+  if (deepUnverifiedHits.length > 0) {
+    report += '### Unverified assets above the liquidity threshold '
+      + `(${fmtUsd(LIQUIDITY_THRESHOLD_USD)})\n\n`;
+    report += renderHitTable(deepUnverifiedHits);
   }
 
   if (squatHits.length > 0) {
@@ -488,19 +546,26 @@ async function main() {
       + 'a distinct string._\n\n';
   }
 
-  if (unpricedHits.length > 0) {
-    report += '<details><summary>Mutated assets without liquidity data '
-      + `(${unpricedHits.length})</summary>\n\n`;
-    for (const h of unpricedHits) {
-      report += `- \`${h.symbol}\` (${h.chain}): ${h.why} (${h.categories.join(', ')}\n`;
+  if (unresolvedHits.length > 0) {
+    report += '### Mutated assets not found in the generated assetlist\n\n';
+    report += 'Verified status could not be determined for these, so they block by '
+      + 'default. A row here means the lifecycle diff and the generated assetlist '
+      + 'disagree about what exists.\n\n';
+    for (const h of unresolvedHits) {
+      report += `- \`${h.symbol}\` (${h.chain}): ${h.why} (${h.categories.join(', ')})\n`;
     }
-    report += '\n</details>\n\n';
+    report += '\n';
   }
 
-  if (!alloyUpliftAvailable) {
-    report += '> ⚠️ SQS alloy composition was unavailable, so alloy constituents were '
+  if (numiaError || numia.size === 0) {
+    report += '> ℹ️ Liquidity data was unavailable this run, so the Liquidity and 24h '
+      + 'vol columns read "unknown". The gate decision keys on verified status, '
+      + 'which is unaffected.\n\n';
+  } else if (!alloyUpliftAvailable) {
+    report += '> ℹ️ SQS alloy composition was unavailable, so alloy constituents were '
       + 'priced on their own liquidity only. A constituent of a deep alloy may read '
-      + 'lower than its effective depth.\n\n';
+      + 'lower than its effective depth. Shown for context only unless a liquidity '
+      + 'threshold is armed.\n\n';
   }
 
   if (unknownCategories.size > 0) {

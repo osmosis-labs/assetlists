@@ -95,6 +95,9 @@ Integrations with Key Apps:
  - Recognition by key Block Explorers:
    - Mintscan (Assets are added at [Cosmostation's Chainlist](https://github.com/cosmostation/chainlist/blob/main/chain/osmosis/assets_2.json))
    - Celatone (Assets are added at [Celatone's Data Repository](https://github.com/alleslabs/aldus/blob/main/data/assets.json))
+ - Recognition by Keplr Wallet:
+   - Keplr does not read this repository or the Cosmos Chain Registry directly for its asset display list. It maintains its own separate registry at [chainapsis/keplr-chain-registry](https://github.com/chainapsis/keplr-chain-registry), and an asset only gets a name, logo, and CoinGecko ID in Keplr's Osmosis view once someone submits a PR adding it to `cosmos/osmosis.json` there. There is no automated sync from this repo into Keplr's registry; it's a manual, per-asset PR process.
+   - For assets bridged via IBC, visibility also depends on the *origin chain* having its own file in `keplr-chain-registry` (e.g. `cosmos/<chain>.json`). If the origin chain isn't registered with Keplr, the IBC asset can display as an unnamed denom hash on Osmosis even though it is fully registered in the Cosmos Chain Registry and on this repo's own assetlist. Registering the origin chain with Keplr is the correct fix in that case, not hardcoding the asset into `cosmos/osmosis.json` alone.
  - Recognition by key Data Aggregators:
    - CoinGecko (See: [How to list new Cryptocurrencies on CoinGecko](https://support.coingecko.com/hc/en-us/articles/7291312302617-How-to-list-new-cryptocurrencies-on-CoinGecko))
      - Has Price, Supply, and Market Capitalization Data

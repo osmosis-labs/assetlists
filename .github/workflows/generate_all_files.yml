@@ -144,9 +144,17 @@ jobs:
             jq -r '.assets[].symbol' osmosis-1/generated/frontend/assetlist.json | sort > /tmp/assets-before.txt
             # Capture verified status for each asset
             jq -r '.assets[] | "\(.symbol)|\(.verified // false)"' osmosis-1/generated/frontend/assetlist.json > /tmp/verified-before.txt
+            # Full pre-generation copy, for the auto-merge gate's identity diff.
+            # The symbol lists above only reveal additions and removals; changes
+            # to decimals / denoms / transfer paths on an asset that keeps its
+            # symbol need the whole prior record to compare against.
+            cp osmosis-1/generated/frontend/assetlist.json /tmp/frontend-before.json
           else
             touch /tmp/assets-before.txt
             touch /tmp/verified-before.txt
+            # No prior list: the gate treats a missing snapshot as "cannot compare"
+            # and blocks, rather than reading every asset as unchanged.
+            rm -f /tmp/frontend-before.json
           fi
 
       - name: Capture Current Chains
@@ -977,11 +985,17 @@ jobs:
       - name: Auto-merge Safety Gate
         working-directory: ./.github/workflows/utility
         run: |
-          # Decides whether this run is safe to auto-merge. Blocks when a
-          # VERIFIED asset had a status change (unstable flip, halt set/cleared,
-          # reason shift), or when a newly listed asset's symbol collides with a
-          # verified asset's symbol. Informational metadata changes (display
-          # name, tooltip text) do not block.
+          # Decides whether this run is safe to auto-merge. Blocks when:
+          #   - a VERIFIED asset had a status change (unstable flip, halt
+          #     set/cleared, reason shift);
+          #   - a newly listed asset's symbol collides with a verified asset's;
+          #   - an EXISTING asset had a financially sensitive field change
+          #     (decimals, denoms, origin chain, IBC path, name, alloy status,
+          #     coingeckoId), which fires no lifecycle row and never shows up in
+          #     new-assets.txt, so it needs the before/after comparison;
+          #   - an unclassified lifecycle category fired, or a required input was
+          #     missing or empty.
+          # Tooltip-text changes still do not block.
           #
           # Verified is the trigger rather than a liquidity threshold because
           # verification is a deliberate human act that the pipeline cannot
@@ -997,7 +1011,12 @@ jobs:
           # green either way so the PR is still created and reviewable. The gate
           # never decides whether the PR exists, only whether it merges itself.
           set +e
-          node check_automerge_gate.mjs osmosis-1 > ../../../gate-report.md
+          # --before is the pre-generation assetlist copy from "Capture Current
+          # Assets". Its absence blocks rather than passing silently, since every
+          # asset would otherwise read as unchanged.
+          node check_automerge_gate.mjs osmosis-1 \
+            --before /tmp/frontend-before.json \
+            > ../../../gate-report.md
           rc=$?
           echo "Gate exit code: $rc"
           if [ "$rc" -ne 0 ]; then

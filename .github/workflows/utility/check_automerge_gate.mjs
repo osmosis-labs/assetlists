@@ -31,6 +31,16 @@
 //        as distinct strings (exact-equality grouping), plus the reverse case
 //        where a squat lands on a symbol whose canonical owner is unverified.
 //
+//     3. Financially sensitive field change to an ESTABLISHED asset. Checks 1
+//        and 2 are blind to an upstream registry refresh that rewrites decimals,
+//        coinMinimalDenom, sourceDenom, origin chain, IBC path, display name,
+//        alloy status or coingeckoId on an asset that keeps its symbol: it fires
+//        no lifecycle category and never appears in new-assets.txt. Those are
+//        exactly the money-and-impersonation fields (a wrong exponent misprices
+//        by orders of magnitude; a re-pointed IBC path changes which escrow
+//        funds move through), so the gate diffs them against a pre-generation
+//        snapshot. See SENSITIVE_FIELDS.
+//
 //   Report-only with respect to the pipeline: never mutates repo files, and
 //   exits 0 even when it blocks (via process.exitCode, so the report on stdout
 //   is allowed to flush before the process ends). The decision is communicated
@@ -63,6 +73,10 @@
 //                                ../../../new-assets.txt, i.e. the repo root,
 //                                where the workflow's "Detect New Assets" step
 //                                writes it (this script runs from utility/)
+//   --before <path>              pre-generation copy of the frontend assetlist,
+//                                for the sensitive-field diff; default
+//                                /tmp/frontend-before.json, written by the
+//                                workflow's "Capture Current Assets" step
 //
 // Exit codes:
 //   0  ran to completion (check GATE_BLOCKED for the verdict)
@@ -107,6 +121,10 @@ const positional = argv.filter((a, i) => {
 const zoneBasePath = positional[0] || 'osmosis-1';
 const diffPath = flagValue('--json', '/tmp/lifecycle-diff.json');
 const newAssetsPath = flagValue('--new-assets', path.join('..', '..', '..', 'new-assets.txt'));
+// Pre-generation copy of the frontend assetlist, written by the workflow's
+// "Capture Current Assets" step. Needed to detect sensitive-field changes to
+// assets that keep their symbol; the symbol lists only show add/remove.
+const beforePath = flagValue('--before', '/tmp/frontend-before.json');
 
 // Optional secondary trigger. Unset means verified status is the only gate and
 // Numia is reporting-only; set means a deep unverified asset also blocks and
@@ -179,6 +197,52 @@ const METADATA_FIELDS = [
   'depositHaltReason', 'withdrawalHaltReason',
 ];
 
+// ── Financially sensitive identity fields ────────────────────────────────────
+
+/**
+ * Fields on a generated frontend asset where a silent change is a money bug or
+ * an impersonation vector, even with the symbol unchanged:
+ *
+ *   decimals          wrong exponent misprices the asset by orders of magnitude
+ *   coinMinimalDenom  the chain-level identity the frontend and SQS key on
+ *   sourceDenom       the denom on the origin chain
+ *   chainName         re-pointing an asset at a different origin chain
+ *   ibcPath           which channel/escrow funds actually move through
+ *   name              display name, the other half of an impersonation
+ *   isAlloyed         changes how the asset is priced and routed
+ *   coingeckoId       drives price feeds; a wrong id misprices the asset
+ *
+ * An upstream chain-registry refresh can rewrite any of these on an established
+ * token without touching a lifecycle status row or the new-symbol list, which is
+ * how such a change reached auto-merge before this check existed.
+ */
+const SENSITIVE_FIELDS = [
+  'decimals',
+  'coinMinimalDenom',
+  'sourceDenom',
+  'chainName',
+  'ibcPath',
+  'name',
+  'isAlloyed',
+  'coingeckoId',
+];
+
+/** Flatten an asset to just the sensitive fields, with ibcPath lifted out. */
+function sensitiveShape(asset) {
+  const ibcPath = (asset.transferMethods ?? [])
+    .find((tm) => tm?.type === 'ibc' && tm?.chain?.path)?.chain?.path ?? null;
+  return {
+    decimals: asset.decimals ?? null,
+    coinMinimalDenom: asset.coinMinimalDenom ?? null,
+    sourceDenom: asset.sourceDenom ?? null,
+    chainName: asset.chainName ?? null,
+    ibcPath,
+    name: asset.name ?? null,
+    isAlloyed: asset.isAlloyed === true,
+    coingeckoId: asset.coingeckoId ?? null,
+  };
+}
+
 // ── Symbol normalisation for squat detection ─────────────────────────────────
 
 /**
@@ -205,16 +269,48 @@ const HOMOGLYPHS = new Map(Object.entries({
   'ӏ': 'l',
 }));
 
-function normaliseSymbol(symbol) {
+/** Fold case, homoglyphs and separators. Does NOT strip any chain suffix. */
+function foldSymbol(symbol) {
   if (typeof symbol !== 'string') return '';
-  // Strip a trailing .chain suffix (one or more), e.g. USDC.eth.axl -> USDC.
-  const base = symbol.split('.')[0];
   let out = '';
-  for (const ch of base.toLowerCase().normalize('NFKC')) {
+  for (const ch of symbol.toLowerCase().normalize('NFKC')) {
     out += HOMOGLYPHS.get(ch) ?? ch;
   }
   // Drop separators and anything non-alphanumeric so USD-C / USD_C / USDC tie.
+  // Dots go too, so USD.C folds to usdc rather than being truncated to usd.
   return out.replace(/[^a-z0-9]/g, '');
+}
+
+// Suffixes deduplicate_symbols.mjs can append, as ".<suffix>" groups. Only these
+// are treated as generated chain suffixes; any other dot is a separator inside
+// the symbol itself.
+const KNOWN_CHAIN_SUFFIXES = new Set([
+  'atom', 'carbon', 'axl', 'eth', 'matic', 'avax', 'bsc', 'arb', 'op', 'pica',
+  'ntrn', 'strd', 'inj', 'dydx', 'tia', 'wh', 'forex', 'grv', 'kuji', 'nom',
+  'orai', 'planq', 'luna', 'nym', 'src', 'rise', 'juno', 'xprt', 'noble',
+  'sol', 'e', 'int3', 'legacy', 'old',
+]);
+
+/**
+ * Comparison keys for squat detection. Returns BOTH:
+ *   - full: the whole symbol folded, so USD.C -> usdc collides with USDC.
+ *   - stripped: the symbol with recognised generated chain suffixes removed,
+ *     so USDC.eth.axl -> usdc still resolves to its bare owner.
+ *
+ * Unconditionally truncating at the first dot (the previous behaviour) meant
+ * USD.C folded to "usd" and sailed past USDC, even though the advertised
+ * separator normalisation catches USD-C. A dot is only treated as a suffix
+ * boundary when every trailing segment is a known chain suffix.
+ */
+function symbolKeys(symbol) {
+  if (typeof symbol !== 'string') return { full: '', stripped: '' };
+  const parts = symbol.split('.');
+  let end = parts.length;
+  while (end > 1 && KNOWN_CHAIN_SUFFIXES.has(parts[end - 1].toLowerCase())) end -= 1;
+  return {
+    full: foldSymbol(symbol),
+    stripped: foldSymbol(parts.slice(0, end).join('.')),
+  };
 }
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -306,25 +402,46 @@ async function main() {
   }
 
   const frontendData = loadJSON(frontendPath, null);
-  if (!frontendData?.assets) {
+  // `!frontendData?.assets` alone let {assets: []} through, because an empty
+  // array is truthy. A generation failure that emitted zero assets would then
+  // produce no lifecycle hits and no new symbols, so the gate reported a clean
+  // pass and auto-merged a list that removes every asset. Require a non-empty
+  // array explicitly.
+  if (!Array.isArray(frontendData?.assets) || frontendData.assets.length === 0) {
+    const detail = !frontendData
+      ? 'the file was missing or unparseable'
+      : !Array.isArray(frontendData.assets)
+        ? 'the `assets` key was absent or not an array'
+        : 'the `assets` array was empty (0 assets)';
     return finish({
       blocked: true,
       evaluationFailed: true,
-      reasons: [`cannot read frontend assetlist at ${frontendPath}`],
-      report: blockReport([`The generated frontend assetlist (\`${frontendPath}\`) was missing or empty.`]),
+      reasons: [`unusable frontend assetlist at ${frontendPath}: ${detail}`],
+      report: blockReport([
+        `The generated frontend assetlist (\`${frontendPath}\`) is unusable: ${detail}.`,
+        '',
+        'A run that generated no assets would otherwise look like a run with',
+        'nothing to review, so auto-merge was withheld.',
+      ]),
     });
   }
 
   // ── Detect diff schema drift ──────────────────────────────────────────────
-  // Any boolean key in the diff that this script doesn't classify is treated as
-  // unknown. We report it loudly but do not block on it alone: blocking on an
-  // unclassified cosmetic field would wedge the daily run on a harmless
-  // workflow edit. The report tells the operator to classify it.
+  // Any boolean key in the diff that this script doesn't classify is unknown.
+  // A key that is merely PRESENT but false everywhere is inert, so it only
+  // warns; a key that is actually TRUE on some row means an unclassified
+  // mutation happened and the gate has no idea whether it is financially
+  // sensitive. Warning was useless there, because the PR auto-merged before
+  // anyone read it, so an active unknown category now blocks until someone
+  // classifies it in BLOCKING_CATEGORIES or NON_BLOCKING_CATEGORIES.
   const known = new Set([...BLOCKING_CATEGORIES, ...NON_BLOCKING_CATEGORIES, ...METADATA_FIELDS]);
   const unknownCategories = new Set();
+  const activeUnknownCategories = new Set();
   for (const row of diffRows) {
     for (const [k, v] of Object.entries(row ?? {})) {
-      if (typeof v === 'boolean' && !known.has(k)) unknownCategories.add(k);
+      if (typeof v !== 'boolean' || known.has(k)) continue;
+      unknownCategories.add(k);
+      if (v === true) activeUnknownCategories.add(k);
     }
   }
 
@@ -379,7 +496,7 @@ async function main() {
   // normalised -> canonical symbol, built ONLY from verified assets whose
   // symbol carries no chain suffix.
   //
-  // Why unsuffixed only: normaliseSymbol strips the .chain suffix, so all seven
+  // Why unsuffixed only: symbolKeys strips known chain suffixes, so all seven
   // verified USDC variants (USDC, USDC.eth.axl, USDC.avax.axl, ...) collapse to
   // the same key. Registering every one of them would make the *legitimate*
   // bare USDC collide with its own suffixed siblings and block the run on a
@@ -392,7 +509,7 @@ async function main() {
   for (const a of frontendData.assets) {
     feByKey.set(feKey(a), a);
     if (a.verified && typeof a.symbol === 'string' && !a.symbol.includes('.')) {
-      const n = normaliseSymbol(a.symbol);
+      const n = foldSymbol(a.symbol);
       if (n && !verifiedNormSymbols.has(n)) verifiedNormSymbols.set(n, a.symbol);
     }
   }
@@ -494,9 +611,13 @@ async function main() {
   }
 
   for (const sym of newSymbols) {
-    const norm = normaliseSymbol(sym);
-    if (!norm) continue;
+    const { full, stripped } = symbolKeys(sym);
+    if (!full && !stripped) continue;
 
+    // Try the suffix-stripped form first (USDC.eth.axl -> usdc, the intended
+    // dedupe shape), then the whole folded symbol (USD.C -> usdc, which the old
+    // truncate-at-first-dot behaviour missed entirely).
+    const norm = verifiedNormSymbols.has(stripped) ? stripped : full;
     const collidesWith = verifiedNormSymbols.get(norm);
     if (!collidesWith) continue;
 
@@ -544,6 +665,71 @@ async function main() {
     );
   }
 
+  // ── Check 3: sensitive-field changes to established assets ───────────────
+  // Symbol-keyed add/remove detection cannot see an upstream refresh that
+  // rewrites decimals, denoms, origin chain or IBC path on an asset that keeps
+  // its symbol. Compare the pre-generation snapshot field by field.
+  //
+  // Identity: match on coinMinimalDenom OR the IBC-path key, because both are
+  // themselves sensitive fields. 970 of the 1336 current keys embed sourceDenom
+  // in the path, so keying on the path alone would read a denom change as a
+  // remove plus an add and miss the modification.
+  const identityChanges = [];
+  let beforeMissing = false;
+  const beforeData = loadJSON(beforePath, null);
+
+  if (!Array.isArray(beforeData?.assets) || beforeData.assets.length === 0) {
+    // No usable snapshot means every asset would read as unchanged, which is a
+    // silent pass on exactly the class of change this check exists to catch.
+    beforeMissing = true;
+  } else {
+    const beforeByDenom = new Map();
+    const beforeByPath = new Map();
+    for (const a of beforeData.assets) {
+      if (a.coinMinimalDenom) beforeByDenom.set(a.coinMinimalDenom, a);
+      const k = feKey(a);
+      if (k) beforeByPath.set(k, a);
+    }
+
+    for (const a of frontendData.assets) {
+      const prior = beforeByDenom.get(a.coinMinimalDenom) ?? beforeByPath.get(feKey(a));
+      // No prior record: a genuinely new asset. Covered by the squat check and
+      // by the workflow's New Assets list, not here.
+      if (!prior) continue;
+
+      const now = sensitiveShape(a);
+      const was = sensitiveShape(prior);
+      const changed = SENSITIVE_FIELDS
+        .filter((f) => JSON.stringify(was[f]) !== JSON.stringify(now[f]))
+        .map((f) => ({ field: f, from: was[f], to: now[f] }));
+
+      if (changed.length > 0) {
+        identityChanges.push({
+          symbol: a.symbol ?? prior.symbol ?? '?',
+          chain: a.chainName ?? '?',
+          verified: a.verified === true || prior.verified === true,
+          changed,
+        });
+      }
+    }
+    // Verified assets first: those are the curated, user-visible ones.
+    identityChanges.sort((x, y) => (y.verified ? 1 : 0) - (x.verified ? 1 : 0));
+  }
+
+  if (beforeMissing) {
+    reasons.push(
+      `no usable pre-generation snapshot at ${beforePath}, so sensitive-field `
+      + 'changes to existing assets could not be checked'
+    );
+  }
+  if (identityChanges.length > 0) {
+    const v = identityChanges.filter((c) => c.verified).length;
+    reasons.push(
+      `${identityChanges.length} existing asset(s) had a financially sensitive `
+      + `field change (${v} verified)`
+    );
+  }
+
   if (unresolvedHits.length > 0) {
     reasons.push(
       `${unresolvedHits.length} mutated asset(s) could not be resolved in the generated assetlist`
@@ -557,6 +743,13 @@ async function main() {
     );
   }
 
+  if (activeUnknownCategories.size > 0) {
+    reasons.push(
+      `${activeUnknownCategories.size} unclassified lifecycle mutation(s) fired `
+      + `(${[...activeUnknownCategories].join(', ')})`
+    );
+  }
+
   // ── Build report ─────────────────────────────────────────────────────────
   const blocked = reasons.length > 0;
 
@@ -567,7 +760,8 @@ async function main() {
     report += '\n';
   } else {
     report += '## ✅ Auto-merge gate passed\n\n';
-    report += 'No status changes to verified assets';
+    report += 'No sensitive-field changes to existing assets, no status changes to '
+      + 'verified assets';
     if (LIQUIDITY_THRESHOLD_USD !== null) {
       report += ` (or to unverified assets above ${fmtUsd(LIQUIDITY_THRESHOLD_USD)} liquidity)`;
     }
@@ -617,6 +811,31 @@ async function main() {
       + 'a distinct string._\n\n';
   }
 
+  if (identityChanges.length > 0) {
+    report += '### Existing assets with financially sensitive field changes\n\n';
+    report += 'These assets already existed and kept their identity, but a field '
+      + 'that affects pricing, routing, or impersonation changed. Confirm each '
+      + 'against the upstream chain-registry commit before merging.\n\n';
+    report += '| Symbol | Chain | Verified | Field | Before | After |\n';
+    report += '|--------|-------|----------|-------|--------|-------|\n';
+    for (const c of identityChanges) {
+      for (const ch of c.changed) {
+        const fmt = (x) => (x === null ? '_(none)_' : `\`${String(x)}\``);
+        report += `| \`${c.symbol}\` | ${c.chain} | ${c.verified ? 'yes' : 'no'} `
+          + `| ${ch.field} | ${fmt(ch.from)} | ${fmt(ch.to)} |\n`;
+      }
+    }
+    report += '\n';
+  }
+
+  if (beforeMissing) {
+    report += '### No pre-generation snapshot\n\n';
+    report += `No usable asset snapshot was found at \`${beforePath}\`, so changes to `
+      + 'decimals, denoms, origin chain, or IBC path on existing assets could not '
+      + 'be checked. Every asset would have read as unchanged, so auto-merge was '
+      + 'withheld rather than passing that silently.\n\n';
+  }
+
   if (unresolvedHits.length > 0) {
     report += '### Mutated assets not found in the generated assetlist\n\n';
     report += 'Verified status could not be determined for these, so they block by '
@@ -649,10 +868,22 @@ async function main() {
       + 'gating still ran normally.\n\n';
   }
 
-  if (unknownCategories.size > 0) {
-    report += `> ⚠️ Unclassified lifecycle-diff fields: \`${[...unknownCategories].join('`, `')}\`. `
-      + 'These did not participate in the gate decision. Classify them in '
-      + '`check_automerge_gate.mjs` (BLOCKING_CATEGORIES / NON_BLOCKING_CATEGORIES).\n\n';
+  if (activeUnknownCategories.size > 0) {
+    report += '### Unclassified lifecycle mutations\n\n';
+    report += 'These lifecycle-diff fields fired on at least one asset but are not '
+      + 'classified in this gate, so it cannot tell whether the change is '
+      + 'financially sensitive. Auto-merge was withheld until they are added to '
+      + '`BLOCKING_CATEGORIES` or `NON_BLOCKING_CATEGORIES` in '
+      + '`check_automerge_gate.mjs`.\n\n';
+    for (const k of activeUnknownCategories) report += `- \`${k}\`\n`;
+    report += '\n';
+  }
+
+  const inertUnknown = [...unknownCategories].filter((k) => !activeUnknownCategories.has(k));
+  if (inertUnknown.length > 0) {
+    report += `> ℹ️ Unclassified lifecycle-diff fields present but false on every row: \`${inertUnknown.join('`, `')}\`. `
+      + 'They changed nothing this run, so they did not block. Classify them in '
+      + '`check_automerge_gate.mjs` before they fire.\n\n';
   }
 
   return finish({ blocked, reasons, report });

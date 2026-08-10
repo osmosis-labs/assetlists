@@ -38,6 +38,17 @@ jobs:
       - name: Install dependencies
         run: npm install
           
+      - name: Run utility unit tests
+        working-directory: ./.github/workflows/utility
+        # Covers check_automerge_gate.test.mjs (the auto-merge gate's decision
+        # logic, which guards decimals / denoms / IBC paths on PRs that merge
+        # themselves) and the pre-existing lifecycle_helpers.test.mjs, neither of
+        # which had a runner. Placed in this workflow because it is the one that
+        # actually triggers on pull_request; full_validation.yml is
+        # workflow_dispatch-only. Runs before the zone-data check so a broken
+        # helper is reported as a test failure rather than as data noise.
+        run: node --test *.test.mjs
+
       - name: Run code to Validate Zone Data
         working-directory: ./.github/workflows/utility
         run: node validate_zone_files.mjs

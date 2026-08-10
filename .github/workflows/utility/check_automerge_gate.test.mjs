@@ -7,6 +7,7 @@ import {
   buildVerifiedSymbolIndexes,
   findActiveUnknownCategories,
   findIdentityChanges,
+  findRemovedAssets,
   findVerifiedSymbolCollision,
   hasUsableAssetlist,
   symbolKeys,
@@ -72,19 +73,115 @@ test('detects sensitive changes even when denom and IBC identity both change', (
 
 test('treats unknown dot segments as symbol separators but leaves dotted targets unreserved', () => {
   const indexes = buildVerifiedSymbolIndexes([
-    asset({ symbol: 'USDC' }),
+    asset({ symbol: 'USDC', variantGroupKey: 'grp/usdc' }),
     asset({ symbol: 'SUI.wh', coinMinimalDenom: 'ibc/SUI' }),
   ]);
 
-  assert.deepEqual(symbolKeys('USD.C'), { full: 'usdc', stripped: 'usdc' });
-  assert.deepEqual(symbolKeys('USDC.eth.axl'), {
-    full: 'usdcethaxl',
-    stripped: 'usdc',
-  });
+  assert.equal(symbolKeys('USD.C').full, 'usdc');
+  assert.equal(symbolKeys('USDC.eth.axl').full, 'usdcethaxl');
+  // Every dot-boundary prefix is offered, longest first, so a squat on an
+  // unmapped suffix cannot hide behind an unrecognised segment.
+  assert.deepEqual(symbolKeys('DOT.glmr.axl').prefixes, ['dotglmraxl', 'dotglmr', 'dot']);
+
   assert.equal(findVerifiedSymbolCollision('USD-C', indexes), 'USDC');
   assert.equal(findVerifiedSymbolCollision('USD.C', indexes), 'USDC');
+  // Only unsuffixed verified symbols reserve a name.
   assert.equal(findVerifiedSymbolCollision('SUI', indexes), undefined);
   assert.equal(findVerifiedSymbolCollision('SUI-WH', indexes), undefined);
-  assert.equal(findVerifiedSymbolCollision('SUI.WH', indexes), undefined);
   assert.equal(findVerifiedSymbolCollision('SUI.other', indexes), undefined);
+});
+
+test('exempts legitimate bridged variants but still catches impostors', () => {
+  const indexes = buildVerifiedSymbolIndexes([
+    asset({ symbol: 'USDC', variantGroupKey: 'grp/usdc' }),
+  ]);
+
+  // Same asset arriving by another route: shares the owner's variantGroupKey.
+  // Previously these were reported as squats, which would have blocked routine
+  // daily runs (29 existing assets flag that way on the live list).
+  const legitimateVariant = asset({
+    symbol: 'USDC.eth.axl',
+    verified: false,
+    variantGroupKey: 'grp/usdc',
+  });
+  assert.equal(
+    findVerifiedSymbolCollision('USDC.eth.axl', indexes, legitimateVariant),
+    undefined,
+  );
+
+  // A different underlying asset claiming the same name is a squat.
+  const impostor = asset({
+    symbol: 'USDC.eth.axl',
+    verified: false,
+    variantGroupKey: 'grp/scam',
+  });
+  assert.equal(
+    findVerifiedSymbolCollision('USDC.eth.axl', indexes, impostor),
+    'USDC',
+  );
+
+  // Unknown provenance (no record in the generated list) still reports.
+  assert.equal(findVerifiedSymbolCollision('USD.C', indexes, undefined), 'USDC');
+});
+
+test('reports removed assets so a mass delisting cannot pass as a quiet day', () => {
+  const kept = asset({ coinMinimalDenom: 'ibc/KEPT' });
+  const dropped = asset({
+    symbol: 'GONE',
+    coinMinimalDenom: 'ibc/GONE',
+    transferMethods: [{ type: 'ibc', chain: { path: 'transfer/channel-7/ugone' } }],
+  });
+
+  const removed = findRemovedAssets([kept, dropped], [kept]);
+  assert.equal(removed.length, 1);
+  assert.equal(removed[0].symbol, 'GONE');
+  assert.equal(removed[0].verified, true);
+
+  // Nothing removed when the list is unchanged.
+  assert.deepEqual(findRemovedAssets([kept, dropped], [kept, dropped]), []);
+
+  // A denom change is a modification, not a removal: the IBC path still matches.
+  const repriced = { ...dropped, coinMinimalDenom: 'ibc/NEWDENOM' };
+  assert.deepEqual(findRemovedAssets([dropped], [repriced]), []);
+});
+
+test('does not pair a relisted symbol with an unrelated prior asset', () => {
+  // Old asset delisted; a different asset is listed under the same symbol on a
+  // different chain. Pairing them fabricated "decimals 6 -> 18" style rows.
+  const before = asset({
+    symbol: 'FOO',
+    chainName: 'terra',
+    coinMinimalDenom: 'ibc/OLDFOO',
+    decimals: 6,
+    transferMethods: [{ type: 'ibc', chain: { path: 'transfer/channel-1/uoldfoo' } }],
+  });
+  const after = asset({
+    symbol: 'FOO',
+    chainName: 'ethereum',
+    coinMinimalDenom: 'ibc/NEWFOO',
+    decimals: 18,
+    transferMethods: [{ type: 'ibc', chain: { path: 'transfer/channel-2/unewfoo' } }],
+  });
+
+  assert.deepEqual(findIdentityChanges([before], [after]), []);
+
+  // Same chain with both stable keys changed is still treated as a mutation.
+  const sameChainAfter = { ...after, chainName: 'terra' };
+  const [change] = findIdentityChanges([before], [sameChainAfter]);
+  assert.ok(change);
+  assert.ok(change.changed.some(({ field }) => field === 'decimals'));
+});
+
+test('prefers the first record for duplicate symbols rather than the last', () => {
+  // The live list carries two LINK.eth.terra entries differing only by denom.
+  const first = asset({ symbol: 'DUP', coinMinimalDenom: 'ibc/ONE', decimals: 6 });
+  const second = asset({
+    symbol: 'DUP',
+    coinMinimalDenom: 'ibc/TWO',
+    decimals: 8,
+    transferMethods: [{ type: 'ibc', chain: { path: 'transfer/channel-5/udup' } }],
+  });
+
+  // Each pairs with itself by denom, so neither reports a change.
+  assert.deepEqual(findIdentityChanges([first, second], [first, second]), []);
 });

@@ -1076,12 +1076,49 @@ jobs:
         if: steps.cpr.outputs.pull-request-number && github.event_name == 'schedule' && env.GATE_BLOCKED == 'false'
         run: |
           PR=${{ steps.cpr.outputs.pull-request-number }}
-          # No `|| gh pr merge --squash` fallback. That fallback merged
-          # immediately whenever --auto was rejected, which defeated the point
-          # of --auto: a failing or pending required check would have been
-          # bypassed rather than waited on. If --auto cannot be enabled, the PR
-          # stays open for a human.
-          gh pr merge "$PR" --auto --squash
+          # `main` currently has NO required status checks (the REST endpoint
+          # returns 404 "Required status checks not enabled") and requires 0
+          # approving reviews, so a freshly created bot PR is already mergeable.
+          # GitHub rejects enablePullRequestAutoMerge on an already-clean PR, so
+          # `--auto` fails here every time and a direct merge is what has always
+          # landed these PRs.
+          #
+          # Prefer --auto so that the moment required checks ARE configured, the
+          # merge waits on them. Fall back to a direct merge only when --auto was
+          # rejected for "clean status", never when a check is failing or pending:
+          # in that case leave the PR for a human. This keeps today's behaviour
+          # working without reintroducing the unconditional `|| gh pr merge` that
+          # would bypass a genuinely failing check.
+          set +e
+          auto_err=$(gh pr merge "$PR" --auto --squash 2>&1)
+          auto_rc=$?
+          set -e
+          if [ "$auto_rc" -eq 0 ]; then
+            echo "Auto-merge enabled on PR #$PR; it will merge when mergeable."
+            exit 0
+          fi
+          echo "gh pr merge --auto failed (rc=$auto_rc): $auto_err"
+          # Re-read mergeability. Only a clean, nothing-pending PR may be merged
+          # directly. `mergeStateStatus` is CLEAN only when every check that does
+          # exist has passed and there are no conflicts.
+          state=$(gh pr view "$PR" --json mergeStateStatus,mergeable \
+            --jq '"\(.mergeStateStatus)/\(.mergeable)"')
+          echo "PR #$PR merge state: $state"
+          case "$state" in
+            CLEAN/MERGEABLE)
+              echo "PR is clean with no pending checks; merging directly."
+              gh pr merge "$PR" --squash
+              ;;
+            *)
+              echo "PR is not in a clean mergeable state, so it was NOT merged."
+              echo "Leaving it open for review rather than forcing the merge."
+              gh label create "needs-review" \
+                --color "d93f0b" \
+                --description "Auto-merge withheld by the safety gate; needs human review" \
+                2>/dev/null || true
+              gh pr edit "$PR" --add-label "needs-review" || true
+              ;;
+          esac
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

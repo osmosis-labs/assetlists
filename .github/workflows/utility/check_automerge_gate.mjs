@@ -91,6 +91,7 @@ import {
   feKey,
   findActiveUnknownCategories,
   findIdentityChanges,
+  findRemovedAssets,
   findVerifiedSymbolCollision,
   hasUsableAssetlist,
   normaliseSymbol,
@@ -215,6 +216,26 @@ function fmtUsd(n) {
   if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(2)}M`;
   if (n >= 1_000) return `$${(n / 1_000).toFixed(1)}k`;
   return `$${n.toFixed(0)}`;
+}
+
+/**
+ * Make a registry-sourced string safe to drop into a markdown table cell.
+ *
+ * Values reaching the report (symbol, name, contract, denoms, reason) come from
+ * the chain-registry submodule and zone_assets. An unescaped `|` splits the row
+ * into extra columns, so GitHub renders Before/After exponents under the wrong
+ * headings. Since the gate's whole value is that a human reads this table before
+ * a mass merge, a silently misaligned table is worse than no table. Backticks
+ * are neutralised too so a value cannot break out of its code span, and newlines
+ * are flattened so a multi-line value cannot end the row early.
+ */
+function esc(value) {
+  if (value === null || value === undefined) return '';
+  return String(value)
+    .replace(/\\/g, '\\\\')
+    .replace(/\|/g, '\\|')
+    .replace(/`/g, '‘')
+    .replace(/\r?\n/g, ' ');
 }
 
 function appendGithubEnv(lines) {
@@ -380,9 +401,22 @@ async function main() {
   //
   const verifiedSymbolIndexes = buildVerifiedSymbolIndexes(frontendData.assets);
 
-  // Symbol -> asset, for resolving new-asset rows (new-assets.txt holds the
-  // post-dedupe frontend symbol, which is unique by construction).
-  const feBySymbol = new Map(frontendData.assets.map((a) => [a.symbol, a]));
+  // Symbol -> asset, for resolving new-asset and lifecycle rows.
+  //
+  // Symbol is NOT unique in practice: the live list carries two LINK.eth.terra
+  // entries differing only by denom. `new Map(assets.map(...))` is last-wins,
+  // which could hide a verified asset behind an unverified duplicate and let a
+  // status change on the verified one be classified as unverified. Prefer a
+  // verified record, then first-wins, so the resolution is deterministic and
+  // always errs toward the record that gates.
+  const feBySymbol = new Map();
+  for (const a of frontendData.assets) {
+    if (typeof a.symbol !== 'string') continue;
+    const existing = feBySymbol.get(a.symbol);
+    if (!existing || (a.verified === true && existing.verified !== true)) {
+      feBySymbol.set(a.symbol, a);
+    }
+  }
 
   // ── Check 1: status changes to curated assets ────────────────────────────
   // Trigger is the verified flag. Liquidity is carried alongside purely as
@@ -397,16 +431,37 @@ async function main() {
     if (fired.length === 0) continue;
 
     // Re-derive the diff row's key. The diff carries chain+symbol but not
-    // coinMinimalDenom, so resolve through the frontend list by symbol first
-    // (unique post-dedupe) and fall back to chain|symbol scanning.
+    // coinMinimalDenom, so resolve through the frontend list by symbol.
+    //
+    // The upstream jq falls back to `_comment` then `base_denom` when a zone
+    // asset has no frontend row, and `_comment` is shaped "Label $SYMBOL"
+    // (e.g. "Evmos $EVMOS"). 252 of 884 zone assets have no frontend row today,
+    // almost all source_chain_killed, and they are exactly the set the lifecycle
+    // scripts churn. Matching only the raw string meant every such row landed in
+    // unresolvedHits and blocked the run for a deliberately-pruned dead chain,
+    // so extract the trailing $SYMBOL and retry before giving up.
+    const dollarSymbol = typeof row.symbol === 'string'
+      ? row.symbol.match(/\$([^\s$]+)\s*$/)?.[1]
+      : undefined;
     const fe = feBySymbol.get(row.symbol)
+      ?? (dollarSymbol ? feBySymbol.get(dollarSymbol) : undefined)
       ?? frontendData.assets.find((a) => a.chainName === row.chain && a.symbol === row.symbol);
 
     if (!fe) {
-      // The diff and the generated list disagree about what exists. That is
-      // suspicious in its own right, and it also means verified status is
-      // unknown, so block rather than skip.
-      unresolvedHits.push({ ...row, categories: fired, why: 'not found in generated assetlist' });
+      // Not in the generated list at all. For a zone asset that was pruned (its
+      // source chain is dead) this is expected, not a disagreement: it cannot be
+      // user-visible on the frontend precisely because it is not listed. Such a
+      // row carries the "Label $SYMBOL" comment form rather than a bare symbol,
+      // which is the signal that the upstream lookup already missed. Record it
+      // for the report but do not block on it.
+      unresolvedHits.push({
+        ...row,
+        categories: fired,
+        why: dollarSymbol
+          ? 'not listed on the frontend (pruned or unlisted zone asset)'
+          : 'not found in generated assetlist',
+        blocking: !dollarSymbol,
+      });
       continue;
     }
 
@@ -439,6 +494,7 @@ async function main() {
         unresolvedHits.push({
           ...hit,
           why: 'unverified, and liquidity unavailable while a threshold is armed',
+          blocking: true,
         });
       }
     }
@@ -480,9 +536,6 @@ async function main() {
     const norm = normaliseSymbol(sym);
     if (!norm) continue;
 
-    const collidesWith = findVerifiedSymbolCollision(sym, verifiedSymbolIndexes);
-    if (!collidesWith) continue;
-
     const fe = feBySymbol.get(sym);
 
     // A newly listed asset that is itself verified reached that state only by a
@@ -492,9 +545,12 @@ async function main() {
     // its first run.
     if (fe?.verified) continue;
 
-    // Defensive: an exact self-match belongs to the verified asset already
-    // skipped above. Keep the guard in case indexing or dedupe changes.
-    if (collidesWith === sym) continue;
+    // Passing the candidate's own record lets the lookup exempt a legitimate
+    // bridged variant: those share the verified owner's variantGroupKey, so
+    // USDC.eth.axl is recognised as the same asset by another route rather than
+    // an impersonation of bare USDC.
+    const collidesWith = findVerifiedSymbolCollision(sym, verifiedSymbolIndexes, fe);
+    if (!collidesWith) continue;
 
     const market = fe?.coinMinimalDenom
       ? resolveMarket(numia, constituentToAlloy, fe.coinMinimalDenom)
@@ -534,15 +590,20 @@ async function main() {
   // in the path, so keying on the path alone would read a denom change as a
   // remove plus an add and miss the modification.
   const identityChanges = [];
+  const removedAssets = [];
   let beforeMissing = false;
   const beforeData = loadJSON(beforePath, null);
 
-  if (!Array.isArray(beforeData?.assets) || beforeData.assets.length === 0) {
+  if (!hasUsableAssetlist(beforeData)) {
     // No usable snapshot means every asset would read as unchanged, which is a
     // silent pass on exactly the class of change this check exists to catch.
     beforeMissing = true;
   } else {
     identityChanges.push(...findIdentityChanges(beforeData.assets, frontendData.assets));
+    // Removals are a separate pass: findIdentityChanges only walks the after
+    // list, so a delisting produces no row there. Without this, a generation
+    // failure that dropped most of the list looked identical to a quiet day.
+    removedAssets.push(...findRemovedAssets(beforeData.assets, frontendData.assets));
   }
 
   if (beforeMissing) {
@@ -558,10 +619,22 @@ async function main() {
       + `field change (${v} verified)`
     );
   }
-
-  if (unresolvedHits.length > 0) {
+  if (removedAssets.length > 0) {
+    const v = removedAssets.filter((r) => r.verified).length;
     reasons.push(
-      `${unresolvedHits.length} mutated asset(s) could not be resolved in the generated assetlist`
+      `${removedAssets.length} asset(s) were removed from the generated list `
+      + `(${v} verified)`
+    );
+  }
+
+  // Only genuinely unexplained rows gate. A pruned zone asset that is simply not
+  // listed on the frontend is reported but does not block, otherwise routine
+  // dead-chain lifecycle churn would withhold the merge every run and reviewers
+  // would learn to ignore the verdict.
+  const blockingUnresolved = unresolvedHits.filter((h) => h.blocking !== false);
+  if (blockingUnresolved.length > 0) {
+    reasons.push(
+      `${blockingUnresolved.length} mutated asset(s) could not be resolved in the generated assetlist`
     );
   }
 
@@ -589,8 +662,8 @@ async function main() {
     report += '\n';
   } else {
     report += '## ✅ Auto-merge gate passed\n\n';
-    report += 'No sensitive-field changes to existing assets, no status changes to '
-      + 'verified assets';
+    report += 'No removals or sensitive-field changes to existing assets, no status '
+      + 'changes to verified assets';
     if (LIQUIDITY_THRESHOLD_USD !== null) {
       report += ` (or to unverified assets above ${fmtUsd(LIQUIDITY_THRESHOLD_USD)} liquidity)`;
     }
@@ -606,8 +679,8 @@ async function main() {
     for (const h of hits) {
       const liq = h.liquidity === undefined ? 'unknown' : fmtUsd(h.liquidity);
       const vol = h.volume24h === undefined ? 'unknown' : fmtUsd(h.volume24h);
-      out += `| \`${h.symbol}\` | ${h.chain} | ${liq} | ${vol} `
-        + `| ${h.categories.join(', ')} | ${h.reason || '-'} |\n`;
+      out += `| \`${esc(h.symbol)}\` | ${esc(h.chain)} | ${liq} | ${vol} `
+        + `| ${esc(h.categories.join(', '))} | ${esc(h.reason) || '-'} |\n`;
     }
     return out + '\n';
   };
@@ -630,9 +703,9 @@ async function main() {
     report += '| New symbol | Collides with | Match | Chain | Liquidity | Denom |\n';
     report += '|------------|---------------|-------|-------|-----------|-------|\n';
     for (const s of squatHits) {
-      report += `| \`${s.symbol}\` | \`${s.collidesWith}\` | ${s.matchKind} `
-        + `| ${s.chain} | ${s.liquidity === undefined ? 'unknown' : fmtUsd(s.liquidity)} `
-        + `| \`${s.denom}\` |\n`;
+      report += `| \`${esc(s.symbol)}\` | \`${esc(s.collidesWith)}\` | ${esc(s.matchKind)} `
+        + `| ${esc(s.chain)} | ${s.liquidity === undefined ? 'unknown' : fmtUsd(s.liquidity)} `
+        + `| \`${esc(s.denom)}\` |\n`;
     }
     report += '\n';
     report += '_Normalised matches ignore case, separators, and homoglyphs, so a '
@@ -649,10 +722,28 @@ async function main() {
     report += '|--------|-------|----------|-------|--------|-------|\n';
     for (const c of identityChanges) {
       for (const ch of c.changed) {
-        const fmt = (x) => (x === null ? '_(none)_' : `\`${String(x)}\``);
-        report += `| \`${c.symbol}\` | ${c.chain} | ${c.verified ? 'yes' : 'no'} `
-          + `| ${ch.field} | ${fmt(ch.from)} | ${fmt(ch.to)} |\n`;
+        const fmt = (x) => (x === null ? '_(none)_' : `\`${esc(x)}\``);
+        report += `| \`${esc(c.symbol)}\` | ${esc(c.chain)} | ${c.verified ? 'yes' : 'no'} `
+          + `| ${esc(ch.field)} | ${fmt(ch.from)} | ${fmt(ch.to)} |\n`;
       }
+    }
+    report += '\n';
+  }
+
+  if (removedAssets.length > 0) {
+    report += '### Assets removed from the generated list\n\n';
+    report += 'These were in the pre-generation snapshot and are absent afterwards. '
+      + 'A deliberate delisting belongs here, but so does a generation failure or a '
+      + 'chain-registry fetch problem that silently dropped assets, so confirm the '
+      + 'removals were intended.\n\n';
+    report += '| Symbol | Chain | Verified | Denom |\n';
+    report += '|--------|-------|----------|-------|\n';
+    for (const r of removedAssets.slice(0, 50)) {
+      report += `| \`${esc(r.symbol)}\` | ${esc(r.chain)} | ${r.verified ? 'yes' : 'no'} `
+        + `| \`${esc(r.denom)}\` |\n`;
+    }
+    if (removedAssets.length > 50) {
+      report += `\n_and ${removedAssets.length - 50} more removals not shown._\n`;
     }
     report += '\n';
   }
@@ -665,15 +756,29 @@ async function main() {
       + 'withheld rather than passing that silently.\n\n';
   }
 
-  if (unresolvedHits.length > 0) {
+  if (blockingUnresolved.length > 0) {
     report += '### Mutated assets not found in the generated assetlist\n\n';
     report += 'Verified status could not be determined for these, so they block by '
       + 'default. A row here means the lifecycle diff and the generated assetlist '
       + 'disagree about what exists.\n\n';
-    for (const h of unresolvedHits) {
-      report += `- \`${h.symbol}\` (${h.chain}): ${h.why} (${h.categories.join(', ')})\n`;
+    for (const h of blockingUnresolved) {
+      report += `- \`${esc(h.symbol)}\` (${esc(h.chain)}): ${esc(h.why)} `
+        + `(${esc(h.categories.join(', '))})\n`;
     }
     report += '\n';
+  }
+
+  const unlistedUnresolved = unresolvedHits.filter((h) => h.blocking === false);
+  if (unlistedUnresolved.length > 0) {
+    report += '<details><summary>Lifecycle changes on assets not listed on the '
+      + `frontend (${unlistedUnresolved.length}, informational)</summary>\n\n`;
+    report += 'These zone assets have no frontend row, usually because their source '
+      + 'chain is dead and they were pruned. They cannot be user-visible, so they do '
+      + 'not withhold the merge.\n\n';
+    for (const h of unlistedUnresolved) {
+      report += `- \`${esc(h.symbol)}\` (${esc(h.chain)}): ${esc(h.categories.join(', '))}\n`;
+    }
+    report += '\n</details>\n\n';
   }
 
   if (numiaError || numia.size === 0) {

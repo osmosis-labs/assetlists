@@ -993,7 +993,6 @@ jobs:
           #     contract, IBC path, display name). This is the primary purpose:
           #     such a change fires no lifecycle row and never shows up in
           #     new-assets.txt, so only the before/after comparison sees it;
-          #   - a newly listed asset's symbol collides with a verified asset's;
           #   - a VERIFIED asset was removed from the generated list;
           #   - an unclassified lifecycle category fired, or a required input was
           #     missing or empty.
@@ -1002,9 +1001,11 @@ jobs:
           # flips, halts set/cleared, reason shifts): the pipeline is responding
           # to real chain conditions and the summary below already itemises them,
           # so holding the merge for them stalled the assetlist over routine
-          # bridge outages. Also ignores tooltip text, isAlloyed, coingeckoId, and
-          # anything scoped to unverified assets (an unverified removal count is
-          # still reported, since a large drop can mean a broken generation run).
+          # bridge outages. Nor on new-asset symbol collisions, which in practice
+          # flagged ordinary dotted bridge listings rather than impersonations.
+          # Also ignores tooltip text, isAlloyed, coingeckoId, and anything scoped
+          # to unverified assets (an unverified removal count is still reported,
+          # since a large drop can mean a broken generation run).
           #
           # Fails closed: exit 1 means the gate could not evaluate (missing or
           # unreadable inputs), and the merge step below treats that the same as

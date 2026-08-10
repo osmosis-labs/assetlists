@@ -4,13 +4,10 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import {
-  buildVerifiedSymbolIndexes,
   findActiveUnknownCategories,
   findIdentityChanges,
   findRemovedAssets,
-  findVerifiedSymbolCollision,
   hasUsableAssetlist,
-  symbolKeys,
 } from './check_automerge_gate_helpers.mjs';
 
 function asset(overrides = {}) {
@@ -69,59 +66,6 @@ test('detects sensitive changes even when denom and IBC identity both change', (
     'sourceDenom',
   ]);
   assert.deepEqual(findIdentityChanges([before], [{ ...before }]), []);
-});
-
-test('treats unknown dot segments as symbol separators but leaves dotted targets unreserved', () => {
-  const indexes = buildVerifiedSymbolIndexes([
-    asset({ symbol: 'USDC', variantGroupKey: 'grp/usdc' }),
-    asset({ symbol: 'SUI.wh', coinMinimalDenom: 'ibc/SUI' }),
-  ]);
-
-  assert.equal(symbolKeys('USD.C').full, 'usdc');
-  assert.equal(symbolKeys('USDC.eth.axl').full, 'usdcethaxl');
-  // Every dot-boundary prefix is offered, longest first, so a squat on an
-  // unmapped suffix cannot hide behind an unrecognised segment.
-  assert.deepEqual(symbolKeys('DOT.glmr.axl').prefixes, ['dotglmraxl', 'dotglmr', 'dot']);
-
-  assert.equal(findVerifiedSymbolCollision('USD-C', indexes), 'USDC');
-  assert.equal(findVerifiedSymbolCollision('USD.C', indexes), 'USDC');
-  // Only unsuffixed verified symbols reserve a name.
-  assert.equal(findVerifiedSymbolCollision('SUI', indexes), undefined);
-  assert.equal(findVerifiedSymbolCollision('SUI-WH', indexes), undefined);
-  assert.equal(findVerifiedSymbolCollision('SUI.other', indexes), undefined);
-});
-
-test('exempts legitimate bridged variants but still catches impostors', () => {
-  const indexes = buildVerifiedSymbolIndexes([
-    asset({ symbol: 'USDC', variantGroupKey: 'grp/usdc' }),
-  ]);
-
-  // Same asset arriving by another route: shares the owner's variantGroupKey.
-  // Previously these were reported as squats, which would have blocked routine
-  // daily runs (29 existing assets flag that way on the live list).
-  const legitimateVariant = asset({
-    symbol: 'USDC.eth.axl',
-    verified: false,
-    variantGroupKey: 'grp/usdc',
-  });
-  assert.equal(
-    findVerifiedSymbolCollision('USDC.eth.axl', indexes, legitimateVariant),
-    undefined,
-  );
-
-  // A different underlying asset claiming the same name is a squat.
-  const impostor = asset({
-    symbol: 'USDC.eth.axl',
-    verified: false,
-    variantGroupKey: 'grp/scam',
-  });
-  assert.equal(
-    findVerifiedSymbolCollision('USDC.eth.axl', indexes, impostor),
-    'USDC',
-  );
-
-  // Unknown provenance (no record in the generated list) still reports.
-  assert.equal(findVerifiedSymbolCollision('USD.C', indexes, undefined), 'USDC');
 });
 
 test('scopes sensitive-field changes to verified assets', () => {

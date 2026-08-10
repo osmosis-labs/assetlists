@@ -2,9 +2,9 @@
 //   Auto-merge safety gate for the daily "Generate All Files" pipeline.
 //
 //   The daily run opens a PR and immediately auto-merges it. The gate exists for
-//   one thing: an unreviewed change to the IDENTITY of a curated asset, or a new
-//   asset impersonating one. It is deliberately narrow, because a gate that
-//   blocks on routine churn gets ignored.
+//   one thing: an unreviewed change to the IDENTITY of a curated asset. It is
+//   deliberately narrow, because a gate that blocks on routine churn gets
+//   ignored, and routine churn is most of what the daily run does.
 //
 //   Scoped to VERIFIED assets throughout. Verified is the curated,
 //   default-visible set, and it is the only place these changes are user-facing;
@@ -12,16 +12,7 @@
 //   human act (nothing in the daily pipeline writes osmosis_verified), so the
 //   flag cannot be moved by the pipeline underneath the gate.
 //
-//     1. Symbol squat by a newly listed asset. A new asset whose symbol
-//        collides with an existing verified asset's bare symbol is a listing
-//        that wants a human to look at it. deduplicate_symbols.mjs already
-//        suffixes the non-preferred variant, so this is defence in depth: it
-//        also catches case-only, separator-only and homoglyph near-matches that
-//        dedupe treats as distinct strings (exact-equality grouping). A
-//        candidate sharing the owner's variantGroupKey is the same asset by
-//        another route and is exempt.
-//
-//     2. Financially sensitive field change to an ESTABLISHED verified asset.
+//     1. Financially sensitive field change to an ESTABLISHED verified asset.
 //        The primary purpose. An upstream registry refresh can rewrite decimals,
 //        coinMinimalDenom, sourceDenom, origin chain, contract, IBC path or
 //        display name on an asset that keeps its symbol: it fires no lifecycle
@@ -31,7 +22,7 @@
 //        by orders of magnitude; a re-pointed contract or IBC path sends funds
 //        somewhere else). See SENSITIVE_FIELDS in the helpers module.
 //
-//     3. Removal of a verified asset. findIdentityChanges only walks the after
+//     2. Removal of a verified asset. findIdentityChanges only walks the after
 //        list, so a delisting produces no row there; without a separate pass a
 //        generation failure that dropped assets looked like a quiet day.
 //
@@ -40,6 +31,16 @@
 //       shifts). The pipeline is responding to real chain conditions and the
 //       daily summary already itemises them. Blocking meant a routine bridge
 //       outage stalled the assetlist. Reported for context only.
+//     - New-asset symbol collisions. This was a check here, removed because
+//       measured against the live list it flagged 23 assets of which 21 were
+//       ordinary dotted bridge listings (USDC.eth.axl style) and the other 2
+//       were case-only collisions between genuinely distinct assets
+//       (cOSMO/COSMO, stLuna/stLUNA). It found no real impersonation while
+//       reliably blocking routine bridge work, so it was pure noise. Symbol
+//       deduplication in deduplicate_symbols.mjs already gives the verified
+//       asset the bare symbol and suffixes the rest, and nothing in the daily
+//       pipeline can set osmosis_verified, so a new asset cannot arrive
+//       verified.
 //     - Informational metadata (tooltip text). Note `name` IS gated for
 //       existing verified assets, because a display-name rewrite is the other
 //       half of an impersonation.
@@ -65,9 +66,8 @@
 //   unusable one means the gate cannot evaluate and it blocks rather than waving
 //   the run through. That covers an unreadable lifecycle diff, a generated
 //   assetlist that is absent or has an EMPTY assets array (an empty array is
-//   truthy, so this needs an explicit length check), a missing pre-generation
-//   snapshot (every asset would read as unchanged), and a missing new-asset list
-//   (the collision check would examine nothing).
+//   truthy, so this needs an explicit length check), and a missing
+//   pre-generation snapshot (every asset would read as unchanged).
 //
 // Usage:
 //   node check_automerge_gate.mjs [<zone_name>] [options]
@@ -76,10 +76,6 @@
 //   --json <path>                lifecycle diff produced by the workflow's
 //                                "Extract per-mutation symbol lists" step;
 //                                default /tmp/lifecycle-diff.json
-//   --new-assets <path>          newline-delimited new symbols; default
-//                                ../../../new-assets.txt, i.e. the repo root,
-//                                where the workflow's "Detect New Assets" step
-//                                writes it (this script runs from utility/)
 //   --before <path>              pre-generation copy of the frontend assetlist,
 //                                for the sensitive-field diff; default
 //                                /tmp/frontend-before.json, written by the
@@ -93,14 +89,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import {
-  buildVerifiedSymbolIndexes,
-  feKey,
   findActiveUnknownCategories,
   findIdentityChanges,
   findRemovedAssets,
-  findVerifiedSymbolCollision,
   hasUsableAssetlist,
-  normaliseSymbol,
 } from './check_automerge_gate_helpers.mjs';
 
 import { loadJSON } from './lifecycle_helpers.mjs';
@@ -133,7 +125,6 @@ const positional = argv.filter((a, i) => {
 
 const zoneBasePath = positional[0] || 'osmosis-1';
 const diffPath = flagValue('--json', '/tmp/lifecycle-diff.json');
-const newAssetsPath = flagValue('--new-assets', path.join('..', '..', '..', 'new-assets.txt'));
 // Pre-generation copy of the frontend assetlist, written by the workflow's
 // "Capture Current Assets" step. Needed to detect sensitive-field changes to
 // assets that keep their symbol; the symbol lists only show add/remove.
@@ -345,13 +336,7 @@ async function main() {
   // there is no Numia or SQS outage that can stall or silently weaken it. A
   // reviewer who wants depth context for a flagged asset can look it up.
 
-  // ── Index the frontend list for status and symbol checks ──────────────────
-  // Only unsuffixed verified symbols reserve a canonical symbol. Dotted symbols
-  // are variants, not additional canonical-name reservations.
-  //
-  const verifiedSymbolIndexes = buildVerifiedSymbolIndexes(frontendData.assets);
-
-  // Symbol -> asset, for resolving new-asset and lifecycle rows.
+  // Symbol -> asset, for resolving lifecycle rows to their verified status.
   //
   // Symbol is NOT unique in practice: the live list carries two LINK.eth.terra
   // entries differing only by denom. `new Map(assets.map(...))` is last-wins,
@@ -404,69 +389,10 @@ async function main() {
   // Verified first so the most user-visible rows read at the top.
   statusChanges.sort((x, y) => (y.verified ? 1 : 0) - (x.verified ? 1 : 0));
 
-  // ── Check 1: new-asset symbol squats ─────────────────────────────────────
-  const squatHits = [];
-  let newSymbols = [];
-  // Absent file is NOT the same as "no new assets". The workflow always writes
-  // new-assets.txt (possibly empty), so a missing file means the step ordering
-  // changed or the path is wrong, and the squat check silently examined nothing.
-  // That is a missing decision input, exactly like an unreadable lifecycle diff
-  // or assetlist, so it blocks rather than merely warning: a squatted symbol
-  // could have slipped through unseen. Warning-only here would have let the run
-  // auto-merge while reporting a clean collision check that never ran.
-  const newAssetsMissing = !fs.existsSync(newAssetsPath);
-  if (!newAssetsMissing) {
-    newSymbols = fs.readFileSync(newAssetsPath, 'utf8')
-      .split('\n').map((s) => s.trim()).filter(Boolean);
-  }
-
-  for (const sym of newSymbols) {
-    const norm = normaliseSymbol(sym);
-    if (!norm) continue;
-
-    const fe = feBySymbol.get(sym);
-
-    // A newly listed asset that is itself verified reached that state only by a
-    // curator hand-editing osmosis_verified (nothing in the daily pipeline
-    // writes it), so it is a deliberate listing, not a squat. This also covers
-    // the asset that legitimately owns the bare symbol appearing as "new" in
-    // its first run.
-    if (fe?.verified) continue;
-
-    // Passing the candidate's own record lets the lookup exempt a legitimate
-    // bridged variant: those share the verified owner's variantGroupKey, so
-    // USDC.eth.axl is recognised as the same asset by another route rather than
-    // an impersonation of bare USDC.
-    const collidesWith = findVerifiedSymbolCollision(sym, verifiedSymbolIndexes, fe);
-    if (!collidesWith) continue;
-
-    squatHits.push({
-      symbol: sym,
-      normalised: norm,
-      collidesWith,
-      // Case-only collision (usdc vs USDC) versus a wider normalised match
-      // (USD-C, homoglyph ATOM). A byte-exact match cannot reach here: such a
-      // symbol would belong to the verified owner and be skipped above.
-      // Case-insensitive equality is the strongest comparison still meaningful
-      // at this point, and it tells the reviewer whether the squat is a pure
-      // case flip or something that needed separator/homoglyph folding.
-      matchKind: collidesWith.toLowerCase() === sym.toLowerCase() ? 'case' : 'normalised',
-      chain: fe?.chainName ?? '?',
-      denom: fe?.coinMinimalDenom ?? '?',
-      verified: fe?.verified === true,
-    });
-  }
-
-  if (squatHits.length > 0) {
-    reasons.push(
-      `${squatHits.length} newly listed asset(s) collide with a verified asset's symbol`
-    );
-  }
-
-  // ── Check 3: sensitive-field changes to established assets ───────────────
-  // Symbol-keyed add/remove detection cannot see an upstream refresh that
-  // rewrites decimals, denoms, origin chain or IBC path on an asset that keeps
-  // its symbol. Compare the pre-generation snapshot field by field.
+  // ── Sensitive-field changes to established verified assets ───────────────
+  // The gate's purpose. Symbol-keyed add/remove detection cannot see an upstream
+  // refresh that rewrites decimals, denoms, origin chain, contract or IBC path on
+  // an asset that keeps its symbol, so compare the snapshot field by field.
   //
   // Identity: match on coinMinimalDenom OR the IBC-path key, because both are
   // themselves sensitive fields. 970 of the 1336 current keys embed sourceDenom
@@ -515,13 +441,6 @@ async function main() {
     );
   }
 
-  if (newAssetsMissing) {
-    reasons.push(
-      `the new-asset list (${newAssetsPath}) was missing, so the symbol-collision `
-      + 'check could not run'
-    );
-  }
-
   if (activeUnknownCategories.size > 0) {
     reasons.push(
       `${activeUnknownCategories.size} unclassified lifecycle mutation(s) fired `
@@ -539,22 +458,7 @@ async function main() {
     report += '\n';
   } else {
     report += '## ✅ Auto-merge gate passed\n\n';
-    report += 'No identity changes or removals affecting verified assets, and no '
-      + 'new-asset symbol collisions with verified assets.\n\n';
-  }
-
-  if (squatHits.length > 0) {
-    report += '### New assets colliding with a verified symbol\n\n';
-    report += '| New symbol | Collides with | Match | Chain | Denom |\n';
-    report += '|------------|---------------|-------|-------|-------|\n';
-    for (const s of squatHits) {
-      report += `| \`${esc(s.symbol)}\` | \`${esc(s.collidesWith)}\` | ${esc(s.matchKind)} `
-        + `| ${esc(s.chain)} | \`${esc(s.denom)}\` |\n`;
-    }
-    report += '\n';
-    report += '_Normalised matches ignore case, separators, and homoglyphs, so a '
-      + 'lookalike symbol is caught even though symbol deduplication treats it as '
-      + 'a distinct string._\n\n';
+    report += 'No identity changes or removals affecting verified assets.\n\n';
   }
 
   if (identityChanges.length > 0) {
@@ -636,16 +540,6 @@ async function main() {
       report += `\n_and ${statusChanges.length - 100} more._\n`;
     }
     report += '\n</details>\n\n';
-  }
-
-  if (newAssetsMissing) {
-    report += '### New-asset list missing\n\n';
-    report += `The new-asset list (\`${newAssetsPath}\`) was not found, so the `
-      + 'symbol-collision check examined nothing this run and a squatted symbol '
-      + 'would not have been caught. The workflow always writes this file (possibly '
-      + 'empty), so its absence points at a step-ordering or path problem rather '
-      + 'than an empty run. Auto-merge was withheld for that reason; verified-status '
-      + 'gating still ran normally.\n\n';
   }
 
   if (activeUnknownCategories.size > 0) {

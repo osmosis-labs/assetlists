@@ -31,71 +31,12 @@ export function sensitiveShape(asset) {
   };
 }
 
-const HOMOGLYPHS = new Map(Object.entries({
-  // Cyrillic -> Latin
-  'а': 'a', 'в': 'b', 'е': 'e', 'к': 'k', 'м': 'm', 'н': 'h', 'о': 'o',
-  'р': 'p', 'с': 'c', 'т': 't', 'у': 'y', 'х': 'x', 'і': 'i', 'ѕ': 's',
-  'ј': 'j', 'ԁ': 'd', 'ɡ': 'g',
-  // Greek -> Latin
-  'α': 'a', 'β': 'b', 'ε': 'e', 'ι': 'i', 'κ': 'k', 'ν': 'v', 'ο': 'o',
-  'ρ': 'p', 'τ': 't', 'υ': 'u', 'χ': 'x', 'ζ': 'z', 'η': 'n',
-  // U+04CF Cyrillic palochka renders as l/I and survives NFKC.
-  'ӏ': 'l',
-}));
-
-export function foldSymbol(symbol) {
-  if (typeof symbol !== 'string') return '';
-  let out = '';
-  for (const ch of symbol.toLowerCase().normalize('NFKC')) {
-    out += HOMOGLYPHS.get(ch) ?? ch;
-  }
-  return out.replace(/[^a-z0-9]/g, '');
-}
-
 /**
- * Every dot-boundary prefix of a symbol, longest first, folded.
- *
- * Replaces a hardcoded chain-suffix vocabulary. That list had two failure
- * modes: one unmapped segment stopped the right-to-left walk and defeated
- * stripping for the whole symbol (`DOT.glmr.axl` folded to `dotglmr`, never
- * reaching `dot`), and it needed hand-editing as chains were added. Emitting
- * every prefix and letting the caller intersect against symbols that actually
- * exist needs no vocabulary and cannot drift.
- *
- * `full` is the whole symbol folded, so a dot used as a separator inside a
- * claimed symbol still collides: `USD.C` -> `usdc`.
+ * Split the diff's boolean fields into "unknown to this gate" and "unknown AND
+ * actually fired". A field merely present but false everywhere is inert, so it
+ * only warns; one that fired means an unclassified mutation happened and the
+ * gate cannot tell whether it is financially sensitive, so it blocks.
  */
-export function symbolKeys(symbol) {
-  if (typeof symbol !== 'string') return { full: '', stripped: '', prefixes: [] };
-  const parts = symbol.split('.');
-  const prefixes = [];
-  for (let end = parts.length; end >= 1; end -= 1) {
-    const folded = foldSymbol(parts.slice(0, end).join('.'));
-    if (folded && !prefixes.includes(folded)) prefixes.push(folded);
-  }
-  return {
-    full: foldSymbol(symbol),
-    // Longest proper prefix, i.e. the whole symbol minus its last dot segment.
-    // Retained for callers that want the single most likely bare form.
-    stripped: prefixes[prefixes.length - 1] ?? '',
-    prefixes,
-  };
-}
-
-export function normaliseSymbol(symbol) {
-  return symbolKeys(symbol).stripped;
-}
-
-export function feKey(asset) {
-  const ibcPath = (asset.transferMethods ?? [])
-    .find((tm) => tm?.type === 'ibc' && tm?.chain?.path)?.chain?.path;
-  return ibcPath ?? `${asset.chainName}|${asset.sourceDenom}`;
-}
-
-export function hasUsableAssetlist(data) {
-  return Array.isArray(data?.assets) && data.assets.length > 0;
-}
-
 export function findActiveUnknownCategories(diffRows, knownFields) {
   const unknownCategories = new Set();
   const activeUnknownCategories = new Set();
@@ -110,81 +51,32 @@ export function findActiveUnknownCategories(diffRows, knownFields) {
 }
 
 /**
- * Indexes of verified bare symbols (no dot), plus each one's variantGroupKey.
- *
- * The variant group is what separates an impostor from an ordinary bridged
- * listing: every legitimate variant of USDC (USDC.eth.axl, USDC.avax.axl, ...)
- * carries the SAME variantGroupKey as bare USDC, because they are the same
- * underlying asset arriving by different routes.
+ * Stable identity key for an asset: its first IBC transfer path, else
+ * chain|sourceDenom. Mirrors the feKey definition in the workflow's
+ * "Extract per-mutation symbol lists" jq so both sides pair the same rows.
  */
-export function buildVerifiedSymbolIndexes(assets) {
-  const bare = new Map();
-  const groupBySymbol = new Map();
-
-  for (const asset of assets) {
-    if (asset?.verified !== true
-        || typeof asset.symbol !== 'string'
-        || asset.symbol.includes('.')) continue;
-    const normalized = foldSymbol(asset.symbol);
-    if (normalized && !bare.has(normalized)) {
-      bare.set(normalized, asset.symbol);
-      groupBySymbol.set(asset.symbol, asset.variantGroupKey ?? null);
-    }
-  }
-
-  return { bare, groupBySymbol };
+export function feKey(asset) {
+  const ibcPath = (asset.transferMethods ?? [])
+    .find((tm) => tm?.type === 'ibc' && tm?.chain?.path)?.chain?.path;
+  return ibcPath ?? `${asset.chainName}|${asset.sourceDenom}`;
 }
 
 /**
- * The verified bare symbol a candidate collides with, or undefined.
- *
- * Two behaviours the previous vocabulary-based version got wrong:
- *
- *   - It matched only the suffix-stripped form, so every routine bridged
- *     variant of a verified asset (USDC.eth.axl, ETH.arb.carbon) resolved to
- *     the bare owner and was reported as a squat. 29 existing unverified assets
- *     flagged that way, which would have blocked ordinary daily runs. A
- *     candidate sharing the owner's variantGroupKey is the same asset by another
- *     route, so it is exempt.
- *   - It stopped stripping at the first unmapped segment, so a squat on an
- *     unmapped suffix slipped through. Now every dot-boundary prefix is tried.
- *
- * Pass the candidate's own asset record (when it exists) so the variant-group
- * exemption can be applied; without it, every prefix match is reported.
+ * An empty array is truthy, so `!data?.assets` accepted {assets: []} and a
+ * generation run that emitted zero assets read as a quiet day. Require content.
  */
-export function findVerifiedSymbolCollision(symbol, indexes, candidateAsset) {
-  const { full, prefixes } = symbolKeys(symbol);
-  const candidateGroup = candidateAsset?.variantGroupKey ?? null;
-
-  // Longest first: prefer the most specific match.
-  for (const key of [full, ...prefixes]) {
-    const owner = indexes.bare.get(key);
-    if (!owner) continue;
-    // Exact same string is not a squat; that is the owner itself.
-    if (owner === symbol) return undefined;
-    const ownerGroup = indexes.groupBySymbol?.get(owner) ?? null;
-    if (candidateGroup !== null && ownerGroup !== null && candidateGroup === ownerGroup) {
-      // Legitimate variant of this asset, not an impersonation of it.
-      return undefined;
-    }
-    return owner;
-  }
-  return undefined;
+export function hasUsableAssetlist(data) {
+  return Array.isArray(data?.assets) && data.assets.length > 0;
 }
 
 /**
  * Assets present in the snapshot but absent from the generated list.
  *
  * findIdentityChanges only walks afterAssets, so a removal produces no row
- * there. That was a fail-open hole: a generation bug or a failed chain-registry
- * submodule fetch that drops most of the list yields no identity changes, no
- * lifecycle rows and no new symbols, and hasUsableAssetlist accepts anything
- * with at least one asset, so the gate reported a clean pass and auto-merged a
- * mass delisting. Removals are reported separately so they can block.
- *
- * Keyed on coinMinimalDenom (unique across the generated list) with the
+ * there. Keyed on coinMinimalDenom (unique across the generated list) with the
  * IBC-path key as a second chance, so an asset whose denom changed counts as
- * modified (findIdentityChanges' job) rather than removed.
+ * modified rather than removed. `verified` is tagged so the caller can block on
+ * verified removals and merely report the rest.
  */
 export function findRemovedAssets(beforeAssets, afterAssets) {
   const afterDenoms = new Set();

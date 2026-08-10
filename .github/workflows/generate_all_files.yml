@@ -990,9 +990,9 @@ jobs:
           #     set/cleared, reason shift);
           #   - a newly listed asset's symbol collides with a verified asset's;
           #   - an EXISTING asset had a financially sensitive field change
-          #     (decimals, denoms, origin chain, IBC path, name, alloy status,
-          #     coingeckoId), which fires no lifecycle row and never shows up in
-          #     new-assets.txt, so it needs the before/after comparison;
+          #     (decimals, denoms, origin chain, contract, IBC path, name, alloy
+          #     status, coingeckoId), which fires no lifecycle row and never
+          #     shows up in new-assets.txt, so it needs the before/after comparison;
           #   - an unclassified lifecycle category fired, or a required input was
           #     missing or empty.
           # Tooltip-text changes still do not block.

@@ -33,13 +33,14 @@
 //
 //     3. Financially sensitive field change to an ESTABLISHED asset. Checks 1
 //        and 2 are blind to an upstream registry refresh that rewrites decimals,
-//        coinMinimalDenom, sourceDenom, origin chain, IBC path, display name,
-//        alloy status or coingeckoId on an asset that keeps its symbol: it fires
-//        no lifecycle category and never appears in new-assets.txt. Those are
-//        exactly the money-and-impersonation fields (a wrong exponent misprices
-//        by orders of magnitude; a re-pointed IBC path changes which escrow
-//        funds move through), so the gate diffs them against a pre-generation
-//        snapshot. See SENSITIVE_FIELDS.
+//        coinMinimalDenom, sourceDenom, origin chain, contract, IBC path,
+//        display name, alloy status or coingeckoId on an asset that keeps its
+//        symbol: it fires no lifecycle category and never appears in
+//        new-assets.txt. Those are exactly the money-and-impersonation fields (a
+//        wrong exponent misprices by orders of magnitude; a re-pointed contract
+//        or IBC path changes where funds move), so the gate diffs them against a
+//        pre-generation snapshot. See SENSITIVE_FIELDS in
+//        check_automerge_gate_helpers.mjs.
 //
 //   Report-only with respect to the pipeline: never mutates repo files, and
 //   exits 0 even when it blocks (via process.exitCode, so the report on stdout
@@ -84,6 +85,16 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
+
+import {
+  buildVerifiedSymbolIndexes,
+  feKey,
+  findActiveUnknownCategories,
+  findIdentityChanges,
+  findVerifiedSymbolCollision,
+  hasUsableAssetlist,
+  normaliseSymbol,
+} from './check_automerge_gate_helpers.mjs';
 
 import {
   fetchAlloyConstituentMap,
@@ -197,130 +208,7 @@ const METADATA_FIELDS = [
   'depositHaltReason', 'withdrawalHaltReason',
 ];
 
-// ── Financially sensitive identity fields ────────────────────────────────────
-
-/**
- * Fields on a generated frontend asset where a silent change is a money bug or
- * an impersonation vector, even with the symbol unchanged:
- *
- *   decimals          wrong exponent misprices the asset by orders of magnitude
- *   coinMinimalDenom  the chain-level identity the frontend and SQS key on
- *   sourceDenom       the denom on the origin chain
- *   chainName         re-pointing an asset at a different origin chain
- *   ibcPath           which channel/escrow funds actually move through
- *   name              display name, the other half of an impersonation
- *   isAlloyed         changes how the asset is priced and routed
- *   coingeckoId       drives price feeds; a wrong id misprices the asset
- *
- * An upstream chain-registry refresh can rewrite any of these on an established
- * token without touching a lifecycle status row or the new-symbol list, which is
- * how such a change reached auto-merge before this check existed.
- */
-const SENSITIVE_FIELDS = [
-  'decimals',
-  'coinMinimalDenom',
-  'sourceDenom',
-  'chainName',
-  'ibcPath',
-  'name',
-  'isAlloyed',
-  'coingeckoId',
-];
-
-/** Flatten an asset to just the sensitive fields, with ibcPath lifted out. */
-function sensitiveShape(asset) {
-  const ibcPath = (asset.transferMethods ?? [])
-    .find((tm) => tm?.type === 'ibc' && tm?.chain?.path)?.chain?.path ?? null;
-  return {
-    decimals: asset.decimals ?? null,
-    coinMinimalDenom: asset.coinMinimalDenom ?? null,
-    sourceDenom: asset.sourceDenom ?? null,
-    chainName: asset.chainName ?? null,
-    ibcPath,
-    name: asset.name ?? null,
-    isAlloyed: asset.isAlloyed === true,
-    coingeckoId: asset.coingeckoId ?? null,
-  };
-}
-
-// ── Symbol normalisation for squat detection ─────────────────────────────────
-
-/**
- * Collapse a symbol to a comparison key that survives the tricks a squatter
- * would use: case, separators, and the handful of Latin/Cyrillic/Greek
- * homoglyphs that render identically in the frontend's font.
- *
- * The chain suffix that deduplicate_symbols.mjs appends (USDC.axl) is stripped
- * so a new "USDC" from a junk chain still compares against verified "USDC".
- */
-const HOMOGLYPHS = new Map(Object.entries({
-  // Cyrillic -> Latin
-  'а': 'a', 'в': 'b', 'е': 'e', 'к': 'k', 'м': 'm', 'н': 'h', 'о': 'o',
-  'р': 'p', 'с': 'c', 'т': 't', 'у': 'y', 'х': 'x', 'і': 'i', 'ѕ': 's',
-  'ј': 'j', 'ԁ': 'd', 'ɡ': 'g',
-  // Greek -> Latin
-  'α': 'a', 'β': 'b', 'ε': 'e', 'ι': 'i', 'κ': 'k', 'ν': 'v', 'ο': 'o',
-  'ρ': 'p', 'τ': 't', 'υ': 'u', 'χ': 'x', 'ζ': 'z', 'η': 'n',
-  // Lookalikes that survive NFKC. Fullwidth forms, script/roman-numeral letters
-  // (ｌ, ⅼ, ℓ) and fullwidth digits already fold to ASCII via NFKC below, so they
-  // need no entry here; the ones listed are the residue that does not.
-  // U+04CF Cyrillic palochka renders as l/I and NFKC leaves it unchanged.
-  // (This slot previously held a no-op 'l' -> 'l'.)
-  'ӏ': 'l',
-}));
-
-/** Fold case, homoglyphs and separators. Does NOT strip any chain suffix. */
-function foldSymbol(symbol) {
-  if (typeof symbol !== 'string') return '';
-  let out = '';
-  for (const ch of symbol.toLowerCase().normalize('NFKC')) {
-    out += HOMOGLYPHS.get(ch) ?? ch;
-  }
-  // Drop separators and anything non-alphanumeric so USD-C / USD_C / USDC tie.
-  // Dots go too, so USD.C folds to usdc rather than being truncated to usd.
-  return out.replace(/[^a-z0-9]/g, '');
-}
-
-// Suffixes deduplicate_symbols.mjs can append, as ".<suffix>" groups. Only these
-// are treated as generated chain suffixes; any other dot is a separator inside
-// the symbol itself.
-const KNOWN_CHAIN_SUFFIXES = new Set([
-  'atom', 'carbon', 'axl', 'eth', 'matic', 'avax', 'bsc', 'arb', 'op', 'pica',
-  'ntrn', 'strd', 'inj', 'dydx', 'tia', 'wh', 'forex', 'grv', 'kuji', 'nom',
-  'orai', 'planq', 'luna', 'nym', 'src', 'rise', 'juno', 'xprt', 'noble',
-  'sol', 'e', 'int3', 'legacy', 'old',
-]);
-
-/**
- * Comparison keys for squat detection. Returns BOTH:
- *   - full: the whole symbol folded, so USD.C -> usdc collides with USDC.
- *   - stripped: the symbol with recognised generated chain suffixes removed,
- *     so USDC.eth.axl -> usdc still resolves to its bare owner.
- *
- * Unconditionally truncating at the first dot (the previous behaviour) meant
- * USD.C folded to "usd" and sailed past USDC, even though the advertised
- * separator normalisation catches USD-C. A dot is only treated as a suffix
- * boundary when every trailing segment is a known chain suffix.
- */
-function symbolKeys(symbol) {
-  if (typeof symbol !== 'string') return { full: '', stripped: '' };
-  const parts = symbol.split('.');
-  let end = parts.length;
-  while (end > 1 && KNOWN_CHAIN_SUFFIXES.has(parts[end - 1].toLowerCase())) end -= 1;
-  return {
-    full: foldSymbol(symbol),
-    stripped: foldSymbol(parts.slice(0, end).join('.')),
-  };
-}
-
 // ── Helpers ──────────────────────────────────────────────────────────────────
-
-/** Mirror of the workflow's feKey: first IBC transferMethod path, else chain|sourceDenom. */
-function feKey(asset) {
-  const ibcPath = (asset.transferMethods ?? [])
-    .find((tm) => tm?.type === 'ibc' && tm?.chain?.path)?.chain?.path;
-  return ibcPath ?? `${asset.chainName}|${asset.sourceDenom}`;
-}
 
 function fmtUsd(n) {
   if (!Number.isFinite(n)) return 'unknown';
@@ -407,7 +295,7 @@ async function main() {
   // produce no lifecycle hits and no new symbols, so the gate reported a clean
   // pass and auto-merged a list that removes every asset. Require a non-empty
   // array explicitly.
-  if (!Array.isArray(frontendData?.assets) || frontendData.assets.length === 0) {
+  if (!hasUsableAssetlist(frontendData)) {
     const detail = !frontendData
       ? 'the file was missing or unparseable'
       : !Array.isArray(frontendData.assets)
@@ -435,15 +323,10 @@ async function main() {
   // anyone read it, so an active unknown category now blocks until someone
   // classifies it in BLOCKING_CATEGORIES or NON_BLOCKING_CATEGORIES.
   const known = new Set([...BLOCKING_CATEGORIES, ...NON_BLOCKING_CATEGORIES, ...METADATA_FIELDS]);
-  const unknownCategories = new Set();
-  const activeUnknownCategories = new Set();
-  for (const row of diffRows) {
-    for (const [k, v] of Object.entries(row ?? {})) {
-      if (typeof v !== 'boolean' || known.has(k)) continue;
-      unknownCategories.add(k);
-      if (v === true) activeUnknownCategories.add(k);
-    }
-  }
+  const { unknownCategories, activeUnknownCategories } = findActiveUnknownCategories(
+    diffRows,
+    known
+  );
 
   // ── Liquidity lookup (live, alloy-aware) ──────────────────────────────────
   // Numia is REPORTING-ONLY unless --liquidity-threshold armed it. The gate
@@ -491,28 +374,11 @@ async function main() {
   const constituentToAlloy = await fetchAlloyConstituentMap(alloyedDenomSet);
   const alloyUpliftAvailable = constituentToAlloy.size > 0 || alloyedDenomSet.size === 0;
 
-  // ── Index the frontend list by the same key the diff uses ─────────────────
-  const feByKey = new Map();
-  // normalised -> canonical symbol, built ONLY from verified assets whose
-  // symbol carries no chain suffix.
+  // ── Index the frontend list for status and symbol checks ──────────────────
+  // Only unsuffixed verified symbols reserve a canonical symbol. Dotted symbols
+  // are variants, not additional canonical-name reservations.
   //
-  // Why unsuffixed only: symbolKeys strips known chain suffixes, so all seven
-  // verified USDC variants (USDC, USDC.eth.axl, USDC.avax.axl, ...) collapse to
-  // the same key. Registering every one of them would make the *legitimate*
-  // bare USDC collide with its own suffixed siblings and block the run on a
-  // false positive. The asset a squatter is impersonating is always the one
-  // holding the bare symbol, so that is the only comparison target that means
-  // anything. Suffixed variants are still protected: a new asset trying to
-  // squat "USDC.eth.axl" would first have to claim bare "USDC", which this
-  // catches.
-  const verifiedNormSymbols = new Map();
-  for (const a of frontendData.assets) {
-    feByKey.set(feKey(a), a);
-    if (a.verified && typeof a.symbol === 'string' && !a.symbol.includes('.')) {
-      const n = foldSymbol(a.symbol);
-      if (n && !verifiedNormSymbols.has(n)) verifiedNormSymbols.set(n, a.symbol);
-    }
-  }
+  const verifiedSymbolIndexes = buildVerifiedSymbolIndexes(frontendData.assets);
 
   // Symbol -> asset, for resolving new-asset rows (new-assets.txt holds the
   // post-dedupe frontend symbol, which is unique by construction).
@@ -611,14 +477,10 @@ async function main() {
   }
 
   for (const sym of newSymbols) {
-    const { full, stripped } = symbolKeys(sym);
-    if (!full && !stripped) continue;
+    const norm = normaliseSymbol(sym);
+    if (!norm) continue;
 
-    // Try the suffix-stripped form first (USDC.eth.axl -> usdc, the intended
-    // dedupe shape), then the whole folded symbol (USD.C -> usdc, which the old
-    // truncate-at-first-dot behaviour missed entirely).
-    const norm = verifiedNormSymbols.has(stripped) ? stripped : full;
-    const collidesWith = verifiedNormSymbols.get(norm);
+    const collidesWith = findVerifiedSymbolCollision(sym, verifiedSymbolIndexes);
     if (!collidesWith) continue;
 
     const fe = feBySymbol.get(sym);
@@ -630,11 +492,8 @@ async function main() {
     // its first run.
     if (fe?.verified) continue;
 
-    // Defensive: an exact self-match should already be impossible here.
-    // verifiedNormSymbols is built only from verified, unsuffixed symbols, so
-    // collidesWith === sym implies sym belongs to a verified asset, which the
-    // fe?.verified check above has already skipped. Kept as a cheap guard in
-    // case that indexing or the dedupe upstream changes.
+    // Defensive: an exact self-match belongs to the verified asset already
+    // skipped above. Keep the guard in case indexing or dedupe changes.
     if (collidesWith === sym) continue;
 
     const market = fe?.coinMinimalDenom
@@ -683,37 +542,7 @@ async function main() {
     // silent pass on exactly the class of change this check exists to catch.
     beforeMissing = true;
   } else {
-    const beforeByDenom = new Map();
-    const beforeByPath = new Map();
-    for (const a of beforeData.assets) {
-      if (a.coinMinimalDenom) beforeByDenom.set(a.coinMinimalDenom, a);
-      const k = feKey(a);
-      if (k) beforeByPath.set(k, a);
-    }
-
-    for (const a of frontendData.assets) {
-      const prior = beforeByDenom.get(a.coinMinimalDenom) ?? beforeByPath.get(feKey(a));
-      // No prior record: a genuinely new asset. Covered by the squat check and
-      // by the workflow's New Assets list, not here.
-      if (!prior) continue;
-
-      const now = sensitiveShape(a);
-      const was = sensitiveShape(prior);
-      const changed = SENSITIVE_FIELDS
-        .filter((f) => JSON.stringify(was[f]) !== JSON.stringify(now[f]))
-        .map((f) => ({ field: f, from: was[f], to: now[f] }));
-
-      if (changed.length > 0) {
-        identityChanges.push({
-          symbol: a.symbol ?? prior.symbol ?? '?',
-          chain: a.chainName ?? '?',
-          verified: a.verified === true || prior.verified === true,
-          changed,
-        });
-      }
-    }
-    // Verified assets first: those are the curated, user-visible ones.
-    identityChanges.sort((x, y) => (y.verified ? 1 : 0) - (x.verified ? 1 : 0));
+    identityChanges.push(...findIdentityChanges(beforeData.assets, frontendData.assets));
   }
 
   if (beforeMissing) {
@@ -831,7 +660,7 @@ async function main() {
   if (beforeMissing) {
     report += '### No pre-generation snapshot\n\n';
     report += `No usable asset snapshot was found at \`${beforePath}\`, so changes to `
-      + 'decimals, denoms, origin chain, or IBC path on existing assets could not '
+      + 'decimals, denoms, origin chain, contract, or IBC path on existing assets could not '
       + 'be checked. Every asset would have read as unchanged, so auto-merge was '
       + 'withheld rather than passing that silently.\n\n';
   }

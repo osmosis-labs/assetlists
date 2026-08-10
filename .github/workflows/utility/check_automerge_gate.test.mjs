@@ -124,6 +124,42 @@ test('exempts legitimate bridged variants but still catches impostors', () => {
   assert.equal(findVerifiedSymbolCollision('USD.C', indexes, undefined), 'USDC');
 });
 
+test('scopes sensitive-field changes to verified assets', () => {
+  const base = {
+    chainName: 'cosmoshub',
+    sourceDenom: 'uatom',
+    coinMinimalDenom: 'ibc/SAME',
+    symbol: 'THING',
+    decimals: 6,
+    name: 'Thing',
+    transferMethods: [{ type: 'ibc', chain: { path: 'transfer/channel-0/uatom' } }],
+  };
+
+  // Unverified on both sides: not the gate's business.
+  const unvBefore = { ...base, verified: false };
+  const unvAfter = { ...base, verified: false, decimals: 18 };
+  assert.deepEqual(findIdentityChanges([unvBefore], [unvAfter]), []);
+
+  // Verified on either side is reviewed, so a curator verifying an asset in the
+  // same window still gets its change surfaced.
+  const verBefore = { ...base, verified: true };
+  const verAfter = { ...base, verified: true, decimals: 18 };
+  assert.equal(findIdentityChanges([verBefore], [verAfter]).length, 1);
+  assert.equal(findIdentityChanges([unvBefore], [{ ...unvAfter, verified: true }]).length, 1);
+});
+
+test('does not treat isAlloyed or coingeckoId as sensitive', () => {
+  const before = asset({ isAlloyed: false, coingeckoId: 'cosmos' });
+  const after = asset({ isAlloyed: true, coingeckoId: 'something-else' });
+  assert.deepEqual(findIdentityChanges([before], [after]), []);
+
+  // A contract re-point on the same asset still reports.
+  const repointed = asset({ contract: 'osmo1evil' });
+  const [change] = findIdentityChanges([asset({ contract: 'osmo1good' })], [repointed]);
+  assert.ok(change);
+  assert.deepEqual(change.changed.map(({ field }) => field), ['contract']);
+});
+
 test('reports removed assets so a mass delisting cannot pass as a quiet day', () => {
   const kept = asset({ coinMinimalDenom: 'ibc/KEPT' });
   const dropped = asset({
@@ -135,7 +171,13 @@ test('reports removed assets so a mass delisting cannot pass as a quiet day', ()
   const removed = findRemovedAssets([kept, dropped], [kept]);
   assert.equal(removed.length, 1);
   assert.equal(removed[0].symbol, 'GONE');
+  // Tagged so the caller can block on verified removals and merely report the
+  // unverified ones.
   assert.equal(removed[0].verified, true);
+
+  const unverifiedDrop = { ...dropped, verified: false };
+  const [row] = findRemovedAssets([kept, unverifiedDrop], [kept]);
+  assert.equal(row.verified, false);
 
   // Nothing removed when the list is unchanged.
   assert.deepEqual(findRemovedAssets([kept, dropped], [kept, dropped]), []);

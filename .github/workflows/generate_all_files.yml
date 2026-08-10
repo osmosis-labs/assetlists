@@ -985,31 +985,33 @@ jobs:
       - name: Auto-merge Safety Gate
         working-directory: ./.github/workflows/utility
         run: |
-          # Decides whether this run is safe to auto-merge. Blocks when:
-          #   - a VERIFIED asset had a status change (unstable flip, halt
-          #     set/cleared, reason shift);
+          # Decides whether this run is safe to auto-merge. Scoped to VERIFIED
+          # assets: that is the curated, default-visible set, and the only place
+          # these changes are user-facing. Blocks when:
+          #   - an existing VERIFIED asset had a financially sensitive field
+          #     change (decimals, coinMinimalDenom, sourceDenom, origin chain,
+          #     contract, IBC path, display name). This is the primary purpose:
+          #     such a change fires no lifecycle row and never shows up in
+          #     new-assets.txt, so only the before/after comparison sees it;
           #   - a newly listed asset's symbol collides with a verified asset's;
-          #   - an EXISTING asset had a financially sensitive field change
-          #     (decimals, denoms, origin chain, contract, IBC path, name, alloy
-          #     status, coingeckoId), which fires no lifecycle row and never
-          #     shows up in new-assets.txt, so it needs the before/after comparison;
+          #   - a VERIFIED asset was removed from the generated list;
           #   - an unclassified lifecycle category fired, or a required input was
           #     missing or empty.
-          # Tooltip-text changes still do not block.
           #
-          # Verified is the trigger rather than a liquidity threshold because
-          # verification is a deliberate human act that the pipeline cannot
-          # perform on its own, and it is what the frontend shows by default. A
-          # thin verified asset is still a curated listing. Liquidity is fetched
-          # and reported as severity context; pass --liquidity-threshold <usd> to
-          # ALSO gate deep-but-unverified assets.
+          # Deliberately does NOT block on lifecycle status changes (unstable
+          # flips, halts set/cleared, reason shifts): the pipeline is responding
+          # to real chain conditions and the summary below already itemises them,
+          # so holding the merge for them stalled the assetlist over routine
+          # bridge outages. Also ignores tooltip text, isAlloyed, coingeckoId, and
+          # anything scoped to unverified assets (an unverified removal count is
+          # still reported, since a large drop can mean a broken generation run).
           #
           # Fails closed: exit 1 means the gate could not evaluate (missing or
           # unreadable inputs), and the merge step below treats that the same as
-          # a block. A Numia outage is NOT fatal here, since liquidity is only an
-          # annotation in this configuration. `set +e` keeps the pipeline itself
-          # green either way so the PR is still created and reviewable. The gate
-          # never decides whether the PR exists, only whether it merges itself.
+          # a block. The gate makes no network calls, so there is no market-data
+          # outage that can stall it. `set +e` keeps the pipeline itself green
+          # either way so the PR is still created and reviewable. The gate never
+          # decides whether the PR exists, only whether it merges itself.
           set +e
           # --before is the pre-generation assetlist copy from "Capture Current
           # Assets". Its absence blocks rather than passing silently, since every

@@ -1,6 +1,12 @@
 // Pure helpers for check_automerge_gate.mjs. Kept separate so regression tests
 // can import the decision logic without executing the workflow entrypoint.
 
+// Fields where a silent change to a VERIFIED asset is a money bug or an
+// impersonation vector. Deliberately excludes:
+//   isAlloyed    - a routing/pricing property the pipeline manages; a change
+//                  here does not move funds to a different place.
+//   coingeckoId  - price-feed metadata, wrong values misprice the display but
+//                  do not redirect a transfer.
 export const SENSITIVE_FIELDS = [
   'decimals',
   'coinMinimalDenom',
@@ -9,8 +15,6 @@ export const SENSITIVE_FIELDS = [
   'contract',
   'ibcPath',
   'name',
-  'isAlloyed',
-  'coingeckoId',
 ];
 
 export function sensitiveShape(asset) {
@@ -24,8 +28,6 @@ export function sensitiveShape(asset) {
     contract: asset.contract ?? null,
     ibcPath,
     name: asset.name ?? null,
-    isAlloyed: asset.isAlloyed === true,
-    coingeckoId: asset.coingeckoId ?? null,
   };
 }
 
@@ -255,6 +257,13 @@ export function findIdentityChanges(beforeAssets, afterAssets) {
       ?? beforeByPath.get(feKey(asset))
       ?? (bySymbol?.chainName === asset.chainName ? bySymbol : undefined);
     if (!prior) continue;
+
+    // VERIFIED only. Verified is the curated, default-visible set, and it is the
+    // only place an identity rewrite is user-facing; an unverified asset is
+    // hidden by default, so a decimals or path change on it is not worth holding
+    // the daily run for. Either side counts as verified so that a curator
+    // verifying an asset in the same window still gets its change reviewed.
+    if (asset.verified !== true && prior.verified !== true) continue;
 
     const now = sensitiveShape(asset);
     const was = sensitiveShape(prior);

@@ -15721,6 +15721,8 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
       "preview": false,
       "listingDate": "2024-01-24T10:58:00.000Z",
       "lastDowntimeDate": "2026-06-17T10:50:34.464Z"
@@ -18582,9 +18584,15 @@
       "name": "Shido",
       "isAlloyed": false,
       "verified": false,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
       "disabled": false,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "lastDowntimeDate": "2026-08-16T15:08:19.309Z"
     },
     {
       "chainName": "cifer",

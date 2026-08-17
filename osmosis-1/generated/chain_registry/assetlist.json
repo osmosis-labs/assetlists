@@ -40713,6 +40713,40 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/6CF86ACC0BC170B45A41FFAA138B062CFA454D919490B79CCAA8491B3B4B420D",
+          "exponent": 0,
+          "aliases": [
+            "utail"
+          ]
+        },
+        {
+          "denom": "TAIL",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/6CF86ACC0BC170B45A41FFAA138B062CFA454D919490B79CCAA8491B3B4B420D",
+      "name": "TAIL Network",
+      "display": "TAIL",
+      "symbol": "TAIL",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "tail",
+            "base_denom": "utail",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-110566",
+            "path": "transfer/channel-110566/utail"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
           "exponent": 0,
           "aliases": [
@@ -46862,40 +46896,6 @@
           "chain": {
             "channel_id": "channel-104867",
             "path": "transfer/channel-104867/uvnd"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/6CF86ACC0BC170B45A41FFAA138B062CFA454D919490B79CCAA8491B3B4B420D",
-          "exponent": 0,
-          "aliases": [
-            "utail"
-          ]
-        },
-        {
-          "denom": "TAIL",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/6CF86ACC0BC170B45A41FFAA138B062CFA454D919490B79CCAA8491B3B4B420D",
-      "name": "TAIL Network",
-      "display": "TAIL",
-      "symbol": "TAIL",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "tail",
-            "base_denom": "utail",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-110566",
-            "path": "transfer/channel-110566/utail"
           }
         }
       ]

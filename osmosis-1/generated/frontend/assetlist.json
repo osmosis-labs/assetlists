@@ -6078,7 +6078,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/usdx.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/usdx.svg"
       },
-      "coingeckoId": "usdx",
       "categories": [
         "stablecoin",
         "defi"
@@ -58358,6 +58357,57 @@
       ],
       "variantGroupKey": "ibc/8E65448D403DDD152CE62B462F44C947EFEDB1DC740C5FC506B9D50F8E155F09",
       "name": "Sensei Dog",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "sovr",
+      "sourceDenom": "usovr",
+      "coinMinimalDenom": "ibc/FB26E04E71EACCCCCD6D81F0F7666D5567C3A1686E2AC577FCC03F28F5B5874F",
+      "symbol": "SOVR",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sovr/images/sovr.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sovr/images/sovr.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "sovr",
+            "chainId": "sovr-1",
+            "sourceDenom": "usovr",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-110679",
+            "path": "transfer/channel-110679/usovr"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "sovr",
+          "sourceDenom": "usovr",
+          "chainType": "cosmos",
+          "chainId": "sovr-1",
+          "symbol": "SOVR",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sovr/images/sovr.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sovr/images/sovr.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/FB26E04E71EACCCCCD6D81F0F7666D5567C3A1686E2AC577FCC03F28F5B5874F",
+      "name": "Sovren",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

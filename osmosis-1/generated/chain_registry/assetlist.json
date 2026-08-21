@@ -40796,6 +40796,43 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/FB26E04E71EACCCCCD6D81F0F7666D5567C3A1686E2AC577FCC03F28F5B5874F",
+          "exponent": 0,
+          "aliases": [
+            "usovr"
+          ]
+        },
+        {
+          "denom": "sovr",
+          "exponent": 6,
+          "aliases": [
+            "SOVR"
+          ]
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/FB26E04E71EACCCCCD6D81F0F7666D5567C3A1686E2AC577FCC03F28F5B5874F",
+      "name": "Sovren",
+      "display": "sovr",
+      "symbol": "SOVR",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "sovr",
+            "base_denom": "usovr",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-110679",
+            "path": "transfer/channel-110679/usovr"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
           "exponent": 0,
           "aliases": [
@@ -46770,43 +46807,6 @@
           "chain": {
             "channel_id": "channel-782",
             "path": "transfer/channel-782/factory/sei1ta5rkr6y2qlkj7px8w2cvear7m2822q4f4ea0m/sensei"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/FB26E04E71EACCCCCD6D81F0F7666D5567C3A1686E2AC577FCC03F28F5B5874F",
-          "exponent": 0,
-          "aliases": [
-            "usovr"
-          ]
-        },
-        {
-          "denom": "sovr",
-          "exponent": 6,
-          "aliases": [
-            "SOVR"
-          ]
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/FB26E04E71EACCCCCD6D81F0F7666D5567C3A1686E2AC577FCC03F28F5B5874F",
-      "name": "Sovren",
-      "display": "sovr",
-      "symbol": "SOVR",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "sovr",
-            "base_denom": "usovr",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-110679",
-            "path": "transfer/channel-110679/usovr"
           }
         }
       ]

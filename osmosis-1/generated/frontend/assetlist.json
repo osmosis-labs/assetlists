@@ -21836,10 +21836,12 @@
       "name": "Juris Protocol",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "listingDate": "2025-08-19T18:08:30.019Z"
+      "listingDate": "2025-08-19T18:08:30.019Z",
+      "lastDowntimeDate": "2026-08-21T15:13:41.811Z"
     },
     {
       "chainName": "terra",
@@ -50166,6 +50168,57 @@
       "lastDowntimeDate": "2026-08-17T15:10:52.298Z"
     },
     {
+      "chainName": "sovr",
+      "sourceDenom": "usovr",
+      "coinMinimalDenom": "ibc/FB26E04E71EACCCCCD6D81F0F7666D5567C3A1686E2AC577FCC03F28F5B5874F",
+      "symbol": "SOVR",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sovr/images/sovr.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sovr/images/sovr.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "sovr",
+            "chainId": "sovr-1",
+            "sourceDenom": "usovr",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-110679",
+            "path": "transfer/channel-110679/usovr"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "sovr",
+          "sourceDenom": "usovr",
+          "chainType": "cosmos",
+          "chainId": "sovr-1",
+          "symbol": "SOVR",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sovr/images/sovr.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sovr/images/sovr.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/FB26E04E71EACCCCCD6D81F0F7666D5567C3A1686E2AC577FCC03F28F5B5874F",
+      "name": "Sovren",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -58421,57 +58474,6 @@
       ],
       "variantGroupKey": "ibc/8E65448D403DDD152CE62B462F44C947EFEDB1DC740C5FC506B9D50F8E155F09",
       "name": "Sensei Dog",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "sovr",
-      "sourceDenom": "usovr",
-      "coinMinimalDenom": "ibc/FB26E04E71EACCCCCD6D81F0F7666D5567C3A1686E2AC577FCC03F28F5B5874F",
-      "symbol": "SOVR",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sovr/images/sovr.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sovr/images/sovr.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "sovr",
-            "chainId": "sovr-1",
-            "sourceDenom": "usovr",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-110679",
-            "path": "transfer/channel-110679/usovr"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "sovr",
-          "sourceDenom": "usovr",
-          "chainType": "cosmos",
-          "chainId": "sovr-1",
-          "symbol": "SOVR",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sovr/images/sovr.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sovr/images/sovr.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/FB26E04E71EACCCCCD6D81F0F7666D5567C3A1686E2AC577FCC03F28F5B5874F",
-      "name": "Sovren",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

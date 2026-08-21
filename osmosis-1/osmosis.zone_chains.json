@@ -1581,6 +1581,17 @@
       "rpc": "https://rpc.trusttails.io",
       "rest": "https://api.trusttails.io",
       "explorer_tx_url": "https://explorer.trusttails.io/tail/tx/${txHash}"
+    },
+    {
+      "chain_name": "sovr",
+      "rpc": "https://rpc.sovrchain.net",
+      "rest": "https://api.sovrchain.net",
+      "explorer_tx_url": "https://sovrscan.com/transactions/${txHash}",
+      "keplr_features": [
+        "ibc-go",
+        "cosmwasm",
+        "wasmd_0.24+"
+      ]
     }
   ]
 }

@@ -88,6 +88,10 @@ const ACCEPTED = [
     "source URL restated with trailing slash",
     "Details unter https://sovrentech.io/ verfügbar.",
   ],
+  [
+    "European number grouping is not an IP address",
+    "Die Gesamtmenge beträgt 1.000.000.000 Token.",
+  ],
 ];
 
 for (const [name, translated] of ACCEPTED) {

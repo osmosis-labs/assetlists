@@ -169,7 +169,11 @@ function canonicalizeUrl(token) {
       : token;
   }
 }
-const IP_PATTERN = /\b\d{1,3}(?:\.\d{1,3}){3}\b/g;
+// Strict IPv4 octets (0-255, no leading zeros): European number formatting
+// turns "1,000,000,000" into "1.000.000.000", which a loose \d{1,3} octet
+// pattern falsely flagged as an IP in real translations.
+const IP_PATTERN =
+  /\b(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}\b/g;
 // Markdown destinations, so [text](/redirect) style targets are compared too.
 const MARKDOWN_DEST_PATTERN = /\]\(\s*([^)\s]+)/g;
 const DANGEROUS_SCHEME_PATTERN = /\b(?:javascript|data|vbscript):/i;
@@ -237,8 +241,15 @@ async function translateText(text, targetLocale, deadlineAt) {
       });
       if (!response.ok) {
         lastError = `HTTP ${response.status}`;
-        // 4xx (other than 429) won't improve on retry
-        if (response.status < 500 && response.status !== 429) {
+        // 4xx generally won't improve on retry, except 429 and 403: the
+        // service sits behind Cloudflare, which intermittently challenges
+        // GitHub runner IPs with 403s that clear on retry (observed 13/160
+        // in the first production run, on a runner that got 137 successes).
+        if (
+          response.status < 500 &&
+          response.status !== 429 &&
+          response.status !== 403
+        ) {
           break;
         }
       } else {

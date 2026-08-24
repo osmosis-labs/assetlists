@@ -4,62 +4,23 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-patchedDependencies:
-  '@inlang/cli@1.20.0':
-    hash: 8071ed886e9f95081508d18dd17f74285958138a420a4eb16986de497085be87
-    path: patches/@inlang__cli@1.20.0.patch
-
 importers:
 
   .:
     dependencies:
-      inlang:
-        specifier: ^0.1.2
-        version: 0.1.2
       pnpm:
         specifier: ^9.1.0
         version: 9.15.9
       ws:
         specifier: ^8.21.0
         version: 8.21.0
-    devDependencies:
-      '@inlang/cli':
-        specifier: 1.20.0
-        version: 1.20.0(patch_hash=8071ed886e9f95081508d18dd17f74285958138a420a4eb16986de497085be87)
 
 packages:
-
-  '@inlang/cli@1.20.0':
-    resolution: {integrity: sha512-zJ/EhEwaxPvrZ2Vgp6WtT07HSxcp2yTxx/tI2QLBEDiqqJJ4EVz395kHZh93MpTIH+/80aW2EkKD97/Gt4UM3w==}
-    engines: {node: '>=18.0.0'}
-    hasBin: true
-
-  esbuild-wasm@0.19.12:
-    resolution: {integrity: sha512-Zmc4hk6FibJZBcTx5/8K/4jT3/oG1vkGTEeKJUQFCUQKimD6Q7+adp/bdVQyYJFolMKaXkQnVZdV4O5ZaTYmyQ==}
-    engines: {node: '>=12'}
-    hasBin: true
-
-  fs-extra@11.1.1:
-    resolution: {integrity: sha512-MGIE4HOvQCeUCzmlHs0vXpih4ysz4wg9qiSAu6cd42lVwPbTM1TjV7RusoyQqMmk/95gdQZX72u+YW+c3eEpFQ==}
-    engines: {node: '>=14.14'}
-
-  graceful-fs@4.2.11:
-    resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
-
-  inlang@0.1.2:
-    resolution: {integrity: sha512-WCMEGJuBhQsFj2mMrnIskWCWHD/sID9QArQT63r1YcNdRX2xMj9uI0VB0yTYRALPm5qfE49cYU6hinI9PeMwtA==}
-
-  jsonfile@6.2.1:
-    resolution: {integrity: sha512-zwOTdL3rFQ/lRdBnntKVOX6k5cKJwEc1HdilT71BWEu7J41gXIB2MRp+vxduPSwZJPWBxEzv4yH1wYLJGUHX4Q==}
 
   pnpm@9.15.9:
     resolution: {integrity: sha512-aARhQYk8ZvrQHAeSMRKOmvuJ74fiaR1p5NQO7iKJiClf1GghgbrlW1hBjDolO95lpQXsfF+UA+zlzDzTfc8lMQ==}
     engines: {node: '>=18.12'}
     hasBin: true
-
-  universalify@2.0.1:
-    resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
-    engines: {node: '>= 10.0.0'}
 
   ws@8.21.0:
     resolution: {integrity: sha512-Vsp28b7DRcimFQvrqu2Wek3z1iYxDCWqHYB8Qsnk/S4RfaCQzPGPyBNuVjJV3cd6UiKtUtp6sNM77gWvzcCH+g==}
@@ -75,31 +36,6 @@ packages:
 
 snapshots:
 
-  '@inlang/cli@1.20.0(patch_hash=8071ed886e9f95081508d18dd17f74285958138a420a4eb16986de497085be87)':
-    dependencies:
-      esbuild-wasm: 0.19.12
-      fs-extra: 11.1.1
-
-  esbuild-wasm@0.19.12: {}
-
-  fs-extra@11.1.1:
-    dependencies:
-      graceful-fs: 4.2.11
-      jsonfile: 6.2.1
-      universalify: 2.0.1
-
-  graceful-fs@4.2.11: {}
-
-  inlang@0.1.2: {}
-
-  jsonfile@6.2.1:
-    dependencies:
-      universalify: 2.0.1
-    optionalDependencies:
-      graceful-fs: 4.2.11
-
   pnpm@9.15.9: {}
-
-  universalify@2.0.1: {}
 
   ws@8.21.0: {}

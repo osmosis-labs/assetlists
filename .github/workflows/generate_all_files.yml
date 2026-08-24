@@ -412,7 +412,12 @@ jobs:
 
       - name: Run localization
         working-directory: ./.github/workflows/utility
-        run: pnpm inlang machine translate --force
+        # Calls the keyless community translation service directly (the
+        # inlang-hosted RPC was decommissioned). The script never fails the
+        # workflow: translation outages degrade to English-only descriptions
+        # plus a ::warning:: annotation, and incomplete assets re-queue on the
+        # next daily run.
+        run: node translate_language_files.mjs
 
       - name: Run post-localization code
         working-directory: ./.github/workflows/utility

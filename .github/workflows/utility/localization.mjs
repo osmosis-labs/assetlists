@@ -81,8 +81,15 @@ export function setAssetDetailLocalizationInput(chainName, assets) {
     for (const propertyName of localized_properties) {
 
       if (!asset[propertyName]) { return; }
-      const currentValue = getAssetDetail(chainName, asset.base)?.[propertyName]?.[default_localization_code];
-      if (currentValue === asset[propertyName]) { return; }
+      // Re-queue when the English source changed OR any locale is still
+      // missing (a partial merge from an earlier run, e.g. after a
+      // translation-service outage, must be completed on a later run).
+      const existingProperty = getAssetDetail(chainName, asset.base)?.[propertyName];
+      const currentValue = existingProperty?.[default_localization_code];
+      const hasAllLocalizations = localization_codes.every(
+        (localization_code) => existingProperty?.[localization_code]
+      );
+      if (currentValue === asset[propertyName] && hasAllLocalizations) { return; }
 
       inlangInput[chainName][encodeKeyForInlang(asset.base)] = {
         [propertyName]: asset[propertyName]
@@ -144,7 +151,13 @@ export function getLocalizationOutput() {
           savedTranslations[chainName][assetName][propertyName][localization] = 
             inlangOutput[localization][chainName][assetName][propertyName];
         });
-        if (Object.keys(savedTranslations[chainName][assetName][propertyName]).length !== localization_codes.length) {
+        // Merge partial locale sets rather than all-or-nothing: as long as the
+        // English source is present, write what we have. Missing locales are
+        // re-queued by setAssetDetailLocalizationInput on the next generation
+        // run, so translations backfill once the translation service recovers.
+        // (Previously this required ALL locales, so a translation outage
+        // silently dropped even the English description.)
+        if (!savedTranslations[chainName][assetName][propertyName][default_localization_code]) {
           delete savedTranslations[chainName][assetName][propertyName];
         }
       }
@@ -171,7 +184,16 @@ export function getLocalizationOutput() {
       let asset_detail = getAssetDetail(chainName, asset_base) || {};
 
       for (const propertyName in localized_asset_detail_properties) {   // this only contains new localized data
-        asset_detail[propertyName] = localized_asset_detail_properties[propertyName];
+        const incoming = localized_asset_detail_properties[propertyName];
+        const existing = asset_detail[propertyName];
+        // Same English source: this run is backfilling locales, so merge into
+        // what exists. Changed English source: old translations describe the
+        // previous text, so replace the whole object.
+        if (existing?.[default_localization_code] === incoming[default_localization_code]) {
+          asset_detail[propertyName] = { ...existing, ...incoming };
+        } else {
+          asset_detail[propertyName] = incoming;
+        }
       }
 
       zone.writeToFile(

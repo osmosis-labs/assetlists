@@ -1,4 +1,4 @@
-# Description: Runs InLang machine translation and post-processing for localization
+# Description: Runs machine translation (keyless community service) and post-processing for localization
 # Included in: Generate All Files bundle workflow (runs daily at 15:00 UTC)
 # Trigger: Manual via workflow_dispatch only (standalone run)
 # Output: Creates PR with localization updates to branch 'update/localization'
@@ -36,7 +36,12 @@ jobs:
 
       - name: Run localization
         working-directory: ./.github/workflows/utility
-        run: pnpm inlang machine translate --force
+        # Calls the keyless community translation service directly (the
+        # inlang-hosted RPC was decommissioned). The script never fails the
+        # workflow: translation outages degrade to English-only descriptions
+        # plus a ::warning:: annotation, and incomplete assets re-queue on the
+        # next daily run.
+        run: node translate_language_files.mjs
 
       - name: Run post-localization code
         working-directory: ./.github/workflows/utility

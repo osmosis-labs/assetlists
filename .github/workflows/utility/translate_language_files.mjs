@@ -42,6 +42,16 @@ const MAX_ATTEMPTS = 3;
 const RETRY_DELAY_MS = [5000, 15000];
 const CONCURRENCY = 3; // stay polite to the free community service
 
+// Run-wide bound: with retries, a full-outage worst case is ~380s per
+// string-locale pair, which on a busy queue would brush the 6-hour GitHub
+// Actions job limit. Past the deadline, or after the circuit breaker trips
+// on consecutive failures, remaining pairs are skipped; they re-queue on the
+// next daily run.
+const RUN_DEADLINE_MS = Number(
+  process.env.TRANSLATE_RUN_DEADLINE_MS ?? 20 * 60 * 1000
+);
+const CIRCUIT_BREAKER_THRESHOLD = 8;
+
 const dryRun = process.argv.includes("--dry-run");
 
 //-- Helpers --
@@ -86,7 +96,125 @@ function collectLeaves(enInput) {
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-async function translateText(text, targetLocale) {
+// Guard against a compromised or misbehaving translation service: the output
+// lands, auto-merged, in user-facing asset descriptions, so reject anything
+// that adds link-like tokens absent from the English source, contains markup
+// or Markdown link syntax, or is wildly out of proportion to the source.
+// Detection is generic rather than TLD-allowlisted: any dot-separated token
+// with an alphabetic final label reads as a domain, and any scheme:// counts
+// as a URL, so an attacker cannot route around a fixed TLD list. This still
+// cannot be exhaustive against an adversary (spelled-out dots, homoglyphs),
+// but every rejection is fail-safe: the locale stays English and re-queues,
+// and the warning annotation makes repeated rejections visible. A rejected
+// pair advances the circuit breaker like any other failure, so an endpoint
+// serving malicious 200s gets cut off the same way as an outage.
+const DOMAIN_TOKEN_PATTERN = /\b(?:[A-Za-z0-9_-]+\.)+[A-Za-z]{2,24}\b/g;
+// Complete URLs (scheme, authority, and path), not just the scheme: comparing
+// schemes alone let a translation swap the destination behind a source URL
+// (https://192.0.2.1, or a different path on the legitimate domain).
+// URL tokens span the full RFC-3986 ASCII character set, including parens
+// (paths like /path(claim)) and brackets (IPv6 authorities), but stay
+// ASCII-only so a token ends where surrounding prose begins even with no
+// space: agglutinative languages attach particles directly to URLs (Korean
+// "https://sovrentech.io를"), which must compare equal to the source URL,
+// while any ASCII path/query an attacker appends lands inside the token and
+// mismatches. Wrapping punctuation is trimmed afterwards (trailing sentence
+// punctuation, and closers with no matching opener inside the token, so a
+// Markdown or prose ")" is dropped while a balanced "/path(claim)" is kept).
+const URL_CANDIDATE_CHARS = "[A-Za-z0-9\\-._~:/?#@!$&*+,;=%()\\[\\]]";
+const URL_PATTERN = new RegExp(
+  `\\b[a-z][a-z0-9+.-]*:\\/\\/${URL_CANDIDATE_CHARS}+`,
+  "gi"
+);
+// Protocol-relative authorities (//host/...): the lookbehind excludes the //
+// inside scheme:// URLs, which URL_PATTERN already captures whole.
+const PROTOCOL_RELATIVE_PATTERN = new RegExp(
+  `(?<![:\\w])\\/\\/${URL_CANDIDATE_CHARS}+`,
+  "g"
+);
+function trimUrlToken(raw) {
+  const count = (s, ch) => s.split(ch).length - 1;
+  let token = raw;
+  for (;;) {
+    const before = token;
+    token = token.replace(/[.,;:!?]+$/, "");
+    while (token.endsWith(")") && count(token, "(") < count(token, ")")) {
+      token = token.slice(0, -1);
+    }
+    while (token.endsWith("]") && count(token, "[") < count(token, "]")) {
+      token = token.slice(0, -1);
+    }
+    if (token === before) {
+      break;
+    }
+  }
+  return token;
+}
+// Canonicalize through the standard URL parser so equivalent spellings
+// compare equal ("https://x.io" vs "https://x.io/", default ports). The
+// parser lowercases the case-INsensitive components (scheme, host) and
+// preserves the case-SENSITIVE ones (path, query, fragment), so /SafePath
+// and /safepath stay distinct destinations. Protocol-relative tokens get a
+// scheme so the same authority with and without one compares equal. Tokens
+// the parser refuses are lowercased only when they are bare domains (hosts
+// are case-insensitive); anything else, e.g. a relative Markdown
+// destination, keeps its case.
+function canonicalizeUrl(token) {
+  const withScheme = token.startsWith("//") ? `https:${token}` : token;
+  try {
+    return new URL(withScheme).href;
+  } catch {
+    return /^(?:[A-Za-z0-9_-]+\.)+[A-Za-z]{2,24}$/.test(token)
+      ? token.toLowerCase()
+      : token;
+  }
+}
+const IP_PATTERN = /\b\d{1,3}(?:\.\d{1,3}){3}\b/g;
+// Markdown destinations, so [text](/redirect) style targets are compared too.
+const MARKDOWN_DEST_PATTERN = /\]\(\s*([^)\s]+)/g;
+const DANGEROUS_SCHEME_PATTERN = /\b(?:javascript|data|vbscript):/i;
+function extractLinkTokens(text) {
+  // Normalize unicode dot lookalikes so "claim。co" reads as "claim.co".
+  const normalized = text.replace(/[。．｡]/g, ".");
+  const tokens = [
+    ...(normalized.match(DOMAIN_TOKEN_PATTERN) ?? []),
+    ...(normalized.match(URL_PATTERN) ?? []),
+    ...(normalized.match(PROTOCOL_RELATIVE_PATTERN) ?? []),
+    ...(normalized.match(IP_PATTERN) ?? []),
+    ...[...normalized.matchAll(MARKDOWN_DEST_PATTERN)].map((m) => m[1]),
+  ];
+  return tokens.map((token) => canonicalizeUrl(trimUrlToken(token)));
+}
+export function validateTranslation(sourceText, translatedText) {
+  if (/<[a-zA-Z/][^>]*>/.test(translatedText)) {
+    return "contains markup";
+  }
+  if (DANGEROUS_SCHEME_PATTERN.test(translatedText)) {
+    return "contains dangerous URI scheme";
+  }
+  if (/\]\s*\(/.test(translatedText) && !/\]\s*\(/.test(sourceText)) {
+    return "contains Markdown link syntax";
+  }
+  const sourceLinks = new Set(extractLinkTokens(sourceText));
+  for (const token of extractLinkTokens(translatedText)) {
+    if (!sourceLinks.has(token)) {
+      return `adds link-like token "${token}"`;
+    }
+  }
+  // Loose bounds only: CJK translations legitimately compress well below 1/10
+  // of the English length, and Indic scripts expand. This catches injected
+  // essays and truncated junk, not normal variation.
+  if (
+    translatedText.length >
+      Math.max(sourceText.length * 4, sourceText.length + 200) ||
+    translatedText.length < sourceText.length * 0.05
+  ) {
+    return `implausible length (${translatedText.length} chars vs ${sourceText.length} source)`;
+  }
+  return undefined;
+}
+
+async function translateText(text, targetLocale, deadlineAt) {
   const query = new URLSearchParams({
     q: text,
     target: targetLocale,
@@ -98,10 +226,14 @@ async function translateText(text, targetLocale) {
   });
   let lastError;
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    const remainingMs = deadlineAt - Date.now();
+    if (remainingMs <= 0) {
+      return { ok: false, error: "run deadline reached", skipped: true };
+    }
     try {
       const response = await fetch(`${TRANSLATE_API_URL}?${query}`, {
         method: "POST",
-        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+        signal: AbortSignal.timeout(Math.min(REQUEST_TIMEOUT_MS, remainingMs)),
       });
       if (!response.ok) {
         lastError = `HTTP ${response.status}`;
@@ -177,24 +309,67 @@ async function main() {
     return;
   }
 
+  // Remove any leftover target-locale files (e.g. from an interrupted earlier
+  // run) so stale translations of a different en.json can never reach the
+  // merge: only files written by this run survive.
+  for (const locale of targetLocales) {
+    fs.rmSync(path.join(languageFilesDir, locale + fileExtension), {
+      force: true,
+    });
+  }
+
   const outputs = {}; // locale -> nested object mirroring en.json
   const failures = [];
   let translatedCount = 0;
+  let skippedCount = 0;
+  const deadlineAt = Date.now() + RUN_DEADLINE_MS;
+  const breaker = { consecutiveFailures: 0, tripped: false };
+
+  // Request failures and validation rejections share one accounting path, so
+  // an endpoint serving repeated malicious or malformed 200s trips the same
+  // circuit breaker as an outage.
+  const registerFailure = (message) => {
+    failures.push(message);
+    breaker.consecutiveFailures++;
+    if (
+      breaker.consecutiveFailures >= CIRCUIT_BREAKER_THRESHOLD &&
+      !breaker.tripped
+    ) {
+      breaker.tripped = true;
+      console.log(
+        `Circuit breaker tripped after ${CIRCUIT_BREAKER_THRESHOLD} consecutive failures; skipping remaining translations this run.`
+      );
+    }
+  };
 
   const tasks = [];
   for (const locale of targetLocales) {
     for (const leaf of leaves) {
       tasks.push(async () => {
-        const result = await translateText(leaf.text, locale);
+        if (breaker.tripped || Date.now() >= deadlineAt) {
+          skippedCount++;
+          return;
+        }
+        const result = await translateText(leaf.text, locale, deadlineAt);
         if (result.ok) {
+          const rejection = validateTranslation(leaf.text, result.translatedText);
+          if (rejection) {
+            registerFailure(
+              `${locale}: ${leaf.chainName}/${leaf.assetBase}.${leaf.propertyName} (rejected: ${rejection})`
+            );
+            return;
+          }
+          breaker.consecutiveFailures = 0;
           outputs[locale] ??= {};
           outputs[locale][leaf.chainName] ??= {};
           outputs[locale][leaf.chainName][leaf.assetBase] ??= {};
           outputs[locale][leaf.chainName][leaf.assetBase][leaf.propertyName] =
             result.translatedText;
           translatedCount++;
+        } else if (result.skipped) {
+          skippedCount++;
         } else {
-          failures.push(
+          registerFailure(
             `${locale}: ${leaf.chainName}/${leaf.assetBase}.${leaf.propertyName} (${result.error})`
           );
         }
@@ -217,6 +392,11 @@ async function main() {
 
   const expected = leaves.length * targetLocales.length;
   console.log(`Translated ${translatedCount}/${expected} string-locale pairs.`);
+  if (skippedCount > 0) {
+    emitWarning(
+      `${skippedCount} of ${expected} string-locale pairs were skipped (run deadline or circuit breaker); they re-queue on the next daily run.`
+    );
+  }
   if (failures.length > 0) {
     emitWarning(
       `Translation service errored on ${failures.length} of ${expected} string-locale pairs; affected descriptions stay English-only until the next run re-queues them.`
@@ -228,4 +408,32 @@ async function main() {
   }
 }
 
-await main();
+// Only run when executed directly (validateTranslation is imported by tests).
+// realpath both sides so the comparison survives junctions/symlinks, where
+// Node may canonicalize one path and not the other.
+function isMainModule() {
+  if (!process.argv[1]) {
+    return false;
+  }
+  const selfPath = fileURLToPath(import.meta.url);
+  try {
+    return (
+      fs.realpathSync(path.resolve(process.argv[1])) ===
+      fs.realpathSync(selfPath)
+    );
+  } catch {
+    return path.resolve(process.argv[1]) === selfPath;
+  }
+}
+if (isMainModule()) {
+  try {
+    await main();
+  } catch (error) {
+    // Translation is best-effort by contract: a crash (e.g. malformed
+    // en.json) must not fail the daily pipeline. localization_post.mjs still
+    // merges whatever exists, and incomplete assets re-queue on the next run.
+    emitWarning(
+      `Translation step crashed (${error?.message ?? error}); descriptions stay English-only until a later run succeeds.`
+    );
+  }
+}

@@ -3221,12 +3221,6 @@
           "type": "external_interface",
           "deposit_url": "https://express.noble.xyz/transfer?origin=solana&destination=osmosis",
           "withdraw_url": "https://express.noble.xyz/transfer?origin=osmosis&destination=solana"
-        },
-        {
-          "name": "Skip:Go",
-          "type": "external_interface",
-          "deposit_url": "https://go.skip.build/?src_chain=solana&src_asset=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&dest_chain=osmosis-1&dest_asset=ibc%2F498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4",
-          "withdraw_url": "https://go.skip.build/?src_chain=osmosis-1&src_asset=ibc%2F498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4&dest_chain=solana&dest_asset=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
         }
       ],
       "categories": [
@@ -5456,7 +5450,15 @@
             "base_denom": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F"
           }
         ]
-      }
+      },
+      "transfer_methods": [
+        {
+          "name": "Skip:Go",
+          "type": "external_interface",
+          "deposit_url": "https://go.skip.build/?src_chain=1&src_asset=0xdAC17F958D2ee523a2206206994597C13D831ec7&dest_chain=osmosis-1&dest_asset=factory%2Fosmo1em6xs47hd82806f5cxgyufguxrrc7l0aqx7nzzptjuqgswczk8csavdxek%2Falloyed%2FallUSDT",
+          "withdraw_url": "https://go.skip.build/?src_chain=osmosis-1&src_asset=factory%2Fosmo1em6xs47hd82806f5cxgyufguxrrc7l0aqx7nzzptjuqgswczk8csavdxek%2Falloyed%2FallUSDT&dest_chain=1&dest_asset=0xdAC17F958D2ee523a2206206994597C13D831ec7"
+        }
+      ]
     },
     {
       "chain_name": "osmosis",
@@ -5518,7 +5520,15 @@
             "base_denom": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
           }
         ]
-      }
+      },
+      "transfer_methods": [
+        {
+          "name": "Skip:Go",
+          "type": "external_interface",
+          "deposit_url": "https://go.skip.build/?src_chain=1&src_asset=0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48&dest_chain=osmosis-1&dest_asset=factory%2Fosmo147h5x9pcj7lm0cttlaefx6sqq5vdfnmwfcqxkmjd7exqm9gc7grqhr75m0%2Falloyed%2FallUSDC",
+          "withdraw_url": "https://go.skip.build/?src_chain=osmosis-1&src_asset=factory%2Fosmo147h5x9pcj7lm0cttlaefx6sqq5vdfnmwfcqxkmjd7exqm9gc7grqhr75m0%2Falloyed%2FallUSDC&dest_chain=1&dest_asset=0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        }
+      ]
     },
     {
       "chain_name": "composable",
@@ -5563,7 +5573,15 @@
       "canonical": {
         "chain_name": "bitcoin",
         "base_denom": "sat"
-      }
+      },
+      "transfer_methods": [
+        {
+          "name": "Skip:Go",
+          "type": "external_interface",
+          "deposit_url": "https://go.skip.build/?src_chain=1&src_asset=0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599&dest_chain=osmosis-1&dest_asset=factory%2Fosmo1z6r6qdknhgsc0zeracktgpcxf43j6sekq07nw8sxduc9lg0qjjlqfu25e3%2Falloyed%2FallBTC",
+          "withdraw_url": "https://go.skip.build/?src_chain=osmosis-1&src_asset=factory%2Fosmo1z6r6qdknhgsc0zeracktgpcxf43j6sekq07nw8sxduc9lg0qjjlqfu25e3%2Falloyed%2FallBTC&dest_chain=1&dest_asset=0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
+        }
+      ]
     },
     {
       "chain_name": "bitsong",
@@ -6082,7 +6100,15 @@
             "base_denom": "0x4200000000000000000000000000000000000006"
           }
         ]
-      }
+      },
+      "transfer_methods": [
+        {
+          "name": "Skip:Go",
+          "type": "external_interface",
+          "deposit_url": "https://go.skip.build/?src_chain=1&src_asset=ethereum-native&dest_chain=osmosis-1&dest_asset=factory%2Fosmo1k6c8jln7ejuqwtqmay3yvzrg3kueaczl96pk067ldg8u835w0yhsw27twm%2Falloyed%2FallETH",
+          "withdraw_url": "https://go.skip.build/?src_chain=osmosis-1&src_asset=factory%2Fosmo1k6c8jln7ejuqwtqmay3yvzrg3kueaczl96pk067ldg8u835w0yhsw27twm%2Falloyed%2FallETH&dest_chain=1&dest_asset=ethereum-native"
+        }
+      ]
     },
     {
       "chain_name": "osmosis",
@@ -6341,6 +6367,14 @@
       },
       "categories": [
         "oracles"
+      ],
+      "transfer_methods": [
+        {
+          "name": "Skip:Go",
+          "type": "external_interface",
+          "deposit_url": "https://go.skip.build/?src_chain=1&src_asset=0x514910771AF9Ca656af840dff83E8264EcF986CA&dest_chain=osmosis-1&dest_asset=factory%2Fosmo18zdw5yvs6gfp95rp74qqwug9yduw2fyr8kplk2xgs726s9axc5usa2vpgw%2Falloyed%2FallLINK",
+          "withdraw_url": "https://go.skip.build/?src_chain=osmosis-1&src_asset=factory%2Fosmo18zdw5yvs6gfp95rp74qqwug9yduw2fyr8kplk2xgs726s9axc5usa2vpgw%2Falloyed%2FallLINK&dest_chain=1&dest_asset=0x514910771AF9Ca656af840dff83E8264EcF986CA"
+        }
       ]
     },
     {
@@ -6788,7 +6822,15 @@
         "base_denom": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984"
       },
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "transfer_methods": [
+        {
+          "name": "Skip:Go",
+          "type": "external_interface",
+          "deposit_url": "https://go.skip.build/?src_chain=1&src_asset=0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984&dest_chain=osmosis-1&dest_asset=factory%2Fosmo1eqjda4pc6e09jtxzxggf6jl3jye2yn453ja58we5gxwzmf5ah28qvlnaz8%2Falloyed%2FallUNI",
+          "withdraw_url": "https://go.skip.build/?src_chain=osmosis-1&src_asset=factory%2Fosmo1eqjda4pc6e09jtxzxggf6jl3jye2yn453ja58we5gxwzmf5ah28qvlnaz8%2Falloyed%2FallUNI&dest_chain=1&dest_asset=0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984"
+        }
+      ]
     },
     {
       "chain_name": "pryzm",
@@ -7698,7 +7740,15 @@
       },
       "_comment": "Binance Coin $BNB",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "transfer_methods": [
+        {
+          "name": "Skip:Go",
+          "type": "external_interface",
+          "deposit_url": "https://go.skip.build/?src_chain=56&src_asset=binance-native&dest_chain=osmosis-1&dest_asset=factory%2Fosmo1zetxzc5nka4jm203ljjtjf933jwjh45ge6spfeef447rnnhqxc4qrazrcz%2Falloyed%2FallBNB",
+          "withdraw_url": "https://go.skip.build/?src_chain=osmosis-1&src_asset=factory%2Fosmo1zetxzc5nka4jm203ljjtjf933jwjh45ge6spfeef447rnnhqxc4qrazrcz%2Falloyed%2FallBNB&dest_chain=56&dest_asset=binance-native"
+        }
+      ]
     },
     {
       "chain_name": "sidechain",
@@ -7732,7 +7782,15 @@
         }
       },
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "transfer_methods": [
+        {
+          "name": "Skip:Go",
+          "type": "external_interface",
+          "deposit_url": "https://go.skip.build/?src_chain=dydx-mainnet-1&src_asset=adydx&dest_chain=osmosis-1&dest_asset=factory%2Fosmo1zem8r6dv6u38f6qpg546zy30946av8h5srgug0s4gcyy6cfecf3seac083%2Falloyed%2FallDYDX",
+          "withdraw_url": "https://go.skip.build/?src_chain=osmosis-1&src_asset=factory%2Fosmo1zem8r6dv6u38f6qpg546zy30946av8h5srgug0s4gcyy6cfecf3seac083%2Falloyed%2FallDYDX&dest_chain=dydx-mainnet-1&dest_asset=adydx"
+        }
+      ]
     },
     {
       "chain_name": "osmosis",

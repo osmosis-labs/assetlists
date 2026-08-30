@@ -40880,6 +40880,40 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/F82E97B58F45D32AE2199AE8AD9979FFD35CDC823BB3EB34C36349E374A8EFE3",
+          "exponent": 0,
+          "aliases": [
+            "arst"
+          ]
+        },
+        {
+          "denom": "rst",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/F82E97B58F45D32AE2199AE8AD9979FFD35CDC823BB3EB34C36349E374A8EFE3",
+      "name": "Realio Security Token",
+      "display": "rst",
+      "symbol": "RST",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "realio",
+            "base_denom": "arst",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-1424",
+            "path": "transfer/channel-1424/arst"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
           "exponent": 0,
           "aliases": [
@@ -46287,40 +46321,6 @@
         }
       ],
       "coingecko_id": "qie"
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/F82E97B58F45D32AE2199AE8AD9979FFD35CDC823BB3EB34C36349E374A8EFE3",
-          "exponent": 0,
-          "aliases": [
-            "arst"
-          ]
-        },
-        {
-          "denom": "rst",
-          "exponent": 18
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/F82E97B58F45D32AE2199AE8AD9979FFD35CDC823BB3EB34C36349E374A8EFE3",
-      "name": "Realio Security Token",
-      "display": "rst",
-      "symbol": "RST",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "realio",
-            "base_denom": "arst",
-            "channel_id": "channel-1"
-          },
-          "chain": {
-            "channel_id": "channel-1424",
-            "path": "transfer/channel-1424/arst"
-          }
-        }
-      ]
     },
     {
       "denom_units": [

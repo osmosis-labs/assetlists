@@ -3318,7 +3318,13 @@
       "categories": [
         "rwa"
       ],
-      "_comment": "Realio Network $RIO"
+      "_comment": "Realio Network $RIO",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "osmosis",
@@ -13139,6 +13145,18 @@
       "path": "transfer/channel-110679/usovr",
       "_comment": "Sovren $SOVR",
       "osmosis_verified": true
+    },
+    {
+      "chain_name": "realio",
+      "base_denom": "arst",
+      "path": "transfer/channel-1424/arst",
+      "_comment": "Realio Security Token $RST",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     }
   ]
 }

@@ -13748,9 +13748,15 @@
       "name": "Realio Network",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
       "disabled": false,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "lastDowntimeDate": "2026-08-30T15:13:10.887Z"
     },
     {
       "chainName": "osmosis",
@@ -50484,6 +50490,61 @@
       "listingDate": "2026-08-24T16:29:55.129Z"
     },
     {
+      "chainName": "realio",
+      "sourceDenom": "arst",
+      "coinMinimalDenom": "ibc/F82E97B58F45D32AE2199AE8AD9979FFD35CDC823BB3EB34C36349E374A8EFE3",
+      "symbol": "RST",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/realio/images/rst.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "realio",
+            "chainId": "realionetwork_3301-1",
+            "sourceDenom": "arst",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-1424",
+            "path": "transfer/channel-1424/arst"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "realio",
+          "sourceDenom": "arst",
+          "chainType": "cosmos",
+          "chainId": "realionetwork_3301-1",
+          "symbol": "RST",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/realio/images/rst.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/F82E97B58F45D32AE2199AE8AD9979FFD35CDC823BB3EB34C36349E374A8EFE3",
+      "name": "Realio Security Token",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "lastDowntimeDate": "2026-08-30T15:13:10.887Z"
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -57939,55 +58000,6 @@
       "preview": false,
       "lastDowntimeDate": "2026-07-04T15:29:33.304Z",
       "lastRecoveryDate": "2026-08-02T15:27:32.463Z"
-    },
-    {
-      "chainName": "realio",
-      "sourceDenom": "arst",
-      "coinMinimalDenom": "ibc/F82E97B58F45D32AE2199AE8AD9979FFD35CDC823BB3EB34C36349E374A8EFE3",
-      "symbol": "RST",
-      "decimals": 18,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/realio/images/rst.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "realio",
-            "chainId": "realionetwork_3301-1",
-            "sourceDenom": "arst",
-            "port": "transfer",
-            "channelId": "channel-1"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-1424",
-            "path": "transfer/channel-1424/arst"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "realio",
-          "sourceDenom": "arst",
-          "chainType": "cosmos",
-          "chainId": "realionetwork_3301-1",
-          "symbol": "RST",
-          "decimals": 18,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/realio/images/rst.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/F82E97B58F45D32AE2199AE8AD9979FFD35CDC823BB3EB34C36349E374A8EFE3",
-      "name": "Realio Security Token",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
     },
     {
       "chainName": "safrochain",

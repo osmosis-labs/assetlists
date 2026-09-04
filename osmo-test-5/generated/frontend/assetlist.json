@@ -6079,6 +6079,57 @@
       "preview": false
     },
     {
+      "chainName": "mantrachaintestnet2",
+      "sourceDenom": "erc20:0x36A28B8C8FFD00bEE440dB8273D57451FBeAf767",
+      "coinMinimalDenom": "ibc/990003A3424B424F29F726690D32DBEC35EE8D3A1F5F85E22A109A4B0275C8C7",
+      "symbol": "wmantraUSD",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/wmantraUSD-token.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/wmantraUSD-token.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "mantrachaintestnet2",
+            "chainId": "mantra-dukong-1",
+            "sourceDenom": "erc20:0x36A28B8C8FFD00bEE440dB8273D57451FBeAf767",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-9126",
+            "path": "transfer/channel-9126/erc20:0x36A28B8C8FFD00bEE440dB8273D57451FBeAf767"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "mantrachaintestnet2",
+          "sourceDenom": "erc20:0x36A28B8C8FFD00bEE440dB8273D57451FBeAf767",
+          "chainType": "cosmos",
+          "chainId": "mantra-dukong-1",
+          "symbol": "wmantraUSD",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/wmantraUSD-token.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/wmantraUSD-token.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/990003A3424B424F29F726690D32DBEC35EE8D3A1F5F85E22A109A4B0275C8C7",
+      "name": "Wrapped mantraUSD",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "neutrontestnet",
       "sourceDenom": "untrn",
       "coinMinimalDenom": "ibc/6E74FCA8851F2F81213A6F0D61DB78D1898454C3BF924105DF6549500E1C4785",

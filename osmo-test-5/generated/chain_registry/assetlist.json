@@ -4706,6 +4706,40 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/990003A3424B424F29F726690D32DBEC35EE8D3A1F5F85E22A109A4B0275C8C7",
+          "exponent": 0,
+          "aliases": [
+            "erc20:0x36A28B8C8FFD00bEE440dB8273D57451FBeAf767"
+          ]
+        },
+        {
+          "denom": "wmantrausd",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/990003A3424B424F29F726690D32DBEC35EE8D3A1F5F85E22A109A4B0275C8C7",
+      "name": "Wrapped mantraUSD",
+      "display": "wmantrausd",
+      "symbol": "wmantraUSD",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "mantrachaintestnet2",
+            "base_denom": "erc20:0x36A28B8C8FFD00bEE440dB8273D57451FBeAf767",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-9126",
+            "path": "transfer/channel-9126/erc20:0x36A28B8C8FFD00bEE440dB8273D57451FBeAf767"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/6E74FCA8851F2F81213A6F0D61DB78D1898454C3BF924105DF6549500E1C4785",
           "exponent": 0,
           "aliases": [

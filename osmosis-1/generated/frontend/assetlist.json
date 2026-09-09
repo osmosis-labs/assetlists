@@ -34080,6 +34080,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/epix/images/epix.svg"
       },
+      "coingeckoId": "epix",
       "categories": [
         "defi",
         "dweb"
@@ -46146,11 +46147,11 @@
     {
       "chainName": "amitis",
       "sourceDenom": "uamts",
-      "coinMinimalDenom": "ibc/7E577151E593349028AAC4A9FCC33258D70749FDF3CBB48F7744262DD18FC89D",
+      "coinMinimalDenom": "ibc/4793BB9CA6FFCF1A8AEA9BA386200D8D32413E0986BDD7812891A361B57F1C31",
       "symbol": "AMTS",
       "decimals": 6,
       "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/amitis/images/amts.svg"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/amitis/images/amts.png"
       },
       "categories": [],
       "transferMethods": [
@@ -46162,12 +46163,12 @@
             "chainId": "amitis-network",
             "sourceDenom": "uamts",
             "port": "transfer",
-            "channelId": "channel-1"
+            "channelId": "channel-3"
           },
           "chain": {
             "port": "transfer",
-            "channelId": "channel-110089",
-            "path": "transfer/channel-110089/uamts"
+            "channelId": "channel-111069",
+            "path": "transfer/channel-111069/uamts"
           }
         }
       ],
@@ -46180,11 +46181,11 @@
           "symbol": "AMTS",
           "decimals": 6,
           "logoURIs": {
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/amitis/images/amts.svg"
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/amitis/images/amts.png"
           }
         }
       ],
-      "variantGroupKey": "ibc/7E577151E593349028AAC4A9FCC33258D70749FDF3CBB48F7744262DD18FC89D",
+      "variantGroupKey": "ibc/4793BB9CA6FFCF1A8AEA9BA386200D8D32413E0986BDD7812891A361B57F1C31",
       "name": "Amitis Network",
       "isAlloyed": false,
       "verified": false,
@@ -46196,7 +46197,7 @@
       "haltWithdrawals": true,
       "withdrawalHaltReason": "bridge_down",
       "preview": false,
-      "lastDowntimeDate": "2026-08-03T15:56:48.609Z"
+      "lastDowntimeDate": "2026-09-09T15:15:13.344Z"
     },
     {
       "chainName": "kujira",
@@ -50561,6 +50562,61 @@
       "withdrawalHaltReason": "bridge_down",
       "preview": false,
       "lastDowntimeDate": "2026-08-30T15:13:10.887Z"
+    },
+    {
+      "chainName": "amitis",
+      "sourceDenom": "uamts",
+      "coinMinimalDenom": "ibc/7E577151E593349028AAC4A9FCC33258D70749FDF3CBB48F7744262DD18FC89D",
+      "symbol": "AMTS.amitis",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/amitis/images/amts.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "amitis",
+            "chainId": "amitis-network",
+            "sourceDenom": "uamts",
+            "port": "transfer",
+            "channelId": "channel-110089"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-110089",
+            "path": "transfer/channel-110089/uamts"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "amitis",
+          "sourceDenom": "uamts",
+          "chainType": "cosmos",
+          "chainId": "amitis-network",
+          "symbol": "AMTS",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/amitis/images/amts.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/4793BB9CA6FFCF1A8AEA9BA386200D8D32413E0986BDD7812891A361B57F1C31",
+      "name": "Amitis Network",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "lastDowntimeDate": "2026-08-03T15:56:48.609Z"
     },
     {
       "chainName": "akash",

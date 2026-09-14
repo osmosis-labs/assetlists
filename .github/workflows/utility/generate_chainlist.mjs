@@ -104,12 +104,6 @@ function getValidationRecord(state, chain_name) {
 
 //-- Functions --
 
-async function asyncForEach(array, callback) {
-  for (let index = 0; index < array.length; index++) {
-    await callback(array[index], index, array);
-  }
-}
-
 function getChainImage(chain_name) {
 
   const logo_URIs = chain_reg.getFileProperty(chain_name, "chain", "logo_URIs");
@@ -380,7 +374,7 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
 
   // -- Get Fees --
   chain.feeCurrencies = [];
-  await asyncForEach(chainFees?.fee_tokens, async (fee) => {
+  await zone.asyncForEach(chainFees?.fee_tokens, async (fee) => {
 
     let currency = {
       base_denom: fee.denom
@@ -422,7 +416,7 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   let chain_assets = chain_reg.getFileProperty(chain_name, "assetlist", "assets");
 
   //chain_reg_assets?.forEach((asset) => {
-  await asyncForEach(chain_assets, async (asset) => {
+  await zone.asyncForEach(chain_assets, async (asset) => {
 
     let currency = {
       base_denom: asset.base
@@ -594,7 +588,7 @@ function getZoneChainOverrideProperties(chain, zoneChain) {
 async function generateChains(generatedChains, chainsToGenerate, local_chain_name) {
   //zone_chains.forEach(async (zone_chain) => {
 
-  await asyncForEach(chainsToGenerate, async (chainToGenerate) => {
+  await zone.asyncForEach(chainsToGenerate, async (chainToGenerate) => {
 
     // -- Start Chain Object --
     let chain = {

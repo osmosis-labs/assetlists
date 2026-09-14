@@ -602,7 +602,7 @@ A second, independent track exists for market-driven unstable. When a verified, 
 
 #### On-demand utility
 
-**`asset_status_report.mjs`** (read-only, `workflow_dispatch`-triggered). Produces a six-section markdown report covering unstable assets, halt status, disabled assets, verification-borderline assets, pending unverifies in cooldown, and detected invariant violations.
+**`asset_status_report.mjs`** (read-only; run by hand with `node asset_status_report.mjs [<zone_name>]` from `.github/workflows/utility`, no workflow invokes it). Produces a six-section markdown report covering unstable assets, halt status, disabled assets, verification-borderline assets, pending unverifies in cooldown, and detected invariant violations.
 
 #### Safety mechanisms
 

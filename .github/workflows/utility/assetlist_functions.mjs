@@ -162,3 +162,8 @@ export function addUniqueArrayItem(item, array) {
   const exists = array.some(existingArrayItem => deepEqual(existingArrayItem, item));
   if (!exists) array.push(item);
 }
+export async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array);
+  }
+}

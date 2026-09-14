@@ -68,45 +68,6 @@ let assetProperty = new Map();
 
 //-- Functions --
 
-export async function asyncForEach(array, callback) {
-  for (let index = 0; index < array.length; index++) {
-    await callback(array[index], index, array);
-  }
-}
-
-export function deepEqual(obj1, obj2) {
-  if (obj1 === obj2) {
-    return true;
-  }
-
-  if (typeof obj1 !== 'object' || obj1 === null || typeof obj2 !== 'object' || obj2 === null) {
-    return false;
-  }
-
-  const keys1 = Object.keys(obj1);
-  const keys2 = Object.keys(obj2);
-
-  if (keys1.length !== keys2.length) {
-    return false;
-  }
-
-  for (let key of keys1) {
-    if (!keys2.includes(key) || !deepEqual(obj1[key], obj2[key])) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-function addUniqueArrayItem(item, array) {
-  const exists = array.some(existingArrayItem => deepEqual(existingArrayItem, item));
-  if (!exists) {
-    array.push(item);
-  }
-  return array;
-}
-
 export function addArrayItem(item, array) {
   if (!array.includes(item)) {
     array.push(item);
@@ -674,7 +635,7 @@ export function setSymbol(asset_data) {
           accumulative_suffix = accumulative_suffix.slice(0, accumulative_suffix.length - 4);
         }
         if (
-          deepEqual(
+          zone.deepEqual(
             asset_data.identity_asset,
             ({
               chain_name: "ethereum",
@@ -1077,7 +1038,7 @@ export function getImages(asset_data) {
   //This adds image_sync, but only for the first image
   let firstCanonicalImage = true;
   canonicalImages?.forEach((canonicalImage) => {
-    addUniqueArrayItem(canonicalImage, images);
+    zone.addUniqueArrayItem(canonicalImage, images);
     if (
       firstCanonicalImage
       &&
@@ -1109,7 +1070,7 @@ export function getImages(asset_data) {
     });
 
     if (!containsImage) {
-      addUniqueArrayItem(localImage, images);
+      zone.addUniqueArrayItem(localImage, images);
     }
   });
 
@@ -1521,13 +1482,13 @@ export function setCounterparty(asset_data) {
       base_denom: trace.counterparty.base_denom
     };
   
-    addUniqueArrayItem(
+    zone.addUniqueArrayItem(
       traceCounterpartyAsset,
       counterpartyAssets
     );
 
     if (
-      deepEqual(
+      zone.deepEqual(
         traceCounterpartyAsset,
         asset_data.identity_asset
       )
@@ -1537,7 +1498,7 @@ export function setCounterparty(asset_data) {
 
   //add any manually specified counterparty assets
   asset_data.zone_asset?.override_properties?.counterparty?.forEach((asset) => {
-    addUniqueArrayItem(
+    zone.addUniqueArrayItem(
       asset,
       counterpartyAssets
     );

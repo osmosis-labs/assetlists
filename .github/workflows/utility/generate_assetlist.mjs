@@ -14,12 +14,6 @@ import * as symbolDedup from "./deduplicate_symbols.mjs";
 
 //-- Functions --
 
-async function asyncForEach(array, callback) {
-  for (let index = 0; index < array.length; index++) {
-    await callback(array[index], index, array);
-  }
-}
-
 /**
  * AUTOMATIC ASSET DETECTION: Discover new cross-chain assets from Chain Registry
  *
@@ -72,7 +66,7 @@ async function getAssetsFromChainRegistry(localChainName, asset_datas) {
   //try each chain of that network_type
   let chains = chain_reg.getChains() || [];
 
-  await asyncForEach(chains, async (chainName) => {
+  await zone.asyncForEach(chains, async (chainName) => {
 
     if (chainName === localChainName) return; //we'll check assets under this chain separately
 
@@ -114,7 +108,7 @@ async function getAssetsFromChainRegistry(localChainName, asset_datas) {
     const assets = chain_reg.getFileProperty(chainName, "assetlist", "assets") || [];
 
     //iterate the assets
-    await asyncForEach(assets, async (asset) => {
+    await zone.asyncForEach(assets, async (asset) => {
     //assets.forEach((asset) => {
 
       //get asset type
@@ -196,7 +190,7 @@ async function getLocalChainAssetsFromChainRegistry(localChainName, asset_datas)
 
   const assets = chain_reg.getFileProperty(localChainName, "assetlist", "assets") || [];
 
-  await asyncForEach(assets, async (asset) => {
+  await zone.asyncForEach(assets, async (asset) => {
 
     //Accept all native chain-asset types from the chain-registry guide.
     //Skip ics20 (already-IBC'd) and cw20 (handled via the dedicated cw20 path).
@@ -263,7 +257,7 @@ const generateAssets = async (
 
   let asset_datas = [];
 
-  await asyncForEach(zone_assets, async (zone_asset) => {
+  await zone.asyncForEach(zone_assets, async (zone_asset) => {
 
     //--Create the Generated Asset Objects--
     //let generated_asset = {};

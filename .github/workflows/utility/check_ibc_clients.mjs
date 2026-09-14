@@ -47,6 +47,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { calculateIbcHash } from './assetlist_functions.mjs';
+import { sleep } from './api_management.mjs';
 import { loadJSON, findStateAsset, materialiseStateAsset } from './lifecycle_helpers.mjs';
 
 const DEFAULT_LCD = "https://lcd.osmosis.zone";
@@ -180,10 +181,6 @@ const MANUAL_CHAIN_INHERIT_TOOLTIP =
   'Deposits and withdrawals are halted pending manual review.';
 
 // ── HTTP helpers ──────────────────────────────────────────────────────────────
-
-function sleep(ms) {
-  return new Promise((r) => setTimeout(r, ms));
-}
 
 /** Categorise a fetch failure so the run summary can show what's actually
  *  going wrong (rate-limit vs. server error vs. network/timeout). */

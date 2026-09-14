@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft-07/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Osmosis Zone List",
   "description": "Chain Zone List is a list of chains integrated with Osmosis, in alphabetical order.",
   "type": "object",
@@ -44,7 +44,7 @@
         "explorer_tx_url": {
           "type": "string",
           "description": "The chain's block explorer Transaction URL",
-          "pattern": "^https:\/\/.*{txHash}.*"
+          "pattern": "^https:\/\/.*\\{txHash\\}.*"
         },
         "keplr_features": {
           "type": "array",

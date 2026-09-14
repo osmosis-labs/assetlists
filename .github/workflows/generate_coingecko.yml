@@ -26,13 +26,17 @@ jobs:
         run: |
           git submodule update --init --remote --recursive
           
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
           node-version: 20.x
+          cache: pnpm
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install --frozen-lockfile
           
       - name: Run code to Generate CoinGecko
         working-directory: ./.github/workflows/utility

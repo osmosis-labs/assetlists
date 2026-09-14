@@ -30,13 +30,23 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install JSON-Schema-Validator
-        run: npm install -g jsonschema
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20.x
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Validate zone ${{ matrix.kind }} schema
+        # ajv-cli is pinned in package.json. The zone schemas are draft-07;
+        # strict mode is off because they carry the non-standard `example`
+        # annotation keyword.
         run: |
-          for file in $(find . -name '${{ matrix.file }}'); do
-            if ! jsonschema -i "$file" ./${{ matrix.schema }}; then
-              exit 1
-            fi
+          for file in $(find . -name '${{ matrix.file }}' -not -path './node_modules/*' -not -path './chain-registry/*'); do
+            pnpm exec ajv validate --spec=draft7 --strict=false -s ./${{ matrix.schema }} -d "$file"
           done

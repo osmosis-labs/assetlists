@@ -161,8 +161,15 @@ const AUTO_MANAGED_FIELDS = new Set([
   'osmosis_withdrawal_halt_reason',
 ]);
 
+// Entries this script creates carry a `_comment` of the form "SYMBOL $SYMBOL"
+// (see the bridge-down branch). Only those are auto-added and safe to remove
+// once their halts clear. A curator-written entry that happens to hold only
+// auto-managed fields is a real listing and must survive a recovery.
+const AUTO_COMMENT = /^(.+) \$\1$/;
+
 function isThinEntry(asset) {
-  return Object.keys(asset).every((k) => AUTO_MANAGED_FIELDS.has(k));
+  return AUTO_COMMENT.test(asset._comment ?? '') &&
+    Object.keys(asset).every((k) => AUTO_MANAGED_FIELDS.has(k));
 }
 
 // Reasons this script is allowed to clear. Anything else (extended_unstable_market,
@@ -549,6 +556,20 @@ async function main() {
     if (asset.path) zoneByPath.set(asset.path, asset);
   }
 
+  // The same assets keyed by (chain_name, base_denom). The frontend list this
+  // script walks is the previous generation's output, so when a curator moves
+  // an asset to a renewed channel the frontend path is stale for one run. A
+  // path miss that still has a chain+denom match therefore means "already
+  // listed, path not regenerated yet", never "new asset". Treating it as new
+  // appended a duplicate carrying the superseded channel, and the following
+  // run then removed the renewed entry as thin.
+  const zoneByChainDenom = new Map();
+  for (const asset of zoneData.assets) {
+    const key = `${asset.chain_name}|${asset.base_denom}`;
+    if (!zoneByChainDenom.has(key)) zoneByChainDenom.set(key, []);
+    zoneByChainDenom.get(key).push(asset);
+  }
+
   // Snapshot, from PRE-RUN state, the chains the curator has fully taken
   // over with manual halts. New assets the channel walk discovers on these
   // chains will be created as manual (curator-locked) rather than with the
@@ -837,6 +858,16 @@ async function main() {
       const haltReasonOnDown = chainKilled ? 'source_chain_killed' : 'bridge_down';
 
       let zoneAsset = zoneByPath.get(fa.ibcPath);
+      if (!zoneAsset) {
+        const listed = zoneByChainDenom.get(`${fa.chainName}|${fa.sourceDenom}`);
+        if (listed?.length) {
+          // Listed under a different path than the frontend list carries:
+          // skip without writing. The next generation refreshes the path and
+          // the entry is evaluated on its real channel from then on.
+          mutations.push({ kind: 'stale_path', fa, zoneAsset: listed[0] });
+          continue;
+        }
+      }
       // Read-only lookup: never creates an empty placeholder. Calls that
       // need to write to state must materialise the entry explicitly.
       const stateAsset = findStateAsset(state, fa.coinMinimalDenom);
@@ -1056,7 +1087,7 @@ async function main() {
   // ── Mutation cap ────────────────────────────────────────────────────────────
   const affectedChains = new Set(
     mutations
-      .filter((m) => m.fa)
+      .filter((m) => m.fa && m.kind !== 'stale_path')
       .map((m) => m.fa.chainName)
   );
   if (affectedChains.size > MAX_CHAINS_PER_RUN && !force && !dryRun) {

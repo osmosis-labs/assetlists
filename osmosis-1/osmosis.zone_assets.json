@@ -7367,8 +7367,6 @@
       "categories": [
         "ai"
       ],
-      "tooltip_message": "XION has rebranded to Verona on 17th June 2026. Source: https://verona.dev/blog/welcome-to-verona-the-intelligence-layer-for-ai",
-      "tooltip_expiry_date": "2026-09-15",
       "_comment": "Verona $VERONA"
     },
     {
@@ -13197,6 +13195,19 @@
       "_comment": "Amitis Network $AMTS",
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "ibc_client"
+    },
+    {
+      "chain_name": "nomic",
+      "base_denom": "unom",
+      "path": "transfer/channel-6897/unom",
+      "_comment": "Nomic $NOM.nom",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "manual",
+      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
     }
   ]
 }

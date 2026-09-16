@@ -28360,7 +28360,6 @@
       "unstable": false,
       "disabled": false,
       "preview": false,
-      "tooltipMessage": "XION has rebranded to Verona on 17th June 2026. Source: https://verona.dev/blog/welcome-to-verona-the-intelligence-layer-for-ai",
       "listingDate": "2024-12-05T10:50:32.804Z"
     },
     {
@@ -32454,6 +32453,207 @@
         "sourceDenom": "uatom"
       },
       "listingDate": "2025-07-23T22:57:50.226Z"
+    },
+    {
+      "chainName": "cosmoshub",
+      "sourceDenom": "ibc/1568B2266E9CF742A068567F052D6057366121943C61F62D82518AEEC4C07C7F",
+      "coinMinimalDenom": "ibc/41395C34786CBF147112C037494AEDC78A6FB9A6408F558DB19C2382CCA357F9",
+      "symbol": "wstETH.atom",
+      "decimals": 18,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wsteth.svg"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "cosmoshub",
+            "chainId": "cosmoshub-4",
+            "sourceDenom": "ibc/1568B2266E9CF742A068567F052D6057366121943C61F62D82518AEEC4C07C7F",
+            "port": "transfer",
+            "channelId": "channel-141"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-0",
+            "path": "transfer/channel-0/transfer/08-wasm-1369/0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "cosmoshub",
+          "sourceDenom": "ibc/1568B2266E9CF742A068567F052D6057366121943C61F62D82518AEEC4C07C7F",
+          "chainType": "cosmos",
+          "chainId": "cosmoshub-4",
+          "symbol": "wstETH",
+          "decimals": 18,
+          "logoURIs": {
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wsteth.svg"
+          }
+        },
+        {
+          "chainName": "ethereum",
+          "sourceDenom": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+          "chainType": "evm",
+          "chainId": 1,
+          "address": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+          "symbol": "wstETH",
+          "decimals": 18,
+          "logoURIs": {
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/wsteth.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/2F21E6D4271DE3F561F20A02CD541DAF7405B1E9CB3B9B07E3C2AC7D8A4338A5",
+      "name": "Wrapped Lido Staked Ether (Eureka)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "cosmoshub",
+        "sourceDenom": "uatom"
+      }
+    },
+    {
+      "chainName": "cosmoshub",
+      "sourceDenom": "ibc/5512EB544A275E5375CE4D82233BDAA2D03002E352A9C6B0049175BD368DF10E",
+      "coinMinimalDenom": "ibc/D48A8DD25E1470CAE78CB83D41B5C2D0EF118FD7CAA00AB4C146F419793F5CC7",
+      "symbol": "EURC.atom",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eurc.png"
+      },
+      "categories": [
+        "stablecoin"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "cosmoshub",
+            "chainId": "cosmoshub-4",
+            "sourceDenom": "ibc/5512EB544A275E5375CE4D82233BDAA2D03002E352A9C6B0049175BD368DF10E",
+            "port": "transfer",
+            "channelId": "channel-141"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-0",
+            "path": "transfer/channel-0/transfer/08-wasm-1369/0x1abaea1f7c830bd89acc67ec4af516284b1bc33c"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "cosmoshub",
+          "sourceDenom": "ibc/5512EB544A275E5375CE4D82233BDAA2D03002E352A9C6B0049175BD368DF10E",
+          "chainType": "cosmos",
+          "chainId": "cosmoshub-4",
+          "symbol": "EURC",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eurc.png"
+          }
+        },
+        {
+          "chainName": "ethereum",
+          "sourceDenom": "0x1abaea1f7c830bd89acc67ec4af516284b1bc33c",
+          "chainType": "evm",
+          "chainId": 1,
+          "address": "0x1abaea1f7c830bd89acc67ec4af516284b1bc33c",
+          "symbol": "EURC",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eurc.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/D48A8DD25E1470CAE78CB83D41B5C2D0EF118FD7CAA00AB4C146F419793F5CC7",
+      "name": "Euro Coin (Eureka)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "cosmoshub",
+        "sourceDenom": "uatom"
+      }
+    },
+    {
+      "chainName": "cosmoshub",
+      "sourceDenom": "ibc/A96C4DBCB7E36F8D265E92240510DB0F29F39CE4AAF52DBDE686E448BA447886",
+      "coinMinimalDenom": "ibc/F20FE45BF7122CF10559EDEA032E37956D3314774EA6D8D1D46B87D138290C45",
+      "symbol": "XAUt.atom",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/xaut.png"
+      },
+      "categories": [
+        "rwa"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "cosmoshub",
+            "chainId": "cosmoshub-4",
+            "sourceDenom": "ibc/A96C4DBCB7E36F8D265E92240510DB0F29F39CE4AAF52DBDE686E448BA447886",
+            "port": "transfer",
+            "channelId": "channel-141"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-0",
+            "path": "transfer/channel-0/transfer/08-wasm-1369/0x68749665ff8d2d112fa859aa293f07a622782f38"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "cosmoshub",
+          "sourceDenom": "ibc/A96C4DBCB7E36F8D265E92240510DB0F29F39CE4AAF52DBDE686E448BA447886",
+          "chainType": "cosmos",
+          "chainId": "cosmoshub-4",
+          "symbol": "XAUt",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/xaut.png"
+          }
+        },
+        {
+          "chainName": "ethereum",
+          "sourceDenom": "0x68749665ff8d2d112fa859aa293f07a622782f38",
+          "chainType": "evm",
+          "chainId": 1,
+          "address": "0x68749665ff8d2d112fa859aa293f07a622782f38",
+          "symbol": "XAUt",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/xaut.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/F20FE45BF7122CF10559EDEA032E37956D3314774EA6D8D1D46B87D138290C45",
+      "name": "Tether Gold (Eureka)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false,
+      "sortWith": {
+        "chainName": "cosmoshub",
+        "sourceDenom": "uatom"
+      }
     },
     {
       "chainName": "coreum",
@@ -50559,6 +50759,64 @@
       "lastRecoveryDate": "2026-09-14T15:25:17.891Z"
     },
     {
+      "chainName": "nomic",
+      "sourceDenom": "unom",
+      "coinMinimalDenom": "ibc/F49DFB3BC8105C57EE7F17EC2402438825B31212CFDD81681EB87911E934F32C",
+      "symbol": "NOM.nom",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nom.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nom.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "nomic",
+            "chainId": "nomic-stakenet-3",
+            "sourceDenom": "unom",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-6897",
+            "path": "transfer/channel-6897/unom"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "nomic",
+          "sourceDenom": "unom",
+          "chainType": "cosmos",
+          "chainId": "nomic-stakenet-3",
+          "symbol": "NOM",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nom.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nom.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/F49DFB3BC8105C57EE7F17EC2402438825B31212CFDD81681EB87911E934F32C",
+      "name": "Nomic",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "manual",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
+      "preview": false,
+      "tooltipMessage": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review.",
+      "lastDowntimeDate": "2026-09-16T15:15:06.159Z"
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -57696,57 +57954,6 @@
       ],
       "variantGroupKey": "ibc/B36FA1449007D770F373A0806EC5A907CC2D7DC11AE73FA8AFF76C5903A4F9B0",
       "name": "Stake",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "nomic",
-      "sourceDenom": "unom",
-      "coinMinimalDenom": "ibc/F49DFB3BC8105C57EE7F17EC2402438825B31212CFDD81681EB87911E934F32C",
-      "symbol": "NOM.nom",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nom.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nom.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "nomic",
-            "chainId": "nomic-stakenet-3",
-            "sourceDenom": "unom",
-            "port": "transfer",
-            "channelId": "channel-1"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-6897",
-            "path": "transfer/channel-6897/unom"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "nomic",
-          "sourceDenom": "unom",
-          "chainType": "cosmos",
-          "chainId": "nomic-stakenet-3",
-          "symbol": "NOM",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nom.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nom.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/F49DFB3BC8105C57EE7F17EC2402438825B31212CFDD81681EB87911E934F32C",
-      "name": "Nomic",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

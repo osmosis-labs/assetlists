@@ -12395,7 +12395,8 @@
       "haltWithdrawals": true,
       "withdrawalHaltReason": "bridge_down",
       "preview": false,
-      "tooltipMessage": "Sei disabled IBC transfers with the SIP-3 / Sei Giga upgrade (governance proposal 116, passed 12 May 2026). The channel is closed, so SEI deposits and withdrawals are disabled. Sei is now an EVM-only chain. For more information see: https://blog.sei.io/announcements/the-sip-3-upgrade-making-way-for-sei-giga/"
+      "tooltipMessage": "Sei disabled IBC transfers with the SIP-3 / Sei Giga upgrade (governance proposal 116, passed 12 May 2026). The channel is closed, so SEI deposits and withdrawals are disabled. Sei is now an EVM-only chain. For more information see: https://blog.sei.io/announcements/the-sip-3-upgrade-making-way-for-sei-giga/",
+      "lastDowntimeDate": "2026-09-21T15:15:27.818Z"
     },
     {
       "chainName": "quicksilver",
@@ -13643,7 +13644,8 @@
       "haltWithdrawals": true,
       "withdrawalHaltReason": "bridge_down",
       "preview": false,
-      "tooltipMessage": "Sei disabled IBC transfers with the SIP-3 / Sei Giga upgrade (governance proposal 116, passed 12 May 2026). The channel is closed, so deposits and withdrawals are disabled. Sei is now an EVM-only chain. For more information see: https://blog.sei.io/announcements/the-sip-3-upgrade-making-way-for-sei-giga/"
+      "tooltipMessage": "Sei disabled IBC transfers with the SIP-3 / Sei Giga upgrade (governance proposal 116, passed 12 May 2026). The channel is closed, so deposits and withdrawals are disabled. Sei is now an EVM-only chain. For more information see: https://blog.sei.io/announcements/the-sip-3-upgrade-making-way-for-sei-giga/",
+      "lastDowntimeDate": "2026-09-21T15:15:27.818Z"
     },
     {
       "chainName": "evmos",
@@ -17806,7 +17808,8 @@
       "haltWithdrawals": true,
       "withdrawalHaltReason": "bridge_down",
       "preview": true,
-      "tooltipMessage": "Sei disabled IBC transfers with the SIP-3 / Sei Giga upgrade (governance proposal 116, passed 12 May 2026). The channel is closed, so deposits and withdrawals are disabled. Sei is now an EVM-only chain. For more information see: https://blog.sei.io/announcements/the-sip-3-upgrade-making-way-for-sei-giga/"
+      "tooltipMessage": "Sei disabled IBC transfers with the SIP-3 / Sei Giga upgrade (governance proposal 116, passed 12 May 2026). The channel is closed, so deposits and withdrawals are disabled. Sei is now an EVM-only chain. For more information see: https://blog.sei.io/announcements/the-sip-3-upgrade-making-way-for-sei-giga/",
+      "lastDowntimeDate": "2026-09-21T15:15:27.818Z"
     },
     {
       "chainName": "nibiru",
@@ -32879,13 +32882,10 @@
       "unstable": true,
       "unstableReason": "ibc_client",
       "disabled": false,
-      "haltDeposits": true,
-      "depositHaltReason": "bridge_down",
-      "haltWithdrawals": true,
-      "withdrawalHaltReason": "bridge_down",
       "preview": false,
       "listingDate": "2025-07-02T18:03:35.348Z",
-      "lastDowntimeDate": "2026-05-22T09:57:52.115Z"
+      "lastDowntimeDate": "2026-05-22T09:57:52.115Z",
+      "lastRecoveryDate": "2026-09-21T15:15:27.818Z"
     },
     {
       "chainName": "taketitan",
@@ -50832,6 +50832,174 @@
       "lastDowntimeDate": "2026-09-16T15:15:06.159Z"
     },
     {
+      "chainName": "sei",
+      "sourceDenom": "factory/sei1x2fgaaqecvk8kwuqkjqcj27clw5p5g99uawdzy9sc4rku8avumcq3cky4k/ampSEI",
+      "coinMinimalDenom": "ibc/B38908D9639A8DAEB43FF12143D60B1C2C6B109041D5A53790777909D778B1B5",
+      "symbol": "ampSEI",
+      "decimals": 6,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sei/images/ampsei.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "sei",
+            "chainId": "pacific-1",
+            "sourceDenom": "factory/sei1x2fgaaqecvk8kwuqkjqcj27clw5p5g99uawdzy9sc4rku8avumcq3cky4k/ampSEI",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-782",
+            "path": "transfer/channel-782/factory/sei1x2fgaaqecvk8kwuqkjqcj27clw5p5g99uawdzy9sc4rku8avumcq3cky4k/ampSEI"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "sei",
+          "sourceDenom": "factory/sei1x2fgaaqecvk8kwuqkjqcj27clw5p5g99uawdzy9sc4rku8avumcq3cky4k/ampSEI",
+          "chainType": "cosmos",
+          "chainId": "pacific-1",
+          "symbol": "ampSEI",
+          "decimals": 6,
+          "logoURIs": {
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sei/images/ampsei.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/B38908D9639A8DAEB43FF12143D60B1C2C6B109041D5A53790777909D778B1B5",
+      "name": "ERIS Amplified SEI",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "manual",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
+      "preview": false,
+      "tooltipMessage": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review.",
+      "lastDowntimeDate": "2026-09-21T15:15:27.818Z"
+    },
+    {
+      "chainName": "sei",
+      "sourceDenom": "factory/sei1fl8pg59wfsgw2wp4aruk38zqccfnc2g8ptrm24/popeye",
+      "coinMinimalDenom": "ibc/AA6D5410E9D8D0A6C4671B8B7C13C46538EAFFB080A12A1E9516D04B09F25DDB",
+      "symbol": "POPEYE",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sei/images/popeye.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "sei",
+            "chainId": "pacific-1",
+            "sourceDenom": "factory/sei1fl8pg59wfsgw2wp4aruk38zqccfnc2g8ptrm24/popeye",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-782",
+            "path": "transfer/channel-782/factory/sei1fl8pg59wfsgw2wp4aruk38zqccfnc2g8ptrm24/popeye"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "sei",
+          "sourceDenom": "factory/sei1fl8pg59wfsgw2wp4aruk38zqccfnc2g8ptrm24/popeye",
+          "chainType": "cosmos",
+          "chainId": "pacific-1",
+          "symbol": "POPEYE",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sei/images/popeye.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/AA6D5410E9D8D0A6C4671B8B7C13C46538EAFFB080A12A1E9516D04B09F25DDB",
+      "name": "Popeye",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "manual",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
+      "preview": false,
+      "tooltipMessage": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review.",
+      "lastDowntimeDate": "2026-09-21T15:15:27.818Z"
+    },
+    {
+      "chainName": "sei",
+      "sourceDenom": "factory/sei1ta5rkr6y2qlkj7px8w2cvear7m2822q4f4ea0m/sensei",
+      "coinMinimalDenom": "ibc/8E65448D403DDD152CE62B462F44C947EFEDB1DC740C5FC506B9D50F8E155F09",
+      "symbol": "SENSEI",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sei/images/SenseiDog.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "sei",
+            "chainId": "pacific-1",
+            "sourceDenom": "factory/sei1ta5rkr6y2qlkj7px8w2cvear7m2822q4f4ea0m/sensei",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-782",
+            "path": "transfer/channel-782/factory/sei1ta5rkr6y2qlkj7px8w2cvear7m2822q4f4ea0m/sensei"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "sei",
+          "sourceDenom": "factory/sei1ta5rkr6y2qlkj7px8w2cvear7m2822q4f4ea0m/sensei",
+          "chainType": "cosmos",
+          "chainId": "pacific-1",
+          "symbol": "SENSEI",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sei/images/SenseiDog.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/8E65448D403DDD152CE62B462F44C947EFEDB1DC740C5FC506B9D50F8E155F09",
+      "name": "Sensei Dog",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "manual",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
+      "preview": false,
+      "tooltipMessage": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review.",
+      "lastDowntimeDate": "2026-09-21T15:15:27.818Z"
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -55361,6 +55529,55 @@
       "preview": false
     },
     {
+      "chainName": "injective",
+      "sourceDenom": "factory/inj1dg3nxn4z36p2sqem4cy2jsdjf4ytk8cn256jjx/T42",
+      "coinMinimalDenom": "ibc/863B6B2B3A314BF44CF11F1C79B7EE3BBC7B79480AABF20C0C8083DDFDD7D479",
+      "symbol": "T42",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/t42.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "injective",
+            "chainId": "injective-1",
+            "sourceDenom": "factory/inj1dg3nxn4z36p2sqem4cy2jsdjf4ytk8cn256jjx/T42",
+            "port": "transfer",
+            "channelId": "channel-8"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-122",
+            "path": "transfer/channel-122/factory/inj1dg3nxn4z36p2sqem4cy2jsdjf4ytk8cn256jjx/T42"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "injective",
+          "sourceDenom": "factory/inj1dg3nxn4z36p2sqem4cy2jsdjf4ytk8cn256jjx/T42",
+          "chainType": "cosmos",
+          "chainId": "injective-1",
+          "symbol": "T42",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/t42.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/863B6B2B3A314BF44CF11F1C79B7EE3BBC7B79480AABF20C0C8083DDFDD7D479",
+      "name": "TeaForTwo",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "juno",
       "sourceDenom": "cw20:juno1ur4jx0sxchdevahep7fwq28yk4tqsrhshdtylz46yka3uf6kky5qllqp4k",
       "coinMinimalDenom": "ibc/D53609853919635406B7F9B83BADE77BF480F7030215B49E932A1EF0A193E49A",
@@ -58990,153 +59207,6 @@
       ],
       "variantGroupKey": "ibc/F4B09984A0B7F52D8D0F52B9ED1752880EB3030CF6D3F489E4BDE45B0F8A4BD0",
       "name": "SNVR",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "sei",
-      "sourceDenom": "factory/sei1x2fgaaqecvk8kwuqkjqcj27clw5p5g99uawdzy9sc4rku8avumcq3cky4k/ampSEI",
-      "coinMinimalDenom": "ibc/B38908D9639A8DAEB43FF12143D60B1C2C6B109041D5A53790777909D778B1B5",
-      "symbol": "ampSEI",
-      "decimals": 6,
-      "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sei/images/ampsei.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "sei",
-            "chainId": "pacific-1",
-            "sourceDenom": "factory/sei1x2fgaaqecvk8kwuqkjqcj27clw5p5g99uawdzy9sc4rku8avumcq3cky4k/ampSEI",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-782",
-            "path": "transfer/channel-782/factory/sei1x2fgaaqecvk8kwuqkjqcj27clw5p5g99uawdzy9sc4rku8avumcq3cky4k/ampSEI"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "sei",
-          "sourceDenom": "factory/sei1x2fgaaqecvk8kwuqkjqcj27clw5p5g99uawdzy9sc4rku8avumcq3cky4k/ampSEI",
-          "chainType": "cosmos",
-          "chainId": "pacific-1",
-          "symbol": "ampSEI",
-          "decimals": 6,
-          "logoURIs": {
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sei/images/ampsei.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/B38908D9639A8DAEB43FF12143D60B1C2C6B109041D5A53790777909D778B1B5",
-      "name": "ERIS Amplified SEI",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "sei",
-      "sourceDenom": "factory/sei1fl8pg59wfsgw2wp4aruk38zqccfnc2g8ptrm24/popeye",
-      "coinMinimalDenom": "ibc/AA6D5410E9D8D0A6C4671B8B7C13C46538EAFFB080A12A1E9516D04B09F25DDB",
-      "symbol": "POPEYE",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sei/images/popeye.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "sei",
-            "chainId": "pacific-1",
-            "sourceDenom": "factory/sei1fl8pg59wfsgw2wp4aruk38zqccfnc2g8ptrm24/popeye",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-782",
-            "path": "transfer/channel-782/factory/sei1fl8pg59wfsgw2wp4aruk38zqccfnc2g8ptrm24/popeye"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "sei",
-          "sourceDenom": "factory/sei1fl8pg59wfsgw2wp4aruk38zqccfnc2g8ptrm24/popeye",
-          "chainType": "cosmos",
-          "chainId": "pacific-1",
-          "symbol": "POPEYE",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sei/images/popeye.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/AA6D5410E9D8D0A6C4671B8B7C13C46538EAFFB080A12A1E9516D04B09F25DDB",
-      "name": "Popeye",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "sei",
-      "sourceDenom": "factory/sei1ta5rkr6y2qlkj7px8w2cvear7m2822q4f4ea0m/sensei",
-      "coinMinimalDenom": "ibc/8E65448D403DDD152CE62B462F44C947EFEDB1DC740C5FC506B9D50F8E155F09",
-      "symbol": "SENSEI",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sei/images/SenseiDog.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "sei",
-            "chainId": "pacific-1",
-            "sourceDenom": "factory/sei1ta5rkr6y2qlkj7px8w2cvear7m2822q4f4ea0m/sensei",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-782",
-            "path": "transfer/channel-782/factory/sei1ta5rkr6y2qlkj7px8w2cvear7m2822q4f4ea0m/sensei"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "sei",
-          "sourceDenom": "factory/sei1ta5rkr6y2qlkj7px8w2cvear7m2822q4f4ea0m/sensei",
-          "chainType": "cosmos",
-          "chainId": "pacific-1",
-          "symbol": "SENSEI",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sei/images/SenseiDog.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/8E65448D403DDD152CE62B462F44C947EFEDB1DC740C5FC506B9D50F8E155F09",
-      "name": "Sensei Dog",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

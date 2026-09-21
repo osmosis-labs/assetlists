@@ -8503,11 +8503,7 @@
       },
       "_comment": "Ripple (XRPL EVM) $XRP.xrplevm",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
-      "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
-      "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_unstable_reason": "ibc_client"
     },
     {
       "chain_name": "taketitan",
@@ -13215,6 +13211,45 @@
       "base_denom": "unom",
       "path": "transfer/channel-6897/unom",
       "_comment": "Nomic $NOM.nom",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "manual",
+      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+    },
+    {
+      "chain_name": "sei",
+      "base_denom": "factory/sei1x2fgaaqecvk8kwuqkjqcj27clw5p5g99uawdzy9sc4rku8avumcq3cky4k/ampSEI",
+      "path": "transfer/channel-782/factory/sei1x2fgaaqecvk8kwuqkjqcj27clw5p5g99uawdzy9sc4rku8avumcq3cky4k/ampSEI",
+      "_comment": "ERIS Amplified SEI $ampSEI",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "manual",
+      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+    },
+    {
+      "chain_name": "sei",
+      "base_denom": "factory/sei1fl8pg59wfsgw2wp4aruk38zqccfnc2g8ptrm24/popeye",
+      "path": "transfer/channel-782/factory/sei1fl8pg59wfsgw2wp4aruk38zqccfnc2g8ptrm24/popeye",
+      "_comment": "Popeye $POPEYE",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "manual",
+      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+    },
+    {
+      "chain_name": "sei",
+      "base_denom": "factory/sei1ta5rkr6y2qlkj7px8w2cvear7m2822q4f4ea0m/sensei",
+      "path": "transfer/channel-782/factory/sei1ta5rkr6y2qlkj7px8w2cvear7m2822q4f4ea0m/sensei",
+      "_comment": "Sensei Dog $SENSEI",
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "manual",
       "osmosis_halt_deposits": true,

@@ -32879,13 +32879,10 @@
       "name": "Ripple (XRPL EVM)",
       "isAlloyed": false,
       "verified": true,
-      "unstable": true,
-      "unstableReason": "ibc_client",
+      "unstable": false,
       "disabled": false,
       "preview": false,
-      "listingDate": "2025-07-02T18:03:35.348Z",
-      "lastDowntimeDate": "2026-05-22T09:57:52.115Z",
-      "lastRecoveryDate": "2026-09-21T15:15:27.818Z"
+      "listingDate": "2025-07-02T18:03:35.348Z"
     },
     {
       "chainName": "taketitan",
@@ -50995,6 +50992,55 @@
       "preview": false,
       "tooltipMessage": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review.",
       "lastDowntimeDate": "2026-09-21T15:15:27.818Z"
+    },
+    {
+      "chainName": "hyve",
+      "sourceDenom": "ahyve",
+      "coinMinimalDenom": "ibc/FD06E4149AA81F2CBD5B603DAF1C711C308650BE2C1CB86D8E2ED21B4E9E6A09",
+      "symbol": "HYVE",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hyve/images/hyve.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "hyve",
+            "chainId": "hyve_7847-1",
+            "sourceDenom": "ahyve",
+            "port": "transfer",
+            "channelId": "channel-10"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-110655",
+            "path": "transfer/channel-110655/ahyve"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "hyve",
+          "sourceDenom": "ahyve",
+          "chainType": "cosmos",
+          "chainId": "hyve_7847-1",
+          "symbol": "HYVE",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/hyve/images/hyve.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/FD06E4149AA81F2CBD5B603DAF1C711C308650BE2C1CB86D8E2ED21B4E9E6A09",
+      "name": "HyveChain",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
     },
     {
       "chainName": "akash",

@@ -25,15 +25,18 @@ import { calculateIbcHash } from './assetlist_functions.mjs';
 import {
   fetchAlloyConstituentMap,
   fetchNumia,
+  fetchSqsLiquidityMap,
+  isMarketGenuinelyFailing,
   loadJSON,
   resolveMarket,
 } from './lifecycle_helpers.mjs';
 
 const NINETY_DAYS_MS = 90 * 24 * 60 * 60 * 1000;
 const COOLDOWN_MS = 30 * 24 * 60 * 60 * 1000;
-// Mirrors FLAP_WINDOW_MS in check_ibc_clients.mjs: a recovery older than this
-// is treated as the asset being out of a current incident, not a short flap.
-const FLAP_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
+// Mirror LOW_LIQUIDITY_USD / LOW_VOLUME_24H_USD in check_market_health.mjs, so
+// a market-unstable asset is only proposed while it would still be flagged.
+const LOW_LIQUIDITY_USD = 1000;
+const LOW_VOLUME_24H_USD = 100;
 
 const args = process.argv.slice(2);
 const dryRun = args.includes('--dry-run');
@@ -66,7 +69,9 @@ async function main() {
     frontendByDenom.set(asset.coinMinimalDenom, asset);
   }
 
-  // Numia is non-critical here; we only use it for PR body enrichment.
+  // Numia fails soft here. It enriches the PR body and, together with SQS,
+  // re-confirms market-unstable candidates below; an empty map means no
+  // market-reason candidate can be confirmed this run.
   const numia = await fetchNumia({ hardFail: false });
 
   // Alloy-aware market display: a constituent's standalone Numia row often
@@ -78,6 +83,16 @@ async function main() {
       .map((a) => a.coinMinimalDenom)
   );
   const constituentToAlloy = await fetchAlloyConstituentMap(alloyedDenomSet);
+
+  // On-chain liquidity per denom. A constituent's entry includes its alloy
+  // pool, so this also covers alloys whose own Numia row reads 0 (allPEPE:
+  // liquidity 0, price null, while its transmuter pool held ~$72k). Empty on
+  // SQS error, in which case market-reason candidates are withheld.
+  const sqsLiquidityByDenom = await fetchSqsLiquidityMap();
+  const sqsAvailable = sqsLiquidityByDenom.size > 0;
+  if (!sqsAvailable) {
+    console.error('SQS liquidity unavailable; market-reason candidates withheld this run.');
+  }
 
   const nowIso = new Date().toISOString();
   const nowMs = new Date(nowIso).getTime();
@@ -102,17 +117,14 @@ async function main() {
     const downtimeMs = nowMs - new Date(stateAsset.lastDowntimeDate).getTime();
     if (downtimeMs < NINETY_DAYS_MS) continue;
 
-    // Skip if the asset has recovered and stayed recovered past the flap
-    // window. check_ibc_clients keeps osmosis_unstable=true after a bridge-up
-    // (to keep the 90-day clock armed in case of re-flap), so a short outage
-    // followed by sustained recovery would otherwise look "continuously
-    // unstable for 90 days" by lastDowntimeDate alone. A recovery older than
-    // FLAP_WINDOW_MS means the asset isn't in a current incident, it would
-    // have been treated as a fresh incident if it went down again.
-    if (stateAsset.lastRecoveryDate) {
-      const recoveredMs = nowMs - new Date(stateAsset.lastRecoveryDate).getTime();
-      if (recoveredMs > FLAP_WINDOW_MS) continue;
-    }
+    // Skip if the bridge is back up. check_ibc_clients keeps
+    // osmosis_unstable=true after a bridge-up (to keep the 90-day clock armed
+    // in case of re-flap) and records lastRecoveryDate. It deletes
+    // lastRecoveryDate again the moment the asset goes back down (the
+    // flap-vs-fresh rule in applyDowntimeDateRule), so its presence means the
+    // asset is up right now and not continuously unstable. If it re-flaps, the
+    // field is cleared and the asset becomes a candidate on the next run.
+    if (stateAsset.lastRecoveryDate) continue;
 
     // Cooldown
     if (stateAsset.lastUnverifyProposedAt) {
@@ -122,6 +134,24 @@ async function main() {
 
     const feAsset = frontendByDenom.get(coinMinimalDenom);
     const market = resolveMarket(numia, constituentToAlloy, coinMinimalDenom);
+
+    // A market flag can be months old, and it predates the SQS agreement
+    // check_market_health now requires before flagging. Re-confirm it with the
+    // same two-source reading: propose only while Numia (alloy-aware) AND SQS
+    // both say the asset is illiquid. An asset in active market recovery is
+    // left for check_market_health to clear.
+    if (zoneAsset.osmosis_unstable_reason === 'market') {
+      const stillFailing =
+        sqsAvailable &&
+        isMarketGenuinelyFailing({
+          market,
+          sqsLiquidity: sqsLiquidityByDenom.get(coinMinimalDenom),
+          lowLiquidityUsd: LOW_LIQUIDITY_USD,
+          lowVolumeUsd: LOW_VOLUME_24H_USD,
+        });
+      if (!stillFailing) continue;
+    }
+
     candidates.push({
       chain: zoneAsset.chain_name,
       symbol: feAsset?.symbol ?? zoneAsset._comment ?? zoneAsset.base_denom,
@@ -129,7 +159,6 @@ async function main() {
       daysUnstable: Math.floor(downtimeMs / (24 * 60 * 60 * 1000)),
       reason: zoneAsset.osmosis_unstable_reason ?? '?',
       lastDowntimeDate: stateAsset.lastDowntimeDate,
-      lastRecoveryDate: stateAsset.lastRecoveryDate ?? '',
       liquidity: market?.liquidity ?? '?',
       volume24h: market?.volume24h ?? '?',
       haltDeposits: zoneAsset.osmosis_halt_deposits === true,
@@ -151,12 +180,12 @@ async function main() {
     `On merge, only \`osmosis_verified\` flips. \`osmosis_unstable\` and the ` +
     `state.json history fields are preserved as record.`,
     ``,
-    `| Chain | Symbol | Base denom | Days unstable | Reason | Last downtime | Last recovery | Liquidity | Vol 24h | Halt D | Halt W |`,
-    `|-------|--------|-----------|--------------|--------|---------------|---------------|-----------|---------|--------|--------|`,
+    `| Chain | Symbol | Base denom | Days unstable | Reason | Last downtime | Liquidity | Vol 24h | Halt D | Halt W |`,
+    `|-------|--------|-----------|--------------|--------|---------------|-----------|---------|--------|--------|`,
   ];
   for (const c of candidates) {
     prBodyLines.push(
-      `| ${c.chain} | ${c.symbol} | \`${c.baseDenom}\` | ${c.daysUnstable} | ${c.reason} | ${c.lastDowntimeDate} | ${c.lastRecoveryDate} | ${c.liquidity} | ${c.volume24h} | ${c.haltDeposits ? '✓' : ''} | ${c.haltWithdrawals ? '✓' : ''} |`
+      `| ${c.chain} | ${c.symbol} | \`${c.baseDenom}\` | ${c.daysUnstable} | ${c.reason} | ${c.lastDowntimeDate} | ${c.liquidity} | ${c.volume24h} | ${c.haltDeposits ? '✓' : ''} | ${c.haltWithdrawals ? '✓' : ''} |`
     );
   }
 

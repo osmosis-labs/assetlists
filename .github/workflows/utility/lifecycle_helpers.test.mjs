@@ -12,6 +12,8 @@ import { test } from 'node:test';
 import {
   buildSqsLiquidityMap,
   canClearExtendedHalt,
+  canClearRecoveredIbcUnstable,
+  IBC_UNSTABLE_CLEAR_AFTER_MS,
   isMarketGenuinelyFailing,
 } from './lifecycle_helpers.mjs';
 
@@ -229,4 +231,77 @@ test('whole-pool caps are summed per denom, error pools skipped', () => {
 test('malformed SQS body yields an empty map, not a throw', () => {
   assert.equal(buildSqsLiquidityMap(undefined).size, 0);
   assert.equal(buildSqsLiquidityMap({}).size, 0);
+});
+
+// ── canClearRecoveredIbcUnstable: the 60-day recovered-route exit ───────────
+
+const NOW = Date.parse('2026-12-01T00:00:00.000Z');
+const DAY_MS = 24 * 60 * 60 * 1000;
+const recoveredDaysAgo = (days) => ({
+  lastDowntimeDate: '2026-05-22T00:00:00.000Z',
+  lastRecoveryDate: new Date(NOW - days * DAY_MS).toISOString(),
+});
+const ibcUnstable = (extra = {}) => ({
+  osmosis_unstable: true,
+  osmosis_unstable_reason: 'ibc_client',
+  ...extra,
+});
+
+test('route up for exactly the window → clears', () => {
+  assert.equal(IBC_UNSTABLE_CLEAR_AFTER_MS, 60 * DAY_MS);
+  assert.equal(
+    canClearRecoveredIbcUnstable({ zoneAsset: ibcUnstable(), stateAsset: recoveredDaysAgo(60), nowMs: NOW }),
+    true
+  );
+});
+
+test('route up for less than the window → keeps the flag', () => {
+  assert.equal(
+    canClearRecoveredIbcUnstable({ zoneAsset: ibcUnstable(), stateAsset: recoveredDaysAgo(59), nowMs: NOW }),
+    false
+  );
+});
+
+test('no recovery date (still down, or never recovered) → keeps the flag', () => {
+  for (const stateAsset of [undefined, {}, { lastDowntimeDate: '2026-01-01T00:00:00.000Z' }, { lastRecoveryDate: 'garbage' }]) {
+    assert.equal(canClearRecoveredIbcUnstable({ zoneAsset: ibcUnstable(), stateAsset, nowMs: NOW }), false);
+  }
+});
+
+test('reasons owned elsewhere are never cleared', () => {
+  for (const reason of ['market', 'manual', 'source_chain_killed', undefined]) {
+    const zoneAsset = ibcUnstable({ osmosis_unstable_reason: reason });
+    assert.equal(
+      canClearRecoveredIbcUnstable({ zoneAsset, stateAsset: recoveredDaysAgo(90), nowMs: NOW }),
+      false
+    );
+  }
+});
+
+test('curator tooltip locks the flag', () => {
+  const zoneAsset = ibcUnstable({ tooltip_message: 'curator note' });
+  assert.equal(
+    canClearRecoveredIbcUnstable({ zoneAsset, stateAsset: recoveredDaysAgo(90), nowMs: NOW }),
+    false
+  );
+});
+
+test('any remaining halt keeps the flag', () => {
+  for (const extra of [
+    { osmosis_halt_deposits: true, osmosis_deposit_halt_reason: 'extended_unstable_market' },
+    { osmosis_halt_withdrawals: true, osmosis_withdrawal_halt_reason: 'manual' },
+  ]) {
+    assert.equal(
+      canClearRecoveredIbcUnstable({ zoneAsset: ibcUnstable(extra), stateAsset: recoveredDaysAgo(90), nowMs: NOW }),
+      false
+    );
+  }
+});
+
+test('asset that is not unstable → nothing to clear', () => {
+  assert.equal(
+    canClearRecoveredIbcUnstable({ zoneAsset: { osmosis_unstable_reason: 'ibc_client' }, stateAsset: recoveredDaysAgo(90), nowMs: NOW }),
+    false
+  );
+  assert.equal(canClearRecoveredIbcUnstable({ zoneAsset: undefined, stateAsset: recoveredDaysAgo(90), nowMs: NOW }), false);
 });

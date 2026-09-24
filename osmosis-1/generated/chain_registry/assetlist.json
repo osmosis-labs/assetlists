@@ -41199,6 +41199,41 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/FD06E4149AA81F2CBD5B603DAF1C711C308650BE2C1CB86D8E2ED21B4E9E6A09",
+          "exponent": 0,
+          "aliases": [
+            "attohyve",
+            "ahyve"
+          ]
+        },
+        {
+          "denom": "HYVE",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/FD06E4149AA81F2CBD5B603DAF1C711C308650BE2C1CB86D8E2ED21B4E9E6A09",
+      "name": "HyveChain",
+      "display": "HYVE",
+      "symbol": "HYVE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "hyve",
+            "base_denom": "ahyve",
+            "channel_id": "channel-10"
+          },
+          "chain": {
+            "channel_id": "channel-110655",
+            "path": "transfer/channel-110655/ahyve"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
           "exponent": 0,
           "aliases": [

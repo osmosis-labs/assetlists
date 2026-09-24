@@ -1,11 +1,10 @@
 // Purpose:
 //   workflow_dispatch utility: emit a markdown status report covering
-//     1. Unstable assets (with reason, dates, halt status, days until 60d/90d milestones)
+//     1. Unstable assets (with reason, dates, halt status, days until the 60d milestone)
 //     2. Halt status (every asset with halt_deposits or halt_withdrawals)
 //     3. Disabled assets (osmosis_disabled === true)
 //     4. Verification-borderline assets (verified but failing market thresholds)
-//     5. Pending unverify (in cooldown), assets that crossed 90d but had a PR opened recently
-//     6. Inconsistencies (invariants violated; e.g. osmosis_unstable=true with no state.lastDowntimeDate)
+//     5. Inconsistencies (invariants violated; e.g. osmosis_unstable=true with no state.lastDowntimeDate)
 //
 //   Read-only. No mutations.
 //
@@ -26,8 +25,6 @@ import {
 const LOW_LIQUIDITY_USD = 1000;
 const LOW_VOLUME_24H_USD = 100;
 const SIXTY_DAYS_MS = 60 * 24 * 60 * 60 * 1000;
-const NINETY_DAYS_MS = 90 * 24 * 60 * 60 * 1000;
-const COOLDOWN_MS = 30 * 24 * 60 * 60 * 1000;
 
 const args = process.argv.slice(2);
 const positional = args.filter((a) => !a.startsWith('--'));
@@ -76,7 +73,6 @@ async function main() {
   const halts = [];
   const disabled = [];
   const borderline = [];
-  const pending = [];
   const inconsistencies = [];
 
   // Iterate zone_assets directly so we cover killed-chain assets whose
@@ -103,7 +99,6 @@ async function main() {
       }
       const days = sa?.lastDowntimeDate ? daysBetween(nowMs, sa.lastDowntimeDate) : null;
       const daysUntilHalt = days != null ? Math.max(0, 60 - days) : null;
-      const daysUntilUnverify = days != null ? Math.max(0, 90 - days) : null;
       unstable.push({
         chain: za.chain_name,
         symbol,
@@ -114,7 +109,6 @@ async function main() {
         lastRecovery: sa?.lastRecoveryDate ?? '-',
         days,
         daysUntilHalt,
-        daysUntilUnverify,
         liquidity: m?.liquidity ?? '?',
         volume24h: m?.volume24h ?? '?',
         mcap: m?.mcap ?? '?',
@@ -177,27 +171,6 @@ async function main() {
         volume24h: m.volume24h,
       });
     }
-
-    // Pending unverify (in cooldown)
-    if (
-      za.osmosis_verified === true &&
-      za.osmosis_unstable === true &&
-      sa?.lastDowntimeDate &&
-      sa?.lastUnverifyProposedAt
-    ) {
-      const days = daysBetween(nowMs, sa.lastDowntimeDate);
-      const cooldownLeft =
-        COOLDOWN_MS - (nowMs - new Date(sa.lastUnverifyProposedAt).getTime());
-      if (days >= 90 && cooldownLeft > 0) {
-        pending.push({
-          chain: za.chain_name,
-          symbol,
-          daysUnstable: days,
-          lastProposed: sa.lastUnverifyProposedAt,
-          daysUntilRepropose: Math.ceil(cooldownLeft / (24 * 60 * 60 * 1000)),
-        });
-      }
-    }
   }
 
   // ── Compose markdown ────────────────────────────────────────────────────────
@@ -207,11 +180,11 @@ async function main() {
 
   lines.push(`## 1. Unstable assets (${unstable.length})`);
   lines.push('');
-  lines.push(`| Chain | Symbol | Base denom | Verified | Reason | Last downtime | Last recovery | Days | Days→halt | Days→unverify | Liquidity | Vol 24h | MCap |`);
-  lines.push(`|-------|--------|-----------|----------|--------|---------------|---------------|------|----------|---------------|-----------|---------|------|`);
+  lines.push(`| Chain | Symbol | Base denom | Verified | Reason | Last downtime | Last recovery | Days | Days→halt | Liquidity | Vol 24h | MCap |`);
+  lines.push(`|-------|--------|-----------|----------|--------|---------------|---------------|------|----------|-----------|---------|------|`);
   for (const u of unstable) {
     lines.push(
-      `| ${u.chain} | ${u.symbol} | \`${u.baseDenom}\` | ${u.verified ? '✓' : ''} | ${u.reason} | ${u.lastDowntime} | ${u.lastRecovery} | ${u.days ?? '-'} | ${u.daysUntilHalt ?? '-'} | ${u.daysUntilUnverify ?? '-'} | ${u.liquidity} | ${u.volume24h} | ${u.mcap} |`
+      `| ${u.chain} | ${u.symbol} | \`${u.baseDenom}\` | ${u.verified ? '✓' : ''} | ${u.reason} | ${u.lastDowntime} | ${u.lastRecovery} | ${u.days ?? '-'} | ${u.daysUntilHalt ?? '-'} |${u.liquidity} | ${u.volume24h} | ${u.mcap} |`
     );
   }
   lines.push('');
@@ -248,19 +221,7 @@ async function main() {
   }
   lines.push('');
 
-  lines.push(`## 5. Pending unverify (in cooldown) (${pending.length})`);
-  lines.push('');
-  lines.push('Assets that crossed 90 days unstable and had a PR proposed within the ' +
-    'last 30 days. They\'re hidden from the candidate pool until cooldown ends.');
-  lines.push('');
-  lines.push(`| Chain | Symbol | Days unstable | Last proposed | Days until re-propose |`);
-  lines.push(`|-------|--------|--------------|---------------|----------------------|`);
-  for (const p of pending) {
-    lines.push(`| ${p.chain} | ${p.symbol} | ${p.daysUnstable} | ${p.lastProposed} | ${p.daysUntilRepropose} |`);
-  }
-  lines.push('');
-
-  lines.push(`## 6. Inconsistencies (${inconsistencies.length})`);
+  lines.push(`## 5. Inconsistencies (${inconsistencies.length})`);
   lines.push('');
   if (inconsistencies.length === 0) {
     lines.push('_None._');
@@ -280,7 +241,7 @@ async function main() {
   );
   fs.writeFileSync(reportPath, lines.join('\n') + '\n', 'utf8');
   console.log(`\n📝 Status report: ${reportPath}`);
-  console.log(`Unstable: ${unstable.length} | Halts: ${halts.length} | Disabled: ${disabled.length} | Borderline: ${borderline.length} | Pending: ${pending.length} | Inconsistencies: ${inconsistencies.length}`);
+  console.log(`Unstable: ${unstable.length} | Halts: ${halts.length} | Disabled: ${disabled.length} | Borderline: ${borderline.length} | Inconsistencies: ${inconsistencies.length}`);
 }
 
 main().catch((err) => {

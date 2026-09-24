@@ -1059,26 +1059,6 @@ Clear `tooltip_message` and set the reason back to a script-owned value (or just
 
 ---
 
-### RB007: Bi-weekly unverify PR, close vs merge
-
-**Use when**: the bi-weekly `auto-unverify/weekly-candidates` PR is open and you need to decide what to do.
-
-#### Procedure
-
-The PR body lists each candidate with days unstable, reason, last downtime / recovery, halt status, liquidity, and volume. For each candidate:
-
-- **Merge if** the asset has been broken for 90+ days, the underlying issue isn't expected to resolve, and the market data confirms no real activity. Merge flips `osmosis_verified=false`; all history fields stay as record.
-- **Close (don't merge) if** the asset is recovering, has an active community working on the fix, or there's a strategic reason to keep it verified. Closing triggers a 30-day cooldown, so the asset won't be re-proposed until then.
-- **Edit the PR (remove rows) if** you want to unverify some but not all candidates. Use `git rebase` or commit a follow-up to the same branch, then merge.
-
-#### Notes
-
-- `osmosis_unstable` and the state history fields are preserved on unverify. This is intentional, so a later re-verification carries the prior incident record.
-- A re-verified asset that's still carrying stale dates should have them manually cleared at re-verify time.
-- The cooldown is per-asset, not per-PR. Closing the PR stamps `state.lastUnverifyProposedAt` for every candidate that was in the PR.
-
----
-
 ### RB008: Mutation cap hit
 
 **Use when**: the daily `[AUTO]` PR body shows a "⚠️ Mutation cap hit" section, or a lifecycle step in the run log exited with code 2.

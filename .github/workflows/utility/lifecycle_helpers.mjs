@@ -1,10 +1,9 @@
 // Shared helpers for the daily/weekly lifecycle cron scripts:
 //   - check_market_health.mjs
 //   - check_extended_halts.mjs
-//   - check_unverify_candidates.mjs
 //   - asset_status_report.mjs
 //
-// Consolidates what was previously duplicated across all four. Generation-time
+// Consolidates what was previously duplicated across all three. Generation-time
 // helpers (update_assetlist_state.mjs's getStateAsset, etc.) intentionally
 // stay separate because they mutate during generation rather than reading a
 // frozen frontend assetlist.
@@ -22,7 +21,7 @@ export const NUMIA_TOKENS_URL = 'https://public-osmosis-api.numia.xyz/tokens/v2/
  *
  * Pass { hardFail: true } when the script cannot meaningfully continue without
  * Numia data (check_market_health / check_extended_halts). Pass false to
- * degrade quietly to an empty map (asset_status_report / check_unverify_candidates,
+ * degrade quietly to an empty map (asset_status_report,
  * where Numia data is informational).
  */
 export async function fetchNumia({ hardFail = true } = {}) {
@@ -85,7 +84,7 @@ export const ALLOYED_POOL_CODE_IDS = new Set([814, 867, 996]);
  *
  * Returns an empty map on SQS error so callers degrade to self-only
  * evaluation. That fallback matches pre-alloy-awareness behaviour and is
- * safe in all four lifecycle scripts.
+ * safe in all three lifecycle scripts.
  */
 export async function fetchAlloyConstituentMap(alloyedDenomSet) {
   const constituentToAlloy = new Map();

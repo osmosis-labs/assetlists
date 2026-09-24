@@ -1000,8 +1000,8 @@ async function main() {
         }
 
         if (cleared) {
-          // Record recovery. Keep osmosis_unstable populated so the 90-day
-          // window stays armed via the persistent lastDowntimeDate.
+          // Record recovery. Keep osmosis_unstable populated so the 60-day
+          // extended-halt clock stays armed via the persistent lastDowntimeDate.
           materialiseStateAsset(state, fa.coinMinimalDenom).lastRecoveryDate = nowIso;
 
           // If the resulting entry is a thin auto-added one, remove it entirely.
@@ -1016,7 +1016,7 @@ async function main() {
       } else {
         // Unconfirmed (e.g. counterparty status unknown, source chain status unknown).
         // Safety net for already-unstable assets that the channel walk could not
-        // confirm: populate lastDowntimeDate (so the 90-day clock has an anchor)
+        // confirm: populate lastDowntimeDate (so the 60-day clock has an anchor)
         // and best-effort backfill the unstable reason. Halt fields are backfilled
         // on the same basis when source chain is killed.
         if (zoneAsset?.osmosis_unstable === true) {
@@ -1040,7 +1040,7 @@ async function main() {
   // Some assets, particularly killed-chain ones whose source chains have lost
   // their transferMethods during generation, never appear in the channel walk.
   // For these, apply the manual-flip safety net so curators get a populated
-  // lastDowntimeDate (anchoring the 90-day clock) even without channel data.
+  // lastDowntimeDate (anchoring the 60-day clock) even without channel data.
   //
   // State entries are keyed by coinMinimalDenom (matching update_assetlist_state.mjs
   // and every other lifecycle script). For IBC assets we compute that hash from

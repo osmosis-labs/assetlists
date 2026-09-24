@@ -575,14 +575,12 @@ Each flag has a paired `*_reason` enum field. The frontend uses the reason to pi
       │        halt_deposits=true (reason: extended_unstable_market)
       │        withdrawals stay open
       │
-      │  90 days since state.lastDowntimeDate (regardless of intervening recovery)
       ▼
-   PR opened proposing osmosis_verified=false
-   state.lastUnverifyProposedAt = <now> (30-day cooldown)
-   On merge: only osmosis_verified flips; unstable + state history kept as record.
+   bridge stays down: osmosis_unstable and both halts remain until bridge_up
+   (osmosis_verified is never changed by the lifecycle scripts)
 ```
 
-A second, independent track exists for market-driven unstable. When a verified, non-disabled asset is post-grace (23+ days past listing) and fails the market check (`liquidity < $1k && volume_24h < $100`) for 7 consecutive daily runs, it is flagged with reason `market`. The same 60/90-day timeline applies. Recovery is single-day for the halt and 7-day for the full unstable clear; on full recovery, state history is wiped.
+A second, independent track exists for market-driven unstable. When a verified, non-disabled asset is post-grace (23+ days past listing) and fails the market check (`liquidity < $1k && volume_24h < $100`) for 7 consecutive daily runs, it is flagged with reason `market`. The same 60-day timeline applies. Recovery is single-day for the halt and 7-day for the full unstable clear; on full recovery, state history is wiped.
 
 #### Scripts in the daily cron (in order)
 
@@ -596,13 +594,9 @@ A second, independent track exists for market-driven unstable. When a verified, 
 
 5. **`report_dead_chains.mjs`** (report-only, owns no reason enum and writes no lifecycle flags). Maintains the per-chain dead-endpoint streak in `generated/state/dead_chain_streaks.json` and renders the "Dead chain candidates" and "Possible planned shutdowns" sections of the PR body. The cheap streak counter runs every day; the heavier half (governance-proposal scan plus cosmos.directory corroboration, and the published candidate list) runs only on the Monday `--weekly` invocation to bound CI cost and external load. A chain reaching the 7-run all-endpoints-failed streak and corroborated as dead is a candidate for a `source_chain_killed` flag plus an upstream chain-registry `status: killed` PR.
 
-#### Bi-weekly cron
-
-**`check_unverify_candidates.mjs`** (1st and 15th of each month at 16:00 UTC, via `propose_unverify.yml`). Collects every verified asset that has been continuously unstable for 90+ days and hasn't had an unverify PR opened in the last 30 days. Flips `osmosis_verified=false` for each, writes a markdown PR body, stamps `state.lastUnverifyProposedAt` for cooldown, and the workflow opens or updates a PR on a fixed branch (`auto-unverify/weekly-candidates`). The PR requires human approval.
-
 #### On-demand utility
 
-**`asset_status_report.mjs`** (read-only; run by hand with `node asset_status_report.mjs [<zone_name>]` from `.github/workflows/utility`, no workflow invokes it). Produces a six-section markdown report covering unstable assets, halt status, disabled assets, verification-borderline assets, pending unverifies in cooldown, and detected invariant violations.
+**`asset_status_report.mjs`** (read-only; run by hand with `node asset_status_report.mjs [<zone_name>]` from `.github/workflows/utility`, no workflow invokes it). Produces a five-section markdown report covering unstable assets, halt status, disabled assets, verification-borderline assets, and detected invariant violations.
 
 #### Safety mechanisms
 

@@ -251,7 +251,7 @@ For complete schema definitions, see `zone_assets.schema.json`.
 ```
 **Result**: Warning indicator (alert-circle icon) shown next to the asset symbol. Both deposit and withdraw flows still work; the frontend renders a localised banner explaining the cause. Typically auto-set by `check_ibc_clients.mjs`.
 
-**To enable native IBC fully**: `check_ibc_clients.mjs` clears `osmosis_unstable` automatically once both IBC clients are Active again. To force-clear, remove the flag manually.
+**To enable native IBC fully**: once both IBC clients are Active again, `check_ibc_clients.mjs` clears the deposit and withdrawal halts on the next daily run, then clears `osmosis_unstable` after the route has stayed functional for 60 days. To force-clear sooner, remove the flag manually.
 
 #### Scenario 4: Asset with Custom Transfer Method
 ```json
@@ -570,10 +570,15 @@ Each flag has a paired `*_reason` enum field. The frontend uses the reason to pi
       │     osmosis_unstable stays
       │     state.lastRecoveryDate = <now>
       │        │
-      │        │   60 days since state.lastDowntimeDate AND market still failing
+      │        ├──── 60 days since state.lastDowntimeDate AND market still failing
+      │        │     ▼
+      │        │     halt_deposits=true (reason: extended_unstable_market)
+      │        │     withdrawals stay open
+      │        │
+      │        │   60 days since state.lastRecoveryDate, route up throughout,
+      │        │   no halts left (reason ibc_client only)
       │        ▼
-      │        halt_deposits=true (reason: extended_unstable_market)
-      │        withdrawals stay open
+      │        osmosis_unstable cleared, lastDowntimeDate/lastRecoveryDate wiped
       │
       ▼
    bridge stays down: osmosis_unstable and both halts remain until bridge_up
@@ -586,7 +591,7 @@ A second, independent track exists for market-driven unstable. When a verified, 
 
 1. **`check_tooltip_expiry.mjs`**, the curator-driven tooltip expiry/decay. Runs first so an expired tooltip is cleared (or decayed via `tooltip_decay_message`) before the lock-respecting scripts below see it. Acts only on a curator-set `tooltip_expiry_date` that has passed; never touches a tooltip without one. Owns no halt/unstable reason enum.
 
-2. **`check_ibc_clients.mjs`**, the unified bridge-state check. Detects IBC client status and source chain `status="killed"`. Owns reasons `ibc_client`, `source_chain_killed` (unstable) and `bridge_down`, `source_chain_killed` (halts). Implements the flap-vs-fresh-incident rule (within 30 days of recovery = continuation; beyond = fresh incident). Includes a "manual-flip safety net" that populates `state.lastDowntimeDate` if a curator manually sets `osmosis_unstable` without one. On the Monday `--weekly` invocation it additionally sweeps the **counterparty-side** client (the client on the remote chain tracking Osmosis, the side an expired relayer kills first): any triple reading non-Active (Expired, Frozen, or unreachable) on **2 consecutive weekly runs** is halted through the same `ibc_client`/`bridge_down` machinery, with week-1 candidates surfaced in the PR body first. Streaks persist in `generated/state/counterparty_client_streaks.json`; a sweep where most triples read non-Active at once is discarded as invalid (runner-side network trouble) rather than advancing streaks, and structurally unverifiable chains (no REST endpoints listed anywhere, or a custom node without IBC query routes, e.g. nomic) are skipped and reported rather than streaked. Recovery needs no streak: once halted, the existing counterparty clearing check runs daily, so a governance-recovered client un-halts on the next daily run.
+2. **`check_ibc_clients.mjs`**, the unified bridge-state check. Detects IBC client status and source chain `status="killed"`. Owns reasons `ibc_client`, `source_chain_killed` (unstable) and `bridge_down`, `source_chain_killed` (halts). Implements the flap-vs-fresh-incident rule (within 30 days of recovery = continuation; beyond = fresh incident). Includes a "manual-flip safety net" that populates `state.lastDowntimeDate` if a curator manually sets `osmosis_unstable` without one. On the Monday `--weekly` invocation it additionally sweeps the **counterparty-side** client (the client on the remote chain tracking Osmosis, the side an expired relayer kills first): any triple reading non-Active (Expired, Frozen, or unreachable) on **2 consecutive weekly runs** is halted through the same `ibc_client`/`bridge_down` machinery, with week-1 candidates surfaced in the PR body first. Streaks persist in `generated/state/counterparty_client_streaks.json`; a sweep where most triples read non-Active at once is discarded as invalid (runner-side network trouble) rather than advancing streaks, and structurally unverifiable chains (no REST endpoints listed anywhere, or a custom node without IBC query routes, e.g. nomic) are skipped and reported rather than streaked. Recovery needs no streak: once halted, the existing counterparty clearing check runs daily, so a governance-recovered client un-halts on the next daily run. After recovery the `ibc_client` unstable flag stays on until the route has been functional for 60 days, then clears along with the asset's downtime history.
 
 3. **`check_market_health.mjs`**, the market track. Owns reason `market` for unstable and is the **only** writer that fully recovers an asset from market-driven instability. Skipped for unverified, disabled, and preview assets, and for assets within the 23-day post-listing grace window. Alloyed assets are evaluated normally; constituents of an alloy inherit the alloy's volume and liquidity via `max(self, alloy)` so they are not falsely flagged when their standalone Numia row reads zero but the alloy carries real activity. Constituent membership is determined from SQS pool composition (positive balance in the alloyed transmuter pool).
 

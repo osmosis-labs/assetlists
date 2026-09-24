@@ -9,6 +9,9 @@
 //       osmosis_halt_withdrawals in zone_assets.json, with reasons.
 //     • Maintain state.json's lastDowntimeDate / lastRecoveryDate fields
 //       (flap-vs-fresh-incident rule).
+//     • Recovery clears halts immediately but keeps osmosis_unstable
+//       (ibc_client) until the route has stayed up for 60 days, then clears
+//       it (see canClearRecoveredIbcUnstable).
 //     • Weekly (--weekly): sweep the COUNTERPARTY-side client (the client on
 //       the remote chain that tracks Osmosis) for every triple whose
 //       Osmosis-side client is Active. A triple that reads non-Active
@@ -48,7 +51,12 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { calculateIbcHash } from './assetlist_functions.mjs';
 import { sleep } from './api_management.mjs';
-import { loadJSON, findStateAsset, materialiseStateAsset } from './lifecycle_helpers.mjs';
+import {
+  loadJSON,
+  findStateAsset,
+  materialiseStateAsset,
+  canClearRecoveredIbcUnstable,
+} from './lifecycle_helpers.mjs';
 
 const DEFAULT_LCD = "https://lcd.osmosis.zone";
 const CONCURRENCY = 5;
@@ -1002,6 +1010,8 @@ async function main() {
         if (cleared) {
           // Record recovery. Keep osmosis_unstable populated so the 60-day
           // extended-halt clock stays armed via the persistent lastDowntimeDate.
+          // The flag itself clears once the route has stayed up for
+          // IBC_UNSTABLE_CLEAR_AFTER_MS (branch below, on a later run).
           materialiseStateAsset(state, fa.coinMinimalDenom).lastRecoveryDate = nowIso;
 
           // If the resulting entry is a thin auto-added one, remove it entirely.
@@ -1012,6 +1022,15 @@ async function main() {
           } else {
             mutations.push({ kind: 'bridge_up', fa, zoneAsset });
           }
+        } else if (canClearRecoveredIbcUnstable({ zoneAsset, stateAsset, nowMs: Date.parse(nowIso) })) {
+          // Route has been functional since lastRecoveryDate for the full
+          // window: drop the warning and close the incident, so a later outage
+          // starts a fresh downtime clock.
+          delete zoneAsset.osmosis_unstable;
+          delete zoneAsset.osmosis_unstable_reason;
+          delete stateAsset.lastDowntimeDate;
+          delete stateAsset.lastRecoveryDate;
+          mutations.push({ kind: 'unstable_cleared', fa, reason: 'ibc_client', zoneAsset });
         }
       } else {
         // Unconfirmed (e.g. counterparty status unknown, source chain status unknown).
@@ -1223,7 +1242,7 @@ async function main() {
   // manual_inherited assets are a flag event (a new asset locked down), so
   // they roll into NEWLY_FLAGGED, as do counterparty_down halts.
   console.log(`\nIBC_NEWLY_FLAGGED=${(byKind.bridge_down ?? 0) + (byKind.manual_inherited ?? 0) + (byKind.counterparty_down ?? 0)}`);
-  console.log(`IBC_NEWLY_CLEARED=${(byKind.bridge_up ?? 0) + (byKind.thin_removed ?? 0)}`);
+  console.log(`IBC_NEWLY_CLEARED=${(byKind.bridge_up ?? 0) + (byKind.thin_removed ?? 0) + (byKind.unstable_cleared ?? 0)}`);
   console.log(`IBC_ERRORS=${byKind.ibc_error ?? 0}`);
   if (weekly) {
     console.log(`IBC_CP_CANDIDATES=${cpCandidates.length}`);

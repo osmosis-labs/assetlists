@@ -292,6 +292,41 @@ export function isMarketGenuinelyFailing({
   return numiaFailing && sqsAgrees;
 }
 
+// ── IBC recovery ─────────────────────────────────────────────────────────────
+
+// How long a recovered IBC route must stay functional before its
+// ibc_client unstable flag is cleared.
+export const IBC_UNSTABLE_CLEAR_AFTER_MS = 60 * 24 * 60 * 60 * 1000;
+
+/**
+ * Decide whether an asset whose IBC route has recovered can drop its
+ * `ibc_client` unstable flag. check_ibc_clients.mjs keeps the flag on through
+ * recovery so check_extended_halts.mjs's 60-day clock stays armed; this is the
+ * exit once the route has stayed up long enough.
+ *
+ * Every condition must hold:
+ *   1. The flag is set with reason `ibc_client`. `market` belongs to
+ *      check_market_health.mjs, `manual` to the curator.
+ *   2. No curator tooltip (the shared automation lock).
+ *   3. No deposit or withdrawal halt of any reason remains. A leftover halt
+ *      means some other owner still considers the asset impaired.
+ *   4. lastRecoveryDate is at least IBC_UNSTABLE_CLEAR_AFTER_MS old. Any
+ *      bridge-down reading deletes lastRecoveryDate (applyDowntimeDateRule),
+ *      so its presence means the route has been up continuously since then.
+ *
+ * Pure function (no I/O) so it is unit-testable with fixture inputs.
+ */
+export function canClearRecoveredIbcUnstable({ zoneAsset, stateAsset, nowMs }) {
+  if (zoneAsset?.osmosis_unstable !== true) return false;
+  if (zoneAsset.osmosis_unstable_reason !== 'ibc_client') return false;
+  if (zoneAsset.tooltip_message) return false;
+  if (zoneAsset.osmosis_halt_deposits === true) return false;
+  if (zoneAsset.osmosis_halt_withdrawals === true) return false;
+  const recoveredAt = Date.parse(stateAsset?.lastRecoveryDate ?? '');
+  if (!Number.isFinite(recoveredAt)) return false;
+  return nowMs - recoveredAt >= IBC_UNSTABLE_CLEAR_AFTER_MS;
+}
+
 // ── Misc ─────────────────────────────────────────────────────────────────────
 
 export function loadJSON(p, fallback) {

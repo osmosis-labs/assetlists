@@ -50,11 +50,10 @@ const stateLocations = [
  *   listingDate                   ISO UTC; existing, date asset was first verified
  *   legacyAsset                   existing, true if verified before state tracking
  *
- *   lastDowntimeDate              ISO UTC; anchors the 60/90-day lifecycle clock
+ *   lastDowntimeDate              ISO UTC; anchors the 60-day lifecycle clock
  *   lastRecoveryDate              ISO UTC; when the bridge/market last recovered
  *   marketHealthStreak            numeric; consecutive failing market-check runs
  *   marketHealthRecoveryStreak    numeric; consecutive passing runs while unstable
- *   lastUnverifyProposedAt        ISO UTC; last time check_unverify_candidates opened a PR
  *
  * Indexed by base_denom (which is coinMinimalDenom on Osmosis, e.g. uosmo or ibc/...).
  * See "Graceful Shutdown of Asset Listings" plan for the lifecycle contract.

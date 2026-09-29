@@ -13,8 +13,10 @@ import {
   buildSqsLiquidityMap,
   canClearExtendedHalt,
   canClearRecoveredIbcUnstable,
+  countsTowardRecovery,
   IBC_UNSTABLE_CLEAR_AFTER_MS,
   isMarketGenuinelyFailing,
+  resolveMarket,
 } from './lifecycle_helpers.mjs';
 
 const FLOORS = { lowLiquidityUsd: 1000, lowVolumeUsd: 100 };
@@ -209,6 +211,103 @@ test('setting and clearing are not mutually exhaustive', () => {
   };
   assert.equal(isMarketGenuinelyFailing(input), false);
   assert.equal(canClearExtendedHalt(input), false);
+});
+
+// ── countsTowardRecovery: denoms Numia does not price ───────────────────────
+
+const UNPRICED = { liquidity: 0, volume24h: 0, priced: false };
+
+test('unpriced asset advances recovery on SQS alone (the PEPE.axl case)', () => {
+  // Live shape 2026-09-29: Numia price null (so liquidity 0, volume 0) while
+  // SQS shows $74,361 pooled. Requiring Numia to pass made recovery
+  // impossible for every unpriced denom.
+  assert.equal(
+    countsTowardRecovery({ market: UNPRICED, sqsLiquidity: 74361, ...FLOORS }),
+    true
+  );
+});
+
+test('unpriced asset never clears a halt in a single run', () => {
+  // The single-run clear stays two-source: SQS whole-pool caps move between
+  // runs (ARB.axl read $738 and then $27,339 minutes apart on 2026-09-29), so
+  // one SQS reading must not reopen deposits. The halt goes with the flag
+  // after the full consecutive-run window instead.
+  assert.equal(
+    canClearExtendedHalt({ market: UNPRICED, sqsLiquidity: 74361, ...FLOORS }),
+    false
+  );
+});
+
+test('unpriced asset with thin SQS depth does not advance', () => {
+  // allDOGE shape 2026-09-29: unpriced, $868 pooled.
+  assert.equal(
+    countsTowardRecovery({ market: UNPRICED, sqsLiquidity: 868, ...FLOORS }),
+    false
+  );
+});
+
+test('unpriced asset with no usable SQS reading does not advance', () => {
+  for (const sqsLiquidity of [undefined, 0, NaN, 'not-a-number']) {
+    assert.equal(
+      countsTowardRecovery({ market: UNPRICED, sqsLiquidity, ...FLOORS }),
+      false
+    );
+  }
+});
+
+test('priced and legacy rows keep the two-source rule', () => {
+  // A priced denom reporting zero is a measurement, not absent coverage.
+  for (const market of [
+    { liquidity: 0, volume24h: 0, priced: true },
+    { liquidity: 0, volume24h: 0 },
+  ]) {
+    assert.equal(
+      countsTowardRecovery({ market, sqsLiquidity: 74361, ...FLOORS }),
+      false
+    );
+  }
+  assert.equal(
+    countsTowardRecovery({
+      market: { liquidity: 5000, volume24h: 0, priced: true },
+      sqsLiquidity: 5000,
+      ...FLOORS,
+    }),
+    true
+  );
+  // Phantom Numia liquidity still cannot confirm (the axlUSDT case).
+  assert.equal(
+    countsTowardRecovery({
+      market: { liquidity: 162830.91, volume24h: 0, priced: true },
+      sqsLiquidity: 0,
+      ...FLOORS,
+    }),
+    false
+  );
+});
+
+// ── resolveMarket: priced flag ──────────────────────────────────────────────
+
+test('resolveMarket is unpriced only when every consulted row is unpriced', () => {
+  const unpriced = { liquidity: 0, volume24h: 0, mcap: 0, priced: false };
+  const priced = { liquidity: 5000, volume24h: 200, mcap: 0, priced: true };
+  const numia = new Map([
+    ['c-unpriced', unpriced],
+    ['c-alone', unpriced],
+    ['alloy-unpriced', unpriced],
+    ['alloy-priced', priced],
+    ['c-legacy', { liquidity: 0, volume24h: 0, mcap: 0 }],
+  ]);
+  const toAlloy = new Map([
+    ['c-unpriced', 'alloy-unpriced'],
+    ['c-with-priced-alloy', 'alloy-priced'],
+  ]);
+  assert.equal(resolveMarket(numia, toAlloy, 'c-unpriced').priced, false);
+  assert.equal(resolveMarket(numia, toAlloy, 'c-alone').priced, false);
+  // Constituent missing from Numia but its alloy is priced → priced rules.
+  assert.equal(resolveMarket(numia, toAlloy, 'c-with-priced-alloy').priced, true);
+  // A row without the field is treated as priced (conservative).
+  assert.equal(resolveMarket(numia, toAlloy, 'c-legacy').priced, true);
+  assert.equal(resolveMarket(numia, toAlloy, 'missing'), undefined);
 });
 
 // ── buildSqsLiquidityMap: the whole-pool-cap convention ─────────────────────

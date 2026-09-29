@@ -16,8 +16,13 @@ export const NUMIA_TOKENS_URL = 'https://public-osmosis-api.numia.xyz/tokens/v2/
 
 /**
  * Fetch the Numia token list and build a Map keyed by denom. Each entry holds
- * { liquidity, volume24h, mcap }; mcap is populated for callers that need it
- * (asset_status_report) and ignored by everyone else.
+ * { liquidity, volume24h, mcap, priced }; mcap is populated for callers that
+ * need it (asset_status_report) and ignored by everyone else.
+ *
+ * `priced` is false when Numia returns `price: null` for the denom. Numia
+ * prices a small minority of the denoms it lists and reports liquidity 0 and
+ * volume 0 for the rest, so for an unpriced denom those zeroes are absent
+ * coverage, not a measurement (see countsTowardRecovery).
  *
  * Pass { hardFail: true } when the script cannot meaningfully continue without
  * Numia data (check_market_health / check_extended_halts). Pass false to
@@ -46,6 +51,7 @@ export async function fetchNumia({ hardFail = true } = {}) {
         // Several plausible field names in Numia's history; default to 0.
         volume24h: Number(t.volume_24h ?? t.volume_24h_usd ?? t.volume24h ?? 0),
         mcap: Number(t.market_cap ?? 0),
+        priced: t.price != null,
       });
     }
     return byDenom;
@@ -135,6 +141,10 @@ export async function fetchAlloyConstituentMap(alloyedDenomSet) {
  *
  * mcap is forwarded so asset_status_report's borderline detector can include
  * it; other callers can ignore the field.
+ *
+ * `priced` is false only when every row consulted is explicitly unpriced, so
+ * a constituent whose alloy Numia does price keeps the priced-asset rules.
+ * A row without the field counts as priced (the conservative reading).
  */
 export function resolveMarket(numia, constituentToAlloy, coinMinimalDenom) {
   const self = numia.get(coinMinimalDenom);
@@ -145,6 +155,7 @@ export function resolveMarket(numia, constituentToAlloy, coinMinimalDenom) {
     liquidity: Math.max(self?.liquidity ?? 0, alloy?.liquidity ?? 0),
     volume24h: Math.max(self?.volume24h ?? 0, alloy?.volume24h ?? 0),
     mcap: self?.mcap ?? alloy?.mcap ?? 0,
+    priced: ![self, alloy].filter(Boolean).every((r) => r.priced === false),
   };
 }
 
@@ -234,6 +245,41 @@ export function canClearExtendedHalt({
     (market.liquidity >= lowLiquidityUsd || market.volume24h >= lowVolumeUsd);
   const sqsConfirms = Number(sqsLiquidity ?? 0) >= lowLiquidityUsd;
   return numiaPassing && sqsConfirms;
+}
+
+/**
+ * Decide whether one run counts toward the market-health RECOVERY streak.
+ *
+ * For a priced asset this is canClearExtendedHalt: both sources must pass.
+ *
+ * For an asset Numia does not price (`market.priced === false`), Numia's
+ * liquidity/volume zeroes carry no information, so requiring Numia to pass
+ * made recovery impossible however deep the asset's pools became. SQS is then
+ * the only measurement and decides alone, which mirrors how such an asset is
+ * flagged in the first place (isMarketGenuinelyFailing reduces to the SQS
+ * reading when Numia reports zeroes). A market row without the `priced` field
+ * keeps the two-source rule.
+ *
+ * SQS alone is a noisy upper bound (whole-pool caps, which move between runs),
+ * so a single passing run must never clear anything for an unpriced asset.
+ * It only advances the streak; check_market_health clears the flag and the
+ * extended deposit halt together after the full consecutive-run window, and
+ * any failing run resets it. canClearExtendedHalt, the single-run clear used
+ * by check_extended_halts, deliberately stays two-source.
+ *
+ * Pure function (no I/O) so it is unit-testable with fixture inputs.
+ */
+export function countsTowardRecovery({
+  market,
+  sqsLiquidity,
+  lowLiquidityUsd,
+  lowVolumeUsd,
+}) {
+  if (market?.priced !== false) {
+    return canClearExtendedHalt({ market, sqsLiquidity, lowLiquidityUsd, lowVolumeUsd });
+  }
+  const sqsReading = Number(sqsLiquidity ?? 0);
+  return Number.isFinite(sqsReading) && sqsReading >= lowLiquidityUsd;
 }
 
 /**

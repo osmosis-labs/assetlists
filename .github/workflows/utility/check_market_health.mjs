@@ -13,10 +13,17 @@
 //       tooltip) on the first confirmed-passing run.
 //     • 7 consecutive confirmed-passing runs → clear osmosis_unstable AND wipe
 //       state history fields, only if osmosis_unstable_reason === "market".
-//   Resetting is the exception: a Numia-only failing run may zero
-//   marketHealthRecoveryStreak unaided, since discarding unconfirmed progress
-//   is the safe direction. So a passing-but-unconfirmed run neither advances
-//   nor resets the streak (it holds), while a failing run resets it outright.
+//   For a denom Numia does not price (price null, so it reports zeroes), SQS
+//   is the only measurement, mirroring how such a denom is flagged: an SQS
+//   pass advances the streak (see countsTowardRecovery), but nothing clears
+//   until the full 7-run window, which then clears the flag and the extended
+//   deposit halt together. A single SQS reading is too noisy to reopen
+//   deposits on.
+//   Resetting is the exception: a single-source failing run (Numia for priced
+//   denoms, SQS for unpriced ones) may zero marketHealthRecoveryStreak unaided,
+//   since discarding unconfirmed progress is the safe direction. So a
+//   passing-but-unconfirmed run neither advances nor resets the streak (it
+//   holds), while a failing run resets it outright.
 //
 //   Reason-vocabulary contract: this script owns reasons {market}.
 //
@@ -28,6 +35,7 @@ import * as path from 'path';
 
 import {
   canClearExtendedHalt,
+  countsTowardRecovery,
   fetchAlloyConstituentMap,
   fetchNumia,
   fetchSqsLiquidityMap,
@@ -142,13 +150,25 @@ async function main() {
     // See lifecycle_helpers.resolveMarket.
     const market = resolveMarket(numia, constituentToAlloy, asset.coinMinimalDenom);
     const marketMissing = !market;
-    const failing =
+    const sqsLiquidity = sqsLiquidityByDenom.get(asset.coinMinimalDenom);
+    // Numia reports zeroes for every denom it does not price, so for those
+    // its reading is absent coverage and SQS is the only measurement. The
+    // reset branches below then follow SQS, and stay put when SQS is down.
+    const unpriced = !marketMissing && market.priced === false;
+    const sqsReading = Number(sqsLiquidity ?? 0);
+    const sqsLiquid =
+      sqsAvailable && Number.isFinite(sqsReading) && sqsReading >= LOW_LIQUIDITY_USD;
+    const sqsIlliquid =
+      sqsAvailable && Number.isFinite(sqsReading) && sqsReading < LOW_LIQUIDITY_USD;
+    const numiaFailing =
       !marketMissing &&
       market.liquidity < LOW_LIQUIDITY_USD &&
       market.volume24h < LOW_VOLUME_24H_USD;
-    // Numia-only recovery signal. Kept as-is for the streak_reset / recovery
-    // _reset branches, where it only ever makes recovery harder.
-    const passing = !marketMissing && !failing;
+    // Single-source signals for the streak_reset / recovery_reset branches,
+    // where they only ever discard progress: Numia for priced assets, SQS for
+    // unpriced ones.
+    const failing = unpriced ? sqsIlliquid : numiaFailing;
+    const passing = unpriced ? sqsLiquid : !marketMissing && !numiaFailing;
     // Recovery that MUTATES (advancing the streak, clearing the halt, clearing
     // osmosis_unstable) requires the same cross-source agreement as the
     // deposit-halt clear. Numia can report liquidity for a denom with no real
@@ -156,13 +176,13 @@ async function main() {
     // could accumulate 7 passing runs and lose osmosis_unstable while
     // canClearExtendedHalt still correctly refuses to reopen its deposits —
     // inconsistent state from a single unverified source. Fail-closed: no SQS
-    // this run means no recovery progress.
+    // this run means no recovery progress. For an unpriced asset SQS decides
+    // alone (see countsTowardRecovery).
     const passingConfirmed =
-      passing &&
       sqsAvailable &&
-      canClearExtendedHalt({
+      countsTowardRecovery({
         market,
-        sqsLiquidity: sqsLiquidityByDenom.get(asset.coinMinimalDenom),
+        sqsLiquidity,
         lowLiquidityUsd: LOW_LIQUIDITY_USD,
         lowVolumeUsd: LOW_VOLUME_24H_USD,
       });
@@ -258,6 +278,17 @@ async function main() {
           rstreak >= RECOVERY_RUNS_TO_CLEAR_UNSTABLE &&
           !zoneAsset.tooltip_message
         ) {
+          // An unpriced asset never passes the two-source early clear above,
+          // so its extended deposit halt goes with the flag. For a priced
+          // asset it was already cleared on an earlier run.
+          if (
+            zoneAsset.osmosis_halt_deposits === true &&
+            zoneAsset.osmosis_deposit_halt_reason === 'extended_unstable_market'
+          ) {
+            delete zoneAsset.osmosis_halt_deposits;
+            delete zoneAsset.osmosis_deposit_halt_reason;
+            mutations.push({ kind: 'extended_halt_cleared', asset: asset.symbol, chain: asset.chainName });
+          }
           delete zoneAsset.osmosis_unstable;
           delete zoneAsset.osmosis_unstable_reason;
           delete stateAsset.lastDowntimeDate;
@@ -267,9 +298,10 @@ async function main() {
           mutations.push({ kind: 'market_recovered', asset: asset.symbol, chain: asset.chainName });
         }
       } else if (failing) {
-        // Numia-only on purpose: this only RESETS progress, so the stricter
-        // reading would be the unsafe direction (it would let a phantom
-        // recovery survive a genuinely failing run).
+        // Single-source on purpose (Numia, or SQS for an unpriced denom): this
+        // only RESETS progress, so the stricter reading would be the unsafe
+        // direction (it would let a phantom recovery survive a genuinely
+        // failing run).
         if (stateAsset?.marketHealthRecoveryStreak) {
           stateAsset.marketHealthRecoveryStreak = 0;
           mutations.push({ kind: 'recovery_reset', asset: asset.symbol });

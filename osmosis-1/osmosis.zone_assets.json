@@ -356,12 +356,7 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "pSTAKE Finance $PSTAKE",
-      "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
-      "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
-      "tooltip_message": "Gravity Bridge has been compromised. Deposits are halted while the situation is assessed."
+      "_comment": "pSTAKE Finance $PSTAKE"
     },
     {
       "chain_name": "akash",
@@ -666,10 +661,7 @@
       "categories": [
         "bridges"
       ],
-      "_comment": "Gravity Bridge $GRAV",
-      "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
-      "tooltip_message": "Gravity Bridge suffered an exploit in May 2026 and its Ethereum bridge remains out of service. GRAV transfers over IBC are working again, but assets bridged from Ethereum through Gravity cannot currently be redeemed."
+      "_comment": "Gravity Bridge $GRAV"
     },
     {
       "chain_name": "decentr",
@@ -882,14 +874,7 @@
           "logo_uri": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gravitybridge/images/grav.png"
         }
       ],
-      "_comment": "Wrapped Bitcoin (Ethereum via Gravity Bridge) $WBTC.eth.grv",
-      "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
-      "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
-      "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down",
-      "tooltip_message": "Gravity Bridge has been compromised. Deposits and withdrawals are halted while the situation is assessed."
+      "_comment": "Wrapped Bitcoin (Ethereum via Gravity Bridge) $WBTC.eth.grv"
     },
     {
       "chain_name": "gravitybridge",
@@ -912,7 +897,7 @@
       "osmosis_deposit_halt_reason": "bridge_down",
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "bridge_down",
-      "tooltip_message": "Gravity Bridge has been compromised. Deposits and withdrawals are halted while the situation is assessed."
+      "tooltip_message": "Gravity Bridge's Ethereum reserves for this asset were drained in the 29-30 May 2026 exploit. The bridge has since reactivated, but ETH.grv remains locked and is not backed. Deposits and withdrawals are disabled. Source: https://www.mintscan.io/gravity-bridge/proposals/263"
     },
     {
       "chain_name": "gravitybridge",
@@ -938,7 +923,7 @@
       "osmosis_deposit_halt_reason": "bridge_down",
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "bridge_down",
-      "tooltip_message": "Gravity Bridge has been compromised. Deposits and withdrawals are halted while the situation is assessed."
+      "tooltip_message": "Gravity Bridge's Ethereum reserves for this asset were drained in the 29-30 May 2026 exploit. The bridge has since reactivated, but USDC.eth.grv remains locked and is not backed. Deposits and withdrawals are disabled. Source: https://www.mintscan.io/gravity-bridge/proposals/263"
     },
     {
       "chain_name": "gravitybridge",
@@ -957,14 +942,7 @@
       "categories": [
         "stablecoin"
       ],
-      "_comment": "Dai Stablecoin (Gravity Bridge) $DAI.grv",
-      "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
-      "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
-      "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down",
-      "tooltip_message": "Gravity Bridge has been compromised. Deposits and withdrawals are halted while the situation is assessed."
+      "_comment": "Dai Stablecoin (Gravity Bridge) $DAI.grv"
     },
     {
       "chain_name": "gravitybridge",
@@ -990,7 +968,7 @@
       "osmosis_deposit_halt_reason": "bridge_down",
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "bridge_down",
-      "tooltip_message": "Gravity Bridge has been compromised. Deposits and withdrawals are halted while the situation is assessed."
+      "tooltip_message": "Gravity Bridge's Ethereum reserves for this asset were drained in the 29-30 May 2026 exploit. The bridge has since reactivated, but USDT.eth.grv remains locked and is not backed. Deposits and withdrawals are disabled. Source: https://www.mintscan.io/gravity-bridge/proposals/263"
     },
     {
       "chain_name": "juno",
@@ -3826,14 +3804,7 @@
           "logo_uri": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gravitybridge/images/grav.png"
         }
       ],
-      "_comment": "Page $PAGE",
-      "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
-      "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
-      "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down",
-      "tooltip_message": "Gravity Bridge has been compromised. Deposits and withdrawals are halted while the situation is assessed."
+      "_comment": "Page $PAGE"
     },
     {
       "chain_name": "pundix",
@@ -4725,7 +4696,7 @@
       "osmosis_deposit_halt_reason": "bridge_down",
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "bridge_down",
-      "tooltip_message": "Gravity Bridge has been compromised. Deposits and withdrawals are halted while the situation is assessed."
+      "tooltip_message": "Gravity Bridge's Ethereum reserves for this asset were drained in the 29-30 May 2026 exploit. The bridge has since reactivated, but PAXG.grv remains locked and is not backed. Deposits and withdrawals are disabled. Source: https://www.mintscan.io/gravity-bridge/proposals/263"
     },
     {
       "chain_name": "migaloo",
@@ -6869,11 +6840,11 @@
       "osmosis_verified": false,
       "_comment": "Int3face $INT3",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "int3face",
@@ -6892,11 +6863,11 @@
       ],
       "_comment": "Dogecoin (Int3) $DOGE.int3",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
       "tooltip_message": "The Int3face bridge has shut down."
     },
     {
@@ -6915,11 +6886,11 @@
       ],
       "_comment": "Bitcoin (Int3) $BTC.int3",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
       "tooltip_message": "The Int3face bridge has shut down."
     },
     {
@@ -6938,11 +6909,11 @@
       ],
       "_comment": "Bitcoin Cash (Int3) $BCH.int3",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
       "tooltip_message": "The Int3face bridge has shut down."
     },
     {
@@ -6961,11 +6932,11 @@
       ],
       "_comment": "Litecoin (Int3) $LTC.int3",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
       "tooltip_message": "The Int3face bridge has shut down."
     },
     {
@@ -7416,11 +7387,11 @@
       },
       "_comment": "Toncoin (Int3) $TON.int3",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
       "tooltip_message": "The Int3face bridge has shut down."
     },
     {
@@ -8308,11 +8279,11 @@
       ],
       "_comment": "Solana (Int3) $SOL.int3",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
       "tooltip_message": "The Int3face bridge has shut down."
     },
     {
@@ -8338,11 +8309,11 @@
       ],
       "_comment": "Ripple (xrpl via Int3) $XRP.xrpl.int3",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
       "tooltip_message": "The Int3face bridge has shut down."
     },
     {
@@ -8562,11 +8533,11 @@
       ],
       "_comment": "Pudgy Penguins (Int3) $PENGU.int3",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
       "tooltip_message": "The Int3face bridge has shut down."
     },
     {
@@ -8588,11 +8559,11 @@
       ],
       "_comment": "Official Trump (Int3) $TRUMP.int3",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
       "tooltip_message": "The Int3face bridge has shut down."
     },
     {
@@ -8804,11 +8775,11 @@
       ],
       "_comment": "Zcash (Int3) $ZEC.int3",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
       "tooltip_message": "The Int3face bridge has shut down."
     },
     {
@@ -11914,40 +11885,19 @@
       "chain_name": "gravitybridge",
       "base_denom": "gravity0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006",
       "path": "transfer/channel-144/gravity0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006",
-      "_comment": "pSTAKE Finance (Gravity Bridge) $PSTAKE.grv",
-      "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
-      "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
-      "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down",
-      "tooltip_message": "Gravity Bridge has been compromised. Deposits and withdrawals are halted while the situation is assessed."
+      "_comment": "pSTAKE Finance (Gravity Bridge) $PSTAKE.grv"
     },
     {
       "chain_name": "gravitybridge",
       "base_denom": "gravity0x83F20F44975D03b1b09e64809B757c47f942BEeA",
       "path": "transfer/channel-144/gravity0x83F20F44975D03b1b09e64809B757c47f942BEeA",
-      "_comment": "Savings Dai (Gravity Bridge) $sDAI.grv",
-      "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
-      "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
-      "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down",
-      "tooltip_message": "Gravity Bridge has been compromised. Deposits and withdrawals are halted while the situation is assessed."
+      "_comment": "Savings Dai (Gravity Bridge) $sDAI.grv"
     },
     {
       "chain_name": "gravitybridge",
       "base_denom": "gravity0x2F109021aFe75B949429fe30523Ee7C0D5B27207",
       "path": "transfer/channel-144/gravity0x2F109021aFe75B949429fe30523Ee7C0D5B27207",
-      "_comment": "OccamFi (Gravity Bridge) $OCC.grv",
-      "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
-      "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
-      "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down",
-      "tooltip_message": "Gravity Bridge has been compromised. Deposits and withdrawals are halted while the situation is assessed."
+      "_comment": "OccamFi (Gravity Bridge) $OCC.grv"
     },
     {
       "chain_name": "turkchain",
@@ -13176,12 +13126,12 @@
       "path": "transfer/channel-782/factory/sei1x2fgaaqecvk8kwuqkjqcj27clw5p5g99uawdzy9sc4rku8avumcq3cky4k/ampSEI",
       "_comment": "ERIS Amplified SEI $ampSEI",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "ibc_client",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_deposit_halt_reason": "bridge_down",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
-      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+      "osmosis_withdrawal_halt_reason": "bridge_down",
+      "tooltip_message": "Sei disabled IBC transfers with the SIP-3 / Sei Giga upgrade (governance proposal 116, passed 12 May 2026). The channel is closed, so deposits and withdrawals are disabled. Sei is now an EVM-only chain. For more information see: https://blog.sei.io/announcements/the-sip-3-upgrade-making-way-for-sei-giga/"
     },
     {
       "chain_name": "sei",
@@ -13189,12 +13139,12 @@
       "path": "transfer/channel-782/factory/sei1fl8pg59wfsgw2wp4aruk38zqccfnc2g8ptrm24/popeye",
       "_comment": "Popeye $POPEYE",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "ibc_client",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_deposit_halt_reason": "bridge_down",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
-      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+      "osmosis_withdrawal_halt_reason": "bridge_down",
+      "tooltip_message": "Sei disabled IBC transfers with the SIP-3 / Sei Giga upgrade (governance proposal 116, passed 12 May 2026). The channel is closed, so deposits and withdrawals are disabled. Sei is now an EVM-only chain. For more information see: https://blog.sei.io/announcements/the-sip-3-upgrade-making-way-for-sei-giga/"
     },
     {
       "chain_name": "sei",
@@ -13202,12 +13152,12 @@
       "path": "transfer/channel-782/factory/sei1ta5rkr6y2qlkj7px8w2cvear7m2822q4f4ea0m/sensei",
       "_comment": "Sensei Dog $SENSEI",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
+      "osmosis_unstable_reason": "ibc_client",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_deposit_halt_reason": "bridge_down",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "manual",
-      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+      "osmosis_withdrawal_halt_reason": "bridge_down",
+      "tooltip_message": "Sei disabled IBC transfers with the SIP-3 / Sei Giga upgrade (governance proposal 116, passed 12 May 2026). The channel is closed, so deposits and withdrawals are disabled. Sei is now an EVM-only chain. For more information see: https://blog.sei.io/announcements/the-sip-3-upgrade-making-way-for-sei-giga/"
     },
     {
       "chain_name": "hyve",

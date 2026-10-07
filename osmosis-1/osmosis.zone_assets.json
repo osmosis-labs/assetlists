@@ -499,11 +499,11 @@
       "osmosis_verified": true,
       "_comment": "Ki $XKI",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "panacea",
@@ -522,11 +522,11 @@
       ],
       "_comment": "bostrom $BOOT",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "comdex",
@@ -538,10 +538,12 @@
       ],
       "_comment": "Comdex $CMDX",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "planned_shutdown",
-      "tooltip_message": "The Comdex team ended support for the Comdex chain on 31 October 2025, deposits are disabled. Withdrawals remain open. Source: https://x.com/ComdexOfficial/status/1968366352537682220"
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Comdex team ended support for the Comdex chain on 31 October 2025 and it no longer produces blocks. Deposits and withdrawals are disabled. Source: https://x.com/ComdexOfficial/status/1968366352537682220",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "cheqd",
@@ -560,11 +562,11 @@
       "osmosis_verified": true,
       "_comment": "Lum Network $LUM",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "vidulum",
@@ -631,11 +633,11 @@
       "osmosis_verified": true,
       "osmosis_unstable": true,
       "_comment": "Konstellation $DARC",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "umee",
@@ -743,11 +745,16 @@
       "path": "transfer/channel-232/umntl",
       "osmosis_verified": true,
       "osmosis_disabled": true,
-      "tooltip_message": "IBC clients have expired. Transfers will be stuck in a pending state indefinitely until resolved by AssetMantle",
       "categories": [
         "nft_protocol"
       ],
-      "_comment": "AssetMantle $MNTL"
+      "_comment": "AssetMantle $MNTL",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "juno",
@@ -810,11 +817,11 @@
       ],
       "_comment": "Sifchain $ROWAN",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "shentu",
@@ -994,11 +1001,11 @@
       "osmosis_verified": false,
       "_comment": "Galaxy $GLX",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "juno",
@@ -1031,11 +1038,11 @@
       ],
       "_comment": "MEME $MEME",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "juno",
@@ -1065,11 +1072,11 @@
       "osmosis_verified": false,
       "_comment": "Rizon $ATOLO",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kava",
@@ -1260,11 +1267,11 @@
       ],
       "_comment": "Kujira $KUJI",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "tgrade",
@@ -1295,11 +1302,11 @@
       ],
       "_comment": "Echelon $ECH",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "odin",
@@ -1311,11 +1318,11 @@
       ],
       "_comment": "Odin Protocol $ODIN",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "odin",
@@ -1324,11 +1331,11 @@
       "osmosis_verified": false,
       "osmosis_unstable": true,
       "_comment": "GEO $GEO",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "odin",
@@ -1337,11 +1344,11 @@
       "osmosis_verified": false,
       "osmosis_unstable": true,
       "_comment": "O9W $O9W",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kichain",
@@ -1353,11 +1360,11 @@
       },
       "_comment": "LVN $LVN.ki",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "axelar",
@@ -1417,11 +1424,11 @@
       ],
       "_comment": "Crescent $CRE",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "lumenx",
@@ -1573,11 +1580,11 @@
       "osmosis_verified": false,
       "osmosis_unstable": true,
       "_comment": "Rebus $REBUS",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "teritori",
@@ -1586,11 +1593,11 @@
       "osmosis_verified": true,
       "_comment": "Teritori $TORI",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "extended_unstable_market",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "stride",
@@ -1653,11 +1660,11 @@
       ],
       "_comment": "USK $USK",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "extended_unstable_market",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "unification",
@@ -1781,11 +1788,11 @@
       "osmosis_verified": false,
       "_comment": "Acrechain $ACRE",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "comdex",
@@ -1798,10 +1805,12 @@
       ],
       "_comment": "CMST $CMST",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "planned_shutdown",
-      "tooltip_message": "The Comdex team ended support for the Comdex chain on 31 October 2025, deposits are disabled. Withdrawals remain open. Source: https://x.com/ComdexOfficial/status/1968366352537682220"
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Comdex team ended support for the Comdex chain on 31 October 2025 and it no longer produces blocks. Deposits and withdrawals are disabled. Source: https://x.com/ComdexOfficial/status/1968366352537682220",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "imversed",
@@ -1810,11 +1819,11 @@
       "osmosis_verified": false,
       "_comment": "Imversed $IMV",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "medasdigital",
@@ -1912,11 +1921,11 @@
       ],
       "_comment": "Arable USD $arUSD",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "planq",
@@ -1925,11 +1934,11 @@
       "osmosis_verified": true,
       "_comment": "Planq $PLQ",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "axelar",
@@ -1962,11 +1971,11 @@
       "osmosis_verified": true,
       "_comment": "Canto $CANTO",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "extended_unstable_market",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "quicksilver",
@@ -2081,11 +2090,11 @@
       ],
       "_comment": "Ciento Token $CNTO",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "stride",
@@ -2164,10 +2173,12 @@
       ],
       "_comment": "Harbor $HARBOR",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "planned_shutdown",
-      "tooltip_message": "The Comdex team ended support for the Comdex chain on 31 October 2025, deposits are disabled. Withdrawals remain open. Source: https://x.com/ComdexOfficial/status/1968366352537682220"
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Comdex team ended support for the Comdex chain on 31 October 2025 and it no longer produces blocks. Deposits and withdrawals are disabled. Source: https://x.com/ComdexOfficial/status/1968366352537682220",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "quicksilver",
@@ -2217,11 +2228,11 @@
       "osmosis_verified": false,
       "osmosis_unstable": true,
       "_comment": "Arkhadian $ARKH",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "quicksilver",
@@ -2261,11 +2272,11 @@
       ],
       "_comment": "Migaloo $WHALE",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "juno",
@@ -2483,11 +2494,11 @@
       "osmosis_verified": true,
       "_comment": "Bluzelle $BLZ",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "axelar",
@@ -2776,11 +2787,11 @@
       ],
       "_comment": "Picasso $PICA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -2803,11 +2814,11 @@
       ],
       "_comment": "Kusama $KSM",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -2826,11 +2837,11 @@
       ],
       "_comment": "Polkadot (Picasso via Picasso) (Picasso) $DOT.pica",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "quasar",
@@ -2843,11 +2854,11 @@
       ],
       "_comment": "Quasar $QSR.legacy",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "archway",
@@ -3080,11 +3091,11 @@
       ],
       "_comment": "MantaDAO $MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "extended_unstable_market",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "juno",
@@ -3333,11 +3344,11 @@
       ],
       "_comment": "SGE $SGE",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "stafihub",
@@ -3349,11 +3360,11 @@
       ],
       "_comment": "StaFi Hub $FIS",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "stafihub",
@@ -3365,11 +3376,11 @@
       ],
       "_comment": "rATOM $rATOM",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "stargaze",
@@ -3499,11 +3510,11 @@
       "osmosis_verified": false,
       "_comment": "Unstake Fi $NSTK",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "stargaze",
@@ -3573,11 +3584,11 @@
       "osmosis_verified": true,
       "_comment": "Bostrom Hydrogen $HYDROGEN",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "bostrom",
@@ -3586,11 +3597,11 @@
       "osmosis_verified": false,
       "_comment": "Bostrom Tocyb $TOCYB",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "bostrom",
@@ -3599,11 +3610,11 @@
       "osmosis_verified": false,
       "_comment": "Bostrom Volt $V",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "bostrom",
@@ -3612,11 +3623,11 @@
       "osmosis_verified": false,
       "_comment": "Bostrom Ampere $A",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "source",
@@ -3626,11 +3637,11 @@
       "osmosis_disabled": true,
       "_comment": "Source $SOURCE",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "gateway",
@@ -3729,11 +3740,11 @@
       ],
       "_comment": "ASH $ASH",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "migaloo",
@@ -3746,11 +3757,11 @@
       ],
       "_comment": "Racoon $RAC",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "migaloo",
@@ -3762,11 +3773,11 @@
       ],
       "_comment": "GUPPY $GUPPY",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "haqq",
@@ -4170,11 +4181,11 @@
       "osmosis_verified": true,
       "_comment": "Scorum Network $SCR",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "chain4energy",
@@ -4201,11 +4212,11 @@
       },
       "_comment": "Source Token $SRCX",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "pylons",
@@ -4217,11 +4228,11 @@
       ],
       "_comment": "Pylons $ROCK",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "gateway",
@@ -4280,11 +4291,11 @@
       "osmosis_verified": true,
       "_comment": "DOKI $DOKI",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "osmosis",
@@ -4307,11 +4318,11 @@
       ],
       "_comment": "SHARK $SHARK",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "coreum",
@@ -4386,11 +4397,11 @@
       "osmosis_unlisted": true,
       "_comment": "ConsciousDAO $CVN",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "osmosis",
@@ -4478,11 +4489,11 @@
       "osmosis_verified": true,
       "_comment": "Tinkernet $TNKR",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "gateway",
@@ -4535,11 +4546,11 @@
       "osmosis_verified": false,
       "_comment": "furya $FURY",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "saga",
@@ -4705,11 +4716,11 @@
       "osmosis_verified": false,
       "_comment": "RESTAKE $RSTK",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "osmosis",
@@ -4735,11 +4746,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -4756,11 +4767,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -4777,11 +4788,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -4798,11 +4809,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -4819,11 +4830,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -4840,11 +4851,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -4861,11 +4872,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -4882,11 +4893,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "bitsong",
@@ -5092,11 +5103,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -5114,11 +5125,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -5136,11 +5147,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -5158,11 +5169,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -5180,11 +5191,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -5202,11 +5213,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -5224,11 +5235,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -5246,11 +5257,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "osmosis",
@@ -5295,11 +5306,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -5318,11 +5329,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -5341,11 +5352,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -5364,11 +5375,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "composable",
@@ -5386,11 +5397,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "osmosis",
@@ -5525,11 +5536,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "osmosis",
@@ -6407,11 +6418,11 @@
         }
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "haqq",
@@ -6578,11 +6589,11 @@
         "liquid_staking"
       ],
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "osmosis",
@@ -6753,11 +6764,11 @@
       "osmosis_verified": false,
       "_comment": "Kima Network $KIMA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "stratos",
@@ -7264,11 +7275,11 @@
       ],
       "_comment": "Synternet $SYNT",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "osmosis",
@@ -7560,11 +7571,11 @@
       ],
       "_comment": "kUSD $kUSD",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kopi",
@@ -7576,11 +7587,11 @@
       ],
       "_comment": "Kopi $XKP",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "quicksilver",
@@ -7758,11 +7769,11 @@
       "osmosis_verified": true,
       "_comment": "Side Bitcoin $sBTC",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "osmosis",
@@ -8109,11 +8120,11 @@
       "osmosis_verified": false,
       "_comment": "Anubis $ANUBI",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "planq",
@@ -8122,11 +8133,11 @@
       "osmosis_verified": false,
       "_comment": "Astonic $ATC",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "planq",
@@ -8135,11 +8146,11 @@
       "osmosis_verified": false,
       "_comment": "Astonic USD $aUSD",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "planq",
@@ -8148,11 +8159,11 @@
       "osmosis_verified": false,
       "_comment": "Astonic EUR $aEUR",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "planq",
@@ -8161,11 +8172,11 @@
       "osmosis_verified": false,
       "_comment": "Astonic BRL $aBRL",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "cosmoshub",
@@ -8324,11 +8335,11 @@
       "osmosis_unlisted": true,
       "_comment": "OPHIR $OPHIR",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "cosmoshub",
@@ -8709,11 +8720,11 @@
       ],
       "_comment": "Intento $INTO",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "sunrise",
@@ -9029,11 +9040,11 @@
       "path": "transfer/channel-258/umyrk",
       "osmosis_unstable": true,
       "_comment": "MYRK $MYRK",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "planq",
@@ -9041,11 +9052,11 @@
       "path": "transfer/channel-492/erc20/0x091F9A57A3F58d758b6572E9d41675918EAC7F09",
       "osmosis_unstable": true,
       "_comment": "Source Token $SRCX.planq",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "stafihub",
@@ -9053,11 +9064,11 @@
       "path": "transfer/channel-5413/uriris",
       "osmosis_unstable": true,
       "_comment": "rIRIS $rIRIS",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "stafihub",
@@ -9065,11 +9076,11 @@
       "path": "transfer/channel-5413/urhuahua",
       "osmosis_unstable": true,
       "_comment": "rHUAHUA $rHUAHUA",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "stafihub",
@@ -9077,11 +9088,11 @@
       "path": "transfer/channel-5413/urswth",
       "osmosis_unstable": true,
       "_comment": "rSWTH $rSWTH",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "scorum",
@@ -9089,11 +9100,11 @@
       "path": "transfer/channel-20100/gas",
       "osmosis_unstable": true,
       "_comment": "GAS $GAS",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "lorenzo",
@@ -9101,11 +9112,11 @@
       "path": "transfer/channel-79840/alrz",
       "osmosis_unstable": true,
       "_comment": "Lorenzo Protocol $LRZ",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "pryzm",
@@ -11525,11 +11536,11 @@
       "path": "transfer/channel-97998/uckusd",
       "osmosis_unstable": true,
       "_comment": "ckUSD $CKUSD",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kopi",
@@ -11537,11 +11548,11 @@
       "path": "transfer/channel-97998/ucusdc",
       "osmosis_unstable": true,
       "_comment": "cUSDC $CUSDC",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kopi",
@@ -11549,11 +11560,11 @@
       "path": "transfer/channel-97998/ucusdtinj",
       "osmosis_unstable": true,
       "_comment": "cUSDT.inj $cUSDT.inj",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kopi",
@@ -11561,11 +11572,11 @@
       "path": "transfer/channel-97998/uasusdtinj",
       "osmosis_unstable": true,
       "_comment": "asUSDT.inj $asUSDT.inj",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kopi",
@@ -11573,11 +11584,11 @@
       "path": "transfer/channel-97998/uasusdc",
       "osmosis_unstable": true,
       "_comment": "asUSDC $ASUSDC",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "sidechain",
@@ -11585,11 +11596,11 @@
       "path": "transfer/channel-98081/uside",
       "osmosis_unstable": true,
       "_comment": "Side Chain $SIDE",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "manifest",
@@ -11621,11 +11632,11 @@
       "path": "transfer/channel-107392/ufandomChain",
       "osmosis_unstable": true,
       "_comment": "fandomChain $FANDOMCHAIN",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "onex",
@@ -11646,11 +11657,11 @@
       "path": "transfer/channel-78292/uslf",
       "osmosis_unstable": true,
       "_comment": "Self Chain $SLF",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "shareledger",
@@ -11670,11 +11681,11 @@
       "path": "transfer/channel-642/factory/migaloo1436kxs0w2es6xlqpp9rd35e3d0cjnw4sv8j3a7483sgks29jqwgshqdky4/ampWHALE",
       "osmosis_unstable": true,
       "_comment": "ampWHALE $ampWHALE",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "migaloo",
@@ -11682,11 +11693,11 @@
       "path": "transfer/channel-642/factory/migaloo1mf6ptkssddfmxvhdx0ech0k03ktp6kf9yk59renau2gvht3nq2gqdhts4u/boneWhale",
       "osmosis_unstable": true,
       "_comment": "BackBone Labs Liquid Staked WHALE $bWHALE",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "migaloo",
@@ -11694,11 +11705,11 @@
       "path": "transfer/channel-642/factory/migaloo18a9m9stu3dyvewwcq9qmp85euxqcvln5mefync/fable",
       "osmosis_unstable": true,
       "_comment": "FABLE $FABLE",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "migaloo",
@@ -11706,11 +11717,11 @@
       "path": "transfer/channel-642/factory/migaloo1p3aj9f09d7c4jxhgue0hpdpw370j6gzc59nxxx6l8d0gc9f9rfwsdwetus/lsdSHARK",
       "osmosis_unstable": true,
       "_comment": "lsdSHARK $lsdSHARK",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "migaloo",
@@ -11718,11 +11729,11 @@
       "path": "transfer/channel-642/factory/migaloo1r9x8fz4alekzr78k42rpmr9unpa7egsldpqeynmwl2nfvzexue9sn8l5rg/gash",
       "osmosis_unstable": true,
       "_comment": "GASH $GASH",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "migaloo",
@@ -11730,11 +11741,11 @@
       "path": "transfer/channel-642/factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/ugrac",
       "osmosis_unstable": true,
       "_comment": "Gaming RAC Token $GRAC",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "migaloo",
@@ -11742,11 +11753,11 @@
       "path": "transfer/channel-642/factory/migaloo1nsskhvvh0msm7d5ke2kfg24a8d4jecsnxd28s27h0uz5kf9ap60shlqmcl/ampGASH",
       "osmosis_unstable": true,
       "_comment": "ampGASH $ampGASH",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "migaloo",
@@ -11754,11 +11765,11 @@
       "path": "transfer/channel-642/factory/migaloo1axtz4y7jyvdkkrflknv9dcut94xr5k8m6wete4rdrw4fuptk896su44x2z/uLP",
       "osmosis_unstable": true,
       "_comment": "WHALE-wBTC WW LP $WHALE-wBTC-WW-LP",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "migaloo",
@@ -11766,11 +11777,11 @@
       "path": "transfer/channel-642/factory/migaloo1zsptvkg5aeg4tjksgv7vp4x5s9p5euqrh9jl3sfdv48wtnrhftlszsvmu5/uwhalex",
       "osmosis_unstable": true,
       "_comment": "WHALEX $WHALEX",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "bluzelle",
@@ -11778,11 +11789,11 @@
       "path": "transfer/channel-763/uelt",
       "osmosis_unstable": true,
       "_comment": "ELT $ELT",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "bluzelle",
@@ -11790,11 +11801,11 @@
       "path": "transfer/channel-763/ug4",
       "osmosis_unstable": true,
       "_comment": "G4 $G4",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "manifest",
@@ -11841,11 +11852,11 @@
       "path": "transfer/channel-297/ubcre",
       "osmosis_unstable": true,
       "_comment": "Bonded Crescent $bCRE",
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "cosmoshub",
@@ -12166,11 +12177,11 @@
       "path": "transfer/channel-259/factory/kujira1qk00h5atutpsv900x202pxx42npjr9thg58dnqpa72f2p7m2luase444a7/uusk",
       "_comment": "USK $USK",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12178,11 +12189,11 @@
       "path": "transfer/channel-259/factory/kujira1m96ucsfpt2yy72w09z2rxjdj38y5qd8lqx5jtggnejmdua2ynpnsxyvjex/urcpt",
       "_comment": "qcKUJI $qcKUJI",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12190,11 +12201,11 @@
       "path": "transfer/channel-259/factory/kujira1n3fr5f56r2ce0s37wdvwrk98yhhq3unnxgcqus8nzsfxvllk0yxquurqty/ampKUJI",
       "_comment": "ampKUJI $ampKUJI",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12202,11 +12213,11 @@
       "path": "transfer/channel-259/factory/kujira1643jxg8wasy5cfcn7xm8rd742yeazcksqlg4d7/umnta",
       "_comment": "MantaDAO $MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12214,11 +12225,11 @@
       "path": "transfer/channel-259/factory/kujira1qzu3up50auxhqyzfq56znuj8n38q2ra7daaf9ef7vg8gu66jh4fqd2wd2y/urcpt",
       "_comment": "qcMNTA $qcMNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12226,11 +12237,11 @@
       "path": "transfer/channel-259/factory/kujira175yatpvkpgw07w0chhzuks3zrrae9z9g2y6r7u5pzqesyau4x9eqqyv0rr/ampMNTA",
       "_comment": "ERIS Amplified MNTA $ampMNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12238,11 +12249,11 @@
       "path": "transfer/channel-259/factory/kujira12cjjeytrqcj25uv349thltcygnp9k0kukpct0e/uwink",
       "_comment": "WINK $WINK",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12250,11 +12261,11 @@
       "path": "transfer/channel-259/factory/kujira1slueerjz7mx9jp45u3y0rjwtvhcf8a68wf2mjt/ublend",
       "_comment": "BLEND $BLEND",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12262,11 +12273,11 @@
       "path": "transfer/channel-259/factory/kujira1sc6a0347cc5q3k890jj0pf3ylx2s38rh4sza4t/ufuzn",
       "_comment": "Fuzion $FUZN",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12274,11 +12285,11 @@
       "path": "transfer/channel-259/factory/kujira1sc6a0347cc5q3k890jj0pf3ylx2s38rh4sza4t/urfuzn",
       "_comment": "Fuzion Receipt $rFUZN",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12286,11 +12297,11 @@
       "path": "transfer/channel-259/factory/kujira1sc6a0347cc5q3k890jj0pf3ylx2s38rh4sza4t/uyfuzn",
       "_comment": "Fuzion Yield $yFUZN",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12298,11 +12309,11 @@
       "path": "transfer/channel-259/factory/kujira1l04ged98c7a7s9tllu62ld09ztylwf442qgm4thfgmadrvngeumsz4zrh2/urcpt",
       "_comment": "qcFUZN $qcFUZN",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12310,11 +12321,11 @@
       "path": "transfer/channel-259/factory/kujira1d9fmsgvu3yvvppvqech2s3dhrqdm5ukngcf82ghcl70edfpwcrlsu6yr0u/urcpt",
       "_comment": "qcAQLA $qcAQLA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12322,11 +12333,11 @@
       "path": "transfer/channel-259/factory/kujira1xe0awk5planmtsmjel5xtx2hzhqdw5p8z66yqd/uaqla",
       "_comment": "AQLA $AQLA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12334,11 +12345,11 @@
       "path": "transfer/channel-259/factory/kujira1aaudpfr9y23lt9d45hrmskphpdfaq9ajxd3ukh/unstk",
       "_comment": "Unstake Fi $NSTK",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12346,11 +12357,11 @@
       "path": "transfer/channel-259/factory/kujira1swkuyt08z74n5jl7zr6hx0ru5sa2yev5v896p6/local",
       "_comment": "LOCAL $LOCAL",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12358,11 +12369,11 @@
       "path": "transfer/channel-259/factory/kujira166ysf07ze5suazfzj0r05tv8amk2yn8zvsfuu7/uplnk",
       "_comment": "Plankton $PLNK",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12370,11 +12381,11 @@
       "path": "transfer/channel-259/factory/kujira15e8q5wzlk5k38gjxlhse3vu6vqnafysncx2ltexd6y9gx50vuj2qpt7dgv/boneKuji",
       "_comment": "BackBone Labs Liquid Staked KUJI $bKUJI",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12382,11 +12393,11 @@
       "path": "transfer/channel-259/factory/kujira1w4yaama77v53fp0f9343t9w2f932z526vj970n2jv5055a7gt92sxgwypf/urcpt",
       "_comment": "Ghost Vault USK $xUSK",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12394,11 +12405,11 @@
       "path": "transfer/channel-259/factory/kujira1ya42knfcsvy6eztegsn3hz7zpjvhzn05ge85xa2dy2zrjeul9hnspp3c06/urcpt",
       "_comment": "Ghost Vault MNTA $xMNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12406,11 +12417,11 @@
       "path": "transfer/channel-259/factory/kujira10qyzrqaza0f593cmnl4sc3p3nhqqakn9j56d899u723pznxpn8us6cypuw/ulp",
       "_comment": "LP Bow: DOT.axl-MNTA $LP-DOT.axl-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12418,11 +12429,11 @@
       "path": "transfer/channel-259/factory/kujira12tpc335t72qtrjh64ccdydzsr9qtswkqn72cyvfj4d5hmtgynphsv4xjtu/ulp",
       "_comment": "LP Bow: SHD-MNTA $LP-SHD-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12430,11 +12441,11 @@
       "path": "transfer/channel-259/factory/kujira13g2eelkf9q4md4xx52ylqvlgpccn50f2vyu05eazufd2g4jatmhq2425pq/ulp",
       "_comment": "LP Bow: DYDX-MNTA $LP-DYDX-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12442,11 +12453,11 @@
       "path": "transfer/channel-259/factory/kujira15pk8c09vcsgsdq4xlh2qfqxtu2r8pgdy7nggkqj8p3h2phke80pqwnvtzk/ulp",
       "_comment": "LP Bow: wAVAX.axl-MNTA $LP-wAVAX.axl-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12454,11 +12465,11 @@
       "path": "transfer/channel-259/factory/kujira15w6jhxsv924mn9cfr0qg9z36hltmw4rzd68x40d9re6hzyhslumqjw9zqd/ulp",
       "_comment": "LP Bow: CHEQ-MNTA $LP-CHEQ-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12466,11 +12477,11 @@
       "path": "transfer/channel-259/factory/kujira1622xuv8unv22xzazljvqh8uukcdz3yzmrp6axgerh7vxg4kum5tqcwcqmv/ulp",
       "_comment": "LP Bow: FUZN-MNTA $LP-FUZN-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12478,11 +12489,11 @@
       "path": "transfer/channel-259/factory/kujira17djzq5x5e5zm9q9zlp6dtxdt9p8q2zvj0qtmjs0wrxm5g9e2vf5q9d6y2t/ulp",
       "_comment": "LP Bow: SOMM-MNTA $LP-SOMM-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12490,11 +12501,11 @@
       "path": "transfer/channel-259/factory/kujira17x2v39aut0paj5d6wc5jxvqqxrdhy9kvca4y5xn6vsfpsxkgc6gq7n4tg0/ulp",
       "_comment": "LP Bow: wETH.axl-MNTA $LP-wETH.axl-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12502,11 +12513,11 @@
       "path": "transfer/channel-259/factory/kujira18lhugzap20ndlqr5j2p86yk4pxpe9jjuac05z0ypxuwn3mm5vjhsjh4etr/ulp",
       "_comment": "LP Bow: NTRN-MNTA $LP-NTRN-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12514,11 +12525,11 @@
       "path": "transfer/channel-259/factory/kujira18mveas6xseaqu3fmukwv2ac6mp4hszk08lvyamedytjs0kxm42yqs9v89x/ulp",
       "_comment": "LP Bow: wFTM.axl-MNTA $LP-wFTM.axl-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12526,11 +12537,11 @@
       "path": "transfer/channel-259/factory/kujira1av284rnqh6s0l2lwdqgpgz8wuva3wh9lkmlsupjd9escn5v4fels6kwc7v/ulp",
       "_comment": "LP Bow: STARS-MNTA $LP-STARS-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12538,11 +12549,11 @@
       "path": "transfer/channel-259/factory/kujira1cpdyhrkwdnz38u45el3zq7007at9dm6h05tc36zpxvs6vrdwzrrskt0tgg/ulp",
       "_comment": "LP Bow: TIA-MNTA $LP-TIA-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12550,11 +12561,11 @@
       "path": "transfer/channel-259/factory/kujira1eqd96322ec258w7k9n9cfqkusrlvzwv38jkph3qs720egdv0epmq70j2zl/ulp",
       "_comment": "LP Bow: SOL.wh-MNTA $LP-SOL.wh-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12562,11 +12573,11 @@
       "path": "transfer/channel-259/factory/kujira1fg7wmsde7ygw3pm6hqmd29cdvp947anajmunsvk0guvjta3md25qdqk4fw/ulp",
       "_comment": "LP Bow: DYM-MNTA $LP-DYM-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12574,11 +12585,11 @@
       "path": "transfer/channel-259/factory/kujira1gnftck9586x0nhsqsj99k9zednl6tx4kezu9hpph0u6jtqnafpyqxha3me/ulp",
       "_comment": "LP Bow: AKT-MNTA $LP-AKT-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12586,11 +12597,11 @@
       "path": "transfer/channel-259/factory/kujira1gnvja05kkmpeh9dnxl0c2p4sde7fpsy2r44njzyqgpsf72nqs78q3gzpzc/ulp",
       "_comment": "LP Bow: LINK.axl-MNTA $LP-LINK.axl-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12598,11 +12609,11 @@
       "path": "transfer/channel-259/factory/kujira1gz2kvfw7hpds9fvygwkj64znl3a9pw697g77cspcq5y4vj3ru45s7qc0rd/ulp",
       "_comment": "LP Bow: wTAO.grv-MNTA $LP-wTAO.grv-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12610,11 +12621,11 @@
       "path": "transfer/channel-259/factory/kujira1h75predtjdm2e7u8cuvqs3usc6xs2mxlkcr20zsshvw3qap25frsr4z949/ulp",
       "_comment": "LP Bow: MNTA-KUJI $LP-MNTA-KUJI",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12622,11 +12633,11 @@
       "path": "transfer/channel-259/factory/kujira1h929g9e9vxhc5y8v7uexdrncacxdatjupr67velewafwepfyfaaq6s7l3v/ulp",
       "_comment": "LP Bow: AXL-MNTA $LP-AXL-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12634,11 +12645,11 @@
       "path": "transfer/channel-259/factory/kujira1h9f3k54j060pzlnea8ep8qfymsmwl5yhwc5hqept5p2esqzve7tq2ghnm4/ulp",
       "_comment": "LP Bow: ATOM-MNTA $LP-ATOM-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12646,11 +12657,11 @@
       "path": "transfer/channel-259/factory/kujira1kc90tgn4ucvdv4c9xycktanwz2lna0nfel6244ylqjvhaetfntusnmyu3d/ulp",
       "_comment": "LP Bow: ARB-MNTA $LP-ARB-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12658,11 +12669,11 @@
       "path": "transfer/channel-259/factory/kujira1jsjygyj8hwa4f0p9wwgct4yzmzzexe5x5u6l40l7ty2qzwwwsemqavhk3x/ulp",
       "_comment": "LP Bow: WHALE-MNTA $LP-WHALE-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12670,11 +12681,11 @@
       "path": "transfer/channel-259/factory/kujira1p7w9ncnnme9yzzhrvzv0hnsa5u5ga06v0ckt7lq9yfap04hc5k9sn2vf6w/ulp",
       "_comment": "LP Bow: SCRT-MNTA $LP-SCRT-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12682,11 +12693,11 @@
       "path": "transfer/channel-259/factory/kujira1qx3hcr297qmgjt5f6u9peldf4phxqufvmew8d3eey3ns29e8qp3snj6jfu/ulp",
       "_comment": "LP Bow: wstETH.axl-MNTA $LP-wstETH.axl-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12694,11 +12705,11 @@
       "path": "transfer/channel-259/factory/kujira1smfdnww47xav4nn849xphku3gk3xp7a24fk533dce8masnsz4v8quklajx/ulp",
       "_comment": "LP Bow: wMATIC.axl-MNTA $LP-wMATIC.axl-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12706,11 +12717,11 @@
       "path": "transfer/channel-259/factory/kujira1t4mr2xt4ky4mfwcy752chzlquam3hzs44mt8vwyec8mvypmzxu5s90vamt/ulp",
       "_comment": "LP Bow: UNI.axl-MNTA $LP-UNI.axl-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12718,11 +12729,11 @@
       "path": "transfer/channel-259/factory/kujira1u8dluwa4a83q7anz0cgpmma605r07a06f0789ajcl8l0xjrplqss005cgn/ulp",
       "_comment": "LP Bow: yieldETH.axl-MNTA $LP-yieldETH.axl-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12730,11 +12741,11 @@
       "path": "transfer/channel-259/factory/kujira1vj39mdwekxznxxa97fv5gt957cghfdqhwju8fdv5ysu0x6vsyhps4zmqjl/ulp",
       "_comment": "LP Bow: wBTC.axl-MNTA $LP-wBTC.axl-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12742,11 +12753,11 @@
       "path": "transfer/channel-259/factory/kujira1vqdyup9zxxl9gqy5hwh593vvuc84lstldj7qzt7fylf3q3e3uemqlwpg9y/ulp",
       "_comment": "LP Bow: PAXG.grv-MNTA $LP-PAXG.grv-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12754,11 +12765,11 @@
       "path": "transfer/channel-259/factory/kujira1y24jwsv84lnuv5j78qeqz5ujjpd058qsft7wfc0nk9jvycugm32sqnq53d/ulp",
       "_comment": "LP Bow: wBNB.axl-MNTA $LP-wBNB.axl-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12766,11 +12777,11 @@
       "path": "transfer/channel-259/factory/kujira1ygperwf0dc9ng2jffj0pwnnray3rscn9el6d78qjtt25qwgqukqszmdwtv/ulp",
       "_comment": "LP Bow: OSMO-MNTA $LP-OSMO-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12778,11 +12789,11 @@
       "path": "transfer/channel-259/factory/kujira1znx048dcc6arqfw6kpckl0k4ts2h7cdx20nk22wz2cxh5vle3wxqknk238/ulp",
       "_comment": "LP Bow: INJ-MNTA $LP-INJ-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12790,11 +12801,11 @@
       "path": "transfer/channel-259/factory/kujira18sek950cg92gd0kvpj67dfg6p7kee6hzw92etcf2jgufr3mttvaslt5sal/ulp",
       "_comment": "LP Bow: stOSMO-OSMO $LP-stOSMO-OSMO",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12802,11 +12813,11 @@
       "path": "transfer/channel-259/factory/kujira1lyyeyuw4qgan6nz45thw2m0nmxa457uz7cp9dqw5d9a0h7ccek7qavkm6g/ulp",
       "_comment": "LP Bow: wstETH.axl-wETH.axl $LP-wstETH.axl-wETH.axl",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12814,11 +12825,11 @@
       "path": "transfer/channel-259/factory/kujira1ul00h0a2kgcg9x2yfa86wj9qguhyv7jmpjpw6ztt24j9mn9xjw3slawyc8/ulp",
       "_comment": "LP Bow: qcMNTA-MNTA $LP-qcMNTA-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12826,11 +12837,11 @@
       "path": "transfer/channel-259/factory/kujira1vj36ntsqd3msc69lxldcv9dd50jngknmael9e07rz4fpn5kyq0jsglvz2m/ulp",
       "_comment": "LP Bow: ampMNTA-MNTA $LP-ampMNTA-MNTA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12838,11 +12849,11 @@
       "path": "transfer/channel-259/factory/kujira1n648rfqqvjxm6c7zgfnfqay85rkapgg0z7da9pnmjazz5m5d7l0qxdtq90/ulp",
       "_comment": "LP Bow: wETH.axl-USK $LP-wETH.axl-USK",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12850,11 +12861,11 @@
       "path": "transfer/channel-259/factory/kujira13x2l25mpkhwnwcwdzzd34cr8fyht9jlj7xu9g4uffe36g3fmln8qkvm3qn/unami",
       "_comment": "NAMI $NAMI",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12862,11 +12873,11 @@
       "path": "transfer/channel-259/factory/kujira18thffdpuz8tm3mwwun4uhks8a2v7ye0jmw3fllqhklma82lqkpms20gh9c/unausd",
       "_comment": "NAUSD $NAUSD",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12874,11 +12885,11 @@
       "path": "transfer/channel-259/factory/kujira1mn2pgkggquqm2m44zqlaq29jxwtad53qkv4xy4/MCTest",
       "_comment": "MCTEST $MC01",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12886,11 +12897,11 @@
       "path": "transfer/channel-259/factory/kujira13x2l25mpkhwnwcwdzzd34cr8fyht9jlj7xu9g4uffe36g3fmln8qkvm3qn/uauto",
       "_comment": "AUTO $AUTO",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12898,11 +12909,11 @@
       "path": "transfer/channel-259/factory/kujira1seqq2ekz47uqayshqkg5wqx5vcyrmtwcl9vscnwy2gjh7mz5aapsdfxsd5/urcpt",
       "_comment": "qcDYDX $qcDYDX",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12910,11 +12921,11 @@
       "path": "transfer/channel-259/factory/kujira1tsekaqv9vmem0zwskmf90gpf0twl6k57e8vdnq/urkuji",
       "_comment": "rKUJI $rKUJI",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12922,11 +12933,11 @@
       "path": "transfer/channel-259/factory/kujira1yncutssgh2vj9scaymtteg949hwcft07c6qmgarxnaf04yesq3jsn6g2uv/ulp",
       "_comment": "LP Bow: ATOM-USK $LP-ATOM-USK",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12934,11 +12945,11 @@
       "path": "transfer/channel-259/factory/kujira1xwvvjq5w0887v2vz4e83kcu38s0jq8q8lqa3z5hxm295q7y4uejqp24la7/ulp",
       "_comment": "LP Bow: wETH.axl-USK $LP-wETH.axl-USK.kuji",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12946,11 +12957,11 @@
       "path": "transfer/channel-259/factory/kujira1vcmh95lje5dln782pxckma65eujs4sv960w22whgsp7a2ajsc6lsvnlhgd/ulp",
       "_comment": "LP Bow: SOL.wh-USK $LP-SOL.wh-USK",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12958,11 +12969,11 @@
       "path": "transfer/channel-259/factory/kujira1n4jfv39hzv2dtshzv6gj4hp8rkdy5rrsr7l84lc3x9cahz4v0umq24q3lu/ulp",
       "_comment": "LP Bow: wETH.axl-USDC $LP-wETH.axl-USDC",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12970,11 +12981,11 @@
       "path": "transfer/channel-259/factory/kujira1lctu7hy65466fxw3tcqf8w45zwrpwgd9chvjqpgyfgcr73k774nsv4ya6t/ulp",
       "_comment": "LP Bow: DYDX-USK $LP-DYDX-USK",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12982,11 +12993,11 @@
       "path": "transfer/channel-259/factory/kujira1g5st8p6qdyf23zzerjcxgpr2r7a9wzdyaymu79ngg6ve3m9v3n4sdetv4e/ulp",
       "_comment": "LP Bow: AKT-USDC $LP-AKT-USDC",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -12994,11 +13005,11 @@
       "path": "transfer/channel-259/factory/kujira1d7jt9zwlnpvf7sskfm57c77pm9mtwczqre75t9k80ees0v523kasss9htj/ulp",
       "_comment": "LP Bow: wBTC-USK $LP-wBTC-USK",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -13006,11 +13017,11 @@
       "path": "transfer/channel-259/factory/kujira1c4e2zk4z0anrufjh64gxtse6e4s5g52fe2ja8ke3r9e0pvpd0z0qws8zsp/ulp",
       "_comment": "LP Bow: wBTC.axl-wBTC $LP-wBTC.axl-wBTC",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -13018,11 +13029,11 @@
       "path": "transfer/channel-259/factory/kujira14jwhlsg3az20f7keav2axxj205fyv5j8mp6rv5svqwwll3ls9slq6zwleg/ulp",
       "_comment": "LP Bow: INJ-USDC $LP-INJ-USDC",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -13030,11 +13041,11 @@
       "path": "transfer/channel-259/factory/kujira13my0qtm2a8jp0wg8uzg49tyn4zcea8scy3dc7ghn8z9eys08yzls49ymdm/ulp",
       "_comment": "LP Bow: ATOM-USDC $LP-ATOM-USDC",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -13042,11 +13053,11 @@
       "path": "transfer/channel-259/factory/kujira1742pe93mxm0cwqjxgxh6th9sspdrluqvw9pha9q69eeatue4x5xs0wdq2d/ulp",
       "_comment": "LP Bow: MNTA-USDC $LP-MNTA-USDC",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -13054,11 +13065,11 @@
       "path": "transfer/channel-259/factory/kujira1xtaadmh06s8u3z5mypp8qayhrnxgga5wr88s7raram4rz8zu37hquf82wk/ulp",
       "_comment": "LP Bow: MNTA-USK $LP-MNTA-USK",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "kujira",
@@ -13066,11 +13077,11 @@
       "path": "transfer/channel-259/factory/kujira1gewwffxhaygxe8tacd3z9h4uyvpd2h7v9qtfmaw8jjhwalxxpd7qlqld4m/boon",
       "_comment": "Boon $BOON",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "tail",
@@ -13078,11 +13089,11 @@
       "path": "transfer/channel-110566/utail",
       "_comment": "TAIL Network $TAIL",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_deposit_halt_reason": "source_chain_killed",
       "osmosis_halt_withdrawals": true,
-      "osmosis_withdrawal_halt_reason": "bridge_down"
+      "osmosis_withdrawal_halt_reason": "source_chain_killed"
     },
     {
       "chain_name": "sovr",

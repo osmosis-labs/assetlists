@@ -240,7 +240,8 @@ this order:
      withdrawals still open, mutation-cap hits, down chains with deposits open.
 
 2. Quick summary: one row per category (new chains/assets, IBC flagged/cleared,
-   manual halts added this run, manual halts in effect, extended/planned halts).
+   manual halts added this run, manual halts in effect, manual warnings with
+   transfers open, extended/planned halts).
    Empty categories read "none". Anything non-empty is the run's actual delta.
 
 3. Mutation cap hit (only present if a lifecycle script hit the cap): the diff

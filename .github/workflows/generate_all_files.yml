@@ -374,13 +374,18 @@ jobs:
           # top-level state.json key so the next run can diff against it to
           # surface "newly halted this run" (see the Snapshot step). A chain
           # counts as manual if its overall unstable reason or either
-          # per-direction halt reason is "manual". Distinct chains, sorted.
+          # per-direction halt reason is "manual" AND at least one direction
+          # is actually halted. A manual unstable flag with transfers open is
+          # a warning, not a halt, and is reported separately. Distinct
+          # chains, sorted.
           jq -r '
             [ .assets[]
               | select(
-                  (.osmosis_unstable_reason == "manual")
-                  or (.osmosis_deposit_halt_reason == "manual")
-                  or (.osmosis_withdrawal_halt_reason == "manual")
+                  ((.osmosis_unstable_reason == "manual")
+                    or (.osmosis_deposit_halt_reason == "manual")
+                    or (.osmosis_withdrawal_halt_reason == "manual"))
+                  and ((.osmosis_halt_deposits == true)
+                    or (.osmosis_halt_withdrawals == true))
                 )
               | .chain_name
             ] | sort | unique
@@ -571,15 +576,20 @@ jobs:
           # counts as manual if ANY of its three reason fields is "manual":
           # the overall unstable reason, or the per-direction deposit/withdrawal
           # halt reason (a curator may halt one direction without flagging the
-          # asset unstable). Distinct chains, sorted. This bare chain-name set
-          # feeds the added-this-run delta and the persisted manualHaltChains
-          # state; the display variant below carries the per-chain detail.
+          # asset unstable). Only assets with at least one direction actually
+          # halted count: a manual unstable flag with transfers open is a
+          # warning and gets its own row below. Distinct chains, sorted. This
+          # bare chain-name set feeds the added-this-run delta and the
+          # persisted manualHaltChains state; the display variant below
+          # carries the per-chain detail.
           MANUAL_HALT_CHAINS=$(jq -r '
             .assets
             | map(select(
-                (.osmosis_unstable_reason == "manual")
-                or (.osmosis_deposit_halt_reason == "manual")
-                or (.osmosis_withdrawal_halt_reason == "manual")
+                ((.osmosis_unstable_reason == "manual")
+                  or (.osmosis_deposit_halt_reason == "manual")
+                  or (.osmosis_withdrawal_halt_reason == "manual"))
+                and ((.osmosis_halt_deposits == true)
+                  or (.osmosis_halt_withdrawals == true))
               ))
             | map(.chain_name) | unique | .[]
           ' osmosis-1/osmosis.zone_assets.json 2>/dev/null | sort > /tmp/lc-manualHalts.txt && echo ok || echo err)
@@ -596,8 +606,11 @@ jobs:
           # listing is halted and name the impacted symbols (with the bridge
           # hop when the halt is really the hop's problem), so a single-asset
           # halt (e.g. PSTAKE routed via a compromised Gravity Bridge) cannot
-          # read as a whole-chain halt of its origin chain.
-          jq -r --slurpfile fe osmosis-1/generated/frontend/assetlist.json '
+          # read as a whole-chain halt of its origin chain. $kind selects the
+          # halt row ("halt": a manual reason and a direction halted) or the
+          # warning row ("warn": manual unstable flag, transfers open).
+          manual_display() {
+          jq -r --arg kind "$1" --slurpfile fe osmosis-1/generated/frontend/assetlist.json '
             ($fe[0].assets
               | map({ key: (.chainName + "|" + .sourceDenom), value: . })
               | from_entries) as $byOrigin
@@ -605,10 +618,17 @@ jobs:
               | map({ key: .[0].chain_name, value: length })
               | from_entries) as $totals
             | [ .assets[]
+                | ((.osmosis_halt_deposits == true)
+                    or (.osmosis_halt_withdrawals == true)) as $halted
                 | select(
-                    (.osmosis_unstable_reason == "manual")
-                    or (.osmosis_deposit_halt_reason == "manual")
-                    or (.osmosis_withdrawal_halt_reason == "manual")
+                    if $kind == "halt" then
+                      ((.osmosis_unstable_reason == "manual")
+                        or (.osmosis_deposit_halt_reason == "manual")
+                        or (.osmosis_withdrawal_halt_reason == "manual"))
+                      and $halted
+                    else
+                      (.osmosis_unstable_reason == "manual") and ($halted | not)
+                    end
                   ) ]
             | group_by(.chain_name)
             | .[]
@@ -624,10 +644,13 @@ jobs:
                | if length > 6 then .[0:6] + ["+\(length - 6) more"] else . end
                | join(", ")) as $names
             | "\(.[0].chain_name) — \(length) of \($totals[.[0].chain_name] // 0) listed: \($names)"
-          ' osmosis-1/osmosis.zone_assets.json 2>/dev/null \
-            > /tmp/lc-manualHaltsDisplay.txt \
+          ' osmosis-1/osmosis.zone_assets.json 2>/dev/null
+          }
+          manual_display halt > /tmp/lc-manualHaltsDisplay.txt \
             || cp /tmp/lc-manualHalts.txt /tmp/lc-manualHaltsDisplay.txt 2>/dev/null || true
           emit_row "⚠️" "Manual halts in effect" /tmp/lc-manualHaltsDisplay.txt name
+          manual_display warn > /tmp/lc-manualWarningsDisplay.txt || : > /tmp/lc-manualWarningsDisplay.txt
+          emit_row "ℹ️" "Manual warnings, transfers open" /tmp/lc-manualWarningsDisplay.txt name
 
           emit_row "⏸️" "Extended halt set" /tmp/lc-extendedHaltSet.txt symbol
           emit_row "▶️" "Extended halt cleared" /tmp/lc-extendedHaltCleared.txt symbol
@@ -903,6 +926,13 @@ jobs:
                     chain_total: ($totals[$a.chain_name] // 0)
                   })
           ' osmosis-1/osmosis.zone_assets.json)
+          # Split off assets with no direction halted: a manual unstable flag
+          # with transfers open is a warning, listed in its own table below,
+          # not a halt.
+          STANDING_WARNINGS=$(echo "$STANDING_HALTS" | jq '
+            map(select((.osmosis_halt_deposits != true) and (.osmosis_halt_withdrawals != true)))')
+          STANDING_HALTS=$(echo "$STANDING_HALTS" | jq '
+            map(select((.osmosis_halt_deposits == true) or (.osmosis_halt_withdrawals == true)))')
           STANDING_HALT_COUNT=$(echo "$STANDING_HALTS" | jq 'length')
 
           if [ "$STANDING_HALT_COUNT" -eq 0 ]; then
@@ -981,6 +1011,23 @@ jobs:
             ' >> workflow-summary.md
             echo "" >> workflow-summary.md
             echo "</details>" >> workflow-summary.md
+          fi
+
+          # Manual warnings: curator-set unstable flags with both directions
+          # open (e.g. a supply incident on a chain that has since recovered).
+          # Standing state like the halts above, but transfers are not blocked.
+          STANDING_WARNING_COUNT=$(echo "$STANDING_WARNINGS" | jq 'length')
+          if [ "$STANDING_WARNING_COUNT" -gt 0 ]; then
+            echo "" >> workflow-summary.md
+            echo "### Manual warnings, transfers open (${STANDING_WARNING_COUNT})" >> workflow-summary.md
+            echo "" >> workflow-summary.md
+            echo "| Symbol | Route | Reason | Tooltip |" >> workflow-summary.md
+            echo "|--------|-------|--------|---------|" >> workflow-summary.md
+            echo "$STANDING_WARNINGS" | jq -r '
+              .[]
+              | (if .hop then .chain_name + " via " + .hop else .chain_name end) as $route
+              | "| \(.symbol) | \($route) | \(.osmosis_unstable_reason // "") | \(.tooltip_message // "") |"
+            ' >> workflow-summary.md
           fi
 
           echo "" >> workflow-summary.md

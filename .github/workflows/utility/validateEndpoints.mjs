@@ -932,6 +932,9 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
   let rpcEndpointIndex = 0;
   let rpcAddress = null;
   let rpcCorsPassed = false;
+  // First endpoint that passed everything except WSS. Used only when no
+  // endpoint passes all RPC tests, so a WSS-capable endpoint stays preferred.
+  let rpcWssOnlyFallback = null;
 
   for (let i = 0; i < rpcCount; i++) {
     const endpoint = sortedRpcEndpoints[i];
@@ -953,9 +956,12 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
       ? flatResults.filter(r => r.test !== RPC_CORS)  // Skip CORS for primary endpoints
       : flatResults;  // Require CORS for backup endpoints
 
-    // Separate CORS from connectivity tests
+    // Separate CORS from connectivity tests. WSS is a warning, not a
+    // connectivity failure: some providers (e.g. Polkachu) reject websocket
+    // upgrades while /status serves fresh blocks, and counting that as down
+    // made live chains look dead.
     const corsTests = flatResults.filter(r => r.test === RPC_CORS);
-    const connectivityTests = flatResults.filter(r => r.test !== RPC_CORS);
+    const connectivityTests = flatResults.filter(r => r.test !== RPC_CORS && r.test !== RPC_WSS);
 
     const connectivityPassed = connectivityTests.every(r => r.success && !r.stale);
     const corsPassed = isPrimary || corsTests.every(r => r.success);
@@ -989,7 +995,22 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
     } else {
       // Store last failed results for reporting
       rpcResults = flatResults;
+      const passedExceptWss = resultsToCheck
+        .filter(r => r.test !== RPC_WSS)
+        .every(r => r.success && !r.stale);
+      if (passedExceptWss && !rpcWssOnlyFallback) {
+        rpcWssOnlyFallback = { endpoint, flatResults, corsPassed };
+      }
     }
+  }
+
+  if (!rpcAddress && rpcWssOnlyFallback) {
+    const { endpoint, flatResults, corsPassed } = rpcWssOnlyFallback;
+    console.log(`RPC WSS failed on every endpoint; using ${endpoint.address} without websocket`);
+    rpcResults = flatResults;
+    rpcEndpointIndex = endpoint.originalIndex;
+    rpcAddress = endpoint.address;
+    rpcCorsPassed = corsPassed;
   }
 
   // Get all REST endpoints with original indices
@@ -1102,8 +1123,8 @@ function determineValidationSuccess(validationResults, rpcIsPrimary = false, res
     r.test === REST_CORS || r.test === REST_ENDPOINTS
   );
 
-  // Check RPC connectivity (non-CORS tests)
-  const rpcConnectivityTests = rpcResults.filter(r => r.test !== RPC_CORS);
+  // Check RPC connectivity (non-CORS, non-WSS tests; WSS is a warning only)
+  const rpcConnectivityTests = rpcResults.filter(r => r.test !== RPC_CORS && r.test !== RPC_WSS);
   const rpcConnectivitySuccess = rpcConnectivityTests.length > 0 &&
     rpcConnectivityTests.every(r => r.success && !r.stale);
 
@@ -1645,6 +1666,9 @@ async function generateValidationReport(chainName) {
   //                                             report (it corroborates against
   //                                             cosmos.directory success history,
   //                                             not just this run).
+  //   • No death signal on the previous run    → watch; a single failed run
+  //                                             is usually a transient outage
+  //                                             or runner egress blip.
   //   • Deposits still open, shorter streak    → halt deposits / investigate.
   //   • All unstable but deposits still open   → consider a deposit halt.
   const getActionLabel = (chain_name, proxy) => {
@@ -1671,6 +1695,14 @@ async function generateValidationReport(chainName) {
       // corroborates against cosmos.directory's success HISTORY (some
       // long-failing chains are alive on private endpoints, e.g. gravitybridge).
       return `🔍 check dead-chain candidates${streakNote}`;
+    }
+    // The streak file is written by report_dead_chains.mjs, which runs after
+    // this report, so it holds previous runs only. A zero streak means this is
+    // no death signal on the previous run (first failed run, or a partial
+    // failure that never counts as dead): hold off on recommending a halt
+    // until a dead verdict repeats.
+    if (streak < 1) {
+      return '👀 watch (no dead verdict on previous run)';
     }
     if (cov.unstable >= cov.total) {
       // Everything flagged unstable but deposits still open.

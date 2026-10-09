@@ -7299,10 +7299,12 @@
       "name": "BeeZee",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "listingDate": "2024-10-29T18:00:00.000Z"
+      "listingDate": "2024-10-29T18:00:00.000Z",
+      "lastDowntimeDate": "2026-10-09T15:14:52.201Z"
     },
     {
       "chainName": "juno",
@@ -50043,6 +50045,640 @@
       "preview": false
     },
     {
+      "chainName": "carbon",
+      "sourceDenom": "usc",
+      "coinMinimalDenom": "ibc/F64D67581D50AE3F641A344F31FE7CF9DC5A2C8C8C455A6967E36DEA09D563E6",
+      "symbol": "USC",
+      "decimals": 8,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/usc.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/usc.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "carbon",
+            "chainId": "carbon-1",
+            "sourceDenom": "usc",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-188",
+            "path": "transfer/channel-188/usc"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "carbon",
+          "sourceDenom": "usc",
+          "chainType": "cosmos",
+          "chainId": "carbon-1",
+          "symbol": "USC",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/usc.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/usc.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/F64D67581D50AE3F641A344F31FE7CF9DC5A2C8C8C455A6967E36DEA09D563E6",
+      "name": "Carbon USD Coin",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "manual",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
+      "preview": false,
+      "tooltipMessage": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review.",
+      "lastDowntimeDate": "2026-10-09T15:14:43.350Z"
+    },
+    {
+      "chainName": "carbon",
+      "sourceDenom": "bnb.1.6.773edb",
+      "coinMinimalDenom": "ibc/09B40B4315A4A188A84E0C5F2A11013604B3F8D8542970A1F767481B6560E66B",
+      "symbol": "BNB.carbon",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/bnb.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/bnb.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "carbon",
+            "chainId": "carbon-1",
+            "sourceDenom": "bnb.1.6.773edb",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-188",
+            "path": "transfer/channel-188/bnb.1.6.773edb"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "carbon",
+          "sourceDenom": "bnb.1.6.773edb",
+          "chainType": "cosmos",
+          "chainId": "carbon-1",
+          "symbol": "BNB",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/bnb.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/bnb.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo1zetxzc5nka4jm203ljjtjf933jwjh45ge6spfeef447rnnhqxc4qrazrcz/alloyed/allBNB",
+      "name": "Binance Coin",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "manual",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
+      "preview": false,
+      "tooltipMessage": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review.",
+      "lastDowntimeDate": "2026-10-09T15:14:43.350Z"
+    },
+    {
+      "chainName": "carbon",
+      "sourceDenom": "bneo.1.14.e2e5f6",
+      "coinMinimalDenom": "ibc/FB57581C2E698C45AE811B2C31697EB3D3C34CD55F8996DDE1B9447D6E879ACD",
+      "symbol": "bNEO",
+      "decimals": 8,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/bneo.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/bneo.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "carbon",
+            "chainId": "carbon-1",
+            "sourceDenom": "bneo.1.14.e2e5f6",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-188",
+            "path": "transfer/channel-188/bneo.1.14.e2e5f6"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "carbon",
+          "sourceDenom": "bneo.1.14.e2e5f6",
+          "chainType": "cosmos",
+          "chainId": "carbon-1",
+          "symbol": "bNEO",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/bneo.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/bneo.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/FB57581C2E698C45AE811B2C31697EB3D3C34CD55F8996DDE1B9447D6E879ACD",
+      "name": "BurgerNEO",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "manual",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
+      "preview": false,
+      "tooltipMessage": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review.",
+      "lastDowntimeDate": "2026-10-09T15:14:43.350Z"
+    },
+    {
+      "chainName": "carbon",
+      "sourceDenom": "busd.1.6.754a80",
+      "coinMinimalDenom": "ibc/6018AD9F3E8AEF59DBD127F9D81C4F2B69CF1DD5680DBD4D72F0FE1F87E7397D",
+      "symbol": "BUSD.carbon",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/busd.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "carbon",
+            "chainId": "carbon-1",
+            "sourceDenom": "busd.1.6.754a80",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-188",
+            "path": "transfer/channel-188/busd.1.6.754a80"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "carbon",
+          "sourceDenom": "busd.1.6.754a80",
+          "chainType": "cosmos",
+          "chainId": "carbon-1",
+          "symbol": "BUSD",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/busd.png"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo147h5x9pcj7lm0cttlaefx6sqq5vdfnmwfcqxkmjd7exqm9gc7grqhr75m0/alloyed/allUSDC",
+      "name": "BUSD (BEP-20)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "manual",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
+      "preview": false,
+      "tooltipMessage": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review.",
+      "lastDowntimeDate": "2026-10-09T15:14:43.350Z"
+    },
+    {
+      "chainName": "carbon",
+      "sourceDenom": "cglp.1.19.1698d3",
+      "coinMinimalDenom": "ibc/FF1EB215DC22B8D383105710E17DAF0584FEB7C15DDA2FADC7D44F5B77DFFBF4",
+      "symbol": "CGLP",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/cglp.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/cglp.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "carbon",
+            "chainId": "carbon-1",
+            "sourceDenom": "cglp.1.19.1698d3",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-188",
+            "path": "transfer/channel-188/cglp.1.19.1698d3"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "carbon",
+          "sourceDenom": "cglp.1.19.1698d3",
+          "chainType": "cosmos",
+          "chainId": "carbon-1",
+          "symbol": "CGLP",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/cglp.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/cglp.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/FF1EB215DC22B8D383105710E17DAF0584FEB7C15DDA2FADC7D44F5B77DFFBF4",
+      "name": "Carbon Wrapped GLP",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "manual",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
+      "preview": false,
+      "tooltipMessage": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review.",
+      "lastDowntimeDate": "2026-10-09T15:14:43.350Z"
+    },
+    {
+      "chainName": "carbon",
+      "sourceDenom": "cgt/1",
+      "coinMinimalDenom": "ibc/73C2C269DCA7914B90E227D315C339836FDC6F2D570E5C5438D6C288472A665B",
+      "symbol": "USD",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/carbon-grouped-usd.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/carbon-grouped-usd.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "carbon",
+            "chainId": "carbon-1",
+            "sourceDenom": "cgt/1",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-188",
+            "path": "transfer/channel-188/cgt/1"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "carbon",
+          "sourceDenom": "cgt/1",
+          "chainType": "cosmos",
+          "chainId": "carbon-1",
+          "symbol": "USD",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/carbon-grouped-usd.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/carbon-grouped-usd.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/73C2C269DCA7914B90E227D315C339836FDC6F2D570E5C5438D6C288472A665B",
+      "name": "Carbon Grouped USD",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "manual",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
+      "preview": false,
+      "tooltipMessage": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review.",
+      "lastDowntimeDate": "2026-10-09T15:14:43.350Z"
+    },
+    {
+      "chainName": "carbon",
+      "sourceDenom": "eth.1.19.c3b805",
+      "coinMinimalDenom": "ibc/0BAB91A2EFF98CFE98803D4777ECAA19801E3F8FF5B2D78278915610BFA4242A",
+      "symbol": "ETH.arb.carbon",
+      "decimals": 18,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eth.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "carbon",
+            "chainId": "carbon-1",
+            "sourceDenom": "eth.1.19.c3b805",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-188",
+            "path": "transfer/channel-188/eth.1.19.c3b805"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "carbon",
+          "sourceDenom": "eth.1.19.c3b805",
+          "chainType": "cosmos",
+          "chainId": "carbon-1",
+          "symbol": "ETH",
+          "decimals": 18,
+          "logoURIs": {
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eth.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo1k6c8jln7ejuqwtqmay3yvzrg3kueaczl96pk067ldg8u835w0yhsw27twm/alloyed/allETH",
+      "name": "Ethereum (Arbitrum)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "manual",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
+      "preview": false,
+      "tooltipMessage": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review.",
+      "sortWith": {
+        "chainName": "arbitrum",
+        "sourceDenom": "0x912CE59144191C1204E64559FE8253a0e49E6548"
+      },
+      "lastDowntimeDate": "2026-10-09T15:14:43.350Z"
+    },
+    {
+      "chainName": "carbon",
+      "sourceDenom": "eth.1.2.942d87",
+      "coinMinimalDenom": "ibc/0824A92510C1CE67BF02944854A5D7C7F392DF111045B4551ADDF7EFFEA05A32",
+      "symbol": "ETH.eth.carbon",
+      "decimals": 18,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eth.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "carbon",
+            "chainId": "carbon-1",
+            "sourceDenom": "eth.1.2.942d87",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-188",
+            "path": "transfer/channel-188/eth.1.2.942d87"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "carbon",
+          "sourceDenom": "eth.1.2.942d87",
+          "chainType": "cosmos",
+          "chainId": "carbon-1",
+          "symbol": "ETH",
+          "decimals": 18,
+          "logoURIs": {
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eth.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo1k6c8jln7ejuqwtqmay3yvzrg3kueaczl96pk067ldg8u835w0yhsw27twm/alloyed/allETH",
+      "name": "Ethereum (ERC20)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "manual",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
+      "preview": false,
+      "tooltipMessage": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review.",
+      "lastDowntimeDate": "2026-10-09T15:14:43.350Z"
+    },
+    {
+      "chainName": "carbon",
+      "sourceDenom": "usdc.1.2.343151",
+      "coinMinimalDenom": "ibc/B39116ED5DA87C0DD8E959A9D0DFF5B4E38608669528A20DEFF29D7447B6087B",
+      "symbol": "USDC.eth.carbon",
+      "decimals": 6,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "carbon",
+            "chainId": "carbon-1",
+            "sourceDenom": "usdc.1.2.343151",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-188",
+            "path": "transfer/channel-188/usdc.1.2.343151"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "carbon",
+          "sourceDenom": "usdc.1.2.343151",
+          "chainType": "cosmos",
+          "chainId": "carbon-1",
+          "symbol": "USDC",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo147h5x9pcj7lm0cttlaefx6sqq5vdfnmwfcqxkmjd7exqm9gc7grqhr75m0/alloyed/allUSDC",
+      "name": "Circle USD",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "manual",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
+      "preview": false,
+      "tooltipMessage": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review.",
+      "lastDowntimeDate": "2026-10-09T15:14:43.350Z"
+    },
+    {
+      "chainName": "carbon",
+      "sourceDenom": "usdc.1.6.53ff75",
+      "coinMinimalDenom": "ibc/A14A79305A1168CF7C8071EA40B5BC647E3D3FEBBD427E38F05FE07F0B317E0A",
+      "symbol": "USDC.bsc.carbon",
+      "decimals": 18,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "carbon",
+            "chainId": "carbon-1",
+            "sourceDenom": "usdc.1.6.53ff75",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-188",
+            "path": "transfer/channel-188/usdc.1.6.53ff75"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "carbon",
+          "sourceDenom": "usdc.1.6.53ff75",
+          "chainType": "cosmos",
+          "chainId": "carbon-1",
+          "symbol": "USDC",
+          "decimals": 18,
+          "logoURIs": {
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/6329DD8CF31A334DD5BE3F68C846C9FE313281362B37686A62343BAC1EB1546D",
+      "name": "USD Coin (BEP-20)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "manual",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
+      "preview": false,
+      "tooltipMessage": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review.",
+      "lastDowntimeDate": "2026-10-09T15:14:43.350Z"
+    },
+    {
+      "chainName": "carbon",
+      "sourceDenom": "zil.1.18.1a4a06",
+      "coinMinimalDenom": "ibc/3F517AB4EC381A9288A449EC7D99D75B4DEE3DE9560140344893A15A3D630DB7",
+      "symbol": "ZIL",
+      "decimals": 12,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/zil.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/zil.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "carbon",
+            "chainId": "carbon-1",
+            "sourceDenom": "zil.1.18.1a4a06",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-188",
+            "path": "transfer/channel-188/zil.1.18.1a4a06"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "carbon",
+          "sourceDenom": "zil.1.18.1a4a06",
+          "chainType": "cosmos",
+          "chainId": "carbon-1",
+          "symbol": "ZIL",
+          "decimals": 12,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/zil.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/zil.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/3F517AB4EC381A9288A449EC7D99D75B4DEE3DE9560140344893A15A3D630DB7",
+      "name": "Zilliqa",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "manual",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
+      "preview": false,
+      "tooltipMessage": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review.",
+      "lastDowntimeDate": "2026-10-09T15:14:43.350Z"
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -51986,559 +52622,6 @@
       ],
       "variantGroupKey": "ibc/26201350CB5096C2B8C0585A2871C519BFEBC73EEEC287396934B85F60E7AA5E",
       "name": "BLG24",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "carbon",
-      "sourceDenom": "usc",
-      "coinMinimalDenom": "ibc/F64D67581D50AE3F641A344F31FE7CF9DC5A2C8C8C455A6967E36DEA09D563E6",
-      "symbol": "USC",
-      "decimals": 8,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/usc.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/usc.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "carbon",
-            "chainId": "carbon-1",
-            "sourceDenom": "usc",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-188",
-            "path": "transfer/channel-188/usc"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "carbon",
-          "sourceDenom": "usc",
-          "chainType": "cosmos",
-          "chainId": "carbon-1",
-          "symbol": "USC",
-          "decimals": 8,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/usc.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/usc.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/F64D67581D50AE3F641A344F31FE7CF9DC5A2C8C8C455A6967E36DEA09D563E6",
-      "name": "Carbon USD Coin",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "carbon",
-      "sourceDenom": "bnb.1.6.773edb",
-      "coinMinimalDenom": "ibc/09B40B4315A4A188A84E0C5F2A11013604B3F8D8542970A1F767481B6560E66B",
-      "symbol": "BNB.carbon",
-      "decimals": 18,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/bnb.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/bnb.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "carbon",
-            "chainId": "carbon-1",
-            "sourceDenom": "bnb.1.6.773edb",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-188",
-            "path": "transfer/channel-188/bnb.1.6.773edb"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "carbon",
-          "sourceDenom": "bnb.1.6.773edb",
-          "chainType": "cosmos",
-          "chainId": "carbon-1",
-          "symbol": "BNB",
-          "decimals": 18,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/bnb.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/binancesmartchain/images/bnb.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "factory/osmo1zetxzc5nka4jm203ljjtjf933jwjh45ge6spfeef447rnnhqxc4qrazrcz/alloyed/allBNB",
-      "name": "Binance Coin",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "carbon",
-      "sourceDenom": "bneo.1.14.e2e5f6",
-      "coinMinimalDenom": "ibc/FB57581C2E698C45AE811B2C31697EB3D3C34CD55F8996DDE1B9447D6E879ACD",
-      "symbol": "bNEO",
-      "decimals": 8,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/bneo.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/bneo.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "carbon",
-            "chainId": "carbon-1",
-            "sourceDenom": "bneo.1.14.e2e5f6",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-188",
-            "path": "transfer/channel-188/bneo.1.14.e2e5f6"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "carbon",
-          "sourceDenom": "bneo.1.14.e2e5f6",
-          "chainType": "cosmos",
-          "chainId": "carbon-1",
-          "symbol": "bNEO",
-          "decimals": 8,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/bneo.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/bneo.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/FB57581C2E698C45AE811B2C31697EB3D3C34CD55F8996DDE1B9447D6E879ACD",
-      "name": "BurgerNEO",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "carbon",
-      "sourceDenom": "busd.1.6.754a80",
-      "coinMinimalDenom": "ibc/6018AD9F3E8AEF59DBD127F9D81C4F2B69CF1DD5680DBD4D72F0FE1F87E7397D",
-      "symbol": "BUSD.carbon",
-      "decimals": 18,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/busd.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "carbon",
-            "chainId": "carbon-1",
-            "sourceDenom": "busd.1.6.754a80",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-188",
-            "path": "transfer/channel-188/busd.1.6.754a80"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "carbon",
-          "sourceDenom": "busd.1.6.754a80",
-          "chainType": "cosmos",
-          "chainId": "carbon-1",
-          "symbol": "BUSD",
-          "decimals": 18,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/busd.png"
-          }
-        }
-      ],
-      "variantGroupKey": "factory/osmo147h5x9pcj7lm0cttlaefx6sqq5vdfnmwfcqxkmjd7exqm9gc7grqhr75m0/alloyed/allUSDC",
-      "name": "BUSD (BEP-20)",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "carbon",
-      "sourceDenom": "cglp.1.19.1698d3",
-      "coinMinimalDenom": "ibc/FF1EB215DC22B8D383105710E17DAF0584FEB7C15DDA2FADC7D44F5B77DFFBF4",
-      "symbol": "CGLP",
-      "decimals": 18,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/cglp.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/cglp.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "carbon",
-            "chainId": "carbon-1",
-            "sourceDenom": "cglp.1.19.1698d3",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-188",
-            "path": "transfer/channel-188/cglp.1.19.1698d3"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "carbon",
-          "sourceDenom": "cglp.1.19.1698d3",
-          "chainType": "cosmos",
-          "chainId": "carbon-1",
-          "symbol": "CGLP",
-          "decimals": 18,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/cglp.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/cglp.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/FF1EB215DC22B8D383105710E17DAF0584FEB7C15DDA2FADC7D44F5B77DFFBF4",
-      "name": "Carbon Wrapped GLP",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "carbon",
-      "sourceDenom": "cgt/1",
-      "coinMinimalDenom": "ibc/73C2C269DCA7914B90E227D315C339836FDC6F2D570E5C5438D6C288472A665B",
-      "symbol": "USD",
-      "decimals": 18,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/carbon-grouped-usd.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/carbon-grouped-usd.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "carbon",
-            "chainId": "carbon-1",
-            "sourceDenom": "cgt/1",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-188",
-            "path": "transfer/channel-188/cgt/1"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "carbon",
-          "sourceDenom": "cgt/1",
-          "chainType": "cosmos",
-          "chainId": "carbon-1",
-          "symbol": "USD",
-          "decimals": 18,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/carbon-grouped-usd.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/carbon-grouped-usd.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/73C2C269DCA7914B90E227D315C339836FDC6F2D570E5C5438D6C288472A665B",
-      "name": "Carbon Grouped USD",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "carbon",
-      "sourceDenom": "eth.1.19.c3b805",
-      "coinMinimalDenom": "ibc/0BAB91A2EFF98CFE98803D4777ECAA19801E3F8FF5B2D78278915610BFA4242A",
-      "symbol": "ETH.arb.carbon",
-      "decimals": 18,
-      "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eth.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "carbon",
-            "chainId": "carbon-1",
-            "sourceDenom": "eth.1.19.c3b805",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-188",
-            "path": "transfer/channel-188/eth.1.19.c3b805"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "carbon",
-          "sourceDenom": "eth.1.19.c3b805",
-          "chainType": "cosmos",
-          "chainId": "carbon-1",
-          "symbol": "ETH",
-          "decimals": 18,
-          "logoURIs": {
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eth.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "factory/osmo1k6c8jln7ejuqwtqmay3yvzrg3kueaczl96pk067ldg8u835w0yhsw27twm/alloyed/allETH",
-      "name": "Ethereum (Arbitrum)",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "carbon",
-      "sourceDenom": "eth.1.2.942d87",
-      "coinMinimalDenom": "ibc/0824A92510C1CE67BF02944854A5D7C7F392DF111045B4551ADDF7EFFEA05A32",
-      "symbol": "ETH.eth.carbon",
-      "decimals": 18,
-      "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eth.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "carbon",
-            "chainId": "carbon-1",
-            "sourceDenom": "eth.1.2.942d87",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-188",
-            "path": "transfer/channel-188/eth.1.2.942d87"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "carbon",
-          "sourceDenom": "eth.1.2.942d87",
-          "chainType": "cosmos",
-          "chainId": "carbon-1",
-          "symbol": "ETH",
-          "decimals": 18,
-          "logoURIs": {
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eth.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "factory/osmo1k6c8jln7ejuqwtqmay3yvzrg3kueaczl96pk067ldg8u835w0yhsw27twm/alloyed/allETH",
-      "name": "Ethereum (ERC20)",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "carbon",
-      "sourceDenom": "usdc.1.2.343151",
-      "coinMinimalDenom": "ibc/B39116ED5DA87C0DD8E959A9D0DFF5B4E38608669528A20DEFF29D7447B6087B",
-      "symbol": "USDC.eth.carbon",
-      "decimals": 6,
-      "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg",
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "carbon",
-            "chainId": "carbon-1",
-            "sourceDenom": "usdc.1.2.343151",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-188",
-            "path": "transfer/channel-188/usdc.1.2.343151"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "carbon",
-          "sourceDenom": "usdc.1.2.343151",
-          "chainType": "cosmos",
-          "chainId": "carbon-1",
-          "symbol": "USDC",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "factory/osmo147h5x9pcj7lm0cttlaefx6sqq5vdfnmwfcqxkmjd7exqm9gc7grqhr75m0/alloyed/allUSDC",
-      "name": "Circle USD",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "carbon",
-      "sourceDenom": "usdc.1.6.53ff75",
-      "coinMinimalDenom": "ibc/A14A79305A1168CF7C8071EA40B5BC647E3D3FEBBD427E38F05FE07F0B317E0A",
-      "symbol": "USDC.bsc.carbon",
-      "decimals": 18,
-      "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "carbon",
-            "chainId": "carbon-1",
-            "sourceDenom": "usdc.1.6.53ff75",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-188",
-            "path": "transfer/channel-188/usdc.1.6.53ff75"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "carbon",
-          "sourceDenom": "usdc.1.6.53ff75",
-          "chainType": "cosmos",
-          "chainId": "carbon-1",
-          "symbol": "USDC",
-          "decimals": 18,
-          "logoURIs": {
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/6329DD8CF31A334DD5BE3F68C846C9FE313281362B37686A62343BAC1EB1546D",
-      "name": "USD Coin (BEP-20)",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "carbon",
-      "sourceDenom": "zil.1.18.1a4a06",
-      "coinMinimalDenom": "ibc/3F517AB4EC381A9288A449EC7D99D75B4DEE3DE9560140344893A15A3D630DB7",
-      "symbol": "ZIL",
-      "decimals": 12,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/zil.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/zil.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "carbon",
-            "chainId": "carbon-1",
-            "sourceDenom": "zil.1.18.1a4a06",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-188",
-            "path": "transfer/channel-188/zil.1.18.1a4a06"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "carbon",
-          "sourceDenom": "zil.1.18.1a4a06",
-          "chainType": "cosmos",
-          "chainId": "carbon-1",
-          "symbol": "ZIL",
-          "decimals": 12,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/zil.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/zil.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/3F517AB4EC381A9288A449EC7D99D75B4DEE3DE9560140344893A15A3D630DB7",
-      "name": "Zilliqa",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

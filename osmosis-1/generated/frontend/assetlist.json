@@ -27097,12 +27097,10 @@
       "isAlloyed": true,
       "contract": "osmo10pk4crey8fpdyqd62rsau0y02e3rk055w5u005ah6ly7k849k5tsf72x40",
       "verified": true,
-      "unstable": true,
-      "unstableReason": "market",
+      "unstable": false,
       "disabled": false,
       "preview": false,
-      "listingDate": "2024-11-19T20:00:00.000Z",
-      "lastDowntimeDate": "2026-09-29T15:16:56.685Z"
+      "listingDate": "2024-11-19T20:00:00.000Z"
     },
     {
       "chainName": "osmosis",
@@ -50679,6 +50677,62 @@
       "lastDowntimeDate": "2026-10-09T15:14:43.350Z"
     },
     {
+      "chainName": "paxi",
+      "sourceDenom": "upaxi",
+      "coinMinimalDenom": "ibc/2BDB1A24CECA305FBECD3285D7C4391AE8916B80AB4ED2B1DBFCAECED254D4D1",
+      "symbol": "PAXI",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/paxi/images/paxi.png"
+      },
+      "coingeckoId": "paxi-network",
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "paxi",
+            "chainId": "paxi-mainnet",
+            "sourceDenom": "upaxi",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-107354",
+            "path": "transfer/channel-107354/upaxi"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "paxi",
+          "sourceDenom": "upaxi",
+          "chainType": "cosmos",
+          "chainId": "paxi-mainnet",
+          "symbol": "PAXI",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/paxi/images/paxi.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/2BDB1A24CECA305FBECD3285D7C4391AE8916B80AB4ED2B1DBFCAECED254D4D1",
+      "name": "Paxi",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "lastDowntimeDate": "2026-10-10T15:14:50.700Z"
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -57665,56 +57719,6 @@
       ],
       "variantGroupKey": "ibc/B36FA1449007D770F373A0806EC5A907CC2D7DC11AE73FA8AFF76C5903A4F9B0",
       "name": "Stake",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "paxi",
-      "sourceDenom": "upaxi",
-      "coinMinimalDenom": "ibc/2BDB1A24CECA305FBECD3285D7C4391AE8916B80AB4ED2B1DBFCAECED254D4D1",
-      "symbol": "PAXI",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/paxi/images/paxi.png"
-      },
-      "coingeckoId": "paxi-network",
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "paxi",
-            "chainId": "paxi-mainnet",
-            "sourceDenom": "upaxi",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-107354",
-            "path": "transfer/channel-107354/upaxi"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "paxi",
-          "sourceDenom": "upaxi",
-          "chainType": "cosmos",
-          "chainId": "paxi-mainnet",
-          "symbol": "PAXI",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/paxi/images/paxi.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/2BDB1A24CECA305FBECD3285D7C4391AE8916B80AB4ED2B1DBFCAECED254D4D1",
-      "name": "Paxi",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

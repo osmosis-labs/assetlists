@@ -10,6 +10,8 @@ import * as assetlist from "./generate_assetlist_functions.mjs";
 import * as localization from "./localization.mjs";
 import * as state from "./update_assetlist_state.mjs";
 import * as symbolDedup from "./deduplicate_symbols.mjs";
+import { encodeAssetList, decodeAssetList } from "./compact_assetlist.mjs";
+import assert from "node:assert/strict";
 
 
 //-- Functions --
@@ -428,6 +430,19 @@ async function generateAssetlist(chainName) {
     zone.zoneConfigAssetlist,
     zone.assetlistFileName,
     frontend_assetlist
+  );
+
+  // Keep the public object list unchanged for SQS/Numia. Publish a lossless,
+  // versioned table alongside it for frontend fetching and embedding.
+  const published = JSON.parse(JSON.stringify(frontend_assetlist));
+  const compact = encodeAssetList(published);
+  assert.deepEqual(decodeAssetList(compact), published);
+  zone.writeToFile(
+    chainName,
+    zone.zoneConfigAssetlist,
+    "assetlist.compact.json",
+    compact,
+    0
   );
 
   let asset_detail_assetlist = {

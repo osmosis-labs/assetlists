@@ -41471,6 +41471,41 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/2BDB1A24CECA305FBECD3285D7C4391AE8916B80AB4ED2B1DBFCAECED254D4D1",
+          "exponent": 0,
+          "aliases": [
+            "upaxi"
+          ]
+        },
+        {
+          "denom": "paxi",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/2BDB1A24CECA305FBECD3285D7C4391AE8916B80AB4ED2B1DBFCAECED254D4D1",
+      "name": "Paxi",
+      "display": "paxi",
+      "symbol": "PAXI",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "paxi",
+            "base_denom": "upaxi",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-107354",
+            "path": "transfer/channel-107354/upaxi"
+          }
+        }
+      ],
+      "coingecko_id": "paxi-network"
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
           "exponent": 0,
           "aliases": [
@@ -46510,41 +46545,6 @@
           }
         }
       ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/2BDB1A24CECA305FBECD3285D7C4391AE8916B80AB4ED2B1DBFCAECED254D4D1",
-          "exponent": 0,
-          "aliases": [
-            "upaxi"
-          ]
-        },
-        {
-          "denom": "paxi",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/2BDB1A24CECA305FBECD3285D7C4391AE8916B80AB4ED2B1DBFCAECED254D4D1",
-      "name": "Paxi",
-      "display": "paxi",
-      "symbol": "PAXI",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "paxi",
-            "base_denom": "upaxi",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-107354",
-            "path": "transfer/channel-107354/upaxi"
-          }
-        }
-      ],
-      "coingecko_id": "paxi-network"
     },
     {
       "denom_units": [

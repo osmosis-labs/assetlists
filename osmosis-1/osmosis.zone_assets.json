@@ -356,7 +356,9 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "pSTAKE Finance $PSTAKE"
+      "_comment": "pSTAKE Finance $PSTAKE",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "akash",
@@ -3822,7 +3824,9 @@
           "logo_uri": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gravitybridge/images/grav.png"
         }
       ],
-      "_comment": "Page $PAGE"
+      "_comment": "Page $PAGE",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "pundix",
@@ -7176,7 +7180,9 @@
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "market",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "extended_unstable_market"
+      "osmosis_deposit_halt_reason": "extended_unstable_market",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "atomone",
@@ -7874,7 +7880,9 @@
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "market",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "extended_unstable_market"
+      "osmosis_deposit_halt_reason": "extended_unstable_market",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "pryzm",
@@ -8057,7 +8065,9 @@
         "chain_name": "ethereum",
         "base_denom": "0x7a56e1c57c7475ccf742a1832b028f0456652f97"
       },
-      "_comment": "SolvBTC $solvBTC"
+      "_comment": "SolvBTC $solvBTC",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "neutron",
@@ -8603,7 +8613,9 @@
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "market",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "extended_unstable_market"
+      "osmosis_deposit_halt_reason": "extended_unstable_market",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "osmosis",
@@ -13328,6 +13340,66 @@
       "base_denom": "upaxi",
       "path": "transfer/channel-107354/upaxi",
       "_comment": "Paxi $PAXI",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
+    },
+    {
+      "chain_name": "mantrachain",
+      "base_denom": "amantra",
+      "path": "transfer/channel-85077/amantra",
+      "_comment": "MANTRA $MANTRA",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
+    },
+    {
+      "chain_name": "mantrachain",
+      "base_denom": "erc20:0x5EB619e3dcA586c321Bb83282D2916577B5c383d",
+      "path": "transfer/channel-85077/erc20:0x5EB619e3dcA586c321Bb83282D2916577B5c383d",
+      "_comment": "Wrapped mantraUSD $wmantraUSD",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
+    },
+    {
+      "chain_name": "symphony",
+      "base_denom": "uusd",
+      "path": "transfer/channel-104867/uusd",
+      "_comment": "Harmony USD $HUSD",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
+    },
+    {
+      "chain_name": "symphony",
+      "base_denom": "ukhd",
+      "path": "transfer/channel-104867/ukhd",
+      "_comment": "Harmony HKD $HKHD",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
+    },
+    {
+      "chain_name": "symphony",
+      "base_denom": "uvnd",
+      "path": "transfer/channel-104867/uvnd",
+      "_comment": "Harmony VND $HVND",
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "ibc_client",
       "osmosis_halt_deposits": true,

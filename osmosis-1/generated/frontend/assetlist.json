@@ -1516,10 +1516,11 @@
       "name": "pSTAKE Finance",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
+      "lastDowntimeDate": "2026-10-12T15:18:26.851Z"
     },
     {
       "chainName": "akash",
@@ -15201,10 +15202,11 @@
       "name": "Page",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
+      "lastDowntimeDate": "2026-10-12T15:18:26.851Z"
     },
     {
       "chainName": "pundix",
@@ -27272,6 +27274,8 @@
       "disabled": false,
       "haltDeposits": true,
       "depositHaltReason": "extended_unstable_market",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
       "preview": false,
       "listingDate": "2024-10-23T19:00:00.000Z",
       "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
@@ -29595,6 +29599,8 @@
       "disabled": false,
       "haltDeposits": true,
       "depositHaltReason": "extended_unstable_market",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
       "preview": false,
       "listingDate": "2025-02-25T19:28:44.808Z",
       "lastDowntimeDate": "2026-05-28T09:17:16.684Z"
@@ -30205,10 +30211,12 @@
       "name": "SolvBTC",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "listingDate": "2025-07-08T09:08:38.621Z"
+      "listingDate": "2025-07-08T09:08:38.621Z",
+      "lastDowntimeDate": "2026-10-12T15:18:26.851Z"
     },
     {
       "chainName": "neutron",
@@ -32823,6 +32831,8 @@
       "disabled": false,
       "haltDeposits": true,
       "depositHaltReason": "extended_unstable_market",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
       "preview": false,
       "listingDate": "2025-12-17T11:15:53.803Z",
       "lastDowntimeDate": "2026-05-30T15:33:12.966Z"
@@ -50735,6 +50745,286 @@
       "lastDowntimeDate": "2026-10-10T15:14:50.700Z"
     },
     {
+      "chainName": "mantrachain",
+      "sourceDenom": "amantra",
+      "coinMinimalDenom": "ibc/4EDB04DED162ED1D45F86F8C7F92E011E8CF3AE9E5214BD3EA06F9D05B38F18D",
+      "symbol": "MANTRA",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Darkmatt.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Darkmatt.svg"
+      },
+      "coingeckoId": "mantra",
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "mantrachain",
+            "chainId": "mantra-1",
+            "sourceDenom": "amantra",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-85077",
+            "path": "transfer/channel-85077/amantra"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "mantrachain",
+          "sourceDenom": "amantra",
+          "chainType": "cosmos",
+          "chainId": "mantra-1",
+          "symbol": "MANTRA",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/4EDB04DED162ED1D45F86F8C7F92E011E8CF3AE9E5214BD3EA06F9D05B38F18D",
+      "name": "MANTRA",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "lastDowntimeDate": "2026-10-12T15:18:22.693Z"
+    },
+    {
+      "chainName": "mantrachain",
+      "sourceDenom": "erc20:0x5EB619e3dcA586c321Bb83282D2916577B5c383d",
+      "coinMinimalDenom": "ibc/BFC34498CB88A6078324DFE1325D0257A0AE18D18039D5D261A4078BC24EDCDF",
+      "symbol": "wmantraUSD",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/wmantraUSD-token.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/wmantraUSD-token.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "mantrachain",
+            "chainId": "mantra-1",
+            "sourceDenom": "erc20:0x5EB619e3dcA586c321Bb83282D2916577B5c383d",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-85077",
+            "path": "transfer/channel-85077/erc20:0x5EB619e3dcA586c321Bb83282D2916577B5c383d"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "mantrachain",
+          "sourceDenom": "erc20:0x5EB619e3dcA586c321Bb83282D2916577B5c383d",
+          "chainType": "cosmos",
+          "chainId": "mantra-1",
+          "symbol": "wmantraUSD",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/wmantraUSD-token.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/wmantraUSD-token.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/BFC34498CB88A6078324DFE1325D0257A0AE18D18039D5D261A4078BC24EDCDF",
+      "name": "Wrapped mantraUSD",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "lastDowntimeDate": "2026-10-12T15:18:22.693Z"
+    },
+    {
+      "chainName": "symphony",
+      "sourceDenom": "uusd",
+      "coinMinimalDenom": "ibc/799FF3558FC4B21B06D44DDEDCAAD14B968CCAE15D6F2E48D3859A26BCF8223D",
+      "symbol": "HUSD",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/husd.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "symphony",
+            "chainId": "symphony-1",
+            "sourceDenom": "uusd",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-104867",
+            "path": "transfer/channel-104867/uusd"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "symphony",
+          "sourceDenom": "uusd",
+          "chainType": "cosmos",
+          "chainId": "symphony-1",
+          "symbol": "HUSD",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/husd.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/799FF3558FC4B21B06D44DDEDCAAD14B968CCAE15D6F2E48D3859A26BCF8223D",
+      "name": "Harmony USD",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "lastDowntimeDate": "2026-10-12T15:18:22.693Z"
+    },
+    {
+      "chainName": "symphony",
+      "sourceDenom": "ukhd",
+      "coinMinimalDenom": "ibc/E3D27CCCF02807C4891D0D86A883C3A2388F1D24338A4CC9F5D617F6ABB9E57C",
+      "symbol": "HKHD",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/hhkd.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "symphony",
+            "chainId": "symphony-1",
+            "sourceDenom": "ukhd",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-104867",
+            "path": "transfer/channel-104867/ukhd"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "symphony",
+          "sourceDenom": "ukhd",
+          "chainType": "cosmos",
+          "chainId": "symphony-1",
+          "symbol": "HKHD",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/hhkd.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/E3D27CCCF02807C4891D0D86A883C3A2388F1D24338A4CC9F5D617F6ABB9E57C",
+      "name": "Harmony HKD",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "lastDowntimeDate": "2026-10-12T15:18:22.693Z"
+    },
+    {
+      "chainName": "symphony",
+      "sourceDenom": "uvnd",
+      "coinMinimalDenom": "ibc/9805A3715F1C315D3753397FFCEFF284F55771AA3975429997D314F4BA73D18B",
+      "symbol": "HVND",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/hvnd.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "symphony",
+            "chainId": "symphony-1",
+            "sourceDenom": "uvnd",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-104867",
+            "path": "transfer/channel-104867/uvnd"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "symphony",
+          "sourceDenom": "uvnd",
+          "chainType": "cosmos",
+          "chainId": "symphony-1",
+          "symbol": "HVND",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/hvnd.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/9805A3715F1C315D3753397FFCEFF284F55771AA3975429997D314F4BA73D18B",
+      "name": "Harmony VND",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "lastDowntimeDate": "2026-10-12T15:18:22.693Z"
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -56437,109 +56727,6 @@
       "preview": false
     },
     {
-      "chainName": "mantrachain",
-      "sourceDenom": "amantra",
-      "coinMinimalDenom": "ibc/4EDB04DED162ED1D45F86F8C7F92E011E8CF3AE9E5214BD3EA06F9D05B38F18D",
-      "symbol": "MANTRA",
-      "decimals": 18,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Darkmatt.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Darkmatt.svg"
-      },
-      "coingeckoId": "mantra",
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "mantrachain",
-            "chainId": "mantra-1",
-            "sourceDenom": "amantra",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-85077",
-            "path": "transfer/channel-85077/amantra"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "mantrachain",
-          "sourceDenom": "amantra",
-          "chainType": "cosmos",
-          "chainId": "mantra-1",
-          "symbol": "MANTRA",
-          "decimals": 18,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/4EDB04DED162ED1D45F86F8C7F92E011E8CF3AE9E5214BD3EA06F9D05B38F18D",
-      "name": "MANTRA",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "mantrachain",
-      "sourceDenom": "erc20:0x5EB619e3dcA586c321Bb83282D2916577B5c383d",
-      "coinMinimalDenom": "ibc/BFC34498CB88A6078324DFE1325D0257A0AE18D18039D5D261A4078BC24EDCDF",
-      "symbol": "wmantraUSD",
-      "decimals": 18,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/wmantraUSD-token.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/wmantraUSD-token.svg"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "mantrachain",
-            "chainId": "mantra-1",
-            "sourceDenom": "erc20:0x5EB619e3dcA586c321Bb83282D2916577B5c383d",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-85077",
-            "path": "transfer/channel-85077/erc20:0x5EB619e3dcA586c321Bb83282D2916577B5c383d"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "mantrachain",
-          "sourceDenom": "erc20:0x5EB619e3dcA586c321Bb83282D2916577B5c383d",
-          "chainType": "cosmos",
-          "chainId": "mantra-1",
-          "symbol": "wmantraUSD",
-          "decimals": 18,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/wmantraUSD-token.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/wmantraUSD-token.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/BFC34498CB88A6078324DFE1325D0257A0AE18D18039D5D261A4078BC24EDCDF",
-      "name": "Wrapped mantraUSD",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
       "chainName": "mucoin",
       "sourceDenom": "umuc",
       "coinMinimalDenom": "ibc/8B84D6340B0340917D3E2E3A17B4BE962F5593637AD7E42F6AE61D6A00ACE713",
@@ -58747,153 +58934,6 @@
       ],
       "variantGroupKey": "ibc/92BE0ABD01850CD92E1A9FF93AB15EB96D3C691884850ECA171697F1E3C70CF4",
       "name": "Sunrise",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "symphony",
-      "sourceDenom": "uusd",
-      "coinMinimalDenom": "ibc/799FF3558FC4B21B06D44DDEDCAAD14B968CCAE15D6F2E48D3859A26BCF8223D",
-      "symbol": "HUSD",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/husd.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "symphony",
-            "chainId": "symphony-1",
-            "sourceDenom": "uusd",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-104867",
-            "path": "transfer/channel-104867/uusd"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "symphony",
-          "sourceDenom": "uusd",
-          "chainType": "cosmos",
-          "chainId": "symphony-1",
-          "symbol": "HUSD",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/husd.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/799FF3558FC4B21B06D44DDEDCAAD14B968CCAE15D6F2E48D3859A26BCF8223D",
-      "name": "Harmony USD",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "symphony",
-      "sourceDenom": "ukhd",
-      "coinMinimalDenom": "ibc/E3D27CCCF02807C4891D0D86A883C3A2388F1D24338A4CC9F5D617F6ABB9E57C",
-      "symbol": "HKHD",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/hhkd.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "symphony",
-            "chainId": "symphony-1",
-            "sourceDenom": "ukhd",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-104867",
-            "path": "transfer/channel-104867/ukhd"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "symphony",
-          "sourceDenom": "ukhd",
-          "chainType": "cosmos",
-          "chainId": "symphony-1",
-          "symbol": "HKHD",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/hhkd.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/E3D27CCCF02807C4891D0D86A883C3A2388F1D24338A4CC9F5D617F6ABB9E57C",
-      "name": "Harmony HKD",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "symphony",
-      "sourceDenom": "uvnd",
-      "coinMinimalDenom": "ibc/9805A3715F1C315D3753397FFCEFF284F55771AA3975429997D314F4BA73D18B",
-      "symbol": "HVND",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/hvnd.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "symphony",
-            "chainId": "symphony-1",
-            "sourceDenom": "uvnd",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-104867",
-            "path": "transfer/channel-104867/uvnd"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "symphony",
-          "sourceDenom": "uvnd",
-          "chainType": "cosmos",
-          "chainId": "symphony-1",
-          "symbol": "HVND",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/symphony/images/hvnd.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/9805A3715F1C315D3753397FFCEFF284F55771AA3975429997D314F4BA73D18B",
-      "name": "Harmony VND",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

@@ -41504,6 +41504,214 @@
       "coingecko_id": "paxi-network"
     },
     {
+      "description": "The native token of MANTRA",
+      "denom_units": [
+        {
+          "denom": "ibc/4EDB04DED162ED1D45F86F8C7F92E011E8CF3AE9E5214BD3EA06F9D05B38F18D",
+          "exponent": 0,
+          "aliases": [
+            "amantra"
+          ]
+        },
+        {
+          "denom": "mantra",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/4EDB04DED162ED1D45F86F8C7F92E011E8CF3AE9E5214BD3EA06F9D05B38F18D",
+      "name": "MANTRA",
+      "display": "mantra",
+      "symbol": "MANTRA",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "mantrachain",
+            "base_denom": "amantra",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-85077",
+            "path": "transfer/channel-85077/amantra"
+          }
+        }
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.svg"
+      },
+      "images": [
+        {
+          "image_sync": {
+            "chain_name": "mantrachain",
+            "base_denom": "amantra"
+          },
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.svg",
+          "theme": {
+            "circle": true
+          }
+        },
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Darkmatt.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Darkmatt.svg",
+          "theme": {
+            "dark_mode": true,
+            "circle": true
+          }
+        },
+        {
+          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-WHT.png",
+          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-WHT.svg",
+          "theme": {
+            "dark_mode": false,
+            "circle": true
+          }
+        }
+      ],
+      "coingecko_id": "mantra"
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/BFC34498CB88A6078324DFE1325D0257A0AE18D18039D5D261A4078BC24EDCDF",
+          "exponent": 0,
+          "aliases": [
+            "erc20:0x5EB619e3dcA586c321Bb83282D2916577B5c383d"
+          ]
+        },
+        {
+          "denom": "wmantrausd",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/BFC34498CB88A6078324DFE1325D0257A0AE18D18039D5D261A4078BC24EDCDF",
+      "name": "Wrapped mantraUSD",
+      "display": "wmantrausd",
+      "symbol": "wmantraUSD",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "mantrachain",
+            "base_denom": "erc20:0x5EB619e3dcA586c321Bb83282D2916577B5c383d",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-85077",
+            "path": "transfer/channel-85077/erc20:0x5EB619e3dcA586c321Bb83282D2916577B5c383d"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/799FF3558FC4B21B06D44DDEDCAAD14B968CCAE15D6F2E48D3859A26BCF8223D",
+          "exponent": 0,
+          "aliases": [
+            "microusd",
+            "uusd"
+          ]
+        },
+        {
+          "denom": "husd",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/799FF3558FC4B21B06D44DDEDCAAD14B968CCAE15D6F2E48D3859A26BCF8223D",
+      "name": "Harmony USD",
+      "display": "husd",
+      "symbol": "HUSD",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "symphony",
+            "base_denom": "uusd",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-104867",
+            "path": "transfer/channel-104867/uusd"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/E3D27CCCF02807C4891D0D86A883C3A2388F1D24338A4CC9F5D617F6ABB9E57C",
+          "exponent": 0,
+          "aliases": [
+            "microhkd",
+            "ukhd"
+          ]
+        },
+        {
+          "denom": "hkhd",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/E3D27CCCF02807C4891D0D86A883C3A2388F1D24338A4CC9F5D617F6ABB9E57C",
+      "name": "Harmony HKD",
+      "display": "hkhd",
+      "symbol": "HKHD",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "symphony",
+            "base_denom": "ukhd",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-104867",
+            "path": "transfer/channel-104867/ukhd"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/9805A3715F1C315D3753397FFCEFF284F55771AA3975429997D314F4BA73D18B",
+          "exponent": 0,
+          "aliases": [
+            "microvnd",
+            "uvnd"
+          ]
+        },
+        {
+          "denom": "hvnd",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/9805A3715F1C315D3753397FFCEFF284F55771AA3975429997D314F4BA73D18B",
+      "name": "Harmony VND",
+      "display": "hvnd",
+      "symbol": "HVND",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "symphony",
+            "base_denom": "uvnd",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-104867",
+            "path": "transfer/channel-104867/uvnd"
+          }
+        }
+      ]
+    },
+    {
       "denom_units": [
         {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -45626,109 +45834,6 @@
       ]
     },
     {
-      "description": "The native token of MANTRA",
-      "denom_units": [
-        {
-          "denom": "ibc/4EDB04DED162ED1D45F86F8C7F92E011E8CF3AE9E5214BD3EA06F9D05B38F18D",
-          "exponent": 0,
-          "aliases": [
-            "amantra"
-          ]
-        },
-        {
-          "denom": "mantra",
-          "exponent": 18
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/4EDB04DED162ED1D45F86F8C7F92E011E8CF3AE9E5214BD3EA06F9D05B38F18D",
-      "name": "MANTRA",
-      "display": "mantra",
-      "symbol": "MANTRA",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "mantrachain",
-            "base_denom": "amantra",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-85077",
-            "path": "transfer/channel-85077/amantra"
-          }
-        }
-      ],
-      "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.svg"
-      },
-      "images": [
-        {
-          "image_sync": {
-            "chain_name": "mantrachain",
-            "base_denom": "amantra"
-          },
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Prim-Col.svg",
-          "theme": {
-            "circle": true
-          }
-        },
-        {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Darkmatt.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-Darkmatt.svg",
-          "theme": {
-            "dark_mode": true,
-            "circle": true
-          }
-        },
-        {
-          "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-WHT.png",
-          "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mantrachain/images/OM-WHT.svg",
-          "theme": {
-            "dark_mode": false,
-            "circle": true
-          }
-        }
-      ],
-      "coingecko_id": "mantra"
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/BFC34498CB88A6078324DFE1325D0257A0AE18D18039D5D261A4078BC24EDCDF",
-          "exponent": 0,
-          "aliases": [
-            "erc20:0x5EB619e3dcA586c321Bb83282D2916577B5c383d"
-          ]
-        },
-        {
-          "denom": "wmantrausd",
-          "exponent": 18
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/BFC34498CB88A6078324DFE1325D0257A0AE18D18039D5D261A4078BC24EDCDF",
-      "name": "Wrapped mantraUSD",
-      "display": "wmantrausd",
-      "symbol": "wmantraUSD",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "mantrachain",
-            "base_denom": "erc20:0x5EB619e3dcA586c321Bb83282D2916577B5c383d",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-85077",
-            "path": "transfer/channel-85077/erc20:0x5EB619e3dcA586c321Bb83282D2916577B5c383d"
-          }
-        }
-      ]
-    },
-    {
       "denom_units": [
         {
           "denom": "ibc/8B84D6340B0340917D3E2E3A17B4BE962F5593637AD7E42F6AE61D6A00ACE713",
@@ -47264,111 +47369,6 @@
           "chain": {
             "channel_id": "channel-106275",
             "path": "transfer/channel-106275/uvrise"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/799FF3558FC4B21B06D44DDEDCAAD14B968CCAE15D6F2E48D3859A26BCF8223D",
-          "exponent": 0,
-          "aliases": [
-            "microusd",
-            "uusd"
-          ]
-        },
-        {
-          "denom": "husd",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/799FF3558FC4B21B06D44DDEDCAAD14B968CCAE15D6F2E48D3859A26BCF8223D",
-      "name": "Harmony USD",
-      "display": "husd",
-      "symbol": "HUSD",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "symphony",
-            "base_denom": "uusd",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-104867",
-            "path": "transfer/channel-104867/uusd"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/E3D27CCCF02807C4891D0D86A883C3A2388F1D24338A4CC9F5D617F6ABB9E57C",
-          "exponent": 0,
-          "aliases": [
-            "microhkd",
-            "ukhd"
-          ]
-        },
-        {
-          "denom": "hkhd",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/E3D27CCCF02807C4891D0D86A883C3A2388F1D24338A4CC9F5D617F6ABB9E57C",
-      "name": "Harmony HKD",
-      "display": "hkhd",
-      "symbol": "HKHD",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "symphony",
-            "base_denom": "ukhd",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-104867",
-            "path": "transfer/channel-104867/ukhd"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/9805A3715F1C315D3753397FFCEFF284F55771AA3975429997D314F4BA73D18B",
-          "exponent": 0,
-          "aliases": [
-            "microvnd",
-            "uvnd"
-          ]
-        },
-        {
-          "denom": "hvnd",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/9805A3715F1C315D3753397FFCEFF284F55771AA3975429997D314F4BA73D18B",
-      "name": "Harmony VND",
-      "display": "hvnd",
-      "symbol": "HVND",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "symphony",
-            "base_denom": "uvnd",
-            "channel_id": "channel-0"
-          },
-          "chain": {
-            "channel_id": "channel-104867",
-            "path": "transfer/channel-104867/uvnd"
           }
         }
       ]

@@ -33220,7 +33220,8 @@
       "haltWithdrawals": true,
       "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
-      "tooltipMessage": "The Sunrise chain shut down on 5 October 2026 as the project moved to Sunrise Edge. Deposits and withdrawals are disabled. Source: https://sunriselayer.io/migration/"
+      "tooltipMessage": "The Sunrise chain shut down on 5 October 2026 as the project moved to Sunrise Edge. Deposits and withdrawals are disabled. Source: https://sunriselayer.io/migration/",
+      "lastDowntimeDate": "2026-10-19T15:15:11.377Z"
     },
     {
       "chainName": "sunrise",
@@ -33279,7 +33280,8 @@
       "haltWithdrawals": true,
       "withdrawalHaltReason": "source_chain_killed",
       "preview": false,
-      "tooltipMessage": "The Sunrise chain shut down on 5 October 2026 as the project moved to Sunrise Edge. Deposits and withdrawals are disabled. Source: https://sunriselayer.io/migration/"
+      "tooltipMessage": "The Sunrise chain shut down on 5 October 2026 as the project moved to Sunrise Edge. Deposits and withdrawals are disabled. Source: https://sunriselayer.io/migration/",
+      "lastDowntimeDate": "2026-10-19T15:15:11.377Z"
     },
     {
       "chainName": "lumera",
@@ -51083,6 +51085,64 @@
       "listingDate": "2026-10-13T15:27:12.713Z"
     },
     {
+      "chainName": "sunrise",
+      "sourceDenom": "uvrise",
+      "coinMinimalDenom": "ibc/92BE0ABD01850CD92E1A9FF93AB15EB96D3C691884850ECA171697F1E3C70CF4",
+      "symbol": "vRISE",
+      "decimals": 6,
+      "logoURIs": {
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/vrise.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/vrise.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "sunrise",
+            "chainId": "sunrise-1",
+            "sourceDenom": "uvrise",
+            "port": "transfer",
+            "channelId": "channel-3"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-106275",
+            "path": "transfer/channel-106275/uvrise"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "sunrise",
+          "sourceDenom": "uvrise",
+          "chainType": "cosmos",
+          "chainId": "sunrise-1",
+          "symbol": "vRISE",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/vrise.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/vrise.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/92BE0ABD01850CD92E1A9FF93AB15EB96D3C691884850ECA171697F1E3C70CF4",
+      "name": "Sunrise",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "manual",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
+      "preview": false,
+      "tooltipMessage": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review.",
+      "lastDowntimeDate": "2026-10-19T15:15:11.377Z"
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -53686,6 +53746,57 @@
       ],
       "variantGroupKey": "ibc/04DDB3C027A5C06F499684FF02E80744CABC705ECF015460F52AE6E280006180",
       "name": "Lumen (XLM) pegged token",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "dungeon",
+      "sourceDenom": "factory/dungeon1wtzjvusmm6r370k0nfwtejywl4qklf7rmhf0ng43tdsqh70cljjqc7gh6q/wbtc",
+      "coinMinimalDenom": "ibc/F8057955E516D60402EED00C07D17F907CDF40C9BD2C87CBBB2C88EA21442921",
+      "symbol": "dnBTC",
+      "decimals": 8,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dungeon/images/dnbtc.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dungeon/images/dnbtc.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "dungeon",
+            "chainId": "dungeon-1",
+            "sourceDenom": "factory/dungeon1wtzjvusmm6r370k0nfwtejywl4qklf7rmhf0ng43tdsqh70cljjqc7gh6q/wbtc",
+            "port": "transfer",
+            "channelId": "channel-5305"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-101249",
+            "path": "transfer/channel-101249/factory/dungeon1wtzjvusmm6r370k0nfwtejywl4qklf7rmhf0ng43tdsqh70cljjqc7gh6q/wbtc"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "dungeon",
+          "sourceDenom": "factory/dungeon1wtzjvusmm6r370k0nfwtejywl4qklf7rmhf0ng43tdsqh70cljjqc7gh6q/wbtc",
+          "chainType": "cosmos",
+          "chainId": "dungeon-1",
+          "symbol": "dnBTC",
+          "decimals": 8,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dungeon/images/dnbtc.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dungeon/images/dnbtc.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "factory/osmo1z6r6qdknhgsc0zeracktgpcxf43j6sekq07nw8sxduc9lg0qjjlqfu25e3/alloyed/allBTC",
+      "name": "Dungeon Bridged Bitcoin",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,
@@ -58892,57 +59003,6 @@
       ],
       "variantGroupKey": "ibc/CB10783FD6E5CB6155E6CA0B1558061874EEE85291DD4306D1C0B2724E361EC5",
       "name": "Stride Staked CMDX",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "sunrise",
-      "sourceDenom": "uvrise",
-      "coinMinimalDenom": "ibc/92BE0ABD01850CD92E1A9FF93AB15EB96D3C691884850ECA171697F1E3C70CF4",
-      "symbol": "vRISE",
-      "decimals": 6,
-      "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/vrise.svg",
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/vrise.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "sunrise",
-            "chainId": "sunrise-1",
-            "sourceDenom": "uvrise",
-            "port": "transfer",
-            "channelId": "channel-3"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-106275",
-            "path": "transfer/channel-106275/uvrise"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "sunrise",
-          "sourceDenom": "uvrise",
-          "chainType": "cosmos",
-          "chainId": "sunrise-1",
-          "symbol": "vRISE",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/vrise.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sunrise/images/vrise.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/92BE0ABD01850CD92E1A9FF93AB15EB96D3C691884850ECA171697F1E3C70CF4",
-      "name": "Sunrise",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

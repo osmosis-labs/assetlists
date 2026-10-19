@@ -41763,6 +41763,42 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/92BE0ABD01850CD92E1A9FF93AB15EB96D3C691884850ECA171697F1E3C70CF4",
+          "exponent": 0,
+          "aliases": [
+            "microvRISE",
+            "microvrise",
+            "uvrise"
+          ]
+        },
+        {
+          "denom": "vrise",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/92BE0ABD01850CD92E1A9FF93AB15EB96D3C691884850ECA171697F1E3C70CF4",
+      "name": "Sunrise",
+      "display": "vrise",
+      "symbol": "vRISE",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "sunrise",
+            "base_denom": "uvrise",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-106275",
+            "path": "transfer/channel-106275/uvrise"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
           "exponent": 0,
           "aliases": [
@@ -43570,6 +43606,41 @@
           "chain": {
             "channel_id": "channel-5",
             "path": "transfer/channel-5/baseXLM"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/F8057955E516D60402EED00C07D17F907CDF40C9BD2C87CBBB2C88EA21442921",
+          "exponent": 0,
+          "aliases": [
+            "sat",
+            "factory/dungeon1wtzjvusmm6r370k0nfwtejywl4qklf7rmhf0ng43tdsqh70cljjqc7gh6q/wbtc"
+          ]
+        },
+        {
+          "denom": "dnbtc",
+          "exponent": 8
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/F8057955E516D60402EED00C07D17F907CDF40C9BD2C87CBBB2C88EA21442921",
+      "name": "Dungeon Bridged Bitcoin",
+      "display": "dnbtc",
+      "symbol": "dnBTC",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "dungeon",
+            "base_denom": "factory/dungeon1wtzjvusmm6r370k0nfwtejywl4qklf7rmhf0ng43tdsqh70cljjqc7gh6q/wbtc",
+            "channel_id": "channel-5305"
+          },
+          "chain": {
+            "channel_id": "channel-101249",
+            "path": "transfer/channel-101249/factory/dungeon1wtzjvusmm6r370k0nfwtejywl4qklf7rmhf0ng43tdsqh70cljjqc7gh6q/wbtc"
           }
         }
       ]
@@ -47334,42 +47405,6 @@
           "chain": {
             "channel_id": "channel-326",
             "path": "transfer/channel-326/stucmdx"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/92BE0ABD01850CD92E1A9FF93AB15EB96D3C691884850ECA171697F1E3C70CF4",
-          "exponent": 0,
-          "aliases": [
-            "microvRISE",
-            "microvrise",
-            "uvrise"
-          ]
-        },
-        {
-          "denom": "vrise",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/92BE0ABD01850CD92E1A9FF93AB15EB96D3C691884850ECA171697F1E3C70CF4",
-      "name": "Sunrise",
-      "display": "vrise",
-      "symbol": "vRISE",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "sunrise",
-            "base_denom": "uvrise",
-            "channel_id": "channel-3"
-          },
-          "chain": {
-            "channel_id": "channel-106275",
-            "path": "transfer/channel-106275/uvrise"
           }
         }
       ]

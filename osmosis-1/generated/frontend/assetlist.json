@@ -21649,6 +21649,8 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
       "preview": false,
       "listingDate": "2025-08-19T18:08:30.019Z",
       "lastDowntimeDate": "2026-08-21T15:13:41.811Z"
@@ -26032,10 +26034,12 @@
       "name": "Stratos",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "listingDate": "2024-10-20T12:00:00.000Z"
+      "listingDate": "2024-10-20T12:00:00.000Z",
+      "lastDowntimeDate": "2026-10-20T15:15:12.076Z"
     },
     {
       "chainName": "axelar",
@@ -53597,6 +53601,57 @@
       ],
       "variantGroupKey": "ibc/B7D7AA538008E2A35328820B7B56F014F1AB38205D51BB13D1F84B11D362B9ED",
       "name": "COREZ",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "coreum",
+      "sourceDenom": "uustx-core1rfxrg75fzuq5hgnnymjgsxj70d9w9cs8xuza7x",
+      "coinMinimalDenom": "ibc/1AED49E348C429D9AAE900DCAB2C697F731AEE2B1AF6BA6D3664D05D55F81793",
+      "symbol": "USTX",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/ustx.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/ustx.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "coreum",
+            "chainId": "coreum-mainnet-1",
+            "sourceDenom": "uustx-core1rfxrg75fzuq5hgnnymjgsxj70d9w9cs8xuza7x",
+            "port": "transfer",
+            "channelId": "channel-2"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-2188",
+            "path": "transfer/channel-2188/uustx-core1rfxrg75fzuq5hgnnymjgsxj70d9w9cs8xuza7x"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "coreum",
+          "sourceDenom": "uustx-core1rfxrg75fzuq5hgnnymjgsxj70d9w9cs8xuza7x",
+          "chainType": "cosmos",
+          "chainId": "coreum-mainnet-1",
+          "symbol": "USTX",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/ustx.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/ustx.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/1AED49E348C429D9AAE900DCAB2C697F731AEE2B1AF6BA6D3664D05D55F81793",
+      "name": "USTX",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

@@ -1866,6 +1866,57 @@
       "preview": false
     },
     {
+      "chainName": "coreumtestnet",
+      "sourceDenom": "uustx-testcore1dy5l3teqsvnwr6reeg9jm6f7mpcr45jy7fqgsr",
+      "coinMinimalDenom": "ibc/785A0F3BECF4C223AC8466C9E1F84C48DFADA8FA78BF6B7B5B1EF88942E552ED",
+      "symbol": "USTX",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/ustx.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/ustx.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "coreumtestnet",
+            "chainId": "coreum-testnet-1",
+            "sourceDenom": "uustx-testcore1dy5l3teqsvnwr6reeg9jm6f7mpcr45jy7fqgsr",
+            "port": "transfer",
+            "channelId": "channel-47"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-7894",
+            "path": "transfer/channel-7894/uustx-testcore1dy5l3teqsvnwr6reeg9jm6f7mpcr45jy7fqgsr"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "coreumtestnet",
+          "sourceDenom": "uustx-testcore1dy5l3teqsvnwr6reeg9jm6f7mpcr45jy7fqgsr",
+          "chainType": "cosmos",
+          "chainId": "coreum-testnet-1",
+          "symbol": "USTX",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/ustx.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/coreum/images/ustx.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/785A0F3BECF4C223AC8466C9E1F84C48DFADA8FA78BF6B7B5B1EF88942E552ED",
+      "name": "USTX",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "doravotatestnet",
       "sourceDenom": "peaka",
       "coinMinimalDenom": "ibc/7AF17F89F81663C5EAF71BA3A538D03AEA47921C95ACD2212FF0ED2383A571FE",

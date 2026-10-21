@@ -27711,10 +27711,12 @@
       "name": "dATOM",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
-      "listingDate": "2024-11-27T10:38:08.547Z"
+      "listingDate": "2024-11-27T10:38:08.547Z",
+      "lastDowntimeDate": "2026-10-21T15:16:43.164Z"
     },
     {
       "chainName": "osmosis",
@@ -58295,6 +58297,108 @@
       ],
       "variantGroupKey": "ibc/24DB48F51D035B58072C5237354740B578B6648BAC78959921163AC98EAC2377",
       "name": "PSTAKE staked XPRT",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "provenance",
+      "sourceDenom": "uylds.fcc",
+      "coinMinimalDenom": "ibc/924A62CC6911726FA8FB7C8605BA91C312FF3FEB305AD6B302B5929C7A6FF7D3",
+      "symbol": "YLDS",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/provenance/images/ylds.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/provenance/images/ylds.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "provenance",
+            "chainId": "pio-mainnet-1",
+            "sourceDenom": "uylds.fcc",
+            "port": "transfer",
+            "channelId": "channel-7"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-222",
+            "path": "transfer/channel-222/uylds.fcc"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "provenance",
+          "sourceDenom": "uylds.fcc",
+          "chainType": "cosmos",
+          "chainId": "pio-mainnet-1",
+          "symbol": "YLDS",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/provenance/images/ylds.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/provenance/images/ylds.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/924A62CC6911726FA8FB7C8605BA91C312FF3FEB305AD6B302B5929C7A6FF7D3",
+      "name": "YLDS",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "provenance",
+      "sourceDenom": "nfgrd",
+      "coinMinimalDenom": "ibc/50963413187B308BB803E08602B6A8ABCB50BA3CF97FD1560F0C34A38C4901C3",
+      "symbol": "FGRS",
+      "decimals": 9,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/provenance/images/fgrs.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/provenance/images/fgrs.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "provenance",
+            "chainId": "pio-mainnet-1",
+            "sourceDenom": "nfgrd",
+            "port": "transfer",
+            "channelId": "channel-7"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-222",
+            "path": "transfer/channel-222/nfgrd"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "provenance",
+          "sourceDenom": "nfgrd",
+          "chainType": "cosmos",
+          "chainId": "pio-mainnet-1",
+          "symbol": "FGRS",
+          "decimals": 9,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/provenance/images/fgrs.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/provenance/images/fgrs.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/50963413187B308BB803E08602B6A8ABCB50BA3CF97FD1560F0C34A38C4901C3",
+      "name": "Figure Technology Solutions Series A Blockchain Common Stock",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

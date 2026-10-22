@@ -54339,6 +54339,42 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/E148CBB509DD277676772C542C1D17FC886719CF74BAD187DE8DCF707D136279",
+          "exponent": 0,
+          "aliases": [
+            "cw20:terra1j9tjp5terr8n209ng8ys68rfrs8x76lrycet5rsc55yultyh9gfqeaa4wq"
+          ]
+        },
+        {
+          "denom": "blame",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/E148CBB509DD277676772C542C1D17FC886719CF74BAD187DE8DCF707D136279",
+      "name": "#blamefrag",
+      "display": "blame",
+      "symbol": "BLAME",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "terra",
+            "base_denom": "cw20:terra1j9tjp5terr8n209ng8ys68rfrs8x76lrycet5rsc55yultyh9gfqeaa4wq",
+            "port": "wasm.terra19pfxzj9580h7rjd6z6sn5x2se76vgrc0etltr79g9z3t82jzp4hq63qguc",
+            "channel_id": "channel-108"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-78488",
+            "path": "transfer/channel-78488/cw20:terra1j9tjp5terr8n209ng8ys68rfrs8x76lrycet5rsc55yultyh9gfqeaa4wq"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/B6663AC8DC3A5A4FF99D6CD1EAB040C176D10FCE7718CD9DB2C227BCA59BCCD7",
           "exponent": 0,
           "aliases": [

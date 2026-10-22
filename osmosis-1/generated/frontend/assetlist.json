@@ -24149,9 +24149,15 @@
       "name": "Penumbra",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "manual",
       "disabled": true,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
       "preview": false,
+      "tooltipMessage": "The IBC connection between Penumbra and Osmosis that this UM uses has expired, so it can't currently be transferred in or out.",
       "listingDate": "2024-07-31T20:00:00.000Z"
     },
     {
@@ -25731,9 +25737,14 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": true,
-      "unstableReason": "market",
+      "unstableReason": "manual",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
       "preview": false,
+      "tooltipMessage": "The Omnity Bridge is offline, so ckBTC can't currently be transferred in or out.",
       "listingDate": "2024-10-04T13:20:00.000Z",
       "lastDowntimeDate": "2026-07-20T15:40:38.247Z"
     },
@@ -28098,9 +28109,15 @@
       "name": "Internet Computer",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "manual",
       "disabled": true,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
       "preview": false,
+      "tooltipMessage": "The Omnity Bridge is offline, so ICP can't currently be transferred in or out.",
       "listingDate": "2024-12-18T19:04:57.225Z"
     },
     {
@@ -28402,9 +28419,14 @@
       "isAlloyed": false,
       "verified": true,
       "unstable": true,
-      "unstableReason": "market",
+      "unstableReason": "manual",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
       "preview": false,
+      "tooltipMessage": "The Omnity Bridge is offline, so ckDOGE can't currently be transferred in or out.",
       "listingDate": "2025-01-01T00:00:00.000Z",
       "lastDowntimeDate": "2026-07-07T15:57:31.445Z"
     },
@@ -29406,7 +29428,7 @@
       "contract": "osmo1mdvn6lmykp2z345ncpf647dztslyll8cyhwj9pltrc0lf7nva3cqvrp6qs",
       "verified": true,
       "unstable": false,
-      "disabled": true,
+      "disabled": false,
       "preview": false
     },
     {
@@ -68233,6 +68255,55 @@
       ],
       "variantGroupKey": "ibc/3B16647EEE058DA677ED944A6798125F4E69E9D24328404C7E213BA0A365D668",
       "name": "cookie",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "terra",
+      "sourceDenom": "cw20:terra1j9tjp5terr8n209ng8ys68rfrs8x76lrycet5rsc55yultyh9gfqeaa4wq",
+      "coinMinimalDenom": "ibc/E148CBB509DD277676772C542C1D17FC886719CF74BAD187DE8DCF707D136279",
+      "symbol": "BLAME",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/blame.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "terra",
+            "chainId": "columbus-5",
+            "sourceDenom": "cw20:terra1j9tjp5terr8n209ng8ys68rfrs8x76lrycet5rsc55yultyh9gfqeaa4wq",
+            "port": "wasm.terra19pfxzj9580h7rjd6z6sn5x2se76vgrc0etltr79g9z3t82jzp4hq63qguc",
+            "channelId": "channel-108"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-78488",
+            "path": "transfer/channel-78488/cw20:terra1j9tjp5terr8n209ng8ys68rfrs8x76lrycet5rsc55yultyh9gfqeaa4wq"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "terra",
+          "sourceDenom": "cw20:terra1j9tjp5terr8n209ng8ys68rfrs8x76lrycet5rsc55yultyh9gfqeaa4wq",
+          "chainType": "cosmos",
+          "chainId": "columbus-5",
+          "symbol": "BLAME",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/blame.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/E148CBB509DD277676772C542C1D17FC886719CF74BAD187DE8DCF707D136279",
+      "name": "#blamefrag",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

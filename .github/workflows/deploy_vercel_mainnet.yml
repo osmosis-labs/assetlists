@@ -14,6 +14,7 @@ on:
       - main
     paths:
       - osmosis-1/generated/frontend/assetlist.json
+      - osmosis-1/generated/frontend/assetlist.compact.json
       - osmosis-1/generated/frontend/chainlist.json
 
 jobs:
@@ -29,7 +30,7 @@ jobs:
         id: check_changes
         run: |
           # Get last commit time for the target files
-          LAST_CHANGE=$(git log -1 --format=%ct --all -- osmosis-1/generated/frontend/assetlist.json osmosis-1/generated/frontend/chainlist.json)
+          LAST_CHANGE=$(git log -1 --format=%ct --all -- osmosis-1/generated/frontend/assetlist.json osmosis-1/generated/frontend/assetlist.compact.json osmosis-1/generated/frontend/chainlist.json)
           CURRENT_TIME=$(date +%s)
           TIME_DIFF=$((CURRENT_TIME - LAST_CHANGE))
 

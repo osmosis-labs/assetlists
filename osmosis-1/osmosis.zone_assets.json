@@ -3260,7 +3260,7 @@
       "categories": [
         "gaming"
       ],
-      "_comment": "XPLA $XPLA"
+      "_comment": "CONX $XPLA"
     },
     {
       "chain_name": "sei",
@@ -6006,7 +6006,7 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Stride Staked ISLM $stISLM",
+      "_comment": "Stride Staked ISLM (Stride) $stISLM.stride",
       "tooltip_message": "Stride has proposed an orderly wind-down of the Stride chain. stTokens can be redeemed on Stride until 12 October 2026. Redemptions then pause while the underlying stake unbonds, and the redemption rate stops increasing. Redemption is expected to resume on Osmosis around 20 November 2026, with no need to bridge back to Stride. stTokens do not expire. Source: https://x.com/stride_zone/status/2104944449503813922"
     },
     {
@@ -6808,7 +6808,11 @@
       "osmosis_verified": true,
       "_comment": "Stratos $STOS",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "axelar",
@@ -13480,7 +13484,7 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Stride Staked ISLM via HAQQ $stISLM.haqq",
+      "_comment": "Stride Staked ISLM (via HAQQ) $stISLM.haqq",
       "tooltip_message": "stISLM that reached Osmosis from HAQQ. As part of Stride's wind-down it redeems for ISLM in its own Osmosis pool, at the same rate as the canonical stISLM; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922"
     }
   ]

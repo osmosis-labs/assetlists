@@ -13298,12 +13298,13 @@
         }
       ],
       "variantGroupKey": "ibc/95C9B5870F95E21A242E6AF9ADCB1F212EE4A8855087226C36FBE43FC41A77B8",
-      "name": "XPLA",
+      "name": "CONX",
       "isAlloyed": false,
       "verified": true,
       "unstable": false,
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "tooltipMessage": "XPLA has rebranded as CONX following a community governance vote. The chain, token and balances are unchanged; only the name and branding have changed. Source: https://x.com/Official_CONX/status/1987779540610097528"
     },
     {
       "chainName": "sei",
@@ -26046,6 +26047,10 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
       "preview": false,
       "listingDate": "2024-10-20T12:00:00.000Z",
       "lastDowntimeDate": "2026-10-20T15:15:12.076Z"
@@ -51170,6 +51175,73 @@
       "lastDowntimeDate": "2026-10-19T15:15:11.377Z"
     },
     {
+      "chainName": "haqq",
+      "sourceDenom": "ibc/B1A035A8CC1CCE2D612CCC2F3CB72B6C9DD951670E81A94AEA0A452995EA9C8C",
+      "coinMinimalDenom": "ibc/5A2F817CDD856A83D06AB7DA6AB7B3C26DACE67CBBA897AB07BA66E249F0063B",
+      "symbol": "stISLM.haqq",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stislm.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stislm.svg"
+      },
+      "coingeckoId": "stride-staked-islm",
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "haqq",
+            "chainId": "haqq_11235-1",
+            "sourceDenom": "ibc/B1A035A8CC1CCE2D612CCC2F3CB72B6C9DD951670E81A94AEA0A452995EA9C8C",
+            "port": "transfer",
+            "channelId": "channel-2"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-1575",
+            "path": "transfer/channel-1575/transfer/channel-7/staISLM"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "haqq",
+          "sourceDenom": "ibc/B1A035A8CC1CCE2D612CCC2F3CB72B6C9DD951670E81A94AEA0A452995EA9C8C",
+          "chainType": "cosmos",
+          "chainId": "haqq_11235-1",
+          "symbol": "stISLM",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stislm.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stislm.svg"
+          }
+        },
+        {
+          "chainName": "stride",
+          "sourceDenom": "staISLM",
+          "chainType": "cosmos",
+          "chainId": "stride-1",
+          "symbol": "stISLM",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stislm.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stislm.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/245C3CA604AAB4BB9EEA5E86F23F52D59253D8722C8FC9C4E3E69F77C5CD3D2F",
+      "name": "Stride Staked ISLM (via HAQQ)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true,
+      "tooltipMessage": "stISLM that reached Osmosis from HAQQ. As part of Stride's wind-down it redeems for ISLM in its own Osmosis pool, at the same rate as the canonical stISLM; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922"
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -56918,6 +56990,104 @@
       ],
       "variantGroupKey": "ibc/57BD7DB23E685F6B0BB9013E51CFB627FBFE9347360137159703E963B179E7C7",
       "name": "ashWIND",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "luxa",
+      "sourceDenom": "uluxa",
+      "coinMinimalDenom": "ibc/8965A5F178427372659F3DD28D1F40770A905038A48DFB5D9C3800A5D81BE5DD",
+      "symbol": "LUXA",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/luxa/images/luxa.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "luxa",
+            "chainId": "luxa-1",
+            "sourceDenom": "uluxa",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-111100",
+            "path": "transfer/channel-111100/uluxa"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "luxa",
+          "sourceDenom": "uluxa",
+          "chainType": "cosmos",
+          "chainId": "luxa-1",
+          "symbol": "LUXA",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/luxa/images/luxa.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/8965A5F178427372659F3DD28D1F40770A905038A48DFB5D9C3800A5D81BE5DD",
+      "name": "LUXA Network",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
+      "chainName": "luxa",
+      "sourceDenom": "ushard",
+      "coinMinimalDenom": "ibc/542571FE2192CC1A704752965330FE63DAE9BA85E1B9E6E9B79912F62E1A2203",
+      "symbol": "SHARD",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/luxa/images/ushard.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "luxa",
+            "chainId": "luxa-1",
+            "sourceDenom": "ushard",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-111100",
+            "path": "transfer/channel-111100/ushard"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "luxa",
+          "sourceDenom": "ushard",
+          "chainType": "cosmos",
+          "chainId": "luxa-1",
+          "symbol": "SHARD",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/luxa/images/ushard.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/542571FE2192CC1A704752965330FE63DAE9BA85E1B9E6E9B79912F62E1A2203",
+      "name": "LUXA Shard",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

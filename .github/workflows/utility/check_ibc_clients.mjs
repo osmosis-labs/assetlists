@@ -252,14 +252,18 @@ async function fetchJSONWithTimeout(url, timeoutMs = COUNTERPARTY_TIMEOUT_MS) {
   }
 }
 
-async function processInBatches(items, batchSize, fn) {
-  const results = [];
-  for (let i = 0; i < items.length; i += batchSize) {
-    const batch = items.slice(i, i + batchSize);
-    const batchResults = await Promise.all(batch.map(fn));
-    results.push(...batchResults);
-    if (i + batchSize < items.length) await sleep(500);
-  }
+// Run fn over items with up to `concurrency` calls in flight, results in item
+// order. A slow call doesn't hold up the others, unlike fixed batches.
+async function processWithPool(items, concurrency, fn) {
+  const results = new Array(items.length);
+  let next = 0;
+  const worker = async () => {
+    while (next < items.length) {
+      const i = next++;
+      results[i] = await fn(items[i]);
+    }
+  };
+  await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, worker));
   return results;
 }
 
@@ -277,23 +281,43 @@ function getSourceChainStatus(chainName) {
 
 // ── IBC client lookup (Osmosis side) ─────────────────────────────────────────
 
-async function getClientStatusForChannel(channelId) {
-  const channelData = await fetchJSON(
-    `${LCD}/ibc/core/channel/v1/channels/${channelId}/ports/transfer`
-  );
-  const connectionId = channelData.channel?.connection_hops?.[0];
-  if (!connectionId) throw new Error(`No connection for ${channelId}`);
+// state.json key caching each Osmosis channel's connection and client. Both
+// are fixed onchain once the channel exists (a channel's connection_hops and
+// a connection's client_id never change), so after the first walk only the
+// client status, the part that changes, is queried.
+const CHANNEL_CLIENTS_STATE_KEY = 'ibcChannelClients';
 
-  const connData = await fetchJSON(
-    `${LCD}/ibc/core/connection/v1/connections/${connectionId}`
-  );
-  const clientId = connData.connection?.client_id;
-  if (!clientId) throw new Error(`No client for ${connectionId}`);
+// clientStatuses memoizes one status request per client per run: several
+// channels can share a connection, and so a client.
+function getClientStatus(clientId, clientStatuses) {
+  if (!clientStatuses.has(clientId)) {
+    clientStatuses.set(
+      clientId,
+      fetchJSON(`${LCD}/ibc/core/client/v1/client_status/${clientId}`).then((d) => d.status)
+    );
+  }
+  return clientStatuses.get(clientId);
+}
 
-  const statusData = await fetchJSON(
-    `${LCD}/ibc/core/client/v1/client_status/${clientId}`
-  );
-  return { channelId, connectionId, clientId, status: statusData.status };
+async function getClientStatusForChannel(channelId, channelClients, clientStatuses) {
+  let { connectionId, clientId } = channelClients[channelId] ?? {};
+  if (!connectionId || !clientId) {
+    const channelData = await fetchJSON(
+      `${LCD}/ibc/core/channel/v1/channels/${channelId}/ports/transfer`
+    );
+    connectionId = channelData.channel?.connection_hops?.[0];
+    if (!connectionId) throw new Error(`No connection for ${channelId}`);
+
+    const connData = await fetchJSON(
+      `${LCD}/ibc/core/connection/v1/connections/${connectionId}`
+    );
+    clientId = connData.connection?.client_id;
+    if (!clientId) throw new Error(`No client for ${connectionId}`);
+    channelClients[channelId] = { connectionId, clientId };
+  }
+
+  const status = await getClientStatus(clientId, clientStatuses);
+  return { channelId, connectionId, clientId, status };
 }
 
 // ── IBC client lookup (counterparty side) ────────────────────────────────────
@@ -618,12 +642,15 @@ async function main() {
   console.log(`Checking IBC client + chain status for ${uniqueChannels.length} channels (${totalAssets} IBC assets)...\n`);
 
   // Phase 1: Osmosis-side IBC client status
-  const ibcResults = await processInBatches(
+  state[CHANNEL_CLIENTS_STATE_KEY] ??= {};
+  const channelClients = state[CHANNEL_CLIENTS_STATE_KEY];
+  const clientStatuses = new Map();
+  const ibcResults = await processWithPool(
     uniqueChannels,
     CONCURRENCY,
     async (channelId) => {
       try {
-        const result = await getClientStatusForChannel(channelId);
+        const result = await getClientStatusForChannel(channelId, channelClients, clientStatuses);
         return { channelId, ...result, error: null };
       } catch (err) {
         return {
@@ -635,6 +662,12 @@ async function main() {
       }
     }
   );
+
+  // Drop cached paths for channels no listed asset uses any more.
+  const listedChannels = new Set(uniqueChannels);
+  for (const channelId of Object.keys(channelClients)) {
+    if (!listedChannels.has(channelId)) delete channelClients[channelId];
+  }
 
   // Hard-fail when the LCD is essentially unusable. If ≥ 90% of channel
   // lookups errored, we can't tell anything from this run and writing a
@@ -721,7 +754,7 @@ async function main() {
   if (cpCheckNeeded.size > 0) {
     console.log(`Checking counterparty IBC client for ${cpCheckNeeded.size} counterparty path(s)${weekly ? ' (weekly sweep)' : ''}...\n`);
     const deadEndpoints = new Set();
-    const cpResults = await processInBatches(
+    const cpResults = await processWithPool(
       [...cpCheckNeeded.entries()],
       weekly ? CP_SWEEP_CONCURRENCY : CONCURRENCY,
       async ([key, cp]) => {

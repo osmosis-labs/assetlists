@@ -11344,7 +11344,7 @@
       ],
       "type_asset": "ics20",
       "base": "ibc/95C9B5870F95E21A242E6AF9ADCB1F212EE4A8855087226C36FBE43FC41A77B8",
-      "name": "XPLA",
+      "name": "CONX",
       "display": "xpla",
       "symbol": "XPLA",
       "traces": [
@@ -41799,6 +41799,41 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/5A2F817CDD856A83D06AB7DA6AB7B3C26DACE67CBBA897AB07BA66E249F0063B",
+          "exponent": 0,
+          "aliases": [
+            "ibc/B1A035A8CC1CCE2D612CCC2F3CB72B6C9DD951670E81A94AEA0A452995EA9C8C"
+          ]
+        },
+        {
+          "denom": "stISLM",
+          "exponent": 18
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/5A2F817CDD856A83D06AB7DA6AB7B3C26DACE67CBBA897AB07BA66E249F0063B",
+      "name": "Stride Staked ISLM (via HAQQ)",
+      "display": "stISLM",
+      "symbol": "stISLM",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "haqq",
+            "base_denom": "ibc/B1A035A8CC1CCE2D612CCC2F3CB72B6C9DD951670E81A94AEA0A452995EA9C8C",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-1575",
+            "path": "transfer/channel-1575/transfer/channel-7/staISLM"
+          }
+        }
+      ],
+      "coingecko_id": "stride-staked-islm"
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
           "exponent": 0,
           "aliases": [
@@ -45935,6 +45970,78 @@
           "chain": {
             "channel_id": "channel-42",
             "path": "transfer/channel-42/factory/juno16uprl38e4ljj5ctuha9ehpvp2l93z3d5jmwj2cttt6jkhlrhscpqgglalk/wind.ash"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/8965A5F178427372659F3DD28D1F40770A905038A48DFB5D9C3800A5D81BE5DD",
+          "exponent": 0,
+          "aliases": [
+            "uluxa"
+          ]
+        },
+        {
+          "denom": "LUXA",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/8965A5F178427372659F3DD28D1F40770A905038A48DFB5D9C3800A5D81BE5DD",
+      "name": "LUXA Network",
+      "display": "LUXA",
+      "symbol": "LUXA",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "luxa",
+            "base_denom": "uluxa",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-111100",
+            "path": "transfer/channel-111100/uluxa"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/542571FE2192CC1A704752965330FE63DAE9BA85E1B9E6E9B79912F62E1A2203",
+          "exponent": 0,
+          "aliases": [
+            "ushard"
+          ]
+        },
+        {
+          "denom": "SHARD",
+          "exponent": 6,
+          "aliases": [
+            "shard",
+            "shards"
+          ]
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/542571FE2192CC1A704752965330FE63DAE9BA85E1B9E6E9B79912F62E1A2203",
+      "name": "LUXA Shard",
+      "display": "SHARD",
+      "symbol": "SHARD",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "luxa",
+            "base_denom": "ushard",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-111100",
+            "path": "transfer/channel-111100/ushard"
           }
         }
       ]
@@ -54332,6 +54439,42 @@
             "port": "transfer",
             "channel_id": "channel-78488",
             "path": "transfer/channel-78488/cw20:terra15p8su45k45axng8ue59rl6zph4at27s49u3agr6uqrx3dhcxpg3qt0ekdt"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
+          "denom": "ibc/E148CBB509DD277676772C542C1D17FC886719CF74BAD187DE8DCF707D136279",
+          "exponent": 0,
+          "aliases": [
+            "cw20:terra1j9tjp5terr8n209ng8ys68rfrs8x76lrycet5rsc55yultyh9gfqeaa4wq"
+          ]
+        },
+        {
+          "denom": "blame",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/E148CBB509DD277676772C542C1D17FC886719CF74BAD187DE8DCF707D136279",
+      "name": "#blamefrag",
+      "display": "blame",
+      "symbol": "BLAME",
+      "traces": [
+        {
+          "type": "ibc-cw20",
+          "counterparty": {
+            "chain_name": "terra",
+            "base_denom": "cw20:terra1j9tjp5terr8n209ng8ys68rfrs8x76lrycet5rsc55yultyh9gfqeaa4wq",
+            "port": "wasm.terra19pfxzj9580h7rjd6z6sn5x2se76vgrc0etltr79g9z3t82jzp4hq63qguc",
+            "channel_id": "channel-108"
+          },
+          "chain": {
+            "port": "transfer",
+            "channel_id": "channel-78488",
+            "path": "transfer/channel-78488/cw20:terra1j9tjp5terr8n209ng8ys68rfrs8x76lrycet5rsc55yultyh9gfqeaa4wq"
           }
         }
       ]

@@ -3260,7 +3260,9 @@
       "categories": [
         "gaming"
       ],
-      "_comment": "XPLA $XPLA"
+      "_comment": "CONX $XPLA",
+      "tooltip_message": "XPLA has rebranded as CONX following a community governance vote. The chain, token and balances are unchanged; only the name and branding have changed. Source: https://x.com/Official_CONX/status/1987779540610097528",
+      "tooltip_expiry_date": "2027-01-26"
     },
     {
       "chain_name": "sei",
@@ -4984,9 +4986,7 @@
       "_comment": "Cosmos Airdrop Chat $CAC",
       "categories": [
         "meme"
-      ],
-      "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      ]
     },
     {
       "chain_name": "neutron",
@@ -6810,7 +6810,11 @@
       "osmosis_verified": true,
       "_comment": "Stratos $STOS",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "axelar",
@@ -13464,6 +13468,22 @@
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "manual",
       "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
+    },
+    {
+      "chain_name": "haqq",
+      "base_denom": "ibc/B1A035A8CC1CCE2D612CCC2F3CB72B6C9DD951670E81A94AEA0A452995EA9C8C",
+      "path": "transfer/channel-1575/transfer/channel-7/staISLM",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "override_properties": {
+        "symbol": "stISLM.haqq",
+        "name": "Stride Staked ISLM (via HAQQ)"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "_comment": "Stride Staked ISLM (via HAQQ) $stISLM.haqq",
+      "tooltip_message": "stISLM that reached Osmosis from HAQQ. As part of Stride's wind-down it redeems for ISLM in its own Osmosis pool, at the same rate as the canonical stISLM; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922"
     },
     {
       "chain_name": "cosmoshub",

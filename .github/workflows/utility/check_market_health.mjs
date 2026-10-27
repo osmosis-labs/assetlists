@@ -44,6 +44,8 @@ import {
   loadJSON,
   materialiseStateAsset,
   resolveMarket,
+  writeFileAtomic,
+  writeLifecycleState,
 } from './lifecycle_helpers.mjs';
 
 const LOW_LIQUIDITY_USD = 1000;        // matches MIN_LIQUIDITY_USD elsewhere
@@ -350,12 +352,12 @@ async function main() {
   const zoneChanged = JSON.stringify(zoneData) !== zoneBefore;
   const stateChanged = JSON.stringify(state) !== stateBefore;
   if (zoneChanged) {
-    fs.writeFileSync(zoneAssetsPath, JSON.stringify(zoneData, null, 2) + '\n', 'utf8');
+    writeFileAtomic(zoneAssetsPath, JSON.stringify(zoneData, null, 2) + '\n');
     console.log(`✓ Updated ${zoneAssetsPath}`);
   }
   if (stateChanged) {
     fs.mkdirSync(path.dirname(statePath), { recursive: true });
-    fs.writeFileSync(statePath, JSON.stringify(state, null, 2) + '\n', 'utf8');
+    writeLifecycleState(statePath, state);
     console.log(`✓ Updated ${statePath}`);
   }
   if (!zoneChanged && !stateChanged) {

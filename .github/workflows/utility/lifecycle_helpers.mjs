@@ -384,6 +384,35 @@ export function loadJSON(p, fallback) {
   }
 }
 
+/**
+ * Write via a temp file and rename, so a concurrent reader never sees a
+ * half-written file. Endpoint validation runs in the background alongside the
+ * lifecycle steps and reads zone_assets, zone_chains and state.json.
+ */
+export function writeFileAtomic(p, content) {
+  const tmp = `${p}.${process.pid}.tmp`;
+  fs.writeFileSync(tmp, content, 'utf8');
+  fs.renameSync(tmp, p);
+}
+
+// state.json keys owned by endpoint validation (validateEndpoints.mjs).
+export const VALIDATION_STATE_KEYS = ['chains', 'lastValidationRun'];
+
+/**
+ * Write state.json from a lifecycle script, keeping whatever endpoint
+ * validation has written to its own keys since this script loaded the file.
+ * Validation runs concurrently and writes only VALIDATION_STATE_KEYS, so
+ * writing the in-memory copy whole would discard that run's results.
+ */
+export function writeLifecycleState(statePath, state) {
+  const current = loadJSON(statePath, {});
+  const merged = { ...state };
+  for (const key of VALIDATION_STATE_KEYS) {
+    if (key in current) merged[key] = current[key];
+  }
+  writeFileAtomic(statePath, JSON.stringify(merged, null, 2) + '\n');
+}
+
 // ── State helpers (cron-lifecycle semantics) ────────────────────────────────
 
 /**

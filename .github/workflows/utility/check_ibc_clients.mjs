@@ -56,6 +56,8 @@ import {
   findStateAsset,
   materialiseStateAsset,
   canClearRecoveredIbcUnstable,
+  writeFileAtomic,
+  writeLifecycleState,
 } from './lifecycle_helpers.mjs';
 
 const DEFAULT_LCD = "https://lcd.osmosis.zone";
@@ -1174,12 +1176,12 @@ async function main() {
   // the Active-reading reset in the bridge-up path.
   const cpStreaksChanged = JSON.stringify(cpStreaks) !== cpStreaksBefore;
   if (zoneChanged) {
-    fs.writeFileSync(zoneAssetsPath, JSON.stringify(zoneData, null, 2) + '\n', 'utf8');
+    writeFileAtomic(zoneAssetsPath, JSON.stringify(zoneData, null, 2) + '\n');
     console.log(`✓ Updated ${zoneAssetsPath}`);
   }
   if (stateChanged) {
     fs.mkdirSync(path.dirname(statePath), { recursive: true });
-    fs.writeFileSync(statePath, JSON.stringify(state, null, 2) + '\n', 'utf8');
+    writeLifecycleState(statePath, state);
     console.log(`✓ Updated ${statePath}`);
   }
   if (cpStreaksChanged) {

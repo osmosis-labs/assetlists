@@ -229,6 +229,17 @@ function isRegroupedSourceNumber(token, normalizedTranslation, ranges) {
 }
 
 export function validateTranslation(sourceText, translatedText) {
+  // Loose bounds only: CJK translations legitimately compress well below 1/10
+  // of the English length, and Indic scripts expand. This catches injected
+  // essays and truncated junk, not normal variation. Checked first so an
+  // oversized response can't make the regex scans below expensive.
+  if (
+    translatedText.length >
+      Math.max(sourceText.length * 4, sourceText.length + 200) ||
+    translatedText.length < sourceText.length * 0.05
+  ) {
+    return `implausible length (${translatedText.length} chars vs ${sourceText.length} source)`;
+  }
   if (/<[a-zA-Z/][^>]*>/.test(translatedText)) {
     return "contains markup";
   }
@@ -237,17 +248,6 @@ export function validateTranslation(sourceText, translatedText) {
   }
   if (/\]\s*\(/.test(translatedText) && !/\]\s*\(/.test(sourceText)) {
     return "contains Markdown link syntax";
-  }
-  // Loose bounds only: CJK translations legitimately compress well below 1/10
-  // of the English length, and Indic scripts expand. This catches injected
-  // essays and truncated junk, not normal variation. Checked before the link
-  // scans so an oversized response can't make them expensive.
-  if (
-    translatedText.length >
-      Math.max(sourceText.length * 4, sourceText.length + 200) ||
-    translatedText.length < sourceText.length * 0.05
-  ) {
-    return `implausible length (${translatedText.length} chars vs ${sourceText.length} source)`;
   }
   const sourceLinks = new Set(extractLinkTokens(sourceText));
   // Same unicode-dot normalization as extractLinkTokens.

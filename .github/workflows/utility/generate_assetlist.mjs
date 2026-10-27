@@ -4,6 +4,7 @@
 //-- Imports --
 
 import * as chain_reg from "../../../chain-registry/.github/workflows/utility/chain_registry.mjs";
+import * as chain_reg_cache from "./chain_registry_cache.mjs";
 chain_reg.setup();
 import * as zone from "./assetlist_functions.mjs";
 import * as assetlist from "./generate_assetlist_functions.mjs";
@@ -60,7 +61,7 @@ import * as symbolDedup from "./deduplicate_symbols.mjs";
 async function getAssetsFromChainRegistry(localChainName, asset_datas) {
 
   //get network_type (mainnet vs testnet)
-  const localNetworkType = chain_reg.getFileProperty(localChainName, "chain", "network_type");
+  const localNetworkType = chain_reg_cache.getFileProperty(localChainName, "chain", "network_type");
   if (localNetworkType !== "mainnet" && localNetworkType !== "testnet" && localNetworkType !== "devnet") return;
 
   //try each chain of that network_type
@@ -70,10 +71,10 @@ async function getAssetsFromChainRegistry(localChainName, asset_datas) {
 
     if (chainName === localChainName) return; //we'll check assets under this chain separately
 
-    const networkType = chain_reg.getFileProperty(chainName, "chain", "network_type");
+    const networkType = chain_reg_cache.getFileProperty(chainName, "chain", "network_type");
     if (networkType !== localNetworkType) return; // must match the local chain's network type
 
-    const chainType = chain_reg.getFileProperty(chainName, "chain", "chain_type");
+    const chainType = chain_reg_cache.getFileProperty(chainName, "chain", "chain_type");
     if (chainType !== "cosmos") return; // must be a cosmos chain
 
     // Checkpoint: the chain now qualifies, but we still need to check that there exists an ibc connection
@@ -105,7 +106,7 @@ async function getAssetsFromChainRegistry(localChainName, asset_datas) {
     // Checkpoint: now that we know there exists an ibc connection, we can iterate the assets
 
     //get the chain's assets
-    const assets = chain_reg.getFileProperty(chainName, "assetlist", "assets") || [];
+    const assets = chain_reg_cache.getFileProperty(chainName, "assetlist", "assets") || [];
 
     //iterate the assets
     await zone.asyncForEach(assets, async (asset) => {
@@ -188,7 +189,7 @@ async function getAssetsFromChainRegistry(localChainName, asset_datas) {
 // that aren't already present in asset_datas (from osmosis.zone_assets.json).
 async function getLocalChainAssetsFromChainRegistry(localChainName, asset_datas) {
 
-  const assets = chain_reg.getFileProperty(localChainName, "assetlist", "assets") || [];
+  const assets = chain_reg_cache.getFileProperty(localChainName, "assetlist", "assets") || [];
 
   await zone.asyncForEach(assets, async (asset) => {
 
@@ -277,7 +278,7 @@ const generateAssets = async (
     assetlist.setSourceAsset(asset_data);
 
     //make sure it exists
-    if (!chain_reg.getAssetProperty(asset_data.source_asset.chain_name, asset_data.source_asset.base_denom, "base")) {
+    if (!chain_reg_cache.getAssetProperty(asset_data.source_asset.chain_name, asset_data.source_asset.base_denom, "base")) {
       console.log(`Asset does not exist! ${asset_data.source_asset.chain_name}, ${asset_data.source_asset.base_denom}`);
       return;
     }

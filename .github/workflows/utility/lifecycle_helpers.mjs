@@ -398,38 +398,68 @@ export function writeFileAtomic(p, content) {
 // state.json keys owned by endpoint validation (validateEndpoints.mjs).
 export const VALIDATION_STATE_KEYS = ['chains', 'lastValidationRun'];
 
-const STATE_LOCK_STALE_MS = 60000;
+// A lock directory with no owner file is one whose creator died between mkdir
+// and writing the owner; only that case falls back to an age-based takeover.
+const STATE_LOCK_UNOWNED_STALE_MS = 60000;
 const STATE_LOCK_POLL_MS = 50;
+
+const isProcessAlive = (pid) => {
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch (err) {
+    return err.code === 'EPERM';
+  }
+};
+
+const readLockOwner = (lockDir) => {
+  try {
+    return JSON.parse(fs.readFileSync(`${lockDir}/owner`, 'utf8'));
+  } catch {
+    return null;
+  }
+};
 
 /**
  * Run fn while holding an exclusive lock on statePath, so one process's
  * read-merge-write can't interleave with another's (each would otherwise
  * re-read, then rename over the other's update). mkdir is atomic across
- * processes. The lock is only held for a synchronous read and write, so one
- * older than STATE_LOCK_STALE_MS was left by a killed process and is taken over.
+ * processes, and the writers all run on the same runner, so a lock is taken
+ * over only when its owner process has exited, and released only by its owner.
  */
 export function withStateLock(statePath, fn) {
   const lockDir = `${statePath}.lock`;
+  const token = `${process.pid}-${Date.now()}-${Math.random()}`;
   const sleeper = new Int32Array(new SharedArrayBuffer(4));
   for (;;) {
     try {
       fs.mkdirSync(lockDir);
+      fs.writeFileSync(`${lockDir}/owner`, JSON.stringify({ pid: process.pid, token }));
       break;
     } catch (err) {
       if (err.code !== 'EEXIST') throw err;
-      try {
-        if (Date.now() - fs.statSync(lockDir).mtimeMs > STATE_LOCK_STALE_MS) {
-          fs.rmSync(lockDir, { recursive: true, force: true });
-          continue;
-        }
-      } catch { /* lock released between mkdir and stat: retry */ }
+      const owner = readLockOwner(lockDir);
+      let abandoned = false;
+      if (owner) {
+        abandoned = !isProcessAlive(owner.pid);
+      } else {
+        try {
+          abandoned = Date.now() - fs.statSync(lockDir).mtimeMs > STATE_LOCK_UNOWNED_STALE_MS;
+        } catch { /* lock released meanwhile: retry */ }
+      }
+      if (abandoned && JSON.stringify(readLockOwner(lockDir)) === JSON.stringify(owner)) {
+        fs.rmSync(lockDir, { recursive: true, force: true });
+        continue;
+      }
       Atomics.wait(sleeper, 0, 0, STATE_LOCK_POLL_MS);
     }
   }
   try {
     return fn();
   } finally {
-    fs.rmSync(lockDir, { recursive: true, force: true });
+    if (readLockOwner(lockDir)?.token === token) {
+      fs.rmSync(lockDir, { recursive: true, force: true });
+    }
   }
 }
 

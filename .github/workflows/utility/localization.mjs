@@ -225,6 +225,18 @@ export function getLocalizationOutput() {
 
 export function getAssetDetail(chainName, asset_base) {
 
+  // A newly listed asset has no asset_detail file until this run writes one.
+  // readFromFile would log the ENOENT with a full stack trace and then return
+  // the error (handled below), so check first and skip the noise.
+  const location = zone.getFileLocation(
+    chainName,
+    zone.zoneAssetDetail,
+    getAssetDetailFileName(asset_base)
+  );
+  if (!fs.existsSync(location)) {
+    return {};
+  }
+
   let asset_detail = zone.readFromFile(
     chainName,
     zone.zoneAssetDetail,

@@ -185,6 +185,24 @@ function extractLinkTokens(text) {
   ];
   return tokens.map((token) => canonicalizeUrl(trimUrlToken(token)));
 }
+// Many locales group thousands with dots (de, es, pt-br, ro, tr), so a source
+// "1,000,000,000" correctly becomes "1.000.000.000", which IP_PATTERN reads as
+// an added IP and rejects every run. Before link tokens are extracted, a
+// dot-grouped number is blanked out only when it is grouped in exact
+// thousands AND its digits are a number in the source, so a translation can
+// regroup the source's numbers but not introduce an IP.
+const DOT_GROUPED_NUMBER_PATTERN = /(?<![\d.])\d{1,3}(?:\.\d{3})+(?![\d.]*\d)/g;
+const SOURCE_NUMBER_PATTERN = /\d{1,3}(?:[,.\s  ']\d{3})+|\d+/g;
+
+function stripRegroupedSourceNumbers(sourceText, translatedText) {
+  const sourceDigits = new Set(
+    (sourceText.match(SOURCE_NUMBER_PATTERN) ?? []).map((n) => n.replace(/\D/g, ""))
+  );
+  return translatedText.replace(DOT_GROUPED_NUMBER_PATTERN, (number) =>
+    sourceDigits.has(number.replace(/\./g, "")) ? " " : number
+  );
+}
+
 export function validateTranslation(sourceText, translatedText) {
   if (/<[a-zA-Z/][^>]*>/.test(translatedText)) {
     return "contains markup";
@@ -196,7 +214,8 @@ export function validateTranslation(sourceText, translatedText) {
     return "contains Markdown link syntax";
   }
   const sourceLinks = new Set(extractLinkTokens(sourceText));
-  for (const token of extractLinkTokens(translatedText)) {
+  const translatedForLinks = stripRegroupedSourceNumbers(sourceText, translatedText);
+  for (const token of extractLinkTokens(translatedForLinks)) {
     if (!sourceLinks.has(token)) {
       return `adds link-like token "${token}"`;
     }

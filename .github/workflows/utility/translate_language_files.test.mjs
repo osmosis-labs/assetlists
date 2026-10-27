@@ -172,3 +172,31 @@ test("markdown destination swap is rejected even when source has markdown", () =
     undefined
   );
 });
+
+test("dot-grouped thousands allowed only for numbers in the source", () => {
+  const numSrc = "Total supply is 1,000,000,000 tokens, with 2,500,000,000,000 reserved.";
+  // de/es/pt-br/ro/tr group thousands with dots; these looked like IPs.
+  assert.equal(
+    validateTranslation(numSrc, "Das Gesamtangebot beträgt 1.000.000.000 Token."),
+    undefined
+  );
+  assert.equal(
+    validateTranslation(numSrc, "Reservados 2.500.000.000.000 tokens."),
+    undefined
+  );
+  // A dot-grouped number that isn't in the source still reads as an IP.
+  assert.notEqual(
+    validateTranslation(numSrc, "Das Gesamtangebot beträgt 203.000.113.007 Token."),
+    undefined
+  );
+  // A real IP stays rejected even next to a regrouped source number.
+  assert.notEqual(
+    validateTranslation(numSrc, "1.000.000.000 Token, siehe 203.0.113.7"),
+    undefined
+  );
+  // Without the number in the source, the regrouped form is rejected.
+  assert.notEqual(
+    validateTranslation(SRC, "Das Gesamtangebot beträgt 1.000.000.000 Token."),
+    undefined
+  );
+});

@@ -3260,7 +3260,9 @@
       "categories": [
         "gaming"
       ],
-      "_comment": "XPLA $XPLA"
+      "_comment": "CONX $XPLA",
+      "tooltip_message": "XPLA has rebranded as CONX following a community governance vote. The chain, token and balances are unchanged; only the name and branding have changed. Source: https://x.com/Official_CONX/status/1987779540610097528",
+      "tooltip_expiry_date": "2027-01-26"
     },
     {
       "chain_name": "sei",
@@ -4984,9 +4986,7 @@
       "_comment": "Cosmos Airdrop Chat $CAC",
       "categories": [
         "meme"
-      ],
-      "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      ]
     },
     {
       "chain_name": "neutron",
@@ -6810,7 +6810,11 @@
       "osmosis_verified": true,
       "_comment": "Stratos $STOS",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "axelar",
@@ -13466,15 +13470,139 @@
       "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
     },
     {
+      "chain_name": "haqq",
+      "base_denom": "ibc/B1A035A8CC1CCE2D612CCC2F3CB72B6C9DD951670E81A94AEA0A452995EA9C8C",
+      "path": "transfer/channel-1575/transfer/channel-7/staISLM",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "override_properties": {
+        "symbol": "stISLM.haqq",
+        "name": "Stride Staked ISLM (via HAQQ)"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "_comment": "Stride Staked ISLM (via HAQQ) $stISLM.haqq",
+      "tooltip_message": "stISLM that reached Osmosis from HAQQ. As part of Stride's wind-down it redeems for ISLM in its own Osmosis pool, at the same rate as the canonical stISLM; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922"
+    },
+    {
+      "chain_name": "cosmoshub",
+      "base_denom": "ibc/17DABEBAC71C388DA064A3D54FB7E68BAF0687965EC39DEADA1FB78C0F1447E6",
+      "path": "transfer/channel-0/transfer/channel-391/stutia",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "override_properties": {
+        "symbol": "stTIA.cosmoshub",
+        "name": "Stride Staked TIA (via Cosmos Hub)"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "_comment": "Stride Staked TIA via Cosmos Hub $stTIA.cosmoshub",
+      "tooltip_message": "stTIA that reached Osmosis from Cosmos Hub. As part of Stride's wind-down it redeems for TIA in its own Osmosis pool, at the same rate as the canonical stTIA; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922"
+    },
+    {
+      "chain_name": "neutron",
+      "base_denom": "ibc/6569E05DEE32B339D9286A52BE33DFCEFC97267F23EF9CFDE0C055140967A9A5",
+      "path": "transfer/channel-874/transfer/channel-8/stutia",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "override_properties": {
+        "symbol": "stTIA.neutron",
+        "name": "Stride Staked TIA (via Neutron)"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "_comment": "Stride Staked TIA via Neutron $stTIA.neutron",
+      "tooltip_message": "stTIA that reached Osmosis from Neutron. As part of Stride's wind-down it redeems for TIA in its own Osmosis pool, at the same rate as the canonical stTIA; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922"
+    },
+    {
+      "chain_name": "agoric",
+      "base_denom": "ibc/4BFBA0996893D2049913D24060BE5936EF8AAF2C89E08B91BCCCA2B8DE3BA241",
+      "path": "transfer/channel-320/transfer/channel-59/stutia",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "override_properties": {
+        "symbol": "stTIA.agoric",
+        "name": "Stride Staked TIA (via Agoric)"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "_comment": "Stride Staked TIA via Agoric $stTIA.agoric",
+      "tooltip_message": "stTIA that reached Osmosis from Agoric. As part of Stride's wind-down it redeems for TIA in its own Osmosis pool, at the same rate as the canonical stTIA; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922"
+    },
+    {
+      "chain_name": "celestia",
+      "base_denom": "ibc/EADAE1AEE456C91C72D4FD4F8C3103C287909BF2929B4CE7A1B5123EA9B85AEA",
+      "path": "transfer/channel-6994/transfer/channel-4/stutia",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "override_properties": {
+        "symbol": "stTIA.celestia",
+        "name": "Stride Staked TIA (via Celestia)"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "_comment": "Stride Staked TIA via Celestia $stTIA.celestia",
+      "tooltip_message": "stTIA that reached Osmosis from Celestia. As part of Stride's wind-down it redeems for TIA in its own Osmosis pool, at the same rate as the canonical stTIA; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922"
+    },
+    {
+      "chain_name": "dymension",
+      "base_denom": "ibc/F46BA5EDCA6DAA5F7EFD3838430E03647CDC786BB1B89BC9FDD1CBE16B099645",
+      "path": "transfer/channel-19774/transfer/channel-0/stutia",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "override_properties": {
+        "symbol": "stTIA.dymension",
+        "name": "Stride Staked TIA (via Dymension)"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "_comment": "Stride Staked TIA via Dymension $stTIA.dymension",
+      "tooltip_message": "stTIA that reached Osmosis from Dymension. As part of Stride's wind-down it redeems for TIA in its own Osmosis pool, at the same rate as the canonical stTIA; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922"
+    },
+    {
+      "chain_name": "cosmoshub",
+      "base_denom": "ibc/054892D6BB43AF8B93AAC28AA5FD7019D2C59A15DAFD6F45C1FA2BF9BDA22454",
+      "path": "transfer/channel-0/transfer/channel-391/stuosmo",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "override_properties": {
+        "symbol": "stOSMO.cosmoshub",
+        "name": "Stride Staked OSMO (via Cosmos Hub)"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "_comment": "Stride Staked OSMO via Cosmos Hub $stOSMO.cosmoshub",
+      "tooltip_message": "stOSMO that reached Osmosis from Cosmos Hub. As part of Stride's wind-down it redeems for OSMO in its own Osmosis pool, at the same rate as the canonical stOSMO; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922"
+    },
+    {
+      "chain_name": "secretnetwork",
+      "base_denom": "ibc/B0988C39E7418C644FDFD41682A59D22DCAD1BCC7A6429B2EAAA195FB726A2D7",
+      "path": "transfer/channel-88/transfer/channel-37/stuosmo",
+      "osmosis_verified": false,
+      "osmosis_unlisted": true,
+      "override_properties": {
+        "symbol": "stOSMO.secret",
+        "name": "Stride Staked OSMO (via Secret Network)"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "_comment": "Stride Staked OSMO via Secret Network $stOSMO.secret",
+      "tooltip_message": "stOSMO that reached Osmosis from Secret Network. As part of Stride's wind-down it redeems for OSMO in its own Osmosis pool, at the same rate as the canonical stOSMO; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922"
+    },
+    {
       "chain_name": "cosmoshub",
       "base_denom": "ibc/B05539B66B72E2739B986B86391E5D08F12B8D5D2C2A7F8F8CF9ADF674DFA231",
       "path": "transfer/channel-0/transfer/channel-391/stuatom",
       "osmosis_verified": false,
       "osmosis_unlisted": true,
-      "canonical": {
-        "chain_name": "stride",
-        "base_denom": "stuatom"
-      },
       "override_properties": {
         "symbol": "stATOM.cosmoshub",
         "name": "Stride Staked ATOM (via Cosmos Hub)"
@@ -13491,10 +13619,6 @@
       "path": "transfer/channel-122/transfer/channel-89/stuatom",
       "osmosis_verified": false,
       "osmosis_unlisted": true,
-      "canonical": {
-        "chain_name": "stride",
-        "base_denom": "stuatom"
-      },
       "override_properties": {
         "symbol": "stATOM.injective",
         "name": "Stride Staked ATOM (via Injective)"
@@ -13511,10 +13635,6 @@
       "path": "transfer/channel-88/transfer/channel-37/stuatom",
       "osmosis_verified": false,
       "osmosis_unlisted": true,
-      "canonical": {
-        "chain_name": "stride",
-        "base_denom": "stuatom"
-      },
       "override_properties": {
         "symbol": "stATOM.secret",
         "name": "Stride Staked ATOM (via Secret Network)"
@@ -13531,10 +13651,6 @@
       "path": "transfer/channel-251/transfer/channel-46/stuatom",
       "osmosis_verified": false,
       "osmosis_unlisted": true,
-      "canonical": {
-        "chain_name": "stride",
-        "base_denom": "stuatom"
-      },
       "override_properties": {
         "symbol": "stATOM.terra",
         "name": "Stride Staked ATOM (via Terra)"
@@ -13551,10 +13667,6 @@
       "path": "transfer/channel-874/transfer/channel-8/stuatom",
       "osmosis_verified": false,
       "osmosis_unlisted": true,
-      "canonical": {
-        "chain_name": "stride",
-        "base_denom": "stuatom"
-      },
       "override_properties": {
         "symbol": "stATOM.neutron",
         "name": "Stride Staked ATOM (via Neutron)"
@@ -13571,10 +13683,6 @@
       "path": "transfer/channel-320/transfer/channel-59/stuatom",
       "osmosis_verified": false,
       "osmosis_unlisted": true,
-      "canonical": {
-        "chain_name": "stride",
-        "base_denom": "stuatom"
-      },
       "override_properties": {
         "symbol": "stATOM.agoric",
         "name": "Stride Staked ATOM (via Agoric)"
@@ -13591,10 +13699,6 @@
       "path": "transfer/channel-0/transfer/channel-391/stadydx",
       "osmosis_verified": false,
       "osmosis_unlisted": true,
-      "canonical": {
-        "chain_name": "stride",
-        "base_denom": "stadydx"
-      },
       "override_properties": {
         "symbol": "stDYDX.cosmoshub",
         "name": "Stride Staked DYDX (via Cosmos Hub)"
@@ -13611,10 +13715,6 @@
       "path": "transfer/channel-0/transfer/channel-391/stinj",
       "osmosis_verified": false,
       "osmosis_unlisted": true,
-      "canonical": {
-        "chain_name": "stride",
-        "base_denom": "stinj"
-      },
       "override_properties": {
         "symbol": "stINJ.cosmoshub",
         "name": "Stride Staked INJ (via Cosmos Hub)"
@@ -13631,10 +13731,6 @@
       "path": "transfer/channel-122/transfer/channel-89/stinj",
       "osmosis_verified": false,
       "osmosis_unlisted": true,
-      "canonical": {
-        "chain_name": "stride",
-        "base_denom": "stinj"
-      },
       "override_properties": {
         "symbol": "stINJ.injective",
         "name": "Stride Staked INJ (via Injective)"
@@ -13651,10 +13747,6 @@
       "path": "transfer/channel-88/transfer/channel-37/stinj",
       "osmosis_verified": false,
       "osmosis_unlisted": true,
-      "canonical": {
-        "chain_name": "stride",
-        "base_denom": "stinj"
-      },
       "override_properties": {
         "symbol": "stINJ.secret",
         "name": "Stride Staked INJ (via Secret Network)"
@@ -13671,10 +13763,6 @@
       "path": "transfer/channel-0/transfer/channel-391/stuband",
       "osmosis_verified": false,
       "osmosis_unlisted": true,
-      "canonical": {
-        "chain_name": "stride",
-        "base_denom": "stuband"
-      },
       "override_properties": {
         "symbol": "stBAND.cosmoshub",
         "name": "Stride Staked BAND (via Cosmos Hub)"
@@ -13691,10 +13779,6 @@
       "path": "transfer/channel-251/transfer/channel-46/stuluna",
       "osmosis_verified": false,
       "osmosis_unlisted": true,
-      "canonical": {
-        "chain_name": "stride",
-        "base_denom": "stuluna"
-      },
       "override_properties": {
         "symbol": "stLUNA.terra",
         "name": "Stride Staked LUNA (via Terra)"

@@ -189,24 +189,25 @@ function extractLinkTokens(text) {
 // "1,000,000,000" correctly becomes "1.000.000.000", which IP_PATTERN reads as
 // an added IP and rejects every run. The text is never edited before link
 // extraction (that hid URLs, hosts and Markdown destinations built around the
-// number). Instead, a token missing from the source is exempt only when it is
-// purely digits and dots, is not a Markdown destination, and EVERY place it
-// occurs lies inside a standalone dot-grouped number whose digits are a
-// number in the source. Standalone is strict: it starts at the start of the
-// text or after whitespace, optionally behind one opening bracket or quote
-// that itself follows whitespace, and ends the same way (optionally one
-// closing bracket or quote, then optionally one sentence punctuation mark,
-// then whitespace or the end). A number glued to anything else (a URL path,
-// a host, an apostrophe) never counts. Markdown destinations, inline or
-// reference-style, are never exempt. So a translation can regroup the
-// source's numbers but not introduce an IP, host, URL or link target.
+// number). Instead, when the translation has no Markdown link syntax at all,
+// a token missing from the source is exempt only when it is purely digits and
+// dots and EVERY place it occurs lies inside a standalone dot-grouped number
+// whose digits are a number in the source. Standalone is strict: it starts at
+// the start of the text or after whitespace, optionally behind one opening
+// bracket or quote that itself follows whitespace, and ends the same way
+// (optionally one closing bracket or quote, then optionally one sentence
+// punctuation mark, then whitespace or the end). A number glued to anything
+// else (a URL path, a host, an apostrophe) never counts, and any Markdown
+// link syntax ("](", "]:", "][", in any of CommonMark's layouts) disables the
+// exemption, so no link destination can be exempted. So a translation can
+// regroup the source's numbers but not introduce an IP, host, URL or link.
 const STANDALONE_DOT_GROUPED_NUMBER_PATTERN =
   /(?<=(?:^|\s)[("\u00ab\u00bb\u201a\u201e\u201c\u201d]?)\d{1,3}(?:\.\d{3})+(?=[)"\u00ab\u00bb\u201c\u201d]?[.,;:!?]?(?:\s|$))/g;
-// Reference-style Markdown link definitions: "[label]: destination".
-const MARKDOWN_REFERENCE_DEST_PATTERN = /^[ \t]*\[[^\]\n]+\]:[ \t]*(\S+)/gm;
+const MARKDOWN_LINK_SYNTAX_PATTERN = /\]\s*[(:[]/;
 const SOURCE_NUMBER_PATTERN = /\d{1,3}(?:[,.\s\u00a0\u202f']\d{3})+|\d+/g;
 
 function getRegroupedNumberRanges(sourceText, normalizedTranslation) {
+  if (MARKDOWN_LINK_SYNTAX_PATTERN.test(normalizedTranslation)) return [];
   const sourceDigits = new Set(
     (sourceText.match(SOURCE_NUMBER_PATTERN) ?? []).map((n) => n.replace(/\D/g, ""))
   );
@@ -215,8 +216,8 @@ function getRegroupedNumberRanges(sourceText, normalizedTranslation) {
     .map((m) => [m.index, m.index + m[0].length]);
 }
 
-function isRegroupedSourceNumber(token, normalizedTranslation, ranges, markdownDests) {
-  if (!/^[\d.]+$/.test(token) || markdownDests.has(token)) return false;
+function isRegroupedSourceNumber(token, normalizedTranslation, ranges) {
+  if (!/^[\d.]+$/.test(token) || ranges.length === 0) return false;
   for (let i = normalizedTranslation.indexOf(token); i !== -1;
     i = normalizedTranslation.indexOf(token, i + 1)) {
     if (!ranges.some(([start, end]) => start <= i && i + token.length <= end)) {
@@ -240,16 +241,10 @@ export function validateTranslation(sourceText, translatedText) {
   // Same unicode-dot normalization as extractLinkTokens.
   const normalizedTranslation = translatedText.replace(/[。．｡]/g, ".");
   const regroupedRanges = getRegroupedNumberRanges(sourceText, normalizedTranslation);
-  const markdownDests = new Set(
-    [
-      ...normalizedTranslation.matchAll(MARKDOWN_DEST_PATTERN),
-      ...normalizedTranslation.matchAll(MARKDOWN_REFERENCE_DEST_PATTERN),
-    ].map((m) => canonicalizeUrl(trimUrlToken(m[1])))
-  );
   for (const token of extractLinkTokens(translatedText)) {
     if (
       !sourceLinks.has(token) &&
-      !isRegroupedSourceNumber(token, normalizedTranslation, regroupedRanges, markdownDests)
+      !isRegroupedSourceNumber(token, normalizedTranslation, regroupedRanges)
     ) {
       return `adds link-like token "${token}"`;
     }

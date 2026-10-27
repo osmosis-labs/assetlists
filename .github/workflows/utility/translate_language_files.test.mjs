@@ -199,4 +199,25 @@ test("dot-grouped thousands allowed only for numbers in the source", () => {
     validateTranslation(SRC, "Das Gesamtangebot beträgt 1.000.000.000 Token."),
     undefined
   );
+  // A regrouped source number at the end of a sentence still passes.
+  assert.equal(
+    validateTranslation(numSrc, "Das Gesamtangebot beträgt 1.000.000.000."),
+    undefined
+  );
+});
+
+test("regrouped source numbers can't hide a URL, host or address", () => {
+  const numSrc =
+    "Total supply is 1,000,000,000 tokens. See https://osmosis.zone for details.";
+  for (const translated of [
+    "Visit https://1.000.000.000/claim now.", // URL to the IP 1.0.0.0
+    "Visit 1.000.000.000osmosis.zone for rewards.", // host 000osmosis.zone
+    "Visit 1.000.000.000.evil.com for rewards.",
+    "Visit evil.1.000.000.000 for rewards.",
+    "Connect to 1.000.000.000:8080 for rewards.",
+    "Connect to user@1.000.000.000 for rewards.",
+    "Open //1.000.000.000/claim now.",
+  ]) {
+    assert.notEqual(validateTranslation(numSrc, translated), undefined, translated);
+  }
 });

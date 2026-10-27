@@ -188,17 +188,21 @@ function extractLinkTokens(text) {
 // Many locales group thousands with dots (de, es, pt-br, ro, tr), so a source
 // "1,000,000,000" correctly becomes "1.000.000.000", which IP_PATTERN reads as
 // an added IP and rejects every run. Before link tokens are extracted, a
-// dot-grouped number is blanked out only when it is grouped in exact
-// thousands AND its digits are a number in the source, so a translation can
-// regroup the source's numbers but not introduce an IP.
-const DOT_GROUPED_NUMBER_PATTERN = /(?<![\d.])\d{1,3}(?:\.\d{3})+(?![\d.]*\d)/g;
+// dot-grouped number is blanked out only when it is STANDALONE (grouped in
+// exact thousands, and not touching letters, digits, "/", ":", "@", "-", or a
+// dot followed by one of those, so it is never part of a URL, hostname or
+// address) AND its digits are a number in the source. Numbers inside a URL or
+// host keep their full token and are compared as before, so a translation can
+// regroup the source's numbers but not introduce an IP, host or URL.
+const STANDALONE_DOT_GROUPED_NUMBER_PATTERN =
+  /(?<![\w.\/:@-])\d{1,3}(?:\.\d{3})+(?![\w\/:@-]|\.[\w\/:@-])/g;
 const SOURCE_NUMBER_PATTERN = /\d{1,3}(?:[,.\s  ']\d{3})+|\d+/g;
 
-function stripRegroupedSourceNumbers(sourceText, translatedText) {
+function blankRegroupedSourceNumbers(sourceText, translatedText) {
   const sourceDigits = new Set(
     (sourceText.match(SOURCE_NUMBER_PATTERN) ?? []).map((n) => n.replace(/\D/g, ""))
   );
-  return translatedText.replace(DOT_GROUPED_NUMBER_PATTERN, (number) =>
+  return translatedText.replace(STANDALONE_DOT_GROUPED_NUMBER_PATTERN, (number) =>
     sourceDigits.has(number.replace(/\./g, "")) ? " " : number
   );
 }
@@ -214,7 +218,7 @@ export function validateTranslation(sourceText, translatedText) {
     return "contains Markdown link syntax";
   }
   const sourceLinks = new Set(extractLinkTokens(sourceText));
-  const translatedForLinks = stripRegroupedSourceNumbers(sourceText, translatedText);
+  const translatedForLinks = blankRegroupedSourceNumbers(sourceText, translatedText);
   for (const token of extractLinkTokens(translatedForLinks)) {
     if (!sourceLinks.has(token)) {
       return `adds link-like token "${token}"`;

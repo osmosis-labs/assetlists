@@ -192,13 +192,18 @@ function extractLinkTokens(text) {
 // number). Instead, a token missing from the source is exempt only when it is
 // purely digits and dots, is not a Markdown destination, and EVERY place it
 // occurs lies inside a standalone dot-grouped number whose digits are a
-// number in the source. Standalone is strict: preceded by the start,
-// whitespace, "(" or an opening quote, and followed by the end, whitespace,
-// ")", a closing quote, or sentence punctuation that is itself followed by
-// whitespace or the end. So a translation can regroup the source's numbers
-// but not introduce an IP, host, URL or link target.
+// number in the source. Standalone is strict: it starts at the start of the
+// text or after whitespace, optionally behind one opening bracket or quote
+// that itself follows whitespace, and ends the same way (optionally one
+// closing bracket or quote, then optionally one sentence punctuation mark,
+// then whitespace or the end). A number glued to anything else (a URL path,
+// a host, an apostrophe) never counts. Markdown destinations, inline or
+// reference-style, are never exempt. So a translation can regroup the
+// source's numbers but not introduce an IP, host, URL or link target.
 const STANDALONE_DOT_GROUPED_NUMBER_PATTERN =
-  /(?<=^|[\s("'\u00ab\u00bb\u201a\u201e\u201c\u201d\u2018\u2019])\d{1,3}(?:\.\d{3})+(?=$|[\s)"'\u00ab\u00bb\u201c\u201d\u2018\u2019]|[.,;:!?](?=\s|$))/g;
+  /(?<=(?:^|\s)[("\u00ab\u00bb\u201a\u201e\u201c\u201d]?)\d{1,3}(?:\.\d{3})+(?=[)"\u00ab\u00bb\u201c\u201d]?[.,;:!?]?(?:\s|$))/g;
+// Reference-style Markdown link definitions: "[label]: destination".
+const MARKDOWN_REFERENCE_DEST_PATTERN = /^[ \t]*\[[^\]\n]+\]:[ \t]*(\S+)/gm;
 const SOURCE_NUMBER_PATTERN = /\d{1,3}(?:[,.\s\u00a0\u202f']\d{3})+|\d+/g;
 
 function getRegroupedNumberRanges(sourceText, normalizedTranslation) {
@@ -236,9 +241,10 @@ export function validateTranslation(sourceText, translatedText) {
   const normalizedTranslation = translatedText.replace(/[。．｡]/g, ".");
   const regroupedRanges = getRegroupedNumberRanges(sourceText, normalizedTranslation);
   const markdownDests = new Set(
-    [...normalizedTranslation.matchAll(MARKDOWN_DEST_PATTERN)].map((m) =>
-      canonicalizeUrl(trimUrlToken(m[1]))
-    )
+    [
+      ...normalizedTranslation.matchAll(MARKDOWN_DEST_PATTERN),
+      ...normalizedTranslation.matchAll(MARKDOWN_REFERENCE_DEST_PATTERN),
+    ].map((m) => canonicalizeUrl(trimUrlToken(m[1])))
   );
   for (const token of extractLinkTokens(translatedText)) {
     if (

@@ -221,6 +221,11 @@ test("regrouped source numbers can't hide a URL, host or address", () => {
     "Visit https://osmosis.zone/!1.000.000.000", // path on the source URL
     "Visit https://osmosis.zone/?1.000.000.000", // query on the source URL
     "Mehr: 1.000.000.000 Token, siehe 1.000.000.000:8080", // one standalone, one not
+    "Visit https://osmosis.zone/'1.000.000.000", // apostrophe is a URL path char
+    'Visit https://osmosis.zone/"1.000.000.000"', // quote glued to the URL
+    "Visit https://osmosis.zone/(1.000.000.000)", // bracket glued to the URL
+    "[claim][reward]\n\n[reward]: 1.000.000.000", // reference-style destination
+    "[claim][reward]\n\n[reward]: <1.000.000.000>",
   ]) {
     assert.notEqual(validateTranslation(numSrc, translated), undefined, translated);
   }

@@ -193,7 +193,8 @@ function extractLinkTokens(text) {
 // a token missing from the source is exempt only when it is purely digits and
 // dots and EVERY place it occurs lies inside a standalone dot-grouped number
 // whose digits are a number in the source. Standalone is strict: it starts at
-// the start of the text or after whitespace, optionally behind one opening
+// the start of the text or after ASCII whitespace (not NBSP or other Unicode
+// spaces, which autolinkers keep inside a URL), optionally behind one opening
 // bracket or quote that itself follows whitespace, and ends the same way
 // (optionally one closing bracket or quote, then optionally one sentence
 // punctuation mark, then whitespace or the end). A number glued to anything
@@ -202,7 +203,7 @@ function extractLinkTokens(text) {
 // exemption, so no link destination can be exempted. So a translation can
 // regroup the source's numbers but not introduce an IP, host, URL or link.
 const STANDALONE_DOT_GROUPED_NUMBER_PATTERN =
-  /(?<=(?:^|\s)[("\u00ab\u00bb\u201a\u201e\u201c\u201d]?)\d{1,3}(?:\.\d{3})+(?=[)"\u00ab\u00bb\u201c\u201d]?[.,;:!?]?(?:\s|$))/g;
+  /(?<=(?:^|[ \t\r\n])[("\u00ab\u00bb\u201a\u201e\u201c\u201d]?)\d{1,3}(?:\.\d{3})+(?=[)"\u00ab\u00bb\u201c\u201d]?[.,;:!?]?(?:[ \t\r\n]|$))/g;
 const MARKDOWN_LINK_SYNTAX_PATTERN = /\]\s*[(:[]/;
 const SOURCE_NUMBER_PATTERN = /\d{1,3}(?:[,.\s\u00a0\u202f']\d{3})+|\d+/g;
 

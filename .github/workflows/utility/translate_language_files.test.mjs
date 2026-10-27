@@ -229,6 +229,11 @@ test("regrouped source numbers can't hide a URL, host or address", () => {
     "[claim][reward]\n\n[reward]:\n  1.000.000.000", // destination on the next line
     "[claim][reward]\n\n> [reward]: 1.000.000.000", // definition in a blockquote
     "[claim]\n\n[claim]: 1.000.000.000", // shortcut reference
+    // Unicode spaces that autolinkers keep inside a URL
+    "Visit https://osmosis.zone/ 1.000.000.000",
+    "Visit https://osmosis.zone/ 1.000.000.000",
+    "Visit https://osmosis.zone/ 1.000.000.000",
+    "Visit https://osmosis.zone/　1.000.000.000",
   ]) {
     assert.notEqual(validateTranslation(numSrc, translated), undefined, translated);
   }

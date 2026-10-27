@@ -238,27 +238,29 @@ export function validateTranslation(sourceText, translatedText) {
   if (/\]\s*\(/.test(translatedText) && !/\]\s*\(/.test(sourceText)) {
     return "contains Markdown link syntax";
   }
-  const sourceLinks = new Set(extractLinkTokens(sourceText));
-  // Same unicode-dot normalization as extractLinkTokens.
-  const normalizedTranslation = translatedText.replace(/[。．｡]/g, ".");
-  const regroupedRanges = getRegroupedNumberRanges(sourceText, normalizedTranslation);
-  for (const token of extractLinkTokens(translatedText)) {
-    if (
-      !sourceLinks.has(token) &&
-      !isRegroupedSourceNumber(token, normalizedTranslation, regroupedRanges)
-    ) {
-      return `adds link-like token "${token}"`;
-    }
-  }
   // Loose bounds only: CJK translations legitimately compress well below 1/10
   // of the English length, and Indic scripts expand. This catches injected
-  // essays and truncated junk, not normal variation.
+  // essays and truncated junk, not normal variation. Checked before the link
+  // scans so an oversized response can't make them expensive.
   if (
     translatedText.length >
       Math.max(sourceText.length * 4, sourceText.length + 200) ||
     translatedText.length < sourceText.length * 0.05
   ) {
     return `implausible length (${translatedText.length} chars vs ${sourceText.length} source)`;
+  }
+  const sourceLinks = new Set(extractLinkTokens(sourceText));
+  // Same unicode-dot normalization as extractLinkTokens.
+  const normalizedTranslation = translatedText.replace(/[。．｡]/g, ".");
+  const regroupedRanges = getRegroupedNumberRanges(sourceText, normalizedTranslation);
+  // Each distinct token is checked once: the exemption scans every occurrence.
+  for (const token of new Set(extractLinkTokens(translatedText))) {
+    if (
+      !sourceLinks.has(token) &&
+      !isRegroupedSourceNumber(token, normalizedTranslation, regroupedRanges)
+    ) {
+      return `adds link-like token "${token}"`;
+    }
   }
   return undefined;
 }

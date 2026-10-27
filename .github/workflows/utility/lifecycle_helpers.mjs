@@ -398,6 +398,41 @@ export function writeFileAtomic(p, content) {
 // state.json keys owned by endpoint validation (validateEndpoints.mjs).
 export const VALIDATION_STATE_KEYS = ['chains', 'lastValidationRun'];
 
+const STATE_LOCK_STALE_MS = 60000;
+const STATE_LOCK_POLL_MS = 50;
+
+/**
+ * Run fn while holding an exclusive lock on statePath, so one process's
+ * read-merge-write can't interleave with another's (each would otherwise
+ * re-read, then rename over the other's update). mkdir is atomic across
+ * processes. The lock is only held for a synchronous read and write, so one
+ * older than STATE_LOCK_STALE_MS was left by a killed process and is taken over.
+ */
+export function withStateLock(statePath, fn) {
+  const lockDir = `${statePath}.lock`;
+  const sleeper = new Int32Array(new SharedArrayBuffer(4));
+  for (;;) {
+    try {
+      fs.mkdirSync(lockDir);
+      break;
+    } catch (err) {
+      if (err.code !== 'EEXIST') throw err;
+      try {
+        if (Date.now() - fs.statSync(lockDir).mtimeMs > STATE_LOCK_STALE_MS) {
+          fs.rmSync(lockDir, { recursive: true, force: true });
+          continue;
+        }
+      } catch { /* lock released between mkdir and stat: retry */ }
+      Atomics.wait(sleeper, 0, 0, STATE_LOCK_POLL_MS);
+    }
+  }
+  try {
+    return fn();
+  } finally {
+    fs.rmSync(lockDir, { recursive: true, force: true });
+  }
+}
+
 /**
  * Write state.json from a lifecycle script, keeping whatever endpoint
  * validation has written to its own keys since this script loaded the file.
@@ -405,12 +440,14 @@ export const VALIDATION_STATE_KEYS = ['chains', 'lastValidationRun'];
  * writing the in-memory copy whole would discard that run's results.
  */
 export function writeLifecycleState(statePath, state) {
-  const current = loadJSON(statePath, {});
-  const merged = { ...state };
-  for (const key of VALIDATION_STATE_KEYS) {
-    if (key in current) merged[key] = current[key];
-  }
-  writeFileAtomic(statePath, JSON.stringify(merged, null, 2) + '\n');
+  withStateLock(statePath, () => {
+    const current = loadJSON(statePath, {});
+    const merged = { ...state };
+    for (const key of VALIDATION_STATE_KEYS) {
+      if (key in current) merged[key] = current[key];
+    }
+    writeFileAtomic(statePath, JSON.stringify(merged, null, 2) + '\n');
+  });
 }
 
 // ── State helpers (cron-lifecycle semantics) ────────────────────────────────

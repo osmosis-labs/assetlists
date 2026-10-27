@@ -281,11 +281,12 @@ function getSourceChainStatus(chainName) {
 
 // ── IBC client lookup (Osmosis side) ─────────────────────────────────────────
 
-// state.json key caching each Osmosis channel's connection and client. Both
-// are fixed onchain once the channel exists (a channel's connection_hops and
-// a connection's client_id never change), so after the first walk only the
-// client status, the part that changes, is queried.
-const CHANNEL_CLIENTS_STATE_KEY = 'ibcChannelClients';
+// state.json key caching each Osmosis connection's client. A connection's
+// client_id is set when the connection is created and never changes, so it is
+// looked up once. A channel's connection is NOT cached: an IBC channel upgrade
+// can move a channel to a new connection while keeping its id, so the channel
+// is read every run.
+const CONNECTION_CLIENTS_STATE_KEY = 'ibcConnectionClients';
 
 // clientStatuses memoizes one status request per client per run: several
 // channels can share a connection, and so a client.
@@ -299,21 +300,21 @@ function getClientStatus(clientId, clientStatuses) {
   return clientStatuses.get(clientId);
 }
 
-async function getClientStatusForChannel(channelId, channelClients, clientStatuses) {
-  let { connectionId, clientId } = channelClients[channelId] ?? {};
-  if (!connectionId || !clientId) {
-    const channelData = await fetchJSON(
-      `${LCD}/ibc/core/channel/v1/channels/${channelId}/ports/transfer`
-    );
-    connectionId = channelData.channel?.connection_hops?.[0];
-    if (!connectionId) throw new Error(`No connection for ${channelId}`);
+async function getClientStatusForChannel(channelId, connectionClients, clientStatuses) {
+  const channelData = await fetchJSON(
+    `${LCD}/ibc/core/channel/v1/channels/${channelId}/ports/transfer`
+  );
+  const connectionId = channelData.channel?.connection_hops?.[0];
+  if (!connectionId) throw new Error(`No connection for ${channelId}`);
 
+  let clientId = connectionClients[connectionId];
+  if (!clientId) {
     const connData = await fetchJSON(
       `${LCD}/ibc/core/connection/v1/connections/${connectionId}`
     );
     clientId = connData.connection?.client_id;
     if (!clientId) throw new Error(`No client for ${connectionId}`);
-    channelClients[channelId] = { connectionId, clientId };
+    connectionClients[connectionId] = clientId;
   }
 
   const status = await getClientStatus(clientId, clientStatuses);
@@ -642,15 +643,15 @@ async function main() {
   console.log(`Checking IBC client + chain status for ${uniqueChannels.length} channels (${totalAssets} IBC assets)...\n`);
 
   // Phase 1: Osmosis-side IBC client status
-  state[CHANNEL_CLIENTS_STATE_KEY] ??= {};
-  const channelClients = state[CHANNEL_CLIENTS_STATE_KEY];
+  state[CONNECTION_CLIENTS_STATE_KEY] ??= {};
+  const connectionClients = state[CONNECTION_CLIENTS_STATE_KEY];
   const clientStatuses = new Map();
   const ibcResults = await processWithPool(
     uniqueChannels,
     CONCURRENCY,
     async (channelId) => {
       try {
-        const result = await getClientStatusForChannel(channelId, channelClients, clientStatuses);
+        const result = await getClientStatusForChannel(channelId, connectionClients, clientStatuses);
         return { channelId, ...result, error: null };
       } catch (err) {
         return {
@@ -663,10 +664,14 @@ async function main() {
     }
   );
 
-  // Drop cached paths for channels no listed asset uses any more.
-  const listedChannels = new Set(uniqueChannels);
-  for (const channelId of Object.keys(channelClients)) {
-    if (!listedChannels.has(channelId)) delete channelClients[channelId];
+  // Drop cached clients for connections no listed channel uses any more. Only
+  // prune on a run where every channel lookup succeeded, so a transient error
+  // doesn't evict entries that are still in use.
+  if (ibcResults.every((r) => r.connectionId)) {
+    const usedConnections = new Set(ibcResults.map((r) => r.connectionId));
+    for (const connectionId of Object.keys(connectionClients)) {
+      if (!usedConnections.has(connectionId)) delete connectionClients[connectionId];
+    }
   }
 
   // Hard-fail when the LCD is essentially unusable. If ≥ 90% of channel

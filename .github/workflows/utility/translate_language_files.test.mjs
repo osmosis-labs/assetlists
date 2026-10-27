@@ -217,7 +217,27 @@ test("regrouped source numbers can't hide a URL, host or address", () => {
     "Connect to 1.000.000.000:8080 for rewards.",
     "Connect to user@1.000.000.000 for rewards.",
     "Open //1.000.000.000/claim now.",
+    "Claim at 1.000.000.000。com", // unicode dot: host 1.000.000.000.com
+    "Visit https://osmosis.zone/!1.000.000.000", // path on the source URL
+    "Visit https://osmosis.zone/?1.000.000.000", // query on the source URL
+    "Mehr: 1.000.000.000 Token, siehe 1.000.000.000:8080", // one standalone, one not
   ]) {
     assert.notEqual(validateTranslation(numSrc, translated), undefined, translated);
+  }
+  const mdSrc = "Supply is 1,000,000,000. See [docs](https://osmosis.zone).";
+  assert.notEqual(
+    validateTranslation(mdSrc, "Angebot 1.000.000.000. [claim](1.000.000.000)"),
+    undefined
+  );
+});
+
+test("regrouped source numbers pass in normal prose punctuation", () => {
+  const numSrc = "Total supply is 1,000,000,000 tokens.";
+  for (const translated of [
+    "Das Gesamtangebot beträgt „1.000.000.000“ Token.",
+    "Das Gesamtangebot (1.000.000.000) ist fix.",
+    "Gesamtangebot: 1.000.000.000, fest.",
+  ]) {
+    assert.equal(validateTranslation(numSrc, translated), undefined, translated);
   }
 });

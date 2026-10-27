@@ -187,24 +187,38 @@ function extractLinkTokens(text) {
 }
 // Many locales group thousands with dots (de, es, pt-br, ro, tr), so a source
 // "1,000,000,000" correctly becomes "1.000.000.000", which IP_PATTERN reads as
-// an added IP and rejects every run. Before link tokens are extracted, a
-// dot-grouped number is blanked out only when it is STANDALONE (grouped in
-// exact thousands, and not touching letters, digits, "/", ":", "@", "-", or a
-// dot followed by one of those, so it is never part of a URL, hostname or
-// address) AND its digits are a number in the source. Numbers inside a URL or
-// host keep their full token and are compared as before, so a translation can
-// regroup the source's numbers but not introduce an IP, host or URL.
+// an added IP and rejects every run. The text is never edited before link
+// extraction (that hid URLs, hosts and Markdown destinations built around the
+// number). Instead, a token missing from the source is exempt only when it is
+// purely digits and dots, is not a Markdown destination, and EVERY place it
+// occurs lies inside a standalone dot-grouped number whose digits are a
+// number in the source. Standalone is strict: preceded by the start,
+// whitespace, "(" or an opening quote, and followed by the end, whitespace,
+// ")", a closing quote, or sentence punctuation that is itself followed by
+// whitespace or the end. So a translation can regroup the source's numbers
+// but not introduce an IP, host, URL or link target.
 const STANDALONE_DOT_GROUPED_NUMBER_PATTERN =
-  /(?<![\w.\/:@-])\d{1,3}(?:\.\d{3})+(?![\w\/:@-]|\.[\w\/:@-])/g;
-const SOURCE_NUMBER_PATTERN = /\d{1,3}(?:[,.\s  ']\d{3})+|\d+/g;
+  /(?<=^|[\s("'\u00ab\u00bb\u201a\u201e\u201c\u201d\u2018\u2019])\d{1,3}(?:\.\d{3})+(?=$|[\s)"'\u00ab\u00bb\u201c\u201d\u2018\u2019]|[.,;:!?](?=\s|$))/g;
+const SOURCE_NUMBER_PATTERN = /\d{1,3}(?:[,.\s\u00a0\u202f']\d{3})+|\d+/g;
 
-function blankRegroupedSourceNumbers(sourceText, translatedText) {
+function getRegroupedNumberRanges(sourceText, normalizedTranslation) {
   const sourceDigits = new Set(
     (sourceText.match(SOURCE_NUMBER_PATTERN) ?? []).map((n) => n.replace(/\D/g, ""))
   );
-  return translatedText.replace(STANDALONE_DOT_GROUPED_NUMBER_PATTERN, (number) =>
-    sourceDigits.has(number.replace(/\./g, "")) ? " " : number
-  );
+  return [...normalizedTranslation.matchAll(STANDALONE_DOT_GROUPED_NUMBER_PATTERN)]
+    .filter((m) => sourceDigits.has(m[0].replace(/\./g, "")))
+    .map((m) => [m.index, m.index + m[0].length]);
+}
+
+function isRegroupedSourceNumber(token, normalizedTranslation, ranges, markdownDests) {
+  if (!/^[\d.]+$/.test(token) || markdownDests.has(token)) return false;
+  for (let i = normalizedTranslation.indexOf(token); i !== -1;
+    i = normalizedTranslation.indexOf(token, i + 1)) {
+    if (!ranges.some(([start, end]) => start <= i && i + token.length <= end)) {
+      return false;
+    }
+  }
+  return true;
 }
 
 export function validateTranslation(sourceText, translatedText) {
@@ -218,9 +232,19 @@ export function validateTranslation(sourceText, translatedText) {
     return "contains Markdown link syntax";
   }
   const sourceLinks = new Set(extractLinkTokens(sourceText));
-  const translatedForLinks = blankRegroupedSourceNumbers(sourceText, translatedText);
-  for (const token of extractLinkTokens(translatedForLinks)) {
-    if (!sourceLinks.has(token)) {
+  // Same unicode-dot normalization as extractLinkTokens.
+  const normalizedTranslation = translatedText.replace(/[。．｡]/g, ".");
+  const regroupedRanges = getRegroupedNumberRanges(sourceText, normalizedTranslation);
+  const markdownDests = new Set(
+    [...normalizedTranslation.matchAll(MARKDOWN_DEST_PATTERN)].map((m) =>
+      canonicalizeUrl(trimUrlToken(m[1]))
+    )
+  );
+  for (const token of extractLinkTokens(translatedText)) {
+    if (
+      !sourceLinks.has(token) &&
+      !isRegroupedSourceNumber(token, normalizedTranslation, regroupedRanges, markdownDests)
+    ) {
       return `adds link-like token "${token}"`;
     }
   }

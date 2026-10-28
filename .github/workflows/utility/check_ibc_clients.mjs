@@ -213,11 +213,42 @@ function categoriseFetchError(err, status) {
   return 'network';
 }
 
+// The LCD answers bursts with HTTP 429 (Retry-After: 1) and keeps refusing
+// while the pool's other workers carry on, so short per-request retries all
+// fail together. A 429 instead pauses every LCD request until the cooldown
+// ends, and gets more attempts than other failures.
+const RATE_LIMIT_RETRY_DELAYS_MS = [2000, 5000, 10000, 20000];
+const MAX_RETRY_AFTER_MS = 30000;
+let lcdCooldownUntil = 0;
+
+async function waitForLcdCooldown() {
+  while (Date.now() < lcdCooldownUntil) {
+    await sleep(lcdCooldownUntil - Date.now());
+  }
+}
+
+function rateLimitDelayMs(res, rateLimitAttempt) {
+  const retryAfterSeconds = Number(res.headers.get('retry-after'));
+  const backoff = RATE_LIMIT_RETRY_DELAYS_MS[rateLimitAttempt];
+  if (Number.isFinite(retryAfterSeconds) && retryAfterSeconds > 0) {
+    return Math.max(backoff, Math.min(retryAfterSeconds * 1000, MAX_RETRY_AFTER_MS));
+  }
+  return backoff;
+}
+
 async function fetchJSON(url, retries = MAX_RETRIES) {
+  let rateLimitAttempt = 0;
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
+      await waitForLcdCooldown();
       const res = await fetch(url);
-      if ((res.status === 429 || res.status >= 500) && attempt < retries) {
+      if (res.status === 429 && rateLimitAttempt < RATE_LIMIT_RETRY_DELAYS_MS.length) {
+        lcdCooldownUntil = Math.max(lcdCooldownUntil, Date.now() + rateLimitDelayMs(res, rateLimitAttempt));
+        rateLimitAttempt++;
+        attempt--;
+        continue;
+      }
+      if (res.status >= 500 && attempt < retries) {
         await sleep(RETRY_DELAY_MS * attempt);
         continue;
       }

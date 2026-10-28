@@ -6,6 +6,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as chain_reg from "../../../chain-registry/.github/workflows/utility/chain_registry.mjs";
+import * as chain_reg_cache from "./chain_registry_cache.mjs";
 chain_reg.setup();
 import * as zone from "./assetlist_functions.mjs";
 
@@ -153,7 +154,7 @@ export function getAssetTrace(asset_data) {
   //Make sure Path is provided for Mainnet assets
   if (!ZONE_ASSET_PATH_DEFINED) {
     if (IS_MAINNET === undefined) {
-      IS_MAINNET = chain_reg.getFileProperty(asset_data.chainName, "chain", "network_type") === "mainnet";
+      IS_MAINNET = chain_reg_cache.getFileProperty(asset_data.chainName, "chain", "network_type") === "mainnet";
     }
     if (IS_MAINNET) {
       console.log("No path provided.");
@@ -549,7 +550,7 @@ function getNetworkSymbolSuffix(chain_name, asset_data) {
     return chain_symbol_suffix;
   }
 
-  let bech32_prefix = chain_reg.getFileProperty(chain_name, "chain", "bech32_prefix");
+  let bech32_prefix = chain_reg_cache.getFileProperty(chain_name, "chain", "bech32_prefix");
   if (bech32_prefix) {
     return bech32_prefix;
   }
@@ -570,7 +571,7 @@ function getNetworkName(chain_name, asset_data) {
     return override_chain_pretty_name;
   }
 
-  let chain_pretty_name = chain_reg.getFileProperty(chain_name, "chain", "pretty_name");
+  let chain_pretty_name = chain_reg_cache.getFileProperty(chain_name, "chain", "pretty_name");
   if (chain_pretty_name) {
     return chain_pretty_name;
   }
@@ -715,7 +716,7 @@ export function setName(asset_data) {
       &&
     getAssetProperty(asset_data.identity_asset, "is_staking")
   ) {
-    name = chain_reg.getFileProperty(asset_data.identity_asset.chain_name, "chain", "pretty_name");
+    name = chain_reg_cache.getFileProperty(asset_data.identity_asset.chain_name, "chain", "pretty_name");
     //Check for Chain Name Override--E.G., "Ethereum Mainnet" -> "Ethereum"
     let override_chain_pretty_name = asset_data.zone_config?.chains?.find(
       chain => //where
@@ -905,7 +906,7 @@ export function getAssetProperty(asset, propertyName) {
     } else {
       assetProperty.set(
         assetPropertyKey,
-        chain_reg.getAssetProperty(
+        chain_reg_cache.getAssetProperty(
           asset.chain_name,
           asset.base_denom,
           propertyName
@@ -924,8 +925,8 @@ export function getAssetDecimals(asset) {
 
   let decimals;
 
-  const display = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "display");
-  const denom_units = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "denom_units");
+  const display = chain_reg_cache.getAssetProperty(asset.chain_name, asset.base_denom, "display");
+  const denom_units = chain_reg_cache.getAssetProperty(asset.chain_name, asset.base_denom, "denom_units");
   denom_units?.forEach((unit) => {
     if (display === unit.denom) {
       decimals = unit.exponent;
@@ -952,7 +953,7 @@ export function getAssetIsStaking(asset) {
     return asset.is_staking;
   }
 
-  return chain_reg.getFileProperty(asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom === asset.base_denom;
+  return chain_reg_cache.getFileProperty(asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom === asset.base_denom;
 
 }
 
@@ -969,7 +970,7 @@ export function getAssetTraces(asset) {
   const limit = 50;
 
   while (lastTrace && counter !== limit) {
-    traces = chain_reg.getAssetProperty(
+    traces = chain_reg_cache.getAssetProperty(
       lastTrace.counterparty.chain_name,
       lastTrace.counterparty.base_denom,
       "traces"
@@ -1265,14 +1266,14 @@ export function setCategories(asset_data) {
   });
 
   // if (
-  //   chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "fees")?.fee_tokens[0]?.denom ===
+  //   chain_reg_cache.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "fees")?.fee_tokens[0]?.denom ===
   //   asset_data.canonical_asset.base_denom
   // ) {
   //   addArrayItem("defi", asset_data.frontend.categories);
   // }
   // if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
   // //if (
-  // //  chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom ===
+  // //  chain_reg_cache.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom ===
   // //  asset_data.canonical_asset.base_denom
   // //) {
   //   addArrayItem("defi", asset_data.frontend.categories);
@@ -1364,7 +1365,7 @@ export function setTypeAsset(asset_data) {
 
 function getChainType(asset_data, chainName) {
 
-  let chain_type = chain_reg.getFileProperty(
+  let chain_type = chain_reg_cache.getFileProperty(
     chainName,
     "chain",
     "chain_type"
@@ -1373,13 +1374,13 @@ function getChainType(asset_data, chainName) {
     return "cosmos";
   }
 
-  /*let feeTokenDenom = chain_reg.getFileProperty(
+  /*let feeTokenDenom = chain_reg_cache.getFileProperty(
     chainName,
     "chain",
     "fees"
   )?.fee_tokens?.[0];
   if (feeTokenDenom) {
-    let feeTokenType = chain_reg.getAssetProperty(
+    let feeTokenType = chain_reg_cache.getAssetProperty(
       chainName,
       feeTokenDenom,
       "type_asset"
@@ -1415,7 +1416,7 @@ function getChainType(asset_data, chainName) {
 
 function getChainId(asset_data, chainName) {
 
-  let chainId = chain_reg.getFileProperty(chainName, "chain", "chain_id");
+  let chainId = chain_reg_cache.getFileProperty(chainName, "chain", "chain_id");
   let chainType = getChainType(asset_data, chainName);
   if (chainType === "evm") {
     chainId = Number(chainId);
@@ -1546,7 +1547,7 @@ export function setTransferMethods(asset_data) {
   });
 
   if (asset_data.source_asset.chain_name !== asset_data.chainName) {
-    const live = chain_reg.getFileProperty(asset_data.source_asset.chain_name, "chain", "status");
+    const live = chain_reg_cache.getFileProperty(asset_data.source_asset.chain_name, "chain", "status");
     if (live === "live") {
       const traces = getAssetProperty(asset_data.local_asset, "traces");
       const trace = traces?.[traces.length - 1];
@@ -1558,7 +1559,7 @@ export function setTransferMethods(asset_data) {
           type: "ibc",
           counterparty: {
             chainName: trace.counterparty.chain_name,
-            chainId: chain_reg.getFileProperty(
+            chainId: chain_reg_cache.getFileProperty(
               trace.counterparty.chain_name,
               "chain",
               "chain_id"
@@ -1702,7 +1703,7 @@ export function setSocials(asset_data) {
   if (socials) { return; }
 
   if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
-    socials = chain_reg.getFileProperty(
+    socials = chain_reg_cache.getFileProperty(
       asset_data.canonical_asset.chain_name,
       "chain",
       "socials"
@@ -1710,7 +1711,7 @@ export function setSocials(asset_data) {
 
     // Fallback to top-level website field (standard in chain.json schema)
     if (!socials) {
-      const website = chain_reg.getFileProperty(
+      const website = chain_reg_cache.getFileProperty(
         asset_data.canonical_asset.chain_name,
         "chain",
         "website"
@@ -1790,7 +1791,7 @@ export function setDescription(asset_data) {
 
   if (!extended_description) {
     if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
-      extended_description = chain_reg.getFileProperty(
+      extended_description = chain_reg_cache.getFileProperty(
         asset_data.canonical_asset.chain_name,
         "chain",
         "description"

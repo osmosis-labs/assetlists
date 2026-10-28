@@ -210,19 +210,13 @@ jobs:
           # Capture current verified status
           jq -r '.assets[] | "\(.symbol)|\(.verified // false)"' osmosis-1/generated/frontend/assetlist.json > /tmp/verified-after.txt
 
-          # Find assets that changed from false to true
-          > newly-verified.txt
-          while IFS='|' read -r symbol verified_after || [ -n "$symbol" ]; do
-            # Escape special characters for grep
-            escaped_symbol=$(printf '%s\n' "$symbol" | sed 's/[[\.*^$()+?{|]/\\&/g')
-            verified_before=$(grep "^${escaped_symbol}|" /tmp/verified-before.txt 2>/dev/null | cut -d'|' -f2 || echo "")
-            if [ "$verified_before" = "false" ] && [ "$verified_after" = "true" ]; then
-              echo "$symbol" >> newly-verified.txt
-            elif [ -z "$verified_before" ] && [ "$verified_after" = "true" ]; then
-              # New asset that's already verified - don't count as newly verified
-              :
-            fi
-          done < /tmp/verified-after.txt
+          # Find assets that changed from false to true, in one pass (a per-asset
+          # grep loop took ~5s). A symbol counts only when it appears exactly
+          # once before, as false; a new asset that's already verified, or a
+          # duplicated symbol, is not counted as newly verified.
+          awk -F'|' 'FILENAME == ARGV[1] { n[$1]++; before[$1] = $2; next }
+            n[$1] == 1 && before[$1] == "false" && $2 == "true" { print $1 }' \
+            /tmp/verified-before.txt /tmp/verified-after.txt > newly-verified.txt
 
           echo "NEWLY_VERIFIED_COUNT=$(wc -l < newly-verified.txt 2>/dev/null || echo 0)" >> $GITHUB_ENV
 

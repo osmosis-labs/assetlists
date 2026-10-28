@@ -191,3 +191,33 @@ test('status-change reason explains the change that fired', () => {
   assert.equal(statusChangeReason({ reason: 'market' }, ['ibcFlagged']), 'market');
   assert.equal(statusChangeReason({ reason: '?' }, ['ibcCleared']), '');
 });
+
+test('flags a changed counterparty channel, symbol or external link on a verified asset', () => {
+  const ibc = (channelId) => ({
+    type: 'ibc',
+    counterparty: { chainName: 'cosmoshub', chainId: 'cosmoshub-4', port: 'transfer', channelId },
+    chain: { port: 'transfer', channelId: 'channel-0', path: 'transfer/channel-0/uatom' },
+  });
+  const link = (url) => ({ type: 'external_interface', depositUrl: url, withdrawUrl: url });
+  const before = asset({ transferMethods: [link('https://bridge.example/a'), ibc('channel-141')] });
+
+  // Same Osmosis path: only the counterparty channel deposits leave from moved.
+  const [redirected] = findIdentityChanges([before], [
+    asset({ transferMethods: [link('https://bridge.example/a'), ibc('channel-0')] }),
+  ]);
+  assert.deepEqual(redirected.changed.map(({ field }) => field), ['ibcCounterpartyChannelId']);
+
+  const [relinked] = findIdentityChanges([before], [
+    asset({ symbol: 'ATOM.x', transferMethods: [link('https://parked.example/'), ibc('channel-141')] }),
+  ]);
+  assert.deepEqual(relinked.changed.map(({ field }) => field).sort(), ['externalUrls', 'symbol']);
+});
+
+test('treats swapped deposit and withdraw links as a change', () => {
+  const method = (depositUrl, withdrawUrl) => ({ type: 'external_interface', name: 'Bridge', depositUrl, withdrawUrl });
+  const before = asset({ transferMethods: [method('https://a.example/in', 'https://a.example/out')] });
+  const [swapped] = findIdentityChanges([before], [
+    asset({ transferMethods: [method('https://a.example/out', 'https://a.example/in')] }),
+  ]);
+  assert.deepEqual(swapped.changed.map(({ field }) => field), ['externalUrls']);
+});

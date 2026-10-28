@@ -14,8 +14,9 @@
 //
 //     1. Financially sensitive field change to an ESTABLISHED verified asset.
 //        The primary purpose. An upstream registry refresh can rewrite decimals,
-//        coinMinimalDenom, sourceDenom, origin chain, contract, IBC path or
-//        display name on an asset that keeps its symbol: it fires no lifecycle
+//        coinMinimalDenom, sourceDenom, origin chain, contract, IBC path, the
+//        counterparty channel deposits are sent from, the external deposit and
+//        withdraw links, symbol or display name on an existing asset: it fires no lifecycle
 //        category and never appears in new-assets.txt, so nothing else in the
 //        pipeline would surface it. These are the fields that determine where
 //        funds move or what the asset claims to be (a wrong exponent misprices
@@ -465,9 +466,9 @@ async function main() {
 
   if (identityChanges.length > 0) {
     report += '### Verified assets with financially sensitive field changes\n\n';
-    report += 'These verified assets kept their symbol, but a field that determines '
-      + 'where funds move or what the asset claims to be changed. Confirm each '
-      + 'against the upstream chain-registry commit before merging.\n\n';
+    report += 'A field that determines where funds move or what these verified assets '
+      + 'claim to be changed. Confirm each against the upstream chain-registry commit, '
+      + 'or the zone_assets PR that changed it, before merging.\n\n';
     report += '| Symbol | Chain | Field | Before | After |\n';
     report += '|--------|-------|-------|--------|-------|\n';
     for (const c of identityChanges) {

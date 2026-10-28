@@ -237,7 +237,9 @@ const processAsset = (chainName, asset) => {
   assetObject.image = getAssetImage(asset);
   assetObject.color = asset.images?.[0].theme?.primary_color_hex;
   assetObject.coinGeckoId = getAssetCoinGeckoId(chainName, asset);
-  if (assetObject.type === "ibc") {
+  // An IBC asset whose counterparty channel is unknown (its trace was not
+  // exported) gets no ibc_info rather than a route without a channel.
+  if (assetObject.type === "ibc" && asset.traces?.at(-1)?.counterparty?.channel_id) {
     assetObject.ibc_info = getIbcInfo(chainName, asset);
   }
   if (assetObject.type === "bridge") {

@@ -329,12 +329,17 @@ export async function setLocalAsset(asset_data) {
     // Extract channel ID from path (e.g., "channel-123" from segments[1])
     const channelId = segments[1];
 
+    // The path only gives the Osmosis-side channel. The counterparty's
+    // channel id is unknown without the registry's IBC entry, so it is left
+    // unset rather than guessed: copying the Osmosis id here would make the
+    // frontend send deposits out of the remote chain's channel with that
+    // number, which usually leads somewhere else. setTransferMethods skips
+    // the IBC transfer method when the counterparty channel is missing.
     const minimalTrace = {
       type: type,
       counterparty: {
         chain_name: asset_data.source_asset.chain_name,
-        base_denom: asset_data.source_asset.base_denom,
-        channel_id: channelId  // Will be set in setTransferMethods if needed
+        base_denom: asset_data.source_asset.base_denom
       },
       chain: {
         channel_id: channelId,
@@ -996,7 +1001,13 @@ export function getAssetTraces(asset) {
 export function setTraces(asset_data) {
 
   let traces = getAssetProperty(asset_data.local_asset, "traces");
-  asset_data.chain_reg.traces = traces?.length ? [ traces.at(-1) ] : undefined;
+  const last = traces?.at(-1);
+  // The fallback trace built in setLocalAsset has no counterparty channel. The
+  // chain-registry schema requires one, and Mintscan's export would publish an
+  // IBC route without it, so an incomplete IBC hop is not exported.
+  const incompleteIbc = (last?.type === "ibc" || last?.type === "ibc-cw20")
+    && !last?.counterparty?.channel_id;
+  asset_data.chain_reg.traces = last && !incompleteIbc ? [ last ] : undefined;
 
 }
 
@@ -1552,8 +1563,14 @@ export function setTransferMethods(asset_data) {
       const traces = getAssetProperty(asset_data.local_asset, "traces");
       const trace = traces?.[traces.length - 1];
 
-      // Only add IBC transfer method if we have a valid trace with required fields
-      if (trace?.counterparty?.chain_name && trace?.chain?.channel_id) {
+      // Only add IBC transfer method if we have a valid trace with required
+      // fields. Both channel ids are needed: deposits are sent out of the
+      // counterparty channel, withdrawals out of the Osmosis one.
+      if (
+        trace?.counterparty?.chain_name &&
+        trace?.counterparty?.channel_id &&
+        trace?.chain?.channel_id
+      ) {
         const ibcTransferMethod = {
           name: "Osmosis IBC Transfer",
           type: "ibc",
@@ -1734,15 +1751,24 @@ export function setSocials(asset_data) {
 
 }
 
+// An alloy is the share token a transmuter mints under its own factory
+// namespace ("factory/<transmuter>/alloyed/<name>"). An alloy picked up from
+// the chain registry with no zone entry (allUSD) has no is_alloyed, so the
+// denom decides; an explicit is_alloyed in the zone entry still wins.
+function isAlloyedAsset(asset_data) {
+  return asset_data.zone_asset.is_alloyed
+    ?? /^factory\/osmo1[a-z0-9]+\/alloyed\//.test(asset_data.zone_asset.base_denom ?? "");
+}
+
 export function setIsAlloyed(asset_data) {
 
-  asset_data.frontend.isAlloyed = asset_data.zone_asset.is_alloyed;
+  asset_data.frontend.isAlloyed = isAlloyedAsset(asset_data);
 
 }
 
 export function setContract(asset_data) {
 
-  if (asset_data.zone_asset.is_alloyed) {
+  if (isAlloyedAsset(asset_data)) {
     
     asset_data.frontend.contract = asset_data.chain_reg.address;
 

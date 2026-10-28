@@ -14,12 +14,27 @@ export const SENSITIVE_FIELDS = [
   'chainName',
   'contract',
   'ibcPath',
+  'ibcCounterpartyChannelId',
+  'ibcCounterpartyChainId',
+  'ibcCounterpartyPort',
+  'externalUrls',
+  'symbol',
   'name',
 ];
 
 export function sensitiveShape(asset) {
-  const ibcPath = (asset.transferMethods ?? [])
-    .find((tm) => tm?.type === 'ibc' && tm?.chain?.path)?.chain?.path ?? null;
+  const ibcMethod = (asset.transferMethods ?? [])
+    .find((tm) => tm?.type === 'ibc' && tm?.chain?.path);
+  const ibcPath = ibcMethod?.chain?.path ?? null;
+  // Deposits are sent out of the counterparty channel, so a change there
+  // redirects funds even when the Osmosis-side path is unchanged. The
+  // "Deposit via ..." links send users to a third-party site.
+  // One record per method, keeping which URL is the deposit and which the
+  // withdrawal, so swapping the two still reads as a change.
+  const externalUrls = (asset.transferMethods ?? [])
+    .filter((tm) => tm?.type === 'external_interface')
+    .map((tm) => `${tm.name ?? ''} | deposit ${tm.depositUrl ?? '-'} | withdraw ${tm.withdrawUrl ?? '-'}`)
+    .sort();
   return {
     decimals: asset.decimals ?? null,
     coinMinimalDenom: asset.coinMinimalDenom ?? null,
@@ -27,6 +42,11 @@ export function sensitiveShape(asset) {
     chainName: asset.chainName ?? null,
     contract: asset.contract ?? null,
     ibcPath,
+    ibcCounterpartyChannelId: ibcMethod?.counterparty?.channelId ?? null,
+    ibcCounterpartyChainId: ibcMethod?.counterparty?.chainId ?? null,
+    ibcCounterpartyPort: ibcMethod?.counterparty?.port ?? null,
+    externalUrls,
+    symbol: asset.symbol ?? null,
     name: asset.name ?? null,
   };
 }

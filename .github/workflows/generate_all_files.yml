@@ -830,7 +830,23 @@ jobs:
                     hop: ([ ($f.counterparty // [])[]
                             | select(.chainType == "cosmos" and .chainName != $a.chain_name)
                             | .chainName ] | first),
-                    chain_total: ($totals[$a.chain_name] // 0)
+                    chain_total: ($totals[$a.chain_name] // 0),
+                    # Table-safe tooltip: a "|" or newline would break the row.
+                    tooltip: (($a.tooltip_message // "") | gsub("\\|"; "\\|") | gsub("\n"; " ")),
+                    # check_tooltip_expiry.mjs acts after the expiry day (UTC).
+                    # It only removes or replaces the tooltip: a halt stays in
+                    # place, now without the explanation.
+                    # An unparseable date reads as "invalid", never as expired.
+                    expiry: (
+                      if $a.tooltip_expiry_date then
+                        (try ((("\($a.tooltip_expiry_date)T23:59:59Z" | fromdate) - now) / 86400 | floor) catch null) as $days
+                        | if $days == null then "\($a.tooltip_expiry_date) (invalid date)"
+                          else "\($a.tooltip_expiry_date) (" + (if $days < 0 then "due" else "in \($days)d" end) + "): tooltip "
+                            + (if (($a.tooltip_decay_message // "") != "") then "replaced" else "removed" end)
+                          end
+                      elif $a.planned_shutdown_date then "shutdown \($a.planned_shutdown_date)"
+                      else null end
+                    )
                   })
           ' osmosis-1/osmosis.zone_assets.json)
           # Split off assets with no direction halted: a manual unstable flag
@@ -843,18 +859,22 @@ jobs:
           STANDING_HALT_COUNT=$(echo "$STANDING_HALTS" | jq 'length')
           STANDING_HALT_CHAINS=$(echo "$STANDING_HALTS" | jq '[.[].chain_name] | unique | length')
           STANDING_WARNING_COUNT=$(echo "$STANDING_WARNINGS" | jq 'length')
+          STANDING_EXPIRING=$(echo "$STANDING_HALTS" "$STANDING_WARNINGS" | jq -s 'add | map(select(.tooltip_expiry_date)) | length')
+          STANDING_NO_TOOLTIP=$(echo "$STANDING_HALTS" | jq 'map(select(.tooltip == "")) | length')
 
           section "🛑 Standing manual and planned-shutdown halts"
-          status "${STANDING_HALT_COUNT} asset(s) halted across ${STANDING_HALT_CHAINS} chain(s); ${STANDING_WARNING_COUNT} asset(s) with a manual warning and transfers open."
+          status "${STANDING_HALT_COUNT} asset(s) halted across ${STANDING_HALT_CHAINS} chain(s), ${STANDING_NO_TOOLTIP} without a tooltip; ${STANDING_WARNING_COUNT} asset(s) with a manual warning and transfers open; ${STANDING_EXPIRING} tooltip(s) set to expire."
 
           if [ "$STANDING_HALT_COUNT" -gt 0 ]; then
             # One compact row per chain. "Assets halted" reads "X of Y" against
             # the chain's full listing so a single-asset halt (e.g. USDN on
             # noble) cannot read as a whole-chain halt, and the impacted symbols
-            # are named in the row. The per-asset, per-direction breakdown is
-            # collapsed below.
-            echo "| Chain | Assets halted | Impacted assets | Directions | Reason(s) |" >> $S
-            echo "|-------|---------------|-----------------|------------|-----------|" >> $S
+            # are named in the row. Tooltip lists the distinct messages users
+            # see (and flags halted assets with none); Expires shows the
+            # earliest tooltip expiry or planned shutdown. The per-asset,
+            # per-direction breakdown is collapsed below.
+            echo "| Chain | Assets halted | Impacted assets | Directions | Reason(s) | Tooltip | Expires |" >> $S
+            echo "|-------|---------------|-----------------|------------|-----------|---------|---------|" >> $S
             echo "$STANDING_HALTS" | jq -r '
               group_by(.chain_name)
               | map({
@@ -880,10 +900,20 @@ jobs:
                         ( .osmosis_withdrawal_halt_reason // empty ),
                         ( .osmosis_unstable_reason // empty )
                     ] | unique | join(", ")
+                  ),
+                  tooltips: (
+                    ([ .[] | select(.tooltip == "") ] | length) as $missing
+                    | [ .[] | .tooltip | select(. != "") ] | unique
+                    | . + (if $missing > 0 then ["⚠️ \($missing) asset(s) without a tooltip"] else [] end)
+                    | join("<br>")
+                  ),
+                  expires: (
+                    [ .[] | .expiry // empty ] | unique
+                    | if length == 0 then "-" else join("<br>") end
                   )
                 })
               | .[]
-              | "| \(.chain) | \(.halted) of \(.total) | \(.assets) | \(.directions) | \(.reasons) |"
+              | "| \(.chain) | \(.halted) of \(.total) | \(.assets) | \(.directions) | \(.reasons) | \(.tooltips) | \(.expires) |"
             ' >> $S
 
             echo "" >> $S
@@ -893,8 +923,8 @@ jobs:
             # so a native Gravity asset reads "gravitybridge" while a
             # Persistence asset bridged in via Gravity reads "persistence via
             # gravitybridge".
-            echo "| Symbol | Route | Base denom | Direction | Reason | Tooltip |" >> $S
-            echo "|--------|-------|-----------|-----------|--------|---------|" >> $S
+            echo "| Symbol | Route | Base denom | Direction | Reason | Tooltip | Expires |" >> $S
+            echo "|--------|-------|-----------|-----------|--------|---------|---------|" >> $S
             echo "$STANDING_HALTS" | jq -r '
               .[]
               | . as $a
@@ -902,10 +932,10 @@ jobs:
               | (if $a.hop then $a.chain_name + " via " + $a.hop else $a.chain_name end) as $route
               | [
                   (if .osmosis_halt_deposits == true then
-                     "| \($sym) | \($route) | \(.base_denom) | deposit | \(.osmosis_deposit_halt_reason // "") | \(.tooltip_message // "") |"
+                     "| \($sym) | \($route) | \(.base_denom) | deposit | \(.osmosis_deposit_halt_reason // "") | \(if .tooltip == "" then "⚠️ none" else .tooltip end) | \(.expiry // "-") |"
                    else empty end),
                   (if .osmosis_halt_withdrawals == true then
-                     "| \($sym) | \($route) | \(.base_denom) | withdrawal | \(.osmosis_withdrawal_halt_reason // "") | \(.tooltip_message // "") |"
+                     "| \($sym) | \($route) | \(.base_denom) | withdrawal | \(.osmosis_withdrawal_halt_reason // "") | \(if .tooltip == "" then "⚠️ none" else .tooltip end) | \(.expiry // "-") |"
                    else empty end)
                 ]
               | .[]
@@ -920,12 +950,12 @@ jobs:
             echo "" >> $S
             echo "### Manual warnings, transfers open (${STANDING_WARNING_COUNT} asset(s))" >> $S
             echo "" >> $S
-            echo "| Symbol | Route | Reason | Tooltip |" >> $S
-            echo "|--------|-------|--------|---------|" >> $S
+            echo "| Symbol | Route | Reason | Tooltip | Expires |" >> $S
+            echo "|--------|-------|--------|---------|---------|" >> $S
             echo "$STANDING_WARNINGS" | jq -r '
               .[]
               | (if .hop then .chain_name + " via " + .hop else .chain_name end) as $route
-              | "| \(.symbol) | \($route) | \(.osmosis_unstable_reason // "") | \(.tooltip_message // "") |"
+              | "| \(.symbol) | \($route) | \(.osmosis_unstable_reason // "") | \(if .tooltip == "" then "⚠️ none" else .tooltip end) | \(.expiry // "-") |"
             ' >> $S
           fi
           echo "" >> $S

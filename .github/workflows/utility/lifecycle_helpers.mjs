@@ -29,7 +29,30 @@ export const NUMIA_TOKENS_URL = 'https://public-osmosis-api.numia.xyz/tokens/v2/
  * degrade quietly to an empty map (asset_status_report,
  * where Numia data is informational).
  */
+// A single slow Numia response used to fail the whole daily run. Timeouts,
+// network errors, HTTP 5xx and 429 are retried after these delays before the
+// hard-fail policy applies; other 4xx answers fail immediately.
+const NUMIA_RETRY_DELAYS_MS = [5000, 15000];
+
 export async function fetchNumia({ hardFail = true } = {}) {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return await fetchNumiaOnce();
+    } catch (err) {
+      const retryable = !(err.status >= 400 && err.status < 500 && err.status !== 429);
+      const delayMs = NUMIA_RETRY_DELAYS_MS[attempt];
+      if (retryable && delayMs !== undefined) {
+        console.warn(`${err.message}; retrying in ${delayMs / 1000}s (attempt ${attempt + 2} of ${NUMIA_RETRY_DELAYS_MS.length + 1})`);
+        await new Promise((resolve) => setTimeout(resolve, delayMs));
+        continue;
+      }
+      if (!hardFail) return new Map();
+      throw new Error(`${err.message} (hard-fail policy, ${attempt + 1} attempt(s))`);
+    }
+  }
+}
+
+async function fetchNumiaOnce() {
   const controller = new AbortController();
   const timeoutMs = 10000;
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
@@ -37,10 +60,9 @@ export async function fetchNumia({ hardFail = true } = {}) {
     const res = await fetch(NUMIA_TOKENS_URL, { signal: controller.signal });
     clearTimeout(timeoutId);
     if (!res.ok) {
-      if (hardFail) {
-        throw new Error(`Numia returned HTTP ${res.status}; aborting (hard-fail policy)`);
-      }
-      return new Map();
+      const error = new Error(`Numia returned HTTP ${res.status}`);
+      error.status = res.status;
+      throw error;
     }
     const data = await res.json();
     const byDenom = new Map();
@@ -57,9 +79,9 @@ export async function fetchNumia({ hardFail = true } = {}) {
     return byDenom;
   } catch (err) {
     clearTimeout(timeoutId);
-    if (!hardFail) return new Map();
+    if (err.status) throw err;
     if (err.name === 'AbortError') {
-      throw new Error(`Request to ${NUMIA_TOKENS_URL} timed out after 10s (hard-fail policy)`);
+      throw new Error(`Request to ${NUMIA_TOKENS_URL} timed out after ${timeoutMs / 1000}s`);
     }
     throw new Error(`Failed to fetch from ${NUMIA_TOKENS_URL}: ${err.message}`);
   }

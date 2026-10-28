@@ -1,0 +1,70 @@
+# Description: Fails a pull request that edits generated files by hand.
+#              Everything under <zone>/generated/ is rebuilt by the daily
+#              Generate All Files run from the zone files and the chain
+#              registry, so a hand edit either disappears on the next run or,
+#              until then, puts unreviewed data in front of users. Edit
+#              osmosis.zone_assets.json / osmosis.zone_chains.json instead.
+# Included in: NOT included in Generate All Files bundle (PR validation only)
+# Trigger: Automatically runs on pull requests to main branch
+# Exempt: PRs opened by the github-actions bot (the generation workflows), and
+#         PRs a maintainer labels "generated-edit-approved" for a deliberate
+#         reconciliation.
+#
+# Runs on pull_request_target so the check always uses main's copy of this
+# workflow: under pull_request a PR could edit the check itself. It never
+# checks out or runs PR code; the changed paths come from the GitHub API.
+
+on:
+  pull_request_target:
+    branches:
+      - main
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+name: Guard Generated Files
+permissions:
+  pull-requests: read
+jobs:
+  guard_generated_files:
+    name: No hand edits to generated files
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Check changed paths
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+          APPROVED: ${{ contains(github.event.pull_request.labels.*.name, 'generated-edit-approved') }}
+          CHANGED_FILES: ${{ github.event.pull_request.changed_files }}
+        run: |
+          if [ "$AUTHOR" = "github-actions[bot]" ]; then
+            echo "Opened by the generation workflow; generated files are expected."
+            exit 0
+          fi
+          # The files API lists at most 3000 files, so a larger PR can't be
+          # checked completely and fails unless a maintainer approved it.
+          if [ "${CHANGED_FILES:-0}" -gt 3000 ]; then
+            if [ "$APPROVED" = "true" ]; then
+              echo "PR changes ${CHANGED_FILES} files, too many to check; allowed by the generated-edit-approved label."
+              exit 0
+            fi
+            echo "::error::This PR changes ${CHANGED_FILES} files, more than the 3000 the check can list. Split it, or have a maintainer add the generated-edit-approved label."
+            exit 1
+          fi
+          # Both sides of a rename count, so moving a generated file out of
+          # generated/ is still caught. A failed API call fails the check.
+          gh api --paginate "repos/$REPO/pulls/$PR_NUMBER/files" \
+            --jq '.[] | .filename, (.previous_filename // empty)' > changed-files.txt
+          grep -E '^[^/]+/generated/' changed-files.txt | sort -u > generated-edits.txt || true
+          if [ ! -s generated-edits.txt ]; then
+            echo "No generated files changed."
+            exit 0
+          fi
+          if [ "$APPROVED" = "true" ]; then
+            echo "Generated files changed, allowed by the generated-edit-approved label:"
+            cat generated-edits.txt
+            exit 0
+          fi
+          echo "::error::This PR edits generated files, which the daily run rebuilds from the zone files and the chain registry. Make the change in osmosis.zone_assets.json or osmosis.zone_chains.json instead. A maintainer can add the generated-edit-approved label for a deliberate reconciliation."
+          cat generated-edits.txt
+          exit 1

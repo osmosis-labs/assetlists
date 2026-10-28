@@ -20,6 +20,7 @@ chain_reg.setup();
 import * as path from 'path';
 import * as api_mgmt from "./api_management.mjs";
 import { sortEndpointsByProvider, isPreferredProvider, getProviderFromEndpoint, isTeamEndpoint } from './endpoint_preference.mjs';
+import { VALIDATION_STATE_KEYS, withStateLock, writeFileAtomic } from './lifecycle_helpers.mjs';
 
 import WebSocket from 'ws';
 import https from 'https';
@@ -1336,7 +1337,17 @@ function addValidationRecordsToState(state, chainName, validationRecords) {
       state.chains.push(validationRecord);
     }
   });
-  zone.writeToFile(chainName, stateDir, stateFileName, state);
+  // Validation runs in the background alongside the lifecycle scripts (IBC
+  // client status, market health), which write state.assets. Re-read the file
+  // and replace only the keys validation owns, so their updates survive.
+  const statePath = zone.getFileLocation(chainName, stateDir, stateFileName);
+  withStateLock(statePath, () => {
+    const currentState = getState(chainName);
+    for (const key of VALIDATION_STATE_KEYS) {
+      currentState[key] = state[key];
+    }
+    writeFileAtomic(statePath, JSON.stringify(currentState, null, 2));
+  });
   console.log("Saved State.");
 
 }

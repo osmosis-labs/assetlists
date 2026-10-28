@@ -384,6 +384,81 @@ export function loadJSON(p, fallback) {
   }
 }
 
+/**
+ * Write via a temp file and rename, so a concurrent reader never sees a
+ * half-written file. Endpoint validation runs in the background alongside the
+ * lifecycle steps and reads zone_assets, zone_chains and state.json.
+ */
+export function writeFileAtomic(p, content) {
+  const tmp = `${p}.${process.pid}.tmp`;
+  fs.writeFileSync(tmp, content, 'utf8');
+  fs.renameSync(tmp, p);
+}
+
+// state.json keys owned by endpoint validation (validateEndpoints.mjs).
+export const VALIDATION_STATE_KEYS = ['chains', 'lastValidationRun'];
+
+const STATE_LOCK_TIMEOUT_MS = 120000;
+const STATE_LOCK_POLL_MS = 50;
+
+/**
+ * Run fn while holding an exclusive lock on statePath, so one process's
+ * read-merge-write can't interleave with another's (each would otherwise
+ * re-read, then rename over the other's update). mkdir is atomic across
+ * processes, and only the process that created the lock removes it.
+ *
+ * The lock is held only for a synchronous read and write, so one still held
+ * after STATE_LOCK_TIMEOUT_MS means a writer died mid-write. That throws and
+ * fails the step rather than taking the lock over: every takeover rule
+ * (owner liveness, lock age) leaves a window where two writers both proceed.
+ */
+export function withStateLock(statePath, fn) {
+  const lockDir = `${statePath}.lock`;
+  const sleeper = new Int32Array(new SharedArrayBuffer(4));
+  const deadline = Date.now() + STATE_LOCK_TIMEOUT_MS;
+  for (;;) {
+    try {
+      fs.mkdirSync(lockDir);
+      break;
+    } catch (err) {
+      if (err.code !== 'EEXIST') throw err;
+      if (Date.now() > deadline) {
+        let owner = 'unknown';
+        try { owner = fs.readFileSync(`${lockDir}/owner`, 'utf8'); } catch { /* no owner file */ }
+        throw new Error(
+          `Timed out after ${STATE_LOCK_TIMEOUT_MS / 1000}s waiting for ${lockDir} (held by pid ${owner}). ` +
+          'A writer probably died mid-write; check state.json, then remove the lock directory.'
+        );
+      }
+      Atomics.wait(sleeper, 0, 0, STATE_LOCK_POLL_MS);
+    }
+  }
+  try {
+    // Only used in the timeout message above.
+    fs.writeFileSync(`${lockDir}/owner`, String(process.pid));
+    return fn();
+  } finally {
+    fs.rmSync(lockDir, { recursive: true, force: true });
+  }
+}
+
+/**
+ * Write state.json from a lifecycle script, keeping whatever endpoint
+ * validation has written to its own keys since this script loaded the file.
+ * Validation runs concurrently and writes only VALIDATION_STATE_KEYS, so
+ * writing the in-memory copy whole would discard that run's results.
+ */
+export function writeLifecycleState(statePath, state) {
+  withStateLock(statePath, () => {
+    const current = loadJSON(statePath, {});
+    const merged = { ...state };
+    for (const key of VALIDATION_STATE_KEYS) {
+      if (key in current) merged[key] = current[key];
+    }
+    writeFileAtomic(statePath, JSON.stringify(merged, null, 2) + '\n');
+  });
+}
+
 // ── State helpers (cron-lifecycle semantics) ────────────────────────────────
 
 /**

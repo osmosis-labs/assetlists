@@ -5290,12 +5290,6 @@
       "categories": [],
       "transferMethods": [
         {
-          "name": "Echelon Network",
-          "type": "external_interface",
-          "depositUrl": "https://app.ech.network/ibc",
-          "withdrawUrl": "https://app.ech.network/ibc"
-        },
-        {
           "name": "Osmosis IBC Transfer",
           "type": "ibc",
           "counterparty": {
@@ -7302,12 +7296,10 @@
       "name": "BeeZee",
       "isAlloyed": false,
       "verified": true,
-      "unstable": true,
-      "unstableReason": "market",
+      "unstable": false,
       "disabled": false,
       "preview": false,
-      "listingDate": "2024-10-29T18:00:00.000Z",
-      "lastDowntimeDate": "2026-10-09T15:14:52.201Z"
+      "listingDate": "2024-10-29T18:00:00.000Z"
     },
     {
       "chainName": "juno",
@@ -7884,14 +7876,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/acrechain/images/arusd.svg"
       },
       "categories": [],
-      "transferMethods": [
-        {
-          "name": "Arable Finance",
-          "type": "external_interface",
-          "depositUrl": "https://app.arable.finance/#/ibc",
-          "withdrawUrl": "https://app.arable.finance/#/ibc"
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "acrechain",
@@ -8500,14 +8485,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/acrechain/images/cnto.svg"
       },
       "categories": [],
-      "transferMethods": [
-        {
-          "name": "Arable Finance",
-          "type": "external_interface",
-          "depositUrl": "https://app.arable.finance/#/ibc",
-          "withdrawUrl": "https://app.arable.finance/#/ibc"
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "acrechain",
@@ -10670,13 +10648,15 @@
       "name": "Pepe (Axelar)",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
       "preview": false,
       "sortWith": {
         "chainName": "axelar",
         "sourceDenom": "uaxl"
-      }
+      },
+      "lastDowntimeDate": "2026-10-28T09:50:34.106Z"
     },
     {
       "chainName": "osmosis",
@@ -21536,15 +21516,9 @@
       "isAlloyed": true,
       "contract": "osmo1z6r6qdknhgsc0zeracktgpcxf43j6sekq07nw8sxduc9lg0qjjlqfu25e3",
       "verified": true,
-      "unstable": true,
-      "unstableReason": "manual",
+      "unstable": false,
       "disabled": false,
-      "haltDeposits": true,
-      "depositHaltReason": "manual",
-      "haltWithdrawals": true,
-      "withdrawalHaltReason": "manual",
-      "preview": false,
-      "tooltipMessage": "Alloyed BTC deposits and withdrawals are paused after a Nomic bridge exploit minted unbacked nBTC, one of its backing variants. Trading remains available and the other Bitcoin variants are unaffected. A recovery plan to restore full backing and remove nBTC from the alloy is under discussion at https://forum.osmosis.zone/t/4122"
+      "preview": false
     },
     {
       "chainName": "bitsong",
@@ -26274,15 +26248,7 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/doge.int3.png"
       },
       "categories": [],
-      "transferMethods": [
-        {
-          "name": "Int3face Bridge",
-          "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone/bridge?fromChain=dogecoin&toChain=osmosis&fromToken=DOGE",
-          "withdrawUrl": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=dogecoin&fromToken=DOGE.int3",
-          "logoUri": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "int3face",
@@ -26338,15 +26304,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/btc.int3.svg"
       },
       "categories": [],
-      "transferMethods": [
-        {
-          "name": "Int3face Bridge",
-          "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone/bridge",
-          "withdrawUrl": "https://app.int3face.zone/bridge",
-          "logoUri": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "int3face",
@@ -26403,15 +26361,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/bch.int3.svg"
       },
       "categories": [],
-      "transferMethods": [
-        {
-          "name": "Int3face Bridge",
-          "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone/bridge",
-          "withdrawUrl": "https://app.int3face.zone/bridge",
-          "logoUri": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "int3face",
@@ -26468,15 +26418,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/ltc.int3.svg"
       },
       "categories": [],
-      "transferMethods": [
-        {
-          "name": "Int3face Bridge",
-          "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone/bridge",
-          "withdrawUrl": "https://app.int3face.zone/bridge",
-          "logoUri": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "int3face",
@@ -27142,15 +27084,7 @@
       },
       "coingeckoId": "litecoin",
       "categories": [],
-      "transferMethods": [
-        {
-          "name": "Int3face Bridge",
-          "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone/bridge",
-          "withdrawUrl": "https://app.int3face.zone/bridge",
-          "logoUri": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "litecoin",
@@ -27193,15 +27127,7 @@
       },
       "coingeckoId": "bitcoin-cash",
       "categories": [],
-      "transferMethods": [
-        {
-          "name": "Int3face Bridge",
-          "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone/bridge",
-          "withdrawUrl": "https://app.int3face.zone/bridge",
-          "logoUri": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "bitcoincash",
@@ -27967,15 +27893,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/ton.int3.svg"
       },
       "categories": [],
-      "transferMethods": [
-        {
-          "name": "Int3face Bridge",
-          "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone/bridge",
-          "withdrawUrl": "https://app.int3face.zone/bridge",
-          "logoUri": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "int3face",
@@ -30400,9 +30318,15 @@
       "name": "Initia",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "manual",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
       "preview": false,
+      "tooltipMessage": "The Initia chain was halted on 23 October 2026 after an exploit of its Move virtual machine. Initia says native INIT was not minted in the exploit, but the chain is not producing blocks, so deposits and withdrawals are disabled until it resumes. Source: https://x.com/initia/status/2113661738625155217",
       "listingDate": "2025-04-24T17:42:54.132Z"
     },
     {
@@ -31210,15 +31134,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/sol.int3.svg"
       },
       "categories": [],
-      "transferMethods": [
-        {
-          "name": "Int3face Bridge",
-          "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone/bridge?fromChain=solana&toChain=osmosis&fromToken=SOL",
-          "withdrawUrl": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=solana&fromToken=SOL.int3",
-          "logoUri": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "int3face",
@@ -31328,15 +31244,7 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/xrpl/images/xrp.svg"
       },
       "categories": [],
-      "transferMethods": [
-        {
-          "name": "Int3face Bridge",
-          "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone/bridge?fromChain=xrpl&toChain=osmosis&fromToken=XRP",
-          "withdrawUrl": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=xrpl&fromToken=XRP.int3",
-          "logoUri": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "int3face",
@@ -32598,15 +32506,7 @@
       "categories": [
         "meme"
       ],
-      "transferMethods": [
-        {
-          "name": "Int3face Bridge",
-          "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone/bridge?fromChain=solana&toChain=osmosis&fromToken=PENGU",
-          "withdrawUrl": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=solana&fromToken=iPENGU",
-          "logoUri": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "int3face",
@@ -32662,15 +32562,7 @@
       "categories": [
         "meme"
       ],
-      "transferMethods": [
-        {
-          "name": "Int3face Bridge",
-          "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone/bridge?fromChain=solana&toChain=osmosis&fromToken=TRUMP",
-          "withdrawUrl": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=solana&fromToken=iTRUMP",
-          "logoUri": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "int3face",
@@ -32885,15 +32777,7 @@
       "categories": [
         "meme"
       ],
-      "transferMethods": [
-        {
-          "name": "Int3face Bridge",
-          "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone/bridge?fromChain=solana&toChain=osmosis&fromToken=TRUMP",
-          "withdrawUrl": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=solana&fromToken=iTRUMP",
-          "logoUri": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "solana",
@@ -32936,15 +32820,7 @@
       "categories": [
         "meme"
       ],
-      "transferMethods": [
-        {
-          "name": "Int3face Bridge",
-          "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone/bridge?fromChain=solana&toChain=osmosis&fromToken=PENGU",
-          "withdrawUrl": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=solana&fromToken=iPENGU",
-          "logoUri": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "solana",
@@ -33373,15 +33249,7 @@
       "categories": [
         "privacy"
       ],
-      "transferMethods": [
-        {
-          "name": "Int3face Bridge",
-          "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone/bridge?fromChain=zcash&toChain=osmosis&fromToken=ZEC",
-          "withdrawUrl": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=zcash&fromToken=bZEC",
-          "logoUri": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "int3face",
@@ -33438,15 +33306,7 @@
       "categories": [
         "privacy"
       ],
-      "transferMethods": [
-        {
-          "name": "Int3face Bridge",
-          "type": "external_interface",
-          "depositUrl": "https://app.int3face.zone/bridge?fromChain=zcash&toChain=osmosis&fromToken=ZEC",
-          "withdrawUrl": "https://app.int3face.zone/bridge?fromChain=osmosis&toChain=zcash&fromToken=bZEC",
-          "logoUri": "https://raw.githubusercontent.com/cosmos/chain-registry/master/int3face/images/int3.png"
-        }
-      ],
+      "transferMethods": [],
       "counterparty": [
         {
           "chainName": "zcash",
@@ -34645,7 +34505,7 @@
       "chainName": "pryzm",
       "sourceDenom": "c:uosmo",
       "coinMinimalDenom": "ibc/B89DE064B57F5026B63CFF50ED15A5EBA901A6B17D9600B9A4F86C32095BFEF4",
-      "symbol": "cOSMO",
+      "symbol": "cOSMO.pryzm",
       "decimals": 6,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/pryzm/images/cOsmo.png",
@@ -51233,11 +51093,12 @@
       "variantGroupKey": "ibc/245C3CA604AAB4BB9EEA5E86F23F52D59253D8722C8FC9C4E3E69F77C5CD3D2F",
       "name": "Stride Staked ISLM (via HAQQ)",
       "isAlloyed": false,
-      "verified": false,
+      "verified": true,
       "unstable": false,
       "disabled": false,
-      "preview": true,
-      "tooltipMessage": "stISLM that reached Osmosis from HAQQ. As part of Stride's wind-down it redeems for ISLM in its own Osmosis pool, at the same rate as the canonical stISLM; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922"
+      "preview": false,
+      "tooltipMessage": "stISLM that reached Osmosis from HAQQ. As part of Stride's wind-down it redeems for ISLM in its own Osmosis pool, at the same rate as the canonical stISLM; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922",
+      "listingDate": "2026-10-28T09:51:09.127Z"
     },
     {
       "chainName": "cosmoshub",
@@ -52079,7 +51940,7 @@
       "chainName": "babylon",
       "sourceDenom": "cw20:bbn1s7jzz7cyuqmy5xpr07yepka5ngktexsferu2cr4xeww897ftj77sv30f5s",
       "coinMinimalDenom": "ibc/3F5F0DB5516ECB13C11E92B8A88A000D2879E840215564BD648AAF7882957360",
-      "symbol": "eBABY",
+      "symbol": "eBABY.babylon",
       "decimals": 6,
       "logoURIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/babylon/images/eBABY.svg"
@@ -52234,7 +52095,7 @@
       "chainName": "babylon",
       "sourceDenom": "cw20:bbn1tyvxlr8qjt7yx48lhhle7xzxfxkyqwzkaxey3jekrl0gql260jlqlxgfst",
       "coinMinimalDenom": "ibc/6318B2FF2D25FD8203712BE6074C8340F2A34D056EF6BCDF5064BC1919B0C517",
-      "symbol": "SolvBTC",
+      "symbol": "SolvBTC.babylon",
       "decimals": 18,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/solvBTC.png",
@@ -55912,7 +55773,7 @@
       "chainName": "injective",
       "sourceDenom": "factory/inj1n636d9gzrqggdk66n2f97th0x8yuhfrtx520e7/ausd",
       "coinMinimalDenom": "ibc/0CAAE33AD6708DE2CFBE368DB16F24E1CB9BB3B91328EC61EEB3D1027AEBCC55",
-      "symbol": "AUSD",
+      "symbol": "AUSD.inj",
       "decimals": 6,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/ausd.png"
@@ -56452,7 +56313,7 @@
       "chainName": "juno",
       "sourceDenom": "cw20:juno12wxyvtqe76x2a5jj6ckp2hfq8v32m6rvyyxwwufl2tksqvkt7whqczv6pa",
       "coinMinimalDenom": "ibc/758A759BD24DD768B66FE3C8087AEF21B337B45FB7B359D2E9624B21507C1B82",
-      "symbol": "CATOM",
+      "symbol": "CATOM.juno",
       "decimals": 6,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/catom.png"
@@ -57287,7 +57148,7 @@
       "chainName": "juno",
       "sourceDenom": "cw20:juno1mvkgcr5uce2rnpzr4qrzf50hx4qreuwzlt7fzsjrhjud3xnjmttq5mkh2m",
       "coinMinimalDenom": "ibc/8ED0F4F84A6035D7DE3E0D6B8A0258401496C7366481F7C863C0B7B738C37A2B",
-      "symbol": "bJUNO",
+      "symbol": "bJUNO.juno",
       "decimals": 6,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/bJUNO-bbl.png"
@@ -63238,7 +63099,7 @@
       "chainName": "terra",
       "sourceDenom": "cw20:terra12dfv3f0e6m22z6cnhfn3nxk2en3z3zeqy6ctym",
       "coinMinimalDenom": "ibc/1FF3A3AA13A80B8AF2FBBB9E40C1496D58B62D1748BA183B8D53A3152A25037D",
-      "symbol": "LINK.eth.terra",
+      "symbol": "LINK.eth.wh.terra",
       "decimals": 8,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/link.png",
@@ -63485,7 +63346,7 @@
       "chainName": "terra",
       "sourceDenom": "cw20:terra1yg3j2s986nyp5z7r2lvt0hx3r0lnd7kwvwwtsc",
       "coinMinimalDenom": "ibc/641DB39FDC4B68E95DC87D7CBF3F7A51C04CCA0B44D2ACFDDAD4EAED082FCEFC",
-      "symbol": "stLuna",
+      "symbol": "stLuna.terra",
       "decimals": 6,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/stluna.png"
@@ -64962,7 +64823,7 @@
       "chainName": "terra",
       "sourceDenom": "cw20:terra13zaagrrrxj47qjwczsczujlvnnntde7fdt0mau",
       "coinMinimalDenom": "ibc/36A1E70684C02AF59DD3025B888CC5A45B87136C64CF9ACAEFB6E0B3F12E442A",
-      "symbol": "cLuna",
+      "symbol": "cLuna.terra",
       "decimals": 6,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/cluna.png"
@@ -69649,7 +69510,8 @@
       ],
       "variantGroupKey": "factory/osmo1t82ql2w69m9g3un7c6sk5wss578ewst2uscr7zdkn6k8rmzc3e8qz9n4q2/alloyed/allUSD",
       "name": "Osmosis Alloyed USD",
-      "isAlloyed": false,
+      "isAlloyed": true,
+      "contract": "osmo1t82ql2w69m9g3un7c6sk5wss578ewst2uscr7zdkn6k8rmzc3e8qz9n4q2",
       "verified": false,
       "unstable": false,
       "disabled": false,

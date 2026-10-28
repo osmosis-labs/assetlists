@@ -8,6 +8,7 @@ import {
   findIdentityChanges,
   findRemovedAssets,
   hasUsableAssetlist,
+  statusChangeReason,
 } from './check_automerge_gate_helpers.mjs';
 
 function asset(overrides = {}) {
@@ -170,4 +171,23 @@ test('prefers the first record for duplicate symbols rather than the last', () =
 
   // Each pairs with itself by denom, so neither reports a change.
   assert.deepEqual(findIdentityChanges([first, second], [first, second]), []);
+});
+
+test('status-change reason explains the change that fired', () => {
+  // A cleared unstable flag has no current reason, so the old one is shown.
+  assert.equal(statusChangeReason({ reason: '?', unstableReasonOld: 'market' }, ['ibcCleared']), 'was market');
+  // A halt being set shows the halt reason, not the unstable reason.
+  assert.equal(
+    statusChangeReason(
+      { reason: 'market', depositHaltReason: 'bridge_down', withdrawalHaltReason: 'bridge_down' },
+      ['bridgeOrKillWithdrawalSet', 'bridgeOrKillDepositSet'],
+    ),
+    'bridge_down',
+  );
+  assert.equal(
+    statusChangeReason({ reason: 'bridge_down', unstableReasonOld: 'market' }, ['unstableReasonChanged']),
+    'market → bridge_down',
+  );
+  assert.equal(statusChangeReason({ reason: 'market' }, ['ibcFlagged']), 'market');
+  assert.equal(statusChangeReason({ reason: '?' }, ['ibcCleared']), '');
 });

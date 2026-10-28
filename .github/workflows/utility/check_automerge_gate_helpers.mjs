@@ -176,3 +176,40 @@ export function findIdentityChanges(beforeAssets, afterAssets) {
   identityChanges.sort((x, y) => (y.verified ? 1 : 0) - (x.verified ? 1 : 0));
   return identityChanges;
 }
+
+// Reader-facing names for the lifecycle categories in the status-change
+// table. ibcFlagged / ibcCleared fire on the unstable flag from any check
+// (IBC client, market health, a curator PR), so they are not labelled "IBC".
+export const CATEGORY_LABELS = {
+  bridgeOrKillWithdrawalSet: 'withdrawal halt set',
+  bridgeOrKillDepositSet: 'deposit halt set',
+  ibcFlagged: 'flagged unstable',
+  extendedHaltSet: 'extended halt set',
+  plannedShutdownSet: 'planned shutdown set',
+  unstableReasonChanged: 'unstable reason changed',
+  bridgeOrKillWithdrawalCleared: 'withdrawal halt cleared',
+  bridgeOrKillDepositCleared: 'deposit halt cleared',
+  ibcCleared: 'unstable cleared',
+  extendedHaltCleared: 'extended halt cleared',
+};
+
+// The reason that explains the change: the halt reason for a halt being set,
+// the old reason for a cleared unstable flag (the current one is empty), the
+// transition for a reason change, otherwise the current unstable reason.
+export function statusChangeReason(row, fired) {
+  const reasons = [];
+  if (fired.includes('bridgeOrKillDepositSet') && row.depositHaltReason) {
+    reasons.push(row.depositHaltReason);
+  }
+  if (fired.includes('bridgeOrKillWithdrawalSet') && row.withdrawalHaltReason) {
+    reasons.push(row.withdrawalHaltReason);
+  }
+  if (fired.includes('ibcCleared') && row.unstableReasonOld) {
+    reasons.push(`was ${row.unstableReasonOld}`);
+  }
+  if (fired.includes('unstableReasonChanged')) {
+    reasons.push(`${row.unstableReasonOld || '?'} → ${row.reason || '?'}`);
+  }
+  if (reasons.length === 0 && row.reason && row.reason !== '?') reasons.push(row.reason);
+  return [...new Set(reasons)].join(', ');
+}

@@ -89,10 +89,12 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import {
+  CATEGORY_LABELS,
   findActiveUnknownCategories,
   findIdentityChanges,
   findRemovedAssets,
   hasUsableAssetlist,
+  statusChangeReason,
 } from './check_automerge_gate_helpers.mjs';
 
 import { loadJSON } from './lifecycle_helpers.mjs';
@@ -382,7 +384,7 @@ async function main() {
       verified: fe?.verified === true,
       listed: Boolean(fe),
       categories: fired,
-      reason: row.reason ?? '',
+      reason: statusChangeReason(row, fired),
     });
   }
 
@@ -533,7 +535,7 @@ async function main() {
     report += '|--------|-------|----------|--------|--------|--------|\n';
     for (const s of statusChanges.slice(0, 100)) {
       report += `| \`${esc(s.symbol)}\` | ${esc(s.chain)} | ${s.verified ? 'yes' : 'no'} `
-        + `| ${s.listed ? 'yes' : 'no'} | ${esc(s.categories.join(', '))} `
+        + `| ${s.listed ? 'yes' : 'no'} | ${esc(s.categories.map((c) => CATEGORY_LABELS[c] ?? c).join(', '))} `
         + `| ${esc(s.reason) || '-'} |\n`;
     }
     if (statusChanges.length > 100) {

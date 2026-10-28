@@ -20,7 +20,7 @@ chain_reg.setup();
 import * as path from 'path';
 import * as api_mgmt from "./api_management.mjs";
 import { sortEndpointsByProvider, isPreferredProvider, getProviderFromEndpoint, isTeamEndpoint } from './endpoint_preference.mjs';
-import { VALIDATION_STATE_KEYS, withStateLock, writeFileAtomic } from './lifecycle_helpers.mjs';
+import { VALIDATION_STATE_KEYS, buildHaltCoverage, withStateLock, writeFileAtomic } from './lifecycle_helpers.mjs';
 
 import WebSocket from 'ws';
 import https from 'https';
@@ -1696,86 +1696,11 @@ async function generateValidationReport(chainName) {
   } catch { deadStreaks = {}; }
   const DEAD_STREAK_THRESHOLD = 7; // mirror report_dead_chains.mjs
 
-  // Summarize halt coverage per chain: how many of its assets are unstable and
-  // how many have deposits halted. An asset is attributed to a chain if either
-  // its listed chain_name OR its canonical.chain_name matches, so a token routed
-  // via the failed chain but listed under an intermediary (e.g. milkINIT listed
-  // under initia with canonical.chain_name "moo") still counts toward that
-  // chain's coverage. Counted once per chain even if both keys point at it.
-  const haltCoverageByChain = {};
-  const bumpCoverage = (c, asset) => {
-    if (!haltCoverageByChain[c]) {
-      haltCoverageByChain[c] = {
-        total: 0, unstable: 0, depositsHalted: 0, haltedBothDirections: 0,
-        assets: []
-      };
-    }
-    haltCoverageByChain[c].total += 1;
-    if (asset.osmosis_unstable) { haltCoverageByChain[c].unstable += 1; }
-    if (asset.osmosis_halt_deposits) { haltCoverageByChain[c].depositsHalted += 1; }
-    if (asset.osmosis_halt_deposits && asset.osmosis_halt_withdrawals) {
-      haltCoverageByChain[c].haltedBothDirections += 1;
-    }
-    haltCoverageByChain[c].assets.push(asset);
-  };
-  zoneAssets.forEach(asset => {
-    const chains = new Set();
-    if (asset.chain_name) { chains.add(asset.chain_name); }
-    if (asset.canonical?.chain_name) { chains.add(asset.canonical.chain_name); }
-    chains.forEach(c => bumpCoverage(c, asset));
-  });
-
-  // Render the per-asset status breakdown for a chain as one Markdown cell, one
-  // asset per line (joined with <br> since a literal newline would break the
-  // table row). Each line is "<symbol> — <status>", where status reflects the
-  // strongest halt flag set on that asset and its reason. This replaces the old
-  // aggregate-count cell so a reviewer can see exactly which assets are still
-  // exposed on an unreachable chain without the table ballooning into one row
-  // per asset. Asset identity prefers the human label parsed from _comment
-  // (e.g. "Evmos $EVMOS" -> "EVMOS"), falling back to base_denom.
-  const getAssetSymbol = (asset) => {
-    const ticker = asset._comment?.match(/\$([A-Za-z0-9.\-]+)/)?.[1];
-    return ticker || asset.base_denom || '(unknown)';
-  };
-  const getAssetStatusLine = (asset) => {
-    const reason = (r) => (r ? ` (${r})` : '');
-    let status;
-    if (asset.osmosis_halt_deposits && asset.osmosis_halt_withdrawals) {
-      status = `🛑 deposits + withdrawals halted${reason(asset.osmosis_deposit_halt_reason || asset.osmosis_withdrawal_halt_reason)}`;
-    } else if (asset.osmosis_halt_deposits) {
-      status = `🛑 deposits halted${reason(asset.osmosis_deposit_halt_reason)}`;
-    } else if (asset.osmosis_halt_withdrawals) {
-      status = `🛑 withdrawals halted${reason(asset.osmosis_withdrawal_halt_reason)}`;
-    } else if (asset.osmosis_unstable) {
-      status = `⚠️ unstable${reason(asset.osmosis_unstable_reason)}`;
-    } else {
-      status = '❗ not covered';
-    }
-    return `${getAssetSymbol(asset)} — ${status}`;
-  };
-  const getAssetBreakdownCell = (chain_name) => {
-    const cov = haltCoverageByChain[chain_name];
-    if (!cov || cov.assets.length === 0) { return '— no listed assets'; }
-    return cov.assets.map(getAssetStatusLine).join('<br>');
-  };
-
-  // Render a short coverage label for a chain's assets. An asset counts as
-  // "covered" only if it is deposit-halted or flagged unstable. osmosis_disabled
-  // is intentionally ignored here: it only marks a non-native deposit/withdrawal
-  // flow (a UX router flag), not a kill switch, so it says nothing about whether
-  // deposits/withdrawals are actually halted. The actionable case is a
-  // connectivity-failing chain with one or more assets that are neither
-  // deposit-halted nor unstable.
-  const getHaltCoverageLabel = (chain_name) => {
-    const cov = haltCoverageByChain[chain_name];
-    if (!cov || cov.total === 0) { return '— no listed assets'; }
-    if (cov.depositsHalted >= cov.total) { return `🛑 deposits halted (${cov.depositsHalted}/${cov.total})`; }
-    if (cov.unstable >= cov.total) { return `⚠️ unstable (${cov.unstable}/${cov.total})`; }
-    if (cov.depositsHalted > 0 || cov.unstable > 0) {
-      return `🟠 partial (${cov.unstable}/${cov.total} unstable, ${cov.depositsHalted}/${cov.total} dep-halted)`;
-    }
-    return `❗ not covered (0/${cov.total})`;
-  };
+  const {
+    byChain: haltCoverageByChain,
+    label: getHaltCoverageLabel,
+    breakdown: getAssetBreakdownCell,
+  } = buildHaltCoverage(zoneAssets);
 
   // Derive a concrete next step for a connectivity-failing chain from its halt
   // coverage, the cosmos.directory second-vantage probe, and its dead-chain
@@ -1933,11 +1858,10 @@ async function generateValidationReport(chainName) {
   const successfulThisRun = chainsValidatedThisRun.length - failedChains.length - corsPartialFail.length;
   const fullySuccessful = successfulThisRun;
 
-  let report = `**Chains Validated This Run:** ${chainsValidatedThisRun.length}\n`;
-  report += `**Fully Successful:** ${fullySuccessful}\n`;
-  report += `**CORS Partial Failures:** ${corsPartialFail.length}\n`;
-  report += `**Connectivity Failed:** ${failedChains.length}\n`;
-  report += `**Using Backup Endpoints:** ${chainsWithBackupsUsed}\n\n`;
+  let report = `**Status:** ${chainsValidatedThisRun.length} chains validated, `
+    + `${fullySuccessful} fully successful, ${failedChains.length} with connectivity `
+    + `failures, ${corsPartialFail.length} with CORS-only failures, `
+    + `${chainsWithBackupsUsed} using backup endpoints.\n\n`;
 
   // Alert for forced endpoint failures
   if (forcedEndpointFailures.length > 0) {
@@ -2008,6 +1932,7 @@ async function generateValidationReport(chainName) {
     report += `### ✅ All Chains Validated Successfully\n\n`;
   } else if (failedChains.length > 0) {
     report += `### ❌ Connectivity Failures\n\n`;
+    report += `<details><summary>How to read this table</summary>\n\n`;
     report += `The following chains have endpoints that failed connectivity tests (not just CORS). `;
     report += `The cosmos.directory column is a second-vantage probe through that proxy: a fresh block `;
     report += `there means the chain is alive and our endpoint set (or the runner's egress) is the `;
@@ -2015,7 +1940,7 @@ async function generateValidationReport(chainName) {
     report += `are already flagged unstable / deposit-halted by another mechanism. The Assets column `;
     report += `lists every asset on the chain with its individual status (one per line). The Action `;
     report += `column gives the suggested next step derived from that coverage, the proxy probe, and `;
-    report += `the chain's dead-chain streak.\n\n`;
+    report += `the chain's dead-chain streak.\n\n</details>\n\n`;
     report += `| Chain Name | Last Validation | Days Ago | RPC Status | REST Status | cosmos.directory | Halt Coverage | Assets | Action |\n`;
     report += `|------------|----------------|----------|------------|-------------|------------------|---------------|--------|--------|\n`;
 
@@ -2069,8 +1994,7 @@ async function generateValidationReport(chainName) {
     });
 
     if (chainsWithBackups.length > 0) {
-      report += `### 🔄 Endpoint Reordering (Backup Endpoints Used)\n\n`;
-      report += `The following chains had their zone endpoint fail validation and were reordered to use a working backup:\n\n`;
+      report += `<details><summary>🔄 Endpoint reordering: ${chainsWithBackups.length} chain(s) moved to a working backup endpoint</summary>\n\n`;
       report += `| Chain Name | RPC Endpoint Type | REST Endpoint Type | Last Validation |\n`;
       report += `|------------|-------------------|-------------------|----------------|\n`;
 
@@ -2109,7 +2033,7 @@ async function generateValidationReport(chainName) {
 
         report += `| ${chain.chain_name} | ${rpcType} | ${restType} | ${validationDate} |\n`;
       });
-      report += `\n`;
+      report += `\n</details>\n\n`;
     }
   }
 

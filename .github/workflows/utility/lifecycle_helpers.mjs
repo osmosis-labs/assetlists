@@ -506,3 +506,105 @@ export function materialiseStateAsset(state, baseDenom) {
   }
   return s;
 }
+
+/**
+ * Halt coverage of each chain's listed assets, shared by the endpoint
+ * validation report and the dead-chain report so both describe a down chain's
+ * exposure the same way. Returns the per-chain counts plus two renderers: a
+ * short coverage label and a per-asset status cell (one asset per line).
+ */
+export function buildHaltCoverage(zoneAssets) {
+  // Summarize halt coverage per chain: how many of its assets are unstable and
+  // how many have deposits halted. An asset is attributed to a chain if either
+  // its listed chain_name OR its canonical.chain_name matches, so a token routed
+  // via the failed chain but listed under an intermediary (e.g. milkINIT listed
+  // under initia with canonical.chain_name "moo") still counts toward that
+  // chain's coverage. Counted once per chain even if both keys point at it.
+  const haltCoverageByChain = {};
+  const bumpCoverage = (c, asset) => {
+    if (!haltCoverageByChain[c]) {
+      haltCoverageByChain[c] = {
+        total: 0, unstable: 0, depositsHalted: 0, haltedBothDirections: 0,
+        assets: []
+      };
+    }
+    haltCoverageByChain[c].total += 1;
+    if (asset.osmosis_unstable) { haltCoverageByChain[c].unstable += 1; }
+    if (asset.osmosis_halt_deposits) { haltCoverageByChain[c].depositsHalted += 1; }
+    if (asset.osmosis_halt_deposits && asset.osmosis_halt_withdrawals) {
+      haltCoverageByChain[c].haltedBothDirections += 1;
+    }
+    haltCoverageByChain[c].assets.push(asset);
+  };
+  zoneAssets.forEach(asset => {
+    const chains = new Set();
+    if (asset.chain_name) { chains.add(asset.chain_name); }
+    if (asset.canonical?.chain_name) { chains.add(asset.canonical.chain_name); }
+    chains.forEach(c => bumpCoverage(c, asset));
+  });
+
+  // Render the per-asset status breakdown for a chain as one Markdown cell, one
+  // asset per line (joined with <br> since a literal newline would break the
+  // table row). Each line is "<symbol> — <status>", where status reflects the
+  // strongest halt flag set on that asset and its reason. This replaces the old
+  // aggregate-count cell so a reviewer can see exactly which assets are still
+  // exposed on an unreachable chain without the table ballooning into one row
+  // per asset. Asset identity prefers the human label parsed from _comment
+  // (e.g. "Evmos $EVMOS" -> "EVMOS"), falling back to base_denom.
+  const getAssetSymbol = (asset) => {
+    const ticker = asset._comment?.match(/\$([A-Za-z0-9.\-]+)/)?.[1];
+    return ticker || asset.base_denom || '(unknown)';
+  };
+  const getAssetStatusLine = (asset) => {
+    const reason = (r) => (r ? ` (${r})` : '');
+    let status;
+    if (asset.osmosis_halt_deposits && asset.osmosis_halt_withdrawals) {
+      status = `🛑 deposits + withdrawals halted${reason(asset.osmosis_deposit_halt_reason || asset.osmosis_withdrawal_halt_reason)}`;
+    } else if (asset.osmosis_halt_deposits) {
+      status = `🛑 deposits halted${reason(asset.osmosis_deposit_halt_reason)}`;
+    } else if (asset.osmosis_halt_withdrawals) {
+      status = `🛑 withdrawals halted${reason(asset.osmosis_withdrawal_halt_reason)}`;
+    } else if (asset.osmosis_unstable) {
+      status = `⚠️ unstable${reason(asset.osmosis_unstable_reason)}`;
+    } else {
+      status = '❗ not covered';
+    }
+    return `${getAssetSymbol(asset)} — ${status}`;
+  };
+  const getAssetBreakdownCell = (chain_name) => {
+    const cov = haltCoverageByChain[chain_name];
+    if (!cov || cov.assets.length === 0) { return '— no listed assets'; }
+    return cov.assets.map(getAssetStatusLine).join('<br>');
+  };
+
+  // Render a short coverage label for a chain's assets. An asset counts as
+  // "covered" only if it is deposit-halted or flagged unstable. osmosis_disabled
+  // is intentionally ignored here: it only marks a non-native deposit/withdrawal
+  // flow (a UX router flag), not a kill switch, so it says nothing about whether
+  // deposits/withdrawals are actually halted. The actionable case is a
+  // connectivity-failing chain with one or more assets that are neither
+  // deposit-halted nor unstable.
+  const getHaltCoverageLabel = (chain_name) => {
+    const cov = haltCoverageByChain[chain_name];
+    if (!cov || cov.total === 0) { return '— no listed assets'; }
+    if (cov.depositsHalted >= cov.total) { return `🛑 deposits halted (${cov.depositsHalted}/${cov.total})`; }
+    if (cov.unstable >= cov.total) { return `⚠️ unstable (${cov.unstable}/${cov.total})`; }
+    if (cov.depositsHalted > 0 || cov.unstable > 0) {
+      return `🟠 partial (${cov.unstable}/${cov.total} unstable, ${cov.depositsHalted}/${cov.total} dep-halted)`;
+    }
+    return `❗ not covered (0/${cov.total})`;
+  };
+  // Covered = every listed asset has deposits halted, the bar the endpoint
+  // report's "already covered" action uses. A chain with no listed assets has
+  // no exposure, so it counts as covered.
+  const isCovered = (chain_name) => {
+    const cov = haltCoverageByChain[chain_name];
+    return !cov || cov.total === 0 || cov.depositsHalted >= cov.total;
+  };
+  return {
+    byChain: haltCoverageByChain,
+    label: getHaltCoverageLabel,
+    breakdown: getAssetBreakdownCell,
+    isCovered,
+  };
+}

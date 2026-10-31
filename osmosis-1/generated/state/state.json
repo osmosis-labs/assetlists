@@ -880,7 +880,7 @@
       "legacyAsset": true,
       "marketHealthStreak": 0,
       "lastDowntimeDate": "2026-07-20T15:40:38.247Z",
-      "marketHealthRecoveryStreak": 0
+      "marketHealthRecoveryStreak": 1
     },
     {
       "base_denom": "ibc/BF685448E564B5A4AC8F6E0493A0B979D0E0BF5EC11F7E15D25A0A2160C944DD",
@@ -3217,8 +3217,7 @@
     },
     {
       "base_denom": "ibc/29651CA364AA857248A912B1DEC17EF8AC320728C616FB635338CFE965E18BE3",
-      "lastDowntimeDate": "2026-07-04T15:29:33.304Z",
-      "lastRecoveryDate": "2026-08-02T15:27:32.463Z"
+      "lastDowntimeDate": "2026-10-31T15:08:20.667Z"
     },
     {
       "base_denom": "ibc/243B3934C4462EE254C84AA31AF42E34F1869418194D3E4161E4A659A01AC6E6",
@@ -3795,7 +3794,7 @@
   "chains": [
     {
       "chain_name": "osmosis",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -3829,8 +3828,8 @@
               "url": "https://rpc-osmosis.keplr.app/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:50.62051545Z",
-              "latestBlockHeight": 73579943
+              "latestBlockTime": "2026-10-31T15:07:32.365463244Z",
+              "latestBlockHeight": 73679443
             }
           ]
         },
@@ -3871,8 +3870,8 @@
           "url": "https://rpc-osmosis.keplr.app/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:50.62051545Z",
-          "latestBlockHeight": 73579943
+          "latestBlockTime": "2026-10-31T15:07:32.365463244Z",
+          "latestBlockHeight": 73679443
         },
         {
           "test": "REST CORS",
@@ -3892,7 +3891,7 @@
     },
     {
       "chain_name": "agoric",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -3930,7 +3929,7 @@
               "url": "https://agoric.rpc.kjnodes.com/status",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
             }
           ]
         },
@@ -3959,8 +3958,69 @@
               "url": "https://main.rpc.agoric.net/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:59.839981795Z",
-              "latestBlockHeight": 28045699
+              "latestBlockTime": "2026-10-31T15:07:45.712117636Z",
+              "latestBlockHeight": 28060919
+            }
+          ]
+        },
+        {
+          "type": "rpc",
+          "address": "https://agoric-rpc.stakeangle.com",
+          "isPrimary": false,
+          "orderTested": 2,
+          "connectivityPassed": true,
+          "corsPassed": false,
+          "testResults": [
+            {
+              "test": "RPC CORS",
+              "url": "https://agoric-rpc.stakeangle.com/",
+              "success": false,
+              "errorMessage": "CORS Policy: undefined"
+            },
+            {
+              "test": "RPC WSS",
+              "url": "wss://agoric-rpc.stakeangle.com/websocket",
+              "success": false,
+              "errorType": "WEBSOCKET_ERROR",
+              "errorMessage": "Unexpected server response: 400"
+            },
+            {
+              "test": "RPC Endpoints",
+              "url": "https://agoric-rpc.stakeangle.com/status",
+              "success": true,
+              "stale": false,
+              "latestBlockTime": "2026-10-31T15:07:45.712117636Z",
+              "latestBlockHeight": 28060919
+            }
+          ]
+        },
+        {
+          "type": "rpc",
+          "address": "https://agoric-rpc.polkachu.com:443",
+          "isPrimary": false,
+          "orderTested": 3,
+          "connectivityPassed": true,
+          "corsPassed": true,
+          "testResults": [
+            {
+              "test": "RPC CORS",
+              "url": "https://agoric-rpc.polkachu.com/",
+              "success": true
+            },
+            {
+              "test": "RPC WSS",
+              "url": "wss://agoric-rpc.polkachu.com/websocket",
+              "success": false,
+              "errorType": "WEBSOCKET_ERROR",
+              "errorMessage": "Unexpected server response: 400"
+            },
+            {
+              "test": "RPC Endpoints",
+              "url": "https://agoric-rpc.polkachu.com/status",
+              "success": true,
+              "stale": false,
+              "latestBlockTime": "2026-10-31T15:07:45.712117636Z",
+              "latestBlockHeight": 28060919
             }
           ]
         },
@@ -3968,7 +4028,7 @@
           "type": "rpc",
           "address": "https://agoric-mainnet-rpc.autostake.com:443",
           "isPrimary": false,
-          "orderTested": 2,
+          "orderTested": 4,
           "connectivityPassed": false,
           "corsPassed": false,
           "testResults": [
@@ -3999,7 +4059,7 @@
           "type": "rpc",
           "address": "https://rpc-agoric-01.stakeflow.io",
           "isPrimary": false,
-          "orderTested": 3,
+          "orderTested": 5,
           "connectivityPassed": false,
           "corsPassed": false,
           "testResults": [
@@ -4030,7 +4090,7 @@
           "type": "rpc",
           "address": "https://agoric-rpc.0base.dev",
           "isPrimary": false,
-          "orderTested": 4,
+          "orderTested": 6,
           "connectivityPassed": false,
           "corsPassed": false,
           "testResults": [
@@ -4059,40 +4119,9 @@
         },
         {
           "type": "rpc",
-          "address": "https://agoric-rpc.stakeangle.com",
-          "isPrimary": false,
-          "orderTested": 5,
-          "connectivityPassed": true,
-          "corsPassed": false,
-          "testResults": [
-            {
-              "test": "RPC CORS",
-              "url": "https://agoric-rpc.stakeangle.com/",
-              "success": false,
-              "errorMessage": "CORS Policy: undefined"
-            },
-            {
-              "test": "RPC WSS",
-              "url": "wss://agoric-rpc.stakeangle.com/websocket",
-              "success": false,
-              "errorType": "WEBSOCKET_ERROR",
-              "errorMessage": "Unexpected server response: 400"
-            },
-            {
-              "test": "RPC Endpoints",
-              "url": "https://agoric-rpc.stakeangle.com/status",
-              "success": true,
-              "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:05.359265275Z",
-              "latestBlockHeight": 28045700
-            }
-          ]
-        },
-        {
-          "type": "rpc",
           "address": "https://agoric-rpc.w3coins.io",
           "isPrimary": false,
-          "orderTested": 6,
+          "orderTested": 7,
           "connectivityPassed": false,
           "corsPassed": false,
           "testResults": [
@@ -4123,7 +4152,7 @@
           "type": "rpc",
           "address": "https://rpc.agoric.stakewith.us",
           "isPrimary": false,
-          "orderTested": 7,
+          "orderTested": 8,
           "connectivityPassed": false,
           "corsPassed": false,
           "testResults": [
@@ -4154,7 +4183,7 @@
           "type": "rpc",
           "address": "https://agoric-rpc.stakeandrelax.net",
           "isPrimary": false,
-          "orderTested": 8,
+          "orderTested": 9,
           "connectivityPassed": false,
           "corsPassed": false,
           "testResults": [
@@ -4185,7 +4214,7 @@
           "type": "rpc",
           "address": "https://rpc.agoric.bronbro.io:443",
           "isPrimary": false,
-          "orderTested": 9,
+          "orderTested": 10,
           "connectivityPassed": false,
           "corsPassed": false,
           "testResults": [
@@ -4209,36 +4238,6 @@
               "success": false,
               "errorType": "NETWORK_ERROR",
               "errorMessage": "Hostname/IP does not match certificate's altnames: Host: rpc.agoric.bronbro.io. is not in the cert's altnames: DNS:api.gluceradisplay.co.uk"
-            }
-          ]
-        },
-        {
-          "type": "rpc",
-          "address": "https://agoric-rpc.polkachu.com:443",
-          "isPrimary": false,
-          "orderTested": 10,
-          "connectivityPassed": true,
-          "corsPassed": true,
-          "testResults": [
-            {
-              "test": "RPC CORS",
-              "url": "https://agoric-rpc.polkachu.com/",
-              "success": true
-            },
-            {
-              "test": "RPC WSS",
-              "url": "wss://agoric-rpc.polkachu.com/websocket",
-              "success": false,
-              "errorType": "WEBSOCKET_ERROR",
-              "errorMessage": "Unexpected server response: 400"
-            },
-            {
-              "test": "RPC Endpoints",
-              "url": "https://agoric-rpc.polkachu.com/status",
-              "success": true,
-              "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:10.86247408Z",
-              "latestBlockHeight": 28045701
             }
           ]
         },
@@ -4281,8 +4280,8 @@
           "url": "https://main.rpc.agoric.net/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:59.839981795Z",
-          "latestBlockHeight": 28045699
+          "latestBlockTime": "2026-10-31T15:07:45.712117636Z",
+          "latestBlockHeight": 28060919
         },
         {
           "test": "REST CORS",
@@ -4302,7 +4301,7 @@
     },
     {
       "chain_name": "cosmoshub",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -4336,8 +4335,8 @@
               "url": "https://rpc-cosmoshub.keplr.app/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:40.567391694Z",
-              "latestBlockHeight": 33649221
+              "latestBlockTime": "2026-10-31T15:07:25.831659598Z",
+              "latestBlockHeight": 33664298
             }
           ]
         },
@@ -4378,8 +4377,8 @@
           "url": "https://rpc-cosmoshub.keplr.app/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:40.567391694Z",
-          "latestBlockHeight": 33649221
+          "latestBlockTime": "2026-10-31T15:07:25.831659598Z",
+          "latestBlockHeight": 33664298
         },
         {
           "test": "REST CORS",
@@ -4399,7 +4398,7 @@
     },
     {
       "chain_name": "terra",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -4433,8 +4432,8 @@
               "url": "https://rpc.terra-classic.hexxagon.io/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:41.360521349Z",
-              "latestBlockHeight": 31067783
+              "latestBlockTime": "2026-10-31T15:07:25.464621015Z",
+              "latestBlockHeight": 31082359
             }
           ]
         },
@@ -4475,8 +4474,8 @@
           "url": "https://rpc.terra-classic.hexxagon.io/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:41.360521349Z",
-          "latestBlockHeight": 31067783
+          "latestBlockTime": "2026-10-31T15:07:25.464621015Z",
+          "latestBlockHeight": 31082359
         },
         {
           "test": "REST CORS",
@@ -4496,7 +4495,7 @@
     },
     {
       "chain_name": "secretnetwork",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -4530,8 +4529,8 @@
               "url": "https://rpc-secret.keplr.app/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:43.40065018Z",
-              "latestBlockHeight": 27858356
+              "latestBlockTime": "2026-10-31T15:07:26.931014022Z",
+              "latestBlockHeight": 27873784
             }
           ]
         },
@@ -4572,8 +4571,8 @@
           "url": "https://rpc-secret.keplr.app/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:43.40065018Z",
-          "latestBlockHeight": 27858356
+          "latestBlockTime": "2026-10-31T15:07:26.931014022Z",
+          "latestBlockHeight": 27873784
         },
         {
           "test": "REST CORS",
@@ -4593,7 +4592,7 @@
     },
     {
       "chain_name": "akash",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -4627,8 +4626,8 @@
               "url": "https://rpc-akash.keplr.app/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:44.419672358Z",
-              "latestBlockHeight": 29297590
+              "latestBlockTime": "2026-10-31T15:07:28.717129607Z",
+              "latestBlockHeight": 29312178
             }
           ]
         },
@@ -4669,8 +4668,8 @@
           "url": "https://rpc-akash.keplr.app/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:44.419672358Z",
-          "latestBlockHeight": 29297590
+          "latestBlockTime": "2026-10-31T15:07:28.717129607Z",
+          "latestBlockHeight": 29312178
         },
         {
           "test": "REST CORS",
@@ -4690,7 +4689,7 @@
     },
     {
       "chain_name": "regen",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -4724,8 +4723,8 @@
               "url": "https://rpc-regen.keplr.app/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:46.058981516Z",
-              "latestBlockHeight": 29528251
+              "latestBlockTime": "2026-10-31T15:07:28.914981634Z",
+              "latestBlockHeight": 29543746
             }
           ]
         },
@@ -4766,8 +4765,8 @@
           "url": "https://rpc-regen.keplr.app/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:46.058981516Z",
-          "latestBlockHeight": 29528251
+          "latestBlockTime": "2026-10-31T15:07:28.914981634Z",
+          "latestBlockHeight": 29543746
         },
         {
           "test": "REST CORS",
@@ -4787,7 +4786,7 @@
     },
     {
       "chain_name": "sentinel",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -4821,8 +4820,8 @@
               "url": "https://rpc-sentinel.keplr.app/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:49.89501749Z",
-              "latestBlockHeight": 32451125
+              "latestBlockTime": "2026-10-31T15:07:29.691401301Z",
+              "latestBlockHeight": 32474797
             }
           ]
         },
@@ -4863,8 +4862,8 @@
           "url": "https://rpc-sentinel.keplr.app/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:49.89501749Z",
-          "latestBlockHeight": 32451125
+          "latestBlockTime": "2026-10-31T15:07:29.691401301Z",
+          "latestBlockHeight": 32474797
         },
         {
           "test": "REST CORS",
@@ -4884,7 +4883,7 @@
     },
     {
       "chain_name": "persistence",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -4918,8 +4917,8 @@
               "url": "https://rpc-persistence.keplr.app/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:44.078537387Z",
-              "latestBlockHeight": 29927657
+              "latestBlockTime": "2026-10-31T15:07:27.103172573Z",
+              "latestBlockHeight": 29943024
             }
           ]
         },
@@ -4960,8 +4959,8 @@
           "url": "https://rpc-persistence.keplr.app/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:44.078537387Z",
-          "latestBlockHeight": 29927657
+          "latestBlockTime": "2026-10-31T15:07:27.103172573Z",
+          "latestBlockHeight": 29943024
         },
         {
           "test": "REST CORS",
@@ -4975,12 +4974,6 @@
         }
       ],
       "validatedEndpoints": {
-        "rpcAddress": "https://rpc-persistence.keplr.app",
-        "restAddress": "https://lcd-persistence.keplr.app"
-      },
-      "backupUsed": {
-        "rpcEndpointIndex": 1,
-        "restEndpointIndex": 0,
         "rpcAddress": "https://rpc-persistence.keplr.app",
         "restAddress": "https://lcd-persistence.keplr.app"
       }
@@ -5137,7 +5130,7 @@
     },
     {
       "chain_name": "cryptoorgchain",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -5171,8 +5164,8 @@
               "url": "https://rpc-crypto-org.keplr.app/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:45.101394955Z",
-              "latestBlockHeight": 32563734
+              "latestBlockTime": "2026-10-31T15:07:28.801347205Z",
+              "latestBlockHeight": 32580678
             }
           ]
         },
@@ -5213,8 +5206,8 @@
           "url": "https://rpc-crypto-org.keplr.app/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:45.101394955Z",
-          "latestBlockHeight": 32563734
+          "latestBlockTime": "2026-10-31T15:07:28.801347205Z",
+          "latestBlockHeight": 32580678
         },
         {
           "test": "REST CORS",
@@ -5577,7 +5570,7 @@
     },
     {
       "chain_name": "juno",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -5611,8 +5604,8 @@
               "url": "https://rpc-juno.keplr.app/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:52.599544559Z",
-              "latestBlockHeight": 43235294
+              "latestBlockTime": "2026-10-31T15:07:34.176042918Z",
+              "latestBlockHeight": 43268903
             }
           ]
         },
@@ -5653,8 +5646,8 @@
           "url": "https://rpc-juno.keplr.app/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:52.599544559Z",
-          "latestBlockHeight": 43235294
+          "latestBlockTime": "2026-10-31T15:07:34.176042918Z",
+          "latestBlockHeight": 43268903
         },
         {
           "test": "REST CORS",
@@ -5781,7 +5774,7 @@
     },
     {
       "chain_name": "likecoin",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -5815,8 +5808,8 @@
               "url": "https://mainnet-node.like.co/rpc/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:42.558302549Z",
-              "latestBlockHeight": 27343638
+              "latestBlockTime": "2026-10-31T15:07:23.849740396Z",
+              "latestBlockHeight": 27359339
             }
           ]
         },
@@ -5857,8 +5850,8 @@
           "url": "https://mainnet-node.like.co/rpc/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:42.558302549Z",
-          "latestBlockHeight": 27343638
+          "latestBlockTime": "2026-10-31T15:07:23.849740396Z",
+          "latestBlockHeight": 27359339
         },
         {
           "test": "REST CORS",
@@ -5878,7 +5871,7 @@
     },
     {
       "chain_name": "impacthub",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -5915,8 +5908,8 @@
               "url": "https://impacthub.ixo.world/rpc/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:43.139784674Z",
-              "latestBlockHeight": 19852303
+              "latestBlockTime": "2026-10-31T15:07:25.317522304Z",
+              "latestBlockHeight": 19867577
             }
           ]
         },
@@ -5943,8 +5936,8 @@
               "url": "https://ixo.ibs.team/rpc/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:43.139784674Z",
-              "latestBlockHeight": 19852303
+              "latestBlockTime": "2026-10-31T15:07:25.317522304Z",
+              "latestBlockHeight": 19867577
             }
           ]
         },
@@ -5986,8 +5979,8 @@
           "url": "https://ixo.ibs.team/rpc/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:43.139784674Z",
-          "latestBlockHeight": 19852303
+          "latestBlockTime": "2026-10-31T15:07:25.317522304Z",
+          "latestBlockHeight": 19867577
         },
         {
           "test": "REST CORS",
@@ -6008,7 +6001,7 @@
     },
     {
       "chain_name": "bitcanna",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -6045,8 +6038,8 @@
               "url": "https://bcna.rpc.arcturian.tech/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:48.978610395Z",
-              "latestBlockHeight": 27461078
+              "latestBlockTime": "2026-10-31T15:07:27.036017191Z",
+              "latestBlockHeight": 27476210
             }
           ]
         },
@@ -6086,28 +6079,29 @@
           "address": "https://bitcanna.rpc.m.anode.team/",
           "isPrimary": false,
           "orderTested": 2,
-          "connectivityPassed": true,
-          "corsPassed": true,
+          "connectivityPassed": false,
+          "corsPassed": false,
           "testResults": [
             {
               "test": "RPC CORS",
-              "url": "https://bitcanna.rpc.m.anode.team/",
-              "success": true
+              "url": null,
+              "success": false,
+              "errorType": "SKIPPED",
+              "errorMessage": "Not tested: connectivity test failed"
             },
             {
               "test": "RPC WSS",
-              "url": "wss://bitcanna.rpc.m.anode.team/websocket",
+              "url": null,
               "success": false,
-              "errorType": "WEBSOCKET_ERROR",
-              "errorMessage": "Unexpected server response: 400"
+              "errorType": "SKIPPED",
+              "errorMessage": "Not tested: connectivity test failed"
             },
             {
               "test": "RPC Endpoints",
               "url": "https://bitcanna.rpc.m.anode.team/status",
-              "success": true,
-              "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:00.300544321Z",
-              "latestBlockHeight": 27461080
+              "success": false,
+              "errorType": "TIMEOUT",
+              "errorMessage": "Request timed out"
             }
           ]
         },
@@ -6165,8 +6159,8 @@
               "url": "https://bcna.rpc.arcturian.tech/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:00.300544321Z",
-              "latestBlockHeight": 27461080
+              "latestBlockTime": "2026-10-31T15:07:44.020309747Z",
+              "latestBlockHeight": 27476213
             }
           ]
         },
@@ -6196,8 +6190,8 @@
               "url": "https://bitcanna-rpc.bluestake.net/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:00.300544321Z",
-              "latestBlockHeight": 27461080
+              "latestBlockTime": "2026-10-31T15:07:44.020309747Z",
+              "latestBlockHeight": 27476213
             }
           ]
         },
@@ -6352,7 +6346,7 @@
               "url": "https://bitcanna.rpc.kjnodes.com/status",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
             }
           ]
         },
@@ -6769,8 +6763,8 @@
           "url": "https://bcna.rpc.arcturian.tech/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:48.978610395Z",
-          "latestBlockHeight": 27461078
+          "latestBlockTime": "2026-10-31T15:07:27.036017191Z",
+          "latestBlockHeight": 27476210
         },
         {
           "test": "REST CORS",
@@ -6791,7 +6785,7 @@
     },
     {
       "chain_name": "bitsong",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -6825,8 +6819,8 @@
               "url": "https://rpc.explorebitsong.com/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:48.793973173Z",
-              "latestBlockHeight": 30641149
+              "latestBlockTime": "2026-10-31T15:07:29.633812025Z",
+              "latestBlockHeight": 30656478
             }
           ]
         },
@@ -6867,8 +6861,8 @@
           "url": "https://rpc.explorebitsong.com/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:48.793973173Z",
-          "latestBlockHeight": 30641149
+          "latestBlockTime": "2026-10-31T15:07:29.633812025Z",
+          "latestBlockHeight": 30656478
         },
         {
           "test": "REST CORS",
@@ -7336,7 +7330,7 @@
     },
     {
       "chain_name": "panacea",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -7370,8 +7364,8 @@
               "url": "https://rpc.gopanacea.org/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:48.286078195Z",
-              "latestBlockHeight": 29137076
+              "latestBlockTime": "2026-10-31T15:07:32.628349747Z",
+              "latestBlockHeight": 29152006
             }
           ]
         },
@@ -7413,8 +7407,8 @@
           "url": "https://rpc.gopanacea.org/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:48.286078195Z",
-          "latestBlockHeight": 29137076
+          "latestBlockTime": "2026-10-31T15:07:32.628349747Z",
+          "latestBlockHeight": 29152006
         },
         {
           "test": "REST CORS",
@@ -8306,7 +8300,7 @@
     },
     {
       "chain_name": "cheqd",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -8340,8 +8334,8 @@
               "url": "https://rpc.cheqd.net/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:47.493851108Z",
-              "latestBlockHeight": 26938792
+              "latestBlockTime": "2026-10-31T15:07:32.601206906Z",
+              "latestBlockHeight": 26953915
             }
           ]
         },
@@ -8382,8 +8376,8 @@
           "url": "https://rpc.cheqd.net/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:47.493851108Z",
-          "latestBlockHeight": 26938792
+          "latestBlockTime": "2026-10-31T15:07:32.601206906Z",
+          "latestBlockHeight": 26953915
         },
         {
           "test": "REST CORS",
@@ -9509,7 +9503,7 @@
     },
     {
       "chain_name": "chihuahua",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -9543,8 +9537,8 @@
               "url": "https://rpc.chihuahua.wtf/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:52.314607353Z",
-              "latestBlockHeight": 25977847
+              "latestBlockTime": "2026-10-31T15:07:30.231926399Z",
+              "latestBlockHeight": 25992429
             }
           ]
         },
@@ -9585,8 +9579,8 @@
           "url": "https://rpc.chihuahua.wtf/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:52.314607353Z",
-          "latestBlockHeight": 25977847
+          "latestBlockTime": "2026-10-31T15:07:30.231926399Z",
+          "latestBlockHeight": 25992429
         },
         {
           "test": "REST CORS",
@@ -10295,7 +10289,7 @@
     },
     {
       "chain_name": "desmos",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -10332,8 +10326,8 @@
               "url": "https://rpc.mainnet.desmos.network/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:46.929998486Z",
-              "latestBlockHeight": 31103087
+              "latestBlockTime": "2026-10-31T15:07:35.669581414Z",
+              "latestBlockHeight": 31112730
             }
           ]
         },
@@ -10342,26 +10336,122 @@
           "address": "https://desmos-rpc.staketab.org:443",
           "isPrimary": false,
           "orderTested": 1,
-          "connectivityPassed": true,
-          "corsPassed": true,
+          "connectivityPassed": false,
+          "corsPassed": false,
           "testResults": [
             {
               "test": "RPC CORS",
-              "url": "https://desmos-rpc.staketab.org/",
-              "success": true
+              "url": null,
+              "success": false,
+              "errorType": "SKIPPED",
+              "errorMessage": "Not tested: connectivity test failed"
             },
             {
               "test": "RPC WSS",
-              "url": "wss://desmos-rpc.staketab.org/websocket",
-              "success": true
+              "url": null,
+              "success": false,
+              "errorType": "SKIPPED",
+              "errorMessage": "Not tested: connectivity test failed"
             },
             {
               "test": "RPC Endpoints",
               "url": "https://desmos-rpc.staketab.org/status",
-              "success": true,
-              "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:46.929998486Z",
-              "latestBlockHeight": 31103087
+              "success": false,
+              "errorType": "TIMEOUT",
+              "errorMessage": "Request timed out"
+            }
+          ]
+        },
+        {
+          "type": "rpc",
+          "address": "https://rpc.desmos.bronbro.io:443",
+          "isPrimary": false,
+          "orderTested": 2,
+          "connectivityPassed": false,
+          "corsPassed": false,
+          "testResults": [
+            {
+              "test": "RPC CORS",
+              "url": null,
+              "success": false,
+              "errorType": "SKIPPED",
+              "errorMessage": "Not tested: connectivity test failed"
+            },
+            {
+              "test": "RPC WSS",
+              "url": null,
+              "success": false,
+              "errorType": "SKIPPED",
+              "errorMessage": "Not tested: connectivity test failed"
+            },
+            {
+              "test": "RPC Endpoints",
+              "url": "https://rpc.desmos.bronbro.io/status",
+              "success": false,
+              "errorType": "NETWORK_ERROR",
+              "errorMessage": "getaddrinfo ENOTFOUND rpc.desmos.bronbro.io"
+            }
+          ]
+        },
+        {
+          "type": "rpc",
+          "address": "https://desmos.declab.pro:26613",
+          "isPrimary": false,
+          "orderTested": 3,
+          "connectivityPassed": false,
+          "corsPassed": false,
+          "testResults": [
+            {
+              "test": "RPC CORS",
+              "url": null,
+              "success": false,
+              "errorType": "SKIPPED",
+              "errorMessage": "Not tested: connectivity test failed"
+            },
+            {
+              "test": "RPC WSS",
+              "url": null,
+              "success": false,
+              "errorType": "SKIPPED",
+              "errorMessage": "Not tested: connectivity test failed"
+            },
+            {
+              "test": "RPC Endpoints",
+              "url": "https://desmos.declab.pro:26613/status",
+              "success": false,
+              "errorType": "NETWORK_ERROR",
+              "errorMessage": "getaddrinfo ENOTFOUND desmos.declab.pro"
+            }
+          ]
+        },
+        {
+          "type": "rpc",
+          "address": "https://desmos-rpc.noders.services",
+          "isPrimary": false,
+          "orderTested": 4,
+          "connectivityPassed": false,
+          "corsPassed": false,
+          "testResults": [
+            {
+              "test": "RPC CORS",
+              "url": null,
+              "success": false,
+              "errorType": "SKIPPED",
+              "errorMessage": "Not tested: connectivity test failed"
+            },
+            {
+              "test": "RPC WSS",
+              "url": null,
+              "success": false,
+              "errorType": "SKIPPED",
+              "errorMessage": "Not tested: connectivity test failed"
+            },
+            {
+              "test": "RPC Endpoints",
+              "url": "https://desmos-rpc.noders.services/status",
+              "success": false,
+              "errorType": "NETWORK_ERROR",
+              "errorMessage": "getaddrinfo ENOTFOUND desmos-rpc.noders.services"
             }
           ]
         },
@@ -10390,21 +10480,24 @@
       "validationResults": [
         {
           "test": "RPC CORS",
-          "url": "https://desmos-rpc.staketab.org/",
-          "success": true
+          "url": "https://rpc.mainnet.desmos.network/",
+          "success": false,
+          "errorType": "CORS_FAILED"
         },
         {
           "test": "RPC WSS",
-          "url": "wss://desmos-rpc.staketab.org/websocket",
-          "success": true
+          "url": "wss://rpc.mainnet.desmos.network/websocket",
+          "success": false,
+          "errorType": "WEBSOCKET_ERROR",
+          "errorMessage": "Unexpected server response: 400"
         },
         {
           "test": "RPC Endpoints",
-          "url": "https://desmos-rpc.staketab.org/status",
+          "url": "https://rpc.mainnet.desmos.network/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:46.929998486Z",
-          "latestBlockHeight": 31103087
+          "latestBlockTime": "2026-10-31T15:07:35.669581414Z",
+          "latestBlockHeight": 31112730
         },
         {
           "test": "REST CORS",
@@ -10419,13 +10512,13 @@
         }
       ],
       "validatedEndpoints": {
-        "rpcAddress": "https://desmos-rpc.staketab.org:443",
+        "rpcAddress": "https://rpc.mainnet.desmos.network",
         "restAddress": "https://api.mainnet.desmos.network"
       },
       "backupUsed": {
         "rpcEndpointIndex": 1,
         "restEndpointIndex": 0,
-        "rpcAddress": "https://desmos-rpc.staketab.org:443",
+        "rpcAddress": "https://rpc.mainnet.desmos.network",
         "restAddress": "https://api.mainnet.desmos.network"
       }
     },
@@ -10591,7 +10684,7 @@
     },
     {
       "chain_name": "sommelier",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -10625,8 +10718,8 @@
               "url": "https://rpc-sommelier.keplr.app/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:01.277532954Z",
-              "latestBlockHeight": 28538546
+              "latestBlockTime": "2026-10-31T15:07:40.661311862Z",
+              "latestBlockHeight": 28555405
             }
           ]
         },
@@ -10667,8 +10760,8 @@
           "url": "https://rpc-sommelier.keplr.app/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:01.277532954Z",
-          "latestBlockHeight": 28538546
+          "latestBlockTime": "2026-10-31T15:07:40.661311862Z",
+          "latestBlockHeight": 28555405
         },
         {
           "test": "REST CORS",
@@ -11007,7 +11100,7 @@
     },
     {
       "chain_name": "bandchain",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -11041,8 +11134,8 @@
               "url": "https://band.ibs.team/rpc/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:58.46749023Z",
-              "latestBlockHeight": 76888887
+              "latestBlockTime": "2026-10-31T15:07:39.449048399Z",
+              "latestBlockHeight": 76963342
             }
           ]
         },
@@ -11084,8 +11177,8 @@
           "url": "https://band.ibs.team/rpc/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:58.46749023Z",
-          "latestBlockHeight": 76888887
+          "latestBlockTime": "2026-10-31T15:07:39.449048399Z",
+          "latestBlockHeight": 76963342
         },
         {
           "test": "REST CORS",
@@ -12196,7 +12289,7 @@
     },
     {
       "chain_name": "gravitybridge",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -12230,8 +12323,8 @@
               "url": "https://gravitychain.io:26657/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:51.922566593Z",
-              "latestBlockHeight": 24355277
+              "latestBlockTime": "2026-10-31T15:07:34.711965777Z",
+              "latestBlockHeight": 24370244
             }
           ]
         },
@@ -12273,8 +12366,8 @@
           "url": "https://gravitychain.io:26657/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:51.922566593Z",
-          "latestBlockHeight": 24355277
+          "latestBlockTime": "2026-10-31T15:07:34.711965777Z",
+          "latestBlockHeight": 24370244
         },
         {
           "test": "REST CORS",
@@ -12295,15 +12388,15 @@
     },
     {
       "chain_name": "decentr",
-      "validationDate": "2026-10-30T15:09:51.631Z",
-      "validationSuccess": true,
+      "validationDate": "2026-10-31T15:07:33.390Z",
+      "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
         "corsSuccess": false
       },
       "restStatus": {
-        "connectivitySuccess": true,
-        "corsSuccess": true
+        "connectivitySuccess": false,
+        "corsSuccess": false
       },
       "allTestedEndpoints": [
         {
@@ -12333,7 +12426,7 @@
               "url": "https://poseidon.mainnet.decentr.xyz/status",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
             }
           ]
         },
@@ -12512,13 +12605,13 @@
               "url": "https://rest.mainnet.decentr.xyz/cosmos/base/tendermint/v1beta1/node_info",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
             }
           ]
         },
         {
           "type": "rest",
-          "address": "https://decentr.api.m.stavr.tech",
+          "address": "https://api.decentr.chaintools.tech/",
           "isPrimary": false,
           "orderTested": 1,
           "connectivityPassed": false,
@@ -12533,7 +12626,7 @@
             },
             {
               "test": "REST Endpoints",
-              "url": "https://decentr.api.m.stavr.tech/cosmos/base/tendermint/v1beta1/node_info",
+              "url": "https://api.decentr.chaintools.tech/cosmos/base/tendermint/v1beta1/node_info",
               "success": false,
               "errorType": "TIMEOUT",
               "errorMessage": "Request timed out"
@@ -12542,21 +12635,49 @@
         },
         {
           "type": "rest",
-          "address": "https://api.decentr.chaintools.tech/",
+          "address": "https://decentr-api.polkachu.com",
           "isPrimary": false,
           "orderTested": 2,
-          "connectivityPassed": true,
-          "corsPassed": true,
+          "connectivityPassed": false,
+          "corsPassed": false,
           "testResults": [
             {
               "test": "REST CORS",
-              "url": "https://api.decentr.chaintools.tech/",
-              "success": true
+              "url": null,
+              "success": false,
+              "errorType": "SKIPPED",
+              "errorMessage": "Not tested: connectivity test failed"
             },
             {
               "test": "REST Endpoints",
-              "url": "https://api.decentr.chaintools.tech/cosmos/base/tendermint/v1beta1/node_info",
-              "success": true
+              "url": "https://decentr-api.polkachu.com/cosmos/base/tendermint/v1beta1/node_info",
+              "success": false,
+              "errorType": "NETWORK_ERROR",
+              "errorMessage": "getaddrinfo ENOTFOUND decentr-api.polkachu.com"
+            }
+          ]
+        },
+        {
+          "type": "rest",
+          "address": "https://decentr.api.m.stavr.tech",
+          "isPrimary": false,
+          "orderTested": 3,
+          "connectivityPassed": false,
+          "corsPassed": false,
+          "testResults": [
+            {
+              "test": "REST CORS",
+              "url": null,
+              "success": false,
+              "errorType": "SKIPPED",
+              "errorMessage": "Not tested: connectivity test failed"
+            },
+            {
+              "test": "REST Endpoints",
+              "url": "https://decentr.api.m.stavr.tech/cosmos/base/tendermint/v1beta1/node_info",
+              "success": false,
+              "errorType": "HTTP_ERROR",
+              "errorMessage": "Invalid response: 502"
             }
           ]
         }
@@ -12585,29 +12706,27 @@
         },
         {
           "test": "REST CORS",
-          "url": "https://api.decentr.chaintools.tech/",
-          "success": true
+          "url": null,
+          "success": false,
+          "errorType": "SKIPPED",
+          "errorMessage": "Not tested: connectivity test failed"
         },
         {
           "test": "REST Endpoints",
-          "url": "https://api.decentr.chaintools.tech/cosmos/base/tendermint/v1beta1/node_info",
-          "success": true
+          "url": "https://decentr.api.m.stavr.tech/cosmos/base/tendermint/v1beta1/node_info",
+          "success": false,
+          "errorType": "HTTP_ERROR",
+          "errorMessage": "Invalid response: 502"
         }
       ],
       "validatedEndpoints": {
         "rpcAddress": null,
-        "restAddress": "https://api.decentr.chaintools.tech/"
-      },
-      "backupUsed": {
-        "rpcEndpointIndex": 0,
-        "restEndpointIndex": 2,
-        "rpcAddress": null,
-        "restAddress": "https://api.decentr.chaintools.tech/"
+        "restAddress": null
       }
     },
     {
       "chain_name": "shentu",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -12672,8 +12791,8 @@
               "url": "https://rpc.shentu.org/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:57.377406312Z",
-              "latestBlockHeight": 31825830
+              "latestBlockTime": "2026-10-31T15:07:39.876871088Z",
+              "latestBlockHeight": 31840942
             }
           ]
         },
@@ -12712,7 +12831,8 @@
             {
               "test": "REST CORS",
               "url": "https://rest.shentu.org/",
-              "success": true
+              "success": false,
+              "errorType": "TIMEOUT"
             },
             {
               "test": "REST Endpoints",
@@ -12738,13 +12858,14 @@
           "url": "https://rpc.shentu.org/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:57.377406312Z",
-          "latestBlockHeight": 31825830
+          "latestBlockTime": "2026-10-31T15:07:39.876871088Z",
+          "latestBlockHeight": 31840942
         },
         {
           "test": "REST CORS",
           "url": "https://rest.shentu.org/",
-          "success": true
+          "success": false,
+          "errorType": "TIMEOUT"
         },
         {
           "test": "REST Endpoints",
@@ -12755,17 +12876,11 @@
       "validatedEndpoints": {
         "rpcAddress": "https://rpc.shentu.org:443",
         "restAddress": "https://rest.shentu.org/"
-      },
-      "backupUsed": {
-        "rpcEndpointIndex": 6,
-        "restEndpointIndex": 6,
-        "rpcAddress": "https://rpc.shentu.org:443",
-        "restAddress": "https://rest.shentu.org/"
       }
     },
     {
       "chain_name": "carbon",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -12896,7 +13011,7 @@
               "url": "https://rpc.carbon.blockhunters.org/status",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
             }
           ]
         },
@@ -13023,7 +13138,7 @@
               "url": "https://rest.carbon.blockhunters.org/cosmos/base/tendermint/v1beta1/node_info",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
             }
           ]
         },
@@ -13096,7 +13211,7 @@
     },
     {
       "chain_name": "injective",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -13161,8 +13276,8 @@
               "url": "https://rpc.lavenderfive.com/injective/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:09.533516291Z",
-              "latestBlockHeight": 189595011
+              "latestBlockTime": "2026-10-31T15:07:51.859892869Z",
+              "latestBlockHeight": 189739100
             }
           ]
         },
@@ -13227,8 +13342,8 @@
           "url": "https://rpc.lavenderfive.com/injective/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:09.533516291Z",
-          "latestBlockHeight": 189595011
+          "latestBlockTime": "2026-10-31T15:07:51.859892869Z",
+          "latestBlockHeight": 189739100
         },
         {
           "test": "REST CORS",
@@ -13355,7 +13470,7 @@
     },
     {
       "chain_name": "fetchhub",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -13389,8 +13504,8 @@
               "url": "https://rpc-fetchhub.fetch.ai/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:59.176422878Z",
-              "latestBlockHeight": 29906120
+              "latestBlockTime": "2026-10-31T15:07:42.261583001Z",
+              "latestBlockHeight": 29921187
             }
           ]
         },
@@ -13431,8 +13546,8 @@
           "url": "https://rpc-fetchhub.fetch.ai/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:59.176422878Z",
-          "latestBlockHeight": 29906120
+          "latestBlockTime": "2026-10-31T15:07:42.261583001Z",
+          "latestBlockHeight": 29921187
         },
         {
           "test": "REST CORS",
@@ -13747,7 +13862,7 @@
     },
     {
       "chain_name": "provenance",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -13782,8 +13897,8 @@
               "url": "https://rpc.provenance.io/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:56.319658971Z",
-              "latestBlockHeight": 34383043
+              "latestBlockTime": "2026-10-31T15:07:42.039049277Z",
+              "latestBlockHeight": 34402890
             }
           ]
         },
@@ -13826,8 +13941,8 @@
           "url": "https://rpc.provenance.io/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:56.319658971Z",
-          "latestBlockHeight": 34383043
+          "latestBlockTime": "2026-10-31T15:07:42.039049277Z",
+          "latestBlockHeight": 34402890
         },
         {
           "test": "REST CORS",
@@ -15102,7 +15217,7 @@
     },
     {
       "chain_name": "terra2",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -15136,8 +15251,8 @@
               "url": "https://rpc.lavenderfive.com/terra2/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:56.162768138Z",
-              "latestBlockHeight": 23523908
+              "latestBlockTime": "2026-10-31T15:07:42.721828932Z",
+              "latestBlockHeight": 23538882
             }
           ]
         },
@@ -15178,8 +15293,8 @@
           "url": "https://rpc.lavenderfive.com/terra2/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:56.162768138Z",
-          "latestBlockHeight": 23523908
+          "latestBlockTime": "2026-10-31T15:07:42.721828932Z",
+          "latestBlockHeight": 23538882
         },
         {
           "test": "REST CORS",
@@ -15542,7 +15657,7 @@
     },
     {
       "chain_name": "kava",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -15576,8 +15691,8 @@
               "url": "https://rpc-kava.keplr.app/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:59.067122811Z",
-              "latestBlockHeight": 23264847
+              "latestBlockTime": "2026-10-31T15:07:43.476773543Z",
+              "latestBlockHeight": 23279968
             }
           ]
         },
@@ -15618,8 +15733,8 @@
           "url": "https://rpc-kava.keplr.app/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:59.067122811Z",
-          "latestBlockHeight": 23264847
+          "latestBlockTime": "2026-10-31T15:07:43.476773543Z",
+          "latestBlockHeight": 23279968
         },
         {
           "test": "REST CORS",
@@ -15639,7 +15754,7 @@
     },
     {
       "chain_name": "genesisl1",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -15673,8 +15788,8 @@
               "url": "https://26657.genesisl1.org/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:39.441671382Z",
-              "latestBlockHeight": 13934013
+              "latestBlockTime": "2026-10-31T15:07:36.349391697Z",
+              "latestBlockHeight": 13940015
             }
           ]
         },
@@ -15716,8 +15831,8 @@
           "url": "https://26657.genesisl1.org/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:39.441671382Z",
-          "latestBlockHeight": 13934013
+          "latestBlockTime": "2026-10-31T15:07:36.349391697Z",
+          "latestBlockHeight": 13940015
         },
         {
           "test": "REST CORS",
@@ -17612,7 +17727,7 @@
     },
     {
       "chain_name": "oraichain",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -17646,8 +17761,8 @@
               "url": "https://rpc.orai.io/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:06.696530843Z",
-              "latestBlockHeight": 128219032
+              "latestBlockTime": "2026-10-31T15:07:50.670169855Z",
+              "latestBlockHeight": 128336531
             }
           ]
         },
@@ -17689,8 +17804,8 @@
           "url": "https://rpc.orai.io/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:06.696530843Z",
-          "latestBlockHeight": 128219032
+          "latestBlockTime": "2026-10-31T15:07:50.670169855Z",
+          "latestBlockHeight": 128336531
         },
         {
           "test": "REST CORS",
@@ -18136,7 +18251,7 @@
     },
     {
       "chain_name": "stride",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -18170,8 +18285,8 @@
               "url": "https://stride-rpc.stakeandrelax.net/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:06.026434251Z",
-              "latestBlockHeight": 42284666
+              "latestBlockTime": "2026-10-31T15:07:49.568688988Z",
+              "latestBlockHeight": 42326423
             }
           ]
         },
@@ -18213,8 +18328,8 @@
           "url": "https://stride-rpc.stakeandrelax.net/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:06.026434251Z",
-          "latestBlockHeight": 42284666
+          "latestBlockTime": "2026-10-31T15:07:49.568688988Z",
+          "latestBlockHeight": 42326423
         },
         {
           "test": "REST CORS",
@@ -19568,7 +19683,7 @@
     },
     {
       "chain_name": "celestia",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -19602,8 +19717,8 @@
               "url": "https://rpc.lunaroasis.net/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:11.438757375Z",
-              "latestBlockHeight": 15434087
+              "latestBlockTime": "2026-10-31T15:07:55.720875671Z",
+              "latestBlockHeight": 15464354
             }
           ]
         },
@@ -19668,8 +19783,8 @@
           "url": "https://rpc.lunaroasis.net/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:11.438757375Z",
-          "latestBlockHeight": 15434087
+          "latestBlockTime": "2026-10-31T15:07:55.720875671Z",
+          "latestBlockHeight": 15464354
         },
         {
           "test": "REST CORS",
@@ -19689,7 +19804,7 @@
     },
     {
       "chain_name": "noble",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -19725,8 +19840,8 @@
               "url": "https://noble-rpc.polkachu.com/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:09.428265579Z",
-              "latestBlockHeight": 62786616
+              "latestBlockTime": "2026-10-31T15:07:51.481220048Z",
+              "latestBlockHeight": 62863362
             }
           ]
         },
@@ -19753,8 +19868,8 @@
               "url": "https://rpc.lavenderfive.com/noble/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:10.885022527Z",
-              "latestBlockHeight": 62786617
+              "latestBlockTime": "2026-10-31T15:07:53.710873845Z",
+              "latestBlockHeight": 62863364
             }
           ]
         },
@@ -19796,8 +19911,8 @@
           "url": "https://rpc.lavenderfive.com/noble/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:10.885022527Z",
-          "latestBlockHeight": 62786617
+          "latestBlockTime": "2026-10-31T15:07:53.710873845Z",
+          "latestBlockHeight": 62863364
         },
         {
           "test": "REST CORS",
@@ -20084,7 +20199,7 @@
     },
     {
       "chain_name": "unification",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -20122,7 +20237,7 @@
               "url": "https://rpc.unification.chainmasters.ninja/status",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
             }
           ]
         },
@@ -20149,8 +20264,8 @@
               "url": "https://rpc.unification.io/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:00.025509273Z",
-              "latestBlockHeight": 24201613
+              "latestBlockTime": "2026-10-31T15:07:42.416861828Z",
+              "latestBlockHeight": 24217241
             }
           ]
         },
@@ -20174,7 +20289,7 @@
               "url": "https://rest.unification.chainmasters.ninja/cosmos/base/tendermint/v1beta1/node_info",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
             }
           ]
         },
@@ -20215,8 +20330,8 @@
           "url": "https://rpc.unification.io/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:00.025509273Z",
-          "latestBlockHeight": 24201613
+          "latestBlockTime": "2026-10-31T15:07:42.416861828Z",
+          "latestBlockHeight": 24217241
         },
         {
           "test": "REST CORS",
@@ -20236,7 +20351,7 @@
     },
     {
       "chain_name": "passage",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -20270,8 +20385,8 @@
               "url": "https://passage-rpc.stakeandrelax.net/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:02.673468242Z",
-              "latestBlockHeight": 21651786
+              "latestBlockTime": "2026-10-31T15:07:48.687204877Z",
+              "latestBlockHeight": 21666719
             }
           ]
         },
@@ -20313,8 +20428,8 @@
           "url": "https://passage-rpc.stakeandrelax.net/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:02.673468242Z",
-          "latestBlockHeight": 21651786
+          "latestBlockTime": "2026-10-31T15:07:48.687204877Z",
+          "latestBlockHeight": 21666719
         },
         {
           "test": "REST CORS",
@@ -20335,7 +20450,7 @@
     },
     {
       "chain_name": "jackal",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -20369,8 +20484,8 @@
               "url": "https://rpc.jackal.nodestake.org/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:57.92936381Z",
-              "latestBlockHeight": 20456422
+              "latestBlockTime": "2026-10-31T15:07:44.931706291Z",
+              "latestBlockHeight": 20470839
             }
           ]
         },
@@ -20412,8 +20527,8 @@
           "url": "https://rpc.jackal.nodestake.org/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:57.92936381Z",
-          "latestBlockHeight": 20456422
+          "latestBlockTime": "2026-10-31T15:07:44.931706291Z",
+          "latestBlockHeight": 20470839
         },
         {
           "test": "REST CORS",
@@ -20434,7 +20549,7 @@
     },
     {
       "chain_name": "beezee",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -20468,8 +20583,8 @@
               "url": "https://rpc.getbze.com/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:59.051718063Z",
-              "latestBlockHeight": 25319779
+              "latestBlockTime": "2026-10-31T15:07:43.16637701Z",
+              "latestBlockHeight": 25334274
             }
           ]
         },
@@ -20510,8 +20625,8 @@
           "url": "https://rpc.getbze.com/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:59.051718063Z",
-          "latestBlockHeight": 25319779
+          "latestBlockTime": "2026-10-31T15:07:43.16637701Z",
+          "latestBlockHeight": 25334274
         },
         {
           "test": "REST CORS",
@@ -20957,7 +21072,7 @@
     },
     {
       "chain_name": "medasdigital",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -20991,8 +21106,8 @@
               "url": "https://rpc.medas-digital.io:26657/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:03.204460546Z",
-              "latestBlockHeight": 10651315
+              "latestBlockTime": "2026-10-31T15:07:44.987249523Z",
+              "latestBlockHeight": 10666127
             }
           ]
         },
@@ -21033,8 +21148,8 @@
           "url": "https://rpc.medas-digital.io:26657/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:03.204460546Z",
-          "latestBlockHeight": 10651315
+          "latestBlockTime": "2026-10-31T15:07:44.987249523Z",
+          "latestBlockHeight": 10666127
         },
         {
           "test": "REST CORS",
@@ -22951,7 +23066,7 @@
     },
     {
       "chain_name": "quicksilver",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -23144,7 +23259,7 @@
               "url": "https://quicksilver.rpc.kjnodes.com/status",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
             }
           ]
         },
@@ -23175,7 +23290,7 @@
               "url": "https://rpc-quicksilver.architectnodes.com/status",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
             }
           ]
         },
@@ -23361,7 +23476,7 @@
               "url": "https://rpc.quicksilver.validatus.com/status",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
             }
           ]
         },
@@ -23597,8 +23712,8 @@
               "test": "REST Endpoints",
               "url": "https://rest-quicksilver.architectnodes.com/cosmos/base/tendermint/v1beta1/node_info",
               "success": false,
-              "errorType": "TIMEOUT",
-              "errorMessage": "Request timed out"
+              "errorType": "NETWORK_ERROR",
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
             }
           ]
         },
@@ -23742,7 +23857,7 @@
               "url": "https://api.quicksilver.validatus.com/cosmos/base/tendermint/v1beta1/node_info",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
             }
           ]
         },
@@ -25252,7 +25367,7 @@
     },
     {
       "chain_name": "axelar",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -25286,8 +25401,8 @@
               "url": "https://rpc-axelar.keplr.app/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:05.789157541Z",
-              "latestBlockHeight": 37014497
+              "latestBlockTime": "2026-10-31T15:07:53.356840581Z",
+              "latestBlockHeight": 37063713
             }
           ]
         },
@@ -25328,8 +25443,8 @@
           "url": "https://rpc-axelar.keplr.app/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:05.789157541Z",
-          "latestBlockHeight": 37014497
+          "latestBlockTime": "2026-10-31T15:07:53.356840581Z",
+          "latestBlockHeight": 37063713
         },
         {
           "test": "REST CORS",
@@ -25638,7 +25753,7 @@
     },
     {
       "chain_name": "gitopia",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -25703,8 +25818,8 @@
               "url": "https://rpc.gitopia.roomit.xyz/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:08.94510132Z",
-              "latestBlockHeight": 65751173
+              "latestBlockTime": "2026-10-31T15:07:50.438923479Z",
+              "latestBlockHeight": 65796779
             }
           ]
         },
@@ -25769,8 +25884,8 @@
           "url": "https://rpc.gitopia.roomit.xyz/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:08.94510132Z",
-          "latestBlockHeight": 65751173
+          "latestBlockTime": "2026-10-31T15:07:50.438923479Z",
+          "latestBlockHeight": 65796779
         },
         {
           "test": "REST CORS",
@@ -25790,7 +25905,7 @@
     },
     {
       "chain_name": "nolus",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -25855,8 +25970,8 @@
               "url": "https://rpc.nolus.network/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:08.057979881Z",
-              "latestBlockHeight": 28158379
+              "latestBlockTime": "2026-10-31T15:07:52.574212561Z",
+              "latestBlockHeight": 28200210
             }
           ]
         },
@@ -25921,8 +26036,8 @@
           "url": "https://rpc.nolus.network/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:08.057979881Z",
-          "latestBlockHeight": 28158379
+          "latestBlockTime": "2026-10-31T15:07:52.574212561Z",
+          "latestBlockHeight": 28200210
         },
         {
           "test": "REST CORS",
@@ -25942,7 +26057,7 @@
     },
     {
       "chain_name": "neutron",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -25976,8 +26091,8 @@
               "url": "https://rpc-neutron.keplr.app/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:58.100224745Z",
-              "latestBlockHeight": 62069110
+              "latestBlockTime": "2026-10-31T15:07:46.332008201Z",
+              "latestBlockHeight": 62081527
             }
           ]
         },
@@ -26018,8 +26133,8 @@
           "url": "https://rpc-neutron.keplr.app/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:58.100224745Z",
-          "latestBlockHeight": 62069110
+          "latestBlockTime": "2026-10-31T15:07:46.332008201Z",
+          "latestBlockHeight": 62081527
         },
         {
           "test": "REST CORS",
@@ -26758,7 +26873,7 @@
     },
     {
       "chain_name": "realio",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -26823,8 +26938,8 @@
               "url": "https://realio-rpc.noders.services/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:05.555364734Z",
-              "latestBlockHeight": 20336053
+              "latestBlockTime": "2026-10-31T15:07:53.134272157Z",
+              "latestBlockHeight": 20351320
             }
           ]
         },
@@ -26889,8 +27004,8 @@
           "url": "https://realio-rpc.noders.services/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:05.555364734Z",
-          "latestBlockHeight": 20336053
+          "latestBlockTime": "2026-10-31T15:07:53.134272157Z",
+          "latestBlockHeight": 20351320
         },
         {
           "test": "REST CORS",
@@ -27576,7 +27691,7 @@
     },
     {
       "chain_name": "archway",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -27610,8 +27725,8 @@
               "url": "https://rpc.mainnet.archway.io/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:00.544792476Z",
-              "latestBlockHeight": 18024654
+              "latestBlockTime": "2026-10-31T15:07:46.122175695Z",
+              "latestBlockHeight": 18039866
             }
           ]
         },
@@ -27652,8 +27767,8 @@
           "url": "https://rpc.mainnet.archway.io/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:00.544792476Z",
-          "latestBlockHeight": 18024654
+          "latestBlockTime": "2026-10-31T15:07:46.122175695Z",
+          "latestBlockHeight": 18039866
         },
         {
           "test": "REST CORS",
@@ -27673,7 +27788,7 @@
     },
     {
       "chain_name": "empowerchain",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -27738,8 +27853,8 @@
               "url": "https://rpc-empowerchain.mzonder.com/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:03.916362846Z",
-              "latestBlockHeight": 19430144
+              "latestBlockTime": "2026-10-31T15:07:49.559370432Z",
+              "latestBlockHeight": 19447075
             }
           ]
         },
@@ -28063,8 +28178,8 @@
           "url": "https://rpc-empowerchain.mzonder.com/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:03.916362846Z",
-          "latestBlockHeight": 19430144
+          "latestBlockTime": "2026-10-31T15:07:49.559370432Z",
+          "latestBlockHeight": 19447075
         },
         {
           "test": "REST CORS",
@@ -28088,7 +28203,7 @@
     },
     {
       "chain_name": "kyve",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -28155,8 +28270,8 @@
               "url": "https://rpc.kyve.network/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:01.928010536Z",
-              "latestBlockHeight": 19745575
+              "latestBlockTime": "2026-10-31T15:07:48.289165546Z",
+              "latestBlockHeight": 19760848
             }
           ]
         },
@@ -28183,8 +28298,8 @@
               "url": "https://kyve.ibs.team/rpc/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:07.780218345Z",
-              "latestBlockHeight": 19745576
+              "latestBlockTime": "2026-10-31T15:07:48.289165546Z",
+              "latestBlockHeight": 19760848
             }
           ]
         },
@@ -28225,8 +28340,8 @@
           "url": "https://kyve.ibs.team/rpc/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:07.780218345Z",
-          "latestBlockHeight": 19745576
+          "latestBlockTime": "2026-10-31T15:07:48.289165546Z",
+          "latestBlockHeight": 19760848
         },
         {
           "test": "REST CORS",
@@ -28246,7 +28361,7 @@
     },
     {
       "chain_name": "sei",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -28366,7 +28481,7 @@
     },
     {
       "chain_name": "gateway",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -28402,8 +28517,8 @@
               "url": "https://wormchain-rpc.polkachu.com/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:03.964223326Z",
-              "latestBlockHeight": 21920478
+              "latestBlockTime": "2026-10-31T15:07:48.896746378Z",
+              "latestBlockHeight": 21935834
             }
           ]
         },
@@ -28509,8 +28624,8 @@
           "url": "https://wormchain-rpc.polkachu.com/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:03.964223326Z",
-          "latestBlockHeight": 21920478
+          "latestBlockTime": "2026-10-31T15:07:48.896746378Z",
+          "latestBlockHeight": 21935834
         },
         {
           "test": "REST CORS",
@@ -28531,7 +28646,7 @@
     },
     {
       "chain_name": "xpla",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -28565,8 +28680,8 @@
               "url": "https://dimension-rpc.xpla.dev/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:05.523390959Z",
-              "latestBlockHeight": 22010702
+              "latestBlockTime": "2026-10-31T15:07:51.528451064Z",
+              "latestBlockHeight": 22025490
             }
           ]
         },
@@ -28608,8 +28723,8 @@
           "url": "https://dimension-rpc.xpla.dev/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:05.523390959Z",
-          "latestBlockHeight": 22010702
+          "latestBlockTime": "2026-10-31T15:07:51.528451064Z",
+          "latestBlockHeight": 22025490
         },
         {
           "test": "REST CORS",
@@ -29669,7 +29784,7 @@
     },
     {
       "chain_name": "doravota",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -29703,8 +29818,8 @@
               "url": "https://vota-rpc.dorafactory.org/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:08.24216788Z",
-              "latestBlockHeight": 18008678
+              "latestBlockTime": "2026-10-31T15:07:52.136043835Z",
+              "latestBlockHeight": 18024019
             }
           ]
         },
@@ -29746,8 +29861,8 @@
           "url": "https://vota-rpc.dorafactory.org/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:08.24216788Z",
-          "latestBlockHeight": 18008678
+          "latestBlockTime": "2026-10-31T15:07:52.136043835Z",
+          "latestBlockHeight": 18024019
         },
         {
           "test": "REST CORS",
@@ -29768,7 +29883,7 @@
     },
     {
       "chain_name": "coreum",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -29802,8 +29917,8 @@
               "url": "https://rpc-01.mainnet-1.tx.org/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:13.66791017Z",
-              "latestBlockHeight": 92094030
+              "latestBlockTime": "2026-10-31T15:07:58.236424716Z",
+              "latestBlockHeight": 92215803
             }
           ]
         },
@@ -29844,8 +29959,8 @@
           "url": "https://rpc-01.mainnet-1.tx.org/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:13.66791017Z",
-          "latestBlockHeight": 92094030
+          "latestBlockTime": "2026-10-31T15:07:58.236424716Z",
+          "latestBlockHeight": 92215803
         },
         {
           "test": "REST CORS",
@@ -29865,7 +29980,7 @@
     },
     {
       "chain_name": "dydx",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -29902,8 +30017,8 @@
               "url": "https://dydx-rpc.polkachu.com/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:13.953799791Z",
-              "latestBlockHeight": 111755497
+              "latestBlockTime": "2026-10-31T15:07:58.628660922Z",
+              "latestBlockHeight": 111897029
             }
           ]
         },
@@ -29930,8 +30045,8 @@
               "url": "https://rpc.lavenderfive.com/dydx/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:07.563413787Z",
-              "latestBlockHeight": 111755486
+              "latestBlockTime": "2026-10-31T15:07:59.207710901Z",
+              "latestBlockHeight": 111897030
             }
           ]
         },
@@ -29973,8 +30088,8 @@
           "url": "https://rpc.lavenderfive.com/dydx/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:07.563413787Z",
-          "latestBlockHeight": 111755486
+          "latestBlockTime": "2026-10-31T15:07:59.207710901Z",
+          "latestBlockHeight": 111897030
         },
         {
           "test": "REST CORS",
@@ -30155,7 +30270,7 @@
     },
     {
       "chain_name": "nomic",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -30286,7 +30401,7 @@
               "url": "https://rpc.nomic.basementnodes.ca/status",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
             }
           ]
         },
@@ -30340,8 +30455,8 @@
               "test": "REST Endpoints",
               "url": "https://app.nomic.io:8443/cosmos/base/tendermint/v1beta1/node_info",
               "success": false,
-              "errorType": "TIMEOUT",
-              "errorMessage": "Request timed out"
+              "errorType": "HTTP_ERROR",
+              "errorMessage": "Invalid response: 521"
             }
           ]
         }
@@ -30379,8 +30494,8 @@
           "test": "REST Endpoints",
           "url": "https://app.nomic.io:8443/cosmos/base/tendermint/v1beta1/node_info",
           "success": false,
-          "errorType": "TIMEOUT",
-          "errorMessage": "Request timed out"
+          "errorType": "HTTP_ERROR",
+          "errorMessage": "Invalid response: 521"
         }
       ],
       "validatedEndpoints": {
@@ -31222,15 +31337,15 @@
     },
     {
       "chain_name": "qwoyn",
-      "validationDate": "2026-10-30T15:09:51.631Z",
-      "validationSuccess": false,
+      "validationDate": "2026-10-31T15:07:33.390Z",
+      "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": false,
         "corsSuccess": false
       },
       "restStatus": {
-        "connectivitySuccess": false,
-        "corsSuccess": false
+        "connectivitySuccess": true,
+        "corsSuccess": true
       },
       "allTestedEndpoints": [
         {
@@ -31483,187 +31598,19 @@
           "address": "https://api.qwoyn.studio:443",
           "isPrimary": true,
           "orderTested": 0,
-          "connectivityPassed": false,
+          "connectivityPassed": true,
           "corsPassed": true,
           "testResults": [
             {
               "test": "REST CORS",
-              "url": null,
-              "success": false,
-              "errorType": "SKIPPED",
-              "errorMessage": "Not tested: connectivity test failed"
-            },
-            {
-              "test": "REST Endpoints",
-              "url": "https://api.qwoyn.studio/cosmos/base/tendermint/v1beta1/node_info",
-              "success": false,
-              "errorType": "NETWORK_ERROR",
-              "errorMessage": "Invalid response: 302"
-            }
-          ]
-        },
-        {
-          "type": "rest",
-          "address": "https://rest-qwoyn.theamsolutions.info:443",
-          "isPrimary": false,
-          "orderTested": 1,
-          "connectivityPassed": true,
-          "corsPassed": false,
-          "testResults": [
-            {
-              "test": "REST CORS",
-              "url": "https://rest-qwoyn.theamsolutions.info/",
+              "url": "https://api.qwoyn.studio/",
               "success": false,
               "errorMessage": "CORS Policy: undefined"
             },
             {
               "test": "REST Endpoints",
-              "url": "https://rest-qwoyn.theamsolutions.info/cosmos/base/tendermint/v1beta1/node_info",
+              "url": "https://api.qwoyn.studio/cosmos/base/tendermint/v1beta1/node_info",
               "success": true
-            }
-          ]
-        },
-        {
-          "type": "rest",
-          "address": "https://qwoyn-rest.staketab.org",
-          "isPrimary": false,
-          "orderTested": 2,
-          "connectivityPassed": false,
-          "corsPassed": false,
-          "testResults": [
-            {
-              "test": "REST CORS",
-              "url": null,
-              "success": false,
-              "errorType": "SKIPPED",
-              "errorMessage": "Not tested: connectivity test failed"
-            },
-            {
-              "test": "REST Endpoints",
-              "url": "https://qwoyn-rest.staketab.org/cosmos/base/tendermint/v1beta1/node_info",
-              "success": false,
-              "errorType": "TIMEOUT",
-              "errorMessage": "Request timed out"
-            }
-          ]
-        },
-        {
-          "type": "rest",
-          "address": "https://qwoyn.api.m.stavr.tech",
-          "isPrimary": false,
-          "orderTested": 3,
-          "connectivityPassed": false,
-          "corsPassed": false,
-          "testResults": [
-            {
-              "test": "REST CORS",
-              "url": null,
-              "success": false,
-              "errorType": "SKIPPED",
-              "errorMessage": "Not tested: connectivity test failed"
-            },
-            {
-              "test": "REST Endpoints",
-              "url": "https://qwoyn.api.m.stavr.tech/cosmos/base/tendermint/v1beta1/node_info",
-              "success": false,
-              "errorType": "HTTP_ERROR",
-              "errorMessage": "Invalid response: 502"
-            }
-          ]
-        },
-        {
-          "type": "rest",
-          "address": "https://qwoyn-rest-archive.staketab.org",
-          "isPrimary": false,
-          "orderTested": 4,
-          "connectivityPassed": false,
-          "corsPassed": false,
-          "testResults": [
-            {
-              "test": "REST CORS",
-              "url": null,
-              "success": false,
-              "errorType": "SKIPPED",
-              "errorMessage": "Not tested: connectivity test failed"
-            },
-            {
-              "test": "REST Endpoints",
-              "url": "https://qwoyn-rest-archive.staketab.org/cosmos/base/tendermint/v1beta1/node_info",
-              "success": false,
-              "errorType": "HTTP_ERROR",
-              "errorMessage": "Invalid response: 502"
-            }
-          ]
-        },
-        {
-          "type": "rest",
-          "address": "https://rest.lavenderfive.com:443/qwoyn",
-          "isPrimary": false,
-          "orderTested": 5,
-          "connectivityPassed": false,
-          "corsPassed": false,
-          "testResults": [
-            {
-              "test": "REST CORS",
-              "url": null,
-              "success": false,
-              "errorType": "SKIPPED",
-              "errorMessage": "Not tested: connectivity test failed"
-            },
-            {
-              "test": "REST Endpoints",
-              "url": "https://rest.lavenderfive.com/qwoyn/cosmos/base/tendermint/v1beta1/node_info",
-              "success": false,
-              "errorType": "HTTP_ERROR",
-              "errorMessage": "Invalid response: 503"
-            }
-          ]
-        },
-        {
-          "type": "rest",
-          "address": "https://api-qwoyn.mzonder.com",
-          "isPrimary": false,
-          "orderTested": 6,
-          "connectivityPassed": false,
-          "corsPassed": false,
-          "testResults": [
-            {
-              "test": "REST CORS",
-              "url": null,
-              "success": false,
-              "errorType": "SKIPPED",
-              "errorMessage": "Not tested: connectivity test failed"
-            },
-            {
-              "test": "REST Endpoints",
-              "url": "https://api-qwoyn.mzonder.com/cosmos/base/tendermint/v1beta1/node_info",
-              "success": false,
-              "errorType": "NETWORK_ERROR",
-              "errorMessage": "getaddrinfo ENOTFOUND api-qwoyn.mzonder.com"
-            }
-          ]
-        },
-        {
-          "type": "rest",
-          "address": "https://lcd.qwoyn.bronbro.io:443",
-          "isPrimary": false,
-          "orderTested": 7,
-          "connectivityPassed": false,
-          "corsPassed": false,
-          "testResults": [
-            {
-              "test": "REST CORS",
-              "url": null,
-              "success": false,
-              "errorType": "SKIPPED",
-              "errorMessage": "Not tested: connectivity test failed"
-            },
-            {
-              "test": "REST Endpoints",
-              "url": "https://lcd.qwoyn.bronbro.io/cosmos/base/tendermint/v1beta1/node_info",
-              "success": false,
-              "errorType": "NETWORK_ERROR",
-              "errorMessage": "Hostname/IP does not match certificate's altnames: Host: lcd.qwoyn.bronbro.io. is not in the cert's altnames: DNS:api.gluceradisplay.co.uk"
             }
           ]
         }
@@ -31692,22 +31639,25 @@
         },
         {
           "test": "REST CORS",
-          "url": null,
+          "url": "https://api.qwoyn.studio/",
           "success": false,
-          "errorType": "SKIPPED",
-          "errorMessage": "Not tested: connectivity test failed"
+          "errorMessage": "CORS Policy: undefined"
         },
         {
           "test": "REST Endpoints",
-          "url": "https://lcd.qwoyn.bronbro.io/cosmos/base/tendermint/v1beta1/node_info",
-          "success": false,
-          "errorType": "NETWORK_ERROR",
-          "errorMessage": "Hostname/IP does not match certificate's altnames: Host: lcd.qwoyn.bronbro.io. is not in the cert's altnames: DNS:api.gluceradisplay.co.uk"
+          "url": "https://api.qwoyn.studio/cosmos/base/tendermint/v1beta1/node_info",
+          "success": true
         }
       ],
       "validatedEndpoints": {
         "rpcAddress": null,
-        "restAddress": null
+        "restAddress": "https://api.qwoyn.studio:443"
+      },
+      "backupUsed": {
+        "rpcEndpointIndex": 0,
+        "restEndpointIndex": 1,
+        "rpcAddress": null,
+        "restAddress": "https://api.qwoyn.studio:443"
       }
     },
     {
@@ -32876,7 +32826,7 @@
     },
     {
       "chain_name": "haqq",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -32910,8 +32860,8 @@
               "url": "https://rpc.tm.haqq.network/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:09.176414381Z",
-              "latestBlockHeight": 23015445
+              "latestBlockTime": "2026-10-31T15:07:50.517191923Z",
+              "latestBlockHeight": 23029761
             }
           ]
         },
@@ -32953,8 +32903,8 @@
           "url": "https://rpc.tm.haqq.network/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:09.176414381Z",
-          "latestBlockHeight": 23015445
+          "latestBlockTime": "2026-10-31T15:07:50.517191923Z",
+          "latestBlockHeight": 23029761
         },
         {
           "test": "REST CORS",
@@ -33072,7 +33022,7 @@
     },
     {
       "chain_name": "nyx",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -33106,8 +33056,8 @@
               "url": "https://rpc.nymtech.net/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:06.786815391Z",
-              "latestBlockHeight": 26323325
+              "latestBlockTime": "2026-10-31T15:07:50.96908382Z",
+              "latestBlockHeight": 26338621
             }
           ]
         },
@@ -33149,8 +33099,8 @@
           "url": "https://rpc.nymtech.net/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:06.786815391Z",
-          "latestBlockHeight": 26323325
+          "latestBlockTime": "2026-10-31T15:07:50.96908382Z",
+          "latestBlockHeight": 26338621
         },
         {
           "test": "REST CORS",
@@ -33171,7 +33121,7 @@
     },
     {
       "chain_name": "dymension",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -33215,40 +33165,9 @@
         },
         {
           "type": "rpc",
-          "address": "https://dym-m-rpc.agoranodes.com",
-          "isPrimary": false,
-          "orderTested": 1,
-          "connectivityPassed": false,
-          "corsPassed": false,
-          "testResults": [
-            {
-              "test": "RPC CORS",
-              "url": null,
-              "success": false,
-              "errorType": "SKIPPED",
-              "errorMessage": "Not tested: connectivity test failed"
-            },
-            {
-              "test": "RPC WSS",
-              "url": null,
-              "success": false,
-              "errorType": "SKIPPED",
-              "errorMessage": "Not tested: connectivity test failed"
-            },
-            {
-              "test": "RPC Endpoints",
-              "url": "https://dym-m-rpc.agoranodes.com/status",
-              "success": false,
-              "errorType": "NETWORK_ERROR",
-              "errorMessage": "getaddrinfo ENOTFOUND dym-m-rpc.agoranodes.com"
-            }
-          ]
-        },
-        {
-          "type": "rpc",
           "address": "https://rpc.dymension.nodestake.org",
           "isPrimary": false,
-          "orderTested": 2,
+          "orderTested": 1,
           "connectivityPassed": true,
           "corsPassed": true,
           "testResults": [
@@ -33267,8 +33186,8 @@
               "url": "https://rpc.dymension.nodestake.org/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:02.957385956Z",
-              "latestBlockHeight": 24207348
+              "latestBlockTime": "2026-10-31T15:07:47.422035531Z",
+              "latestBlockHeight": 24225279
             }
           ]
         },
@@ -33310,8 +33229,8 @@
           "url": "https://rpc.dymension.nodestake.org/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:02.957385956Z",
-          "latestBlockHeight": 24207348
+          "latestBlockTime": "2026-10-31T15:07:47.422035531Z",
+          "latestBlockHeight": 24225279
         },
         {
           "test": "REST CORS",
@@ -33328,17 +33247,11 @@
       "validatedEndpoints": {
         "rpcAddress": "https://rpc.dymension.nodestake.org",
         "restAddress": "https://api.dymension.nodestake.org"
-      },
-      "backupUsed": {
-        "rpcEndpointIndex": 2,
-        "restEndpointIndex": 25,
-        "rpcAddress": "https://rpc.dymension.nodestake.org",
-        "restAddress": "https://api.dymension.nodestake.org"
       }
     },
     {
       "chain_name": "humans",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -33376,7 +33289,7 @@
               "url": "https://rpc.humans.nodestake.top/status",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
             }
           ]
         },
@@ -33403,8 +33316,8 @@
               "url": "https://rpc.humans.nodestake.org/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:08.53316638Z",
-              "latestBlockHeight": 18795664
+              "latestBlockTime": "2026-10-31T15:07:51.757386126Z",
+              "latestBlockHeight": 18810726
             }
           ]
         },
@@ -33428,7 +33341,7 @@
               "url": "https://api.humans.nodestake.top/cosmos/base/tendermint/v1beta1/node_info",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
             }
           ]
         },
@@ -33469,8 +33382,8 @@
           "url": "https://rpc.humans.nodestake.org/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:08.53316638Z",
-          "latestBlockHeight": 18795664
+          "latestBlockTime": "2026-10-31T15:07:51.757386126Z",
+          "latestBlockHeight": 18810726
         },
         {
           "test": "REST CORS",
@@ -33597,7 +33510,7 @@
     },
     {
       "chain_name": "chain4energy",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -33631,8 +33544,8 @@
               "url": "https://rpc.c4e.io/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:06.557522232Z",
-              "latestBlockHeight": 21619228
+              "latestBlockTime": "2026-10-31T15:07:55.132292312Z",
+              "latestBlockHeight": 21634071
             }
           ]
         },
@@ -33673,8 +33586,8 @@
           "url": "https://rpc.c4e.io/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:06.557522232Z",
-          "latestBlockHeight": 21619228
+          "latestBlockTime": "2026-10-31T15:07:55.132292312Z",
+          "latestBlockHeight": 21634071
         },
         {
           "test": "REST CORS",
@@ -33877,7 +33790,7 @@
     },
     {
       "chain_name": "aioz",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -33911,8 +33824,8 @@
               "url": "https://rpc-dataseed.aioz.network/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:06.216782137Z",
-              "latestBlockHeight": 25876666
+              "latestBlockTime": "2026-10-31T15:07:53.324393095Z",
+              "latestBlockHeight": 25891312
             }
           ]
         },
@@ -33954,8 +33867,8 @@
           "url": "https://rpc-dataseed.aioz.network/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:06.216782137Z",
-          "latestBlockHeight": 25876666
+          "latestBlockTime": "2026-10-31T15:07:53.324393095Z",
+          "latestBlockHeight": 25891312
         },
         {
           "test": "REST CORS",
@@ -33976,7 +33889,7 @@
     },
     {
       "chain_name": "nibiru",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -34010,8 +33923,8 @@
               "url": "https://rpc.nibiru.fi/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:10.746289795Z",
-              "latestBlockHeight": 48778066
+              "latestBlockTime": "2026-10-31T15:07:58.80117889Z",
+              "latestBlockHeight": 48834834
             }
           ]
         },
@@ -34052,8 +33965,8 @@
           "url": "https://rpc.nibiru.fi/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:10.746289795Z",
-          "latestBlockHeight": 48778066
+          "latestBlockTime": "2026-10-31T15:07:58.80117889Z",
+          "latestBlockHeight": 48834834
         },
         {
           "test": "REST CORS",
@@ -34659,7 +34572,7 @@
     },
     {
       "chain_name": "saga",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -34693,8 +34606,8 @@
               "url": "https://rpc-saga.keplr.app/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:10.359075117Z",
-              "latestBlockHeight": 14304992
+              "latestBlockTime": "2026-10-31T15:07:55.269796963Z",
+              "latestBlockHeight": 14320081
             }
           ]
         },
@@ -34735,8 +34648,8 @@
           "url": "https://rpc-saga.keplr.app/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:10.359075117Z",
-          "latestBlockHeight": 14304992
+          "latestBlockTime": "2026-10-31T15:07:55.269796963Z",
+          "latestBlockHeight": 14320081
         },
         {
           "test": "REST CORS",
@@ -34756,7 +34669,7 @@
     },
     {
       "chain_name": "shido",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -34821,8 +34734,8 @@
               "url": "https://rpc.shidoscan.net/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:23.179511483Z",
-              "latestBlockHeight": 46415553
+              "latestBlockTime": "2026-10-31T15:08:05.896596727Z",
+              "latestBlockHeight": 46514953
             }
           ]
         },
@@ -34888,8 +34801,8 @@
           "url": "https://rpc.shidoscan.net/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:23.179511483Z",
-          "latestBlockHeight": 46415553
+          "latestBlockTime": "2026-10-31T15:08:05.896596727Z",
+          "latestBlockHeight": 46514953
         },
         {
           "test": "REST CORS",
@@ -34910,7 +34823,7 @@
     },
     {
       "chain_name": "cifer",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -34946,8 +34859,8 @@
               "url": "https://cif_node.cifer.ai/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:18.320582463Z",
-              "latestBlockHeight": 29793851
+              "latestBlockTime": "2026-10-31T15:08:00.522272065Z",
+              "latestBlockHeight": 29876409
             }
           ]
         },
@@ -34974,8 +34887,8 @@
               "url": "https://rpc.cifer.ai/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:19.373240264Z",
-              "latestBlockHeight": 29793852
+              "latestBlockTime": "2026-10-31T15:08:02.604472108Z",
+              "latestBlockHeight": 29876411
             }
           ]
         },
@@ -35017,8 +34930,8 @@
           "url": "https://rpc.cifer.ai/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:19.373240264Z",
-          "latestBlockHeight": 29793852
+          "latestBlockTime": "2026-10-31T15:08:02.604472108Z",
+          "latestBlockHeight": 29876411
         },
         {
           "test": "REST CORS",
@@ -35039,7 +34952,7 @@
     },
     {
       "chain_name": "seda",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -35076,8 +34989,8 @@
               "url": "https://rpc.mainnet.seda.xyz/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:07.276071414Z",
-              "latestBlockHeight": 9693240
+              "latestBlockTime": "2026-10-31T15:07:53.471237116Z",
+              "latestBlockHeight": 9703828
             }
           ]
         },
@@ -35107,8 +35020,8 @@
               "url": "https://rpc.mainnet.seda.xyz/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:07.276071414Z",
-              "latestBlockHeight": 9693240
+              "latestBlockTime": "2026-10-31T15:07:53.471237116Z",
+              "latestBlockHeight": 9703828
             }
           ]
         },
@@ -35135,8 +35048,8 @@
               "url": "https://rpc.lavenderfive.com/seda/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:07.276071414Z",
-              "latestBlockHeight": 9693240
+              "latestBlockTime": "2026-10-31T15:07:53.471237116Z",
+              "latestBlockHeight": 9703828
             }
           ]
         },
@@ -35178,8 +35091,8 @@
           "url": "https://rpc.lavenderfive.com/seda/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:07.276071414Z",
-          "latestBlockHeight": 9693240
+          "latestBlockTime": "2026-10-31T15:07:53.471237116Z",
+          "latestBlockHeight": 9703828
         },
         {
           "test": "REST CORS",
@@ -35200,7 +35113,7 @@
     },
     {
       "chain_name": "neutaro",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -35234,8 +35147,8 @@
               "url": "https://rpc2.neutaro.io/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:12.301758633Z",
-              "latestBlockHeight": 17770974
+              "latestBlockTime": "2026-10-31T15:07:54.512852254Z",
+              "latestBlockHeight": 17785665
             }
           ]
         },
@@ -35276,8 +35189,8 @@
           "url": "https://rpc2.neutaro.io/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:12.301758633Z",
-          "latestBlockHeight": 17770974
+          "latestBlockTime": "2026-10-31T15:07:54.512852254Z",
+          "latestBlockHeight": 17785665
         },
         {
           "test": "REST CORS",
@@ -35297,7 +35210,7 @@
     },
     {
       "chain_name": "firmachain",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -35331,8 +35244,8 @@
               "url": "https://lcd-mainnet.firmachain.dev:26657/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:10.276334056Z",
-              "latestBlockHeight": 25843760
+              "latestBlockTime": "2026-10-31T15:07:56.735189388Z",
+              "latestBlockHeight": 25858960
             }
           ]
         },
@@ -35374,8 +35287,8 @@
           "url": "https://lcd-mainnet.firmachain.dev:26657/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:10.276334056Z",
-          "latestBlockHeight": 25843760
+          "latestBlockTime": "2026-10-31T15:07:56.735189388Z",
+          "latestBlockHeight": 25858960
         },
         {
           "test": "REST CORS",
@@ -35396,7 +35309,7 @@
     },
     {
       "chain_name": "lava",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -35432,8 +35345,8 @@
               "url": "https://lava-rpc.w3coins.io/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:07.222497812Z",
-              "latestBlockHeight": 6154508
+              "latestBlockTime": "2026-10-31T15:07:53.014347361Z",
+              "latestBlockHeight": 6161368
             }
           ]
         },
@@ -35460,8 +35373,8 @@
               "url": "https://lava.tendermintrpc.lava.build/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:07.222497812Z",
-              "latestBlockHeight": 6154508
+              "latestBlockTime": "2026-10-31T15:07:53.014347361Z",
+              "latestBlockHeight": 6161368
             }
           ]
         },
@@ -35502,8 +35415,8 @@
           "url": "https://lava.tendermintrpc.lava.build/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:07.222497812Z",
-          "latestBlockHeight": 6154508
+          "latestBlockTime": "2026-10-31T15:07:53.014347361Z",
+          "latestBlockHeight": 6161368
         },
         {
           "test": "REST CORS",
@@ -35926,7 +35839,7 @@
     },
     {
       "chain_name": "andromeda",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -36023,7 +35936,7 @@
               "url": "https://andromeda.rpc.kjnodes.com/status",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
             }
           ]
         },
@@ -36297,7 +36210,7 @@
               "url": "https://andromeda.api.kjnodes.com/cosmos/base/tendermint/v1beta1/node_info",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000458:SSL routines:ssl3_read_bytes:tlsv1 unrecognized name:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 112\n"
             }
           ]
         },
@@ -36594,7 +36507,7 @@
     },
     {
       "chain_name": "stratos",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -37272,7 +37185,7 @@
     },
     {
       "chain_name": "mantrachain",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -37306,8 +37219,8 @@
               "url": "https://rpc.mantrachain.io/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:17.141954648Z",
-              "latestBlockHeight": 19264229
+              "latestBlockTime": "2026-10-31T15:08:00.990722913Z",
+              "latestBlockHeight": 19291044
             }
           ]
         },
@@ -37348,8 +37261,8 @@
           "url": "https://rpc.mantrachain.io/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:17.141954648Z",
-          "latestBlockHeight": 19264229
+          "latestBlockTime": "2026-10-31T15:08:00.990722913Z",
+          "latestBlockHeight": 19291044
         },
         {
           "test": "REST CORS",
@@ -37369,7 +37282,7 @@
     },
     {
       "chain_name": "atomone",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -37403,8 +37316,8 @@
               "url": "https://atomone-rpc.allinbits.com/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:12.350746014Z",
-              "latestBlockHeight": 11042940
+              "latestBlockTime": "2026-10-31T15:07:55.536212826Z",
+              "latestBlockHeight": 11057835
             }
           ]
         },
@@ -37445,8 +37358,8 @@
           "url": "https://atomone-rpc.allinbits.com/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:12.350746014Z",
-          "latestBlockHeight": 11042940
+          "latestBlockTime": "2026-10-31T15:07:55.536212826Z",
+          "latestBlockHeight": 11057835
         },
         {
           "test": "REST CORS",
@@ -37702,7 +37615,7 @@
     },
     {
       "chain_name": "dungeon",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -37767,8 +37680,8 @@
               "url": "https://rpc.dungeongames.io/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:18.526853839Z",
-              "latestBlockHeight": 22528187
+              "latestBlockTime": "2026-10-31T15:08:01.941753289Z",
+              "latestBlockHeight": 22575951
             }
           ]
         },
@@ -37833,8 +37746,8 @@
           "url": "https://rpc.dungeongames.io/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:18.526853839Z",
-          "latestBlockHeight": 22528187
+          "latestBlockTime": "2026-10-31T15:08:01.941753289Z",
+          "latestBlockHeight": 22575951
         },
         {
           "test": "REST CORS",
@@ -38173,7 +38086,7 @@
     },
     {
       "chain_name": "xion",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -38207,8 +38120,8 @@
               "url": "https://rpc.xion-mainnet-1.burnt.com/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:12.555769707Z",
-              "latestBlockHeight": 24756123
+              "latestBlockTime": "2026-10-31T15:07:46.113858532Z",
+              "latestBlockHeight": 24777342
             }
           ]
         },
@@ -38249,8 +38162,8 @@
           "url": "https://rpc.xion-mainnet-1.burnt.com/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:12.555769707Z",
-          "latestBlockHeight": 24756123
+          "latestBlockTime": "2026-10-31T15:07:46.113858532Z",
+          "latestBlockHeight": 24777342
         },
         {
           "test": "REST CORS",
@@ -38801,7 +38714,7 @@
     },
     {
       "chain_name": "aaronetwork",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -40593,7 +40506,7 @@
     },
     {
       "chain_name": "babylon",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -40629,8 +40542,8 @@
               "url": "https://babylon-rpc.polkachu.com/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:01.012328619Z",
-              "latestBlockHeight": 4927212
+              "latestBlockTime": "2026-10-31T15:07:52.049286264Z",
+              "latestBlockHeight": 4936247
             }
           ]
         },
@@ -40657,8 +40570,8 @@
               "url": "https://babylon-rpc.publicnode.com/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:11.841498844Z",
-              "latestBlockHeight": 4927213
+              "latestBlockTime": "2026-10-31T15:07:52.049286264Z",
+              "latestBlockHeight": 4936247
             }
           ]
         },
@@ -40700,8 +40613,8 @@
           "url": "https://babylon-rpc.publicnode.com/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:11.841498844Z",
-          "latestBlockHeight": 4927213
+          "latestBlockTime": "2026-10-31T15:07:52.049286264Z",
+          "latestBlockHeight": 4936247
         },
         {
           "test": "REST CORS",
@@ -40722,7 +40635,7 @@
     },
     {
       "chain_name": "initia",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -41103,7 +41016,7 @@
     },
     {
       "chain_name": "arkeo",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -41137,8 +41050,8 @@
               "url": "https://rpc-seed.arkeo.network/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:12.097166185Z",
-              "latestBlockHeight": 8607334
+              "latestBlockTime": "2026-10-31T15:07:54.391995802Z",
+              "latestBlockHeight": 8622336
             }
           ]
         },
@@ -41180,8 +41093,8 @@
           "url": "https://rpc-seed.arkeo.network/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:12.097166185Z",
-          "latestBlockHeight": 8607334
+          "latestBlockTime": "2026-10-31T15:07:54.391995802Z",
+          "latestBlockHeight": 8622336
         },
         {
           "test": "REST CORS",
@@ -41202,7 +41115,7 @@
     },
     {
       "chain_name": "bitbadges",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -41236,8 +41149,8 @@
               "url": "https://rpc.bitbadges.io/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:13.228392011Z",
-              "latestBlockHeight": 12877182
+              "latestBlockTime": "2026-10-31T15:07:56.40994056Z",
+              "latestBlockHeight": 12893627
             }
           ]
         },
@@ -41278,8 +41191,8 @@
           "url": "https://rpc.bitbadges.io/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:13.228392011Z",
-          "latestBlockHeight": 12877182
+          "latestBlockTime": "2026-10-31T15:07:56.40994056Z",
+          "latestBlockHeight": 12893627
         },
         {
           "test": "REST CORS",
@@ -41299,7 +41212,7 @@
     },
     {
       "chain_name": "xrplevm",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -41333,8 +41246,8 @@
               "url": "https://cosmos-rpc.xrplevm.org/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:14.118954746Z",
-              "latestBlockHeight": 8381523
+              "latestBlockTime": "2026-10-31T15:07:59.331080888Z",
+              "latestBlockHeight": 8395750
             }
           ]
         },
@@ -41376,8 +41289,8 @@
           "url": "https://cosmos-rpc.xrplevm.org/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:14.118954746Z",
-          "latestBlockHeight": 8381523
+          "latestBlockTime": "2026-10-31T15:07:59.331080888Z",
+          "latestBlockHeight": 8395750
         },
         {
           "test": "REST CORS",
@@ -41398,7 +41311,7 @@
     },
     {
       "chain_name": "taketitan",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -41432,8 +41345,8 @@
               "url": "https://rpc.taketitan.com/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:14.367899163Z",
-              "latestBlockHeight": 7928866
+              "latestBlockTime": "2026-10-31T15:07:59.119857694Z",
+              "latestBlockHeight": 7945890
             }
           ]
         },
@@ -41475,8 +41388,8 @@
           "url": "https://rpc.taketitan.com/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:14.367899163Z",
-          "latestBlockHeight": 7928866
+          "latestBlockTime": "2026-10-31T15:07:59.119857694Z",
+          "latestBlockHeight": 7945890
         },
         {
           "test": "REST CORS",
@@ -41497,7 +41410,7 @@
     },
     {
       "chain_name": "hippoprotocol",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -41531,8 +41444,8 @@
               "url": "https://rpc.hippo-protocol.com/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:14.610086812Z",
-              "latestBlockHeight": 7768752
+              "latestBlockTime": "2026-10-31T15:07:58.284009551Z",
+              "latestBlockHeight": 7782969
             }
           ]
         },
@@ -41573,8 +41486,8 @@
           "url": "https://rpc.hippo-protocol.com/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:14.610086812Z",
-          "latestBlockHeight": 7768752
+          "latestBlockTime": "2026-10-31T15:07:58.284009551Z",
+          "latestBlockHeight": 7782969
         },
         {
           "test": "REST CORS",
@@ -41594,7 +41507,7 @@
     },
     {
       "chain_name": "qfs",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -41628,8 +41541,8 @@
               "url": "https://rpc.qfsone.com/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:15.595482651Z",
-              "latestBlockHeight": 7928389
+              "latestBlockTime": "2026-10-31T15:08:00.549533139Z",
+              "latestBlockHeight": 7945415
             }
           ]
         },
@@ -41671,8 +41584,8 @@
           "url": "https://rpc.qfsone.com/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:15.595482651Z",
-          "latestBlockHeight": 7928389
+          "latestBlockTime": "2026-10-31T15:08:00.549533139Z",
+          "latestBlockHeight": 7945415
         },
         {
           "test": "REST CORS",
@@ -41693,7 +41606,7 @@
     },
     {
       "chain_name": "mtgbp",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -41727,8 +41640,8 @@
               "url": "https://rpc.mtgbp.com/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:14.502103863Z",
-              "latestBlockHeight": 7928617
+              "latestBlockTime": "2026-10-31T15:07:59.800987688Z",
+              "latestBlockHeight": 7945640
             }
           ]
         },
@@ -41770,8 +41683,8 @@
           "url": "https://rpc.mtgbp.com/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:14.502103863Z",
-          "latestBlockHeight": 7928617
+          "latestBlockTime": "2026-10-31T15:07:59.800987688Z",
+          "latestBlockHeight": 7945640
         },
         {
           "test": "REST CORS",
@@ -41792,7 +41705,7 @@
     },
     {
       "chain_name": "symphony",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -42178,7 +42091,7 @@
     },
     {
       "chain_name": "manifest",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -42212,8 +42125,8 @@
               "url": "https://rpc.manifest.network/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:16.010625242Z",
-              "latestBlockHeight": 9233369
+              "latestBlockTime": "2026-10-31T15:07:55.549012799Z",
+              "latestBlockHeight": 9249068
             }
           ]
         },
@@ -42254,8 +42167,8 @@
           "url": "https://rpc.manifest.network/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:16.010625242Z",
-          "latestBlockHeight": 9233369
+          "latestBlockTime": "2026-10-31T15:07:55.549012799Z",
+          "latestBlockHeight": 9249068
         },
         {
           "test": "REST CORS",
@@ -42382,7 +42295,7 @@
     },
     {
       "chain_name": "sunrise",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -42606,7 +42519,7 @@
               "url": "https://rpc.sunrise.nodestake.org/status",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
             }
           ]
         },
@@ -42788,8 +42701,8 @@
               "test": "RPC Endpoints",
               "url": "https://sunrise.rpc.m.anode.team/status",
               "success": false,
-              "errorType": "HTTP_ERROR",
-              "errorMessage": "Invalid response: 502"
+              "errorType": "NETWORK_ERROR",
+              "errorMessage": "Hostname/IP does not match certificate's altnames: Host: sunrise.rpc.m.anode.team. is not in the cert's altnames: DNS:arkh.api.m.anode.team"
             }
           ]
         },
@@ -43161,7 +43074,7 @@
               "url": "https://rpc-sunrise.nagagininode.xyz/status",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
             }
           ]
         },
@@ -43223,7 +43136,7 @@
               "url": "https://rpc-sunrice.batana.space/status",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
             }
           ]
         },
@@ -43453,7 +43366,7 @@
               "url": "https://api.sunrise.nodestake.org/cosmos/base/tendermint/v1beta1/node_info",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
             }
           ]
         },
@@ -43596,8 +43509,8 @@
               "test": "REST Endpoints",
               "url": "https://sunrise.api.m.anode.team/cosmos/base/tendermint/v1beta1/node_info",
               "success": false,
-              "errorType": "HTTP_ERROR",
-              "errorMessage": "Invalid response: 502"
+              "errorType": "NETWORK_ERROR",
+              "errorMessage": "Hostname/IP does not match certificate's altnames: Host: sunrise.api.m.anode.team. is not in the cert's altnames: DNS:arkh.api.m.anode.team"
             }
           ]
         },
@@ -43885,7 +43798,7 @@
               "url": "https://api-sunrise.nagagininode.xyz/cosmos/base/tendermint/v1beta1/node_info",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
             }
           ]
         },
@@ -43933,7 +43846,7 @@
               "url": "https://api-sunrice.batana.space/cosmos/base/tendermint/v1beta1/node_info",
               "success": false,
               "errorType": "NETWORK_ERROR",
-              "errorMessage": "write EPROTO C05C4CC23A780000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
+              "errorMessage": "write EPROTO C09CECFB37730000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1601:SSL alert number 80\n"
             }
           ]
         },
@@ -44006,7 +43919,7 @@
     },
     {
       "chain_name": "lumera",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -44041,8 +43954,8 @@
               "url": "https://rpc.lumera.io/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:17.658810917Z",
-              "latestBlockHeight": 7608142
+              "latestBlockTime": "2026-10-31T15:07:56.845363139Z",
+              "latestBlockHeight": 7623272
             }
           ]
         },
@@ -44085,8 +43998,8 @@
           "url": "https://rpc.lumera.io/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:17.658810917Z",
-          "latestBlockHeight": 7608142
+          "latestBlockTime": "2026-10-31T15:07:56.845363139Z",
+          "latestBlockHeight": 7623272
         },
         {
           "test": "REST CORS",
@@ -44107,7 +44020,7 @@
     },
     {
       "chain_name": "optio",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -44141,8 +44054,8 @@
               "url": "https://rpc.optio.zone/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:08:31.764418724Z",
-              "latestBlockHeight": 984288
+              "latestBlockTime": "2026-10-31T15:06:24.260193865Z",
+              "latestBlockHeight": 985709
             }
           ]
         },
@@ -44184,8 +44097,8 @@
           "url": "https://rpc.optio.zone/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:08:31.764418724Z",
-          "latestBlockHeight": 984288
+          "latestBlockTime": "2026-10-31T15:06:24.260193865Z",
+          "latestBlockHeight": 985709
         },
         {
           "test": "REST CORS",
@@ -44206,7 +44119,7 @@
     },
     {
       "chain_name": "ethereum",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -44244,7 +44157,7 @@
     },
     {
       "chain_name": "composablepolkadot",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -44263,7 +44176,7 @@
     },
     {
       "chain_name": "solana",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -44282,7 +44195,7 @@
     },
     {
       "chain_name": "nim",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -44393,7 +44306,7 @@
     },
     {
       "chain_name": "mande",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -44504,7 +44417,7 @@
     },
     {
       "chain_name": "penumbra",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -44523,7 +44436,7 @@
     },
     {
       "chain_name": "tron",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -44542,7 +44455,7 @@
     },
     {
       "chain_name": "unicorn",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -44561,7 +44474,7 @@
     },
     {
       "chain_name": "ton",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -44580,7 +44493,7 @@
     },
     {
       "chain_name": "rootstock",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -44599,7 +44512,7 @@
     },
     {
       "chain_name": "lombardledger",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -44618,7 +44531,7 @@
     },
     {
       "chain_name": "namada",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -44637,7 +44550,7 @@
     },
     {
       "chain_name": "epix",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -44671,8 +44584,8 @@
               "url": "https://rpc.epix.zone/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:13.856674666Z",
-              "latestBlockHeight": 6301771
+              "latestBlockTime": "2026-10-31T15:07:55.663757151Z",
+              "latestBlockHeight": 6317157
             }
           ]
         },
@@ -44713,8 +44626,8 @@
           "url": "https://rpc.epix.zone/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:13.856674666Z",
-          "latestBlockHeight": 6301771
+          "latestBlockTime": "2026-10-31T15:07:55.663757151Z",
+          "latestBlockHeight": 6317157
         },
         {
           "test": "REST CORS",
@@ -44734,7 +44647,7 @@
     },
     {
       "chain_name": "aura",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -44768,8 +44681,8 @@
               "url": "https://rpc.aura.network/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:19.373322849Z",
-              "latestBlockHeight": 20093243
+              "latestBlockTime": "2026-10-31T15:08:01.297041788Z",
+              "latestBlockHeight": 20108872
             }
           ]
         },
@@ -44810,8 +44723,8 @@
           "url": "https://rpc.aura.network/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:19.373322849Z",
-          "latestBlockHeight": 20093243
+          "latestBlockTime": "2026-10-31T15:08:01.297041788Z",
+          "latestBlockHeight": 20108872
         },
         {
           "test": "REST CORS",
@@ -45045,7 +44958,7 @@
     },
     {
       "chain_name": "paxi",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -45079,8 +44992,8 @@
               "url": "https://mainnet-rpc.paxinet.io/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:20.866129508Z",
-              "latestBlockHeight": 8749491
+              "latestBlockTime": "2026-10-31T15:08:03.794943959Z",
+              "latestBlockHeight": 8768837
             }
           ]
         },
@@ -45121,8 +45034,8 @@
           "url": "https://mainnet-rpc.paxinet.io/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:20.866129508Z",
-          "latestBlockHeight": 8749491
+          "latestBlockTime": "2026-10-31T15:08:03.794943959Z",
+          "latestBlockHeight": 8768837
         },
         {
           "test": "REST CORS",
@@ -45567,7 +45480,7 @@
     },
     {
       "chain_name": "shareledger",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -45601,8 +45514,8 @@
               "url": "https://rpc.explorer.shareri.ng/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:15.407111628Z",
-              "latestBlockHeight": 29380908
+              "latestBlockTime": "2026-10-31T15:07:57.539694667Z",
+              "latestBlockHeight": 29395925
             }
           ]
         },
@@ -45644,8 +45557,8 @@
           "url": "https://rpc.explorer.shareri.ng/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:15.407111628Z",
-          "latestBlockHeight": 29380908
+          "latestBlockTime": "2026-10-31T15:07:57.539694667Z",
+          "latestBlockHeight": 29395925
         },
         {
           "test": "REST CORS",
@@ -45666,7 +45579,7 @@
     },
     {
       "chain_name": "mirage",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -45701,8 +45614,8 @@
               "url": "https://mirage.talk/chain/rpc/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:20.48207596Z",
-              "latestBlockHeight": 8720558
+              "latestBlockTime": "2026-10-31T15:08:00.183210463Z",
+              "latestBlockHeight": 8745304
             }
           ]
         },
@@ -45745,8 +45658,8 @@
           "url": "https://mirage.talk/chain/rpc/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:20.48207596Z",
-          "latestBlockHeight": 8720558
+          "latestBlockTime": "2026-10-31T15:08:00.183210463Z",
+          "latestBlockHeight": 8745304
         },
         {
           "test": "REST CORS",
@@ -45767,7 +45680,7 @@
     },
     {
       "chain_name": "divine",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -45801,8 +45714,8 @@
               "url": "https://rpc-mainnet.divineray.ca/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:15.835437666Z",
-              "latestBlockHeight": 3653043
+              "latestBlockTime": "2026-10-31T15:07:54.777463265Z",
+              "latestBlockHeight": 3667438
             }
           ]
         },
@@ -45843,8 +45756,8 @@
           "url": "https://rpc-mainnet.divineray.ca/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:15.835437666Z",
-          "latestBlockHeight": 3653043
+          "latestBlockTime": "2026-10-31T15:07:54.777463265Z",
+          "latestBlockHeight": 3667438
         },
         {
           "test": "REST CORS",
@@ -45971,7 +45884,7 @@
     },
     {
       "chain_name": "gnodi",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -46036,8 +45949,8 @@
               "url": "https://rpc.gnodipowered.com/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:54.714254369Z",
-              "latestBlockHeight": 858063
+              "latestBlockTime": "2026-10-31T15:07:20.608832425Z",
+              "latestBlockHeight": 860946
             }
           ]
         },
@@ -46103,8 +46016,8 @@
           "url": "https://rpc.gnodipowered.com/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:54.714254369Z",
-          "latestBlockHeight": 858063
+          "latestBlockTime": "2026-10-31T15:07:20.608832425Z",
+          "latestBlockHeight": 860946
         },
         {
           "test": "REST CORS",
@@ -46125,7 +46038,7 @@
     },
     {
       "chain_name": "lumen",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -46159,8 +46072,8 @@
               "url": "https://lumen-rpc.linknode.org/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:20.887149472Z",
-              "latestBlockHeight": 5426436
+              "latestBlockTime": "2026-10-31T15:08:02.997062739Z",
+              "latestBlockHeight": 5443240
             }
           ]
         },
@@ -46202,8 +46115,8 @@
           "url": "https://lumen-rpc.linknode.org/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:20.887149472Z",
-          "latestBlockHeight": 5426436
+          "latestBlockTime": "2026-10-31T15:08:02.997062739Z",
+          "latestBlockHeight": 5443240
         },
         {
           "test": "REST CORS",
@@ -46224,7 +46137,7 @@
     },
     {
       "chain_name": "qie",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -46259,8 +46172,8 @@
               "url": "https://rpc.qie.digital/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:22.600493776Z",
-              "latestBlockHeight": 11551910
+              "latestBlockTime": "2026-10-31T15:08:02.96370645Z",
+              "latestBlockHeight": 11575661
             }
           ]
         },
@@ -46303,8 +46216,8 @@
           "url": "https://rpc.qie.digital/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:22.600493776Z",
-          "latestBlockHeight": 11551910
+          "latestBlockTime": "2026-10-31T15:08:02.96370645Z",
+          "latestBlockHeight": 11575661
         },
         {
           "test": "REST CORS",
@@ -46325,7 +46238,7 @@
     },
     {
       "chain_name": "hazinachain",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -46359,8 +46272,8 @@
               "url": "https://rpc.hazinachain.com/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:18.604306643Z",
-              "latestBlockHeight": 785199
+              "latestBlockTime": "2026-10-31T15:08:01.255010443Z",
+              "latestBlockHeight": 802393
             }
           ]
         },
@@ -46402,8 +46315,8 @@
           "url": "https://rpc.hazinachain.com/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:18.604306643Z",
-          "latestBlockHeight": 785199
+          "latestBlockTime": "2026-10-31T15:08:01.255010443Z",
+          "latestBlockHeight": 802393
         },
         {
           "test": "REST CORS",
@@ -46424,7 +46337,7 @@
     },
     {
       "chain_name": "amitis",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -46458,8 +46371,8 @@
               "url": "https://rpc.amitis.network/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:19.984664763Z",
-              "latestBlockHeight": 2689839
+              "latestBlockTime": "2026-10-31T15:07:58.88083704Z",
+              "latestBlockHeight": 2705800
             }
           ]
         },
@@ -46500,8 +46413,8 @@
           "url": "https://rpc.amitis.network/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:19.984664763Z",
-          "latestBlockHeight": 2689839
+          "latestBlockTime": "2026-10-31T15:07:58.88083704Z",
+          "latestBlockHeight": 2705800
         },
         {
           "test": "REST CORS",
@@ -46521,7 +46434,7 @@
     },
     {
       "chain_name": "wolochain",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -46556,8 +46469,8 @@
               "url": "https://aoe2war.com/rpc-mainnet/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:17.36752838Z",
-              "latestBlockHeight": 2722293
+              "latestBlockTime": "2026-10-31T15:07:59.981487285Z",
+              "latestBlockHeight": 2739487
             }
           ]
         },
@@ -46600,8 +46513,8 @@
           "url": "https://aoe2war.com/rpc-mainnet/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:17.36752838Z",
-          "latestBlockHeight": 2722293
+          "latestBlockTime": "2026-10-31T15:07:59.981487285Z",
+          "latestBlockHeight": 2739487
         },
         {
           "test": "REST CORS",
@@ -46622,7 +46535,7 @@
     },
     {
       "chain_name": "turkchain",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -46657,8 +46570,8 @@
               "url": "https://node.turkscan.com/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:21.35801889Z",
-              "latestBlockHeight": 2899627
+              "latestBlockTime": "2026-10-31T15:07:59.365175833Z",
+              "latestBlockHeight": 2916309
             }
           ]
         },
@@ -46701,8 +46614,8 @@
           "url": "https://node.turkscan.com/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:21.35801889Z",
-          "latestBlockHeight": 2899627
+          "latestBlockTime": "2026-10-31T15:07:59.365175833Z",
+          "latestBlockHeight": 2916309
         },
         {
           "test": "REST CORS",
@@ -46723,7 +46636,7 @@
     },
     {
       "chain_name": "safrochain",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -46757,8 +46670,8 @@
               "url": "https://rpc1.safrochain.network/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:21.884989116Z",
-              "latestBlockHeight": 3974997
+              "latestBlockTime": "2026-10-31T15:08:04.881639303Z",
+              "latestBlockHeight": 4005662
             }
           ]
         },
@@ -46799,8 +46712,8 @@
           "url": "https://rpc1.safrochain.network/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:21.884989116Z",
-          "latestBlockHeight": 3974997
+          "latestBlockTime": "2026-10-31T15:08:04.881639303Z",
+          "latestBlockHeight": 4005662
         },
         {
           "test": "REST CORS",
@@ -46820,7 +46733,7 @@
     },
     {
       "chain_name": "gonka",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -46854,8 +46767,8 @@
               "url": "https://gonka.hyperfusion.io/chain-rpc/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:23.939924967Z",
-              "latestBlockHeight": 6812523
+              "latestBlockTime": "2026-10-31T15:07:59.141331797Z",
+              "latestBlockHeight": 6828560
             }
           ]
         },
@@ -46896,8 +46809,8 @@
           "url": "https://gonka.hyperfusion.io/chain-rpc/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:23.939924967Z",
-          "latestBlockHeight": 6812523
+          "latestBlockTime": "2026-10-31T15:07:59.141331797Z",
+          "latestBlockHeight": 6828560
         },
         {
           "test": "REST CORS",
@@ -46917,7 +46830,7 @@
     },
     {
       "chain_name": "mucoin",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -47043,7 +46956,7 @@
     },
     {
       "chain_name": "sovr",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -47077,8 +46990,8 @@
               "url": "https://rpc.sovrchain.net/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:16.821081467Z",
-              "latestBlockHeight": 2672034
+              "latestBlockTime": "2026-10-31T15:08:02.803658676Z",
+              "latestBlockHeight": 2686670
             }
           ]
         },
@@ -47119,8 +47032,8 @@
           "url": "https://rpc.sovrchain.net/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:16.821081467Z",
-          "latestBlockHeight": 2672034
+          "latestBlockTime": "2026-10-31T15:08:02.803658676Z",
+          "latestBlockHeight": 2686670
         },
         {
           "test": "REST CORS",
@@ -47140,7 +47053,7 @@
     },
     {
       "chain_name": "hyve",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -47174,8 +47087,8 @@
               "url": "https://tendermint.hyvechain.com/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:10:24.006125394Z",
-              "latestBlockHeight": 5430135
+              "latestBlockTime": "2026-10-31T15:08:02.540980781Z",
+              "latestBlockHeight": 5453992
             }
           ]
         },
@@ -47216,8 +47129,8 @@
           "url": "https://tendermint.hyvechain.com/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:10:24.006125394Z",
-          "latestBlockHeight": 5430135
+          "latestBlockTime": "2026-10-31T15:08:02.540980781Z",
+          "latestBlockHeight": 5453992
         },
         {
           "test": "REST CORS",
@@ -47237,7 +47150,7 @@
     },
     {
       "chain_name": "blg24",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": false,
       "rpcStatus": {
         "connectivitySuccess": false,
@@ -47256,7 +47169,7 @@
     },
     {
       "chain_name": "luxa",
-      "validationDate": "2026-10-30T15:09:51.631Z",
+      "validationDate": "2026-10-31T15:07:33.390Z",
       "validationSuccess": true,
       "rpcStatus": {
         "connectivitySuccess": true,
@@ -47290,8 +47203,8 @@
               "url": "https://rpc.luxaecosystem.xyz/status",
               "success": true,
               "stale": false,
-              "latestBlockTime": "2026-10-30T15:09:28.186553396Z",
-              "latestBlockHeight": 35495
+              "latestBlockTime": "2026-10-31T15:06:44.905690865Z",
+              "latestBlockHeight": 37334
             }
           ]
         },
@@ -47333,8 +47246,8 @@
           "url": "https://rpc.luxaecosystem.xyz/status",
           "success": true,
           "stale": false,
-          "latestBlockTime": "2026-10-30T15:09:28.186553396Z",
-          "latestBlockHeight": 35495
+          "latestBlockTime": "2026-10-31T15:06:44.905690865Z",
+          "latestBlockHeight": 37334
         },
         {
           "test": "REST CORS",
@@ -47355,7 +47268,7 @@
     }
   ],
   "lastValidationRun": {
-    "timestamp": "2026-10-30T15:09:51.631Z",
+    "timestamp": "2026-10-31T15:07:33.390Z",
     "chainsValidated": [
       "osmosis",
       "cosmoshub",

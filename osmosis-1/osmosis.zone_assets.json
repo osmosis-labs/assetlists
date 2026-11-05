@@ -598,7 +598,11 @@
       ],
       "_comment": "Desmos $DSM",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client"
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
     },
     {
       "chain_name": "dig",
@@ -8863,9 +8867,7 @@
       "osmosis_verified": false,
       "_comment": "Gnodi $GNOD",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "manual",
-      "tooltip_message": "The Gnodi chain experienced a security incident in August 2026 that briefly halted the chain and affected GNOD's supply. The chain has since resumed normal operation and transfers are open again.",
-      "tooltip_expiry_date": "2026-11-04"
+      "osmosis_unstable_reason": "manual"
     },
     {
       "chain_name": "neutron",

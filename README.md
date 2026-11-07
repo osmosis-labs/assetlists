@@ -631,7 +631,7 @@ A second, independent track exists for market-driven unstable. When a verified, 
 
 ### Deployment to Frontend
 
-Changes to generated files are automatically deployed to the Osmosis Zone frontend via Vercel:
+Changes to generated files are automatically deployed to the Osmosis Zone frontend. Mainnet runs on Cloudflare Workers (Workers Builds deploy hooks); testnet is still on Vercel:
 
 **Deployment Schedule:**
 - **Scheduled**: Every day at 15:30 UTC (30 minutes after generation workflow completes)
@@ -646,9 +646,9 @@ Changes to generated files are automatically deployed to the Osmosis Zone fronte
 1. Generation workflow completes at 15:00 UTC (daily) and auto-merges to `main`
 2. 30 minutes later (15:30 UTC), deployment workflow runs on schedule
 3. Workflow checks if monitored files were modified in the last 2 hours
-4. **If files unchanged**: Deployment is skipped (no unnecessary Vercel builds)
-5. **If files changed**: Vercel webhooks are triggered (preview + production for mainnet, testnet separately)
-6. Vercel builds and deploys to environments
+4. **If files unchanged**: Deployment is skipped (no unnecessary builds)
+5. **If files changed**: Deploy hooks are triggered (Cloudflare stage + production for mainnet, Vercel for testnet)
+6. Each environment rebuilds against the latest assetlists `main` commit and deploys
 7. Osmosis Zone app reflects updated data within ~30-45 minutes of generation
 
 This completes the full pipeline: **Chain Registry → Detection → Generation → PR → Merge → Scheduled Deployment → Frontend**

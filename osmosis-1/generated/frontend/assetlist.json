@@ -49684,6 +49684,8 @@
       "unstable": true,
       "unstableReason": "ibc_client",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
       "preview": false,
       "lastDowntimeDate": "2026-09-09T15:15:13.344Z",
       "lastRecoveryDate": "2026-09-14T15:25:17.891Z"
@@ -51603,6 +51605,828 @@
       "listingDate": "2026-10-28T15:21:29.089Z"
     },
     {
+      "chainName": "cosmoshub",
+      "sourceDenom": "ibc/B05539B66B72E2739B986B86391E5D08F12B8D5D2C2A7F8F8CF9ADF674DFA231",
+      "coinMinimalDenom": "ibc/7451074F46885686D3B47B12A6BF74F6D36847ED1891AC612FCFAEB7FB551E14",
+      "symbol": "stATOM.cosmoshub",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.svg"
+      },
+      "coingeckoId": "stride-staked-atom",
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "cosmoshub",
+            "chainId": "cosmoshub-4",
+            "sourceDenom": "ibc/B05539B66B72E2739B986B86391E5D08F12B8D5D2C2A7F8F8CF9ADF674DFA231",
+            "port": "transfer",
+            "channelId": "channel-141"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-0",
+            "path": "transfer/channel-0/transfer/channel-391/stuatom"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "cosmoshub",
+          "sourceDenom": "ibc/B05539B66B72E2739B986B86391E5D08F12B8D5D2C2A7F8F8CF9ADF674DFA231",
+          "chainType": "cosmos",
+          "chainId": "cosmoshub-4",
+          "symbol": "stATOM",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.svg"
+          }
+        },
+        {
+          "chainName": "stride",
+          "sourceDenom": "stuatom",
+          "chainType": "cosmos",
+          "chainId": "stride-1",
+          "symbol": "stATOM",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/C140AFD542AE77BD7DCC83F13FDD8C5E5BB8C4929785E6EC2F4C636F98F17901",
+      "name": "Stride Staked ATOM (via Cosmos Hub)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true,
+      "tooltipMessage": "stATOM that reached Osmosis from Cosmos Hub. As part of Stride's wind-down it redeems for ATOM in its own Osmosis pool, at the same rate as the canonical stATOM; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922"
+    },
+    {
+      "chainName": "injective",
+      "sourceDenom": "ibc/A8F39212ED30B6A8C2AC736665835720D3D7BE4A1D18D68566525EC25ECF1C9B",
+      "coinMinimalDenom": "ibc/F65724D2AE4A14F5BC149FC12C984D53D2307D95EC57BBA1CE52F94EB670EF60",
+      "symbol": "stATOM.injective",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.svg"
+      },
+      "coingeckoId": "stride-staked-atom",
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "injective",
+            "chainId": "injective-1",
+            "sourceDenom": "ibc/A8F39212ED30B6A8C2AC736665835720D3D7BE4A1D18D68566525EC25ECF1C9B",
+            "port": "transfer",
+            "channelId": "channel-8"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-122",
+            "path": "transfer/channel-122/transfer/channel-89/stuatom"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "injective",
+          "sourceDenom": "ibc/A8F39212ED30B6A8C2AC736665835720D3D7BE4A1D18D68566525EC25ECF1C9B",
+          "chainType": "cosmos",
+          "chainId": "injective-1",
+          "symbol": "stATOM",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.svg"
+          }
+        },
+        {
+          "chainName": "stride",
+          "sourceDenom": "stuatom",
+          "chainType": "cosmos",
+          "chainId": "stride-1",
+          "symbol": "stATOM",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/C140AFD542AE77BD7DCC83F13FDD8C5E5BB8C4929785E6EC2F4C636F98F17901",
+      "name": "Stride Staked ATOM (via Injective)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true,
+      "tooltipMessage": "stATOM that reached Osmosis from Injective. As part of Stride's wind-down it redeems for ATOM in its own Osmosis pool, at the same rate as the canonical stATOM; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922"
+    },
+    {
+      "chainName": "secretnetwork",
+      "sourceDenom": "ibc/A0E80E59956C754F1D9CB37234D13E0CF2949E7254896359F284512FA8428E18",
+      "coinMinimalDenom": "ibc/8AEB813EE960508AEDC1C2EB605788CE6A32F4E632583336D840BE4B8EC24CC7",
+      "symbol": "stATOM.secret",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.svg"
+      },
+      "coingeckoId": "stride-staked-atom",
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "secretnetwork",
+            "chainId": "secret-4",
+            "sourceDenom": "ibc/A0E80E59956C754F1D9CB37234D13E0CF2949E7254896359F284512FA8428E18",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-88",
+            "path": "transfer/channel-88/transfer/channel-37/stuatom"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "secretnetwork",
+          "sourceDenom": "ibc/A0E80E59956C754F1D9CB37234D13E0CF2949E7254896359F284512FA8428E18",
+          "chainType": "cosmos",
+          "chainId": "secret-4",
+          "symbol": "stATOM",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.svg"
+          }
+        },
+        {
+          "chainName": "stride",
+          "sourceDenom": "stuatom",
+          "chainType": "cosmos",
+          "chainId": "stride-1",
+          "symbol": "stATOM",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/C140AFD542AE77BD7DCC83F13FDD8C5E5BB8C4929785E6EC2F4C636F98F17901",
+      "name": "Stride Staked ATOM (via Secret Network)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true,
+      "tooltipMessage": "stATOM that reached Osmosis from Secret Network. As part of Stride's wind-down it redeems for ATOM in its own Osmosis pool, at the same rate as the canonical stATOM; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922"
+    },
+    {
+      "chainName": "terra2",
+      "sourceDenom": "ibc/FD9DBF0DB4D301313195159303811FD2FD72185C4B11A51659EFCD49D7FF1228",
+      "coinMinimalDenom": "ibc/6FFB21E2C0D8406F9CDF418C9371ED1F4544655D80F1621E7394E4B427D85FE2",
+      "symbol": "stATOM.terra",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.svg"
+      },
+      "coingeckoId": "stride-staked-atom",
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "terra2",
+            "chainId": "phoenix-1",
+            "sourceDenom": "ibc/FD9DBF0DB4D301313195159303811FD2FD72185C4B11A51659EFCD49D7FF1228",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-251",
+            "path": "transfer/channel-251/transfer/channel-46/stuatom"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "terra2",
+          "sourceDenom": "ibc/FD9DBF0DB4D301313195159303811FD2FD72185C4B11A51659EFCD49D7FF1228",
+          "chainType": "cosmos",
+          "chainId": "phoenix-1",
+          "symbol": "stATOM",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.svg"
+          }
+        },
+        {
+          "chainName": "stride",
+          "sourceDenom": "stuatom",
+          "chainType": "cosmos",
+          "chainId": "stride-1",
+          "symbol": "stATOM",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/C140AFD542AE77BD7DCC83F13FDD8C5E5BB8C4929785E6EC2F4C636F98F17901",
+      "name": "Stride Staked ATOM (via Terra)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true,
+      "tooltipMessage": "stATOM that reached Osmosis from Terra. As part of Stride's wind-down it redeems for ATOM in its own Osmosis pool, at the same rate as the canonical stATOM; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922"
+    },
+    {
+      "chainName": "neutron",
+      "sourceDenom": "ibc/B7864B03E1B9FD4F049243E92ABD691586F682137037A9F3FCA5222815620B3C",
+      "coinMinimalDenom": "ibc/8FCFAF3AE6BA4C5BDFF85B41449FBACE547E2BAC23895E839230404FB0EC3837",
+      "symbol": "stATOM.neutron",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.svg"
+      },
+      "coingeckoId": "stride-staked-atom",
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "neutron",
+            "chainId": "neutron-1",
+            "sourceDenom": "ibc/B7864B03E1B9FD4F049243E92ABD691586F682137037A9F3FCA5222815620B3C",
+            "port": "transfer",
+            "channelId": "channel-10"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-874",
+            "path": "transfer/channel-874/transfer/channel-8/stuatom"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "neutron",
+          "sourceDenom": "ibc/B7864B03E1B9FD4F049243E92ABD691586F682137037A9F3FCA5222815620B3C",
+          "chainType": "cosmos",
+          "chainId": "neutron-1",
+          "symbol": "stATOM",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.svg"
+          }
+        },
+        {
+          "chainName": "stride",
+          "sourceDenom": "stuatom",
+          "chainType": "cosmos",
+          "chainId": "stride-1",
+          "symbol": "stATOM",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/C140AFD542AE77BD7DCC83F13FDD8C5E5BB8C4929785E6EC2F4C636F98F17901",
+      "name": "Stride Staked ATOM (via Neutron)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true,
+      "tooltipMessage": "stATOM that reached Osmosis from Neutron. As part of Stride's wind-down it redeems for ATOM in its own Osmosis pool, at the same rate as the canonical stATOM; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922"
+    },
+    {
+      "chainName": "agoric",
+      "sourceDenom": "ibc/B1E6288B5A0224565D915D1F66716486F16D8A44BF33A9EC323DD6BA30764C35",
+      "coinMinimalDenom": "ibc/C86C2FA56D954AB05960450215E63605528CB3481694ABEA87CE4DB0EF17D265",
+      "symbol": "stATOM.agoric",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.svg"
+      },
+      "coingeckoId": "stride-staked-atom",
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "agoric",
+            "chainId": "agoric-3",
+            "sourceDenom": "ibc/B1E6288B5A0224565D915D1F66716486F16D8A44BF33A9EC323DD6BA30764C35",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-320",
+            "path": "transfer/channel-320/transfer/channel-59/stuatom"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "agoric",
+          "sourceDenom": "ibc/B1E6288B5A0224565D915D1F66716486F16D8A44BF33A9EC323DD6BA30764C35",
+          "chainType": "cosmos",
+          "chainId": "agoric-3",
+          "symbol": "stATOM",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.svg"
+          }
+        },
+        {
+          "chainName": "stride",
+          "sourceDenom": "stuatom",
+          "chainType": "cosmos",
+          "chainId": "stride-1",
+          "symbol": "stATOM",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/C140AFD542AE77BD7DCC83F13FDD8C5E5BB8C4929785E6EC2F4C636F98F17901",
+      "name": "Stride Staked ATOM (via Agoric)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true,
+      "tooltipMessage": "stATOM that reached Osmosis from Agoric. As part of Stride's wind-down it redeems for ATOM in its own Osmosis pool, at the same rate as the canonical stATOM; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922"
+    },
+    {
+      "chainName": "cosmoshub",
+      "sourceDenom": "ibc/EEFD952A6DE346F2649039E99A16430B05FFEDF628A4DE99F34BB4B5F6A9346E",
+      "coinMinimalDenom": "ibc/CCDF3314561B67BE2186A8B7369C2F87C50B363CE173F06D19C2A04CB5B0891E",
+      "symbol": "stDYDX.cosmoshub",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdydx.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdydx.svg"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "cosmoshub",
+            "chainId": "cosmoshub-4",
+            "sourceDenom": "ibc/EEFD952A6DE346F2649039E99A16430B05FFEDF628A4DE99F34BB4B5F6A9346E",
+            "port": "transfer",
+            "channelId": "channel-141"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-0",
+            "path": "transfer/channel-0/transfer/channel-391/stadydx"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "cosmoshub",
+          "sourceDenom": "ibc/EEFD952A6DE346F2649039E99A16430B05FFEDF628A4DE99F34BB4B5F6A9346E",
+          "chainType": "cosmos",
+          "chainId": "cosmoshub-4",
+          "symbol": "stDYDX",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdydx.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdydx.svg"
+          }
+        },
+        {
+          "chainName": "stride",
+          "sourceDenom": "stadydx",
+          "chainType": "cosmos",
+          "chainId": "stride-1",
+          "symbol": "stDYDX",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdydx.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stdydx.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/980E82A9F8E7CA8CD480F4577E73682A6D3855A267D1831485D7EBEF0E7A6C2C",
+      "name": "Stride Staked DYDX (via Cosmos Hub)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true,
+      "tooltipMessage": "stDYDX that reached Osmosis from Cosmos Hub. As part of Stride's wind-down it redeems for DYDX in its own Osmosis pool, at the same rate as the canonical stDYDX; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922",
+      "sortWith": {
+        "chainName": "stride",
+        "sourceDenom": "ustrd"
+      }
+    },
+    {
+      "chainName": "cosmoshub",
+      "sourceDenom": "ibc/B011C1A0AD5E717F674BA59FD8E05B2F946E4FD41C9CB3311C95F7ED4B815620",
+      "coinMinimalDenom": "ibc/DC697DA4D4353E3817B0CB3D08AAE9E133729BF1315EBA5172FBDA9C800D86B0",
+      "symbol": "stINJ.cosmoshub",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.svg"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "cosmoshub",
+            "chainId": "cosmoshub-4",
+            "sourceDenom": "ibc/B011C1A0AD5E717F674BA59FD8E05B2F946E4FD41C9CB3311C95F7ED4B815620",
+            "port": "transfer",
+            "channelId": "channel-141"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-0",
+            "path": "transfer/channel-0/transfer/channel-391/stinj"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "cosmoshub",
+          "sourceDenom": "ibc/B011C1A0AD5E717F674BA59FD8E05B2F946E4FD41C9CB3311C95F7ED4B815620",
+          "chainType": "cosmos",
+          "chainId": "cosmoshub-4",
+          "symbol": "stINJ",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.svg"
+          }
+        },
+        {
+          "chainName": "stride",
+          "sourceDenom": "stinj",
+          "chainType": "cosmos",
+          "chainId": "stride-1",
+          "symbol": "stINJ",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/C04DFC9BCD893E57F2BEFE40F63EFD18D2768514DBD5F63ABD2FF7F48FC01D36",
+      "name": "Stride Staked INJ (via Cosmos Hub)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true,
+      "tooltipMessage": "stINJ that reached Osmosis from Cosmos Hub. As part of Stride's wind-down it redeems for INJ in its own Osmosis pool, at the same rate as the canonical stINJ; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922",
+      "sortWith": {
+        "chainName": "stride",
+        "sourceDenom": "ustrd"
+      }
+    },
+    {
+      "chainName": "injective",
+      "sourceDenom": "ibc/AC87717EA002B0123B10A05063E69BCA274BA2C44D842AEEB41558D2856DCE93",
+      "coinMinimalDenom": "ibc/8E9B6F896F920815120519943B7A2948597F680CAF5C817D6FB3641BD7D07071",
+      "symbol": "stINJ.injective",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.svg"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "injective",
+            "chainId": "injective-1",
+            "sourceDenom": "ibc/AC87717EA002B0123B10A05063E69BCA274BA2C44D842AEEB41558D2856DCE93",
+            "port": "transfer",
+            "channelId": "channel-8"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-122",
+            "path": "transfer/channel-122/transfer/channel-89/stinj"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "injective",
+          "sourceDenom": "ibc/AC87717EA002B0123B10A05063E69BCA274BA2C44D842AEEB41558D2856DCE93",
+          "chainType": "cosmos",
+          "chainId": "injective-1",
+          "symbol": "stINJ",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.svg"
+          }
+        },
+        {
+          "chainName": "stride",
+          "sourceDenom": "stinj",
+          "chainType": "cosmos",
+          "chainId": "stride-1",
+          "symbol": "stINJ",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/C04DFC9BCD893E57F2BEFE40F63EFD18D2768514DBD5F63ABD2FF7F48FC01D36",
+      "name": "Stride Staked INJ (via Injective)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true,
+      "tooltipMessage": "stINJ that reached Osmosis from Injective. As part of Stride's wind-down it redeems for INJ in its own Osmosis pool, at the same rate as the canonical stINJ; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922",
+      "sortWith": {
+        "chainName": "stride",
+        "sourceDenom": "ustrd"
+      }
+    },
+    {
+      "chainName": "secretnetwork",
+      "sourceDenom": "ibc/7E8DC1B7D29E1FD88496D49CA8045F98EDF5C4D332D64D058BFB7DFCAACE8F46",
+      "coinMinimalDenom": "ibc/CA5D0BBEC26DECB072BA6E73F61E827ADB8154DFE22EC87E44BAED3E15D0E02B",
+      "symbol": "stINJ.secret",
+      "decimals": 18,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.svg"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "secretnetwork",
+            "chainId": "secret-4",
+            "sourceDenom": "ibc/7E8DC1B7D29E1FD88496D49CA8045F98EDF5C4D332D64D058BFB7DFCAACE8F46",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-88",
+            "path": "transfer/channel-88/transfer/channel-37/stinj"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "secretnetwork",
+          "sourceDenom": "ibc/7E8DC1B7D29E1FD88496D49CA8045F98EDF5C4D332D64D058BFB7DFCAACE8F46",
+          "chainType": "cosmos",
+          "chainId": "secret-4",
+          "symbol": "stINJ",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.svg"
+          }
+        },
+        {
+          "chainName": "stride",
+          "sourceDenom": "stinj",
+          "chainType": "cosmos",
+          "chainId": "stride-1",
+          "symbol": "stINJ",
+          "decimals": 18,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stinj.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/C04DFC9BCD893E57F2BEFE40F63EFD18D2768514DBD5F63ABD2FF7F48FC01D36",
+      "name": "Stride Staked INJ (via Secret Network)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true,
+      "tooltipMessage": "stINJ that reached Osmosis from Secret Network. As part of Stride's wind-down it redeems for INJ in its own Osmosis pool, at the same rate as the canonical stINJ; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922",
+      "sortWith": {
+        "chainName": "stride",
+        "sourceDenom": "ustrd"
+      }
+    },
+    {
+      "chainName": "cosmoshub",
+      "sourceDenom": "ibc/E9401AC885592AC2023E0FB9BA7C8BC66D346CEE04CED8E9F545F3C25290708A",
+      "coinMinimalDenom": "ibc/1D49DDF2137C4D746EB61D466A535D3707B6A1F394478289BD07BFCF0D418BB4",
+      "symbol": "stBAND.cosmoshub",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stband.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stband.svg"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "cosmoshub",
+            "chainId": "cosmoshub-4",
+            "sourceDenom": "ibc/E9401AC885592AC2023E0FB9BA7C8BC66D346CEE04CED8E9F545F3C25290708A",
+            "port": "transfer",
+            "channelId": "channel-141"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-0",
+            "path": "transfer/channel-0/transfer/channel-391/stuband"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "cosmoshub",
+          "sourceDenom": "ibc/E9401AC885592AC2023E0FB9BA7C8BC66D346CEE04CED8E9F545F3C25290708A",
+          "chainType": "cosmos",
+          "chainId": "cosmoshub-4",
+          "symbol": "stBAND",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stband.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stband.svg"
+          }
+        },
+        {
+          "chainName": "stride",
+          "sourceDenom": "stuband",
+          "chainType": "cosmos",
+          "chainId": "stride-1",
+          "symbol": "stBAND",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stband.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stband.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/603140E681973C7A3A33B06B1D377AAD0F6AC376119735CECC04C9184A1AB080",
+      "name": "Stride Staked BAND (via Cosmos Hub)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true,
+      "tooltipMessage": "stBAND that reached Osmosis from Cosmos Hub. As part of Stride's wind-down it redeems for BAND in its own Osmosis pool, at the same rate as the canonical stBAND; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922",
+      "sortWith": {
+        "chainName": "stride",
+        "sourceDenom": "ustrd"
+      }
+    },
+    {
+      "chainName": "terra2",
+      "sourceDenom": "ibc/08095CEDEA29977C9DD0CE9A48329FDA622C183359D5F90CF04CC4FF80CBE431",
+      "coinMinimalDenom": "ibc/231E2D37832CB212FEBAB3FC26A73758A15E50072DAAB4186028C304E0306288",
+      "symbol": "stLUNA.strd.terra",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stluna.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stluna.svg"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "terra2",
+            "chainId": "phoenix-1",
+            "sourceDenom": "ibc/08095CEDEA29977C9DD0CE9A48329FDA622C183359D5F90CF04CC4FF80CBE431",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-251",
+            "path": "transfer/channel-251/transfer/channel-46/stuluna"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "terra2",
+          "sourceDenom": "ibc/08095CEDEA29977C9DD0CE9A48329FDA622C183359D5F90CF04CC4FF80CBE431",
+          "chainType": "cosmos",
+          "chainId": "phoenix-1",
+          "symbol": "stLUNA",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stluna.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stluna.svg"
+          }
+        },
+        {
+          "chainName": "stride",
+          "sourceDenom": "stuluna",
+          "chainType": "cosmos",
+          "chainId": "stride-1",
+          "symbol": "stLUNA",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stluna.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stluna.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/C491E7582E94AE921F6A029790083CDE1106C28F3F6C4AD7F1340544C13EC372",
+      "name": "Stride Staked LUNA (via Terra)",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": true,
+      "tooltipMessage": "stLUNA that reached Osmosis from Terra. As part of Stride's wind-down it redeems for LUNA in its own Osmosis pool, at the same rate as the canonical stLUNA; it does not need to go back through Stride. Source: https://x.com/stride_zone/status/2104944449503813922",
+      "sortWith": {
+        "chainName": "stride",
+        "sourceDenom": "ustrd"
+      }
+    },
+    {
       "chainName": "qie",
       "sourceDenom": "aqie",
       "coinMinimalDenom": "ibc/29651CA364AA857248A912B1DEC17EF8AC320728C616FB635338CFE965E18BE3",
@@ -51657,6 +52481,61 @@
       "withdrawalHaltReason": "bridge_down",
       "preview": false,
       "lastDowntimeDate": "2026-10-31T15:08:20.667Z"
+    },
+    {
+      "chainName": "mucoin",
+      "sourceDenom": "umuc",
+      "coinMinimalDenom": "ibc/8B84D6340B0340917D3E2E3A17B4BE962F5593637AD7E42F6AE61D6A00ACE713",
+      "symbol": "MUC",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mucoin/images/mucoin.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "mucoin",
+            "chainId": "mucoin-1",
+            "sourceDenom": "umuc",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-110556",
+            "path": "transfer/channel-110556/umuc"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "mucoin",
+          "sourceDenom": "umuc",
+          "chainType": "cosmos",
+          "chainId": "mucoin-1",
+          "symbol": "MUC",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mucoin/images/mucoin.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/8B84D6340B0340917D3E2E3A17B4BE962F5593637AD7E42F6AE61D6A00ACE713",
+      "name": "MuCoin",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "lastDowntimeDate": "2026-11-09T15:10:16.048Z"
     },
     {
       "chainName": "akash",
@@ -57512,55 +58391,6 @@
       "preview": false
     },
     {
-      "chainName": "mucoin",
-      "sourceDenom": "umuc",
-      "coinMinimalDenom": "ibc/8B84D6340B0340917D3E2E3A17B4BE962F5593637AD7E42F6AE61D6A00ACE713",
-      "symbol": "MUC",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mucoin/images/mucoin.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "mucoin",
-            "chainId": "mucoin-1",
-            "sourceDenom": "umuc",
-            "port": "transfer",
-            "channelId": "channel-0"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-110556",
-            "path": "transfer/channel-110556/umuc"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "mucoin",
-          "sourceDenom": "umuc",
-          "chainType": "cosmos",
-          "chainId": "mucoin-1",
-          "symbol": "MUC",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/mucoin/images/mucoin.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/8B84D6340B0340917D3E2E3A17B4BE962F5593637AD7E42F6AE61D6A00ACE713",
-      "name": "MuCoin",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
       "chainName": "neutron",
       "sourceDenom": "factory/neutron14henrqx9y328fjrdvz6l6d92r0t7g5hk86q5nd/uastropepe",
       "coinMinimalDenom": "ibc/0FC38457AF15A8BD1962BB97DDF1AB5EF4C74C5BFDAEF00289A9C405CBD609B0",
@@ -63368,7 +64198,7 @@
       "chainName": "terra",
       "sourceDenom": "cw20:terra1yg3j2s986nyp5z7r2lvt0hx3r0lnd7kwvwwtsc",
       "coinMinimalDenom": "ibc/641DB39FDC4B68E95DC87D7CBF3F7A51C04CCA0B44D2ACFDDAD4EAED082FCEFC",
-      "symbol": "stLuna.terra",
+      "symbol": "stLuna.terra.2",
       "decimals": 6,
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/stluna.png"

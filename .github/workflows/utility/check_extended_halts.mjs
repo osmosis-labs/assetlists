@@ -48,6 +48,7 @@ import {
   isMarketGenuinelyFailing,
   loadJSON,
   resolveMarket,
+  writeFileAtomic,
 } from './lifecycle_helpers.mjs';
 
 const SIXTY_DAYS_MS = 60 * 24 * 60 * 60 * 1000;
@@ -327,7 +328,7 @@ async function main() {
   }
 
   if (mutations.length > 0) {
-    fs.writeFileSync(zoneAssetsPath, JSON.stringify(zoneData, null, 2) + '\n', 'utf8');
+    writeFileAtomic(zoneAssetsPath, JSON.stringify(zoneData, null, 2) + '\n');
     console.log(`✓ Updated ${zoneAssetsPath}`);
   } else {
     console.log('No changes needed.');

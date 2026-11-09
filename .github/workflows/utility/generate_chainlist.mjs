@@ -13,6 +13,7 @@
 //-- Imports --
 
 import * as chain_reg from "../../../chain-registry/.github/workflows/utility/chain_registry.mjs";
+import * as chain_reg_cache from "./chain_registry_cache.mjs";
 chain_reg.setup();
 import * as zone from "./assetlist_functions.mjs";
 import * as path from 'path';
@@ -106,9 +107,9 @@ function getValidationRecord(state, chain_name) {
 
 function getChainImage(chain_name) {
 
-  const logo_URIs = chain_reg.getFileProperty(chain_name, "chain", "logo_URIs");
+  const logo_URIs = chain_reg_cache.getFileProperty(chain_name, "chain", "logo_URIs");
   if (logo_URIs) return logo_URIs;
-  let image = chain_reg.getFileProperty(chain_name, "chain", "images")?.[0];
+  let image = chain_reg_cache.getFileProperty(chain_name, "chain", "images")?.[0];
   if (image) {
     delete image.image_sync;
     delete image.theme;
@@ -119,9 +120,9 @@ function getChainImage(chain_name) {
 
 function getAssetImage(chain_name, base_denom) {
 
-  const logo_URIs = chain_reg.getAssetProperty(chain_name, base_denom, "logo_URIs");
+  const logo_URIs = chain_reg_cache.getAssetProperty(chain_name, base_denom, "logo_URIs");
   if (logo_URIs) return logo_URIs;
-  let image = chain_reg.getAssetProperty(chain_name, base_denom, "images")?.[0];
+  let image = chain_reg_cache.getAssetProperty(chain_name, base_denom, "images")?.[0];
   if (image) {
     delete image.image_sync;
     delete image.theme;
@@ -135,19 +136,19 @@ function getChainLogo(chain_name) {
   let logo_URIs = getChainImage(chain_name);
   if (logo_URIs) return logo_URIs;
 
-  let stakingTokenDenom = chain_reg.getFileProperty(chain_name, "chain", "staking")?.staking_tokens?.[0]?.denom;
+  let stakingTokenDenom = chain_reg_cache.getFileProperty(chain_name, "chain", "staking")?.staking_tokens?.[0]?.denom;
   if (stakingTokenDenom) {
     logo_URIs = getAssetImage(chain_name, stakingTokenDenom);
     if (logo_URIs) return logo_URIs;
   }
 
-  let feeTokenDenom = chain_reg.getFileProperty(chain_name, "chain", "fees")?.fee_tokens?.[0]?.denom;
+  let feeTokenDenom = chain_reg_cache.getFileProperty(chain_name, "chain", "fees")?.fee_tokens?.[0]?.denom;
   if (feeTokenDenom) {
     logo_URIs = getAssetImage(chain_name, feeTokenDenom);
     if (logo_URIs) return logo_URIs;
   }
 
-  if (chain_reg.getFileProperty(chain_name, "chain", "network_type") !== "mainnet") {
+  if (chain_reg_cache.getFileProperty(chain_name, "chain", "network_type") !== "mainnet") {
     const testnetIndex = chain_name.indexOf("testnet");
     const devnetIndex = chain_name.indexOf("devnet");
 
@@ -189,7 +190,7 @@ function getMininmalChainProperties(chain) {
 
   // Level 1:
   //-- Get Pretty Name --
-  chain.prettyName = chain_reg.getFileProperty(chain_name, "chain", "pretty_name");
+  chain.prettyName = chain_reg_cache.getFileProperty(chain_name, "chain", "pretty_name");
   if (!chain.prettyName) return false;
 
   // -- Get Chain Logo --
@@ -205,7 +206,7 @@ async function getSuggestionCurrencyProperties(currency, chain_name) {
   if (!currency.base_denom) return false;
 
   // -- Get Properties Pt. 1 --
-  currency.coinDenom = chain_reg.getAssetProperty(chain_name, base_denom, "symbol");
+  currency.coinDenom = chain_reg_cache.getAssetProperty(chain_name, base_denom, "symbol");
   if (!currency.coinDenom) return false;
 
   currency.coinMinimalDenom = base_denom;
@@ -216,9 +217,9 @@ async function getSuggestionCurrencyProperties(currency, chain_name) {
   if (!currency.coinGeckoId) delete currency.coinGeckoId;
 
   // -- Get Logo --
-  let logo_URIs = chain_reg.getAssetProperty(chain_name, base_denom, "logo_URIs");
+  let logo_URIs = chain_reg_cache.getAssetProperty(chain_name, base_denom, "logo_URIs");
   if (!logo_URIs) {
-    logo_URIs = chain_reg.getAssetProperty(chain_name, base_denom, "images")?.[0];
+    logo_URIs = chain_reg_cache.getAssetProperty(chain_name, base_denom, "images")?.[0];
   }
   currency.coinImageUrl = logo_URIs?.png ? logo_URIs?.png : logo_URIs?.svg;
   //if (!currency.coinImageUrl) return false; // TODO: determine whether logo is required
@@ -234,14 +235,14 @@ function getChainSuggestionFeatures(chain, zoneChain) {
   let features = zoneChain.override_properties?.keplr_features || zoneChain.keplr_features || [];
   let feature = "";
 
-  const recommended_version = chain_reg.getFileProperty(chain.chain_name, "chain", "codebase")?.recommended_version;
+  const recommended_version = chain_reg_cache.getFileProperty(chain.chain_name, "chain", "codebase")?.recommended_version;
   if (recommended_version) {
     // getFileProperty only resolves the "chain"/"assetlist" files, so a
     // "versions" lookup returns undefined; some chains also simply have no
     // versions.json or no top-level versions array. Guard against a non-array
     // here so a chain with codebase.recommended_version set doesn't crash the
     // whole chainlist generation with "versions is not iterable".
-    const versions = chain_reg.getFileProperty(chain.chain_name, "versions", "versions");
+    const versions = chain_reg_cache.getFileProperty(chain.chain_name, "versions", "versions");
     for (const version of (Array.isArray(versions) ? versions : [])) {
       if (version.recommended_version === recommended_version) {
 
@@ -280,28 +281,28 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   }
 
   //Make sure it's a Cosmos Chain
-  let chainType = chain_reg.getFileProperty(chain_name, "chain", "chain_type");
+  let chainType = chain_reg_cache.getFileProperty(chain_name, "chain", "chain_type");
   if (chainType !== "cosmos") return false;
 
   // -- Get Basic Metadata with override support --
   chain.status = zoneChain.override_properties?.status ||
-                 chain_reg.getFileProperty(chain_name, "chain", "status");
+                 chain_reg_cache.getFileProperty(chain_name, "chain", "status");
   if (!chain.status) return false;
   chain.networkType = zoneChain.override_properties?.network_type ||
-                      chain_reg.getFileProperty(chain_name, "chain", "network_type");
+                      chain_reg_cache.getFileProperty(chain_name, "chain", "network_type");
   if (!chain.networkType) return false;
   chain.prettyName = zoneChain.override_properties?.pretty_name ||
                      minimalChain.prettyName;
 
-  chain.chain_id = chain_reg.getFileProperty(chain_name, "chain", "chain_id");
+  chain.chain_id = chain_reg_cache.getFileProperty(chain_name, "chain", "chain_id");
   if (!chain.chain_id) return false;
 
   // -- Get bech32_config with override support --
   chain.bech32Prefix = zoneChain.override_properties?.bech32_prefix ||
-                       chain_reg.getFileProperty(chain_name, "chain", "bech32_prefix");
+                       chain_reg_cache.getFileProperty(chain_name, "chain", "bech32_prefix");
   if (!chain.bech32Prefix) return false;
   let bech32_config = zoneChain.override_properties?.bech32_config ||
-                      chain_reg.getFileProperty(chain_name, "chain", "bech32_config") || {};
+                      chain_reg_cache.getFileProperty(chain_name, "chain", "bech32_config") || {};
   chain_reg.bech32ConfigSuffixMap.forEach((value, key) => {
     if (bech32_config[key]) return;
     bech32_config[key] = chain.bech32Prefix?.concat(value);
@@ -316,10 +317,10 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   // in report_dead_chains). Only a genuinely absent value (null/undefined)
   // should fail the guard.
   chain.slip44 = zoneChain.override_properties?.slip44 ??
-                 chain_reg.getFileProperty(chain_name, "chain", "slip44");
+                 chain_reg_cache.getFileProperty(chain_name, "chain", "slip44");
   if (chain.slip44 === undefined || chain.slip44 === null) return false;
   chain.alternativeSlip44s = zoneChain.override_properties?.alternative_slip44s ||
-                             chain_reg.getFileProperty(chain_name, "chain", "alternative_slip44s");
+                             chain_reg_cache.getFileProperty(chain_name, "chain", "alternative_slip44s");
   if (!chain.alternativeSlip44s) delete chain.alternativeSlip44s;
 
   // -- Get Chain Logo --
@@ -327,11 +328,11 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
 
   // -- Check that Chain Fees Exist with override support --
   let chainFees = zoneChain.override_properties?.fees ||
-                  chain_reg.getFileProperty(chain_name, "chain", "fees");
+                  chain_reg_cache.getFileProperty(chain_name, "chain", "fees");
   if (!chainFees) return false;
 
   // -- Get APIs --
-  let apis = chain_reg.getFileProperty(chain_name, "chain", "apis");
+  let apis = chain_reg_cache.getFileProperty(chain_name, "chain", "apis");
 
   // For validation: ensure we have at least one RPC and REST endpoint
   let rest = zoneChain.rest || apis?.rest?.[0]?.address;
@@ -343,7 +344,7 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   // Chain Registry uses tx_page (snake_case). Prefer an explorer whose tx_page
   // contains the {txHash} template (matches the zone schema's required pattern);
   // fall back to the first explorer that has any tx_page at all.
-  let explorers = chain_reg.getFileProperty(chain.chain_name, "chain", "explorers");
+  let explorers = chain_reg_cache.getFileProperty(chain.chain_name, "chain", "explorers");
   let registryExplorerTxPage =
     explorers?.find((e) => e?.tx_page?.includes("{txHash}"))?.tx_page ||
     explorers?.find((e) => e?.tx_page)?.tx_page;
@@ -359,7 +360,7 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
 
   // -- Get Staking with override support --
   let chain_staking = zoneChain.override_properties?.staking ||
-                      chain_reg.getFileProperty(chain_name, "chain", "staking");
+                      chain_reg_cache.getFileProperty(chain_name, "chain", "staking");
   if (chain_staking) {
 
     const base_denom = chain_staking?.staking_tokens[0]?.denom;
@@ -413,7 +414,7 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
   // -- Get Currencies --
   //chain.currencies = [];
   chain.currencies = [...requiredCurrencies];
-  let chain_assets = chain_reg.getFileProperty(chain_name, "assetlist", "assets");
+  let chain_assets = chain_reg_cache.getFileProperty(chain_name, "assetlist", "assets");
 
   //chain_reg_assets?.forEach((asset) => {
   await zone.asyncForEach(chain_assets, async (asset) => {
@@ -423,13 +424,13 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
     }
 
     //remove ics20 assets
-    if (chain_reg.getAssetProperty(chain_name, currency.base_denom, "type_asset") === "ics20") {
+    if (chain_reg_cache.getAssetProperty(chain_name, currency.base_denom, "type_asset") === "ics20") {
       //but only if it's source chain is a cosmos chain
-      const traces = chain_reg.getAssetProperty(chain_name, currency.base_denom, "traces");
+      const traces = chain_reg_cache.getAssetProperty(chain_name, currency.base_denom, "traces");
       if (traces) {
         const counterpartyChain = traces?.[traces.length - 1]?.counterparty?.chain_name;
         if (counterpartyChain) {
-          const chainType = chain_reg.getFileProperty(counterpartyChain, "chain", "chain_type");
+          const chainType = chain_reg_cache.getFileProperty(counterpartyChain, "chain", "chain_type");
           if (chainType === "cosmos") {
             return;
           }
@@ -447,7 +448,7 @@ async function getSuggestionChainProperties(minimalChain, zoneChain = {}) {
 
   // -- Get Description with override support --
   chain.description = zoneChain.override_properties?.description ||
-                      chain_reg.getFileProperty(chain_name, "chain", "description");
+                      chain_reg_cache.getFileProperty(chain_name, "chain", "description");
   if (!chain.description) delete chain.description;
 
   // -- Create APIs Property --

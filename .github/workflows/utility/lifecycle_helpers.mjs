@@ -29,7 +29,30 @@ export const NUMIA_TOKENS_URL = 'https://public-osmosis-api.numia.xyz/tokens/v2/
  * degrade quietly to an empty map (asset_status_report,
  * where Numia data is informational).
  */
+// A single slow Numia response used to fail the whole daily run. Timeouts,
+// network errors, HTTP 5xx and 429 are retried after these delays before the
+// hard-fail policy applies; other 4xx answers fail immediately.
+const NUMIA_RETRY_DELAYS_MS = [5000, 15000];
+
 export async function fetchNumia({ hardFail = true } = {}) {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return await fetchNumiaOnce();
+    } catch (err) {
+      const retryable = !(err.status >= 400 && err.status < 500 && err.status !== 429);
+      const delayMs = NUMIA_RETRY_DELAYS_MS[attempt];
+      if (retryable && delayMs !== undefined) {
+        console.warn(`${err.message}; retrying in ${delayMs / 1000}s (attempt ${attempt + 2} of ${NUMIA_RETRY_DELAYS_MS.length + 1})`);
+        await new Promise((resolve) => setTimeout(resolve, delayMs));
+        continue;
+      }
+      if (!hardFail) return new Map();
+      throw new Error(`${err.message} (hard-fail policy, ${attempt + 1} attempt(s))`);
+    }
+  }
+}
+
+async function fetchNumiaOnce() {
   const controller = new AbortController();
   const timeoutMs = 10000;
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
@@ -37,10 +60,9 @@ export async function fetchNumia({ hardFail = true } = {}) {
     const res = await fetch(NUMIA_TOKENS_URL, { signal: controller.signal });
     clearTimeout(timeoutId);
     if (!res.ok) {
-      if (hardFail) {
-        throw new Error(`Numia returned HTTP ${res.status}; aborting (hard-fail policy)`);
-      }
-      return new Map();
+      const error = new Error(`Numia returned HTTP ${res.status}`);
+      error.status = res.status;
+      throw error;
     }
     const data = await res.json();
     const byDenom = new Map();
@@ -57,9 +79,9 @@ export async function fetchNumia({ hardFail = true } = {}) {
     return byDenom;
   } catch (err) {
     clearTimeout(timeoutId);
-    if (!hardFail) return new Map();
+    if (err.status) throw err;
     if (err.name === 'AbortError') {
-      throw new Error(`Request to ${NUMIA_TOKENS_URL} timed out after 10s (hard-fail policy)`);
+      throw new Error(`Request to ${NUMIA_TOKENS_URL} timed out after ${timeoutMs / 1000}s`);
     }
     throw new Error(`Failed to fetch from ${NUMIA_TOKENS_URL}: ${err.message}`);
   }
@@ -384,6 +406,81 @@ export function loadJSON(p, fallback) {
   }
 }
 
+/**
+ * Write via a temp file and rename, so a concurrent reader never sees a
+ * half-written file. Endpoint validation runs in the background alongside the
+ * lifecycle steps and reads zone_assets, zone_chains and state.json.
+ */
+export function writeFileAtomic(p, content) {
+  const tmp = `${p}.${process.pid}.tmp`;
+  fs.writeFileSync(tmp, content, 'utf8');
+  fs.renameSync(tmp, p);
+}
+
+// state.json keys owned by endpoint validation (validateEndpoints.mjs).
+export const VALIDATION_STATE_KEYS = ['chains', 'lastValidationRun'];
+
+const STATE_LOCK_TIMEOUT_MS = 120000;
+const STATE_LOCK_POLL_MS = 50;
+
+/**
+ * Run fn while holding an exclusive lock on statePath, so one process's
+ * read-merge-write can't interleave with another's (each would otherwise
+ * re-read, then rename over the other's update). mkdir is atomic across
+ * processes, and only the process that created the lock removes it.
+ *
+ * The lock is held only for a synchronous read and write, so one still held
+ * after STATE_LOCK_TIMEOUT_MS means a writer died mid-write. That throws and
+ * fails the step rather than taking the lock over: every takeover rule
+ * (owner liveness, lock age) leaves a window where two writers both proceed.
+ */
+export function withStateLock(statePath, fn) {
+  const lockDir = `${statePath}.lock`;
+  const sleeper = new Int32Array(new SharedArrayBuffer(4));
+  const deadline = Date.now() + STATE_LOCK_TIMEOUT_MS;
+  for (;;) {
+    try {
+      fs.mkdirSync(lockDir);
+      break;
+    } catch (err) {
+      if (err.code !== 'EEXIST') throw err;
+      if (Date.now() > deadline) {
+        let owner = 'unknown';
+        try { owner = fs.readFileSync(`${lockDir}/owner`, 'utf8'); } catch { /* no owner file */ }
+        throw new Error(
+          `Timed out after ${STATE_LOCK_TIMEOUT_MS / 1000}s waiting for ${lockDir} (held by pid ${owner}). ` +
+          'A writer probably died mid-write; check state.json, then remove the lock directory.'
+        );
+      }
+      Atomics.wait(sleeper, 0, 0, STATE_LOCK_POLL_MS);
+    }
+  }
+  try {
+    // Only used in the timeout message above.
+    fs.writeFileSync(`${lockDir}/owner`, String(process.pid));
+    return fn();
+  } finally {
+    fs.rmSync(lockDir, { recursive: true, force: true });
+  }
+}
+
+/**
+ * Write state.json from a lifecycle script, keeping whatever endpoint
+ * validation has written to its own keys since this script loaded the file.
+ * Validation runs concurrently and writes only VALIDATION_STATE_KEYS, so
+ * writing the in-memory copy whole would discard that run's results.
+ */
+export function writeLifecycleState(statePath, state) {
+  withStateLock(statePath, () => {
+    const current = loadJSON(statePath, {});
+    const merged = { ...state };
+    for (const key of VALIDATION_STATE_KEYS) {
+      if (key in current) merged[key] = current[key];
+    }
+    writeFileAtomic(statePath, JSON.stringify(merged, null, 2) + '\n');
+  });
+}
+
 // ── State helpers (cron-lifecycle semantics) ────────────────────────────────
 
 /**
@@ -408,4 +505,106 @@ export function materialiseStateAsset(state, baseDenom) {
     state.assets.push(s);
   }
   return s;
+}
+
+/**
+ * Halt coverage of each chain's listed assets, shared by the endpoint
+ * validation report and the dead-chain report so both describe a down chain's
+ * exposure the same way. Returns the per-chain counts plus two renderers: a
+ * short coverage label and a per-asset status cell (one asset per line).
+ */
+export function buildHaltCoverage(zoneAssets) {
+  // Summarize halt coverage per chain: how many of its assets are unstable and
+  // how many have deposits halted. An asset is attributed to a chain if either
+  // its listed chain_name OR its canonical.chain_name matches, so a token routed
+  // via the failed chain but listed under an intermediary (e.g. milkINIT listed
+  // under initia with canonical.chain_name "moo") still counts toward that
+  // chain's coverage. Counted once per chain even if both keys point at it.
+  const haltCoverageByChain = {};
+  const bumpCoverage = (c, asset) => {
+    if (!haltCoverageByChain[c]) {
+      haltCoverageByChain[c] = {
+        total: 0, unstable: 0, depositsHalted: 0, haltedBothDirections: 0,
+        assets: []
+      };
+    }
+    haltCoverageByChain[c].total += 1;
+    if (asset.osmosis_unstable) { haltCoverageByChain[c].unstable += 1; }
+    if (asset.osmosis_halt_deposits) { haltCoverageByChain[c].depositsHalted += 1; }
+    if (asset.osmosis_halt_deposits && asset.osmosis_halt_withdrawals) {
+      haltCoverageByChain[c].haltedBothDirections += 1;
+    }
+    haltCoverageByChain[c].assets.push(asset);
+  };
+  zoneAssets.forEach(asset => {
+    const chains = new Set();
+    if (asset.chain_name) { chains.add(asset.chain_name); }
+    if (asset.canonical?.chain_name) { chains.add(asset.canonical.chain_name); }
+    chains.forEach(c => bumpCoverage(c, asset));
+  });
+
+  // Render the per-asset status breakdown for a chain as one Markdown cell, one
+  // asset per line (joined with <br> since a literal newline would break the
+  // table row). Each line is "<symbol> — <status>", where status reflects the
+  // strongest halt flag set on that asset and its reason. This replaces the old
+  // aggregate-count cell so a reviewer can see exactly which assets are still
+  // exposed on an unreachable chain without the table ballooning into one row
+  // per asset. Asset identity prefers the human label parsed from _comment
+  // (e.g. "Evmos $EVMOS" -> "EVMOS"), falling back to base_denom.
+  const getAssetSymbol = (asset) => {
+    const ticker = asset._comment?.match(/\$([A-Za-z0-9.\-]+)/)?.[1];
+    return ticker || asset.base_denom || '(unknown)';
+  };
+  const getAssetStatusLine = (asset) => {
+    const reason = (r) => (r ? ` (${r})` : '');
+    let status;
+    if (asset.osmosis_halt_deposits && asset.osmosis_halt_withdrawals) {
+      status = `🛑 deposits + withdrawals halted${reason(asset.osmosis_deposit_halt_reason || asset.osmosis_withdrawal_halt_reason)}`;
+    } else if (asset.osmosis_halt_deposits) {
+      status = `🛑 deposits halted${reason(asset.osmosis_deposit_halt_reason)}`;
+    } else if (asset.osmosis_halt_withdrawals) {
+      status = `🛑 withdrawals halted${reason(asset.osmosis_withdrawal_halt_reason)}`;
+    } else if (asset.osmosis_unstable) {
+      status = `⚠️ unstable${reason(asset.osmosis_unstable_reason)}`;
+    } else {
+      status = '❗ not covered';
+    }
+    return `${getAssetSymbol(asset)} — ${status}`;
+  };
+  const getAssetBreakdownCell = (chain_name) => {
+    const cov = haltCoverageByChain[chain_name];
+    if (!cov || cov.assets.length === 0) { return '— no listed assets'; }
+    return cov.assets.map(getAssetStatusLine).join('<br>');
+  };
+
+  // Render a short coverage label for a chain's assets. An asset counts as
+  // "covered" only if it is deposit-halted or flagged unstable. osmosis_disabled
+  // is intentionally ignored here: it only marks a non-native deposit/withdrawal
+  // flow (a UX router flag), not a kill switch, so it says nothing about whether
+  // deposits/withdrawals are actually halted. The actionable case is a
+  // connectivity-failing chain with one or more assets that are neither
+  // deposit-halted nor unstable.
+  const getHaltCoverageLabel = (chain_name) => {
+    const cov = haltCoverageByChain[chain_name];
+    if (!cov || cov.total === 0) { return '— no listed assets'; }
+    if (cov.depositsHalted >= cov.total) { return `🛑 deposits halted (${cov.depositsHalted}/${cov.total})`; }
+    if (cov.unstable >= cov.total) { return `⚠️ unstable (${cov.unstable}/${cov.total})`; }
+    if (cov.depositsHalted > 0 || cov.unstable > 0) {
+      return `🟠 partial (${cov.unstable}/${cov.total} unstable, ${cov.depositsHalted}/${cov.total} dep-halted)`;
+    }
+    return `❗ not covered (0/${cov.total})`;
+  };
+  // Covered = every listed asset has deposits halted, the bar the endpoint
+  // report's "already covered" action uses. A chain with no listed assets has
+  // no exposure, so it counts as covered.
+  const isCovered = (chain_name) => {
+    const cov = haltCoverageByChain[chain_name];
+    return !cov || cov.total === 0 || cov.depositsHalted >= cov.total;
+  };
+  return {
+    byChain: haltCoverageByChain,
+    label: getHaltCoverageLabel,
+    breakdown: getAssetBreakdownCell,
+    isCovered,
+  };
 }

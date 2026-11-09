@@ -172,3 +172,85 @@ test("markdown destination swap is rejected even when source has markdown", () =
     undefined
   );
 });
+
+test("dot-grouped thousands allowed only for numbers in the source", () => {
+  const numSrc = "Total supply is 1,000,000,000 tokens, with 2,500,000,000,000 reserved.";
+  // de/es/pt-br/ro/tr group thousands with dots; these looked like IPs.
+  assert.equal(
+    validateTranslation(numSrc, "Das Gesamtangebot beträgt 1.000.000.000 Token."),
+    undefined
+  );
+  assert.equal(
+    validateTranslation(numSrc, "Reservados 2.500.000.000.000 tokens."),
+    undefined
+  );
+  // A dot-grouped number that isn't in the source still reads as an IP.
+  assert.notEqual(
+    validateTranslation(numSrc, "Das Gesamtangebot beträgt 203.000.113.007 Token."),
+    undefined
+  );
+  // A real IP stays rejected even next to a regrouped source number.
+  assert.notEqual(
+    validateTranslation(numSrc, "1.000.000.000 Token, siehe 203.0.113.7"),
+    undefined
+  );
+  // Without the number in the source, the regrouped form is rejected.
+  assert.notEqual(
+    validateTranslation(SRC, "Das Gesamtangebot beträgt 1.000.000.000 Token."),
+    undefined
+  );
+  // A regrouped source number at the end of a sentence still passes.
+  assert.equal(
+    validateTranslation(numSrc, "Das Gesamtangebot beträgt 1.000.000.000."),
+    undefined
+  );
+});
+
+test("regrouped source numbers can't hide a URL, host or address", () => {
+  const numSrc =
+    "Total supply is 1,000,000,000 tokens. See https://osmosis.zone for details.";
+  for (const translated of [
+    "Visit https://1.000.000.000/claim now.", // URL to the IP 1.0.0.0
+    "Visit 1.000.000.000osmosis.zone for rewards.", // host 000osmosis.zone
+    "Visit 1.000.000.000.evil.com for rewards.",
+    "Visit evil.1.000.000.000 for rewards.",
+    "Connect to 1.000.000.000:8080 for rewards.",
+    "Connect to user@1.000.000.000 for rewards.",
+    "Open //1.000.000.000/claim now.",
+    "Claim at 1.000.000.000。com", // unicode dot: host 1.000.000.000.com
+    "Visit https://osmosis.zone/!1.000.000.000", // path on the source URL
+    "Visit https://osmosis.zone/?1.000.000.000", // query on the source URL
+    "Mehr: 1.000.000.000 Token, siehe 1.000.000.000:8080", // one standalone, one not
+    "Visit https://osmosis.zone/'1.000.000.000", // apostrophe is a URL path char
+    'Visit https://osmosis.zone/"1.000.000.000"', // quote glued to the URL
+    "Visit https://osmosis.zone/(1.000.000.000)", // bracket glued to the URL
+    "[claim][reward]\n\n[reward]: 1.000.000.000", // reference-style destination
+    "[claim][reward]\n\n[reward]: <1.000.000.000>",
+    "[claim][reward]\n\n[reward]:\n  1.000.000.000", // destination on the next line
+    "[claim][reward]\n\n> [reward]: 1.000.000.000", // definition in a blockquote
+    "[claim]\n\n[claim]: 1.000.000.000", // shortcut reference
+    // Unicode spaces that autolinkers keep inside a URL
+    "Visit https://osmosis.zone/ 1.000.000.000",
+    "Visit https://osmosis.zone/ 1.000.000.000",
+    "Visit https://osmosis.zone/ 1.000.000.000",
+    "Visit https://osmosis.zone/　1.000.000.000",
+  ]) {
+    assert.notEqual(validateTranslation(numSrc, translated), undefined, translated);
+  }
+  const mdSrc = "Supply is 1,000,000,000. See [docs](https://osmosis.zone).";
+  assert.notEqual(
+    validateTranslation(mdSrc, "Angebot 1.000.000.000. [claim](1.000.000.000)"),
+    undefined
+  );
+});
+
+test("regrouped source numbers pass in normal prose punctuation", () => {
+  const numSrc = "Total supply is 1,000,000,000 tokens.";
+  for (const translated of [
+    "Das Gesamtangebot beträgt „1.000.000.000“ Token.",
+    "Das Gesamtangebot (1.000.000.000) ist fix.",
+    "Gesamtangebot: 1.000.000.000, fest.",
+  ]) {
+    assert.equal(validateTranslation(numSrc, translated), undefined, translated);
+  }
+});

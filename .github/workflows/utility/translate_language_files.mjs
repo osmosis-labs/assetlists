@@ -185,7 +185,61 @@ function extractLinkTokens(text) {
   ];
   return tokens.map((token) => canonicalizeUrl(trimUrlToken(token)));
 }
+// Many locales group thousands with dots (de, es, pt-br, ro, tr), so a source
+// "1,000,000,000" correctly becomes "1.000.000.000", which IP_PATTERN reads as
+// an added IP and rejects every run. The text is never edited before link
+// extraction (that hid URLs, hosts and Markdown destinations built around the
+// number). Instead, when the translation has no Markdown link syntax at all,
+// a token missing from the source is exempt only when it is purely digits and
+// dots and EVERY place it occurs lies inside a standalone dot-grouped number
+// whose digits are a number in the source. Standalone is strict: it starts at
+// the start of the text or after ASCII whitespace (not NBSP or other Unicode
+// spaces, which autolinkers keep inside a URL), optionally behind one opening
+// bracket or quote that itself follows whitespace, and ends the same way
+// (optionally one closing bracket or quote, then optionally one sentence
+// punctuation mark, then whitespace or the end). A number glued to anything
+// else (a URL path, a host, an apostrophe) never counts, and any Markdown
+// link syntax ("](", "]:", "][", in any of CommonMark's layouts) disables the
+// exemption, so no link destination can be exempted. So a translation can
+// regroup the source's numbers but not introduce an IP, host, URL or link.
+const STANDALONE_DOT_GROUPED_NUMBER_PATTERN =
+  /(?<=(?:^|[ \t\r\n])[("\u00ab\u00bb\u201a\u201e\u201c\u201d]?)\d{1,3}(?:\.\d{3})+(?=[)"\u00ab\u00bb\u201c\u201d]?[.,;:!?]?(?:[ \t\r\n]|$))/g;
+const MARKDOWN_LINK_SYNTAX_PATTERN = /\]\s*[(:[]/;
+const SOURCE_NUMBER_PATTERN = /\d{1,3}(?:[,.\s\u00a0\u202f']\d{3})+|\d+/g;
+
+function getRegroupedNumberRanges(sourceText, normalizedTranslation) {
+  if (MARKDOWN_LINK_SYNTAX_PATTERN.test(normalizedTranslation)) return [];
+  const sourceDigits = new Set(
+    (sourceText.match(SOURCE_NUMBER_PATTERN) ?? []).map((n) => n.replace(/\D/g, ""))
+  );
+  return [...normalizedTranslation.matchAll(STANDALONE_DOT_GROUPED_NUMBER_PATTERN)]
+    .filter((m) => sourceDigits.has(m[0].replace(/\./g, "")))
+    .map((m) => [m.index, m.index + m[0].length]);
+}
+
+function isRegroupedSourceNumber(token, normalizedTranslation, ranges) {
+  if (!/^[\d.]+$/.test(token) || ranges.length === 0) return false;
+  for (let i = normalizedTranslation.indexOf(token); i !== -1;
+    i = normalizedTranslation.indexOf(token, i + 1)) {
+    if (!ranges.some(([start, end]) => start <= i && i + token.length <= end)) {
+      return false;
+    }
+  }
+  return true;
+}
+
 export function validateTranslation(sourceText, translatedText) {
+  // Loose bounds only: CJK translations legitimately compress well below 1/10
+  // of the English length, and Indic scripts expand. This catches injected
+  // essays and truncated junk, not normal variation. Checked first so an
+  // oversized response can't make the regex scans below expensive.
+  if (
+    translatedText.length >
+      Math.max(sourceText.length * 4, sourceText.length + 200) ||
+    translatedText.length < sourceText.length * 0.05
+  ) {
+    return `implausible length (${translatedText.length} chars vs ${sourceText.length} source)`;
+  }
   if (/<[a-zA-Z/][^>]*>/.test(translatedText)) {
     return "contains markup";
   }
@@ -196,20 +250,17 @@ export function validateTranslation(sourceText, translatedText) {
     return "contains Markdown link syntax";
   }
   const sourceLinks = new Set(extractLinkTokens(sourceText));
-  for (const token of extractLinkTokens(translatedText)) {
-    if (!sourceLinks.has(token)) {
+  // Same unicode-dot normalization as extractLinkTokens.
+  const normalizedTranslation = translatedText.replace(/[。．｡]/g, ".");
+  const regroupedRanges = getRegroupedNumberRanges(sourceText, normalizedTranslation);
+  // Each distinct token is checked once: the exemption scans every occurrence.
+  for (const token of new Set(extractLinkTokens(translatedText))) {
+    if (
+      !sourceLinks.has(token) &&
+      !isRegroupedSourceNumber(token, normalizedTranslation, regroupedRanges)
+    ) {
       return `adds link-like token "${token}"`;
     }
-  }
-  // Loose bounds only: CJK translations legitimately compress well below 1/10
-  // of the English length, and Indic scripts expand. This catches injected
-  // essays and truncated junk, not normal variation.
-  if (
-    translatedText.length >
-      Math.max(sourceText.length * 4, sourceText.length + 200) ||
-    translatedText.length < sourceText.length * 0.05
-  ) {
-    return `implausible length (${translatedText.length} chars vs ${sourceText.length} source)`;
   }
   return undefined;
 }

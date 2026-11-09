@@ -6,6 +6,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as chain_reg from "../../../chain-registry/.github/workflows/utility/chain_registry.mjs";
+import * as chain_reg_cache from "./chain_registry_cache.mjs";
 chain_reg.setup();
 import * as zone from "./assetlist_functions.mjs";
 
@@ -153,7 +154,7 @@ export function getAssetTrace(asset_data) {
   //Make sure Path is provided for Mainnet assets
   if (!ZONE_ASSET_PATH_DEFINED) {
     if (IS_MAINNET === undefined) {
-      IS_MAINNET = chain_reg.getFileProperty(asset_data.chainName, "chain", "network_type") === "mainnet";
+      IS_MAINNET = chain_reg_cache.getFileProperty(asset_data.chainName, "chain", "network_type") === "mainnet";
     }
     if (IS_MAINNET) {
       console.log("No path provided.");
@@ -328,12 +329,17 @@ export async function setLocalAsset(asset_data) {
     // Extract channel ID from path (e.g., "channel-123" from segments[1])
     const channelId = segments[1];
 
+    // The path only gives the Osmosis-side channel. The counterparty's
+    // channel id is unknown without the registry's IBC entry, so it is left
+    // unset rather than guessed: copying the Osmosis id here would make the
+    // frontend send deposits out of the remote chain's channel with that
+    // number, which usually leads somewhere else. setTransferMethods skips
+    // the IBC transfer method when the counterparty channel is missing.
     const minimalTrace = {
       type: type,
       counterparty: {
         chain_name: asset_data.source_asset.chain_name,
-        base_denom: asset_data.source_asset.base_denom,
-        channel_id: channelId  // Will be set in setTransferMethods if needed
+        base_denom: asset_data.source_asset.base_denom
       },
       chain: {
         channel_id: channelId,
@@ -549,7 +555,7 @@ function getNetworkSymbolSuffix(chain_name, asset_data) {
     return chain_symbol_suffix;
   }
 
-  let bech32_prefix = chain_reg.getFileProperty(chain_name, "chain", "bech32_prefix");
+  let bech32_prefix = chain_reg_cache.getFileProperty(chain_name, "chain", "bech32_prefix");
   if (bech32_prefix) {
     return bech32_prefix;
   }
@@ -570,7 +576,7 @@ function getNetworkName(chain_name, asset_data) {
     return override_chain_pretty_name;
   }
 
-  let chain_pretty_name = chain_reg.getFileProperty(chain_name, "chain", "pretty_name");
+  let chain_pretty_name = chain_reg_cache.getFileProperty(chain_name, "chain", "pretty_name");
   if (chain_pretty_name) {
     return chain_pretty_name;
   }
@@ -715,7 +721,7 @@ export function setName(asset_data) {
       &&
     getAssetProperty(asset_data.identity_asset, "is_staking")
   ) {
-    name = chain_reg.getFileProperty(asset_data.identity_asset.chain_name, "chain", "pretty_name");
+    name = chain_reg_cache.getFileProperty(asset_data.identity_asset.chain_name, "chain", "pretty_name");
     //Check for Chain Name Override--E.G., "Ethereum Mainnet" -> "Ethereum"
     let override_chain_pretty_name = asset_data.zone_config?.chains?.find(
       chain => //where
@@ -905,7 +911,7 @@ export function getAssetProperty(asset, propertyName) {
     } else {
       assetProperty.set(
         assetPropertyKey,
-        chain_reg.getAssetProperty(
+        chain_reg_cache.getAssetProperty(
           asset.chain_name,
           asset.base_denom,
           propertyName
@@ -924,8 +930,8 @@ export function getAssetDecimals(asset) {
 
   let decimals;
 
-  const display = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "display");
-  const denom_units = chain_reg.getAssetProperty(asset.chain_name, asset.base_denom, "denom_units");
+  const display = chain_reg_cache.getAssetProperty(asset.chain_name, asset.base_denom, "display");
+  const denom_units = chain_reg_cache.getAssetProperty(asset.chain_name, asset.base_denom, "denom_units");
   denom_units?.forEach((unit) => {
     if (display === unit.denom) {
       decimals = unit.exponent;
@@ -952,7 +958,7 @@ export function getAssetIsStaking(asset) {
     return asset.is_staking;
   }
 
-  return chain_reg.getFileProperty(asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom === asset.base_denom;
+  return chain_reg_cache.getFileProperty(asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom === asset.base_denom;
 
 }
 
@@ -969,7 +975,7 @@ export function getAssetTraces(asset) {
   const limit = 50;
 
   while (lastTrace && counter !== limit) {
-    traces = chain_reg.getAssetProperty(
+    traces = chain_reg_cache.getAssetProperty(
       lastTrace.counterparty.chain_name,
       lastTrace.counterparty.base_denom,
       "traces"
@@ -995,7 +1001,13 @@ export function getAssetTraces(asset) {
 export function setTraces(asset_data) {
 
   let traces = getAssetProperty(asset_data.local_asset, "traces");
-  asset_data.chain_reg.traces = traces?.length ? [ traces.at(-1) ] : undefined;
+  const last = traces?.at(-1);
+  // The fallback trace built in setLocalAsset has no counterparty channel. The
+  // chain-registry schema requires one, and Mintscan's export would publish an
+  // IBC route without it, so an incomplete IBC hop is not exported.
+  const incompleteIbc = (last?.type === "ibc" || last?.type === "ibc-cw20")
+    && !last?.counterparty?.channel_id;
+  asset_data.chain_reg.traces = last && !incompleteIbc ? [ last ] : undefined;
 
 }
 
@@ -1265,14 +1277,14 @@ export function setCategories(asset_data) {
   });
 
   // if (
-  //   chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "fees")?.fee_tokens[0]?.denom ===
+  //   chain_reg_cache.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "fees")?.fee_tokens[0]?.denom ===
   //   asset_data.canonical_asset.base_denom
   // ) {
   //   addArrayItem("defi", asset_data.frontend.categories);
   // }
   // if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
   // //if (
-  // //  chain_reg.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom ===
+  // //  chain_reg_cache.getFileProperty(asset_data.canonical_asset.chain_name, "chain", "staking")?.staking_tokens[0]?.denom ===
   // //  asset_data.canonical_asset.base_denom
   // //) {
   //   addArrayItem("defi", asset_data.frontend.categories);
@@ -1364,7 +1376,7 @@ export function setTypeAsset(asset_data) {
 
 function getChainType(asset_data, chainName) {
 
-  let chain_type = chain_reg.getFileProperty(
+  let chain_type = chain_reg_cache.getFileProperty(
     chainName,
     "chain",
     "chain_type"
@@ -1373,13 +1385,13 @@ function getChainType(asset_data, chainName) {
     return "cosmos";
   }
 
-  /*let feeTokenDenom = chain_reg.getFileProperty(
+  /*let feeTokenDenom = chain_reg_cache.getFileProperty(
     chainName,
     "chain",
     "fees"
   )?.fee_tokens?.[0];
   if (feeTokenDenom) {
-    let feeTokenType = chain_reg.getAssetProperty(
+    let feeTokenType = chain_reg_cache.getAssetProperty(
       chainName,
       feeTokenDenom,
       "type_asset"
@@ -1415,7 +1427,7 @@ function getChainType(asset_data, chainName) {
 
 function getChainId(asset_data, chainName) {
 
-  let chainId = chain_reg.getFileProperty(chainName, "chain", "chain_id");
+  let chainId = chain_reg_cache.getFileProperty(chainName, "chain", "chain_id");
   let chainType = getChainType(asset_data, chainName);
   if (chainType === "evm") {
     chainId = Number(chainId);
@@ -1546,19 +1558,25 @@ export function setTransferMethods(asset_data) {
   });
 
   if (asset_data.source_asset.chain_name !== asset_data.chainName) {
-    const live = chain_reg.getFileProperty(asset_data.source_asset.chain_name, "chain", "status");
+    const live = chain_reg_cache.getFileProperty(asset_data.source_asset.chain_name, "chain", "status");
     if (live === "live") {
       const traces = getAssetProperty(asset_data.local_asset, "traces");
       const trace = traces?.[traces.length - 1];
 
-      // Only add IBC transfer method if we have a valid trace with required fields
-      if (trace?.counterparty?.chain_name && trace?.chain?.channel_id) {
+      // Only add IBC transfer method if we have a valid trace with required
+      // fields. Both channel ids are needed: deposits are sent out of the
+      // counterparty channel, withdrawals out of the Osmosis one.
+      if (
+        trace?.counterparty?.chain_name &&
+        trace?.counterparty?.channel_id &&
+        trace?.chain?.channel_id
+      ) {
         const ibcTransferMethod = {
           name: "Osmosis IBC Transfer",
           type: "ibc",
           counterparty: {
             chainName: trace.counterparty.chain_name,
-            chainId: chain_reg.getFileProperty(
+            chainId: chain_reg_cache.getFileProperty(
               trace.counterparty.chain_name,
               "chain",
               "chain_id"
@@ -1702,7 +1720,7 @@ export function setSocials(asset_data) {
   if (socials) { return; }
 
   if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
-    socials = chain_reg.getFileProperty(
+    socials = chain_reg_cache.getFileProperty(
       asset_data.canonical_asset.chain_name,
       "chain",
       "socials"
@@ -1710,7 +1728,7 @@ export function setSocials(asset_data) {
 
     // Fallback to top-level website field (standard in chain.json schema)
     if (!socials) {
-      const website = chain_reg.getFileProperty(
+      const website = chain_reg_cache.getFileProperty(
         asset_data.canonical_asset.chain_name,
         "chain",
         "website"
@@ -1733,15 +1751,24 @@ export function setSocials(asset_data) {
 
 }
 
+// An alloy is the share token a transmuter mints under its own factory
+// namespace ("factory/<transmuter>/alloyed/<name>"). An alloy picked up from
+// the chain registry with no zone entry (allUSD) has no is_alloyed, so the
+// denom decides; an explicit is_alloyed in the zone entry still wins.
+function isAlloyedAsset(asset_data) {
+  return asset_data.zone_asset.is_alloyed
+    ?? /^factory\/osmo1[a-z0-9]+\/alloyed\//.test(asset_data.zone_asset.base_denom ?? "");
+}
+
 export function setIsAlloyed(asset_data) {
 
-  asset_data.frontend.isAlloyed = asset_data.zone_asset.is_alloyed;
+  asset_data.frontend.isAlloyed = isAlloyedAsset(asset_data);
 
 }
 
 export function setContract(asset_data) {
 
-  if (asset_data.zone_asset.is_alloyed) {
+  if (isAlloyedAsset(asset_data)) {
     
     asset_data.frontend.contract = asset_data.chain_reg.address;
 
@@ -1790,7 +1817,7 @@ export function setDescription(asset_data) {
 
   if (!extended_description) {
     if (getAssetProperty(asset_data.canonical_asset, "is_staking")) {
-      extended_description = chain_reg.getFileProperty(
+      extended_description = chain_reg_cache.getFileProperty(
         asset_data.canonical_asset.chain_name,
         "chain",
         "description"

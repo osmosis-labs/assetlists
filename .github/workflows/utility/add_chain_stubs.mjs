@@ -8,6 +8,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
+import { writeFileAtomic } from './lifecycle_helpers.mjs';
 
 // Get zone name from command line argument
 const zoneBasePath = process.argv[2] || 'osmosis-1';
@@ -105,7 +106,7 @@ zoneChains.chains.push(...stubEntries);
 // Write updated zone_chains.json
 try {
   const updatedContent = JSON.stringify(zoneChains, null, 2);
-  fs.writeFileSync(zoneChainsPath, updatedContent + '\n', 'utf8');
+  writeFileAtomic(zoneChainsPath, updatedContent + '\n');
   console.log(`\n✓ Successfully added ${chainsNeedingStubs.length} chain stubs to zone_chains.json`);
   console.log(`✓ Total chains in zone_chains.json: ${zoneChains.chains.length}`);
 } catch (error) {

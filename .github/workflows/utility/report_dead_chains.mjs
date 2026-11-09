@@ -64,7 +64,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { loadJSON } from './lifecycle_helpers.mjs';
+import { buildHaltCoverage, loadJSON } from './lifecycle_helpers.mjs';
 import {
   populateChainDirectories,
   getFileProperty,
@@ -106,6 +106,13 @@ const FROZEN_HEIGHT_RUNS = 2;
 // visibly for at least its first ~3 weeks of staleness (well past the point a
 // real halt is actionable) before folding into the collapsed long-stale block.
 const RECENT_STALE_DAYS = 28;
+
+// How old the freshest RPC block must be before it outweighs a passing REST
+// check. REST connectivity is only a node_info call, which a halted chain still
+// answers, but a single lagging RPC node can also report a block a few hours
+// old while the chain is fine. A day separates the two: Initia's RPC was four
+// days behind while its REST kept passing.
+const STALE_OVERRIDES_REST_HOURS = 24;
 
 // Per-chain HTTP timeout for the weekly external lookups.
 const HTTP_TIMEOUT_MS = 8000;
@@ -325,7 +332,22 @@ function classifyChainFromState(stateChain) {
   if (tested.length === 0) return { verdict: 'unverifiable' };
 
   // validationSuccess is true when a working RPC OR REST connectivity was found.
-  if (stateChain.validationSuccess === true) return { verdict: 'alive' };
+  // REST connectivity is only a node_info call, which a halted chain still
+  // answers, so it can't vouch for liveness on its own: if no RPC /status
+  // reading this run was fresh and the newest stale one is a day or more old,
+  // the chain is not producing blocks (Initia answered REST for days after
+  // halting).
+  if (stateChain.validationSuccess === true) {
+    const statusReadings = tested.flatMap((e) =>
+      (e.testResults ?? []).filter((t) => t.latestBlockTime)
+    );
+    const anyFresh = statusReadings.some((t) => t.stale !== true && t.success === true);
+    const stale = staleBlockInfo(stateChain);
+    if (!anyFresh && stale && stale.ageHours >= STALE_OVERRIDES_REST_HOURS) {
+      return { verdict: 'stale' };
+    }
+    return { verdict: 'alive' };
+  }
 
   // validationSuccess false → at least one direction has no working endpoint.
   // Distinguish "all endpoints dead" (every tested endpoint failed
@@ -694,8 +716,9 @@ async function runPart1(state, chainlist, zoneAssets, streaks, heights) {
     // watch-list, independent of streak maturity. Captured here, but the row is
     // pushed AFTER the streak is resolved below so the displayed streak reflects
     // what actually happened this run — a stale RPC reading does NOT always
-    // advance the streak: if REST connectivity passes the run verdict is 'alive'
-    // and the streak resets to 0, even though one /status read was stale.
+    // advance the streak: if another endpoint returned a fresh block the run
+    // verdict is 'alive' and the streak resets to 0, even though one /status
+    // read was stale.
     const staleInfo = staleBlockInfo(stateChain);
 
     const isDeadSignal =
@@ -1013,45 +1036,66 @@ function proposalLink(chainName, proposalId) {
   return `\`${idLabel}\``;
 }
 
-function renderReport({ part1, part2, part3 }) {
+function renderReport({ part1, part2, part3, coverage }) {
   const lines = [];
+  const coverageCell = (chainName) => coverage.label(chainName);
+  const recentStale = (part1.currentlyStale ?? []).filter(
+    (c) => c.ageHours < RECENT_STALE_DAYS * 24
+  );
+  const recentUncovered = recentStale.filter((c) => !coverage.isCovered(c.chainName));
+  const candidatesUncovered = part1.candidates.filter((c) => !coverage.isCovered(c.chainName));
+
   lines.push('## ⚰️ Dead chain candidates');
   lines.push('');
+  const status = part1.weeklyGated
+    ? `${part1.candidates.length} corroborated candidate(s), ${candidatesUncovered.length} with deposits still open`
+    : `${part1.streakReached.length} chain(s) at or past the ${DEAD_STREAK_THRESHOLD}-run streak; candidates are corroborated on the weekly run`;
   lines.push(
-    `_Chains Osmosis lists an asset from, registered as live, that have shown a ` +
+    `**Status:** ${status}. ${recentStale.length} recently stale chain(s), ` +
+      `${recentUncovered.length} with deposits still open.`
+  );
+  lines.push('');
+  lines.push('<details><summary>How this section works</summary>');
+  lines.push('');
+  lines.push(
+    `Chains Osmosis lists an asset from, registered as live, that have shown a ` +
       `death signal on the Osmosis endpoint probe for ${DEAD_STREAK_THRESHOLD}+ ` +
       `consecutive runs AND which status.cosmos.directory corroborates as ` +
       `dead. Candidates for a \`source_chain_killed\` flag and an upstream ` +
-      `chain-registry \`status: killed\` PR. Verify before acting._`
+      `chain-registry \`status: killed\` PR. Verify before acting.`
   );
   lines.push('');
   lines.push(
-    `_**Endpoint probe** verdicts: \`all_dead\` = no RPC or REST endpoint passed ` +
-      `connectivity (CORS excluded); \`stale\` = an endpoint answered but its ` +
-      `latest block is over an hour old; \`frozen\` = endpoints answer but the ` +
-      `block height has not advanced across ${FROZEN_HEIGHT_RUNS} consecutive ` +
-      `runs (consensus halted)._`
+    `**Endpoint probe** verdicts: \`all_dead\` = no RPC or REST endpoint passed ` +
+      `connectivity (CORS excluded); \`stale\` = every RPC block reading is over ` +
+      `an hour old (a passing REST node_info call does not count as alive); ` +
+      `\`frozen\` = the block height has not advanced across ${FROZEN_HEIGHT_RUNS} ` +
+      `consecutive runs (consensus halted).`
   );
   lines.push('');
   lines.push(
-    `> **On the cosmos.directory signal:** it sources its chain and endpoint ` +
+    `**Halt coverage** counts the chain's listed assets that are flagged ` +
+      `unstable or deposit-halted. A chain is covered once every asset has ` +
+      `deposits halted, the same bar the endpoint report's Action column uses.`
+  );
+  lines.push('');
+  lines.push(
+    `**On the cosmos.directory signal:** it sources its chain and endpoint ` +
       `list from the cosmos chain-registry, then probes those endpoints. So a ` +
       `stale \`lastSuccessAt\` age IS an independent measurement (real probes ` +
       `against live endpoints), but a 404 / "not tracked" only means the chain ` +
       `isn't in the registry's monitored set (partly circular with the very ` +
       `registry change we're proposing), so treat 404-only corroboration as ` +
       `weak. The local ${DEAD_STREAK_THRESHOLD}-run streak is the independent ` +
-      `half of the gate._`
+      `half of the gate.`
   );
+  lines.push('');
+  lines.push('</details>');
   lines.push('');
 
   if (!part1.weeklyGated) {
     // Daily run: streaks advanced but corroboration (the gate) didn't run.
-    lines.push(
-      `_Candidate list publishes on the weekly corroborated run. ` +
-        `${part1.streakReached.length} chain(s) currently at or past the ` +
-        `${DEAD_STREAK_THRESHOLD}-run streak, pending corroboration._`
-    );
+    lines.push('_Candidate list publishes on the weekly corroborated run._');
   } else if (!part1.candidates.length) {
     lines.push('_None corroborated._');
   } else {
@@ -1061,36 +1105,40 @@ function renderReport({ part1, part2, part3 }) {
     // is the consecutive-failure run count (one per daily run); "First reported"
     // is the date the streak began.
     lines.push(
-      '| Chain | Registry status | Endpoint probe | cosmos.directory | Streak (days) | First reported |'
+      '| Chain | Registry status | Endpoint probe | cosmos.directory | Streak (days) | First reported | Halt coverage |'
     );
     lines.push(
-      '|-------|-----------------|----------------|------------------|---------------|----------------|'
+      '|-------|-----------------|----------------|------------------|---------------|----------------|---------------|'
     );
     for (const c of part1.candidates) {
       lines.push(
         `| ${c.chainName} | ${c.registryStatus} | ${c.verdict} | ${c.cosmosDirectory} | ` +
-          `${c.streak} | ${c.firstSeen.slice(0, 10)} |`
+          `${c.streak} | ${c.firstSeen.slice(0, 10)} | ${coverageCell(c.chainName)} |`
       );
     }
   }
 
-  // Probe mismatches: streak mature, but cosmos.directory shows the chain ALIVE.
-  // This is an Osmosis-side endpoint problem, not a dead chain — surfacing it
-  // lets a curator fix the chain's endpoint set rather than wrongly kill it.
+  // Probe mismatches: streak mature, but cosmos.directory had a success within
+  // COSMOS_DIRECTORY_STALE_DAYS, so it does not corroborate death. Usually an
+  // Osmosis-side endpoint problem rather than a dead chain; surfacing it lets a
+  // curator fix the chain's endpoint set rather than wrongly kill it. Worded as
+  // "not corroborated" rather than "alive", since a success nearly two weeks
+  // ago is not proof of life.
   if (part1.weeklyGated && part1.probeMismatches.length) {
     lines.push('');
     lines.push(
-      `<details><summary>⚠️ Probe mismatches (${part1.probeMismatches.length}) — ` +
-        `failing Osmosis validation ${DEAD_STREAK_THRESHOLD}+ runs but ALIVE on ` +
-        `cosmos.directory. Osmosis's endpoint set is likely the problem, not the chain.</summary>`
+      `<details><summary>⚠️ Not corroborated (${part1.probeMismatches.length}): ` +
+        `failing Osmosis validation ${DEAD_STREAK_THRESHOLD}+ runs, but ` +
+        `cosmos.directory had a success within ${COSMOS_DIRECTORY_STALE_DAYS} days. ` +
+        `Check Osmosis's endpoint set before treating the chain as dead.</summary>`
     );
     lines.push('');
     lines.push(
-      '| Chain | Streak (days) | cosmos.directory |'
+      '| Chain | Streak (days) | cosmos.directory | Halt coverage |'
     );
-    lines.push('|-------|---------------|------------------|');
+    lines.push('|-------|---------------|------------------|---------------|');
     for (const c of part1.probeMismatches) {
-      lines.push(`| ${c.chainName} | ${c.streak} | ${c.cosmosDirectory} |`);
+      lines.push(`| ${c.chainName} | ${c.streak} | ${c.cosmosDirectory} | ${coverageCell(c.chainName)} |`);
     }
     lines.push('');
     lines.push('</details>');
@@ -1121,19 +1169,18 @@ function renderReport({ part1, part2, part3 }) {
       );
       lines.push('');
       lines.push(
-        `_Endpoints answer but the latest block is over an hour old and under ` +
-          `${RECENT_STALE_DAYS} days — recent enough that the chain may have just ` +
-          `halted. Worth a look now; not yet a kill candidate (still subject to ` +
-          `the ${DEAD_STREAK_THRESHOLD}-run streak + corroboration). Streak is the ` +
-          `consecutive death-signal run count so far._`
+        `_An endpoint answered with a block over an hour old and under ` +
+          `${RECENT_STALE_DAYS} days old, so the chain may have just halted. One ` +
+          `with deposits still open needs a look now; it is not a kill candidate ` +
+          `until the ${DEAD_STREAK_THRESHOLD}-run streak and corroboration agree._`
       );
       lines.push('');
-      lines.push('| Chain | Registry status | Block age | Height | Streak (days) |');
-      lines.push('|-------|-----------------|-----------|--------|---------------|');
+      lines.push('| Chain | Registry status | Block age | Height | Streak (days) | Halt coverage |');
+      lines.push('|-------|-----------------|-----------|--------|---------------|---------------|');
       for (const c of recent) {
         lines.push(
           `| ${c.chainName} | ${c.registryStatus} | ${fmtAge(c.ageHours)} | ` +
-            `${c.height ?? '-'} | ${c.streak} |`
+            `${c.height ?? '-'} | ${c.streak} | ${coverageCell(c.chainName)} |`
         );
       }
     }
@@ -1145,12 +1192,12 @@ function renderReport({ part1, part2, part3 }) {
           `${longStale.length}) — endpoints answer but likely long-abandoned</summary>`
       );
       lines.push('');
-      lines.push('| Chain | Registry status | Block age | Height | Streak (days) |');
-      lines.push('|-------|-----------------|-----------|--------|---------------|');
+      lines.push('| Chain | Registry status | Block age | Height | Streak (days) | Halt coverage |');
+      lines.push('|-------|-----------------|-----------|--------|---------------|---------------|');
       for (const c of longStale) {
         lines.push(
           `| ${c.chainName} | ${c.registryStatus} | ${fmtAge(c.ageHours)} | ` +
-            `${c.height ?? '-'} | ${c.streak} |`
+            `${c.height ?? '-'} | ${c.streak} | ${coverageCell(c.chainName)} |`
         );
       }
       lines.push('');
@@ -1178,23 +1225,33 @@ function renderReport({ part1, part2, part3 }) {
   lines.push('');
   if (!weekly) {
     lines.push(
-      '_Skipped this run (governance-proposal scan runs weekly to bound CI cost and external load)._'
+      '**Status:** runs on Mondays only (the governance-proposal scan is weekly to bound CI cost and external load).'
     );
   } else if (!part2.length) {
-    lines.push('_No shutdown-language governance proposals detected._');
+    lines.push('**Status:** no shutdown-language governance proposals detected.');
   } else {
+    const open = part2.filter((m) => /VOTING_PERIOD|DEPOSIT_PERIOD/.test(m.status ?? '')).length;
     lines.push(
-      `_Governance proposals on listed chains matching shutdown language, ` +
+      `**Status:** ${part2.length} proposal(s) matched shutdown language, ` +
+        `${open} still open for voting or deposit.`
+    );
+    lines.push('');
+    lines.push('<details><summary>How this section works</summary>');
+    lines.push('');
+    lines.push(
+      `Governance proposals on listed chains matching shutdown language, ` +
         `filed within the last ${SHUTDOWN_PROPOSAL_MAX_AGE_DAYS} days (older ones ` +
         `are skipped). Sorted newest-submitted first for a quick priority check. ` +
         `False positives are expected (a ` +
         `proposal may reject or merely discuss a shutdown). **Submitted** is the ` +
         `proposal filing date (how new this result is); **Target date / height** ` +
         `lists date/height strings lifted verbatim from the proposal text ` +
-        `(unparsed — confirm before trusting). Verify, then a curator may set ` +
+        `(unparsed, confirm before trusting). Verify, then a curator may set ` +
         `\`planned_shutdown_date\` on the zone_asset to drive the existing halt ` +
-        `automation._`
+        `automation.`
     );
+    lines.push('');
+    lines.push('</details>');
     lines.push('');
     lines.push(
       '| Chain | Proposal | Submitted | Target date / height | Matched phrase | In title | Status | Title |'
@@ -1238,21 +1295,29 @@ function renderReport({ part1, part2, part3 }) {
     // upstream PR merges — daily repetition is reviewer noise, so show it on
     // the weekly run only (same cadence as Part 2).
     lines.push(
-      '_Skipped this run (upstreaming worklist is shown on the weekly run to keep daily PRs concise)._'
+      '**Status:** shown on Mondays only (the upstreaming worklist changes rarely).'
     );
   } else {
+    const part3Candidates = part3?.candidates ?? [];
+    const part3Excluded = part3?.excludedHostChains ?? [];
     lines.push(
-      `_Chains Osmosis has flagged \`source_chain_killed\` on at least one asset, ` +
+      `**Status:** ${part3Candidates.length} chain(s) to mark killed upstream.`
+    );
+    lines.push('');
+    lines.push('<details><summary>How this section works</summary>');
+    lines.push('');
+    lines.push(
+      `Chains Osmosis has flagged \`source_chain_killed\` on at least one asset, ` +
         `but whose chain-registry status is not yet \`killed\`. Each is a candidate ` +
-        `for an upstream \`status: killed\` PR to cosmos/chain-registry — the ` +
+        `for an upstream \`status: killed\` PR to cosmos/chain-registry; the ` +
         `curation is already done on our side. "First seen down" is the earliest ` +
         `\`state.lastDowntimeDate\` across the chain's killed assets (an approximate ` +
         `first-observed-dead date, not a precise flag timestamp; chains sharing one ` +
-        `date were backfilled when this tracking began)._`
+        `date were backfilled when this tracking began).`
     );
     lines.push('');
-    const part3Candidates = part3?.candidates ?? [];
-    const part3Excluded = part3?.excludedHostChains ?? [];
+    lines.push('</details>');
+    lines.push('');
     if (!part3Candidates.length) {
       lines.push('_None — our killed set matches upstream._');
     } else {
@@ -1310,20 +1375,28 @@ async function main() {
 
   // The report goes to stdout so the workflow can capture and append it to the
   // PR body, matching how validateEndpoints generateReport is consumed.
-  const report = renderReport({ part1, part2, part3 });
+  const coverage = buildHaltCoverage(zoneAssets.assets ?? []);
+  const report = renderReport({ part1, part2, part3, coverage });
   process.stdout.write(report + '\n');
 
   // Diagnostic counts to stderr (kept out of the captured report).
   const frozenReached = part1.streakReached.filter((c) => c.verdict === 'frozen').length;
-  const recentStale = (part1.currentlyStale ?? []).filter(
+  const recentStaleRows = (part1.currentlyStale ?? []).filter(
     (c) => c.ageHours < RECENT_STALE_DAYS * 24
-  ).length;
+  );
+  const recentStale = recentStaleRows.length;
+  // Uncovered counts feed the PR's action banner: a dead or halting chain
+  // whose deposits are already halted needs no action.
+  const recentUncovered = recentStaleRows.filter((c) => !coverage.isCovered(c.chainName)).length;
+  const candidatesUncovered = part1.candidates.filter((c) => !coverage.isCovered(c.chainName)).length;
   console.error(
     `dead_chain streak_reached=${part1.streakReached.length} ` +
       `frozen=${frozenReached} ` +
       `stale_total=${(part1.currentlyStale ?? []).length} ` +
       `stale_recent=${recentStale} ` +
+      `stale_recent_uncovered=${recentUncovered} ` +
       `candidates=${part1.candidates.length} ` +
+      `candidates_uncovered=${candidatesUncovered} ` +
       `probe_mismatches=${part1.probeMismatches.length} ` +
       `unverifiable=${part1.unverifiable.length} ` +
       `planned_shutdown_hits=${part2.length} ` +

@@ -1,6 +1,10 @@
 node_modules/
 package-lock.json
 *.log
+# Exit code of the background endpoint validation step, and temp files from
+# atomic writes interrupted before their rename.
+validation.rc
+*.tmp
 new-assets.txt
 new-chains.txt
 newly-verified.txt

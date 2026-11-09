@@ -20,6 +20,7 @@ chain_reg.setup();
 import * as path from 'path';
 import * as api_mgmt from "./api_management.mjs";
 import { sortEndpointsByProvider, isPreferredProvider, getProviderFromEndpoint, isTeamEndpoint } from './endpoint_preference.mjs';
+import { VALIDATION_STATE_KEYS, buildHaltCoverage, withStateLock, writeFileAtomic } from './lifecycle_helpers.mjs';
 
 import WebSocket from 'ws';
 import https from 'https';
@@ -190,7 +191,72 @@ function getEndpointsArray(test) {
  * await queryUrl("https://rpc.example.com/status", RPC_ENDPOINTS)
  * // Returns: { success: true, body: "{...}", ... }
  */
-const queryUrl = (url, test) => {
+// Cap in-flight requests per provider. Chains run in parallel, and many share
+// one provider (rpc.lavenderfive.com/<chain>, rest.lavenderfive.com/<chain>),
+// which answers bursts with HTTP 429 and pushes chains onto backup endpoints.
+// Keyed on the hostname's last two labels so a provider's rpc. and rest.
+// hosts share one limit.
+const MAX_REQUESTS_PER_PROVIDER = 2;
+const providerQueues = new Map();
+
+const getProviderKey = (url) => {
+  try {
+    return new URL(url).hostname.split('.').slice(-2).join('.');
+  } catch {
+    return url;
+  }
+};
+
+const withProviderLimit = async (url, fn) => {
+  const key = getProviderKey(url);
+  let queue = providerQueues.get(key);
+  if (!queue) {
+    queue = { active: 0, waiting: [] };
+    providerQueues.set(key, queue);
+  }
+  if (queue.active >= MAX_REQUESTS_PER_PROVIDER) {
+    // The finishing request hands its slot over, so active stays unchanged.
+    await new Promise(resolve => queue.waiting.push(resolve));
+  } else {
+    queue.active++;
+  }
+  try {
+    return await fn();
+  } finally {
+    const next = queue.waiting.shift();
+    if (next) { next(); } else { queue.active--; }
+  }
+};
+
+// Retry rate-limited (HTTP 429) answers instead of recording them as a down
+// endpoint. Lavender Five rate-limits at roughly a third of a request per
+// second, which parallel chains exceed. The retry waits inside the provider
+// slot, so a provider that is rate-limiting is also slowed down.
+const RATE_LIMIT_RETRY_DELAYS_MS = [5000, 15000];
+const MAX_RETRY_AFTER_MS = 30000;
+
+const isRateLimited = (result) =>
+  result?.errorCode === 429 ||
+  (typeof result?.message === 'string' && result.message.includes('Unexpected server response: 429'));
+
+const getRetryDelayMs = (result, attempt) => {
+  const retryAfterSeconds = Number(result?.headers?.['retry-after']);
+  if (Number.isFinite(retryAfterSeconds) && retryAfterSeconds > 0) {
+    return Math.min(retryAfterSeconds * 1000, MAX_RETRY_AFTER_MS);
+  }
+  return RATE_LIMIT_RETRY_DELAYS_MS[attempt];
+};
+
+const queryUrl = (url, test) => withProviderLimit(url, async () => {
+  let result = await queryUrlUnlimited(url, test);
+  for (let attempt = 0; attempt < RATE_LIMIT_RETRY_DELAYS_MS.length && isRateLimited(result); attempt++) {
+    await new Promise(resolve => setTimeout(resolve, getRetryDelayMs(result, attempt)));
+    result = await queryUrlUnlimited(url, test);
+  }
+  return result;
+});
+
+const queryUrlUnlimited = (url, test) => {
   switch (test) {
     case RPC_WSS:
       return queryWSS(url);
@@ -891,6 +957,31 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
   const rpcTestTypes = [RPC_CORS, RPC_WSS, RPC_ENDPOINTS];
   const restTestTypes = [REST_CORS, REST_ENDPOINTS];
 
+  // Run the connectivity test first and only probe the rest (CORS, WSS) when it
+  // passes. An endpoint that fails connectivity can't be selected, so its other
+  // results don't change the outcome, and skipping them cuts requests to
+  // rate-limited providers whose per-chain paths are often retired (HTTP 503).
+  // Results keep testTypes order; skipped tests are recorded as failed with
+  // errorType SKIPPED, so dead-endpoint detection still keys on the
+  // connectivity result's own error type.
+  const runTests = async (testTypes, connectivityTest) => {
+    const connectivityResults = await validate(connectivityTest, 0);
+    const connected = connectivityResults.every(r => r.success);
+    const otherTests = testTypes.filter(test => test !== connectivityTest);
+    const otherResults = connected
+      ? await Promise.all(otherTests.map(test => validate(test, 0)))
+      : otherTests.map(test => [{
+        test,
+        url: null,
+        success: false,
+        errorType: 'SKIPPED',
+        errorMessage: 'Not tested: connectivity test failed',
+      }]);
+    return testTypes.map(test =>
+      test === connectivityTest ? connectivityResults : otherResults[otherTests.indexOf(test)]
+    );
+  };
+
   // Move the zone-pinned endpoint to the front of an already provider-sorted
   // list, so the validator tests it first. This mirrors the generator, which
   // places the zone pin in slot 0 BEFORE applying provider sorting to the rest.
@@ -924,8 +1015,10 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
   const rpcCount = sortedRpcEndpoints.length;
   const restCount = getEndpointCount(counterpartyChain, REST_NODE);
 
-  // Store all tested endpoints for detailed reporting
-  const allTestedEndpoints = [];
+  // Store tested endpoints for detailed reporting. RPC and REST are probed
+  // concurrently, so each keeps its own list and they are joined RPC-first.
+  const rpcTestedEndpoints = [];
+  const restTestedEndpoints = [];
 
   // Find working RPC endpoint (test in preferred order)
   let rpcResults = null;
@@ -936,82 +1029,87 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
   // endpoint passes all RPC tests, so a WSS-capable endpoint stays preferred.
   let rpcWssOnlyFallback = null;
 
-  for (let i = 0; i < rpcCount; i++) {
-    const endpoint = sortedRpcEndpoints[i];
+  // The RPC and REST sweeps run in parallel. Each only swaps its own
+  // counterpartyChain.apis.rpc / .rest slot, and validate() reads the slot
+  // matching the test's node type, so the two never see each other's swap.
+  const findRpcEndpoint = async () => {
+    for (let i = 0; i < rpcCount; i++) {
+      const endpoint = sortedRpcEndpoints[i];
 
-    // Temporarily modify counterpartyChain to test this endpoint
-    const originalRpcArray = counterpartyChain.apis.rpc;
-    counterpartyChain.apis.rpc = [endpoint];
+      // Temporarily modify counterpartyChain to test this endpoint
+      const originalRpcArray = counterpartyChain.apis.rpc;
+      counterpartyChain.apis.rpc = [endpoint];
 
-    const results = await Promise.all(rpcTestTypes.map(test => validate(test, 0)));
-    const flatResults = results.flat();
+      const results = await runTests(rpcTestTypes, RPC_ENDPOINTS);
+      const flatResults = results.flat();
 
-    // Restore original array
-    counterpartyChain.apis.rpc = originalRpcArray;
+      // Restore original array
+      counterpartyChain.apis.rpc = originalRpcArray;
 
-    // Check if all RPC tests passed
-    // For primary endpoints (zone/team/preferred), skip CORS validation
-    const isPrimary = isPrimaryEndpoint(endpoint, RPC_NODE);
-    const resultsToCheck = isPrimary
-      ? flatResults.filter(r => r.test !== RPC_CORS)  // Skip CORS for primary endpoints
-      : flatResults;  // Require CORS for backup endpoints
+      // Check if all RPC tests passed
+      // For primary endpoints (zone/team/preferred), skip CORS validation
+      const isPrimary = isPrimaryEndpoint(endpoint, RPC_NODE);
+      const resultsToCheck = isPrimary
+        ? flatResults.filter(r => r.test !== RPC_CORS)  // Skip CORS for primary endpoints
+        : flatResults;  // Require CORS for backup endpoints
 
-    // Separate CORS from connectivity tests. WSS is a warning, not a
-    // connectivity failure: some providers (e.g. Polkachu) reject websocket
-    // upgrades while /status serves fresh blocks, and counting that as down
-    // made live chains look dead.
-    const corsTests = flatResults.filter(r => r.test === RPC_CORS);
-    const connectivityTests = flatResults.filter(r => r.test !== RPC_CORS && r.test !== RPC_WSS);
+      // Separate CORS from connectivity tests. WSS is a warning, not a
+      // connectivity failure: some providers (e.g. Polkachu) reject websocket
+      // upgrades while /status serves fresh blocks, and counting that as down
+      // made live chains look dead.
+      const corsTests = flatResults.filter(r => r.test === RPC_CORS);
+      const connectivityTests = flatResults.filter(r => r.test !== RPC_CORS && r.test !== RPC_WSS);
 
-    const connectivityPassed = connectivityTests.every(r => r.success && !r.stale);
-    const corsPassed = isPrimary || corsTests.every(r => r.success);
+      const connectivityPassed = connectivityTests.every(r => r.success && !r.stale);
+      const corsPassed = isPrimary || corsTests.every(r => r.success);
 
-    // Store this endpoint's test results
-    allTestedEndpoints.push({
-      type: 'rpc',
-      address: endpoint.address,
-      isPrimary: isPrimary,
-      orderTested: i,
-      connectivityPassed: connectivityPassed,
-      corsPassed: corsPassed,
-      testResults: flatResults
-    });
+      // Store this endpoint's test results
+      rpcTestedEndpoints.push({
+        type: 'rpc',
+        address: endpoint.address,
+        isPrimary: isPrimary,
+        orderTested: i,
+        connectivityPassed: connectivityPassed,
+        corsPassed: corsPassed,
+        testResults: flatResults
+      });
 
-    const allPassed = resultsToCheck.every(r => r.success && !r.stale);
-    if (allPassed) {
-      if (isPrimary && flatResults.some(r => r.test === RPC_CORS && !r.success)) {
-        console.log(`RPC Primary Endpoint (CORS skipped): ${endpoint.address}`);
-      }
-      // Only record endpoint info if validation succeeded
-      rpcResults = flatResults;
-      rpcEndpointIndex = endpoint.originalIndex; // Use original Chain Registry index
-      rpcAddress = endpoint.address;
-      rpcCorsPassed = corsPassed;
+      const allPassed = resultsToCheck.every(r => r.success && !r.stale);
+      if (allPassed) {
+        if (isPrimary && flatResults.some(r => r.test === RPC_CORS && !r.success)) {
+          console.log(`RPC Primary Endpoint (CORS skipped): ${endpoint.address}`);
+        }
+        // Only record endpoint info if validation succeeded
+        rpcResults = flatResults;
+        rpcEndpointIndex = endpoint.originalIndex; // Use original Chain Registry index
+        rpcAddress = endpoint.address;
+        rpcCorsPassed = corsPassed;
 
-      if (endpoint.originalIndex > 0) {
-        console.log(`RPC Backup Used [${endpoint.originalIndex}]: ${rpcAddress}`);
-      }
-      break;
-    } else {
-      // Store last failed results for reporting
-      rpcResults = flatResults;
-      const passedExceptWss = resultsToCheck
-        .filter(r => r.test !== RPC_WSS)
-        .every(r => r.success && !r.stale);
-      if (passedExceptWss && !rpcWssOnlyFallback) {
-        rpcWssOnlyFallback = { endpoint, flatResults, corsPassed };
+        if (endpoint.originalIndex > 0) {
+          console.log(`RPC Backup Used [${endpoint.originalIndex}]: ${rpcAddress}`);
+        }
+        break;
+      } else {
+        // Store last failed results for reporting
+        rpcResults = flatResults;
+        const passedExceptWss = resultsToCheck
+          .filter(r => r.test !== RPC_WSS)
+          .every(r => r.success && !r.stale);
+        if (passedExceptWss && !rpcWssOnlyFallback) {
+          rpcWssOnlyFallback = { endpoint, flatResults, corsPassed };
+        }
       }
     }
-  }
 
-  if (!rpcAddress && rpcWssOnlyFallback) {
-    const { endpoint, flatResults, corsPassed } = rpcWssOnlyFallback;
-    console.log(`RPC WSS failed on every endpoint; using ${endpoint.address} without websocket`);
-    rpcResults = flatResults;
-    rpcEndpointIndex = endpoint.originalIndex;
-    rpcAddress = endpoint.address;
-    rpcCorsPassed = corsPassed;
-  }
+    if (!rpcAddress && rpcWssOnlyFallback) {
+      const { endpoint, flatResults, corsPassed } = rpcWssOnlyFallback;
+      console.log(`RPC WSS failed on every endpoint; using ${endpoint.address} without websocket`);
+      rpcResults = flatResults;
+      rpcEndpointIndex = endpoint.originalIndex;
+      rpcAddress = endpoint.address;
+      rpcCorsPassed = corsPassed;
+    }
+  };
 
   // Get all REST endpoints with original indices
   const restEndpoints = (counterpartyChain?.apis?.rest || []).map((ep, idx) => ({
@@ -1031,64 +1129,69 @@ async function validateCounterpartyChain(counterpartyChain, chainName = "osmosis
   let restAddress = null;
   let restCorsPassed = false;
 
-  for (let i = 0; i < sortedRestEndpoints.length; i++) {
-    const endpoint = sortedRestEndpoints[i];
+  const findRestEndpoint = async () => {
+    for (let i = 0; i < sortedRestEndpoints.length; i++) {
+      const endpoint = sortedRestEndpoints[i];
 
-    // Temporarily modify counterpartyChain to test this endpoint
-    const originalRestArray = counterpartyChain.apis.rest;
-    counterpartyChain.apis.rest = [endpoint];
+      // Temporarily modify counterpartyChain to test this endpoint
+      const originalRestArray = counterpartyChain.apis.rest;
+      counterpartyChain.apis.rest = [endpoint];
 
-    const results = await Promise.all(restTestTypes.map(test => validate(test, 0)));
-    const flatResults = results.flat();
+      const results = await runTests(restTestTypes, REST_ENDPOINTS);
+      const flatResults = results.flat();
 
-    // Restore original array
-    counterpartyChain.apis.rest = originalRestArray;
+      // Restore original array
+      counterpartyChain.apis.rest = originalRestArray;
 
-    // Check if all REST tests passed
-    // For primary endpoints (zone/team/preferred), skip CORS validation
-    const isPrimary = isPrimaryEndpoint(endpoint, REST_NODE);
-    const resultsToCheck = isPrimary
-      ? flatResults.filter(r => r.test !== REST_CORS)  // Skip CORS for primary endpoints
-      : flatResults;  // Require CORS for backup endpoints
+      // Check if all REST tests passed
+      // For primary endpoints (zone/team/preferred), skip CORS validation
+      const isPrimary = isPrimaryEndpoint(endpoint, REST_NODE);
+      const resultsToCheck = isPrimary
+        ? flatResults.filter(r => r.test !== REST_CORS)  // Skip CORS for primary endpoints
+        : flatResults;  // Require CORS for backup endpoints
 
-    // Separate CORS from connectivity tests
-    const corsTests = flatResults.filter(r => r.test === REST_CORS);
-    const connectivityTests = flatResults.filter(r => r.test !== REST_CORS);
+      // Separate CORS from connectivity tests
+      const corsTests = flatResults.filter(r => r.test === REST_CORS);
+      const connectivityTests = flatResults.filter(r => r.test !== REST_CORS);
 
-    const connectivityPassed = connectivityTests.every(r => r.success);
-    const corsPassed = isPrimary || corsTests.every(r => r.success);
+      const connectivityPassed = connectivityTests.every(r => r.success);
+      const corsPassed = isPrimary || corsTests.every(r => r.success);
 
-    // Store this endpoint's test results
-    allTestedEndpoints.push({
-      type: 'rest',
-      address: endpoint.address,
-      isPrimary: isPrimary,
-      orderTested: i,
-      connectivityPassed: connectivityPassed,
-      corsPassed: corsPassed,
-      testResults: flatResults
-    });
+      // Store this endpoint's test results
+      restTestedEndpoints.push({
+        type: 'rest',
+        address: endpoint.address,
+        isPrimary: isPrimary,
+        orderTested: i,
+        connectivityPassed: connectivityPassed,
+        corsPassed: corsPassed,
+        testResults: flatResults
+      });
 
-    const allPassed = resultsToCheck.every(r => r.success);
-    if (allPassed) {
-      if (isPrimary && flatResults.some(r => r.test === REST_CORS && !r.success)) {
-        console.log(`REST Primary Endpoint (CORS skipped): ${endpoint.address}`);
+      const allPassed = resultsToCheck.every(r => r.success);
+      if (allPassed) {
+        if (isPrimary && flatResults.some(r => r.test === REST_CORS && !r.success)) {
+          console.log(`REST Primary Endpoint (CORS skipped): ${endpoint.address}`);
+        }
+        // Only record endpoint info if validation succeeded
+        restResults = flatResults;
+        restEndpointIndex = endpoint.originalIndex; // Use original Chain Registry index
+        restAddress = endpoint.address;
+        restCorsPassed = corsPassed;
+
+        if (endpoint.originalIndex > 0) {
+          console.log(`REST Backup Used [${endpoint.originalIndex}]: ${restAddress}`);
+        }
+        break;
+      } else {
+        // Store last failed results for reporting
+        restResults = flatResults;
       }
-      // Only record endpoint info if validation succeeded
-      restResults = flatResults;
-      restEndpointIndex = endpoint.originalIndex; // Use original Chain Registry index
-      restAddress = endpoint.address;
-      restCorsPassed = corsPassed;
-
-      if (endpoint.originalIndex > 0) {
-        console.log(`REST Backup Used [${endpoint.originalIndex}]: ${restAddress}`);
-      }
-      break;
-    } else {
-      // Store last failed results for reporting
-      restResults = flatResults;
     }
-  }
+  };
+
+  await Promise.all([findRpcEndpoint(), findRestEndpoint()]);
+  const allTestedEndpoints = [...rpcTestedEndpoints, ...restTestedEndpoints];
 
   // Combine results
   const allResults = [...(rpcResults || []), ...(restResults || [])];
@@ -1205,9 +1308,9 @@ function addValidationRecordsToState(state, chainName, validationRecords) {
   const validatedInThisRun = validationRecords.map(r => r.chain_name);
 
   // Check if this is a continuation of an existing run (within 30 minutes)
-  // This is important for batch processing in fullValidation() where we process
-  // chains in batches of 10 and call this function after each batch.
-  // Without this, only the last batch would be tracked in chainsValidated.
+  // This matters for callers that validate chains in batches and call this
+  // function after each batch. Without it, only the last batch would be
+  // tracked in chainsValidated.
   const isExistingRun = state.lastValidationRun?.timestamp &&
     (new Date().getTime() - new Date(state.lastValidationRun.timestamp).getTime()) < (30 * 60 * 1000);
 
@@ -1234,7 +1337,17 @@ function addValidationRecordsToState(state, chainName, validationRecords) {
       state.chains.push(validationRecord);
     }
   });
-  zone.writeToFile(chainName, stateDir, stateFileName, state);
+  // Validation runs in the background alongside the lifecycle scripts (IBC
+  // client status, market health), which write state.assets. Re-read the file
+  // and replace only the keys validation owns, so their updates survive.
+  const statePath = zone.getFileLocation(chainName, stateDir, stateFileName);
+  withStateLock(statePath, () => {
+    const currentState = getState(chainName);
+    for (const key of VALIDATION_STATE_KEYS) {
+      currentState[key] = state[key];
+    }
+    writeFileAtomic(statePath, JSON.stringify(currentState, null, 2));
+  });
   console.log("Saved State.");
 
 }
@@ -1438,44 +1551,57 @@ async function validateEndpointsForAllCounterpartyChains(chainName) {
  * Full Validation - Validates ALL chains without prioritization or limits
  *
  * This is the RECOMMENDED validation mode for scheduled runs.
- * - Validates every chain on every run
+ * - Validates every chain on every run, except terminally dead ones (registry
+ *   status killed, or every listed asset flagged source_chain_killed)
  * - No prioritization or skipping based on previous results
  * - Ensures deprecated endpoints are caught quickly
- * - Processes chains in batches of 10 to avoid overwhelming the system
+ * - Validates up to 10 chains at a time to avoid overwhelming the system
  *
  * Used by: .github/workflows/generate_all_files.yml (scheduled daily at 15:00 UTC)
  */
 async function fullValidation(chainName) {
 
   if (chainName !== "osmosis") { return; } // temporary--just focusing on mainnet for now
-  const chainlist = getChainlist(chainName)?.chains;
-  if (!chainlist) { return; }
+  const allChains = getChainlist(chainName)?.chains;
+  if (!allChains) { return; }
 
   let state = getState(chainName);
 
+  // Skip terminally dead chains (registry status killed, or every listed asset
+  // flagged source_chain_killed), as validateEndpointsForAllCounterpartyChains
+  // does. Their previous state record is kept: the dead-chain report already
+  // exempts them, and the chainlist generator keeps their last endpoint order.
+  const fullyKilledChains = getFullyKilledChains(chainName);
+  const chainlist = allChains.filter(chain =>
+    chain.status !== 'killed' && !fullyKilledChains.has(chain.chain_name)
+  );
+  console.log(`Skipping ${allChains.length - chainlist.length} killed chains.`);
+
   console.log(`Starting full validation of ${chainlist.length} chains...`);
 
-  // Validate chains in batches to avoid overwhelming the system
-  const batchSize = 10;
-  for (let i = 0; i < chainlist.length; i += batchSize) {
-    const batch = chainlist.slice(i, Math.min(i + batchSize, chainlist.length));
-
-    console.log(`Validating chains ${i + 1}-${Math.min(i + batchSize, chainlist.length)} of ${chainlist.length}...`);
-
-    // Generate validation promises for this batch
-    const validationPromises = batch.map(async (counterpartyChain) => {
+  // Validate chains through a fixed-size worker pool. Fixed batches waited on
+  // the slowest chain in each batch (a dead chain timing out on every
+  // endpoint), so a pool keeps the same concurrency without the idle time.
+  const concurrency = 10;
+  const validationRecords = new Array(chainlist.length);
+  let nextIndex = 0;
+  let completed = 0;
+  const worker = async () => {
+    while (nextIndex < chainlist.length) {
+      const i = nextIndex++;
+      const counterpartyChain = chainlist[i];
       const validationResults = await validateCounterpartyChain(counterpartyChain, chainName);
-      return constructValidationRecord(counterpartyChain.chain_name, validationResults);
-    });
+      validationRecords[i] = constructValidationRecord(counterpartyChain.chain_name, validationResults);
+      completed++;
+      if (completed % 10 === 0 || completed === chainlist.length) {
+        console.log(`${completed}/${chainlist.length} chains validated.`);
+      }
+    }
+  };
+  await Promise.all(Array.from({ length: Math.min(concurrency, chainlist.length) }, worker));
 
-    // Wait for all validations in this batch and collect the records
-    const validationRecords = await Promise.all(validationPromises);
-
-    // Add validation records to state
-    addValidationRecordsToState(state, chainName, validationRecords);
-
-    console.log(`Batch completed. ${Math.min(i + batchSize, chainlist.length)}/${chainlist.length} chains validated.`);
-  }
+  // Add validation records to state in chainlist order
+  addValidationRecordsToState(state, chainName, validationRecords);
 
   console.log('Full validation complete!');
 }
@@ -1570,86 +1696,11 @@ async function generateValidationReport(chainName) {
   } catch { deadStreaks = {}; }
   const DEAD_STREAK_THRESHOLD = 7; // mirror report_dead_chains.mjs
 
-  // Summarize halt coverage per chain: how many of its assets are unstable and
-  // how many have deposits halted. An asset is attributed to a chain if either
-  // its listed chain_name OR its canonical.chain_name matches, so a token routed
-  // via the failed chain but listed under an intermediary (e.g. milkINIT listed
-  // under initia with canonical.chain_name "moo") still counts toward that
-  // chain's coverage. Counted once per chain even if both keys point at it.
-  const haltCoverageByChain = {};
-  const bumpCoverage = (c, asset) => {
-    if (!haltCoverageByChain[c]) {
-      haltCoverageByChain[c] = {
-        total: 0, unstable: 0, depositsHalted: 0, haltedBothDirections: 0,
-        assets: []
-      };
-    }
-    haltCoverageByChain[c].total += 1;
-    if (asset.osmosis_unstable) { haltCoverageByChain[c].unstable += 1; }
-    if (asset.osmosis_halt_deposits) { haltCoverageByChain[c].depositsHalted += 1; }
-    if (asset.osmosis_halt_deposits && asset.osmosis_halt_withdrawals) {
-      haltCoverageByChain[c].haltedBothDirections += 1;
-    }
-    haltCoverageByChain[c].assets.push(asset);
-  };
-  zoneAssets.forEach(asset => {
-    const chains = new Set();
-    if (asset.chain_name) { chains.add(asset.chain_name); }
-    if (asset.canonical?.chain_name) { chains.add(asset.canonical.chain_name); }
-    chains.forEach(c => bumpCoverage(c, asset));
-  });
-
-  // Render the per-asset status breakdown for a chain as one Markdown cell, one
-  // asset per line (joined with <br> since a literal newline would break the
-  // table row). Each line is "<symbol> — <status>", where status reflects the
-  // strongest halt flag set on that asset and its reason. This replaces the old
-  // aggregate-count cell so a reviewer can see exactly which assets are still
-  // exposed on an unreachable chain without the table ballooning into one row
-  // per asset. Asset identity prefers the human label parsed from _comment
-  // (e.g. "Evmos $EVMOS" -> "EVMOS"), falling back to base_denom.
-  const getAssetSymbol = (asset) => {
-    const ticker = asset._comment?.match(/\$([A-Za-z0-9.\-]+)/)?.[1];
-    return ticker || asset.base_denom || '(unknown)';
-  };
-  const getAssetStatusLine = (asset) => {
-    const reason = (r) => (r ? ` (${r})` : '');
-    let status;
-    if (asset.osmosis_halt_deposits && asset.osmosis_halt_withdrawals) {
-      status = `🛑 deposits + withdrawals halted${reason(asset.osmosis_deposit_halt_reason || asset.osmosis_withdrawal_halt_reason)}`;
-    } else if (asset.osmosis_halt_deposits) {
-      status = `🛑 deposits halted${reason(asset.osmosis_deposit_halt_reason)}`;
-    } else if (asset.osmosis_halt_withdrawals) {
-      status = `🛑 withdrawals halted${reason(asset.osmosis_withdrawal_halt_reason)}`;
-    } else if (asset.osmosis_unstable) {
-      status = `⚠️ unstable${reason(asset.osmosis_unstable_reason)}`;
-    } else {
-      status = '❗ not covered';
-    }
-    return `${getAssetSymbol(asset)} — ${status}`;
-  };
-  const getAssetBreakdownCell = (chain_name) => {
-    const cov = haltCoverageByChain[chain_name];
-    if (!cov || cov.assets.length === 0) { return '— no listed assets'; }
-    return cov.assets.map(getAssetStatusLine).join('<br>');
-  };
-
-  // Render a short coverage label for a chain's assets. An asset counts as
-  // "covered" only if it is deposit-halted or flagged unstable. osmosis_disabled
-  // is intentionally ignored here: it only marks a non-native deposit/withdrawal
-  // flow (a UX router flag), not a kill switch, so it says nothing about whether
-  // deposits/withdrawals are actually halted. The actionable case is a
-  // connectivity-failing chain with one or more assets that are neither
-  // deposit-halted nor unstable.
-  const getHaltCoverageLabel = (chain_name) => {
-    const cov = haltCoverageByChain[chain_name];
-    if (!cov || cov.total === 0) { return '— no listed assets'; }
-    if (cov.depositsHalted >= cov.total) { return `🛑 deposits halted (${cov.depositsHalted}/${cov.total})`; }
-    if (cov.unstable >= cov.total) { return `⚠️ unstable (${cov.unstable}/${cov.total})`; }
-    if (cov.depositsHalted > 0 || cov.unstable > 0) {
-      return `🟠 partial (${cov.unstable}/${cov.total} unstable, ${cov.depositsHalted}/${cov.total} dep-halted)`;
-    }
-    return `❗ not covered (0/${cov.total})`;
-  };
+  const {
+    byChain: haltCoverageByChain,
+    label: getHaltCoverageLabel,
+    breakdown: getAssetBreakdownCell,
+  } = buildHaltCoverage(zoneAssets);
 
   // Derive a concrete next step for a connectivity-failing chain from its halt
   // coverage, the cosmos.directory second-vantage probe, and its dead-chain
@@ -1807,11 +1858,10 @@ async function generateValidationReport(chainName) {
   const successfulThisRun = chainsValidatedThisRun.length - failedChains.length - corsPartialFail.length;
   const fullySuccessful = successfulThisRun;
 
-  let report = `**Chains Validated This Run:** ${chainsValidatedThisRun.length}\n`;
-  report += `**Fully Successful:** ${fullySuccessful}\n`;
-  report += `**CORS Partial Failures:** ${corsPartialFail.length}\n`;
-  report += `**Connectivity Failed:** ${failedChains.length}\n`;
-  report += `**Using Backup Endpoints:** ${chainsWithBackupsUsed}\n\n`;
+  let report = `**Status:** ${chainsValidatedThisRun.length} chains validated, `
+    + `${fullySuccessful} fully successful, ${failedChains.length} with connectivity `
+    + `failures, ${corsPartialFail.length} with CORS-only failures, `
+    + `${chainsWithBackupsUsed} using backup endpoints.\n\n`;
 
   // Alert for forced endpoint failures
   if (forcedEndpointFailures.length > 0) {
@@ -1882,6 +1932,7 @@ async function generateValidationReport(chainName) {
     report += `### ✅ All Chains Validated Successfully\n\n`;
   } else if (failedChains.length > 0) {
     report += `### ❌ Connectivity Failures\n\n`;
+    report += `<details><summary>How to read this table</summary>\n\n`;
     report += `The following chains have endpoints that failed connectivity tests (not just CORS). `;
     report += `The cosmos.directory column is a second-vantage probe through that proxy: a fresh block `;
     report += `there means the chain is alive and our endpoint set (or the runner's egress) is the `;
@@ -1889,7 +1940,7 @@ async function generateValidationReport(chainName) {
     report += `are already flagged unstable / deposit-halted by another mechanism. The Assets column `;
     report += `lists every asset on the chain with its individual status (one per line). The Action `;
     report += `column gives the suggested next step derived from that coverage, the proxy probe, and `;
-    report += `the chain's dead-chain streak.\n\n`;
+    report += `the chain's dead-chain streak.\n\n</details>\n\n`;
     report += `| Chain Name | Last Validation | Days Ago | RPC Status | REST Status | cosmos.directory | Halt Coverage | Assets | Action |\n`;
     report += `|------------|----------------|----------|------------|-------------|------------------|---------------|--------|--------|\n`;
 
@@ -1943,8 +1994,7 @@ async function generateValidationReport(chainName) {
     });
 
     if (chainsWithBackups.length > 0) {
-      report += `### 🔄 Endpoint Reordering (Backup Endpoints Used)\n\n`;
-      report += `The following chains had their zone endpoint fail validation and were reordered to use a working backup:\n\n`;
+      report += `<details><summary>🔄 Endpoint reordering: ${chainsWithBackups.length} chain(s) moved to a working backup endpoint</summary>\n\n`;
       report += `| Chain Name | RPC Endpoint Type | REST Endpoint Type | Last Validation |\n`;
       report += `|------------|-------------------|-------------------|----------------|\n`;
 
@@ -1983,7 +2033,7 @@ async function generateValidationReport(chainName) {
 
         report += `| ${chain.chain_name} | ${rpcType} | ${restType} | ${validationDate} |\n`;
       });
-      report += `\n`;
+      report += `\n</details>\n\n`;
     }
   }
 

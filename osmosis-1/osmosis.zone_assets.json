@@ -5418,26 +5418,6 @@
       "categories": [
         "stablecoin"
       ],
-      "override_properties": {
-        "counterparty": [
-          {
-            "chain_name": "arbitrum",
-            "base_denom": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9"
-          },
-          {
-            "chain_name": "avalanche",
-            "base_denom": "0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7"
-          },
-          {
-            "chain_name": "binancesmartchain",
-            "base_denom": "0x55d398326f99059fF775485246999027B3197955"
-          },
-          {
-            "chain_name": "polygon",
-            "base_denom": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F"
-          }
-        ]
-      },
       "transfer_methods": [
         {
           "name": "Skip:Go",
@@ -5562,6 +5542,18 @@
       "canonical": {
         "chain_name": "bitcoin",
         "base_denom": "sat"
+      },
+      "override_properties": {
+        "counterparty": [
+          {
+            "chain_name": "ethereum",
+            "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+          },
+          {
+            "chain_name": "base",
+            "base_denom": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf"
+          }
+        ]
       },
       "transfer_methods": [
         {
@@ -6082,18 +6074,6 @@
       "canonical": {
         "chain_name": "ethereum",
         "base_denom": "wei"
-      },
-      "override_properties": {
-        "counterparty": [
-          {
-            "chain_name": "optimism",
-            "base_denom": "wei"
-          },
-          {
-            "chain_name": "optimism",
-            "base_denom": "0x4200000000000000000000000000000000000006"
-          }
-        ]
       },
       "transfer_methods": [
         {
@@ -7081,6 +7061,14 @@
         "chain_name": "dogecoin",
         "base_denom": "shibe"
       },
+      "override_properties": {
+        "counterparty": [
+          {
+            "chain_name": "base",
+            "base_denom": "0xcbD06E5A2B0C65597161de254AA074E489dEb510"
+          }
+        ]
+      },
       "categories": [
         "meme"
       ],
@@ -7961,6 +7949,14 @@
       "canonical": {
         "chain_name": "movement",
         "base_denom": "0xa"
+      },
+      "override_properties": {
+        "counterparty": [
+          {
+            "chain_name": "ethereum",
+            "base_denom": "0x3073f7aaa4db83f95e9fff17424f71d4751a3073"
+          }
+        ]
       },
       "_comment": "Movement $MOVE",
       "osmosis_unstable": true,

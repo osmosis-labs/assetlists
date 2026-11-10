@@ -5563,6 +5563,18 @@
         "chain_name": "bitcoin",
         "base_denom": "sat"
       },
+      "override_properties": {
+        "counterparty": [
+          {
+            "chain_name": "ethereum",
+            "base_denom": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+          },
+          {
+            "chain_name": "base",
+            "base_denom": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf"
+          }
+        ]
+      },
       "transfer_methods": [
         {
           "name": "Skip:Go",
@@ -6092,6 +6104,14 @@
           {
             "chain_name": "optimism",
             "base_denom": "0x4200000000000000000000000000000000000006"
+          },
+          {
+            "chain_name": "arbitrum",
+            "base_denom": "wei"
+          },
+          {
+            "chain_name": "base",
+            "base_denom": "wei"
           }
         ]
       },

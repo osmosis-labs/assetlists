@@ -54425,6 +54425,57 @@
       "preview": false
     },
     {
+      "chainName": "blakiston",
+      "sourceDenom": "tln",
+      "coinMinimalDenom": "ibc/4BE2312A6035CEA0EA6982ECA351E1209214FB46C8B40E392AC8DD5C37A5C8A4",
+      "symbol": "TLN",
+      "decimals": 0,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/blakiston/images/blakiston.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/blakiston/images/blakiston.svg"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "blakiston",
+            "chainId": "blakiston",
+            "sourceDenom": "tln",
+            "port": "transfer",
+            "channelId": "channel-0"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-111105",
+            "path": "transfer/channel-111105/tln"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "blakiston",
+          "sourceDenom": "tln",
+          "chainType": "cosmos",
+          "chainId": "blakiston",
+          "symbol": "TLN",
+          "decimals": 0,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/blakiston/images/blakiston.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/blakiston/images/blakiston.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/4BE2312A6035CEA0EA6982ECA351E1209214FB46C8B40E392AC8DD5C37A5C8A4",
+      "name": "Blakiston",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": false,
+      "disabled": false,
+      "preview": false
+    },
+    {
       "chainName": "blg24",
       "sourceDenom": "ug24",
       "coinMinimalDenom": "ibc/26201350CB5096C2B8C0585A2871C519BFEBC73EEEC287396934B85F60E7AA5E",

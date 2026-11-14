@@ -1,8 +1,9 @@
-# Description: Triggers Vercel deployment webhooks for mainnet (preview and production)
+# Description: Triggers Cloudflare Workers Builds deploy hooks for mainnet (stage and production)
 # Included in: NOT included in Generate All Files bundle (deployment only)
 # Trigger: Scheduled 30 min after generation workflow (daily 15:30 UTC) + manual trigger + push to main
 # Note: Push trigger kept as fallback, but won't work with auto-merge due to GITHUB_TOKEN limitation
-# Output: Deploys to Vercel preview and production environments via webhooks
+# Output: Rebuilds the osmosis-frontend-stage and osmosis-frontend-production Workers, which
+#         fetch the latest assetlists main commit at build time
 
 name: Osmosis Front-End Deployment (Mainnet)
 on:
@@ -67,10 +68,16 @@ jobs:
           echo "Failed to fetch latest commit after $MAX_RETRIES attempts."
           exit 1
 
-      - name: Deploy preview
+      # The deploy hook URL is its own credential, so it stays in the env and out of the
+      # logged command. -f fails the step if Cloudflare rejects the hook.
+      - name: Deploy stage
         if: steps.check_changes.outputs.should_deploy == 'true'
-        run: curl -X POST ${{ secrets.VERCEL_WEBHOOK_DEPLOY_STAGE }}
+        env:
+          DEPLOY_HOOK: ${{ secrets.CF_DEPLOY_HOOK_STAGE }}
+        run: curl -fsS -o /dev/null -X POST "$DEPLOY_HOOK"
 
       - name: Deploy production
         if: steps.check_changes.outputs.should_deploy == 'true'
-        run: curl -X POST ${{ secrets.VERCEL_WEBHOOK_DEPLOY_PRODUCTION }}
+        env:
+          DEPLOY_HOOK: ${{ secrets.CF_DEPLOY_HOOK_PRODUCTION }}
+        run: curl -fsS -o /dev/null -X POST "$DEPLOY_HOOK"

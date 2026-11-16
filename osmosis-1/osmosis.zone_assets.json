@@ -1530,7 +1530,14 @@
       "categories": [
         "liquid_staking"
       ],
-      "_comment": "Stride $STRD"
+      "_comment": "Stride $STRD",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stride chain has stopped producing blocks as part of its wind-down, so deposits and withdrawals are disabled. Source: https://x.com/stride_zone/status/2104944449503813922"
     },
     {
       "chain_name": "stride",
@@ -1541,7 +1548,13 @@
         "liquid_staking"
       ],
       "_comment": "Stride Staked ATOM $stATOM",
-      "tooltip_message": "Stride has proposed an orderly wind-down of the Stride chain. stTokens can be redeemed on Stride until 12 October 2026. Redemptions then pause while the underlying stake unbonds, and the redemption rate stops increasing. Redemption is expected to resume on Osmosis around 20 November 2026, with no need to bridge back to Stride. stTokens do not expire. Source: https://x.com/stride_zone/status/2104944449503813922"
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stride chain has stopped producing blocks as part of its wind-down, so deposits and withdrawals are disabled. stATOM can still be redeemed on Osmosis: swapping stATOM for ATOM routes through Stride's one-way redemption pool (pool 3634), which pays out ATOM at a fixed redemption rate. Source: https://x.com/stride_zone/status/2104944449503813922"
     },
     {
       "chain_name": "stride",
@@ -1554,7 +1567,11 @@
       "_comment": "Stride Staked STARS $stSTARS",
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "source_chain_killed",
-      "tooltip_message": "The Stargaze chain has shut down and migrated to the Cosmos Hub. This is a liquid-staked derivative of the old STARS; the underlying stake can no longer be unbonded on Stargaze. Stride has also proposed an orderly wind-down of the Stride chain, with stToken redemptions on Stride open until 12 October 2026. Migrate STARS via https://automigration.stargaze.zone/ Source: https://x.com/stride_zone/status/2104944449503813922"
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stride chain has stopped producing blocks as part of its wind-down, so deposits and withdrawals are disabled. There is no Osmosis redemption pool for stSTARS. The Stargaze chain has also shut down and migrated to the Cosmos Hub, so the underlying stake can no longer be unbonded on Stargaze. Source: https://x.com/stride_zone/status/2104944449503813922"
     },
     {
       "chain_name": "juno",
@@ -1615,7 +1632,13 @@
         "liquid_staking"
       ],
       "_comment": "Stride Staked JUNO $stJUNO",
-      "tooltip_message": "Stride has proposed an orderly wind-down of the Stride chain. stTokens can be redeemed on Stride until 12 October 2026. Redemptions then pause while the underlying stake unbonds, and the redemption rate stops increasing. Redemption is expected to resume on Osmosis around 20 November 2026, with no need to bridge back to Stride. stTokens do not expire. Source: https://x.com/stride_zone/status/2104944449503813922"
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stride chain has stopped producing blocks as part of its wind-down, so deposits and withdrawals are disabled. stJUNO can still be redeemed on Osmosis: swapping stJUNO for JUNO routes through Stride's one-way redemption pool (pool 3644), which pays out JUNO at a fixed redemption rate. Source: https://x.com/stride_zone/status/2104944449503813922"
     },
     {
       "chain_name": "stride",
@@ -1626,7 +1649,13 @@
         "liquid_staking"
       ],
       "_comment": "Stride Staked OSMO $stOSMO",
-      "tooltip_message": "Stride has proposed an orderly wind-down of the Stride chain. stTokens can be redeemed on Stride until 12 October 2026. Redemptions then pause while the underlying stake unbonds, and the redemption rate stops increasing. Redemption is expected to resume on Osmosis around 20 November 2026, with no need to bridge back to Stride. stTokens do not expire. Source: https://x.com/stride_zone/status/2104944449503813922"
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stride chain has stopped producing blocks as part of its wind-down, so deposits and withdrawals are disabled. stOSMO can still be redeemed on Osmosis: swapping stOSMO for OSMO routes through Stride's one-way redemption pool (pool 3647), which pays out OSMO at a fixed redemption rate. Source: https://x.com/stride_zone/status/2104944449503813922"
     },
     {
       "chain_name": "juno",
@@ -2097,10 +2126,12 @@
       ],
       "_comment": "Stride Staked LUNA $stLUNA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "extended_unstable_market",
-      "tooltip_message": "Stride has proposed an orderly wind-down of the Stride chain. stTokens can be redeemed on Stride until 12 October 2026. Redemptions then pause while the underlying stake unbonds, and the redemption rate stops increasing. Redemption is expected to resume on Osmosis around 20 November 2026, with no need to bridge back to Stride. stTokens do not expire. Source: https://x.com/stride_zone/status/2104944449503813922"
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stride chain has stopped producing blocks as part of its wind-down, so deposits and withdrawals are disabled. stLUNA can still be redeemed on Osmosis: swapping stLUNA for LUNA routes through Stride's one-way redemption pool (pool 3650), which pays out LUNA at a fixed redemption rate. Source: https://x.com/stride_zone/status/2104944449503813922"
     },
     {
       "chain_name": "stride",
@@ -2112,10 +2143,12 @@
       ],
       "_comment": "Stride Staked EVMOS $stEVMOS",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "extended_unstable_market",
-      "tooltip_message": "Stride has proposed an orderly wind-down of the Stride chain. stTokens can be redeemed on Stride until 12 October 2026. Redemptions then pause while the underlying stake unbonds, and the redemption rate stops increasing. Redemption is expected to resume on Osmosis around 20 November 2026, with no need to bridge back to Stride. stTokens do not expire. Source: https://x.com/stride_zone/status/2104944449503813922"
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stride chain has stopped producing blocks as part of its wind-down, so deposits and withdrawals are disabled. There is no Osmosis redemption pool for stEVMOS. Source: https://x.com/stride_zone/status/2104944449503813922"
     },
     {
       "chain_name": "juno",
@@ -2696,10 +2729,12 @@
       ],
       "_comment": "Stride Staked UMEE $stUMEE",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "extended_unstable_market",
-      "tooltip_message": "Stride has proposed an orderly wind-down of the Stride chain. stTokens can be redeemed on Stride until 12 October 2026. Redemptions then pause while the underlying stake unbonds, and the redemption rate stops increasing. Redemption is expected to resume on Osmosis around 20 November 2026, with no need to bridge back to Stride. stTokens do not expire. Source: https://x.com/stride_zone/status/2104944449503813922"
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stride chain has stopped producing blocks as part of its wind-down, so deposits and withdrawals are disabled. There is no Osmosis redemption pool for stUMEE. Source: https://x.com/stride_zone/status/2104944449503813922"
     },
     {
       "chain_name": "osmosis",
@@ -2961,10 +2996,12 @@
       ],
       "_comment": "Stride Staked SOMM $stSOMM",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "extended_unstable_market",
-      "tooltip_message": "Stride has proposed an orderly wind-down of the Stride chain. stTokens can be redeemed on Stride until 12 October 2026. Redemptions then pause while the underlying stake unbonds, and the redemption rate stops increasing. Redemption is expected to resume on Osmosis around 20 November 2026, with no need to bridge back to Stride. stTokens do not expire. Source: https://x.com/stride_zone/status/2104944449503813922"
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stride chain has stopped producing blocks as part of its wind-down, so deposits and withdrawals are disabled. stSOMM can still be redeemed on Osmosis: swapping stSOMM for SOMM routes through Stride's one-way redemption pool (pool 3652), which pays out SOMM at a fixed redemption rate. Source: https://x.com/stride_zone/status/2104944449503813922"
     },
     {
       "chain_name": "gateway",
@@ -4007,8 +4044,12 @@
       "osmosis_verified": true,
       "_comment": "Stride Staked DYDX $stDYDX",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market",
-      "tooltip_message": "Stride has proposed an orderly wind-down of the Stride chain. stTokens can be redeemed on Stride until 12 October 2026. Redemptions then pause while the underlying stake unbonds, and the redemption rate stops increasing. Redemption is expected to resume on Osmosis around 20 November 2026, with no need to bridge back to Stride. stTokens do not expire. Source: https://x.com/stride_zone/status/2104944449503813922"
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stride chain has stopped producing blocks as part of its wind-down, so deposits and withdrawals are disabled. stDYDX can still be redeemed on Osmosis: swapping stDYDX for DYDX routes through Stride's one-way redemption pool (pool 3639), which pays out DYDX at a fixed redemption rate. Source: https://x.com/stride_zone/status/2104944449503813922"
     },
     {
       "chain_name": "stride",
@@ -4019,7 +4060,13 @@
       ],
       "osmosis_verified": true,
       "_comment": "Stride Staked TIA $stTIA",
-      "tooltip_message": "Stride has proposed an orderly wind-down of the Stride chain. stTokens can be redeemed on Stride until 12 October 2026. Redemptions then pause while the underlying stake unbonds, and the redemption rate stops increasing. Redemption is expected to resume on Osmosis around 20 November 2026, with no need to bridge back to Stride. stTokens do not expire. Source: https://x.com/stride_zone/status/2104944449503813922"
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stride chain has stopped producing blocks as part of its wind-down, so deposits and withdrawals are disabled. stTIA can still be redeemed on Osmosis: swapping stTIA for TIA routes through Stride's one-way redemption pool (pool 3628), which pays out TIA at a fixed redemption rate. Source: https://x.com/stride_zone/status/2104944449503813922"
     },
     {
       "chain_name": "stride",
@@ -4031,10 +4078,12 @@
       "osmosis_verified": true,
       "_comment": "Stride Staked SAGA $stSAGA",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "extended_unstable_market",
-      "tooltip_message": "Stride has proposed an orderly wind-down of the Stride chain. stTokens can be redeemed on Stride until 12 October 2026. Redemptions then pause while the underlying stake unbonds, and the redemption rate stops increasing. Redemption is expected to resume on Osmosis around 20 November 2026, with no need to bridge back to Stride. stTokens do not expire. Source: https://x.com/stride_zone/status/2104944449503813922"
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stride chain has stopped producing blocks as part of its wind-down, so deposits and withdrawals are disabled. stSAGA can still be redeemed on Osmosis: swapping stSAGA for SAGA routes through Stride's one-way redemption pool (pool 3653), which pays out SAGA at a fixed redemption rate. Source: https://x.com/stride_zone/status/2104944449503813922"
     },
     {
       "chain_name": "stride",
@@ -4046,10 +4095,12 @@
       "osmosis_verified": true,
       "_comment": "Stride Staked INJ $stINJ",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "extended_unstable_market",
-      "tooltip_message": "Stride has proposed an orderly wind-down of the Stride chain. stTokens can be redeemed on Stride until 12 October 2026. Redemptions then pause while the underlying stake unbonds, and the redemption rate stops increasing. Redemption is expected to resume on Osmosis around 20 November 2026, with no need to bridge back to Stride. stTokens do not expire. Source: https://x.com/stride_zone/status/2104944449503813922"
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stride chain has stopped producing blocks as part of its wind-down, so deposits and withdrawals are disabled. stINJ can still be redeemed on Osmosis: swapping stINJ for INJ routes through Stride's one-way redemption pool (pool 3642), which pays out INJ at a fixed redemption rate. Source: https://x.com/stride_zone/status/2104944449503813922"
     },
     {
       "chain_name": "injective",
@@ -4279,9 +4330,12 @@
       "osmosis_verified": true,
       "_comment": "Stride Staked DYM $stDYM",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market",
+      "osmosis_unstable_reason": "source_chain_killed",
       "osmosis_halt_deposits": true,
-      "osmosis_deposit_halt_reason": "extended_unstable_market"
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stride chain has stopped producing blocks as part of its wind-down, so deposits and withdrawals are disabled. There is no Osmosis redemption pool for stDYM. Source: https://x.com/stride_zone/status/2104944449503813922"
     },
     {
       "chain_name": "odin",
@@ -5981,7 +6035,13 @@
         "liquid_staking"
       ],
       "_comment": "Stride Staked ISLM $stISLM",
-      "tooltip_message": "Stride has proposed an orderly wind-down of the Stride chain. stTokens can be redeemed on Stride until 12 October 2026. Redemptions then pause while the underlying stake unbonds, and the redemption rate stops increasing. Redemption is expected to resume on Osmosis around 20 November 2026, with no need to bridge back to Stride. stTokens do not expire. Source: https://x.com/stride_zone/status/2104944449503813922"
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stride chain has stopped producing blocks as part of its wind-down, so deposits and withdrawals are disabled. stISLM can still be redeemed on Osmosis: swapping stISLM for ISLM routes through Stride's one-way redemption pool (pool 3641), which pays out ISLM at a fixed redemption rate. Source: https://x.com/stride_zone/status/2104944449503813922"
     },
     {
       "chain_name": "dymension",
@@ -6233,7 +6293,13 @@
         "liquid_staking"
       ],
       "_comment": "Stride Staked BAND $stBAND",
-      "tooltip_message": "Stride has proposed an orderly wind-down of the Stride chain. stTokens can be redeemed on Stride until 12 October 2026. Redemptions then pause while the underlying stake unbonds, and the redemption rate stops increasing. Redemption is expected to resume on Osmosis around 20 November 2026, with no need to bridge back to Stride. stTokens do not expire. Source: https://x.com/stride_zone/status/2104944449503813922"
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "source_chain_killed",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "source_chain_killed",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "source_chain_killed",
+      "tooltip_message": "The Stride chain has stopped producing blocks as part of its wind-down, so deposits and withdrawals are disabled. stBAND can still be redeemed on Osmosis: swapping stBAND for BAND routes through Stride's one-way redemption pool (pool 3645), which pays out BAND at a fixed redemption rate. Source: https://x.com/stride_zone/status/2104944449503813922"
     },
     {
       "chain_name": "osmosis",

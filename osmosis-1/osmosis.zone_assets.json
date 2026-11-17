@@ -7837,7 +7837,9 @@
       "canonical": {
         "chain_name": "fetchhub",
         "base_denom": "afet"
-      }
+      },
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "market"
     },
     {
       "chain_name": "osmosis",
@@ -13710,6 +13712,18 @@
       "base_denom": "ug24",
       "path": "transfer/channel-111099/ug24",
       "_comment": "BLG24 $G24",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "ibc_client",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "bridge_down",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "bridge_down"
+    },
+    {
+      "chain_name": "xpex",
+      "base_denom": "uxpx",
+      "path": "transfer/channel-111103/uxpx",
+      "_comment": "XPEX $XPX",
       "osmosis_unstable": true,
       "osmosis_unstable_reason": "ibc_client",
       "osmosis_halt_deposits": true,

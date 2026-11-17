@@ -1451,7 +1451,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/pstake.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/pstake.svg"
       },
-      "coingeckoId": "pstake-finance",
       "categories": [
         "liquid_staking"
       ],
@@ -1520,6 +1519,10 @@
       "unstableReason": "market",
       "disabled": false,
       "preview": false,
+      "sortWith": {
+        "chainName": "persistence",
+        "sourceDenom": "uxprt"
+      },
       "lastDowntimeDate": "2026-10-12T15:18:26.851Z"
     },
     {
@@ -3132,7 +3135,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/neta.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/neta.svg"
       },
-      "coingeckoId": "neta",
       "categories": [],
       "transferMethods": [
         {
@@ -4576,7 +4578,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/hard.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/hard.svg"
       },
-      "coingeckoId": "kava-lend",
       "categories": [
         "defi"
       ],
@@ -7447,7 +7448,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/comdex/images/cmst.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/comdex/images/cmst.svg"
       },
-      "coingeckoId": "composite",
       "categories": [
         "stablecoin",
         "defi"
@@ -10334,7 +10334,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/shd.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/shd.svg"
       },
-      "coingeckoId": "shade-protocol",
       "categories": [
         "defi"
       ],
@@ -16429,7 +16428,6 @@
       "logoURIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/astro-cw20.svg"
       },
-      "coingeckoId": "astroport-fi",
       "categories": [
         "defi"
       ],
@@ -18435,7 +18433,6 @@
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/astro.png"
       },
-      "coingeckoId": "astroport-fi",
       "categories": [
         "defi"
       ],
@@ -24495,7 +24492,6 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/routerchain/images/router.svg",
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/routerchain/images/router.png"
       },
-      "coingeckoId": "router-protocol-2",
       "categories": [
         "bridges"
       ],
@@ -25946,7 +25942,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kimanetwork/images/kima.svg"
       },
-      "coingeckoId": "kima",
       "categories": [
         "bridges"
       ],
@@ -27652,7 +27647,6 @@
       "logoURIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/dATOM.svg"
       },
-      "coingeckoId": "drop-staked-atom",
       "categories": [
         "liquid_staking"
       ],
@@ -29386,9 +29380,11 @@
       "isAlloyed": true,
       "contract": "osmo1mdvn6lmykp2z345ncpf647dztslyll8cyhwj9pltrc0lf7nva3cqvrp6qs",
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "lastDowntimeDate": "2026-11-17T15:10:21.528Z"
     },
     {
       "chainName": "osmosis",
@@ -43006,7 +43002,6 @@
       "logoURIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/self/images/self.png"
       },
-      "coingeckoId": "self-chain",
       "categories": [],
       "transferMethods": [
         {
@@ -52645,6 +52640,61 @@
       "lastDowntimeDate": "2026-11-16T15:13:56.379Z"
     },
     {
+      "chainName": "xpex",
+      "sourceDenom": "uxpx",
+      "coinMinimalDenom": "ibc/977E0C0764110C8B33E659307AFAA335FE1B64119F8DBAB43F9E379D74838C0F",
+      "symbol": "XPX",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xpex/images/xpx.png"
+      },
+      "categories": [],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "xpex",
+            "chainId": "xpex-2",
+            "sourceDenom": "uxpx",
+            "port": "transfer",
+            "channelId": "channel-1"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-111103",
+            "path": "transfer/channel-111103/uxpx"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "xpex",
+          "sourceDenom": "uxpx",
+          "chainType": "cosmos",
+          "chainId": "xpex-2",
+          "symbol": "XPX",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xpex/images/xpx.png"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/977E0C0764110C8B33E659307AFAA335FE1B64119F8DBAB43F9E379D74838C0F",
+      "name": "XPEX",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "ibc_client",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "bridge_down",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "bridge_down",
+      "preview": false,
+      "lastDowntimeDate": "2026-11-17T15:10:14.041Z"
+    },
+    {
       "chainName": "akash",
       "sourceDenom": "uact",
       "coinMinimalDenom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
@@ -60113,7 +60163,6 @@
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/shd.png",
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/shd.svg"
       },
-      "coingeckoId": "shade-protocol",
       "categories": [],
       "transferMethods": [
         {
@@ -64802,7 +64851,6 @@
       "logoURIs": {
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/astro-cw20.svg"
       },
-      "coingeckoId": "astroport-fi",
       "categories": [],
       "transferMethods": [
         {
@@ -70304,55 +70352,6 @@
       ],
       "variantGroupKey": "ibc/CA856981A3BA81CB5D4D54B146DD1E6F50E0F6A11A0E381CE26C8EDBC8AD48AA",
       "name": "Eris Protocol LUNA/ampLUNA ampLP",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "xpex",
-      "sourceDenom": "uxpx",
-      "coinMinimalDenom": "ibc/977E0C0764110C8B33E659307AFAA335FE1B64119F8DBAB43F9E379D74838C0F",
-      "symbol": "XPX",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xpex/images/xpx.png"
-      },
-      "categories": [],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "xpex",
-            "chainId": "xpex-2",
-            "sourceDenom": "uxpx",
-            "port": "transfer",
-            "channelId": "channel-1"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-111103",
-            "path": "transfer/channel-111103/uxpx"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "xpex",
-          "sourceDenom": "uxpx",
-          "chainType": "cosmos",
-          "chainId": "xpex-2",
-          "symbol": "XPX",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/xpex/images/xpx.png"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/977E0C0764110C8B33E659307AFAA335FE1B64119F8DBAB43F9E379D74838C0F",
-      "name": "XPEX",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,

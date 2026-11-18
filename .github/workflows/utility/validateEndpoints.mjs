@@ -1557,7 +1557,7 @@ async function validateEndpointsForAllCounterpartyChains(chainName) {
  * - Ensures deprecated endpoints are caught quickly
  * - Validates up to 10 chains at a time to avoid overwhelming the system
  *
- * Used by: .github/workflows/generate_all_files.yml (scheduled daily at 15:00 UTC)
+ * Used by: .github/workflows/generate_all_files.yml (scheduled daily at 14:30 UTC)
  */
 async function fullValidation(chainName) {
 

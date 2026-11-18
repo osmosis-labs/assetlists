@@ -25,7 +25,7 @@ The generated files power the Osmosis Zone interface, providing wallet integrati
 
 2. **Wait for Chain Registry PR to be merged** - Once your PR is approved and merged into Chain Registry
 
-3. **Automatic Detection and Listing** - Automated runs in this repo occur daily (15:00 UTC) and will:
+3. **Automatic Detection and Listing** - Automated runs in this repo occur daily (14:30 UTC) and will:
    - Pull latest Chain Registry data
    - Automatically detect new assets with IBC connections to Osmosis
    - Automatically add detected assets to `osmosis.zone_assets.json`
@@ -505,7 +505,7 @@ External services that provide data TO this repository:
 
 This repository uses GitHub Actions workflows to automatically generate and validate files:
 
-**Scheduled Generation** (Daily at 15:00 UTC):
+**Scheduled Generation** (Daily at 14:30 UTC):
 The `Generate All Files` bundle workflow runs automatically and includes:
 - Updates the chain-registry submodule to the latest version
 - Adds chain stubs to `osmosis.zone_chains.json` for any newly detected chains
@@ -623,7 +623,7 @@ A second, independent track exists for market-driven unstable. When a verified, 
 5. **Auto-Generation**: Generated files are automatically updated on the next scheduled run or manual trigger
 
 **For Automated Generation Runs:**
-1. **Scheduled Run**: Workflow executes daily at 15:00 UTC
+1. **Scheduled Run**: Workflow executes daily at 14:30 UTC
 2. **Generation**: Creates updated assetlist/chainlist files
 3. **PR Creation**: Automatically creates a PR to the `update/assetlist_all` branch with all generated changes
 4. **Validation**: All validation checks must pass
@@ -634,7 +634,7 @@ A second, independent track exists for market-driven unstable. When a verified, 
 Changes to generated files are automatically deployed to the Osmosis Zone frontend via Vercel:
 
 **Deployment Schedule:**
-- **Scheduled**: Every day at 15:30 UTC (30 minutes after generation workflow completes)
+- **Scheduled**: Every day at 15:00 UTC (30 minutes after generation workflow completes)
 - **Manual**: Can be triggered manually via GitHub Actions workflow dispatch
 - **Fallback**: Push to main (won't trigger with auto-merge due to GITHUB_TOKEN limitation)
 
@@ -643,8 +643,8 @@ Changes to generated files are automatically deployed to the Osmosis Zone fronte
 - `osmo-test-5/generated/frontend/assetlist.json` and `chainlist.json` (testnet)
 
 **Deployment Flow:**
-1. Generation workflow completes at 15:00 UTC (daily) and auto-merges to `main`
-2. 30 minutes later (15:30 UTC), deployment workflow runs on schedule
+1. Generation workflow completes at 14:30 UTC (daily) and auto-merges to `main`
+2. 30 minutes later (15:00 UTC), deployment workflow runs on schedule
 3. Workflow checks if monitored files were modified in the last 2 hours
 4. **If files unchanged**: Deployment is skipped (no unnecessary Vercel builds)
 5. **If files changed**: Vercel webhooks are triggered (preview + production for mainnet, testnet separately)

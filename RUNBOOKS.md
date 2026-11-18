@@ -463,7 +463,7 @@ gh pr create --title "Add Neutron $NTRN" --body "Adds Neutron native token to zo
 
 **Step 5: Trigger Generation**
 ```
-# Option A: Wait for next scheduled run (daily 15:00 UTC)
+# Option A: Wait for next scheduled run (daily 14:30 UTC)
 # Option B: Manually trigger workflow
 
 Navigate to: https://github.com/osmosis-labs/assetlists/actions/workflows/generate_all_files.yml
@@ -648,7 +648,7 @@ If all tests passed:
    - ✅ Price displayed
    - ✅ Tradeable on DEX
 
-   Merging now. Verified badge will appear on next deployment (daily 15:30 UTC)."
+   Merging now. Verified badge will appear on next deployment (daily 15:00 UTC)."
 7. Click: "Submit review"
 8. Click: "Squash and merge"
 9. Confirm merge

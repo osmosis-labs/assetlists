@@ -1303,6 +1303,18 @@ export function setCategories(asset_data) {
   //   addArrayItem("meme", asset_data.frontend.categories);
   // }
 
+  // Category tabs promote assets by market cap, so keep assets whose source
+  // chain is gone or whose IBC path is down out of them. The zone file keeps
+  // its categories, so they return once the unstable flag is cleared.
+  // Market and manual flags are left alone: they cover healthy majors too.
+  const categoryHiddenUnstableReasons = ["source_chain_killed", "ibc_client"];
+  if (
+    asset_data.zone_asset?.osmosis_unstable &&
+    categoryHiddenUnstableReasons.includes(asset_data.zone_asset?.osmosis_unstable_reason)
+  ) {
+    asset_data.frontend.categories = [];
+  }
+
   if (asset_data.frontend.categories.length === 0) {
     asset_data.frontend.categories = undefined;
   }

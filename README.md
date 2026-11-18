@@ -631,25 +631,17 @@ A second, independent track exists for market-driven unstable. When a verified, 
 
 ### Deployment to Frontend
 
-Changes to generated files are automatically deployed to the Osmosis Zone frontend via Vercel:
+Changes to generated files reach the Osmosis Zone frontend through two deploy paths:
 
-**Deployment Schedule:**
-- **Scheduled**: Every day at 15:00 UTC (30 minutes after generation workflow completes)
-- **Manual**: Can be triggered manually via GitHub Actions workflow dispatch
-- **Fallback**: Push to main (won't trigger with auto-merge due to GITHUB_TOKEN limitation)
-
-**Monitored Files:**
-- `osmosis-1/generated/frontend/assetlist.json` and `chainlist.json` (mainnet)
-- `osmo-test-5/generated/frontend/assetlist.json` and `chainlist.json` (testnet)
+- **Mainnet** (app.osmosis.zone and stage.osmosis.zone, Cloudflare Workers): the frontend repo's `assetlist-deploy.yml` workflow runs daily at 15:00 UTC. If `osmosis-1/generated/frontend/assetlist.json` or `chainlist.json` changed on `main` in the last 26 hours, it rebuilds and deploys the stage and production Workers. It can also be run by hand from the frontend repo's Actions tab (it then deploys regardless of changes). The lists are built into the Workers at build time, so a list change only reaches users through one of these deploys.
+- **Testnet** (Vercel): this repo's `deploy_vercel_testnet.yml` runs daily at 15:00 UTC and triggers the Vercel testnet deploy hook if `osmo-test-5/generated/frontend/assetlist.json` or `chainlist.json` changed in the last 2 hours. It can also be triggered manually.
 
 **Deployment Flow:**
 1. Generation workflow completes at 14:30 UTC (daily) and auto-merges to `main`
-2. 30 minutes later (15:00 UTC), deployment workflow runs on schedule
-3. Workflow checks if monitored files were modified in the last 2 hours
-4. **If files unchanged**: Deployment is skipped (no unnecessary Vercel builds)
-5. **If files changed**: Vercel webhooks are triggered (preview + production for mainnet, testnet separately)
-6. Vercel builds and deploys to environments
-7. Osmosis Zone app reflects updated data within ~30-45 minutes of generation
+2. At 15:00 UTC the deploy workflows check whether the generated files changed
+3. **If files unchanged**: Deployment is skipped
+4. **If files changed**: the frontend Workers are rebuilt (mainnet) and the Vercel testnet hook is triggered
+5. Osmosis Zone app reflects updated data within ~30-45 minutes of generation
 
 This completes the full pipeline: **Chain Registry → Detection → Generation → PR → Merge → Scheduled Deployment → Frontend**
 

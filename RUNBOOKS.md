@@ -26,37 +26,30 @@ This document provides step-by-step procedures for common maintenance operations
 #### Symptoms
 - app.osmosis.zone returns errors (500, 404)
 - Users cannot access assets or swap interface
-- Vercel deployment shows ❌ Failed or deployed with errors
+- The frontend's Cloudflare deploy (`cf-deploy.yml` in osmosis-frontend) failed or deployed with errors
 
 #### Immediate Actions
 
-**Step 1: Rollback in Vercel** (Fastest - Do This First)
+**Step 1: Roll back the Cloudflare Workers** (Fastest - Do This First)
 ```
 Duration: 2 minutes
 
-1. Navigate to: https://vercel.com/osmo-labs/osmosis-frontend/deployments
-2. Locate: Last successful deployment (green checkmark)
-3. Click: Three dots menu → "Promote to Production"
-4. Confirm: Click "Promote"
-5. Wait: 1-2 minutes for deployment
-6. Verify: https://app.osmosis.zone/ loads correctly
+1. In the Cloudflare dashboard (Osmosis Labs account) → Workers & Pages,
+   open osmosis-frontend-production, then osmosis-frontend-api-production
+2. Deployments → pick the last good version → "Rollback"
+   (or: npx wrangler rollback --name <worker>)
+3. Verify: https://app.osmosis.zone/ loads correctly
 ```
 
 **Step 2: Disable Auto-Deployments** (Prevent Further Issues)
 ```
 Duration: 3 minutes
 
-Option A: Disable GitHub Workflow (Fastest)
-1. Go to: Repository → Actions → Deploy Vercel Mainnet
+Disable the frontend's daily assetlist deploy:
+1. Go to: osmosis-labs/osmosis-frontend → Actions → "Assetlist deploy"
+   (assetlist-deploy.yml)
 2. Click: Three dots → "Disable workflow"
 3. Confirm: Workflow disabled
-
-Option B: Revoke Vercel Webhook (Most Secure)
-1. Go to: Vercel Dashboard → Project Settings
-2. Click: Git → Deploy Hooks
-3. Locate: Production deploy hook
-4. Click: Delete hook
-5. Confirm: Deletion
 ```
 
 **Step 3: Communicate Incident**
@@ -74,9 +67,9 @@ Duration: 2 minutes
 ```
 Duration: 15-30 minutes (after immediate response)
 
-1. Review Vercel Build Logs:
-   - Go to failed deployment
-   - Check "Building" and "Runtime" logs
+1. Review the deploy logs:
+   - osmosis-frontend → Actions → the failed "Cloudflare deploy" run
+   - Cloudflare dashboard → the Worker → Logs for runtime errors
    - Identify error message
 
 2. Check Generated Files:
@@ -91,7 +84,7 @@ Duration: 15-30 minutes (after immediate response)
 4. Identify Fix:
    - If bad generated data: Revert generation commit, regenerate
    - If frontend code issue: Notify frontend team
-   - If Vercel config issue: Update Vercel settings
+   - If deploy config issue: Notify frontend team
 ```
 
 #### Resolution and Re-deployment
@@ -114,9 +107,9 @@ Duration: 30-60 minutes
    # Test swap interface
 
 3. Deploy to Production:
-   # Re-enable workflow or recreate webhook
-   # Trigger deployment
-   # Monitor Vercel dashboard
+   # Re-enable assetlist-deploy.yml in osmosis-frontend
+   # Run it by hand (deploys stage and production)
+   # Watch the "Cloudflare deploy" runs it starts
 
 4. Verify Resolution:
    # Check app.osmosis.zone
@@ -340,7 +333,7 @@ Option B: Request changes (issues found)
 ```
 Post-Merge Verification:
 1. Wait 30 minutes (for deployment to trigger)
-2. Check Vercel deployment: https://vercel.com/dashboard
+2. Check the frontend deploy: osmosis-frontend → Actions → "Cloudflare deploy" (master)
 3. Verify app.osmosis.zone:
    - New assets appear (if any)
    - Search for new asset by symbol
@@ -978,9 +971,9 @@ Wait: ~3 minutes
 
 # Review PR, merge immediately
 # Trigger deployment
-Navigate to: Actions → Deploy Vercel Mainnet
+Navigate to: osmosis-frontend → Actions → "Assetlist deploy"
 Click: "Run workflow"
-Wait: ~5 minutes
+Wait: ~15 minutes (Worker builds)
 ```
 
 **Step 4: Verify Fix**

@@ -832,7 +832,10 @@
       "base_denom": "uctk",
       "path": "transfer/channel-146/uctk",
       "osmosis_verified": true,
-      "_comment": "Shentu $CTK"
+      "_comment": "Shentu $CTK",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "manual",
+      "tooltip_message": "Shentu governance has disabled outbound IBC transfers from the Shentu chain (Shentu proposal 57, passed 29 October 2026), so deposits of CTK from Shentu to Osmosis are disabled until Shentu re-enables them. Withdrawals from Osmosis to Shentu still work. Source: https://www.mintscan.io/shentu/proposals/57"
     },
     {
       "chain_name": "juno",

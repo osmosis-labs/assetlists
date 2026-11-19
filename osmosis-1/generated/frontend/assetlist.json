@@ -1963,9 +1963,11 @@
       "name": "Impact Hub",
       "isAlloyed": false,
       "verified": true,
-      "unstable": false,
+      "unstable": true,
+      "unstableReason": "market",
       "disabled": false,
-      "preview": false
+      "preview": false,
+      "lastDowntimeDate": "2026-11-19T14:37:35.292Z"
     },
     {
       "chainName": "bitcanna",
@@ -3407,7 +3409,10 @@
       "verified": true,
       "unstable": false,
       "disabled": false,
-      "preview": false
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "preview": false,
+      "tooltipMessage": "Shentu governance has disabled outbound IBC transfers from the Shentu chain (Shentu proposal 57, passed 29 October 2026), so deposits of CTK from Shentu to Osmosis are disabled until Shentu re-enables them. Withdrawals from Osmosis to Shentu still work. Source: https://www.mintscan.io/shentu/proposals/57"
     },
     {
       "chainName": "juno",

@@ -42616,6 +42616,40 @@
     {
       "denom_units": [
         {
+          "denom": "ibc/CB10783FD6E5CB6155E6CA0B1558061874EEE85291DD4306D1C0B2724E361EC5",
+          "exponent": 0,
+          "aliases": [
+            "stucmdx"
+          ]
+        },
+        {
+          "denom": "stcmdx",
+          "exponent": 6
+        }
+      ],
+      "type_asset": "ics20",
+      "base": "ibc/CB10783FD6E5CB6155E6CA0B1558061874EEE85291DD4306D1C0B2724E361EC5",
+      "name": "Stride Staked CMDX",
+      "display": "stcmdx",
+      "symbol": "stCMDX",
+      "traces": [
+        {
+          "type": "ibc",
+          "counterparty": {
+            "chain_name": "stride",
+            "base_denom": "stucmdx",
+            "channel_id": "channel-5"
+          },
+          "chain": {
+            "channel_id": "channel-326",
+            "path": "transfer/channel-326/stucmdx"
+          }
+        }
+      ]
+    },
+    {
+      "denom_units": [
+        {
           "denom": "ibc/76351FA8FA49F3C74694F70B77D8CFC3603088BA01351C7BB32CE8C104547474",
           "exponent": 0,
           "aliases": [
@@ -48317,40 +48351,6 @@
             "port": "transfer",
             "channel_id": "channel-88",
             "path": "transfer/channel-88/cw20:secret1d6qvapy96q94etwlnc7j33dlzmenz4j70w3ew7"
-          }
-        }
-      ]
-    },
-    {
-      "denom_units": [
-        {
-          "denom": "ibc/CB10783FD6E5CB6155E6CA0B1558061874EEE85291DD4306D1C0B2724E361EC5",
-          "exponent": 0,
-          "aliases": [
-            "stucmdx"
-          ]
-        },
-        {
-          "denom": "stcmdx",
-          "exponent": 6
-        }
-      ],
-      "type_asset": "ics20",
-      "base": "ibc/CB10783FD6E5CB6155E6CA0B1558061874EEE85291DD4306D1C0B2724E361EC5",
-      "name": "Stride Staked CMDX",
-      "display": "stcmdx",
-      "symbol": "stCMDX",
-      "traces": [
-        {
-          "type": "ibc",
-          "counterparty": {
-            "chain_name": "stride",
-            "base_denom": "stucmdx",
-            "channel_id": "channel-5"
-          },
-          "chain": {
-            "channel_id": "channel-326",
-            "path": "transfer/channel-326/stucmdx"
           }
         }
       ]

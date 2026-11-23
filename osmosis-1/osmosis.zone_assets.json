@@ -2756,7 +2756,9 @@
       ],
       "_comment": "Nolus $NLS",
       "osmosis_unstable": true,
-      "osmosis_unstable_reason": "market"
+      "osmosis_unstable_reason": "market",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "extended_unstable_market"
     },
     {
       "chain_name": "terra2",
@@ -3336,9 +3338,7 @@
       "categories": [
         "rwa"
       ],
-      "_comment": "Realio Network $RIO",
-      "osmosis_unstable": true,
-      "osmosis_unstable_reason": "ibc_client"
+      "_comment": "Realio Network $RIO"
     },
     {
       "chain_name": "osmosis",
@@ -13725,6 +13725,19 @@
       "osmosis_deposit_halt_reason": "bridge_down",
       "osmosis_halt_withdrawals": true,
       "osmosis_withdrawal_halt_reason": "bridge_down"
+    },
+    {
+      "chain_name": "stride",
+      "base_denom": "stucmdx",
+      "path": "transfer/channel-326/stucmdx",
+      "_comment": "Stride Staked CMDX $stCMDX",
+      "osmosis_unstable": true,
+      "osmosis_unstable_reason": "manual",
+      "osmosis_halt_deposits": true,
+      "osmosis_deposit_halt_reason": "manual",
+      "osmosis_halt_withdrawals": true,
+      "osmosis_withdrawal_halt_reason": "manual",
+      "tooltip_message": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review."
     }
   ]
 }

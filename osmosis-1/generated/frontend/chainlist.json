@@ -1769,10 +1769,10 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://rpc-osmosis.keplr.app"
+            "address": "https://rpc.osmosis.zone/"
           },
           {
-            "address": "https://rpc.osmosis.zone/"
+            "address": "https://rpc-osmosis.keplr.app"
           },
           {
             "address": "https://rpc.lavenderfive.com:443/osmosis"
@@ -2100,13 +2100,22 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://rpc.lavenderfive.com:443/cosmoshub"
-          },
-          {
             "address": "https://rpc-cosmoshub.keplr.app"
           },
           {
+            "address": "https://cosmos.rpc.uquad.org:443"
+          },
+          {
             "address": "https://rpc.cosmoshub-main.ccvalidators.com:443"
+          },
+          {
+            "address": "https://cosmoshub.tendermintrpc.lava.build:443"
+          },
+          {
+            "address": "https://cosmos-rpc.quickapi.com:443"
+          },
+          {
+            "address": "https://rpc.lavenderfive.com:443/cosmoshub"
           },
           {
             "address": "https://rpc-cosmoshub.ecostake.com"
@@ -2194,15 +2203,6 @@
           },
           {
             "address": "https://cosmos-mainnet-rpc.crouton.digital"
-          },
-          {
-            "address": "https://cosmos.rpc.uquad.org:443"
-          },
-          {
-            "address": "https://cosmoshub.tendermintrpc.lava.build:443"
-          },
-          {
-            "address": "https://cosmos-rpc.quickapi.com:443"
           }
         ],
         "rest": [
@@ -7879,9 +7879,6 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://sommelier-rpc.polkachu.com:443"
-          },
-          {
             "address": "https://rpc-sommelier.keplr.app"
           },
           {
@@ -7901,17 +7898,20 @@
           },
           {
             "address": "https://sommelier-rpc.w3coins.io"
+          },
+          {
+            "address": "https://sommelier-rpc.polkachu.com:443"
           }
         ],
         "rest": [
+          {
+            "address": "https://sommelier-api.polkachu.com"
+          },
           {
             "address": "https://lcd-sommelier.keplr.app"
           },
           {
             "address": "https://api-sommelier.pupmos.network"
-          },
-          {
-            "address": "https://sommelier-api.polkachu.com"
           },
           {
             "address": "https://som.api.m.stavr.tech"
@@ -9240,7 +9240,7 @@
           "coinDenom": "USDC",
           "coinMinimalDenom": "usdc.1.6.53ff75",
           "coinDecimals": 18,
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg",
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png",
           "gasPriceStep": {
             "low": 100000000,
             "average": 100000000,
@@ -9423,7 +9423,7 @@
           "coinDenom": "USDC",
           "coinMinimalDenom": "usdc.1.6.53ff75",
           "coinDecimals": 18,
-          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
+          "coinImageUrl": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png"
         },
         {
           "coinDenom": "ZIL",
@@ -13124,6 +13124,15 @@
             "address": "https://main.rpc.agoric.net:443"
           },
           {
+            "address": "https://agoric-rpc.stakeangle.com"
+          },
+          {
+            "address": "https://agoric-rpc.polkachu.com:443"
+          },
+          {
+            "address": "https://agoric.rpc.kjnodes.com"
+          },
+          {
             "address": "https://agoric-mainnet-rpc.autostake.com:443"
           },
           {
@@ -13131,9 +13140,6 @@
           },
           {
             "address": "https://agoric-rpc.0base.dev"
-          },
-          {
-            "address": "https://agoric-rpc.stakeangle.com"
           },
           {
             "address": "https://agoric-rpc.w3coins.io"
@@ -13146,12 +13152,6 @@
           },
           {
             "address": "https://rpc.agoric.bronbro.io:443"
-          },
-          {
-            "address": "https://agoric-rpc.polkachu.com:443"
-          },
-          {
-            "address": "https://agoric.rpc.kjnodes.com"
           }
         ],
         "rest": [
@@ -15279,9 +15279,6 @@
         ],
         "rest": [
           {
-            "address": "https://rest-quicksilver.architectnodes.com"
-          },
-          {
             "address": "https://lcd-quicksilver.keplr.app"
           },
           {
@@ -15295,6 +15292,9 @@
           },
           {
             "address": "https://quick.api.m.stavr.tech"
+          },
+          {
+            "address": "https://rest-quicksilver.architectnodes.com"
           },
           {
             "address": "https://quicksilver-rest.staketab.org"
@@ -20409,10 +20409,10 @@
       "apis": {
         "rpc": [
           {
-            "address": "https://rpc.qwoyn.studio:443"
+            "address": "https://rpc-qwoyn.theamsolutions.info:443"
           },
           {
-            "address": "https://rpc-qwoyn.theamsolutions.info:443"
+            "address": "https://rpc.qwoyn.studio:443"
           },
           {
             "address": "https://qwoyn.rpc.m.stavr.tech:443"
@@ -28446,7 +28446,10 @@
         "bech32PrefixConsAddr": "lumeravalcons",
         "bech32PrefixConsPub": "lumeravalconspub"
       },
-      "slip44": 118,
+      "slip44": 60,
+      "alternativeSlip44s": [
+        118
+      ],
       "logo_URIs": {
         "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lumera/images/lumera.png"
       },

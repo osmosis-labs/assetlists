@@ -11200,6 +11200,8 @@
       "unstable": true,
       "unstableReason": "market",
       "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "extended_unstable_market",
       "preview": false,
       "lastDowntimeDate": "2026-09-23T15:15:38.400Z"
     },
@@ -13362,7 +13364,9 @@
         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/realio/images/rio.svg"
       },
       "coingeckoId": "realio-network",
-      "categories": [],
+      "categories": [
+        "rwa"
+      ],
       "transferMethods": [
         {
           "name": "Realio Network",
@@ -13404,12 +13408,9 @@
       "name": "Realio Network",
       "isAlloyed": false,
       "verified": true,
-      "unstable": true,
-      "unstableReason": "ibc_client",
+      "unstable": false,
       "disabled": false,
-      "preview": false,
-      "lastDowntimeDate": "2026-08-30T15:13:10.887Z",
-      "lastRecoveryDate": "2026-09-23T15:15:33.265Z"
+      "preview": false
     },
     {
       "chainName": "osmosis",
@@ -49938,7 +49939,8 @@
       "symbol": "BUSD.carbon",
       "decimals": 18,
       "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/busd.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/busd.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/busd.svg"
       },
       "categories": [],
       "transferMethods": [
@@ -49968,7 +49970,8 @@
           "symbol": "BUSD",
           "decimals": 18,
           "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/busd.png"
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/busd.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/busd.svg"
           }
         }
       ],
@@ -50284,7 +50287,8 @@
       "symbol": "USDC.bsc.carbon",
       "decimals": 18,
       "logoURIs": {
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg",
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png"
       },
       "categories": [],
       "transferMethods": [
@@ -50314,6 +50318,7 @@
           "symbol": "USDC",
           "decimals": 18,
           "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.png",
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/usdc.svg"
           }
         }
@@ -52450,6 +52455,70 @@
       "withdrawalHaltReason": "bridge_down",
       "preview": false,
       "lastDowntimeDate": "2026-11-17T15:10:14.041Z"
+    },
+    {
+      "chainName": "stride",
+      "sourceDenom": "stucmdx",
+      "coinMinimalDenom": "ibc/CB10783FD6E5CB6155E6CA0B1558061874EEE85291DD4306D1C0B2724E361EC5",
+      "symbol": "stCMDX",
+      "decimals": 6,
+      "logoURIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stcmdx.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stcmdx.svg"
+      },
+      "categories": [
+        "liquid_staking"
+      ],
+      "transferMethods": [
+        {
+          "name": "Osmosis IBC Transfer",
+          "type": "ibc",
+          "counterparty": {
+            "chainName": "stride",
+            "chainId": "stride-1",
+            "sourceDenom": "stucmdx",
+            "port": "transfer",
+            "channelId": "channel-5"
+          },
+          "chain": {
+            "port": "transfer",
+            "channelId": "channel-326",
+            "path": "transfer/channel-326/stucmdx"
+          }
+        }
+      ],
+      "counterparty": [
+        {
+          "chainName": "stride",
+          "sourceDenom": "stucmdx",
+          "chainType": "cosmos",
+          "chainId": "stride-1",
+          "symbol": "stCMDX",
+          "decimals": 6,
+          "logoURIs": {
+            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stcmdx.png",
+            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stcmdx.svg"
+          }
+        }
+      ],
+      "variantGroupKey": "ibc/CB10783FD6E5CB6155E6CA0B1558061874EEE85291DD4306D1C0B2724E361EC5",
+      "name": "Stride Staked CMDX",
+      "isAlloyed": false,
+      "verified": false,
+      "unstable": true,
+      "unstableReason": "manual",
+      "disabled": false,
+      "haltDeposits": true,
+      "depositHaltReason": "manual",
+      "haltWithdrawals": true,
+      "withdrawalHaltReason": "manual",
+      "preview": false,
+      "tooltipMessage": "This asset appeared on a source chain whose transfers are manually halted. Deposits and withdrawals are halted pending manual review.",
+      "sortWith": {
+        "chainName": "stride",
+        "sourceDenom": "ustrd"
+      },
+      "lastDowntimeDate": "2026-11-23T14:37:26.751Z"
     },
     {
       "chainName": "akash",
@@ -60410,59 +60479,6 @@
       ],
       "variantGroupKey": "ibc/F4B09984A0B7F52D8D0F52B9ED1752880EB3030CF6D3F489E4BDE45B0F8A4BD0",
       "name": "SNVR",
-      "isAlloyed": false,
-      "verified": false,
-      "unstable": false,
-      "disabled": false,
-      "preview": false
-    },
-    {
-      "chainName": "stride",
-      "sourceDenom": "stucmdx",
-      "coinMinimalDenom": "ibc/CB10783FD6E5CB6155E6CA0B1558061874EEE85291DD4306D1C0B2724E361EC5",
-      "symbol": "stCMDX",
-      "decimals": 6,
-      "logoURIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stcmdx.png",
-        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stcmdx.svg"
-      },
-      "categories": [
-        "liquid_staking"
-      ],
-      "transferMethods": [
-        {
-          "name": "Osmosis IBC Transfer",
-          "type": "ibc",
-          "counterparty": {
-            "chainName": "stride",
-            "chainId": "stride-1",
-            "sourceDenom": "stucmdx",
-            "port": "transfer",
-            "channelId": "channel-5"
-          },
-          "chain": {
-            "port": "transfer",
-            "channelId": "channel-326",
-            "path": "transfer/channel-326/stucmdx"
-          }
-        }
-      ],
-      "counterparty": [
-        {
-          "chainName": "stride",
-          "sourceDenom": "stucmdx",
-          "chainType": "cosmos",
-          "chainId": "stride-1",
-          "symbol": "stCMDX",
-          "decimals": 6,
-          "logoURIs": {
-            "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stcmdx.png",
-            "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stcmdx.svg"
-          }
-        }
-      ],
-      "variantGroupKey": "ibc/CB10783FD6E5CB6155E6CA0B1558061874EEE85291DD4306D1C0B2724E361EC5",
-      "name": "Stride Staked CMDX",
       "isAlloyed": false,
       "verified": false,
       "unstable": false,
